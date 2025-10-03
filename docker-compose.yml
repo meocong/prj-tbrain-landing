@@ -1,0 +1,23 @@
+version: "3.9"
+
+services:
+  tbrain-lp:
+    ports:
+      - "3289:3000"
+    build:
+      context: .
+    image: tbrain_lp_img:latest
+    restart: always
+    networks:
+      - traefik-net
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.tbrain-lp.rule=Host(`tbrain.ai`)"
+      - "traefik.http.routers.tbrain-lp.entrypoints=https"
+      - "traefik.http.services.tbrain-lp.loadbalancer.server.port=3000"
+      - "traefik.http.routers.tbrain-lp.tls=true"
+      - "traefik.http.routers.tbrain-lp.tls.certresolver=letsencrypt"
+
+networks:
+  traefik-net:
+    external: true

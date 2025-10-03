@@ -1,0 +1,92 @@
+stages:
+  - deploy
+
+variables:
+  APP_NAME: "tbrain-lp"
+  APP_SUBDIR: "tbrain-lp"
+  # APP_DIR không đặt cố định ở đây vì thường khác giữa envs — set trong GitLab CI Variables
+  # APP_DIR: "/var/www/myapp"
+
+deploy_production:
+  stage: deploy
+  image: alpine:latest
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "develop"'
+
+  before_script:
+    - apk add --no-cache openssh-client bash coreutils git
+    - echo "=> Prepare ssh dir and key"
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
+
+    # decode base64 -> file (recommended: store private key as base64 in SSH_PRIVATE_KEY_B64)
+    - |
+      if [ -n "$SSH_PRIVATE_KEY" ]; then
+        echo "$SSH_PRIVATE_KEY" | tr -d '\r' | base64 -d > ~/.ssh/id_rsa 2>/dev/null || { echo "Base64 decode failed"; exit 1; }
+      elif [ -n "$SSH_PRIVATE_KEY" ]; then
+        echo "$SSH_PRIVATE_KEY" | tr -d '\r' > ~/.ssh/id_rsa
+      else
+        echo "No SSH_PRIVATE_KEY_B64 or SSH_PRIVATE_KEY set"; exit 1
+      fi
+    - chmod 600 ~/.ssh/id_rsa
+    - echo "Key head: $(head -n 1 ~/.ssh/id_rsa)"
+    - ssh-keygen -lf ~/.ssh/id_rsa || (echo "ssh-keygen parse failed"; exit 1)
+    - eval "$(ssh-agent -s)"
+    - ssh-add ~/.ssh/id_rsa
+    - ssh-keyscan -H $EC2_HOST >> ~/.ssh/known_hosts
+    - chmod 644 ~/.ssh/known_hosts
+    - echo "SSH ready"
+
+  script:
+    - echo "📥 Deploying branch: $CI_COMMIT_REF_NAME -> $EC2_HOST:$APP_DIR"
+    # Run entire deploy sequence in one remote SSH session (atomically on remote)
+    - |
+      ssh -o BatchMode=yes -o StrictHostKeyChecking=no $EC2_USER@$EC2_HOST bash -s <<'REMOTE'
+        set -euo pipefail
+
+        # variables passed by expansion from CI (CI will substitute $APP_DIR etc before sending)
+        REMOTE_APP_DIR="${APP_DIR}"
+        REMOTE_SUBDIR="${APP_SUBDIR}"
+        REMOTE_APP_NAME="${APP_NAME}"
+        BRANCH="${CI_COMMIT_REF_NAME}"
+
+        if [ -z "$REMOTE_APP_DIR" ]; then
+          echo "ERROR: APP_DIR not set in GitLab CI variables"; exit 1
+        fi
+
+        echo "-> Ensuring repo present at $REMOTE_APP_DIR"
+        mkdir -p "$REMOTE_APP_DIR"
+        cd "$REMOTE_APP_DIR"
+
+        # If git repo exists use fetch/reset, else clone
+        if [ -d .git ]; then
+          git fetch --all --prune
+          git reset --hard "origin/$BRANCH"
+        else
+          git clone --branch "$BRANCH" "$CI_REPOSITORY_URL" .
+        fi
+
+        # cd into subdir and install/build
+        cd "$REMOTE_APP_DIR/$REMOTE_SUBDIR"
+
+        # Ensure node + npm available on remote. Set node build memory flag to avoid OOM.
+        export NODE_OPTIONS="--max_old_space_size=4096"
+        echo "NODE_OPTIONS=$NODE_OPTIONS"
+
+        # Install production deps only (omit dev deps)
+        npm ci --omit=dev
+
+        # Build (Next.js)
+        npm run build
+
+        # Restart via pm2 (attempt restart, fallback to start using ecosystem file)
+        pm2 restart "$REMOTE_APP_NAME" || pm2 start ecosystem.config.js --only "$REMOTE_APP_NAME" || { echo "pm2 start failed"; exit 1; }
+
+        pm2 save
+        pm2 status
+        echo "REMOTE deploy finished"
+      REMOTE
+
+  environment:
+    name: production
+    url: http://$EC2_HOST
