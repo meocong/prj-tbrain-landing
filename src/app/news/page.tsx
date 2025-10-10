@@ -1,3 +1,4 @@
+
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -41,6 +42,7 @@ export default async function Page({
       <Header />
       
       {/* Animated Background */}
+      
       <div className="wrap">
         <div className="one top-0 left-1/4 h-80 w-80"></div>
         <div className="two top-0 right-1/4 h-80 w-80"></div>
@@ -63,7 +65,7 @@ export default async function Page({
             </h1>
           </div>
 
-          {/* Featured Post */}
+          {/* Featured cst */}
           {firstPost && (
             <div 
               className="w-full bg-white/80 backdrop-blur-sm rounded-[28px] shadow-lg hover:shadow-xl transition-all duration-300 flex p-6 md:p-8 gap-6 md:gap-8 flex-col lg:flex-row mb-12"
