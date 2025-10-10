@@ -206,7 +206,7 @@ export default async function Page() {
           <h3 className="text-lg font-bold text-[#222222] mb-3">✓ Instruction Following</h3>
           <p className="text-[#222222] text-sm">Respects scope, format, jurisdiction, dates, units, and length constraints</p>
         </div>
-
+        
         <div className="bg-white/80 backdrop-blur-sm rounded-lg shadow-md p-6 border-t-4 border-indigo-500">
           <h3 className="text-lg font-bold text-[#222222] mb-3">✓ Evidence & Citation Quality</h3>
           <p className="text-[#222222] text-sm">Points to exact span, section, page, or table cell for quick verification</p>
