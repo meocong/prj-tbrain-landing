@@ -202,7 +202,7 @@ export default function PostsList({
                 />
               </svg>
               <span className="text-[#0e1b2e] font-medium">
-                You've reached the end
+                {`You've reached the end`}
               </span>
               <span className="text-[#78818f]">•</span>
               <span className="text-[#78818f]">
