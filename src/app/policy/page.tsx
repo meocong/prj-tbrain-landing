@@ -14,8 +14,7 @@ export default async function Page() {
       <Header />
       <main
         style={{ backgroundImage: `url(${post_bg?.src})` }}
-        className="bg-center bg-no-repeat bg-cover"
-      >
+        className="bg-center bg-no-repeat bg-cover">
         <div className="wrap !fixed top-[400px] w-full">
           <div className="one top-0 left-0 h-80 w-80 "></div>
           <div className="two top-0 right-0 h-80 w-80 "></div>
