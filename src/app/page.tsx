@@ -1,5 +1,7 @@
 import Link from "next/link";
-import { getPosts } from "@/lib/api"; // reuse the same lib the News page uses
+import { getPosts } from "@/lib/api"; 
+import post_banner from "../assets/images/post_banner.png"; // fallback image
+
 import Footer from "@/components/common/Footer";
 import Header from "@/components/common/Header";
 import StartNow from "@/components/common/StartNow";
