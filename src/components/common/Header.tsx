@@ -85,15 +85,21 @@ const Header = () => {
               >
                 <Link href="/policy">Privacy Policy</Link>
               </li>
+              <li
+                className={`text-base font-medium hover:text-[#6C3CF4] ${pathname.startsWith("/casestudy") ? "text-[#6C3CF4]" : null}`}
+              >
+                <Link href="/casestudy">Case Study</Link>
+              </li>
             </ul>
           </div>
           <div className="flex items-center gap-6">
             <DropDown
-              items={["Home", "About Us", "Technical Expertise", "Contact", "News", "Privacy Policy"]}
+              items={["Home", "About Us", "Technical Expertise", "Contact", "News", "Privacy Policy", "Case Study"]}
               title={
                 <div className="md:hidden">
                   <Image src={Menu} width={30} height={500} alt="svg" />
                 </div>
+                
               }
             />
           </div>
