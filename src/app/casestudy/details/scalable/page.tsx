@@ -15,7 +15,7 @@ export default async function Page() {
   return (
     <div>
       {/* Header */}
-           <Header />
+      <Header />
 
 
       <main
@@ -116,8 +116,7 @@ export default async function Page() {
           <div className="mb-12 bg-gradient-to-br from-indigo-50/80 to-purple-50/80 backdrop-blur-sm rounded-2xl p-8 shadow-md">
             <h2 className="text-3xl font-bold text-[#222222] mb-8 flex items-center">
               <div className="w-2 h-8 bg-indigo-600 rounded-full mr-4"></div>
-              Tbrain's Strategic Solution
-            </h2>
+              <p>{`Tbrain's Stragtic!`}</p>            </h2>
 
             {/* Workflow Visual */}
             <div className="mb-8 bg-white/90 rounded-xl p-8 shadow-inner">
@@ -131,9 +130,9 @@ export default async function Page() {
                     </div>
                   </div>
                 </div>
-                
+
                 <div className="text-4xl text-gray-400 hidden md:block">→</div>
-                
+
                 <div className="flex flex-col items-center">
                   <div className="w-32 h-32 bg-green-500 rounded-2xl flex items-center justify-center shadow-lg transform hover:scale-105 transition-transform">
                     <div className="text-center text-white">
@@ -143,9 +142,9 @@ export default async function Page() {
                     </div>
                   </div>
                 </div>
-                
+
                 <div className="text-4xl text-gray-400 hidden md:block">→</div>
-                
+
                 <div className="flex flex-col items-center gap-4">
                   <div className="w-32 h-32 bg-yellow-500 rounded-2xl flex items-center justify-center shadow-lg transform hover:scale-105 transition-transform">
                     <div className="text-center text-white">
@@ -160,9 +159,9 @@ export default async function Page() {
                     </div>
                   </div>
                 </div>
-                
+
                 <div className="text-4xl text-gray-400 hidden md:block">→</div>
-                
+
                 <div className="flex flex-col items-center">
                   <div className="w-32 h-32 bg-purple-500 rounded-2xl flex items-center justify-center shadow-lg transform hover:scale-105 transition-transform">
                     <div className="text-center text-white">
