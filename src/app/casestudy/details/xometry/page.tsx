@@ -14,7 +14,7 @@ export default async function Page() {
   return (
     <div>
       {/* Header */}
-           <Header />
+      <Header />
 
 
       <main
@@ -160,8 +160,7 @@ export default async function Page() {
           <div className="mb-12 bg-gradient-to-br from-indigo-50/80 to-purple-50/80 backdrop-blur-sm rounded-2xl p-8 shadow-md">
             <h2 className="text-3xl font-bold text-[#222222] mb-8 flex items-center">
               <div className="w-2 h-8 bg-indigo-600 rounded-full mr-4"></div>
-              Tbrain's Strategic Solution
-            </h2>
+              <p>{`Tbrain's Stragtic!`}</p>            </h2>
 
             <p className="text-[#222222] leading-relaxed text-lg mb-8">
               We designed a comprehensive strategy built on <span className="font-bold text-indigo-600">three foundational pillars</span>: Multi-Layer Quality Assurance, Strategic Platform Integration, and Elite Subject Matter Experts.
@@ -170,7 +169,7 @@ export default async function Page() {
             {/* 5-Layer QA Visual */}
             <div className="mb-8 bg-white/90 rounded-xl p-8 shadow-inner">
               <h3 className="text-2xl font-bold text-center text-[#222222] mb-8">5-Layer Quality Assurance Framework</h3>
-              
+
               <div className="space-y-4">
                 <div className="flex items-center gap-4">
                   <div className="w-24 h-24 bg-blue-500 rounded-xl flex items-center justify-center shadow-lg flex-shrink-0">

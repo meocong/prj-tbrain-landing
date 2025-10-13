@@ -14,7 +14,7 @@ export default async function Page() {
   return (
     <div>
       {/* Header */}
-           <Header />
+      <Header />
 
       <main
         style={{ backgroundImage: `url(${post_bg?.src})` }}
@@ -149,8 +149,7 @@ export default async function Page() {
           <div className="mb-12 bg-gradient-to-br from-indigo-50/80 to-purple-50/80 backdrop-blur-sm rounded-2xl p-8 shadow-md">
             <h2 className="text-3xl font-bold text-[#222222] mb-8 flex items-center">
               <div className="w-2 h-8 bg-indigo-600 rounded-full mr-4"></div>
-              Tbrain's Strategic Solution
-            </h2>
+              <p>{`Tbrain's Stragtic!`}</p>            </h2>
 
             <p className="text-[#222222] leading-relaxed text-lg mb-8">
               Tbrain executed a <span className="font-semibold text-indigo-700">pod-based operating model</span> to maximize throughput within the 1-month window. Multiple teams worked in parallel, each owning the end-to-end lifecycle for one agent under central coordination.
@@ -159,7 +158,7 @@ export default async function Page() {
             {/* Pod Structure Visual */}
             <div className="mb-8 bg-white/90 rounded-xl p-8 shadow-inner">
               <h3 className="text-2xl font-bold text-center text-[#222222] mb-8">Pod-Based Operating Model</h3>
-              
+
               {/* Project Manager */}
               <div className="flex justify-center mb-6">
                 <div className="bg-gradient-to-r from-indigo-500 to-purple-500 rounded-xl p-4 shadow-lg text-white text-center max-w-md">
@@ -199,7 +198,7 @@ export default async function Page() {
 
             {/* Five-Stage Workflow */}
             <h3 className="text-2xl font-bold text-[#222222] mb-6 mt-8">Five-Stage Workflow</h3>
-            
+
             <div className="space-y-4">
               <div className="bg-white/80 backdrop-blur-sm rounded-xl p-6 shadow-md border-l-4 border-blue-500">
                 <div className="flex items-center mb-2">
