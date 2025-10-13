@@ -9,7 +9,7 @@ const caseStudies = [
   {
     id: 1,
     path: '/casestudy/details/agent',
-    title: 'AI Agent Development Platform',
+    title: 'AI Agent Creation and Evaluation',
     excerpt: 'Building intelligent AI agents that can understand context, make decisions, and execute complex tasks autonomously. Our platform enables seamless integration of multiple AI models for enhanced performance.',
     image: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&h=500&fit=crop',
     category: 'AI Development',
@@ -18,7 +18,7 @@ const caseStudies = [
   {
     id: 2,
     
-    title: "Xometry Manufacturing Intelligence",
+    title: "High-Accuracy CAD Annotation",
     excerpt: "Revolutionizing manufacturing processes with AI-powered analytics and predictive modeling. Smart resource allocation and quality control systems that reduce costs and improve efficiency.",
     path: "/casestudy/details/xometry",
     featuredImage: {
