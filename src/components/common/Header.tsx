@@ -21,8 +21,8 @@ const Header = () => {
         setPath(sectionId);
       }
     } else {
-      // Nếu không ở trang chủ, chuyển về trang chủ rồi scroll đến section
-      router.push(`/${sectionId}`);
+      // Nếu không ở trang chủ, chuyển về trang chủ rồi scroll đến section trên trang chủ
+      router.push(`/${sectionId.startsWith('#') ? sectionId : '#' + sectionId}`);
     }
   };
 
@@ -75,20 +75,29 @@ const Header = () => {
                   Contact
                 </Link>
               </li>
-              <li
-                className={`text-base font-medium hover:text-[#6C3CF4] ${pathname.startsWith("/news") ? "text-[#6C3CF4]" : null}`}
-              >
-                <Link href="/news">News</Link>
+              <li>
+                <Link
+                  href="/news"
+                  className={`text-base font-medium hover:text-[#6C3CF4] ${pathname.startsWith("/news") ? "text-[#6C3CF4]" : ""}`}
+                >
+                  News
+                </Link>
               </li>
-              <li
-                className={`text-base font-medium hover:text-[#6C3CF4] ${pathname.startsWith("/policy") ? "text-[#6C3CF4]" : null}`}
-              >
-                <Link href="/policy">Privacy Policy</Link>
+              <li>
+                <Link
+                  href="/policy"
+                  className={`text-base font-medium hover:text-[#6C3CF4] ${pathname.startsWith("/policy") ? "text-[#6C3CF4]" : ""}`}
+                >
+                  Privacy Policy
+                </Link>
               </li>
-              <li
-                className={`text-base font-medium hover:text-[#6C3CF4] ${pathname.startsWith("/casestudy") ? "text-[#6C3CF4]" : null}`}
-              >
-                <Link href="/casestudy">Case Study</Link>
+              <li>
+                <Link
+                  href="/casestudy"
+                  className={`text-base font-medium hover:text-[#6C3CF4] ${pathname.startsWith("/casestudy") ? "text-[#6C3CF4]" : ""}`}
+                >
+                  Case Study
+                </Link>
               </li>
             </ul>
           </div>

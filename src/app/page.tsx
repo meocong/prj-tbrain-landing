@@ -152,6 +152,118 @@ const caseStudyData = {
           <div className="one top-0 left-0 h-80 w-80 "></div>
           <div className="two top-0 right-0 h-80 w-80 "></div>
         </div>
+         <section className="container mx-auto px-3 pt-24 pb-24 relative max-w-[1128px]">
+      {/* Title + floating star */}
+      <div className="relative mb-12">
+        <div className="absolute -top-4 right-[15%] hidden md:block">
+          <div className="up-down">
+            <Image src={Star} width={38} height={38} alt="Floating Icon" />
+          </div>
+        </div>
+        <h3 className="text-[#222222] text-4xl lg:text-5xl font-medium leading-tight">
+          Case Studies
+        </h3>
+      </div>
+
+      {/* Featured Case Study */}
+      <div
+        className="w-full bg-white/80 backdrop-blur-sm rounded-[28px] shadow-lg hover:shadow-xl transition-all duration-300 flex p-6 md:p-8 gap-6 md:gap-8 flex-col lg:flex-row mb-12"
+        data-aos="fade-up"
+      >
+        <div className="lg:w-[58%] relative group overflow-hidden rounded-[24px]">
+          <Image
+            width={800}
+            height={415}
+            className="w-full h-[300px] md:h-[415px] object-cover transition-transform duration-300 group-hover:scale-105"
+            src={caseStudyData.image}
+            alt={caseStudyData.title}
+          />
+          <div className="absolute top-4 left-4 bg-[#6c3cf4] text-white px-4 py-2 rounded-full text-sm font-semibold shadow-lg">
+            Featured
+          </div>
+        </div>
+        
+        <div className="flex-1 flex flex-col justify-between">
+          <div>
+            <h2 className="text-[#0e1b2e] text-2xl md:text-3xl font-semibold leading-tight mb-3">
+              {caseStudyData.title}
+            </h2>
+            <p className="text-[#6c3cf4] text-lg font-medium mb-4">
+              {caseStudyData.shortDescription}
+            </p>
+            <p className="text-[#78818f] text-base font-normal leading-relaxed mb-6">
+              {caseStudyData.description}
+            </p>
+            
+            {/* Key Metrics */}
+            <div className="grid grid-cols-2 gap-3 mb-6">
+              {caseStudyData.metrics.map((metric, index) => (
+                <div key={index} className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-lg p-3">
+                  <div className="text-2xl font-bold text-[#6c3cf4]">{metric.value}</div>
+                  <div className="text-xs text-[#78818f]">{metric.label}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+          
+          <Link
+            href="/casestudy"
+            className="inline-flex items-center gap-2 text-[#6c3cf4] text-base font-semibold hover:gap-3 transition-all group"
+          >
+            View Details
+            <svg className="w-5 h-5 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            </svg>
+          </Link>
+        </div>
+      </div>
+
+      {/* BG blur blobs */}
+      <div className="wrap">
+        <div className="one top-[60%] left-0 h-80 w-80"></div>
+        <div className="two top-[60%] right-0 h-80 w-80"></div>
+      </div>
+
+      {/* Key Highlights Section */}
+      <div className="relative z-10">
+        <div className="flex items-center justify-between mb-8">
+          <h2 className="text-2xl md:text-3xl font-semibold text-[#0e1b2e]">Key Highlights</h2>
+          <div className="h-1 flex-1 mx-6 bg-gradient-to-r from-[#6c3cf4]/20 to-transparent rounded-full"></div>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
+          {caseStudyData.highlights.map((highlight, index) => (
+            <div
+              key={index}
+              className="bg-white/80 backdrop-blur-sm rounded-[20px] shadow hover:shadow-lg transition-all p-6 flex items-start gap-4 group"
+              data-aos="fade-up"
+              data-aos-delay={index * 100}
+            >
+              <div className="flex-shrink-0 w-10 h-10 bg-gradient-to-br from-[#6c3cf4] to-[#5a2fd3] rounded-full flex items-center justify-center text-white font-bold group-hover:scale-110 transition-transform">
+                {index + 1}
+              </div>
+              <p className="text-[#222222] text-base leading-relaxed pt-1">
+                {highlight}
+              </p>
+            </div>
+          ))}
+        </div>
+
+        {/* CTA Button */}
+        <div className="flex justify-center mt-10">
+          <Link
+            href="/casestudy"
+            className="px-8 h-12 bg-[#6c3cf4] hover:bg-[#5a2fd3] text-white text-base font-semibold rounded-xl transition-all hover:shadow-lg inline-flex items-center gap-2 group"
+          >
+            <span>View Full Case Study</span>
+            <svg className="w-5 h-5 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            </svg>
+          </Link>
+        </div>
+      </div>
+    </section>
+
         <section id="about" className="container mx-auto px-3 pt-24">
           <div className="text-center">
             <h3 className="mx-auto max-w-max text-4xl md:text-5xl font-medium">
@@ -494,117 +606,6 @@ const caseStudyData = {
             </div>
           </div>
         </section>
- <section className="container mx-auto px-3 pt-24 pb-24 relative max-w-[1128px]">
-      {/* Title + floating star */}
-      <div className="relative mb-12">
-        <div className="absolute -top-4 right-[15%] hidden md:block">
-          <div className="up-down">
-            <Image src={Star} width={38} height={38} alt="Floating Icon" />
-          </div>
-        </div>
-        <h3 className="text-[#222222] text-4xl lg:text-5xl font-medium leading-tight">
-          Case Studies
-        </h3>
-      </div>
-
-      {/* Featured Case Study */}
-      <div
-        className="w-full bg-white/80 backdrop-blur-sm rounded-[28px] shadow-lg hover:shadow-xl transition-all duration-300 flex p-6 md:p-8 gap-6 md:gap-8 flex-col lg:flex-row mb-12"
-        data-aos="fade-up"
-      >
-        <div className="lg:w-[58%] relative group overflow-hidden rounded-[24px]">
-          <Image
-            width={800}
-            height={415}
-            className="w-full h-[300px] md:h-[415px] object-cover transition-transform duration-300 group-hover:scale-105"
-            src={caseStudyData.image}
-            alt={caseStudyData.title}
-          />
-          <div className="absolute top-4 left-4 bg-[#6c3cf4] text-white px-4 py-2 rounded-full text-sm font-semibold shadow-lg">
-            Featured
-          </div>
-        </div>
-        
-        <div className="flex-1 flex flex-col justify-between">
-          <div>
-            <h2 className="text-[#0e1b2e] text-2xl md:text-3xl font-semibold leading-tight mb-3">
-              {caseStudyData.title}
-            </h2>
-            <p className="text-[#6c3cf4] text-lg font-medium mb-4">
-              {caseStudyData.shortDescription}
-            </p>
-            <p className="text-[#78818f] text-base font-normal leading-relaxed mb-6">
-              {caseStudyData.description}
-            </p>
-            
-            {/* Key Metrics */}
-            <div className="grid grid-cols-2 gap-3 mb-6">
-              {caseStudyData.metrics.map((metric, index) => (
-                <div key={index} className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-lg p-3">
-                  <div className="text-2xl font-bold text-[#6c3cf4]">{metric.value}</div>
-                  <div className="text-xs text-[#78818f]">{metric.label}</div>
-                </div>
-              ))}
-            </div>
-          </div>
-          
-          <Link
-            href="/case-study"
-            className="inline-flex items-center gap-2 text-[#6c3cf4] text-base font-semibold hover:gap-3 transition-all group"
-          >
-            View Details
-            <svg className="w-5 h-5 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-            </svg>
-          </Link>
-        </div>
-      </div>
-
-      {/* BG blur blobs */}
-      <div className="wrap">
-        <div className="one top-[60%] left-0 h-80 w-80"></div>
-        <div className="two top-[60%] right-0 h-80 w-80"></div>
-      </div>
-
-      {/* Key Highlights Section */}
-      <div className="relative z-10">
-        <div className="flex items-center justify-between mb-8">
-          <h2 className="text-2xl md:text-3xl font-semibold text-[#0e1b2e]">Key Highlights</h2>
-          <div className="h-1 flex-1 mx-6 bg-gradient-to-r from-[#6c3cf4]/20 to-transparent rounded-full"></div>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
-          {caseStudyData.highlights.map((highlight, index) => (
-            <div
-              key={index}
-              className="bg-white/80 backdrop-blur-sm rounded-[20px] shadow hover:shadow-lg transition-all p-6 flex items-start gap-4 group"
-              data-aos="fade-up"
-              data-aos-delay={index * 100}
-            >
-              <div className="flex-shrink-0 w-10 h-10 bg-gradient-to-br from-[#6c3cf4] to-[#5a2fd3] rounded-full flex items-center justify-center text-white font-bold group-hover:scale-110 transition-transform">
-                {index + 1}
-              </div>
-              <p className="text-[#222222] text-base leading-relaxed pt-1">
-                {highlight}
-              </p>
-            </div>
-          ))}
-        </div>
-
-        {/* CTA Button */}
-        <div className="flex justify-center mt-10">
-          <Link
-            href="/casestudy"
-            className="px-8 h-12 bg-[#6c3cf4] hover:bg-[#5a2fd3] text-white text-base font-semibold rounded-xl transition-all hover:shadow-lg inline-flex items-center gap-2 group"
-          >
-            <span>View Full Case Study</span>
-            <svg className="w-5 h-5 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-            </svg>
-          </Link>
-        </div>
-      </div>
-    </section>
 
 
         <section className="container mx-auto px-3 pt-28">
