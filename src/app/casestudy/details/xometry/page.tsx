@@ -338,7 +338,7 @@ export default async function Page() {
                   <div className="text-gray-600 font-semibold mt-2">High Pass Rate Achieved</div>
                 </div>
                 <p className="text-sm text-gray-600 text-center">
-                  Exceeded the ambitious 95% requirement with exceptionally high accuracy validated by client's rigorous internal checks
+                  Exceeded the ambitious 95% requirement with exceptionally high accuracy validated by client&apos;s rigorous internal checks
                 </p>
               </div>
 
@@ -366,7 +366,7 @@ export default async function Page() {
                   <svg className="w-6 h-6 text-green-600 mr-3 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                   </svg>
-                  <span className="text-[#222222]"><span className="font-semibold">Zero Strain on Internal Resources:</span> Client's engineering team remained focused on core innovation and revenue-generating activities</span>
+                  <span className="text-[#222222]"><span className="font-semibold">Zero Strain on Internal Resources:</span> Client&apos;s engineering team remained focused on core innovation and revenue-generating activities</span>
                 </li>
                 <li className="flex items-start">
                   <svg className="w-6 h-6 text-green-600 mr-3 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
