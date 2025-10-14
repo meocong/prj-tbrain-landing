@@ -9,8 +9,8 @@ const caseStudies = [
   {
     id: 1,
     path: '/casestudy/details/agent',
-    title: 'AI Agent Creation and Evaluation',
-    excerpt: 'Building intelligent AI agents that can understand context, make decisions, and execute complex tasks autonomously. Our platform enables seamless integration of multiple AI models for enhanced performance.',
+    title: 'Evaluation and Benchmarks for Agents',
+    excerpt: 'A global enterprise engaged Tbrain to stand up 6 domain-specific Q&A agents and a practical evaluation framework. We delivered production-grade agents grounded in authentic, approved knowledge in just 1 month from kickoff to handoff.',
     image: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&h=500&fit=crop',
     category: 'AI Development',
     featured: true
@@ -33,7 +33,7 @@ const caseStudies = [
     id: 3,
     path: '/casestudy/details/scalable',
     title: 'Scalable Multimodal AI System',
-    excerpt: 'Advanced multimodal AI architecture that processes text, images, audio, and video simultaneously. Designed for enterprise-scale applications with real-time processing capabilities.',
+    excerpt: 'Scaled from zero to 48,000 high-quality multimodal annotations in just 4 months. Our team delivered consistent, production-ready labeled data across text, image, and audio modalities, enabling rapid model training and deployment.',
     image: 'https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=800&h=500&fit=crop',
     category: 'Enterprise AI'
   }
@@ -55,7 +55,7 @@ export function CaseStudyContent() {
 
   return (
     <>
-      {/* Featured Case Study */}
+      {/* Featured Case Studies */}
       {featuredStudy && (
         <div className="w-full bg-white/80 backdrop-blur-sm rounded-[28px] shadow-lg hover:shadow-xl transition-all duration-300 flex p-6 md:p-8 gap-6 md:gap-8 flex-col lg:flex-row mb-12">
           <div className="lg:w-[58%] relative group overflow-hidden rounded-[24px] h-[300px] md:h-[415px]">
@@ -88,7 +88,7 @@ export function CaseStudyContent() {
               href='/casestudy/details/agent'
               className="inline-flex items-center gap-2 text-[#6c3cf4] text-base font-semibold hover:gap-3 transition-all group"
             >
-              View Case Study
+              View more details
               <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
             </Link>
           </div>

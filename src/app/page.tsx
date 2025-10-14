@@ -50,24 +50,36 @@ export const metadata: Metadata = {
 export default async function Home() {
 const CASE_STUDY_CATEGORY_SLUG = "case-study";
 const { edges } = await getPosts({ first: 7, categorySlug: CASE_STUDY_CATEGORY_SLUG });
-const caseStudyData = {
-  title: "Agent Creation and Evaluation",
-  shortDescription: "Delivering enterprise-grade AI agents at unprecedented speed",
-  description: "A global enterprise engaged Tbrain to stand up 6 domain-specific Q&A agents and a practical evaluation framework. We delivered production-grade agents grounded in authentic, approved knowledge in just 1 month from kickoff to handoff.",
-  image: "https://qdrant.tech/img/ai-agent.svg", // Replace with your image path
-  metrics: [
-    { value: "6", label: "Production Agents" },
-    { value: "1", label: "Month Delivery" },
-    { value: "720", label: "Test Queries" },
-    { value: "270", label: "Curated Files" }
-  ],
-  highlights: [
-    "Pod-based operating model for maximum throughput",
-    "Five-stage workflow from curation to packaging",
-    "Turnkey evaluation framework ready for immediate use",
-    "Every answer mapped to precise supporting passages"
-  ]
-};
+
+// Featured Case Studies Data
+const featuredCaseStudies = [
+  {
+    title: "Marvel Project",
+    shortDescription: "48K Multimodal Annotation in 4 months",
+    description: "Scaled from zero to 48,000 high-quality multimodal annotations in just 4 months. Our team delivered consistent, production-ready labeled data across text, image, and audio modalities, enabling rapid model training and deployment.",
+    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=415&fit=crop", 
+    metrics: [
+      { value: "48K", label: "Annotations" },
+      { value: "4", label: "Months" },
+      { value: "3", label: "Modalities" },
+      { value: "90%", label: "Accuracy" }
+    ]
+  }
+ ,
+  {
+    title: "Evaluation and Benchmarks for Agents",
+    shortDescription: "Delivering enterprise-grade AI agents at unprecedented speed",
+    description: "A global enterprise engaged Tbrain to stand up 6 domain-specific Q&A agents and a practical evaluation framework. We delivered production-grade agents grounded in authentic, approved knowledge in just 1 month from kickoff to handoff.",
+    image: "https://qdrant.tech/img/ai-agent.svg",
+    metrics: [
+      { value: "6", label: "Production Agents" },
+      { value: "1", label: "Month Delivery" },
+      { value: "720", label: "Test Queries" },
+      { value: "270", label: "Curated Files" }
+    ]
+  },
+];
+
   return (
     <div>
       <Header />
@@ -108,7 +120,7 @@ const caseStudyData = {
                 </span>
               </h3>
 
-              <p className="max-w-screen-md text-center mt-16 text-lg mx-auto text-gray-500">
+              <p className="max-w-screen-md text-center mt-16 text-lg mx-auto text-[#78818f]">
                 Skilled, ready-to-deploy experts in data labeling, model
                 evaluation, and technical domains. U.S.-based and offshore
                 talent. Fast, scalable, and reliable.
@@ -152,122 +164,105 @@ const caseStudyData = {
           <div className="one top-0 left-0 h-80 w-80 "></div>
           <div className="two top-0 right-0 h-80 w-80 "></div>
         </div>
-         <section className="container mx-auto px-3 pt-24 pb-24 relative max-w-[1128px]">
-      {/* Title + floating star */}
-      <div className="relative mb-12">
-        <div className="absolute -top-4 right-[15%] hidden md:block">
-          <div className="up-down">
-            <Image src={Star} width={38} height={38} alt="Floating Icon" />
-          </div>
-        </div>
-        <h3 className="text-[#222222] text-4xl lg:text-5xl font-medium leading-tight">
-          Case Studies
-        </h3>
-      </div>
-
-      {/* Featured Case Study */}
-      <div
-        className="w-full bg-white/80 backdrop-blur-sm rounded-[28px] shadow-lg hover:shadow-xl transition-all duration-300 flex p-6 md:p-8 gap-6 md:gap-8 flex-col lg:flex-row mb-12"
-        data-aos="fade-up"
-      >
-        <div className="lg:w-[58%] relative group overflow-hidden rounded-[24px]">
-          <Image
-            width={800}
-            height={415}
-            className="w-full h-[300px] md:h-[415px] object-cover transition-transform duration-300 group-hover:scale-105"
-            src={caseStudyData.image}
-            alt={caseStudyData.title}
-          />
-          <div className="absolute top-4 left-4 bg-[#6c3cf4] text-white px-4 py-2 rounded-full text-sm font-semibold shadow-lg">
-            Featured
-          </div>
-        </div>
         
-        <div className="flex-1 flex flex-col justify-between">
-          <div>
-            <h2 className="text-[#0e1b2e] text-2xl md:text-3xl font-semibold leading-tight mb-3">
-              {caseStudyData.title}
-            </h2>
-            <p className="text-[#6c3cf4] text-lg font-medium mb-4">
-              {caseStudyData.shortDescription}
-            </p>
-            <p className="text-[#78818f] text-base font-normal leading-relaxed mb-6">
-              {caseStudyData.description}
-            </p>
-            
-            {/* Key Metrics */}
-            <div className="grid grid-cols-2 gap-3 mb-6">
-              {caseStudyData.metrics.map((metric, index) => (
-                <div key={index} className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-lg p-3">
-                  <div className="text-2xl font-bold text-[#6c3cf4]">{metric.value}</div>
-                  <div className="text-xs text-[#78818f]">{metric.label}</div>
+        {/* How We Deliver Values Section - Reduced gap with pt-12 */}
+        <section className="container mx-auto px-3 pt-12 pb-24 relative max-w-[1200px]">
+          {/* Title + floating star */}
+          <div className="text-center relative mb-12">
+            <h3 className="mx-auto max-w-screen-lg text-4xl md:text-5xl font-medium">
+              <span className="gradient-text">How We Deliver Values</span>{" "}
+              <div className="float-end">
+                <div className="up-down">
+                  <Image src={StarFill} width={38} height={38} alt="Floating Icon" />
                 </div>
-              ))}
-            </div>
-          </div>
-          
-          <Link
-            href="/casestudy"
-            className="inline-flex items-center gap-2 text-[#6c3cf4] text-base font-semibold hover:gap-3 transition-all group"
-          >
-            View Details
-            <svg className="w-5 h-5 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-            </svg>
-          </Link>
-        </div>
-      </div>
-
-      {/* BG blur blobs */}
-      <div className="wrap">
-        <div className="one top-[60%] left-0 h-80 w-80"></div>
-        <div className="two top-[60%] right-0 h-80 w-80"></div>
-      </div>
-
-      {/* Key Highlights Section */}
-      <div className="relative z-10">
-        <div className="flex items-center justify-between mb-8">
-          <h2 className="text-2xl md:text-3xl font-semibold text-[#0e1b2e]">Key Highlights</h2>
-          <div className="h-1 flex-1 mx-6 bg-gradient-to-r from-[#6c3cf4]/20 to-transparent rounded-full"></div>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
-          {caseStudyData.highlights.map((highlight, index) => (
-            <div
-              key={index}
-              className="bg-white/80 backdrop-blur-sm rounded-[20px] shadow hover:shadow-lg transition-all p-6 flex items-start gap-4 group"
-              data-aos="fade-up"
-              data-aos-delay={index * 100}
-            >
-              <div className="flex-shrink-0 w-10 h-10 bg-gradient-to-br from-[#6c3cf4] to-[#5a2fd3] rounded-full flex items-center justify-center text-white font-bold group-hover:scale-110 transition-transform">
-                {index + 1}
               </div>
-              <p className="text-[#222222] text-base leading-relaxed pt-1">
-                {highlight}
-              </p>
-            </div>
-          ))}
-        </div>
+            </h3>
+          </div>
 
-        {/* CTA Button */}
-        <div className="flex justify-center mt-10">
-          <Link
-            href="/casestudy"
-            className="px-8 h-12 bg-[#6c3cf4] hover:bg-[#5a2fd3] text-white text-base font-semibold rounded-xl transition-all hover:shadow-lg inline-flex items-center gap-2 group"
-          >
-            <span>View Full Case Study</span>
-            <svg className="w-5 h-5 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-            </svg>
-          </Link>
-        </div>
-      </div>
-    </section>
+          {/* Two Featured Case Studies Grid */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+            {featuredCaseStudies.map((caseStudy, index) => (
+              <div
+                key={index}
+                className="bg-white/80 backdrop-blur-sm rounded-[24px] shadow-lg hover:shadow-xl transition-all duration-300 p-6 flex flex-col"
+                data-aos="fade-up"
+                data-aos-delay={index * 100}
+              >
+                {/* Image */}
+                <div className="relative group overflow-hidden rounded-[20px] mb-5">
+                  <Image
+                    width={600}
+                    height={320}
+                    className="w-full h-[280px] object-cover transition-transform duration-300 group-hover:scale-105"
+                    src={caseStudy.image}
+                    alt={caseStudy.title}
+                  />
+                  <div className="absolute top-3 left-3 bg-[#6C3CF4] text-white px-3 py-1.5 rounded-full text-sm font-semibold shadow-lg">
+                    Featured
+                  </div>
+                </div>
+                
+                {/* Content */}
+                <div className="flex-1 flex flex-col">
+                  <h2 className="text-[#0e1b2e] text-2xl font-semibold leading-tight mb-2">
+                    {caseStudy.title}
+                  </h2>
+                  <p className="text-[#6C3CF4] text-base font-medium mb-3">
+                    {caseStudy.shortDescription}
+                  </p>
+                  <p className="text-[#78818f] text-sm font-normal leading-relaxed mb-5">
+                    {caseStudy.description}
+                  </p>
+                  
+                  {/* Key Metrics */}
+                  <div className="grid grid-cols-2 gap-2 mb-5">
+                    {caseStudy.metrics.map((metric, idx) => (
+                      <div key={idx} className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-lg p-2.5">
+                        <div className="text-xl font-bold text-[#6C3CF4]">{metric.value}</div>
+                        <div className="text-xs text-[#78818f]">{metric.label}</div>
+                      </div>
+                    ))}
+                  </div>
+                  
+                  {/* View Details Link */}
+                  <Link
+                    href="/casestudy"
+                    className="inline-flex items-center gap-2 text-[#6C3CF4] text-sm font-semibold hover:gap-3 transition-all group mt-auto"
+                  >
+                    View Details
+                    <svg className="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                    </svg>
+                  </Link>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* View More Button */}
+          <div className="flex justify-center mt-8">
+            <Link
+              href="/casestudy"
+              className="px-8 h-12 bg-[#6C3CF4] hover:bg-[#5a2fd3] text-white text-base font-semibold rounded-xl transition-all hover:shadow-lg inline-flex items-center gap-2 group"
+            >
+              <span>View More Case Studies</span>
+              <svg className="w-5 h-5 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </Link>
+          </div>
+
+          {/* BG blur blobs */}
+          <div className="wrap">
+            <div className="one top-[60%] left-0 h-80 w-80"></div>
+            <div className="two top-[60%] right-0 h-80 w-80"></div>
+          </div>
+        </section>
 
         <section id="about" className="container mx-auto px-3 pt-24">
           <div className="text-center">
-            <h3 className="mx-auto max-w-max text-4xl md:text-5xl font-medium">
-              Our Differentiation{" "}
+            <h3 className="mx-auto max-w-screen-lg text-4xl md:text-5xl font-medium">
+              Our <span className="gradient-text">Differentiation</span>{" "}
               <div className="float-end">
                 <div className="up-down">
                   <Image
@@ -279,7 +274,7 @@ const caseStudyData = {
                 </div>
               </div>
             </h3>
-            <p className="mx-auto mt-5 max-w-5xl text-lg font-normal">
+            <p className="mx-auto mt-5 max-w-5xl text-lg font-normal text-[#78818f]">
               Our trainers are NOT anonymous crowd workers. Many are our
               employees, while others are carefully vetted experts referred into
               our network through trusted channels. Each undergoes rigorous
@@ -374,8 +369,8 @@ const caseStudyData = {
               />
             </div>
             <div className="text-center">
-              <h3 className="mx-auto max-w-max text-4xl md:text-5xl font-medium">
-                Sample Profiles{" "}
+              <h3 className="mx-auto max-w-screen-lg text-4xl md:text-5xl font-medium">
+                <span className="gradient-text">Sample Profiles</span>{" "}
                 <div className="float-end">
                   <div className="up-down">
                     <Image
@@ -406,19 +401,14 @@ const caseStudyData = {
                   <h2 className="font-family_avt my-3 text-center text-2xl font-semibold">
                     Nguyen Minh T.
                   </h2>
-                  <p className="text-center text-base font-normal text-gray-500">
-                    Radiologist with 9+ years of experience, currently working
-                    at one of the top international hospitals in Hanoi,
-                    specializing in diagnostic imaging and image guided
-                    interventions
-
+                  <p className="text-center text-base font-normal text-[#78818f]">
                     Radiologist with 9+ years of experience, currently working
                     at one of the top international hospitals in Hanoi,
                     specializing in diagnostic imaging and image guided
                     interventions
                   </p>
                   <div className="flex mt-auto pt-4">
-                    <div className="mx-auto rounded-full bg-[#4A21EF] text-sm text-white px-4 py-1 w-fit">
+                    <div className="mx-auto rounded-full bg-[#6C3CF4] text-sm text-white px-4 py-1 w-fit">
                       Medical
                     </div>
                   </div>
@@ -439,15 +429,15 @@ const caseStudyData = {
                   <h2 className="font-family_avt my-3 text-center text-2xl font-semibold">
                     Trang M.
                   </h2>
-                  <p className="text-center text-base font-normal text-gray-500">
+                  <p className="text-center text-base font-normal text-[#78818f]">
                     Co-founder of PowerGate Labs
                     <br />
-                    Head of Al at PowerGate Group (Test)
+                    Head of Al at PowerGate Group
                     <br />
                     Ph.D. in Software Engineering, Hanoi University, Vietnam.
                   </p>
                   <div className="flex mt-auto pt-4">
-                    <div className="mx-auto rounded-full bg-[#4A21EF] text-sm text-white px-4 py-1 w-fit">
+                    <div className="mx-auto rounded-full bg-[#6C3CF4] text-sm text-white px-4 py-1 w-fit">
                       Coding / AI
                     </div>
                   </div>
@@ -469,14 +459,14 @@ const caseStudyData = {
                   <h2 className="font-family_avt my-3 text-center text-2xl font-semibold">
                     Huy L.
                   </h2>
-                  <p className="text-center text-base font-normal text-gray-500">
-                    Al Expert ai PowerGate
+                  <p className="text-center text-base font-normal text-[#78818f]">
+                    Al Expert at PowerGate
                     <br />
                     Ph.D. in engineering with research interest on deep learning
                     applications Researcher at Phenikaa University
                   </p>
                   <div className="flex mt-auto pt-4">
-                    <div className="mx-auto rounded-full bg-[#4A21EF] text-sm text-white px-4 py-1 w-fit">
+                    <div className="mx-auto rounded-full bg-[#6C3CF4] text-sm text-white px-4 py-1 w-fit">
                       Coding / AI
                     </div>
                   </div>
@@ -498,7 +488,7 @@ const caseStudyData = {
                   <h2 className="font-family_avt my-3 text-center text-2xl font-semibold">
                     Tu Ng.
                   </h2>
-                  <p className="text-center text-base font-normal text-gray-500">
+                  <p className="text-center text-base font-normal text-[#78818f]">
                     10+ years in Data Science
                     <br />
                     Head of AI at PowerGate Labs
@@ -508,7 +498,7 @@ const caseStudyData = {
                     Expert in Python, SQL, machine learning
                   </p>
                   <div className="flex mt-auto pt-4">
-                    <div className="mx-auto rounded-full bg-[#4A21EF] text-sm text-white px-4 py-1 w-fit">
+                    <div className="mx-auto rounded-full bg-[#6C3CF4] text-sm text-white px-4 py-1 w-fit">
                       Data
                     </div>
                   </div>
@@ -533,14 +523,24 @@ const caseStudyData = {
         </div>
         <section className="container max-w-screen-xl mx-auto mt-32 px-3 flex flex-col items-center">
           <div className="text-center">
-            <h3 className="mx-auto max-w-max text-[#6C3CF4] text-4xl md:text-5xl font-medium">
-              Sample Projects
+            <h3 className="mx-auto max-w-screen-lg text-4xl md:text-5xl font-medium">
+              <span className="gradient-text">Sample Projects</span>{" "}
+              <div className="float-end">
+                <div className="up-down">
+                  <Image
+                    src={StarFill}
+                    width={38}
+                    height={38}
+                    alt="Floating Icon"
+                  />
+                </div>
+              </div>
             </h3>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 w-fit gap-6 mt-16">
             <div
-              className="bg-[linear-gradient(0deg,rgba(255,255,255,0)_0%,rgba(126,82,228,0.05)_50%,rgba(132,101,255,0.15)_100%)] p-8 w-[352px] h-[362px] gradient-border-top"
+              className="bg-[linear-gradient(0deg,rgba(255,255,255,0)_0%,rgba(108,60,244,0.05)_50%,rgba(108,60,244,0.15)_100%)] p-8 w-[352px] h-[362px] gradient-border-top"
               data-aos="fade-up"
             >
               <div className="w-[90px] h-[90px] mb-6">
@@ -554,13 +554,13 @@ const caseStudyData = {
               <h4 className="text-[20px] font-bold text-[#6C3CF4] mb-4">
                 Chatbot data generation
               </h4>
-              <p className="text-[#222]">
+              <p className="text-[#0e1b2e]">
                 Make Q&A pairs to train a chatbot on medical questions.
               </p>
             </div>
 
             <div
-              className="bg-[linear-gradient(0deg,rgba(255,255,255,0)_0%,rgba(126,82,228,0.05)_50%,rgba(132,101,255,0.15)_100%)] p-8 w-[352px] h-[362px] gradient-border-top"
+              className="bg-[linear-gradient(0deg,rgba(255,255,255,0)_0%,rgba(108,60,244,0.05)_50%,rgba(108,60,244,0.15)_100%)] p-8 w-[352px] h-[362px] gradient-border-top"
               data-aos="fade-up"
               data-aos-delay="100"
             >
@@ -575,7 +575,7 @@ const caseStudyData = {
               <h4 className="text-[20px] font-bold text-[#6C3CF4] mb-4">
                 Training data generation
               </h4>
-              <p className="text-[#222]">
+              <p className="text-[#0e1b2e]">
                 Assess the accuracy and validity of LLM-generated responses in
                 advanced domains by verifying if answers are correct and if
                 questions are solvable.
@@ -583,7 +583,7 @@ const caseStudyData = {
             </div>
 
             <div
-              className="bg-[linear-gradient(0deg,rgba(255,255,255,0)_0%,rgba(126,82,228,0.05)_50%,rgba(132,101,255,0.15)_100%)] p-8 w-[352px] h-[362px] gradient-border-top"
+              className="bg-[linear-gradient(0deg,rgba(255,255,255,0)_0%,rgba(108,60,244,0.05)_50%,rgba(108,60,244,0.15)_100%)] p-8 w-[352px] h-[362px] gradient-border-top"
               data-aos="fade-up"
               data-aos-delay="200"
             >
@@ -598,7 +598,7 @@ const caseStudyData = {
               <h4 className="text-[20px] font-bold text-[#6C3CF4] mb-4">
                 Audio Data Collection
               </h4>
-              <p className="text-[#222]">
+              <p className="text-[#0e1b2e]">
                 Gather high-quality audio data to enhance smart device
                 capabilities, enabling better understanding and response to a
                 variety of user commands and accents.
@@ -647,7 +647,7 @@ const caseStudyData = {
                     className="rounded-full"
                   />
                   <h3 className="mt-6 text-3xl font-medium">Tam Le</h3>
-                  <p className="mt-3 text-base font-normal min-h-[130px]">
+                  <p className="mt-3 text-base font-normal min-h-[130px] text-[#78818f]">
                     Seasoned Data Science and Analytics leader with over 15
                     years of experience across big tech and startups, including
                     Google, Adobe, and Asana. Expertise in AI training, honed
@@ -707,7 +707,7 @@ const caseStudyData = {
                     className="rounded-full"
                   />
                   <h3 className="mt-6 text-3xl font-medium">David Do</h3>
-                  <p className="mt-3 text-base font-normal min-h-[130px]">
+                  <p className="mt-3 text-base font-normal min-h-[130px] text-[#78818f]">
                     Senior Software Engineering leader with 20 years of
                     experience managing outsourced teams. Formerly led an
                     engineering organization of 500+ professionals and oversaw
@@ -885,9 +885,19 @@ const caseStudyData = {
         <section id="contact" className="container mx-auto px-3 pt-24">
           <div className="text-center">
             <h3 className="mx-auto max-w-screen-lg text-4xl md:text-5xl font-medium">
-              Ready to start now{" "}
+              Ready to <span className="gradient-text">start now</span>{" "}
+              <div className="float-end">
+                <div className="up-down">
+                  <Image
+                    src={StarFill}
+                    width={38}
+                    height={38}
+                    alt="Floating Icon"
+                  />
+                </div>
+              </div>
             </h3>
-            <p className="text-lg text-black font-normal mt-4 mb-8">
+            <p className="text-lg text-[#0e1b2e] font-normal mt-4 mb-8">
               &middot; Our team is available to start a project immediately!{" "}
               <br /> &middot; Talk to us now about your needs!
             </p>
@@ -903,11 +913,11 @@ const caseStudyData = {
                 alt="img"
               />
             </div>
-            <h3 className="text-4xl font-medium text-center text-black my-8">
+            <h3 className="text-4xl font-medium text-center text-[#0e1b2e] my-8">
               Send us an email at{" "}
               <a
                 href="mailto:info@tbrain.ai"
-                className="text-[#682EC3] underline"
+                className="text-[#6C3CF4] underline"
               >
                 info@tbrain.ai
               </a>
