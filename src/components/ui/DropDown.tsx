@@ -41,8 +41,8 @@ const Dropdown = ({ title, items }: DropdownProps) => {
               case "Privacy Policy":
                 path = "/policy";
                 break;
-                case "Case Study":
-                path = "/casestudy";
+                case "Case Studies":
+                path = "/casestudies";
                 break;
               default:
                 path = "";

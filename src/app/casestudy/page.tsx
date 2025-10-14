@@ -7,7 +7,7 @@ import Footer from "@/components/common/Footer";
 import { CaseStudyContent } from "@/components/casestudy/CaseStudyContent";
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import Logo from "@/assets/images/logo.png";
+import Logo from "@/assets/images/logo.svg";
 import Image from "next/image";
 
 export default function Page() {
@@ -20,16 +20,22 @@ export default function Page() {
         <div className="container mx-auto">
           <div className="flex items-center justify-between">
             <Link href="/" className="flex items-center justify-center gap-2">
-              <Image src={Logo} width={123} height={500} alt="logo" />
-            </Link>
+  <Image 
+    src={Logo} 
+    width={123} 
+    height={40} 
+    alt="logo"
+    priority
+    className="object-contain"
+  />
+</Link>
             <div className="hidden md:block">
               <ul className="flex items-center gap-16">
                 <li>
                   <Link
                     href="/"
-                    className={`text-base font-medium hover:text-[#6C3CF4] ${
-                      pathname === "/" ? "text-[#6C3CF4]" : ""
-                    }`}
+                    className={`text-base font-medium hover:text-[#6C3CF4] ${pathname === "/" ? "text-[#6C3CF4]" : ""
+                      }`}
                   >
                     Home
                   </Link>
@@ -61,9 +67,8 @@ export default function Page() {
                 <li>
                   <Link
                     href="/news"
-                    className={`text-base font-medium hover:text-[#6C3CF4] ${
-                      pathname.startsWith("/news") ? "text-[#6C3CF4]" : ""
-                    }`}
+                    className={`text-base font-medium hover:text-[#6C3CF4] ${pathname.startsWith("/news") ? "text-[#6C3CF4]" : ""
+                      }`}
                   >
                     News
                   </Link>
@@ -71,21 +76,19 @@ export default function Page() {
                 <li>
                   <Link
                     href="/policy"
-                    className={`text-base font-medium hover:text-[#6C3CF4] ${
-                      pathname.startsWith("/policy") ? "text-[#6C3CF4]" : ""
-                    }`}
+                    className={`text-base font-medium hover:text-[#6C3CF4] ${pathname.startsWith("/policy") ? "text-[#6C3CF4]" : ""
+                      }`}
                   >
                     Privacy Policy
                   </Link>
                 </li>
                 <li>
                   <Link
-                    href="/casestudy"
-                    className={`text-base font-medium hover:text-[#6C3CF4] ${
-                      pathname.startsWith("/casestudy") ? "text-[#6C3CF4]" : ""
-                    }`}
+                    href="/casestudies"
+                    className={`text-base font-medium hover:text-[#6C3CF4] ${pathname.startsWith("/casestudy") ? "text-[#6C3CF4]" : ""
+                      }`}
                   >
-                    Case Study
+                    Case Studies
                   </Link>
                 </li>
               </ul>
@@ -102,7 +105,7 @@ export default function Page() {
           <div className="one top-0 left-0 h-80 w-80"></div>
           <div className="two top-0 right-0 h-80 w-80"></div>
         </div>
-        
+
         {/* Animated Background */}
         <div className="fixed inset-0 overflow-hidden pointer-events-none">
           <div className="absolute top-0 left-1/4 w-80 h-80 bg-purple-200/20 rounded-full blur-3xl animate-pulse"></div>
@@ -111,7 +114,7 @@ export default function Page() {
           <div className="absolute top-[60%] right-0 w-80 h-80 bg-indigo-200/20 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '3s' }}></div>
         </div>
 
-        {}
+        { }
         <section
           id="casestudy"
           className="container mx-auto px-3 pt-24 pb-24 relative max-w-[1128px]"
@@ -130,7 +133,7 @@ export default function Page() {
           <CaseStudyContent />
         </section>
       </main>
-      
+
       <Footer />
     </div>
   );

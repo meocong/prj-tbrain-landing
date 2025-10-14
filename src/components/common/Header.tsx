@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import DropDown from "@/components/ui/DropDown";
-import Logo from "@/assets/images/logo.png";
+import Logo from "@/assets/images/logo.svg";
 import Menu from "@/assets/icons/menu-11.svg";
 import Image from "next/image";
 import Link from "next/link";
@@ -30,19 +30,25 @@ const Header = () => {
     <header className="fixed right-0 top-0 z-10 w-full bg-[#FFFFFF59] p-3 backdrop-blur-sm">
       <div className="container mx-auto">
         <div className="flex items-center justify-between">
-          <Link href="#home" className="flex items-center justify-center gap-2">
-            <Image src={Logo} width={123} height={500} alt="logo" />
+          <Link href="/" className="flex items-center justify-center gap-2">
+            <Image
+              src={Logo}
+              width={123}
+              height={40}
+              alt="logo"
+              priority
+              className="object-contain"
+            />
           </Link>
           <div className="hidden md:block">
             <ul className="flex items-center gap-16">
               <li>
                 <Link
                   href="/"
-                  className={`text-base font-medium hover:text-[#6C3CF4] ${
-                    pathname === "/" && (path === "#home" || path === "")
+                  className={`text-base font-medium hover:text-[#6C3CF4] ${pathname === "/" && (path === "#home" || path === "")
                       ? "text-[#6C3CF4]"
                       : null
-                  }`}
+                    }`}
                   onClick={() => handleScrollToSection("#home")}
                 >
                   Home
@@ -96,19 +102,19 @@ const Header = () => {
                   href="/casestudy"
                   className={`text-base font-medium hover:text-[#6C3CF4] ${pathname.startsWith("/casestudy") ? "text-[#6C3CF4]" : ""}`}
                 >
-                  Case Study
+                  Case Studies
                 </Link>
               </li>
             </ul>
           </div>
           <div className="flex items-center gap-6">
             <DropDown
-              items={["Home", "About Us", "Technical Expertise", "Contact", "News", "Privacy Policy", "Case Study"]}
+              items={["Home", "About Us", "Technical Expertise", "Contact", "News", "Privacy Policy", "Case Studies"]}
               title={
                 <div className="md:hidden">
                   <Image src={Menu} width={30} height={500} alt="svg" />
                 </div>
-                
+
               }
             />
           </div>
