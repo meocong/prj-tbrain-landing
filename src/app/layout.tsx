@@ -27,7 +27,7 @@ export default function RootLayout({
           <Script
             src="https://tbrain.arcanic.ai/embed.js"
             data-chat-service="TbrainAI"
-            data-url="https://tbrain.arcanic.ai/"
+            data-url="http://3.24.232.29/chat"
             data-chat-width="450px"
             data-chat-height="600px"
           />
