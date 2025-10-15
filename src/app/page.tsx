@@ -54,10 +54,10 @@ const { edges } = await getPosts({ first: 7, categorySlug: CASE_STUDY_CATEGORY_S
 // Featured Case Studies Data
 const featuredCaseStudies = [
   {
-    title: "Marvel Project",
+    title: "Scalable Multimodal Data Annotation",
     shortDescription: "48K Multimodal Annotation in 4 months",
     description: "Scaled from zero to 48,000 high-quality multimodal annotations in just 4 months. Our team delivered consistent, production-ready labeled data across text, image, and audio modalities, enabling rapid model training and deployment.",
-    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=415&fit=crop", 
+    image: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=800&h=500&fit=crop", 
     metrics: [
       { value: "48K", label: "Annotations" },
       { value: "4", label: "Months" },
@@ -70,7 +70,7 @@ const featuredCaseStudies = [
     title: "Evaluation and Benchmarks for Agents",
     shortDescription: "Delivering enterprise-grade AI agents at unprecedented speed",
     description: "A global enterprise engaged Tbrain to stand up 6 domain-specific Q&A agents and a practical evaluation framework. We delivered production-grade agents grounded in authentic, approved knowledge in just 1 month from kickoff to handoff.",
-    image: "https://qdrant.tech/img/ai-agent.svg",
+    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=415&fit=crop",
     metrics: [
       { value: "6", label: "Production Agents" },
       { value: "1", label: "Month Delivery" },

@@ -11,8 +11,7 @@ const caseStudies = [
     path: '/casestudy/details/agent',
     title: 'Evaluation and Benchmarks for Agents',
     excerpt: 'A global enterprise engaged Tbrain to stand up 6 domain-specific Q&A agents and a practical evaluation framework. We delivered production-grade agents grounded in authentic, approved knowledge in just 1 month from kickoff to handoff.',
-    image: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&h=500&fit=crop',
-    category: 'AI Development',
+    image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=415&fit=crop',
     featured: true
   },
   {

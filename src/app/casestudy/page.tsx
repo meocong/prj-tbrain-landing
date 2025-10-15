@@ -2,100 +2,19 @@
 
 import React from 'react';
 import { Star } from 'lucide-react';
+import Header from '@/components/common/Header';
 import post_bg from "@/assets/images/post_bg.png";
 import Footer from "@/components/common/Footer";
 import { CaseStudyContent } from "@/components/casestudy/CaseStudyContent";
-import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import Logo from "@/assets/images/logo.svg";
-import Image from "next/image";
 
 export default function Page() {
   const pathname = usePathname();
 
   return (
     <div>
-      {/* Header */}
-      <header className="fixed right-0 top-0 z-10 w-full bg-[#FFFFFF59] p-3 backdrop-blur-sm">
-        <div className="container mx-auto">
-          <div className="flex items-center justify-between">
-            <Link href="/" className="flex items-center justify-center gap-2">
-  <Image 
-    src={Logo} 
-    width={123} 
-    height={40} 
-    alt="logo"
-    priority
-    className="object-contain"
-  />
-</Link>
-            <div className="hidden md:block">
-              <ul className="flex items-center gap-16">
-                <li>
-                  <Link
-                    href="/"
-                    className={`text-base font-medium hover:text-[#6C3CF4] ${pathname === "/" ? "text-[#6C3CF4]" : ""
-                      }`}
-                  >
-                    Home
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/#about"
-                    className="text-base font-medium hover:text-[#6C3CF4]"
-                  >
-                    About Us
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/#skills"
-                    className="text-base font-medium hover:text-[#6C3CF4]"
-                  >
-                    Technical Expertise
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/#contact"
-                    className="text-base font-medium hover:text-[#6C3CF4]"
-                  >
-                    Contact
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/news"
-                    className={`text-base font-medium hover:text-[#6C3CF4] ${pathname.startsWith("/news") ? "text-[#6C3CF4]" : ""
-                      }`}
-                  >
-                    News
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/policy"
-                    className={`text-base font-medium hover:text-[#6C3CF4] ${pathname.startsWith("/policy") ? "text-[#6C3CF4]" : ""
-                      }`}
-                  >
-                    Privacy Policy
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/casestudies"
-                    className={`text-base font-medium hover:text-[#6C3CF4] ${pathname.startsWith("/casestudy") ? "text-[#6C3CF4]" : ""
-                      }`}
-                  >
-                    Case Studies
-                  </Link>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </header>
+           <Header />
+
 
       {/* Main */}
       <main
