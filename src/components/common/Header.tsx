@@ -63,6 +63,14 @@ const Header = () => {
                   About Us
                 </Link>
               </li>
+               <li>
+                <Link
+                  href="/casestudy"
+                  className={`text-base font-medium hover:text-[#6C3CF4] ${pathname.startsWith("/casestudy") ? "text-[#6C3CF4]" : ""}`}
+                >
+                  Case Studies
+                </Link>
+              </li>
               <li>
                 <Link
                   href="/#skills"
@@ -72,15 +80,7 @@ const Header = () => {
                   Technical Expertise
                 </Link>
               </li>
-              <li>
-                <Link
-                  href="/#contact"
-                  className={`text-base font-medium hover:text-[#6C3CF4] ${pathname === "/" && path === "#contact" ? "text-[#6C3CF4]" : null}`}
-                  onClick={() => handleScrollToSection("#contact")}
-                >
-                  Contact
-                </Link>
-              </li>
+             
               <li>
                 <Link
                   href="/news"
@@ -99,10 +99,11 @@ const Header = () => {
               </li>
               <li>
                 <Link
-                  href="/casestudy"
-                  className={`text-base font-medium hover:text-[#6C3CF4] ${pathname.startsWith("/casestudy") ? "text-[#6C3CF4]" : ""}`}
+                  href="/#contact"
+                  className={`text-base font-medium hover:text-[#6C3CF4] ${pathname === "/" && path === "#contact" ? "text-[#6C3CF4]" : null}`}
+                  onClick={() => handleScrollToSection("#contact")}
                 >
-                  Case Studies
+                  Contact
                 </Link>
               </li>
             </ul>
