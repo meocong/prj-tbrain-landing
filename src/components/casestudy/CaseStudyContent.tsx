@@ -4,14 +4,14 @@ import React from 'react';
 import { ArrowRight } from 'lucide-react';
 import Image from "next/image";
 import Link from "next/link";
-
+import datalabeling from "@/assets/images/labeling.svg";
 const caseStudies = [
   {
     id: 1,
     path: '/casestudy/details/agent',
     title: 'Evaluation and Benchmarks for Agents',
     excerpt: 'A global enterprise engaged Tbrain to stand up 6 domain-specific Q&A agents and a practical evaluation framework. We delivered production-grade agents grounded in authentic, approved knowledge in just 1 month from kickoff to handoff.',
-    image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=415&fit=crop',
+    image: 'https://qdrant.tech/img/ai-agent.svg',
     featured: true
   },
   {
@@ -33,7 +33,8 @@ const caseStudies = [
     path: '/casestudy/details/scalable',
     title: 'Scalable Multimodal AI System',
     excerpt: 'Scaled from zero to 48,000 high-quality multimodal annotations in just 4 months. Our team delivered consistent, production-ready labeled data across text, image, and audio modalities, enabling rapid model training and deployment.',
-    image: 'https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=800&h=500&fit=crop',
+        image: datalabeling.src,
+
     category: 'Enterprise AI'
   }
 ];
