@@ -19,7 +19,7 @@ const caseStudies = [
     
     title: "High-Accuracy CAD Annotation",
     excerpt: "Revolutionizing manufacturing processes with AI-powered analytics and predictive modeling. Smart resource allocation and quality control systems that reduce costs and improve efficiency.",
-    path: "/casestudy/details/xometry",
+    path: "/casestudy/details/manufacturing",
     featuredImage: {
       node: {
         sourceUrl: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&h=500&fit=crop",
