@@ -320,7 +320,7 @@ systems and expert-led loops required for agents to self-improve.
               <div className="mt-6 md:mt-10" data-aos="fade-up-left">
                 <div className="rounded-2xl border border-[#6C3CF4]/40 bg-white/75 backdrop-blur-sm p-6 md:p-8 shadow-sm min-h-[200px] flex flex-col justify-center">
                   <h4 className="text-2xl md:text-3xl font-bold text-[#6C3CF4]/90 mb-3">Verifiable</h4>
-                  <p className="text-base md:text-lg font-normal text-[#0e1b2e]">Closed Loop reinforcement learning systems </p>
+                  <p className="text-base md:text-lg font-normal text-[#0e1b2e]">Closed-loop reinforcement learning systems for agents to self-improve.</p>
                 </div>
               </div>
             </div>
