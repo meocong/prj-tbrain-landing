@@ -27,12 +27,8 @@ import iconTraining from "../assets/icons/icon_training.svg";
 import techcombank from "../assets/icons/techcombank_logo.svg";
 import Tick from "../assets/icons/tick.svg";
 import turningCom from "../assets/icons/turingcom_logo.svg";
-import img1 from "../assets/images/1.png";
 import img2 from "../assets/images/2.png";
 import img3 from "../assets/images/3.png";
-import img4 from "../assets/images/4.png";
-import img5 from "../assets/images/5.png";
-import img6 from "../assets/images/6.png";
 import avt1 from "../assets/images/avt-1.png";
 import avt2 from "../assets/images/avt-2.png";
 import avt3 from "../assets/images/avt-3.png";
@@ -119,9 +115,8 @@ export default async function Home() {
               </h3>
 
               <p className="max-w-screen-md text-center mt-16 text-lg mx-auto text-[#78818f]">
-                Expert-validated environments and data to
-                reliably measure and improve agent
-                performance.
+                Expert-validated environments and data fast, scalable, and reliable to
+                measure and improve agent performance.
               </p>
               <div className="flex justify-center items-center mt-16">
                 <StartNow />
@@ -277,75 +272,56 @@ export default async function Home() {
 systems and expert-led loops required for agents to self-improve.
             </p>
           </div>
-          <div className="mx-auto mt-12 grid max-w-screen-lg grid-cols-12 gap-4">
-            <div className="col-span-12 md:col-span-4">
-              <div className="grid grid-cols-12 gap-4">
-                <div className="col-span-12">
-                  <Image
-                    src={img1}
-                    loading="lazy"
-                    width={600}
-                    height={500}
-                    alt="img"
-                    data-aos="fade-down-right"
-                  />
+          {/* Staggered horizontal 2x3: so le hàng ngang, box chữ to hơn */}
+          <div className="mx-auto mt-12 max-w-screen-lg px-1">
+            {/* Row 1: so le — cột 1,3 cao; cột 2 thấp */}
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-6 items-end">
+              <div className="mt-0 md:mt-0" data-aos="fade-down-right">
+                <div className="rounded-2xl border border-[#6C3CF4]/40 bg-white/75 backdrop-blur-sm p-6 md:p-8 shadow-sm min-h-[200px] flex flex-col justify-center">
+                  <h4 className="text-2xl md:text-3xl font-bold text-[#6C3CF4]/90 mb-3">Domain-Specific Expert Pods</h4>
+                  <p className="text-base md:text-lg font-normal text-[#0e1b2e]">Coding, STEM, Medical, Manufacturing, Agent Tool Use</p>
                 </div>
-                <div className="col-span-12">
-                  <Image
-                    src={img2}
-                    loading="lazy"
-                    width={600}
-                    height={500}
-                    alt="img"
-                    data-aos="fade-up-right"
-                  />
+              </div>
+              <div className="mt-6 md:mt-10">
+                <Image
+                  src={img3}
+                  loading="lazy"
+                  width={600}
+                  height={500}
+                  alt="Team collaboration"
+                  className="w-full h-auto rounded-2xl object-cover"
+                />
+              </div>
+              <div className="mt-0 md:mt-0" data-aos="fade-down-left">
+                <div className="rounded-2xl border border-[#6C3CF4]/40 bg-white/75 backdrop-blur-sm p-6 md:p-8 shadow-sm min-h-[200px] flex flex-col justify-center">
+                  <h4 className="text-2xl md:text-3xl font-bold text-[#6C3CF4]/90 mb-3">Custom software & tools</h4>
+                  <p className="text-base md:text-lg font-normal text-[#0e1b2e]">to see immediate results</p>
                 </div>
               </div>
             </div>
-            <div className="col-span-12 md:col-span-4">
-              <div className="grid grid-cols-12 gap-7">
-                <div className="col-span-12">
-                  <Image
-                    src={img3}
-                    loading="lazy"
-                    width={600}
-                    height={500}
-                    alt="img"
-                  />
-                </div>
-                <div className="col-span-12">
-                  <Image
-                    src={img4}
-                    loading="lazy"
-                    width={600}
-                    height={500}
-                    alt="img"
-                    data-aos="fade-up"
-                  />
+            {/* Row 2: so le — cột 1 thấp; cột 2,3 cao */}
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-6 items-end mt-4 md:mt-6">
+              <div className="mt-6 md:mt-10">
+                <Image
+                  src={img2}
+                  loading="lazy"
+                  width={600}
+                  height={500}
+                  alt="Expertise illustration"
+                  className="w-full h-auto rounded-2xl object-cover"
+                  data-aos="fade-up-right"
+                />
+              </div>
+              <div className="mt-0 md:mt-0" data-aos="fade-up">
+                <div className="rounded-2xl border border-[#6C3CF4]/40 bg-white/75 backdrop-blur-sm p-6 md:p-8 shadow-sm min-h-[200px] flex flex-col justify-center">
+                  <h4 className="text-2xl md:text-3xl font-bold text-[#6C3CF4]/90 mb-3">17k +</h4>
+                  <p className="text-base md:text-lg font-normal text-[#0e1b2e]">Pipeline from top universities and research institutions including PhDs and International Olympiad medalists.</p>
                 </div>
               </div>
-            </div>
-            <div className="col-span-12 md:col-span-4">
-              <div className="grid grid-cols-12 gap-4">
-                <div className="col-span-12">
-                  <Image
-                    src={img6}
-                    loading="lazy"
-                    width={600}
-                    height={500}
-                    alt="img"
-                    data-aos="fade-down-left"
-                  />
-                </div>
-                <div className="col-span-12">
-                  <Image
-                    src={img5}
-                    loading="lazy"
-                    width={600}
-                    height={500}
-                    alt="img"
-                    data-aos="fade-up-left"
-                  />
+              <div className="mt-6 md:mt-10" data-aos="fade-up-left">
+                <div className="rounded-2xl border border-[#6C3CF4]/40 bg-white/75 backdrop-blur-sm p-6 md:p-8 shadow-sm min-h-[200px] flex flex-col justify-center">
+                  <h4 className="text-2xl md:text-3xl font-bold text-[#6C3CF4]/90 mb-3">Closed-loop</h4>
+                  <p className="text-base md:text-lg font-normal text-[#0e1b2e]">verifiable software systems for agents to self-improve.</p>
                 </div>
               </div>
             </div>
@@ -365,7 +341,7 @@ systems and expert-led loops required for agents to self-improve.
             </div>
             <div className="text-center">
               <h3 className="mx-auto max-w-screen-lg text-4xl md:text-5xl font-medium">
-                <span className="gradient-text">Sample Profiles</span>{" "}
+                <span className="gradient-text">Sample Experts</span>{" "}
                 <div className="float-end">
                   <div className="up-down">
                     <Image
@@ -893,7 +869,7 @@ systems and expert-led loops required for agents to self-improve.
               </div>
             </h3>
             <p className="text-lg text-[#0e1b2e] font-normal mt-4 mb-8">
-              &middot; Whether you need a benchmark, a training data program, or a managed expert team for a complex domain, Tbrain can help you move faster with higher confidence.
+              Whether you need a benchmark, a training data program, or a managed expert team for a complex domain, Tbrain can help you move faster with higher confidence.
             </p>
           </div>
           <div className="mx-auto max-w-screen-lg">
