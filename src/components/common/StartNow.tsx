@@ -18,7 +18,7 @@ const StartNow = () => {
       href="#start"
       className="transition-all duration-500 px-10 py-3 text-lg rounded-full bg-[#682EC3] text-white hover:bg-[#d25df9]"
     >
-      Ready to start now
+      Request a Demo
     </a>
   );
 };
