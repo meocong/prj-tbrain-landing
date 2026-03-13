@@ -115,8 +115,7 @@ export default async function Home() {
               </h3>
 
               <p className="max-w-screen-md text-center mt-16 text-lg mx-auto text-[#78818f]">
-                Expert-validated environments and data fast, scalable, and reliable to
-                measure and improve agent performance.
+                Expert-validated environments and data to measure and improve agent performance. Fast, scalable, and reliable.
               </p>
               <div className="flex justify-center items-center mt-16">
                 <StartNow />
@@ -279,7 +278,7 @@ systems and expert-led loops required for agents to self-improve.
               <div className="mt-0 md:mt-0" data-aos="fade-down-right">
                 <div className="rounded-2xl border border-[#6C3CF4]/40 bg-white/75 backdrop-blur-sm p-6 md:p-8 shadow-sm min-h-[200px] flex flex-col justify-center">
                   <h4 className="text-2xl md:text-3xl font-bold text-[#6C3CF4]/90 mb-3">Domain-Specific Expert Pods</h4>
-                  <p className="text-base md:text-lg font-normal text-[#0e1b2e]">Coding, STEM, Medical, Manufacturing, Agent Tool Use</p>
+                  <p className="text-base md:text-lg font-normal text-[#0e1b2e]">Coding, STEM, Medical, Manufacturing, Agent Tool Use etc.</p>
                 </div>
               </div>
               <div className="mt-6 md:mt-10">
@@ -315,13 +314,13 @@ systems and expert-led loops required for agents to self-improve.
               <div className="mt-0 md:mt-0" data-aos="fade-up">
                 <div className="rounded-2xl border border-[#6C3CF4]/40 bg-white/75 backdrop-blur-sm p-6 md:p-8 shadow-sm min-h-[200px] flex flex-col justify-center">
                   <h4 className="text-2xl md:text-3xl font-bold text-[#6C3CF4]/90 mb-3">17k +</h4>
-                  <p className="text-base md:text-lg font-normal text-[#0e1b2e]">Pipeline from top universities and research institutions including PhDs and International Olympiad medalists.</p>
+                  <p className="text-base md:text-lg font-normal text-[#0e1b2e]">Pipeline from top universities and research institutions including <span className="font-bold">PhDs</span> and <span className="font-bold">International Olympiad</span> medalists.</p>
                 </div>
               </div>
               <div className="mt-6 md:mt-10" data-aos="fade-up-left">
                 <div className="rounded-2xl border border-[#6C3CF4]/40 bg-white/75 backdrop-blur-sm p-6 md:p-8 shadow-sm min-h-[200px] flex flex-col justify-center">
                   <h4 className="text-2xl md:text-3xl font-bold text-[#6C3CF4]/90 mb-3">Closed-loop</h4>
-                  <p className="text-base md:text-lg font-normal text-[#0e1b2e]">verifiable software systems for agents to self-improve.</p>
+                  <p className="text-base md:text-lg font-normal text-[#0e1b2e]"><span className="font-bold">Verifiable RL system</span> for agents to self-improve.</p>
                 </div>
               </div>
             </div>
