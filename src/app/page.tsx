@@ -893,9 +893,7 @@ systems and expert-led loops required for agents to self-improve.
               </div>
             </h3>
             <p className="text-lg text-[#0e1b2e] font-normal mt-4 mb-8">
-              &middot; Whether you need a benchmark, a training data program, or a managed expert team for 
-!{" "}
-              <br /> &middot; a complex domain, Tbrain can help you move faster with higher confidence.
+              &middot; Whether you need a benchmark, a training data program, or a managed expert team for a complex domain, Tbrain can help you move faster with higher confidence.
             </p>
           </div>
           <div className="mx-auto max-w-screen-lg">
