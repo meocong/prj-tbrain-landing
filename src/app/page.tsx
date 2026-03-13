@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { getPosts } from "@/lib/api"; 
+import { getPosts } from "@/lib/api";
 import post_banner from "../assets/images/post_banner.png"; // fallback image
 
 import Footer from "@/components/common/Footer";
@@ -49,35 +49,35 @@ export const metadata: Metadata = {
 };
 
 export default async function Home() {
-const CASE_STUDY_CATEGORY_SLUG = "case-study";
-const { edges } = await getPosts({ first: 7, categorySlug: CASE_STUDY_CATEGORY_SLUG });
-// Featured Case Studies Data
-const featuredCaseStudies = [
-  {
-    title: "Scalable Multimodal Data Annotation",
-    shortDescription: "48K Multimodal Annotation in 4 months",
-    description: "Scaled from zero to 48,000 high-quality multimodal annotations in just 4 months. Our team delivered consistent, production-ready labeled data across text, image, and audio modalities, enabling rapid model training and deployment.",
-    image: datalabeling.src,
-    metrics: [
-      { value: "48K", label: "Annotations" },
-      { value: "4", label: "Months" },
-      { value: "3", label: "Modalities" },
-      { value: "90%", label: "Accuracy" }
-    ]
-  },
-  {
-    title: "Evaluation and Benchmarks for Agents",
-    shortDescription: "Delivering enterprise-grade AI agents at unprecedented speed",
-    description: "A global enterprise engaged Tbrain to stand up 6 domain-specific Q&A agents and a practical evaluation framework. We delivered production-grade agents grounded in authentic, approved knowledge in just 1 month from kickoff to handoff.",
-    image: "https://qdrant.tech/img/ai-agent.svg",
-    metrics: [
-      { value: "6", label: "Production Agents" },
-      { value: "1", label: "Month Delivery" },
-      { value: "720", label: "Test Queries" },
-      { value: "270", label: "Curated Files" }
-    ]
-  },
-];
+  const CASE_STUDY_CATEGORY_SLUG = "case-study";
+  const { edges } = await getPosts({ first: 7, categorySlug: CASE_STUDY_CATEGORY_SLUG });
+  // Featured Case Studies Data
+  const featuredCaseStudies = [
+    {
+      title: "Scalable Multimodal Data Annotation",
+      shortDescription: "48K Multimodal Annotation in 4 months",
+      description: "Scaled from zero to 48,000 high-quality multimodal annotations in just 4 months. Our team delivered consistent, production-ready labeled data across text, image, and audio modalities, enabling rapid model training and deployment.",
+      image: datalabeling.src,
+      metrics: [
+        { value: "48K", label: "Annotations" },
+        { value: "4", label: "Months" },
+        { value: "3", label: "Modalities" },
+        { value: "90%", label: "Accuracy" }
+      ]
+    },
+    {
+      title: "Evaluation and Benchmarks for Agents",
+      shortDescription: "Delivering enterprise-grade AI agents at unprecedented speed",
+      description: "A global enterprise engaged Tbrain to stand up 6 domain-specific Q&A agents and a practical evaluation framework. We delivered production-grade agents grounded in authentic, approved knowledge in just 1 month from kickoff to handoff.",
+      image: "https://qdrant.tech/img/ai-agent.svg",
+      metrics: [
+        { value: "6", label: "Production Agents" },
+        { value: "1", label: "Month Delivery" },
+        { value: "720", label: "Test Queries" },
+        { value: "270", label: "Curated Files" }
+      ]
+    },
+  ];
   return (
     <div>
       <Header />
@@ -111,17 +111,17 @@ const featuredCaseStudies = [
               </div>
 
               <h3 className="mt-10 text-center leading-tight text-5xl md:text-7xl font-medium">
-                High Quality Data for{" "}
+                The Improvement Layer for{" "}
                 <span className="gradient-text">
                   {" "}
-                  Smarter AI Data Generation, Annotation and Evaluation
+                  Agentic AI Training Data & Evaluation
                 </span>
               </h3>
 
               <p className="max-w-screen-md text-center mt-16 text-lg mx-auto text-[#78818f]">
-                Skilled, ready-to-deploy experts in data labeling, model
-                evaluation, and technical domains. U.S.-based and offshore
-                talent. Fast, scalable, and reliable.
+                Expert-validated environments and data to
+                reliably measure and improve agent
+                performance.
               </p>
               <div className="flex justify-center items-center mt-16">
                 <StartNow />
@@ -162,7 +162,7 @@ const featuredCaseStudies = [
           <div className="one top-0 left-0 h-80 w-80 "></div>
           <div className="two top-0 right-0 h-80 w-80 "></div>
         </div>
-        
+
         {/* How We Deliver Values Section - Reduced gap with pt-12 */}
         <section className="container mx-auto px-3 pt-12 pb-24 relative max-w-[1200px]">
           {/* Title + floating star */}
@@ -199,7 +199,7 @@ const featuredCaseStudies = [
                     Featured
                   </div>
                 </div>
-                
+
                 {/* Content */}
                 <div className="flex-1 flex flex-col">
                   <h2 className="text-[#0e1b2e] text-2xl font-semibold leading-tight mb-2">
@@ -211,7 +211,7 @@ const featuredCaseStudies = [
                   <p className="text-[#78818f] text-sm font-normal leading-relaxed mb-5">
                     {caseStudy.description}
                   </p>
-                  
+
                   {/* Key Metrics */}
                   <div className="grid grid-cols-2 gap-2 mb-5">
                     {caseStudy.metrics.map((metric, idx) => (
@@ -221,7 +221,7 @@ const featuredCaseStudies = [
                       </div>
                     ))}
                   </div>
-                  
+
                   {/* View Details Link */}
                   <Link
                     href="/casestudy"
@@ -260,7 +260,7 @@ const featuredCaseStudies = [
         <section id="about" className="container mx-auto px-3 pt-24">
           <div className="text-center">
             <h3 className="mx-auto max-w-screen-lg text-4xl md:text-5xl font-medium">
-              Our <span className="gradient-text">Differentiation</span>{" "}
+              Optimized for <span className="gradient-text">Scaling Complexity</span>{" "}
               <div className="float-end">
                 <div className="up-down">
                   <Image
@@ -273,11 +273,8 @@ const featuredCaseStudies = [
               </div>
             </h3>
             <p className="mx-auto mt-5 max-w-5xl text-lg font-normal text-[#78818f]">
-              Our trainers are NOT anonymous crowd workers. Many are our
-              employees, while others are carefully vetted experts referred into
-              our network through trusted channels. Each undergoes rigorous
-              verification and specialized training led by our dedicated subject
-              matter trainers to ensure the highest quality and expertise
+             Legacy marketplaces break on high-stakes AI work. We provide the verifiable software
+systems and expert-led loops required for agents to self-improve.
             </p>
           </div>
           <div className="mx-auto mt-12 grid max-w-screen-lg grid-cols-12 gap-4">
@@ -896,8 +893,9 @@ const featuredCaseStudies = [
               </div>
             </h3>
             <p className="text-lg text-[#0e1b2e] font-normal mt-4 mb-8">
-              &middot; Our team is available to start a project immediately!{" "}
-              <br /> &middot; Talk to us now about your needs!
+              &middot; Whether you need a benchmark, a training data program, or a managed expert team for 
+!{" "}
+              <br /> &middot; a complex domain, Tbrain can help you move faster with higher confidence.
             </p>
           </div>
           <div className="mx-auto max-w-screen-lg">
