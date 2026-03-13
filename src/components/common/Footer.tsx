@@ -117,7 +117,7 @@ const Footer = () => {
         {/* Copyright - Bottom */}
         <div className="text-center mt-6 pt-5 border-t border-gray-100">
           <p className="text-base font-semibold text-[#0e1b2e]">
-            © Tbrain 2025 • <span className="text-[#6C3CF4]">Human-in-the-Loop AI Validation</span>
+            © Tbrain 2026 • <span className="text-[#6C3CF4]">Human-in-the-Loop AI Validation</span>
           </p>
           <p className="text-sm text-[#78818f] mt-1">
             Empowering Smarter AI with High-Quality Data
