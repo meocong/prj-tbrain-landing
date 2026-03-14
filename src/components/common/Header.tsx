@@ -110,7 +110,7 @@ const Header = () => {
           </div>
           <div className="flex items-center gap-6">
             <DropDown
-              items={["Home", "About Us", "Technical Expertise", "Contact", "News", "Privacy Policy", "Case Studies"]}
+              items={["Home", "Case Studies", "About Us", "Technical Expertise", "Contact", "News", "Privacy Policy"]}
               title={
                 <div className="md:hidden">
                   <Image src={Menu} width={30} height={500} alt="svg" />
