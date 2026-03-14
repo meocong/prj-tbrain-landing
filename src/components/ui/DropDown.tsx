@@ -42,7 +42,7 @@ const Dropdown = ({ title, items }: DropdownProps) => {
                 path = "/policy";
                 break;
                 case "Case Studies":
-                path = "/casestudies";
+                path = "/casestudy";
                 break;
               default:
                 path = "";
@@ -51,7 +51,7 @@ const Dropdown = ({ title, items }: DropdownProps) => {
 
             return (
               <Link
-                href={["/news", "/policy"].includes(path) ? path : `/#${path}`}
+                href={path.startsWith("/") ? path : `/#${path}`}
                 key={i}
                 className="block px-4 py-2 text-[#682EC3] hover:bg-gray-100"
                 onClick={closeDropdown}
