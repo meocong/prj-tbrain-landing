@@ -119,7 +119,6 @@ export function OverviewPanel({
   files: FileRow[];
 }) {
   const summary = extractSummary(sample.instruction_md);
-  const spec = sample.spec_json ?? {};
   const tests: TestEntry[] = sample.tests_json ?? [];
   const stack = detectStack(files);
   const dirs = topDirs(files);
@@ -141,33 +140,7 @@ export function OverviewPanel({
     files.some((f) => f.path === "solution/solve.sh") ||
     files.some((f) => f.path.startsWith("solution/"));
 
-  const envSpec: { label: string; value: string | null }[] = [
-    { label: "cpus", value: spec.cpus != null ? String(spec.cpus) : null },
-    { label: "memory", value: spec.memory_mb != null ? `${spec.memory_mb} MB` : null },
-    { label: "storage", value: spec.storage_mb != null ? `${spec.storage_mb} MB` : null },
-    {
-      label: "build timeout",
-      value: spec.build_timeout_sec != null ? `${spec.build_timeout_sec}s` : null,
-    },
-    {
-      label: "agent timeout",
-      value: spec.agent_timeout_sec != null ? `${spec.agent_timeout_sec}s` : null,
-    },
-    {
-      label: "verifier timeout",
-      value: spec.verifier_timeout_sec != null ? `${spec.verifier_timeout_sec}s` : null,
-    },
-  ];
-
   const effortStats = [
-    {
-      label: "expert time",
-      value: sample.expert_time_min != null ? `${sample.expert_time_min}m` : "—",
-    },
-    {
-      label: "junior time",
-      value: sample.junior_time_min != null ? `${sample.junior_time_min}m` : "—",
-    },
     { label: "files", value: String(files.length) },
     { label: "source", value: formatBytes(totalBytes) },
     { label: "tests", value: String(tests.length) },
@@ -218,12 +191,6 @@ export function OverviewPanel({
         )}
 
         <div className="mt-7 flex flex-wrap items-center gap-3 border-t border-[#E5E7EB] pt-6 text-xs text-[#78818f]">
-          {sample.author_name ? (
-            <span className="font-family_avt uppercase tracking-widest">
-              authored by · <span className="text-[#0e1b2e]">{sample.author_name}</span>
-            </span>
-          ) : null}
-          <span>·</span>
           <span className="font-family_avt uppercase tracking-widest">
             ingested · <span className="text-[#0e1b2e]">{formatIngested(sample.created_at)}</span>
           </span>
@@ -233,7 +200,7 @@ export function OverviewPanel({
       </section>
 
       {/* Effort / scale stats */}
-      <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-6">
+      <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
         {effortStats.map((s) => (
           <div
             key={s.label}
@@ -247,57 +214,33 @@ export function OverviewPanel({
         ))}
       </div>
 
-      {/* Environment spec + Stack detection side by side */}
-      <div className="grid gap-6 lg:grid-cols-2">
-        <section className="rounded-2xl border border-[#E5E7EB] bg-white p-6">
-          <p className="font-family_avt text-xs uppercase tracking-widest text-[#78818f]">
-            Container spec
-          </p>
-          <p className="mt-1 text-xs text-[#78818f]">
-            Deterministic resource caps enforced at run-time.
-          </p>
-          <dl className="mt-5 grid grid-cols-2 gap-x-4 gap-y-3 text-sm">
-            {envSpec.map((row) => (
-              <div
-                key={row.label}
-                className="flex items-baseline justify-between border-b border-dashed border-[#E5E7EB] pb-2 last:border-0"
+      {/* Stack detection */}
+      <section className="rounded-2xl border border-[#E5E7EB] bg-white p-6">
+        <p className="font-family_avt text-xs uppercase tracking-widest text-[#78818f]">
+          Stack detected
+        </p>
+        <p className="mt-1 text-xs text-[#78818f]">
+          Tooling inferred from the ingested file tree.
+        </p>
+        <div className="mt-5 flex flex-wrap gap-2">
+          {stack.length > 0 ? (
+            stack.map((t) => (
+              <span
+                key={t.name}
+                title={`detected from ${t.from}`}
+                className="rounded-full border border-[#E5E7EB] bg-[#FAFAF7] px-3 py-1 text-xs text-[#0e1b2e]"
               >
-                <dt className="font-family_avt text-[10px] uppercase tracking-widest text-[#78818f]">
-                  {row.label}
-                </dt>
-                <dd className="font-mono text-[#0e1b2e]">{row.value ?? "—"}</dd>
-              </div>
-            ))}
-          </dl>
-        </section>
-
-        <section className="rounded-2xl border border-[#E5E7EB] bg-white p-6">
-          <p className="font-family_avt text-xs uppercase tracking-widest text-[#78818f]">
-            Stack detected
-          </p>
-          <p className="mt-1 text-xs text-[#78818f]">
-            Tooling inferred from the ingested file tree.
-          </p>
-          <div className="mt-5 flex flex-wrap gap-2">
-            {stack.length > 0 ? (
-              stack.map((t) => (
-                <span
-                  key={t.name}
-                  title={`detected from ${t.from}`}
-                  className="rounded-full border border-[#E5E7EB] bg-[#FAFAF7] px-3 py-1 text-xs text-[#0e1b2e]"
-                >
-                  <span className="font-semibold text-[#6C3CF4]">{t.name}</span>{" "}
-                  <span className="text-[#78818f]">· {t.from}</span>
-                </span>
-              ))
-            ) : (
-              <p className="text-sm italic text-[#78818f]">
-                No recognised tooling — ask the author for a stack summary.
-              </p>
-            )}
-          </div>
-        </section>
-      </div>
+                <span className="font-semibold text-[#6C3CF4]">{t.name}</span>{" "}
+                <span className="text-[#78818f]">· {t.from}</span>
+              </span>
+            ))
+          ) : (
+            <p className="text-sm italic text-[#78818f]">
+              No recognised tooling detected in the ingested file tree.
+            </p>
+          )}
+        </div>
+      </section>
 
       {/* Directory map + Language mix */}
       <div className="grid gap-6 lg:grid-cols-2">

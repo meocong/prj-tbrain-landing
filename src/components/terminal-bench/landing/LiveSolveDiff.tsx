@@ -1,6 +1,7 @@
 import { supabaseAdmin } from "@/lib/terminal-bench/supabase/admin";
 import { downloadBuffer, fileObject } from "@/lib/terminal-bench/gcs";
 import { highlightToHtml } from "@/lib/terminal-bench/highlight";
+import { CollapsibleSolve } from "./CollapsibleSolve";
 
 const FALLBACK_SH = `#!/usr/bin/env bash
 # Example expert solution (sample unavailable at build time).
@@ -85,10 +86,7 @@ export async function LiveSolveDiff() {
               bash · github-light
             </span>
           </div>
-          <div
-            className="solve-sh-block overflow-x-auto px-5 py-6 text-sm leading-relaxed"
-            dangerouslySetInnerHTML={{ __html: html }}
-          />
+          <CollapsibleSolve html={html} />
         </div>
       </div>
     </section>

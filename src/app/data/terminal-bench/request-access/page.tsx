@@ -16,7 +16,7 @@ export default function RequestAccessPage() {
         Tell us about <span className="gradient-text">your team</span>
       </h1>
       <p className="mt-5 text-base text-[#78818f]">
-        Tam reviews every request personally — typically within one business
+        Our sales team reviews every request — typically within one business
         day. Approved requests get a 30-day passcode by email.
       </p>
 
