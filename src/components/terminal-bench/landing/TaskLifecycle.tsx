@@ -105,7 +105,7 @@ export function TaskLifecycle() {
                 </p>
                 <h3 className="mt-3 text-lg font-semibold text-[#0e1b2e]">{s.title}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-[#78818f]">{s.body}</p>
-                <pre className="mt-5 w-full whitespace-pre-wrap break-words rounded-lg bg-[#0D1117] px-3 py-3 font-mono text-[11px] leading-relaxed text-[#c9d1d9]">
+                <pre className="mt-5 w-full whitespace-pre-wrap break-words rounded-lg bg-[#0D1117] px-3 py-3 font-mono text-[11px] leading-relaxed text-[#c9d1d9] md:mt-auto md:pt-5">
                   {s.snippet}
                 </pre>
               </motion.div>
