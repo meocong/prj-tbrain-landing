@@ -4,6 +4,7 @@ import Footer from "@/components/common/Footer";
 import Image from "next/image";
 import Link from "next/link";
 import { LEADERSHIP, EXPERTS } from "@/lib/constants/marketing";
+import { StatsGrid } from "./stats-grid";
 
 export const metadata: Metadata = {
   title: "About Us",
@@ -34,19 +35,7 @@ export default function AboutPage() {
 
         {/* Stats */}
         <section className="container mx-auto mt-20 px-3">
-          <div className="mx-auto grid max-w-4xl grid-cols-2 gap-6 md:grid-cols-4">
-            {[
-              { value: "48K+", label: "AI Training Experts" },
-              { value: "250+", label: "Projects Delivered" },
-              { value: "17+", label: "Countries" },
-              { value: "15+", label: "Years Combined Leadership" },
-            ].map((s, i) => (
-              <div key={i} className="glass-card p-6 text-center">
-                <div className="text-3xl font-bold text-[#6C3CF4]">{s.value}</div>
-                <div className="mt-1 text-sm text-[#78818f]">{s.label}</div>
-              </div>
-            ))}
-          </div>
+          <StatsGrid />
         </section>
 
         {/* Leadership */}
