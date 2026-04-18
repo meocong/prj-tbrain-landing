@@ -25,14 +25,15 @@ export const dynamic = "force-dynamic";
 export default async function SampleViewerPage({
   params,
 }: {
-  params: { batchSlug: string; sampleSlug: string };
+  params: Promise<{ batchSlug: string; sampleSlug: string }>;
 }) {
+  const { batchSlug, sampleSlug } = await params;
   const db = supabaseAdmin();
   const { data: batch } = await db
     .from("batches")
     .select("id, slug")
     .eq("project", "terminal-bench")
-    .eq("slug", params.batchSlug)
+    .eq("slug", batchSlug)
     .maybeSingle();
   if (!batch) notFound();
 
@@ -40,7 +41,7 @@ export default async function SampleViewerPage({
     .from("samples")
     .select("*")
     .eq("batch_id", batch.id)
-    .eq("slug", params.sampleSlug)
+    .eq("slug", sampleSlug)
     .maybeSingle<SampleRow>();
   if (!sample) notFound();
 
@@ -72,8 +73,9 @@ export default async function SampleViewerPage({
     .map((f) => f.path);
 
   // Audit: log the viewer open.
-  const h = headers();
-  const token = cookies().get(SESSION_COOKIE)?.value;
+  const h = await headers();
+  const cookieStore = await cookies();
+  const token = cookieStore.get(SESSION_COOKIE)?.value;
   const claims = token ? await verifySessionJwt(token) : null;
   if (claims) {
     await logEvent({

@@ -18,11 +18,12 @@ import { ITEM_PER_PAGE } from "@/constants";
 export default async function Page({
   searchParams,
 }: {
-  searchParams: { first?: string; q?: string; c?: string };
+  searchParams: Promise<{ first?: string; q?: string; c?: string }>;
 }) {
-  const initialFirst = Number(searchParams.first) || ITEM_PER_PAGE + 1; // Số lượng bài viết ban đầu
-  const categorySlug = searchParams.c || "";
-  const search = searchParams.q || "";
+  const sp = await searchParams;
+  const initialFirst = Number(sp.first) || ITEM_PER_PAGE + 1; // Số lượng bài viết ban đầu
+  const categorySlug = sp.c || "";
+  const search = sp.q || "";
 
   // Fetch dữ liệu từ server
   const { edges, pageInfo } = await getPosts({
