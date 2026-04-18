@@ -1,6 +1,7 @@
 import { type NextRequest } from "next/server";
 import Anthropic from "@anthropic-ai/sdk";
 import { checkRateLimit, getClientIp, RATE_LIMITS } from "@/lib/rate-limit";
+import { resolveAIProvider } from "@/lib/ai/provider";
 
 export const runtime = "nodejs";
 
@@ -35,27 +36,30 @@ export async function POST(req: NextRequest) {
     return Response.json({ error: "rate_limited" }, { status: 429 });
   }
 
-  const apiKey = process.env.ANTHROPIC_API_KEY;
-  if (!apiKey) {
+  let provider;
+  try {
+    provider = await resolveAIProvider();
+  } catch {
     return Response.json({ error: "Chat not configured" }, { status: 503 });
   }
 
-  const { messages, sessionId } = await req.json();
+  const { messages } = await req.json();
 
   if (!messages || !Array.isArray(messages) || messages.length === 0) {
     return Response.json({ error: "Messages required" }, { status: 400 });
   }
 
-  // Rate limit: simple in-memory (for production, use Redis)
-  // For now, just cap message count
   if (messages.length > 50) {
     return Response.json({ error: "Session too long" }, { status: 429 });
   }
 
-  const client = new Anthropic({ apiKey });
+  const client = new Anthropic({
+    apiKey: provider.apiKey,
+    baseURL: provider.baseURL,
+  });
 
   const stream = await client.messages.stream({
-    model: "claude-sonnet-4-20250514",
+    model: provider.model,
     max_tokens: 1024,
     system: SYSTEM_PROMPT,
     messages: messages.map((m: { role: string; content: string }) => ({
@@ -64,7 +68,6 @@ export async function POST(req: NextRequest) {
     })),
   });
 
-  // Stream the response
   const encoder = new TextEncoder();
   const readable = new ReadableStream({
     async start(controller) {
@@ -75,7 +78,9 @@ export async function POST(req: NextRequest) {
             event.delta.type === "text_delta"
           ) {
             controller.enqueue(
-              encoder.encode(`data: ${JSON.stringify({ text: event.delta.text })}\n\n`)
+              encoder.encode(
+                `data: ${JSON.stringify({ text: event.delta.text })}\n\n`
+              )
             );
           }
         }
