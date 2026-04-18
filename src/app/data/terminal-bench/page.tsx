@@ -154,8 +154,9 @@ export default function TerminalBenchLanding() {
                 Have a passcode?
               </h3>
               <p className="mt-4 text-base leading-relaxed text-[#78818f]">
-                If Tam has sent you a <code className="font-mono">TB-XXXX-XXXX</code>{" "}
-                passcode, enter it to open the current batch.
+                If our sales team has sent you a{" "}
+                <code className="font-mono">TB-XXXX-XXXX</code> passcode, enter
+                it to open the current batch.
               </p>
               <div className="mt-6">
                 <Link
@@ -174,8 +175,8 @@ export default function TerminalBenchLanding() {
                 Request access
               </h3>
               <p className="mt-4 text-base leading-relaxed text-[#78818f]">
-                Tell us about your team and intended use. Tam reviews each
-                request personally and usually responds within one business day.
+                Tell us about your team and intended use. Our sales team
+                reviews each request and usually responds within one business day.
               </p>
               <div className="mt-6">
                 <Link

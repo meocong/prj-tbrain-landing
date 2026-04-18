@@ -19,7 +19,7 @@ export default function EnterPage() {
         Enter <span className="gradient-text">showcase</span>
       </h1>
       <p className="mt-5 text-base text-[#78818f]">
-        Paste the passcode Tam sent you. Entries are rate-limited and each use is logged.
+        Paste the passcode our sales team sent you. Entries are rate-limited and each use is logged.
       </p>
 
       <div className="mt-10 rounded-3xl border border-[#E5E7EB] bg-white p-8 shadow-sm">

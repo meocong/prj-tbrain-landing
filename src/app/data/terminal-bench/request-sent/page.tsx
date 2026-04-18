@@ -12,7 +12,7 @@ export default function RequestSentPage() {
         Request <span className="gradient-text">received</span>
       </h1>
       <p className="mx-auto mt-6 max-w-md text-base text-[#78818f]">
-        Tam will review your request shortly. If approved, a 30-day passcode
+        Our sales team will review your request shortly. If approved, a 30-day passcode
         will arrive in your inbox — check spam if it hasn&apos;t landed within
         one business day.
       </p>

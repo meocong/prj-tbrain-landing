@@ -9,18 +9,6 @@ export function MetadataHeader({
   sample: SampleRow;
   batchSlug: string;
 }) {
-  const spec = sample.spec_json ?? {};
-  const rows: [string, string | number | null | undefined][] = [
-    ["author", sample.author_name],
-    ["expert", sample.expert_time_min != null ? `${sample.expert_time_min}m` : null],
-    ["junior", sample.junior_time_min != null ? `${sample.junior_time_min}m` : null],
-    ["cpus", spec.cpus],
-    ["memory", spec.memory_mb != null ? `${spec.memory_mb} MB` : null],
-    ["storage", spec.storage_mb != null ? `${spec.storage_mb} MB` : null],
-    ["agent t/o", spec.agent_timeout_sec != null ? `${spec.agent_timeout_sec}s` : null],
-    ["verifier t/o", spec.verifier_timeout_sec != null ? `${spec.verifier_timeout_sec}s` : null],
-  ];
-
   return (
     <div className="border-b border-[#E5E7EB] bg-white">
       <div className="container mx-auto max-w-6xl px-6 py-10">
@@ -62,18 +50,6 @@ export function MetadataHeader({
           </Link>
         </div>
 
-        <div className="mt-8 grid grid-cols-2 gap-4 text-sm text-[#0e1b2e] md:grid-cols-4 lg:grid-cols-8">
-          {rows.map(([label, value]) =>
-            value != null ? (
-              <div key={label}>
-                <div className="font-family_avt text-[10px] uppercase tracking-widest text-[#78818f]">
-                  {label}
-                </div>
-                <div className="mt-1 text-sm font-medium">{String(value)}</div>
-              </div>
-            ) : null
-          )}
-        </div>
       </div>
     </div>
   );
