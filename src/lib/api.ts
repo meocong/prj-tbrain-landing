@@ -65,7 +65,7 @@ export const getPosts = async ({
       },
     },
   });
-  return data.posts;
+  return data!.posts;
 };
 
 // API getPostDetail (Bao gồm thông tin category)
@@ -104,7 +104,7 @@ export const getPostDetail = async ({
     },
   });
 
-  return data.postBy;
+  return data?.postBy ?? null;
 };
 
 // API getCategories (Danh sách category)
@@ -129,5 +129,5 @@ export const getCategories = async (): Promise<Category[]> => {
     query: GET_CATEGORIES,
   });
 
-  return data.categories.edges.map((edge) => edge.node);
+  return data!.categories.edges.map((edge) => edge.node);
 };

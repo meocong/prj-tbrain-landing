@@ -1,38 +1,65 @@
-"use client";
-import { Inter } from "next/font/google";
-import "./globals.css";
-import { Suspense, useEffect } from "react";
-import Aos from "aos";
+import type { Metadata } from "next";
+import { DM_Sans, Space_Grotesk, JetBrains_Mono } from "next/font/google";
+import { Suspense } from "react";
+import { Providers } from "@/components/providers";
 import Analytics from "@/components/analytics/Analytics";
-import Script from "next/script";
-const inter = Inter({ subsets: ["latin"] });
+import { ChatWidget } from "@/components/chat/ChatWidget";
+import "./globals.css";
+
+const dmSans = DM_Sans({
+  subsets: ["latin"],
+  variable: "--font-body",
+  display: "swap",
+});
+
+const spaceGrotesk = Space_Grotesk({
+  subsets: ["latin"],
+  variable: "--font-heading",
+  display: "swap",
+});
+
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  variable: "--font-mono",
+  display: "swap",
+});
+
+export const metadata: Metadata = {
+  title: {
+    default: "Tbrain — AI Training Data & Evaluation",
+    template: "%s | Tbrain",
+  },
+  description:
+    "High-quality AI training data, RLHF, and evaluation services. Production-grade datasets for building better AI models.",
+  metadataBase: new URL(
+    process.env.PUBLIC_BASE_URL || "https://tbrain.ai"
+  ),
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    siteName: "Tbrain",
+  },
+};
 
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  useEffect(() => {
-    Aos.init({
-      duration: 1000,
-      offset: 0,
-    });
-  }, []);
-
   return (
-    <html suppressHydrationWarning={true} lang="en">
-      <body className={inter.className}>
-        <Suspense fallback={<div></div>}>
-          <Analytics />
-          <Script
-            src="https://tbrain.arcanic.ai/embed.js"
-            data-chat-service="TbrainAI"
-            data-url="https://tbrain.arcanic.ai/"
-            data-chat-width="450px"
-            data-chat-height="600px"
-          />
-        </Suspense>
-        {children}
+    <html
+      suppressHydrationWarning
+      lang="en"
+      className={`${dmSans.variable} ${spaceGrotesk.variable} ${jetbrainsMono.variable}`}
+    >
+      <body>
+        <Providers>
+          <Suspense fallback={null}>
+            <Analytics />
+          </Suspense>
+          {children}
+          <ChatWidget />
+        </Providers>
       </body>
     </html>
   );

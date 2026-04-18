@@ -18,13 +18,13 @@ import Link from "next/link";
 import { formatDate } from "@/utils/date_utils";
 
 type PostPageProps = {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 };
 
 export default async function PostDetailPage({ params }: PostPageProps) {
-  const { slug } = params;
+  const { slug } = await params;
   const post: PostDetail | null = await getPostDetail({ slug });
 
   if (!post) {
