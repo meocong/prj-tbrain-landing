@@ -6,8 +6,12 @@ services:
       - "3289:3000"
     build:
       context: .
+      args:
+        NEXT_PUBLIC_TURNSTILE_SITE_KEY: ${NEXT_PUBLIC_TURNSTILE_SITE_KEY:-}
     image: tbrain_lp_img:latest
     restart: always
+    env_file:
+      - .env.local
     networks:
       - traefik-net
     labels:
