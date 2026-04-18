@@ -98,14 +98,14 @@ export function TaskLifecycle() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.3, margin: "0px 0px -10% 0px" }}
                 transition={{ duration: 0.45, delay: i * 0.08, ease: "easeOut" }}
-                className="flex flex-col rounded-2xl border border-[#E5E7EB] bg-white p-6 transition-colors hover:border-[#6C3CF4]/40"
+                className="flex min-w-0 flex-col rounded-2xl border border-[#E5E7EB] bg-white p-6 transition-colors hover:border-[#6C3CF4]/40"
               >
                 <p className="font-family_avt text-xs uppercase tracking-widest text-[#6C3CF4]">
                   step {s.n}
                 </p>
                 <h3 className="mt-3 text-lg font-semibold text-[#0e1b2e]">{s.title}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-[#78818f]">{s.body}</p>
-                <pre className="mt-5 overflow-x-auto rounded-lg bg-[#0D1117] px-3 py-3 font-mono text-[11px] leading-relaxed text-[#c9d1d9]">
+                <pre className="mt-5 w-full whitespace-pre-wrap break-words rounded-lg bg-[#0D1117] px-3 py-3 font-mono text-[11px] leading-relaxed text-[#c9d1d9]">
                   {s.snippet}
                 </pre>
               </motion.div>
