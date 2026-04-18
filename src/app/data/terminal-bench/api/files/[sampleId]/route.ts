@@ -34,5 +34,14 @@ export async function GET(req: NextRequest, { params }: { params: { sampleId: st
     if (page.length < PAGE) break;
   }
 
-  return NextResponse.json({ files: all });
+  return NextResponse.json(
+    { files: all },
+    {
+      headers: {
+        // Manifest is stable per sampleId (re-ingests are rare). Let Vercel's
+        // edge hold it for an hour; serve stale for a day while revalidating.
+        "Cache-Control": "public, max-age=300, s-maxage=3600, stale-while-revalidate=86400",
+      },
+    }
+  );
 }
