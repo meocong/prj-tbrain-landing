@@ -1,125 +1,94 @@
 "use client";
+
 import { useState } from "react";
-import DropDown from "@/components/ui/DropDown";
 import Logo from "@/assets/images/logo.svg";
-import Menu from "@/assets/icons/menu-11.svg";
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
+import { Menu, X } from "lucide-react";
+
+const NAV_ITEMS = [
+  { label: "Home", href: "/" },
+  { label: "About", href: "/about" },
+  { label: "Services", href: "/services" },
+  { label: "Case Studies", href: "/casestudy" },
+  { label: "Data", href: "/data/terminal-bench" },
+  { label: "Blog", href: "/blog" },
+  { label: "Contact", href: "/contact" },
+];
 
 const Header = () => {
-  const [path, setPath] = useState("#home");
+  const [mobileOpen, setMobileOpen] = useState(false);
   const pathname = usePathname();
-  const router = useRouter();
 
-  const handleScrollToSection = (sectionId: string) => {
-    if (pathname === "/") {
-      // Nếu đang ở trang chủ thì scroll đến section ngay lập tức
-      const section = document.querySelector(sectionId);
-      if (section) {
-        section.scrollIntoView({ behavior: "smooth" });
-        setPath(sectionId);
-      }
-    } else {
-      // Nếu không ở trang chủ, chuyển về trang chủ rồi scroll đến section trên trang chủ
-      router.push(`/${sectionId.startsWith('#') ? sectionId : '#' + sectionId}`);
-    }
+  const isActive = (href: string) => {
+    if (href === "/") return pathname === "/";
+    return pathname.startsWith(href);
   };
 
   return (
-    <header className="fixed right-0 top-0 z-10 w-full bg-[#FFFFFF59] p-3 backdrop-blur-sm">
+    <header className="fixed right-0 top-0 z-50 w-full bg-white/60 p-3 backdrop-blur-md">
       <div className="container mx-auto">
         <div className="flex items-center justify-between">
-          <Link href="/" className="flex items-center justify-center gap-2">
+          <Link href="/" className="flex items-center gap-2">
             <Image
               src={Logo}
               width={123}
               height={40}
-              alt="logo"
+              alt="Tbrain"
               priority
               className="object-contain"
             />
           </Link>
-          <div className="hidden md:block">
-            <ul className="flex items-center gap-16">
-              <li>
-                <Link
-                  href="/"
-                  className={`text-base font-medium hover:text-[#6C3CF4] ${pathname === "/" && (path === "#home" || path === "")
-                      ? "text-[#6C3CF4]"
-                      : null
-                    }`}
-                  onClick={() => handleScrollToSection("#home")}
-                >
-                  Home
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/#about"
-                  className={`text-base font-medium hover:text-[#6C3CF4] ${pathname === "/" && path === "#about" ? "text-[#6C3CF4]" : null}`}
-                  onClick={() => handleScrollToSection("#about")}
-                >
-                  About Us
-                </Link>
-              </li>
-               <li>
-                <Link
-                  href="/casestudy"
-                  className={`text-base font-medium hover:text-[#6C3CF4] ${pathname.startsWith("/casestudy") ? "text-[#6C3CF4]" : ""}`}
-                >
-                  Case Studies
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/#skills"
-                  className={`text-base font-medium hover:text-[#6C3CF4] ${pathname === "/" && path === "#skills" ? "text-[#6C3CF4]" : null}`}
-                  onClick={() => handleScrollToSection("#skills")}
-                >
-                  Technical Expertise
-                </Link>
-              </li>
-             
-              <li>
-                <Link
-                  href="/news"
-                  className={`text-base font-medium hover:text-[#6C3CF4] ${pathname.startsWith("/news") ? "text-[#6C3CF4]" : ""}`}
-                >
-                  News
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/policy"
-                  className={`text-base font-medium hover:text-[#6C3CF4] ${pathname.startsWith("/policy") ? "text-[#6C3CF4]" : ""}`}
-                >
-                  Privacy Policy
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/#contact"
-                  className={`text-base font-medium hover:text-[#6C3CF4] ${pathname === "/" && path === "#contact" ? "text-[#6C3CF4]" : null}`}
-                  onClick={() => handleScrollToSection("#contact")}
-                >
-                  Contact
-                </Link>
-              </li>
-            </ul>
-          </div>
-          <div className="flex items-center gap-6">
-            <DropDown
-              items={["Home", "Case Studies", "About Us", "Technical Expertise", "Contact", "News", "Privacy Policy"]}
-              title={
-                <div className="md:hidden">
-                  <Image src={Menu} width={30} height={500} alt="svg" />
-                </div>
 
-              }
-            />
-          </div>
+          {/* Desktop nav */}
+          <nav className="hidden items-center gap-8 lg:flex">
+            {NAV_ITEMS.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className={`text-sm font-medium transition-colors hover:text-[#6C3CF4] ${
+                  isActive(item.href) ? "text-[#6C3CF4]" : "text-[#0e1b2e]"
+                }`}
+              >
+                {item.label}
+              </Link>
+            ))}
+          </nav>
+
+          {/* Mobile toggle */}
+          <button
+            onClick={() => setMobileOpen(!mobileOpen)}
+            className="rounded-lg p-2 lg:hidden"
+            aria-label="Toggle menu"
+          >
+            {mobileOpen ? (
+              <X className="h-6 w-6 text-[#0e1b2e]" />
+            ) : (
+              <Menu className="h-6 w-6 text-[#0e1b2e]" />
+            )}
+          </button>
         </div>
+
+        {/* Mobile nav */}
+        {mobileOpen && (
+          <nav className="mt-4 rounded-2xl bg-white p-4 shadow-lg lg:hidden">
+            {NAV_ITEMS.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                onClick={() => setMobileOpen(false)}
+                className={`block rounded-lg px-4 py-3 text-sm font-medium transition-colors ${
+                  isActive(item.href)
+                    ? "bg-[#6C3CF4]/5 text-[#6C3CF4]"
+                    : "text-[#0e1b2e] hover:bg-gray-50"
+                }`}
+              >
+                {item.label}
+              </Link>
+            ))}
+          </nav>
+        )}
       </div>
     </header>
   );
