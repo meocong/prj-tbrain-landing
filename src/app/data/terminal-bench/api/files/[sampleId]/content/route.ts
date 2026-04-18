@@ -63,5 +63,14 @@ export async function GET(req: NextRequest, { params }: { params: { sampleId: st
     userAgent: req.headers.get("user-agent") ?? null,
   });
 
-  return NextResponse.json({ path: file.path, lang, html, size: file.size_bytes });
+  return NextResponse.json(
+    { path: file.path, lang, html, size: file.size_bytes },
+    {
+      headers: {
+        // Content is effectively immutable per (sampleId, path). Cache at the
+        // edge for a year; clients already hold a copy in React state too.
+        "Cache-Control": "public, max-age=31536000, s-maxage=31536000, immutable",
+      },
+    }
+  );
 }

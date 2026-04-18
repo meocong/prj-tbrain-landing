@@ -221,11 +221,6 @@ export function OverviewPanel({
           {sample.author_name ? (
             <span className="font-family_avt uppercase tracking-widest">
               authored by · <span className="text-[#0e1b2e]">{sample.author_name}</span>
-              {sample.author_email ? (
-                <span className="ml-1 text-[#78818f] normal-case tracking-normal">
-                  ({sample.author_email})
-                </span>
-              ) : null}
             </span>
           ) : null}
           <span>·</span>

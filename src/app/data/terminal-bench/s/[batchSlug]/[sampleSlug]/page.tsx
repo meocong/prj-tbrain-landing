@@ -64,6 +64,13 @@ export default async function SampleViewerPage({
     fileRows.find((f) => f.path === "solution/solve.sh") ??
     fileRows.find((f) => f.path.startsWith("solution/"));
 
+  // Detect the test harness layout so the Tests tab can show meaningful
+  // empty-state copy instead of "No tests captured" when a sample uses a
+  // non-pytest verifier (shell, patch-based, custom python locations).
+  const harnessFiles = fileRows
+    .filter((f) => f.path.startsWith("tests/") && !f.path.includes("/files/"))
+    .map((f) => f.path);
+
   // Audit: log the viewer open.
   const h = headers();
   const token = cookies().get(SESSION_COOKIE)?.value;
@@ -103,6 +110,7 @@ export default async function SampleViewerPage({
                 tests={sample.tests_json}
                 sampleId={sample.id}
                 batchId={batch.id}
+                harnessFiles={harnessFiles}
               />
             </Suspense>
           ),
