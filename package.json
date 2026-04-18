@@ -13,6 +13,7 @@
     "email:preview": "email dev --dir ./src/emails"
   },
   "dependencies": {
+    "@anthropic-ai/sdk": "^0.90.0",
     "@apollo/client": "^4.1.7",
     "@base-ui/react": "^1.4.0",
     "@google-cloud/storage": "^7.19.0",
