@@ -1,7 +1,10 @@
 import "server-only";
 import { listAdminResource } from "@/lib/admin/server/list";
+import { getAuditStats } from "@/lib/admin/server/stats";
 import { supabaseAdmin } from "@/lib/terminal-bench/supabase/admin";
 import { AuditClient } from "./audit-client";
+import { KpiStrip } from "@/components/admin/ui/kpi-strip";
+import { Activity, CalendarDays, CalendarRange, UsersRound } from "lucide-react";
 
 export const dynamic = "force-dynamic";
 
@@ -16,7 +19,7 @@ export default async function AuditPage({
     ? "id, event_type, occurred_at, ip, user_agent, client:clients(email, full_name), batch:batches!inner(slug, name, product_id)"
     : "id, event_type, occurred_at, ip, user_agent, client:clients(email, full_name), batch:batches(slug, name, product_id)";
 
-  const [initial, products] = await Promise.all([
+  const [initial, products, stats] = await Promise.all([
     listAdminResource(
       {
         table: "access_events",
@@ -38,6 +41,7 @@ export default async function AuditPage({
       sp
     ),
     supabaseAdmin().from("products").select("id, name").order("name"),
+    getAuditStats(),
   ]);
 
   const productOptions = [
@@ -58,6 +62,14 @@ export default async function AuditPage({
           Every access event across all products. Filter by product, event type, or date range.
         </p>
       </div>
+      <KpiStrip
+        items={[
+          { label: "Today", value: stats.today, icon: Activity, accent: "primary" },
+          { label: "Last 7d", value: stats.last_7d, icon: CalendarDays, accent: "info" },
+          { label: "Last 30d", value: stats.last_30d, icon: CalendarRange, accent: "success" },
+          { label: "Unique actors (30d)", value: stats.unique_actors_30d, icon: UsersRound, accent: "warning" },
+        ]}
+      />
       <AuditClient initial={initial as never} productOptions={productOptions} />
     </div>
   );
