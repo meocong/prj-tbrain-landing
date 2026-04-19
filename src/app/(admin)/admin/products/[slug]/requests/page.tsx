@@ -1,10 +1,12 @@
 "use client";
 
 import { useState } from "react";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { useParams } from "next/navigation";
 import { supabaseAdmin } from "@/lib/admin/supabase-browser";
+import { useHasPermission } from "@/lib/admin/auth-context";
 import { DataTable, type Column } from "@/components/admin/ui/data-table";
+import { CheckCircle, XCircle } from "lucide-react";
 import type { Product } from "@/lib/admin/types";
 
 const PAGE_SIZE = 20;
@@ -30,9 +32,34 @@ const STATUS_COLOR: Record<string, string> = {
 
 export default function ProductRequestsPage() {
   const params = useParams<{ slug: string }>();
+  const qc = useQueryClient();
+  const canApprove = useHasPermission("requests.approve");
+  const canReject = useHasPermission("requests.reject");
   const [page, setPage] = useState(0);
   const [search, setSearch] = useState("");
   const [status, setStatus] = useState("all");
+  const [banner, setBanner] = useState<string | null>(null);
+
+  const act = useMutation({
+    mutationFn: async (args: { id: string; action: "approve" | "reject"; reason?: string }) => {
+      const res = await fetch(`/api/admin/requests/${args.id}/action`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ action: args.action, reason: args.reason }),
+      });
+      const j = await res.json();
+      if (!j.ok) throw new Error(j.error ?? "failed");
+      return j;
+    },
+    onSuccess: (j, vars) => {
+      qc.invalidateQueries({ queryKey: ["product-requests"] });
+      if (vars.action === "approve" && j.passcode_plain) {
+        setBanner(`Approved · passcode ${j.passcode_plain} · email ${j.email?.ok ? "sent" : "skipped"}`);
+      } else {
+        setBanner(`Rejected · email ${j.email?.ok ? "sent" : "skipped"}`);
+      }
+    },
+  });
 
   const { data: product } = useQuery({
     queryKey: ["admin-product", params.slug],
@@ -109,10 +136,59 @@ export default function ProductRequestsPage() {
         </span>
       ),
     },
+    {
+      key: "actions",
+      header: "",
+      align: "right" as const,
+      render: (r) => {
+        if (r.status !== "pending") return null;
+        return (
+          <div className="flex justify-end gap-1">
+            {canApprove && (
+              <button
+                type="button"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  if (confirm(`Approve ${r.email}?`)) act.mutate({ id: r.id, action: "approve" });
+                }}
+                className="inline-flex items-center gap-1 rounded px-2 py-1 text-xs"
+                style={{ color: "#16a34a", background: "rgba(16,185,129,0.08)" }}
+              >
+                <CheckCircle className="h-3 w-3" /> Approve
+              </button>
+            )}
+            {canReject && (
+              <button
+                type="button"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  const reason = prompt("Rejection reason (optional, sent in email):") ?? "";
+                  if (confirm(`Reject ${r.email}?`)) act.mutate({ id: r.id, action: "reject", reason: reason || undefined });
+                }}
+                className="inline-flex items-center gap-1 rounded px-2 py-1 text-xs"
+                style={{ color: "#dc2626", background: "rgba(239,68,68,0.08)" }}
+              >
+                <XCircle className="h-3 w-3" /> Reject
+              </button>
+            )}
+          </div>
+        );
+      },
+    },
   ];
 
   return (
-    <DataTable<RequestRow>
+    <>
+      {banner && (
+        <div
+          className="mb-3 flex items-center justify-between rounded-lg px-4 py-2.5 text-sm"
+          style={{ background: "rgba(16,185,129,0.08)", border: "1px solid rgba(16,185,129,0.3)", color: "#16a34a" }}
+        >
+          <span>{banner}</span>
+          <button onClick={() => setBanner(null)} className="text-xs">Dismiss</button>
+        </div>
+      )}
+      <DataTable<RequestRow>
       columns={columns}
       rows={data?.rows ?? []}
       total={data?.total ?? 0}
@@ -146,6 +222,7 @@ export default function ProductRequestsPage() {
       onPageChange={setPage}
       rowKey={(r) => r.id}
       empty="No access requests yet."
-    />
+      />
+    </>
   );
 }
