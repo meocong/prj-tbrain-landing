@@ -5,12 +5,12 @@ import { Bot, Hand, Home as HomeIcon, Factory, Video, Gauge } from "lucide-react
 import { RevealOnScroll, StaggerContainer, STAGGER_ITEM } from "@/components/marketing/fx/RevealOnScroll";
 
 const USE_CASES = [
-  { title: "Whole-body humanoid control", description: "Locomotion, balance, and coordination policies from full-body demonstration data.", icon: Bot, accent: "#A78BFA" },
-  { title: "Dexterous manipulation", description: "High-precision hand and finger tracking for grasping, tool use, assembly, and fine motor tasks.", icon: Hand, accent: "#10B981" },
-  { title: "Imitation learning", description: "Demonstration datasets formatted for behavioral cloning, DAgger, diffusion policy, and inverse RL.", icon: Video, accent: "#34D399" },
+  { title: "Household tasks", description: "Cooking, cleaning, laundry, tidying, dishwashing — the everyday home chores your humanoid will actually ship.", icon: HomeIcon, accent: "#A78BFA" },
+  { title: "Factory & warehouse work", description: "Assembly, packaging, picking, inspection — human operators demonstrating industrial tasks in real environments.", icon: Factory, accent: "#F59E0B" },
+  { title: "Dexterous manipulation", description: "Grasping, tool use, fine motor tasks — high-precision hand + finger tracking your manipulation policy needs.", icon: Hand, accent: "#10B981" },
+  { title: "Whole-body control", description: "Locomotion, balance, and full-body coordination captured as policy-ready trajectories.", icon: Bot, accent: "#6C3CF4" },
+  { title: "Imitation learning", description: "Demonstration data formatted for behavioral cloning, DAgger, diffusion policy, and inverse RL pipelines.", icon: Video, accent: "#34D399" },
   { title: "Sim-to-real transfer", description: "Ground-truth trajectories for validating simulator fidelity and closing the sim-to-real gap.", icon: Gauge, accent: "#8B5CF6" },
-  { title: "Household & domestic tasks", description: "Cooking, cleaning, tidying — real homes with real variability. Everyday motions humans do without thinking.", icon: HomeIcon, accent: "#6C3CF4" },
-  { title: "Commercial & industrial", description: "Warehouse picking, food service, assembly workflows, inspection — demonstrated by human operators in context.", icon: Factory, accent: "#F59E0B" },
 ];
 
 export function UseCasesGrid() {

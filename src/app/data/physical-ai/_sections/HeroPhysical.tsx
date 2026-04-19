@@ -86,10 +86,11 @@ export function HeroPhysical() {
 
             <FadeIn delay={1.0} className="mt-6">
               <p className="max-w-xl text-base md:text-lg leading-relaxed" style={{ color: "rgba(226,232,240,0.72)" }}>
-                Demonstration datasets for whole-body control, dexterous
-                manipulation, and sim-to-real transfer. Lab-grade optical
-                capture from real humans — the ground truth humanoids learn
-                from.
+                Demonstration datasets for the humanoids that will cook,
+                clean, fold laundry, and work your warehouse floor.
+                Lab-grade optical capture from real humans in real kitchens,
+                real homes, and real factories — the ground truth humanoids
+                learn from.
               </p>
             </FadeIn>
 
@@ -160,10 +161,10 @@ export function HeroPhysical() {
                 </span>
                 <div className="min-w-0">
                   <p className="text-[10px] uppercase tracking-wider" style={{ color: "rgba(226,232,240,0.6)" }}>
-                    Capture session
+                    Current capture
                   </p>
                   <p className="text-sm font-medium truncate" style={{ color: "white" }}>
-                    Full-body MOCAP · hand rig · 48-channel
+                    Kitchen · folding laundry · mocap + IMU
                   </p>
                 </div>
               </div>
