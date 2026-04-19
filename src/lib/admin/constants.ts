@@ -37,6 +37,8 @@ export const ADMIN_NAV: NavItem[] = [
 
   // CRM
   { label: "Contacts", href: "/admin/contacts", icon: Users, permission: "contacts.view", section: "CRM" },
+  { label: "Contact Forms", href: "/admin/contacts/forms", icon: Inbox, permission: "contacts.view", section: "CRM" },
+  { label: "Newsletter", href: "/admin/contacts/newsletter", icon: Mail, permission: "contacts.view", section: "CRM" },
   { label: "Approvals", href: "/admin/approvals", icon: CheckSquare, permission: "approvals.view", section: "CRM" },
 
   // Communications
