@@ -3,11 +3,6 @@ import Header from "@/components/common/Header";
 import Footer from "@/components/common/Footer";
 import Link from "next/link";
 import {
-  PHYSICAL_AI_PROBLEMS,
-  PHYSICAL_AI_TIERS,
-  PHYSICAL_AI_DATASETS,
-} from "@/lib/constants/marketing";
-import {
   Bot,
   Hand,
   Home as HomeIcon,
@@ -16,20 +11,124 @@ import {
   Gauge,
   ArrowRight,
   CheckCircle,
-  XCircle,
-  Star,
+  Crosshair,
+  Video,
+  Layers,
+  Shield,
 } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Physical AI Training Data",
+  title: "Physical AI & Robotics Data",
   description:
-    "High-fidelity egocentric video and hand pose data for robot training. 3-tier hardware framework with peer-reviewed accuracy from 5mm to sub-millimeter.",
-  openGraph: {
-    title: "Physical AI Training Data — Tbrain",
-    description:
-      "Production-grade Physical AI data: 6 problem categories, 0.8mm accuracy, validated against peer-reviewed benchmarks.",
-  },
+    "Ground-truth human motion data for training humanoid control policies, imitation learning, and sim-to-real transfer. Lab-grade precision, not estimated from video.",
 };
+
+const WHY_FEATURES = [
+  {
+    num: "01",
+    title: "Lab-grade precision",
+    detail:
+      "Optical motion capture, infrared tracking, and depth sensors — not estimated from monocular video. Real 3D MPJPE, peer-reviewed.",
+    icon: Crosshair,
+  },
+  {
+    num: "02",
+    title: "Multi-modal coverage",
+    detail:
+      "Egocentric video, MOCAP, hand pose, IMU, force/torque, depth maps, and task annotations — whatever your pipeline needs.",
+    icon: Layers,
+  },
+  {
+    num: "03",
+    title: "Scene-aware capture",
+    detail:
+      "Every object tracked, environment scanned and reconstructed in 3D. Context-rich data for world models and spatial reasoning.",
+    icon: Camera,
+  },
+  {
+    num: "04",
+    title: "Validated at scale",
+    detail:
+      "Accuracy validated against published benchmarks (EgoDex, OpenEgo, EPIC-KITCHENS). Production pipelines, not one-off research captures.",
+    icon: Shield,
+  },
+];
+
+const USE_CASES = [
+  {
+    title: "Humanoid Whole-Body Control",
+    description:
+      "Full-body motion data for training humanoid locomotion, balance, and coordination policies.",
+    icon: Bot,
+  },
+  {
+    title: "Dexterous Manipulation",
+    description:
+      "High-precision hand and finger tracking for grasping, tool use, and fine motor tasks.",
+    icon: Hand,
+  },
+  {
+    title: "Household & Domestic Robotics",
+    description:
+      "Kitchen, cleaning, tidying, and everyday tasks — real homes, real complexity, real diversity.",
+    icon: HomeIcon,
+  },
+  {
+    title: "Commercial & Industrial",
+    description:
+      "Warehouse operations, retail, food service, manufacturing assembly, and logistics.",
+    icon: Factory,
+  },
+  {
+    title: "Imitation Learning Pipelines",
+    description:
+      "Demonstration data formatted for behavioral cloning, DAgger, and inverse RL workflows.",
+    icon: Video,
+  },
+  {
+    title: "Sim-to-Real Transfer",
+    description:
+      "Ground-truth trajectories for validating simulation fidelity and bridging the sim-to-real gap.",
+    icon: Gauge,
+  },
+];
+
+const DATA_MODALITIES = [
+  "Egocentric RGB video",
+  "Stereo / multi-view video",
+  "Optical motion capture (MOCAP)",
+  "Hand pose (21+ joints, 3D)",
+  "Full-body skeletal tracking",
+  "IMU / inertial measurement",
+  "Force & torque sensing",
+  "Depth maps (LiDAR / structured light)",
+  "Object 6DoF pose",
+  "Environment 3D reconstruction",
+  "Task & action annotations",
+  "Gripper state & joint angles",
+];
+
+const ACCURACY_TIERS = [
+  {
+    name: "Standard",
+    accuracy: "5mm",
+    description: "Suitable for locomotion, navigation, and general manipulation tasks",
+    recommended: false,
+  },
+  {
+    name: "High Precision",
+    accuracy: "Sub-millimeter",
+    description: "Fine manipulation, threading, assembly — validated against peer-reviewed benchmarks",
+    recommended: true,
+  },
+];
+
+const REFERENCE_DATASETS = [
+  { name: "EgoDex", volume: "829 hours", quality: "21-joint hand (sub-mm)", useCase: "Dexterous manipulation" },
+  { name: "OpenEgo", volume: "1,107 hours", quality: "21-joint unified", useCase: "Diverse egocentric tasks" },
+  { name: "EPIC-KITCHENS", volume: "100 hours", quality: "Action labels", useCase: "Household activities" },
+  { name: "UMI Community", volume: "1,400 hours", quality: "SLAM 6DoF", useCase: "Gripper manipulation" },
+];
 
 export default function PhysicalAIPage() {
   return (
@@ -42,199 +141,161 @@ export default function PhysicalAIPage() {
             <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-50">
               <Bot className="h-5 w-5 text-[#0151FF]" />
             </div>
-            <span className="text-sm font-medium text-[#0151FF]">Physical AI Data</span>
+            <span className="text-sm font-medium text-[#0151FF]">
+              Physical AI & Robotics
+            </span>
           </div>
           <h1
             className="mt-6 text-4xl font-medium md:text-6xl"
             style={{ fontFamily: "var(--font-heading)" }}
           >
-            Robot Training Data with{" "}
-            <span className="gradient-text">Sub-Millimeter Accuracy</span>
+            Ground-truth motion data for{" "}
+            <span className="gradient-text">Physical AI</span>
           </h1>
           <p className="mx-auto mt-6 max-w-3xl text-lg text-[#78818f]">
-            High-fidelity egocentric video and 3D hand pose data for robot
-            learning. Peer-reviewed accuracy, not marketing claims. From
-            household tasks to commercial robotics.
+            Multimodal datasets for humanoid control policies, imitation
+            learning, and sim-to-real transfer. Lab-grade precision from optical
+            capture systems — not estimated from video.
           </p>
           <div className="mt-8 flex items-center justify-center gap-4">
             <Link
               href="/contact"
               className="rounded-xl bg-[#0151FF] px-8 py-3 text-base font-semibold text-white transition-all hover:bg-[#003fcc] hover:shadow-lg"
             >
-              Request a Pilot
+              Design your dataset
             </Link>
             <a
-              href="#tiers"
+              href="#use-cases"
               className="rounded-xl border border-gray-300 px-8 py-3 text-base font-medium text-[#0e1b2e] transition-all hover:border-[#0151FF] hover:text-[#0151FF]"
             >
-              View Hardware Tiers
+              See use cases
             </a>
           </div>
         </section>
 
-        {/* Problem Categories */}
+        {/* Why Tbrain */}
         <section className="container mx-auto mt-24 px-3">
           <h2
             className="text-center text-3xl font-medium md:text-4xl"
             style={{ fontFamily: "var(--font-heading)" }}
           >
-            6 Problem Categories
+            Why Tbrain for Robotics Data
           </h2>
-          <p className="mx-auto mt-3 max-w-2xl text-center text-[#78818f]">
-            Covering the full spectrum of physical AI data needs — from fine
-            manipulation to commercial-scale operations.
-          </p>
 
-          <div className="mx-auto mt-12 grid max-w-5xl grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
-            {PHYSICAL_AI_PROBLEMS.map((p, i) => (
-              <div
-                key={i}
-                className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm transition-all hover:border-[#0151FF]/30 hover:shadow-md"
-              >
-                <div className="flex items-center justify-between">
-                  <h3 className="text-lg font-semibold text-[#0e1b2e]" style={{ fontFamily: "var(--font-heading)" }}>
-                    {p.title}
-                  </h3>
-                  <span
-                    className={`rounded-full px-2.5 py-0.5 text-[10px] font-medium ${
-                      p.status === "Active"
-                        ? "bg-green-50 text-green-700"
-                        : "bg-yellow-50 text-yellow-700"
-                    }`}
-                  >
-                    {p.status}
-                  </span>
+          <div className="mx-auto mt-12 grid max-w-4xl grid-cols-1 gap-8 md:grid-cols-2">
+            {WHY_FEATURES.map((f, i) => (
+              <div key={i} className="flex gap-4">
+                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-[#0151FF] text-sm font-bold text-white">
+                  {f.num}
                 </div>
-                <p className="mt-2 text-sm text-[#78818f]">{p.description}</p>
-                <div className="mt-4 flex gap-3 text-xs">
-                  <span className="rounded-lg bg-blue-50 px-2 py-1 font-medium text-[#0151FF]">
-                    {p.accuracy}
-                  </span>
-                  <span className="rounded-lg bg-gray-50 px-2 py-1 font-medium text-gray-600">
-                    {p.tier}
-                  </span>
+                <div>
+                  <h3 className="font-semibold text-[#0e1b2e]">{f.title}</h3>
+                  <p className="mt-1 text-sm leading-relaxed text-[#78818f]">
+                    {f.detail}
+                  </p>
                 </div>
               </div>
             ))}
           </div>
         </section>
 
-        {/* Hardware Tiers */}
-        <section id="tiers" className="mt-24 bg-gradient-to-b from-gray-50 to-white py-24">
+        {/* Use Cases */}
+        <section id="use-cases" className="mt-24 bg-gradient-to-b from-gray-50 to-white py-24">
           <div className="container mx-auto px-3">
             <h2
               className="text-center text-3xl font-medium md:text-4xl"
               style={{ fontFamily: "var(--font-heading)" }}
             >
-              3-Tier Hardware Framework
+              Built for Every Robotics Use Case
             </h2>
             <p className="mx-auto mt-3 max-w-2xl text-center text-[#78818f]">
-              Peer-reviewed accuracy validated against published benchmarks.
-              Real-world 3D MPJPE measurements, not lab-only PA-MPJPE.
+              We design datasets tailored to your exact pipeline — from data
+              structure and quality to format and scalability.
             </p>
 
-            <div className="mx-auto mt-12 grid max-w-5xl grid-cols-1 gap-6 lg:grid-cols-3">
-              {PHYSICAL_AI_TIERS.map((t, i) => (
+            <div className="mx-auto mt-12 grid max-w-5xl grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+              {USE_CASES.map((uc, i) => (
                 <div
                   key={i}
-                  className={`relative rounded-2xl border-2 bg-white p-6 shadow-sm ${
-                    t.recommended
-                      ? "border-[#0151FF] shadow-md"
-                      : "border-gray-200"
-                  }`}
+                  className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm transition-all hover:border-[#0151FF]/30 hover:shadow-md"
                 >
-                  {t.recommended && (
-                    <div className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-[#0151FF] px-3 py-0.5 text-xs font-medium text-white">
-                      Recommended
-                    </div>
-                  )}
-                  <div className="text-center">
-                    <span className="text-sm font-medium text-[#78818f]">{t.tier}</span>
-                    <h3 className="mt-1 text-xl font-semibold text-[#0e1b2e]" style={{ fontFamily: "var(--font-heading)" }}>
-                      {t.name}
-                    </h3>
-                  </div>
-                  <div className="mt-6 space-y-3 text-sm">
-                    <div>
-                      <span className="font-medium text-[#0e1b2e]">Hardware:</span>
-                      <p className="mt-0.5 text-[#78818f]">{t.hardware}</p>
-                    </div>
-                    <div>
-                      <span className="font-medium text-[#0e1b2e]">Accuracy:</span>
-                      <p className="mt-0.5 text-2xl font-bold text-[#0151FF]">{t.accuracy}</p>
-                    </div>
-                    <div>
-                      <span className="font-medium text-[#0e1b2e]">Cost/Setup:</span>
-                      <p className="mt-0.5 text-[#78818f]">{t.cost}</p>
-                    </div>
-                    <div>
-                      <span className="font-medium text-[#0e1b2e]">Source:</span>
-                      <p className="mt-0.5 text-xs text-[#78818f]">{t.source}</p>
-                    </div>
-                    <div>
-                      <span className="font-medium text-[#0e1b2e]">Best For:</span>
-                      <p className="mt-0.5 text-[#78818f]">{t.bestFor}</p>
-                    </div>
-                  </div>
+                  <uc.icon className="h-6 w-6 text-[#0151FF]" />
+                  <h3 className="mt-3 font-semibold text-[#0e1b2e]" style={{ fontFamily: "var(--font-heading)" }}>
+                    {uc.title}
+                  </h3>
+                  <p className="mt-2 text-sm leading-relaxed text-[#78818f]">
+                    {uc.description}
+                  </p>
                 </div>
               ))}
             </div>
           </div>
         </section>
 
-        {/* What works / doesn't */}
+        {/* Data Modalities */}
         <section className="container mx-auto mt-24 px-3">
-          <h2
-            className="text-center text-3xl font-medium md:text-4xl"
-            style={{ fontFamily: "var(--font-heading)" }}
-          >
-            Validated Technology Choices
+          <h2 className="text-center text-3xl font-medium md:text-4xl" style={{ fontFamily: "var(--font-heading)" }}>
+            Data Modalities We Capture
           </h2>
-          <div className="mx-auto mt-12 grid max-w-4xl grid-cols-1 gap-6 md:grid-cols-2">
-            <div className="rounded-2xl border border-green-200 bg-green-50/50 p-6">
-              <h3 className="flex items-center gap-2 text-lg font-semibold text-green-700">
-                <CheckCircle className="h-5 w-5" /> What Works
-              </h3>
-              <ul className="mt-4 space-y-3 text-sm text-green-800">
-                <li>Leap Motion 2 headmount: 5mm, bare-hand compliant, proven with robot ground truth</li>
-                <li>Apple Vision Pro: sub-mm (0.8mm), 98.7% frame consistency, EgoDex 829h validated</li>
-                <li>Stereo GoPro: 15-20mm, fully wireless, suitable for budget scenarios</li>
-              </ul>
-            </div>
-            <div className="rounded-2xl border border-red-200 bg-red-50/50 p-6">
-              <h3 className="flex items-center gap-2 text-lg font-semibold text-red-700">
-                <XCircle className="h-5 w-5" /> What We Rejected
-              </h3>
-              <ul className="mt-4 space-y-3 text-sm text-red-800">
-                <li>Quest 3: 17.3mm accuracy, no public IMU API, decoder bugs</li>
-                <li>Single-view MediaPipe/HaMeR: 25-35mm on real egocentric — fails all tiers</li>
-                <li>Manus gloves / Rokoko: violate bare-hand natural requirement</li>
-                <li>Studio systems (OptiTrack, Vicon): not portable, research-only</li>
-              </ul>
-            </div>
+          <p className="mx-auto mt-3 max-w-2xl text-center text-[#78818f]">
+            Mix and match modalities based on your pipeline requirements.
+          </p>
+          <div className="mx-auto mt-10 grid max-w-3xl grid-cols-2 gap-3 md:grid-cols-3">
+            {DATA_MODALITIES.map((mod, i) => (
+              <div key={i} className="flex items-center gap-2 rounded-lg bg-gray-50 px-4 py-3 text-sm">
+                <CheckCircle className="h-4 w-4 shrink-0 text-[#0151FF]" />
+                <span className="text-[#0e1b2e]">{mod}</span>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Accuracy Tiers */}
+        <section className="container mx-auto mt-24 px-3">
+          <h2 className="text-center text-3xl font-medium md:text-4xl" style={{ fontFamily: "var(--font-heading)" }}>
+            Accuracy That Meets Your Requirements
+          </h2>
+          <div className="mx-auto mt-12 grid max-w-3xl grid-cols-1 gap-6 md:grid-cols-2">
+            {ACCURACY_TIERS.map((t, i) => (
+              <div
+                key={i}
+                className={`relative rounded-2xl border-2 bg-white p-6 text-center ${
+                  t.recommended ? "border-[#0151FF] shadow-md" : "border-gray-200"
+                }`}
+              >
+                {t.recommended && (
+                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-[#0151FF] px-3 py-0.5 text-xs font-medium text-white">
+                    Recommended
+                  </div>
+                )}
+                <div className="text-sm font-medium text-[#78818f]">{t.name}</div>
+                <div className="mt-2 text-4xl font-bold text-[#0151FF]">{t.accuracy}</div>
+                <p className="mt-3 text-sm text-[#78818f]">{t.description}</p>
+              </div>
+            ))}
           </div>
         </section>
 
         {/* Reference Datasets */}
         <section className="container mx-auto mt-24 px-3">
-          <h2
-            className="text-center text-3xl font-medium md:text-4xl"
-            style={{ fontFamily: "var(--font-heading)" }}
-          >
-            Gold-Standard Reference Datasets
+          <h2 className="text-center text-3xl font-medium md:text-4xl" style={{ fontFamily: "var(--font-heading)" }}>
+            Aligned with Gold-Standard Datasets
           </h2>
-          <div className="mx-auto mt-12 max-w-4xl overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm">
+          <p className="mx-auto mt-3 max-w-2xl text-center text-[#78818f]">
+            Our pipelines produce data compatible with leading academic benchmarks.
+          </p>
+          <div className="mx-auto mt-10 max-w-4xl overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm">
             <table className="w-full text-sm">
               <thead>
                 <tr className="border-b border-gray-100 bg-gray-50">
                   <th className="px-6 py-3 text-left font-medium text-[#78818f]">Dataset</th>
                   <th className="px-6 py-3 text-left font-medium text-[#78818f]">Volume</th>
                   <th className="px-6 py-3 text-left font-medium text-[#78818f]">Quality</th>
-                  <th className="px-6 py-3 text-left font-medium text-[#78818f]">Use Case</th>
+                  <th className="px-6 py-3 text-left font-medium text-[#78818f]">Application</th>
                 </tr>
               </thead>
               <tbody>
-                {PHYSICAL_AI_DATASETS.map((d, i) => (
+                {REFERENCE_DATASETS.map((d, i) => (
                   <tr key={i} className="border-b border-gray-50 last:border-0">
                     <td className="px-6 py-3 font-semibold text-[#0e1b2e]">{d.name}</td>
                     <td className="px-6 py-3 font-medium text-[#0151FF]">{d.volume}</td>
@@ -250,18 +311,18 @@ export default function PhysicalAIPage() {
         {/* CTA */}
         <section className="container mx-auto mt-24 px-3 text-center">
           <h2 className="text-3xl font-medium" style={{ fontFamily: "var(--font-heading)" }}>
-            Ready to build your Physical AI dataset?
+            Need data designed for your specific pipeline?
           </h2>
           <p className="mx-auto mt-3 max-w-lg text-lg text-[#78818f]">
-            Start with a 5-task pilot — we handle hardware, calibration, and
-            validation. You get production-grade data.
+            We design datasets tailored to your exact workflow — from data
+            structure and quality to format and scalability.
           </p>
           <div className="mt-8 flex items-center justify-center gap-4">
             <Link
               href="/contact"
               className="rounded-xl bg-[#0151FF] px-8 py-3 text-base font-semibold text-white transition-all hover:bg-[#003fcc]"
             >
-              Request a Pilot
+              Design your dataset
             </Link>
             <Link
               href="/data/terminal-bench"

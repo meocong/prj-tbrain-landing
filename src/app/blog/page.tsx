@@ -1,68 +1,75 @@
 import type { Metadata } from "next";
 import Header from "@/components/common/Header";
 import Footer from "@/components/common/Footer";
-import { supabaseAdmin } from "@/lib/terminal-bench/supabase/admin";
 import { getPosts } from "@/lib/api";
 import Link from "next/link";
-import Image from "next/image";
-import type { CmsPost } from "@/lib/admin/types";
 
 export const metadata: Metadata = {
   title: "Blog",
-  description: "Latest insights on AI training data, RLHF, evaluation, and more from the Tbrain team.",
+  description:
+    "Insights on AI training data, RLHF, evaluation, and building better AI from the Tbrain team.",
 };
 
-export const dynamic = "force-dynamic";
-export const revalidate = 3600; // 1h ISR
+export const revalidate = 3600;
+
+function decodeEntities(text: string): string {
+  return text
+    .replace(/<[^>]*>/g, "")
+    .replace(/&hellip;/g, "…")
+    .replace(/&amp;/g, "&")
+    .replace(/&lt;/g, "<")
+    .replace(/&gt;/g, ">")
+    .replace(/&#8220;/g, "\u201C")
+    .replace(/&#8221;/g, "\u201D")
+    .replace(/&#8216;/g, "\u2018")
+    .replace(/&#8217;/g, "\u2019")
+    .replace(/&nbsp;/g, " ")
+    .replace(/\u00a0/g, " ")
+    .trim();
+}
+
+const GRADIENTS = [
+  "from-purple-500 to-blue-500",
+  "from-blue-500 to-cyan-500",
+  "from-indigo-500 to-purple-500",
+  "from-violet-500 to-fuchsia-500",
+  "from-blue-600 to-indigo-600",
+];
 
 export default async function BlogPage() {
-  // Fetch from both CMS (self-hosted) and WordPress
-  const db = supabaseAdmin();
-  const { data: cmsPosts } = await db
-    .from("cms_posts")
-    .select("*")
-    .eq("status", "published")
-    .order("published_at", { ascending: false })
-    .limit(20);
+  let posts: {
+    title: string;
+    slug: string;
+    excerpt: string;
+    date: string;
+    image?: string;
+    category: string | null;
+  }[] = [];
 
-  // WordPress posts
-  let wpPosts: { title: string; slug: string; excerpt: string; date: string; image?: string }[] = [];
   try {
     const { edges } = await getPosts({ first: 20 });
-    wpPosts = edges.map((e: { node: Record<string, unknown> }) => ({
-      title: e.node.title as string,
-      slug: e.node.slug as string,
-      excerpt: (e.node.excerpt as string)?.replace(/<[^>]*>/g, "") || "",
-      date: e.node.date as string,
-      image: (e.node.featuredImage as { node?: { sourceUrl?: string } })?.node?.sourceUrl,
-    }));
-  } catch {
-    // WordPress unavailable — show CMS posts only
-  }
+    posts = edges.map(
+      (e: { node: Record<string, unknown> }) => {
+        const node = e.node;
+        const rawExcerpt = decodeEntities((node.excerpt as string) || "");
+        const categories = node.categories as {
+          edges: { node: { name: string } }[];
+        } | null;
+        const catName = categories?.edges?.[0]?.node?.name ?? null;
 
-  // Merge and sort by date
-  const allPosts = [
-    ...(cmsPosts ?? []).map((p: CmsPost) => ({
-      id: p.id,
-      title: p.title,
-      slug: p.slug,
-      excerpt: p.excerpt || "",
-      date: p.published_at || p.created_at,
-      image: p.cover_image_url,
-      source: "cms" as const,
-      category: p.category,
-    })),
-    ...wpPosts.map((p) => ({
-      id: `wp-${p.slug}`,
-      title: p.title,
-      slug: p.slug,
-      excerpt: p.excerpt,
-      date: p.date,
-      image: p.image,
-      source: "wordpress" as const,
-      category: null as string | null,
-    })),
-  ].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+        return {
+          title: decodeEntities((node.title as string) || ""),
+          slug: node.slug as string,
+          excerpt: rawExcerpt.length > 160 ? rawExcerpt.slice(0, 160) + "…" : rawExcerpt,
+          date: node.date as string,
+          image: (node.featuredImage as { node?: { sourceUrl?: string } } | null)?.node?.sourceUrl,
+          category: catName && catName.toLowerCase() !== "uncategorized" ? catName : null,
+        };
+      }
+    );
+  } catch {
+    // WordPress unavailable
+  }
 
   return (
     <div>
@@ -79,51 +86,50 @@ export default async function BlogPage() {
           </div>
 
           <div className="mx-auto mt-16 grid max-w-5xl grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-            {allPosts.map((post) => (
+            {posts.map((post, i) => (
               <Link
-                key={post.id}
-                href={post.source === "cms" ? `/blog/${post.slug}` : `/news/${post.slug}`}
-                className="glass-card-hover overflow-hidden transition-all"
+                key={post.slug}
+                href={`/news/${post.slug}`}
+                className="group overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm transition-all hover:shadow-md"
               >
-                {post.image && (
-                  <div className="h-48 overflow-hidden">
-                    <Image
+                <div className="h-44 overflow-hidden">
+                  {post.image ? (
+                    <img
                       src={post.image}
                       alt={post.title}
-                      width={400}
-                      height={200}
-                      className="h-full w-full object-cover transition-transform duration-300 hover:scale-105"
+                      className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
                     />
-                  </div>
-                )}
+                  ) : (
+                    <div className={`flex h-full w-full items-center justify-center bg-gradient-to-br ${GRADIENTS[i % GRADIENTS.length]} p-6`}>
+                      <span className="line-clamp-3 text-center text-lg font-semibold text-white/90">
+                        {post.title}
+                      </span>
+                    </div>
+                  )}
+                </div>
                 <div className="p-5">
                   <div className="flex items-center gap-2 text-xs" style={{ color: "var(--text-muted)" }}>
                     {post.category && (
-                      <span className="badge badge-info">{post.category}</span>
+                      <span className="rounded-full bg-purple-50 px-2 py-0.5 text-[10px] font-medium text-purple-600">
+                        {post.category}
+                      </span>
                     )}
-                    <span>{new Date(post.date).toLocaleDateString()}</span>
+                    <span>{new Date(post.date).toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" })}</span>
                   </div>
-                  <h3
-                    className="mt-2 text-lg font-semibold line-clamp-2"
-                    style={{ fontFamily: "var(--font-heading)", color: "var(--text-primary)" }}
-                  >
+                  <h3 className="mt-2 text-base font-semibold leading-snug line-clamp-2" style={{ fontFamily: "var(--font-heading)", color: "var(--text-primary)" }}>
                     {post.title}
                   </h3>
-                  {post.excerpt && (
-                    <p className="mt-2 text-sm line-clamp-3" style={{ color: "var(--text-secondary)" }}>
-                      {post.excerpt}
-                    </p>
-                  )}
+                  <p className="mt-2 text-sm line-clamp-3 leading-relaxed" style={{ color: "var(--text-secondary)" }}>
+                    {post.excerpt}
+                  </p>
                 </div>
               </Link>
             ))}
           </div>
 
-          {allPosts.length === 0 && (
+          {posts.length === 0 && (
             <div className="mt-16 text-center">
-              <p className="text-lg" style={{ color: "var(--text-muted)" }}>
-                No posts yet. Check back soon!
-              </p>
+              <p className="text-lg" style={{ color: "var(--text-muted)" }}>No posts yet. Check back soon!</p>
             </div>
           )}
         </section>

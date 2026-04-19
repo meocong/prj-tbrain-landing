@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { MessageSquare, X, Send, Loader2 } from "lucide-react";
+import ReactMarkdown from "react-markdown";
 
 interface Message {
   id: string;
@@ -189,7 +190,25 @@ export function ChatWidget() {
                           }
                     }
                   >
-                    {m.content || (
+                    {m.content ? (
+                      m.role === "assistant" ? (
+                        <ReactMarkdown
+                          components={{
+                            p: ({ children }) => <p className="mb-1 last:mb-0">{children}</p>,
+                            a: ({ href, children }) => (
+                              <a href={href} className="underline text-[#6C3CF4]" target="_blank" rel="noopener noreferrer">{children}</a>
+                            ),
+                            strong: ({ children }) => <strong className="font-semibold">{children}</strong>,
+                            ul: ({ children }) => <ul className="list-disc pl-4 mb-1">{children}</ul>,
+                            li: ({ children }) => <li className="mb-0.5">{children}</li>,
+                          }}
+                        >
+                          {m.content}
+                        </ReactMarkdown>
+                      ) : (
+                        m.content
+                      )
+                    ) : (
                       <Loader2 className="h-4 w-4 animate-spin" style={{ color: "var(--text-muted)" }} />
                     )}
                   </div>
