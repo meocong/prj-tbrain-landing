@@ -10,8 +10,8 @@ import {
   Package,
   FolderOpen,
   CheckSquare,
-  Mail,
   Images,
+  Mail,
   type LucideIcon,
 } from "lucide-react";
 
@@ -34,10 +34,9 @@ export const ADMIN_NAV: NavItem[] = [
   { label: "Posts", href: "/admin/content", icon: FileText, permission: "content.view", section: "Content" },
   { label: "Gallery", href: "/admin/gallery", icon: Images, permission: "files.view", section: "Content" },
 
-  // CRM
+  // CRM — unified. Forms / Newsletter surface as tags inside Contacts.
   { label: "Contacts", href: "/admin/contacts", icon: Users, permission: "contacts.view", section: "CRM" },
-  { label: "Contact Forms", href: "/admin/contacts/forms", icon: Inbox, permission: "contacts.view", section: "CRM" },
-  { label: "Newsletter", href: "/admin/contacts/newsletter", icon: Mail, permission: "contacts.view", section: "CRM" },
+  { label: "Inbox (form submissions)", href: "/admin/contacts/forms", icon: Inbox, permission: "contacts.view", section: "CRM" },
   { label: "Approvals", href: "/admin/approvals", icon: CheckSquare, permission: "approvals.view", section: "CRM" },
 
   // Communications

@@ -7,8 +7,8 @@ export const GET = makeAdminListHandler({
   permCode: "requests.view",
   select: "*, batch:batches(slug, name), product:products(slug, name)",
   searchable: ["email", "full_name", "company"],
-  defaultSort: { key: "created_at", dir: "desc" },
-  sortWhitelist: ["created_at", "reviewed_at", "email", "status"],
+  defaultSort: { key: "requested_at", dir: "desc" },
+  sortWhitelist: ["requested_at", "reviewed_at", "email", "status"],
   filters: {
     product_id: (v, q) => q.eq("product_id", v),
     status: (v, q) => q.eq("status", v),
