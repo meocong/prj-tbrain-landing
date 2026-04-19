@@ -1,52 +1,78 @@
 "use client";
 
-import { motion } from "framer-motion";
-import Image from "next/image";
-import Link from "next/link";
+import { ArrowRight } from "lucide-react";
+import { MagneticButton } from "@/components/marketing/fx/MagneticButton";
+import { RevealOnScroll } from "@/components/marketing/fx/RevealOnScroll";
 
 export function ContactCTA() {
   return (
-    <section id="contact" className="container mx-auto px-3 pt-24 pb-16">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.5 }}
-        className="text-center"
-      >
-        <h3 className="mx-auto max-w-screen-lg text-4xl font-medium md:text-5xl">
-          Ready to <span className="gradient-text">start now</span>
-        </h3>
-        <p className="mx-auto mt-4 mb-8 max-w-2xl text-lg font-normal text-[#0e1b2e]">
-          Whether you need a benchmark, a training data program, or a managed
-          expert team for a complex domain, Tbrain can help you move faster with
-          higher confidence.
-        </p>
-      </motion.div>
+    <section
+      className="relative overflow-hidden py-28 md:py-40"
+      style={{ background: "#020617", color: "white" }}
+    >
+      <div
+        aria-hidden
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background:
+            "radial-gradient(ellipse 80% 60% at 50% 50%, rgba(108,60,244,0.32) 0%, transparent 60%)," +
+            "radial-gradient(ellipse 50% 40% at 20% 80%, rgba(16,185,129,0.25) 0%, transparent 55%)",
+        }}
+      />
+      <div
+        aria-hidden
+        className="absolute inset-0 pointer-events-none opacity-30"
+        style={{
+          backgroundImage:
+            "linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px)",
+          backgroundSize: "48px 48px",
+          maskImage: "radial-gradient(ellipse at center, black 20%, transparent 70%)",
+        }}
+      />
 
-      <div className="mx-auto max-w-screen-lg">
-        <Image
-          src="/images/image.jpg"
-          loading="lazy"
-          height={500}
-          width={2000}
-          className="rounded-[30px] md:rounded-[61px]"
-          alt="Contact Tbrain"
-        />
-        <div className="my-8 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
-          <Link
-            href="/contact"
-            className="inline-flex items-center gap-2 rounded-xl bg-[#6C3CF4] px-8 py-3 text-base font-semibold text-white transition-all hover:bg-[#5a2fd3] hover:shadow-lg"
+      <div className="container mx-auto px-4 relative z-10 max-w-4xl text-center">
+        <RevealOnScroll>
+          <h2
+            className="text-5xl md:text-7xl font-medium tracking-tight leading-[1.05]"
+            style={{ fontFamily: "var(--font-heading)", letterSpacing: "-0.03em" }}
           >
-            Contact Us
-          </Link>
-          <a
-            href="mailto:info@tbrain.ai"
-            className="text-lg font-medium text-[#6C3CF4] underline"
-          >
-            info@tbrain.ai
-          </a>
-        </div>
+            Let&apos;s build{" "}
+            <span
+              style={{
+                background: "linear-gradient(120deg, #A78BFA 0%, #6C3CF4 50%, #10B981 100%)",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+              }}
+            >
+              the dataset
+            </span>{" "}
+            <br className="hidden md:block" />
+            your model needs.
+          </h2>
+        </RevealOnScroll>
+
+        <RevealOnScroll delay={0.15}>
+          <p className="mx-auto mt-8 max-w-xl text-base md:text-lg" style={{ color: "rgba(226,232,240,0.65)" }}>
+            Tell us your training target. We&apos;ll scope a program in 48 hours and ship first samples in 2 weeks.
+          </p>
+        </RevealOnScroll>
+
+        <RevealOnScroll delay={0.3}>
+          <div className="mt-12 flex flex-col items-center justify-center gap-3 sm:flex-row">
+            <MagneticButton href="/contact" variant="primary">
+              Talk to an expert <ArrowRight className="h-4 w-4" />
+            </MagneticButton>
+            <MagneticButton href="/casestudy" variant="outline">
+              See case studies
+            </MagneticButton>
+          </div>
+        </RevealOnScroll>
+
+        <RevealOnScroll delay={0.5}>
+          <p className="mt-10 text-xs uppercase tracking-widest" style={{ color: "rgba(226,232,240,0.4)" }}>
+            Tbrain · Data Factory · Hanoi · Singapore
+          </p>
+        </RevealOnScroll>
       </div>
     </section>
   );

@@ -29,7 +29,7 @@ export function PlatformSection() {
 
         <div className="mx-auto mt-16 grid max-w-4xl grid-cols-1 gap-6 md:grid-cols-2">
           {PLATFORM_FEATURES.map((feature, i) => {
-            const Icon = ICON_MAP[feature.icon] || ShieldCheck;
+            const Icon = (ICON_MAP[feature.icon] || ShieldCheck) as React.ComponentType<{ className?: string }>;
             return (
               <motion.div
                 key={i}
