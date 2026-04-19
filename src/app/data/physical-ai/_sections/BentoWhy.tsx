@@ -13,7 +13,7 @@ const FEATURES = [
     accent: "#10B981",
     title: "Lab-grade precision",
     description:
-      "Optical motion capture, infrared tracking, and depth sensors — not estimated from monocular video. Sub-millimeter spatial accuracy where your pipeline demands it.",
+      "Optical motion capture, infrared tracking, and depth sensors — not estimated from monocular video. Hardware and protocol tuned per program to the precision your pipeline actually needs.",
     image: "/images/mocap-studio.jpg",
   },
   {
@@ -36,9 +36,9 @@ const FEATURES = [
     size: "md" as const,
     icon: Shield,
     accent: "#F59E0B",
-    title: "Validated at scale",
+    title: "Built for production",
     description:
-      "Accuracy validated against published benchmarks (EgoDex, OpenEgo, EPIC-KITCHENS). Production pipelines, not one-off research captures. SDK-ready exports for your training loop.",
+      "Calibrated with reference to the datasets the embodied-AI community already trusts (EgoDex, OpenEgo, EPIC-KITCHENS). Production pipelines, not one-off research captures. SDK-ready exports for your training loop.",
     image: "/images/blog-humanoid.jpg",
   },
 ];

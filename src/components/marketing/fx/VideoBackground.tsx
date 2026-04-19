@@ -96,7 +96,7 @@ export function VideoBackground({
           muted
           loop
           playsInline
-          preload="metadata"
+          preload="auto"
           poster={poster}
           onError={() => setFailed(true)}
           className="absolute inset-0 h-full w-full object-cover"

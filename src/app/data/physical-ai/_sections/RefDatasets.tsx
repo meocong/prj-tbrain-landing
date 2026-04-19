@@ -4,10 +4,10 @@ import { motion } from "framer-motion";
 import { RevealOnScroll, StaggerContainer, STAGGER_ITEM } from "@/components/marketing/fx/RevealOnScroll";
 
 const REFS = [
-  { name: "EgoDex", volume: "829 hours", quality: "21-joint hand (sub-mm)", useCase: "Dexterous manipulation" },
-  { name: "OpenEgo", volume: "1,107 hours", quality: "21-joint unified", useCase: "Diverse egocentric tasks" },
+  { name: "EgoDex", volume: "829 hours", quality: "Hand + egocentric", useCase: "Dexterous manipulation" },
+  { name: "OpenEgo", volume: "1,107 hours", quality: "Unified hand format", useCase: "Diverse egocentric tasks" },
   { name: "EPIC-KITCHENS", volume: "100 hours", quality: "Action labels", useCase: "Household activities" },
-  { name: "UMI Community", volume: "1,400 hours", quality: "SLAM 6DoF", useCase: "Gripper manipulation" },
+  { name: "UMI Community", volume: "1,400 hours", quality: "SLAM / 6DoF", useCase: "Gripper manipulation" },
 ];
 
 export function RefDatasets() {
@@ -23,10 +23,10 @@ export function RefDatasets() {
               className="text-3xl md:text-5xl font-medium tracking-tight"
               style={{ fontFamily: "var(--font-heading)", letterSpacing: "-0.02em" }}
             >
-              Benchmarked against the field
+              The datasets the field uses
             </h2>
             <p className="mx-auto mt-3 max-w-xl text-sm md:text-base" style={{ color: "rgba(226,232,240,0.6)" }}>
-              Our capture quality is validated against the datasets the embodied-AI community already trusts.
+              Public reference datasets we align our capture formats with — so your team can mix our data with what you already train on.
             </p>
           </div>
         </RevealOnScroll>

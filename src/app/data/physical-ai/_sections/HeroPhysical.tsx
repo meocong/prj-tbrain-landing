@@ -1,15 +1,9 @@
-"use client";
-
 import Image from "next/image";
-import { motion, useReducedMotion } from "framer-motion";
+import Link from "next/link";
 import { ArrowRight, Sparkles, ChevronDown } from "lucide-react";
 import { VideoBackground } from "@/components/marketing/fx/VideoBackground";
-import { KineticHeadline, FadeIn } from "@/components/marketing/fx/KineticText";
-import { MagneticButton } from "@/components/marketing/fx/MagneticButton";
 
 export function HeroPhysical() {
-  const shouldReduce = useReducedMotion();
-
   return (
     <section
       className="relative overflow-hidden"
@@ -18,7 +12,7 @@ export function HeroPhysical() {
       <VideoBackground
         src="/videos/physical-ambient.webm"
         srcMp4="/videos/physical-ambient.mp4"
-        poster="/images/mocap-studio.jpg"
+        poster="/images/physical-poster.jpg"
       />
       <div
         aria-hidden
@@ -31,7 +25,6 @@ export function HeroPhysical() {
         }}
       />
 
-      {/* Grid overlay */}
       <div
         aria-hidden
         className="absolute inset-0 pointer-events-none"
@@ -40,91 +33,98 @@ export function HeroPhysical() {
             "linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px)",
           backgroundSize: "80px 80px",
           maskImage: "radial-gradient(ellipse at center, black 40%, transparent 75%)",
+          WebkitMaskImage: "radial-gradient(ellipse at center, black 40%, transparent 75%)",
         }}
       />
 
       <div className="container mx-auto relative z-10 min-h-screen px-4 pt-28 pb-16">
         <div className="grid items-center gap-10 md:grid-cols-[1fr_420px] md:gap-12 md:pt-12">
           <div>
-            <FadeIn>
-              <motion.div
-                initial={shouldReduce ? {} : { opacity: 0, scale: 0.9 }}
-                animate={shouldReduce ? {} : { opacity: 1, scale: 1 }}
-                transition={{ duration: 0.5 }}
-                className="mb-6 inline-flex items-center gap-2 rounded-full px-3.5 py-1.5 text-xs font-medium"
+            <div
+              className="hero-reveal hero-reveal-0 mb-6 inline-flex items-center gap-2 rounded-full px-3.5 py-1.5 text-xs font-medium"
+              style={{
+                background: "rgba(16,185,129,0.08)",
+                border: "1px solid rgba(16,185,129,0.24)",
+                backdropFilter: "blur(10px)",
+              }}
+            >
+              <span className="relative flex h-2 w-2">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full" style={{ background: "#10B981", opacity: 0.6 }} />
+                <span className="relative inline-flex h-2 w-2 rounded-full" style={{ background: "#10B981" }} />
+              </span>
+              <span style={{ color: "rgba(226,232,240,0.92)" }}>Physical AI &amp; Robotics</span>
+              <Sparkles className="h-3 w-3" style={{ color: "#34D399" }} />
+            </div>
+
+            <h1
+              className="hero-reveal hero-reveal-1 font-medium tracking-tight text-4xl md:text-6xl leading-[1.08]"
+              style={{ fontFamily: "var(--font-heading)", letterSpacing: "-0.02em" }}
+            >
+              Human motion data for training{" "}
+              <span
                 style={{
-                  background: "rgba(16,185,129,0.08)",
-                  border: "1px solid rgba(16,185,129,0.24)",
+                  background: "linear-gradient(120deg, #A78BFA 0%, #6C3CF4 40%, #10B981 100%)",
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                  backgroundClip: "text",
+                  textShadow: "0 0 42px rgba(108,60,244,0.55)",
+                }}
+              >
+                humanoids.
+              </span>
+            </h1>
+
+            <p
+              className="hero-reveal hero-reveal-2 mt-6 max-w-xl text-base md:text-lg leading-relaxed"
+              style={{ color: "rgba(226,232,240,0.72)" }}
+            >
+              Demonstration datasets for the humanoids being trained to cook,
+              clean, fold laundry, and work warehouse floors. Lab-grade
+              optical capture of real human motion — the ground truth your
+              policy learns from.
+            </p>
+
+            <div className="hero-reveal hero-reveal-3 mt-8 flex flex-col items-start gap-3 sm:flex-row">
+              <Link
+                href="/contact"
+                className="inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-semibold transition-transform hover:scale-[1.03]"
+                style={{
+                  background: "linear-gradient(120deg, #6C3CF4 0%, #A78BFA 100%)",
+                  color: "white",
+                  boxShadow: "0 10px 30px -10px rgba(108,60,244,0.6)",
+                }}
+              >
+                Start a data program <ArrowRight className="h-4 w-4" />
+              </Link>
+              <Link
+                href="#modalities"
+                className="inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-semibold transition-colors"
+                style={{
+                  background: "rgba(255,255,255,0.05)",
+                  border: "1px solid rgba(255,255,255,0.16)",
+                  color: "white",
                   backdropFilter: "blur(10px)",
                 }}
               >
-                <span className="relative flex h-2 w-2">
-                  <span
-                    className="absolute inline-flex h-full w-full animate-ping rounded-full"
-                    style={{ background: "#10B981", opacity: 0.6 }}
-                  />
-                  <span className="relative inline-flex h-2 w-2 rounded-full" style={{ background: "#10B981" }} />
-                </span>
-                <span style={{ color: "rgba(226,232,240,0.92)" }}>Physical AI &amp; Robotics</span>
-                <Sparkles className="h-3 w-3" style={{ color: "#34D399" }} />
-              </motion.div>
-            </FadeIn>
+                Explore modalities
+              </Link>
+            </div>
 
-            <KineticHeadline
-              className="font-medium tracking-tight text-4xl md:text-6xl"
-              words={[
-                "Human",
-                "motion",
-                "data",
-                "for",
-                "training",
-                { text: "humanoids", gradient: true, glow: true },
-                { text: ".", gradient: true, glow: true },
-              ]}
-              delay={0.2}
-            />
-
-            <FadeIn delay={1.0} className="mt-6">
-              <p className="max-w-xl text-base md:text-lg leading-relaxed" style={{ color: "rgba(226,232,240,0.72)" }}>
-                Demonstration datasets for the humanoids that will cook,
-                clean, fold laundry, and work your warehouse floor.
-                Lab-grade optical capture from real humans in real kitchens,
-                real homes, and real factories — the ground truth humanoids
-                learn from.
-              </p>
-            </FadeIn>
-
-            <FadeIn delay={1.2} className="mt-8">
-              <div className="flex flex-col items-start gap-3 sm:flex-row">
-                <MagneticButton href="/contact" variant="primary">
-                  Start a data program <ArrowRight className="h-4 w-4" />
-                </MagneticButton>
-                <MagneticButton href="#modalities" variant="outline">
-                  Explore modalities
-                </MagneticButton>
-              </div>
-            </FadeIn>
-
-            <FadeIn delay={1.4} className="mt-10">
-              <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-xs md:text-sm uppercase tracking-wider" style={{ color: "rgba(226,232,240,0.55)" }}>
-                <span>Optical MOCAP</span>
-                <span className="h-3 w-px" style={{ background: "rgba(255,255,255,0.2)" }} />
-                <span>Multi-modal</span>
-                <span className="h-3 w-px" style={{ background: "rgba(255,255,255,0.2)" }} />
-                <span>Scene-aware</span>
-                <span className="h-3 w-px" style={{ background: "rgba(255,255,255,0.2)" }} />
-                <span>Sim-ready exports</span>
-              </div>
-            </FadeIn>
+            <div
+              className="hero-reveal hero-reveal-4 mt-10 flex flex-wrap items-center gap-x-5 gap-y-2 text-xs md:text-sm uppercase tracking-wider"
+              style={{ color: "rgba(226,232,240,0.55)" }}
+            >
+              <span>Optical MOCAP</span>
+              <span className="h-3 w-px" style={{ background: "rgba(255,255,255,0.2)" }} />
+              <span>Multi-modal</span>
+              <span className="h-3 w-px" style={{ background: "rgba(255,255,255,0.2)" }} />
+              <span>Scene-aware</span>
+              <span className="h-3 w-px" style={{ background: "rgba(255,255,255,0.2)" }} />
+              <span>Sim-ready exports</span>
+            </div>
           </div>
 
-          {/* Visual side */}
-          <motion.div
-            initial={shouldReduce ? {} : { opacity: 0, scale: 0.95, y: 20 }}
-            animate={shouldReduce ? {} : { opacity: 1, scale: 1, y: 0 }}
-            transition={{ delay: 0.8, duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-            className="hidden md:block"
-          >
+          <div className="hero-reveal hero-reveal-2 hidden md:block">
             <div
               className="relative overflow-hidden rounded-3xl"
               style={{
@@ -140,12 +140,10 @@ export function HeroPhysical() {
                 className="aspect-[4/5] w-full object-cover"
                 priority
               />
-              {/* Vignette */}
               <div
                 className="absolute inset-0 pointer-events-none"
                 style={{ background: "linear-gradient(180deg, rgba(2,6,23,0) 40%, rgba(2,6,23,0.6) 100%)" }}
               />
-              {/* Overlay data chip */}
               <div
                 className="absolute bottom-4 left-4 right-4 flex items-center gap-3 rounded-2xl px-3.5 py-2.5 backdrop-blur-md"
                 style={{ background: "rgba(15,23,42,0.55)", border: "1px solid rgba(255,255,255,0.12)" }}
@@ -161,7 +159,7 @@ export function HeroPhysical() {
                 </span>
                 <div className="min-w-0">
                   <p className="text-[10px] uppercase tracking-wider" style={{ color: "rgba(226,232,240,0.6)" }}>
-                    Current capture
+                    Capture example
                   </p>
                   <p className="text-sm font-medium truncate" style={{ color: "white" }}>
                     Kitchen · folding laundry · mocap + IMU
@@ -169,19 +167,16 @@ export function HeroPhysical() {
                 </div>
               </div>
             </div>
-          </motion.div>
+          </div>
         </div>
 
-        <motion.div
-          initial={shouldReduce ? {} : { opacity: 0 }}
-          animate={shouldReduce ? {} : { opacity: [0, 1, 1, 0.4, 1] }}
-          transition={{ delay: 2, duration: 2.4, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute bottom-6 left-1/2 flex -translate-x-1/2 flex-col items-center gap-1"
-          style={{ color: "rgba(226,232,240,0.4)" }}
+        <div
+          className="hero-reveal hero-reveal-5 absolute bottom-6 left-1/2 flex -translate-x-1/2 flex-col items-center gap-1"
+          style={{ color: "rgba(226,232,240,0.4)", animationIterationCount: 1 }}
         >
           <span className="text-[10px] uppercase tracking-widest">Scroll</span>
           <ChevronDown className="h-4 w-4" />
-        </motion.div>
+        </div>
       </div>
     </section>
   );

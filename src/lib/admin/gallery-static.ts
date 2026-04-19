@@ -238,6 +238,12 @@ export const STATIC_IMAGES: StaticImage[] = [
     "size_bytes": 10120682
   },
   {
+    "path": "/images/hero-poster.jpg",
+    "name": "hero-poster",
+    "ext": "jpg",
+    "size_bytes": 75432
+  },
+  {
     "path": "/images/humanoid-ai.jpg",
     "name": "humanoid-ai",
     "ext": "jpg",
@@ -272,6 +278,12 @@ export const STATIC_IMAGES: StaticImage[] = [
     "name": "mocap-studio",
     "ext": "jpg",
     "size_bytes": 271106
+  },
+  {
+    "path": "/images/physical-poster.jpg",
+    "name": "physical-poster",
+    "ext": "jpg",
+    "size_bytes": 105202
   },
   {
     "path": "/images/post_banner.png",

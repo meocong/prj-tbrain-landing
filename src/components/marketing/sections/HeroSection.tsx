@@ -12,7 +12,7 @@ export function HeroSection() {
       <VideoBackground
         src="/videos/hero-ambient.webm"
         srcMp4="/videos/hero-ambient.mp4"
-        poster="/images/humanoid-ai.jpg"
+        poster="/images/hero-poster.jpg"
       />
 
       <div
