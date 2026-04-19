@@ -19,7 +19,7 @@ const GROUPS = [
     label: "Hand & Face",
     accent: "#A78BFA",
     items: [
-      "Hand pose (21+ joints, 3D)",
+      "3D hand pose tracking",
       "Finger articulation",
       "Facial rig (optional)",
       "Gaze vector",

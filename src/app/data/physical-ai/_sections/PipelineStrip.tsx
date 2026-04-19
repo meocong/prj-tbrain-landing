@@ -14,7 +14,7 @@ const STEPS = [
   {
     icon: Video,
     label: "Multi-modal capture",
-    body: "Optical mocap + IMU + force/torque + depth. Synchronous streams, sub-millimeter spatial accuracy.",
+    body: "Optical mocap + IMU + force/torque + depth. Synchronous streams, studio-calibrated per program.",
     accent: "#34D399",
   },
   {

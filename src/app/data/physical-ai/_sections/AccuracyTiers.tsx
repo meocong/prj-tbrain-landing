@@ -6,17 +6,17 @@ import { RevealOnScroll, StaggerContainer, STAGGER_ITEM } from "@/components/mar
 
 const TIERS = [
   {
-    name: "Standard",
-    accuracy: "5 mm",
+    name: "General",
+    accuracy: "Training-ready",
     description: "Locomotion, navigation, general manipulation, imitation learning from diverse scenes.",
     icon: Target,
     accent: "#A78BFA",
     recommended: false,
   },
   {
-    name: "High Precision",
-    accuracy: "Sub-millimeter",
-    description: "Fine manipulation, threading, surgical-grade assembly — validated against peer-reviewed benchmarks.",
+    name: "Studio-grade",
+    accuracy: "Per program",
+    description: "Fine manipulation and dexterous tasks — hardware + protocol scoped to the precision your policy actually needs.",
     icon: Sparkles,
     accent: "#10B981",
     recommended: true,

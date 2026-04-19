@@ -1,9 +1,9 @@
 // ── Trust Metrics ──
 export const TRUST_METRICS = [
-  { value: "48K+", label: "Expert Contributors" },
-  { value: "250+", label: "Projects Delivered" },
-  { value: "17+", label: "Countries" },
-  { value: "0.8mm", label: "Hand Pose Accuracy" },
+  { value: "Lab-grade", label: "Capture precision" },
+  { value: "Per-program", label: "Custom pipelines" },
+  { value: "Multi-modal", label: "Motion · IMU · depth · force" },
+  { value: "Sim-ready", label: "URDF / USD exports" },
 ];
 
 // ── Product Pillars (Labelbox-style numbered features) ──
@@ -15,9 +15,9 @@ export const PRODUCT_PILLARS = [
       "Robots that learn from real-world complexity start with real-world data. Ground-truth human motion and hand pose — captured with lab-grade precision, not estimated from video.",
     href: "/data/physical-ai",
     features: [
-      { num: "01", title: "3-tier hardware", detail: "5mm standard to 0.8mm premium, validated against peer-reviewed benchmarks" },
-      { num: "02", title: "6 problem categories", detail: "Household, commercial, dexterous manipulation, gripper, teleoperation" },
-      { num: "03", title: "Scene-aware capture", detail: "Egocentric video with 3D hand pose, environment context, and task annotations" },
+      { num: "01", title: "Lab-grade capture", detail: "Optical mocap, IMU, depth — hardware scoped per program to the precision your pipeline needs" },
+      { num: "02", title: "Household + factory focus", detail: "Cooking, cleaning, laundry, assembly, picking — real humanoid target tasks" },
+      { num: "03", title: "Scene-aware", detail: "Egocentric video with 3D hand pose, environment context, and task annotations" },
     ],
     color: "#0151FF",
   },
@@ -29,7 +29,7 @@ export const PRODUCT_PILLARS = [
     href: "/data/terminal-bench",
     features: [
       { num: "01", title: "Multi-step reasoning", detail: "Chains of actions across Linux, DevOps, Security, and Database domains" },
-      { num: "02", title: "4-layer validation", detail: "Spec → Oracle → LLM baseline (≤20% GPT-5) → Expert review" },
+      { num: "02", title: "Layered validation", detail: "Spec → oracle → LLM baseline → expert review — frontier models still fail" },
       { num: "03", title: "Anti-cheat by design", detail: "No test leakage, no hardcoding — deterministic and reproducible" },
     ],
     color: "#6C3CF4",
@@ -41,8 +41,8 @@ export const PRODUCT_PILLARS = [
       "RLHF preference data, domain-specific SFT datasets — we build exactly what your model needs, with AI-native QC that catches what humans miss.",
     href: "/services",
     features: [
-      { num: "01", title: "Domain expert pods", detail: "Medical, STEM, Coding, Finance — PhDs and Olympiad medalists" },
-      { num: "02", title: "AI-native QC", detail: "Automated pre-screening handles 60-70%. Humans focus on edge cases" },
+      { num: "01", title: "Domain expert pods", detail: "Medical, STEM, Coding, Finance — PhDs and subject-matter experts" },
+      { num: "02", title: "AI-native QC", detail: "Automated pre-screening lifts the throughput ceiling; humans focus on edge cases" },
       { num: "03", title: "Multi-modal", detail: "Text, image, video, and audio annotation in one pipeline" },
     ],
     color: "#10B981",
