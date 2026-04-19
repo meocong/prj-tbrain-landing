@@ -1,14 +1,34 @@
 "use client";
 
-import { CountUp } from "@/components/marketing/fx/CountUp";
-import { RevealOnScroll, StaggerContainer, STAGGER_ITEM } from "@/components/marketing/fx/RevealOnScroll";
 import { motion } from "framer-motion";
+import { ShieldCheck, Sparkles, Cpu, Globe2 } from "lucide-react";
+import { RevealOnScroll, StaggerContainer, STAGGER_ITEM } from "@/components/marketing/fx/RevealOnScroll";
 
-const STATS = [
-  { value: 48000, suffix: "+", label: "Expert annotators", sub: "across 17 countries", accent: "#A78BFA" },
-  { value: 12,    suffix: "M+", label: "Motion capture frames", sub: "lab-grade precision", accent: "#10B981" },
-  { value: 0.98,  suffix: "",   label: "QC confidence", sub: "AI-native verification", accent: "#6C3CF4", decimal: true },
-  { value: 99.94, suffix: "%",  label: "Task completion", sub: "on agent benchmarks", accent: "#F59E0B", decimal: true },
+const PILLARS = [
+  {
+    icon: ShieldCheck,
+    title: "Lab-grade precision",
+    body: "Optical capture, IMU, and multi-camera rigs — not video-estimated approximations.",
+    accent: "#A78BFA",
+  },
+  {
+    icon: Cpu,
+    title: "AI-native QC",
+    body: "Every sample runs through our confidence models before it reaches your training run.",
+    accent: "#10B981",
+  },
+  {
+    icon: Globe2,
+    title: "Global expert network",
+    body: "Domain experts across science, engineering, language, and annotation tasks.",
+    accent: "#6C3CF4",
+  },
+  {
+    icon: Sparkles,
+    title: "Custom programs",
+    body: "Scoped in days, first samples in weeks, SDK-ready exports.",
+    accent: "#F59E0B",
+  },
 ];
 
 export function StatsSection() {
@@ -17,7 +37,6 @@ export function StatsSection() {
       className="relative overflow-hidden py-24 md:py-32"
       style={{ background: "#020617", color: "white" }}
     >
-      {/* gradient ambience */}
       <div
         aria-hidden
         className="absolute inset-0 pointer-events-none opacity-40"
@@ -34,62 +53,57 @@ export function StatsSection() {
               className="inline-block text-xs font-semibold uppercase tracking-widest mb-4"
               style={{ color: "#10B981" }}
             >
-              The numbers
+              Why Tbrain
             </span>
             <h2
               className="text-4xl md:text-6xl font-medium tracking-tight"
               style={{ fontFamily: "var(--font-heading)", letterSpacing: "-0.02em" }}
             >
-              Scale you can&apos;t fake.
+              Quality your team{" "}
+              <span
+                style={{
+                  background: "linear-gradient(120deg, #A78BFA, #10B981)",
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                }}
+              >
+                can&apos;t fake.
+              </span>
             </h2>
           </div>
         </RevealOnScroll>
 
-        <StaggerContainer
-          className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6"
-          stagger={0.12}
-        >
-          {STATS.map((s) => (
+        <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5" stagger={0.1}>
+          {PILLARS.map((p) => (
             <motion.div
-              key={s.label}
+              key={p.title}
               variants={STAGGER_ITEM}
-              className="relative overflow-hidden rounded-2xl p-6 md:p-8"
+              className="relative overflow-hidden rounded-2xl p-6"
               style={{
-                background: "linear-gradient(165deg, rgba(255,255,255,0.035) 0%, rgba(255,255,255,0.01) 100%)",
+                background: "linear-gradient(165deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.015) 100%)",
                 border: "1px solid rgba(255,255,255,0.08)",
               }}
             >
               <div
                 aria-hidden
                 className="absolute -top-10 -right-10 h-32 w-32 rounded-full pointer-events-none opacity-40"
-                style={{ background: `radial-gradient(circle, ${s.accent}55 0%, transparent 70%)`, filter: "blur(20px)" }}
+                style={{ background: `radial-gradient(circle, ${p.accent}55 0%, transparent 70%)`, filter: "blur(20px)" }}
               />
               <div
                 className="absolute top-0 left-0 right-0 h-[3px]"
-                style={{ background: `linear-gradient(90deg, ${s.accent}, ${s.accent}00)` }}
+                style={{ background: `linear-gradient(90deg, ${p.accent}, ${p.accent}00)` }}
               />
-              <p
-                className="text-4xl md:text-6xl font-bold tracking-tight"
-                style={{
-                  fontFamily: "var(--font-heading)",
-                  letterSpacing: "-0.03em",
-                  background: `linear-gradient(135deg, ${s.accent}, white)`,
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                }}
+              <span
+                className="inline-flex h-10 w-10 items-center justify-center rounded-xl mb-3"
+                style={{ background: `${p.accent}22`, color: p.accent, border: `1px solid ${p.accent}33` }}
               >
-                <CountUp
-                  value={s.value}
-                  suffix={s.suffix}
-                  duration={2.2}
-                  format={s.decimal ? (n) => (n / (s.value === 0.98 ? 100 : 1)).toFixed(2) : undefined}
-                />
+                <p.icon className="h-5 w-5" />
+              </span>
+              <p className="text-base font-semibold" style={{ fontFamily: "var(--font-heading)", color: "white" }}>
+                {p.title}
               </p>
-              <p className="mt-3 text-sm font-semibold" style={{ color: "white" }}>
-                {s.label}
-              </p>
-              <p className="mt-0.5 text-xs" style={{ color: "rgba(226,232,240,0.55)" }}>
-                {s.sub}
+              <p className="mt-2 text-sm leading-relaxed" style={{ color: "rgba(226,232,240,0.65)" }}>
+                {p.body}
               </p>
             </motion.div>
           ))}

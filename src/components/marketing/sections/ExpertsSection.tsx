@@ -1,86 +1,90 @@
 "use client";
 
-import { motion } from "framer-motion";
 import Image from "next/image";
+import { motion } from "framer-motion";
 import { EXPERT_NETWORK } from "@/lib/constants/marketing";
+import { RevealOnScroll, StaggerContainer, STAGGER_ITEM } from "@/components/marketing/fx/RevealOnScroll";
 
 export function ExpertsSection() {
   return (
-    <section className="bg-gradient-to-b from-white to-gray-50 py-24">
-      <div className="container mx-auto px-3">
-        {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-center"
-        >
-          <h2
-            className="text-4xl font-medium md:text-5xl"
-            style={{ fontFamily: "var(--font-heading)" }}
-          >
-            <span className="gradient-text">{EXPERT_NETWORK.headline}</span>
-          </h2>
-          <p className="mx-auto mt-4 max-w-2xl text-lg text-[#78818f]">
-            {EXPERT_NETWORK.subheadline}
-          </p>
-        </motion.div>
+    <section
+      className="relative overflow-hidden py-24 md:py-32"
+      style={{ background: "#020617", color: "white" }}
+    >
+      <div
+        aria-hidden
+        className="absolute -top-40 left-1/3 h-[500px] w-[500px] rounded-full pointer-events-none"
+        style={{ background: "radial-gradient(circle, rgba(16,185,129,0.14) 0%, transparent 65%)", filter: "blur(60px)" }}
+      />
 
-        {/* Stats row */}
-        <div className="mx-auto mt-12 flex max-w-4xl flex-wrap items-center justify-center gap-8 md:gap-16">
-          {EXPERT_NETWORK.stats.map((s, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 10 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.1 }}
-              className="text-center"
+      <div className="container mx-auto px-4 relative z-10">
+        <RevealOnScroll>
+          <div className="text-center mb-10 md:mb-16">
+            <span
+              className="inline-block text-xs font-semibold uppercase tracking-widest mb-4"
+              style={{ color: "#10B981" }}
             >
-              <div className="text-3xl font-bold text-[#6C3CF4]">{s.value}</div>
-              <div className="mt-1 text-sm text-[#78818f]">{s.label}</div>
-            </motion.div>
-          ))}
-        </div>
+              The network
+            </span>
+            <h2
+              className="text-4xl md:text-6xl font-medium tracking-tight"
+              style={{ fontFamily: "var(--font-heading)", letterSpacing: "-0.02em" }}
+            >
+              <span
+                style={{
+                  background: "linear-gradient(120deg, #A78BFA, #10B981)",
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                }}
+              >
+                {EXPERT_NETWORK.headline}
+              </span>
+            </h2>
+            <p className="mx-auto mt-4 max-w-2xl text-base md:text-lg" style={{ color: "rgba(226,232,240,0.65)" }}>
+              {EXPERT_NETWORK.subheadline}
+            </p>
+          </div>
+        </RevealOnScroll>
 
         {/* Expert cards */}
-        <div className="mx-auto mt-16 grid max-w-5xl grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <StaggerContainer className="mx-auto grid max-w-5xl grid-cols-2 gap-4 md:gap-5 lg:grid-cols-4">
           {EXPERT_NETWORK.experts.map((expert, i) => (
             <motion.div
               key={i}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.1 }}
-              className="rounded-2xl border border-gray-200 bg-white p-5 text-center shadow-sm transition-all hover:shadow-md"
+              variants={STAGGER_ITEM}
+              className="relative overflow-hidden rounded-2xl p-5 text-center"
+              style={{
+                background: "linear-gradient(165deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.015) 100%)",
+                border: "1px solid rgba(255,255,255,0.08)",
+                backdropFilter: "blur(10px)",
+              }}
             >
               <Image
                 src={expert.avatar}
-                width={80}
-                height={80}
+                width={72}
+                height={72}
                 alt={expert.name}
                 className="mx-auto rounded-full"
+                style={{ border: "2px solid rgba(255,255,255,0.12)" }}
               />
-              <h3
-                className="mt-3 text-base font-semibold text-[#0e1b2e]"
-                style={{ fontFamily: "var(--font-heading)" }}
-              >
+              <h3 className="mt-3 text-base font-semibold" style={{ fontFamily: "var(--font-heading)", color: "white" }}>
                 {expert.name}
               </h3>
-              <p className="mt-0.5 text-xs font-medium text-[#6C3CF4]">
+              <p className="mt-0.5 text-xs font-medium" style={{ color: "#A78BFA" }}>
                 {expert.title}
               </p>
-              <p className="mt-2 text-xs leading-relaxed text-[#78818f]">
+              <p className="mt-2 text-xs leading-relaxed" style={{ color: "rgba(226,232,240,0.55)" }}>
                 {expert.detail}
               </p>
-              <div className="mt-3">
-                <span className="inline-block rounded-full bg-gray-100 px-3 py-0.5 text-[10px] font-medium text-gray-600">
-                  {expert.domain}
-                </span>
-              </div>
+              <span
+                className="mt-3 inline-block rounded-full px-2.5 py-0.5 text-[10px] font-medium"
+                style={{ background: "rgba(255,255,255,0.06)", color: "rgba(226,232,240,0.7)", border: "1px solid rgba(255,255,255,0.08)" }}
+              >
+                {expert.domain}
+              </span>
             </motion.div>
           ))}
-        </div>
+        </StaggerContainer>
       </div>
     </section>
   );

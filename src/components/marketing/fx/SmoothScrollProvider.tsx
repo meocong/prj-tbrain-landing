@@ -1,32 +1,14 @@
 "use client";
 
-import { useEffect } from "react";
-import Lenis from "@studio-freight/lenis";
-
-/** Enables smooth, inertial scrolling across the landing. */
+/**
+ * Smooth scroll provider — DISABLED.
+ *
+ * Lenis was causing main-thread thrash when combined with the Canvas
+ * hero shader on some browsers (scroll jitter / stuck scroll). Native
+ * scroll is smooth enough for this page. Kept as a no-op component
+ * so imports still work; re-enable when we validate perf on low-end
+ * devices.
+ */
 export function SmoothScrollProvider() {
-  useEffect(() => {
-    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reduced) return;
-
-    const lenis = new Lenis({
-      duration: 1.15,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      smoothWheel: true,
-    });
-
-    let raf = 0;
-    const loop = (time: number) => {
-      lenis.raf(time);
-      raf = requestAnimationFrame(loop);
-    };
-    raf = requestAnimationFrame(loop);
-
-    return () => {
-      cancelAnimationFrame(raf);
-      lenis.destroy();
-    };
-  }, []);
-
   return null;
 }

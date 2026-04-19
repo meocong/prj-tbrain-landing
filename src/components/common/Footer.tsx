@@ -37,11 +37,7 @@ function NewsletterForm() {
   };
 
   if (done) {
-    return (
-      <p className="text-sm text-[#6C3CF4] font-medium">
-        Thanks for subscribing!
-      </p>
-    );
+    return <p className="text-sm font-medium" style={{ color: "#A78BFA" }}>Thanks for subscribing!</p>;
   }
 
   return (
@@ -52,13 +48,23 @@ function NewsletterForm() {
         value={email}
         onChange={(e) => setEmail(e.target.value)}
         placeholder="your@email.com"
-        className="rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm outline-none transition-colors focus:border-[#6C3CF4]"
-        style={{ minWidth: "200px" }}
+        className="rounded-lg px-3 py-2 text-sm outline-none transition-colors"
+        style={{
+          minWidth: "200px",
+          background: "rgba(255,255,255,0.06)",
+          border: "1px solid rgba(255,255,255,0.1)",
+          color: "white",
+        }}
       />
       <button
         type="submit"
         disabled={loading}
-        className="inline-flex items-center gap-1.5 rounded-lg bg-[#6C3CF4] px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-[#5a2fd3]"
+        className="inline-flex items-center gap-1.5 rounded-lg px-4 py-2 text-sm font-medium text-white transition-opacity"
+        style={{
+          background: "linear-gradient(135deg, #6C3CF4, #8B5CF6)",
+          boxShadow: "0 8px 24px -6px rgba(108,60,244,0.45)",
+          opacity: loading ? 0.7 : 1,
+        }}
       >
         <Send className="h-3.5 w-3.5" />
         {loading ? "..." : "Subscribe"}
@@ -78,38 +84,55 @@ const FOOTER_LINKS = [
 
 const Footer = () => {
   return (
-    <footer className="relative mt-16 overflow-hidden bg-white">
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-purple-50/30 to-blue-50/30" />
+    <footer
+      className="relative overflow-hidden"
+      style={{
+        background: "#020617",
+        color: "white",
+        borderTop: "1px solid rgba(255,255,255,0.08)",
+      }}
+    >
+      {/* Ambient glow */}
+      <div
+        aria-hidden
+        className="absolute -top-40 left-1/2 -translate-x-1/2 h-[400px] w-[800px] rounded-full pointer-events-none"
+        style={{
+          background:
+            "radial-gradient(ellipse, rgba(108,60,244,0.15) 0%, transparent 60%)",
+          filter: "blur(60px)",
+        }}
+      />
 
-      <div className="relative z-10 mx-auto w-full max-w-7xl px-6 py-10">
-        <div className="w-full h-[1px] bg-gradient-to-r from-transparent via-purple-200 to-transparent mb-8" />
-
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
-          {/* Brand */}
+      <div className="relative z-10 mx-auto w-full max-w-7xl px-6 py-14">
+        <div className="grid grid-cols-1 gap-10 md:grid-cols-3">
           <div>
-            <Link href="/">
+            <Link href="/" className="inline-block">
               <Image
                 src={Logo}
                 width={110}
                 height={36}
                 alt="Tbrain"
                 className="object-contain"
+                style={{ filter: "brightness(0) invert(1)" }}
               />
             </Link>
-            <p className="mt-3 text-sm text-[#78818f]">
-              The improvement layer for agentic AI training data & evaluation.
+            <p className="mt-4 text-sm leading-relaxed" style={{ color: "rgba(226,232,240,0.55)" }}>
+              The data factory for robotics, agents, and post-training.
+              Ground-truth data, purpose-built for frontier AI.
             </p>
           </div>
 
-          {/* Links */}
           <div>
-            <h4 className="text-sm font-semibold text-[#0e1b2e]">Quick Links</h4>
-            <div className="mt-3 grid grid-cols-2 gap-2">
+            <h4 className="text-xs font-semibold uppercase tracking-widest" style={{ color: "rgba(226,232,240,0.45)" }}>
+              Quick links
+            </h4>
+            <div className="mt-4 grid grid-cols-2 gap-y-2.5">
               {FOOTER_LINKS.map((link) => (
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="text-sm text-[#78818f] transition-colors hover:text-[#6C3CF4]"
+                  className="text-sm transition-colors hover:text-white"
+                  style={{ color: "rgba(226,232,240,0.7)" }}
                 >
                   {link.label}
                 </Link>
@@ -117,13 +140,12 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* Newsletter */}
           <div>
-            <h4 className="text-sm font-semibold text-[#0e1b2e]">
-              Stay Updated
+            <h4 className="text-xs font-semibold uppercase tracking-widest" style={{ color: "rgba(226,232,240,0.45)" }}>
+              Stay updated
             </h4>
-            <p className="mt-2 text-sm text-[#78818f]">
-              Get the latest on AI training data and insights.
+            <p className="mt-4 text-sm" style={{ color: "rgba(226,232,240,0.6)" }}>
+              The latest on AI training data and evaluation.
             </p>
             <div className="mt-3">
               <NewsletterForm />
@@ -131,27 +153,31 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="mt-8 w-full h-[1px] bg-gray-200" />
+        <div className="mt-10 h-px w-full" style={{ background: "rgba(255,255,255,0.08)" }} />
 
-        {/* Bottom */}
-        <div className="mt-6 flex flex-col items-center justify-between gap-4 md:flex-row">
-          <div className="flex items-center gap-4">
+        <div className="mt-6 flex flex-col items-start justify-between gap-4 md:flex-row md:items-center">
+          <div className="flex items-center gap-4 flex-wrap">
             <a
               href="https://www.linkedin.com/company/tbrain-ai"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 rounded-full border border-gray-200 px-4 py-1.5 text-sm font-medium text-[#0e1b2e] transition-all hover:border-[#6C3CF4] hover:text-[#6C3CF4]"
+              className="flex items-center gap-2 rounded-full px-3.5 py-1.5 text-xs font-medium transition-colors"
+              style={{
+                background: "rgba(255,255,255,0.04)",
+                border: "1px solid rgba(255,255,255,0.1)",
+                color: "rgba(226,232,240,0.85)",
+              }}
             >
-              <Image src={iconLinkedin} width={18} height={18} alt="LinkedIn" />
+              <Image src={iconLinkedin} width={16} height={16} alt="LinkedIn" style={{ filter: "brightness(0) invert(1)", opacity: 0.8 }} />
               LinkedIn
             </a>
-            <span className="text-sm text-[#78818f]">
-              Sheridan, WY, USA &bull; Hanoi, Vietnam
+            <span className="text-xs" style={{ color: "rgba(226,232,240,0.5)" }}>
+              Sheridan, WY &bull; Hanoi
             </span>
           </div>
-          <p className="text-sm text-[#78818f]">
+          <p className="text-xs" style={{ color: "rgba(226,232,240,0.5)" }}>
             &copy; Tbrain {new Date().getFullYear()} &bull;{" "}
-            <span className="text-[#6C3CF4]">Human-in-the-Loop AI Validation</span>
+            <span style={{ color: "#A78BFA" }}>Human-in-the-Loop AI Validation</span>
           </p>
         </div>
       </div>
