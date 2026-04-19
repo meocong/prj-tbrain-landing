@@ -87,27 +87,47 @@ export async function resolveTemplate(
 }
 
 /** Wrap the rendered body HTML in the Tbrain email theme: 600px container,
- *  brand font-family, branded header strip. Safe to apply to any body_html
- *  since it only adds wrapper chrome. */
-export function applyTbrainTheme(bodyHtml: string, opts: { preview?: boolean } = {}): string {
+ *  brand header with logo, content, signature block with team name,
+ *  footer with copyright + reply hint.
+ *  All URLs are absolute so email clients render them. */
+export function applyTbrainTheme(bodyHtml: string, _opts: { preview?: boolean } = {}): string {
   const brand = "#6C3CF4";
-  const bg = opts.preview ? "#F8FAFC" : "#F8FAFC";
+  const bg = "#F8FAFC";
+  const baseUrl = process.env.PUBLIC_BASE_URL ?? "https://tbrain.ai";
+  const logoUrl = `${baseUrl}/images/logo.svg`;
+
   return `<!doctype html>
 <html>
 <head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
-<body style="margin:0;padding:24px 0;background:${bg};font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;color:#0F172A;">
+<body style="margin:0;padding:32px 0;background:${bg};font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;color:#0F172A;">
   <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin:0 auto;">
     <tr><td align="center">
-      <table role="presentation" cellpadding="0" cellspacing="0" style="width:100%;max-width:600px;background:#ffffff;border-radius:12px;box-shadow:0 1px 3px rgba(0,0,0,0.06);overflow:hidden;">
-        <tr><td style="background:${brand};padding:16px 24px;">
-          <span style="color:#fff;font-weight:700;font-size:18px;letter-spacing:-0.01em;">Tbrain</span>
+      <table role="presentation" cellpadding="0" cellspacing="0" style="width:100%;max-width:600px;background:#ffffff;border-radius:16px;box-shadow:0 2px 8px rgba(15,23,42,0.08);overflow:hidden;">
+
+        <!-- Header with logo -->
+        <tr><td style="background:${brand};padding:20px 28px;">
+          <a href="${baseUrl}" style="display:inline-block;text-decoration:none;">
+            <img src="${logoUrl}" alt="Tbrain" height="28" style="display:block;height:28px;filter:brightness(0) invert(1);"/>
+          </a>
         </td></tr>
-        <tr><td style="padding:24px;font-size:15px;line-height:1.6;">
+
+        <!-- Content -->
+        <tr><td style="padding:32px 28px 16px 28px;font-size:15px;line-height:1.65;color:#0F172A;">
           ${bodyHtml}
+
+          <!-- Signature block -->
+          <div style="margin-top:32px;padding-top:20px;border-top:1px solid #E2E8F0;font-size:14px;line-height:1.5;color:#475569;">
+            Best regards,<br/>
+            <strong style="color:#0F172A;">The Tbrain Team</strong><br/>
+            <a href="${baseUrl}" style="color:${brand};text-decoration:none;">tbrain.ai</a>
+          </div>
         </td></tr>
-        <tr><td style="padding:16px 24px;background:#F1F5F9;font-size:12px;color:#64748B;text-align:center;">
-          © Tbrain. Reply to this email if you have questions.
+
+        <!-- Footer -->
+        <tr><td style="padding:16px 28px 20px;background:#F1F5F9;font-size:12px;color:#64748B;text-align:center;">
+          © ${new Date().getFullYear()} Tbrain. Reply to this email with any questions.
         </td></tr>
+
       </table>
     </td></tr>
   </table>
