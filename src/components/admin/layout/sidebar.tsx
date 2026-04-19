@@ -34,26 +34,51 @@ export function AdminSidebar() {
       </div>
 
       {/* Nav */}
-      <nav className="flex-1 overflow-y-auto px-3 py-4 space-y-1">
-        {ADMIN_NAV.map((item) => {
-          const allowed = useHasPermission(item.permission);
-          if (!allowed) return null;
+      <nav className="flex-1 overflow-y-auto px-3 py-4">
+        {(() => {
+          // Build ordered section groups, preserving nav order
+          const groups: Array<{ section: string | undefined; items: typeof ADMIN_NAV }> = [];
+          for (const item of ADMIN_NAV) {
+            const last = groups[groups.length - 1];
+            if (last && last.section === item.section) {
+              last.items.push(item);
+            } else {
+              groups.push({ section: item.section, items: [item] });
+            }
+          }
 
-          const active =
-            pathname === item.href ||
-            (item.href !== "/admin" && pathname.startsWith(item.href));
-
-          return (
-            <Link
-              key={item.href}
-              href={item.href}
-              className={active ? "sidebar-item-active" : "sidebar-item"}
-            >
-              <item.icon className="h-4 w-4 shrink-0" />
-              {item.label}
-            </Link>
-          );
-        })}
+          return groups.map((g, gi) => {
+            const visible = g.items.filter((item) => useHasPermission(item.permission));
+            if (visible.length === 0) return null;
+            return (
+              <div key={gi} className={gi === 0 ? "space-y-1" : "mt-5 space-y-1"}>
+                {g.section && (
+                  <p
+                    className="px-3 pb-1 text-[10px] font-semibold uppercase tracking-wider"
+                    style={{ color: "var(--text-muted)", opacity: 0.7 }}
+                  >
+                    {g.section}
+                  </p>
+                )}
+                {visible.map((item) => {
+                  const active =
+                    pathname === item.href ||
+                    (item.href !== "/admin" && pathname.startsWith(item.href));
+                  return (
+                    <Link
+                      key={item.href}
+                      href={item.href}
+                      className={active ? "sidebar-item-active" : "sidebar-item"}
+                    >
+                      <item.icon className="h-4 w-4 shrink-0" />
+                      {item.label}
+                    </Link>
+                  );
+                })}
+              </div>
+            );
+          });
+        })()}
       </nav>
 
       {/* User */}

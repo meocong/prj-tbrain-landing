@@ -21,7 +21,7 @@ export default function AdminDashboard() {
       const db = supabaseAdmin;
       const [contacts, passcodes, requests, posts, events, approvals] = await Promise.all([
         db.from("clients").select("id", { count: "exact", head: true }),
-        db.from("access_grants").select("id", { count: "exact", head: true }),
+        db.from("passcodes").select("id", { count: "exact", head: true }).is("revoked_at", null),
         db.from("access_requests").select("id", { count: "exact", head: true }).eq("status", "pending"),
         db.from("cms_posts").select("id", { count: "exact", head: true }).eq("status", "published"),
         db.from("access_events").select("id", { count: "exact", head: true }),

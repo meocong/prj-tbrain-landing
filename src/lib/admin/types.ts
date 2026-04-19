@@ -1,3 +1,35 @@
+// ── Product / Batch Types ──
+
+export interface Product {
+  id: string;
+  slug: string;
+  name: string;
+  description: string | null;
+  site_url: string | null;
+  sample_type: string | null;
+  is_active: boolean;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface Passcode {
+  id: string;
+  batch_id: string;
+  product_id: string | null;
+  client_id: string | null;
+  passcode_prefix: string;
+  label: string | null;
+  issued_at: string;
+  expires_at: string | null;
+  revoked_at: string | null;
+  max_uses: number | null;
+  use_count: number;
+  last_used_at: string | null;
+  note: string | null;
+  client?: { email: string; full_name: string | null; company: string | null } | null;
+  batch?: { slug: string; name: string } | null;
+}
+
 // ── RBAC Types ──
 
 export interface Permission {
