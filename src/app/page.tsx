@@ -1,14 +1,15 @@
 import type { Metadata } from "next";
 import Header from "@/components/common/Header";
 import Footer from "@/components/common/Footer";
-import TableStart from "@/components/tables/TableStart";
 import { HeroSection } from "@/components/marketing/sections/HeroSection";
-import { TrustStrip } from "@/components/marketing/sections/TrustStrip";
+import { CapabilitiesMarquee } from "@/components/marketing/sections/CapabilitiesMarquee";
 import { ProductPillarsSection } from "@/components/marketing/sections/ProductPillarsSection";
+import { StatsSection } from "@/components/marketing/sections/StatsSection";
 import { PlatformSection } from "@/components/marketing/sections/PlatformSection";
 import { ExpertsSection } from "@/components/marketing/sections/ExpertsSection";
 import { LeadershipSection } from "@/components/marketing/sections/LeadershipSection";
 import { ContactCTA } from "@/components/marketing/sections/ContactCTA";
+import { SmoothScrollProvider } from "@/components/marketing/fx/SmoothScrollProvider";
 
 export const metadata: Metadata = {
   title: "Tbrain — The Data Factory for Robotics, Agents & Post-Training",
@@ -16,9 +17,13 @@ export const metadata: Metadata = {
     "Ground-truth motion capture, multi-step agent benchmarks, and custom data programs. 48K+ experts across 17+ countries. Lab-grade precision. AI-native QC.",
   openGraph: {
     title: "Tbrain — The Data Factory for Robotics, Agents & Post-Training",
-    description:
-      "From robotics to agent evaluation — purpose-built data for frontier AI.",
+    description: "From robotics to agent evaluation — purpose-built data for frontier AI.",
     type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Tbrain — The Data Factory for Robotics, Agents & Post-Training",
+    description: "From robotics to agent evaluation — purpose-built data for frontier AI.",
   },
 };
 
@@ -26,16 +31,18 @@ export const revalidate = 86400;
 
 export default function Home() {
   return (
-    <div>
+    <div style={{ background: "#020617" }}>
+      <SmoothScrollProvider />
       <Header />
       <main>
         <HeroSection />
-        <TrustStrip />
+        <CapabilitiesMarquee />
         <ProductPillarsSection />
+        <StatsSection />
         <PlatformSection />
         <ExpertsSection />
         <LeadershipSection />
-        <TableStart />
+        <ContactCTA />
       </main>
       <Footer />
     </div>

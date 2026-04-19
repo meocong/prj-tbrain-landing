@@ -53,7 +53,7 @@ export default function ServicesPage() {
         <section className="container mx-auto mt-20 px-3">
           <div className="mx-auto grid max-w-5xl grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {SERVICES.map((svc, i) => {
-              const Icon = ICON_MAP[svc.icon] || Database;
+              const Icon = (ICON_MAP[svc.icon] || Database) as React.ComponentType<{ className?: string }>;
               return (
                 <div
                   key={i}
