@@ -160,21 +160,22 @@ export function PlasmaBackground({
     return () => io.disconnect();
   }, []);
 
-  const showCanvas = glReady && inView;
-
+  // Keep Canvas mounted — toggling `frameloop` pauses rendering when off-
+  // screen without losing the WebGL context (which browsers limit to ~16
+  // total and kill when you mount/unmount too many).
   return (
     <div
       ref={hostRef}
       className={className}
       style={{ position: "absolute", inset: 0, pointerEvents: "none", background: staticFallback(tint) }}
     >
-      {showCanvas && (
+      {glReady && (
         <Canvas
           orthographic
           camera={{ zoom: 1, position: [0, 0, 1] }}
           gl={{ antialias: false, alpha: false, powerPreference: "high-performance" }}
           dpr={1}
-          frameloop="always"
+          frameloop={inView ? "always" : "never"}
           style={{ position: "absolute", inset: 0 }}
         >
           <PlasmaPlane tint={tint} />

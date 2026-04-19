@@ -274,12 +274,6 @@ export const STATIC_IMAGES: StaticImage[] = [
     "size_bytes": 271106
   },
   {
-    "path": "/images/motion-capture.jpg",
-    "name": "motion-capture",
-    "ext": "jpg",
-    "size_bytes": 29
-  },
-  {
     "path": "/images/post_banner.png",
     "name": "post_banner",
     "ext": "png",
