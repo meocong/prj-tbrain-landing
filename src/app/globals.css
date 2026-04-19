@@ -349,6 +349,71 @@ h1, h2, h3, h4, h5, h6 {
 .stagger-5 { animation: staggerFadeIn 0.3s ease-out 0.25s both; }
 .stagger-6 { animation: staggerFadeIn 0.3s ease-out 0.30s both; }
 
+/* ── Input Field ── */
+.input-field {
+  width: 100%;
+  padding: 0.625rem 1rem;
+  border-radius: 0.75rem;
+  background: var(--bg-input);
+  border: 1px solid var(--border-default);
+  color: var(--text-primary);
+  font-size: 0.875rem;
+  outline: none;
+  transition: all 0.2s;
+}
+.input-field:focus {
+  border-color: var(--border-hover);
+  box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.15);
+}
+.input-field::placeholder {
+  color: var(--text-muted);
+}
+
+/* ── Sidebar Items ── */
+.sidebar-item {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  padding: 0.625rem 0.75rem;
+  border-radius: 0.75rem;
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  transition: all 0.15s ease;
+  cursor: pointer;
+}
+.sidebar-item:hover {
+  color: var(--text-primary);
+  background: var(--sidebar-item-hover);
+  transform: translateX(2px);
+}
+.sidebar-item-active {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  padding: 0.625rem 0.75rem;
+  border-radius: 0.75rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-brand-600, #8B5CF6);
+  background: var(--sidebar-active-bg);
+  border: 1px solid var(--sidebar-active-border);
+}
+
+/* ── KPI Accent Bars ── */
+.kpi-accent-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  border-radius: 12px 12px 0 0;
+}
+.kpi-accent-primary { background: linear-gradient(90deg, #A78BFA, #6C3CF4); }
+.kpi-accent-success { background: linear-gradient(90deg, #34D399, #10B981); }
+.kpi-accent-warning { background: linear-gradient(90deg, #FCD34D, #EAB308); }
+.kpi-accent-error { background: linear-gradient(90deg, #FCA5A5, #EF4444); }
+.kpi-accent-info { background: linear-gradient(90deg, #93C5FD, #3B82F6); }
+
 /* ── Skeleton Loader ── */
 .skeleton {
   background: linear-gradient(90deg, var(--bg-input) 25%, var(--bg-card-hover) 50%, var(--bg-input) 75%);
