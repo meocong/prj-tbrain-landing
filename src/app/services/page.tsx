@@ -10,6 +10,7 @@ import {
   Database,
   ShieldCheck,
   Users,
+  Bot,
   CheckCircle,
 } from "lucide-react";
 
@@ -26,6 +27,7 @@ const ICON_MAP: Record<string, React.ElementType> = {
   Database,
   ShieldCheck,
   Users,
+  Bot,
 };
 
 export default function ServicesPage() {

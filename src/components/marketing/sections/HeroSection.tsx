@@ -6,7 +6,7 @@ import StartNow from "@/components/common/StartNow";
 
 export function HeroSection() {
   return (
-    <section id="home" className="container mx-auto h-screen px-3 pt-24 relative">
+    <section id="home" className="container mx-auto min-h-screen px-3 pt-28 relative">
       <div className="wrap">
         <div className="one top-0 left-1/4 h-80 w-80" />
         <div className="two top-0 right-1/4 h-80 w-80" />
@@ -26,7 +26,7 @@ export function HeroSection() {
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.3, duration: 0.5 }}
-              className="z-1 text-nowrap rounded-3xl bg-white px-5 py-2 text-sm font-medium text-[#6C3CF4] shadow"
+              className="z-10 text-nowrap rounded-3xl bg-white px-5 py-2 text-sm font-medium text-[#6C3CF4] shadow"
             >
               The human power of RLHF and SFT
             </motion.div>
