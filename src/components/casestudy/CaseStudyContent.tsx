@@ -1,160 +1,121 @@
 "use client";
 
-import React from 'react';
-import { ArrowRight } from 'lucide-react';
-import Image from "next/image";
+import React from "react";
+import { ArrowRight } from "lucide-react";
 import Link from "next/link";
-import datalabeling from "@/assets/images/labeling.svg";
-const caseStudies = [
-  {
-    id: 1,
-    path: '/casestudy/details/agent',
-    title: 'Evaluation and Benchmarks for Agents',
-    excerpt: 'A global enterprise engaged Tbrain to stand up 6 domain-specific Q&A agents and a practical evaluation framework. We delivered production-grade agents grounded in authentic, approved knowledge in just 1 month from kickoff to handoff.',
-    image: 'https://qdrant.tech/img/ai-agent.svg',
-    featured: true
-  },
-  {
-    id: 2,
-    
-    title: "High-Accuracy CAD Annotation",
-    excerpt: "Revolutionizing manufacturing processes with AI-powered analytics and predictive modeling. Smart resource allocation and quality control systems that reduce costs and improve efficiency.",
-    path: "/casestudy/details/manufacturing",
-    featuredImage: {
-      node: {
-        sourceUrl: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&h=500&fit=crop",
-        altText: "Manufacturing Intelligence"
-      }
-    },
-    category: "Manufacturing AI"
-  },
-  {
-    id: 3,
-    path: '/casestudy/details/scalable',
-    title: 'Scalable Multimodal AI System',
-    excerpt: 'Scaled from zero to 48,000 high-quality multimodal annotations in just 4 months. Our team delivered consistent, production-ready labeled data across text, image, and audio modalities, enabling rapid model training and deployment.',
-        image: datalabeling.src,
-
-    category: 'Enterprise AI'
-  }
-];
+import { FEATURED_CASE_STUDIES } from "@/lib/constants/marketing";
 
 export function CaseStudyContent() {
-  const [filteredStudies, setFilteredStudies] = React.useState(caseStudies);
-
-  const handleSearch = (query: string) => {
-    const filtered = caseStudies.filter(study =>
-      study.title.toLowerCase().includes(query.toLowerCase()) ||
-      study.excerpt.toLowerCase().includes(query.toLowerCase())
-    );
-    setFilteredStudies(filtered);
-  };
-
-  const featuredStudy = caseStudies.find(s => s.featured);
-  const regularStudies = filteredStudies.filter(s => !s.featured);
+  const studies = FEATURED_CASE_STUDIES;
+  const featured = studies[0];
+  const rest = studies.slice(1);
 
   return (
     <>
-      {/* Featured Case Studies */}
-      {featuredStudy && (
-        <div className="w-full bg-white/80 backdrop-blur-sm rounded-[28px] shadow-lg hover:shadow-xl transition-all duration-300 flex p-6 md:p-8 gap-6 md:gap-8 flex-col lg:flex-row mb-12">
-          <div className="lg:w-[58%] relative group overflow-hidden rounded-[24px] h-[300px] md:h-[415px]">
-            <Image
-              fill
-              className="object-cover transition-transform duration-300 group-hover:scale-105"
-              src={featuredStudy.image ?? ""}
-              alt={featuredStudy.title}
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+      {/* Featured */}
+      {featured && (
+        <div className="mb-16 overflow-hidden rounded-2xl bg-white shadow-lg">
+          <div className="h-64 overflow-hidden md:h-80">
+            <img
+              src={featured.image}
+              alt={featured.title}
+              className="h-full w-full object-cover"
             />
-            <div className="absolute top-4 left-4 bg-[#6c3cf4] text-white px-4 py-2 rounded-full text-sm font-semibold shadow-lg">
-              Featured
-            </div>
-            <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm text-[#6c3cf4] px-3 py-1 rounded-full text-xs font-medium">
-              {featuredStudy.category}
-            </div>
           </div>
-          <div className="flex-1 flex flex-col justify-between">
-            <div>
-              <Link href={featuredStudy.path}>
-                <h2 className="text-[#0e1b2e] text-2xl md:text-3xl font-semibold leading-tight mb-4 hover:text-[#6c3cf4] transition-colors">
-                  {featuredStudy.title}
-                </h2>
-              </Link>
-              <p className="text-[#78818f] text-base font-normal leading-relaxed mb-6">
-                {featuredStudy.excerpt}
-              </p>
-            </div>
-            <Link
-              href='/casestudy/details/agent'
-              className="inline-flex items-center gap-2 text-[#6c3cf4] text-base font-semibold hover:gap-3 transition-all group"
+          <div className="p-8">
+            <h2
+              className="text-2xl font-semibold md:text-3xl"
+              style={{ fontFamily: "var(--font-heading)" }}
             >
-              View more details
-              <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
-            </Link>
+              {featured.title}
+            </h2>
+            <p className="mt-2 text-sm font-medium text-[#6C3CF4]">
+              {featured.shortDescription}
+            </p>
+            <p className="mt-4 text-base leading-relaxed text-[#78818f]">
+              {featured.description}
+            </p>
+            <div className="mt-6 grid grid-cols-2 gap-3 md:grid-cols-4">
+              {featured.metrics.map((m, i) => (
+                <div
+                  key={i}
+                  className="rounded-xl bg-gradient-to-br from-purple-50 to-blue-50 p-4 text-center"
+                >
+                  <div className="text-2xl font-bold text-[#6C3CF4]">
+                    {m.value}
+                  </div>
+                  <div className="mt-1 text-xs text-[#78818f]">{m.label}</div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       )}
 
-      {/* Search Bar */}
-      <CaseStudySearch onSearch={handleSearch} />
-
-      {/* Case Studies Grid */}
-      <div className="relative z-10">
-        <div className="flex items-center justify-between mb-8">
-          <h2 className="text-2xl md:text-3xl font-semibold text-[#0e1b2e]">
-            All Case Studies
-          </h2>
-          <div className="h-1 flex-1 mx-6 bg-gradient-to-r from-[#6c3cf4]/20 to-transparent rounded-full"></div>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {regularStudies.map((study) => (
-            <div
-              key={study.id}
-              className="bg-white/80 backdrop-blur-sm rounded-[24px] shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden group flex flex-col"
-            >
-              <div className="relative w-full h-[200px] overflow-hidden">
-                <Image
-                  fill
-                  className="object-cover transition-transform duration-300 group-hover:scale-105"
-                  src={study.image ?? study.featuredImage?.node.sourceUrl ?? ""}
-                  alt={study.title}
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                />
-                <div className="absolute top-3 right-3 bg-white/90 backdrop-blur-sm text-[#6c3cf4] px-3 py-1 rounded-full text-xs font-medium">
-                  {study.category}
-                </div>
-              </div>
-              <div className="p-6 flex flex-col flex-grow">
-                <Link href={study.path}>
-                  <h3 className="text-[#0e1b2e] text-xl font-semibold leading-tight mb-3 hover:text-[#6c3cf4] transition-colors">
-                    {study.title}
-                  </h3>
-                </Link>
-                <p className="text-[#78818f] text-sm font-normal leading-relaxed mb-4 line-clamp-3 flex-grow">
-                  {study.excerpt}
-                </p>
-                <Link
-                  href={study.path}
-                  className="inline-flex items-center gap-2 text-[#6c3cf4] text-sm font-semibold hover:gap-3 transition-all group mt-auto"
-                >
-                  Learn More
-                  <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-                </Link>
+      {/* Grid */}
+      <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
+        {rest.map((study, i) => (
+          <div
+            key={i}
+            className="overflow-hidden rounded-2xl bg-white shadow-md transition-all hover:shadow-lg"
+          >
+            <div className="h-48 overflow-hidden">
+              <img
+                src={study.image}
+                alt={study.title}
+                className="h-full w-full object-cover transition-transform duration-300 hover:scale-105"
+              />
+            </div>
+            <div className="p-6">
+              <h3
+                className="text-xl font-semibold"
+                style={{ fontFamily: "var(--font-heading)" }}
+              >
+                {study.title}
+              </h3>
+              <p className="mt-1 text-sm font-medium text-[#6C3CF4]">
+                {study.shortDescription}
+              </p>
+              <p className="mt-3 text-sm leading-relaxed text-[#78818f]">
+                {study.description}
+              </p>
+              <div className="mt-4 grid grid-cols-2 gap-2">
+                {study.metrics.map((m, j) => (
+                  <div
+                    key={j}
+                    className="rounded-lg bg-gray-50 p-2 text-center"
+                  >
+                    <div className="text-lg font-bold text-[#6C3CF4]">
+                      {m.value}
+                    </div>
+                    <div className="text-[10px] text-[#78818f]">{m.label}</div>
+                  </div>
+                ))}
               </div>
             </div>
-          ))}
-        </div>
-
-        {filteredStudies.length === 0 && (
-          <div className="text-center py-12">
-            <p className="text-[#78818f] text-lg">No case studies found. Try a different search term.</p>
           </div>
-        )}
+        ))}
+      </div>
+
+      {/* CTA */}
+      <div className="mt-16 text-center">
+        <h3
+          className="text-2xl font-medium"
+          style={{ fontFamily: "var(--font-heading)" }}
+        >
+          Have a similar challenge?
+        </h3>
+        <p className="mt-2 text-[#78818f]">
+          Let&apos;s discuss how we can help with your specific data needs.
+        </p>
+        <Link
+          href="/contact"
+          className="mt-6 inline-flex items-center gap-2 rounded-xl bg-[#6C3CF4] px-8 py-3 text-base font-semibold text-white transition-all hover:bg-[#5a2fd3]"
+        >
+          Talk to an expert
+          <ArrowRight className="h-4 w-4" />
+        </Link>
       </div>
     </>
   );
 }
-
-// Import this in CaseStudyContent.tsx
-import { CaseStudySearch } from './CaseStudySearch';
