@@ -51,7 +51,15 @@ function estimateReadTime(text: string): string {
   return `${Math.max(1, Math.ceil(words / 200))} min read`;
 }
 
-export default async function BlogPage() {
+const POSTS_PER_PAGE = 6;
+
+export default async function BlogPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ page?: string }>;
+}) {
+  const sp = await searchParams;
+  const currentPage = Math.max(1, Number(sp.page) || 1);
   let posts: BlogPost[] = [];
 
   try {
@@ -107,8 +115,11 @@ export default async function BlogPage() {
 
   posts.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
+  const totalPosts = posts.length;
+  const totalPages = Math.ceil((totalPosts - 1) / POSTS_PER_PAGE); // -1 for featured
   const featured = posts[0];
-  const rest = posts.slice(1);
+  const allRest = posts.slice(1);
+  const rest = allRest.slice((currentPage - 1) * POSTS_PER_PAGE, currentPage * POSTS_PER_PAGE);
 
   return (
     <div>
@@ -222,6 +233,47 @@ export default async function BlogPage() {
               </Link>
             ))}
           </div>
+
+          {/* Pagination */}
+          {totalPages > 1 && (
+            <div className="mt-14 flex items-center justify-center gap-2">
+              {currentPage > 1 && (
+                <Link
+                  href={`/blog?page=${currentPage - 1}`}
+                  className="rounded-lg px-3 py-2 text-sm font-medium transition-colors hover:bg-gray-100"
+                  style={{ color: "#6b7280" }}
+                >
+                  ← Previous
+                </Link>
+              )}
+              {Array.from({ length: totalPages }, (_, i) => i + 1).map((p) => (
+                <Link
+                  key={p}
+                  href={`/blog?page=${p}`}
+                  className={`rounded-lg px-3.5 py-2 text-sm font-medium transition-colors ${
+                    p === currentPage
+                      ? "bg-[#6C3CF4] text-white"
+                      : "text-gray-500 hover:bg-gray-100"
+                  }`}
+                >
+                  {p}
+                </Link>
+              ))}
+              {currentPage < totalPages && (
+                <Link
+                  href={`/blog?page=${currentPage + 1}`}
+                  className="rounded-lg px-3 py-2 text-sm font-medium transition-colors hover:bg-gray-100"
+                  style={{ color: "#6b7280" }}
+                >
+                  Next →
+                </Link>
+              )}
+            </div>
+          )}
+
+          <p className="mt-6 text-center text-xs" style={{ color: "#9ca3af" }}>
+            {totalPosts} articles
+          </p>
 
           {posts.length === 0 && (
             <div className="mt-16 text-center">

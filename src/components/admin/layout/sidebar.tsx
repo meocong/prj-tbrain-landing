@@ -49,12 +49,7 @@ export function AdminSidebar() {
             <Link
               key={item.href}
               href={item.href}
-              className="flex items-center gap-2.5 rounded-lg px-3 py-2 text-sm transition-colors"
-              style={{
-                color: active ? "var(--color-brand-600)" : "var(--text-secondary)",
-                backgroundColor: active ? "var(--sidebar-active-bg)" : "transparent",
-                fontWeight: active ? 600 : 400,
-              }}
+              className={active ? "sidebar-item-active" : "sidebar-item"}
             >
               <item.icon className="h-4 w-4 shrink-0" />
               {item.label}
