@@ -132,14 +132,19 @@ export default async function BlogPostPage({
             </div>
           )}
 
-          {/* Content */}
-          {post.content_md && (
+          {/* Content — render HTML if available, fallback to Markdown */}
+          {post.content_html ? (
+            <div
+              className="prose prose-lg mt-12 max-w-none prose-headings:font-bold prose-headings:tracking-tight prose-h2:text-[26px] prose-h2:mt-12 prose-h2:mb-4 prose-h3:text-[20px] prose-h3:mt-8 prose-p:text-[18px] prose-p:leading-[1.8] prose-p:text-[#374151] prose-li:text-[18px] prose-li:leading-[1.8] prose-a:text-[#6C3CF4] prose-img:rounded-xl prose-img:my-8 prose-blockquote:border-l-[#6C3CF4] prose-blockquote:text-[#6b7280] prose-blockquote:italic"
+              dangerouslySetInnerHTML={{ __html: post.content_html }}
+            />
+          ) : post.content_md ? (
             <div className="prose prose-lg mt-12 max-w-none prose-headings:font-bold prose-headings:tracking-tight prose-h2:text-[26px] prose-h2:mt-12 prose-h2:mb-4 prose-h3:text-[20px] prose-h3:mt-8 prose-p:text-[18px] prose-p:leading-[1.8] prose-p:text-[#374151] prose-li:text-[18px] prose-li:leading-[1.8] prose-a:text-[#6C3CF4] prose-img:rounded-xl prose-img:my-8 prose-blockquote:border-l-[#6C3CF4] prose-blockquote:text-[#6b7280] prose-blockquote:italic">
               <ReactMarkdown remarkPlugins={[remarkGfm]}>
                 {post.content_md}
               </ReactMarkdown>
             </div>
-          )}
+          ) : null}
 
           {/* Tags */}
           {post.tags && post.tags.length > 0 && (
