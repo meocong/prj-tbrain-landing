@@ -76,9 +76,41 @@ export const PLATFORM_FEATURES = [
 
 // ── Case Studies ──
 export const FEATURED_CASE_STUDIES = [
-  { title: "Terminal Bench", shortDescription: "500+ multi-step tasks, ≤20% GPT-5 pass rate", description: "Domain-specific benchmark tasks with 4-layer validation pipeline.", image: "/images/labeling.svg", metrics: [{ value: "500+", label: "Tasks" }, { value: "≤20%", label: "GPT-5 Pass" }, { value: "4", label: "Layers" }, { value: "8+", label: "Domains" }] },
-  { title: "Robotics Data", shortDescription: "Sub-mm accuracy, 6 problem categories", description: "Ground-truth egocentric video and 3D hand pose with lab-grade hardware.", image: "https://qdrant.tech/img/ai-agent.svg", metrics: [{ value: "6", label: "Categories" }, { value: "0.8mm", label: "Accuracy" }, { value: "829h", label: "Reference" }, { value: "3", label: "Tiers" }] },
-  { title: "Multimodal at Scale", shortDescription: "48K annotations, 4 months, 3 modalities", description: "Production-ready labeled data across text, image, and audio.", image: "/images/labeling.svg", metrics: [{ value: "48K", label: "Annotations" }, { value: "4", label: "Months" }, { value: "3", label: "Modalities" }, { value: "90%", label: "Accuracy" }] },
+  {
+    title: "Terminal Bench: Agent Evaluation Platform",
+    shortDescription: "500+ multi-step reasoning tasks with 4-layer validation",
+    description: "Built a comprehensive benchmark for AI terminal agents. Each task requires multi-step reasoning across Linux, DevOps, Security, and Database. 4-layer validation ensures tasks are genuinely hard — GPT-5 passes ≤20% of them.",
+    image: "/images/labeling.svg",
+    metrics: [{ value: "500+", label: "Tasks" }, { value: "≤20%", label: "GPT-5 Pass" }, { value: "4", label: "Validation Layers" }, { value: "8+", label: "Domains" }],
+  },
+  {
+    title: "Robotics: Ground-Truth Motion Capture",
+    shortDescription: "Multi-modal datasets for humanoid and manipulation training",
+    description: "Producing egocentric video, MOCAP, and 3D hand pose data across household and commercial robotics use cases. Lab-grade capture validated against peer-reviewed benchmarks.",
+    image: "https://qdrant.tech/img/ai-agent.svg",
+    metrics: [{ value: "Sub-mm", label: "Precision" }, { value: "12+", label: "Data Modalities" }, { value: "829h", label: "Reference Data" }, { value: "6+", label: "Use Cases" }],
+  },
+  {
+    title: "Multimodal Annotation at Scale",
+    shortDescription: "48K annotations in 4 months across 3 modalities",
+    description: "Scaled from zero to 48,000 high-quality annotations in 4 months. Production-ready labeled data across text, image, and audio for enterprise AI training programs.",
+    image: "/images/labeling.svg",
+    metrics: [{ value: "48K", label: "Annotations" }, { value: "4", label: "Months" }, { value: "3", label: "Modalities" }, { value: "90%+", label: "Accuracy" }],
+  },
+  {
+    title: "Enterprise AI Agents",
+    shortDescription: "6 domain-specific Q&A agents in 1 month",
+    description: "Stood up 6 production-grade Q&A agents with a practical evaluation framework for a global enterprise. Grounded in curated, approved knowledge — delivered from kickoff to handoff in 30 days.",
+    image: "/images/labeling.svg",
+    metrics: [{ value: "6", label: "Agents" }, { value: "1", label: "Month" }, { value: "720", label: "Test Queries" }, { value: "270", label: "Knowledge Files" }],
+  },
+  {
+    title: "Video Game Data Pipeline",
+    shortDescription: "Automated QC and delivery for game recording annotation",
+    description: "Built an end-to-end annotation pipeline for video game data collection with 4 agentic workflows: automated QC validation, delivery preparation, cloud sync (GCS/R2), and real-time notifications.",
+    image: "/images/labeling.svg",
+    metrics: [{ value: "4", label: "AI Agents" }, { value: "Auto", label: "QC Pipeline" }, { value: "OAuth", label: "Cloud Sync" }, { value: "Real-time", label: "Tracking" }],
+  },
 ];
 
 // ── Leadership ──
