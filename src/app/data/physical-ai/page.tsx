@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Header from "@/components/common/Header";
 import Footer from "@/components/common/Footer";
 import Link from "next/link";
+import Image from "next/image";
 import {
   Bot,
   Hand,
@@ -172,6 +173,20 @@ export default function PhysicalAIPage() {
             </a>
           </div>
         </section>
+
+        {/* Hero image */}
+        <div className="container mx-auto mt-16 px-3">
+          <div className="mx-auto max-w-5xl overflow-hidden rounded-3xl">
+            <Image
+              src="/images/humanoid-ai.jpg"
+              alt="Humanoid robot — Physical AI training data"
+              width={1200}
+              height={600}
+              className="h-[400px] w-full object-cover"
+              priority
+            />
+          </div>
+        </div>
 
         {/* Why Tbrain */}
         <section className="container mx-auto mt-24 px-3">
