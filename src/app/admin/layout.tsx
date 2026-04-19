@@ -14,7 +14,9 @@ export default function AdminPublicLayout({
 }) {
   return (
     <div className="dark min-h-screen" style={{ backgroundColor: "#020617" }}>
-      {children}
+      {/* Animated mesh background */}
+      <div className="page-mesh" />
+      <div className="relative z-10">{children}</div>
     </div>
   );
 }

@@ -18,7 +18,7 @@ export default function AdminLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="dark min-h-screen" style={{ backgroundColor: "var(--bg-page)" }}>
+    <div className="dark min-h-screen"  id="admin-root">
       <AdminAuthProvider>
         <AdminShell>{children}</AdminShell>
       </AdminAuthProvider>
