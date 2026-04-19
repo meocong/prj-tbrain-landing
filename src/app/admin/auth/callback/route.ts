@@ -1,6 +1,7 @@
 import { createServerClient } from "@supabase/ssr";
 import { cookies } from "next/headers";
 import { NextResponse, type NextRequest } from "next/server";
+import { ensureBootstrapAdmin } from "@/lib/admin/bootstrap";
 
 /**
  * OAuth Callback — exchanges PKCE code for session server-side.
@@ -51,6 +52,27 @@ export async function GET(request: NextRequest) {
     const { error } = await supabase.auth.exchangeCodeForSession(code);
 
     if (!error) {
+      // Bootstrap allowlisted admins on first login. Failures are logged but
+      // must not block the redirect — pre-existing admins still pass through.
+      try {
+        const {
+          data: { user },
+        } = await supabase.auth.getUser();
+        if (user?.email) {
+          await ensureBootstrapAdmin(
+            user.email,
+            (user.user_metadata?.full_name as string | undefined) ??
+              (user.user_metadata?.name as string | undefined) ??
+              null,
+            (user.user_metadata?.avatar_url as string | undefined) ??
+              (user.user_metadata?.picture as string | undefined) ??
+              null
+          );
+        }
+      } catch (bootstrapErr) {
+        console.error("[landing] admin bootstrap error:", bootstrapErr);
+      }
+
       return NextResponse.redirect(`${baseUrl}${next}`);
     }
 
