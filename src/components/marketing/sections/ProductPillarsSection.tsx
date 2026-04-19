@@ -8,7 +8,7 @@ import { RevealOnScroll, StaggerContainer, STAGGER_ITEM } from "@/components/mar
 
 const PILLARS = [
   {
-    size: "lg" as const,
+    size: "md" as const,
     title: "Physical AI",
     subtitle: "Motion capture · Humanoid control · Sim-to-real",
     icon: Bot,
@@ -63,7 +63,7 @@ const PILLARS = [
     visual: "text",
   },
   {
-    size: "lg" as const,
+    size: "md" as const,
     title: "AI-native QC",
     subtitle: "Models that watch the models",
     icon: Cpu,
@@ -138,7 +138,7 @@ export function ProductPillarsSection() {
             <motion.div
               key={p.title}
               variants={STAGGER_ITEM}
-              className={p.size === "lg" ? "md:col-span-2 lg:row-span-2" : ""}
+              className=""
             >
               <TiltCard className="h-full" intensity={4}>
                 <Link
@@ -156,7 +156,7 @@ export function ProductPillarsSection() {
                     style={{ background: `radial-gradient(circle, ${p.accent}44 0%, transparent 70%)`, filter: "blur(28px)" }}
                   />
 
-                  <PillarVisual kind={p.visual} accent={p.accent} big={p.size === "lg"} />
+                  <PillarVisual kind={p.visual} accent={p.accent} />
 
                   <div className="relative z-10 flex flex-col h-full">
                     <div className="flex items-start justify-between mb-4">
@@ -191,8 +191,8 @@ export function ProductPillarsSection() {
   );
 }
 
-function PillarVisual({ kind, accent, big }: { kind: string; accent: string; big: boolean }) {
-  if (kind === "physical" && big) {
+function PillarVisual({ kind, accent }: { kind: string; accent: string }) {
+  if (kind === "physical") {
     return (
       <div aria-hidden className="absolute inset-0 flex items-end justify-end pointer-events-none opacity-70">
         <svg viewBox="0 0 400 300" className="h-full w-auto" style={{ color: accent, filter: `drop-shadow(0 0 20px ${accent}55)` }}>
@@ -269,7 +269,7 @@ function PillarVisual({ kind, accent, big }: { kind: string; accent: string; big
       </div>
     );
   }
-  if (kind === "qc" && big) {
+  if (kind === "qc") {
     return (
       <div aria-hidden className="absolute inset-0 flex items-end justify-end pointer-events-none opacity-60">
         <svg viewBox="0 0 400 280" className="h-full w-auto" style={{ color: accent, filter: `drop-shadow(0 0 20px ${accent}44)` }}>

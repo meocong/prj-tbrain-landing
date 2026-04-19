@@ -8,7 +8,7 @@ import { RevealOnScroll, StaggerContainer, STAGGER_ITEM } from "@/components/mar
 
 const FEATURES = [
   {
-    size: "lg" as const,
+    size: "md" as const,
     icon: Crosshair,
     accent: "#10B981",
     title: "Lab-grade precision",
@@ -22,7 +22,7 @@ const FEATURES = [
     accent: "#A78BFA",
     title: "Multi-modal coverage",
     description: "Egocentric video, MOCAP, hand pose, IMU, force/torque, depth maps, and task annotations — whatever your pipeline needs.",
-    image: "/images/motion-capture.jpg",
+    image: "/images/blog-humanoid.jpg",
   },
   {
     size: "md" as const,
@@ -33,7 +33,7 @@ const FEATURES = [
     image: "/images/robot-hand.jpg",
   },
   {
-    size: "lg" as const,
+    size: "md" as const,
     icon: Shield,
     accent: "#F59E0B",
     title: "Validated at scale",
@@ -76,12 +76,11 @@ export function BentoWhy() {
           </div>
         </RevealOnScroll>
 
-        <StaggerContainer className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-5 auto-rows-[minmax(280px,auto)]">
+        <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5 auto-rows-[minmax(300px,auto)]">
           {FEATURES.map((f) => (
             <motion.div
               key={f.title}
               variants={STAGGER_ITEM}
-              className={f.size === "lg" ? "md:col-span-2 lg:row-span-1" : ""}
             >
               <TiltCard className="h-full" intensity={4}>
                 <div
