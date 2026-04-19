@@ -83,16 +83,27 @@ export function LeadershipSection() {
                   {leader.logos.map((logo, j) => (
                     <span
                       key={j}
-                      className="flex h-9 w-9 items-center justify-center rounded-xl overflow-hidden shrink-0"
+                      className="flex h-10 w-10 items-center justify-center rounded-xl overflow-hidden shrink-0"
                       style={{ background: "white", border: "1px solid rgba(255,255,255,0.15)" }}
                       title={logo.replace(/_logo\.svg$/, "")}
                     >
-                      <Image
+                      {/* Plain <img> bypasses next/image SVG optimization that blurs
+                          raster-in-SVG brand logos. Intrinsic size is 40×40 so we
+                          render at 32 with crisp-edges for sharp downscale. */}
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
                         src={`/icons/${logo}`}
                         alt=""
-                        width={26}
-                        height={26}
-                        className="object-contain"
+                        width={32}
+                        height={32}
+                        loading="lazy"
+                        decoding="async"
+                        style={{
+                          width: 32,
+                          height: 32,
+                          objectFit: "contain",
+                          imageRendering: "auto",
+                        }}
                       />
                     </span>
                   ))}

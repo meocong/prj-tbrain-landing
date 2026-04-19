@@ -756,17 +756,23 @@ h1, h2, h3, h4, h5, h6 {
 
 .pillar-chart-line {
   stroke-dasharray: 500;
-  stroke-dashoffset: 500;
-  animation: pillarChart 3s ease-out forwards;
+  animation: pillarChart 4.5s ease-in-out infinite;
 }
 @keyframes pillarChart {
-  to { stroke-dashoffset: 0; }
+  0%   { stroke-dashoffset: 500;  opacity: 0.6; }
+  45%  { stroke-dashoffset: 0;    opacity: 1;   }
+  75%  { stroke-dashoffset: 0;    opacity: 1;   }
+  100% { stroke-dashoffset: -500; opacity: 0.5; }
 }
 
 .pillar-chart-dot {
   opacity: 0;
-  animation: pillarChartDot 0.4s ease-out forwards;
+  transform-origin: center;
+  animation: pillarChartDot 4.5s ease-out infinite;
 }
 @keyframes pillarChartDot {
-  to { opacity: 1; }
+  0%, 30%  { opacity: 0; transform: scale(0.6); }
+  50%      { opacity: 1; transform: scale(1.4); }
+  60%, 75% { opacity: 1; transform: scale(1);   }
+  100%     { opacity: 0; transform: scale(0.6); }
 }
