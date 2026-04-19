@@ -17,10 +17,6 @@ const PILLARS = [
     description:
       "Lab-grade human motion capture — not estimated from video — for training humanoid policies, imitation learning, and embodied agents.",
     visual: "physical",
-    stats: [
-      { k: "12M+", v: "frames" },
-      { k: "48", v: "joint channels" },
-    ],
   },
   {
     size: "md" as const,
@@ -76,10 +72,6 @@ const PILLARS = [
     description:
       "Every sample runs through our confidence models — flagging edge cases before they hit your training run.",
     visual: "qc",
-    stats: [
-      { k: "0.98", v: "confidence" },
-      { k: "3×", v: "fewer rejects" },
-    ],
   },
 ];
 
@@ -188,29 +180,6 @@ export function ProductPillarsSection() {
                     <p className="mt-4 text-sm leading-relaxed max-w-md" style={{ color: "rgba(226,232,240,0.68)" }}>
                       {p.description}
                     </p>
-
-                    {p.stats && (
-                      <div className="mt-auto pt-6 flex gap-6">
-                        {p.stats.map((s) => (
-                          <div key={s.v}>
-                            <p
-                              className="text-2xl font-bold"
-                              style={{
-                                fontFamily: "var(--font-heading)",
-                                background: `linear-gradient(135deg, ${p.accent}, white)`,
-                                WebkitBackgroundClip: "text",
-                                WebkitTextFillColor: "transparent",
-                              }}
-                            >
-                              {s.k}
-                            </p>
-                            <p className="text-[10px] uppercase tracking-wider" style={{ color: "rgba(226,232,240,0.5)" }}>
-                              {s.v}
-                            </p>
-                          </div>
-                        ))}
-                      </div>
-                    )}
                   </div>
                 </Link>
               </TiltCard>

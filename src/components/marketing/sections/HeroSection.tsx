@@ -5,7 +5,6 @@ import { ArrowRight, Sparkles, ChevronDown } from "lucide-react";
 import { PlasmaBackground } from "@/components/marketing/fx/PlasmaBackground";
 import { KineticHeadline, FadeIn } from "@/components/marketing/fx/KineticText";
 import { MagneticButton } from "@/components/marketing/fx/MagneticButton";
-import { LiveChips } from "@/components/marketing/fx/LiveChips";
 
 export function HeroSection() {
   const shouldReduce = useReducedMotion();
@@ -31,9 +30,6 @@ export function HeroSection() {
           WebkitMaskImage: "radial-gradient(ellipse at center, black 40%, transparent 75%)",
         }}
       />
-
-      {/* Floating live-data chips */}
-      <LiveChips />
 
       {/* Main hero content */}
       <div className="container mx-auto relative z-10 flex min-h-screen flex-col items-center justify-center px-4 pt-24 pb-12">
@@ -84,16 +80,16 @@ export function HeroSection() {
           </p>
         </FadeIn>
 
-        {/* Stats ribbon */}
+        {/* Value-prop ribbon */}
         <FadeIn delay={1.3} className="mt-10">
-          <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-2 text-sm" style={{ color: "rgba(226,232,240,0.55)" }}>
-            <StatPill value="48K+" label="expert annotators" />
+          <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs md:text-sm uppercase tracking-wider" style={{ color: "rgba(226,232,240,0.55)" }}>
+            <span>Lab-grade precision</span>
             <Divider />
-            <StatPill value="17+" label="countries" />
+            <span>AI-native QC</span>
             <Divider />
-            <StatPill value="0.98" label="QC confidence" />
+            <span>Global expert network</span>
             <Divider />
-            <StatPill value="Lab-grade" label="precision" />
+            <span>Custom data programs</span>
           </div>
         </FadeIn>
 
@@ -122,17 +118,6 @@ export function HeroSection() {
         </motion.div>
       </div>
     </section>
-  );
-}
-
-function StatPill({ value, label }: { value: string; label: string }) {
-  return (
-    <span className="inline-flex items-baseline gap-1.5">
-      <span className="text-base font-semibold" style={{ fontFamily: "var(--font-heading)", color: "white" }}>
-        {value}
-      </span>
-      <span className="opacity-70">{label}</span>
-    </span>
   );
 }
 
