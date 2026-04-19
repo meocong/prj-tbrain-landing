@@ -36,7 +36,6 @@ export default function Home() {
         <ExpertsSection />
         <LeadershipSection />
         <TableStart />
-        <ContactCTA />
       </main>
       <Footer />
     </div>
