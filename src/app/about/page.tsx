@@ -92,8 +92,9 @@ export default function AboutPage() {
                 <h4 className="mt-4 text-xl font-semibold" style={{ fontFamily: "var(--font-heading)" }}>
                   {expert.name}
                 </h4>
-                <p className="mt-2 text-sm text-[#78818f] whitespace-pre-line">
-                  {expert.bio}
+                <p className="text-xs font-medium text-[#6C3CF4]">{expert.title}</p>
+                <p className="mt-2 text-sm text-[#78818f]">
+                  {expert.detail}
                 </p>
                 <div className="mt-auto pt-3">
                   <span className="rounded-full bg-[#6C3CF4] px-4 py-1 text-sm text-white">

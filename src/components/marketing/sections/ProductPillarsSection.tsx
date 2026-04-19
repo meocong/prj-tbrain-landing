@@ -3,80 +3,89 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { PRODUCT_PILLARS } from "@/lib/constants/marketing";
-import { Terminal, Bot, Database, ArrowRight } from "lucide-react";
-
-const ICON_MAP: Record<string, React.ElementType> = {
-  Terminal,
-  Bot,
-  Database,
-};
+import { ArrowRight } from "lucide-react";
 
 export function ProductPillarsSection() {
   return (
-    <section className="container mx-auto px-3 py-24">
-      <div className="text-center">
-        <h2 className="text-4xl font-medium md:text-5xl" style={{ fontFamily: "var(--font-heading)" }}>
-          Our <span className="gradient-text">Data Products</span>
-        </h2>
-        <p className="mx-auto mt-4 max-w-2xl text-lg text-[#78818f]">
-          Purpose-built data solutions for the most demanding AI challenges
-        </p>
-      </div>
+    <section className="py-24">
+      <div className="container mx-auto px-3">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-center"
+        >
+          <h2 className="text-4xl font-medium md:text-5xl" style={{ fontFamily: "var(--font-heading)" }}>
+            Purpose-built data for the{" "}
+            <span className="gradient-text">hardest AI problems</span>
+          </h2>
+          <p className="mx-auto mt-4 max-w-2xl text-lg text-[#78818f]">
+            From robotics to agent evaluation, we build the data infrastructure
+            that frontier AI teams depend on.
+          </p>
+        </motion.div>
 
-      <div className="mx-auto mt-16 grid max-w-6xl grid-cols-1 gap-6 lg:grid-cols-3">
-        {PRODUCT_PILLARS.map((pillar, i) => {
-          const Icon = ICON_MAP[pillar.icon] || Database;
-          return (
+        <div className="mx-auto mt-20 max-w-6xl space-y-20">
+          {PRODUCT_PILLARS.map((pillar, i) => (
             <motion.div
               key={i}
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.15, duration: 0.5 }}
-              className="group flex flex-col rounded-2xl border border-gray-200 bg-white p-6 shadow-sm transition-all duration-300 hover:border-[#6C3CF4]/30 hover:shadow-lg"
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.6 }}
+              className={`flex flex-col gap-12 lg:flex-row ${
+                i % 2 === 1 ? "lg:flex-row-reverse" : ""
+              }`}
             >
-              <div
-                className="flex h-12 w-12 items-center justify-center rounded-xl"
-                style={{ backgroundColor: `${pillar.color}10` }}
-              >
-                <Icon className="h-6 w-6" style={{ color: pillar.color }} />
+              {/* Text content */}
+              <div className="flex-1">
+                <div
+                  className="inline-block rounded-full px-4 py-1 text-xs font-semibold uppercase tracking-wider text-white"
+                  style={{ backgroundColor: pillar.color }}
+                >
+                  {pillar.title}
+                </div>
+                <h3
+                  className="mt-4 text-3xl font-medium md:text-4xl"
+                  style={{ fontFamily: "var(--font-heading)", color: "#0e1b2e" }}
+                >
+                  {pillar.subtitle}
+                </h3>
+                <p className="mt-4 text-base leading-relaxed text-[#78818f]">
+                  {pillar.description}
+                </p>
+                <Link
+                  href={pillar.href}
+                  className="group mt-6 inline-flex items-center gap-2 text-sm font-semibold"
+                  style={{ color: pillar.color }}
+                >
+                  Explore {pillar.title.toLowerCase()}
+                  <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                </Link>
               </div>
 
-              <h3 className="mt-4 text-xl font-semibold text-[#0e1b2e]" style={{ fontFamily: "var(--font-heading)" }}>
-                {pillar.title}
-              </h3>
-              <p className="mt-1 text-sm font-medium" style={{ color: pillar.color }}>
-                {pillar.subtitle}
-              </p>
-              <p className="mt-3 flex-1 text-sm leading-relaxed text-[#78818f]">
-                {pillar.description}
-              </p>
-
-              <div className="mt-5 grid grid-cols-2 gap-2">
-                {pillar.metrics.map((m, j) => (
-                  <div
-                    key={j}
-                    className="rounded-lg bg-gray-50 p-2.5 text-center"
-                  >
-                    <div className="text-lg font-bold" style={{ color: pillar.color }}>
-                      {m.value}
+              {/* Numbered features */}
+              <div className="flex-1 space-y-6">
+                {pillar.features.map((f, j) => (
+                  <div key={j} className="flex gap-4">
+                    <div
+                      className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl text-sm font-bold text-white"
+                      style={{ backgroundColor: pillar.color }}
+                    >
+                      {f.num}
                     </div>
-                    <div className="text-[10px] text-[#78818f]">{m.label}</div>
+                    <div>
+                      <h4 className="font-semibold text-[#0e1b2e]">{f.title}</h4>
+                      <p className="mt-1 text-sm leading-relaxed text-[#78818f]">
+                        {f.detail}
+                      </p>
+                    </div>
                   </div>
                 ))}
               </div>
-
-              <Link
-                href={pillar.href}
-                className="group/link mt-5 inline-flex items-center gap-2 text-sm font-semibold transition-all"
-                style={{ color: pillar.color }}
-              >
-                Learn more
-                <ArrowRight className="h-4 w-4 transition-transform group-hover/link:translate-x-1" />
-              </Link>
             </motion.div>
-          );
-        })}
+          ))}
+        </div>
       </div>
     </section>
   );

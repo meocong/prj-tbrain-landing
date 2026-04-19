@@ -2,12 +2,11 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
-import StartNow from "@/components/common/StartNow";
+import Link from "next/link";
 
 export function HeroSection() {
   return (
     <section id="home" className="relative overflow-hidden">
-      {/* Background blobs */}
       <div className="wrap">
         <div className="one top-0 left-1/4 h-80 w-80" />
         <div className="two top-0 right-1/4 h-80 w-80" />
@@ -27,36 +26,47 @@ export function HeroSection() {
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.3, duration: 0.5 }}
-              className="z-10 text-nowrap rounded-3xl bg-white px-5 py-2 text-sm font-medium text-[#6C3CF4] shadow"
+              className="z-10 rounded-3xl bg-white px-5 py-2 text-sm font-medium text-[#6C3CF4] shadow"
             >
-              The human power of RLHF and SFT
+              Trusted by leading AI labs
             </motion.div>
           </div>
 
           <h1 className="mt-10 text-center text-5xl font-medium leading-tight md:text-7xl">
-            The Improvement Layer for{" "}
+            The data factory for{" "}
             <span className="gradient-text">
-              Agentic AI Training Data & Evaluation
+              robotics, agents & post-training
             </span>
           </h1>
 
-          <p className="mx-auto mt-16 max-w-screen-md text-center text-lg text-[#78818f]">
-            Expert-validated environments and data to measure and improve agent
-            performance. Fast, scalable, and reliable.
+          <p className="mx-auto mt-10 max-w-screen-md text-center text-lg text-[#78818f]">
+            From ground-truth motion capture to multi-step agent benchmarks,
+            we partner with AI teams to build the data their models can&apos;t
+            learn without. 48K+ experts. Lab-grade precision. AI-native QC.
           </p>
 
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5, duration: 0.4 }}
-            className="mt-16 flex items-center justify-center"
+            className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row"
           >
-            <StartNow />
+            <Link
+              href="/contact"
+              className="rounded-full bg-[#6C3CF4] px-8 py-3 text-base font-semibold text-white transition-all hover:bg-[#5a2fd3] hover:shadow-lg"
+            >
+              Talk to an expert
+            </Link>
+            <Link
+              href="/data/physical-ai"
+              className="rounded-full border border-gray-300 px-8 py-3 text-base font-medium text-[#0e1b2e] transition-all hover:border-[#6C3CF4] hover:text-[#6C3CF4]"
+            >
+              Explore robotics data
+            </Link>
           </motion.div>
         </motion.div>
       </div>
 
-      {/* Floating images — positions match original design */}
       <motion.div
         initial={{ opacity: 0, x: -20 }}
         animate={{ opacity: 1, x: 0 }}
