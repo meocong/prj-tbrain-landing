@@ -13,12 +13,11 @@ export function HeroSection() {
         <div className="two top-0 right-1/4 h-80 w-80" />
       </div>
 
-      <div className="container mx-auto flex min-h-screen items-center justify-center px-3 pt-20 pb-16 relative z-10">
+      <div className="container mx-auto flex min-h-screen items-center justify-center px-3 pt-24 pb-16 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="text-center"
         >
           <div className="flex items-center justify-center gap-3">
             <div className="up-down">
@@ -34,14 +33,14 @@ export function HeroSection() {
             </motion.div>
           </div>
 
-          <h1 className="mt-10 text-5xl font-medium leading-tight md:text-7xl">
+          <h1 className="mt-10 text-center text-5xl font-medium leading-tight md:text-7xl">
             The Improvement Layer for{" "}
             <span className="gradient-text">
               Agentic AI Training Data & Evaluation
             </span>
           </h1>
 
-          <p className="mx-auto mt-8 max-w-screen-md text-lg text-[#78818f]">
+          <p className="mx-auto mt-16 max-w-screen-md text-center text-lg text-[#78818f]">
             Expert-validated environments and data to measure and improve agent
             performance. Fast, scalable, and reliable.
           </p>
@@ -50,19 +49,19 @@ export function HeroSection() {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5, duration: 0.4 }}
-            className="mt-10 flex items-center justify-center"
+            className="mt-16 flex items-center justify-center"
           >
             <StartNow />
           </motion.div>
         </motion.div>
       </div>
 
-      {/* Floating images */}
+      {/* Floating images — positions match original design */}
       <motion.div
         initial={{ opacity: 0, x: -20 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ delay: 0.6, duration: 0.5 }}
-        className="absolute left-[10%] top-[20%] z-10 hidden md:block"
+        className="absolute left-[27%] top-[15%] z-10 hidden md:block"
       >
         <Image src="/icons/home-1.png" width={110} height={110} alt="" />
       </motion.div>
@@ -70,7 +69,7 @@ export function HeroSection() {
         initial={{ opacity: 0, x: 20 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ delay: 0.8, duration: 0.5 }}
-        className="absolute right-[10%] top-[55%] z-10 hidden md:block"
+        className="absolute right-[13%] top-[55%] z-10 hidden md:block"
       >
         <Image src="/icons/home-2.png" width={130} height={130} alt="" />
       </motion.div>
@@ -78,7 +77,7 @@ export function HeroSection() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 1, duration: 0.5 }}
-        className="absolute bottom-[15%] left-[5%] z-10 hidden md:block"
+        className="absolute bottom-[15%] left-[13%] z-10 hidden md:block"
       >
         <Image src="/icons/home-3.png" width={180} height={180} alt="" />
       </motion.div>
