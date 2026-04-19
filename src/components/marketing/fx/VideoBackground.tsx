@@ -5,10 +5,12 @@ import { useEffect, useRef, useState } from "react";
 /**
  * Cinematic looping video background.
  *
- * - Lazy: only starts loading when the component is in the viewport.
+ * - Lazy: only starts playing when the component is in the viewport.
+ * - Auto-resumes on scroll-back (previously stopped because the play()
+ *   effect only fired once; we now drive play/pause directly from the
+ *   IntersectionObserver callback).
  * - Respects prefers-reduced-motion: stays on poster frame.
- * - Gracefully falls back to the plasma/poster below if the video fails.
- * - Both WebM (preferred) and MP4 (Safari) sources supported.
+ * - Graceful fallback to poster if the video fails to load.
  */
 export function VideoBackground({
   src,
@@ -25,36 +27,62 @@ export function VideoBackground({
 }) {
   const ref = useRef<HTMLVideoElement>(null);
   const hostRef = useRef<HTMLDivElement>(null);
-  const [shouldPlay, setShouldPlay] = useState(false);
   const [failed, setFailed] = useState(false);
+  const [reducedMotion, setReducedMotion] = useState(false);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-
-    const el = hostRef.current;
-    if (!el || typeof IntersectionObserver === "undefined") {
-      setShouldPlay(true);
-      return;
-    }
-    const io = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) setShouldPlay(true);
-        else if (ref.current) ref.current.pause();
-      },
-      { threshold: 0 }
-    );
-    io.observe(el);
-    return () => io.disconnect();
+    setReducedMotion(window.matchMedia("(prefers-reduced-motion: reduce)").matches);
   }, []);
 
   useEffect(() => {
-    if (shouldPlay && ref.current) {
-      ref.current.play().catch(() => {
-        /* autoplay blocked — poster stays */
-      });
+    if (reducedMotion) return;
+    const host = hostRef.current;
+    if (!host) return;
+
+    const tryPlay = () => {
+      const v = ref.current;
+      if (!v) return;
+      const p = v.play();
+      if (p && typeof p.catch === "function") p.catch(() => {});
+    };
+
+    if (typeof IntersectionObserver === "undefined") {
+      tryPlay();
+      return;
     }
-  }, [shouldPlay]);
+
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        const v = ref.current;
+        if (!v) return;
+        if (entry.isIntersecting) {
+          tryPlay();
+        } else {
+          v.pause();
+        }
+      },
+      { threshold: 0 }
+    );
+    io.observe(host);
+
+    // Also resume on page-visibility change (coming back to the tab)
+    const onVisible = () => {
+      if (document.visibilityState === "visible" && ref.current && !ref.current.paused === false) {
+        // If it was left paused by the observer while off-screen, no-op.
+        // If it was paused because the tab was hidden, re-trigger play when back.
+        const rect = host.getBoundingClientRect();
+        const inView = rect.bottom > 0 && rect.top < window.innerHeight;
+        if (inView) tryPlay();
+      }
+    };
+    document.addEventListener("visibilitychange", onVisible);
+
+    return () => {
+      io.disconnect();
+      document.removeEventListener("visibilitychange", onVisible);
+    };
+  }, [reducedMotion]);
 
   return (
     <div
