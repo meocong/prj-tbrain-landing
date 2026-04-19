@@ -2,11 +2,12 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { useParams, useRouter } from "next/navigation";
+import { useParams } from "next/navigation";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { supabaseAdmin } from "@/lib/admin/supabase-browser";
 import { useHasPermission } from "@/lib/admin/auth-context";
-import { ChevronLeft, Save, Eye, Send } from "lucide-react";
+import { ChevronLeft, Save, Eye } from "lucide-react";
+import { TipTapEditor } from "@/components/admin/editor/TipTapEditor";
 
 type Tpl = {
   id: string;
@@ -22,7 +23,6 @@ type Tpl = {
 
 export default function EditEmailTemplatePage() {
   const params = useParams<{ id: string }>();
-  const router = useRouter();
   const qc = useQueryClient();
   const canEdit = useHasPermission("content.edit");
 
@@ -142,16 +142,16 @@ export default function EditEmailTemplatePage() {
 
         <div>
           <label className="block text-xs font-medium mb-1" style={{ color: "var(--text-secondary)" }}>
-            Body HTML
+            Body (rich editor)
           </label>
-          <textarea
-            value={form.body_html}
-            disabled={!canEdit}
-            onChange={(e) => setForm({ ...form, body_html: e.target.value })}
-            rows={16}
-            className="input-field font-mono text-xs"
-            style={{ resize: "vertical" }}
+          <TipTapEditor
+            content={form.body_html}
+            onChange={(html) => setForm({ ...form, body_html: html })}
+            placeholder="Write the email body. Use {{var}} to insert variables."
           />
+          <p className="mt-1 text-[11px]" style={{ color: "var(--text-muted)" }}>
+            Variables are substituted at send time. Type <code>{"{{passcode}}"}</code> etc.
+          </p>
         </div>
 
         <div>

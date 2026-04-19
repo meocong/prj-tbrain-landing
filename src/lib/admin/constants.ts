@@ -11,7 +11,6 @@ import {
   FolderOpen,
   CheckSquare,
   Mail,
-  UserCircle,
   Images,
   type LucideIcon,
 } from "lucide-react";
@@ -44,10 +43,9 @@ export const ADMIN_NAV: NavItem[] = [
   // Communications
   { label: "Email Templates", href: "/admin/email-templates", icon: Mail, permission: "content.view", section: "Comms" },
 
-  // Access Control (Django-style Auth)
+  // Access Control (Django-style Auth) — My Profile is reached from the avatar dropdown, not here
   { label: "Users", href: "/admin/users", icon: Users, permission: "users.view", section: "Access Control" },
   { label: "Groups", href: "/admin/groups", icon: UsersRound, permission: "groups.view", section: "Access Control" },
-  { label: "My Profile", href: "/admin/profile", icon: UserCircle, permission: "admin.access", section: "Access Control" },
 
   // System
   { label: "Audit Log", href: "/admin/audit", icon: ScrollText, permission: "audit.view", section: "System" },

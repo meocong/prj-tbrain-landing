@@ -1,8 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { useParams } from "next/navigation";
+import { useParams, useSearchParams } from "next/navigation";
 import { supabaseAdmin } from "@/lib/admin/supabase-browser";
 import { DataTable, type Column } from "@/components/admin/ui/data-table";
 import {
@@ -19,10 +19,18 @@ const PAGE_SIZE = 30;
 
 export default function ProductSamplesPage() {
   const params = useParams<{ slug: string }>();
+  const searchParams = useSearchParams();
   const [page, setPage] = useState(0);
   const [search, setSearch] = useState("");
   const [typeFilter, setTypeFilter] = useState<SampleType | "all">("all");
+  const [batchFilter, setBatchFilter] = useState<string>(searchParams.get("batch_id") ?? "all");
   const [detail, setDetail] = useState<SampleRow | null>(null);
+
+  // Sync from URL on mount / navigation
+  useEffect(() => {
+    const b = searchParams.get("batch_id");
+    if (b) setBatchFilter(b);
+  }, [searchParams]);
 
   const { data: product } = useQuery({
     queryKey: ["admin-product", params.slug],
@@ -37,8 +45,21 @@ export default function ProductSamplesPage() {
   });
   const productId = product?.id;
 
+  const { data: batches } = useQuery({
+    queryKey: ["product-batches-filter", productId],
+    enabled: !!productId,
+    queryFn: async () => {
+      const { data } = await supabaseAdmin
+        .from("batches")
+        .select("id, name, slug")
+        .eq("product_id", productId!)
+        .order("created_at", { ascending: false });
+      return (data ?? []) as Array<{ id: string; name: string; slug: string }>;
+    },
+  });
+
   const { data, isLoading } = useQuery({
-    queryKey: ["product-samples", productId, search, typeFilter, page],
+    queryKey: ["product-samples", productId, search, typeFilter, batchFilter, page],
     enabled: !!productId,
     queryFn: async () => {
       let q = supabaseAdmin
@@ -49,6 +70,7 @@ export default function ProductSamplesPage() {
         .range(page * PAGE_SIZE, (page + 1) * PAGE_SIZE - 1);
       if (search) q = q.or(`title.ilike.%${search}%,slug.ilike.%${search}%`);
       if (typeFilter !== "all") q = q.eq("sample_type", typeFilter);
+      if (batchFilter !== "all") q = q.eq("batch_id", batchFilter);
       const { data, count } = await q;
       return { rows: (data ?? []) as unknown as SampleRow[], total: count ?? 0 };
     },
@@ -91,6 +113,11 @@ export default function ProductSamplesPage() {
   const sampleTypeOptions = [
     { value: "all", label: "All types" },
     ...Object.entries(SAMPLE_TYPE_META).map(([value, meta]) => ({ value, label: meta.label })),
+  ];
+
+  const batchOptions = [
+    { value: "all", label: "All batches" },
+    ...((batches ?? []).map((b) => ({ value: b.id, label: b.name }))),
   ];
 
   return (
@@ -138,15 +165,15 @@ export default function ProductSamplesPage() {
         search={search}
         searchPlaceholder="Search samples…"
         filters={[
-          {
-            key: "type",
-            label: "Type",
-            value: typeFilter,
-            options: sampleTypeOptions,
-          },
+          { key: "type", label: "Type", value: typeFilter, options: sampleTypeOptions },
+          { key: "batch", label: "Batch", value: batchFilter, options: batchOptions },
         ]}
         onSearchChange={(v) => { setSearch(v); setPage(0); }}
-        onFilterChange={(_, v) => { setTypeFilter(v as SampleType | "all"); setPage(0); }}
+        onFilterChange={(key, v) => {
+          if (key === "type") setTypeFilter(v as SampleType | "all");
+          if (key === "batch") setBatchFilter(v);
+          setPage(0);
+        }}
         onPageChange={setPage}
         rowKey={(r) => r.id}
         onRowClick={(r) => setDetail(r)}

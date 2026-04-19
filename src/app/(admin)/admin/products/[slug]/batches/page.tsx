@@ -115,6 +115,9 @@ export default function ProductBatchesPage() {
       onPageChange={setPage}
       rowKey={(r) => r.id}
       empty="No batches yet for this product."
+      onRowClick={(r) => {
+        window.location.href = `/admin/products/${params.slug}/samples?batch_id=${r.id}`;
+      }}
     />
   );
 }
