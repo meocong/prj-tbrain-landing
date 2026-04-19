@@ -2,7 +2,9 @@ import type { Metadata } from "next";
 import Header from "@/components/common/Header";
 import Footer from "@/components/common/Footer";
 import { getPosts } from "@/lib/api";
+import { supabaseAdmin } from "@/lib/terminal-bench/supabase/admin";
 import Link from "next/link";
+import type { CmsPost } from "@/lib/admin/types";
 
 export const metadata: Metadata = {
   title: "Blog",
@@ -10,6 +12,7 @@ export const metadata: Metadata = {
     "Insights on AI training data, RLHF, evaluation, and building better AI from the Tbrain team.",
 };
 
+export const dynamic = "force-dynamic";
 export const revalidate = 3600;
 
 function decodeEntities(text: string): string {
@@ -37,19 +40,51 @@ const GRADIENTS = [
 ];
 
 export default async function BlogPage() {
-  let posts: {
+  type BlogPost = {
     title: string;
     slug: string;
     excerpt: string;
     date: string;
     image?: string;
     category: string | null;
-  }[] = [];
+    source: "cms" | "wordpress";
+  };
 
+  let posts: BlogPost[] = [];
+
+  // 1. CMS posts (self-authored, not wp-synced)
+  try {
+    const db = supabaseAdmin();
+    const { data: cmsPosts } = await db
+      .from("cms_posts")
+      .select("*")
+      .eq("status", "published")
+      .not("slug", "like", "wp-%")
+      .order("published_at", { ascending: false })
+      .limit(30);
+
+    if (cmsPosts) {
+      posts.push(
+        ...cmsPosts.map((p: CmsPost) => ({
+          title: p.title,
+          slug: p.slug,
+          excerpt: p.excerpt || (p.content_md?.slice(0, 160).replace(/[#*_\[\]]/g, "") + "…") || "",
+          date: p.published_at || p.created_at,
+          image: p.cover_image_url || undefined,
+          category: p.category,
+          source: "cms" as const,
+        }))
+      );
+    }
+  } catch {
+    // DB unavailable
+  }
+
+  // 2. WordPress posts
   try {
     const { edges } = await getPosts({ first: 20 });
-    posts = edges.map(
-      (e: { node: Record<string, unknown> }) => {
+    posts.push(
+      ...edges.map((e: { node: Record<string, unknown> }) => {
         const node = e.node;
         const rawExcerpt = decodeEntities((node.excerpt as string) || "");
         const categories = node.categories as {
@@ -64,12 +99,16 @@ export default async function BlogPage() {
           date: node.date as string,
           image: (node.featuredImage as { node?: { sourceUrl?: string } } | null)?.node?.sourceUrl,
           category: catName && catName.toLowerCase() !== "uncategorized" ? catName : null,
+          source: "wordpress" as const,
         };
-      }
+      })
     );
   } catch {
     // WordPress unavailable
   }
+
+  // Sort by date (newest first)
+  posts.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
   return (
     <div>
@@ -89,7 +128,7 @@ export default async function BlogPage() {
             {posts.map((post, i) => (
               <Link
                 key={post.slug}
-                href={`/news/${post.slug}`}
+                href={post.source === "cms" ? `/blog/${post.slug}` : `/news/${post.slug}`}
                 className="group overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm transition-all hover:shadow-md"
               >
                 <div className="h-44 overflow-hidden">
