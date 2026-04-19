@@ -79,20 +79,20 @@ export function LeadershipSection() {
                 <p className="mt-3 text-sm leading-relaxed" style={{ color: "rgba(226,232,240,0.65)" }}>
                   {leader.bio}
                 </p>
-                <div className="mt-5 flex gap-3">
+                <div className="mt-5 flex flex-wrap gap-2">
                   {leader.logos.map((logo, j) => (
                     <span
                       key={j}
-                      className="flex h-9 w-9 items-center justify-center rounded-xl"
-                      style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.08)" }}
+                      className="flex h-9 w-9 items-center justify-center rounded-xl overflow-hidden shrink-0"
+                      style={{ background: "white", border: "1px solid rgba(255,255,255,0.15)" }}
+                      title={logo.replace(/_logo\.svg$/, "")}
                     >
                       <Image
                         src={`/icons/${logo}`}
                         alt=""
-                        width={22}
-                        height={22}
-                        className="opacity-80"
-                        style={{ filter: "brightness(0) invert(1)" }}
+                        width={26}
+                        height={26}
+                        className="object-contain"
                       />
                     </span>
                   ))}
