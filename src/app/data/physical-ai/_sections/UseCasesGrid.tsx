@@ -5,12 +5,12 @@ import { Bot, Hand, Home as HomeIcon, Factory, Video, Gauge } from "lucide-react
 import { RevealOnScroll, StaggerContainer, STAGGER_ITEM } from "@/components/marketing/fx/RevealOnScroll";
 
 const USE_CASES = [
-  { title: "Humanoid whole-body control", description: "Full-body motion for locomotion, balance, and coordination policies.", icon: Bot, accent: "#A78BFA" },
-  { title: "Dexterous manipulation", description: "High-precision hand and finger tracking for grasping, tool use, and fine motor tasks.", icon: Hand, accent: "#10B981" },
-  { title: "Household & domestic robotics", description: "Kitchen, cleaning, tidying, and everyday tasks — real homes, real complexity.", icon: HomeIcon, accent: "#6C3CF4" },
-  { title: "Commercial & industrial", description: "Warehouse operations, retail, food service, manufacturing assembly, and logistics.", icon: Factory, accent: "#F59E0B" },
-  { title: "Imitation learning pipelines", description: "Demonstration data formatted for behavioral cloning, DAgger, and inverse RL workflows.", icon: Video, accent: "#34D399" },
-  { title: "Sim-to-real transfer", description: "Ground-truth trajectories for validating simulation fidelity and bridging the gap.", icon: Gauge, accent: "#8B5CF6" },
+  { title: "Whole-body humanoid control", description: "Locomotion, balance, and coordination policies from full-body demonstration data.", icon: Bot, accent: "#A78BFA" },
+  { title: "Dexterous manipulation", description: "High-precision hand and finger tracking for grasping, tool use, assembly, and fine motor tasks.", icon: Hand, accent: "#10B981" },
+  { title: "Imitation learning", description: "Demonstration datasets formatted for behavioral cloning, DAgger, diffusion policy, and inverse RL.", icon: Video, accent: "#34D399" },
+  { title: "Sim-to-real transfer", description: "Ground-truth trajectories for validating simulator fidelity and closing the sim-to-real gap.", icon: Gauge, accent: "#8B5CF6" },
+  { title: "Household & domestic tasks", description: "Cooking, cleaning, tidying — real homes with real variability. Everyday motions humans do without thinking.", icon: HomeIcon, accent: "#6C3CF4" },
+  { title: "Commercial & industrial", description: "Warehouse picking, food service, assembly workflows, inspection — demonstrated by human operators in context.", icon: Factory, accent: "#F59E0B" },
 ];
 
 export function UseCasesGrid() {

@@ -73,21 +73,23 @@ export function HeroPhysical() {
             <KineticHeadline
               className="font-medium tracking-tight text-4xl md:text-6xl"
               words={[
-                "Ground-truth",
+                "Human",
                 "motion",
                 "data",
                 "for",
-                { text: "physical", gradient: true, glow: true },
-                { text: "AI.", gradient: true, glow: true },
+                "training",
+                { text: "humanoids", gradient: true, glow: true },
+                { text: ".", gradient: true, glow: true },
               ]}
               delay={0.2}
             />
 
             <FadeIn delay={1.0} className="mt-6">
               <p className="max-w-xl text-base md:text-lg leading-relaxed" style={{ color: "rgba(226,232,240,0.72)" }}>
-                Multimodal datasets for humanoid control, imitation learning,
-                and sim-to-real transfer. Lab-grade precision from optical
-                capture — not estimated from monocular video.
+                Demonstration datasets for whole-body control, dexterous
+                manipulation, and sim-to-real transfer. Lab-grade optical
+                capture from real humans — the ground truth humanoids learn
+                from.
               </p>
             </FadeIn>
 
