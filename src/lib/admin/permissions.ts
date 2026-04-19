@@ -1,9 +1,9 @@
 import { supabaseAdmin } from "@/lib/terminal-bench/supabase/admin";
-import type { AdminUserWithPermissions } from "./types";
+import type { AdminUserWithPermissions, Permission } from "./types";
 
 /**
- * Fetch an admin user by email, with role and permissions eagerly loaded.
- * Returns null if the user doesn't exist or is inactive.
+ * Fetch an admin user by email, with role permissions + group permissions.
+ * User permissions = Role permissions ∪ Group1 permissions ∪ Group2 permissions ∪ ...
  */
 export async function getAdminUser(
   email: string
@@ -20,21 +20,47 @@ export async function getAdminUser(
 
   if (!user || !user.role) return null;
 
-  // 2. Fetch permissions for the role
+  // 2. Fetch role permissions
   const { data: rps } = await db
     .from("role_permissions")
     .select("permission:permissions(*)")
     .eq("role_id", user.role.id);
 
-  const permissions = (rps ?? [])
-    .map((rp: { permission: unknown }) => rp.permission)
+  const rolePermissions = (rps ?? [])
+    .map((rp: { permission: unknown }) => rp.permission as Permission)
     .filter(Boolean);
+
+  // 3. Fetch group memberships → group permissions
+  const { data: memberships } = await db
+    .from("group_members")
+    .select("group_id")
+    .eq("user_id", user.id);
+
+  let groupPermissions: Permission[] = [];
+  if (memberships && memberships.length > 0) {
+    const groupIds = memberships.map((m: { group_id: string }) => m.group_id);
+    const { data: gps } = await db
+      .from("group_permissions")
+      .select("permission:permissions(*)")
+      .in("group_id", groupIds);
+
+    groupPermissions = (gps ?? [])
+      .map((gp: { permission: unknown }) => gp.permission as Permission)
+      .filter(Boolean);
+  }
+
+  // 4. Union: deduplicate by permission code
+  const allPermsMap = new Map<string, Permission>();
+  for (const p of [...rolePermissions, ...groupPermissions]) {
+    allPermsMap.set(p.code, p);
+  }
+  const allPermissions = Array.from(allPermsMap.values());
 
   return {
     ...user,
     role: {
       ...user.role,
-      permissions,
+      permissions: allPermissions,
     },
   } as AdminUserWithPermissions;
 }
@@ -46,7 +72,6 @@ export function hasPermission(
   user: AdminUserWithPermissions,
   permissionCode: string
 ): boolean {
-  // Super admin bypass: check role code
   if (user.role.code === "super_admin") return true;
   return user.role.permissions.some((p) => p.code === permissionCode);
 }

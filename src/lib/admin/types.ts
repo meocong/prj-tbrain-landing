@@ -126,10 +126,65 @@ export interface NewsletterSubscriber {
   source: string | null;
 }
 
+// ── Group Types ──
+
+export interface Group {
+  id: string;
+  name: string;
+  description: string | null;
+  created_by: string | null;
+  created_at: string;
+  updated_at: string;
+}
+
+// ── File Manager Types ──
+
+export type FileVisibility = "public" | "private" | "group";
+
+export interface FmFolder {
+  id: string;
+  name: string;
+  parent_id: string | null;
+  owner_id: string | null;
+  visibility: FileVisibility;
+  allowed_group_id: string | null;
+  created_at: string;
+}
+
+export interface FmFile {
+  id: string;
+  name: string;
+  gcs_object: string;
+  mime_type: string | null;
+  size_bytes: number | null;
+  folder_id: string | null;
+  owner_id: string | null;
+  visibility: FileVisibility;
+  allowed_group_id: string | null;
+  download_count: number;
+  created_at: string;
+}
+
+// ── Approval Types ──
+
+export type ApprovalStatus = "pending" | "approved" | "rejected" | "cancelled";
+
+export interface ApprovalRequest {
+  id: string;
+  resource_type: string;
+  resource_id: string;
+  submitted_by: string | null;
+  status: ApprovalStatus;
+  reviewed_by: string | null;
+  review_note: string | null;
+  submitted_at: string;
+  reviewed_at: string | null;
+}
+
 // ── Audit Types ──
 
 export type AuditAction = "create" | "update" | "delete" | "approve" | "reject" | "revoke" | "login" | "export";
-export type AuditResource = "post" | "contact" | "passcode" | "request" | "role" | "user" | "setting" | "asset";
+export type AuditResource = "post" | "contact" | "passcode" | "request" | "role" | "user" | "setting" | "asset" | "group" | "file" | "folder" | "approval";
 
 export interface AdminAuditLog {
   id: number;
