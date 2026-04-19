@@ -66,6 +66,15 @@ export default async function BlogPostPage({
     Math.ceil((post.content_md?.split(/\s+/).length || 0) / 200)
   );
 
+  const { data: relatedRaw } = await db
+    .from("cms_posts")
+    .select("id, slug, title, excerpt, cover_image_url, category, published_at, created_at")
+    .eq("status", "published")
+    .neq("id", post.id)
+    .order("published_at", { ascending: false, nullsFirst: false })
+    .limit(4);
+  const related = (relatedRaw ?? []).slice(0, 3);
+
   return (
     <div>
       <Header />
@@ -144,13 +153,77 @@ export default async function BlogPostPage({
           {post.tags && post.tags.length > 0 && (
             <div className="mt-12 flex flex-wrap gap-2">
               {post.tags.map((tag) => (
-                <span key={tag} className="badge badge-muted">
+                <Link
+                  key={tag}
+                  href={`/blog?tag=${encodeURIComponent(tag)}`}
+                  className="inline-flex items-center gap-1 rounded-full bg-[#6C3CF4]/10 hover:bg-[#6C3CF4]/15 text-[#6C3CF4] px-3 py-1 text-xs font-semibold tracking-wide transition-colors"
+                >
+                  <span className="opacity-70">#</span>
                   {tag}
-                </span>
+                </Link>
               ))}
             </div>
           )}
         </article>
+
+        {related.length > 0 && (
+          <section className="mx-auto max-w-[1128px] px-6 mt-20">
+            <div className="flex items-end justify-between mb-6">
+              <div>
+                <div className="text-xs font-semibold uppercase tracking-widest text-[#6C3CF4] mb-2">Keep reading</div>
+                <h2 className="text-2xl md:text-3xl font-semibold text-[#0e1b2e] tracking-tight">Related articles</h2>
+              </div>
+              <Link href="/blog" className="hidden sm:inline-flex items-center gap-1 text-sm font-semibold text-[#6C3CF4] hover:gap-2 transition-all">
+                All articles →
+              </Link>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {related.map((r) => (
+                <Link
+                  key={r.id}
+                  href={`/blog/${r.slug}`}
+                  className="group block rounded-3xl overflow-hidden bg-white shadow hover:shadow-xl transition-all"
+                >
+                  <div className="relative w-full aspect-[16/10] overflow-hidden bg-[#020617]">
+                    {r.cover_image_url ? (
+                      <img
+                        src={r.cover_image_url}
+                        alt={r.title}
+                        className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                      />
+                    ) : (
+                      <>
+                        <div
+                          className="absolute inset-0"
+                          style={{
+                            background:
+                              "radial-gradient(ellipse 80% 80% at 30% 30%, rgba(108,60,244,0.7) 0%, transparent 60%), radial-gradient(ellipse 60% 60% at 80% 80%, rgba(16,185,129,0.5) 0%, transparent 55%), #020617",
+                          }}
+                        />
+                        <div className="absolute inset-0 flex items-center justify-center p-5">
+                          <div
+                            className="text-white text-base md:text-lg font-semibold tracking-tight leading-snug line-clamp-3 text-center"
+                            style={{ fontFamily: "var(--font-heading)" }}
+                          >
+                            {r.title}
+                          </div>
+                        </div>
+                      </>
+                    )}
+                  </div>
+                  <div className="p-5">
+                    <div className="text-[11px] font-semibold uppercase tracking-wide text-[#78818f] mb-2">
+                      {new Date(r.published_at || r.created_at).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}
+                    </div>
+                    <h3 className="text-base md:text-lg font-semibold text-[#0e1b2e] leading-snug line-clamp-2 group-hover:text-[#6C3CF4] transition-colors">
+                      {r.title}
+                    </h3>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </section>
+        )}
       </main>
       <Footer />
     </div>
