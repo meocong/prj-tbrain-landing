@@ -353,7 +353,10 @@ h1, h2, h3, h4, h5, h6 {
 /* ── Input Field ── */
 .input-field {
   width: 100%;
-  padding: 0.625rem 1rem;
+  padding-top: 0.625rem;
+  padding-bottom: 0.625rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
   border-radius: 0.75rem;
   background: var(--bg-input);
   border: 1px solid var(--border-default);
