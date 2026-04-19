@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Header from "@/components/common/Header";
 import Footer from "@/components/common/Footer";
 import { HeroPhysical } from "./_sections/HeroPhysical";
+import { PipelineStrip } from "./_sections/PipelineStrip";
 import { BentoWhy } from "./_sections/BentoWhy";
 import { UseCasesGrid } from "./_sections/UseCasesGrid";
 import { ModalitiesGrid } from "./_sections/ModalitiesGrid";
@@ -11,9 +12,9 @@ import { CapabilitiesMarquee } from "@/components/marketing/sections/Capabilitie
 import { ContactCTA } from "@/components/marketing/sections/ContactCTA";
 
 export const metadata: Metadata = {
-  title: "Physical AI & Robotics Data",
+  title: "Physical AI — Human Motion Data for Training Humanoids",
   description:
-    "Ground-truth human motion data for training humanoid control policies, imitation learning, and sim-to-real transfer. Lab-grade precision, not estimated from video.",
+    "Lab-grade demonstration datasets for training humanoid robots: whole-body control, dexterous manipulation, imitation learning, sim-to-real transfer. Human demo → mocap → retarget → policy-ready exports.",
 };
 
 export default function PhysicalAIPage() {
@@ -23,6 +24,7 @@ export default function PhysicalAIPage() {
       <main style={{ color: "white" }}>
         <HeroPhysical />
         <CapabilitiesMarquee />
+        <PipelineStrip />
         <BentoWhy />
         <UseCasesGrid />
         <ModalitiesGrid />
