@@ -1,10 +1,4 @@
 import { Metadata } from "next";
-
-export const metadata: Metadata = {
-  title: "Tbrain",
-  description: "Full-service human resource agency for AI training experts",
-};
-
 import Footer from "@/components/common/Footer";
 import Header from "@/components/common/Header";
 import { getPostDetail } from "@/lib/api";
@@ -13,8 +7,6 @@ import linkedin from "@/assets/images/linkedin.png";
 import twitter from "@/assets/images/twitter.png";
 import Image from "next/image";
 import Link from "next/link";
-// import post_banner from "@/assets/images/post_banner.png";
-// import post_card_bg from "@/assets/images/post_card_bg.png";
 import { formatDate } from "@/utils/date_utils";
 
 type PostPageProps = {
@@ -23,157 +15,161 @@ type PostPageProps = {
   }>;
 };
 
+function stripHtml(html: string): string {
+  return html.replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim();
+}
+
+function readingTime(html: string): number {
+  const words = stripHtml(html).split(" ").filter(Boolean).length;
+  return Math.max(1, Math.round(words / 220));
+}
+
+export async function generateMetadata({ params }: PostPageProps): Promise<Metadata> {
+  const { slug } = await params;
+  const post = await getPostDetail({ slug });
+  if (!post) {
+    return {
+      title: "Article not found · Tbrain",
+      description: "Full-service human resource agency for AI training experts",
+    };
+  }
+  const description = post.excerpt ? stripHtml(post.excerpt).slice(0, 160) : undefined;
+  return {
+    title: `${post.title} · Tbrain`,
+    description,
+  };
+}
+
 export default async function PostDetailPage({ params }: PostPageProps) {
   const { slug } = await params;
   const post: PostDetail | null = await getPostDetail({ slug });
 
   if (!post) {
-    return <div>Post not found</div>;
+    return (
+      <div>
+        <Header />
+        <main className="min-h-[60vh] flex items-center justify-center">
+          <div className="text-center">
+            <h1 className="text-2xl font-semibold text-[#0e1b2e] mb-2">Article not found</h1>
+            <Link href="/news" className="text-[#6c3cf4] font-medium">← Back to news</Link>
+          </div>
+        </main>
+        <Footer />
+      </div>
+    );
   }
-  metadata.title = post.title;
-  const relPosts: Post[] = [];
+
   const postUrl = `${process.env.NEXT_PUBLIC_HOST}news/${post.slug}`;
+  const minutes = readingTime(post.content);
+  const heroImage = post.featuredImage?.node?.sourceUrl;
+  const heroAlt = post.featuredImage?.node?.altText ?? post.title;
 
   return (
     <div>
       <Header />
       <main>
-        <section
-          id="home"
-          className="container mx-auto px-3 pt-24 relative max-w-[1128px]"
-        >
-          <div className="w-full h-[75px] justify-center items-center gap-[11px] flex">
-            <div className="text-[#8b90a7] text-base font-medium leading-snug">
-              <Link href="/news">News</Link>
+        <article className="container mx-auto px-4 pt-24 relative max-w-[800px]">
+          <nav className="w-full py-6 flex items-center gap-2 text-sm text-[#8b90a7]">
+            <Link href="/news" className="hover:text-[#6c3cf4] transition-colors">News</Link>
+            <span>/</span>
+            <span className="text-[#6c3cf4] truncate">{post.title}</span>
+          </nav>
+
+          {post.categories.edges.length > 0 && (
+            <div className="flex flex-wrap gap-2 mb-5">
+              {post.categories.edges.map((edge) => (
+                <Link
+                  key={edge.node.slug}
+                  href={`/news?c=${edge.node.slug}`}
+                  className="inline-flex items-center gap-0.5 rounded-full bg-[#6c3cf4]/10 hover:bg-[#6c3cf4]/15 text-[#6c3cf4] px-3 py-1 text-xs font-semibold tracking-wide transition-colors"
+                >
+                  <span className="opacity-70">#</span>
+                  {edge.node.name}
+                </Link>
+              ))}
             </div>
-            <div className="text-[#8b90a7] text-base font-medium leading-snug">
-              /
-            </div>
-            <div className="text-[#6c3cf4] text-base font-medium leading-snug">
-              {post.title}
-            </div>
+          )}
+
+          <h1 className="text-3xl md:text-[44px] leading-tight font-semibold text-[#0e1b2e] tracking-tight mb-5">
+            {post.title}
+          </h1>
+
+          <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-[#78818f] pb-6 mb-8 border-b border-[#d8e9f3]">
+            <span className="inline-flex items-center gap-2">
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+              </svg>
+              <span className="font-medium uppercase tracking-wide text-xs">{formatDate(post.date)}</span>
+            </span>
+            <span className="inline-flex items-center gap-2">
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 2m6-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              <span className="font-medium">{minutes} min read</span>
+            </span>
           </div>
-          <div className="w-full flex-col justify-start items-start gap-2.5 flex mb-[24px]">
-            <div className="w-full text-center text-[#0e1b2e] text-4xl lg:text-[42px] font-normal ">
-              {post.title}
+
+          {heroImage && (
+            <div className="relative w-full aspect-[16/9] rounded-3xl overflow-hidden mb-10 shadow-[0_30px_80px_-30px_rgba(108,60,244,0.3)]">
+              <Image
+                src={heroImage}
+                alt={heroAlt}
+                fill
+                sizes="(min-width: 800px) 800px, 100vw"
+                className="object-cover"
+                priority
+              />
             </div>
-            <div className="self-stretch text-[#78818f] text-base font-medium pb-[24px] border-b border-b-[#d8e9f3]">
-              {formatDate(post.date)}
-            </div>
-          </div>
-          <div dangerouslySetInnerHTML={{ __html: post.content }} />
-          <div className="justify-start items-center gap-2 flex mt-[48px] mb-[12px]">
-            <div className="text-[#5a5d71] text-base font-medium leading-snug">
-              Categories:
-            </div>
-            <div>
-              {post.categories.edges.map((edge, index) => {
-                return (
-                  <span key={edge.node.name}>
-                    <Link
-                      href={`/news?c=${edge.node.slug}`}
-                      className="text-[#6c3cf4] text-base font-medium leading-snug"
-                    >
-                      {edge.node.name}
-                    </Link>
-                    {index < post.categories.edges.length - 1 && ", "}
-                  </span>
-                );
-              })}
-            </div>
-          </div>
-          <div className="w-full h-[50px] flex-col justify-start items-start gap-[26px] flex border-b border-b-[#d8e9f3]">
-            <div className="justify-start items-center gap-2 flex">
-              <div className="text-[#5a5d71] text-base font-medium leading-snug">
-                Share:
-              </div>
+          )}
+
+          <div
+            className="prose prose-lg max-w-none prose-headings:font-semibold prose-headings:text-[#0e1b2e] prose-headings:tracking-tight prose-p:text-[#3d4659] prose-p:leading-[1.75] prose-a:text-[#6c3cf4] prose-a:font-medium hover:prose-a:text-[#5a2fd3] prose-strong:text-[#0e1b2e] prose-img:rounded-2xl prose-img:shadow-md prose-blockquote:border-l-[#6c3cf4] prose-blockquote:text-[#5a5d71] prose-li:text-[#3d4659] prose-code:text-[#6c3cf4] prose-code:bg-[#6c3cf4]/5 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:before:content-none prose-code:after:content-none"
+            dangerouslySetInnerHTML={{ __html: post.content }}
+          />
+
+          <div className="mt-12 pt-6 border-t border-[#d8e9f3] flex flex-wrap items-center justify-between gap-4">
+            <div className="flex items-center gap-3">
+              <span className="text-[#5a5d71] text-sm font-medium">Share</span>
               <Link
                 href={`https://www.facebook.com/sharer/sharer.php?u=${postUrl}`}
-                className="w-6 h-6 relative"
+                className="w-9 h-9 rounded-full flex items-center justify-center bg-[#f4f6fb] hover:bg-[#6c3cf4]/10 transition-colors"
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-label="Share on Facebook"
               >
-                <Image
-                  className="w-full h-full object-cover"
-                  src={facebook}
-                  alt=""
-                />
+                <Image className="w-5 h-5 object-contain" src={facebook} alt="" />
               </Link>
               <Link
                 href={`https://www.linkedin.com/shareArticle?mini=true&url=${postUrl}`}
-                className="w-6 h-6 relative"
+                className="w-9 h-9 rounded-full flex items-center justify-center bg-[#f4f6fb] hover:bg-[#6c3cf4]/10 transition-colors"
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-label="Share on LinkedIn"
               >
-                <Image
-                  className="w-full h-full object-cover"
-                  src={linkedin}
-                  alt=""
-                />
+                <Image className="w-5 h-5 object-contain" src={linkedin} alt="" />
               </Link>
               <Link
                 href={`https://twitter.com/intent/tweet?url=${postUrl}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-6 h-6 relative"
+                className="w-9 h-9 rounded-full flex items-center justify-center bg-[#f4f6fb] hover:bg-[#6c3cf4]/10 transition-colors"
+                aria-label="Share on Twitter"
               >
-                <Image
-                  className="w-full h-full object-cover"
-                  src={twitter}
-                  alt=""
-                />
+                <Image className="w-5 h-5 object-contain" src={twitter} alt="" />
               </Link>
             </div>
+
+            <Link
+              href="/news"
+              className="inline-flex items-center gap-2 text-[#6c3cf4] text-sm font-semibold hover:gap-3 transition-all"
+            >
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+              </svg>
+              All articles
+            </Link>
           </div>
-          {/* <div className="w-full mt-[48px]"> */}
-          {/* <div className="w-full flex justify-between items-center mb-[24px]">
-              <div className="text-[#222222] text-2xl font-semibold">
-                Related news
-              </div>
-              <div className="text-[#6c3cf4] text-sm font-normal">
-                <Link href="/news">Read all</Link>
-              </div>
-            </div> */}
-          {/* <div className="w-full flex-col justify-start items-center gap-8 flex">
-              <div className="self-stretch justify-start items-center grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {relPosts.map((post) => (
-                  <div
-                    key={post.id}
-                    className="h-full p-5 bg-white rounded-[28px] shadow flex-col flex relative overflow-hidden bg-center bg-no-repeat bg-cover"
-                    style={{ backgroundImage: `url(${post_card_bg?.src})` }}
-                  >
-                    <div className="self-stretch h-full flex-col justify-between items-start gap-5 flex relative z-1">
-                      <div className="self-stretch flex-col justify-start items-start gap-3.5 flex">
-                        <div className="relative w-full">
-                          <Image
-                            className="w-full h-[196px] rounded-3xl object-cover"
-                            src={post_banner}
-                            alt=""
-                          />
-                        </div>
-                        <div className="self-stretch text-black text-xs font-normal uppercase text-ellipsis overflow-hidden line-clamp-1">
-                          02 January 2020
-                        </div>
-                        <div className="text-[#0e1b2e] text-xl font-medium text-ellipsis overflow-hidden line-clamp-2">
-                          <Link href={`/news/${post.slug}`}>{post.title}</Link>
-                        </div>
-                        <div
-                          dangerouslySetInnerHTML={{ __html: post.excerpt }}
-                          className="text-[#79828f] text-base font-normal leading-tight text-ellipsis overflow-hidden line-clamp-5"
-                        />
-                      </div>
-                      <div className="self-stretch justify-end items-center gap-[15px] flex mt-auto">
-                        <div className="text-[#6c3cf4] text-base font-normal leading-snug">
-                          <Link href={`/news/${post.slug}`}>Read more</Link>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div> */}
-          {/* </div> */}
-        </section>
+        </article>
       </main>
       <Footer />
     </div>
