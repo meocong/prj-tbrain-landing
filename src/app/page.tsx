@@ -3,10 +3,11 @@ import Header from "@/components/common/Header";
 import Footer from "@/components/common/Footer";
 import TableStart from "@/components/tables/TableStart";
 import { HeroSection } from "@/components/marketing/sections/HeroSection";
+import { TrustStrip } from "@/components/marketing/sections/TrustStrip";
+import { ProductPillarsSection } from "@/components/marketing/sections/ProductPillarsSection";
+import { PlatformSection } from "@/components/marketing/sections/PlatformSection";
 import { CaseStudiesSection } from "@/components/marketing/sections/CaseStudiesSection";
-import { ScalingSection } from "@/components/marketing/sections/ScalingSection";
 import { ExpertsSection } from "@/components/marketing/sections/ExpertsSection";
-import { ProjectsSection } from "@/components/marketing/sections/ProjectsSection";
 import { LeadershipSection } from "@/components/marketing/sections/LeadershipSection";
 import { ExpertiseSection } from "@/components/marketing/sections/ExpertiseSection";
 import { ContactCTA } from "@/components/marketing/sections/ContactCTA";
@@ -23,7 +24,7 @@ export const metadata: Metadata = {
   },
 };
 
-export const revalidate = 86400; // 24h ISR
+export const revalidate = 86400;
 
 export default function Home() {
   return (
@@ -31,14 +32,11 @@ export default function Home() {
       <Header />
       <main>
         <HeroSection />
+        <TrustStrip />
+        <ProductPillarsSection />
+        <PlatformSection />
         <CaseStudiesSection />
-        <ScalingSection />
         <ExpertsSection />
-        <div className="wrap">
-          <div className="one top-0 left-0 h-80 w-80" />
-          <div className="two top-0 right-0 h-80 w-80" />
-        </div>
-        <ProjectsSection />
         <LeadershipSection />
         <ExpertiseSection />
         <TableStart />
