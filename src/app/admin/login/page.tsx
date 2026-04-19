@@ -83,7 +83,7 @@ export default function AdminLoginPage() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="you@tbrain.ai"
-                className="input-field pl-10"
+                className="input-field" style={{ paddingLeft: "2.5rem" }}
                 autoComplete="email"
               />
             </div>
@@ -97,7 +97,7 @@ export default function AdminLoginPage() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="Enter your password"
-                className="input-field pl-10 pr-10"
+                className="input-field" style={{ paddingLeft: "2.5rem", paddingRight: "2.5rem" }}
                 autoComplete="current-password"
               />
               <button
