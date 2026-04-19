@@ -1,7 +1,8 @@
 import { Metadata } from "next";
+import { headers } from "next/headers";
 import Footer from "@/components/common/Footer";
 import Header from "@/components/common/Header";
-import { getPostDetail } from "@/lib/api";
+import { getPostDetail, getPosts } from "@/lib/api";
 import facebook from "@/assets/images/facebook.png";
 import linkedin from "@/assets/images/linkedin.png";
 import twitter from "@/assets/images/twitter.png";
@@ -22,6 +23,23 @@ function stripHtml(html: string): string {
 function readingTime(html: string): number {
   const words = stripHtml(html).split(" ").filter(Boolean).length;
   return Math.max(1, Math.round(words / 220));
+}
+
+// LinkedIn copy-paste leaves literal "hashtag#AI" (or bare "#AI #ML")
+// text in post bodies. Normalize both into styled chips so the article
+// tail doesn't look like unstyled keyword soup.
+const CHIP_CLASS =
+  "inline-flex items-center rounded-full bg-[#6c3cf4]/10 text-[#6c3cf4] px-2.5 py-0.5 text-sm font-semibold mr-1 no-underline";
+
+function cleanHashtagSoup(html: string): string {
+  return html
+    .replace(/<a[^>]*>\s*hashtag(#\w+)\s*<\/a>/gi, "$1")
+    .replace(/hashtag(#[A-Za-z0-9_]+)/g, "$1")
+    .replace(
+      /([>\s])#([A-Za-z][A-Za-z0-9_]{1,40})\b/g,
+      (_, pre: string, word: string) =>
+        `${pre}<span class="${CHIP_CLASS}">#${word}</span>`
+    );
 }
 
 export async function generateMetadata({ params }: PostPageProps): Promise<Metadata> {
@@ -59,10 +77,22 @@ export default async function PostDetailPage({ params }: PostPageProps) {
     );
   }
 
-  const postUrl = `${process.env.NEXT_PUBLIC_HOST}news/${post.slug}`;
+  const h = await headers();
+  const host = h.get("x-forwarded-host") ?? h.get("host") ?? "tbrain.ai";
+  const proto = h.get("x-forwarded-proto") ?? "https";
+  const origin = process.env.NEXT_PUBLIC_HOST?.replace(/\/$/, "") ?? `${proto}://${host}`;
+  const postUrl = encodeURIComponent(`${origin}/news/${post.slug}`);
   const minutes = readingTime(post.content);
   const heroImage = post.featuredImage?.node?.sourceUrl;
   const heroAlt = post.featuredImage?.node?.altText ?? post.title;
+  const cleanedContent = cleanHashtagSoup(post.content);
+
+  const primaryCategory = post.categories.edges[0]?.node.slug ?? "";
+  const { edges: relatedEdges } = await getPosts({ first: 4, categorySlug: primaryCategory });
+  const related = relatedEdges
+    .map((e) => e.node)
+    .filter((p) => p.slug !== post.slug)
+    .slice(0, 3);
 
   return (
     <div>
@@ -124,7 +154,7 @@ export default async function PostDetailPage({ params }: PostPageProps) {
 
           <div
             className="prose prose-lg max-w-none prose-headings:font-semibold prose-headings:text-[#0e1b2e] prose-headings:tracking-tight prose-p:text-[#3d4659] prose-p:leading-[1.75] prose-a:text-[#6c3cf4] prose-a:font-medium hover:prose-a:text-[#5a2fd3] prose-strong:text-[#0e1b2e] prose-img:rounded-2xl prose-img:shadow-md prose-blockquote:border-l-[#6c3cf4] prose-blockquote:text-[#5a5d71] prose-li:text-[#3d4659] prose-code:text-[#6c3cf4] prose-code:bg-[#6c3cf4]/5 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:before:content-none prose-code:after:content-none"
-            dangerouslySetInnerHTML={{ __html: post.content }}
+            dangerouslySetInnerHTML={{ __html: cleanedContent }}
           />
 
           <div className="mt-12 pt-6 border-t border-[#d8e9f3] flex flex-wrap items-center justify-between gap-4">
@@ -170,6 +200,54 @@ export default async function PostDetailPage({ params }: PostPageProps) {
             </Link>
           </div>
         </article>
+
+        {related.length > 0 && (
+          <section className="container mx-auto px-4 max-w-[1128px] mt-20 mb-16">
+            <div className="flex items-end justify-between mb-6">
+              <div>
+                <div className="text-xs font-semibold uppercase tracking-widest text-[#6c3cf4] mb-2">Keep reading</div>
+                <h2 className="text-2xl md:text-3xl font-semibold text-[#0e1b2e] tracking-tight">Related articles</h2>
+              </div>
+              <Link href="/news" className="hidden sm:inline-flex items-center gap-1 text-sm font-semibold text-[#6c3cf4] hover:gap-2 transition-all">
+                All articles
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+              </Link>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {related.map((r) => (
+                <Link
+                  key={r.id}
+                  href={`/news/${r.slug}`}
+                  className="group block rounded-3xl overflow-hidden bg-white shadow hover:shadow-xl transition-all"
+                >
+                  <div className="relative w-full aspect-[16/10] overflow-hidden bg-[#f4f6fb]">
+                    {r.featuredImage?.node?.sourceUrl ? (
+                      <Image
+                        src={r.featuredImage.node.sourceUrl}
+                        alt={r.featuredImage.node.altText ?? r.title}
+                        fill
+                        sizes="(min-width: 768px) 360px, 100vw"
+                        className="object-cover transition-transform duration-500 group-hover:scale-105"
+                      />
+                    ) : (
+                      <div className="absolute inset-0 bg-gradient-to-br from-[#6c3cf4]/10 to-[#10B981]/10" />
+                    )}
+                  </div>
+                  <div className="p-5">
+                    <div className="text-[11px] font-semibold uppercase tracking-wide text-[#78818f] mb-2">
+                      {formatDate(r.date)}
+                    </div>
+                    <h3 className="text-base md:text-lg font-semibold text-[#0e1b2e] leading-snug line-clamp-2 group-hover:text-[#6c3cf4] transition-colors">
+                      {r.title}
+                    </h3>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </section>
+        )}
       </main>
       <Footer />
     </div>
