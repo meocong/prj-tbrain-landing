@@ -1,10 +1,11 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useAdminAuth, useHasPermission } from "@/lib/admin/auth-context";
 import { ADMIN_NAV } from "@/lib/admin/constants";
-import { LogOut, Shield } from "lucide-react";
+import { LogOut } from "lucide-react";
 
 export function AdminSidebar() {
   const pathname = usePathname();
@@ -12,31 +13,28 @@ export function AdminSidebar() {
 
   return (
     <aside
-      className="flex h-screen w-60 flex-col border-r"
+      className="flex h-screen w-64 flex-col relative z-20"
       style={{
-        borderColor: "var(--border-default)",
+        borderRight: "1px solid var(--border-default)",
         backgroundColor: "var(--bg-sidebar)",
       }}
     >
       {/* Logo */}
       <div
-        className="flex h-14 items-center gap-2 px-4 border-b"
-        style={{ borderColor: "var(--border-default)" }}
+        className="flex h-14 items-center gap-2 px-4"
+        style={{ borderBottom: "1px solid var(--border-default)" }}
       >
-        <Shield
-          className="h-5 w-5"
-          style={{ color: "var(--color-brand-500)" }}
+        <Image
+          src="/images/logo.svg"
+          width={100}
+          height={30}
+          alt="Tbrain"
+          className="dark:invert opacity-80"
         />
-        <span
-          className="text-sm font-semibold"
-          style={{ fontFamily: "var(--font-heading)", color: "var(--text-primary)" }}
-        >
-          Tbrain Admin
-        </span>
       </div>
 
       {/* Nav */}
-      <nav className="flex-1 overflow-y-auto py-3 px-2">
+      <nav className="flex-1 overflow-y-auto px-3 py-4 space-y-1">
         {ADMIN_NAV.map((item) => {
           const allowed = useHasPermission(item.permission);
           if (!allowed) return null;
@@ -61,36 +59,36 @@ export function AdminSidebar() {
       {/* User */}
       {adminUser && (
         <div
-          className="border-t px-3 py-3"
-          style={{ borderColor: "var(--border-default)" }}
+          className="px-3 py-3"
+          style={{ borderTop: "1px solid var(--border-default)" }}
         >
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2.5">
             <div
-              className="flex h-8 w-8 items-center justify-center rounded-full text-xs font-medium"
+              className="flex h-8 w-8 items-center justify-center rounded-full text-xs font-semibold"
               style={{
-                backgroundColor: "var(--color-brand-50)",
-                color: "var(--color-brand-600)",
+                backgroundColor: "rgba(108,60,244,0.12)",
+                color: "var(--color-brand-500, #8B5CF6)",
               }}
             >
               {(adminUser.full_name || adminUser.email)[0].toUpperCase()}
             </div>
             <div className="flex-1 min-w-0">
               <p
-                className="truncate text-xs font-medium"
+                className="truncate text-sm font-medium"
                 style={{ color: "var(--text-primary)" }}
               >
-                {adminUser.full_name || adminUser.email}
+                {adminUser.full_name || adminUser.email.split("@")[0]}
               </p>
               <p
-                className="truncate text-[10px]"
-                style={{ color: "var(--text-muted)" }}
+                className="truncate text-[10px] uppercase tracking-wide font-medium"
+                style={{ color: "var(--color-brand-500, #8B5CF6)" }}
               >
-                {adminUser.role?.name}
+                {adminUser.role?.name || "Admin"}
               </p>
             </div>
             <button
               onClick={signOut}
-              className="rounded p-1 transition-colors hover:bg-[var(--bg-input)]"
+              className="rounded-lg p-1.5 transition-colors hover:bg-[var(--bg-input)]"
               title="Sign out"
             >
               <LogOut className="h-3.5 w-3.5" style={{ color: "var(--text-muted)" }} />
