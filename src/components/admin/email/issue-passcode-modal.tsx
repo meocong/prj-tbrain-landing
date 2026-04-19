@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { X, Eye, Send, Loader2 } from "lucide-react";
 import { supabaseAdmin } from "@/lib/admin/supabase-browser";
+import { ContactCombobox } from "@/components/admin/forms/contact-combobox";
 
 export type IssueModalProps = {
   open: boolean;
@@ -143,19 +144,23 @@ export function IssuePasscodeModal({ open, productSlug, productId, onClose, onIs
         </div>
 
         <div className="p-5 space-y-4">
+          <div>
+            <label className="block text-xs font-medium mb-1" style={{ color: "var(--text-secondary)" }}>
+              Client *
+            </label>
+            <ContactCombobox
+              value={email}
+              onChange={(v) => {
+                setEmail(v.email);
+                if (v.existing) {
+                  setClientName(v.full_name ?? "");
+                  setCompany(v.company ?? "");
+                }
+              }}
+              placeholder="Type name or email to search contacts…"
+            />
+          </div>
           <div className="grid grid-cols-2 gap-3">
-            <div>
-              <label className="block text-xs font-medium mb-1" style={{ color: "var(--text-secondary)" }}>
-                Client email *
-              </label>
-              <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="input-field"
-                placeholder="client@example.com"
-              />
-            </div>
             <div>
               <label className="block text-xs font-medium mb-1" style={{ color: "var(--text-secondary)" }}>
                 Full name

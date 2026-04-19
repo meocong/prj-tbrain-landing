@@ -124,6 +124,7 @@ export default function ContactFormsPage() {
         onFilterChange={(_, v) => { setSource(v); setPage(0); }}
         onPageChange={setPage}
         rowKey={(r) => r.id}
+        onRowClick={(r) => { window.location.href = `/admin/contacts/forms/${r.id}`; }}
       />
     </div>
   );

@@ -3,151 +3,260 @@
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { supabaseAdmin } from "@/lib/admin/supabase-browser";
-import { ChevronLeft, ChevronRight, Download } from "lucide-react";
+import { DataTable, type Column } from "@/components/admin/ui/data-table";
+import { Download } from "lucide-react";
+
+type Row = {
+  id: number;
+  event_type: string;
+  occurred_at: string;
+  ip: string | null;
+  user_agent: string | null;
+  client?: { email: string; full_name: string | null } | null;
+  batch?: { slug: string; name: string; product_id: string | null } | null;
+};
 
 const PAGE_SIZE = 50;
 
-const EVENT_TYPES = [
-  "all",
-  "enter_success",
-  "enter_fail",
-  "view_sample",
-  "view_file",
-  "view_tests",
-  "view_solution",
-  "download_sample_zip",
-  "download_batch_zip",
+const EVENT_OPTIONS = [
+  { value: "all", label: "All events" },
+  { value: "enter_success", label: "Enter success" },
+  { value: "enter_fail", label: "Enter fail" },
+  { value: "view_sample", label: "View sample" },
+  { value: "view_file", label: "View file" },
+  { value: "view_tests", label: "View tests" },
+  { value: "view_solution", label: "View solution" },
+  { value: "download_sample_zip", label: "Download sample" },
+  { value: "download_batch_zip", label: "Download batch" },
 ];
+
+const RANGE_OPTIONS = [
+  { value: "24h", label: "Last 24h" },
+  { value: "7d", label: "Last 7 days" },
+  { value: "30d", label: "Last 30 days" },
+  { value: "all", label: "All time" },
+];
+
+const EVENT_COLOR: Record<string, string> = {
+  enter_success: "#16a34a",
+  enter_fail: "#dc2626",
+  view_sample: "var(--color-brand-500)",
+  view_file: "var(--color-brand-500)",
+  view_tests: "var(--color-brand-500)",
+  view_solution: "var(--color-brand-500)",
+  download_sample_zip: "#3B82F6",
+  download_batch_zip: "#3B82F6",
+};
 
 export default function AuditPage() {
   const [eventType, setEventType] = useState("all");
+  const [range, setRange] = useState("30d");
+  const [productSlug, setProductSlug] = useState("all");
+  const [search, setSearch] = useState("");
+  const [sort, setSort] = useState<{ key: string; dir: "asc" | "desc" }>({ key: "occurred_at", dir: "desc" });
   const [page, setPage] = useState(0);
 
-  const { data, isLoading } = useQuery({
-    queryKey: ["admin-audit", eventType, page],
+  const { data: products } = useQuery({
+    queryKey: ["audit-products-filter"],
     queryFn: async () => {
-      let query = supabaseAdmin
-        .from("access_events")
-        .select("*, client:clients(email, full_name)", { count: "exact" })
-        .order("occurred_at", { ascending: false })
-        .range(page * PAGE_SIZE, (page + 1) * PAGE_SIZE - 1);
-
-      if (eventType !== "all") {
-        query = query.eq("event_type", eventType);
-      }
-
-      const { data, count } = await query;
-      return { events: data ?? [], total: count ?? 0 };
+      const { data } = await supabaseAdmin.from("products").select("id, slug, name").order("name");
+      return (data ?? []) as Array<{ id: string; slug: string; name: string }>;
     },
   });
 
-  const totalPages = Math.ceil((data?.total ?? 0) / PAGE_SIZE);
+  const productOptions = [
+    { value: "all", label: "All products" },
+    ...((products ?? []).map((p) => ({ value: p.slug, label: p.name }))),
+  ];
+
+  const { data, isLoading } = useQuery({
+    queryKey: ["admin-audit", eventType, range, productSlug, search, sort.key, sort.dir, page],
+    queryFn: async () => {
+      let q = supabaseAdmin
+        .from("access_events")
+        .select(
+          "id, event_type, occurred_at, ip, user_agent, client:clients(email, full_name), batch:batches(slug, name, product_id)",
+          { count: "exact" }
+        )
+        .order(sort.key as "occurred_at", { ascending: sort.dir === "asc" })
+        .range(page * PAGE_SIZE, (page + 1) * PAGE_SIZE - 1);
+
+      if (eventType !== "all") q = q.eq("event_type", eventType);
+
+      if (range !== "all") {
+        const hours = range === "24h" ? 24 : range === "7d" ? 24 * 7 : 24 * 30;
+        const cutoff = new Date(Date.now() - hours * 3600_000).toISOString();
+        q = q.gte("occurred_at", cutoff);
+      }
+
+      if (productSlug !== "all") {
+        const pid = products?.find((p) => p.slug === productSlug)?.id;
+        if (pid) {
+          // Use inner join via batches
+          q = supabaseAdmin
+            .from("access_events")
+            .select(
+              "id, event_type, occurred_at, ip, user_agent, client:clients(email, full_name), batch:batches!inner(slug, name, product_id)",
+              { count: "exact" }
+            )
+            .eq("batch.product_id", pid)
+            .order(sort.key as "occurred_at", { ascending: sort.dir === "asc" })
+            .range(page * PAGE_SIZE, (page + 1) * PAGE_SIZE - 1);
+          if (eventType !== "all") q = q.eq("event_type", eventType);
+          if (range !== "all") {
+            const hours = range === "24h" ? 24 : range === "7d" ? 24 * 7 : 24 * 30;
+            const cutoff = new Date(Date.now() - hours * 3600_000).toISOString();
+            q = q.gte("occurred_at", cutoff);
+          }
+        }
+      }
+
+      const { data, count } = await q;
+      let rows = (data ?? []) as unknown as Row[];
+      if (search) {
+        const s = search.toLowerCase();
+        rows = rows.filter((r) => r.client?.email?.toLowerCase().includes(s) ?? false);
+      }
+      return { rows, total: count ?? 0 };
+    },
+  });
+
+  const exportCsv = () => {
+    const rows = data?.rows ?? [];
+    const header = ["occurred_at", "event_type", "client_email", "batch", "ip"];
+    const lines = [header.join(",")];
+    for (const r of rows) {
+      lines.push(
+        [
+          r.occurred_at,
+          r.event_type,
+          r.client?.email ?? "",
+          r.batch?.slug ?? "",
+          r.ip ?? "",
+        ]
+          .map((v) => `"${String(v).replace(/"/g, '""')}"`)
+          .join(",")
+      );
+    }
+    const blob = new Blob([lines.join("\n")], { type: "text/csv" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `audit-${new Date().toISOString().slice(0, 10)}.csv`;
+    a.click();
+    URL.revokeObjectURL(url);
+  };
+
+  const columns: Column<Row>[] = [
+    {
+      key: "event_type",
+      header: "Event",
+      render: (r) => (
+        <span
+          className="inline-block rounded-full px-2 py-0.5 text-[10px] font-medium"
+          style={{
+            background: "var(--bg-input)",
+            color: EVENT_COLOR[r.event_type] ?? "var(--text-secondary)",
+          }}
+        >
+          {r.event_type.replace(/_/g, " ")}
+        </span>
+      ),
+    },
+    {
+      key: "client",
+      header: "Client",
+      render: (r) =>
+        r.client ? (
+          <div className="min-w-0">
+            <p className="truncate text-sm" style={{ color: "var(--text-primary)" }}>
+              {r.client.full_name ?? r.client.email}
+            </p>
+            {r.client.full_name && (
+              <p className="truncate text-[11px]" style={{ color: "var(--text-muted)" }}>
+                {r.client.email}
+              </p>
+            )}
+          </div>
+        ) : (
+          <span className="text-xs" style={{ color: "var(--text-muted)" }}>—</span>
+        ),
+    },
+    {
+      key: "batch",
+      header: "Batch",
+      render: (r) => (
+        <span className="text-xs" style={{ color: "var(--text-secondary)" }}>
+          {r.batch?.name ?? "—"}
+        </span>
+      ),
+    },
+    {
+      key: "ip",
+      header: "IP",
+      render: (r) => (
+        <code className="text-[11px]" style={{ color: "var(--text-muted)" }}>
+          {r.ip ?? "—"}
+        </code>
+      ),
+    },
+    {
+      key: "occurred_at",
+      header: "When",
+      sortable: true,
+      render: (r) => (
+        <span className="text-xs" style={{ color: "var(--text-muted)" }}>
+          {new Date(r.occurred_at).toLocaleString()}
+        </span>
+      ),
+    },
+  ];
 
   return (
     <div>
-      <div className="flex items-center justify-between">
-        <div>
-          <h1
-            className="text-2xl font-semibold"
-            style={{ fontFamily: "var(--font-heading)", color: "var(--text-primary)" }}
-          >
-            Audit Log
-          </h1>
-          <p className="mt-1 text-sm" style={{ color: "var(--text-muted)" }}>
-            {data?.total ?? 0} events
-          </p>
-        </div>
-        <button className="btn-secondary" title="Export CSV">
-          <Download className="h-4 w-4" />
-          Export
-        </button>
-      </div>
-
-      {/* Filter */}
-      <div className="glass-card mt-4 flex flex-wrap items-center gap-3 p-3">
-        <select
-          value={eventType}
-          onChange={(e) => { setEventType(e.target.value); setPage(0); }}
-          className="rounded-lg px-3 py-2 text-sm"
-          style={{ backgroundColor: "var(--bg-input)", color: "var(--text-primary)", border: "1px solid var(--border-default)" }}
+      <div className="mb-6">
+        <h1
+          className="text-2xl font-bold tracking-tight"
+          style={{ fontFamily: "var(--font-heading)", color: "var(--text-primary)", letterSpacing: "-0.02em" }}
         >
-          {EVENT_TYPES.map((t) => (
-            <option key={t} value={t}>
-              {t === "all" ? "All Events" : t.replace(/_/g, " ")}
-            </option>
-          ))}
-        </select>
+          Audit Log
+        </h1>
+        <p className="mt-1 text-sm" style={{ color: "var(--text-muted)" }}>
+          Every access event across all products. Filter by product, event type, or date range.
+        </p>
       </div>
 
-      {/* Table */}
-      <div className="glass-card mt-4 overflow-hidden">
-        <table className="w-full text-sm">
-          <thead>
-            <tr style={{ borderBottom: "1px solid var(--border-default)" }}>
-              {["Time", "Client", "Event", "Sample", "File", "IP"].map((h) => (
-                <th key={h} className="px-4 py-3 text-left text-xs font-medium" style={{ color: "var(--text-muted)" }}>
-                  {h}
-                </th>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-            {isLoading ? (
-              Array.from({ length: 10 }).map((_, i) => (
-                <tr key={i}><td colSpan={6} className="px-4 py-3"><div className="skeleton h-5 w-full" /></td></tr>
-              ))
-            ) : data?.events.length === 0 ? (
-              <tr>
-                <td colSpan={6} className="px-4 py-12 text-center" style={{ color: "var(--text-muted)" }}>
-                  No events found
-                </td>
-              </tr>
-            ) : (
-              data?.events.map((e: Record<string, unknown>) => {
-                const client = e.client as { email: string; full_name: string | null } | null;
-                return (
-                  <tr key={e.id as number} style={{ borderBottom: "1px solid var(--border-subtle)" }}>
-                    <td className="whitespace-nowrap px-4 py-2.5 text-xs" style={{ color: "var(--text-muted)" }}>
-                      {new Date(e.occurred_at as string).toLocaleString()}
-                    </td>
-                    <td className="px-4 py-2.5 text-xs" style={{ color: "var(--text-secondary)" }}>
-                      {client?.email || "—"}
-                    </td>
-                    <td className="px-4 py-2.5">
-                      <span className="badge badge-info text-[10px]">
-                        {(e.event_type as string).replace(/_/g, " ")}
-                      </span>
-                    </td>
-                    <td className="max-w-[120px] truncate px-4 py-2.5 font-mono text-xs" style={{ color: "var(--text-secondary)" }}>
-                      {(e.sample_id as string)?.slice(0, 8) || "—"}
-                    </td>
-                    <td className="max-w-[200px] truncate px-4 py-2.5 font-mono text-xs" style={{ color: "var(--text-secondary)" }}>
-                      {(e.file_path as string) || "—"}
-                    </td>
-                    <td className="px-4 py-2.5 font-mono text-xs" style={{ color: "var(--text-muted)" }}>
-                      {(e.ip as string) || "—"}
-                    </td>
-                  </tr>
-                );
-              })
-            )}
-          </tbody>
-        </table>
-
-        {totalPages > 1 && (
-          <div className="flex items-center justify-between px-4 py-3" style={{ borderTop: "1px solid var(--border-default)" }}>
-            <p className="text-xs" style={{ color: "var(--text-muted)" }}>Page {page + 1} of {totalPages}</p>
-            <div className="flex gap-1">
-              <button onClick={() => setPage((p) => Math.max(0, p - 1))} disabled={page === 0} className="btn-ghost p-1.5">
-                <ChevronLeft className="h-4 w-4" />
-              </button>
-              <button onClick={() => setPage((p) => Math.min(totalPages - 1, p + 1))} disabled={page >= totalPages - 1} className="btn-ghost p-1.5">
-                <ChevronRight className="h-4 w-4" />
-              </button>
-            </div>
-          </div>
-        )}
-      </div>
+      <DataTable<Row>
+        columns={columns}
+        rows={data?.rows ?? []}
+        total={data?.total ?? 0}
+        page={page}
+        pageSize={PAGE_SIZE}
+        loading={isLoading}
+        search={search}
+        searchPlaceholder="Search by client email…"
+        filters={[
+          { key: "event", label: "Event", value: eventType, options: EVENT_OPTIONS },
+          { key: "product", label: "Product", value: productSlug, options: productOptions },
+          { key: "range", label: "Range", value: range, options: RANGE_OPTIONS },
+        ]}
+        sort={sort}
+        onSortChange={(key, dir) => setSort({ key, dir })}
+        onSearchChange={(v) => { setSearch(v); setPage(0); }}
+        onFilterChange={(key, v) => {
+          if (key === "event") setEventType(v);
+          if (key === "product") setProductSlug(v);
+          if (key === "range") setRange(v);
+          setPage(0);
+        }}
+        onPageChange={setPage}
+        rowKey={(r) => String(r.id)}
+        actions={
+          <button type="button" onClick={exportCsv} className="btn-secondary text-xs">
+            <Download className="h-3.5 w-3.5" /> Export CSV
+          </button>
+        }
+      />
     </div>
   );
 }
