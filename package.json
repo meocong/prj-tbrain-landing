@@ -17,7 +17,6 @@
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.90.0",
-    "@apollo/client": "^4.1.7",
     "@base-ui/react": "^1.4.0",
     "@google-cloud/storage": "^7.19.0",
     "@iarna/toml": "^2.2.5",
@@ -48,7 +47,6 @@
     "dotenv": "^17.4.2",
     "firebase": "^11.5.0",
     "framer-motion": "^12.38.0",
-    "graphql": "^16.9.0",
     "jose": "^5.9.6",
     "lowlight": "^3.3.0",
     "lucide-react": "^1.7.0",

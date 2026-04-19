@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Header from "@/components/common/Header";
 import Footer from "@/components/common/Footer";
-import { getPosts } from "@/lib/api";
 import { supabaseAdmin } from "@/lib/terminal-bench/supabase/admin";
 import Link from "next/link";
 import type { CmsPost } from "@/lib/admin/types";
@@ -15,26 +14,6 @@ export const metadata: Metadata = {
 
 export const dynamic = "force-dynamic";
 
-function decodeEntities(text: string): string {
-  return text
-    .replace(/<[^>]*>/g, "")
-    .replace(/&hellip;/g, "…")
-    .replace(/&amp;/g, "&")
-    .replace(/&#8220;/g, "\u201C")
-    .replace(/&#8221;/g, "\u201D")
-    .replace(/&#8216;/g, "\u2018")
-    .replace(/&#8217;/g, "\u2019")
-    .replace(/&nbsp;/g, " ")
-    .replace(/\u00a0/g, " ")
-    .trim();
-}
-
-const WP_FALLBACK_IMAGES: Record<string, string> = {
-  "tech-terms-tuesday-lets-talk-about-small-language-models-slms": "/images/blog-wp-slm.jpg",
-  "are-we-really-about-to-run-out-of-data-for-ai": "/images/blog-wp-data-running-out.jpg",
-  "behind-every-ai-breakthrough-lies-a-data-secret": "/images/blog-wp-breakthrough.jpg",
-};
-
 type BlogPost = {
   title: string;
   slug: string;
@@ -42,7 +21,6 @@ type BlogPost = {
   date: string;
   image: string;
   category: string | null;
-  source: "cms" | "wordpress";
   readTime: string;
 };
 
@@ -68,52 +46,21 @@ export default async function BlogPage({
       .from("cms_posts")
       .select("*")
       .eq("status", "published")
-      .not("slug", "like", "wp-%")
       .order("published_at", { ascending: false })
-      .limit(30);
+      .limit(60);
 
     if (cmsPosts) {
-      posts.push(
-        ...cmsPosts.map((p: CmsPost) => ({
-          title: p.title,
-          slug: p.slug,
-          excerpt: p.excerpt || (p.content_md?.slice(0, 200).replace(/[#*_\[\]]/g, "") + "…") || "",
-          date: p.published_at || p.created_at,
-          image: p.cover_image_url || "/images/blog-rlhf.jpg",
-          category: p.category,
-          source: "cms" as const,
-          readTime: p.content_md ? estimateReadTime(p.content_md) : "5 min read",
-        }))
-      );
+      posts = cmsPosts.map((p: CmsPost) => ({
+        title: p.title,
+        slug: p.slug,
+        excerpt: p.excerpt || (p.content_md?.slice(0, 200).replace(/[#*_\[\]]/g, "") + "…") || "",
+        date: p.published_at || p.created_at,
+        image: p.cover_image_url || "/images/blog-rlhf.jpg",
+        category: p.category,
+        readTime: p.content_md ? estimateReadTime(p.content_md) : "5 min read",
+      }));
     }
   } catch { /* DB unavailable */ }
-
-  try {
-    const { edges } = await getPosts({ first: 20 });
-    posts.push(
-      ...edges.map((e: { node: Record<string, unknown> }) => {
-        const node = e.node;
-        const slug = node.slug as string;
-        const rawExcerpt = decodeEntities((node.excerpt as string) || "");
-        const categories = node.categories as { edges: { node: { name: string } }[] } | null;
-        const catName = categories?.edges?.[0]?.node?.name ?? null;
-        const wpImage = (node.featuredImage as { node?: { sourceUrl?: string } } | null)?.node?.sourceUrl;
-
-        return {
-          title: decodeEntities((node.title as string) || ""),
-          slug,
-          excerpt: rawExcerpt.length > 200 ? rawExcerpt.slice(0, 200) + "…" : rawExcerpt,
-          date: node.date as string,
-          image: wpImage || WP_FALLBACK_IMAGES[slug] || "/images/blog-rlhf.jpg",
-          category: catName && catName.toLowerCase() !== "uncategorized" ? catName : null,
-          source: "wordpress" as const,
-          readTime: "3 min read",
-        };
-      })
-    );
-  } catch { /* WordPress unavailable */ }
-
-  posts.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
   const totalPosts = posts.length;
   const totalPages = Math.ceil((totalPosts - 1) / POSTS_PER_PAGE); // -1 for featured
@@ -142,7 +89,7 @@ export default async function BlogPage({
           {/* Featured post */}
           {featured && (
             <Link
-              href={featured.source === "cms" ? `/blog/${featured.slug}` : `/news/${featured.slug}`}
+              href={`/blog/${featured.slug}`}
               className="group mt-12 block"
             >
               <div className="overflow-hidden rounded-xl">
@@ -192,7 +139,7 @@ export default async function BlogPage({
             {rest.map((post) => (
               <Link
                 key={post.slug}
-                href={post.source === "cms" ? `/blog/${post.slug}` : `/news/${post.slug}`}
+                href={`/blog/${post.slug}`}
                 className="group flex gap-6 md:gap-8"
               >
                 {/* Text */}
