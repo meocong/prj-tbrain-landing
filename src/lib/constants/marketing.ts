@@ -1,278 +1,140 @@
 // ── Trust Metrics ──
 export const TRUST_METRICS = [
-  { value: "48K+", label: "AI Training Experts" },
+  { value: "48K+", label: "Expert Contributors" },
   { value: "250+", label: "Projects Delivered" },
   { value: "17+", label: "Countries" },
-  { value: "500+", label: "Benchmark Tasks" },
+  { value: "0.8mm", label: "Hand Pose Accuracy" },
 ];
 
-// ── Product Pillars (homepage) ──
+// ── Product Pillars (Labelbox-style numbered features) ──
 export const PRODUCT_PILLARS = [
   {
-    title: "Terminal Bench",
-    subtitle: "AI Agent Evaluation",
+    title: "Robotics",
+    subtitle: "Data for embodied intelligence.",
     description:
-      "Multi-step reasoning tasks for evaluating AI terminal agents. 4-layer validation ensures tasks are hard enough for frontier models, with domain coverage across Linux, DevOps, Security, and Database.",
-    href: "/data/terminal-bench",
-    metrics: [
-      { value: "500+", label: "Benchmark Tasks" },
-      { value: "4", label: "Validation Layers" },
-      { value: "≤20%", label: "GPT-5 Pass Rate" },
-      { value: "8+", label: "Domain Categories" },
-    ],
-    icon: "Terminal",
-    color: "#6C3CF4",
-  },
-  {
-    title: "Physical AI Data",
-    subtitle: "Robot Training Data",
-    description:
-      "High-fidelity egocentric video and hand pose data for robot training. 3-tier hardware framework with peer-reviewed accuracy from 5mm to sub-millimeter, covering household to commercial robotics.",
+      "Robots that learn from real-world complexity start with real-world data. Ground-truth human motion and hand pose — captured with lab-grade precision, not estimated from video.",
     href: "/data/physical-ai",
-    metrics: [
-      { value: "6", label: "Problem Categories" },
-      { value: "0.8mm", label: "Best Accuracy" },
-      { value: "829h", label: "Reference Dataset" },
-      { value: "3", label: "Hardware Tiers" },
+    features: [
+      { num: "01", title: "3-tier hardware", detail: "5mm standard to 0.8mm premium, validated against peer-reviewed benchmarks" },
+      { num: "02", title: "6 problem categories", detail: "Household, commercial, dexterous manipulation, gripper, teleoperation" },
+      { num: "03", title: "Scene-aware capture", detail: "Egocentric video with 3D hand pose, environment context, and task annotations" },
     ],
-    icon: "Bot",
     color: "#0151FF",
   },
   {
-    title: "Custom Data Programs",
-    subtitle: "RLHF, SFT & Annotation",
+    title: "AI Agent Evaluation",
+    subtitle: "Measure what matters.",
     description:
-      "End-to-end data programs with domain expert pods. From RLHF and SFT data generation to multi-modal annotation across text, image, video, and audio — all backed by AI-native QC.",
-    href: "/services",
-    metrics: [
-      { value: "48K", label: "Annotations/4mo" },
-      { value: "90%+", label: "Accuracy" },
-      { value: "3+", label: "Modalities" },
-      { value: "24/7", label: "Operations" },
+      "Generic coding benchmarks aren't enough. Terminal Bench provides domain-specific multi-step challenges that frontier models actually fail.",
+    href: "/data/terminal-bench",
+    features: [
+      { num: "01", title: "Multi-step reasoning", detail: "Chains of actions across Linux, DevOps, Security, and Database domains" },
+      { num: "02", title: "4-layer validation", detail: "Spec → Oracle → LLM baseline (≤20% GPT-5) → Expert review" },
+      { num: "03", title: "Anti-cheat by design", detail: "No test leakage, no hardcoding — deterministic and reproducible" },
     ],
-    icon: "Database",
+    color: "#6C3CF4",
+  },
+  {
+    title: "Custom Data Programs",
+    subtitle: "The fuel for post-training at scale.",
+    description:
+      "RLHF preference data, domain-specific SFT datasets — we build exactly what your model needs, with AI-native QC that catches what humans miss.",
+    href: "/services",
+    features: [
+      { num: "01", title: "Domain expert pods", detail: "Medical, STEM, Coding, Finance — PhDs and Olympiad medalists" },
+      { num: "02", title: "AI-native QC", detail: "Automated pre-screening handles 60-70%. Humans focus on edge cases" },
+      { num: "03", title: "Multi-modal", detail: "Text, image, video, and audio annotation in one pipeline" },
+    ],
     color: "#10B981",
   },
 ];
 
+// ── Expert Network (Alignerr/Snorkel style) ──
+export const EXPERT_NETWORK = {
+  headline: "Elite domain expertise, on demand.",
+  subheadline: "When your model needs to learn from the best, we bring the best.",
+  stats: [
+    { value: "48K+", label: "Expert contributors across 17+ countries" },
+    { value: "PhDs", label: "From top universities and research institutions" },
+    { value: "8+", label: "Domains: Coding, STEM, Medical, Robotics, Finance" },
+  ],
+  experts: [
+    { name: "Nguyen Minh T.", title: "Radiologist, 9+ years", detail: "Top international hospital. Diagnostic imaging.", domain: "Medical", avatar: "/images/avt-1.png" },
+    { name: "Trang M.", title: "Ph.D., Co-founder PowerGate", detail: "Head of AI. Software Engineering.", domain: "Coding / AI", avatar: "/images/avt-2.png" },
+    { name: "Huy L.", title: "Ph.D., AI Researcher", detail: "Deep learning at Phenikaa University.", domain: "Coding / AI", avatar: "/images/avt-3.png" },
+    { name: "Tu Ng.", title: "Head of AI, 10+ years", detail: "Data Science lead. Python, SQL, ML.", domain: "Data Science", avatar: "/images/avt-4.png" },
+  ],
+};
+
 // ── Platform Features ──
 export const PLATFORM_FEATURES = [
-  {
-    title: "AI-Native QC Pipeline",
-    description: "Automated quality checks pre-screen 60-70% of submissions. Humans review edge cases only.",
-    icon: "ShieldCheck",
-  },
-  {
-    title: "Real-Time Dashboards",
-    description: "Live project metrics, submission tracking, and team velocity — visible to customers.",
-    icon: "BarChart3",
-  },
-  {
-    title: "Multi-Tenant Isolation",
-    description: "Workspace-level data isolation with audit trails. Your data never touches other projects.",
-    icon: "Lock",
-  },
-  {
-    title: "Agentic Workflows",
-    description: "4 specialized agents automate QC, delivery, cloud sync, and notifications end-to-end.",
-    icon: "Workflow",
-  },
+  { title: "AI-Native QC Pipeline", description: "Automated quality checks pre-screen 60-70% of submissions. Humans review edge cases only.", icon: "ShieldCheck" },
+  { title: "Real-Time Dashboards", description: "Live project metrics, submission tracking, and team velocity — visible to your team.", icon: "BarChart3" },
+  { title: "Multi-Tenant Isolation", description: "Workspace-level data isolation with full audit trails.", icon: "Lock" },
+  { title: "Agentic Workflows", description: "4 specialized agents automate QC, delivery, cloud sync, and notifications.", icon: "Workflow" },
 ];
 
 // ── Case Studies ──
 export const FEATURED_CASE_STUDIES = [
-  {
-    title: "Terminal Bench: AI Agent Evaluation",
-    shortDescription: "500+ multi-step reasoning tasks with 4-layer validation",
-    description:
-      "Designed and validated 500+ benchmark tasks for evaluating AI terminal agents. Each task requires multi-step reasoning across Linux sysadmin, DevOps, Security, and Database domains. Pass rate capped at ≤20% for GPT-5 through our 4-layer validation pipeline.",
-    image: "/images/labeling.svg",
-    metrics: [
-      { value: "500+", label: "Tasks" },
-      { value: "≤20%", label: "GPT-5 Pass" },
-      { value: "4", label: "Validation Layers" },
-      { value: "8+", label: "Domains" },
-    ],
-  },
-  {
-    title: "Physical AI: Robot Training Data",
-    shortDescription: "Sub-mm hand pose accuracy for robot learning",
-    description:
-      "Producing high-fidelity egocentric video and 3D hand pose data across 6 problem categories. 3-tier hardware framework delivers 0.8mm accuracy for fine manipulation tasks, validated against peer-reviewed benchmarks (EgoDex 829h, OpenEgo 1.1K hours).",
-    image: "https://qdrant.tech/img/ai-agent.svg",
-    metrics: [
-      { value: "6", label: "Problem Types" },
-      { value: "0.8mm", label: "Best Accuracy" },
-      { value: "829h", label: "Reference Data" },
-      { value: "3", label: "Hardware Tiers" },
-    ],
-  },
-  {
-    title: "Multimodal Data Annotation at Scale",
-    shortDescription: "48K annotations in 4 months across 3 modalities",
-    description:
-      "Scaled from zero to 48,000 high-quality multimodal annotations in just 4 months. Delivered consistent, production-ready labeled data across text, image, and audio modalities for enterprise AI training.",
-    image: "/images/labeling.svg",
-    metrics: [
-      { value: "48K", label: "Annotations" },
-      { value: "4", label: "Months" },
-      { value: "3", label: "Modalities" },
-      { value: "90%", label: "Accuracy" },
-    ],
-  },
+  { title: "Terminal Bench", shortDescription: "500+ multi-step tasks, ≤20% GPT-5 pass rate", description: "Domain-specific benchmark tasks with 4-layer validation pipeline.", image: "/images/labeling.svg", metrics: [{ value: "500+", label: "Tasks" }, { value: "≤20%", label: "GPT-5 Pass" }, { value: "4", label: "Layers" }, { value: "8+", label: "Domains" }] },
+  { title: "Robotics Data", shortDescription: "Sub-mm accuracy, 6 problem categories", description: "Ground-truth egocentric video and 3D hand pose with lab-grade hardware.", image: "https://qdrant.tech/img/ai-agent.svg", metrics: [{ value: "6", label: "Categories" }, { value: "0.8mm", label: "Accuracy" }, { value: "829h", label: "Reference" }, { value: "3", label: "Tiers" }] },
+  { title: "Multimodal at Scale", shortDescription: "48K annotations, 4 months, 3 modalities", description: "Production-ready labeled data across text, image, and audio.", image: "/images/labeling.svg", metrics: [{ value: "48K", label: "Annotations" }, { value: "4", label: "Months" }, { value: "3", label: "Modalities" }, { value: "90%", label: "Accuracy" }] },
 ];
 
-// ── Sample Projects (legacy) ──
-export const SAMPLE_PROJECTS = [
-  { title: "Chatbot data generation", description: "Make Q&A pairs to train a chatbot on medical questions.", icon: "/icons/icon_chatbot.svg" },
-  { title: "Training data generation", description: "Assess the accuracy and validity of LLM-generated responses in advanced domains.", icon: "/icons/icon_training.svg" },
-  { title: "Audio Data Collection", description: "Gather high-quality audio data to enhance smart device capabilities.", icon: "/icons/icon_audio.svg" },
+// ── Leadership ──
+export const LEADERSHIP = [
+  { name: "Tam Le", bio: "15+ years across Google, Adobe, Asana, and Turing. Deep expertise in AI training data at scale.", avatar: "/images/avt-tamle.png", logos: ["google_logo.svg", "turingcom_logo.svg", "asana_logo.svg", "healthline_media_logo.svg"] },
+  { name: "David Do", bio: "20 years managing 500+ engineers. Multi-million-dollar outsourced engineering contracts.", avatar: "/images/avt-daviddo.png", logos: ["alphaplus_metaverse_logo.svg", "alphaway_logo.svg", "ibm_logo.svg", "ericsson_logo.svg", "techcombank_logo.svg"] },
 ];
 
-// ── Physical AI Data (for /data/physical-ai page) ──
+// ── Expertise ──
+export const EXPERTISE_AREAS = [
+  { label: "Coding & DevOps:", detail: "Python, C++, Java, Linux sysadmin, full stack" },
+  { label: "Mathematics:", detail: "Real analysis, linear algebra, topology" },
+  { label: "Science:", detail: "Physics, chemistry, biology" },
+  { label: "Robotics:", detail: "Egocentric video, hand pose, motion capture, teleoperation" },
+  { label: "Data Science:", detail: "Python, SQL, machine learning, LLM fine-tuning" },
+  { label: "Finance:", detail: "Macroeconomics, financial reporting" },
+  { label: "Medical:", detail: "Clinical, imaging, diagnostics" },
+];
+
+// ── Services ──
+export const SERVICES = [
+  { title: "RLHF & SFT", description: "Expert-driven reinforcement learning from human feedback and supervised fine-tuning.", icon: "Brain" },
+  { title: "Data Annotation", description: "Multi-modal annotation across text, image, video, and audio.", icon: "Tags" },
+  { title: "AI Agent Evaluation", description: "Multi-step benchmark tasks for frontier AI agents.", icon: "BarChart3" },
+  { title: "Robotics Data", description: "Ground-truth motion and hand pose data with lab-grade precision.", icon: "Bot" },
+  { title: "Quality Assurance", description: "AI-native QC with automated pre-screening and expert review.", icon: "ShieldCheck" },
+  { title: "Expert Teams", description: "On-demand domain expert pods across 17+ countries.", icon: "Users" },
+];
+
+// ── Physical AI page ──
 export const PHYSICAL_AI_PROBLEMS = [
-  {
-    title: "Ego-Diverse",
-    description: "Walking tasks in household environments — cooking, cleaning, assembly. Standard tier with Leap Motion 2 backpack.",
-    accuracy: "5.2mm",
-    tier: "T1",
-    status: "Active",
-  },
-  {
-    title: "UMI-Diverse",
-    description: "Gripper-based manipulation tasks following Stanford UMI standard. Cheapest entry point for robot training data.",
-    accuracy: "6DoF pose",
-    tier: "Stanford UMI",
-    status: "Active",
-  },
-  {
-    title: "Ego-Dexterous",
-    description: "Sub-mm fine manipulation — threading, screw insertion, origami. Premium tier with Apple Vision Pro.",
-    accuracy: "0.8mm",
-    tier: "T3",
-    status: "Active",
-  },
-  {
-    title: "Residential OTS",
-    description: "Household tasks — tidying, dishes, laundry, home mapping. Reuses shared T1 hardware from Ego-Diverse.",
-    accuracy: "5.2mm",
-    tier: "T1",
-    status: "Active",
-  },
-  {
-    title: "Commercial OTS",
-    description: "11 commercial sectors — warehouse, retail, food service, cleaning, manufacturing operations.",
-    accuracy: "5.2mm",
-    tier: "T1",
-    status: "Active",
-  },
-  {
-    title: "Dexterous Hand Teleoperation",
-    description: "Robot data with ≥13 DoF hands (Shadow/Allegro) and tactile sensors. Requires hardware partnership.",
-    accuracy: "Joint angles",
-    tier: "Robot-grade",
-    status: "Phase 2",
-  },
+  { title: "Ego-Diverse", description: "Household walking tasks — cooking, cleaning, assembly.", accuracy: "5.2mm", tier: "T1", status: "Active" },
+  { title: "UMI-Diverse", description: "Gripper manipulation, Stanford UMI standard.", accuracy: "6DoF", tier: "UMI", status: "Active" },
+  { title: "Ego-Dexterous", description: "Sub-mm fine manipulation — threading, origami.", accuracy: "0.8mm", tier: "T3", status: "Active" },
+  { title: "Residential OTS", description: "Tidying, dishes, laundry, home mapping.", accuracy: "5.2mm", tier: "T1", status: "Active" },
+  { title: "Commercial OTS", description: "Warehouse, retail, food service, manufacturing.", accuracy: "5.2mm", tier: "T1", status: "Active" },
+  { title: "Dexterous Hand", description: "≥13 DoF hands with tactile sensors.", accuracy: "Joints", tier: "Robot", status: "Phase 2" },
 ];
 
 export const PHYSICAL_AI_TIERS = [
-  {
-    tier: "T1",
-    name: "Standard",
-    hardware: "Ultraleap Leap Motion 2 + Jetson Orin Nano backpack",
-    accuracy: "5.2-5.3mm 3D MPJPE",
-    cost: "$2,008",
-    source: "MDPI Sensors Dec 2025",
-    bestFor: "Ego-Diverse, Residential, Commercial",
-    recommended: true,
-  },
-  {
-    tier: "T2",
-    name: "Budget",
-    hardware: "Stereo GoPro + HaMeR post-processing fusion",
-    accuracy: "15-20mm 3D MPJPE",
-    cost: "$1,532",
-    source: "HaMeR paper + Pose2Sim",
-    bestFor: "Budget fallback (rarely used)",
-    recommended: false,
-  },
-  {
-    tier: "T3",
-    name: "Premium",
-    hardware: "Apple Vision Pro (ARKit) + GoPro external",
-    accuracy: "0.8 ± 0.3mm 3D MPJPE",
-    cost: "$4,539",
-    source: "MDPI Sensors 2025, EgoDex 829h",
-    bestFor: "Ego-Dexterous (fine manipulation)",
-    recommended: true,
-  },
+  { tier: "T1", name: "Standard", hardware: "Leap Motion 2 + Jetson Orin Nano", accuracy: "5.2-5.3mm", cost: "$2,008", source: "MDPI Sensors 2025", bestFor: "Household, commercial", recommended: true },
+  { tier: "T2", name: "Budget", hardware: "Stereo GoPro + HaMeR fusion", accuracy: "15-20mm", cost: "$1,532", source: "HaMeR + Pose2Sim", bestFor: "Budget fallback", recommended: false },
+  { tier: "T3", name: "Premium", hardware: "Apple Vision Pro (ARKit) + GoPro", accuracy: "0.8 ± 0.3mm", cost: "$4,539", source: "EgoDex 829h", bestFor: "Fine manipulation", recommended: true },
 ];
 
 export const PHYSICAL_AI_DATASETS = [
-  { name: "EgoDex", volume: "829 hours", quality: "21-joint hand (AVP ARKit 0.8mm)", useCase: "Ego-Dexterous reference" },
-  { name: "OpenEgo", volume: "1,107 hours", quality: "21-joint unified", useCase: "Ego-Diverse format reference" },
-  { name: "EPIC-KITCHENS", volume: "100 hours", quality: "Action labels", useCase: "Residential validation" },
-  { name: "UMI Community", volume: "1,400 hours", quality: "SLAM 6DoF", useCase: "UMI-Diverse pipeline" },
+  { name: "EgoDex", volume: "829 hours", quality: "21-joint hand (0.8mm)", useCase: "Dexterous reference" },
+  { name: "OpenEgo", volume: "1,107 hours", quality: "21-joint unified", useCase: "Diverse format" },
+  { name: "EPIC-KITCHENS", volume: "100 hours", quality: "Action labels", useCase: "Residential" },
+  { name: "UMI Community", volume: "1,400 hours", quality: "SLAM 6DoF", useCase: "Gripper pipeline" },
 ];
 
-// ── Experts ──
-export const EXPERTS = [
-  {
-    name: "Nguyen Minh T.",
-    bio: "Radiologist with 9+ years of experience at a top international hospital in Hanoi, specializing in diagnostic imaging and image-guided interventions",
-    domain: "Medical",
-    avatar: "/images/avt-1.png",
-  },
-  {
-    name: "Trang M.",
-    bio: "Co-founder of PowerGate Labs\nHead of AI at PowerGate Group\nPh.D. in Software Engineering",
-    domain: "Coding / AI",
-    avatar: "/images/avt-2.png",
-  },
-  {
-    name: "Huy L.",
-    bio: "AI Expert at PowerGate\nPh.D. in engineering with research interest on deep learning\nResearcher at Phenikaa University",
-    domain: "Coding / AI",
-    avatar: "/images/avt-3.png",
-  },
-  {
-    name: "Tu Ng.",
-    bio: "10+ years in Data Science\nHead of AI at PowerGate Labs\nMS Computer Science\nExpert in Python, SQL, ML",
-    domain: "Data",
-    avatar: "/images/avt-4.png",
-  },
+export const SAMPLE_PROJECTS = [
+  { title: "Chatbot data generation", description: "Q&A pairs for medical chatbot training.", icon: "/icons/icon_chatbot.svg" },
+  { title: "Training data generation", description: "LLM response validation across domains.", icon: "/icons/icon_training.svg" },
+  { title: "Audio Data Collection", description: "High-quality audio data for smart devices.", icon: "/icons/icon_audio.svg" },
 ];
 
-export const EXPERTISE_AREAS = [
-  { label: "Data Scientists / Engineers:", detail: "Python, SQL, machine learning, LLM" },
-  { label: "Mathematics:", detail: "real analysis, linear algebra, topology, number theory" },
-  { label: "Science:", detail: "Physics, chemistry, and biology" },
-  { label: "Physical AI:", detail: "egocentric video, hand pose, robot teleoperation" },
-  { label: "Coding / Software:", detail: "Python, C++, Java, full stack, DevOps, Linux sysadmin" },
-  { label: "Finance & Business:", detail: "macroeconomics, financial reporting" },
-  { label: "Medical Sciences:", detail: "Clinical, Imaging, Diagnostics & Laboratory Medicine" },
-];
-
-export const LEADERSHIP = [
-  {
-    name: "Tam Le",
-    bio: "Seasoned Data Science and Analytics leader with over 15 years of experience across big tech and startups, including Google, Adobe, and Asana. Expertise in AI training at Turing.",
-    avatar: "/images/avt-tamle.png",
-    logos: ["google_logo.svg", "turingcom_logo.svg", "asana_logo.svg", "healthline_media_logo.svg"],
-  },
-  {
-    name: "David Do",
-    bio: "Senior Software Engineering leader with 20 years managing outsourced teams. Formerly led an engineering organization of 500+ professionals and multi-million-dollar contracts.",
-    avatar: "/images/avt-daviddo.png",
-    logos: ["alphaplus_metaverse_logo.svg", "alphaway_logo.svg", "ibm_logo.svg", "ericsson_logo.svg", "techcombank_logo.svg"],
-  },
-];
-
-export const SERVICES = [
-  { title: "RLHF & SFT", description: "Expert-driven reinforcement learning from human feedback and supervised fine-tuning data generation.", icon: "Brain" },
-  { title: "Data Annotation", description: "High-quality multi-modal annotation across text, image, video, and audio.", icon: "Tags" },
-  { title: "AI Agent Evaluation", description: "Multi-step benchmark tasks and evaluation frameworks for AI agents.", icon: "BarChart3" },
-  { title: "Physical AI Data", description: "Egocentric video and hand pose data for robot training with sub-mm accuracy.", icon: "Bot" },
-  { title: "Quality Assurance", description: "AI-native QC pipeline with automated pre-screening and human expert review.", icon: "ShieldCheck" },
-  { title: "Expert Teams", description: "On-demand domain-specific expert pods across 17+ countries.", icon: "Users" },
-];
+export const EXPERTS = EXPERT_NETWORK.experts;
