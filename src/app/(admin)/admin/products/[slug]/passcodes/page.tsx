@@ -6,7 +6,8 @@ import { useParams } from "next/navigation";
 import { supabaseAdmin } from "@/lib/admin/supabase-browser";
 import { useHasPermission } from "@/lib/admin/auth-context";
 import { DataTable, type Column } from "@/components/admin/ui/data-table";
-import { KeyRound, Ban, User } from "lucide-react";
+import { IssuePasscodeModal } from "@/components/admin/email/issue-passcode-modal";
+import { KeyRound, Ban, User, Plus } from "lucide-react";
 import type { Passcode, Product } from "@/lib/admin/types";
 
 const PAGE_SIZE = 20;
@@ -15,11 +16,14 @@ export default function ProductPasscodesPage() {
   const params = useParams<{ slug: string }>();
   const qc = useQueryClient();
   const canRevoke = useHasPermission("passcodes.revoke");
+  const canCreate = useHasPermission("passcodes.create");
 
   const [page, setPage] = useState(0);
   const [search, setSearch] = useState("");
   const [typeFilter, setTypeFilter] = useState("all"); // all | per_client | shared
   const [statusFilter, setStatusFilter] = useState("active"); // active | expired | revoked | all
+  const [issueOpen, setIssueOpen] = useState(false);
+  const [lastIssued, setLastIssued] = useState<string | null>(null);
 
   const { data: product } = useQuery({
     queryKey: ["admin-product", params.slug],
@@ -204,16 +208,48 @@ export default function ProductPasscodesPage() {
   ];
 
   return (
-    <DataTable<Passcode>
-      columns={columns}
-      rows={data?.rows ?? []}
-      total={data?.total ?? 0}
-      page={page}
-      pageSize={PAGE_SIZE}
-      loading={isLoading}
-      search={search}
-      searchPlaceholder="Search by prefix…"
-      filters={[
+    <>
+      {lastIssued && (
+        <div
+          className="mb-3 flex items-center justify-between rounded-lg px-4 py-2.5 text-sm"
+          style={{ background: "rgba(16,185,129,0.08)", border: "1px solid rgba(16,185,129,0.3)", color: "#16a34a" }}
+        >
+          <span>
+            Passcode issued: <code className="font-mono">{lastIssued}</code>
+          </span>
+          <button onClick={() => setLastIssued(null)} className="text-xs">Dismiss</button>
+        </div>
+      )}
+      {productId && (
+        <IssuePasscodeModal
+          open={issueOpen}
+          productSlug={params.slug!}
+          productId={productId}
+          onClose={() => setIssueOpen(false)}
+          onIssued={(r) => setLastIssued(r.passcode_plain)}
+        />
+      )}
+      <DataTable<Passcode>
+        columns={columns}
+        rows={data?.rows ?? []}
+        total={data?.total ?? 0}
+        page={page}
+        pageSize={PAGE_SIZE}
+        loading={isLoading}
+        search={search}
+        searchPlaceholder="Search by prefix…"
+        actions={
+          canCreate ? (
+            <button
+              type="button"
+              onClick={() => setIssueOpen(true)}
+              className="btn-primary text-xs"
+            >
+              <Plus className="h-3.5 w-3.5" /> Issue passcode
+            </button>
+          ) : null
+        }
+        filters={[
         {
           key: "type",
           label: "Type",
@@ -248,6 +284,7 @@ export default function ProductPasscodesPage() {
       onPageChange={setPage}
       rowKey={(r) => r.id}
       empty="No passcodes for this product yet."
-    />
+      />
+    </>
   );
 }
