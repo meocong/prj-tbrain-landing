@@ -52,6 +52,7 @@ export interface CmsPost {
   title: string;
   excerpt: string | null;
   content_md: string | null;
+  content_html: string | null;
   cover_image_url: string | null;
   category: string | null;
   tags: string[] | null;
@@ -63,6 +64,8 @@ export interface CmsPost {
   seo_description: string | null;
   og_image_url: string | null;
   view_count: number;
+  version: number;
+  word_count: number;
   created_at: string;
   updated_at: string;
 }
