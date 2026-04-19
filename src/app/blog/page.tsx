@@ -5,15 +5,15 @@ import { getPosts } from "@/lib/api";
 import { supabaseAdmin } from "@/lib/terminal-bench/supabase/admin";
 import Link from "next/link";
 import type { CmsPost } from "@/lib/admin/types";
+import { Clock, ArrowRight } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Blog",
   description:
-    "Insights on AI training data, RLHF, evaluation, robotics, and building better AI from the Tbrain team.",
+    "Insights on AI training data, robotics, evaluation, and building better AI from the Tbrain team.",
 };
 
 export const dynamic = "force-dynamic";
-export const revalidate = 3600;
 
 function decodeEntities(text: string): string {
   return text
@@ -29,7 +29,6 @@ function decodeEntities(text: string): string {
     .trim();
 }
 
-// Fallback images for WordPress posts that lack featuredImage
 const WP_FALLBACK_IMAGES: Record<string, string> = {
   "tech-terms-tuesday-lets-talk-about-small-language-models-slms": "/images/blog-wp-slm.jpg",
   "are-we-really-about-to-run-out-of-data-for-ai": "/images/blog-wp-data-running-out.jpg",
@@ -44,7 +43,7 @@ type BlogPost = {
   image: string;
   category: string | null;
   source: "cms" | "wordpress";
-  readTime?: string;
+  readTime: string;
 };
 
 function estimateReadTime(text: string): string {
@@ -55,7 +54,6 @@ function estimateReadTime(text: string): string {
 export default async function BlogPage() {
   let posts: BlogPost[] = [];
 
-  // 1. CMS posts (self-authored)
   try {
     const db = supabaseAdmin();
     const { data: cmsPosts } = await db
@@ -71,7 +69,7 @@ export default async function BlogPage() {
         ...cmsPosts.map((p: CmsPost) => ({
           title: p.title,
           slug: p.slug,
-          excerpt: p.excerpt || (p.content_md?.slice(0, 160).replace(/[#*_\[\]]/g, "") + "…") || "",
+          excerpt: p.excerpt || (p.content_md?.slice(0, 200).replace(/[#*_\[\]]/g, "") + "…") || "",
           date: p.published_at || p.created_at,
           image: p.cover_image_url || "/images/blog-rlhf.jpg",
           category: p.category,
@@ -80,11 +78,8 @@ export default async function BlogPage() {
         }))
       );
     }
-  } catch {
-    // DB unavailable
-  }
+  } catch { /* DB unavailable */ }
 
-  // 2. WordPress posts
   try {
     const { edges } = await getPosts({ first: 20 });
     posts.push(
@@ -92,16 +87,14 @@ export default async function BlogPage() {
         const node = e.node;
         const slug = node.slug as string;
         const rawExcerpt = decodeEntities((node.excerpt as string) || "");
-        const categories = node.categories as {
-          edges: { node: { name: string } }[];
-        } | null;
+        const categories = node.categories as { edges: { node: { name: string } }[] } | null;
         const catName = categories?.edges?.[0]?.node?.name ?? null;
         const wpImage = (node.featuredImage as { node?: { sourceUrl?: string } } | null)?.node?.sourceUrl;
 
         return {
           title: decodeEntities((node.title as string) || ""),
           slug,
-          excerpt: rawExcerpt.length > 160 ? rawExcerpt.slice(0, 160) + "…" : rawExcerpt,
+          excerpt: rawExcerpt.length > 200 ? rawExcerpt.slice(0, 200) + "…" : rawExcerpt,
           date: node.date as string,
           image: wpImage || WP_FALLBACK_IMAGES[slug] || "/images/blog-rlhf.jpg",
           category: catName && catName.toLowerCase() !== "uncategorized" ? catName : null,
@@ -110,9 +103,7 @@ export default async function BlogPage() {
         };
       })
     );
-  } catch {
-    // WordPress unavailable
-  }
+  } catch { /* WordPress unavailable */ }
 
   posts.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
@@ -122,90 +113,111 @@ export default async function BlogPage() {
   return (
     <div>
       <Header />
-      <main className="pb-24 pt-32">
-        <section className="container mx-auto px-3">
-          <div className="text-center">
-            <h1 className="text-4xl font-medium md:text-5xl" style={{ fontFamily: "var(--font-heading)" }}>
-              <span className="gradient-text">Blog</span>
-            </h1>
-            <p className="mx-auto mt-4 max-w-xl text-lg text-[#78818f]">
-              Insights on AI training data, robotics, evaluation, and building better AI.
-            </p>
-          </div>
+      <main className="pb-32 pt-32">
+        <div className="mx-auto max-w-[780px] px-6">
+          {/* Header */}
+          <h1
+            className="text-4xl font-bold tracking-tight md:text-5xl"
+            style={{ fontFamily: "var(--font-heading)", color: "#0e1b2e", letterSpacing: "-0.03em" }}
+          >
+            Blog
+          </h1>
+          <p className="mt-4 text-xl leading-relaxed" style={{ color: "#6b7280" }}>
+            Insights on AI training data, robotics, evaluation, and building better AI.
+          </p>
 
-          {/* Featured post — large, Medium-style */}
+          <div className="mt-12 h-px bg-gray-200" />
+
+          {/* Featured post */}
           {featured && (
             <Link
               href={featured.source === "cms" ? `/blog/${featured.slug}` : `/news/${featured.slug}`}
-              className="mx-auto mt-16 block max-w-4xl group"
+              className="group mt-12 block"
             >
-              <div className="overflow-hidden rounded-2xl">
+              <div className="overflow-hidden rounded-xl">
                 <img
                   src={featured.image}
                   alt={featured.title}
-                  className="h-[400px] w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  className="aspect-[2/1] w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
                 />
               </div>
-              <div className="mt-6">
-                <div className="flex items-center gap-3 text-sm" style={{ color: "var(--text-muted)" }}>
+              <div className="mt-8">
+                <div className="flex items-center gap-3 text-sm" style={{ color: "#6b7280" }}>
                   {featured.category && (
-                    <span className="rounded-full bg-purple-50 px-3 py-1 text-xs font-medium text-purple-600">
-                      {featured.category}
-                    </span>
+                    <span className="font-medium text-[#6C3CF4]">{featured.category}</span>
                   )}
-                  <span>{new Date(featured.date).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}</span>
-                  <span>{featured.readTime}</span>
+                  <span>
+                    {new Date(featured.date).toLocaleDateString("en-US", {
+                      year: "numeric",
+                      month: "long",
+                      day: "numeric",
+                    })}
+                  </span>
+                  <span className="flex items-center gap-1">
+                    <Clock className="h-3.5 w-3.5" />
+                    {featured.readTime}
+                  </span>
                 </div>
                 <h2
-                  className="mt-3 text-2xl font-semibold leading-tight md:text-3xl group-hover:text-[#6C3CF4] transition-colors"
-                  style={{ fontFamily: "var(--font-heading)", color: "var(--text-primary)" }}
+                  className="mt-3 text-[28px] font-bold leading-tight tracking-tight group-hover:text-[#6C3CF4] transition-colors duration-300 md:text-[32px]"
+                  style={{ fontFamily: "var(--font-heading)", color: "#0e1b2e", letterSpacing: "-0.02em" }}
                 >
                   {featured.title}
                 </h2>
-                <p className="mt-3 text-base leading-relaxed line-clamp-3" style={{ color: "var(--text-secondary)" }}>
+                <p className="mt-4 text-lg leading-relaxed" style={{ color: "#6b7280" }}>
                   {featured.excerpt}
                 </p>
+                <span className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-[#6C3CF4] group-hover:gap-2 transition-all">
+                  Read more <ArrowRight className="h-4 w-4" />
+                </span>
               </div>
             </Link>
           )}
 
-          {/* Divider */}
-          <div className="mx-auto my-16 max-w-4xl border-t border-gray-200" />
+          <div className="mt-14 h-px bg-gray-200" />
 
-          {/* Rest of posts — 2 column grid */}
-          <div className="mx-auto grid max-w-4xl grid-cols-1 gap-10 md:grid-cols-2">
+          {/* Post list — single column, generous spacing (Medium-style) */}
+          <div className="mt-10 space-y-12">
             {rest.map((post) => (
               <Link
                 key={post.slug}
                 href={post.source === "cms" ? `/blog/${post.slug}` : `/news/${post.slug}`}
-                className="group"
+                className="group flex gap-6 md:gap-8"
               >
-                <div className="overflow-hidden rounded-xl">
-                  <img
-                    src={post.image}
-                    alt={post.title}
-                    className="h-52 w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                  />
-                </div>
-                <div className="mt-4">
-                  <div className="flex items-center gap-2 text-xs" style={{ color: "var(--text-muted)" }}>
+                {/* Text */}
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-center gap-2 text-sm" style={{ color: "#6b7280" }}>
                     {post.category && (
-                      <span className="rounded-full bg-purple-50 px-2 py-0.5 text-[10px] font-medium text-purple-600">
-                        {post.category}
-                      </span>
+                      <span className="font-medium text-[#6C3CF4]">{post.category}</span>
                     )}
-                    <span>{new Date(post.date).toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" })}</span>
-                    <span>{post.readTime}</span>
+                    <span>
+                      {new Date(post.date).toLocaleDateString("en-US", {
+                        month: "short",
+                        day: "numeric",
+                      })}
+                    </span>
                   </div>
                   <h3
-                    className="mt-2 text-lg font-semibold leading-snug line-clamp-2 group-hover:text-[#6C3CF4] transition-colors"
-                    style={{ fontFamily: "var(--font-heading)", color: "var(--text-primary)" }}
+                    className="mt-2 text-xl font-bold leading-snug tracking-tight group-hover:text-[#6C3CF4] transition-colors duration-300"
+                    style={{ fontFamily: "var(--font-heading)", color: "#0e1b2e", letterSpacing: "-0.01em" }}
                   >
                     {post.title}
                   </h3>
-                  <p className="mt-2 text-sm line-clamp-3 leading-relaxed" style={{ color: "var(--text-secondary)" }}>
+                  <p className="mt-2 text-base leading-relaxed line-clamp-2" style={{ color: "#6b7280" }}>
                     {post.excerpt}
                   </p>
+                  <div className="mt-3 flex items-center gap-1 text-sm" style={{ color: "#9ca3af" }}>
+                    <Clock className="h-3.5 w-3.5" />
+                    {post.readTime}
+                  </div>
+                </div>
+                {/* Image */}
+                <div className="w-32 shrink-0 md:w-44">
+                  <img
+                    src={post.image}
+                    alt=""
+                    className="h-24 w-full rounded-lg object-cover md:h-32"
+                  />
                 </div>
               </Link>
             ))}
@@ -213,10 +225,10 @@ export default async function BlogPage() {
 
           {posts.length === 0 && (
             <div className="mt-16 text-center">
-              <p className="text-lg" style={{ color: "var(--text-muted)" }}>No posts yet.</p>
+              <p className="text-lg" style={{ color: "#9ca3af" }}>No posts yet.</p>
             </div>
           )}
-        </section>
+        </div>
       </main>
       <Footer />
     </div>

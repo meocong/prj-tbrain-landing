@@ -70,7 +70,7 @@ export default async function BlogPostPage({
     <div>
       <Header />
       <main className="pb-24 pt-32">
-        <article className="container mx-auto max-w-3xl px-3">
+        <article className="mx-auto max-w-[720px] px-6">
           {/* Back link */}
           <Link
             href="/blog"
@@ -102,8 +102,8 @@ export default async function BlogPostPage({
             </div>
 
             <h1
-              className="mt-4 text-3xl font-semibold leading-tight md:text-4xl"
-              style={{ fontFamily: "var(--font-heading)", color: "var(--text-primary)" }}
+              className="mt-4 text-[32px] font-bold leading-[1.2] tracking-tight md:text-[42px]"
+              style={{ fontFamily: "var(--font-heading)", color: "#0e1b2e", letterSpacing: "-0.03em" }}
             >
               {post.title}
             </h1>
@@ -134,7 +134,7 @@ export default async function BlogPostPage({
 
           {/* Content */}
           {post.content_md && (
-            <div className="prose prose-lg mt-10 max-w-none prose-headings:font-semibold prose-a:text-[#6C3CF4]">
+            <div className="prose prose-lg mt-12 max-w-none prose-headings:font-bold prose-headings:tracking-tight prose-h2:text-[26px] prose-h2:mt-12 prose-h2:mb-4 prose-h3:text-[20px] prose-h3:mt-8 prose-p:text-[18px] prose-p:leading-[1.8] prose-p:text-[#374151] prose-li:text-[18px] prose-li:leading-[1.8] prose-a:text-[#6C3CF4] prose-img:rounded-xl prose-img:my-8 prose-blockquote:border-l-[#6C3CF4] prose-blockquote:text-[#6b7280] prose-blockquote:italic">
               <ReactMarkdown remarkPlugins={[remarkGfm]}>
                 {post.content_md}
               </ReactMarkdown>
