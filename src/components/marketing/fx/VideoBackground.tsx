@@ -17,7 +17,7 @@ export function VideoBackground({
   srcMp4,
   poster,
   className,
-  overlay = "radial-gradient(ellipse at center, transparent 10%, rgba(2,6,23,0.55) 60%, rgba(2,6,23,0.92) 100%)",
+  overlay = "radial-gradient(ellipse at center, rgba(2,6,23,0.5) 0%, rgba(2,6,23,0.78) 55%, rgba(2,6,23,0.96) 100%)",
 }: {
   src: string;
   srcMp4?: string;
@@ -100,7 +100,7 @@ export function VideoBackground({
           poster={poster}
           onError={() => setFailed(true)}
           className="absolute inset-0 h-full w-full object-cover"
-          style={{ opacity: 0.9 }}
+          style={{ opacity: 0.55 }}
         >
           <source src={src} type="video/webm" />
           {srcMp4 && <source src={srcMp4} type="video/mp4" />}
