@@ -677,4 +677,96 @@ h1, h2, h3, h4, h5, h6 {
   }
   .skeleton { animation: none !important; }
   .hover-lift:hover { transform: none !important; }
+  .pillar-joint, .pillar-bar, .pillar-pixel, .pillar-trail,
+  .pillar-typewriter, .pillar-caret, .pillar-text-bar,
+  .pillar-chart-line, .pillar-chart-dot {
+    animation: none !important;
+  }
+}
+
+/* ── Pillar visual animations (ProductPillarsSection) ── */
+.pillar-joint {
+  transform-origin: center;
+  animation: pillarJointPulse 2.4s ease-in-out infinite;
+}
+@keyframes pillarJointPulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50%      { transform: scale(1.7); opacity: 0.75; }
+}
+
+.pillar-trail {
+  stroke-dasharray: 3 4;
+  animation: pillarTrail 3.5s linear infinite;
+}
+@keyframes pillarTrail {
+  0%   { stroke-dashoffset: 0; }
+  100% { stroke-dashoffset: -50; }
+}
+
+.pillar-bar {
+  height: 22%;
+  transform-origin: bottom;
+  animation: pillarBar 1.4s ease-in-out infinite;
+}
+@keyframes pillarBar {
+  0%, 100% { height: 22%; opacity: 0.45; }
+  30%      { height: 78%; opacity: 0.95; }
+  60%      { height: 48%; opacity: 0.7;  }
+}
+
+.pillar-pixel {
+  animation: pillarPixel 2.6s ease-in-out infinite;
+}
+@keyframes pillarPixel {
+  0%, 80%, 100% { opacity: 0.2; transform: scale(1); }
+  10%           { opacity: 1;   transform: scale(1.06); }
+}
+
+.pillar-typewriter {
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  width: 0;
+  animation: pillarType 2.4s steps(48, end) infinite;
+}
+@keyframes pillarType {
+  0%        { width: 0; }
+  40%, 60%  { width: 100%; }
+  100%      { width: 0; }
+}
+
+.pillar-caret {
+  display: inline-block;
+  margin-left: 2px;
+  animation: pillarCaret 0.9s steps(2, end) infinite;
+}
+@keyframes pillarCaret {
+  50% { opacity: 0; }
+}
+
+.pillar-text-bar {
+  transform-origin: left center;
+  animation: pillarTextBar 1.8s ease-out infinite;
+}
+@keyframes pillarTextBar {
+  0%   { transform: scaleX(0); opacity: 0.4; }
+  50%  { transform: scaleX(1); opacity: 1; }
+  100% { transform: scaleX(1); opacity: 0.7; }
+}
+
+.pillar-chart-line {
+  stroke-dasharray: 500;
+  stroke-dashoffset: 500;
+  animation: pillarChart 3s ease-out forwards;
+}
+@keyframes pillarChart {
+  to { stroke-dashoffset: 0; }
+}
+
+.pillar-chart-dot {
+  opacity: 0;
+  animation: pillarChartDot 0.4s ease-out forwards;
+}
+@keyframes pillarChartDot {
+  to { opacity: 1; }
 }

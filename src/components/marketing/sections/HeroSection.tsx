@@ -2,7 +2,7 @@
 
 import { motion, useReducedMotion } from "framer-motion";
 import { ArrowRight, Sparkles, ChevronDown } from "lucide-react";
-import { PlasmaBackground } from "@/components/marketing/fx/PlasmaBackground";
+import { VideoBackground } from "@/components/marketing/fx/VideoBackground";
 import { KineticHeadline, FadeIn } from "@/components/marketing/fx/KineticText";
 import { MagneticButton } from "@/components/marketing/fx/MagneticButton";
 
@@ -15,8 +15,23 @@ export function HeroSection() {
       className="relative overflow-hidden"
       style={{ background: "#020617", minHeight: "100vh", color: "white" }}
     >
-      {/* Animated shader background */}
-      <PlasmaBackground className="inset-0" />
+      {/* Cinematic video background with dark overlay */}
+      <VideoBackground
+        src="/videos/hero-ambient.webm"
+        srcMp4="/videos/hero-ambient.mp4"
+        poster="/images/humanoid-ai.jpg"
+      />
+      {/* Gradient wash for brand color on top of video */}
+      <div
+        aria-hidden
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background:
+            "radial-gradient(ellipse 90% 70% at 20% 30%, rgba(108,60,244,0.28) 0%, transparent 55%)," +
+            "radial-gradient(ellipse 80% 60% at 80% 70%, rgba(16,185,129,0.18) 0%, transparent 55%)",
+          mixBlendMode: "screen",
+        }}
+      />
 
       {/* Subtle grid overlay */}
       <div

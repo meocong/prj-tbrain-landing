@@ -193,6 +193,10 @@ export function ProductPillarsSection() {
 
 function PillarVisual({ kind, accent }: { kind: string; accent: string }) {
   if (kind === "physical") {
+    const JOINTS = [
+      [280, 70], [280, 100], [280, 160], [235, 140], [325, 140],
+      [215, 180], [350, 175], [255, 225], [305, 225], [245, 275], [320, 275],
+    ] as const;
     return (
       <div aria-hidden className="absolute inset-0 flex items-end justify-end pointer-events-none opacity-70">
         <svg viewBox="0 0 400 300" className="h-full w-auto" style={{ color: accent, filter: `drop-shadow(0 0 20px ${accent}55)` }}>
@@ -207,72 +211,101 @@ function PillarVisual({ kind, accent }: { kind: string; accent: string }) {
             <line x1="280" y1="160" x2="305" y2="225" />
             <line x1="255" y1="225" x2="245" y2="275" />
             <line x1="305" y1="225" x2="320" y2="275" />
-            {[
-              [280, 70], [280, 100], [280, 160], [235, 140], [325, 140],
-              [215, 180], [350, 175], [255, 225], [305, 225], [245, 275], [320, 275],
-            ].map(([cx, cy], i) => (
-              <circle key={i} cx={cx} cy={cy} r="2.4" />
+            {JOINTS.map(([cx, cy], i) => (
+              <circle key={i} cx={cx} cy={cy} r="2.4" className="pillar-joint" style={{ animationDelay: `${i * 0.18}s` }} />
             ))}
           </g>
-          <path d="M 100 250 Q 150 180, 200 220 T 300 200" fill="none" stroke="currentColor" strokeWidth="1" strokeDasharray="3 4" opacity="0.4" />
+          <path className="pillar-trail" d="M 100 250 Q 150 180, 200 220 T 300 200" fill="none" stroke="currentColor" strokeWidth="1.2" strokeDasharray="3 4" opacity="0.45" />
         </svg>
       </div>
     );
   }
+
   if (kind === "terminal") {
+    const LINES = [
+      { color: "#64748B", text: "$ tb run --task agent.clone" },
+      { color: accent,    text: "→ step 3/7 · search_docs(\"memory\")" },
+      { color: "#10B981", text: "✓ test 4 passed" },
+    ];
     return (
-      <div aria-hidden className="absolute inset-x-0 bottom-0 pointer-events-none opacity-50">
-        <div className="mx-6 mb-6 rounded-lg p-3 text-[10px] font-mono leading-relaxed" style={{ background: "rgba(0,0,0,0.4)", color: accent, border: "1px solid rgba(255,255,255,0.08)" }}>
-          <div style={{ color: "#64748B" }}>$ tb run --task agent.clone</div>
-          <div>→ step 3/7 · search_docs(&quot;memory&quot;)</div>
-          <div style={{ color: "#10B981" }}>✓ test 4 passed</div>
+      <div aria-hidden className="absolute inset-x-0 bottom-0 pointer-events-none opacity-60">
+        <div
+          className="mx-6 mb-6 rounded-lg p-3 text-[10px] font-mono leading-relaxed overflow-hidden"
+          style={{ background: "rgba(0,0,0,0.55)", border: "1px solid rgba(255,255,255,0.08)" }}
+        >
+          {LINES.map((l, i) => (
+            <div key={i} className="pillar-typewriter" style={{ color: l.color, animationDelay: `${i * 0.8}s` }}>
+              {l.text}
+              <span className="pillar-caret" style={{ color: accent }}>▍</span>
+            </div>
+          ))}
         </div>
       </div>
     );
   }
+
   if (kind === "video") {
     return (
-      <div aria-hidden className="absolute inset-x-0 bottom-0 pointer-events-none opacity-60">
-        <div className="mx-6 mb-6 flex h-12 items-center gap-px rounded" style={{ background: "rgba(0,0,0,0.3)" }}>
-          {Array.from({ length: 42 }).map((_, i) => (
+      <div aria-hidden className="absolute inset-x-0 bottom-0 pointer-events-none opacity-70">
+        <div className="mx-6 mb-6 flex h-14 items-end gap-[2px] rounded" style={{ background: "rgba(0,0,0,0.3)" }}>
+          {Array.from({ length: 38 }).map((_, i) => (
             <span
               key={i}
-              className="flex-1"
-              style={{ background: accent, height: `${30 + Math.sin(i * 0.4) * 40}%`, opacity: 0.4 + ((i * 13) % 6) / 10 }}
+              className="flex-1 pillar-bar"
+              style={{
+                background: accent,
+                animationDelay: `${(i * 0.06) % 1.2}s`,
+                boxShadow: `0 0 6px ${accent}55`,
+              }}
             />
           ))}
         </div>
       </div>
     );
   }
+
   if (kind === "image") {
     return (
-      <div aria-hidden className="absolute right-6 bottom-6 grid grid-cols-3 gap-1 pointer-events-none opacity-60">
-        {Array.from({ length: 9 }).map((_, i) => (
+      <div aria-hidden className="absolute right-6 bottom-6 grid grid-cols-4 gap-1 pointer-events-none opacity-70">
+        {Array.from({ length: 16 }).map((_, i) => (
           <span
             key={i}
-            className="block h-5 w-5 rounded-sm"
-            style={{ background: i % 3 === 0 ? accent : `${accent}33`, border: `1px solid ${accent}55` }}
+            className="block h-5 w-5 rounded-sm pillar-pixel"
+            style={{
+              background: `${accent}55`,
+              border: `1px solid ${accent}66`,
+              animationDelay: `${(i * 0.08) % 1.5}s`,
+            }}
           />
         ))}
       </div>
     );
   }
+
   if (kind === "text") {
     return (
-      <div aria-hidden className="absolute inset-x-0 bottom-0 pointer-events-none opacity-55">
+      <div aria-hidden className="absolute inset-x-0 bottom-0 pointer-events-none opacity-65">
         <div className="mx-6 mb-6 space-y-1.5">
-          {[80, 65, 90, 55].map((w, i) => (
-            <div key={i} className="h-1.5 rounded-full" style={{ width: `${w}%`, background: i === 2 ? accent : "rgba(255,255,255,0.18)" }} />
+          {[85, 62, 92, 54].map((w, i) => (
+            <div
+              key={i}
+              className="h-1.5 rounded-full pillar-text-bar"
+              style={{
+                width: `${w}%`,
+                background: i === 2 ? accent : "rgba(255,255,255,0.22)",
+                animationDelay: `${i * 0.35}s`,
+              }}
+            />
           ))}
         </div>
       </div>
     );
   }
+
   if (kind === "qc") {
     return (
-      <div aria-hidden className="absolute inset-0 flex items-end justify-end pointer-events-none opacity-60">
-        <svg viewBox="0 0 400 280" className="h-full w-auto" style={{ color: accent, filter: `drop-shadow(0 0 20px ${accent}44)` }}>
+      <div aria-hidden className="absolute inset-0 flex items-end justify-end pointer-events-none opacity-70">
+        <svg viewBox="0 0 400 280" className="h-full w-auto" style={{ color: accent, filter: `drop-shadow(0 0 20px ${accent}55)` }}>
           <defs>
             <linearGradient id="qcGrad" x1="0" y1="0" x2="0" y2="1">
               <stop offset="0%" stopColor="currentColor" stopOpacity="0.4" />
@@ -280,9 +313,24 @@ function PillarVisual({ kind, accent }: { kind: string; accent: string }) {
             </linearGradient>
           </defs>
           <path d="M 20 220 Q 80 200, 120 180 T 240 120 T 380 60 L 380 240 L 20 240 Z" fill="url(#qcGrad)" />
-          <path d="M 20 220 Q 80 200, 120 180 T 240 120 T 380 60" fill="none" stroke="currentColor" strokeWidth="2" />
+          <path
+            className="pillar-chart-line"
+            d="M 20 220 Q 80 200, 120 180 T 240 120 T 380 60"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2.2"
+            strokeLinecap="round"
+          />
           {[[120, 180], [180, 155], [240, 120], [310, 85], [380, 60]].map(([cx, cy], i) => (
-            <circle key={i} cx={cx} cy={cy} r="3.5" fill="currentColor" />
+            <circle
+              key={i}
+              cx={cx}
+              cy={cy}
+              r="3.5"
+              fill="currentColor"
+              className="pillar-chart-dot"
+              style={{ animationDelay: `${0.4 + i * 0.15}s` }}
+            />
           ))}
         </svg>
       </div>
