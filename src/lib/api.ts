@@ -78,8 +78,15 @@ export const getPostDetail = async ({
         id
         title
         content
+        excerpt
         slug
         date
+        featuredImage {
+          node {
+            sourceUrl
+            altText
+          }
+        }
         categories {
           edges {
             node {
