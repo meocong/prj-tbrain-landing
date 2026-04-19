@@ -2,11 +2,14 @@ import {
   LayoutDashboard,
   FileText,
   Users,
+  UsersRound,
   KeyRound,
   ScrollText,
   Inbox,
   Settings,
   Database,
+  FolderOpen,
+  CheckSquare,
   type LucideIcon,
 } from "lucide-react";
 
@@ -47,6 +50,24 @@ export const ADMIN_NAV: NavItem[] = [
     href: "/admin/requests",
     icon: Inbox,
     permission: "requests.view",
+  },
+  {
+    label: "Approvals",
+    href: "/admin/approvals",
+    icon: CheckSquare,
+    permission: "approvals.view",
+  },
+  {
+    label: "Groups",
+    href: "/admin/groups",
+    icon: UsersRound,
+    permission: "groups.view",
+  },
+  {
+    label: "Files",
+    href: "/admin/files",
+    icon: FolderOpen,
+    permission: "files.view",
   },
   {
     label: "Audit Log",

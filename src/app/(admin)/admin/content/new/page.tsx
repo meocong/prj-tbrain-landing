@@ -5,12 +5,15 @@ import { useMutation } from "@tanstack/react-query";
 import { supabaseAdmin } from "@/lib/admin/supabase-browser";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
-import { ArrowLeft, Save, Globe, Clock, FileText } from "lucide-react";
+import { ArrowLeft, Save, Globe, Clock, FileText, SendHorizonal } from "lucide-react";
 import Link from "next/link";
 import { TipTapEditor } from "@/components/admin/editor/TipTapEditor";
+import { useAdminAuth, useHasPermission } from "@/lib/admin/auth-context";
 
 export default function NewPostPage() {
   const router = useRouter();
+  const { adminUser } = useAdminAuth();
+  const canPublish = useHasPermission("content.publish");
   const [title, setTitle] = useState("");
   const [contentHtml, setContentHtml] = useState("");
   const [wordCount, setWordCount] = useState(0);
@@ -31,9 +34,9 @@ export default function NewPostPage() {
   const readTime = Math.max(1, Math.ceil(wordCount / 200));
 
   const saveMutation = useMutation({
-    mutationFn: async (status: "draft" | "published") => {
+    mutationFn: async (status: "draft" | "published" | "pending_review") => {
       const slug = form.slug || autoSlug(title);
-      const { error } = await supabaseAdmin.from("cms_posts").insert({
+      const { data: inserted, error } = await supabaseAdmin.from("cms_posts").insert({
         title,
         slug,
         excerpt: form.excerpt || null,
@@ -42,15 +45,25 @@ export default function NewPostPage() {
         cover_image_url: form.coverImageUrl || null,
         category: form.category || null,
         tags: form.tags ? form.tags.split(",").map((t) => t.trim()).filter(Boolean) : null,
+        author_id: adminUser?.id || null,
         author_name: form.authorName || null,
-        status,
+        status: status === "pending_review" ? "draft" : status,
         published_at: status === "published" ? new Date().toISOString() : null,
         seo_title: form.seoTitle || null,
         seo_description: form.seoDescription || null,
         word_count: wordCount,
         version: 1,
-      });
+      }).select("id").single();
       if (error) throw error;
+
+      // If submitting for review, create approval request
+      if (status === "pending_review" && inserted) {
+        await supabaseAdmin.from("approval_requests").insert({
+          resource_type: "post",
+          resource_id: inserted.id,
+          submitted_by: adminUser?.id,
+        });
+      }
     },
     onSuccess: (_, status) => {
       toast.success(status === "published" ? "Published!" : "Draft saved");
@@ -108,13 +121,23 @@ export default function NewPostPage() {
               >
                 <Save className="h-3.5 w-3.5" /> Save Draft
               </button>
-              <button
-                onClick={() => saveMutation.mutate("published")}
-                disabled={saveMutation.isPending || !title}
-                className="btn-primary flex-1 justify-center text-sm"
-              >
-                <Globe className="h-3.5 w-3.5" /> Publish
-              </button>
+              {canPublish ? (
+                <button
+                  onClick={() => saveMutation.mutate("published")}
+                  disabled={saveMutation.isPending || !title}
+                  className="btn-primary flex-1 justify-center text-sm"
+                >
+                  <Globe className="h-3.5 w-3.5" /> Publish
+                </button>
+              ) : (
+                <button
+                  onClick={() => saveMutation.mutate("pending_review")}
+                  disabled={saveMutation.isPending || !title}
+                  className="btn-primary flex-1 justify-center text-sm"
+                >
+                  <SendHorizonal className="h-3.5 w-3.5" /> Submit
+                </button>
+              )}
             </div>
           </div>
 
