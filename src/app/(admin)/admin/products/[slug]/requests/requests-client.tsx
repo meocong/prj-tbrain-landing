@@ -14,7 +14,7 @@ type RequestRow = {
   company: string | null;
   status: string;
   message: string | null;
-  created_at: string;
+  requested_at: string;
   reviewed_at: string | null;
   batch?: { slug: string; name: string } | null;
 };
@@ -84,10 +84,10 @@ export function RequestsClient({ initial }: { initial: ListResult<RequestRow> })
       ),
     },
     {
-      key: "created_at",
+      key: "requested_at",
       header: "Requested",
       sortable: true,
-      render: (r) => <span className="text-xs" style={{ color: "var(--text-muted)" }}>{new Date(r.created_at).toLocaleDateString()}</span>,
+      render: (r) => <span className="text-xs" style={{ color: "var(--text-muted)" }}>{new Date(r.requested_at).toLocaleDateString()}</span>,
     },
     {
       key: "actions",

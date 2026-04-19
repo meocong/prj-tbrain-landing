@@ -111,7 +111,7 @@ export async function getProductBySlug(slug: string) {
   await requireAdmin();
   const db = supabaseAdmin();
   const { data } = await db.from("products").select("*").eq("slug", slug).maybeSingle();
-  return data as { id: string; slug: string; name: string; description: string | null; site_url: string | null; sample_type: string | null; is_active: boolean } | null;
+  return data as { id: string; slug: string; name: string; description: string | null; site_url: string | null; sample_type: string | null; is_active: boolean; created_at: string; updated_at: string } | null;
 }
 
 /** Product stats (server-only, single round-trip). */

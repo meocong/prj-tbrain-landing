@@ -1,7 +1,10 @@
 import { notFound } from "next/navigation";
 import { listAdminResource, getProductBySlug } from "@/lib/admin/server/list";
+import { supabaseAdmin } from "@/lib/terminal-bench/supabase/admin";
+import { KpiStrip } from "@/components/admin/ui/kpi-strip";
 import { PasscodesClient } from "./passcodes-client";
 import type { Passcode } from "@/lib/admin/types";
+import { KeyRound, User, Ban, Clock } from "lucide-react";
 
 export const dynamic = "force-dynamic";
 
@@ -43,5 +46,26 @@ export default async function Page({
     spWithProduct
   );
 
-  return <PasscodesClient initial={initial} productSlug={slug} productId={product.id} />;
+  const db = supabaseAdmin();
+  const now = new Date().toISOString();
+  const [active, shared, revoked, expiringSoon] = await Promise.all([
+    db.from("passcodes").select("id", { count: "exact", head: true }).eq("product_id", product.id).is("revoked_at", null),
+    db.from("passcodes").select("id", { count: "exact", head: true }).eq("product_id", product.id).is("client_id", null).is("revoked_at", null),
+    db.from("passcodes").select("id", { count: "exact", head: true }).eq("product_id", product.id).not("revoked_at", "is", null),
+    db.from("passcodes").select("id", { count: "exact", head: true }).eq("product_id", product.id).is("revoked_at", null).gte("expires_at", now).lte("expires_at", new Date(Date.now() + 7 * 86400_000).toISOString()),
+  ]);
+
+  return (
+    <>
+      <KpiStrip
+        items={[
+          { label: "Active", value: active.count ?? 0, icon: KeyRound, accent: "success" },
+          { label: "Shared codes", value: shared.count ?? 0, icon: User, accent: "primary" },
+          { label: "Expiring ≤ 7d", value: expiringSoon.count ?? 0, icon: Clock, accent: "warning" },
+          { label: "Revoked", value: revoked.count ?? 0, icon: Ban, accent: "error" },
+        ]}
+      />
+      <PasscodesClient initial={initial} productSlug={slug} productId={product.id} />
+    </>
+  );
 }
