@@ -90,7 +90,7 @@ export default function NewPostPage() {
               if (!form.slug) setForm((f) => ({ ...f, slug: autoSlug(e.target.value) }));
             }}
             placeholder="Post title"
-            className="w-full border-0 bg-transparent text-[32px] font-bold tracking-tight outline-none placeholder:text-gray-300"
+            className="w-full border-0 bg-transparent text-[32px] font-bold tracking-tight outline-none placeholder:text-[color:var(--text-muted)]"
             style={{ fontFamily: "var(--font-heading)", color: "var(--text-primary)", letterSpacing: "-0.02em" }}
           />
 

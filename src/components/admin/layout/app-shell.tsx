@@ -6,10 +6,18 @@ import { Loader2, Sun, Moon } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
+const THEME_KEY = "tbrain-admin-theme";
+
 export function AdminShell({ children }: { children: React.ReactNode }) {
   const { adminUser, loading } = useAdminAuth();
   const router = useRouter();
-  const [isDark, setIsDark] = useState(true);
+  const [isDark, setIsDark] = useState<boolean>(() => {
+    if (typeof window === "undefined") return true;
+    const saved = window.localStorage.getItem(THEME_KEY);
+    if (saved === "light") return false;
+    if (saved === "dark") return true;
+    return !window.matchMedia?.("(prefers-color-scheme: light)").matches;
+  });
 
   useEffect(() => {
     if (!loading && !adminUser) {
@@ -24,6 +32,7 @@ export function AdminShell({ children }: { children: React.ReactNode }) {
     } else {
       root.classList.remove("dark");
     }
+    window.localStorage.setItem(THEME_KEY, isDark ? "dark" : "light");
   }, [isDark]);
 
   if (loading) {

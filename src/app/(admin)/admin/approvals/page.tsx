@@ -138,7 +138,10 @@ export default function ApprovalsPage() {
                       </Link>
                     )}
                     {r.review_note ? (
-                      <p className="mt-2 rounded-lg bg-gray-50 px-3 py-2 text-xs italic" style={{ color: "var(--text-secondary)" }}>
+                      <p
+                        className="mt-2 rounded-lg px-3 py-2 text-xs italic"
+                        style={{ background: "var(--bg-input)", color: "var(--text-secondary)" }}
+                      >
                         Note: {String(r.review_note)}
                       </p>
                     ) : null}
