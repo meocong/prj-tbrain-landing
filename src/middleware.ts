@@ -52,8 +52,9 @@ export async function middleware(req: NextRequest) {
 
   // ── Admin routes ──
   if (pathname.startsWith("/admin")) {
-    // Admin login page is always public
+    // Admin login + auth callback are always public
     if (pathname === "/admin/login") return NextResponse.next();
+    if (pathname.startsWith("/admin/auth/")) return NextResponse.next();
 
     const ok = await isAdminAuthenticated(req);
     if (ok) return NextResponse.next();
