@@ -87,8 +87,7 @@ export default async function PostDetailPage({ params }: PostPageProps) {
   const heroAlt = post.featuredImage?.node?.altText ?? post.title;
   const cleanedContent = cleanHashtagSoup(post.content);
 
-  const primaryCategory = post.categories.edges[0]?.node.slug ?? "";
-  const { edges: relatedEdges } = await getPosts({ first: 4, categorySlug: primaryCategory });
+  const { edges: relatedEdges } = await getPosts({ first: 8 });
   const related = relatedEdges
     .map((e) => e.node)
     .filter((p) => p.slug !== post.slug)
@@ -222,7 +221,7 @@ export default async function PostDetailPage({ params }: PostPageProps) {
                   href={`/news/${r.slug}`}
                   className="group block rounded-3xl overflow-hidden bg-white shadow hover:shadow-xl transition-all"
                 >
-                  <div className="relative w-full aspect-[16/10] overflow-hidden bg-[#f4f6fb]">
+                  <div className="relative w-full aspect-[16/10] overflow-hidden bg-[#020617]">
                     {r.featuredImage?.node?.sourceUrl ? (
                       <Image
                         src={r.featuredImage.node.sourceUrl}
@@ -232,7 +231,23 @@ export default async function PostDetailPage({ params }: PostPageProps) {
                         className="object-cover transition-transform duration-500 group-hover:scale-105"
                       />
                     ) : (
-                      <div className="absolute inset-0 bg-gradient-to-br from-[#6c3cf4]/10 to-[#10B981]/10" />
+                      <>
+                        <div
+                          className="absolute inset-0"
+                          style={{
+                            background:
+                              "radial-gradient(ellipse 80% 80% at 30% 30%, rgba(108,60,244,0.7) 0%, transparent 60%), radial-gradient(ellipse 60% 60% at 80% 80%, rgba(16,185,129,0.5) 0%, transparent 55%), #020617",
+                          }}
+                        />
+                        <div className="absolute inset-0 flex items-center justify-center p-5">
+                          <div
+                            className="text-white text-base md:text-lg font-semibold tracking-tight leading-snug line-clamp-3 text-center"
+                            style={{ fontFamily: "var(--font-heading)" }}
+                          >
+                            {r.title}
+                          </div>
+                        </div>
+                      </>
                     )}
                   </div>
                   <div className="p-5">

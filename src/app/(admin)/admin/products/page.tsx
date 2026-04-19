@@ -1,6 +1,9 @@
 import { listAdminResource } from "@/lib/admin/server/list";
+import { getProductsStats } from "@/lib/admin/server/stats";
 import { ProductsClient } from "./products-client";
 import type { Product } from "@/lib/admin/types";
+import { KpiStrip } from "@/components/admin/ui/kpi-strip";
+import { Package, CheckCircle2, Database, FileText } from "lucide-react";
 
 export const dynamic = "force-dynamic";
 
@@ -10,7 +13,7 @@ export default async function ProductsPage({
   searchParams: Promise<Record<string, string | string[] | undefined>>;
 }) {
   const params = await searchParams;
-  const initial = await listAdminResource<Product>(
+  const [initial, stats] = await Promise.all([listAdminResource<Product>(
     {
       table: "products",
       permCode: "data.view",
@@ -22,7 +25,7 @@ export default async function ProductsPage({
       },
     },
     params
-  );
+  ), getProductsStats()]);
 
   return (
     <div className="animate-[fadeIn_0.3s_ease-out]">

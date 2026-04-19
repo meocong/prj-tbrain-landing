@@ -1,5 +1,8 @@
 import { listAdminResource } from "@/lib/admin/server/list";
+import { getEmailTemplatesStats } from "@/lib/admin/server/stats";
 import { TemplatesClient } from "./templates-client";
+import { KpiStrip } from "@/components/admin/ui/kpi-strip";
+import { Mail, MailCheck, MailX, Package } from "lucide-react";
 
 export const dynamic = "force-dynamic";
 
@@ -9,7 +12,7 @@ export default async function Page({
   searchParams: Promise<Record<string, string | string[] | undefined>>;
 }) {
   const sp = await searchParams;
-  const initial = await listAdminResource(
+  const [initial, stats] = await Promise.all([listAdminResource(
     {
       table: "email_templates",
       permCode: "content.view",
@@ -22,7 +25,7 @@ export default async function Page({
       },
     },
     sp
-  );
+  ), getEmailTemplatesStats()]);
 
   return (
     <div className="animate-[fadeIn_0.3s_ease-out]">
@@ -37,6 +40,14 @@ export default async function Page({
           Global defaults + per-product overrides. Variables use <code className="px-1" style={{ background: "var(--bg-input)" }}>{"{{name}}"}</code> syntax.
         </p>
       </div>
+      <KpiStrip
+        items={[
+          { label: "Total", value: stats.total, icon: Mail, accent: "primary" },
+          { label: "Active", value: stats.active, icon: MailCheck, accent: "success" },
+          { label: "Inactive", value: stats.inactive, icon: MailX, accent: "error" },
+          { label: "Linked products", value: stats.linked_products, icon: Package, accent: "info" },
+        ]}
+      />
       <TemplatesClient initial={initial as never} />
     </div>
   );

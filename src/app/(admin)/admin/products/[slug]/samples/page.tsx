@@ -1,9 +1,12 @@
 import "server-only";
 import { notFound } from "next/navigation";
 import { listAdminResource, getProductBySlug } from "@/lib/admin/server/list";
+import { getSamplesStats } from "@/lib/admin/server/stats";
 import { supabaseAdmin } from "@/lib/terminal-bench/supabase/admin";
 import { SamplesClient } from "./samples-client";
 import type { SampleRow } from "@/components/admin/samples/renderers";
+import { KpiStrip } from "@/components/admin/ui/kpi-strip";
+import { FileText, Gauge, TrendingUp, HelpCircle } from "lucide-react";
 
 export const dynamic = "force-dynamic";
 
@@ -19,7 +22,7 @@ export default async function Page({
   if (!product) notFound();
 
   const sp = await searchParams;
-  const [initial, batches] = await Promise.all([
+  const [initial, batches, stats] = await Promise.all([
     listAdminResource<SampleRow>(
       {
         table: "samples",
@@ -42,12 +45,23 @@ export default async function Page({
       .select("id, name")
       .eq("product_id", product.id)
       .order("created_at", { ascending: false }),
+    getSamplesStats(product.id),
   ]);
 
   return (
-    <SamplesClient
+    <>
+      <KpiStrip
+        items={[
+          { label: "Samples", value: stats.total, icon: FileText, accent: "primary" },
+          { label: "Difficulty tiers", value: stats.difficulties, icon: Gauge, accent: "info" },
+          { label: "Top difficulty", value: stats.top_difficulty, icon: TrendingUp, accent: "success" },
+          { label: "Untagged", value: stats.untagged, icon: HelpCircle, accent: "warning" },
+        ]}
+      />
+      <SamplesClient
       initial={initial}
       batches={(batches.data ?? []) as Array<{ id: string; name: string }>}
     />
+    </>
   );
 }
