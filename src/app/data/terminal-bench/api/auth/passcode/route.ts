@@ -54,92 +54,58 @@ export async function POST(req: NextRequest) {
 
   const prefix = passcodePrefix(passcode);
 
-  // 1) Per-user grant.
-  const { data: grantCandidates } = await db
-    .from("access_grants")
+  // Unified passcode lookup: per-client grants (client_id set) and shared
+  // batch codes (client_id null) live in the same table.
+  const { data: candidates } = await db
+    .from("passcodes")
     .select("id, client_id, passcode_hash, expires_at, max_uses, use_count, revoked_at")
     .eq("batch_id", batch.id)
     .eq("passcode_prefix", prefix)
     .is("revoked_at", null);
 
-  for (const g of grantCandidates ?? []) {
-    if (g.expires_at && new Date(g.expires_at) < new Date()) continue;
-    if (g.max_uses != null && g.use_count >= g.max_uses) continue;
-    if (await verifyPasscode(passcode, g.passcode_hash)) {
-      await db
-        .from("access_grants")
-        .update({ use_count: g.use_count + 1, last_used_at: new Date().toISOString() })
-        .eq("id", g.id);
-      const sessionId = newSessionId();
-      const jwt = await signSessionJwt({
-        batchIds: [batch.id],
-        clientId: g.client_id ?? undefined,
-        grantId: g.id,
+  for (const p of candidates ?? []) {
+    if (p.expires_at && new Date(p.expires_at) < new Date()) continue;
+    if (p.max_uses != null && p.use_count >= p.max_uses) continue;
+    if (!(await verifyPasscode(passcode, p.passcode_hash))) continue;
+
+    const isPerClient = p.client_id != null;
+    const kind = isPerClient ? "grant" : "batch_passcode";
+
+    await db
+      .from("passcodes")
+      .update({ use_count: p.use_count + 1, last_used_at: new Date().toISOString() })
+      .eq("id", p.id);
+
+    const sessionId = newSessionId();
+    const jwt = await signSessionJwt({
+      batchIds: [batch.id],
+      clientId: p.client_id ?? undefined,
+      grantId: p.id,
+      sessionId,
+    });
+    await Promise.all([
+      logAuthAttempt({ ip, batchId: batch.id, success: true, meta: { kind } }),
+      logEvent({
+        clientId: p.client_id,
+        grantId: p.id,
         sessionId,
-      });
-      await Promise.all([
-        logAuthAttempt({ ip, batchId: batch.id, success: true, meta: { kind: "grant" } }),
-        logEvent({
-          clientId: g.client_id,
-          grantId: g.id,
-          sessionId,
-          batchId: batch.id,
-          eventType: "enter_success",
-          ip,
-          userAgent,
-          meta: { kind: "grant" },
-        }),
-      ]);
+        batchId: batch.id,
+        eventType: "enter_success",
+        ip,
+        userAgent,
+        meta: { kind },
+      }),
+    ]);
 
-      const res = NextResponse.json({ ok: true, batchSlug: batch.slug });
-      res.cookies.set(SESSION_COOKIE, jwt, {
-        httpOnly: true,
-        secure: process.env.NODE_ENV === "production",
-        sameSite: "strict",
-        path: "/",
-        maxAge: SESSION_TTL_SECONDS,
-      });
-      return res;
-    }
-  }
-
-  // 2) Shared batch passcode fallback.
-  const { data: batchCandidates } = await db
-    .from("batch_passcodes")
-    .select("id, passcode_hash, expires_at, revoked_at")
-    .eq("batch_id", batch.id)
-    .eq("passcode_prefix", prefix)
-    .is("revoked_at", null);
-
-  for (const b of batchCandidates ?? []) {
-    if (b.expires_at && new Date(b.expires_at) < new Date()) continue;
-    if (await verifyPasscode(passcode, b.passcode_hash)) {
-      const sessionId = newSessionId();
-      const jwt = await signSessionJwt({
-        batchIds: [batch.id],
-        sessionId,
-      });
-      await Promise.all([
-        logAuthAttempt({ ip, batchId: batch.id, success: true, meta: { kind: "batch_passcode", id: b.id } }),
-        logEvent({
-          sessionId,
-          batchId: batch.id,
-          eventType: "enter_success",
-          ip,
-          userAgent,
-          meta: { kind: "batch_passcode", id: b.id },
-        }),
-      ]);
-      const res = NextResponse.json({ ok: true, batchSlug: batch.slug });
-      res.cookies.set(SESSION_COOKIE, jwt, {
-        httpOnly: true,
-        secure: process.env.NODE_ENV === "production",
-        sameSite: "strict",
-        path: "/",
-        maxAge: SESSION_TTL_SECONDS,
-      });
-      return res;
-    }
+    const res = NextResponse.json({ ok: true, batchSlug: batch.slug });
+    res.cookies.set(SESSION_COOKIE, jwt, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "strict",
+      path: "/",
+      maxAge: SESSION_TTL_SECONDS,
+    });
+    return res;
   }
 
   // Failure path.

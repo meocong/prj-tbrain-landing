@@ -72,7 +72,7 @@ export async function POST(req: NextRequest) {
 
   // Insert grant
   const { data: grant, error } = await db
-    .from("access_grants")
+    .from("passcodes")
     .upsert(
       {
         client_id: client.id,

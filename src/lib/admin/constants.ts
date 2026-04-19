@@ -7,9 +7,12 @@ import {
   ScrollText,
   Inbox,
   Settings,
-  Database,
+  Package,
   FolderOpen,
   CheckSquare,
+  Mail,
+  UserCircle,
+  Images,
   type LucideIcon,
 } from "lucide-react";
 
@@ -18,76 +21,45 @@ export interface NavItem {
   href: string;
   icon: LucideIcon;
   permission: string; // Required permission code
+  section?: string;
 }
 
 export const ADMIN_NAV: NavItem[] = [
-  {
-    label: "Dashboard",
-    href: "/admin",
-    icon: LayoutDashboard,
-    permission: "admin.access",
-  },
-  {
-    label: "Content",
-    href: "/admin/content",
-    icon: FileText,
-    permission: "content.view",
-  },
-  {
-    label: "Contacts",
-    href: "/admin/contacts",
-    icon: Users,
-    permission: "contacts.view",
-  },
-  {
-    label: "Data Access",
-    href: "/admin/passcodes",
-    icon: KeyRound,
-    permission: "passcodes.view",
-  },
-  {
-    label: "Requests",
-    href: "/admin/requests",
-    icon: Inbox,
-    permission: "requests.view",
-  },
-  {
-    label: "Approvals",
-    href: "/admin/approvals",
-    icon: CheckSquare,
-    permission: "approvals.view",
-  },
-  {
-    label: "Groups",
-    href: "/admin/groups",
-    icon: UsersRound,
-    permission: "groups.view",
-  },
-  {
-    label: "Files",
-    href: "/admin/files",
-    icon: FolderOpen,
-    permission: "files.view",
-  },
-  {
-    label: "Audit Log",
-    href: "/admin/audit",
-    icon: ScrollText,
-    permission: "audit.view",
-  },
-  {
-    label: "Data Projects",
-    href: "/admin/data",
-    icon: Database,
-    permission: "data.view",
-  },
-  {
-    label: "Settings",
-    href: "/admin/settings",
-    icon: Settings,
-    permission: "settings.view",
-  },
+  { label: "Dashboard", href: "/admin", icon: LayoutDashboard, permission: "admin.access" },
+
+  // Products (top-level product-centric surface — each product owns its
+  // batches, passcodes, requests, events, etc.)
+  { label: "Products", href: "/admin/products", icon: Package, permission: "data.view", section: "Products" },
+
+  // Content
+  { label: "Posts", href: "/admin/content", icon: FileText, permission: "content.view", section: "Content" },
+  { label: "Gallery", href: "/admin/gallery", icon: Images, permission: "files.view", section: "Content" },
+
+  // CRM
+  { label: "Contacts", href: "/admin/contacts", icon: Users, permission: "contacts.view", section: "CRM" },
+  { label: "Approvals", href: "/admin/approvals", icon: CheckSquare, permission: "approvals.view", section: "CRM" },
+
+  // Communications
+  { label: "Email Templates", href: "/admin/email-templates", icon: Mail, permission: "content.view", section: "Comms" },
+
+  // Access Control (Django-style Auth)
+  { label: "Users", href: "/admin/users", icon: Users, permission: "users.view", section: "Access Control" },
+  { label: "Groups", href: "/admin/groups", icon: UsersRound, permission: "groups.view", section: "Access Control" },
+  { label: "My Profile", href: "/admin/profile", icon: UserCircle, permission: "admin.access", section: "Access Control" },
+
+  // System
+  { label: "Audit Log", href: "/admin/audit", icon: ScrollText, permission: "audit.view", section: "System" },
+  { label: "Settings", href: "/admin/settings", icon: Settings, permission: "settings.view", section: "System" },
 ];
+
+// Legacy — kept for deep-link/bookmark compatibility; these routes still work,
+// but top-level sidebar now scopes them under Products.
+export const LEGACY_NAV: NavItem[] = [
+  { label: "Passcodes (all)", href: "/admin/passcodes", icon: KeyRound, permission: "passcodes.view" },
+  { label: "Requests (all)", href: "/admin/requests", icon: Inbox, permission: "requests.view" },
+  { label: "Files (old)", href: "/admin/files", icon: FolderOpen, permission: "files.view" },
+];
+
 
 // Badge color maps
 export const CONTACT_STATUS_BADGE: Record<string, string> = {

@@ -91,7 +91,7 @@ export async function GET(req: NextRequest) {
   const expiresAt = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString();
 
   const { data: grant, error: grantErr } = await db
-    .from("access_grants")
+    .from("passcodes")
     .upsert(
       {
         client_id: client.id,

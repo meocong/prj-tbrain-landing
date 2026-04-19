@@ -26,7 +26,7 @@ export default function PasscodesPage() {
     queryKey: ["admin-passcodes", search, page],
     queryFn: async () => {
       let query = supabaseAdmin
-        .from("access_grants")
+        .from("passcodes")
         .select("*, client:clients(email, full_name, company)", { count: "exact" })
         .order("issued_at", { ascending: false })
         .range(page * PAGE_SIZE, (page + 1) * PAGE_SIZE - 1);
@@ -44,7 +44,7 @@ export default function PasscodesPage() {
   const revokeMutation = useMutation({
     mutationFn: async (grantId: string) => {
       const { error } = await supabaseAdmin
-        .from("access_grants")
+        .from("passcodes")
         .update({ revoked_at: new Date().toISOString() })
         .eq("id", grantId);
       if (error) throw error;
