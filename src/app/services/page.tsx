@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Header from "@/components/common/Header";
 import Footer from "@/components/common/Footer";
 import Link from "next/link";
-import { SERVICES, EXPERTISE_AREAS } from "@/lib/constants/marketing";
+import { getServices, getExpertiseAreas } from "@/lib/landing/services";
 import {
   Brain,
   Tags,
@@ -20,6 +20,8 @@ export const metadata: Metadata = {
     "AI training data services — RLHF, SFT, data annotation, evaluation, custom datasets, and expert teams.",
 };
 
+export const revalidate = 300;
+
 const ICON_MAP: Record<string, React.ElementType> = {
   Brain,
   Tags,
@@ -30,7 +32,12 @@ const ICON_MAP: Record<string, React.ElementType> = {
   Bot,
 };
 
-export default function ServicesPage() {
+export default async function ServicesPage() {
+  const [services, expertise] = await Promise.all([
+    getServices(),
+    getExpertiseAreas(),
+  ]);
+
   return (
     <div>
       <Header />
@@ -52,7 +59,7 @@ export default function ServicesPage() {
         {/* Services grid */}
         <section className="container mx-auto mt-20 px-3">
           <div className="mx-auto grid max-w-5xl grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {SERVICES.map((svc, i) => {
+            {services.map((svc, i) => {
               const Icon = (ICON_MAP[svc.icon] || Database) as React.ComponentType<{ className?: string }>;
               return (
                 <div
@@ -89,7 +96,7 @@ export default function ServicesPage() {
                 Deep Technical Expertise
               </h2>
               <div className="mt-8 grid grid-cols-1 gap-4 md:grid-cols-2">
-                {EXPERTISE_AREAS.map((area, i) => (
+                {expertise.map((area, i) => (
                   <div key={i} className="flex items-start gap-3">
                     <CheckCircle className="mt-0.5 h-5 w-5 shrink-0 text-[#6C3CF4]" />
                     <p className="text-base">

@@ -1,20 +1,19 @@
-"use client";
-
-import React from 'react';
-import { Star } from 'lucide-react';
-import Header from '@/components/common/Header';
+import React from "react";
+import { Star } from "lucide-react";
+import Header from "@/components/common/Header";
 import post_bg from "@/assets/images/post_bg.png";
 import Footer from "@/components/common/Footer";
 import { CaseStudyContent } from "@/components/casestudy/CaseStudyContent";
-import { usePathname } from 'next/navigation';
+import { getCaseStudies } from "@/lib/landing/case-studies";
 
-export default function Page() {
-  const pathname = usePathname();
+export const revalidate = 300;
+
+export default async function Page() {
+  const studies = await getCaseStudies();
 
   return (
     <div>
-           <Header />
-
+      <Header />
 
       {/* Main */}
       <main
@@ -33,7 +32,6 @@ export default function Page() {
           <div className="absolute top-[60%] right-0 w-80 h-80 bg-indigo-200/20 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '3s' }}></div>
         </div>
 
-        { }
         <section
           id="casestudy"
           className="container mx-auto px-3 pt-24 pb-24 relative max-w-[1128px]"
@@ -49,7 +47,7 @@ export default function Page() {
           </div>
 
           {/* Case Study Content */}
-          <CaseStudyContent />
+          <CaseStudyContent studies={studies} />
         </section>
       </main>
 
