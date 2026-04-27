@@ -3,10 +3,9 @@
 import React from "react";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
-import { FEATURED_CASE_STUDIES } from "@/lib/constants/marketing";
+import type { CaseStudy } from "@/lib/landing/case-studies";
 
-export function CaseStudyContent() {
-  const studies = FEATURED_CASE_STUDIES;
+export function CaseStudyContent({ studies }: { studies: CaseStudy[] }) {
   const featured = studies[0];
   const rest = studies.slice(1);
 
@@ -56,7 +55,7 @@ export function CaseStudyContent() {
       <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
         {rest.map((study, i) => (
           <div
-            key={i}
+            key={study.id ?? i}
             className="overflow-hidden rounded-2xl bg-white shadow-md transition-all hover:shadow-lg"
           >
             <div className="h-48 overflow-hidden">

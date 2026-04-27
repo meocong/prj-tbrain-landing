@@ -12,6 +12,10 @@ import {
   CheckSquare,
   Images,
   Mail,
+  MessageSquare,
+  Briefcase,
+  Wrench,
+  GraduationCap,
   type LucideIcon,
 } from "lucide-react";
 
@@ -32,6 +36,9 @@ export const ADMIN_NAV: NavItem[] = [
 
   // Content
   { label: "Posts", href: "/admin/content", icon: FileText, permission: "content.view", section: "Content" },
+  { label: "Case Studies", href: "/admin/case-studies", icon: Briefcase, permission: "content.view", section: "Content" },
+  { label: "Services", href: "/admin/services", icon: Wrench, permission: "content.view", section: "Content" },
+  { label: "Expertise", href: "/admin/expertise", icon: GraduationCap, permission: "content.view", section: "Content" },
   { label: "Gallery", href: "/admin/gallery", icon: Images, permission: "files.view", section: "Content" },
 
   // CRM — unified. Forms / Newsletter surface as tags inside Contacts.
@@ -41,6 +48,7 @@ export const ADMIN_NAV: NavItem[] = [
 
   // Communications
   { label: "Email Templates", href: "/admin/email-templates", icon: Mail, permission: "content.view", section: "Comms" },
+  { label: "Chat Sessions", href: "/admin/chats", icon: MessageSquare, permission: "chats.view", section: "Comms" },
 
   // Access Control (Django-style Auth) — My Profile is reached from the avatar dropdown, not here
   { label: "Users", href: "/admin/users", icon: Users, permission: "users.view", section: "Access Control" },
