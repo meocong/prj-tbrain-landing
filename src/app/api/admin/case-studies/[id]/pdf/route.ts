@@ -27,6 +27,16 @@ export async function POST(
   }
 
   const buffer = Buffer.from(await file.arrayBuffer());
+
+  // Magic byte check — defeat MIME/extension spoofing. Real PDFs start with %PDF.
+  const magic = buffer.subarray(0, 4).toString("ascii");
+  if (magic !== "%PDF") {
+    return NextResponse.json(
+      { error: "file is not a valid PDF (magic byte mismatch)" },
+      { status: 400 }
+    );
+  }
+
   const { gcsObject } = await uploadCmsAsset(file.name, buffer, "application/pdf");
 
   const db = supabaseAdmin();

@@ -43,8 +43,22 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  const { email, fullName, company, role, phone, message, turnstileToken } =
-    parsed.data;
+  const {
+    email,
+    fullName,
+    company,
+    role,
+    phone,
+    message,
+    turnstileToken,
+    utm_source,
+    utm_medium,
+    utm_campaign,
+    utm_term,
+    utm_content,
+    referrer,
+  } = parsed.data;
+  const utm = { utm_source, utm_medium, utm_campaign, utm_term, utm_content, referrer };
 
   // Verify Turnstile
   const turnstileOk = await verifyTurnstile(turnstileToken);
@@ -54,7 +68,8 @@ export async function POST(req: NextRequest) {
 
   const db = supabaseAdmin();
 
-  // Upsert client record
+  // Upsert client record (preserve first-touch UTM — only set if not already
+  // populated by an earlier form submission)
   const { data: client } = await db
     .from("clients")
     .upsert(
@@ -66,6 +81,7 @@ export async function POST(req: NextRequest) {
         phone: phone || null,
         source: "contact_form",
         updated_at: new Date().toISOString(),
+        ...utm,
       },
       { onConflict: "email" }
     )
@@ -82,6 +98,7 @@ export async function POST(req: NextRequest) {
     message,
     source: "contact_form",
     client_id: client?.id ?? null,
+    ...utm,
   });
 
   // Send confirmation email to user

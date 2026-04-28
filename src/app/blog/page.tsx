@@ -3,6 +3,7 @@ import Header from "@/components/common/Header";
 import Footer from "@/components/common/Footer";
 import { supabaseAdmin } from "@/lib/terminal-bench/supabase/admin";
 import Link from "next/link";
+import Image from "next/image";
 import type { CmsPost } from "@/lib/admin/types";
 import { Clock, ArrowRight } from "lucide-react";
 
@@ -12,7 +13,9 @@ export const metadata: Metadata = {
     "Insights on AI training data, robotics, evaluation, and building better AI from the Tbrain team.",
 };
 
-export const dynamic = "force-dynamic";
+// ISR: regenerate the blog index every 5 minutes so newly published posts
+// appear quickly without paying for force-dynamic on every request.
+export const revalidate = 300;
 
 type BlogPost = {
   title: string;
@@ -92,11 +95,14 @@ export default async function BlogPage({
               href={`/blog/${featured.slug}`}
               className="group mt-12 block"
             >
-              <div className="overflow-hidden rounded-xl">
-                <img
+              <div className="relative aspect-[2/1] overflow-hidden rounded-xl">
+                <Image
                   src={featured.image}
                   alt={featured.title}
-                  className="aspect-[2/1] w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
+                  fill
+                  priority
+                  sizes="(min-width: 1024px) 800px, 100vw"
+                  className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
                 />
               </div>
               <div className="mt-8">
@@ -170,11 +176,13 @@ export default async function BlogPage({
                   </div>
                 </div>
                 {/* Image */}
-                <div className="w-32 shrink-0 md:w-44">
-                  <img
+                <div className="relative h-24 w-32 shrink-0 overflow-hidden rounded-lg md:h-32 md:w-44">
+                  <Image
                     src={post.image}
                     alt=""
-                    className="h-24 w-full rounded-lg object-cover md:h-32"
+                    fill
+                    sizes="176px"
+                    className="object-cover"
                   />
                 </div>
               </Link>

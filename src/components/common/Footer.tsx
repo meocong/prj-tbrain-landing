@@ -7,6 +7,7 @@ import iconLinkedin from "@/assets/icons/LinkedinLogo.svg";
 import Logo from "@/assets/images/logo.svg";
 import { toast } from "sonner";
 import { Send } from "lucide-react";
+import { readUtm } from "@/lib/utm";
 
 function NewsletterForm() {
   const [email, setEmail] = useState("");
@@ -21,7 +22,7 @@ function NewsletterForm() {
       const res = await fetch("/api/newsletter", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, turnstileToken: "footer-bypass" }),
+        body: JSON.stringify({ email, ...readUtm() }),
       });
       if (res.ok) {
         setDone(true);

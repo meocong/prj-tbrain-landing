@@ -4,6 +4,7 @@ import { supabaseAdmin } from "@/lib/terminal-bench/supabase/admin";
 import { sendEmail } from "@/lib/terminal-bench/email";
 import NewsletterWelcome from "@/emails/NewsletterWelcome";
 import { createElement } from "react";
+import { checkRateLimit, getClientIp, RATE_LIMITS } from "@/lib/rate-limit";
 
 export const runtime = "nodejs";
 
@@ -23,6 +24,12 @@ async function verifyTurnstile(token: string): Promise<boolean> {
 }
 
 export async function POST(req: NextRequest) {
+  const ip = getClientIp(req.headers);
+  const rl = checkRateLimit(`newsletter:${ip}`, RATE_LIMITS.newsletter);
+  if (!rl.allowed) {
+    return NextResponse.json({ error: "rate_limited" }, { status: 429 });
+  }
+
   const body = await req.json();
   const parsed = newsletterSchema.safeParse(body);
 
@@ -33,11 +40,26 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  const { email, fullName, turnstileToken } = parsed.data;
+  const {
+    email,
+    fullName,
+    turnstileToken,
+    utm_source,
+    utm_medium,
+    utm_campaign,
+    utm_term,
+    utm_content,
+    referrer,
+  } = parsed.data;
+  const utm = { utm_source, utm_medium, utm_campaign, utm_term, utm_content, referrer };
 
-  const turnstileOk = await verifyTurnstile(turnstileToken);
-  if (!turnstileOk) {
-    return NextResponse.json({ error: "captcha_failed" }, { status: 403 });
+  // Only verify Turnstile if a token was sent (footer omits it; rate limit
+  // above provides spam protection for low-friction newsletter signup).
+  if (turnstileToken) {
+    const turnstileOk = await verifyTurnstile(turnstileToken);
+    if (!turnstileOk) {
+      return NextResponse.json({ error: "captcha_failed" }, { status: 403 });
+    }
   }
 
   const db = supabaseAdmin();
@@ -50,6 +72,7 @@ export async function POST(req: NextRequest) {
       subscribed_at: new Date().toISOString(),
       unsubscribed_at: null,
       source: "website",
+      ...utm,
     },
     { onConflict: "email" }
   );

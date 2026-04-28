@@ -39,15 +39,19 @@ export function RequestsClient({ initial }: { initial: ListResult<RequestRow> })
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ action, reason: reason || undefined }),
     });
-    const j = await res.json();
+    const j = await res.json().catch(() => ({}));
     setBusy(null);
     if (j.ok) {
       setBanner(
         action === "approve" && j.passcode_plain
-          ? `Approved · passcode ${j.passcode_plain} · email ${j.email?.ok ? "sent" : "skipped"}`
-          : `${action} · email ${j.email?.ok ? "sent" : "skipped"}`
+          ? `Approved · passcode ${j.passcode_plain} · email ${j.email?.ok ? "sent" : `skipped (${j.email?.error ?? "unknown"})`}`
+          : `${action} · email ${j.email?.ok ? "sent" : `skipped (${j.email?.error ?? "unknown"})`}`
       );
       router.refresh();
+    } else {
+      setBanner(
+        `❌ ${action} failed (HTTP ${res.status}): ${j.error ?? "unknown"}${j.detail ? ` — ${j.detail}` : ""}`
+      );
     }
   };
 

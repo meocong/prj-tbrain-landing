@@ -11,6 +11,9 @@ export type EnrichedContact = {
   source: string | null;
   status: string | null;
   created_at: string;
+  utm_source: string | null;
+  utm_medium: string | null;
+  utm_campaign: string | null;
   tags: ContactTag[];
   last_activity: string | null;
 };
@@ -45,6 +48,7 @@ export async function listEnrichedContacts(opts: {
   const clientRows = (clients ?? []) as Array<{
     id: string; email: string; full_name: string | null; company: string | null;
     source: string | null; status: string | null; created_at: string;
+    utm_source: string | null; utm_medium: string | null; utm_campaign: string | null;
   }>;
   if (clientRows.length === 0) return { rows: [], total: count ?? 0 };
 

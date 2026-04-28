@@ -17,6 +17,12 @@ interface RequestBody {
   targetUse?: string[];
   batchSlug?: string;
   turnstileToken?: string;
+  utm_source?: string;
+  utm_medium?: string;
+  utm_campaign?: string;
+  utm_term?: string;
+  utm_content?: string;
+  referrer?: string;
 }
 
 function clientIp(req: NextRequest): string {
@@ -50,15 +56,29 @@ export async function POST(req: NextRequest) {
   // Resolve the batch (optional — a request may refer to a specific batch).
   let batchId: string | null = null;
   let batchName: string | null = null;
+  let productId: string | null = null;
   if (body.batchSlug) {
     const { data: batch } = await db
       .from("batches")
-      .select("id, name")
+      .select("id, name, product_id")
       .eq("project", "terminal-bench")
       .eq("slug", body.batchSlug)
       .maybeSingle();
     batchId = batch?.id ?? null;
     batchName = batch?.name ?? null;
+    productId = batch?.product_id ?? null;
+  }
+
+  // Fallback: derive product_id from the terminal-bench product when no batch
+  // was supplied (or batch had no product link). Keeps /admin/products/.../requests
+  // surfaces working even if the requester didn't pick a specific batch.
+  if (!productId) {
+    const { data: tbProduct } = await db
+      .from("products")
+      .select("id")
+      .eq("slug", "terminal-bench")
+      .maybeSingle();
+    productId = tbProduct?.id ?? null;
   }
 
   const { data: inserted, error } = await db
@@ -72,7 +92,14 @@ export async function POST(req: NextRequest) {
       use_case: body.useCase ?? null,
       target_use: body.targetUse ?? null,
       batch_id: batchId,
+      product_id: productId,
       status: "pending",
+      utm_source: body.utm_source ?? null,
+      utm_medium: body.utm_medium ?? null,
+      utm_campaign: body.utm_campaign ?? null,
+      utm_term: body.utm_term ?? null,
+      utm_content: body.utm_content ?? null,
+      referrer: body.referrer ?? null,
     })
     .select("id")
     .single();

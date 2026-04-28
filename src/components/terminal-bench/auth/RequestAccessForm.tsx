@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Turnstile } from "@marsidev/react-turnstile";
+import { readUtm } from "@/lib/utm";
 
 const TEAM_SIZES = ["1-10", "11-50", "51-200", "200+"];
 const TARGET_USES = [
@@ -50,6 +51,7 @@ export function RequestAccessForm({ siteKey }: { siteKey: string | null }) {
           targetUse,
           batchSlug: "april-2026",
           turnstileToken,
+          ...readUtm(),
         }),
       });
       if (!res.ok) {

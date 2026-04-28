@@ -3,6 +3,7 @@
 import React from "react";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 import type { CaseStudy } from "@/lib/landing/case-studies";
 
 export function CaseStudyContent({ studies }: { studies: CaseStudy[] }) {
@@ -14,11 +15,14 @@ export function CaseStudyContent({ studies }: { studies: CaseStudy[] }) {
       {/* Featured */}
       {featured && (
         <div className="mb-16 overflow-hidden rounded-2xl bg-white shadow-lg">
-          <div className="h-64 overflow-hidden md:h-80">
-            <img
+          <div className="relative h-64 overflow-hidden md:h-80">
+            <Image
               src={featured.image}
               alt={featured.title}
-              className="h-full w-full object-cover"
+              fill
+              priority
+              sizes="(min-width: 1024px) 1100px, 100vw"
+              className="object-cover"
             />
           </div>
           <div className="p-8">
@@ -58,11 +62,13 @@ export function CaseStudyContent({ studies }: { studies: CaseStudy[] }) {
             key={study.id ?? i}
             className="overflow-hidden rounded-2xl bg-white shadow-md transition-all hover:shadow-lg"
           >
-            <div className="h-48 overflow-hidden">
-              <img
+            <div className="relative h-48 overflow-hidden">
+              <Image
                 src={study.image}
                 alt={study.title}
-                className="h-full w-full object-cover transition-transform duration-300 hover:scale-105"
+                fill
+                sizes="(min-width: 768px) 50vw, 100vw"
+                className="object-cover transition-transform duration-300 hover:scale-105"
               />
             </div>
             <div className="p-6">

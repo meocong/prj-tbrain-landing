@@ -1,5 +1,17 @@
 import { z } from "zod";
 
+// Reusable UTM block — every public form may include these fields when the
+// visitor landed from a campaigned URL. All optional because direct/organic
+// traffic doesn't set them.
+const utmFields = {
+  utm_source: z.string().max(200).optional(),
+  utm_medium: z.string().max(200).optional(),
+  utm_campaign: z.string().max(200).optional(),
+  utm_term: z.string().max(200).optional(),
+  utm_content: z.string().max(200).optional(),
+  referrer: z.string().max(500).optional(),
+};
+
 export const contactSchema = z.object({
   email: z.string().email("Invalid email address"),
   fullName: z.string().min(1, "Name is required").max(200),
@@ -8,12 +20,16 @@ export const contactSchema = z.object({
   phone: z.string().max(50).optional(),
   message: z.string().min(1, "Message is required").max(5000),
   turnstileToken: z.string().min(1, "Verification required"),
+  ...utmFields,
 });
 
 export const newsletterSchema = z.object({
   email: z.string().email("Invalid email address"),
   fullName: z.string().max(200).optional(),
-  turnstileToken: z.string().min(1, "Verification required"),
+  // Newsletter is rate-limited at API level; Turnstile is optional here so the
+  // low-friction footer form doesn't need to render a widget.
+  turnstileToken: z.string().optional(),
+  ...utmFields,
 });
 
 export const passcodeCreateSchema = z.object({
