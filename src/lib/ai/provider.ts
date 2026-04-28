@@ -28,7 +28,21 @@ export async function resolveAIProvider(): Promise<AIProvider> {
   // Check cache
   if (_cached && Date.now() - _cachedAt < CACHE_TTL) return _cached;
 
-  // Try SSO database first
+  // ENV override — when ANTHROPIC_API_KEY is set, use it directly. This lets
+  // local dev / Vercel / any environment that can't reach the internal Bifrost
+  // gateway (`http://tbrain-ai-api-prod:8080`) work without DB changes.
+  const envKey = process.env.ANTHROPIC_API_KEY;
+  if (envKey) {
+    _cached = {
+      apiKey: envKey,
+      baseURL: process.env.ANTHROPIC_BASE_URL || "https://api.anthropic.com",
+      model: process.env.ANTHROPIC_MODEL || "claude-sonnet-4-20250514",
+    };
+    _cachedAt = Date.now();
+    return _cached;
+  }
+
+  // Try SSO database (Bifrost gateway path — works inside Docker network)
   try {
     const supabase = getSSOClient();
 
@@ -54,10 +68,24 @@ export async function resolveAIProvider(): Promise<AIProvider> {
         const config = provider.config as Record<string, unknown> | null;
         const models = config?.models as Record<string, string> | undefined;
 
+        // Rewrite Docker-internal hostnames to host-port mappings so dev/non-
+        // Docker callers can reach the gateway. Override via BIFROST_HOST_BASE
+        // env if the host port differs from the default 127.0.0.1:3010.
+        const hostOverride = process.env.BIFROST_HOST_BASE || "http://127.0.0.1:3010";
+        const baseURL = provider.base_url.replace(
+          /^http:\/\/tbrain-ai-api-prod:8080/,
+          hostOverride
+        );
+
+        // Bifrost gateway routes by lowercase model id (e.g. "glm-4.7"); the
+        // DB config sometimes stores it uppercase, normalize here.
+        const rawModel = models?.helper || "claude-sonnet-4-20250514";
+        const model = rawModel.toLowerCase();
+
         _cached = {
           apiKey: key.api_key_encrypted,
-          baseURL: provider.base_url,
-          model: models?.helper || "claude-sonnet-4-20250514",
+          baseURL,
+          model,
         };
         _cachedAt = Date.now();
         return _cached;
