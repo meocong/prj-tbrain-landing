@@ -30,7 +30,7 @@ export const revalidate = 86400;
 
 export default function Home() {
   return (
-    <div style={{ background: "#020617" }}>
+    <div style={{ background: "var(--bg-page)" }}>
       <Header />
       <main>
         <HeroSection />

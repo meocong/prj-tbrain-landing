@@ -80,14 +80,14 @@ export function ProductPillarsSection() {
     <section
       id="products"
       className="relative overflow-hidden py-24 md:py-32"
-      style={{ background: "#020617", color: "white" }}
+      style={{ background: "var(--bg-page)", color: "var(--text-primary)" }}
     >
       <div
         aria-hidden
         className="absolute inset-0 pointer-events-none opacity-60"
         style={{
           backgroundImage:
-            "linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px)",
+            "linear-gradient(rgba(15,23,42,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(15,23,42,0.04) 1px, transparent 1px)",
           backgroundSize: "64px 64px",
           maskImage: "radial-gradient(ellipse at center top, black 30%, transparent 85%)",
         }}
@@ -95,12 +95,12 @@ export function ProductPillarsSection() {
       <div
         aria-hidden
         className="absolute -top-40 left-1/4 h-[500px] w-[500px] rounded-full pointer-events-none"
-        style={{ background: "radial-gradient(circle, rgba(108,60,244,0.25) 0%, transparent 65%)", filter: "blur(60px)" }}
+        style={{ background: "radial-gradient(circle, rgba(108,60,244,0.10) 0%, transparent 65%)", filter: "blur(60px)" }}
       />
       <div
         aria-hidden
         className="absolute -bottom-40 right-1/4 h-[500px] w-[500px] rounded-full pointer-events-none"
-        style={{ background: "radial-gradient(circle, rgba(16,185,129,0.18) 0%, transparent 65%)", filter: "blur(60px)" }}
+        style={{ background: "radial-gradient(circle, rgba(16,185,129,0.08) 0%, transparent 65%)", filter: "blur(60px)" }}
       />
 
       <div className="container mx-auto px-4 relative z-10">
@@ -108,12 +108,12 @@ export function ProductPillarsSection() {
           <div className="text-center mb-14 md:mb-20">
             <span
               className="inline-block text-xs font-semibold uppercase tracking-widest mb-4"
-              style={{ color: "#A78BFA" }}
+              style={{ color: "#6C3CF4" }}
             >
               What we build
             </span>
             <h2
-              className="text-4xl md:text-6xl font-medium tracking-tight"
+              className="text-4xl md:text-6xl font-semibold tracking-tight"
               style={{ fontFamily: "var(--font-heading)", letterSpacing: "-0.02em" }}
             >
               Data programs,{" "}
@@ -127,7 +127,7 @@ export function ProductPillarsSection() {
                 purpose-built
               </span>
             </h2>
-            <p className="mx-auto mt-4 max-w-2xl text-base md:text-lg" style={{ color: "rgba(226,232,240,0.65)" }}>
+            <p className="mx-auto mt-4 max-w-2xl text-base md:text-lg" style={{ color: "var(--text-secondary)" }}>
               Six capabilities. One data factory. From embodied AI to agent evals, we ship the gold-standard set your team can&apos;t assemble in-house.
             </p>
           </div>
@@ -145,9 +145,9 @@ export function ProductPillarsSection() {
                   href={p.href}
                   className="group relative block h-full overflow-hidden rounded-3xl p-6 md:p-8"
                   style={{
-                    background: "linear-gradient(165deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.015) 100%)",
-                    border: "1px solid rgba(255,255,255,0.08)",
-                    backdropFilter: "blur(10px)",
+                    background: "white",
+                    border: "1px solid rgba(15,23,42,0.06)",
+                    boxShadow: "0 6px 24px -8px rgba(15,23,42,0.10)",
                   }}
                 >
                   <div
@@ -168,7 +168,7 @@ export function ProductPillarsSection() {
                       </span>
                       <ArrowUpRight
                         className="h-5 w-5 transition-transform duration-500 group-hover:rotate-45 group-hover:translate-x-1"
-                        style={{ color: "rgba(255,255,255,0.4)" }}
+                        style={{ color: "rgba(15,23,42,0.4)" }}
                       />
                     </div>
                     <h3 className="text-2xl md:text-3xl font-semibold tracking-tight" style={{ fontFamily: "var(--font-heading)" }}>
@@ -177,7 +177,7 @@ export function ProductPillarsSection() {
                     <p className="mt-1 text-xs font-medium uppercase tracking-wider" style={{ color: p.accent }}>
                       {p.subtitle}
                     </p>
-                    <p className="mt-4 text-sm leading-relaxed max-w-md" style={{ color: "rgba(226,232,240,0.68)" }}>
+                    <p className="mt-4 text-sm leading-relaxed max-w-md" style={{ color: "var(--text-secondary)" }}>
                       {p.description}
                     </p>
                   </div>
@@ -292,7 +292,7 @@ function PillarVisual({ kind, accent }: { kind: string; accent: string }) {
               className="h-1.5 rounded-full pillar-text-bar"
               style={{
                 width: `${w}%`,
-                background: i === 2 ? accent : "rgba(255,255,255,0.22)",
+                background: i === 2 ? accent : "rgba(15,23,42,0.15)",
                 animationDelay: `${i * 0.35}s`,
               }}
             />

@@ -28,7 +28,7 @@ const FEATURES: { n: string; title: string; body: string }[] = [
   {
     n: "04",
     title: "Task strategy",
-    body: "A deliberate spread across debugging, devops, library work, and API integration — calibrated to surface capability gaps rather than piling on tasks of one flavour.",
+    body: "A deliberate spread across debugging, devops, library work, and API integration — calibrated to surface capability gaps rather than piling on tasks of one flavor.",
   },
   {
     n: "05",
@@ -38,11 +38,11 @@ const FEATURES: { n: string; title: string; body: string }[] = [
   {
     n: "06",
     title: "Delivery guarantees",
-    body: "Full provenance: author, review notes, time estimates for expert vs. junior, resource caps. Every artefact is versioned; every change is auditable.",
+    body: "Full provenance: author, review notes, time estimates for expert vs. junior, resource caps. Every artifact is versioned; every change is auditable.",
   },
 ];
 
-const ARTEFACTS = [
+const ARTIFACTS = [
   {
     name: "task.toml",
     desc: "Metadata: author, difficulty, tags, time estimates, resource caps, verifier timeout.",
@@ -99,10 +99,10 @@ export default function TerminalBenchLanding() {
       {/* Anatomy */}
       <section className="container mx-auto max-w-6xl px-6 py-24 md:py-32">
         <SectionHeading label="anatomy of a sample">
-          Four artefacts. <span className="gradient-text">Every sample.</span>
+          Four artifacts. <span className="gradient-text">Every sample.</span>
         </SectionHeading>
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
-          {ARTEFACTS.map((it) => (
+          {ARTIFACTS.map((it) => (
             <div
               key={it.name}
               className="rounded-2xl border border-[#E5E7EB] bg-white p-6 transition-all hover:border-[#6C3CF4]/40 hover:shadow-lg"

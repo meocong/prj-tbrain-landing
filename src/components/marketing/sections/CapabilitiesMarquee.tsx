@@ -23,9 +23,9 @@ export function CapabilitiesMarquee() {
     <section
       className="relative overflow-hidden py-12 md:py-16 border-y"
       style={{
-        background: "#020617",
-        borderColor: "rgba(255,255,255,0.06)",
-        color: "white",
+        background: "var(--bg-page)",
+        borderColor: "rgba(15,23,42,0.06)",
+        color: "var(--text-primary)",
       }}
     >
       <MarqueeRow reverse={false} speed={38} />
@@ -35,12 +35,12 @@ export function CapabilitiesMarquee() {
       <div
         aria-hidden
         className="absolute inset-y-0 left-0 w-32 pointer-events-none"
-        style={{ background: "linear-gradient(90deg, #020617 0%, transparent 100%)" }}
+        style={{ background: "linear-gradient(90deg, var(--bg-page) 0%, transparent 100%)" }}
       />
       <div
         aria-hidden
         className="absolute inset-y-0 right-0 w-32 pointer-events-none"
-        style={{ background: "linear-gradient(-90deg, #020617 0%, transparent 100%)" }}
+        style={{ background: "linear-gradient(-90deg, var(--bg-page) 0%, transparent 100%)" }}
       />
     </section>
   );
@@ -61,9 +61,9 @@ function MarqueeRow({ reverse, speed, className = "" }: { reverse: boolean; spee
             key={i}
             className="inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-medium whitespace-nowrap"
             style={{
-              background: "rgba(255,255,255,0.04)",
-              border: "1px solid rgba(255,255,255,0.09)",
-              color: "rgba(226,232,240,0.82)",
+              background: "rgba(15,23,42,0.04)",
+              border: "1px solid rgba(15,23,42,0.09)",
+              color: "rgba(15,23,42,0.78)",
               backdropFilter: "blur(8px)",
             }}
           >

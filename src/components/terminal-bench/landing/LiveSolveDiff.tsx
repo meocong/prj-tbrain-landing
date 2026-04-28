@@ -44,7 +44,7 @@ export async function LiveSolveDiff() {
         <div className="mb-10 grid items-end gap-6 md:grid-cols-[1.5fr_1fr]">
           <div>
             <p className="font-family_avt text-xs uppercase tracking-[0.2em] text-[#78818f]">
-              / real artefact
+              / real artifact
             </p>
             <h2 className="mt-4 max-w-3xl text-4xl font-medium leading-tight text-[#0e1b2e] md:text-5xl">
               One expert solution. <span className="gradient-text">Byte-for-byte.</span>

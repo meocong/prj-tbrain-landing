@@ -75,8 +75,8 @@ export default async function BlogPage({
         <div className="mx-auto max-w-[780px] px-6">
           {/* Header */}
           <h1
-            className="text-4xl font-bold tracking-tight md:text-5xl"
-            style={{ fontFamily: "var(--font-heading)", color: "#0e1b2e", letterSpacing: "-0.03em" }}
+            className="text-4xl font-semibold tracking-tight md:text-5xl"
+            style={{ fontFamily: "var(--font-heading)", color: "var(--text-primary)", letterSpacing: "-0.03em" }}
           >
             Blog
           </h1>

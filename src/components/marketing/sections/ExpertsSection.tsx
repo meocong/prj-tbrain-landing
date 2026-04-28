@@ -9,12 +9,12 @@ export function ExpertsSection() {
   return (
     <section
       className="relative overflow-hidden py-24 md:py-32"
-      style={{ background: "#020617", color: "white" }}
+      style={{ background: "var(--bg-page)", color: "var(--text-primary)" }}
     >
       <div
         aria-hidden
         className="absolute -top-40 left-1/3 h-[500px] w-[500px] rounded-full pointer-events-none"
-        style={{ background: "radial-gradient(circle, rgba(16,185,129,0.14) 0%, transparent 65%)", filter: "blur(60px)" }}
+        style={{ background: "radial-gradient(circle, rgba(16,185,129,0.08) 0%, transparent 65%)", filter: "blur(60px)" }}
       />
 
       <div className="container mx-auto px-4 relative z-10">
@@ -27,7 +27,7 @@ export function ExpertsSection() {
               The network
             </span>
             <h2
-              className="text-4xl md:text-6xl font-medium tracking-tight"
+              className="text-4xl md:text-6xl font-semibold tracking-tight"
               style={{ fontFamily: "var(--font-heading)", letterSpacing: "-0.02em" }}
             >
               <span
@@ -40,7 +40,7 @@ export function ExpertsSection() {
                 {EXPERT_NETWORK.headline}
               </span>
             </h2>
-            <p className="mx-auto mt-4 max-w-2xl text-base md:text-lg" style={{ color: "rgba(226,232,240,0.65)" }}>
+            <p className="mx-auto mt-4 max-w-2xl text-base md:text-lg" style={{ color: "var(--text-secondary)" }}>
               {EXPERT_NETWORK.subheadline}
             </p>
           </div>
@@ -54,9 +54,9 @@ export function ExpertsSection() {
               variants={STAGGER_ITEM}
               className="relative overflow-hidden rounded-2xl p-5 text-center"
               style={{
-                background: "linear-gradient(165deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.015) 100%)",
-                border: "1px solid rgba(255,255,255,0.08)",
-                backdropFilter: "blur(10px)",
+                background: "white",
+                border: "1px solid rgba(15,23,42,0.06)",
+                boxShadow: "0 4px 18px -6px rgba(15,23,42,0.08)",
               }}
             >
               <Image
@@ -65,20 +65,20 @@ export function ExpertsSection() {
                 height={72}
                 alt={expert.name}
                 className="mx-auto rounded-full"
-                style={{ border: "2px solid rgba(255,255,255,0.12)" }}
+                style={{ border: "2px solid rgba(15,23,42,0.08)" }}
               />
-              <h3 className="mt-3 text-base font-semibold" style={{ fontFamily: "var(--font-heading)", color: "white" }}>
+              <h3 className="mt-3 text-base font-semibold" style={{ fontFamily: "var(--font-heading)", color: "var(--text-primary)" }}>
                 {expert.name}
               </h3>
-              <p className="mt-0.5 text-xs font-medium" style={{ color: "#A78BFA" }}>
+              <p className="mt-0.5 text-xs font-medium" style={{ color: "#6C3CF4" }}>
                 {expert.title}
               </p>
-              <p className="mt-2 text-xs leading-relaxed" style={{ color: "rgba(226,232,240,0.55)" }}>
+              <p className="mt-2 text-xs leading-relaxed" style={{ color: "var(--text-muted)" }}>
                 {expert.detail}
               </p>
               <span
                 className="mt-3 inline-block rounded-full px-2.5 py-0.5 text-[10px] font-medium"
-                style={{ background: "rgba(255,255,255,0.06)", color: "rgba(226,232,240,0.7)", border: "1px solid rgba(255,255,255,0.08)" }}
+                style={{ background: "rgba(15,23,42,0.04)", color: "var(--text-secondary)", border: "1px solid rgba(15,23,42,0.08)" }}
               >
                 {expert.domain}
               </span>
