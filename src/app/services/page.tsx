@@ -12,6 +12,15 @@ import {
   Users,
   Bot,
   CheckCircle,
+  Code,
+  Terminal,
+  Stethoscope,
+  Heart,
+  Factory,
+  Wrench,
+  Globe,
+  Languages,
+  Cpu,
 } from "lucide-react";
 
 export const metadata: Metadata = {
@@ -30,11 +39,21 @@ const ICON_MAP: Record<string, React.ElementType> = {
   ShieldCheck,
   Users,
   Bot,
+  Code,
+  Terminal,
+  Stethoscope,
+  Heart,
+  Factory,
+  Wrench,
+  Globe,
+  Languages,
+  Cpu,
 };
 
 export default async function ServicesPage() {
-  const [services, expertise] = await Promise.all([
-    getServices(),
+  const [services, domains, expertise] = await Promise.all([
+    getServices("service"),
+    getServices("domain"),
     getExpertiseAreas(),
   ]);
 
@@ -56,41 +75,85 @@ export default async function ServicesPage() {
           </p>
         </section>
 
-        {/* Services grid */}
+        {/* Our Services */}
         <section className="container mx-auto mt-20 px-3">
-          <div className="mx-auto grid max-w-5xl grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {services.map((svc, i) => {
-              const Icon = (ICON_MAP[svc.icon] || Database) as React.ComponentType<{ className?: string }>;
-              return (
-                <div
-                  key={i}
-                  className="glass-card-hover p-6"
-                >
-                  <div
-                    className="flex h-12 w-12 items-center justify-center rounded-xl"
-                    style={{ backgroundColor: "rgba(108, 60, 244, 0.08)" }}
-                  >
-                    <Icon className="h-6 w-6 text-[#6C3CF4]" />
+          <div className="mx-auto max-w-5xl">
+            <h2
+              className="text-center text-3xl font-semibold mb-10"
+              style={{ fontFamily: "var(--font-heading)" }}
+            >
+              <span className="gradient-text">What we deliver</span>
+            </h2>
+            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {services.map((svc, i) => {
+                const Icon = (ICON_MAP[svc.icon] || Database) as React.ComponentType<{ className?: string; style?: React.CSSProperties }>;
+                return (
+                  <div key={i} className="glass-card-hover p-6">
+                    <div
+                      className="flex h-12 w-12 items-center justify-center rounded-xl"
+                      style={{ backgroundColor: "rgba(108, 60, 244, 0.08)" }}
+                    >
+                      <Icon className="h-6 w-6 text-[#6C3CF4]" />
+                    </div>
+                    <h3
+                      className="mt-4 text-lg font-semibold"
+                      style={{ fontFamily: "var(--font-heading)" }}
+                    >
+                      {svc.title}
+                    </h3>
+                    <p className="mt-2 text-sm text-[#78818f]">{svc.description}</p>
                   </div>
-                  <h3
-                    className="mt-4 text-lg font-semibold"
-                    style={{ fontFamily: "var(--font-heading)" }}
-                  >
-                    {svc.title}
-                  </h3>
-                  <p className="mt-2 text-sm text-[#78818f]">{svc.description}</p>
-                </div>
-              );
-            })}
+                );
+              })}
+            </div>
           </div>
         </section>
+
+        {/* Domains / Pods */}
+        {domains.length > 0 && (
+          <section className="container mx-auto mt-24 px-3">
+            <div className="mx-auto max-w-5xl">
+              <h2
+                className="text-center text-3xl font-semibold mb-3"
+                style={{ fontFamily: "var(--font-heading)" }}
+              >
+                <span className="gradient-text">Domains & Expert Pods</span>
+              </h2>
+              <p className="mx-auto mb-10 max-w-2xl text-center text-base text-[#78818f]">
+                Subject-matter expertise across the disciplines AI teams need most.
+              </p>
+              <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                {domains.map((d, i) => {
+                  const Icon = (ICON_MAP[d.icon] || Globe) as React.ComponentType<{ className?: string; style?: React.CSSProperties }>;
+                  return (
+                    <div key={i} className="glass-card-hover p-6">
+                      <div
+                        className="flex h-12 w-12 items-center justify-center rounded-xl"
+                        style={{ backgroundColor: "rgba(16, 185, 129, 0.08)" }}
+                      >
+                        <Icon className="h-6 w-6" style={{ color: "#10B981" }} />
+                      </div>
+                      <h3
+                        className="mt-4 text-lg font-semibold"
+                        style={{ fontFamily: "var(--font-heading)" }}
+                      >
+                        {d.title}
+                      </h3>
+                      <p className="mt-2 text-sm text-[#78818f]">{d.description}</p>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          </section>
+        )}
 
         {/* Expertise */}
         <section className="container mx-auto mt-24 px-3">
           <div className="mx-auto max-w-3xl">
             <div className="glass-card p-8 md:p-12">
               <h2
-                className="text-center text-3xl font-medium gradient-text"
+                className="text-center text-3xl font-semibold gradient-text"
                 style={{ fontFamily: "var(--font-heading)" }}
               >
                 Deep Technical Expertise
@@ -113,7 +176,7 @@ export default async function ServicesPage() {
         {/* CTA */}
         <section className="container mx-auto mt-24 px-3 text-center">
           <h2
-            className="text-3xl font-medium"
+            className="text-3xl font-semibold"
             style={{ fontFamily: "var(--font-heading)" }}
           >
             Need a custom solution?

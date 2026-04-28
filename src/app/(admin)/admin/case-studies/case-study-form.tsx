@@ -5,7 +5,7 @@ import { useMutation } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { toast } from "sonner";
-import { ArrowLeft, Plus, Save, Trash2 } from "lucide-react";
+import { ArrowLeft, FileText, Plus, Save, Trash2, Upload, Users } from "lucide-react";
 import { supabaseAdmin } from "@/lib/admin/supabase-browser";
 
 type Metric = { value: string; label: string };
@@ -20,6 +20,8 @@ export type CaseStudyFormValues = {
   metrics: Metric[];
   display_order: number;
   is_active: boolean;
+  pdf_filename?: string | null;
+  pdf_gcs_object?: string | null;
 };
 
 const EMPTY: CaseStudyFormValues = {
@@ -40,6 +42,8 @@ export function CaseStudyForm({ initial }: { initial?: CaseStudyFormValues }) {
   const router = useRouter();
   const isEdit = Boolean(initial?.id);
   const [form, setForm] = useState<CaseStudyFormValues>(initial ?? EMPTY);
+  const [pdfFile, setPdfFile] = useState<File | null>(null);
+  const [uploadingPdf, setUploadingPdf] = useState(false);
 
   const saveMutation = useMutation({
     mutationFn: async () => {
@@ -110,6 +114,44 @@ export function CaseStudyForm({ initial }: { initial?: CaseStudyFormValues }) {
       metrics: f.metrics.map((m, j) => (j === i ? { ...m, [key]: val } : m)),
     }));
 
+  const uploadPdf = async () => {
+    if (!pdfFile || !initial?.id) return;
+    setUploadingPdf(true);
+    try {
+      const fd = new FormData();
+      fd.append("file", pdfFile);
+      const res = await fetch(`/api/admin/case-studies/${initial.id}/pdf`, {
+        method: "POST",
+        body: fd,
+      });
+      const json = await res.json();
+      if (!res.ok) throw new Error(json.error ?? "Upload failed");
+      toast.success(`Uploaded ${json.filename}`);
+      setForm((f) => ({ ...f, pdf_filename: json.filename, pdf_gcs_object: json.gcsObject }));
+      setPdfFile(null);
+    } catch (e) {
+      toast.error((e as Error).message);
+    } finally {
+      setUploadingPdf(false);
+    }
+  };
+
+  const deletePdf = async () => {
+    if (!initial?.id) return;
+    if (!confirm("Remove the PDF brochure from this case study?")) return;
+    setUploadingPdf(true);
+    try {
+      const res = await fetch(`/api/admin/case-studies/${initial.id}/pdf`, { method: "DELETE" });
+      if (!res.ok) throw new Error("Delete failed");
+      toast.success("PDF removed");
+      setForm((f) => ({ ...f, pdf_filename: null, pdf_gcs_object: null }));
+    } catch (e) {
+      toast.error((e as Error).message);
+    } finally {
+      setUploadingPdf(false);
+    }
+  };
+
   return (
     <div className="animate-[fadeIn_0.3s_ease-out] max-w-3xl">
       <Link
@@ -162,7 +204,7 @@ export function CaseStudyForm({ initial }: { initial?: CaseStudyFormValues }) {
           <textarea
             value={form.description}
             onChange={(e) => setForm({ ...form, description: e.target.value })}
-            className="input-base min-h-[120px]"
+            className="input-field min-h-[120px]"
             placeholder="Built a comprehensive benchmark for AI terminal agents…"
           />
         </Field>
@@ -192,14 +234,14 @@ export function CaseStudyForm({ initial }: { initial?: CaseStudyFormValues }) {
                   value={m.value}
                   onChange={(e) => updateMetric(i, "value", e.target.value)}
                   placeholder="500+"
-                  className="input-base flex-1"
+                  className="input-field flex-1"
                 />
                 <input
                   type="text"
                   value={m.label}
                   onChange={(e) => updateMetric(i, "label", e.target.value)}
                   placeholder="Tasks"
-                  className="input-base flex-1"
+                  className="input-field flex-1"
                 />
                 <button
                   type="button"
@@ -216,6 +258,62 @@ export function CaseStudyForm({ initial }: { initial?: CaseStudyFormValues }) {
             <Plus className="h-3.5 w-3.5" /> Add metric
           </button>
         </div>
+
+        {isEdit && (
+          <div>
+            <label className="block text-xs font-medium mb-2" style={{ color: "var(--text-secondary)" }}>
+              PDF brochure
+            </label>
+            <p className="text-[11px] mb-3" style={{ color: "var(--text-muted)" }}>
+              Optional PDF (max 25MB). Used by the gated download flow on /casestudy.
+            </p>
+            {form.pdf_filename ? (
+              <div className="rounded-xl p-3 flex items-center justify-between gap-3" style={{ background: "var(--bg-input)", border: "1px solid var(--border-default)" }}>
+                <div className="flex items-center gap-2 min-w-0">
+                  <FileText className="h-4 w-4 shrink-0" style={{ color: "var(--color-brand-500)" }} />
+                  <span className="text-sm truncate" style={{ color: "var(--text-primary)" }}>
+                    {form.pdf_filename}
+                  </span>
+                </div>
+                <div className="flex items-center gap-2 shrink-0">
+                  <Link
+                    href={`/admin/case-studies/${initial?.id}/downloads`}
+                    className="btn-secondary text-xs"
+                    title="View download leads"
+                  >
+                    <Users className="h-3.5 w-3.5" /> Leads
+                  </Link>
+                  <button
+                    type="button"
+                    onClick={deletePdf}
+                    disabled={uploadingPdf}
+                    className="btn-ghost px-2"
+                    aria-label="Remove PDF"
+                  >
+                    <Trash2 className="h-4 w-4" />
+                  </button>
+                </div>
+              </div>
+            ) : (
+              <div className="flex items-center gap-2">
+                <input
+                  type="file"
+                  accept="application/pdf,.pdf"
+                  onChange={(e) => setPdfFile(e.target.files?.[0] ?? null)}
+                  className="input-field flex-1 text-xs"
+                />
+                <button
+                  type="button"
+                  onClick={uploadPdf}
+                  disabled={!pdfFile || uploadingPdf}
+                  className="btn-primary text-xs"
+                >
+                  <Upload className="h-3.5 w-3.5" /> {uploadingPdf ? "Uploading…" : "Upload"}
+                </button>
+              </div>
+            )}
+          </div>
+        )}
 
         <div className="grid grid-cols-2 gap-4">
           <Field label="Display order" hint="Lower = earlier. Featured slot is the lowest.">

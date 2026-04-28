@@ -15,15 +15,27 @@ type ExpertiseRow = {
   detail: string;
 };
 
-export async function getServices(): Promise<Service[]> {
+export type ServiceCategory = "service" | "domain";
+
+/**
+ * Fetch services filtered by category. Defaults to "service" for backward compat
+ * with old call sites. New /services page calls with both "service" and "domain"
+ * to render two separate sections.
+ */
+export async function getServices(category: ServiceCategory = "service"): Promise<Service[]> {
   try {
     const { data, error } = await supabaseAdmin()
       .from("services")
-      .select("title, description, icon, display_order, is_active")
+      .select("title, description, icon, display_order, is_active, category")
       .eq("is_active", true)
+      .eq("category", category)
       .order("display_order", { ascending: true });
     if (error) throw error;
-    if (!data || data.length === 0) return SERVICES;
+    if (!data || data.length === 0) {
+      // Fallback constants only cover the legacy "service" shape; for "domain"
+      // we return [] so /services renders nothing rather than mismatched data.
+      return category === "service" ? SERVICES : [];
+    }
     return (data as ServiceRow[]).map((r) => ({
       title: r.title,
       description: r.description ?? "",
@@ -31,7 +43,7 @@ export async function getServices(): Promise<Service[]> {
     }));
   } catch (err) {
     console.error("[services] load failed, using fallback:", err);
-    return SERVICES;
+    return category === "service" ? SERVICES : [];
   }
 }
 
