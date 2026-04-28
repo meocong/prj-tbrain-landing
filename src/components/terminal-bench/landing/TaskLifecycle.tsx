@@ -36,7 +36,7 @@ const STEPS = [
   },
   {
     n: "06",
-    title: "Artefacts delivered",
+    title: "Artifacts delivered",
     body: "PASS/FAIL plus the full trace: commands, diffs, stdout, timings. Everything is versioned and auditable.",
     snippet: "result: PASS\nlog.jsonl · diff.patch · trace.tar",
   },

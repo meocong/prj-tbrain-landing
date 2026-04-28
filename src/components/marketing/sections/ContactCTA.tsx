@@ -8,15 +8,15 @@ export function ContactCTA() {
   return (
     <section
       className="relative overflow-hidden py-28 md:py-40"
-      style={{ background: "#020617", color: "white" }}
+      style={{ background: "var(--bg-page)", color: "var(--text-primary)" }}
     >
       <div
         aria-hidden
         className="absolute inset-0 pointer-events-none"
         style={{
           background:
-            "radial-gradient(ellipse 80% 60% at 50% 50%, rgba(108,60,244,0.32) 0%, transparent 60%)," +
-            "radial-gradient(ellipse 50% 40% at 20% 80%, rgba(16,185,129,0.25) 0%, transparent 55%)",
+            "radial-gradient(ellipse 80% 60% at 50% 50%, rgba(108,60,244,0.12) 0%, transparent 60%)," +
+            "radial-gradient(ellipse 50% 40% at 20% 80%, rgba(16,185,129,0.10) 0%, transparent 55%)",
         }}
       />
       <div
@@ -24,7 +24,7 @@ export function ContactCTA() {
         className="absolute inset-0 pointer-events-none opacity-30"
         style={{
           backgroundImage:
-            "linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px)",
+            "linear-gradient(rgba(15,23,42,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(15,23,42,0.04) 1px, transparent 1px)",
           backgroundSize: "48px 48px",
           maskImage: "radial-gradient(ellipse at center, black 20%, transparent 70%)",
         }}
@@ -33,7 +33,7 @@ export function ContactCTA() {
       <div className="container mx-auto px-4 relative z-10 max-w-4xl text-center">
         <RevealOnScroll>
           <h2
-            className="text-5xl md:text-7xl font-medium tracking-tight leading-[1.05]"
+            className="text-5xl md:text-7xl font-semibold tracking-tight leading-[1.05]"
             style={{ fontFamily: "var(--font-heading)", letterSpacing: "-0.03em" }}
           >
             Let&apos;s build{" "}
@@ -52,7 +52,7 @@ export function ContactCTA() {
         </RevealOnScroll>
 
         <RevealOnScroll delay={0.15}>
-          <p className="mx-auto mt-8 max-w-xl text-base md:text-lg" style={{ color: "rgba(226,232,240,0.65)" }}>
+          <p className="mx-auto mt-8 max-w-xl text-base md:text-lg" style={{ color: "var(--text-secondary)" }}>
             Tell us your training target. We&apos;ll scope a program in 48 hours and ship first samples in 2 weeks.
           </p>
         </RevealOnScroll>
@@ -69,8 +69,8 @@ export function ContactCTA() {
         </RevealOnScroll>
 
         <RevealOnScroll delay={0.5}>
-          <p className="mt-10 text-xs uppercase tracking-widest" style={{ color: "rgba(226,232,240,0.4)" }}>
-            Tbrain · Data Factory · Hanoi · Singapore
+          <p className="mt-10 text-xs uppercase tracking-widest" style={{ color: "var(--text-muted)" }}>
+            Tbrain · Data Factory · Hanoi
           </p>
         </RevealOnScroll>
       </div>

@@ -29,9 +29,9 @@ const Header = () => {
   const pathname = usePathname();
   const dropdownRef = useRef<HTMLDivElement>(null);
 
-  // Only the fully cinematic (dark-hero) pages — terminal-bench has its
-  // own light gradient hero and must keep the light header.
-  const isDarkPage = pathname === "/" || pathname === "/data/physical-ai";
+  // Pages that keep a dark hero need the dark header variant. Homepage
+  // converted to light theme; only physical-ai still uses dark layout.
+  const isDarkPage = pathname === "/data/physical-ai";
 
   useEffect(() => {
     const handleClick = (e: MouseEvent) => {

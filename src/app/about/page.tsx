@@ -20,7 +20,7 @@ export default function AboutPage() {
         {/* Hero */}
         <section className="container mx-auto px-3 text-center">
           <h1
-            className="text-4xl font-medium md:text-6xl"
+            className="text-4xl font-semibold md:text-6xl"
             style={{ fontFamily: "var(--font-heading)" }}
           >
             Building the{" "}

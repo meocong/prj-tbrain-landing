@@ -236,7 +236,7 @@ export function OverviewPanel({
             ))
           ) : (
             <p className="text-sm italic text-[#78818f]">
-              No recognised tooling detected in the ingested file tree.
+              No recognized tooling detected in the ingested file tree.
             </p>
           )}
         </div>

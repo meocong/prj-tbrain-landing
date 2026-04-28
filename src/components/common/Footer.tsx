@@ -172,7 +172,7 @@ const Footer = () => {
               LinkedIn
             </a>
             <span className="text-xs" style={{ color: "rgba(226,232,240,0.5)" }}>
-              Sheridan, WY &bull; Hanoi
+              Hanoi
             </span>
           </div>
           <p className="text-xs" style={{ color: "rgba(226,232,240,0.5)" }}>
