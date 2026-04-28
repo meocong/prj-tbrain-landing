@@ -6,10 +6,12 @@ import { supabaseAdmin } from "@/lib/terminal-bench/supabase/admin";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowLeft, Calendar, Tag } from "lucide-react";
 import type { CmsPost } from "@/lib/admin/types";
 
-export const dynamic = "force-dynamic";
+// ISR: cache rendered post for 5 minutes; admin edits surface within that window.
+export const revalidate = 300;
 
 export async function generateMetadata({
   params,
@@ -132,11 +134,14 @@ export default async function BlogPostPage({
 
           {/* Cover image */}
           {post.cover_image_url && (
-            <div className="mt-8 overflow-hidden rounded-2xl">
-              <img
+            <div className="relative mt-8 aspect-[2/1] overflow-hidden rounded-2xl">
+              <Image
                 src={post.cover_image_url}
                 alt={post.title}
-                className="h-auto w-full object-cover"
+                fill
+                priority
+                sizes="(min-width: 1024px) 900px, 100vw"
+                className="object-cover"
               />
             </div>
           )}
@@ -186,10 +191,12 @@ export default async function BlogPostPage({
                 >
                   <div className="relative w-full aspect-[16/10] overflow-hidden bg-[#020617]">
                     {r.cover_image_url ? (
-                      <img
+                      <Image
                         src={r.cover_image_url}
                         alt={r.title}
-                        className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                        fill
+                        sizes="(min-width: 768px) 33vw, 100vw"
+                        className="object-cover transition-transform duration-500 group-hover:scale-105"
                       />
                     ) : (
                       <>

@@ -79,6 +79,25 @@ export function ContactsClient({
       ),
     },
     {
+      key: "utm",
+      header: "Channel",
+      render: (r) => {
+        if (!r.utm_source && !r.utm_medium && !r.utm_campaign) {
+          return <span className="text-[10px]" style={{ color: "var(--text-muted)" }}>direct</span>;
+        }
+        return (
+          <div className="text-xs leading-tight" style={{ color: "var(--text-secondary)" }}>
+            <div className="font-medium">{r.utm_source ?? "—"}</div>
+            {(r.utm_medium || r.utm_campaign) && (
+              <div className="text-[10px]" style={{ color: "var(--text-muted)" }}>
+                {[r.utm_medium, r.utm_campaign].filter(Boolean).join(" · ")}
+              </div>
+            )}
+          </div>
+        );
+      },
+    },
+    {
       key: "last_activity",
       header: "Last activity",
       sortable: true,

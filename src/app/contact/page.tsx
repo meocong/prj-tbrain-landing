@@ -6,6 +6,7 @@ import Footer from "@/components/common/Footer";
 import { Turnstile } from "@marsidev/react-turnstile";
 import { toast } from "sonner";
 import { Send, CheckCircle } from "lucide-react";
+import { readUtm } from "@/lib/utm";
 
 export default function ContactPage() {
   const [form, setForm] = useState({
@@ -35,6 +36,7 @@ export default function ContactPage() {
         body: JSON.stringify({
           ...form,
           turnstileToken: turnstileRef.current || "dev-bypass",
+          ...readUtm(),
         }),
       });
 
