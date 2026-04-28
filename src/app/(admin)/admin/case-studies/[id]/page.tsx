@@ -16,6 +16,8 @@ type Row = {
   metrics: Array<{ value: string; label: string }> | null;
   display_order: number;
   is_active: boolean;
+  pdf_filename: string | null;
+  pdf_gcs_object: string | null;
 };
 
 export default async function EditCaseStudyPage({ params }: { params: Promise<{ id: string }> }) {
@@ -24,7 +26,7 @@ export default async function EditCaseStudyPage({ params }: { params: Promise<{ 
 
   const { data } = await supabaseAdmin()
     .from("case_studies")
-    .select("id, slug, title, short_description, description, image_url, metrics, display_order, is_active")
+    .select("id, slug, title, short_description, description, image_url, metrics, display_order, is_active, pdf_filename, pdf_gcs_object")
     .eq("id", id)
     .maybeSingle();
 
@@ -41,6 +43,8 @@ export default async function EditCaseStudyPage({ params }: { params: Promise<{ 
     metrics: r.metrics?.length ? r.metrics : [{ value: "", label: "" }],
     display_order: r.display_order,
     is_active: r.is_active,
+    pdf_filename: r.pdf_filename,
+    pdf_gcs_object: r.pdf_gcs_object,
   };
 
   return <CaseStudyForm initial={initial} />;

@@ -2,11 +2,11 @@ import "server-only";
 import Link from "next/link";
 import { Plus } from "lucide-react";
 import { listAdminResource } from "@/lib/admin/server/list";
-import { ServicesClient } from "./services-client";
+import { ExpertOsClient } from "./expert-os-client";
 
 export const dynamic = "force-dynamic";
 
-export type ServiceRow = {
+export type ExpertOsRow = {
   id: string;
   slug: string;
   title: string;
@@ -17,16 +17,16 @@ export type ServiceRow = {
   updated_at: string;
 };
 
-export default async function ServicesAdminPage({
+export default async function ExpertOsAdminPage({
   searchParams,
 }: {
   searchParams: Promise<Record<string, string | string[] | undefined>>;
 }) {
   const sp = await searchParams;
 
-  const initial = await listAdminResource<ServiceRow>(
+  const initial = await listAdminResource<ExpertOsRow>(
     {
-      table: "services",
+      table: "expert_os_features",
       permCode: "content.view",
       select: "id, slug, title, description, icon, display_order, is_active, updated_at",
       searchable: ["title", "slug", "description"],
@@ -35,8 +35,6 @@ export default async function ServicesAdminPage({
       filters: {
         is_active: (v, q) => q.eq("is_active", v === "true"),
       },
-      // Domains live under /admin/domains — scope this listing to "service".
-      where: (q) => q.eq("category", "service"),
     },
     sp
   );
@@ -49,17 +47,17 @@ export default async function ServicesAdminPage({
             className="text-2xl font-bold tracking-tight"
             style={{ fontFamily: "var(--font-heading)", color: "var(--text-primary)", letterSpacing: "-0.02em" }}
           >
-            Services
+            Platform Features
           </h1>
           <p className="mt-1 text-sm" style={{ color: "var(--text-muted)" }}>
-            Service cards shown on /services. Edit titles, descriptions, and icons.
+            Expert OS feature cards shown on /platform. Edit titles, descriptions, and icons.
           </p>
         </div>
-        <Link href="/admin/services/new" className="btn-primary text-sm">
-          <Plus className="h-4 w-4" /> New service
+        <Link href="/admin/expert-os/new" className="btn-primary text-sm">
+          <Plus className="h-4 w-4" /> New feature
         </Link>
       </div>
-      <ServicesClient initial={initial} />
+      <ExpertOsClient initial={initial} />
     </div>
   );
 }

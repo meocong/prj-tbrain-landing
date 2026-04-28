@@ -17,6 +17,8 @@ export type ListConfig = {
   defaultSort?: { key: string; dir: "asc" | "desc" };
   sortWhitelist?: string[];
   filters?: Record<string, (value: string, q: QueryBuilder) => QueryBuilder | undefined>;
+  /** Fixed where clauses applied unconditionally (e.g. scope to a category). */
+  where?: (q: QueryBuilder) => QueryBuilder;
 };
 
 export type ListResult<T> = {
@@ -47,6 +49,10 @@ export async function listAdminResource<T>(
     .from(cfg.table)
     .select(cfg.select ?? "*", { count: "exact" })
     .range(page * pageSize, (page + 1) * pageSize - 1);
+
+  if (cfg.where) {
+    q = cfg.where(q as QueryBuilder);
+  }
 
   const allowSort = cfg.sortWhitelist ? cfg.sortWhitelist.includes(sortKey) : true;
   if (allowSort) {
