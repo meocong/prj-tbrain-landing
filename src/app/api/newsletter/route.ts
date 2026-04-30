@@ -81,12 +81,17 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "db_error" }, { status: 500 });
   }
 
-  // Send welcome email
-  await sendEmail({
-    to: email,
-    subject: "Welcome to the Tbrain Newsletter",
-    template: createElement(NewsletterWelcome, { fullName }),
-  });
+  // Send welcome email — never let a Resend hiccup turn a successful subscribe
+  // (DB row already written above) into a 500 for the user.
+  try {
+    await sendEmail({
+      to: email,
+      subject: "Welcome to the Tbrain Newsletter",
+      template: createElement(NewsletterWelcome, { fullName }),
+    });
+  } catch (err) {
+    console.error("[newsletter] welcome email failed:", err);
+  }
 
   return NextResponse.json({ ok: true });
 }

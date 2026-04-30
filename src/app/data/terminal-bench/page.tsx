@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { SectionHeading } from "@/components/terminal-bench/shared/SectionHeading";
 import { NumberedBlock } from "@/components/terminal-bench/shared/NumberedBlock";
@@ -8,6 +9,19 @@ import { LiveSolveDiff } from "@/components/terminal-bench/landing/LiveSolveDiff
 import { SampleGalleryPreview } from "@/components/terminal-bench/landing/SampleGalleryPreview";
 
 export const revalidate = 86400;
+
+export const metadata: Metadata = {
+  title: "Terminal Bench — Real Terminal Tasks for Coding Agents",
+  description:
+    "Reproducible terminal benchmark tasks with deterministic verification — designed to expose where coding agents actually break in real Linux/Python/Node environments.",
+  alternates: { canonical: "/data/terminal-bench" },
+  openGraph: {
+    title: "Terminal Bench — Real Terminal Tasks for Coding Agents",
+    description:
+      "Reproducible terminal benchmark tasks with deterministic verification — designed to expose where coding agents actually break.",
+    url: "/data/terminal-bench",
+  },
+};
 
 const FEATURES: { n: string; title: string; body: string }[] = [
   {

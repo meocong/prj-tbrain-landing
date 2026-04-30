@@ -10,6 +10,13 @@ export const metadata: Metadata = {
   title: "About Us",
   description:
     "Learn about Tbrain — AI training data experts across 17+ countries with 48K+ professionals.",
+  alternates: { canonical: "/about" },
+  openGraph: {
+    title: "About Tbrain",
+    description:
+      "Tbrain is the human infrastructure for agentic AI — domain-expert pods, RLHF, and evaluation services that ship.",
+    url: "/about",
+  },
 };
 
 export default function AboutPage() {
@@ -57,12 +64,12 @@ export default function AboutPage() {
                 <p className="mt-3 min-h-[130px] text-base font-normal text-[#78818f]">
                   {leader.bio}
                 </p>
-                <div className="mt-4 flex gap-4">
+                <div className="mt-4 flex gap-4" aria-label={`${leader.name} previous companies`}>
                   {leader.logos.map((logo, j) => (
                     <Image
                       key={j}
                       src={`/icons/${logo}`}
-                      alt=""
+                      alt={logo.replace(/\.[^.]+$/, "").replace(/[-_]/g, " ")}
                       width={40}
                       height={40}
                       className="aspect-square shrink-0 rounded-[28px]"

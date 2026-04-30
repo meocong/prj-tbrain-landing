@@ -92,7 +92,10 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "grant_insert_failed" }, { status: 500 });
   }
 
-  // Send email if requested
+  // Send email if requested — best-effort. The grant is already created, so
+  // an email failure should NOT 500 the admin's request: surface the passcode
+  // back to the admin so they can hand-deliver it instead.
+  let emailSent = shouldSendEmail;
   if (shouldSendEmail) {
     const { data: batch } = await db
       .from("batches")
@@ -101,16 +104,21 @@ export async function POST(req: NextRequest) {
       .single();
 
     const baseUrl = process.env.PUBLIC_BASE_URL ?? "https://tbrain.ai";
-    await sendEmail({
-      to: clientEmail,
-      subject: `Your access passcode for ${batch?.name || "Tbrain Data"}`,
-      template: createElement(ClientPasscodeDelivery, {
-        fullName: clientEmail.split("@")[0],
-        passcode,
-        batchName: batch?.name || "Data",
-        enterUrl: `${baseUrl}/data/terminal-bench/enter`,
-      }),
-    });
+    try {
+      await sendEmail({
+        to: clientEmail,
+        subject: `Your access passcode for ${batch?.name || "Tbrain Data"}`,
+        template: createElement(ClientPasscodeDelivery, {
+          fullName: clientEmail.split("@")[0],
+          passcode,
+          batchName: batch?.name || "Data",
+          enterUrl: `${baseUrl}/data/terminal-bench/enter`,
+        }),
+      });
+    } catch (err) {
+      console.error("[admin/passcodes] email failed:", err);
+      emailSent = false;
+    }
   }
 
   // Audit log
@@ -119,7 +127,7 @@ export async function POST(req: NextRequest) {
     action: "create",
     resourceType: "passcode",
     resourceId: grant.id,
-    details: { clientEmail, batchId, expiresInDays, sentEmail: shouldSendEmail },
+    details: { clientEmail, batchId, expiresInDays, sentEmail: emailSent },
     ip: req.headers.get("x-forwarded-for")?.split(",")[0].trim() ?? null,
     userAgent: req.headers.get("user-agent") ?? null,
   });
@@ -127,6 +135,9 @@ export async function POST(req: NextRequest) {
   return NextResponse.json({
     ok: true,
     grantId: grant.id,
-    passcode: shouldSendEmail ? undefined : passcode, // Only return if not emailed
+    // Surface the passcode whenever the admin will need to deliver it manually:
+    // either they didn't ask us to email, or the email send failed.
+    passcode: emailSent ? undefined : passcode,
+    emailSent,
   });
 }

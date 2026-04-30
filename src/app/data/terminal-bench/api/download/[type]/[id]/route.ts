@@ -33,7 +33,13 @@ export async function GET(
       .maybeSingle();
     if (!sample || !sample.gcs_sample_zip_object) return NextResponse.json({ error: "not_found" }, { status: 404 });
     if (!claims.batchIds.includes(sample.batch_id)) return NextResponse.json({ error: "forbidden" }, { status: 403 });
-    const url = await signDownloadUrl(sample.gcs_sample_zip_object, 300);
+    let url: string;
+    try {
+      url = await signDownloadUrl(sample.gcs_sample_zip_object, 300);
+    } catch (err) {
+      console.error("[tb/download] sample sign failed:", err);
+      return NextResponse.json({ error: "sign_failed" }, { status: 502 });
+    }
     await logEvent({
       clientId: claims.clientId,
       grantId: claims.grantId,
@@ -55,7 +61,13 @@ export async function GET(
       .maybeSingle();
     if (!batch || !batch.gcs_batch_zip_object) return NextResponse.json({ error: "not_found" }, { status: 404 });
     if (!claims.batchIds.includes(batch.id)) return NextResponse.json({ error: "forbidden" }, { status: 403 });
-    const url = await signDownloadUrl(batch.gcs_batch_zip_object, 300);
+    let url: string;
+    try {
+      url = await signDownloadUrl(batch.gcs_batch_zip_object, 300);
+    } catch (err) {
+      console.error("[tb/download] batch sign failed:", err);
+      return NextResponse.json({ error: "sign_failed" }, { status: 502 });
+    }
     await logEvent({
       clientId: claims.clientId,
       grantId: claims.grantId,

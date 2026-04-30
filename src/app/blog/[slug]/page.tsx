@@ -32,7 +32,16 @@ export async function generateMetadata({
   return {
     title: post.seo_title || post.title,
     description: post.seo_description || post.excerpt || undefined,
+    alternates: { canonical: `/blog/${slug}` },
     openGraph: {
+      type: "article",
+      title: post.seo_title || post.title,
+      description: post.seo_description || post.excerpt || undefined,
+      images: post.og_image_url ? [post.og_image_url] : undefined,
+      url: `/blog/${slug}`,
+    },
+    twitter: {
+      card: "summary_large_image",
       title: post.seo_title || post.title,
       description: post.seo_description || post.excerpt || undefined,
       images: post.og_image_url ? [post.og_image_url] : undefined,
@@ -77,8 +86,35 @@ export default async function BlogPostPage({
     .limit(4);
   const related = (relatedRaw ?? []).slice(0, 3);
 
+  const baseUrl = process.env.PUBLIC_BASE_URL || "https://tbrain.ai";
+  const articleJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: post.title,
+    description: post.excerpt || undefined,
+    image: post.cover_image_url ? [post.cover_image_url] : undefined,
+    datePublished: post.published_at || post.created_at,
+    dateModified: post.updated_at || post.published_at || post.created_at,
+    author: post.author_name
+      ? [{ "@type": "Person", name: post.author_name }]
+      : [{ "@type": "Organization", name: "Tbrain" }],
+    publisher: {
+      "@type": "Organization",
+      name: "Tbrain",
+      logo: { "@type": "ImageObject", url: `${baseUrl}/favicon.ico` },
+    },
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": `${baseUrl}/blog/${post.slug}`,
+    },
+  };
+
   return (
     <div>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
+      />
       <Header />
       <main className="pb-24 pt-32">
         <article className="mx-auto max-w-[720px] px-6">

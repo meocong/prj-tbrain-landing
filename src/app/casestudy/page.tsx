@@ -1,4 +1,5 @@
 import React from "react";
+import type { Metadata } from "next";
 import { Star } from "lucide-react";
 import Header from "@/components/common/Header";
 import post_bg from "@/assets/images/post_bg.png";
@@ -7,6 +8,19 @@ import { CaseStudyContent } from "@/components/casestudy/CaseStudyContent";
 import { getCaseStudies } from "@/lib/landing/case-studies";
 
 export const revalidate = 300;
+
+export const metadata: Metadata = {
+  title: "Case Studies",
+  description:
+    "How leading AI teams ship better models with Tbrain — RLHF datasets, evaluation harnesses, and expert annotation at scale.",
+  alternates: { canonical: "/casestudy" },
+  openGraph: {
+    title: "Case Studies — Tbrain",
+    description:
+      "How leading AI teams ship better models with Tbrain — RLHF datasets, evaluation, and expert annotation at scale.",
+    url: "/casestudy",
+  },
+};
 
 export default async function Page() {
   const studies = await getCaseStudies();

@@ -27,6 +27,13 @@ export const metadata: Metadata = {
   title: "Services",
   description:
     "AI training data services — RLHF, SFT, data annotation, evaluation, custom datasets, and expert teams.",
+  alternates: { canonical: "/services" },
+  openGraph: {
+    title: "Services — Tbrain",
+    description:
+      "RLHF, SFT, evaluation, and custom datasets delivered by domain-expert pods across coding, medical, manufacturing, languages, and robotics.",
+    url: "/services",
+  },
 };
 
 export const revalidate = 300;

@@ -16,7 +16,7 @@ export type SendResult = { ok: true; id: string } | { ok: false; error: string }
  */
 export async function sendEmail(args: SendArgs): Promise<SendResult> {
   const key = process.env.RESEND_API_KEY;
-  const from = process.env.EMAIL_FROM ?? "Tbrain <no-reply@tbrain.ai>";
+  const from = process.env.EMAIL_FROM ?? "Tbrain <hello@noreply.tbrain.ai>";
   if (!key) return { ok: false, error: "missing_resend_key" };
 
   try {

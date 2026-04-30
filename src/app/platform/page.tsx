@@ -9,6 +9,13 @@ export const metadata: Metadata = {
   title: "Platform — Expert OS",
   description:
     "The platform behind Tbrain — AI-native operations for managing agents, knowledge, and quality at scale.",
+  alternates: { canonical: "/platform" },
+  openGraph: {
+    title: "Platform — Expert OS by Tbrain",
+    description:
+      "AI-native operations for the human side of agentic AI: knowledge bases, LLM-as-judge, agentic workflows, and agent identity.",
+    url: "/platform",
+  },
 };
 
 export const revalidate = 300;

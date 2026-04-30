@@ -47,10 +47,17 @@ export async function GET(req: NextRequest, { params }: { params: Promise<{ samp
     return NextResponse.json({ error: "too_large", size: file.size_bytes }, { status: 413 });
   }
 
-  const buf = await downloadBuffer(file.gcs_object);
-  const text = buf.toString("utf8");
+  let html: string;
+  let text: string;
   const lang = langForPath(file.path);
-  const html = await highlightToHtml(text, lang);
+  try {
+    const buf = await downloadBuffer(file.gcs_object);
+    text = buf.toString("utf8");
+    html = await highlightToHtml(text, lang);
+  } catch (err) {
+    console.error("[tb/files] read+highlight failed:", err);
+    return NextResponse.json({ error: "read_failed" }, { status: 502 });
+  }
 
   await logEvent({
     clientId: claims.clientId,

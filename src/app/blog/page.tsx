@@ -11,6 +11,14 @@ export const metadata: Metadata = {
   title: "Blog",
   description:
     "Insights on AI training data, robotics, evaluation, and building better AI from the Tbrain team.",
+  alternates: { canonical: "/blog" },
+  openGraph: {
+    title: "Blog — Tbrain",
+    description:
+      "Field notes on training data quality, RLHF, evaluation, and the operational side of agentic AI.",
+    url: "/blog",
+    type: "website",
+  },
 };
 
 // ISR: regenerate the blog index every 5 minutes so newly published posts
@@ -179,7 +187,7 @@ export default async function BlogPage({
                 <div className="relative h-24 w-32 shrink-0 overflow-hidden rounded-lg md:h-32 md:w-44">
                   <Image
                     src={post.image}
-                    alt=""
+                    alt={post.title}
                     fill
                     sizes="176px"
                     className="object-cover"
