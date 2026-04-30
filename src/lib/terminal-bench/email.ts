@@ -13,7 +13,7 @@ function resend(): Resend {
   return _resend;
 }
 
-export const FROM_ADDRESS = process.env.EMAIL_FROM ?? "Tbrain <no-reply@tbrain.ai>";
+export const FROM_ADDRESS = process.env.EMAIL_FROM ?? "Tbrain <hello@noreply.tbrain.ai>";
 
 export async function sendEmail(opts: {
   to: string | string[];

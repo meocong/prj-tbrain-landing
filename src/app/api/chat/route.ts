@@ -148,7 +148,12 @@ export async function POST(req: NextRequest) {
     return Response.json({ error: "Chat not configured" }, { status: 503 });
   }
 
-  const { messages } = (await req.json()) as { messages?: Msg[] };
+  let messages: Msg[] | undefined;
+  try {
+    ({ messages } = (await req.json()) as { messages?: Msg[] });
+  } catch {
+    return Response.json({ error: "invalid_json" }, { status: 400 });
+  }
 
   if (!messages || !Array.isArray(messages) || messages.length === 0) {
     return Response.json({ error: "Messages required" }, { status: 400 });

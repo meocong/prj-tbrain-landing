@@ -71,10 +71,15 @@ export async function POST(req: NextRequest) {
     const isPerClient = p.client_id != null;
     const kind = isPerClient ? "grant" : "batch_passcode";
 
-    await db
+    const { error: bumpErr } = await db
       .from("passcodes")
       .update({ use_count: p.use_count + 1, last_used_at: new Date().toISOString() })
       .eq("id", p.id);
+    if (bumpErr) {
+      // Don't block sign-in on a use_count bump failure — but log so we can
+      // detect quota-tracking drift if it happens repeatedly.
+      console.error("[terminal-bench] passcode use_count update failed:", bumpErr);
+    }
 
     const sessionId = newSessionId();
     const jwt = await signSessionJwt({

@@ -1,12 +1,15 @@
 import { Metadata } from "next";
-
-export const metadata: Metadata = {
-  title: "Tbrain",
-  description: "Full-service human resource agency for AI training experts",
-};
 import post_bg from "@/assets/images/post_bg.png";
 import Footer from "@/components/common/Footer";
 import Header from "@/components/common/Header";
+
+export const metadata: Metadata = {
+  title: "Privacy Policy",
+  description:
+    "How Tbrain collects, uses, and protects personal information for our AI training data services. Last updated November 2024.",
+  alternates: { canonical: "/policy" },
+  robots: { index: true, follow: false },
+};
 
 export default async function Page() {
   return (

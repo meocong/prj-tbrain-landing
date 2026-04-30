@@ -35,11 +35,49 @@ export const metadata: Metadata = {
   metadataBase: new URL(
     process.env.PUBLIC_BASE_URL || "https://tbrain.ai"
   ),
+  alternates: { canonical: "/" },
   openGraph: {
     type: "website",
     locale: "en_US",
     siteName: "Tbrain",
+    url: "/",
+    title: "Tbrain — AI Training Data & Evaluation",
+    description:
+      "High-quality AI training data, RLHF, and evaluation services. Production-grade datasets for building better AI models.",
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "Tbrain — AI Training Data & Evaluation",
+    description:
+      "High-quality AI training data, RLHF, and evaluation services. Production-grade datasets for building better AI models.",
+  },
+};
+
+const ORGANIZATION_JSONLD = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "Tbrain",
+  url: process.env.PUBLIC_BASE_URL || "https://tbrain.ai",
+  logo: `${process.env.PUBLIC_BASE_URL || "https://tbrain.ai"}/favicon.ico`,
+  sameAs: [
+    "https://www.linkedin.com/company/tbrain-ai",
+  ],
+  contactPoint: [
+    {
+      "@type": "ContactPoint",
+      contactType: "sales",
+      email: "info@tbrain.ai",
+      areaServed: "Worldwide",
+      availableLanguage: ["en", "vi"],
+    },
+  ],
+};
+
+const WEBSITE_JSONLD = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "Tbrain",
+  url: process.env.PUBLIC_BASE_URL || "https://tbrain.ai",
 };
 
 export default function RootLayout({
@@ -54,6 +92,14 @@ export default function RootLayout({
       className={`${dmSans.variable} ${spaceGrotesk.variable} ${jetbrainsMono.variable}`}
     >
       <body>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(ORGANIZATION_JSONLD) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(WEBSITE_JSONLD) }}
+        />
         <Providers>
           <Suspense fallback={null}>
             <Analytics />

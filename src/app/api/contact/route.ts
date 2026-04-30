@@ -101,28 +101,36 @@ export async function POST(req: NextRequest) {
     ...utm,
   });
 
-  // Send confirmation email to user
-  await sendEmail({
-    to: email,
-    subject: "We received your message - Tbrain",
-    template: createElement(ContactConfirmation, { fullName }),
-  });
+  // Both emails are best-effort — the contact record is already in the DB, so
+  // a Resend outage shouldn't surface as a 500 to the visitor.
+  try {
+    await sendEmail({
+      to: email,
+      subject: "We received your message - Tbrain",
+      template: createElement(ContactConfirmation, { fullName }),
+    });
+  } catch (err) {
+    console.error("[contact] confirmation email failed:", err);
+  }
 
-  // Notify admin
   const adminEmail = process.env.ADMIN_EMAIL ?? "drake@tbrain.ai";
-  await sendEmail({
-    to: adminEmail,
-    subject: `New contact: ${fullName} (${company || "N/A"})`,
-    template: createElement(ContactAdminNotification, {
-      email,
-      fullName,
-      company,
-      role,
-      phone,
-      message,
-    }),
-    replyTo: email,
-  });
+  try {
+    await sendEmail({
+      to: adminEmail,
+      subject: `New contact: ${fullName} (${company || "N/A"})`,
+      template: createElement(ContactAdminNotification, {
+        email,
+        fullName,
+        company,
+        role,
+        phone,
+        message,
+      }),
+      replyTo: email,
+    });
+  } catch (err) {
+    console.error("[contact] admin notification failed:", err);
+  }
 
   return NextResponse.json({ ok: true });
 }
