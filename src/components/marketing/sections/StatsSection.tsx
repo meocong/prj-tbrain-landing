@@ -55,7 +55,7 @@ export function StatsSection() {
         className="absolute inset-0 pointer-events-none opacity-[0.4]"
         style={{
           backgroundImage:
-            "linear-gradient(rgba(15,23,42,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(15,23,42,0.04) 1px, transparent 1px)",
+            "linear-gradient(var(--product-grid-line) 1px, transparent 1px), linear-gradient(90deg, var(--product-grid-line) 1px, transparent 1px)",
           backgroundSize: "72px 72px",
           maskImage: "radial-gradient(ellipse at center, black 30%, transparent 80%)",
         }}
@@ -95,9 +95,9 @@ export function StatsSection() {
               variants={STAGGER_ITEM}
               className="group relative overflow-hidden rounded-3xl p-8 md:p-10 transition-transform duration-500 hover:-translate-y-1"
               style={{
-                background: "linear-gradient(165deg, rgba(255,255,255,0.85) 0%, rgba(255,255,255,0.65) 100%)",
-                border: "1px solid rgba(15,23,42,0.06)",
-                boxShadow: "0 6px 24px -8px rgba(15,23,42,0.08)",
+                background: "var(--product-card-bg)",
+                border: "1px solid var(--product-card-border)",
+                boxShadow: "var(--product-card-shadow)",
                 backdropFilter: "blur(12px)",
                 minHeight: "220px",
               }}

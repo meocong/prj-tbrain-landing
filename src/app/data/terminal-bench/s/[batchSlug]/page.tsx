@@ -8,6 +8,10 @@ import Link from "next/link";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
+export const metadata = {
+  title: "Terminal Bench Showcase",
+  robots: { index: false, follow: false },
+};
 
 export default async function BatchGridPage({
   params,

@@ -80,6 +80,16 @@ const WEBSITE_JSONLD = {
   url: process.env.PUBLIC_BASE_URL || "https://tbrain.ai",
 };
 
+const THEME_INIT = `
+(function(){try{
+  var key='tbrain-theme';
+  var t=localStorage.getItem(key);
+  var dark=t ? t==='dark' : true;
+  document.documentElement.classList.toggle('dark', dark);
+  document.documentElement.style.colorScheme = dark ? 'dark' : 'light';
+}catch(e){document.documentElement.classList.add('dark');}})();
+`;
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -89,9 +99,11 @@ export default function RootLayout({
     <html
       suppressHydrationWarning
       lang="en"
-      className={`${dmSans.variable} ${spaceGrotesk.variable} ${jetbrainsMono.variable}`}
+      data-scroll-behavior="smooth"
+      className={`dark ${dmSans.variable} ${spaceGrotesk.variable} ${jetbrainsMono.variable}`}
     >
       <body>
+        <script dangerouslySetInnerHTML={{ __html: THEME_INIT }} />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(ORGANIZATION_JSONLD) }}

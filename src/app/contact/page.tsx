@@ -20,6 +20,7 @@ export default function ContactPage() {
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const turnstileRef = useRef<string>("");
+  const isLocalDev = process.env.NODE_ENV !== "production";
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -35,7 +36,7 @@ export default function ContactPage() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           ...form,
-          turnstileToken: turnstileRef.current || "dev-bypass",
+          turnstileToken: isLocalDev ? "dev-bypass" : turnstileRef.current,
           ...readUtm(),
         }),
       });
@@ -158,7 +159,7 @@ export default function ContactPage() {
               />
             </div>
 
-            {process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY && (
+            {process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY && !isLocalDev && (
               <Turnstile
                 siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY}
                 onSuccess={(token) => {

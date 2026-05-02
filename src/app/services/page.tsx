@@ -83,7 +83,7 @@ export default async function ServicesPage() {
         </section>
 
         {/* Our Services */}
-        <section className="container mx-auto mt-20 px-3">
+        <section id="services" className="container mx-auto mt-20 scroll-mt-28 px-3">
           <div className="mx-auto max-w-5xl">
             <h2
               className="text-center text-3xl font-semibold mb-10"

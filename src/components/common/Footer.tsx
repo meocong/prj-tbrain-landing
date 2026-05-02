@@ -38,7 +38,7 @@ function NewsletterForm() {
   };
 
   if (done) {
-    return <p className="text-sm font-medium" style={{ color: "#A78BFA" }}>Thanks for subscribing!</p>;
+    return <p className="text-sm font-medium" style={{ color: "var(--footer-accent)" }}>Thanks for subscribing!</p>;
   }
 
   return (
@@ -52,9 +52,9 @@ function NewsletterForm() {
         className="rounded-lg px-3 py-2 text-sm outline-none transition-colors"
         style={{
           minWidth: "200px",
-          background: "rgba(255,255,255,0.06)",
-          border: "1px solid rgba(255,255,255,0.1)",
-          color: "white",
+          background: "var(--footer-input-bg)",
+          border: "1px solid var(--footer-border)",
+          color: "var(--footer-text)",
         }}
       />
       <button
@@ -88,9 +88,9 @@ const Footer = () => {
     <footer
       className="relative overflow-hidden"
       style={{
-        background: "#020617",
-        color: "white",
-        borderTop: "1px solid rgba(255,255,255,0.08)",
+        background: "var(--footer-bg)",
+        color: "var(--footer-text)",
+        borderTop: "1px solid var(--footer-border)",
       }}
     >
       {/* Ambient glow */}
@@ -98,8 +98,7 @@ const Footer = () => {
         aria-hidden
         className="absolute -top-40 left-1/2 -translate-x-1/2 h-[400px] w-[800px] rounded-full pointer-events-none"
         style={{
-          background:
-            "radial-gradient(ellipse, rgba(108,60,244,0.15) 0%, transparent 60%)",
+          background: "var(--footer-glow)",
           filter: "blur(60px)",
         }}
       />
@@ -113,18 +112,17 @@ const Footer = () => {
                 width={110}
                 height={36}
                 alt="Tbrain"
-                className="object-contain"
-                style={{ filter: "brightness(0) invert(1)" }}
+                className="theme-logo object-contain"
               />
             </Link>
-            <p className="mt-4 text-sm leading-relaxed" style={{ color: "rgba(226,232,240,0.55)" }}>
+            <p className="mt-4 text-sm leading-relaxed" style={{ color: "var(--footer-muted)" }}>
               The data factory for robotics, agents, and post-training.
               Ground-truth data, purpose-built for frontier AI.
             </p>
           </div>
 
           <div>
-            <h4 className="text-xs font-semibold uppercase tracking-widest" style={{ color: "rgba(226,232,240,0.45)" }}>
+            <h4 className="text-xs font-semibold uppercase tracking-widest" style={{ color: "var(--footer-subtle)" }}>
               Quick links
             </h4>
             <div className="mt-4 grid grid-cols-2 gap-y-2.5">
@@ -132,8 +130,8 @@ const Footer = () => {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="text-sm transition-colors hover:text-white"
-                  style={{ color: "rgba(226,232,240,0.7)" }}
+                  className="text-sm transition-colors hover:text-[#6C3CF4]"
+                  style={{ color: "var(--footer-link)" }}
                 >
                   {link.label}
                 </Link>
@@ -142,10 +140,10 @@ const Footer = () => {
           </div>
 
           <div>
-            <h4 className="text-xs font-semibold uppercase tracking-widest" style={{ color: "rgba(226,232,240,0.45)" }}>
+            <h4 className="text-xs font-semibold uppercase tracking-widest" style={{ color: "var(--footer-subtle)" }}>
               Stay updated
             </h4>
-            <p className="mt-4 text-sm" style={{ color: "rgba(226,232,240,0.6)" }}>
+            <p className="mt-4 text-sm" style={{ color: "var(--footer-muted)" }}>
               The latest on AI training data and evaluation.
             </p>
             <div className="mt-3">
@@ -154,7 +152,7 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="mt-10 h-px w-full" style={{ background: "rgba(255,255,255,0.08)" }} />
+        <div className="mt-10 h-px w-full" style={{ background: "var(--footer-border)" }} />
 
         <div className="mt-6 flex flex-col items-start justify-between gap-4 md:flex-row md:items-center">
           <div className="flex items-center gap-4 flex-wrap">
@@ -164,21 +162,21 @@ const Footer = () => {
               rel="noopener noreferrer"
               className="flex items-center gap-2 rounded-full px-3.5 py-1.5 text-xs font-medium transition-colors"
               style={{
-                background: "rgba(255,255,255,0.04)",
-                border: "1px solid rgba(255,255,255,0.1)",
-                color: "rgba(226,232,240,0.85)",
+                background: "var(--footer-chip-bg)",
+                border: "1px solid var(--footer-border)",
+                color: "var(--footer-link)",
               }}
             >
-              <Image src={iconLinkedin} width={16} height={16} alt="LinkedIn" style={{ filter: "brightness(0) invert(1)", opacity: 0.8 }} />
+              <Image src={iconLinkedin} width={16} height={16} alt="LinkedIn" className="theme-logo opacity-80" />
               LinkedIn
             </a>
-            <span className="text-xs" style={{ color: "rgba(226,232,240,0.5)" }}>
+            <span className="text-xs" style={{ color: "var(--footer-muted)" }}>
               Hanoi
             </span>
           </div>
-          <p className="text-xs" style={{ color: "rgba(226,232,240,0.5)" }}>
+          <p className="text-xs" style={{ color: "var(--footer-muted)" }}>
             &copy; Tbrain {new Date().getFullYear()} &bull;{" "}
-            <span style={{ color: "#A78BFA" }}>Human-in-the-Loop AI Validation</span>
+            <span style={{ color: "var(--footer-accent)" }}>Human-in-the-Loop AI Validation</span>
           </p>
         </div>
       </div>

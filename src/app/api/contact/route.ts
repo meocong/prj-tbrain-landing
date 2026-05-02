@@ -12,9 +12,15 @@ export const runtime = "nodejs";
 const TURNSTILE_VERIFY_URL =
   "https://challenges.cloudflare.com/turnstile/v0/siteverify";
 
-async function verifyTurnstile(token: string): Promise<boolean> {
+function isLocalRequest(req: NextRequest): boolean {
+  const host = req.headers.get("host") ?? "";
+  return host.startsWith("localhost") || host.startsWith("127.0.0.1") || host.startsWith("[::1]");
+}
+
+async function verifyTurnstile(token: string, req: NextRequest): Promise<boolean> {
   const secret = process.env.TURNSTILE_SECRET_KEY;
   if (!secret) return true; // Skip in dev
+  if (process.env.NODE_ENV !== "production" && isLocalRequest(req) && token === "dev-bypass") return true;
 
   const res = await fetch(TURNSTILE_VERIFY_URL, {
     method: "POST",
@@ -61,7 +67,7 @@ export async function POST(req: NextRequest) {
   const utm = { utm_source, utm_medium, utm_campaign, utm_term, utm_content, referrer };
 
   // Verify Turnstile
-  const turnstileOk = await verifyTurnstile(turnstileToken);
+  const turnstileOk = await verifyTurnstile(turnstileToken, req);
   if (!turnstileOk) {
     return NextResponse.json({ error: "captcha_failed" }, { status: 403 });
   }
