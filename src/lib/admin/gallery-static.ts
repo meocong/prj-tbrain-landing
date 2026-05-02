@@ -295,7 +295,7 @@ export const STATIC_IMAGES: StaticImage[] = [
     "path": "/images/platform-robotic-poster.jpg",
     "name": "platform-robotic-poster",
     "ext": "jpg",
-    "size_bytes": 50107
+    "size_bytes": 70378
   },
   {
     "path": "/images/post_banner.png",
