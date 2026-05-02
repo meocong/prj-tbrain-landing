@@ -244,6 +244,12 @@ export const STATIC_IMAGES: StaticImage[] = [
     "size_bytes": 75432
   },
   {
+    "path": "/images/home-cinema-poster.jpg",
+    "name": "home-cinema-poster",
+    "ext": "jpg",
+    "size_bytes": 90572
+  },
+  {
     "path": "/images/humanoid-ai.jpg",
     "name": "humanoid-ai",
     "ext": "jpg",
@@ -338,6 +344,12 @@ export const STATIC_IMAGES: StaticImage[] = [
     "name": "team-collab",
     "ext": "jpg",
     "size_bytes": 77843
+  },
+  {
+    "path": "/images/terminal-bench-cinema-poster.jpg",
+    "name": "terminal-bench-cinema-poster",
+    "ext": "jpg",
+    "size_bytes": 68901
   },
   {
     "path": "/images/twitter.png",

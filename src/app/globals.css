@@ -326,6 +326,19 @@
   --magnetic-outline-border: rgba(15, 23, 42, 0.16);
   --magnetic-outline-hover-border: rgba(108, 60, 244, 0.45);
   --magnetic-outline-bg: rgba(255, 255, 255, 0.5);
+  --hero-chip-bg: rgba(15, 23, 42, 0.04);
+  --hero-chip-border: rgba(15, 23, 42, 0.10);
+  --hero-muted: rgba(15, 23, 42, 0.70);
+  --hero-subtle: rgba(15, 23, 42, 0.55);
+  --hero-divider: rgba(15, 23, 42, 0.15);
+  --hero-scroll: rgba(15, 23, 42, 0.40);
+  --hero-grid-line: rgba(15, 23, 42, 0.04);
+  --home-hero-video-overlay:
+    linear-gradient(180deg, rgba(248, 250, 252, 0.86) 0%, rgba(248, 250, 252, 0.76) 58%, var(--bg-page) 100%),
+    radial-gradient(ellipse 80% 60% at 50% 35%, rgba(255, 255, 255, 0.22) 0%, transparent 72%);
+  --terminal-hero-video-overlay:
+    linear-gradient(90deg, rgba(248, 250, 252, 0.96) 0%, rgba(248, 250, 252, 0.88) 46%, rgba(248, 250, 252, 0.72) 100%),
+    radial-gradient(ellipse 70% 55% at 76% 36%, rgba(108, 60, 244, 0.12) 0%, transparent 68%);
 }
 
 .dark {
@@ -373,6 +386,19 @@
   --magnetic-outline-border: rgba(255, 255, 255, 0.25);
   --magnetic-outline-hover-border: rgba(255, 255, 255, 0.62);
   --magnetic-outline-bg: rgba(255, 255, 255, 0.04);
+  --hero-chip-bg: rgba(255, 255, 255, 0.08);
+  --hero-chip-border: rgba(255, 255, 255, 0.12);
+  --hero-muted: rgba(226, 232, 240, 0.78);
+  --hero-subtle: rgba(226, 232, 240, 0.62);
+  --hero-divider: rgba(226, 232, 240, 0.20);
+  --hero-scroll: rgba(226, 232, 240, 0.42);
+  --hero-grid-line: rgba(226, 232, 240, 0.045);
+  --home-hero-video-overlay:
+    linear-gradient(180deg, rgba(2, 6, 23, 0.66) 0%, rgba(2, 6, 23, 0.76) 58%, var(--bg-page) 100%),
+    radial-gradient(ellipse 80% 60% at 50% 35%, rgba(108, 60, 244, 0.16) 0%, transparent 72%);
+  --terminal-hero-video-overlay:
+    linear-gradient(90deg, rgba(2, 6, 23, 0.94) 0%, rgba(2, 6, 23, 0.84) 48%, rgba(2, 6, 23, 0.66) 100%),
+    radial-gradient(ellipse 70% 55% at 76% 36%, rgba(16, 185, 129, 0.12) 0%, transparent 68%);
 }
 
 /* ── Base Styles ── */

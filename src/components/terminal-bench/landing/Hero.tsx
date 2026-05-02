@@ -1,9 +1,17 @@
 import { PlusIconLink } from "@/components/terminal-bench/shared/PlusIconLink";
+import { VideoBackground } from "@/components/marketing/fx/VideoBackground";
 import { TerminalDevice } from "./TerminalDevice";
 
 export function Hero() {
   return (
-    <section className="relative overflow-hidden">
+    <section className="relative overflow-hidden" style={{ background: "var(--bg-page)" }}>
+      <VideoBackground
+        src="/videos/terminal-bench-cinema.webm"
+        srcMp4="/videos/terminal-bench-cinema.mp4"
+        poster="/images/terminal-bench-cinema-poster.jpg"
+        overlay="var(--terminal-hero-video-overlay)"
+      />
+
       <div className="wrap pointer-events-none absolute inset-0 opacity-70">
         <div className="one left-[8%] top-24 h-80 w-80" />
         <div className="two right-[10%] top-40 h-80 w-80" />
