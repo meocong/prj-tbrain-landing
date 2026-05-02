@@ -24,7 +24,7 @@ export function CapabilitiesMarquee() {
       className="relative overflow-hidden py-12 md:py-16 border-y"
       style={{
         background: "var(--bg-page)",
-        borderColor: "rgba(15,23,42,0.06)",
+        borderColor: "var(--marquee-border)",
         color: "var(--text-primary)",
       }}
     >
@@ -61,9 +61,9 @@ function MarqueeRow({ reverse, speed, className = "" }: { reverse: boolean; spee
             key={i}
             className="inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-medium whitespace-nowrap"
             style={{
-              background: "rgba(15,23,42,0.04)",
-              border: "1px solid rgba(15,23,42,0.09)",
-              color: "rgba(15,23,42,0.78)",
+              background: "var(--marquee-chip-bg)",
+              border: "1px solid var(--marquee-chip-border)",
+              color: "var(--marquee-chip-text)",
               backdropFilter: "blur(8px)",
             }}
           >

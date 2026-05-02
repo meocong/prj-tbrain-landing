@@ -14,7 +14,10 @@ export function CaseStudyContent({ studies }: { studies: CaseStudy[] }) {
     <>
       {/* Featured */}
       {featured && (
-        <div className="mb-16 overflow-hidden rounded-2xl bg-white shadow-lg">
+        <Link
+          href={`/casestudy/${featured.slug}`}
+          className="group mb-16 block overflow-hidden rounded-2xl bg-white shadow-lg transition-all hover:-translate-y-0.5 hover:shadow-xl"
+        >
           <div className="relative h-64 overflow-hidden md:h-80">
             <Image
               src={featured.image}
@@ -22,7 +25,7 @@ export function CaseStudyContent({ studies }: { studies: CaseStudy[] }) {
               fill
               priority
               sizes="(min-width: 1024px) 1100px, 100vw"
-              className="object-cover"
+              className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
             />
           </div>
           <div className="p-8">
@@ -51,15 +54,19 @@ export function CaseStudyContent({ studies }: { studies: CaseStudy[] }) {
                 </div>
               ))}
             </div>
+            <span className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-[#6C3CF4]">
+              View case study <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+            </span>
           </div>
-        </div>
+        </Link>
       )}
 
       {/* Grid */}
       <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
         {rest.map((study, i) => (
-          <div
+          <Link
             key={study.id ?? i}
+            href={`/casestudy/${study.slug}`}
             className="overflow-hidden rounded-2xl bg-white shadow-md transition-all hover:shadow-lg"
           >
             <div className="relative h-48 overflow-hidden">
@@ -97,8 +104,11 @@ export function CaseStudyContent({ studies }: { studies: CaseStudy[] }) {
                   </div>
                 ))}
               </div>
+              <span className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-[#6C3CF4]">
+                View detail <ArrowRight className="h-4 w-4" />
+              </span>
             </div>
-          </div>
+          </Link>
         ))}
       </div>
 

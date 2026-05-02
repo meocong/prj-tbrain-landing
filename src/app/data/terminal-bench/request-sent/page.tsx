@@ -1,5 +1,6 @@
 export const metadata = {
   title: "Request sent — Terminal Bench",
+  robots: { index: false, follow: false },
 };
 
 export default function RequestSentPage() {

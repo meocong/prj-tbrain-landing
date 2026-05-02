@@ -47,7 +47,7 @@ export function MagneticButton({
   const variants: Record<string, string> = {
     primary: "text-white",
     ghost: "text-white/90 hover:text-white",
-    outline: "border border-white/25 text-white hover:border-white/60 backdrop-blur-sm",
+    outline: "border backdrop-blur-sm",
   };
 
   return (
@@ -66,7 +66,13 @@ export function MagneticButton({
                 background: "linear-gradient(135deg, #6C3CF4 0%, #8B5CF6 60%, #10B981 160%)",
                 boxShadow: "0 12px 40px -8px rgba(108,60,244,0.55), inset 0 1px 0 rgba(255,255,255,0.18)",
               }
-            : undefined
+            : variant === "outline"
+              ? {
+                  color: "var(--magnetic-outline-text)",
+                  borderColor: "var(--magnetic-outline-border)",
+                  background: "var(--magnetic-outline-bg)",
+                }
+              : undefined
         }
       >
         {variant === "primary" && (

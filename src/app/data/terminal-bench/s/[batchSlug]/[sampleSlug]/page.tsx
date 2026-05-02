@@ -21,6 +21,10 @@ import type { FileRow, SampleRow } from "@/lib/terminal-bench/types";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
+export const metadata = {
+  title: "Terminal Bench Sample",
+  robots: { index: false, follow: false },
+};
 
 export default async function SampleViewerPage({
   params,

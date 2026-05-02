@@ -35,7 +35,7 @@ const PILLARS = [
     subtitle: "Temporal labels at frame precision",
     icon: Video,
     accent: "#6C3CF4",
-    href: "/services",
+    href: "/services#services",
     description:
       "Frame-level boxes, segmentation, action recognition, and multi-view tracking.",
     visual: "video",
@@ -46,7 +46,7 @@ const PILLARS = [
     subtitle: "Pixel-perfect masks & boxes",
     icon: ImageIcon,
     accent: "#34D399",
-    href: "/services",
+    href: "/services#services",
     description:
       "Classification, detection, instance & semantic segmentation — calibrated for frontier vision models.",
     visual: "image",
@@ -57,7 +57,7 @@ const PILLARS = [
     subtitle: "Human preference at scale",
     icon: MessageSquare,
     accent: "#8B5CF6",
-    href: "/services",
+    href: "/services#services",
     description:
       "Preference ranking, rubric-based scoring, and red-team evals with audit trails.",
     visual: "text",
@@ -68,7 +68,7 @@ const PILLARS = [
     subtitle: "Models that watch the models",
     icon: Cpu,
     accent: "#F59E0B",
-    href: "/services",
+    href: "/services#services",
     description:
       "Every sample runs through our confidence models — flagging edge cases before they hit your training run.",
     visual: "qc",
@@ -87,7 +87,7 @@ export function ProductPillarsSection() {
         className="absolute inset-0 pointer-events-none opacity-60"
         style={{
           backgroundImage:
-            "linear-gradient(rgba(15,23,42,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(15,23,42,0.04) 1px, transparent 1px)",
+            "linear-gradient(var(--product-grid-line) 1px, transparent 1px), linear-gradient(90deg, var(--product-grid-line) 1px, transparent 1px)",
           backgroundSize: "64px 64px",
           maskImage: "radial-gradient(ellipse at center top, black 30%, transparent 85%)",
         }}
@@ -143,11 +143,11 @@ export function ProductPillarsSection() {
               <TiltCard className="h-full" intensity={4}>
                 <Link
                   href={p.href}
-                  className="group relative block h-full overflow-hidden rounded-3xl p-6 md:p-8"
+                  className={`group relative block h-full overflow-hidden rounded-3xl p-6 md:p-8 ${p.visual === "terminal" ? "pb-32 md:pb-32" : ""}`}
                   style={{
-                    background: "white",
-                    border: "1px solid rgba(15,23,42,0.06)",
-                    boxShadow: "0 6px 24px -8px rgba(15,23,42,0.10)",
+                    background: "var(--product-card-bg)",
+                    border: "1px solid var(--product-card-border)",
+                    boxShadow: "var(--product-card-shadow)",
                   }}
                 >
                   <div
@@ -168,7 +168,7 @@ export function ProductPillarsSection() {
                       </span>
                       <ArrowUpRight
                         className="h-5 w-5 transition-transform duration-500 group-hover:rotate-45 group-hover:translate-x-1"
-                        style={{ color: "rgba(15,23,42,0.4)" }}
+                        style={{ color: "var(--product-icon-muted)" }}
                       />
                     </div>
                     <h3 className="text-2xl md:text-3xl font-semibold tracking-tight" style={{ fontFamily: "var(--font-heading)" }}>
@@ -223,12 +223,12 @@ function PillarVisual({ kind, accent }: { kind: string; accent: string }) {
 
   if (kind === "terminal") {
     const LINES = [
-      { color: "#64748B", text: "$ tb run --task agent.clone" },
+      { color: "var(--terminal-line-muted)", text: "$ tb run --task agent.clone" },
       { color: accent,    text: "→ step 3/7 · search_docs(\"memory\")" },
       { color: "#10B981", text: "✓ test 4 passed" },
     ];
     return (
-      <div aria-hidden className="absolute inset-x-0 bottom-0 pointer-events-none opacity-60">
+      <div aria-hidden className="absolute inset-x-0 bottom-0 z-0 pointer-events-none opacity-95">
         <div
           className="mx-6 mb-6 rounded-lg p-3 text-[10px] font-mono leading-relaxed overflow-hidden"
           style={{ background: "rgba(0,0,0,0.55)", border: "1px solid rgba(255,255,255,0.08)" }}
@@ -292,7 +292,7 @@ function PillarVisual({ kind, accent }: { kind: string; accent: string }) {
               className="h-1.5 rounded-full pillar-text-bar"
               style={{
                 width: `${w}%`,
-                background: i === 2 ? accent : "rgba(15,23,42,0.15)",
+                background: i === 2 ? accent : "var(--product-muted-bar)",
                 animationDelay: `${i * 0.35}s`,
               }}
             />

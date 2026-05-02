@@ -6,6 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Menu, X, ChevronDown } from "lucide-react";
+import { ThemeToggle } from "@/components/theme/ThemeToggle";
 
 const DATA_ITEMS = [
   { label: "Terminal Bench", href: "/data/terminal-bench", description: "AI Agent Evaluation" },
@@ -27,12 +28,9 @@ const Header = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [dataOpen, setDataOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [isDarkTheme, setIsDarkTheme] = useState(true);
   const pathname = usePathname();
   const dropdownRef = useRef<HTMLDivElement>(null);
-
-  // Pages that keep a dark hero need the dark header variant. Homepage
-  // converted to light theme; only physical-ai still uses dark layout.
-  const isDarkPage = pathname === "/data/physical-ai";
 
   useEffect(() => {
     const handleClick = (e: MouseEvent) => {
@@ -45,12 +43,25 @@ const Header = () => {
   }, []);
 
   useEffect(() => {
-    if (!isDarkPage) return;
     const onScroll = () => setScrolled(window.scrollY > 60);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
-  }, [isDarkPage]);
+  }, []);
+
+  useEffect(() => {
+    const syncTheme = () =>
+      setIsDarkTheme(document.documentElement.classList.contains("dark"));
+    syncTheme();
+
+    const observer = new MutationObserver(syncTheme);
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["class"],
+    });
+
+    return () => observer.disconnect();
+  }, []);
 
   const isActive = (href: string) => {
     if (href === "/") return pathname === "/";
@@ -58,7 +69,7 @@ const Header = () => {
   };
 
   // Color tokens per page theme
-  const tokens = isDarkPage
+  const tokens = isDarkTheme
     ? {
         wrapper: scrolled
           ? "bg-[rgba(2,6,23,0.8)] border-b border-white/[0.08] backdrop-blur-md"
@@ -153,13 +164,16 @@ const Header = () => {
             )}
           </nav>
 
-          <button
-            onClick={() => setMobileOpen(!mobileOpen)}
-            className="rounded-lg p-2 lg:hidden"
-            aria-label="Toggle menu"
-          >
-            {mobileOpen ? <X className={`h-6 w-6 ${tokens.icon}`} /> : <Menu className={`h-6 w-6 ${tokens.icon}`} />}
-          </button>
+          <div className="flex items-center gap-2">
+            <ThemeToggle />
+            <button
+              onClick={() => setMobileOpen(!mobileOpen)}
+              className="rounded-lg p-2 lg:hidden"
+              aria-label="Toggle menu"
+            >
+              {mobileOpen ? <X className={`h-6 w-6 ${tokens.icon}`} /> : <Menu className={`h-6 w-6 ${tokens.icon}`} />}
+            </button>
+          </div>
         </div>
 
         {mobileOpen && (
@@ -171,10 +185,10 @@ const Header = () => {
                 onClick={() => setMobileOpen(false)}
                 className={`block rounded-lg px-4 py-3 text-sm font-medium transition-colors ${
                   isActive(item.href)
-                    ? isDarkPage
+                    ? isDarkTheme
                       ? "bg-white/10 text-white"
                       : "bg-[#6C3CF4]/5 text-[#6C3CF4]"
-                    : isDarkPage
+                    : isDarkTheme
                       ? "text-white/80 hover:bg-white/5"
                       : "text-[#0e1b2e] hover:bg-gray-50"
                 }`}
@@ -184,7 +198,7 @@ const Header = () => {
             ))}
             <div
               className="mt-2 pt-2"
-              style={{ borderTop: isDarkPage ? "1px solid rgba(255,255,255,0.08)" : "1px solid rgba(243,244,246,1)" }}
+              style={{ borderTop: isDarkTheme ? "1px solid rgba(255,255,255,0.08)" : "1px solid rgba(243,244,246,1)" }}
             >
               <p
                 className={`px-4 py-1 text-xs font-medium ${tokens.dropdownSub}`}
@@ -198,10 +212,10 @@ const Header = () => {
                   onClick={() => setMobileOpen(false)}
                   className={`block rounded-lg px-4 py-3 text-sm font-medium transition-colors ${
                     isActive(d.href)
-                      ? isDarkPage
+                      ? isDarkTheme
                         ? "bg-white/10 text-white"
                         : "bg-[#6C3CF4]/5 text-[#6C3CF4]"
-                      : isDarkPage
+                      : isDarkTheme
                         ? "text-white/80 hover:bg-white/5"
                         : "text-[#0e1b2e] hover:bg-gray-50"
                   }`}

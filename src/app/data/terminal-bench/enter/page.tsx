@@ -3,6 +3,8 @@ import { PasscodeForm } from "@/components/terminal-bench/auth/PasscodeForm";
 
 export const metadata = {
   title: "Enter — Terminal Bench",
+  description: "Passcode-gated Terminal Bench showcase access for approved Tbrain visitors.",
+  robots: { index: false, follow: false },
 };
 
 export const dynamic = "force-dynamic";
