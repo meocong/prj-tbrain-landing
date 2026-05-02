@@ -1,0 +1,6 @@
+incoming-videos/
+node_modules/
+.next/
+.env
+.env.local
+*.log
