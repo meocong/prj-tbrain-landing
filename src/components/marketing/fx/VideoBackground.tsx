@@ -29,6 +29,7 @@ export function VideoBackground({
   const hostRef = useRef<HTMLDivElement>(null);
   const [failed, setFailed] = useState(false);
   const [reducedMotion, setReducedMotion] = useState(false);
+  const primaryType = src.endsWith(".mp4") ? "video/mp4" : "video/webm";
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -102,7 +103,7 @@ export function VideoBackground({
           className="absolute inset-0 h-full w-full object-cover"
           style={{ opacity: 0.55 }}
         >
-          <source src={src} type="video/webm" />
+          <source src={src} type={primaryType} />
           {srcMp4 && <source src={srcMp4} type="video/mp4" />}
         </video>
       )}
