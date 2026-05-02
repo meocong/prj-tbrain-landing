@@ -1,5 +1,6 @@
 import { ArrowRight, Sparkles, ChevronDown } from "lucide-react";
 import Link from "next/link";
+import { VideoBackground } from "@/components/marketing/fx/VideoBackground";
 
 export function HeroSection() {
   return (
@@ -8,6 +9,13 @@ export function HeroSection() {
       className="relative overflow-hidden"
       style={{ background: "var(--bg-page)", minHeight: "100vh", color: "var(--text-primary)" }}
     >
+      <VideoBackground
+        src="/videos/home-cinema.webm"
+        srcMp4="/videos/home-cinema.mp4"
+        poster="/images/home-cinema-poster.jpg"
+        overlay="var(--home-hero-video-overlay)"
+      />
+
       {/* Animated pastel blob gradients (like /casestudy) */}
       <div
         aria-hidden
@@ -25,7 +33,7 @@ export function HeroSection() {
         className="absolute inset-0 pointer-events-none"
         style={{
           backgroundImage:
-            "linear-gradient(rgba(15,23,42,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(15,23,42,0.04) 1px, transparent 1px)",
+            "linear-gradient(var(--hero-grid-line) 1px, transparent 1px), linear-gradient(90deg, var(--hero-grid-line) 1px, transparent 1px)",
           backgroundSize: "80px 80px",
           maskImage: "radial-gradient(ellipse at center, black 40%, transparent 75%)",
           WebkitMaskImage: "radial-gradient(ellipse at center, black 40%, transparent 75%)",
@@ -36,8 +44,8 @@ export function HeroSection() {
         <div
           className="hero-reveal hero-reveal-0 mb-8 inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-xs font-medium"
           style={{
-            background: "rgba(15,23,42,0.04)",
-            border: "1px solid rgba(15,23,42,0.10)",
+            background: "var(--hero-chip-bg)",
+            border: "1px solid var(--hero-chip-border)",
             backdropFilter: "blur(10px)",
           }}
         >
@@ -61,7 +69,7 @@ export function HeroSection() {
 
         <p
           className="hero-reveal hero-reveal-2 mx-auto mt-8 max-w-2xl text-center text-lg md:text-xl leading-relaxed"
-          style={{ color: "rgba(15,23,42,0.7)" }}
+          style={{ color: "var(--hero-muted)" }}
         >
           From ground-truth motion capture to multi-step agent benchmarks —
           <br className="hidden md:block" />
@@ -70,7 +78,7 @@ export function HeroSection() {
 
         <div
           className="hero-reveal hero-reveal-3 mt-10 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs md:text-sm uppercase tracking-wider"
-          style={{ color: "rgba(15,23,42,0.55)" }}
+          style={{ color: "var(--hero-subtle)" }}
         >
           <span>Lab-grade precision</span>
           <Divider />
@@ -109,7 +117,7 @@ export function HeroSection() {
 
         <div
           className="hero-reveal hero-reveal-5 absolute bottom-8 left-1/2 flex -translate-x-1/2 flex-col items-center gap-1"
-          style={{ color: "rgba(15,23,42,0.4)", animationIterationCount: 1 }}
+          style={{ color: "var(--hero-scroll)", animationIterationCount: 1 }}
         >
           <span className="text-[10px] uppercase tracking-widest">Scroll</span>
           <ChevronDown className="h-4 w-4" />
@@ -135,5 +143,5 @@ function GradientWord({ children }: { children: React.ReactNode }) {
 }
 
 function Divider() {
-  return <span className="h-3 w-px" style={{ background: "rgba(15,23,42,0.15)" }} />;
+  return <span className="h-3 w-px" style={{ background: "var(--hero-divider)" }} />;
 }
