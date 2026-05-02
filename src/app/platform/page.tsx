@@ -42,7 +42,8 @@ export default async function PlatformPage() {
         {/* Hero */}
         <section className="relative overflow-hidden px-3 pt-32 pb-20 text-center md:pt-36 md:pb-28">
           <VideoBackground
-            src="/videos/platform-robotic-cinema.mp4"
+            src="/videos/platform-robotic-cinema.webm"
+            srcMp4="/videos/platform-robotic-cinema.mp4"
             poster="/images/platform-robotic-poster.jpg"
             overlay="var(--platform-hero-video-overlay)"
           />
