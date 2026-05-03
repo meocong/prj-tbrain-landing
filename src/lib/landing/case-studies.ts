@@ -1,6 +1,5 @@
 import "server-only";
 import { supabaseAdmin } from "@/lib/terminal-bench/supabase/admin";
-import { FEATURED_CASE_STUDIES } from "@/lib/constants/marketing";
 
 export type CaseStudyMetric = { value: string; label: string };
 
@@ -14,16 +13,38 @@ export type CaseStudy = {
   metrics: CaseStudyMetric[];
 };
 
-const FALLBACK_SLUGS = [
-  "terminal-bench",
-  "physical-ai",
-];
-
 function fallbackCaseStudies(): CaseStudy[] {
-  return FEATURED_CASE_STUDIES.slice(0, 2).map((study, index) => ({
-    ...study,
-    slug: FALLBACK_SLUGS[index],
-  }));
+  return [
+    {
+      slug: "details/manufacturing",
+      title: "High-Accuracy CAD Annotation",
+      shortDescription: "Manufacturing AI",
+      description:
+        "Revolutionizing manufacturing processes with AI-powered analytics and predictive modeling. Smart resource allocation and quality control systems that reduce costs and improve efficiency.",
+      image:
+        "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&h=500&fit=crop",
+      metrics: [
+        { value: "500", label: "CAD Drawings" },
+        { value: "15", label: "Annotation Fields" },
+        { value: "95%+", label: "Accuracy Rate" },
+        { value: "30", label: "Days Delivery" },
+      ],
+    },
+    {
+      slug: "details/scalable",
+      title: "Scalable Multimodal AI System",
+      shortDescription: "Enterprise AI",
+      description:
+        "Scaled from zero to 48,000 high-quality multimodal annotations in just 4 months. Our team delivered consistent, production-ready labeled data across text, image, and audio modalities, enabling rapid model training and deployment.",
+      image: "/images/labeling.svg",
+      metrics: [
+        { value: "48K", label: "Visual Prompts" },
+        { value: "7", label: "Scientific Domains" },
+        { value: "600", label: "Expert Makers" },
+        { value: "90%", label: "Pass Rate" },
+      ],
+    },
+  ];
 }
 
 type Row = {
