@@ -13,7 +13,7 @@ let _hl: Promise<Highlighter> | null = null;
 export function getServerHighlighter(): Promise<Highlighter> {
   if (!_hl) {
     _hl = getHighlighter({
-      themes: ["github-light"],
+      themes: ["github-dark"],
       langs: [...LANGS],
     });
   }
@@ -59,5 +59,5 @@ export function langForPath(path: string): string {
 export async function highlightToHtml(code: string, lang: string): Promise<string> {
   const hl = await getServerHighlighter();
   const safeLang = hl.getLoadedLanguages().includes(lang as never) ? lang : "bash";
-  return hl.codeToHtml(code, { lang: safeLang, theme: "github-light" });
+  return hl.codeToHtml(code, { lang: safeLang, theme: "github-dark" });
 }

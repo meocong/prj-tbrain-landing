@@ -4,11 +4,23 @@ import { TerminalDevice } from "./TerminalDevice";
 
 export function Hero() {
   return (
-    <section className="relative overflow-hidden" style={{ background: "var(--bg-page)" }}>
+    <section
+      className="terminal-bench-hero relative overflow-hidden"
+      style={{ background: "#020617", color: "white" }}
+    >
       <VideoBackground
-        src="/videos/terminal-bench-cinema.webm"
-        srcMp4="/videos/terminal-bench-cinema.mp4"
-        poster="/images/terminal-bench-cinema-poster.jpg"
+        sources={[
+          {
+            src: "/videos/terminal-bench-cinema.webm",
+            srcMp4: "/videos/terminal-bench-cinema.mp4",
+            poster: "/images/terminal-bench-cinema-poster.jpg",
+          },
+          {
+            src: "/videos/hero-ambient.webm",
+            srcMp4: "/videos/hero-ambient.mp4",
+            poster: "/images/hero-poster.jpg",
+          },
+        ]}
         overlay="var(--terminal-hero-video-overlay)"
       />
 
@@ -19,22 +31,22 @@ export function Hero() {
       <div className="container relative mx-auto max-w-7xl px-6 pt-24 pb-20 md:pt-32 md:pb-28">
         <div className="grid items-center gap-16 lg:grid-cols-[1.05fr_1fr]">
           <div>
-            <p className="font-family_avt text-xs uppercase tracking-[0.25em] text-[#78818f]">
+            <p className="font-family_avt text-xs uppercase tracking-[0.25em] text-[#CBD5E1]">
               / terminal-bench · april 2026 batch
             </p>
-            <h1 className="mt-6 text-5xl font-medium leading-[1.04] text-[#0e1b2e] md:text-6xl lg:text-[76px]">
+            <h1 className="mt-6 text-5xl font-medium leading-[1.04] text-white md:text-6xl lg:text-[76px]">
               Agentic data that <span className="gradient-text">actually runs</span>.
             </h1>
-            <p className="mt-7 max-w-xl text-base leading-relaxed text-[#78818f] md:text-lg">
+            <p className="mt-7 max-w-xl text-base leading-relaxed text-[#CBD5E1] md:text-lg">
               Expert-authored terminal tasks with Docker-reproducible verifiers
               and reference solutions. Every sample boots in a real container,
               every pass/fail is a concrete test — no LLM-as-judge.
             </p>
             <div className="mt-10 flex flex-wrap items-center gap-4">
-              <PlusIconLink href="/data/terminal-bench/enter" variant="solid">
+              <PlusIconLink href="/data/terminal-bench/enter" variant="solid" tone="cinema">
                 Enter showcase
               </PlusIconLink>
-              <PlusIconLink href="/data/terminal-bench/request-access">
+              <PlusIconLink href="/data/terminal-bench/request-access" tone="cinema">
                 Request access
               </PlusIconLink>
             </div>

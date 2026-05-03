@@ -724,6 +724,49 @@ h1, h2, h3, h4, h5, h6 {
   border-image-slice: 1;
 }
 
+.terminal-bench-hero {
+  --terminal-hero-video-overlay:
+    linear-gradient(90deg, rgba(2, 6, 23, 0.94) 0%, rgba(2, 6, 23, 0.84) 48%, rgba(2, 6, 23, 0.66) 100%),
+    radial-gradient(ellipse 70% 55% at 76% 36%, rgba(16, 185, 129, 0.12) 0%, transparent 68%);
+}
+
+.solve-sh-block .shiki {
+  background: #0D1117 !important;
+  color: #E6EDF3 !important;
+  min-width: max-content;
+}
+
+.dark .terminal-bench-themeable .bg-white,
+.dark .terminal-bench-themeable .bg-white\/95,
+.dark .terminal-bench-themeable [class*="bg-white"] {
+  background-color: rgba(15, 23, 42, 0.82) !important;
+}
+
+.dark .terminal-bench-themeable .bg-\[\#FAFAF7\],
+.dark .terminal-bench-themeable [class*="bg-[#FAFAF7]"] {
+  background-color: rgba(15, 23, 42, 0.72) !important;
+}
+
+.dark .terminal-bench-themeable .bg-\[\#F3F4F6\],
+.dark .terminal-bench-themeable [class*="bg-[#F3F4F6]"] {
+  background-color: rgba(30, 41, 59, 0.78) !important;
+}
+
+.dark .terminal-bench-themeable .text-\[\#0e1b2e\],
+.dark .terminal-bench-themeable [class*="text-[#0e1b2e]"] {
+  color: #F8FAFC !important;
+}
+
+.dark .terminal-bench-themeable .text-\[\#78818f\],
+.dark .terminal-bench-themeable [class*="text-[#78818f]"] {
+  color: #CBD5E1 !important;
+}
+
+.dark .terminal-bench-themeable .border-\[\#E5E7EB\],
+.dark .terminal-bench-themeable [class*="border-[#E5E7EB]"] {
+  border-color: rgba(148, 163, 184, 0.22) !important;
+}
+
 .up-down {
   animation: upDown 6s ease-in-out infinite;
 }

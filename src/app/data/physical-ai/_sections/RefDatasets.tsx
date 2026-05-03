@@ -23,10 +23,12 @@ export function RefDatasets() {
               className="text-3xl md:text-5xl font-medium tracking-tight"
               style={{ fontFamily: "var(--font-heading)", letterSpacing: "-0.02em" }}
             >
-              The datasets the field uses
+              Public references we can align with
             </h2>
             <p className="mx-auto mt-3 max-w-xl text-sm md:text-base" style={{ color: "rgba(226,232,240,0.6)" }}>
-              Public reference datasets we align our capture formats with — so your team can mix our data with what you already train on.
+              These public references guide format planning. Tbrain capture
+              programs are scoped and produced per customer engagement for your
+              robot, task set, and training pipeline.
             </p>
           </div>
         </RevealOnScroll>

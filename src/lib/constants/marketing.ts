@@ -12,7 +12,7 @@ export const PRODUCT_PILLARS = [
     title: "Robotics",
     subtitle: "Data for embodied intelligence.",
     description:
-      "Robots that learn from real-world complexity start with real-world data. Ground-truth human motion and hand pose — captured with lab-grade precision, not estimated from video.",
+      "Robots that learn from real-world complexity need data programs built around real tasks. We scope human motion, hand pose, and scene capture around the robot you are training.",
     href: "/data/physical-ai",
     features: [
       { num: "01", title: "Lab-grade capture", detail: "Optical mocap, IMU, depth — hardware scoped per program to the precision your pipeline needs" },
@@ -84,11 +84,11 @@ export const FEATURED_CASE_STUDIES = [
     metrics: [{ value: "500+", label: "Tasks" }, { value: "≤20%", label: "GPT-5 Pass" }, { value: "4", label: "Validation Layers" }, { value: "8+", label: "Domains" }],
   },
   {
-    title: "Robotics: Ground-Truth Motion Capture",
-    shortDescription: "Multi-modal datasets for humanoid and manipulation training",
-    description: "Producing egocentric video, MOCAP, and 3D hand pose data across household and commercial robotics use cases. Lab-grade capture validated against peer-reviewed benchmarks.",
+    title: "Physical AI: Custom Robotics Data Programs",
+    shortDescription: "Custom capture programs for humanoid and manipulation training",
+    description: "We scope egocentric video, MOCAP, hand pose, and scene-aware capture programs for household and commercial robotics use cases. Final datasets are built per customer task, robot body, and export format.",
     image: "/images/robotics-hero.jpg",
-    metrics: [{ value: "Sub-mm", label: "Precision" }, { value: "12+", label: "Data Modalities" }, { value: "829h", label: "Reference Data" }, { value: "6+", label: "Use Cases" }],
+    metrics: [{ value: "Custom", label: "Scope" }, { value: "Multi-modal", label: "Capture" }, { value: "Reference", label: "Aligned" }, { value: "On request", label: "Delivery" }],
   },
   {
     title: "Multimodal Annotation at Scale",
@@ -142,12 +142,12 @@ export const SERVICES = [
 
 // ── Physical AI page ──
 export const PHYSICAL_AI_PROBLEMS = [
-  { title: "Ego-Diverse", description: "Household walking tasks — cooking, cleaning, assembly.", accuracy: "5.2mm", tier: "T1", status: "Active" },
-  { title: "UMI-Diverse", description: "Gripper manipulation, Stanford UMI standard.", accuracy: "6DoF", tier: "UMI", status: "Active" },
-  { title: "Ego-Dexterous", description: "Sub-mm fine manipulation — threading, origami.", accuracy: "0.8mm", tier: "T3", status: "Active" },
-  { title: "Residential OTS", description: "Tidying, dishes, laundry, home mapping.", accuracy: "5.2mm", tier: "T1", status: "Active" },
-  { title: "Commercial OTS", description: "Warehouse, retail, food service, manufacturing.", accuracy: "5.2mm", tier: "T1", status: "Active" },
-  { title: "Dexterous Hand", description: "≥13 DoF hands with tactile sensors.", accuracy: "Joints", tier: "Robot", status: "Phase 2" },
+  { title: "Ego-Diverse", description: "Household walking tasks — cooking, cleaning, assembly.", accuracy: "Scoped", tier: "T1", status: "On request" },
+  { title: "UMI-Diverse", description: "Gripper manipulation, Stanford UMI standard.", accuracy: "6DoF", tier: "UMI", status: "On request" },
+  { title: "Ego-Dexterous", description: "Fine manipulation — threading, origami, tool use.", accuracy: "Scoped", tier: "T3", status: "On request" },
+  { title: "Residential OTS", description: "Tidying, dishes, laundry, home mapping.", accuracy: "Scoped", tier: "T1", status: "On request" },
+  { title: "Commercial OTS", description: "Warehouse, retail, food service, manufacturing.", accuracy: "Scoped", tier: "T1", status: "On request" },
+  { title: "Dexterous Hand", description: "High-DoF hands with tactile sensors.", accuracy: "Scoped", tier: "Robot", status: "On request" },
 ];
 
 export const PHYSICAL_AI_TIERS = [

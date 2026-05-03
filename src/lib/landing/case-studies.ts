@@ -16,14 +16,11 @@ export type CaseStudy = {
 
 const FALLBACK_SLUGS = [
   "terminal-bench",
-  "robotics-mocap",
-  "multimodal-annotation",
-  "enterprise-ai-agents",
-  "video-game-pipeline",
+  "physical-ai",
 ];
 
 function fallbackCaseStudies(): CaseStudy[] {
-  return FEATURED_CASE_STUDIES.map((study, index) => ({
+  return FEATURED_CASE_STUDIES.slice(0, 2).map((study, index) => ({
     ...study,
     slug: FALLBACK_SLUGS[index],
   }));

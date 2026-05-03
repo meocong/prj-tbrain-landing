@@ -36,9 +36,9 @@ const FEATURES = [
     size: "md" as const,
     icon: Shield,
     accent: "#F59E0B",
-    title: "Built for production",
+    title: "Scoped for production",
     description:
-      "Calibrated with reference to the datasets the embodied-AI community already trusts (EgoDex, OpenEgo, EPIC-KITCHENS). Production pipelines, not one-off research captures. SDK-ready exports for your training loop.",
+      "We design each capture program against the references your team already uses (EgoDex, OpenEgo, EPIC-KITCHENS) and deliver SDK-ready exports for your training loop.",
     image: "/images/blog-humanoid.jpg",
   },
 ];

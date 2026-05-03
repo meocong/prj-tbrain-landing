@@ -16,12 +16,14 @@ export function VideoBackground({
   src,
   srcMp4,
   poster,
+  sources,
   className,
   overlay = "radial-gradient(ellipse at center, rgba(2,6,23,0.5) 0%, rgba(2,6,23,0.78) 55%, rgba(2,6,23,0.96) 100%)",
 }: {
-  src: string;
+  src?: string;
   srcMp4?: string;
   poster?: string;
+  sources?: Array<{ src: string; srcMp4?: string; poster?: string }>;
   className?: string;
   overlay?: string;
 }) {
@@ -29,12 +31,24 @@ export function VideoBackground({
   const hostRef = useRef<HTMLDivElement>(null);
   const [failed, setFailed] = useState(false);
   const [reducedMotion, setReducedMotion] = useState(false);
-  const primaryType = src.endsWith(".mp4") ? "video/mp4" : "video/webm";
+  const [activeIndex, setActiveIndex] = useState(0);
+  const playlist = sources?.length ? sources : src ? [{ src, srcMp4, poster }] : [];
+  const active = playlist[activeIndex % Math.max(playlist.length, 1)];
+  const primaryType = active?.src.endsWith(".mp4") ? "video/mp4" : "video/webm";
 
   useEffect(() => {
     if (typeof window === "undefined") return;
     setReducedMotion(window.matchMedia("(prefers-reduced-motion: reduce)").matches);
   }, []);
+
+  useEffect(() => {
+    if (reducedMotion || playlist.length < 2) return;
+    const timer = window.setInterval(() => {
+      setFailed(false);
+      setActiveIndex((current) => (current + 1) % playlist.length);
+    }, 14000);
+    return () => window.clearInterval(timer);
+  }, [playlist.length, reducedMotion]);
 
   useEffect(() => {
     if (reducedMotion) return;
@@ -69,9 +83,7 @@ export function VideoBackground({
 
     // Also resume on page-visibility change (coming back to the tab)
     const onVisible = () => {
-      if (document.visibilityState === "visible" && ref.current && !ref.current.paused === false) {
-        // If it was left paused by the observer while off-screen, no-op.
-        // If it was paused because the tab was hidden, re-trigger play when back.
+      if (document.visibilityState === "visible" && ref.current) {
         const rect = host.getBoundingClientRect();
         const inView = rect.bottom > 0 && rect.top < window.innerHeight;
         if (inView) tryPlay();
@@ -83,7 +95,7 @@ export function VideoBackground({
       io.disconnect();
       document.removeEventListener("visibilitychange", onVisible);
     };
-  }, [reducedMotion]);
+  }, [activeIndex, reducedMotion]);
 
   return (
     <div
@@ -91,20 +103,21 @@ export function VideoBackground({
       className={className}
       style={{ position: "absolute", inset: 0, pointerEvents: "none", overflow: "hidden" }}
     >
-      {!failed && (
+      {!failed && active && (
         <video
+          key={active.src}
           ref={ref}
           muted
           loop
           playsInline
           preload="auto"
-          poster={poster}
+          poster={active.poster}
           onError={() => setFailed(true)}
           className="absolute inset-0 h-full w-full object-cover"
           style={{ opacity: 0.55 }}
         >
-          <source src={src} type={primaryType} />
-          {srcMp4 && <source src={srcMp4} type="video/mp4" />}
+          <source src={active.src} type={primaryType} />
+          {active.srcMp4 && <source src={active.srcMp4} type="video/mp4" />}
         </video>
       )}
       {overlay && (
