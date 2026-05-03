@@ -78,6 +78,12 @@ const ARTIFACTS = [
 export default function TerminalBenchLanding() {
   return (
     <main className="relative overflow-hidden bg-white dark:bg-[#020617]">
+      <link
+        rel="preload"
+        as="image"
+        href="/images/terminal-bench-cinema-poster.jpg"
+        fetchPriority="high"
+      />
       <Hero />
       <TrustStrip />
 

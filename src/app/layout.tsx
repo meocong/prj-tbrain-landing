@@ -4,7 +4,7 @@ import { Suspense } from "react";
 import { Providers } from "@/components/providers";
 import Analytics from "@/components/analytics/Analytics";
 import { UtmCapture } from "@/components/analytics/UtmCapture";
-import { ChatWidget } from "@/components/chat/ChatWidget";
+import ChatWidget from "@/components/chat/ChatWidgetLoader";
 import "./globals.css";
 
 const dmSans = DM_Sans({
