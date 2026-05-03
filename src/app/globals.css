@@ -809,6 +809,11 @@ h1, h2, h3, h4, h5, h6 {
 .dark .page-mesh::before { opacity: 0.06; }
 .dark .page-mesh::after { opacity: 0.04; }
 
+/* Logo SVG embeds a feColorMatrix that forces all pixels to white. In light
+   mode we recolor to brand purple #6C3CF4; dark mode keeps it white. */
+.theme-logo {
+  filter: brightness(0) saturate(100%) invert(31%) sepia(72%) saturate(4470%) hue-rotate(248deg) brightness(95%) contrast(102%);
+}
 .dark .theme-logo {
   filter: brightness(0) invert(1);
 }
