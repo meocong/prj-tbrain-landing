@@ -113,12 +113,7 @@ const Header = () => {
         dropdownSub: "text-[#78818f]",
         dropdownHover: "hover:bg-gray-50",
         mobileMenu: "bg-white shadow-lg",
-        // Logo SVG embeds a feColorMatrix forcing all pixels to white, so
-        // `filter: none` would render invisibly on a light header. The chain
-        // below converts white → brand purple #6C3CF4 (approximation tuned
-        // via codepen.io/sosuke/pen/Pjoqqp).
-        logoFilter:
-          "brightness(0) saturate(100%) invert(31%) sepia(72%) saturate(4470%) hue-rotate(248deg) brightness(95%) contrast(102%)",
+        logoFilter: "none",
       };
 
   return (
