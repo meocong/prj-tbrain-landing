@@ -10,9 +10,18 @@ export function HeroSection() {
       style={{ background: "var(--bg-page)", minHeight: "100vh", color: "var(--text-primary)" }}
     >
       <VideoBackground
-        src="/videos/home-cinema.webm"
-        srcMp4="/videos/home-cinema.mp4"
-        poster="/images/home-cinema-poster.jpg"
+        sources={[
+          {
+            src: "/videos/home-cinema.webm",
+            srcMp4: "/videos/home-cinema.mp4",
+            poster: "/images/home-cinema-poster.jpg",
+          },
+          {
+            src: "/videos/hero-ambient.webm",
+            srcMp4: "/videos/hero-ambient.mp4",
+            poster: "/images/hero-poster.jpg",
+          },
+        ]}
         overlay="var(--home-hero-video-overlay)"
       />
 

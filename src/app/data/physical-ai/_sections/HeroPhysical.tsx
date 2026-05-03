@@ -10,9 +10,18 @@ export function HeroPhysical() {
       style={{ background: "#020617", minHeight: "100vh", color: "white" }}
     >
       <VideoBackground
-        src="/videos/physical-ambient.webm"
-        srcMp4="/videos/physical-ambient.mp4"
-        poster="/images/physical-poster.jpg"
+        sources={[
+          {
+            src: "/videos/physical-ambient.webm",
+            srcMp4: "/videos/physical-ambient.mp4",
+            poster: "/images/physical-poster.jpg",
+          },
+          {
+            src: "/videos/platform-robotic-cinema.webm",
+            srcMp4: "/videos/platform-robotic-cinema.mp4",
+            poster: "/images/platform-robotic-poster.jpg",
+          },
+        ]}
       />
       <div
         aria-hidden
@@ -78,10 +87,10 @@ export function HeroPhysical() {
               className="hero-reveal hero-reveal-2 mt-6 max-w-xl text-base md:text-lg leading-relaxed"
               style={{ color: "rgba(226,232,240,0.72)" }}
             >
-              Demonstration datasets for the humanoids being trained to cook,
-              clean, fold laundry, and work warehouse floors. Lab-grade
-              optical capture of real human motion — the ground truth your
-              policy learns from.
+              Custom demonstration data programs for teams training humanoids
+              to cook, clean, fold laundry, and work warehouse floors. Tell us
+              the target tasks, robot body, and export format — we scope the
+              capture pipeline around your training run.
             </p>
 
             <div className="hero-reveal hero-reveal-3 mt-8 flex flex-col items-start gap-3 sm:flex-row">
@@ -94,7 +103,7 @@ export function HeroPhysical() {
                   boxShadow: "0 10px 30px -10px rgba(108,60,244,0.6)",
                 }}
               >
-                Start a data program <ArrowRight className="h-4 w-4" />
+                Scope a data program <ArrowRight className="h-4 w-4" />
               </Link>
               <Link
                 href="#modalities"

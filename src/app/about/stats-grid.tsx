@@ -3,10 +3,10 @@
 import { AnimatedCounter } from "@/components/marketing/AnimatedCounter";
 
 const STATS = [
-  { value: 48000, suffix: "+", label: "AI Training Experts" },
-  { value: 250, suffix: "+", label: "Projects Delivered" },
-  { value: 17, suffix: "+", label: "Countries" },
-  { value: 15, suffix: "+", label: "Years Combined Leadership" },
+  { value: 17, suffix: "K+", label: "Expert Pipeline" },
+  { value: 8, suffix: "+", label: "Core Domains" },
+  { value: 3, suffix: "+", label: "Data Modalities" },
+  { value: 100, suffix: "%", label: "Verifiable Loops" },
 ];
 
 export function StatsGrid() {

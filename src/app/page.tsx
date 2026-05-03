@@ -7,7 +7,6 @@ import { ProductPillarsSection } from "@/components/marketing/sections/ProductPi
 import { StatsSection } from "@/components/marketing/sections/StatsSection";
 import { PlatformSection } from "@/components/marketing/sections/PlatformSection";
 import { ExpertsSection } from "@/components/marketing/sections/ExpertsSection";
-import { LeadershipSection } from "@/components/marketing/sections/LeadershipSection";
 import { ContactCTA } from "@/components/marketing/sections/ContactCTA";
 
 export const metadata: Metadata = {
@@ -39,7 +38,6 @@ export default function Home() {
         <StatsSection />
         <PlatformSection />
         <ExpertsSection />
-        <LeadershipSection />
         <ContactCTA />
       </main>
       <Footer />

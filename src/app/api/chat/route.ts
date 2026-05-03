@@ -41,7 +41,7 @@ AI-native BPO platform with:
 - Multi-tenant workspace isolation with audit trails
 - 4 specialized agentic workflows (QC, delivery, cloud sync, notifications)
 
-# Leadership
+# Team
 - **Tam Le**: 15+ years at Google, Adobe, Asana, Turing. AI training data expert.
 - **David Do**: 20 years managing 500+ engineers. Multi-million-dollar contracts.
 

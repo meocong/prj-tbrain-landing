@@ -77,12 +77,12 @@ const ARTIFACTS = [
 
 export default function TerminalBenchLanding() {
   return (
-    <main className="relative overflow-hidden">
+    <main className="relative overflow-hidden bg-white dark:bg-[#020617]">
       <Hero />
       <TrustStrip />
 
       {/* What it is */}
-      <section className="relative bg-white">
+      <section className="relative bg-white dark:bg-[#020617]">
         <div className="container mx-auto max-w-5xl px-6 py-24 md:py-32">
           <p className="font-family_avt text-xs uppercase tracking-[0.2em] text-[#78818f]">
             / what is terminal bench
@@ -154,7 +154,7 @@ export default function TerminalBenchLanding() {
       </section>
 
       {/* How to access */}
-      <section className="bg-[#FAFAF7]">
+      <section className="bg-[#FAFAF7] dark:bg-[#020617]">
         <div className="container mx-auto max-w-5xl px-6 py-24 md:py-32">
           <SectionHeading label="how to access">
             Two paths in. <span className="gradient-text">Zero guesswork.</span>

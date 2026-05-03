@@ -56,7 +56,7 @@ export function TaskLifecycle() {
   const trackWidth = useTransform(scrollYProgress, [0, 1], ["4%", "100%"]);
 
   return (
-    <section className="relative bg-white">
+    <section className="relative bg-white dark:bg-[#020617]">
       <div className="container mx-auto max-w-7xl px-6 py-24 md:py-32">
         <div className="mb-14">
           <p className="font-family_avt text-xs uppercase tracking-[0.2em] text-[#78818f]">

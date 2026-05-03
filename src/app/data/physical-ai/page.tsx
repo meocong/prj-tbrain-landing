@@ -12,22 +12,22 @@ import { CapabilitiesMarquee } from "@/components/marketing/sections/Capabilitie
 import { ContactCTA } from "@/components/marketing/sections/ContactCTA";
 
 export const metadata: Metadata = {
-  title: "Physical AI — Human Motion Data for Training Humanoids",
+  title: "Physical AI — Custom Human Motion Data Programs",
   description:
-    "Lab-grade demonstration datasets for training humanoid robots: whole-body control, dexterous manipulation, imitation learning, sim-to-real transfer. Human demo → mocap → retarget → policy-ready exports.",
+    "Custom lab-grade data programs for humanoid robots: whole-body control, dexterous manipulation, imitation learning, and sim-to-real transfer. Scope the target task, capture method, and export format with Tbrain.",
   alternates: { canonical: "/data/physical-ai" },
   openGraph: {
-    title: "Physical AI — Human Motion Data for Training Humanoids",
+    title: "Physical AI — Custom Human Motion Data Programs",
     description:
-      "Cinema-grade motion capture and policy-ready embodied AI datasets for humanoids, manipulation, and sim-to-real transfer.",
+      "Cinema-grade motion capture programs scoped for humanoids, manipulation, and sim-to-real transfer.",
     url: "/data/physical-ai",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Physical AI — Human Motion Data for Training Humanoids",
+    title: "Physical AI — Custom Human Motion Data Programs",
     description:
-      "Cinema-grade motion capture and policy-ready embodied AI datasets for humanoids, manipulation, and sim-to-real transfer.",
+      "Cinema-grade motion capture programs scoped for humanoids, manipulation, and sim-to-real transfer.",
   },
 };
 
