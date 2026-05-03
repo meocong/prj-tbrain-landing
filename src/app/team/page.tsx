@@ -9,12 +9,12 @@ import { EXPERTS, FEATURED_CASE_STUDIES, LEADERSHIP } from "@/lib/constants/mark
 export const metadata: Metadata = {
   title: "Team — Tbrain",
   description:
-    "Meet the Tbrain team and expert network behind robotics data, agent evaluation, and custom AI data programs.",
+    "Meet the operators, engineering leaders, and expert network behind Tbrain's AI training data and evaluation programs.",
   alternates: { canonical: "/team" },
   openGraph: {
     title: "Team — Tbrain",
     description:
-      "The team behind Tbrain's robotics data, Terminal Bench, and expert-led post-training programs.",
+      "The operators, engineering leaders, and experts behind Tbrain's AI training data and evaluation programs.",
     url: "/team",
     type: "website",
   },
@@ -22,17 +22,17 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Team — Tbrain",
     description:
-      "The team behind Tbrain's robotics data, Terminal Bench, and expert-led post-training programs.",
+      "The operators, engineering leaders, and experts behind Tbrain's AI training data and evaluation programs.",
   },
 };
 
 const CORE_PROFILES = LEADERSHIP.map((person, index) => ({
   ...person,
-  role: index === 0 ? "AI data strategy & operations" : "Engineering delivery & enterprise programs",
+  role: index === 0 ? "AI training data strategy" : "Engineering delivery leadership",
   projects:
     index === 0
-      ? ["Terminal Bench", "Expert QA programs", "Global expert network"]
-      : ["Expert OS platform", "Enterprise agents", "Delivery operations"],
+      ? ["Expert-led data programs", "Model evaluation", "Global expert network"]
+      : ["Engineering operations", "Enterprise delivery", "Managed expert teams"],
 }));
 
 export default function TeamPage() {
@@ -49,12 +49,12 @@ export default function TeamPage() {
               className="mt-5 text-4xl font-semibold leading-tight md:text-6xl"
               style={{ fontFamily: "var(--font-heading)", color: "var(--text-primary)" }}
             >
-              The people behind <span className="gradient-text">Tbrain programs</span>
+              The operators behind <span className="gradient-text">Tbrain programs</span>
             </h1>
             <p className="mx-auto mt-6 max-w-2xl text-base leading-relaxed md:text-lg" style={{ color: "var(--text-secondary)" }}>
-              Tbrain combines experienced operators, engineering leads, and
-              domain experts to build data programs for robotics, agents, and
-              post-training workflows.
+              Tbrain combines AI training data operators, engineering delivery
+              leaders, and domain experts to build evaluation, annotation, and
+              human-feedback programs for high-stakes AI work.
             </p>
           </div>
         </section>
@@ -118,7 +118,7 @@ export default function TeamPage() {
                 / project focus
               </p>
               <h2 className="mt-3 text-3xl font-semibold md:text-5xl" style={{ fontFamily: "var(--font-heading)", color: "var(--text-primary)" }}>
-                Programs the team supports
+                Programs this team can run
               </h2>
             </div>
             <Link
@@ -160,8 +160,13 @@ export default function TeamPage() {
               / expert network
             </p>
             <h2 className="mt-3 text-3xl font-semibold md:text-5xl" style={{ fontFamily: "var(--font-heading)", color: "var(--text-primary)" }}>
-              Domain experts when the work needs depth
+              Domain experts when accuracy depends on depth
             </h2>
+            <p className="mx-auto mt-5 max-w-2xl text-base leading-relaxed" style={{ color: "var(--text-secondary)" }}>
+              Tbrain works with specialized contributors across STEM, medical,
+              coding, data science, robotics, and other technical domains where
+              generic labeling teams are not enough.
+            </p>
           </div>
           <div className="mx-auto mt-12 grid max-w-5xl gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {EXPERTS.map((expert) => (
