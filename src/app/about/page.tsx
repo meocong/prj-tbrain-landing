@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Header from "@/components/common/Header";
 import Footer from "@/components/common/Footer";
+import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Bot, Brain, CheckCircle, Code2, Database, FlaskConical, LineChart, MessageSquare, Mic, Users, Workflow } from "lucide-react";
 import { EXPERTISE_AREAS, LEADERSHIP, SAMPLE_PROJECTS } from "@/lib/constants/marketing";
@@ -188,15 +189,24 @@ export default function AboutPage() {
               {LEADERSHIP.map((person) => (
                 <article
                   key={person.name}
-                  className="rounded-2xl border p-5"
+                  className="flex gap-4 rounded-2xl border p-5"
                   style={{ background: "var(--bg-page)", borderColor: "var(--border-subtle)" }}
                 >
-                  <h3 className="text-xl font-semibold" style={{ fontFamily: "var(--font-heading)", color: "var(--text-primary)" }}>
-                    {person.name}
-                  </h3>
-                  <p className="mt-2 text-sm leading-relaxed" style={{ color: "var(--text-secondary)" }}>
-                    {person.bio}
-                  </p>
+                  <Image
+                    src={person.avatar}
+                    width={64}
+                    height={64}
+                    alt={person.name}
+                    className="h-16 w-16 shrink-0 rounded-full object-cover"
+                  />
+                  <div>
+                    <h3 className="text-xl font-semibold" style={{ fontFamily: "var(--font-heading)", color: "var(--text-primary)" }}>
+                      {person.name}
+                    </h3>
+                    <p className="mt-2 text-sm leading-relaxed" style={{ color: "var(--text-secondary)" }}>
+                      {person.bio}
+                    </p>
+                  </div>
                 </article>
               ))}
             </div>

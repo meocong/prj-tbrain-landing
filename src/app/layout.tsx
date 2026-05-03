@@ -84,7 +84,7 @@ const THEME_INIT = `
 (function(){try{
   var key='tbrain-theme';
   var t=localStorage.getItem(key);
-  var dark=t==='dark';
+  var dark = t==='dark' || (t==null && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
   document.documentElement.classList.toggle('dark', dark);
   document.documentElement.style.colorScheme = dark ? 'dark' : 'light';
 }catch(e){}})();
