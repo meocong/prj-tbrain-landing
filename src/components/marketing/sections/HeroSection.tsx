@@ -17,9 +17,19 @@ export function HeroSection() {
             poster: "/images/home-cinema-poster.jpg",
           },
           {
-            src: "/videos/hero-ambient.webm",
-            srcMp4: "/videos/hero-ambient.mp4",
-            poster: "/images/hero-poster.jpg",
+            src: "/videos/automation-cinema.webm",
+            srcMp4: "/videos/automation-cinema.mp4",
+            poster: "/images/automation-cinema-poster.jpg",
+          },
+          {
+            src: "/videos/datacenter-cinema.webm",
+            srcMp4: "/videos/datacenter-cinema.mp4",
+            poster: "/images/datacenter-cinema-poster.jpg",
+          },
+          {
+            src: "/videos/platform-robotic-cinema.webm",
+            srcMp4: "/videos/platform-robotic-cinema.mp4",
+            poster: "/images/platform-robotic-poster.jpg",
           },
         ]}
         overlay="var(--home-hero-video-overlay)"

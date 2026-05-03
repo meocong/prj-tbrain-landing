@@ -6,12 +6,12 @@ import { useEffect, useState } from "react";
 const THEME_KEY = "tbrain-theme";
 
 function getIsDark() {
-  if (typeof document === "undefined") return true;
+  if (typeof document === "undefined") return false;
   return document.documentElement.classList.contains("dark");
 }
 
 export function ThemeToggle() {
-  const [isDark, setIsDark] = useState(true);
+  const [isDark, setIsDark] = useState(false);
 
   useEffect(() => {
     setIsDark(getIsDark());

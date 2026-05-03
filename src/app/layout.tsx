@@ -84,10 +84,10 @@ const THEME_INIT = `
 (function(){try{
   var key='tbrain-theme';
   var t=localStorage.getItem(key);
-  var dark=t ? t==='dark' : true;
+  var dark=t==='dark';
   document.documentElement.classList.toggle('dark', dark);
   document.documentElement.style.colorScheme = dark ? 'dark' : 'light';
-}catch(e){document.documentElement.classList.add('dark');}})();
+}catch(e){}})();
 `;
 
 export default function RootLayout({
@@ -100,7 +100,7 @@ export default function RootLayout({
       suppressHydrationWarning
       lang="en"
       data-scroll-behavior="smooth"
-      className={`dark ${dmSans.variable} ${spaceGrotesk.variable} ${jetbrainsMono.variable}`}
+      className={`${dmSans.variable} ${spaceGrotesk.variable} ${jetbrainsMono.variable}`}
     >
       <body>
         <script dangerouslySetInnerHTML={{ __html: THEME_INIT }} />
