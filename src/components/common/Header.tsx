@@ -25,12 +25,16 @@ const NAV_ITEMS = [
   { label: "Contact", href: "/contact" },
 ];
 
-// Pages whose hero has a dark video / dark backdrop — header text must stay
-// white over the hero, then flip when the user scrolls past it.
+// Pages whose hero section is hardcoded dark (background:#020617) — header
+// must stay white over the hero, then flip when the user scrolls past it.
+// `/` and `/platform` heroes look light in light theme (overlay ≥86% white)
+// so they DON'T need dark tokens.
 const HERO_DARK_PAGES = new Set([
-  "/",
-  "/platform",
   "/data/terminal-bench",
+]);
+
+// Pages where the entire wrapper is hardcoded dark — header always white.
+const ALWAYS_DARK_PAGES = new Set([
   "/data/physical-ai",
 ]);
 
@@ -42,7 +46,8 @@ const Header = () => {
   const pathname = usePathname();
   const dropdownRef = useRef<HTMLDivElement>(null);
   const heroIsDark = HERO_DARK_PAGES.has(pathname);
-  const useDarkTokens = isDarkTheme || (heroIsDark && !scrolled);
+  const alwaysDark = ALWAYS_DARK_PAGES.has(pathname);
+  const useDarkTokens = isDarkTheme || alwaysDark || (heroIsDark && !scrolled);
 
   useEffect(() => {
     const handleClick = (e: MouseEvent) => {
