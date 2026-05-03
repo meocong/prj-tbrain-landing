@@ -37,6 +37,12 @@ export default async function PlatformPage() {
 
   return (
     <div>
+      <link
+        rel="preload"
+        as="image"
+        href="/images/platform-robotic-poster.jpg"
+        fetchPriority="high"
+      />
       <Header />
       <main className="pb-24">
         {/* Hero */}

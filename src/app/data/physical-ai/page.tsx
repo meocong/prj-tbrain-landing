@@ -34,6 +34,12 @@ export const metadata: Metadata = {
 export default function PhysicalAIPage() {
   return (
     <div style={{ background: "#020617" }}>
+      <link
+        rel="preload"
+        as="image"
+        href="/images/physical-poster.jpg"
+        fetchPriority="high"
+      />
       <Header />
       <main style={{ color: "white" }}>
         <HeroPhysical />

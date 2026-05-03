@@ -28,6 +28,12 @@ export const STATIC_IMAGES: StaticImage[] = [
     "size_bytes": 111746
   },
   {
+    "path": "/images/automation-cinema-poster.jpg",
+    "name": "automation-cinema-poster",
+    "ext": "jpg",
+    "size_bytes": 79810
+  },
+  {
     "path": "/images/avt-1.png",
     "name": "avt-1",
     "ext": "png",
@@ -224,6 +230,12 @@ export const STATIC_IMAGES: StaticImage[] = [
     "name": "data-dashboard",
     "ext": "jpg",
     "size_bytes": 65370
+  },
+  {
+    "path": "/images/datacenter-cinema-poster.jpg",
+    "name": "datacenter-cinema-poster",
+    "ext": "jpg",
+    "size_bytes": 77862
   },
   {
     "path": "/images/facebook.png",
