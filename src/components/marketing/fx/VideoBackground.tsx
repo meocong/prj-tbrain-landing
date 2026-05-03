@@ -47,35 +47,40 @@ export function VideoBackground({
     if (conn?.saveData) setSaveData(true);
   }, []);
 
+  // Stable refs so re-renders from parent (scroll, hover, animation frames)
+  // don't restart the rotation timer.
+  const playlistRef = useRef(playlist);
+  playlistRef.current = playlist;
+  const playlistLen = playlist.length;
+
   // Carousel rotation — paused when reduced-motion / save-data / single clip.
   useEffect(() => {
-    if (reducedMotion || saveData || playlist.length < 2) return;
-    const ROTATE_MS = 22_000;
+    if (reducedMotion || saveData || playlistLen < 2) return;
+    const ROTATE_MS = 12_000;
     const PREFETCH_LEAD_MS = 3_000;
 
     const prefetchTimer = window.setTimeout(() => {
-      const next = playlist[(activeIndex + 1) % playlist.length];
+      const list = playlistRef.current;
+      const next = list[(activeIndex + 1) % list.length];
       if (!next) return;
-      // Hint browser to start fetching the next clip in idle bandwidth.
       const link = document.createElement("link");
       link.rel = "prefetch";
       link.as = "video";
       link.href = next.src;
       document.head.appendChild(link);
-      const cleanup = () => link.remove();
-      window.setTimeout(cleanup, PREFETCH_LEAD_MS + 500);
+      window.setTimeout(() => link.remove(), PREFETCH_LEAD_MS + 500);
     }, ROTATE_MS - PREFETCH_LEAD_MS);
 
     const rotateTimer = window.setTimeout(() => {
       setFailed(false);
-      setActiveIndex((current) => (current + 1) % playlist.length);
+      setActiveIndex((current) => (current + 1) % playlistRef.current.length);
     }, ROTATE_MS);
 
     return () => {
       window.clearTimeout(prefetchTimer);
       window.clearTimeout(rotateTimer);
     };
-  }, [activeIndex, playlist, reducedMotion, saveData]);
+  }, [activeIndex, playlistLen, reducedMotion, saveData]);
 
   useEffect(() => {
     if (reducedMotion) return;
