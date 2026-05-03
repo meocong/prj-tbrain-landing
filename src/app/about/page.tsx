@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import Header from "@/components/common/Header";
 import Footer from "@/components/common/Footer";
 import Link from "next/link";
-import { ArrowRight, Bot, Brain, CheckCircle, Code2, Database, FlaskConical, LineChart, MessageSquare, Mic, Workflow } from "lucide-react";
-import { EXPERTISE_AREAS, SAMPLE_PROJECTS } from "@/lib/constants/marketing";
+import { ArrowRight, Bot, Brain, CheckCircle, Code2, Database, FlaskConical, LineChart, MessageSquare, Mic, Users, Workflow } from "lucide-react";
+import { EXPERTISE_AREAS, LEADERSHIP, SAMPLE_PROJECTS } from "@/lib/constants/marketing";
 import { StatsGrid } from "./stats-grid";
 
 export const metadata: Metadata = {
@@ -152,6 +152,54 @@ export default function AboutPage() {
                 </article>
               );
             })}
+          </div>
+        </section>
+
+        <section className="container mx-auto mt-24 px-3">
+          <div
+            className="mx-auto grid max-w-5xl gap-8 rounded-3xl border p-6 md:grid-cols-[1.1fr_0.9fr] md:p-8"
+            style={{ background: "var(--bg-card)", borderColor: "var(--border-subtle)" }}
+          >
+            <div>
+              <span className="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-[#6C3CF4]/10 text-[#6C3CF4]">
+                <Users className="h-6 w-6" />
+              </span>
+              <p className="mt-6 font-family_avt text-xs uppercase tracking-[0.2em]" style={{ color: "var(--text-muted)" }}>
+                / leadership
+              </p>
+              <h2 className="mt-4 text-3xl font-medium md:text-4xl" style={{ fontFamily: "var(--font-heading)", color: "var(--text-primary)" }}>
+                Built by data and engineering operators
+              </h2>
+              <p className="mt-4 text-base leading-relaxed" style={{ color: "var(--text-secondary)" }}>
+                Tbrain&apos;s leadership combines AI training data experience,
+                expert-network operations, and outsourced engineering delivery
+                for programs where quality needs to be measurable.
+              </p>
+              <Link
+                href="/team"
+                className="mt-6 inline-flex items-center gap-2 text-sm font-semibold"
+                style={{ color: "#6C3CF4" }}
+              >
+                Meet the team <ArrowRight className="h-4 w-4" />
+              </Link>
+            </div>
+
+            <div className="grid gap-4">
+              {LEADERSHIP.map((person) => (
+                <article
+                  key={person.name}
+                  className="rounded-2xl border p-5"
+                  style={{ background: "var(--bg-page)", borderColor: "var(--border-subtle)" }}
+                >
+                  <h3 className="text-xl font-semibold" style={{ fontFamily: "var(--font-heading)", color: "var(--text-primary)" }}>
+                    {person.name}
+                  </h3>
+                  <p className="mt-2 text-sm leading-relaxed" style={{ color: "var(--text-secondary)" }}>
+                    {person.bio}
+                  </p>
+                </article>
+              ))}
+            </div>
           </div>
         </section>
 

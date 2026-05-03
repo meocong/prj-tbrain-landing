@@ -115,8 +115,18 @@ export const FEATURED_CASE_STUDIES = [
 
 // ── Leadership ──
 export const LEADERSHIP = [
-  { name: "Tam Le", bio: "15+ years across Google, Adobe, Asana, and Turing. Deep expertise in AI training data at scale.", avatar: "/images/avt-tamle.png", logos: ["google_logo.svg", "turingcom_logo.svg", "asana_logo.svg", "healthline_media_logo.svg"] },
-  { name: "David Do", bio: "20 years managing 500+ engineers. Multi-million-dollar outsourced engineering contracts.", avatar: "/images/avt-daviddo.png", logos: ["alphaplus_metaverse_logo.svg", "alphaway_logo.svg", "ibm_logo.svg", "ericsson_logo.svg", "techcombank_logo.svg"] },
+  {
+    name: "Tam Le",
+    bio: "Seasoned data science and analytics leader with 15+ years across Google, Adobe, and Asana. Tam brings deep AI training data expertise from close work with the AI trainer industry at Turing.",
+    avatar: "/images/avt-tamle.png",
+    logos: ["google_logo.svg", "turingcom_logo.svg", "asana_logo.svg", "healthline_media_logo.svg"],
+  },
+  {
+    name: "David Do",
+    bio: "Senior software engineering leader with 20 years of experience managing outsourced engineering teams, including a 500+ person engineering organization and multi-million-dollar delivery contracts.",
+    avatar: "/images/avt-daviddo.png",
+    logos: ["alphaplus_metaverse_logo.svg", "alphaway_logo.svg", "ibm_logo.svg", "ericsson_logo.svg", "techcombank_logo.svg"],
+  },
 ];
 
 // ── Expertise ──
