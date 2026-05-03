@@ -25,13 +25,24 @@ const NAV_ITEMS = [
   { label: "Contact", href: "/contact" },
 ];
 
+// Pages whose hero has a dark video / dark backdrop — header text must stay
+// white over the hero, then flip when the user scrolls past it.
+const HERO_DARK_PAGES = new Set([
+  "/",
+  "/platform",
+  "/data/terminal-bench",
+  "/data/physical-ai",
+]);
+
 const Header = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [dataOpen, setDataOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [isDarkTheme, setIsDarkTheme] = useState(true);
+  const [isDarkTheme, setIsDarkTheme] = useState(false);
   const pathname = usePathname();
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const heroIsDark = HERO_DARK_PAGES.has(pathname);
+  const useDarkTokens = isDarkTheme || (heroIsDark && !scrolled);
 
   useEffect(() => {
     const handleClick = (e: MouseEvent) => {
@@ -70,7 +81,7 @@ const Header = () => {
   };
 
   // Color tokens per page theme
-  const tokens = isDarkTheme
+  const tokens = useDarkTokens
     ? {
         wrapper: scrolled
           ? "bg-[rgba(2,6,23,0.8)] border-b border-white/[0.08] backdrop-blur-md"
@@ -186,10 +197,10 @@ const Header = () => {
                 onClick={() => setMobileOpen(false)}
                 className={`block rounded-lg px-4 py-3 text-sm font-medium transition-colors ${
                   isActive(item.href)
-                    ? isDarkTheme
+                    ? useDarkTokens
                       ? "bg-white/10 text-white"
                       : "bg-[#6C3CF4]/5 text-[#6C3CF4]"
-                    : isDarkTheme
+                    : useDarkTokens
                       ? "text-white/80 hover:bg-white/5"
                       : "text-[#0e1b2e] hover:bg-gray-50"
                 }`}
@@ -199,7 +210,7 @@ const Header = () => {
             ))}
             <div
               className="mt-2 pt-2"
-              style={{ borderTop: isDarkTheme ? "1px solid rgba(255,255,255,0.08)" : "1px solid rgba(243,244,246,1)" }}
+              style={{ borderTop: useDarkTokens ? "1px solid rgba(255,255,255,0.08)" : "1px solid rgba(243,244,246,1)" }}
             >
               <p
                 className={`px-4 py-1 text-xs font-medium ${tokens.dropdownSub}`}
@@ -213,10 +224,10 @@ const Header = () => {
                   onClick={() => setMobileOpen(false)}
                   className={`block rounded-lg px-4 py-3 text-sm font-medium transition-colors ${
                     isActive(d.href)
-                      ? isDarkTheme
+                      ? useDarkTokens
                         ? "bg-white/10 text-white"
                         : "bg-[#6C3CF4]/5 text-[#6C3CF4]"
-                      : isDarkTheme
+                      : useDarkTokens
                         ? "text-white/80 hover:bg-white/5"
                         : "text-[#0e1b2e] hover:bg-gray-50"
                   }`}
