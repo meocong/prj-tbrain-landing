@@ -171,10 +171,10 @@ export function ProductPillarsSection() {
                         style={{ color: "var(--product-icon-muted)" }}
                       />
                     </div>
-                    <h3 className="text-2xl md:text-3xl font-semibold tracking-tight" style={{ fontFamily: "var(--font-heading)" }}>
+                    <h3 className="text-2xl md:text-3xl font-semibold tracking-tight" style={{ fontFamily: "var(--font-heading)", color: "var(--text-primary)" }}>
                       {p.title}
                     </h3>
-                    <p className="mt-1 text-xs font-medium uppercase tracking-wider" style={{ color: p.accent }}>
+                    <p className="mt-1.5 text-[11px] font-semibold uppercase tracking-[0.14em]" style={{ color: "var(--text-secondary)" }}>
                       {p.subtitle}
                     </p>
                     <p className="mt-4 text-sm leading-relaxed max-w-md" style={{ color: "var(--text-secondary)" }}>
@@ -228,13 +228,20 @@ function PillarVisual({ kind, accent }: { kind: string; accent: string }) {
       { color: "#10B981", text: "✓ test 4 passed" },
     ];
     return (
-      <div aria-hidden className="absolute inset-x-0 bottom-0 z-0 pointer-events-none opacity-95">
+      <div aria-hidden className="absolute inset-x-0 bottom-0 z-0 pointer-events-none">
         <div
           className="mx-6 mb-6 rounded-lg p-3 text-[10px] font-mono leading-relaxed overflow-hidden"
-          style={{ background: "rgba(0,0,0,0.55)", border: "1px solid rgba(255,255,255,0.08)" }}
+          style={{ background: "#0D1117", border: "1px solid rgba(255,255,255,0.08)" }}
         >
           {LINES.map((l, i) => (
-            <div key={i} className="pillar-typewriter" style={{ color: l.color, animationDelay: `${i * 0.8}s` }}>
+            <div
+              key={i}
+              className="pillar-typewriter"
+              style={{
+                color: l.text.startsWith("$") ? "#94A3B8" : l.color,
+                animationDelay: `${i * 0.8}s`,
+              }}
+            >
               {l.text}
               <span className="pillar-caret" style={{ color: accent }}>▍</span>
             </div>

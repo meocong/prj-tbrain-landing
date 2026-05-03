@@ -22,7 +22,19 @@ export function ThemeToggle() {
       attributeFilter: ["class"],
     });
 
-    return () => observer.disconnect();
+    // Follow system theme changes when user hasn't explicitly toggled
+    const mq = window.matchMedia("(prefers-color-scheme: dark)");
+    const onSystemChange = (e: MediaQueryListEvent) => {
+      if (window.localStorage.getItem(THEME_KEY) != null) return;
+      document.documentElement.classList.toggle("dark", e.matches);
+      document.documentElement.style.colorScheme = e.matches ? "dark" : "light";
+    };
+    mq.addEventListener("change", onSystemChange);
+
+    return () => {
+      observer.disconnect();
+      mq.removeEventListener("change", onSystemChange);
+    };
   }, []);
 
   const toggleTheme = () => {

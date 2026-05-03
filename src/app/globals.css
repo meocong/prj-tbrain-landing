@@ -292,8 +292,8 @@
   --border-subtle: rgba(226, 232, 240, 0.6);
   --border-hover: rgba(108, 60, 244, 0.5);
   --text-primary: #0F172A;
-  --text-secondary: #475569;
-  --text-muted: #94A3B8;
+  --text-secondary: #334155;
+  --text-muted: #64748B;
   --text-inverse: #F8FAFC;
   --sidebar-item-hover: rgba(241, 245, 249, 0.8);
   --sidebar-active-bg: rgba(108, 60, 244, 0.08);
@@ -328,10 +328,10 @@
   --magnetic-outline-bg: rgba(255, 255, 255, 0.5);
   --hero-chip-bg: rgba(15, 23, 42, 0.04);
   --hero-chip-border: rgba(15, 23, 42, 0.10);
-  --hero-muted: rgba(15, 23, 42, 0.70);
-  --hero-subtle: rgba(15, 23, 42, 0.55);
-  --hero-divider: rgba(15, 23, 42, 0.15);
-  --hero-scroll: rgba(15, 23, 42, 0.40);
+  --hero-muted: rgba(15, 23, 42, 0.86);
+  --hero-subtle: rgba(15, 23, 42, 0.72);
+  --hero-divider: rgba(15, 23, 42, 0.28);
+  --hero-scroll: rgba(15, 23, 42, 0.55);
   --hero-grid-line: rgba(15, 23, 42, 0.04);
   --home-hero-video-overlay:
     linear-gradient(180deg, rgba(248, 250, 252, 0.86) 0%, rgba(248, 250, 252, 0.76) 58%, var(--bg-page) 100%),
