@@ -31,6 +31,16 @@ export function HeroSection() {
             srcMp4: "/videos/robotics-cinema.mp4",
             poster: "/images/robotics-cinema-poster.jpg",
           },
+          {
+            src: "/videos/physical-ambient.webm",
+            srcMp4: "/videos/physical-ambient.mp4",
+            poster: "/images/physical-poster.jpg",
+          },
+          {
+            src: "/videos/hero-ambient.webm",
+            srcMp4: "/videos/hero-ambient.mp4",
+            poster: "/images/hero-poster.jpg",
+          },
         ]}
         overlay="var(--home-hero-video-overlay)"
       />
