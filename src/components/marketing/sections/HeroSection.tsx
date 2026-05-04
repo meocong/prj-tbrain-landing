@@ -87,35 +87,37 @@ export function HeroSection() {
         </div>
 
         <h1
-          className="hero-reveal hero-reveal-1 text-center font-semibold tracking-tight text-[44px] md:text-[80px] leading-[1.05]"
-          style={{ fontFamily: "var(--font-heading)", letterSpacing: "-0.03em", maxWidth: "1100px" }}
+          className="hero-reveal hero-reveal-1 text-center font-semibold text-[44px] md:text-[80px] leading-[1.05]"
+          style={{ fontFamily: "var(--font-heading)", letterSpacing: "0", maxWidth: "1100px" }}
         >
-          <span>The data factory for </span>
-          <GradientWord>robotics,</GradientWord>{" "}
-          <GradientWord>agents</GradientWord> &{" "}
-          <GradientWord>post-training.</GradientWord>
+          <span>Trusted </span>
+          <GradientWord>Human Infrastructure</GradientWord>{" "}
+          <span>for </span>
+          <GradientWord>Agentic AI.</GradientWord>
         </h1>
 
         <p
           className="hero-reveal hero-reveal-2 mx-auto mt-8 max-w-2xl text-center text-lg md:text-xl leading-relaxed"
           style={{ color: "var(--hero-muted)" }}
         >
-          From ground-truth motion capture to multi-step agent benchmarks —
+          The data factory behind coding, robotics, agentic workflows,
           <br className="hidden md:block" />
-          purpose-built data for the models no one else can train.
+          evaluation, and post-training programs for frontier AI teams.
         </p>
 
         <div
           className="hero-reveal hero-reveal-3 mt-10 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs md:text-sm uppercase tracking-wider"
           style={{ color: "var(--hero-subtle)" }}
         >
-          <span>Lab-grade precision</span>
+          <span>Coding</span>
           <Divider />
-          <span>AI-native QC</span>
+          <span>Agentic workflows</span>
           <Divider />
-          <span>Global expert network</span>
+          <span>Robotics</span>
           <Divider />
-          <span>Custom data programs</span>
+          <span>Model evaluation</span>
+          <Divider />
+          <span>RLHF / SFT</span>
         </div>
 
         <div className="hero-reveal hero-reveal-4 mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">
@@ -131,7 +133,7 @@ export function HeroSection() {
             Talk to an expert <ArrowRight className="h-4 w-4" />
           </Link>
           <Link
-            href="/data/physical-ai"
+            href="/services"
             className="inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-semibold transition-colors"
             style={{
               background: "rgba(15,23,42,0.04)",
@@ -140,7 +142,7 @@ export function HeroSection() {
               backdropFilter: "blur(10px)",
             }}
           >
-            Explore robotics data
+            Explore our services
           </Link>
         </div>
 

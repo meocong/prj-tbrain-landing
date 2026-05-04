@@ -1,6 +1,6 @@
 import "server-only";
 import { supabaseAdmin } from "@/lib/terminal-bench/supabase/admin";
-import { SERVICES, EXPERTISE_AREAS } from "@/lib/constants/marketing";
+import { DOMAIN_PODS, EXPERTISE_AREAS, SERVICES } from "@/lib/constants/marketing";
 
 export type Service = { title: string; description: string; icon: string };
 export type ExpertiseArea = { label: string; detail: string };
@@ -32,9 +32,7 @@ export async function getServices(category: ServiceCategory = "service"): Promis
       .order("display_order", { ascending: true });
     if (error) throw error;
     if (!data || data.length === 0) {
-      // Fallback constants only cover the legacy "service" shape; for "domain"
-      // we return [] so /services renders nothing rather than mismatched data.
-      return category === "service" ? SERVICES : [];
+      return category === "service" ? SERVICES : DOMAIN_PODS;
     }
     return (data as ServiceRow[]).map((r) => ({
       title: r.title,
@@ -43,7 +41,7 @@ export async function getServices(category: ServiceCategory = "service"): Promis
     }));
   } catch (err) {
     console.error("[services] load failed, using fallback:", err);
-    return category === "service" ? SERVICES : [];
+    return category === "service" ? SERVICES : DOMAIN_PODS;
   }
 }
 

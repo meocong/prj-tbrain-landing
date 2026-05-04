@@ -113,8 +113,8 @@ export function ProductPillarsSection() {
               What we build
             </span>
             <h2
-              className="text-4xl md:text-6xl font-semibold tracking-tight"
-              style={{ fontFamily: "var(--font-heading)", letterSpacing: "-0.02em" }}
+              className="text-4xl md:text-6xl font-semibold"
+              style={{ fontFamily: "var(--font-heading)", letterSpacing: "0" }}
             >
               Data programs,{" "}
               <span
@@ -128,7 +128,9 @@ export function ProductPillarsSection() {
               </span>
             </h2>
             <p className="mx-auto mt-4 max-w-2xl text-base md:text-lg" style={{ color: "var(--text-secondary)" }}>
-              Six capabilities. One data factory. From embodied AI to agent evals, we ship the gold-standard set your team can&apos;t assemble in-house.
+              Six capabilities. One human infrastructure layer. From embodied
+              AI to agent evals, we ship the gold-standard set your team
+              can&apos;t assemble in-house.
             </p>
           </div>
         </RevealOnScroll>
@@ -171,7 +173,7 @@ export function ProductPillarsSection() {
                         style={{ color: "var(--product-icon-muted)" }}
                       />
                     </div>
-                    <h3 className="text-2xl md:text-3xl font-semibold tracking-tight" style={{ fontFamily: "var(--font-heading)", color: "var(--text-primary)" }}>
+                    <h3 className="text-2xl md:text-3xl font-semibold" style={{ fontFamily: "var(--font-heading)", color: "var(--text-primary)", letterSpacing: "0" }}>
                       {p.title}
                     </h3>
                     <p className="mt-1.5 text-[11px] font-semibold uppercase tracking-[0.14em]" style={{ color: "var(--text-secondary)" }}>

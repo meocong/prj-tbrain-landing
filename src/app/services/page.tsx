@@ -24,12 +24,12 @@ import {
 } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Services",
+  title: "Services — Expert Data, Benchmarks & Agent Evaluation",
   description:
-    "AI training data services — RLHF, SFT, data annotation, evaluation, custom datasets, and expert teams.",
+    "Custom expert data collection, benchmark creation, and agent evaluation delivered by domain expert pods.",
   alternates: { canonical: "/services" },
   openGraph: {
-    title: "Services — Tbrain",
+    title: "Services — Expert Data, Benchmarks & Agent Evaluation",
     description:
       "RLHF, SFT, evaluation, and custom datasets delivered by domain-expert pods across coding, medical, manufacturing, languages, and robotics.",
     url: "/services",
@@ -76,9 +76,10 @@ export default async function ServicesPage() {
           >
             Our <span className="gradient-text">Services</span>
           </h1>
-          <p className="mx-auto mt-6 max-w-2xl text-lg text-[#78818f]">
-            End-to-end AI training data solutions, from data collection and
-            annotation to model evaluation and benchmarking.
+          <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed" style={{ color: "var(--text-secondary)" }}>
+            Human infrastructure for model builders: expert data collection,
+            benchmark creation, and agent evaluation programs run by specialized
+            domain pods.
           </p>
         </section>
 
@@ -86,11 +87,15 @@ export default async function ServicesPage() {
         <section id="services" className="container mx-auto mt-20 scroll-mt-28 px-3">
           <div className="mx-auto max-w-5xl">
             <h2
-              className="text-center text-3xl font-semibold mb-10"
+              className="text-center text-3xl font-semibold mb-3"
               style={{ fontFamily: "var(--font-heading)" }}
             >
               <span className="gradient-text">What we deliver</span>
             </h2>
+            <p className="mx-auto mb-10 max-w-2xl text-center text-base leading-relaxed" style={{ color: "var(--text-secondary)" }}>
+              Three core service lines for pre-training, post-training,
+              fine-tuning, and agentic evaluation workflows.
+            </p>
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {services.map((svc, i) => {
                 const Icon = (ICON_MAP[svc.icon] || Database) as React.ComponentType<{ className?: string; style?: React.CSSProperties }>;
@@ -108,7 +113,7 @@ export default async function ServicesPage() {
                     >
                       {svc.title}
                     </h3>
-                    <p className="mt-2 text-sm text-[#78818f]">{svc.description}</p>
+                    <p className="mt-2 text-sm leading-relaxed" style={{ color: "var(--text-secondary)" }}>{svc.description}</p>
                   </div>
                 );
               })}
@@ -126,8 +131,9 @@ export default async function ServicesPage() {
               >
                 <span className="gradient-text">Domains & Expert Pods</span>
               </h2>
-              <p className="mx-auto mb-10 max-w-2xl text-center text-base text-[#78818f]">
-                Subject-matter expertise across the disciplines AI teams need most.
+              <p className="mx-auto mb-10 max-w-2xl text-center text-base leading-relaxed" style={{ color: "var(--text-secondary)" }}>
+                Specialized pods for the domains where generic labeling teams
+                are not enough.
               </p>
               <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
                 {domains.map((d, i) => {
@@ -146,7 +152,7 @@ export default async function ServicesPage() {
                       >
                         {d.title}
                       </h3>
-                      <p className="mt-2 text-sm text-[#78818f]">{d.description}</p>
+                      <p className="mt-2 text-sm leading-relaxed" style={{ color: "var(--text-secondary)" }}>{d.description}</p>
                     </div>
                   );
                 })}
@@ -188,7 +194,7 @@ export default async function ServicesPage() {
           >
             Need a custom solution?
           </h2>
-          <p className="mx-auto mt-3 max-w-lg text-lg text-[#78818f]">
+          <p className="mx-auto mt-3 max-w-lg text-lg leading-relaxed" style={{ color: "var(--text-secondary)" }}>
             Our team will work with you to design the perfect data strategy
             for your AI project.
           </p>
