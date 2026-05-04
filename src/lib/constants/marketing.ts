@@ -68,10 +68,10 @@ export const EXPERT_NETWORK = {
 
 // ── Platform Features ──
 export const PLATFORM_FEATURES = [
-  { title: "AI-Native QC Pipeline", description: "Automated quality checks pre-screen 60-70% of submissions. Humans review edge cases only.", icon: "ShieldCheck" },
-  { title: "Real-Time Dashboards", description: "Live project metrics, submission tracking, and team velocity — visible to your team.", icon: "BarChart3" },
-  { title: "Multi-Tenant Isolation", description: "Workspace-level data isolation with full audit trails.", icon: "Lock" },
-  { title: "Agentic Workflows", description: "4 specialized agents automate QC, delivery, cloud sync, and notifications.", icon: "Workflow" },
+  { title: "Agent Knowledge Base", description: "Custom one-to-one training and instant reference guides that keep agents aligned with the work they need to perform.", icon: "Brain" },
+  { title: "LLM-as-a-Judge", description: "Automated evaluation before final human judgment, so quality scales without removing expert accountability.", icon: "Scale" },
+  { title: "Agentic Workflows", description: "Workflow loops where agents help review, route, and improve agent outputs across the delivery system.", icon: "Workflow" },
+  { title: "Agent Identity & Soul", description: "Persistent agent context, goals, and operating style that make agent behavior coherent over time.", icon: "Sparkles" },
 ];
 
 // ── Case Studies ──
@@ -142,12 +142,18 @@ export const EXPERTISE_AREAS = [
 
 // ── Services ──
 export const SERVICES = [
-  { title: "RLHF & SFT", description: "Expert-driven reinforcement learning from human feedback and supervised fine-tuning.", icon: "Brain" },
-  { title: "Data Annotation", description: "Multi-modal annotation across text, image, video, and audio.", icon: "Tags" },
-  { title: "AI Agent Evaluation", description: "Multi-step benchmark tasks for frontier AI agents.", icon: "BarChart3" },
-  { title: "Robotics Data", description: "Ground-truth motion and hand pose data with lab-grade precision.", icon: "Bot" },
-  { title: "Quality Assurance", description: "AI-native QC with automated pre-screening and expert review.", icon: "ShieldCheck" },
-  { title: "Expert Teams", description: "On-demand domain expert pods across 17+ countries.", icon: "Users" },
+  { title: "Custom Expert Data Collection", description: "RLHF, SFT, and expert data for pre-training, post-training, fine-tuning, and evaluation workflows.", icon: "Brain" },
+  { title: "Benchmark Creation", description: "Custom task design, rubrics, test cases, validation harnesses, and datasets that expose real model failures.", icon: "BarChart3" },
+  { title: "Agent Evaluation and Analysis", description: "Model and agent grading, failure analysis, LLM-assisted review, and final human judgment from domain experts.", icon: "ShieldCheck" },
+];
+
+export const DOMAIN_PODS = [
+  { title: "Coding", description: "Software engineering, terminal workflows, DevOps, security, databases, and code review.", icon: "Code" },
+  { title: "Medical", description: "Clinical, imaging, diagnostics, healthcare QA, and expert review for high-stakes medical tasks.", icon: "Stethoscope" },
+  { title: "Manufacturing", description: "Factory operations, process documentation, quality inspection, and industrial task understanding.", icon: "Factory" },
+  { title: "Languages", description: "Asian languages, Spanish, Portuguese, Baltic languages, and multilingual evaluation.", icon: "Languages" },
+  { title: "Physical AI / Robotics", description: "Robot training data, egocentric video, motion capture, manipulation, and embodied task data.", icon: "Bot" },
+  { title: "RL Environments", description: "Environments, tasks, rewards, and validation loops for reinforcement-learning programs.", icon: "Cpu" },
 ];
 
 // ── Physical AI page ──

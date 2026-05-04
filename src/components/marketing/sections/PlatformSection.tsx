@@ -1,14 +1,15 @@
 "use client";
 
+import Link from "next/link";
 import { motion } from "framer-motion";
 import { PLATFORM_FEATURES } from "@/lib/constants/marketing";
-import { ShieldCheck, BarChart3, Lock, Workflow } from "lucide-react";
+import { ArrowRight, Brain, Scale, Sparkles, Workflow } from "lucide-react";
 import { RevealOnScroll, StaggerContainer, STAGGER_ITEM } from "@/components/marketing/fx/RevealOnScroll";
 
 const ICON_MAP: Record<string, React.ElementType> = {
-  ShieldCheck,
-  BarChart3,
-  Lock,
+  Brain,
+  Scale,
+  Sparkles,
   Workflow,
 };
 
@@ -41,13 +42,13 @@ export function PlatformSection() {
               className="inline-block text-xs font-semibold uppercase tracking-widest mb-4"
               style={{ color: "#6C3CF4" }}
             >
-              The platform
+              Expert OS
             </span>
             <h2
-              className="text-4xl md:text-6xl font-semibold tracking-tight"
-              style={{ fontFamily: "var(--font-heading)", letterSpacing: "-0.02em" }}
+              className="text-4xl md:text-6xl font-semibold"
+              style={{ fontFamily: "var(--font-heading)", letterSpacing: "0" }}
             >
-              Built on our{" "}
+              A management system for{" "}
               <span
                 style={{
                   background: "linear-gradient(120deg, #A78BFA, #10B981)",
@@ -55,27 +56,36 @@ export function PlatformSection() {
                   WebkitTextFillColor: "transparent",
                 }}
               >
-                AI-native platform
+                agents and experts
               </span>
             </h2>
             <p className="mx-auto mt-4 max-w-2xl text-base md:text-lg" style={{ color: "var(--text-secondary)" }}>
-              Custom infrastructure that scales quality. Not a spreadsheet — a production system with automated QC, real-time visibility, and agentic workflows.
+              Expert OS turns knowledge, evaluation, and workflow management
+              into a product layer for teams running agentic AI programs at
+              scale.
             </p>
+            <Link
+              href="/platform"
+              className="mt-7 inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold transition-transform hover:scale-[1.03]"
+              style={{ background: "#6C3CF4", color: "white" }}
+            >
+              Explore Expert OS <ArrowRight className="h-4 w-4" />
+            </Link>
           </div>
         </RevealOnScroll>
 
         <StaggerContainer className="mx-auto mt-16 grid max-w-4xl grid-cols-1 gap-5 md:grid-cols-2">
           {PLATFORM_FEATURES.map((feature, i) => {
-            const Icon = (ICON_MAP[feature.icon] || ShieldCheck) as React.ComponentType<{ className?: string }>;
+            const Icon = (ICON_MAP[feature.icon] || Sparkles) as React.ComponentType<{ className?: string }>;
             return (
               <motion.div
                 key={i}
                 variants={STAGGER_ITEM}
                 className="relative overflow-hidden rounded-2xl p-6 flex gap-4"
                 style={{
-                  background: "white",
-                  border: "1px solid rgba(15,23,42,0.06)",
-                  boxShadow: "0 4px 18px -6px rgba(15,23,42,0.08)",
+                  background: "var(--bg-card)",
+                  border: "1px solid var(--border-subtle)",
+                  boxShadow: "var(--shadow-card)",
                 }}
               >
                 <div

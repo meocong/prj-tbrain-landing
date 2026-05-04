@@ -7,12 +7,12 @@ import { getExpertOsFeatures } from "@/lib/landing/expert-os";
 import { VideoBackground } from "@/components/marketing/fx/VideoBackground";
 
 export const metadata: Metadata = {
-  title: "Platform — Expert OS",
+  title: "Expert OS — Agent & Expert Management Platform",
   description:
-    "The platform behind Tbrain — AI-native operations for managing agents, knowledge, and quality at scale.",
+    "Expert OS is Tbrain's management platform for agent knowledge, expert operations, automated evaluation, and agentic workflows.",
   alternates: { canonical: "/platform" },
   openGraph: {
-    title: "Platform — Expert OS by Tbrain",
+    title: "Expert OS — Agent & Expert Management Platform",
     description:
       "AI-native operations for the human side of agentic AI: knowledge bases, LLM-as-judge, agentic workflows, and agent identity.",
     url: "/platform",
@@ -74,17 +74,17 @@ export default async function PlatformPage() {
             </span>
             <h1
               className="mx-auto mt-6 max-w-4xl text-[34px] font-semibold leading-[1.1] sm:text-4xl md:text-6xl"
-              style={{ fontFamily: "var(--font-heading)" }}
+              style={{ fontFamily: "var(--font-heading)", letterSpacing: "0" }}
             >
-              <span className="block md:inline">The operating</span>{" "}
-              <span className="block md:inline">system for agents</span>{" "}
-              <span className="gradient-text block md:inline">that improve</span>{" "}
-              <span className="gradient-text block">agents</span>
+              <span className="block md:inline">The management</span>{" "}
+              <span className="block md:inline">platform for</span>{" "}
+              <span className="gradient-text block md:inline">agents, experts,</span>{" "}
+              <span className="gradient-text block">and evaluation</span>
             </h1>
             <p className="mx-auto mt-6 max-w-2xl text-lg" style={{ color: "var(--hero-muted)" }}>
-              Tbrain&apos;s platform powers our delivery — from one-to-one agent
-              training to LLM-as-a-judge evaluation. The same infrastructure is
-              available to enterprise teams running agentic workflows at scale.
+              Expert OS helps teams manage expert operations, agent knowledge,
+              automated evaluation, and agentic workflows in one production
+              system.
             </p>
             <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">
               <Link
@@ -110,10 +110,11 @@ export default async function PlatformPage() {
             className="text-center text-3xl font-semibold mb-3"
             style={{ fontFamily: "var(--font-heading)" }}
           >
-            Built for <span className="gradient-text">agentic teams</span>
+            Built for <span className="gradient-text">agent operations</span>
           </h2>
-          <p className="mx-auto mb-12 max-w-2xl text-center text-base text-[#78818f]">
-            Four capabilities that ship together — knowledge, evaluation, workflow, and identity.
+          <p className="mx-auto mb-12 max-w-2xl text-center text-base leading-relaxed" style={{ color: "var(--text-secondary)" }}>
+            Four capabilities that ship together: knowledge, automated
+            evaluation, agentic workflow, and persistent identity.
           </p>
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
             {features.map((f) => {
@@ -122,7 +123,7 @@ export default async function PlatformPage() {
                 <div
                   key={f.id}
                   className="rounded-2xl p-6 md:p-8"
-                  style={{ background: "white", border: "1px solid rgba(15,23,42,0.06)", boxShadow: "0 6px 24px -8px rgba(15,23,42,0.10)" }}
+                  style={{ background: "var(--bg-card)", border: "1px solid var(--border-subtle)", boxShadow: "var(--shadow-card)" }}
                 >
                   <div
                     className="flex h-12 w-12 items-center justify-center rounded-xl"
@@ -132,11 +133,11 @@ export default async function PlatformPage() {
                   </div>
                   <h3
                     className="mt-4 text-xl font-semibold"
-                    style={{ fontFamily: "var(--font-heading)" }}
+                    style={{ fontFamily: "var(--font-heading)", color: "var(--text-primary)" }}
                   >
                     {f.title}
                   </h3>
-                  <p className="mt-2 text-sm leading-relaxed text-[#78818f]">{f.description}</p>
+                  <p className="mt-2 text-sm leading-relaxed" style={{ color: "var(--text-secondary)" }}>{f.description}</p>
                 </div>
               );
             })}
@@ -145,21 +146,22 @@ export default async function PlatformPage() {
 
         {/* How it works */}
         <section className="container mx-auto mt-24 max-w-4xl px-3">
-          <div className="rounded-3xl p-8 md:p-12" style={{ background: "linear-gradient(135deg, rgba(108,60,244,0.04), rgba(16,185,129,0.04))", border: "1px solid rgba(15,23,42,0.06)" }}>
+          <div className="rounded-3xl p-8 md:p-12" style={{ background: "var(--bg-card)", border: "1px solid var(--border-subtle)" }}>
             <h2
               className="text-center text-3xl font-semibold"
               style={{ fontFamily: "var(--font-heading)" }}
             >
               How <span className="gradient-text">Expert OS</span> works
             </h2>
-            <p className="mx-auto mt-4 max-w-2xl text-center text-base text-[#78818f]">
-              Three layers that make agentic systems coherent, evaluatable, and improvable.
+            <p className="mx-auto mt-4 max-w-2xl text-center text-base leading-relaxed" style={{ color: "var(--text-secondary)" }}>
+              Three layers that make agentic systems coherent, evaluatable, and
+              improvable.
             </p>
             <div className="mt-10 grid grid-cols-1 gap-4 md:grid-cols-3">
               {[
-                { n: "01", title: "Knowledge", body: "Curated, versioned reference content tied to each agent's identity." },
-                { n: "02", title: "Evaluation", body: "Automated LLM-as-judge first, expert review for the edge cases." },
-                { n: "03", title: "Iteration", body: "Workflow loops where agents learn from agents — measurable improvement over time." },
+                { n: "01", title: "Knowledge", body: "Curated, versioned reference guides tied to each agent's job and operating context." },
+                { n: "02", title: "Evaluation", body: "LLM-as-a-judge checks every output before final human judgment." },
+                { n: "03", title: "Iteration", body: "Agentic workflow loops route feedback back into the system for measurable improvement." },
               ].map((step) => (
                 <div key={step.n} className="text-center">
                   <span className="text-3xl font-bold" style={{ fontFamily: "var(--font-heading)", color: "rgba(108,60,244,0.4)" }}>
@@ -168,7 +170,7 @@ export default async function PlatformPage() {
                   <h3 className="mt-2 text-lg font-semibold" style={{ fontFamily: "var(--font-heading)" }}>
                     {step.title}
                   </h3>
-                  <p className="mt-2 text-sm text-[#78818f]">{step.body}</p>
+                  <p className="mt-2 text-sm leading-relaxed" style={{ color: "var(--text-secondary)" }}>{step.body}</p>
                 </div>
               ))}
             </div>
@@ -183,8 +185,9 @@ export default async function PlatformPage() {
           >
             Want to see it in action?
           </h2>
-          <p className="mx-auto mt-3 max-w-lg text-lg text-[#78818f]">
-            Get a guided tour of Expert OS and see how it can plug into your team&apos;s agentic workflows.
+          <p className="mx-auto mt-3 max-w-lg text-lg leading-relaxed" style={{ color: "var(--text-secondary)" }}>
+            Get a guided tour of Expert OS and see how it can plug into your
+            team&apos;s agentic workflows.
           </p>
           <Link
             href="/contact"

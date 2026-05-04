@@ -10,18 +10,18 @@ import { ExpertsSection } from "@/components/marketing/sections/ExpertsSection";
 import { ContactCTA } from "@/components/marketing/sections/ContactCTA";
 
 export const metadata: Metadata = {
-  title: "Tbrain — The Data Factory for Robotics, Agents & Post-Training",
+  title: "Tbrain — Trusted Human Infrastructure for Agentic AI",
   description:
-    "Ground-truth motion capture, multi-step agent benchmarks, and custom data programs. Lab-grade precision. AI-native QC. Global expert network.",
+    "Trusted human infrastructure for agentic AI — coding, robotics, evaluation, RLHF, SFT, and post-training data programs.",
   openGraph: {
-    title: "Tbrain — The Data Factory for Robotics, Agents & Post-Training",
-    description: "From robotics to agent evaluation — purpose-built data for frontier AI.",
+    title: "Tbrain — Trusted Human Infrastructure for Agentic AI",
+    description: "The data factory behind coding, robotics, agentic workflows, evaluation, and post-training programs.",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Tbrain — The Data Factory for Robotics, Agents & Post-Training",
-    description: "From robotics to agent evaluation — purpose-built data for frontier AI.",
+    title: "Tbrain — Trusted Human Infrastructure for Agentic AI",
+    description: "The data factory behind coding, robotics, agentic workflows, evaluation, and post-training programs.",
   },
 };
 
