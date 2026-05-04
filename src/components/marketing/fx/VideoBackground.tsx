@@ -7,13 +7,17 @@ type Source = { src: string; srcMp4?: string; poster?: string };
 /**
  * Cinematic looping video background.
  *
+ * Single-clip mode (`src`): video loops forever.
+ * Carousel mode (`sources` length ≥ 2): each clip plays through to its
+ * natural end, then advances to the next via `onEnded`. No fixed timer,
+ * so we don't cut long clips short or replay short clips twice.
+ *
  * Perf:
- * - preload="metadata" — browser only fetches the moov atom upfront (~tens of KB),
- *   not the full video. Body bytes start when play() fires.
- * - IntersectionObserver gates play(): off-screen → pause + no further buffering.
+ * - preload="metadata" — only the moov atom upfront; body bytes start on play().
+ * - IntersectionObserver gates play(); off-screen → pause + no buffering.
  * - Save-Data + reduced-motion users → poster only, no rotation.
- * - Carousel rotation: 22s/clip (was 14s) and prefetches next clip 3s before swap
- *   so the swap is seamless without burning data on clips the user never sees.
+ * - Next clip prefetched 1.5s after the current one starts so the swap is
+ *   seamless without burning data on clips the user never reaches.
  */
 export function VideoBackground({
   src,
@@ -39,6 +43,7 @@ export function VideoBackground({
   const playlist: Source[] = sources?.length ? sources : src ? [{ src, srcMp4, poster }] : [];
   const active = playlist[activeIndex % Math.max(playlist.length, 1)];
   const primaryType = active?.src.endsWith(".mp4") ? "video/mp4" : "video/webm";
+  const isCarousel = playlist.length > 1;
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -47,19 +52,15 @@ export function VideoBackground({
     if (conn?.saveData) setSaveData(true);
   }, []);
 
-  // Stable refs so re-renders from parent (scroll, hover, animation frames)
-  // don't restart the rotation timer.
+  // Stable refs so re-renders from parent don't disturb the carousel.
   const playlistRef = useRef(playlist);
   playlistRef.current = playlist;
   const playlistLen = playlist.length;
 
-  // Carousel rotation — paused when reduced-motion / save-data / single clip.
+  // Prefetch the NEXT clip 1.5s after the current one starts.
   useEffect(() => {
     if (reducedMotion || saveData || playlistLen < 2) return;
-    const ROTATE_MS = 12_000;
-    const PREFETCH_LEAD_MS = 3_000;
-
-    const prefetchTimer = window.setTimeout(() => {
+    const t = window.setTimeout(() => {
       const list = playlistRef.current;
       const next = list[(activeIndex + 1) % list.length];
       if (!next) return;
@@ -68,18 +69,9 @@ export function VideoBackground({
       link.as = "video";
       link.href = next.src;
       document.head.appendChild(link);
-      window.setTimeout(() => link.remove(), PREFETCH_LEAD_MS + 500);
-    }, ROTATE_MS - PREFETCH_LEAD_MS);
-
-    const rotateTimer = window.setTimeout(() => {
-      setFailed(false);
-      setActiveIndex((current) => (current + 1) % playlistRef.current.length);
-    }, ROTATE_MS);
-
-    return () => {
-      window.clearTimeout(prefetchTimer);
-      window.clearTimeout(rotateTimer);
-    };
+      window.setTimeout(() => link.remove(), 8000);
+    }, 1500);
+    return () => window.clearTimeout(t);
   }, [activeIndex, playlistLen, reducedMotion, saveData]);
 
   useEffect(() => {
@@ -128,6 +120,12 @@ export function VideoBackground({
     };
   }, [activeIndex, reducedMotion]);
 
+  const onEnded = () => {
+    if (!isCarousel) return;
+    setFailed(false);
+    setActiveIndex((current) => (current + 1) % playlistRef.current.length);
+  };
+
   return (
     <div
       ref={hostRef}
@@ -139,11 +137,12 @@ export function VideoBackground({
           key={active.src}
           ref={ref}
           muted
-          loop
+          loop={!isCarousel}
           playsInline
           preload="metadata"
           poster={active.poster}
           onError={() => setFailed(true)}
+          onEnded={onEnded}
           className="absolute inset-0 h-full w-full object-cover"
           style={{ opacity: 0.55 }}
         >
