@@ -9,13 +9,25 @@ import Underline from "@tiptap/extension-underline";
 import TextAlign from "@tiptap/extension-text-align";
 import Highlight from "@tiptap/extension-highlight";
 import { Toolbar } from "./Toolbar";
-import { useCallback, useEffect } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { toast } from "sonner";
 
 interface TipTapEditorProps {
   content: string;
   onChange: (html: string) => void;
   onWordCount?: (count: number) => void;
   placeholder?: string;
+}
+
+async function uploadInlineImage(file: File): Promise<string> {
+  const fd = new FormData();
+  fd.append("file", file);
+  const res = await fetch("/api/admin/uploads/image", { method: "POST", body: fd });
+  const json = await res.json();
+  if (!res.ok || !json.url) {
+    throw new Error(json.error ?? "upload_failed");
+  }
+  return json.url as string;
 }
 
 export function TipTapEditor({
@@ -25,6 +37,7 @@ export function TipTapEditor({
   placeholder = "Start writing your article...",
 }: TipTapEditorProps) {
   const editor = useEditor({
+    immediatelyRender: false,
     extensions: [
       StarterKit.configure({
         heading: { levels: [1, 2, 3] },
@@ -34,6 +47,9 @@ export function TipTapEditor({
         blockquote: {
           HTMLAttributes: { class: "border-l-4 border-[#6C3CF4] pl-4 italic text-gray-600 my-4" },
         },
+        // StarterKit v3 ships Link + Underline; we configure them explicitly below.
+        link: false,
+        underline: false,
       }),
       Image.configure({
         HTMLAttributes: { class: "rounded-xl my-6 max-w-full" },
@@ -85,18 +101,83 @@ export function TipTapEditor({
     }
   }, [editor, content]);
 
+  const fileInputRef = useRef<HTMLInputElement | null>(null);
+  const [uploading, setUploading] = useState(false);
+
+  const insertImageFile = useCallback(
+    async (file: File) => {
+      if (!editor) return;
+      setUploading(true);
+      const toastId = toast.loading("Uploading image…");
+      try {
+        const url = await uploadInlineImage(file);
+        editor.chain().focus().setImage({ src: url }).run();
+        toast.success("Image inserted", { id: toastId });
+      } catch (err) {
+        toast.error(`Upload failed: ${(err as Error).message}`, { id: toastId });
+      } finally {
+        setUploading(false);
+      }
+    },
+    [editor]
+  );
+
   const handleImageUpload = useCallback(() => {
-    if (!editor) return;
-    const url = window.prompt("Image URL (paste a URL or upload via the sidebar)");
-    if (url) {
-      editor.chain().focus().setImage({ src: url }).run();
-    }
-  }, [editor]);
+    fileInputRef.current?.click();
+  }, []);
+
+  const onFileChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      const file = e.target.files?.[0];
+      e.target.value = ""; // reset so re-uploading the same file fires onChange
+      if (file) void insertImageFile(file);
+    },
+    [insertImageFile]
+  );
+
+  // Drag-and-drop + paste support so admins can just throw a screenshot in.
+  const onDrop = useCallback(
+    (e: React.DragEvent) => {
+      const file = Array.from(e.dataTransfer.files).find((f) => f.type.startsWith("image/"));
+      if (!file) return;
+      e.preventDefault();
+      void insertImageFile(file);
+    },
+    [insertImageFile]
+  );
+
+  const onPaste = useCallback(
+    (e: React.ClipboardEvent) => {
+      const item = Array.from(e.clipboardData.items).find((it) => it.type.startsWith("image/"));
+      if (!item) return;
+      const file = item.getAsFile();
+      if (!file) return;
+      e.preventDefault();
+      void insertImageFile(file);
+    },
+    [insertImageFile]
+  );
 
   return (
-    <div className="rounded-xl border border-gray-200 bg-white overflow-hidden">
+    <div
+      className="rounded-xl border border-gray-200 bg-white overflow-hidden"
+      onDrop={onDrop}
+      onPaste={onPaste}
+      onDragOver={(e) => e.preventDefault()}
+    >
       <Toolbar editor={editor} onImageUpload={handleImageUpload} />
-
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept="image/png,image/jpeg,image/webp,image/gif"
+        onChange={onFileChange}
+        className="hidden"
+      />
+      {uploading && (
+        <div className="px-4 py-1.5 text-xs text-[#6C3CF4] bg-[#6C3CF4]/5 border-b border-[#6C3CF4]/10">
+          Uploading image…
+        </div>
+      )}
       <EditorContent editor={editor} />
     </div>
   );

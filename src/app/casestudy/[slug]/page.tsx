@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
-import { ArrowLeft, ArrowRight, CheckCircle } from "lucide-react";
+import Image from "next/image";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 import Header from "@/components/common/Header";
 import Footer from "@/components/common/Footer";
 import { getCaseStudies, getCaseStudyBySlug } from "@/lib/landing/case-studies";
+import { PdfDownloadGate } from "@/components/casestudy/PdfDownloadGate";
 import { notFound } from "next/navigation";
 
 export const revalidate = 300;
@@ -16,11 +17,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { slug } = await params;
   const study = await getCaseStudyBySlug(slug);
-
-  if (!study) {
-    return { title: "Case Study" };
-  }
-
+  if (!study) return { title: "Case Study" };
   return {
     title: study.title,
     description: study.shortDescription || study.description,
@@ -34,6 +31,16 @@ export async function generateMetadata({
   };
 }
 
+// Cycle of accent colors for the stat cards. Mirrors the legacy static layout
+// (emerald → blue → purple → pink) so the page feels familiar even though it's
+// CMS-driven.
+const METRIC_ACCENTS = [
+  { border: "border-emerald-600", text: "text-emerald-600" },
+  { border: "border-blue-600", text: "text-blue-600" },
+  { border: "border-purple-600", text: "text-purple-600" },
+  { border: "border-pink-600", text: "text-pink-600" },
+];
+
 export default async function CaseStudyDetailPage({
   params,
 }: {
@@ -41,7 +48,6 @@ export default async function CaseStudyDetailPage({
 }) {
   const { slug } = await params;
   const study = await getCaseStudyBySlug(slug);
-
   if (!study) notFound();
 
   const related = (await getCaseStudies())
@@ -51,80 +57,126 @@ export default async function CaseStudyDetailPage({
   return (
     <div>
       <Header />
-      <main className="pt-28">
-        <section className="container mx-auto max-w-6xl px-4 pb-20">
+      <main className="pt-24 pb-24">
+        <section className="container mx-auto max-w-[1128px] px-4">
           <Link
             href="/casestudy"
             className="inline-flex items-center gap-2 text-sm font-semibold text-[#6C3CF4]"
           >
-            <ArrowLeft className="h-4 w-4" />
-            Back to case studies
+            <ArrowLeft className="h-4 w-4" /> Back to case studies
           </Link>
 
-          <div className="mt-10 grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
-            <div>
-              <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[#6C3CF4]">
-                Case study
-              </p>
-              <h1 className="mt-4 text-4xl font-semibold leading-tight md:text-6xl">
-                {study.title}
-              </h1>
-              <p className="mt-5 text-xl font-medium text-[#6C3CF4]">
+          {/* Hero */}
+          <header className="mt-10 mb-12">
+            <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[#6C3CF4] mb-3">
+              Case study
+            </p>
+            <h1 className="text-[#222222] text-4xl lg:text-5xl font-semibold leading-[1.1]">
+              {study.title}
+            </h1>
+            {study.shortDescription && (
+              <p className="mt-4 text-lg text-[#78818f] italic">
                 {study.shortDescription}
               </p>
-              <p className="mt-6 text-lg leading-relaxed text-[#78818f]">
-                {study.description}
-              </p>
-            </div>
+            )}
+            {(study.clientName || study.industry || study.engagementLength) && (
+              <dl className="mt-6 grid grid-cols-3 gap-4 max-w-2xl">
+                {study.clientName && (
+                  <MetaCell label="Client" value={study.clientName} />
+                )}
+                {study.industry && (
+                  <MetaCell label="Industry" value={study.industry} />
+                )}
+                {study.engagementLength && (
+                  <MetaCell label="Engagement" value={study.engagementLength} />
+                )}
+              </dl>
+            )}
+            {study.pdfGcsObject && (
+              <div className="mt-6">
+                <PdfDownloadGate slug={study.slug} title={study.title} />
+              </div>
+            )}
+          </header>
 
-            <div className="overflow-hidden rounded-3xl bg-white shadow-xl">
-              <div className="relative aspect-[4/3]">
+          {/* Hero image */}
+          {study.image && (
+            <div className="mb-14 overflow-hidden rounded-3xl bg-white shadow-xl">
+              <div className="relative aspect-[16/7]">
                 <Image
                   src={study.image}
                   alt={study.title}
                   fill
                   priority
-                  sizes="(min-width: 1024px) 520px, 100vw"
+                  sizes="(min-width: 1128px) 1100px, 100vw"
                   className="object-cover"
                 />
               </div>
             </div>
-          </div>
+          )}
 
+          {/* Stat banner */}
           {study.metrics.length > 0 && (
-            <div className="mt-12 grid grid-cols-2 gap-4 md:grid-cols-4">
-              {study.metrics.map((metric, index) => (
-                <div key={index} className="rounded-2xl bg-white p-6 text-center shadow-md">
-                  <div className="text-3xl font-bold text-[#6C3CF4]">
-                    {metric.value}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-16">
+              {study.metrics.slice(0, 4).map((metric, i) => {
+                const a = METRIC_ACCENTS[i % METRIC_ACCENTS.length];
+                return (
+                  <div
+                    key={i}
+                    className={`bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg p-6 text-center border-t-4 ${a.border} hover:shadow-xl transition-all`}
+                  >
+                    <div className={`text-5xl font-bold ${a.text} mb-2`}>
+                      {metric.value}
+                    </div>
+                    <div className="text-gray-600 text-sm font-medium">
+                      {metric.label}
+                    </div>
                   </div>
-                  <div className="mt-2 text-sm text-[#78818f]">{metric.label}</div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           )}
 
-          <section className="mt-14 rounded-3xl bg-white p-8 shadow-lg md:p-10">
-            <h2 className="text-3xl font-semibold">Project snapshot</h2>
-            <div className="mt-6 grid gap-5 md:grid-cols-3">
-              {[
-                "Outcome-driven delivery with clear success metrics.",
-                "Expert review workflow designed for auditability.",
-                "Reusable operating model for follow-on data programs.",
-              ].map((item) => (
-                <div key={item} className="flex gap-3">
-                  <CheckCircle className="mt-1 h-5 w-5 shrink-0 text-[#6C3CF4]" />
-                  <p className="text-base leading-relaxed text-[#78818f]">{item}</p>
-                </div>
-              ))}
-            </div>
+          {/* Body — extended content rendered with the legacy visual language */}
+          {study.extendedContent ? (
+            <article
+              className="case-study-body"
+              dangerouslySetInnerHTML={{ __html: study.extendedContent }}
+            />
+          ) : (
+            <article className="case-study-body">
+              <h2>Project snapshot</h2>
+              <p>{study.description}</p>
+            </article>
+          )}
+
+          {/* CTA */}
+          <section className="mt-16 rounded-3xl bg-gradient-to-br from-blue-50/80 to-indigo-50/80 backdrop-blur-sm p-10 text-center shadow-md">
+            <h2 className="text-3xl font-bold text-[#222222]">
+              Ready to run a similar program?
+            </h2>
+            <p className="mt-3 text-lg text-[#78818f]">
+              Let&apos;s scope a pilot in days, not months.
+            </p>
+            <Link
+              href="/contact"
+              className="mt-6 inline-flex items-center gap-2 rounded-full bg-[#6C3CF4] px-7 py-3 text-base font-semibold text-white transition hover:bg-[#5a2fd3]"
+            >
+              Talk to an expert <ArrowRight className="h-4 w-4" />
+            </Link>
           </section>
 
+          {/* Related */}
           {related.length > 0 && (
             <section className="mt-16">
               <div className="mb-6 flex items-center justify-between gap-4">
-                <h2 className="text-2xl font-semibold">More case studies</h2>
-                <Link href="/casestudy" className="text-sm font-semibold text-[#6C3CF4]">
+                <h2 className="text-2xl font-semibold text-[#222222]">
+                  More case studies
+                </h2>
+                <Link
+                  href="/casestudy"
+                  className="text-sm font-semibold text-[#6C3CF4]"
+                >
                   View all
                 </Link>
               </div>
@@ -161,6 +213,17 @@ export default async function CaseStudyDetailPage({
         </section>
       </main>
       <Footer />
+    </div>
+  );
+}
+
+function MetaCell({ label, value }: { label: string; value: string }) {
+  return (
+    <div className="rounded-xl border border-[#e5e7eb] bg-white p-3">
+      <dt className="text-[10px] font-semibold uppercase tracking-wider text-[#9ca3af]">
+        {label}
+      </dt>
+      <dd className="mt-1 text-sm font-medium text-gray-900">{value}</dd>
     </div>
   );
 }

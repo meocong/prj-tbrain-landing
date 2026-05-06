@@ -21,6 +21,14 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  async redirects() {
+    return [
+      // Legacy hardcoded case-study URLs → CMS-driven slugs.
+      { source: "/casestudy/details/manufacturing", destination: "/casestudy/manufacturing", permanent: true },
+      { source: "/casestudy/details/scalable", destination: "/casestudy/scalable-multimodal", permanent: true },
+      { source: "/casestudy/details/agent", destination: "/casestudy/agent-evaluation", permanent: true },
+    ];
+  },
   async headers() {
     return [
       {
