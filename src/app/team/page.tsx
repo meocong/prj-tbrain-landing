@@ -1,10 +1,8 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import Link from "next/link";
-import { ArrowRight } from "lucide-react";
 import Header from "@/components/common/Header";
 import Footer from "@/components/common/Footer";
-import { EXPERTS, FEATURED_CASE_STUDIES, LEADERSHIP } from "@/lib/constants/marketing";
+import { EXPERTS, LEADERSHIP } from "@/lib/constants/marketing";
 
 export const metadata: Metadata = {
   title: "Team — Tbrain",
@@ -112,45 +110,71 @@ export default function TeamPage() {
         </section>
 
         <section className="container mx-auto mt-24 px-4">
-          <div className="mb-10 flex flex-col justify-between gap-4 md:flex-row md:items-end">
-            <div>
-              <p className="font-family_avt text-xs uppercase tracking-[0.22em]" style={{ color: "var(--text-muted)" }}>
-                / project focus
-              </p>
-              <h2 className="mt-3 text-3xl font-semibold md:text-5xl" style={{ fontFamily: "var(--font-heading)", color: "var(--text-primary)" }}>
-                Programs this team can run
-              </h2>
+          <div
+            className="mx-auto grid max-w-6xl gap-0 overflow-hidden rounded-3xl md:grid-cols-[0.9fr_1.1fr]"
+            style={{
+              background: "var(--bg-card)",
+              border: "1px solid var(--border-subtle)",
+              boxShadow: "var(--shadow-card)",
+            }}
+          >
+            <div className="relative aspect-[3/4] md:aspect-auto md:min-h-[440px]">
+              <Image
+                src="/images/office.png"
+                alt="Tbrain office in Hanoi"
+                fill
+                sizes="(max-width: 768px) 100vw, 45vw"
+                className="object-cover"
+              />
             </div>
-            <Link
-              href="/casestudy"
-              className="inline-flex items-center gap-2 text-sm font-semibold"
-              style={{ color: "#6C3CF4" }}
-            >
-              View case studies <ArrowRight className="h-4 w-4" />
-            </Link>
-          </div>
-
-          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-            {FEATURED_CASE_STUDIES.slice(0, 4).map((project) => (
-              <article
-                key={project.title}
-                className="rounded-2xl p-5"
-                style={{
-                  background: "var(--bg-card)",
-                  border: "1px solid var(--border-subtle)",
-                }}
+            <div className="flex flex-col justify-center p-8 md:p-12">
+              <p
+                className="font-family_avt text-xs uppercase tracking-[0.22em]"
+                style={{ color: "var(--text-muted)" }}
               >
-                <div className="relative mb-5 aspect-[4/3] overflow-hidden rounded-xl">
-                  <Image src={project.image} alt="" fill className="object-cover" sizes="(max-width: 768px) 100vw, 25vw" />
+                / our office
+              </p>
+              <h2
+                className="mt-3 text-3xl font-semibold md:text-4xl"
+                style={{ fontFamily: "var(--font-heading)", color: "var(--text-primary)" }}
+              >
+                Built in <span className="gradient-text">Hanoi</span>, shipping for frontier AI
+              </h2>
+              <p
+                className="mt-5 text-base leading-relaxed"
+                style={{ color: "var(--text-secondary)" }}
+              >
+                Engineers, expert ops, and program managers work side by side from
+                our Hanoi headquarters. Daily standups, shared review queues, and
+                domain pods keep delivery tight across timezones.
+              </p>
+              <dl className="mt-8 grid grid-cols-3 gap-4">
+                <div>
+                  <dt className="text-[10px] font-semibold uppercase tracking-wider" style={{ color: "var(--text-muted)" }}>
+                    HQ
+                  </dt>
+                  <dd className="mt-1 text-sm font-medium" style={{ color: "var(--text-primary)" }}>
+                    Hanoi, Vietnam
+                  </dd>
                 </div>
-                <h3 className="text-lg font-semibold leading-snug" style={{ fontFamily: "var(--font-heading)", color: "var(--text-primary)" }}>
-                  {project.title}
-                </h3>
-                <p className="mt-2 text-sm leading-relaxed" style={{ color: "var(--text-secondary)" }}>
-                  {project.shortDescription}
-                </p>
-              </article>
-            ))}
+                <div>
+                  <dt className="text-[10px] font-semibold uppercase tracking-wider" style={{ color: "var(--text-muted)" }}>
+                    Working hours
+                  </dt>
+                  <dd className="mt-1 text-sm font-medium" style={{ color: "var(--text-primary)" }}>
+                    Cross‑TZ delivery
+                  </dd>
+                </div>
+                <div>
+                  <dt className="text-[10px] font-semibold uppercase tracking-wider" style={{ color: "var(--text-muted)" }}>
+                    Network
+                  </dt>
+                  <dd className="mt-1 text-sm font-medium" style={{ color: "var(--text-primary)" }}>
+                    Global experts
+                  </dd>
+                </div>
+              </dl>
+            </div>
           </div>
         </section>
 

@@ -5,8 +5,9 @@ import { useMutation } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { toast } from "sonner";
-import { ArrowLeft, FileText, Plus, Save, Trash2, Upload, Users } from "lucide-react";
+import { ArrowLeft, FileText, Plus, Printer, RefreshCw, Save, Trash2, Upload, Users } from "lucide-react";
 import { supabaseAdmin } from "@/lib/admin/supabase-browser";
+import { TipTapEditor } from "@/components/admin/editor/TipTapEditor";
 
 type Metric = { value: string; label: string };
 
@@ -22,6 +23,10 @@ export type CaseStudyFormValues = {
   is_active: boolean;
   pdf_filename?: string | null;
   pdf_gcs_object?: string | null;
+  extended_content?: string;
+  client_name?: string;
+  industry?: string;
+  engagement_length?: string;
 };
 
 const EMPTY: CaseStudyFormValues = {
@@ -33,6 +38,10 @@ const EMPTY: CaseStudyFormValues = {
   metrics: [{ value: "", label: "" }],
   display_order: 100,
   is_active: true,
+  extended_content: "",
+  client_name: "",
+  industry: "",
+  engagement_length: "",
 };
 
 const autoSlug = (t: string) =>
@@ -57,6 +66,10 @@ export function CaseStudyForm({ initial }: { initial?: CaseStudyFormValues }) {
         metrics: form.metrics.filter((m) => m.value.trim() && m.label.trim()),
         display_order: form.display_order,
         is_active: form.is_active,
+        extended_content: form.extended_content?.trim() ? form.extended_content : null,
+        client_name: form.client_name?.trim() || null,
+        industry: form.industry?.trim() || null,
+        engagement_length: form.engagement_length?.trim() || null,
       };
 
       if (isEdit && initial?.id) {
@@ -129,6 +142,28 @@ export function CaseStudyForm({ initial }: { initial?: CaseStudyFormValues }) {
       toast.success(`Uploaded ${json.filename}`);
       setForm((f) => ({ ...f, pdf_filename: json.filename, pdf_gcs_object: json.gcsObject }));
       setPdfFile(null);
+    } catch (e) {
+      toast.error((e as Error).message);
+    } finally {
+      setUploadingPdf(false);
+    }
+  };
+
+  const regeneratePdf = async () => {
+    if (!initial?.id) return;
+    if (!form.extended_content?.trim()) {
+      toast.error("Add extended content first, then save.");
+      return;
+    }
+    setUploadingPdf(true);
+    try {
+      const res = await fetch(`/api/admin/case-studies/${initial.id}/regenerate-pdf`, {
+        method: "POST",
+      });
+      const json = await res.json();
+      if (!res.ok) throw new Error(json.error ?? "Generate failed");
+      toast.success(`PDF generated (${Math.round((json.sizeBytes ?? 0) / 1024)} KB)`);
+      setForm((f) => ({ ...f, pdf_filename: json.filename, pdf_gcs_object: json.gcsObject }));
     } catch (e) {
       toast.error((e as Error).message);
     } finally {
@@ -219,6 +254,52 @@ export function CaseStudyForm({ initial }: { initial?: CaseStudyFormValues }) {
           />
         </Field>
 
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+          <Field label="Client name" hint="Shown on the brochure header (optional).">
+            <input
+              type="text"
+              value={form.client_name ?? ""}
+              onChange={(e) => setForm({ ...form, client_name: e.target.value })}
+              className="input-field"
+              placeholder="Acme Corp"
+            />
+          </Field>
+          <Field label="Industry">
+            <input
+              type="text"
+              value={form.industry ?? ""}
+              onChange={(e) => setForm({ ...form, industry: e.target.value })}
+              className="input-field"
+              placeholder="Manufacturing"
+            />
+          </Field>
+          <Field label="Engagement length">
+            <input
+              type="text"
+              value={form.engagement_length ?? ""}
+              onChange={(e) => setForm({ ...form, engagement_length: e.target.value })}
+              className="input-field"
+              placeholder="4 months"
+            />
+          </Field>
+        </div>
+
+        <div>
+          <label className="block text-xs font-medium mb-2" style={{ color: "var(--text-secondary)" }}>
+            Extended content (printable brochure)
+          </label>
+          <p className="text-[11px] mb-2 flex items-center gap-1" style={{ color: "var(--text-muted)" }}>
+            <Printer className="h-3 w-3" />
+            Long-form story rendered on the public detail page and into the auto-generated PDF brochure.
+            Use H2/H3 headings to split sections (Challenge, Approach, Results, etc.).
+          </p>
+          <TipTapEditor
+            content={form.extended_content ?? ""}
+            onChange={(html) => setForm((f) => ({ ...f, extended_content: html }))}
+            placeholder="Tell the full story: challenge, approach, deliverables, outcomes, lessons learned…"
+          />
+        </div>
+
         <div>
           <label className="block text-xs font-medium mb-2" style={{ color: "var(--text-secondary)" }}>
             Metrics
@@ -265,8 +346,10 @@ export function CaseStudyForm({ initial }: { initial?: CaseStudyFormValues }) {
               PDF brochure
             </label>
             <p className="text-[11px] mb-3" style={{ color: "var(--text-muted)" }}>
-              Optional PDF (max 25MB). Used by the gated download flow on /casestudy.
+              The gated download on /casestudy serves this file. Generate it from the extended
+              content above, or upload a hand-designed PDF to override.
             </p>
+
             {form.pdf_filename ? (
               <div className="rounded-xl p-3 flex items-center justify-between gap-3" style={{ background: "var(--bg-input)", border: "1px solid var(--border-default)" }}>
                 <div className="flex items-center gap-2 min-w-0">
@@ -276,6 +359,27 @@ export function CaseStudyForm({ initial }: { initial?: CaseStudyFormValues }) {
                   </span>
                 </div>
                 <div className="flex items-center gap-2 shrink-0">
+                  <a
+                    href={`/api/casestudy/${form.slug}/pdf?preview=1`}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="btn-secondary text-xs"
+                    title="Open the live PDF in a new tab"
+                  >
+                    <Printer className="h-3.5 w-3.5" /> Preview
+                  </a>
+                  {form.extended_content?.trim() && (
+                    <button
+                      type="button"
+                      onClick={regeneratePdf}
+                      disabled={uploadingPdf}
+                      className="btn-secondary text-xs"
+                      title="Re-render from current extended content"
+                    >
+                      <RefreshCw className={`h-3.5 w-3.5 ${uploadingPdf ? "animate-spin" : ""}`} />
+                      {uploadingPdf ? "Generating…" : "Re-generate"}
+                    </button>
+                  )}
                   <Link
                     href={`/admin/case-studies/${initial?.id}/downloads`}
                     className="btn-secondary text-xs"
@@ -295,21 +399,51 @@ export function CaseStudyForm({ initial }: { initial?: CaseStudyFormValues }) {
                 </div>
               </div>
             ) : (
-              <div className="flex items-center gap-2">
-                <input
-                  type="file"
-                  accept="application/pdf,.pdf"
-                  onChange={(e) => setPdfFile(e.target.files?.[0] ?? null)}
-                  className="input-field flex-1 text-xs"
-                />
-                <button
-                  type="button"
-                  onClick={uploadPdf}
-                  disabled={!pdfFile || uploadingPdf}
-                  className="btn-primary text-xs"
-                >
-                  <Upload className="h-3.5 w-3.5" /> {uploadingPdf ? "Uploading…" : "Upload"}
-                </button>
+              <div className="space-y-3">
+                {form.extended_content?.trim() ? (
+                  <button
+                    type="button"
+                    onClick={regeneratePdf}
+                    disabled={uploadingPdf}
+                    className="btn-primary text-xs"
+                  >
+                    <RefreshCw className={`h-3.5 w-3.5 ${uploadingPdf ? "animate-spin" : ""}`} />
+                    {uploadingPdf ? "Generating…" : "Generate PDF from extended content"}
+                  </button>
+                ) : (
+                  <div
+                    className="rounded-lg p-3 text-xs"
+                    style={{
+                      background: "rgba(108,60,244,0.06)",
+                      border: "1px dashed rgba(108,60,244,0.3)",
+                      color: "var(--text-secondary)",
+                    }}
+                  >
+                    <strong style={{ color: "var(--text-primary)" }}>Auto-generate is unavailable.</strong>{" "}
+                    This case study has no extended content yet. Scroll up, fill in the
+                    <em> Extended content (printable brochure)</em> editor, click <strong>Save</strong>,
+                    then return here to generate the PDF.
+                  </div>
+                )}
+                <div className="text-[11px]" style={{ color: "var(--text-muted)" }}>
+                  Or upload a hand-designed PDF (max 25MB):
+                </div>
+                <div className="flex items-center gap-2">
+                  <input
+                    type="file"
+                    accept="application/pdf,.pdf"
+                    onChange={(e) => setPdfFile(e.target.files?.[0] ?? null)}
+                    className="input-field flex-1 text-xs"
+                  />
+                  <button
+                    type="button"
+                    onClick={uploadPdf}
+                    disabled={!pdfFile || uploadingPdf}
+                    className="btn-secondary text-xs"
+                  >
+                    <Upload className="h-3.5 w-3.5" /> {uploadingPdf ? "Uploading…" : "Upload"}
+                  </button>
+                </div>
               </div>
             )}
           </div>

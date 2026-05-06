@@ -11,12 +11,18 @@ export type CaseStudy = {
   description: string;
   image: string;
   metrics: CaseStudyMetric[];
+  extendedContent?: string | null;
+  clientName?: string | null;
+  industry?: string | null;
+  engagementLength?: string | null;
+  pdfFilename?: string | null;
+  pdfGcsObject?: string | null;
 };
 
 function fallbackCaseStudies(): CaseStudy[] {
   return [
     {
-      slug: "details/manufacturing",
+      slug: "manufacturing",
       title: "High-Accuracy CAD Annotation",
       shortDescription: "Manufacturing AI",
       description:
@@ -31,7 +37,7 @@ function fallbackCaseStudies(): CaseStudy[] {
       ],
     },
     {
-      slug: "details/scalable",
+      slug: "scalable-multimodal",
       title: "Scalable Multimodal AI System",
       shortDescription: "Enterprise AI",
       description:
@@ -57,7 +63,34 @@ type Row = {
   metrics: CaseStudyMetric[] | null;
   display_order: number;
   is_active: boolean;
+  extended_content?: string | null;
+  client_name?: string | null;
+  industry?: string | null;
+  engagement_length?: string | null;
+  pdf_filename?: string | null;
+  pdf_gcs_object?: string | null;
 };
+
+const DETAIL_COLS =
+  "id, slug, title, short_description, description, image_url, metrics, display_order, is_active, extended_content, client_name, industry, engagement_length, pdf_filename, pdf_gcs_object";
+
+function rowToStudy(r: Row): CaseStudy {
+  return {
+    id: r.id,
+    slug: r.slug,
+    title: r.title,
+    shortDescription: r.short_description ?? "",
+    description: r.description ?? "",
+    image: r.image_url || "/images/code-screen.jpg",
+    metrics: Array.isArray(r.metrics) ? r.metrics : [],
+    extendedContent: r.extended_content ?? null,
+    clientName: r.client_name ?? null,
+    industry: r.industry ?? null,
+    engagementLength: r.engagement_length ?? null,
+    pdfFilename: r.pdf_filename ?? null,
+    pdfGcsObject: r.pdf_gcs_object ?? null,
+  };
+}
 
 /**
  * Read active case studies from DB. Falls back to the static constants if the
@@ -67,22 +100,14 @@ export async function getCaseStudies(): Promise<CaseStudy[]> {
   try {
     const { data, error } = await supabaseAdmin()
       .from("case_studies")
-      .select("id, slug, title, short_description, description, image_url, metrics, display_order, is_active")
+      .select(DETAIL_COLS)
       .eq("is_active", true)
       .order("display_order", { ascending: true });
 
     if (error) throw error;
     if (!data || data.length === 0) return fallbackCaseStudies();
 
-    return (data as Row[]).map((r) => ({
-      id: r.id,
-      slug: r.slug,
-      title: r.title,
-      shortDescription: r.short_description ?? "",
-      description: r.description ?? "",
-      image: r.image_url || "/images/code-screen.jpg",
-      metrics: Array.isArray(r.metrics) ? r.metrics : [],
-    }));
+    return (data as Row[]).map(rowToStudy);
   } catch (err) {
     console.error("[case-studies] load failed, using fallback:", err);
     return fallbackCaseStudies();
@@ -93,7 +118,7 @@ export async function getCaseStudyBySlug(slug: string): Promise<CaseStudy | null
   try {
     const { data, error } = await supabaseAdmin()
       .from("case_studies")
-      .select("id, slug, title, short_description, description, image_url, metrics, display_order, is_active")
+      .select(DETAIL_COLS)
       .eq("slug", slug)
       .eq("is_active", true)
       .maybeSingle();
@@ -101,16 +126,7 @@ export async function getCaseStudyBySlug(slug: string): Promise<CaseStudy | null
     if (error) throw error;
     if (!data) return fallbackCaseStudies().find((study) => study.slug === slug) ?? null;
 
-    const row = data as Row;
-    return {
-      id: row.id,
-      slug: row.slug,
-      title: row.title,
-      shortDescription: row.short_description ?? "",
-      description: row.description ?? "",
-      image: row.image_url || "/images/code-screen.jpg",
-      metrics: Array.isArray(row.metrics) ? row.metrics : [],
-    };
+    return rowToStudy(data as Row);
   } catch (err) {
     console.error("[case-study] load failed, using fallback:", err);
     return fallbackCaseStudies().find((study) => study.slug === slug) ?? null;

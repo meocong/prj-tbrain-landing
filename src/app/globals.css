@@ -1105,3 +1105,123 @@ html.dark body {
   60%, 75% { opacity: 1; transform: scale(1);   }
   100%     { opacity: 0; transform: scale(0.6); }
 }
+
+/* ─────────────────────────────────────────────────────────────────────
+   Case-study detail body — applies the legacy "rich card" visual to any
+   HTML coming out of the TipTap editor. Admins keep writing simple
+   h2/h3/p/ul, the page paints them with the static-page treatment:
+   colored vertical bar before h2, gradient containers, accent links.
+   ───────────────────────────────────────────────────────────────────── */
+.case-study-body {
+  font-size: 17px;
+  line-height: 1.75;
+  color: #222222;
+}
+.case-study-body > * + * { margin-top: 1rem; }
+
+/* h2 sections — colored vertical bar prefix; cycles palette so consecutive
+   sections feel distinct without admin having to mark them. */
+.case-study-body h2 {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: 1.875rem;
+  font-weight: 700;
+  color: #222222;
+  letter-spacing: -0.01em;
+  margin: 3rem 0 1.25rem;
+  page-break-after: avoid;
+}
+.case-study-body h2::before {
+  content: "";
+  display: inline-block;
+  width: 0.5rem;
+  height: 2rem;
+  border-radius: 9999px;
+  background: #2563eb; /* default — blue */
+  flex-shrink: 0;
+}
+.case-study-body h2:nth-of-type(2)::before { background: #4f46e5; } /* indigo */
+.case-study-body h2:nth-of-type(3)::before { background: #dc2626; } /* red — Challenge */
+.case-study-body h2:nth-of-type(4)::before { background: #4f46e5; } /* indigo */
+.case-study-body h2:nth-of-type(5)::before { background: #2563eb; } /* blue */
+.case-study-body h2:nth-of-type(6)::before { background: #16a34a; } /* green — Outcome */
+.case-study-body h2:nth-of-type(7)::before { background: #9333ea; } /* purple */
+.case-study-body h2:nth-of-type(8)::before { background: #db2777; } /* pink */
+.case-study-body h2:nth-of-type(9)::before { background: #f59e0b; } /* amber */
+
+.case-study-body h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #222222;
+  margin: 1.75rem 0 0.5rem;
+  page-break-after: avoid;
+}
+
+.case-study-body p { margin: 0.75rem 0; color: #222222; }
+.case-study-body strong { color: #2563eb; font-weight: 700; }
+.case-study-body em { color: #6b7280; font-style: italic; }
+.case-study-body a { color: #6C3CF4; text-decoration: underline; }
+
+/* Lists rendered as colored cards — each li becomes a sub-card.
+   Cycles border colors so a Challenge list looks layered. */
+.case-study-body ul, .case-study-body ol {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+.case-study-body ul > li, .case-study-body ol > li {
+  position: relative;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(6px);
+  border-radius: 0.75rem;
+  border-left: 4px solid #2563eb;
+  padding: 0.85rem 1.25rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  color: #222222;
+}
+.case-study-body ul > li:nth-child(2n)   { border-left-color: #4f46e5; }
+.case-study-body ul > li:nth-child(3n)   { border-left-color: #dc2626; }
+.case-study-body ul > li:nth-child(4n)   { border-left-color: #16a34a; }
+.case-study-body ul > li:nth-child(5n)   { border-left-color: #9333ea; }
+.case-study-body ol > li:nth-child(2n)   { border-left-color: #4f46e5; }
+.case-study-body ol > li:nth-child(3n)   { border-left-color: #16a34a; }
+
+/* Treat consecutive paragraphs after an h2 as a soft "intro card" */
+.case-study-body h2 + p,
+.case-study-body h2 + p + p {
+  font-size: 1.0625rem;
+  color: #1f2937;
+}
+
+.case-study-body blockquote {
+  background: linear-gradient(135deg, rgba(108,60,244,0.06) 0%, rgba(16,185,129,0.04) 100%);
+  border-left: 4px solid #6C3CF4;
+  border-radius: 0.75rem;
+  padding: 1rem 1.25rem;
+  font-style: italic;
+  color: #4b5563;
+  margin: 1.5rem 0;
+}
+
+.case-study-body img {
+  border-radius: 0.75rem;
+  margin: 1.5rem 0;
+  max-width: 100%;
+  height: auto;
+}
+
+/* Dark mode polish — keep the cards readable */
+:root.dark .case-study-body { color: #e5e7eb; }
+:root.dark .case-study-body h2,
+:root.dark .case-study-body h3,
+:root.dark .case-study-body p { color: #e5e7eb; }
+:root.dark .case-study-body strong { color: #a78bfa; }
+:root.dark .case-study-body ul > li,
+:root.dark .case-study-body ol > li {
+  background: rgba(30, 41, 59, 0.6);
+  color: #e5e7eb;
+}
