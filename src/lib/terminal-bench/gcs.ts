@@ -15,8 +15,21 @@ export function gcsBucket(): Bucket {
 
   let storage: Storage;
   if (clientEmail && privateKeyRaw) {
-    // Unescape literal \n sequences that survive .env parsing.
-    const privateKey = privateKeyRaw.replace(/\\n/g, "\n");
+    // Vercel UI / .env quirks corrupt the PEM in three common ways:
+    //   1. Newlines stored as the literal \n sequence  → un-escape
+    //   2. Whole value wrapped in quotes              → strip leading/trailing
+    //   3. CRLF (\r\n) on Windows-pasted values       → drop the \r
+    let privateKey = privateKeyRaw;
+    if (
+      (privateKey.startsWith('"') && privateKey.endsWith('"')) ||
+      (privateKey.startsWith("'") && privateKey.endsWith("'"))
+    ) {
+      privateKey = privateKey.slice(1, -1);
+    }
+    privateKey = privateKey.replace(/\\r\\n/g, "\n").replace(/\\n/g, "\n").replace(/\r/g, "");
+    if (!privateKey.includes("BEGIN PRIVATE KEY") && !privateKey.includes("BEGIN RSA PRIVATE KEY")) {
+      throw new Error("GCS_PRIVATE_KEY is malformed: missing PEM header after un-escape");
+    }
     storage = new Storage({
       projectId,
       credentials: { client_email: clientEmail, private_key: privateKey },
