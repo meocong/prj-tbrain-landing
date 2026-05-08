@@ -316,6 +316,54 @@ export const STATIC_IMAGES: StaticImage[] = [
     "size_bytes": 70378
   },
   {
+    "path": "/images/platform/ai-providers.png",
+    "name": "ai-providers",
+    "ext": "png",
+    "size_bytes": 123397
+  },
+  {
+    "path": "/images/platform/batches-list.png",
+    "name": "batches-list",
+    "ext": "png",
+    "size_bytes": 172130
+  },
+  {
+    "path": "/images/platform/ctv-active-tasks.png",
+    "name": "ctv-active-tasks",
+    "ext": "png",
+    "size_bytes": 210857
+  },
+  {
+    "path": "/images/platform/dashboard.png",
+    "name": "dashboard",
+    "ext": "png",
+    "size_bytes": 131332
+  },
+  {
+    "path": "/images/platform/knowledge.png",
+    "name": "knowledge",
+    "ext": "png",
+    "size_bytes": 204233
+  },
+  {
+    "path": "/images/platform/project-overview.png",
+    "name": "project-overview",
+    "ext": "png",
+    "size_bytes": 143943
+  },
+  {
+    "path": "/images/platform/projects.png",
+    "name": "projects",
+    "ext": "png",
+    "size_bytes": 102736
+  },
+  {
+    "path": "/images/platform/team-directory.png",
+    "name": "team-directory",
+    "ext": "png",
+    "size_bytes": 148458
+  },
+  {
     "path": "/images/post_banner.png",
     "name": "post_banner",
     "ext": "png",

@@ -1106,6 +1106,19 @@ html.dark body {
   100%     { opacity: 0; transform: scale(0.6); }
 }
 
+/* Animated dash march for the platform workflow loop diagram */
+@keyframes loopDashMarch {
+  to { stroke-dashoffset: -240; }
+}
+.loop-dash {
+  stroke-dasharray: 6 6;
+  animation: loopDashMarch 8s linear infinite;
+}
+@keyframes loopPulse {
+  0%, 100% { transform: translateY(0); box-shadow: var(--shadow-card); }
+  50%      { transform: translateY(-3px); box-shadow: 0 14px 30px -14px rgba(108,60,244,0.35); }
+}
+
 /* ─────────────────────────────────────────────────────────────────────
    Case-study detail body — applies the legacy "rich card" visual to any
    HTML coming out of the TipTap editor. Admins keep writing simple

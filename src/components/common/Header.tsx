@@ -17,7 +17,6 @@ const NAV_ITEMS = [
   { label: "Home", href: "/" },
   { label: "About", href: "/about" },
   { label: "Team", href: "/team" },
-  { label: "Services", href: "/services" },
   { label: "Platform", href: "/platform" },
   { label: "Case Studies", href: "/casestudy" },
   { label: "Data", href: "/data", isDropdown: true },
