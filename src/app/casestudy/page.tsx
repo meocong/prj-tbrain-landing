@@ -48,16 +48,25 @@ export default async function Page() {
 
         <section
           id="casestudy"
-          className="container mx-auto px-3 pt-24 pb-24 relative max-w-[1128px]"
+          className="container mx-auto max-w-6xl px-4 pt-24 pb-24 relative"
         >
           {/* Page Title */}
           <div className="relative mb-12">
             <div className="absolute -top-4 right-[15%] hidden md:block animate-bounce">
               <Star className="w-10 h-10 text-yellow-400 fill-yellow-400" />
             </div>
-            <h1 className="text-[#222222] text-4xl lg:text-5xl font-semibold leading-[52px] mb-8">
+            <h1
+              className="text-4xl font-semibold tracking-tight md:text-6xl"
+              style={{ fontFamily: "var(--font-heading)", color: "var(--text-primary)" }}
+            >
               Case Studies
             </h1>
+            <p
+              className="mt-4 max-w-2xl text-lg leading-relaxed md:text-xl"
+              style={{ color: "var(--text-secondary)" }}
+            >
+              How Tbrain&apos;s expert pods turn high-stakes data into measurable model improvement.
+            </p>
           </div>
 
           {/* Case Study Content */}

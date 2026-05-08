@@ -52,7 +52,7 @@ export default function NotFound() {
 
         <div className="mt-12 grid grid-cols-2 gap-3 max-w-sm mx-auto">
           {[
-            { label: "Services", href: "/services" },
+            { label: "Services", href: "/about#services" },
             { label: "Case Studies", href: "/casestudy" },
             { label: "Platform", href: "/platform" },
             { label: "Blog", href: "/blog" },

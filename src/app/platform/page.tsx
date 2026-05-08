@@ -2,6 +2,10 @@ import type { Metadata } from "next";
 import Header from "@/components/common/Header";
 import Footer from "@/components/common/Footer";
 import Link from "next/link";
+import { PlatformFeatureTour } from "@/components/marketing/platform/PlatformFeatureTour";
+import { PlatformKpiBand } from "@/components/marketing/platform/PlatformKpiBand";
+import { WorkflowLoop } from "@/components/marketing/platform/WorkflowLoop";
+import { WorkflowBuilderShowcase } from "@/components/marketing/platform/WorkflowBuilderShowcase";
 import { ArrowRight, Brain, Scale, Workflow, Sparkles, Cpu, ShieldCheck, Database, BarChart3 } from "lucide-react";
 import { getExpertOsFeatures } from "@/lib/landing/expert-os";
 import { VideoBackground } from "@/components/marketing/fx/VideoBackground";
@@ -94,7 +98,7 @@ export default async function PlatformPage() {
                 Request a demo <ArrowRight className="h-4 w-4" />
               </Link>
               <Link
-                href="/services"
+                href="/about#services"
                 className="inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-semibold transition-colors"
                 style={{ background: "rgba(15,23,42,0.04)", border: "1px solid rgba(15,23,42,0.10)", color: "var(--text-primary)", backdropFilter: "blur(10px)" }}
               >
@@ -113,8 +117,8 @@ export default async function PlatformPage() {
             Built for <span className="gradient-text">agent operations</span>
           </h2>
           <p className="mx-auto mb-12 max-w-2xl text-center text-base leading-relaxed" style={{ color: "var(--text-secondary)" }}>
-            Four capabilities that ship together: knowledge, automated
-            evaluation, agentic workflow, and persistent identity.
+            Three capabilities that ship together — knowledge, automated
+            evaluation, and agentic workflows with persistent agent identity.
           </p>
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
             {features.map((f) => {
@@ -175,6 +179,56 @@ export default async function PlatformPage() {
               ))}
             </div>
           </div>
+        </section>
+
+        {/* Animated KPI band — production proof at a glance */}
+        <section className="container mx-auto mt-24 max-w-6xl px-3">
+          <PlatformKpiBand />
+        </section>
+
+        {/* Platform in action — full-bleed feature tour */}
+        <section className="container mx-auto mt-24 max-w-6xl px-3">
+          <div className="text-center mb-16">
+            <p className="font-family_avt text-xs uppercase tracking-[0.22em]" style={{ color: "var(--text-muted)" }}>
+              / platform in action
+            </p>
+            <h2
+              className="mt-3 text-3xl font-semibold md:text-5xl leading-tight"
+              style={{ fontFamily: "var(--font-heading)" }}
+            >
+              <span className="gradient-text">Real surfaces</span>, running today
+            </h2>
+            <p className="mx-auto mt-5 max-w-2xl text-base leading-relaxed md:text-lg" style={{ color: "var(--text-secondary)" }}>
+              These are not mockups. They are screenshots from production
+              deployments running our internal evaluation programs. Customer
+              names are redacted; the metrics are real.
+            </p>
+          </div>
+          <PlatformFeatureTour />
+        </section>
+
+        {/* Workflow builder — drag & drop canvas, live nodes, dashed connections */}
+        <section className="container mx-auto mt-32 max-w-6xl px-3">
+          <div className="text-center mb-12">
+            <p className="font-family_avt text-xs uppercase tracking-[0.22em]" style={{ color: "var(--text-muted)" }}>
+              / workflow builder
+            </p>
+            <h2
+              className="mt-3 text-3xl font-semibold md:text-5xl leading-tight"
+              style={{ fontFamily: "var(--font-heading)" }}
+            >
+              Drag, drop, <span className="gradient-text">ship a pipeline</span>
+            </h2>
+            <p className="mx-auto mt-5 max-w-2xl text-base leading-relaxed md:text-lg" style={{ color: "var(--text-secondary)" }}>
+              Visual builder backed by Temporal. 24 node types — Auto QC, AI judge, branch, human review, webhook, foreach, subflow — composed without code, durable to retries and pauses.
+            </p>
+          </div>
+          <WorkflowBuilderShowcase />
+        </section>
+
+        {/* Workflow loop — the unique technical moat */}
+        <section className="container mx-auto mt-32 max-w-6xl px-3">
+          <WorkflowLoop />
         </section>
 
         {/* CTA */}

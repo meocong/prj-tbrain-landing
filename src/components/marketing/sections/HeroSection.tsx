@@ -102,7 +102,7 @@ export function HeroSection() {
         >
           The data factory behind coding, robotics, agentic workflows,
           <br className="hidden md:block" />
-          evaluation, and post-training programs for frontier AI teams.
+          world models, evaluation, and post-training programs for frontier AI teams.
         </p>
 
         <div
@@ -114,6 +114,8 @@ export function HeroSection() {
           <span>Agentic workflows</span>
           <Divider />
           <span>Robotics</span>
+          <Divider />
+          <span>World models</span>
           <Divider />
           <span>Model evaluation</span>
           <Divider />
@@ -133,7 +135,7 @@ export function HeroSection() {
             Talk to an expert <ArrowRight className="h-4 w-4" />
           </Link>
           <Link
-            href="/services"
+            href="/about#services"
             className="inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-semibold transition-colors"
             style={{
               background: "rgba(15,23,42,0.04)",

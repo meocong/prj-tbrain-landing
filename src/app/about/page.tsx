@@ -1,26 +1,72 @@
 import type { Metadata } from "next";
 import Header from "@/components/common/Header";
 import Footer from "@/components/common/Footer";
-import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, Bot, Brain, CheckCircle, Code2, Database, FlaskConical, LineChart, MessageSquare, Mic, Users, Workflow } from "lucide-react";
-import { EXPERTISE_AREAS, LEADERSHIP, SAMPLE_PROJECTS } from "@/lib/constants/marketing";
+import {
+  ArrowRight,
+  BarChart3,
+  Bot,
+  Brain,
+  CheckCircle,
+  Code,
+  Code2,
+  Cpu,
+  Database,
+  Factory,
+  FlaskConical,
+  Globe,
+  Heart,
+  Languages,
+  LineChart,
+  MessageSquare,
+  Mic,
+  ShieldCheck,
+  Stethoscope,
+  Tags,
+  Terminal,
+  Users,
+  Workflow,
+  Wrench,
+} from "lucide-react";
+import { EXPERTISE_AREAS, SAMPLE_PROJECTS } from "@/lib/constants/marketing";
+import { getServices, getExpertiseAreas } from "@/lib/landing/services";
 import { StatsGrid } from "./stats-grid";
 
 export const metadata: Metadata = {
   title: "About Us",
   description:
-    "Learn about Tbrain — the improvement layer for agentic AI training data, evaluation, and expert-led validation systems.",
+    "Tbrain — the improvement layer for agentic AI. Custom expert data, benchmark creation, evaluation, and domain pods for frontier AI teams.",
   alternates: { canonical: "/about" },
   openGraph: {
     title: "About Tbrain",
     description:
-      "Tbrain provides expert-validated environments and data to measure and improve agent performance.",
+      "The improvement layer for agentic AI: expert data, benchmarks, evaluation, and domain pods.",
     url: "/about",
   },
 };
 
-export default function AboutPage() {
+export const revalidate = 300;
+
+const ICON_MAP: Record<string, React.ElementType> = {
+  Brain,
+  Tags,
+  BarChart3,
+  Database,
+  ShieldCheck,
+  Users,
+  Bot,
+  Code,
+  Terminal,
+  Stethoscope,
+  Heart,
+  Factory,
+  Wrench,
+  Globe,
+  Languages,
+  Cpu,
+};
+
+export default async function AboutPage() {
   const valueCards = [
     {
       title: "Domain-Specific Expert Pods",
@@ -42,6 +88,15 @@ export default function AboutPage() {
   const projectIcons = [MessageSquare, LineChart, Mic];
   const expertiseIcons = [Database, Brain, FlaskConical, Bot, Code2, LineChart, CheckCircle];
 
+  const [services, domains] = await Promise.all([
+    getServices("service"),
+    getServices("domain"),
+  ]);
+  // Local fallback (kept for resilience even though getServices already returns
+  // DOMAIN_PODS / SERVICES constants when DB is empty).
+  const expertise = EXPERTISE_AREAS;
+  void getExpertiseAreas; // expertise sourced from constants below
+
   return (
     <div>
       <Header />
@@ -56,8 +111,9 @@ export default function AboutPage() {
             <span className="gradient-text">agentic AI</span>
           </h1>
           <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed" style={{ color: "var(--text-secondary)" }}>
-            Expert-validated environments and data to measure and improve
-            agent performance. Fast, scalable, and reliable.
+            Expert-validated environments, data, and evaluation programs that
+            make agentic AI measurably better. Run by domain pods built for
+            high-stakes work.
           </p>
         </section>
 
@@ -66,6 +122,7 @@ export default function AboutPage() {
           <StatsGrid />
         </section>
 
+        {/* How we deliver value */}
         <section className="container mx-auto mt-24 px-3">
           <div className="mx-auto max-w-3xl text-center">
             <p className="font-family_avt text-xs uppercase tracking-[0.2em]" style={{ color: "var(--text-muted)" }}>
@@ -98,13 +155,90 @@ export default function AboutPage() {
           </div>
         </section>
 
+        {/* What we deliver — Services (merged from /services) */}
+        <section id="services" className="container mx-auto mt-24 scroll-mt-28 px-3">
+          <div className="mx-auto max-w-3xl text-center">
+            <p className="font-family_avt text-xs uppercase tracking-[0.2em]" style={{ color: "var(--text-muted)" }}>
+              / what we deliver
+            </p>
+            <h2 className="mt-4 text-3xl font-medium md:text-5xl" style={{ fontFamily: "var(--font-heading)" }}>
+              Three core <span className="gradient-text">service lines</span>
+            </h2>
+            <p className="mx-auto mt-5 max-w-2xl text-base leading-relaxed" style={{ color: "var(--text-secondary)" }}>
+              Pre-training, post-training, fine-tuning, and agentic evaluation
+              workflows — each delivered by a specialized expert pod.
+            </p>
+          </div>
+          <div className="mx-auto mt-12 grid max-w-5xl grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {services.map((svc, i) => {
+              const Icon = (ICON_MAP[svc.icon] || Database) as React.ComponentType<{ className?: string }>;
+              return (
+                <article key={i} className="glass-card-hover p-6">
+                  <div
+                    className="flex h-12 w-12 items-center justify-center rounded-xl"
+                    style={{ backgroundColor: "rgba(108, 60, 244, 0.08)" }}
+                  >
+                    <Icon className="h-6 w-6 text-[#6C3CF4]" />
+                  </div>
+                  <h3 className="mt-4 text-lg font-semibold" style={{ fontFamily: "var(--font-heading)" }}>
+                    {svc.title}
+                  </h3>
+                  <p className="mt-2 text-sm leading-relaxed" style={{ color: "var(--text-secondary)" }}>
+                    {svc.description}
+                  </p>
+                </article>
+              );
+            })}
+          </div>
+        </section>
+
+        {/* Domains & Expert Pods (merged from /services) */}
+        {domains.length > 0 && (
+          <section id="domains" className="container mx-auto mt-24 scroll-mt-28 px-3">
+            <div className="mx-auto max-w-3xl text-center">
+              <p className="font-family_avt text-xs uppercase tracking-[0.2em]" style={{ color: "var(--text-muted)" }}>
+                / domains &amp; expert pods
+              </p>
+              <h2 className="mt-4 text-3xl font-medium md:text-5xl" style={{ fontFamily: "var(--font-heading)" }}>
+                Where generic teams <span className="gradient-text">aren&apos;t enough</span>
+              </h2>
+              <p className="mx-auto mt-5 max-w-2xl text-base leading-relaxed" style={{ color: "var(--text-secondary)" }}>
+                Specialized pods for the domains where accuracy depends on
+                depth, not headcount.
+              </p>
+            </div>
+            <div className="mx-auto mt-12 grid max-w-5xl grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {domains.map((d, i) => {
+                const Icon = (ICON_MAP[d.icon] || Globe) as React.ComponentType<{ className?: string; style?: React.CSSProperties }>;
+                return (
+                  <article key={i} className="glass-card-hover p-6">
+                    <div
+                      className="flex h-12 w-12 items-center justify-center rounded-xl"
+                      style={{ backgroundColor: "rgba(16, 185, 129, 0.08)" }}
+                    >
+                      <Icon className="h-6 w-6" style={{ color: "#10B981" }} />
+                    </div>
+                    <h3 className="mt-4 text-lg font-semibold" style={{ fontFamily: "var(--font-heading)" }}>
+                      {d.title}
+                    </h3>
+                    <p className="mt-2 text-sm leading-relaxed" style={{ color: "var(--text-secondary)" }}>
+                      {d.description}
+                    </p>
+                  </article>
+                );
+              })}
+            </div>
+          </section>
+        )}
+
+        {/* Sample Projects */}
         <section className="container mx-auto mt-24 px-3">
           <div className="mx-auto max-w-3xl text-center">
             <p className="font-family_avt text-xs uppercase tracking-[0.2em]" style={{ color: "var(--text-muted)" }}>
               / sample projects
             </p>
             <h2 className="mt-4 text-3xl font-medium md:text-5xl" style={{ fontFamily: "var(--font-heading)" }}>
-              Data programs that turn expertise into model signal
+              Programs that turn expertise into <span className="gradient-text">model signal</span>
             </h2>
           </div>
           <div className="mx-auto mt-12 grid max-w-5xl gap-5 md:grid-cols-3">
@@ -127,17 +261,18 @@ export default function AboutPage() {
           </div>
         </section>
 
+        {/* Technical Expertise */}
         <section className="container mx-auto mt-24 px-3">
           <div className="mx-auto max-w-3xl text-center">
             <p className="font-family_avt text-xs uppercase tracking-[0.2em]" style={{ color: "var(--text-muted)" }}>
               / technical expertise
             </p>
             <h2 className="mt-4 text-3xl font-medium md:text-5xl" style={{ fontFamily: "var(--font-heading)" }}>
-              Deep technical expertise across hard domains
+              Deep technical expertise across <span className="gradient-text">hard domains</span>
             </h2>
           </div>
           <div className="mx-auto mt-12 grid max-w-5xl gap-4 md:grid-cols-2">
-            {EXPERTISE_AREAS.map((area, index) => {
+            {expertise.map((area, index) => {
               const Icon = expertiseIcons[index] ?? CheckCircle;
               return (
                 <article key={area.label} className="flex gap-4 rounded-2xl border p-5" style={{ background: "var(--bg-card)", borderColor: "var(--border-subtle)" }}>
@@ -156,60 +291,29 @@ export default function AboutPage() {
           </div>
         </section>
 
+        {/* Meet the team CTA — replaces the duplicated Leadership block */}
         <section className="container mx-auto mt-24 px-3">
           <div
-            className="mx-auto grid max-w-5xl gap-8 rounded-3xl border p-6 md:grid-cols-[1.1fr_0.9fr] md:p-8"
+            className="mx-auto flex max-w-5xl flex-col items-center gap-6 rounded-3xl border p-8 text-center md:p-10"
             style={{ background: "var(--bg-card)", borderColor: "var(--border-subtle)" }}
           >
-            <div>
-              <span className="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-[#6C3CF4]/10 text-[#6C3CF4]">
-                <Users className="h-6 w-6" />
-              </span>
-              <p className="mt-6 font-family_avt text-xs uppercase tracking-[0.2em]" style={{ color: "var(--text-muted)" }}>
-                / leadership
-              </p>
-              <h2 className="mt-4 text-3xl font-medium md:text-4xl" style={{ fontFamily: "var(--font-heading)", color: "var(--text-primary)" }}>
-                Built by data and engineering operators
-              </h2>
-              <p className="mt-4 text-base leading-relaxed" style={{ color: "var(--text-secondary)" }}>
-                Tbrain&apos;s leadership combines AI training data experience,
-                expert-network operations, and outsourced engineering delivery
-                for programs where quality needs to be measurable.
-              </p>
-              <Link
-                href="/team"
-                className="mt-6 inline-flex items-center gap-2 text-sm font-semibold"
-                style={{ color: "#6C3CF4" }}
-              >
-                Meet the team <ArrowRight className="h-4 w-4" />
-              </Link>
-            </div>
-
-            <div className="grid gap-4">
-              {LEADERSHIP.map((person) => (
-                <article
-                  key={person.name}
-                  className="flex gap-4 rounded-2xl border p-5"
-                  style={{ background: "var(--bg-page)", borderColor: "var(--border-subtle)" }}
-                >
-                  <Image
-                    src={person.avatar}
-                    width={64}
-                    height={64}
-                    alt={person.name}
-                    className="h-16 w-16 shrink-0 rounded-full object-cover"
-                  />
-                  <div>
-                    <h3 className="text-xl font-semibold" style={{ fontFamily: "var(--font-heading)", color: "var(--text-primary)" }}>
-                      {person.name}
-                    </h3>
-                    <p className="mt-2 text-sm leading-relaxed" style={{ color: "var(--text-secondary)" }}>
-                      {person.bio}
-                    </p>
-                  </div>
-                </article>
-              ))}
-            </div>
+            <span className="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-[#6C3CF4]/10 text-[#6C3CF4]">
+              <Users className="h-6 w-6" />
+            </span>
+            <h2 className="text-3xl font-medium md:text-4xl" style={{ fontFamily: "var(--font-heading)", color: "var(--text-primary)" }}>
+              Built by data and engineering operators
+            </h2>
+            <p className="max-w-2xl text-base leading-relaxed" style={{ color: "var(--text-secondary)" }}>
+              Tbrain&apos;s leadership combines AI training data experience,
+              expert-network operations, and outsourced engineering delivery
+              for programs where quality needs to be measurable.
+            </p>
+            <Link
+              href="/team"
+              className="inline-flex items-center gap-2 rounded-xl bg-[#6C3CF4] px-6 py-3 text-sm font-semibold text-white transition-all hover:bg-[#5a2fd3]"
+            >
+              Meet the team <ArrowRight className="h-4 w-4" />
+            </Link>
           </div>
         </section>
 

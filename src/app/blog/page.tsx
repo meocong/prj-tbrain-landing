@@ -83,19 +83,19 @@ export default async function BlogPage({
     <div>
       <Header />
       <main className="pb-32 pt-32">
-        <div className="mx-auto max-w-[780px] px-6">
+        <div className="container mx-auto max-w-6xl px-4">
           {/* Header */}
           <h1
-            className="text-4xl font-semibold tracking-tight md:text-5xl"
-            style={{ fontFamily: "var(--font-heading)", color: "var(--text-primary)", letterSpacing: "-0.03em" }}
+            className="text-4xl font-semibold tracking-tight md:text-6xl"
+            style={{ fontFamily: "var(--font-heading)", color: "var(--text-primary)" }}
           >
             Blog
           </h1>
-          <p className="mt-4 text-xl leading-relaxed" style={{ color: "#6b7280" }}>
+          <p className="mt-4 max-w-2xl text-lg leading-relaxed md:text-xl" style={{ color: "var(--text-secondary)" }}>
             Insights on AI training data, robotics, evaluation, and building better AI.
           </p>
 
-          <div className="mt-12 h-px bg-gray-200" />
+          <div className="mt-12 h-px" style={{ background: "var(--border-subtle)" }} />
 
           {/* Featured post */}
           {featured && (
