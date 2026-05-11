@@ -2,19 +2,25 @@
 
 import { useState, useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
+import type { Provider } from "@supabase/supabase-js";
 import { supabaseAdmin } from "@/lib/admin/supabase-browser";
-import { AlertCircle, Mail, Lock, Eye, EyeOff } from "lucide-react";
+import { getAdminAuthCallbackUrl, sanitizeAdminRedirect } from "@/lib/admin/auth-redirect";
+import { AlertCircle, Mail, Lock, Eye, EyeOff, ShieldCheck } from "lucide-react";
 import Image from "next/image";
+
+const ssoEnabled = process.env.NEXT_PUBLIC_TBRAIN_SSO_ENABLED === "true";
+const ssoProvider = (process.env.NEXT_PUBLIC_TBRAIN_SSO_PROVIDER || "keycloak") as Provider;
 
 export default function AdminLoginPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const redirect = searchParams.get("redirect") || "/admin";
+  const redirect = sanitizeAdminRedirect(searchParams.get("redirect"));
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPwd, setShowPwd] = useState(false);
   const [loading, setLoading] = useState(false);
   const [googleLoading, setGoogleLoading] = useState(false);
+  const [ssoLoading, setSsoLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   // Check for callback error
@@ -39,10 +45,23 @@ export default function AdminLoginPage() {
     const { error } = await supabaseAdmin.auth.signInWithOAuth({
       provider: "google",
       options: {
-        redirectTo: `${window.location.origin}/admin/auth/callback?redirect=${encodeURIComponent(redirect)}`,
+        redirectTo: getAdminAuthCallbackUrl(window.location.origin, redirect),
       },
     });
     if (error) { setError(error.message); setGoogleLoading(false); }
+  };
+
+  const handleSsoLogin = async () => {
+    setError(null);
+    setSsoLoading(true);
+    const { error } = await supabaseAdmin.auth.signInWithOAuth({
+      provider: ssoProvider,
+      options: {
+        redirectTo: getAdminAuthCallbackUrl(window.location.origin, redirect),
+        scopes: "openid profile email",
+      },
+    });
+    if (error) { setError(error.message); setSsoLoading(false); }
   };
 
   return (
@@ -126,11 +145,26 @@ export default function AdminLoginPage() {
           <div className="h-px flex-1" style={{ background: "var(--border-default)" }} />
         </div>
 
-        {/* Google */}
-        <div className="px-8 pb-8">
+        {/* SSO + Google */}
+        <div className="px-8 pb-8 space-y-3">
+          {ssoEnabled && (
+            <button
+              onClick={handleSsoLogin}
+              disabled={ssoLoading || googleLoading}
+              className="w-full flex items-center justify-center gap-2.5 rounded-xl px-4 py-2.5 text-sm font-semibold transition-all hover:bg-white/10 disabled:opacity-60"
+              style={{
+                background: "rgba(108,60,244,0.12)",
+                border: "1px solid rgba(108,60,244,0.35)",
+                color: "var(--text-primary)",
+              }}
+            >
+              <ShieldCheck className="h-[18px] w-[18px]" style={{ color: "#A78BFA" }} />
+              {ssoLoading ? "Redirecting..." : "Continue with TBrain SSO"}
+            </button>
+          )}
           <button
             onClick={handleGoogleLogin}
-            disabled={googleLoading}
+            disabled={googleLoading || ssoLoading}
             className="w-full flex items-center justify-center gap-2.5 rounded-xl px-4 py-2.5 text-sm font-medium transition-all hover:bg-white/10"
             style={{ background: "white", border: "1.5px solid #dadce0", color: "#3c4043" }}
           >
