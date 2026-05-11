@@ -1,6 +1,7 @@
 import { createServerClient } from "@supabase/ssr";
 import { cookies } from "next/headers";
 import { NextResponse, type NextRequest } from "next/server";
+import { sanitizeAdminRedirect } from "@/lib/admin/auth-redirect";
 import { ensureBootstrapAdmin } from "@/lib/admin/bootstrap";
 
 /**
@@ -10,7 +11,7 @@ import { ensureBootstrapAdmin } from "@/lib/admin/bootstrap";
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
   const code = searchParams.get("code");
-  const next = searchParams.get("redirect") ?? "/admin";
+  const next = sanitizeAdminRedirect(searchParams.get("redirect"));
 
   // Resolve real origin — inside Docker, request.url is http://0.0.0.0:3000
   const forwardedHost = request.headers.get("x-forwarded-host");
@@ -73,11 +74,11 @@ export async function GET(request: NextRequest) {
         console.error("[landing] admin bootstrap error:", bootstrapErr);
       }
 
-      return NextResponse.redirect(`${baseUrl}${next}`);
+      return NextResponse.redirect(new URL(next, baseUrl));
     }
 
     console.error("[landing] OAuth code exchange failed:", error.message);
   }
 
-  return NextResponse.redirect(`${baseUrl}/admin/login?error=auth_callback_failed`);
+  return NextResponse.redirect(new URL("/admin/login?error=auth_callback_failed", baseUrl));
 }
