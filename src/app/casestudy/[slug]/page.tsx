@@ -1,11 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import Image from "next/image";
-import { ArrowLeft, ArrowRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import Header from "@/components/common/Header";
 import Footer from "@/components/common/Footer";
-import { getCaseStudies, getCaseStudyBySlug } from "@/lib/landing/case-studies";
-import { PdfDownloadGate } from "@/components/casestudy/PdfDownloadGate";
+import { getCaseStudyBySlug } from "@/lib/landing/case-studies";
 import { notFound } from "next/navigation";
 import post_bg from "@/assets/images/post_bg.png";
 
@@ -42,6 +40,15 @@ const METRIC_ACCENTS = [
   { border: "border-pink-600", text: "text-pink-600" },
 ];
 
+const SECTION_ACCENTS = [
+  { bar: "bg-blue-600", shell: "bg-gradient-to-br from-blue-50/80 to-indigo-50/80", border: "border-blue-500" },
+  { bar: "bg-indigo-600", shell: "", border: "border-indigo-500" },
+  { bar: "bg-red-600", shell: "", border: "border-red-500" },
+  { bar: "bg-indigo-600", shell: "bg-gradient-to-br from-indigo-50/80 to-purple-50/80", border: "border-indigo-500" },
+  { bar: "bg-green-600", shell: "bg-gradient-to-br from-green-50/80 to-emerald-50/80", border: "border-green-500" },
+  { bar: "bg-blue-600", shell: "", border: "border-blue-500" },
+];
+
 export default async function CaseStudyDetailPage({
   params,
 }: {
@@ -51,9 +58,12 @@ export default async function CaseStudyDetailPage({
   const study = await getCaseStudyBySlug(slug);
   if (!study) notFound();
 
-  const related = (await getCaseStudies())
-    .filter((item) => item.slug !== study.slug)
-    .slice(0, 3);
+  const sections = study.extendedContent
+    ? splitCaseStudySections(study.extendedContent)
+    : [{ title: "Project snapshot", body: `<p>${escapeHtml(study.description)}</p>` }];
+  const ctaTitle = study.slug === "manufacturing"
+    ? "Need Expert CAD Annotation Services?"
+    : "Need Expert Data Services?";
 
   return (
     <div>
@@ -67,18 +77,7 @@ export default async function CaseStudyDetailPage({
           <div className="two top-0 right-0 h-80 w-80"></div>
         </div>
         <section className="container mx-auto max-w-[1128px] px-4">
-          <Link
-            href="/casestudy"
-            className="inline-flex items-center gap-2 text-sm font-semibold text-[#6C3CF4]"
-          >
-            <ArrowLeft className="h-4 w-4" /> Back to case studies
-          </Link>
-
-          {/* Hero */}
-          <header className="mt-10 mb-12">
-            <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[#6C3CF4] mb-3">
-              Case study
-            </p>
+          <header className="mb-12">
             <h1 className="text-[#222222] text-4xl lg:text-5xl font-semibold leading-[1.1]">
               {study.title}
             </h1>
@@ -87,27 +86,8 @@ export default async function CaseStudyDetailPage({
                 {study.shortDescription}
               </p>
             )}
-            {(study.clientName || study.industry || study.engagementLength) && (
-              <dl className="mt-6 grid grid-cols-3 gap-4 max-w-2xl">
-                {study.clientName && (
-                  <MetaCell label="Client" value={study.clientName} />
-                )}
-                {study.industry && (
-                  <MetaCell label="Industry" value={study.industry} />
-                )}
-                {study.engagementLength && (
-                  <MetaCell label="Engagement" value={study.engagementLength} />
-                )}
-              </dl>
-            )}
-            {study.pdfGcsObject && (
-              <div className="mt-6">
-                <PdfDownloadGate slug={study.slug} title={study.title} />
-              </div>
-            )}
           </header>
 
-          {/* Stat banner */}
           {study.metrics.length > 0 && (
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-16">
               {study.metrics.slice(0, 4).map((metric, i) => {
@@ -129,79 +109,29 @@ export default async function CaseStudyDetailPage({
             </div>
           )}
 
-          {/* Body — extended content rendered with the legacy visual language */}
-          {study.extendedContent ? (
-            <article
-              className="case-study-body"
-              dangerouslySetInnerHTML={{ __html: study.extendedContent }}
-            />
-          ) : (
-            <article className="case-study-body">
-              <h2>Project snapshot</h2>
-              <p>{study.description}</p>
-            </article>
-          )}
+          <div className="space-y-12">
+            {sections.map((section, index) => (
+              <LegacySection key={`${section.title}-${index}`} section={section} index={index} />
+            ))}
+          </div>
 
-          {/* CTA */}
-          <section className="mt-16 rounded-3xl bg-gradient-to-br from-blue-50/80 to-indigo-50/80 backdrop-blur-sm p-10 text-center shadow-md">
-            <h2 className="text-3xl font-bold text-[#222222]">
-              Ready to run a similar program?
+          <section className="mt-16 rounded-2xl bg-gradient-to-r from-emerald-600 to-blue-700 p-8 text-center text-white shadow-xl">
+            <h2 className="text-3xl font-bold">
+              {ctaTitle}
             </h2>
-            <p className="mt-3 text-lg text-[#78818f]">
-              Let&apos;s scope a pilot in days, not months.
+            <p className="mt-4 text-xl text-emerald-100">
+              Let Tbrain deliver precision-engineered data solutions on enterprise timelines
             </p>
             <Link
-              href="/contact"
-              className="mt-6 inline-flex items-center gap-2 rounded-full bg-[#6C3CF4] px-7 py-3 text-base font-semibold text-white transition hover:bg-[#5a2fd3]"
+              href="https://www.linkedin.com/company/tbrain-ai"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group mt-6 inline-flex items-center gap-3 rounded-lg bg-white px-8 py-3 font-bold text-emerald-700 shadow-lg transition-all duration-300 hover:scale-105 hover:bg-emerald-50 hover:shadow-xl"
             >
-              Talk to an expert <ArrowRight className="h-4 w-4" />
+              <span>Connect Us Today</span>
+              <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-0.5" />
             </Link>
           </section>
-
-          {/* Related */}
-          {related.length > 0 && (
-            <section className="mt-16">
-              <div className="mb-6 flex items-center justify-between gap-4">
-                <h2 className="text-2xl font-semibold text-[#222222]">
-                  More case studies
-                </h2>
-                <Link
-                  href="/casestudy"
-                  className="text-sm font-semibold text-[#6C3CF4]"
-                >
-                  View all
-                </Link>
-              </div>
-              <div className="grid gap-5 md:grid-cols-3">
-                {related.map((item) => (
-                  <Link
-                    key={item.slug}
-                    href={`/casestudy/${item.slug}`}
-                    className="group overflow-hidden rounded-2xl bg-white shadow-md transition-all hover:-translate-y-0.5 hover:shadow-xl"
-                  >
-                    <div className="relative h-40">
-                      <Image
-                        src={item.image}
-                        alt={item.title}
-                        fill
-                        sizes="(min-width: 768px) 33vw, 100vw"
-                        className="object-cover transition-transform duration-500 group-hover:scale-[1.04]"
-                      />
-                    </div>
-                    <div className="p-5">
-                      <h3 className="text-lg font-semibold">{item.title}</h3>
-                      <p className="mt-2 line-clamp-2 text-sm text-[#78818f]">
-                        {item.shortDescription}
-                      </p>
-                      <span className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-[#6C3CF4]">
-                        Read more <ArrowRight className="h-4 w-4" />
-                      </span>
-                    </div>
-                  </Link>
-                ))}
-              </div>
-            </section>
-          )}
         </section>
       </main>
       <Footer />
@@ -209,13 +139,63 @@ export default async function CaseStudyDetailPage({
   );
 }
 
-function MetaCell({ label, value }: { label: string; value: string }) {
+type CaseSection = { title: string; body: string };
+
+function LegacySection({ section, index }: { section: CaseSection; index: number }) {
+  const accent = SECTION_ACCENTS[index % SECTION_ACCENTS.length];
+  const isChallenge = /challenge/i.test(section.title);
+  const isOutcome = /outcome|result/i.test(section.title);
+  const isSolution = /solution|approach|framework/i.test(section.title);
+  const shellClass = accent.shell || "bg-white/80";
+
   return (
-    <div className="rounded-xl border border-[#e5e7eb] bg-white p-3">
-      <dt className="text-[10px] font-semibold uppercase tracking-wider text-[#9ca3af]">
-        {label}
-      </dt>
-      <dd className="mt-1 text-sm font-medium text-gray-900">{value}</dd>
-    </div>
+    <section
+      className={`${shellClass} rounded-2xl p-8 shadow-md backdrop-blur-sm ${isChallenge ? "case-study-challenge" : ""} ${isOutcome ? "case-study-outcome" : ""} ${isSolution ? "case-study-solution" : ""}`}
+    >
+      <h2 className="mb-6 flex items-center text-3xl font-bold text-[#222222]">
+        <span className={`mr-4 h-8 w-2 rounded-full ${accent.bar}`} />
+        {section.title}
+      </h2>
+      <div
+        className={`case-study-body case-study-body--legacy ${accent.border}`}
+        dangerouslySetInnerHTML={{ __html: section.body }}
+      />
+    </section>
   );
+}
+
+function splitCaseStudySections(html: string): CaseSection[] {
+  const sections: CaseSection[] = [];
+  const h2Pattern = /<h2[^>]*>([\s\S]*?)<\/h2>/gi;
+  const matches = Array.from(html.matchAll(h2Pattern));
+
+  if (matches.length === 0) {
+    return [{ title: "Project snapshot", body: html }];
+  }
+
+  for (let i = 0; i < matches.length; i += 1) {
+    const match = matches[i];
+    const next = matches[i + 1];
+    const start = (match.index ?? 0) + match[0].length;
+    const end = next?.index ?? html.length;
+    sections.push({
+      title: stripTags(match[1]).trim(),
+      body: html.slice(start, end).trim(),
+    });
+  }
+
+  return sections.filter((section) => section.title && section.body);
+}
+
+function stripTags(value: string) {
+  return value.replace(/<[^>]*>/g, "");
+}
+
+function escapeHtml(value: string) {
+  return value
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
 }
