@@ -8,14 +8,12 @@ import {
   Copy,
   Eye,
   GripVertical,
-  Layers,
   Plus,
   Save,
   Trash2,
-  Wand2,
 } from "lucide-react";
 import { supabaseAdmin } from "@/lib/admin/supabase-browser";
-import { CaseStudyWidget, CaseStudyWidgetRenderer } from "@/components/case-studies/CaseStudyWidgetRenderer";
+import { CaseStudyWidget } from "@/components/case-studies/CaseStudyWidgetRenderer";
 import { CASE_STUDY_BLOCK_TYPES, type CaseStudyBlock, type CaseStudyBlockType } from "@/lib/landing/case-study-block-types";
 
 type JsonConfig = Record<string, unknown>;
@@ -62,17 +60,19 @@ const TONES: Tone[] = ["blue", "indigo", "purple", "green", "red", "orange", "ye
 
 export function CaseStudyBlocksClient({
   caseStudyId,
+  caseTitle,
   rows,
 }: {
   caseStudyId: string;
+  caseTitle: string;
   rows: CaseStudyBlockRow[];
 }) {
   const [blocks, setBlocks] = useState<EditableBlock[]>(() => rows.map(fromRow).sort(byOrder));
-  const [selectedId, setSelectedId] = useState<string | null>(() => rows[0]?.id ?? null);
+  const [selectedId, setSelectedId] = useState<string | null>(null);
   const [dragId, setDragId] = useState<string | null>(null);
   const [showAdd, setShowAdd] = useState(false);
-  const selected = blocks.find((block) => block.id === selectedId) ?? blocks[0] ?? null;
-  const previewBlocks = useMemo(() => blocks.filter((block) => block.isActive).sort(byOrder).map(toPublicBlock), [blocks]);
+  const selected = blocks.find((block) => block.id === selectedId) ?? null;
+  const orderedBlocks = useMemo(() => [...blocks].sort(byOrder), [blocks]);
 
   const saveMutation = useMutation({
     mutationFn: async (block: EditableBlock) => {
@@ -115,7 +115,7 @@ export function CaseStudyBlocksClient({
     onSuccess: (id) => {
       setBlocks((current) => {
         const next = current.filter((block) => block.id !== id);
-        setSelectedId(next[0]?.id ?? null);
+        setSelectedId(null);
         return next;
       });
       toast.success("Widget deleted");
@@ -180,138 +180,61 @@ export function CaseStudyBlocksClient({
   }
 
   return (
-    <div className="grid gap-5 xl:grid-cols-[360px_minmax(0,1fr)]">
-      <aside className="space-y-3">
-        <div className="glass-card p-4">
-          <button type="button" onClick={() => setShowAdd(true)} className="btn-primary w-full justify-center text-sm">
+    <div className="space-y-5">
+      <div className="glass-card flex flex-wrap items-center justify-between gap-3 p-3">
+        <div>
+          <p className="text-sm font-semibold" style={{ color: "var(--text-primary)" }}>{caseTitle}</p>
+          <p className="mt-1 text-xs" style={{ color: "var(--text-muted)" }}>
+            Hover a section to edit, drag, duplicate, hide, or delete it. Add widgets directly inside the preview.
+          </p>
+        </div>
+        <div className="flex items-center gap-2">
+          {orderMutation.isPending && <span className="text-[11px]" style={{ color: "var(--text-muted)" }}>Saving order...</span>}
+          <button type="button" onClick={() => setShowAdd(true)} className="btn-primary text-sm">
             <Plus className="h-4 w-4" /> Add widget
           </button>
         </div>
+      </div>
 
-        <div className="glass-card p-3">
-          <div className="mb-3 flex items-center justify-between px-1">
-            <p className="text-xs font-semibold uppercase tracking-wide" style={{ color: "var(--text-muted)" }}>
-              Drag to reorder
-            </p>
-            {orderMutation.isPending && <span className="text-[11px]" style={{ color: "var(--text-muted)" }}>Saving...</span>}
-          </div>
-          <div className="space-y-2">
-            {blocks.map((block) => (
-              <button
-                key={block.id}
-                type="button"
-                draggable
-                onDragStart={() => setDragId(block.id)}
-                onDragOver={(event) => event.preventDefault()}
-                onDrop={() => reorder(block.id)}
-                onDragEnd={() => setDragId(null)}
-                onClick={() => setSelectedId(block.id)}
-                className={`w-full rounded-xl border p-3 text-left transition ${selected?.id === block.id ? "shadow-md" : "hover:shadow-sm"}`}
-                style={{
-                  background: selected?.id === block.id ? "rgba(124, 58, 237, 0.08)" : "var(--bg-elevated, #fff)",
-                  borderColor: selected?.id === block.id ? "rgba(124, 58, 237, 0.45)" : "var(--border-default)",
-                }}
-              >
-                <div className="flex items-start gap-2">
-                  <GripVertical className="mt-0.5 h-4 w-4 shrink-0" style={{ color: "var(--text-muted)" }} />
-                  <div className="min-w-0 flex-1">
-                    <div className="flex items-center gap-2">
-                      <span className={block.isActive ? "badge-success" : "badge-muted"}>{block.isActive ? "Active" : "Hidden"}</span>
-                      <code className="truncate text-[11px]" style={{ color: "var(--text-muted)" }}>{block.displayOrder}</code>
-                    </div>
-                    <p className="mt-2 truncate text-sm font-semibold" style={{ color: "var(--text-primary)" }}>
-                      {block.title || WIDGET_LABELS[block.type]}
-                    </p>
-                    <p className="mt-1 text-xs" style={{ color: "var(--text-muted)" }}>{WIDGET_LABELS[block.type]}</p>
-                  </div>
-                </div>
-              </button>
-            ))}
-            {!blocks.length && (
-              <div className="rounded-xl border border-dashed p-5 text-center" style={{ borderColor: "var(--border-default)" }}>
-                <Layers className="mx-auto mb-2 h-5 w-5" style={{ color: "var(--text-muted)" }} />
-                <p className="text-sm" style={{ color: "var(--text-muted)" }}>No widgets yet.</p>
-              </div>
-            )}
-          </div>
+      <div className="overflow-x-auto rounded-2xl border bg-white p-4" style={{ borderColor: "var(--border-default)" }}>
+        <div className="min-h-[720px] min-w-[860px] rounded-2xl bg-slate-50">
+          <main className="mx-auto max-w-[1128px] px-4 py-12">
+            <header className="mb-12">
+              <p className="mb-3 text-xs font-semibold uppercase tracking-[0.18em]" style={{ color: "var(--text-muted)" }}>Case study detail preview</p>
+              <h1 className="text-4xl font-semibold leading-[1.1] text-[#222222] lg:text-5xl">{caseTitle}</h1>
+            </header>
+
+            <div className="space-y-2">
+              {orderedBlocks.map((block) => (
+                <EditableBlockFrame
+                  key={block.id}
+                  block={block}
+                  selected={selected?.id === block.id}
+                  dragged={dragId === block.id}
+                  saving={saveMutation.isPending && selected?.id === block.id}
+                  deleting={deleteMutation.isPending && selected?.id === block.id}
+                  onSelect={() => setSelectedId(block.id)}
+                  onChange={updateSelected}
+                  onSave={(next) => saveMutation.mutate(next)}
+                  onToggleActive={() => {
+                    const next = { ...block, isActive: !block.isActive };
+                    updateSelected(next);
+                    saveMutation.mutate(next);
+                  }}
+                  onDuplicate={() => duplicateMutation.mutate(block)}
+                  onDelete={() => {
+                    if (confirm("Delete this widget?")) deleteMutation.mutate(block);
+                  }}
+                  onDragStart={() => setDragId(block.id)}
+                  onDrop={() => reorder(block.id)}
+                  onDragEnd={() => setDragId(null)}
+                />
+              ))}
+              <AddBlockTile onCreate={() => setShowAdd(true)} />
+            </div>
+          </main>
         </div>
-      </aside>
-
-      <section className="min-w-0 space-y-5">
-        {selected ? (
-          <>
-            <div className="glass-card p-5">
-              <div className="mb-5 flex flex-wrap items-center justify-between gap-3">
-                <div>
-                  <p className="text-xs font-semibold uppercase tracking-wide" style={{ color: "var(--text-muted)" }}>{WIDGET_LABELS[selected.type]}</p>
-                  <h2 className="mt-1 text-xl font-bold" style={{ color: "var(--text-primary)" }}>{selected.title || "Untitled widget"}</h2>
-                </div>
-                <div className="flex flex-wrap items-center gap-2">
-                  <button
-                    type="button"
-                    onClick={() => {
-                      const next = { ...selected, isActive: !selected.isActive };
-                      updateSelected(next);
-                      saveMutation.mutate(next);
-                    }}
-                    className="btn-secondary text-xs"
-                  >
-                    <Eye className="h-3.5 w-3.5" /> {selected.isActive ? "Hide" : "Show"}
-                  </button>
-                  <button type="button" onClick={() => duplicateMutation.mutate(selected)} disabled={duplicateMutation.isPending} className="btn-secondary text-xs">
-                    <Copy className="h-3.5 w-3.5" /> Duplicate
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => {
-                      if (confirm("Delete this widget?")) deleteMutation.mutate(selected);
-                    }}
-                    disabled={deleteMutation.isPending}
-                    className="btn-secondary text-xs"
-                    style={{ color: "#dc2626", borderColor: "rgba(220,38,38,0.3)" }}
-                  >
-                    <Trash2 className="h-3.5 w-3.5" /> Delete
-                  </button>
-                  <button type="button" onClick={() => saveMutation.mutate(selected)} disabled={saveMutation.isPending} className="btn-primary text-xs">
-                    <Save className="h-3.5 w-3.5" /> {saveMutation.isPending ? "Saving..." : "Save"}
-                  </button>
-                </div>
-              </div>
-
-              <WidgetEditor block={selected} onChange={updateSelected} />
-            </div>
-
-            <div className="glass-card overflow-hidden">
-              <div className="border-b px-5 py-3" style={{ borderColor: "var(--border-subtle)" }}>
-                <p className="text-xs font-semibold uppercase tracking-wide" style={{ color: "var(--text-muted)" }}>Selected widget preview</p>
-              </div>
-              <div className="bg-slate-50 p-5">
-                <div className="mx-auto max-w-[960px]">
-                  <CaseStudyWidget block={toPublicBlock(selected)} fallbackMetrics={[]} />
-                </div>
-              </div>
-            </div>
-
-            <div className="glass-card overflow-hidden">
-              <div className="border-b px-5 py-3" style={{ borderColor: "var(--border-subtle)" }}>
-                <p className="text-xs font-semibold uppercase tracking-wide" style={{ color: "var(--text-muted)" }}>Full detail preview</p>
-              </div>
-              <div className="max-h-[720px] overflow-auto bg-slate-50 p-5">
-                <div className="mx-auto max-w-[960px]">
-                  <CaseStudyWidgetRenderer blocks={previewBlocks} fallbackMetrics={[]} />
-                </div>
-              </div>
-            </div>
-          </>
-        ) : (
-          <div className="glass-card p-8 text-center">
-            <Wand2 className="mx-auto mb-3 h-6 w-6" style={{ color: "var(--text-muted)" }} />
-            <p className="text-sm" style={{ color: "var(--text-muted)" }}>
-              Add a widget to start composing the case study detail page.
-            </p>
-          </div>
-        )}
-      </section>
+      </div>
 
       {showAdd && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4">
@@ -342,6 +265,110 @@ export function CaseStudyBlocksClient({
         </div>
       )}
     </div>
+  );
+}
+
+function EditableBlockFrame({
+  block,
+  selected,
+  dragged,
+  saving,
+  deleting,
+  onSelect,
+  onChange,
+  onSave,
+  onToggleActive,
+  onDuplicate,
+  onDelete,
+  onDragStart,
+  onDrop,
+  onDragEnd,
+}: {
+  block: EditableBlock;
+  selected: boolean;
+  dragged: boolean;
+  saving: boolean;
+  deleting: boolean;
+  onSelect: () => void;
+  onChange: (block: EditableBlock) => void;
+  onSave: (block: EditableBlock) => void;
+  onToggleActive: () => void;
+  onDuplicate: () => void;
+  onDelete: () => void;
+  onDragStart: () => void;
+  onDrop: () => void;
+  onDragEnd: () => void;
+}) {
+  return (
+    <section
+      className={`group/case-widget relative rounded-3xl transition ${!block.isActive ? "opacity-45 grayscale" : ""} ${dragged ? "scale-[0.99] opacity-60" : ""}`}
+      draggable
+      onDragStart={(event) => {
+        event.dataTransfer.effectAllowed = "move";
+        onDragStart();
+      }}
+      onDragOver={(event) => event.preventDefault()}
+      onDrop={(event) => {
+        event.preventDefault();
+        onDrop();
+      }}
+      onDragEnd={onDragEnd}
+      onClick={onSelect}
+    >
+      <div className={`absolute -inset-x-3 -inset-y-3 rounded-3xl border transition ${selected ? "border-[#6C3CF4]/50 bg-[#6C3CF4]/[0.035]" : "border-transparent group-hover/case-widget:border-[#6C3CF4]/30 group-hover/case-widget:bg-[#6C3CF4]/[0.02]"}`} />
+      <div className="absolute left-3 top-3 z-20 flex items-center gap-1 rounded-full border bg-white/95 p-1 opacity-0 shadow-sm transition group-hover/case-widget:opacity-100" style={{ borderColor: "var(--border-default)" }}>
+        <button type="button" className="rounded-full p-1.5 hover:bg-slate-100" title="Drag">
+          <GripVertical className="h-3.5 w-3.5" />
+        </button>
+        <button type="button" onClick={(event) => { event.stopPropagation(); onToggleActive(); }} className="rounded-full p-1.5 hover:bg-slate-100" title={block.isActive ? "Hide" : "Show"}>
+          <Eye className="h-3.5 w-3.5" />
+        </button>
+        <button type="button" onClick={(event) => { event.stopPropagation(); onDuplicate(); }} className="rounded-full p-1.5 hover:bg-slate-100" title="Duplicate">
+          <Copy className="h-3.5 w-3.5" />
+        </button>
+        <button type="button" onClick={(event) => { event.stopPropagation(); onDelete(); }} className="rounded-full p-1.5 text-red-600 hover:bg-red-50" title="Delete" disabled={deleting}>
+          <Trash2 className="h-3.5 w-3.5" />
+        </button>
+      </div>
+      <div className="absolute right-3 top-3 z-20 rounded-full bg-white/95 px-3 py-1 text-[11px] font-semibold uppercase tracking-wider opacity-0 shadow-sm transition group-hover/case-widget:opacity-100" style={{ color: "var(--text-muted)" }}>
+        {WIDGET_LABELS[block.type]} {block.isActive ? "" : "Hidden"}
+      </div>
+      <div className="relative" onClick={(event) => event.stopPropagation()}>
+        {selected ? (
+          <div className="mb-8 rounded-3xl border-2 border-[#6C3CF4] bg-white p-5 shadow-[0_24px_80px_rgba(108,60,244,0.16)]">
+            <div className="mb-5 flex flex-wrap items-center justify-between gap-3">
+              <div>
+                <p className="text-xs font-semibold uppercase tracking-wide" style={{ color: "var(--text-muted)" }}>{WIDGET_LABELS[block.type]}</p>
+                <h2 className="mt-1 text-xl font-bold" style={{ color: "var(--text-primary)" }}>{block.title || "Untitled widget"}</h2>
+              </div>
+              <button type="button" onClick={() => onSave(block)} disabled={saving} className="btn-primary text-xs">
+                <Save className="h-3.5 w-3.5" /> {saving ? "Saving..." : "Save"}
+              </button>
+            </div>
+            <WidgetEditor block={block} onChange={onChange} />
+          </div>
+        ) : (
+          <CaseStudyWidget block={toPublicBlock(block)} fallbackMetrics={[]} />
+        )}
+      </div>
+    </section>
+  );
+}
+
+function AddBlockTile({ onCreate }: { onCreate: () => void }) {
+  return (
+    <button
+      type="button"
+      onClick={onCreate}
+      className="mb-8 flex min-h-[148px] w-full flex-col items-center justify-center rounded-3xl border border-dashed bg-white p-6 text-center transition hover:border-[#6C3CF4] hover:bg-[#6C3CF4]/[0.03]"
+      style={{ borderColor: "var(--border-default)", color: "var(--text-muted)" }}
+    >
+      <span className="mb-3 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-[#6C3CF4]/10 text-[#6C3CF4]">
+        <Plus className="h-5 w-5" />
+      </span>
+      <span className="text-sm font-semibold" style={{ color: "var(--text-primary)" }}>Add case study widget</span>
+      <span className="mt-1 text-xs">Add metrics, text sections, QA framework, process, outcome, or CTA into this preview.</span>
+    </button>
   );
 }
 
