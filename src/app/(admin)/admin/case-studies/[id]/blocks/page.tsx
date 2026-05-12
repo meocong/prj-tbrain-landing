@@ -50,15 +50,15 @@ export default async function CaseStudyBlocksPage({ params }: { params: Promise<
       <div className="mb-6 flex items-start justify-between gap-4">
         <div>
           <h1 className="text-2xl font-bold tracking-tight" style={{ fontFamily: "var(--font-heading)", color: "var(--text-primary)" }}>
-            Page widgets
+            Visual detail builder
           </h1>
           <p className="mt-1 text-sm" style={{ color: "var(--text-muted)" }}>
-            Configure the detail-page blocks for {current.title}. Lower order renders first.
+            Edit {current.title} directly on a case-study preview. Add sections, drag to reorder, and publish the same UI the public page renders.
           </p>
         </div>
       </div>
 
-      <CaseStudyBlocksClient caseStudyId={id} rows={rows} />
+      <CaseStudyBlocksClient caseStudyId={id} caseTitle={current.title} rows={rows} />
     </div>
   );
 }
