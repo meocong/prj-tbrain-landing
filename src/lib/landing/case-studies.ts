@@ -22,11 +22,25 @@ export type CaseStudy = {
 function fallbackCaseStudies(): CaseStudy[] {
   return [
     {
-      slug: "manufacturing",
-      title: "High-Accuracy CAD Annotation",
-      shortDescription: "Manufacturing AI",
+      slug: "agent-evaluation",
+      title: "Evaluation and Benchmarks for Agents",
+      shortDescription: "Delivering enterprise-grade AI agents at unprecedented speed",
       description:
-        "Revolutionizing manufacturing processes with AI-powered analytics and predictive modeling. Smart resource allocation and quality control systems that reduce costs and improve efficiency.",
+        "A global enterprise engaged Tbrain to stand up 6 domain-specific Q&A agents and a practical evaluation framework. We delivered production-grade agents grounded in authentic, approved knowledge in just 1 month from kickoff to handoff.",
+      image: "/images/code-screen.jpg",
+      metrics: [
+        { value: "6", label: "Production Agents" },
+        { value: "1", label: "Month Delivery" },
+        { value: "720", label: "Test Queries" },
+        { value: "270", label: "Curated Files" },
+      ],
+    },
+    {
+      slug: "manufacturing",
+      title: "High-Accuracy CAD Annotation and Review Project",
+      shortDescription: "Delivering mission-critical data for AI-powered manufacturing intelligence",
+      description:
+        "Tbrain partnered with a leading AI-powered manufacturing company to process and review 500 complex CAD drawings across 15 annotation fields within a strict 30-day delivery window.",
       image:
         "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&h=500&fit=crop",
       metrics: [
@@ -38,10 +52,10 @@ function fallbackCaseStudies(): CaseStudy[] {
     },
     {
       slug: "scalable-multimodal",
-      title: "Scalable Multimodal AI System",
-      shortDescription: "Enterprise AI",
+      title: "Scalable Multimodal Data Labeling for Advanced GenAI Training",
+      shortDescription: "Creating 48,000 complex visual prompts across 7 scientific disciplines",
       description:
-        "Scaled from zero to 48,000 high-quality multimodal annotations in just 4 months. Our team delivered consistent, production-ready labeled data across text, image, and audio modalities, enabling rapid model training and deployment.",
+        "Scaled from zero to 48,000 high-quality visual prompts in 4 months across chemistry, biology, medical sciences, mathematics, physics, engineering, and economics.",
       image: "/images/labeling.svg",
       metrics: [
         { value: "48K", label: "Visual Prompts" },

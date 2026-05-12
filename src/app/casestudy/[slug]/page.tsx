@@ -7,6 +7,7 @@ import Footer from "@/components/common/Footer";
 import { getCaseStudies, getCaseStudyBySlug } from "@/lib/landing/case-studies";
 import { PdfDownloadGate } from "@/components/casestudy/PdfDownloadGate";
 import { notFound } from "next/navigation";
+import post_bg from "@/assets/images/post_bg.png";
 
 export const revalidate = 300;
 
@@ -57,7 +58,14 @@ export default async function CaseStudyDetailPage({
   return (
     <div>
       <Header />
-      <main className="pt-24 pb-24">
+      <main
+        className="bg-center bg-no-repeat bg-cover pt-24 pb-24"
+        style={{ backgroundImage: `url(${post_bg.src})` }}
+      >
+        <div className="wrap !fixed top-[400px] w-full">
+          <div className="one top-0 left-0 h-80 w-80"></div>
+          <div className="two top-0 right-0 h-80 w-80"></div>
+        </div>
         <section className="container mx-auto max-w-[1128px] px-4">
           <Link
             href="/casestudy"
@@ -98,22 +106,6 @@ export default async function CaseStudyDetailPage({
               </div>
             )}
           </header>
-
-          {/* Hero image */}
-          {study.image && (
-            <div className="mb-14 overflow-hidden rounded-3xl bg-white shadow-xl">
-              <div className="relative aspect-[16/7]">
-                <Image
-                  src={study.image}
-                  alt={study.title}
-                  fill
-                  priority
-                  sizes="(min-width: 1128px) 1100px, 100vw"
-                  className="object-cover"
-                />
-              </div>
-            </div>
-          )}
 
           {/* Stat banner */}
           {study.metrics.length > 0 && (
