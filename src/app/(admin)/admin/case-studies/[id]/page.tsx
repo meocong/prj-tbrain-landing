@@ -4,6 +4,7 @@ import { ArrowLeft } from "lucide-react";
 import { notFound } from "next/navigation";
 import { requireAdmin } from "@/lib/admin/server/list";
 import { supabaseAdmin } from "@/lib/terminal-bench/supabase/admin";
+import { ensureCaseStudyBlocks, type CaseStudySeedSource } from "@/lib/admin/case-study-block-seed";
 import { CaseStudyBlocksClient, type CaseStudyBlockRow } from "./blocks/blocks-client";
 
 export const dynamic = "force-dynamic";
@@ -12,6 +13,10 @@ type Row = {
   id: string;
   slug: string;
   title: string;
+  short_description: string | null;
+  description: string | null;
+  metrics: Array<{ value: string; label: string }> | null;
+  extended_content: string | null;
 };
 
 export default async function EditCaseStudyPage({ params }: { params: Promise<{ id: string }> }) {
@@ -20,7 +25,11 @@ export default async function EditCaseStudyPage({ params }: { params: Promise<{ 
   const db = supabaseAdmin();
 
   const [{ data }, { data: blocks }] = await Promise.all([
-    db.from("case_studies").select("id, slug, title").eq("id", id).maybeSingle(),
+    db
+      .from("case_studies")
+      .select("id, slug, title, short_description, description, metrics, extended_content")
+      .eq("id", id)
+      .maybeSingle(),
     db
       .from("case_study_blocks")
       .select("id, case_study_id, type, title, subtitle, content, config, display_order, is_active, updated_at")
@@ -30,7 +39,7 @@ export default async function EditCaseStudyPage({ params }: { params: Promise<{ 
 
   if (!data) notFound();
   const r = data as Row;
-  const rows = (blocks ?? []) as CaseStudyBlockRow[];
+  const rows = await ensureCaseStudyBlocks(db, r as CaseStudySeedSource, (blocks ?? []) as CaseStudyBlockRow[]);
 
   return (
     <div className="animate-[fadeIn_0.3s_ease-out]">
