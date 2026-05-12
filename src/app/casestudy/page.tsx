@@ -1,33 +1,20 @@
-import React from "react";
-import type { Metadata } from "next";
-import { Star } from "lucide-react";
-import Header from "@/components/common/Header";
+"use client";
+
+import React from 'react';
+import { Star } from 'lucide-react';
+import Header from '@/components/common/Header';
 import post_bg from "@/assets/images/post_bg.png";
 import Footer from "@/components/common/Footer";
 import { CaseStudyContent } from "@/components/casestudy/CaseStudyContent";
-import { getCaseStudies } from "@/lib/landing/case-studies";
+import { usePathname } from 'next/navigation';
 
-export const revalidate = 300;
-
-export const metadata: Metadata = {
-  title: "Case Studies",
-  description:
-    "How leading AI teams ship better models with Tbrain — RLHF datasets, evaluation harnesses, and expert annotation at scale.",
-  alternates: { canonical: "/casestudy" },
-  openGraph: {
-    title: "Case Studies — Tbrain",
-    description:
-      "How leading AI teams ship better models with Tbrain — RLHF datasets, evaluation, and expert annotation at scale.",
-    url: "/casestudy",
-  },
-};
-
-export default async function Page() {
-  const studies = await getCaseStudies();
+export default function Page() {
+  const pathname = usePathname();
 
   return (
     <div>
-      <Header />
+           <Header />
+
 
       {/* Main */}
       <main
@@ -46,31 +33,23 @@ export default async function Page() {
           <div className="absolute top-[60%] right-0 w-80 h-80 bg-indigo-200/20 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '3s' }}></div>
         </div>
 
+        { }
         <section
           id="casestudy"
-          className="container mx-auto max-w-6xl px-4 pt-24 pb-24 relative"
+          className="container mx-auto px-3 pt-24 pb-24 relative max-w-[1128px]"
         >
           {/* Page Title */}
           <div className="relative mb-12">
             <div className="absolute -top-4 right-[15%] hidden md:block animate-bounce">
               <Star className="w-10 h-10 text-yellow-400 fill-yellow-400" />
             </div>
-            <h1
-              className="text-4xl font-semibold tracking-tight md:text-6xl"
-              style={{ fontFamily: "var(--font-heading)", color: "var(--text-primary)" }}
-            >
+            <h1 className="text-[#222222] text-4xl lg:text-5xl font-semibold leading-[52px] mb-8">
               Case Studies
             </h1>
-            <p
-              className="mt-4 max-w-2xl text-lg leading-relaxed md:text-xl"
-              style={{ color: "var(--text-secondary)" }}
-            >
-              How Tbrain&apos;s expert pods turn high-stakes data into measurable model improvement.
-            </p>
           </div>
 
           {/* Case Study Content */}
-          <CaseStudyContent studies={studies} />
+          <CaseStudyContent />
         </section>
       </main>
 
