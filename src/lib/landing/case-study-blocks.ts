@@ -1,19 +1,7 @@
 import "server-only";
-import { CASE_STUDY_BLOCK_TYPES, type CaseStudyBlockType } from "./case-study-block-types";
+import { CASE_STUDY_BLOCK_TYPES, type CaseStudyBlock, type CaseStudyBlockType } from "./case-study-block-types";
 import { supabaseAdmin } from "@/lib/terminal-bench/supabase/admin";
-export type { CaseStudyBlockType };
-
-export type CaseStudyBlock = {
-  id: string;
-  caseStudyId: string;
-  type: CaseStudyBlockType;
-  title: string | null;
-  subtitle: string | null;
-  content: string | null;
-  config: Record<string, unknown>;
-  displayOrder: number;
-  isActive: boolean;
-};
+export type { CaseStudyBlock, CaseStudyBlockType };
 
 type Row = {
   id: string;
