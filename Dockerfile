@@ -19,6 +19,7 @@ ARG NEXT_PUBLIC_SUPABASE_URL=""
 ARG NEXT_PUBLIC_SUPABASE_ANON_KEY=""
 ARG NEXT_PUBLIC_TBRAIN_SSO_ENABLED="false"
 ARG NEXT_PUBLIC_TBRAIN_SSO_PROVIDER="keycloak"
+ARG BUILD_CACHE_BUST=""
 ENV NEXT_PUBLIC_TURNSTILE_SITE_KEY=${NEXT_PUBLIC_TURNSTILE_SITE_KEY}
 ENV NEXT_PUBLIC_SUPABASE_URL=${NEXT_PUBLIC_SUPABASE_URL}
 ENV NEXT_PUBLIC_SUPABASE_ANON_KEY=${NEXT_PUBLIC_SUPABASE_ANON_KEY}
@@ -29,6 +30,7 @@ ENV NEXT_PUBLIC_TBRAIN_SSO_PROVIDER=${NEXT_PUBLIC_TBRAIN_SSO_PROVIDER}
 # prerendering. Keep it as a BuildKit secret so it is not persisted as an
 # image ENV value.
 RUN --mount=type=secret,id=supabase_service_role_key \
+    echo "build cache ${BUILD_CACHE_BUST}" >/dev/null && \
     SUPABASE_SERVICE_ROLE_KEY="$(cat /run/secrets/supabase_service_role_key 2>/dev/null || true)" \
     pnpm build
 
