@@ -18,6 +18,7 @@ const NAV_ITEMS = [
   { label: "About", href: "/about" },
   { label: "Team", href: "/team" },
   { label: "Services", href: "/services" },
+  { label: "Technology", href: "/technology" },
   { label: "Platform", href: "/platform" },
   { label: "Case Studies", href: "/casestudy" },
   { label: "Data", href: "/data", isDropdown: true },
@@ -134,7 +135,7 @@ const Header = () => {
             />
           </Link>
 
-          <nav className="hidden items-center gap-7 lg:flex">
+          <nav className="hidden items-center gap-5 xl:gap-7 lg:flex">
             {NAV_ITEMS.map((item) =>
               item.isDropdown ? (
                 <div key={item.href} className="relative" ref={dropdownRef}>

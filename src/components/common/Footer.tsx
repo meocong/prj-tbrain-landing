@@ -77,6 +77,8 @@ function NewsletterForm() {
 const FOOTER_LINKS = [
   { label: "About", href: "/about" },
   { label: "Team", href: "/team" },
+  { label: "Services", href: "/services" },
+  { label: "Technology", href: "/technology" },
   { label: "Platform", href: "/platform" },
   { label: "Case Studies", href: "/casestudy" },
   { label: "Blog", href: "/blog" },
