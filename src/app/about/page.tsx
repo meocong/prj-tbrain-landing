@@ -29,8 +29,8 @@ import {
   Workflow,
   Wrench,
 } from "lucide-react";
-import { EXPERTISE_AREAS, EXPERTS, LEADERSHIP, SAMPLE_PROJECTS } from "@/lib/constants/marketing";
-import { getServices, getExpertiseAreas } from "@/lib/landing/services";
+import { getAboutCardGroups } from "@/lib/landing/about-cards";
+import { getServices } from "@/lib/landing/services";
 import { StatsGrid } from "./stats-grid";
 
 export const metadata: Metadata = {
@@ -65,71 +65,28 @@ const ICON_MAP: Record<string, React.ElementType> = {
   Globe,
   Languages,
   Cpu,
+  Workflow,
+  CheckCircle,
+  MessageSquare,
+  LineChart,
+  Mic,
+  Code2,
+  FlaskConical,
 };
 
 export default async function AboutPage() {
-  const coreProfiles = LEADERSHIP.map((person, index) => ({
-    ...person,
-    role: index === 0 ? "AI training data strategy" : "Engineering delivery leadership",
-    projects:
-      index === 0
-        ? ["Expert-led data programs", "Model evaluation", "Global expert network"]
-        : ["Engineering operations", "Enterprise delivery", "Managed expert teams"],
-  }));
-
-  const companyCards = [
-    {
-      label: "Company",
-      title: "Tbrain builds managed data programs for frontier AI teams.",
-      description:
-        "We combine expert operations, workflow software, and AI-native quality control so customers can ship complex datasets without building the whole delivery stack in-house.",
-      icon: Factory,
-    },
-    {
-      label: "Mission",
-      title: "Turn specialized human expertise into reliable model signal.",
-      description:
-        "Our mission is to make agentic AI measurably better through auditable expert feedback, rigorous evaluation, and domain-specific data programs.",
-      icon: ShieldCheck,
-    },
-    {
-      label: "Team",
-      title: "Operators, engineers, and domain experts working as one pod.",
-      description:
-        "Tbrain brings together AI training data operators, engineering delivery leaders, and expert contributors across coding, medical, manufacturing, robotics, and data science.",
-      icon: Users,
-    },
-  ];
-
-  const valueCards = [
-    {
-      title: "Domain-Specific Expert Pods",
-      description: "Coding, STEM, medical, manufacturing, agent tool use, and other high-stakes domains.",
-      icon: Brain,
-    },
-    {
-      title: "Custom software & tools",
-      description: "Purpose-built workflows that make expert review measurable, auditable, and fast to operate.",
-      icon: Workflow,
-    },
-    {
-      title: "Verifiable loops",
-      description: "Closed-loop reinforcement learning systems for agents to self-improve from concrete outcomes.",
-      icon: CheckCircle,
-    },
-  ];
-
-  const projectIcons = [MessageSquare, LineChart, Mic];
-  const expertiseIcons = [Database, Brain, FlaskConical, Bot, Code2, LineChart, CheckCircle];
-
-  const [services, domains] = await Promise.all([
+  const [services, domains, aboutCards] = await Promise.all([
     getServices("service"),
     getServices("domain"),
+    getAboutCardGroups(),
   ]);
-  // Local fallback (kept for resilience even though getServices already returns
-  // DOMAIN_PODS / SERVICES constants when DB is empty).
-  const expertise = EXPERTISE_AREAS;
-  void getExpertiseAreas; // expertise sourced from constants below
+
+  const companyCards = aboutCards.company;
+  const valueCards = aboutCards.value;
+  const sampleProjects = aboutCards.sample_projects;
+  const expertise = aboutCards.expertise;
+  const coreProfiles = aboutCards.team;
+  const experts = aboutCards.experts;
 
   return (
     <div>
@@ -174,9 +131,11 @@ export default async function AboutPage() {
           </div>
 
           <div className="mx-auto mt-12 grid max-w-6xl gap-5 md:grid-cols-3">
-            {companyCards.map((card) => (
+            {companyCards.map((card) => {
+              const Icon = (ICON_MAP[card.icon ?? ""] || Factory) as React.ComponentType<{ className?: string }>;
+              return (
               <article
-                key={card.label}
+                key={card.slug}
                 className="rounded-2xl border p-6"
                 style={{
                   background: "var(--bg-card)",
@@ -186,7 +145,7 @@ export default async function AboutPage() {
               >
                 <div className="flex items-center gap-3">
                   <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-[#6C3CF4]/10 text-[#6C3CF4]">
-                    <card.icon className="h-5 w-5" />
+                    <Icon className="h-5 w-5" />
                   </span>
                   <p className="text-xs font-semibold uppercase tracking-[0.18em]" style={{ color: "var(--text-muted)" }}>
                     {card.label}
@@ -199,7 +158,8 @@ export default async function AboutPage() {
                   {card.description}
                 </p>
               </article>
-            ))}
+              );
+            })}
           </div>
         </section>
 
@@ -220,10 +180,12 @@ export default async function AboutPage() {
           </div>
 
           <div className="mx-auto mt-12 grid max-w-5xl gap-5 md:grid-cols-3">
-            {valueCards.map((card) => (
-              <article key={card.title} className="glass-card p-6">
+            {valueCards.map((card) => {
+              const Icon = (ICON_MAP[card.icon ?? ""] || Brain) as React.ComponentType<{ className?: string }>;
+              return (
+              <article key={card.slug} className="glass-card p-6">
                 <span className="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-[#6C3CF4]/10 text-[#6C3CF4]">
-                  <card.icon className="h-6 w-6" />
+                  <Icon className="h-6 w-6" />
                 </span>
                 <h3 className="mt-5 text-xl font-semibold" style={{ fontFamily: "var(--font-heading)" }}>
                   {card.title}
@@ -232,7 +194,8 @@ export default async function AboutPage() {
                   {card.description}
                 </p>
               </article>
-            ))}
+              );
+            })}
           </div>
         </section>
 
@@ -323,10 +286,10 @@ export default async function AboutPage() {
             </h2>
           </div>
           <div className="mx-auto mt-12 grid max-w-5xl gap-5 md:grid-cols-3">
-            {SAMPLE_PROJECTS.map((project, index) => {
-              const Icon = projectIcons[index] ?? Bot;
+            {sampleProjects.map((project) => {
+              const Icon = (ICON_MAP[project.icon ?? ""] || Bot) as React.ComponentType<{ className?: string }>;
               return (
-                <article key={project.title} className="glass-card p-6">
+                <article key={project.slug} className="glass-card p-6">
                   <span className="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-[#10B981]/10 text-[#10B981]">
                     <Icon className="h-6 w-6" />
                   </span>
@@ -353,17 +316,17 @@ export default async function AboutPage() {
             </h2>
           </div>
           <div className="mx-auto mt-12 grid max-w-5xl gap-4 md:grid-cols-2">
-            {expertise.map((area, index) => {
-              const Icon = expertiseIcons[index] ?? CheckCircle;
+            {expertise.map((area) => {
+              const Icon = (ICON_MAP[area.icon ?? ""] || CheckCircle) as React.ComponentType<{ className?: string }>;
               return (
-                <article key={area.label} className="flex gap-4 rounded-2xl border p-5" style={{ background: "var(--bg-card)", borderColor: "var(--border-subtle)" }}>
+                <article key={area.slug} className="flex gap-4 rounded-2xl border p-5" style={{ background: "var(--bg-card)", borderColor: "var(--border-subtle)" }}>
                   <span className="mt-1 inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#6C3CF4]/10 text-[#6C3CF4]">
                     <Icon className="h-5 w-5" />
                   </span>
                   <div>
-                    <h3 className="font-semibold" style={{ color: "var(--text-primary)" }}>{area.label.replace(/:$/, "")}</h3>
+                    <h3 className="font-semibold" style={{ color: "var(--text-primary)" }}>{area.title.replace(/:$/, "")}</h3>
                     <p className="mt-1 text-sm leading-relaxed" style={{ color: "var(--text-secondary)" }}>
-                      {area.detail}
+                      {area.description}
                     </p>
                   </div>
                 </article>
@@ -389,9 +352,13 @@ export default async function AboutPage() {
           </div>
 
           <div className="mx-auto mt-12 grid max-w-5xl gap-5 md:grid-cols-2">
-            {coreProfiles.map((person) => (
+            {coreProfiles.map((person) => {
+              const projects = Array.isArray(person.meta.projects)
+                ? person.meta.projects.filter((item): item is string => typeof item === "string")
+                : [];
+              return (
               <article
-                key={person.name}
+                key={person.slug}
                 className="rounded-3xl p-6 md:p-8"
                 style={{
                   background: "var(--bg-card)",
@@ -401,26 +368,26 @@ export default async function AboutPage() {
               >
                 <div className="flex items-start gap-5">
                   <Image
-                    src={person.avatar}
+                    src={person.imageUrl || "/images/avt-tamle.png"}
                     width={96}
                     height={96}
-                    alt={person.name}
+                    alt={person.title}
                     className="h-24 w-24 rounded-2xl object-cover"
                   />
                   <div>
                     <p className="text-xs font-semibold uppercase tracking-[0.18em]" style={{ color: "#6C3CF4" }}>
-                      {person.role}
+                      {person.label}
                     </p>
                     <h3 className="mt-2 text-3xl font-semibold" style={{ fontFamily: "var(--font-heading)", color: "var(--text-primary)" }}>
-                      {person.name}
+                      {person.title}
                     </h3>
                   </div>
                 </div>
                 <p className="mt-6 text-base leading-relaxed" style={{ color: "var(--text-secondary)" }}>
-                  {person.bio}
+                  {person.description}
                 </p>
                 <div className="mt-6 flex flex-wrap gap-2">
-                  {person.projects.map((project) => (
+                  {projects.map((project) => (
                     <span
                       key={project}
                       className="rounded-full px-3 py-1 text-xs font-semibold"
@@ -435,7 +402,8 @@ export default async function AboutPage() {
                   ))}
                 </div>
               </article>
-            ))}
+              );
+            })}
           </div>
 
           <div
@@ -510,23 +478,23 @@ export default async function AboutPage() {
           </div>
 
           <div className="mx-auto mt-12 grid max-w-5xl gap-5 sm:grid-cols-2 lg:grid-cols-4">
-            {EXPERTS.map((expert) => (
-              <article key={expert.name} className="text-center">
+            {experts.map((expert) => (
+              <article key={expert.slug} className="text-center">
                 <Image
-                  src={expert.avatar}
+                  src={expert.imageUrl || "/images/avt-1.png"}
                   width={128}
                   height={128}
-                  alt={expert.name}
+                  alt={expert.title}
                   className="mx-auto h-32 w-32 rounded-3xl object-cover"
                 />
                 <h4 className="mt-4 text-lg font-semibold" style={{ fontFamily: "var(--font-heading)", color: "var(--text-primary)" }}>
-                  {expert.name}
+                  {expert.title}
                 </h4>
                 <p className="mt-1 text-xs font-semibold uppercase tracking-[0.16em]" style={{ color: "#6C3CF4" }}>
-                  {expert.domain}
+                  {expert.label}
                 </p>
                 <p className="mt-2 text-sm leading-relaxed" style={{ color: "var(--text-secondary)" }}>
-                  {expert.title}
+                  {expert.description}
                 </p>
               </article>
             ))}
