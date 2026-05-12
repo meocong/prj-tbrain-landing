@@ -16,7 +16,6 @@ const DATA_ITEMS = [
 const NAV_ITEMS = [
   { label: "Home", href: "/" },
   { label: "About", href: "/about" },
-  { label: "Team", href: "/team" },
   { label: "Services", href: "/services" },
   { label: "Technology", href: "/technology" },
   { label: "Platform", href: "/platform" },
