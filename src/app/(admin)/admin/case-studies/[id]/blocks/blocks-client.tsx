@@ -185,7 +185,7 @@ export function CaseStudyBlocksClient({
         <div>
           <p className="text-sm font-semibold" style={{ color: "var(--text-primary)" }}>{caseTitle}</p>
           <p className="mt-1 text-xs" style={{ color: "var(--text-muted)" }}>
-            Hover a section to edit, drag, duplicate, hide, or delete it. Add widgets directly inside the preview.
+            Drag sections to reorder. Click any widget to edit its content directly in place.
           </p>
         </div>
         <div className="flex items-center gap-2">
@@ -200,7 +200,6 @@ export function CaseStudyBlocksClient({
         <div className="min-h-[720px] min-w-[860px] rounded-2xl bg-slate-50">
           <main className="mx-auto max-w-[1128px] px-4 py-12">
             <header className="mb-12">
-              <p className="mb-3 text-xs font-semibold uppercase tracking-[0.18em]" style={{ color: "var(--text-muted)" }}>Case study detail preview</p>
               <h1 className="text-4xl font-semibold leading-[1.1] text-[#222222] lg:text-5xl">{caseTitle}</h1>
             </header>
 
@@ -335,18 +334,7 @@ function EditableBlockFrame({
       </div>
       <div className="relative" onClick={(event) => event.stopPropagation()}>
         {selected ? (
-          <div className="mb-8 rounded-3xl border-2 border-[#6C3CF4] bg-white p-5 shadow-[0_24px_80px_rgba(108,60,244,0.16)]">
-            <div className="mb-5 flex flex-wrap items-center justify-between gap-3">
-              <div>
-                <p className="text-xs font-semibold uppercase tracking-wide" style={{ color: "var(--text-muted)" }}>{WIDGET_LABELS[block.type]}</p>
-                <h2 className="mt-1 text-xl font-bold" style={{ color: "var(--text-primary)" }}>{block.title || "Untitled widget"}</h2>
-              </div>
-              <button type="button" onClick={() => onSave(block)} disabled={saving} className="btn-primary text-xs">
-                <Save className="h-3.5 w-3.5" /> {saving ? "Saving..." : "Save"}
-              </button>
-            </div>
-            <WidgetEditor block={block} onChange={onChange} />
-          </div>
+          <InlineWidgetEditor block={block} saving={saving} onChange={onChange} onSave={onSave} />
         ) : (
           <CaseStudyWidget block={toPublicBlock(block)} fallbackMetrics={[]} />
         )}
@@ -370,6 +358,333 @@ function AddBlockTile({ onCreate }: { onCreate: () => void }) {
       <span className="mt-1 text-xs">Add metrics, text sections, QA framework, process, outcome, or CTA into this preview.</span>
     </button>
   );
+}
+
+function InlineWidgetEditor({
+  block,
+  saving,
+  onChange,
+  onSave,
+}: {
+  block: EditableBlock;
+  saving: boolean;
+  onChange: (block: EditableBlock) => void;
+  onSave: (block: EditableBlock) => void;
+}) {
+  const patchConfig = (patch: JsonConfig) => onChange({ ...block, config: { ...block.config, ...patch } });
+  const button = (
+    <button type="button" onClick={() => onSave(block)} disabled={saving} className="absolute right-4 top-4 z-30 rounded-full bg-[#6C3CF4] px-3 py-2 text-xs font-semibold text-white shadow-lg">
+      <Save className="mr-1 inline h-3.5 w-3.5" /> {saving ? "Saving" : "Save"}
+    </button>
+  );
+
+  if (block.type === "metrics_grid") {
+    const metrics = asObjectArray(block.config.metrics);
+    return (
+      <div className="relative mb-16 rounded-3xl border-2 border-[#6C3CF4] p-4">
+        {button}
+        <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
+          {metrics.map((metric, index) => (
+            <div key={index} className="rounded-2xl border-t-4 border-blue-600 bg-white/80 p-5 text-center shadow-lg">
+              <InlineInput value={stringValue(metric.value)} onChange={(value) => patchArray(block, "metrics", index, { ...metric, value }, patchConfig)} className="text-center text-4xl font-bold text-blue-600" />
+              <InlineInput value={stringValue(metric.label)} onChange={(label) => patchArray(block, "metrics", index, { ...metric, label }, patchConfig)} className="mt-2 text-center text-sm font-medium text-gray-600" />
+              <MiniRemove onClick={() => removeArrayItem(block, "metrics", index, patchConfig)} />
+            </div>
+          ))}
+          <InlineAdd onClick={() => patchConfig({ metrics: [...metrics, { value: "100%", label: "Metric label" }] })} label="Metric" />
+        </div>
+      </div>
+    );
+  }
+
+  if (block.type === "text_card") {
+    const shell = stringValue(block.config.variant) === "blue_gradient" ? "bg-gradient-to-br from-blue-50/80 to-indigo-50/80" : "bg-white/80";
+    return (
+      <section className={`relative mb-12 rounded-2xl border-2 border-[#6C3CF4] ${shell} p-8 shadow-md`}>
+        {button}
+        <LegacyInlineHeading value={block.title} onChange={(title) => onChange({ ...block, title })} tone="blue" />
+        <InlineArea value={block.content} onChange={(content) => onChange({ ...block, content })} className="min-h-[120px] text-lg leading-relaxed text-[#222222]" />
+        <InlineVariant value={stringValue(block.config.variant)} onChange={(variant) => patchConfig({ variant })} />
+      </section>
+    );
+  }
+
+  if (block.type === "objective_grid") {
+    const items = asObjectArray(block.config.items);
+    return (
+      <section className="relative mb-12 rounded-3xl border-2 border-[#6C3CF4] p-4">
+        {button}
+        <LegacyInlineHeading value={block.title} onChange={(title) => onChange({ ...block, title })} tone="indigo" />
+        <div className="rounded-2xl bg-white/80 p-8 shadow-md">
+          <div className="grid gap-6 md:grid-cols-3">
+            {items.map((item, index) => (
+              <InlineItemCard key={index} item={item} fields={["icon", "title", "body", "tone"]} onChange={(next) => patchArray(block, "items", index, next, patchConfig)} onRemove={() => removeArrayItem(block, "items", index, patchConfig)} />
+            ))}
+            <InlineAdd onClick={() => patchConfig({ items: [...items, { icon: "🎯", title: "Objective", body: "Describe the objective.", tone: "blue" }] })} label="Card" />
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  if (block.type === "challenge_cards") {
+    const cards = asObjectArray(block.config.cards);
+    return (
+      <section className="relative mb-12 rounded-3xl border-2 border-[#6C3CF4] p-4">
+        {button}
+        <LegacyInlineHeading value={block.title} onChange={(title) => onChange({ ...block, title })} tone="red" />
+        <div className="space-y-6">
+          {cards.map((card, index) => (
+            <InlineWideCard key={index} item={card} fields={["icon", "title", "body", "tone"]} onChange={(next) => patchArray(block, "cards", index, next, patchConfig)} onRemove={() => removeArrayItem(block, "cards", index, patchConfig)} />
+          ))}
+          <InlineAdd onClick={() => patchConfig({ cards: [...cards, { icon: "1", title: "Challenge", body: "Describe the challenge.", tone: "red" }] })} label="Challenge" />
+        </div>
+      </section>
+    );
+  }
+
+  if (block.type === "qa_framework") {
+    const layers = asObjectArray(block.config.layers);
+    const sampleGates = asObjectArray(block.config.sampleGates);
+    const solutionCards = asObjectArray(block.config.solutionCards);
+    return (
+      <section className="relative mb-12 rounded-2xl border-2 border-[#6C3CF4] bg-gradient-to-br from-indigo-50/80 to-purple-50/80 p-8 shadow-md">
+        {button}
+        <LegacyInlineHeading value={block.title} onChange={(title) => onChange({ ...block, title })} tone="indigo" />
+        <InlineArea value={block.content} onChange={(content) => onChange({ ...block, content })} className="mb-8 min-h-[80px] text-lg leading-relaxed text-[#222222]" />
+        <div className="mb-8 rounded-xl bg-white/90 p-8 shadow-inner">
+          <InlineInput value={stringValue(block.config.frameworkTitle) || "5-Layer Quality Assurance Framework"} onChange={(frameworkTitle) => patchConfig({ frameworkTitle })} className="mb-8 text-center text-2xl font-bold text-[#222222]" />
+          <div className="space-y-4">
+            {layers.map((layer, index) => (
+              <InlineWideCard key={index} item={layer} fields={["num", "label", "title", "body", "tone"]} onChange={(next) => patchArray(block, "layers", index, next, patchConfig)} onRemove={() => removeArrayItem(block, "layers", index, patchConfig)} />
+            ))}
+            <InlineAdd onClick={() => patchConfig({ layers: [...layers, { num: "L1", label: "Layer", title: "QA Layer", body: "Describe the layer.", tone: "blue" }] })} label="QA layer" />
+          </div>
+        </div>
+        <div className="rounded-xl border-2 border-yellow-400 bg-yellow-50 p-6">
+          <InlineInput value={stringValue(block.config.sampleGateTitle) || "Parallel Statistical Quality Gates"} onChange={(sampleGateTitle) => patchConfig({ sampleGateTitle })} className="mb-4 text-center font-bold text-[#222222]" />
+          <div className="grid gap-4 md:grid-cols-2">
+            {sampleGates.map((gate, index) => (
+              <InlineWideCard key={index} item={gate} fields={["num", "label", "body", "tone"]} onChange={(next) => patchArray(block, "sampleGates", index, next, patchConfig)} onRemove={() => removeArrayItem(block, "sampleGates", index, patchConfig)} />
+            ))}
+            <InlineAdd onClick={() => patchConfig({ sampleGates: [...sampleGates, { num: "5%", label: "Sample", body: "Describe the gate.", tone: "yellow" }] })} label="Gate" />
+          </div>
+        </div>
+        <div className="mt-6 grid gap-6 md:grid-cols-3">
+          {solutionCards.map((card, index) => (
+            <InlineItemCard key={index} item={card} fields={["icon", "title", "body", "tone"]} onChange={(next) => patchArray(block, "solutionCards", index, next, patchConfig)} onRemove={() => removeArrayItem(block, "solutionCards", index, patchConfig)} />
+          ))}
+          <InlineAdd onClick={() => patchConfig({ solutionCards: [...solutionCards, { icon: "✓", title: "Solution", body: "Describe the solution.", tone: "green" }] })} label="Solution" />
+        </div>
+      </section>
+    );
+  }
+
+  if (block.type === "process_steps") {
+    const steps = asObjectArray(block.config.steps);
+    return (
+      <section className="relative mb-12 rounded-3xl border-2 border-[#6C3CF4] p-4">
+        {button}
+        <LegacyInlineHeading value={block.title} onChange={(title) => onChange({ ...block, title })} tone="blue" />
+        <div className="space-y-4">
+          {steps.map((step, index) => (
+            <InlineWideCard key={index} item={step} fields={["number", "title", "body", "tone"]} onChange={(next) => patchArray(block, "steps", index, next, patchConfig)} onRemove={() => removeArrayItem(block, "steps", index, patchConfig)} />
+          ))}
+          <InlineAdd onClick={() => patchConfig({ steps: [...steps, { number: "1", title: "Step title", body: "Describe this step.", tone: "blue" }] })} label="Step" />
+        </div>
+      </section>
+    );
+  }
+
+  if (block.type === "outcome") {
+    const cards = asObjectArray(block.config.cards);
+    const benefits = asStringArray(block.config.benefits);
+    return (
+      <section className="relative mb-12 rounded-2xl border-2 border-[#6C3CF4] bg-gradient-to-br from-green-50/80 to-emerald-50/80 p-8 shadow-md">
+        {button}
+        <LegacyInlineHeading value={block.title} onChange={(title) => onChange({ ...block, title })} tone="green" />
+        <div className="mb-8 grid gap-6 md:grid-cols-2">
+          {cards.map((card, index) => (
+            <InlineItemCard key={index} item={card} fields={["value", "label", "body", "tone"]} onChange={(next) => patchArray(block, "cards", index, next, patchConfig)} onRemove={() => removeArrayItem(block, "cards", index, patchConfig)} />
+          ))}
+          <InlineAdd onClick={() => patchConfig({ cards: [...cards, { value: "100%", label: "Result", body: "Describe the result.", tone: "green" }] })} label="Outcome" />
+        </div>
+        <div className="rounded-xl bg-white/90 p-6 shadow-md">
+          <InlineInput value={stringValue(block.config.benefitsTitle) || "Client Benefits"} onChange={(benefitsTitle) => patchConfig({ benefitsTitle })} className="mb-4 text-xl font-bold text-[#222222]" />
+          <div className="space-y-2">
+            {benefits.map((benefit, index) => (
+              <div key={index} className="flex items-center gap-2">
+                <InlineInput value={benefit} onChange={(value) => patchConfig({ benefits: benefits.map((item, itemIndex) => itemIndex === index ? value : item) })} className="flex-1 text-[#222222]" />
+                <MiniRemove onClick={() => patchConfig({ benefits: benefits.filter((_, itemIndex) => itemIndex !== index) })} />
+              </div>
+            ))}
+            <InlineAdd onClick={() => patchConfig({ benefits: [...benefits, "New benefit"] })} label="Benefit" />
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  return (
+    <section className="relative rounded-2xl border-2 border-[#6C3CF4] bg-gradient-to-r from-emerald-600 to-blue-700 p-8 text-center text-white shadow-xl">
+      {button}
+      <InlineInput value={block.title} onChange={(title) => onChange({ ...block, title })} className="text-center text-3xl font-bold text-white" />
+      <InlineInput value={block.subtitle} onChange={(subtitle) => onChange({ ...block, subtitle })} className="mx-auto mt-4 max-w-2xl text-center text-xl text-emerald-100" />
+      <div className="mx-auto mt-6 grid max-w-xl gap-3 md:grid-cols-2">
+        <InlineInput value={stringValue(block.config.label)} onChange={(label) => patchConfig({ label })} className="rounded-lg bg-white px-4 py-3 text-center font-bold text-emerald-700" />
+        <InlineInput value={stringValue(block.config.href)} onChange={(href) => patchConfig({ href })} className="rounded-lg bg-white/15 px-4 py-3 text-center text-sm text-white" />
+      </div>
+    </section>
+  );
+}
+
+function LegacyInlineHeading({ value, onChange, tone }: { value: string; onChange: (value: string) => void; tone: Tone }) {
+  return (
+    <h2 className="mb-6 flex items-center text-3xl font-bold text-[#222222]">
+      <div className={`mr-4 h-8 w-2 rounded-full ${toneBg(tone, 600)}`} />
+      <InlineInput value={value} onChange={onChange} className="min-w-0 flex-1 text-3xl font-bold text-[#222222]" />
+    </h2>
+  );
+}
+
+function InlineItemCard({
+  item,
+  fields,
+  onChange,
+  onRemove,
+}: {
+  item: JsonConfig;
+  fields: string[];
+  onChange: (item: JsonConfig) => void;
+  onRemove: () => void;
+}) {
+  const tone = normalizeTone(item.tone);
+  return (
+    <article className="relative h-full rounded-xl bg-white/90 p-5 text-center shadow-md">
+      <MiniRemove onClick={onRemove} />
+      {fields.includes("icon") && <InlineInput value={stringValue(item.icon)} onChange={(icon) => onChange({ ...item, icon })} className="mx-auto mb-3 h-12 w-12 rounded-full bg-slate-100 text-center text-2xl" />}
+      {fields.includes("value") && <InlineInput value={stringValue(item.value)} onChange={(value) => onChange({ ...item, value })} className={`text-center text-5xl font-bold ${toneText(tone, 600)}`} />}
+      {fields.includes("num") && <InlineInput value={stringValue(item.num)} onChange={(num) => onChange({ ...item, num })} className={`mx-auto mb-2 h-12 w-20 rounded-xl text-center text-xl font-bold text-white ${toneBg(tone, 500)}`} />}
+      {fields.includes("number") && <InlineInput value={stringValue(item.number)} onChange={(number) => onChange({ ...item, number })} className={`mx-auto mb-2 h-12 w-12 rounded-full text-center text-xl font-bold ${toneBg(tone, 100)} ${toneText(tone, 700)}`} />}
+      {fields.includes("label") && <InlineInput value={stringValue(item.label)} onChange={(label) => onChange({ ...item, label })} className="mt-2 text-center text-sm font-semibold text-gray-600" />}
+      {fields.includes("title") && <InlineInput value={stringValue(item.title)} onChange={(title) => onChange({ ...item, title })} className="mt-2 text-center text-lg font-bold text-[#222222]" />}
+      {fields.includes("body") && <InlineArea value={stringValue(item.body)} onChange={(body) => onChange({ ...item, body })} className="mt-2 min-h-[72px] text-center text-sm leading-relaxed text-gray-600" />}
+      {fields.includes("tone") && <ToneDots value={tone} onChange={(nextTone) => onChange({ ...item, tone: nextTone })} />}
+    </article>
+  );
+}
+
+function InlineWideCard({
+  item,
+  fields,
+  onChange,
+  onRemove,
+}: {
+  item: JsonConfig;
+  fields: string[];
+  onChange: (item: JsonConfig) => void;
+  onRemove: () => void;
+}) {
+  const tone = normalizeTone(item.tone);
+  const badge = stringValue(item.icon || item.num || item.number || item.label);
+  return (
+    <article className={`relative rounded-xl border-l-4 bg-white/90 p-5 shadow-md ${toneBorder(tone)}`}>
+      <MiniRemove onClick={onRemove} />
+      <div className="flex items-start gap-4 pr-7">
+        {(fields.includes("icon") || fields.includes("num") || fields.includes("number") || fields.includes("label")) && (
+          <InlineInput
+            value={badge}
+            onChange={(value) => {
+              const key = fields.includes("icon") ? "icon" : fields.includes("num") ? "num" : fields.includes("number") ? "number" : "label";
+              onChange({ ...item, [key]: value });
+            }}
+            className={`h-12 w-16 shrink-0 rounded-xl text-center font-bold ${toneBg(tone, 100)} ${toneText(tone, 700)}`}
+          />
+        )}
+        <div className="min-w-0 flex-1">
+          {fields.includes("title") && <InlineInput value={stringValue(item.title)} onChange={(title) => onChange({ ...item, title })} className="text-lg font-bold text-[#222222]" />}
+          {fields.includes("body") && <InlineArea value={stringValue(item.body)} onChange={(body) => onChange({ ...item, body })} className="mt-2 min-h-[64px] text-sm leading-relaxed text-gray-600" />}
+          {fields.includes("tone") && <ToneDots value={tone} onChange={(nextTone) => onChange({ ...item, tone: nextTone })} />}
+        </div>
+      </div>
+    </article>
+  );
+}
+
+function InlineInput({ value, onChange, className }: { value: string; onChange: (value: string) => void; className?: string }) {
+  return (
+    <input
+      value={value}
+      onChange={(event) => onChange(event.target.value)}
+      className={`w-full border border-transparent bg-transparent px-2 py-1 outline-none transition focus:border-[#6C3CF4]/50 focus:bg-white/70 ${className ?? ""}`}
+    />
+  );
+}
+
+function InlineArea({ value, onChange, className }: { value: string; onChange: (value: string) => void; className?: string }) {
+  return (
+    <textarea
+      value={value}
+      onChange={(event) => onChange(event.target.value)}
+      className={`w-full resize-y border border-transparent bg-transparent px-2 py-1 outline-none transition focus:border-[#6C3CF4]/50 focus:bg-white/70 ${className ?? ""}`}
+    />
+  );
+}
+
+function InlineAdd({ label, onClick }: { label: string; onClick: () => void }) {
+  return (
+    <button type="button" onClick={onClick} className="flex min-h-[120px] items-center justify-center rounded-xl border border-dashed bg-white/70 px-4 py-5 text-sm font-semibold text-[#6C3CF4] hover:border-[#6C3CF4] hover:bg-white">
+      <Plus className="mr-2 h-4 w-4" /> Add {label}
+    </button>
+  );
+}
+
+function MiniRemove({ onClick }: { onClick: () => void }) {
+  return (
+    <button type="button" onClick={onClick} className="absolute right-2 top-2 rounded-full bg-white/90 p-1 text-red-600 opacity-0 shadow-sm transition hover:bg-red-50 group-hover/case-widget:opacity-100">
+      <Trash2 className="h-3.5 w-3.5" />
+    </button>
+  );
+}
+
+function InlineVariant({ value, onChange }: { value: string; onChange: (value: string) => void }) {
+  return (
+    <div className="mt-4 flex gap-2">
+      {[
+        ["", "White"],
+        ["blue_gradient", "Blue"],
+      ].map(([next, label]) => (
+        <button key={next} type="button" onClick={() => onChange(next)} className={value === next ? "btn-primary text-xs" : "btn-secondary text-xs"}>
+          {label}
+        </button>
+      ))}
+    </div>
+  );
+}
+
+function ToneDots({ value, onChange }: { value: Tone; onChange: (tone: Tone) => void }) {
+  return (
+    <div className="mt-3 flex flex-wrap gap-1">
+      {TONES.map((tone) => (
+        <button
+          key={tone}
+          type="button"
+          onClick={() => onChange(tone)}
+          className={`h-5 w-5 rounded-full border-2 ${toneBg(tone, 500)} ${value === tone ? "border-slate-900" : "border-white"}`}
+          title={tone}
+        />
+      ))}
+    </div>
+  );
+}
+
+function patchArray(_block: EditableBlock, key: string, index: number, item: JsonConfig, patchConfig: (patch: JsonConfig) => void) {
+  const items = asObjectArray(_block.config[key]);
+  patchConfig({ [key]: items.map((current, itemIndex) => itemIndex === index ? item : current) });
+}
+
+function removeArrayItem(block: EditableBlock, key: string, index: number, patchConfig: (patch: JsonConfig) => void) {
+  patchConfig({ [key]: asObjectArray(block.config[key]).filter((_, itemIndex) => itemIndex !== index) });
 }
 
 function WidgetEditor({ block, onChange }: { block: EditableBlock; onChange: (block: EditableBlock) => void }) {
@@ -733,6 +1048,51 @@ function asStringArray(value: unknown): string[] {
 
 function stringValue(value: unknown) {
   return typeof value === "string" ? value : "";
+}
+
+function normalizeTone(value: unknown): Tone {
+  const tone = typeof value === "string" ? value : "";
+  if (TONES.includes(tone as Tone)) return tone as Tone;
+  return "blue";
+}
+
+function toneBg(tone: Tone, shade: 100 | 500 | 600) {
+  const map: Record<Tone, Record<number, string>> = {
+    blue: { 100: "bg-blue-100", 500: "bg-blue-500", 600: "bg-blue-600" },
+    indigo: { 100: "bg-indigo-100", 500: "bg-indigo-500", 600: "bg-indigo-600" },
+    purple: { 100: "bg-purple-100", 500: "bg-purple-500", 600: "bg-purple-600" },
+    green: { 100: "bg-green-100", 500: "bg-green-500", 600: "bg-green-600" },
+    red: { 100: "bg-red-100", 500: "bg-red-500", 600: "bg-red-600" },
+    orange: { 100: "bg-orange-100", 500: "bg-orange-500", 600: "bg-orange-600" },
+    yellow: { 100: "bg-yellow-100", 500: "bg-yellow-500", 600: "bg-yellow-600" },
+  };
+  return map[tone][shade];
+}
+
+function toneText(tone: Tone, shade: 600 | 700) {
+  const map: Record<Tone, Record<number, string>> = {
+    blue: { 600: "text-blue-600", 700: "text-blue-700" },
+    indigo: { 600: "text-indigo-600", 700: "text-indigo-700" },
+    purple: { 600: "text-purple-600", 700: "text-purple-700" },
+    green: { 600: "text-green-600", 700: "text-green-700" },
+    red: { 600: "text-red-600", 700: "text-red-700" },
+    orange: { 600: "text-orange-600", 700: "text-orange-700" },
+    yellow: { 600: "text-yellow-600", 700: "text-yellow-700" },
+  };
+  return map[tone][shade];
+}
+
+function toneBorder(tone: Tone) {
+  const map: Record<Tone, string> = {
+    blue: "border-blue-500",
+    indigo: "border-indigo-500",
+    purple: "border-purple-500",
+    green: "border-green-500",
+    red: "border-red-500",
+    orange: "border-orange-500",
+    yellow: "border-yellow-500",
+  };
+  return map[tone];
 }
 
 function fieldLabel(field: string) {
