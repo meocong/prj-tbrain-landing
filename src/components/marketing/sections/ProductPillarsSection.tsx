@@ -35,7 +35,7 @@ const PILLARS = [
     subtitle: "Temporal labels at frame precision",
     icon: Video,
     accent: "#6C3CF4",
-    href: "/about#services",
+    href: "/services",
     description:
       "Frame-level boxes, segmentation, action recognition, and multi-view tracking.",
     visual: "video",
@@ -46,7 +46,7 @@ const PILLARS = [
     subtitle: "Pixel-perfect masks & boxes",
     icon: ImageIcon,
     accent: "#34D399",
-    href: "/about#services",
+    href: "/services",
     description:
       "Classification, detection, instance & semantic segmentation — calibrated for frontier vision models.",
     visual: "image",
@@ -57,7 +57,7 @@ const PILLARS = [
     subtitle: "Human preference at scale",
     icon: MessageSquare,
     accent: "#8B5CF6",
-    href: "/about#services",
+    href: "/services",
     description:
       "Preference ranking, rubric-based scoring, and red-team evals with audit trails.",
     visual: "text",
@@ -68,7 +68,7 @@ const PILLARS = [
     subtitle: "Models that watch the models",
     icon: Cpu,
     accent: "#F59E0B",
-    href: "/about#services",
+    href: "/services",
     description:
       "Every sample runs through our confidence models — flagging edge cases before they hit your training run.",
     visual: "qc",

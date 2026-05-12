@@ -22,12 +22,7 @@ const nextConfig: NextConfig = {
     ],
   },
   async redirects() {
-    return [
-      // /services merged into /about (5/7/26 — tester request to drop duplication).
-      // Anchor preserves SEO landing for users hitting an old "Services" link.
-      { source: "/services", destination: "/about#services", permanent: true },
-      // /services#services and /services#domains preserved as anchors on the merged page.
-    ];
+    return [];
   },
   async headers() {
     return [

@@ -98,7 +98,7 @@ export default async function PlatformPage() {
                 Request a demo <ArrowRight className="h-4 w-4" />
               </Link>
               <Link
-                href="/about#services"
+                href="/services"
                 className="inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-semibold transition-colors"
                 style={{ background: "rgba(15,23,42,0.04)", border: "1px solid rgba(15,23,42,0.10)", color: "var(--text-primary)", backdropFilter: "blur(10px)" }}
               >
