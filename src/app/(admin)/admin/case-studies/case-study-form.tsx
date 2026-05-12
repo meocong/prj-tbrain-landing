@@ -5,7 +5,7 @@ import { useMutation } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { toast } from "sonner";
-import { ArrowLeft, FileText, Plus, Printer, RefreshCw, Save, Trash2, Upload, Users } from "lucide-react";
+import { ArrowLeft, Blocks, FileText, Plus, Printer, RefreshCw, Save, Trash2, Upload, Users } from "lucide-react";
 import { supabaseAdmin } from "@/lib/admin/supabase-browser";
 import { TipTapEditor } from "@/components/admin/editor/TipTapEditor";
 
@@ -203,6 +203,20 @@ export function CaseStudyForm({ initial }: { initial?: CaseStudyFormValues }) {
       >
         {isEdit ? "Edit case study" : "New case study"}
       </h1>
+
+      {isEdit && initial?.id && (
+        <div className="mb-5 rounded-2xl p-4 flex items-center justify-between gap-4" style={{ background: "var(--bg-elevated, #fff)", border: "1px solid var(--border-default)" }}>
+          <div>
+            <p className="text-sm font-medium" style={{ color: "var(--text-primary)" }}>Page widgets</p>
+            <p className="mt-1 text-xs" style={{ color: "var(--text-muted)" }}>
+              Configure detail-page UI blocks such as metrics, challenge cards, QA framework, outcomes, and CTA.
+            </p>
+          </div>
+          <Link href={`/admin/case-studies/${initial.id}/blocks`} className="btn-secondary text-xs">
+            <Blocks className="h-3.5 w-3.5" /> Manage widgets
+          </Link>
+        </div>
+      )}
 
       <div className="space-y-5 rounded-2xl p-6" style={{ background: "var(--bg-elevated, #fff)", border: "1px solid var(--border-default)" }}>
         <Field label="Title" required>
