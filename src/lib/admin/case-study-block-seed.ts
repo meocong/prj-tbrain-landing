@@ -43,7 +43,7 @@ export async function ensureCaseStudyBlocks(
   study: CaseStudySeedSource,
   existing: CaseStudyBlockSeedRow[] | null | undefined
 ): Promise<CaseStudyBlockSeedRow[]> {
-  const normalizedExisting = await removeExactDuplicateBlocks(db, existing ?? []);
+  const normalizedExisting = dedupeExactBlocks(existing ?? []);
   if (normalizedExisting.length) return normalizedExisting;
 
   const seedBlocks = buildSeedBlocks(study);
@@ -59,7 +59,7 @@ export async function ensureCaseStudyBlocks(
     console.error("[case-study-block-seed] latest check failed:", latestError.message);
   }
 
-  const normalizedLatest = await removeExactDuplicateBlocks(db, (latest ?? []) as CaseStudyBlockSeedRow[]);
+  const normalizedLatest = dedupeExactBlocks((latest ?? []) as CaseStudyBlockSeedRow[]);
   if (normalizedLatest.length) return normalizedLatest;
 
   const { data, error } = await db
@@ -73,10 +73,10 @@ export async function ensureCaseStudyBlocks(
     return [];
   }
 
-  return removeExactDuplicateBlocks(db, (data ?? []) as CaseStudyBlockSeedRow[]);
+  return dedupeExactBlocks((data ?? []) as CaseStudyBlockSeedRow[]);
 }
 
-async function removeExactDuplicateBlocks(db: SupabaseClient, rows: CaseStudyBlockSeedRow[]) {
+function dedupeExactBlocks(rows: CaseStudyBlockSeedRow[]) {
   if (rows.length < 2) return rows;
 
   const sorted = [...rows].sort((a, b) => {
@@ -86,7 +86,6 @@ async function removeExactDuplicateBlocks(db: SupabaseClient, rows: CaseStudyBlo
 
   const seen = new Set<string>();
   const keep: CaseStudyBlockSeedRow[] = [];
-  const removeIds: string[] = [];
 
   for (const row of sorted) {
     const signature = [
@@ -99,19 +98,9 @@ async function removeExactDuplicateBlocks(db: SupabaseClient, rows: CaseStudyBlo
       String(row.display_order),
     ].join("\u001f");
 
-    if (seen.has(signature)) {
-      removeIds.push(row.id);
-    } else {
+    if (!seen.has(signature)) {
       seen.add(signature);
       keep.push(row);
-    }
-  }
-
-  if (removeIds.length) {
-    const { error } = await db.from("case_study_blocks").delete().in("id", removeIds);
-    if (error) {
-      console.error("[case-study-block-seed] duplicate cleanup failed:", error.message);
-      return sorted;
     }
   }
 
