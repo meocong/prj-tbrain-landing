@@ -1,6 +1,6 @@
 import "server-only";
 import Link from "next/link";
-import { ArrowLeft, Plus } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 import { requireAdmin } from "@/lib/admin/server/list";
 import { supabaseAdmin } from "@/lib/terminal-bench/supabase/admin";
 import { CaseStudyBlocksClient, type CaseStudyBlockRow } from "./blocks-client";
@@ -22,7 +22,7 @@ export default async function CaseStudyBlocksPage({ params }: { params: Promise<
     db.from("case_studies").select("id, title, slug").eq("id", id).maybeSingle(),
     db
       .from("case_study_blocks")
-      .select("id, type, title, subtitle, display_order, is_active, updated_at")
+      .select("id, case_study_id, type, title, subtitle, content, config, display_order, is_active, updated_at")
       .eq("case_study_id", id)
       .order("display_order", { ascending: true }),
   ]);
@@ -56,9 +56,6 @@ export default async function CaseStudyBlocksPage({ params }: { params: Promise<
             Configure the detail-page blocks for {current.title}. Lower order renders first.
           </p>
         </div>
-        <Link href={`/admin/case-studies/${id}/blocks/new`} className="btn-primary text-sm">
-          <Plus className="h-4 w-4" /> Add widget
-        </Link>
       </div>
 
       <CaseStudyBlocksClient caseStudyId={id} rows={rows} />

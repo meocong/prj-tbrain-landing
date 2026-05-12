@@ -10,3 +10,15 @@ export const CASE_STUDY_BLOCK_TYPES = [
 ] as const;
 
 export type CaseStudyBlockType = (typeof CASE_STUDY_BLOCK_TYPES)[number];
+
+export type CaseStudyBlock = {
+  id: string;
+  caseStudyId: string;
+  type: CaseStudyBlockType;
+  title: string | null;
+  subtitle: string | null;
+  content: string | null;
+  config: Record<string, unknown>;
+  displayOrder: number;
+  isActive: boolean;
+};
