@@ -12,6 +12,7 @@ export type CaseStudyBlockSeedRow = {
   config: Record<string, unknown> | null;
   display_order: number;
   is_active: boolean;
+  created_at?: string | null;
   updated_at: string;
 };
 
@@ -35,17 +36,31 @@ type InsertBlock = {
   is_active: boolean;
 };
 
-const BLOCK_SELECT = "id, case_study_id, type, title, subtitle, content, config, display_order, is_active, updated_at";
+const BLOCK_SELECT = "id, case_study_id, type, title, subtitle, content, config, display_order, is_active, created_at, updated_at";
 
 export async function ensureCaseStudyBlocks(
   db: SupabaseClient,
   study: CaseStudySeedSource,
   existing: CaseStudyBlockSeedRow[] | null | undefined
 ): Promise<CaseStudyBlockSeedRow[]> {
-  if (existing?.length) return existing;
+  const normalizedExisting = await removeExactDuplicateBlocks(db, existing ?? []);
+  if (normalizedExisting.length) return normalizedExisting;
 
   const seedBlocks = buildSeedBlocks(study);
   if (!seedBlocks.length) return [];
+
+  const { data: latest, error: latestError } = await db
+    .from("case_study_blocks")
+    .select(BLOCK_SELECT)
+    .eq("case_study_id", study.id)
+    .order("display_order", { ascending: true });
+
+  if (latestError) {
+    console.error("[case-study-block-seed] latest check failed:", latestError.message);
+  }
+
+  const normalizedLatest = await removeExactDuplicateBlocks(db, (latest ?? []) as CaseStudyBlockSeedRow[]);
+  if (normalizedLatest.length) return normalizedLatest;
 
   const { data, error } = await db
     .from("case_study_blocks")
@@ -58,7 +73,60 @@ export async function ensureCaseStudyBlocks(
     return [];
   }
 
-  return (data ?? []) as CaseStudyBlockSeedRow[];
+  return removeExactDuplicateBlocks(db, (data ?? []) as CaseStudyBlockSeedRow[]);
+}
+
+async function removeExactDuplicateBlocks(db: SupabaseClient, rows: CaseStudyBlockSeedRow[]) {
+  if (rows.length < 2) return rows;
+
+  const sorted = [...rows].sort((a, b) => {
+    if (a.display_order !== b.display_order) return a.display_order - b.display_order;
+    return (a.created_at ?? "").localeCompare(b.created_at ?? "") || a.id.localeCompare(b.id);
+  });
+
+  const seen = new Set<string>();
+  const keep: CaseStudyBlockSeedRow[] = [];
+  const removeIds: string[] = [];
+
+  for (const row of sorted) {
+    const signature = [
+      row.case_study_id,
+      row.type,
+      row.title ?? "",
+      row.subtitle ?? "",
+      row.content ?? "",
+      stableStringify(row.config ?? {}),
+      String(row.display_order),
+    ].join("\u001f");
+
+    if (seen.has(signature)) {
+      removeIds.push(row.id);
+    } else {
+      seen.add(signature);
+      keep.push(row);
+    }
+  }
+
+  if (removeIds.length) {
+    const { error } = await db.from("case_study_blocks").delete().in("id", removeIds);
+    if (error) {
+      console.error("[case-study-block-seed] duplicate cleanup failed:", error.message);
+      return sorted;
+    }
+  }
+
+  return keep;
+}
+
+function stableStringify(value: unknown): string {
+  if (Array.isArray(value)) return `[${value.map(stableStringify).join(",")}]`;
+  if (value && typeof value === "object") {
+    return `{${Object.entries(value as Record<string, unknown>)
+      .sort(([a], [b]) => a.localeCompare(b))
+      .map(([key, item]) => `${JSON.stringify(key)}:${stableStringify(item)}`)
+      .join(",")}}`;
+  }
+  return JSON.stringify(value);
 }
 
 function buildSeedBlocks(study: CaseStudySeedSource): InsertBlock[] {
