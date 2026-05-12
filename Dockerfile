@@ -1,3 +1,4 @@
+# syntax=docker/dockerfile:1.7
 FROM node:22-alpine
 
 WORKDIR /app
@@ -24,7 +25,12 @@ ENV NEXT_PUBLIC_SUPABASE_ANON_KEY=${NEXT_PUBLIC_SUPABASE_ANON_KEY}
 ENV NEXT_PUBLIC_TBRAIN_SSO_ENABLED=${NEXT_PUBLIC_TBRAIN_SSO_ENABLED}
 ENV NEXT_PUBLIC_TBRAIN_SSO_PROVIDER=${NEXT_PUBLIC_TBRAIN_SSO_PROVIDER}
 
-RUN pnpm build
+# CMS-backed static pages read the Supabase service-role key during
+# prerendering. Keep it as a BuildKit secret so it is not persisted as an
+# image ENV value.
+RUN --mount=type=secret,id=supabase_service_role_key \
+    SUPABASE_SERVICE_ROLE_KEY="$(cat /run/secrets/supabase_service_role_key 2>/dev/null || true)" \
+    pnpm build
 
 ENV NODE_ENV=production
 
