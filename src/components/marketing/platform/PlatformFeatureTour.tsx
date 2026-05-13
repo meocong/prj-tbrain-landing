@@ -99,6 +99,9 @@ export function PlatformFeatureTour() {
 function FeatureRow({ tour, index }: { tour: Tour; index: number }) {
   const ref = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
+  const redactionAreas = index === 2
+    ? [{ top: 14, left: 4, width: 92, height: 82 }]
+    : [{ top: 18, left: 4, width: 92, height: 70 }];
 
   useEffect(() => {
     const el = ref.current;
@@ -177,6 +180,19 @@ function FeatureRow({ tour, index }: { tour: Tour; index: number }) {
             sizes="(min-width: 768px) 50vw, 100vw"
             className="object-cover object-top"
           />
+          {redactionAreas.map((area, areaIndex) => (
+            <div
+              key={`${tour.src}-${areaIndex}`}
+              className="pointer-events-none absolute rounded-xl backdrop-blur-md"
+              style={{
+                top: `${area.top}%`,
+                left: `${area.left}%`,
+                width: `${area.width}%`,
+                height: `${area.height}%`,
+                background: "rgba(11,13,18,0.48)",
+              }}
+            />
+          ))}
           <div
             className="pointer-events-none absolute inset-0"
             style={{

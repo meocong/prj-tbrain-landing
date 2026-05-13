@@ -70,7 +70,7 @@ export function ContactCTA() {
 
         <RevealOnScroll delay={0.5}>
           <p className="mt-10 text-xs uppercase tracking-widest" style={{ color: "var(--text-muted)" }}>
-            Tbrain · Data Factory · Hanoi
+            Tbrain · Data Factory · Wilmington, DE
           </p>
         </RevealOnScroll>
       </div>
