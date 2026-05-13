@@ -186,7 +186,7 @@ export default async function Page() {
           <div>
             Email: info@tbrain.ai
             <br />
-            Address: 30 N Gould St Ste N, Sheridan, WY 82801 USA
+            Address: 1209 N Orange St, Wilmington, DE 19801 USA
           </div>
         </section>
       </main>

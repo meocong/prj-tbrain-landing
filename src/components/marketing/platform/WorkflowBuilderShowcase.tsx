@@ -163,7 +163,7 @@ export function WorkflowBuilderShowcase() {
       {/* Canvas */}
       <div className="relative">
         <svg
-          viewBox="0 0 1100 620"
+          viewBox="0 0 1240 620"
           className="block w-full h-auto"
           preserveAspectRatio="xMidYMid meet"
         >
@@ -187,7 +187,7 @@ export function WorkflowBuilderShowcase() {
             </linearGradient>
           </defs>
 
-          <rect width="1100" height="620" fill="url(#wf-grid)" />
+          <rect width="1240" height="620" fill="url(#wf-grid)" />
 
           {/* Edges (drawn first so nodes overlap them) */}
           {EDGES.map((e, i) => {
@@ -289,18 +289,18 @@ export function WorkflowBuilderShowcase() {
                   {p.tag}
                 </text>
                 {/* Title */}
-                <text x="36" y="42" fill="#fff" fontSize="14" fontWeight="600">
+                <text x="48" y="42" fill="#fff" fontSize="14" fontWeight="600">
                   {node.title}
                 </text>
                 {/* Meta */}
                 {node.meta && (
-                  <text x="36" y="60" fill="rgba(255,255,255,0.45)" fontSize="10">
+                  <text x="48" y="60" fill="rgba(255,255,255,0.45)" fontSize="10">
                     {node.meta}
                   </text>
                 )}
                 {/* Icon — drawn via foreignObject so we can use lucide */}
-                <foreignObject x="22" y="32" width="20" height="20">
-                  <p.icon className="h-5 w-5" />
+                <foreignObject x="22" y="34" width="18" height="18">
+                  <p.icon className="h-4 w-4" />
                 </foreignObject>
               </g>
             );
