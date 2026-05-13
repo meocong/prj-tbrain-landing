@@ -1,11 +1,10 @@
 import "server-only";
 import { EXPERTISE_AREAS, EXPERTS, LEADERSHIP, SAMPLE_PROJECTS } from "@/lib/constants/marketing";
-import { supabaseAdmin } from "@/lib/terminal-bench/supabase/admin";
 import { ABOUT_CARD_GROUPS, type AboutCardGroupKey } from "./about-card-groups";
 
 export type AboutCard = {
   id?: string;
-  groupKey: string;
+  groupKey: AboutCardGroupKey;
   slug: string;
   title: string;
   label: string | null;
@@ -16,37 +15,10 @@ export type AboutCard = {
   displayOrder: number;
 };
 
-type AboutCardRow = {
-  id: string;
-  group_key: string;
-  slug: string;
-  title: string;
-  label: string | null;
-  description: string | null;
-  icon: string | null;
-  image_url: string | null;
-  meta: Record<string, unknown> | null;
-  display_order: number;
-};
-
 export type AboutCardGroups = Record<AboutCardGroupKey, AboutCard[]>;
 
 export async function getAboutCards(groupKey: AboutCardGroupKey): Promise<AboutCard[]> {
-  try {
-    const { data, error } = await supabaseAdmin()
-      .from("about_cards")
-      .select("id, group_key, slug, title, label, description, icon, image_url, meta, display_order")
-      .eq("group_key", groupKey)
-      .eq("is_active", true)
-      .order("display_order", { ascending: true });
-
-    if (error) throw error;
-    if (!data || data.length === 0) return FALLBACK_GROUPS[groupKey];
-    return (data as AboutCardRow[]).map((row) => toCard(row)).filter((card): card is AboutCard => Boolean(card));
-  } catch (err) {
-    console.error(`[about-cards/${groupKey}] load failed, using fallback:`, err);
-    return FALLBACK_GROUPS[groupKey];
-  }
+  return FALLBACK_GROUPS[groupKey];
 }
 
 export async function getAboutCardGroups(): Promise<AboutCardGroups> {
@@ -54,46 +26,6 @@ export async function getAboutCardGroups(): Promise<AboutCardGroups> {
     ABOUT_CARD_GROUPS.map(async (groupKey) => [groupKey, await getAboutCards(groupKey)] as const)
   );
   return Object.fromEntries(entries) as AboutCardGroups;
-}
-
-export async function getAboutCardsBySection(): Promise<Record<string, AboutCard[]>> {
-  try {
-    const { data, error } = await supabaseAdmin()
-      .from("about_cards")
-      .select("id, group_key, slug, title, label, description, icon, image_url, meta, display_order")
-      .eq("is_active", true)
-      .order("group_key", { ascending: true })
-      .order("display_order", { ascending: true });
-
-    if (error) throw error;
-    if (!data || data.length === 0) return FALLBACK_GROUPS;
-
-    return (data as AboutCardRow[]).reduce<Record<string, AboutCard[]>>((acc, row) => {
-      const card = toCard(row, { allowCustomGroups: true });
-      if (!card) return acc;
-      acc[card.groupKey] = [...(acc[card.groupKey] ?? []), card];
-      return acc;
-    }, {});
-  } catch (err) {
-    console.error("[about-cards] load failed, using fallback:", err);
-    return FALLBACK_GROUPS;
-  }
-}
-
-function toCard(row: AboutCardRow, options?: { allowCustomGroups?: boolean }): AboutCard | null {
-  if (!options?.allowCustomGroups && !ABOUT_CARD_GROUPS.includes(row.group_key as AboutCardGroupKey)) return null;
-  return {
-    id: row.id,
-    groupKey: row.group_key as AboutCardGroupKey,
-    slug: row.slug,
-    title: row.title,
-    label: row.label,
-    description: row.description ?? "",
-    icon: row.icon,
-    imageUrl: row.image_url,
-    meta: row.meta ?? {},
-    displayOrder: row.display_order,
-  };
 }
 
 const fallbackCompanyCards: AboutCard[] = [

@@ -29,8 +29,7 @@ import {
   Workflow,
   Wrench,
 } from "lucide-react";
-import { getAboutCardsBySection, type AboutCard } from "@/lib/landing/about-cards";
-import { getAboutHero } from "@/lib/landing/about-hero";
+import { getAboutCardGroups } from "@/lib/landing/about-cards";
 import { getAboutSections, type AboutSection } from "@/lib/landing/about-sections";
 import { getServices } from "@/lib/landing/services";
 import { StatsGrid } from "./stats-grid";
@@ -111,86 +110,23 @@ function SectionHeading({
   );
 }
 
-function GenericAboutSection({ section, cards }: { section: AboutSection; cards: AboutCard[] }) {
-  return (
-    <section className="container mx-auto mt-24 px-3">
-      <SectionHeading section={section} />
-      <div className={`mx-auto mt-12 grid max-w-5xl gap-5 ${section.layout === "two" ? "md:grid-cols-2" : section.layout === "four" ? "sm:grid-cols-2 lg:grid-cols-4" : "md:grid-cols-3"}`}>
-        {cards.map((card) => {
-          const cardType = getCardWidgetType(card, section);
-          if (cardType === "avatar-card") {
-            return (
-              <article key={card.slug} className="text-center">
-                <Image src={card.imageUrl || "/images/avt-1.png"} width={128} height={128} alt={card.title} className="mx-auto h-32 w-32 rounded-3xl object-cover" />
-                <h4 className="mt-4 text-lg font-semibold" style={{ fontFamily: "var(--font-heading)", color: "var(--text-primary)" }}>{card.title}</h4>
-                {card.label && <p className="mt-1 text-xs font-semibold uppercase tracking-[0.16em]" style={{ color: section.accent }}>{card.label}</p>}
-                <p className="mt-2 text-sm leading-relaxed" style={{ color: "var(--text-secondary)" }}>{card.description}</p>
-              </article>
-            );
-          }
-
-          if (cardType === "profile-card") {
-            const projects = Array.isArray(card.meta.projects) ? card.meta.projects.filter((item): item is string => typeof item === "string") : [];
-            return (
-              <article key={card.slug} className="rounded-3xl p-6 md:p-8" style={{ background: "var(--bg-card)", border: "1px solid var(--border-subtle)", boxShadow: "var(--shadow-card)" }}>
-                <div className="flex items-start gap-5">
-                  <Image src={card.imageUrl || "/images/avt-tamle.png"} width={96} height={96} alt={card.title} className="h-24 w-24 rounded-2xl object-cover" />
-                  <div>
-                    {card.label && <p className="text-xs font-semibold uppercase tracking-[0.18em]" style={{ color: section.accent }}>{card.label}</p>}
-                    <h3 className="mt-2 text-3xl font-semibold" style={{ fontFamily: "var(--font-heading)", color: "var(--text-primary)" }}>{card.title}</h3>
-                  </div>
-                </div>
-                <p className="mt-6 text-base leading-relaxed" style={{ color: "var(--text-secondary)" }}>{card.description}</p>
-                <div className="mt-6 flex flex-wrap gap-2">{projects.map((project) => <span key={project} className="rounded-full px-3 py-1 text-xs font-semibold" style={{ background: "var(--hero-chip-bg)", border: "1px solid var(--hero-chip-border)", color: "var(--text-secondary)" }}>{project}</span>)}</div>
-              </article>
-            );
-          }
-
-          const Icon = (ICON_MAP[card.icon ?? ""] || Factory) as React.ComponentType<{ className?: string }>;
-          return (
-            <article key={card.slug} className="rounded-2xl border p-6" style={{ background: "var(--bg-card)", borderColor: "var(--border-subtle)", boxShadow: "var(--shadow-card)" }}>
-              <div className="flex items-center gap-3">
-                <span className="inline-flex h-12 w-12 items-center justify-center rounded-xl" style={{ backgroundColor: `${section.accent}1A`, color: section.accent }}><Icon className="h-6 w-6" /></span>
-                {card.label && <p className="text-xs font-semibold uppercase tracking-[0.18em]" style={{ color: "var(--text-muted)" }}>{card.label}</p>}
-              </div>
-              <h3 className="mt-5 text-xl font-semibold leading-snug" style={{ fontFamily: "var(--font-heading)" }}>{card.title}</h3>
-              <p className="mt-3 text-sm leading-relaxed" style={{ color: "var(--text-secondary)" }}>{card.description}</p>
-            </article>
-          );
-        })}
-      </div>
-    </section>
-  );
-}
-
-function getCardWidgetType(card: AboutCard, section: AboutSection): AboutSection["childWidgetType"] {
-  const cardType = card.meta.card_type;
-  return cardType === "profile-card" || cardType === "avatar-card" || cardType === "icon-card"
-    ? cardType
-    : section.childWidgetType;
-}
-
 export default async function AboutPage() {
-  const [services, domains, aboutCards, aboutSections, aboutHero] = await Promise.all([
+  const [services, domains, aboutCards, aboutSections] = await Promise.all([
     getServices("service"),
     getServices("domain"),
-    getAboutCardsBySection(),
+    getAboutCardGroups(),
     getAboutSections(),
-    getAboutHero(),
   ]);
 
   const sectionByGroup = Object.fromEntries(aboutSections.map((section) => [section.groupKey, section])) as Partial<
     Record<AboutSection["groupKey"], AboutSection>
   >;
-  const companyCards = aboutCards.company ?? [];
-  const valueCards = aboutCards.value ?? [];
-  const sampleProjects = aboutCards.sample_projects ?? [];
-  const expertise = aboutCards.expertise ?? [];
-  const coreProfiles = aboutCards.team ?? [];
-  const experts = aboutCards.experts ?? [];
-  const customSections = aboutSections.filter(
-    (section) => !["company", "value", "sample_projects", "expertise", "team", "experts"].includes(section.groupKey)
-  );
+  const companyCards = aboutCards.company;
+  const valueCards = aboutCards.value;
+  const sampleProjects = aboutCards.sample_projects;
+  const expertise = aboutCards.expertise;
+  const coreProfiles = aboutCards.team;
+  const experts = aboutCards.experts;
 
   return (
     <div>
@@ -202,23 +138,19 @@ export default async function AboutPage() {
             className="text-4xl font-semibold md:text-6xl"
             style={{ fontFamily: "var(--font-heading)" }}
           >
-            {aboutHero.titleBefore}
-            {aboutHero.titleHighlight ? (
-              <>
-                {" "}
-                <span className="gradient-text">{aboutHero.titleHighlight}</span>
-              </>
-            ) : null}
-            {aboutHero.titleAfter ? ` ${aboutHero.titleAfter}` : null}
+            The improvement layer for{" "}
+            <span className="gradient-text">agentic AI</span>
           </h1>
           <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed" style={{ color: "var(--text-secondary)" }}>
-            {aboutHero.description}
+            Expert-validated environments, data, and evaluation programs that
+            make agentic AI measurably better. Run by domain pods built for
+            high-stakes work.
           </p>
         </section>
 
         {/* Stats */}
         <section className="container mx-auto mt-20 px-3">
-          <StatsGrid stats={aboutHero.stats} />
+          <StatsGrid />
         </section>
 
         {/* Company, mission, and team */}
@@ -563,10 +495,6 @@ export default async function AboutPage() {
             </div>
           )}
         </section>
-
-        {customSections.map((section) => (
-          <GenericAboutSection key={section.groupKey} section={section} cards={aboutCards[section.groupKey] ?? []} />
-        ))}
 
         {/* CTA */}
         <section className="container mx-auto mt-24 px-3 text-center">
