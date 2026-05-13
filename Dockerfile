@@ -4,7 +4,8 @@ FROM node:22-alpine
 WORKDIR /app
 
 # git for dependencies; python3 for the Terminal Bench test-AST parser used by the ingest script.
-RUN apk add --no-cache git python3 && \
+# chromium is required by the admin PDF export flow.
+RUN apk add --no-cache git python3 chromium nss freetype harfbuzz ca-certificates ttf-freefont && \
     corepack enable && corepack prepare pnpm@latest --activate
 
 COPY package.json pnpm-lock.yaml* ./
@@ -25,6 +26,7 @@ ENV NEXT_PUBLIC_SUPABASE_URL=${NEXT_PUBLIC_SUPABASE_URL}
 ENV NEXT_PUBLIC_SUPABASE_ANON_KEY=${NEXT_PUBLIC_SUPABASE_ANON_KEY}
 ENV NEXT_PUBLIC_TBRAIN_SSO_ENABLED=${NEXT_PUBLIC_TBRAIN_SSO_ENABLED}
 ENV NEXT_PUBLIC_TBRAIN_SSO_PROVIDER=${NEXT_PUBLIC_TBRAIN_SSO_PROVIDER}
+ENV PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium-browser
 
 # CMS-backed static pages read the Supabase service-role key during
 # prerendering. Keep it as a BuildKit secret so it is not persisted as an
