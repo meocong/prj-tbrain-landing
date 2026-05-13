@@ -1,10 +1,9 @@
 import "server-only";
 import { supabaseAdmin } from "@/lib/terminal-bench/supabase/admin";
-import { ABOUT_CARD_GROUPS, type AboutCardGroupKey } from "./about-card-groups";
 
 export type AboutSection = {
   id?: string;
-  groupKey: AboutCardGroupKey;
+  groupKey: string;
   eyebrow: string;
   titleBefore: string;
   titleHighlight: string | null;
@@ -50,11 +49,10 @@ export async function getAboutSections(): Promise<AboutSection[]> {
 }
 
 function toSection(row: AboutSectionRow): AboutSection | null {
-  if (!ABOUT_CARD_GROUPS.includes(row.group_key as AboutCardGroupKey)) return null;
   const fallback = FALLBACK_ABOUT_SECTIONS.find((section) => section.groupKey === row.group_key);
   return {
     id: row.id,
-    groupKey: row.group_key as AboutCardGroupKey,
+    groupKey: row.group_key,
     eyebrow: row.eyebrow ?? fallback?.eyebrow ?? "",
     titleBefore: row.title_before ?? fallback?.titleBefore ?? "",
     titleHighlight: row.title_highlight ?? fallback?.titleHighlight ?? null,
