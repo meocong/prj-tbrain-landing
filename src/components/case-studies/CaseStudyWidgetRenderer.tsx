@@ -49,6 +49,8 @@ export function CaseStudyWidget({
       return <ProcessSteps block={block} />;
     case "outcome":
       return <OutcomeBlock block={block} />;
+    case "image":
+      return <ImageBlock block={block} />;
     case "cta":
       return <LegacyCta title={block.title || "Need Expert Data Services?"} subtitle={block.subtitle || ""} config={block.config} />;
     default:
@@ -285,6 +287,21 @@ function OutcomeBlock({ block }: { block: CaseStudyBlock }) {
           ))}
         </ul>
       </div>
+    </section>
+  );
+}
+
+function ImageBlock({ block }: { block: CaseStudyBlock }) {
+  const src = asString(block.config.src, "");
+  const alt = asString(block.config.alt, "Case study image");
+  const caption = asString(block.config.caption, "");
+  if (!src) return null;
+  return (
+    <section className="mb-12">
+      <figure className="overflow-hidden rounded-2xl bg-white/80 p-3 shadow-md backdrop-blur-sm">
+        <img src={src} alt={alt} className="h-auto w-full rounded-xl object-cover" />
+        {caption && <figcaption className="px-2 pt-3 text-center text-sm text-gray-600">{caption}</figcaption>}
+      </figure>
     </section>
   );
 }

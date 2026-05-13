@@ -5,6 +5,8 @@ import type { ReactNode } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { toast } from "sonner";
 import {
+  ArrowDown,
+  ArrowUp,
   Copy,
   Eye,
   GripVertical,
@@ -53,6 +55,7 @@ const WIDGET_LABELS: Record<CaseStudyBlockType, string> = {
   qa_framework: "QA framework",
   process_steps: "Process steps",
   outcome: "Outcome",
+  image: "Image",
   cta: "CTA",
 };
 
@@ -61,18 +64,40 @@ const TONES: Tone[] = ["blue", "indigo", "purple", "green", "red", "orange", "ye
 export function CaseStudyBlocksClient({
   caseStudyId,
   caseTitle,
+  caseDescription,
   rows,
 }: {
   caseStudyId: string;
   caseTitle: string;
+  caseDescription: string;
   rows: CaseStudyBlockRow[];
 }) {
   const [blocks, setBlocks] = useState<EditableBlock[]>(() => rows.map(fromRow).sort(byOrder));
+  const [caseInfo, setCaseInfo] = useState({ title: caseTitle, description: caseDescription });
+  const [caseInfoFocused, setCaseInfoFocused] = useState(false);
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [dragId, setDragId] = useState<string | null>(null);
   const [showAdd, setShowAdd] = useState(false);
   const selected = blocks.find((block) => block.id === selectedId) ?? null;
   const orderedBlocks = useMemo(() => [...blocks].sort(byOrder), [blocks]);
+
+  const caseInfoMutation = useMutation({
+    mutationFn: async () => {
+      const { error } = await supabaseAdmin
+        .from("case_studies")
+        .update({
+          title: caseInfo.title.trim() || "Untitled case study",
+          short_description: caseInfo.description.trim() || null,
+        })
+        .eq("id", caseStudyId);
+      if (error) throw error;
+    },
+    onSuccess: () => {
+      setCaseInfoFocused(false);
+      toast.success("Case study info saved");
+    },
+    onError: (err: Error) => toast.error(err.message || "Save case study info failed"),
+  });
 
   const saveMutation = useMutation({
     mutationFn: async (block: EditableBlock) => {
@@ -82,7 +107,10 @@ export function CaseStudyBlocksClient({
         .eq("id", block.id);
       if (error) throw error;
     },
-    onSuccess: () => toast.success("Widget saved"),
+    onSuccess: () => {
+      setSelectedId(null);
+      toast.success("Widget saved");
+    },
     onError: (err: Error) => toast.error(err.message || "Save failed"),
   });
 
@@ -101,6 +129,13 @@ export function CaseStudyBlocksClient({
       setBlocks((current) => [...current, block].sort(byOrder));
       setSelectedId(block.id);
       setShowAdd(false);
+      if (block.type === "image") {
+        requestAnimationFrame(() => {
+          const node = document.querySelector<HTMLElement>(`[data-case-widget-id="${block.id}"]`);
+          node?.scrollIntoView({ behavior: "smooth", block: "center", inline: "nearest" });
+          node?.focus({ preventScroll: true });
+        });
+      }
       toast.success("Widget added");
     },
     onError: (err: Error) => toast.error(err.message || "Add widget failed"),
@@ -179,18 +214,33 @@ export function CaseStudyBlocksClient({
     });
   }
 
+  function moveBlock(blockId: string, direction: "up" | "down") {
+    setBlocks((current) => {
+      const ordered = [...current].sort(byOrder);
+      const from = ordered.findIndex((block) => block.id === blockId);
+      const to = direction === "up" ? from - 1 : from + 1;
+      if (from < 0 || to < 0 || to >= ordered.length) return current;
+      const next = [...ordered];
+      const [moved] = next.splice(from, 1);
+      next.splice(to, 0, moved);
+      const nextOrdered = next.map((block, index) => ({ ...block, displayOrder: (index + 1) * 10 }));
+      orderMutation.mutate(nextOrdered);
+      return nextOrdered;
+    });
+  }
+
   return (
     <div className="space-y-5">
       <div className="glass-card flex flex-wrap items-center justify-between gap-3 p-3">
         <div>
-          <p className="text-sm font-semibold" style={{ color: "var(--text-primary)" }}>{caseTitle}</p>
+          <p className="text-sm font-semibold" style={{ color: "var(--text-primary)" }}>Detail page widgets</p>
           <p className="mt-1 text-xs" style={{ color: "var(--text-muted)" }}>
             Drag sections to reorder. Click any widget to edit its content directly in place.
           </p>
         </div>
         <div className="flex items-center gap-2">
           {orderMutation.isPending && <span className="text-[11px]" style={{ color: "var(--text-muted)" }}>Saving order...</span>}
-          <button type="button" onClick={() => setShowAdd(true)} className="btn-primary text-sm">
+          <button type="button" onClick={() => setShowAdd(true)} className="btn-primary cursor-pointer text-sm">
             <Plus className="h-4 w-4" /> Add widget
           </button>
         </div>
@@ -198,9 +248,37 @@ export function CaseStudyBlocksClient({
 
       <div className="overflow-x-auto rounded-2xl border bg-white p-4" style={{ borderColor: "var(--border-default)" }}>
         <div className="min-h-[720px] min-w-[860px] rounded-2xl bg-slate-50">
-          <main className="mx-auto max-w-[1128px] px-4 py-12">
-            <header className="mb-12">
-              <h1 className="text-4xl font-semibold leading-[1.1] text-[#222222] lg:text-5xl">{caseTitle}</h1>
+          <main className="mx-auto max-w-[1128px] px-4 py-12" onClick={() => { setSelectedId(null); setCaseInfoFocused(false); }}>
+            <header
+              className="group/case-info relative mb-12 rounded-3xl transition"
+              onClick={(event) => {
+                event.stopPropagation();
+                setSelectedId(null);
+                setCaseInfoFocused(true);
+              }}
+            >
+              <div className={`absolute -inset-x-3 -inset-y-3 rounded-3xl border transition ${caseInfoFocused ? "border-[#6C3CF4] bg-[#6C3CF4]/[0.05] shadow-[0_0_0_4px_rgba(108,60,244,0.12)]" : "border-transparent group-hover/case-info:border-[#6C3CF4]/30 group-hover/case-info:bg-[#6C3CF4]/[0.02]"}`} />
+              <div className={`absolute left-3 top-0 z-20 flex -translate-y-[calc(100%+0.5rem)] items-center gap-1 rounded-full border bg-white/95 p-1 shadow-sm transition ${caseInfoFocused ? "opacity-100" : "opacity-0 group-hover/case-info:opacity-100"}`} style={{ borderColor: "var(--border-default)" }}>
+                <button type="button" onClick={(event) => { event.stopPropagation(); caseInfoMutation.mutate(); }} disabled={caseInfoMutation.isPending} className="inline-flex h-9 cursor-pointer items-center gap-1 rounded-full bg-[#6C3CF4] px-3 text-xs font-semibold text-white shadow-sm hover:bg-[#5b2ee0] disabled:opacity-60" title="Save case study info">
+                  <Save className="h-3.5 w-3.5" /> {caseInfoMutation.isPending ? "Saving" : "Save"}
+                </button>
+              </div>
+              <div className="relative">
+                <input
+                  value={caseInfo.title}
+                  onFocus={() => setCaseInfoFocused(true)}
+                  onChange={(event) => setCaseInfo((current) => ({ ...current, title: event.target.value }))}
+                  className="w-full rounded-xl border border-transparent bg-transparent px-2 py-1 text-4xl font-semibold leading-[1.1] text-[#222222] outline-none transition focus:border-[#6C3CF4]/40 focus:bg-white/70 lg:text-5xl"
+                  placeholder="Case study title"
+                />
+                <textarea
+                  value={caseInfo.description}
+                  onFocus={() => setCaseInfoFocused(true)}
+                  onChange={(event) => setCaseInfo((current) => ({ ...current, description: event.target.value }))}
+                  className="mt-4 min-h-[64px] w-full resize-none rounded-xl border border-transparent bg-transparent px-2 py-1 text-lg italic text-[#78818f] outline-none transition focus:border-[#6C3CF4]/40 focus:bg-white/70"
+                  placeholder="Short description shown under the title"
+                />
+              </div>
             </header>
 
             <div className="space-y-2">
@@ -221,6 +299,8 @@ export function CaseStudyBlocksClient({
                     saveMutation.mutate(next);
                   }}
                   onDuplicate={() => duplicateMutation.mutate(block)}
+                  onMoveUp={() => moveBlock(block.id, "up")}
+                  onMoveDown={() => moveBlock(block.id, "down")}
                   onDelete={() => {
                     if (confirm("Delete this widget?")) deleteMutation.mutate(block);
                   }}
@@ -243,7 +323,7 @@ export function CaseStudyBlocksClient({
                 <h3 className="text-lg font-bold" style={{ color: "var(--text-primary)" }}>Add widget</h3>
                 <p className="text-xs" style={{ color: "var(--text-muted)" }}>Choose a UI block. It will be created with editable default content.</p>
               </div>
-              <button type="button" onClick={() => setShowAdd(false)} className="btn-secondary text-xs">Close</button>
+              <button type="button" onClick={() => setShowAdd(false)} className="btn-secondary cursor-pointer text-xs">Close</button>
             </div>
             <div className="grid gap-3 sm:grid-cols-2">
               {CASE_STUDY_BLOCK_TYPES.map((type) => (
@@ -252,7 +332,7 @@ export function CaseStudyBlocksClient({
                   type="button"
                   onClick={() => createMutation.mutate(type)}
                   disabled={createMutation.isPending}
-                  className="rounded-xl border p-4 text-left transition hover:shadow-md"
+                  className="cursor-pointer rounded-xl border p-4 text-left transition hover:shadow-md"
                   style={{ borderColor: "var(--border-default)" }}
                 >
                   <p className="font-semibold" style={{ color: "var(--text-primary)" }}>{WIDGET_LABELS[type]}</p>
@@ -278,6 +358,8 @@ function EditableBlockFrame({
   onSave,
   onToggleActive,
   onDuplicate,
+  onMoveUp,
+  onMoveDown,
   onDelete,
   onDragStart,
   onDrop,
@@ -293,6 +375,8 @@ function EditableBlockFrame({
   onSave: (block: EditableBlock) => void;
   onToggleActive: () => void;
   onDuplicate: () => void;
+  onMoveUp: () => void;
+  onMoveDown: () => void;
   onDelete: () => void;
   onDragStart: () => void;
   onDrop: () => void;
@@ -300,43 +384,68 @@ function EditableBlockFrame({
 }) {
   return (
     <section
+      data-case-widget-id={block.id}
+      tabIndex={-1}
       className={`group/case-widget relative rounded-3xl transition ${!block.isActive ? "opacity-45 grayscale" : ""} ${dragged ? "scale-[0.99] opacity-60" : ""}`}
-      draggable
-      onDragStart={(event) => {
-        event.dataTransfer.effectAllowed = "move";
-        onDragStart();
-      }}
       onDragOver={(event) => event.preventDefault()}
       onDrop={(event) => {
         event.preventDefault();
         onDrop();
       }}
       onDragEnd={onDragEnd}
-      onClick={onSelect}
+      onClick={(event) => {
+        event.stopPropagation();
+        onSelect();
+      }}
     >
-      <div className={`absolute -inset-x-3 -inset-y-3 rounded-3xl border transition ${selected ? "border-[#6C3CF4]/50 bg-[#6C3CF4]/[0.035]" : "border-transparent group-hover/case-widget:border-[#6C3CF4]/30 group-hover/case-widget:bg-[#6C3CF4]/[0.02]"}`} />
-      <div className="absolute left-3 top-3 z-20 flex items-center gap-1 rounded-full border bg-white/95 p-1 opacity-0 shadow-sm transition group-hover/case-widget:opacity-100" style={{ borderColor: "var(--border-default)" }}>
-        <button type="button" className="rounded-full p-1.5 hover:bg-slate-100" title="Drag">
-          <GripVertical className="h-3.5 w-3.5" />
+      <div className={`absolute -inset-x-3 -inset-y-3 rounded-3xl border transition ${selected ? "border-[#6C3CF4] bg-[#6C3CF4]/[0.05] shadow-[0_0_0_4px_rgba(108,60,244,0.12)]" : dragged ? "border-[#6C3CF4]/60 bg-[#6C3CF4]/[0.04]" : "border-transparent group-hover/case-widget:border-[#6C3CF4]/30 group-hover/case-widget:bg-[#6C3CF4]/[0.02]"}`} />
+      <div className={`absolute left-3 top-0 z-20 flex -translate-y-[calc(100%+0.5rem)] items-center gap-1 rounded-full border bg-white/95 p-1 shadow-sm transition ${selected ? "opacity-100" : "opacity-0 group-hover/case-widget:opacity-100"}`} style={{ borderColor: "var(--border-default)" }}>
+        <button
+          type="button"
+          draggable
+          onClick={(event) => event.stopPropagation()}
+          onDragStart={(event) => {
+            event.stopPropagation();
+            event.dataTransfer.effectAllowed = "move";
+            onDragStart();
+          }}
+          onDragEnd={onDragEnd}
+          className="flex h-9 w-9 cursor-grab items-center justify-center rounded-full hover:bg-slate-100 active:cursor-grabbing"
+          title="Drag widget"
+        >
+          <GripVertical className="h-4 w-4" />
         </button>
-        <button type="button" onClick={(event) => { event.stopPropagation(); onToggleActive(); }} className="rounded-full p-1.5 hover:bg-slate-100" title={block.isActive ? "Hide" : "Show"}>
+        <button type="button" onClick={(event) => { event.stopPropagation(); onMoveUp(); }} className="flex h-9 w-9 cursor-pointer items-center justify-center rounded-full hover:bg-slate-100" title="Move up">
+          <ArrowUp className="h-4 w-4" />
+        </button>
+        <button type="button" onClick={(event) => { event.stopPropagation(); onMoveDown(); }} className="flex h-9 w-9 cursor-pointer items-center justify-center rounded-full hover:bg-slate-100" title="Move down">
+          <ArrowDown className="h-4 w-4" />
+        </button>
+        <button type="button" onClick={(event) => { event.stopPropagation(); onToggleActive(); }} className="cursor-pointer rounded-full p-1.5 hover:bg-slate-100" title={block.isActive ? "Hide" : "Show"}>
           <Eye className="h-3.5 w-3.5" />
         </button>
-        <button type="button" onClick={(event) => { event.stopPropagation(); onDuplicate(); }} className="rounded-full p-1.5 hover:bg-slate-100" title="Duplicate">
+        <button type="button" onClick={(event) => { event.stopPropagation(); onDuplicate(); }} className="cursor-pointer rounded-full p-1.5 hover:bg-slate-100" title="Duplicate">
           <Copy className="h-3.5 w-3.5" />
         </button>
-        <button type="button" onClick={(event) => { event.stopPropagation(); onDelete(); }} className="rounded-full p-1.5 text-red-600 hover:bg-red-50" title="Delete" disabled={deleting}>
+        <button type="button" onClick={(event) => { event.stopPropagation(); onDelete(); }} className="cursor-pointer rounded-full p-1.5 text-red-600 hover:bg-red-50" title="Delete" disabled={deleting}>
           <Trash2 className="h-3.5 w-3.5" />
         </button>
+        {selected && (
+          <button type="button" onClick={(event) => { event.stopPropagation(); onSave(block); }} disabled={saving} className="ml-1 inline-flex cursor-pointer h-9 items-center gap-1 rounded-full bg-[#6C3CF4] px-3 text-xs font-semibold text-white shadow-sm hover:bg-[#5b2ee0] disabled:opacity-60" title="Save widget">
+            <Save className="h-3.5 w-3.5" /> {saving ? "Saving" : "Save"}
+          </button>
+        )}
       </div>
       <div className="absolute right-3 top-3 z-20 rounded-full bg-white/95 px-3 py-1 text-[11px] font-semibold uppercase tracking-wider opacity-0 shadow-sm transition group-hover/case-widget:opacity-100" style={{ color: "var(--text-muted)" }}>
         {WIDGET_LABELS[block.type]} {block.isActive ? "" : "Hidden"}
       </div>
-      <div className="relative" onClick={(event) => event.stopPropagation()}>
+      <div className="relative" onClick={selected ? (event) => event.stopPropagation() : undefined}>
         {selected ? (
-          <InlineWidgetEditor block={block} saving={saving} onChange={onChange} onSave={onSave} />
+          <InlineWidgetEditor block={block} onChange={onChange} />
         ) : (
-          <CaseStudyWidget block={toPublicBlock(block)} fallbackMetrics={[]} />
+          <button type="button" onClick={onSelect} className="block w-full cursor-pointer text-left">
+            <CaseStudyWidget block={toPublicBlock(block)} fallbackMetrics={[]} />
+          </button>
         )}
       </div>
     </section>
@@ -348,7 +457,7 @@ function AddBlockTile({ onCreate }: { onCreate: () => void }) {
     <button
       type="button"
       onClick={onCreate}
-      className="mb-8 flex min-h-[148px] w-full flex-col items-center justify-center rounded-3xl border border-dashed bg-white p-6 text-center transition hover:border-[#6C3CF4] hover:bg-[#6C3CF4]/[0.03]"
+      className="mb-8 flex cursor-pointer min-h-[148px] w-full flex-col items-center justify-center rounded-3xl border border-dashed bg-white p-6 text-center transition hover:border-[#6C3CF4] hover:bg-[#6C3CF4]/[0.03]"
       style={{ borderColor: "var(--border-default)", color: "var(--text-muted)" }}
     >
       <span className="mb-3 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-[#6C3CF4]/10 text-[#6C3CF4]">
@@ -362,27 +471,17 @@ function AddBlockTile({ onCreate }: { onCreate: () => void }) {
 
 function InlineWidgetEditor({
   block,
-  saving,
   onChange,
-  onSave,
 }: {
   block: EditableBlock;
-  saving: boolean;
   onChange: (block: EditableBlock) => void;
-  onSave: (block: EditableBlock) => void;
 }) {
   const patchConfig = (patch: JsonConfig) => onChange({ ...block, config: { ...block.config, ...patch } });
-  const button = (
-    <button type="button" onClick={() => onSave(block)} disabled={saving} className="absolute right-4 top-4 z-30 rounded-full bg-[#6C3CF4] px-3 py-2 text-xs font-semibold text-white shadow-lg">
-      <Save className="mr-1 inline h-3.5 w-3.5" /> {saving ? "Saving" : "Save"}
-    </button>
-  );
 
   if (block.type === "metrics_grid") {
     const metrics = asObjectArray(block.config.metrics);
     return (
       <div className="relative mb-16 rounded-3xl border-2 border-[#6C3CF4] p-4">
-        {button}
         <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
           {metrics.map((metric, index) => (
             <div key={index} className="rounded-2xl border-t-4 border-blue-600 bg-white/80 p-5 text-center shadow-lg">
@@ -401,7 +500,6 @@ function InlineWidgetEditor({
     const shell = stringValue(block.config.variant) === "blue_gradient" ? "bg-gradient-to-br from-blue-50/80 to-indigo-50/80" : "bg-white/80";
     return (
       <section className={`relative mb-12 rounded-2xl border-2 border-[#6C3CF4] ${shell} p-8 shadow-md`}>
-        {button}
         <LegacyInlineHeading value={block.title} onChange={(title) => onChange({ ...block, title })} tone="blue" />
         <InlineArea value={block.content} onChange={(content) => onChange({ ...block, content })} className="min-h-[120px] text-lg leading-relaxed text-[#222222]" />
         <InlineVariant value={stringValue(block.config.variant)} onChange={(variant) => patchConfig({ variant })} />
@@ -413,7 +511,6 @@ function InlineWidgetEditor({
     const items = asObjectArray(block.config.items);
     return (
       <section className="relative mb-12 rounded-3xl border-2 border-[#6C3CF4] p-4">
-        {button}
         <LegacyInlineHeading value={block.title} onChange={(title) => onChange({ ...block, title })} tone="indigo" />
         <div className="rounded-2xl bg-white/80 p-8 shadow-md">
           <div className="grid gap-6 md:grid-cols-3">
@@ -431,7 +528,6 @@ function InlineWidgetEditor({
     const cards = asObjectArray(block.config.cards);
     return (
       <section className="relative mb-12 rounded-3xl border-2 border-[#6C3CF4] p-4">
-        {button}
         <LegacyInlineHeading value={block.title} onChange={(title) => onChange({ ...block, title })} tone="red" />
         <div className="space-y-6">
           {cards.map((card, index) => (
@@ -449,7 +545,6 @@ function InlineWidgetEditor({
     const solutionCards = asObjectArray(block.config.solutionCards);
     return (
       <section className="relative mb-12 rounded-2xl border-2 border-[#6C3CF4] bg-gradient-to-br from-indigo-50/80 to-purple-50/80 p-8 shadow-md">
-        {button}
         <LegacyInlineHeading value={block.title} onChange={(title) => onChange({ ...block, title })} tone="indigo" />
         <InlineArea value={block.content} onChange={(content) => onChange({ ...block, content })} className="mb-8 min-h-[80px] text-lg leading-relaxed text-[#222222]" />
         <div className="mb-8 rounded-xl bg-white/90 p-8 shadow-inner">
@@ -484,7 +579,6 @@ function InlineWidgetEditor({
     const steps = asObjectArray(block.config.steps);
     return (
       <section className="relative mb-12 rounded-3xl border-2 border-[#6C3CF4] p-4">
-        {button}
         <LegacyInlineHeading value={block.title} onChange={(title) => onChange({ ...block, title })} tone="blue" />
         <div className="space-y-4">
           {steps.map((step, index) => (
@@ -501,7 +595,6 @@ function InlineWidgetEditor({
     const benefits = asStringArray(block.config.benefits);
     return (
       <section className="relative mb-12 rounded-2xl border-2 border-[#6C3CF4] bg-gradient-to-br from-green-50/80 to-emerald-50/80 p-8 shadow-md">
-        {button}
         <LegacyInlineHeading value={block.title} onChange={(title) => onChange({ ...block, title })} tone="green" />
         <div className="mb-8 grid gap-6 md:grid-cols-2">
           {cards.map((card, index) => (
@@ -525,9 +618,24 @@ function InlineWidgetEditor({
     );
   }
 
+  if (block.type === "image") {
+    const src = stringValue(block.config.src);
+    return (
+      <section className="relative mb-12 rounded-3xl border-2 border-[#6C3CF4] bg-white/80 p-4 shadow-md">
+        <div className="grid gap-3 md:grid-cols-3">
+          <InlineInput value={src} onChange={(value) => patchConfig({ src: value })} placeholder="Image URL, e.g. /images/project.jpg" className="md:col-span-2 rounded-lg border border-blue-100 bg-white/80 text-sm text-[#222222]" />
+          <InlineInput value={stringValue(block.config.alt)} onChange={(alt) => patchConfig({ alt })} placeholder="Alt text for accessibility" className="rounded-lg border border-blue-100 bg-white/80 text-sm text-[#222222]" />
+        </div>
+        <div className="mt-4 overflow-hidden rounded-2xl bg-slate-100">
+          {src ? <img src={src} alt={stringValue(block.config.alt) || block.title || "Case study image"} className="h-auto w-full object-cover" /> : <div className="flex min-h-[220px] items-center justify-center text-sm text-slate-500">Image URL is empty</div>}
+        </div>
+        <InlineInput value={stringValue(block.config.caption)} onChange={(caption) => patchConfig({ caption })} placeholder="Caption (optional)" className="mt-3 text-center text-sm text-gray-600" />
+      </section>
+    );
+  }
+
   return (
     <section className="relative rounded-2xl border-2 border-[#6C3CF4] bg-gradient-to-r from-emerald-600 to-blue-700 p-8 text-center text-white shadow-xl">
-      {button}
       <InlineInput value={block.title} onChange={(title) => onChange({ ...block, title })} className="text-center text-3xl font-bold text-white" />
       <InlineInput value={block.subtitle} onChange={(subtitle) => onChange({ ...block, subtitle })} className="mx-auto mt-4 max-w-2xl text-center text-xl text-emerald-100" />
       <div className="mx-auto mt-6 grid max-w-xl gap-3 md:grid-cols-2">
@@ -611,10 +719,11 @@ function InlineWideCard({
   );
 }
 
-function InlineInput({ value, onChange, className }: { value: string; onChange: (value: string) => void; className?: string }) {
+function InlineInput({ value, onChange, placeholder, className }: { value: string; onChange: (value: string) => void; placeholder?: string; className?: string }) {
   return (
     <input
       value={value}
+      placeholder={placeholder}
       onChange={(event) => onChange(event.target.value)}
       className={`w-full border border-transparent bg-transparent px-2 py-1 outline-none transition focus:border-[#6C3CF4]/50 focus:bg-white/70 ${className ?? ""}`}
     />
@@ -633,7 +742,7 @@ function InlineArea({ value, onChange, className }: { value: string; onChange: (
 
 function InlineAdd({ label, onClick }: { label: string; onClick: () => void }) {
   return (
-    <button type="button" onClick={onClick} className="flex min-h-[120px] items-center justify-center rounded-xl border border-dashed bg-white/70 px-4 py-5 text-sm font-semibold text-[#6C3CF4] hover:border-[#6C3CF4] hover:bg-white">
+    <button type="button" onClick={onClick} className="flex min-h-[120px] cursor-pointer items-center justify-center rounded-xl border border-dashed bg-white/70 px-4 py-5 text-sm font-semibold text-[#6C3CF4] hover:border-[#6C3CF4] hover:bg-white">
       <Plus className="mr-2 h-4 w-4" /> Add {label}
     </button>
   );
@@ -641,7 +750,7 @@ function InlineAdd({ label, onClick }: { label: string; onClick: () => void }) {
 
 function MiniRemove({ onClick }: { onClick: () => void }) {
   return (
-    <button type="button" onClick={onClick} className="absolute right-2 top-2 rounded-full bg-white/90 p-1 text-red-600 opacity-0 shadow-sm transition hover:bg-red-50 group-hover/case-widget:opacity-100">
+    <button type="button" onClick={onClick} className="absolute right-2 top-2 cursor-pointer rounded-full bg-white/90 p-1 text-red-600 opacity-0 shadow-sm transition hover:bg-red-50 group-hover/case-widget:opacity-100">
       <Trash2 className="h-3.5 w-3.5" />
     </button>
   );
@@ -654,7 +763,7 @@ function InlineVariant({ value, onChange }: { value: string; onChange: (value: s
         ["", "White"],
         ["blue_gradient", "Blue"],
       ].map(([next, label]) => (
-        <button key={next} type="button" onClick={() => onChange(next)} className={value === next ? "btn-primary text-xs" : "btn-secondary text-xs"}>
+        <button key={next} type="button" onClick={() => onChange(next)} className={value === next ? "btn-primary cursor-pointer text-xs" : "btn-secondary cursor-pointer text-xs"}>
           {label}
         </button>
       ))}
@@ -670,7 +779,7 @@ function ToneDots({ value, onChange }: { value: Tone; onChange: (tone: Tone) => 
           key={tone}
           type="button"
           onClick={() => onChange(tone)}
-          className={`h-5 w-5 rounded-full border-2 ${toneBg(tone, 500)} ${value === tone ? "border-slate-900" : "border-white"}`}
+          className={`h-5 w-5 cursor-pointer rounded-full border-2 ${toneBg(tone, 500)} ${value === tone ? "border-slate-900" : "border-white"}`}
           title={tone}
         />
       ))}
@@ -812,6 +921,22 @@ function WidgetEditor({ block, onChange }: { block: EditableBlock; onChange: (bl
         </>
       )}
 
+      {block.type === "image" && (
+        <>
+          <Field label="Image URL">
+            <input value={stringValue(block.config.src)} onChange={(event) => patchConfig({ src: event.target.value })} className="input-field" placeholder="/images/example.jpg or https://..." />
+          </Field>
+          <div className="grid gap-4 md:grid-cols-2">
+            <Field label="Alt text">
+              <input value={stringValue(block.config.alt)} onChange={(event) => patchConfig({ alt: event.target.value })} className="input-field" placeholder="Describe the image for accessibility" />
+            </Field>
+            <Field label="Caption">
+              <input value={stringValue(block.config.caption)} onChange={(event) => patchConfig({ caption: event.target.value })} className="input-field" placeholder="Optional caption shown below the image" />
+            </Field>
+          </div>
+        </>
+      )}
+
       {block.type === "cta" && (
         <div className="grid gap-4 md:grid-cols-2">
           <Field label="Button label">
@@ -847,7 +972,7 @@ function ArrayEditor({
     <div className="rounded-xl border p-4" style={{ borderColor: "var(--border-default)" }}>
       <div className="mb-3 flex items-center justify-between gap-3">
         <p className="text-sm font-semibold" style={{ color: "var(--text-primary)" }}>{label}</p>
-        <button type="button" onClick={() => onChange([...items, emptyItem])} className="btn-secondary text-xs">
+        <button type="button" onClick={() => onChange([...items, emptyItem])} className="btn-secondary cursor-pointer text-xs">
           <Plus className="h-3.5 w-3.5" /> Add
         </button>
       </div>
@@ -856,7 +981,7 @@ function ArrayEditor({
           <div key={index} className="rounded-xl border p-3" style={{ borderColor: "var(--border-subtle)" }}>
             <div className="mb-3 flex items-center justify-between">
               <span className="text-xs font-semibold" style={{ color: "var(--text-muted)" }}>Item {index + 1}</span>
-              <button type="button" onClick={() => onChange(items.filter((_, itemIndex) => itemIndex !== index))} className="text-xs" style={{ color: "#dc2626" }}>
+              <button type="button" onClick={() => onChange(items.filter((_, itemIndex) => itemIndex !== index))} className="cursor-pointer text-xs" style={{ color: "#dc2626" }}>
                 Remove
               </button>
             </div>
@@ -887,7 +1012,7 @@ function StringListEditor({ label, items, onChange }: { label: string; items: st
     <div className="rounded-xl border p-4" style={{ borderColor: "var(--border-default)" }}>
       <div className="mb-3 flex items-center justify-between gap-3">
         <p className="text-sm font-semibold" style={{ color: "var(--text-primary)" }}>{label}</p>
-        <button type="button" onClick={() => onChange([...items, "New benefit"])} className="btn-secondary text-xs">
+        <button type="button" onClick={() => onChange([...items, "New benefit"])} className="btn-secondary cursor-pointer text-xs">
           <Plus className="h-3.5 w-3.5" /> Add
         </button>
       </div>
@@ -895,7 +1020,7 @@ function StringListEditor({ label, items, onChange }: { label: string; items: st
         {items.map((item, index) => (
           <div key={index} className="flex gap-2">
             <input value={item} onChange={(event) => onChange(items.map((current, itemIndex) => itemIndex === index ? event.target.value : current))} className="input-field" />
-            <button type="button" onClick={() => onChange(items.filter((_, itemIndex) => itemIndex !== index))} className="btn-secondary text-xs" style={{ color: "#dc2626" }}>
+            <button type="button" onClick={() => onChange(items.filter((_, itemIndex) => itemIndex !== index))} className="btn-secondary cursor-pointer text-xs" style={{ color: "#dc2626" }}>
               Remove
             </button>
           </div>
@@ -1015,6 +1140,15 @@ function defaultContent(type: CaseStudyBlockType): { title: string; subtitle?: s
           benefits: ["Clear business benefit"],
         },
       };
+    case "image":
+      return {
+        title: "",
+        config: {
+          src: "/images/code-screen.jpg",
+          alt: "Case study project visual",
+          caption: "Optional image caption",
+        },
+      };
     case "cta":
       return {
         title: "Need Expert Data Services?",
@@ -1033,6 +1167,7 @@ function defaultDescription(type: CaseStudyBlockType) {
     qa_framework: "Layered QA diagram and solution cards",
     process_steps: "Implementation timeline cards",
     outcome: "Results and client benefits",
+    image: "Full-width image with caption",
     cta: "Final call to action",
   };
   return map[type];

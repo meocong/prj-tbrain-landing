@@ -50,7 +50,7 @@ export default async function EditCaseStudyPage({ params }: { params: Promise<{ 
       <div className="mb-6 flex items-start justify-between gap-4">
         <div>
           <h1 className="text-2xl font-bold tracking-tight" style={{ fontFamily: "var(--font-heading)", color: "var(--text-primary)" }}>
-            {r.title}
+            Case study detail builder
           </h1>
           <p className="mt-1 text-sm" style={{ color: "var(--text-muted)" }}>
             Add, edit, and drag case study widgets directly on the detail-page preview.
@@ -58,7 +58,7 @@ export default async function EditCaseStudyPage({ params }: { params: Promise<{ 
         </div>
       </div>
 
-      <CaseStudyBlocksClient caseStudyId={r.id} caseTitle={r.title} rows={rows} />
+      <CaseStudyBlocksClient caseStudyId={r.id} caseTitle={r.title} caseDescription={r.short_description ?? ""} rows={rows} />
     </div>
   );
 }
