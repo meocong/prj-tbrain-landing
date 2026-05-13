@@ -1,7 +1,6 @@
 import "server-only";
-import Link from "next/link";
-import { Plus } from "lucide-react";
-import { listAdminResource } from "@/lib/admin/server/list";
+import { requireAdmin } from "@/lib/admin/server/list";
+import { supabaseAdmin } from "@/lib/terminal-bench/supabase/admin";
 import { AboutCardsClient } from "./about-cards-client";
 
 export const dynamic = "force-dynamic";
@@ -15,32 +14,49 @@ export type AboutCardRow = {
   description: string | null;
   icon: string | null;
   image_url: string | null;
+  meta: Record<string, unknown> | null;
   display_order: number;
   is_active: boolean;
   updated_at: string;
 };
 
-export default async function AboutCardsAdminPage({
-  searchParams,
-}: {
-  searchParams: Promise<Record<string, string | string[] | undefined>>;
-}) {
-  const sp = await searchParams;
-  const initial = await listAdminResource<AboutCardRow>(
-    {
-      table: "about_cards",
-      permCode: "content.view",
-      select: "id, group_key, slug, title, label, description, icon, image_url, display_order, is_active, updated_at",
-      searchable: ["title", "slug", "label", "description"],
-      defaultSort: { key: "display_order", dir: "asc" },
-      sortWhitelist: ["display_order", "title", "group_key", "updated_at", "is_active"],
-      filters: {
-        group_key: (v, q) => q.eq("group_key", v),
-        is_active: (v, q) => q.eq("is_active", v === "true"),
-      },
-    },
-    sp
-  );
+export type AboutSectionRow = {
+  id: string;
+  group_key: string;
+  eyebrow: string | null;
+  title_before: string | null;
+  title_highlight: string | null;
+  title_after: string | null;
+  description: string | null;
+  child_widget_type: "icon-card" | "profile-card" | "avatar-card";
+  layout: "two" | "three" | "four";
+  accent: string;
+  display_order: number;
+  is_active: boolean;
+  updated_at: string;
+};
+
+export default async function AboutCardsAdminPage() {
+  await requireAdmin("content.view");
+  const [cardsResult, sectionsResult] = await Promise.all([
+    supabaseAdmin()
+      .from("about_cards")
+      .select("id, group_key, slug, title, label, description, icon, image_url, meta, display_order, is_active, updated_at")
+      .order("group_key", { ascending: true })
+      .order("display_order", { ascending: true }),
+    supabaseAdmin()
+      .from("about_sections")
+      .select("id, group_key, eyebrow, title_before, title_highlight, title_after, description, child_widget_type, layout, accent, display_order, is_active, updated_at")
+      .order("display_order", { ascending: true }),
+  ]);
+
+  if (cardsResult.error) {
+    console.error("[admin/about-cards]", cardsResult.error.message);
+  }
+  const sectionsReady = !sectionsResult.error;
+  if (sectionsResult.error && !sectionsResult.error.message.includes("about_sections")) {
+    console.error("[admin/about-sections]", sectionsResult.error.message);
+  }
 
   return (
     <div className="animate-[fadeIn_0.3s_ease-out]">
@@ -50,17 +66,18 @@ export default async function AboutCardsAdminPage({
             className="text-2xl font-bold tracking-tight"
             style={{ fontFamily: "var(--font-heading)", color: "var(--text-primary)", letterSpacing: "-0.02em" }}
           >
-            About Cards
+            About Page Builder
           </h1>
           <p className="mt-1 text-sm" style={{ color: "var(--text-muted)" }}>
-            Editable card groups shown on /about. Section headings and office CTA stay in code.
+            Edit section widgets, headings, and child card widgets directly on the landing-style preview.
           </p>
         </div>
-        <Link href="/admin/about-cards/new" className="btn-primary text-sm">
-          <Plus className="h-4 w-4" /> New card
-        </Link>
       </div>
-      <AboutCardsClient initial={initial} />
+      <AboutCardsClient
+        initialRows={(cardsResult.data ?? []) as AboutCardRow[]}
+        initialSections={(sectionsResult.data ?? []) as AboutSectionRow[]}
+        sectionsReady={sectionsReady}
+      />
     </div>
   );
 }
