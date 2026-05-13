@@ -33,6 +33,10 @@ ENV PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium-browser
 # image ENV value.
 RUN --mount=type=secret,id=supabase_service_role_key \
     echo "build cache ${BUILD_CACHE_BUST}" >/dev/null && \
+    test -n "${NEXT_PUBLIC_SUPABASE_URL}" && \
+    test -n "${NEXT_PUBLIC_SUPABASE_ANON_KEY}" && \
+    test -n "${NEXT_PUBLIC_TBRAIN_SSO_ENABLED}" && \
+    test -n "${NEXT_PUBLIC_TBRAIN_SSO_PROVIDER}" && \
     SUPABASE_SERVICE_ROLE_KEY="$(cat /run/secrets/supabase_service_role_key 2>/dev/null || true)" \
     pnpm build
 
