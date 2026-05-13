@@ -3,6 +3,7 @@ import type { CaseStudyBlock } from "@/lib/landing/case-study-block-types";
 
 export type CaseStudyMetric = { value: string; label: string };
 type Tone = "blue" | "indigo" | "purple" | "green" | "red" | "orange" | "yellow";
+type GraphColor = "blue" | "green" | "yellow" | "orange" | "purple" | "pink" | "slate";
 
 const METRIC_ACCENTS = [
   { border: "border-emerald-600", text: "text-emerald-600" },
@@ -54,6 +55,8 @@ export function CaseStudyWidget({
       return <OutcomeBlock block={block} />;
     case "image":
       return <ImageBlock block={block} />;
+    case "workflow_graph":
+      return <WorkflowGraph block={block} />;
     case "cta":
       return <LegacyCta title={block.title || "Need Expert Data Services?"} subtitle={block.subtitle || ""} config={block.config} />;
     default:
@@ -309,6 +312,81 @@ function ImageBlock({ block }: { block: CaseStudyBlock }) {
   );
 }
 
+function WorkflowGraph({ block }: { block: CaseStudyBlock }) {
+  const nodes = asGraphNodes(block.config.nodes);
+  const edges = asGraphEdges(block.config.edges, nodes);
+  if (!nodes.length) return null;
+
+  const nodeW = 128;
+  const nodeH = 128;
+  const gapX = 215;
+  const gapY = 144;
+  const padX = 48;
+  const padY = 56;
+  const maxX = Math.max(...nodes.map((node) => node.x));
+  const maxY = Math.max(...nodes.map((node) => node.y));
+  const width = Math.max(760, padX * 2 + maxX * gapX + nodeW);
+  const height = Math.max(280, padY * 2 + maxY * gapY + nodeH);
+  const positions = new Map(nodes.map((node) => [node.id, { x: padX + node.x * gapX, y: padY + node.y * gapY }]));
+
+  return (
+    <section className="mb-12 overflow-hidden rounded-2xl bg-white/90 p-8 shadow-md backdrop-blur-sm">
+      <h2 className="mb-2 text-center text-2xl font-bold text-[#222222]">{block.title || "Workflow"}</h2>
+      {block.subtitle && <p className="mb-6 text-center text-gray-600">{block.subtitle}</p>}
+      <div className="overflow-x-auto">
+        <div className="relative mx-auto" style={{ width, height }}>
+          <svg className="pointer-events-none absolute inset-0 h-full w-full" width={width} height={height} viewBox={`0 0 ${width} ${height}`} aria-hidden="true">
+            <defs>
+              <marker id={`arrow-${block.id}`} markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto" markerUnits="strokeWidth">
+                <path d="M 0 0 L 10 5 L 0 10 z" fill="#9ca3af" />
+              </marker>
+            </defs>
+            {edges.map((edge, index) => {
+              const from = positions.get(edge.from);
+              const to = positions.get(edge.to);
+              if (!from || !to) return null;
+              const x1 = from.x + nodeW + 24;
+              const y1 = from.y + nodeH / 2;
+              const x2 = to.x - 24;
+              const y2 = to.y + nodeH / 2;
+              const midX = (x1 + x2) / 2;
+              const midY = (y1 + y2) / 2;
+              return (
+                <g key={`${edge.from}-${edge.to}-${index}`}>
+                  <line x1={x1} y1={y1} x2={x2} y2={y2} stroke="#9ca3af" strokeWidth="2.5" markerEnd={`url(#arrow-${block.id})`} />
+                  {edge.label && (
+                    <text x={midX} y={midY - 8} textAnchor="middle" className="fill-gray-500 text-[12px] font-semibold">
+                      {edge.label}
+                    </text>
+                  )}
+                </g>
+              );
+            })}
+          </svg>
+
+          {nodes.map((node) => {
+            const pos = positions.get(node.id);
+            if (!pos) return null;
+            const palette = graphPalette(node.color);
+            return (
+              <div
+                key={node.id}
+                className="absolute flex items-center justify-center rounded-2xl p-4 text-center text-white shadow-lg"
+                style={{ left: pos.x, top: pos.y, width: nodeW, height: nodeH, background: palette.bg }}
+              >
+                <div>
+                  <div className="text-2xl font-black leading-tight">{node.label}</div>
+                  {node.subtitle && <div className="mt-2 text-sm font-semibold opacity-95">{node.subtitle}</div>}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function LegacyHeading({ title, tone }: { title: string; tone: Tone }) {
   return (
     <h2 className="text-3xl font-bold text-[#222222] mb-6 flex items-center">
@@ -359,6 +437,21 @@ type WidgetItem = {
   tone: Tone;
 };
 
+type WorkflowGraphNode = {
+  id: string;
+  label: string;
+  subtitle: string;
+  color: GraphColor;
+  x: number;
+  y: number;
+};
+
+type WorkflowGraphEdge = {
+  from: string;
+  to: string;
+  label: string;
+};
+
 function asString(value: unknown, fallback: string) {
   return typeof value === "string" && value.trim() ? value : fallback;
 }
@@ -403,12 +496,69 @@ function asItems(value: unknown): WidgetItem[] {
   return items.filter((item): item is WidgetItem => Boolean(item));
 }
 
+function asGraphNodes(value: unknown): WorkflowGraphNode[] {
+  if (!Array.isArray(value)) return [];
+  return value
+    .map((item) => {
+      if (!item || typeof item !== "object") return null;
+      const source = item as Record<string, unknown>;
+      const id = asString(source.id, "");
+      const label = asString(source.label, "");
+      if (!id || !label) return null;
+      return {
+        id,
+        label,
+        subtitle: asString(source.subtitle, ""),
+        color: normalizeGraphColor(source.color),
+        x: typeof source.x === "number" ? source.x : Number(source.x) || 0,
+        y: typeof source.y === "number" ? source.y : Number(source.y) || 0,
+      };
+    })
+    .filter((item): item is WorkflowGraphNode => Boolean(item));
+}
+
+function asGraphEdges(value: unknown, nodes: WorkflowGraphNode[]): WorkflowGraphEdge[] {
+  if (!Array.isArray(value)) return [];
+  const ids = new Set(nodes.map((node) => node.id));
+  return value
+    .map((item) => {
+      if (!item || typeof item !== "object") return null;
+      const source = item as Record<string, unknown>;
+      const from = asString(source.from, "");
+      const to = asString(source.to, "");
+      if (!ids.has(from) || !ids.has(to)) return null;
+      return { from, to, label: asString(source.label, "") };
+    })
+    .filter((item): item is WorkflowGraphEdge => Boolean(item));
+}
+
 function normalizeTone(value: unknown): Tone {
   const tone = typeof value === "string" ? value : "";
   if (["blue", "indigo", "purple", "green", "red", "orange", "yellow"].includes(tone)) {
     return tone as Tone;
   }
   return "blue";
+}
+
+function normalizeGraphColor(value: unknown): GraphColor {
+  const color = typeof value === "string" ? value : "";
+  if (["blue", "green", "yellow", "orange", "purple", "pink", "slate"].includes(color)) {
+    return color as GraphColor;
+  }
+  return "blue";
+}
+
+function graphPalette(color: GraphColor) {
+  const map: Record<GraphColor, { bg: string }> = {
+    blue: { bg: "#3b82f6" },
+    green: { bg: "#48c55b" },
+    yellow: { bg: "#eab308" },
+    orange: { bg: "#f97316" },
+    purple: { bg: "#a855f7" },
+    pink: { bg: "#db2777" },
+    slate: { bg: "#475569" },
+  };
+  return map[color];
 }
 
 function toneBg(tone: Tone, shade: 50 | 100 | 500 | 600) {

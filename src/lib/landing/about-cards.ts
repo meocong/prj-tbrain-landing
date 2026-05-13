@@ -5,7 +5,7 @@ import { ABOUT_CARD_GROUPS, type AboutCardGroupKey } from "./about-card-groups";
 
 export type AboutCard = {
   id?: string;
-  groupKey: AboutCardGroupKey;
+  groupKey: string;
   slug: string;
   title: string;
   label: string | null;
@@ -42,7 +42,7 @@ export async function getAboutCards(groupKey: AboutCardGroupKey): Promise<AboutC
 
     if (error) throw error;
     if (!data || data.length === 0) return FALLBACK_GROUPS[groupKey];
-    return (data as AboutCardRow[]).map(toCard).filter((card): card is AboutCard => Boolean(card));
+    return (data as AboutCardRow[]).map((row) => toCard(row)).filter((card): card is AboutCard => Boolean(card));
   } catch (err) {
     console.error(`[about-cards/${groupKey}] load failed, using fallback:`, err);
     return FALLBACK_GROUPS[groupKey];
@@ -56,8 +56,32 @@ export async function getAboutCardGroups(): Promise<AboutCardGroups> {
   return Object.fromEntries(entries) as AboutCardGroups;
 }
 
-function toCard(row: AboutCardRow): AboutCard | null {
-  if (!ABOUT_CARD_GROUPS.includes(row.group_key as AboutCardGroupKey)) return null;
+export async function getAboutCardsBySection(): Promise<Record<string, AboutCard[]>> {
+  try {
+    const { data, error } = await supabaseAdmin()
+      .from("about_cards")
+      .select("id, group_key, slug, title, label, description, icon, image_url, meta, display_order")
+      .eq("is_active", true)
+      .order("group_key", { ascending: true })
+      .order("display_order", { ascending: true });
+
+    if (error) throw error;
+    if (!data || data.length === 0) return FALLBACK_GROUPS;
+
+    return (data as AboutCardRow[]).reduce<Record<string, AboutCard[]>>((acc, row) => {
+      const card = toCard(row, { allowCustomGroups: true });
+      if (!card) return acc;
+      acc[card.groupKey] = [...(acc[card.groupKey] ?? []), card];
+      return acc;
+    }, {});
+  } catch (err) {
+    console.error("[about-cards] load failed, using fallback:", err);
+    return FALLBACK_GROUPS;
+  }
+}
+
+function toCard(row: AboutCardRow, options?: { allowCustomGroups?: boolean }): AboutCard | null {
+  if (!options?.allowCustomGroups && !ABOUT_CARD_GROUPS.includes(row.group_key as AboutCardGroupKey)) return null;
   return {
     id: row.id,
     groupKey: row.group_key as AboutCardGroupKey,
