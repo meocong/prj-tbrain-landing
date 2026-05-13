@@ -5,14 +5,19 @@
 -- about_cards; section headings, descriptions, layout, accent, and active state
 -- move into about_sections.
 --
--- Rollback: 018_rollback.sql
 -- ──────────────────────────────────────────────────────────────────────────
 
 BEGIN;
 
+ALTER TABLE tbrain_landing.about_cards
+  DROP CONSTRAINT IF EXISTS about_cards_group_key_check;
+
+ALTER TABLE IF EXISTS tbrain_landing.about_sections
+  DROP CONSTRAINT IF EXISTS about_sections_group_key_check;
+
 CREATE TABLE IF NOT EXISTS tbrain_landing.about_sections (
   id                uuid PRIMARY KEY DEFAULT gen_random_uuid(),
-  group_key         text NOT NULL UNIQUE CHECK (group_key IN ('company', 'value', 'sample_projects', 'expertise', 'team', 'experts')),
+  group_key         text NOT NULL UNIQUE,
   eyebrow           text,
   title_before      text,
   title_highlight   text,
@@ -68,17 +73,7 @@ VALUES
   ('expertise', '/ technical expertise', 'Deep technical expertise across', 'hard domains', '', NULL, 'icon-card', 'two', '#6C3CF4', 40, true),
   ('team', '/ team', 'The operators behind', 'Tbrain programs', '', 'Tbrain combines AI training data operators, engineering delivery leaders, and domain experts to build evaluation, annotation, and human-feedback programs for high-stakes AI work.', 'profile-card', 'two', '#6C3CF4', 50, true),
   ('experts', '/ expert network', 'Domain experts when accuracy depends on depth', '', '', 'Tbrain works with specialized contributors across STEM, medical, coding, data science, robotics, and other technical domains where generic labeling teams are not enough.', 'avatar-card', 'four', '#6C3CF4', 60, true)
-ON CONFLICT (group_key) DO UPDATE SET
-  eyebrow = EXCLUDED.eyebrow,
-  title_before = EXCLUDED.title_before,
-  title_highlight = EXCLUDED.title_highlight,
-  title_after = EXCLUDED.title_after,
-  description = EXCLUDED.description,
-  child_widget_type = EXCLUDED.child_widget_type,
-  layout = EXCLUDED.layout,
-  accent = EXCLUDED.accent,
-  display_order = EXCLUDED.display_order,
-  is_active = EXCLUDED.is_active;
+ON CONFLICT (group_key) DO NOTHING;
 
 NOTIFY pgrst, 'reload schema';
 
