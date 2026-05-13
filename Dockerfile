@@ -6,7 +6,7 @@ WORKDIR /app
 # git for dependencies; python3 for the Terminal Bench test-AST parser used by the ingest script.
 # chromium is required by the admin PDF export flow.
 RUN apk add --no-cache git python3 chromium nss freetype harfbuzz ca-certificates ttf-freefont && \
-    corepack enable && corepack prepare pnpm@latest --activate
+    corepack enable && corepack prepare pnpm@10.33.2 --activate
 
 COPY package.json pnpm-lock.yaml* ./
 
