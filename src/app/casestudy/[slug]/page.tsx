@@ -1,10 +1,9 @@
 import type { Metadata } from "next";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 import Header from "@/components/common/Header";
 import Footer from "@/components/common/Footer";
 import { getCaseStudyBySlug } from "@/lib/landing/case-studies";
-import { getCaseStudyBlocks } from "@/lib/landing/case-study-blocks";
-import { CaseStudyWidgetRenderer, LegacyCta, MetricsGrid } from "@/components/case-studies/CaseStudyWidgetRenderer";
-import { PdfDownloadGate } from "@/components/casestudy/PdfDownloadGate";
 import { notFound } from "next/navigation";
 import post_bg from "@/assets/images/post_bg.png";
 
@@ -31,6 +30,16 @@ export async function generateMetadata({
   };
 }
 
+// Cycle of accent colors for the stat cards. Mirrors the legacy static layout
+// (emerald → blue → purple → pink) so the page feels familiar even though it's
+// CMS-driven.
+const METRIC_ACCENTS = [
+  { border: "border-emerald-600", text: "text-emerald-600" },
+  { border: "border-blue-600", text: "text-blue-600" },
+  { border: "border-purple-600", text: "text-purple-600" },
+  { border: "border-pink-600", text: "text-pink-600" },
+];
+
 const SECTION_ACCENTS = [
   { bar: "bg-blue-600", shell: "bg-gradient-to-br from-blue-50/80 to-indigo-50/80", border: "border-blue-500" },
   { bar: "bg-indigo-600", shell: "", border: "border-indigo-500" },
@@ -49,9 +58,7 @@ export default async function CaseStudyDetailPage({
   const study = await getCaseStudyBySlug(slug);
   if (!study) notFound();
 
-  const blocks = study.id ? await getCaseStudyBlocks(study.id) : [];
-  const hasWidgetLayout = blocks.length > 0;
-  const sections = !hasWidgetLayout && study.extendedContent
+  const sections = study.extendedContent
     ? splitCaseStudySections(study.extendedContent)
     : [{ title: "Project snapshot", body: `<p>${escapeHtml(study.description)}</p>` }];
   const ctaTitle = study.slug === "manufacturing"
@@ -71,38 +78,60 @@ export default async function CaseStudyDetailPage({
         </div>
         <section className="container mx-auto max-w-[1128px] px-4">
           <header className="mb-12">
-            <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
-              <div className="min-w-0 flex-1">
-                <h1 className="text-[#222222] text-4xl lg:text-5xl font-semibold leading-[1.1]">
-                  {study.title}
-                </h1>
-                {study.shortDescription && (
-                  <p className="mt-4 text-lg text-[#78818f] italic">
-                    {study.shortDescription}
-                  </p>
-                )}
-              </div>
-              {study.pdfGcsObject && (
-                <div className="shrink-0">
-                  <PdfDownloadGate slug={study.slug} title={study.title} />
-                </div>
-              )}
-            </div>
+            <h1 className="text-[#222222] text-4xl lg:text-5xl font-semibold leading-[1.1]">
+              {study.title}
+            </h1>
+            {study.shortDescription && (
+              <p className="mt-4 text-lg text-[#78818f] italic">
+                {study.shortDescription}
+              </p>
+            )}
           </header>
 
-          {hasWidgetLayout ? (
-            <CaseStudyWidgetRenderer blocks={blocks} fallbackMetrics={study.metrics} />
-          ) : (
-            <>
-              <MetricsGrid metrics={study.metrics} />
-              <div className="space-y-12">
-                {sections.map((section, index) => (
-                  <LegacySection key={`${section.title}-${index}`} section={section} index={index} />
-                ))}
-              </div>
-              <LegacyCta title={ctaTitle} subtitle="Let Tbrain deliver precision-engineered data solutions on enterprise timelines" />
-            </>
+          {study.metrics.length > 0 && (
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-16">
+              {study.metrics.slice(0, 4).map((metric, i) => {
+                const a = METRIC_ACCENTS[i % METRIC_ACCENTS.length];
+                return (
+                  <div
+                    key={i}
+                    className={`bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg p-6 text-center border-t-4 ${a.border} hover:shadow-xl transition-all`}
+                  >
+                    <div className={`text-5xl font-bold ${a.text} mb-2`}>
+                      {metric.value}
+                    </div>
+                    <div className="text-gray-600 text-sm font-medium">
+                      {metric.label}
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
           )}
+
+          <div className="space-y-12">
+            {sections.map((section, index) => (
+              <LegacySection key={`${section.title}-${index}`} section={section} index={index} />
+            ))}
+          </div>
+
+          <section className="mt-16 rounded-2xl bg-gradient-to-r from-emerald-600 to-blue-700 p-8 text-center text-white shadow-xl">
+            <h2 className="text-3xl font-bold">
+              {ctaTitle}
+            </h2>
+            <p className="mt-4 text-xl text-emerald-100">
+              Let Tbrain deliver precision-engineered data solutions on enterprise timelines
+            </p>
+            <Link
+              href="https://www.linkedin.com/company/tbrain-ai"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group mt-6 inline-flex items-center gap-3 rounded-lg bg-white px-8 py-3 font-bold text-emerald-700 shadow-lg transition-all duration-300 hover:scale-105 hover:bg-emerald-50 hover:shadow-xl"
+            >
+              <span>Connect Us Today</span>
+              <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-0.5" />
+            </Link>
+          </section>
         </section>
       </main>
       <Footer />
