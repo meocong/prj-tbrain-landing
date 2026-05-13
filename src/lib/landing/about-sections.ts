@@ -1,9 +1,9 @@
 import "server-only";
-import { supabaseAdmin } from "@/lib/terminal-bench/supabase/admin";
+import type { AboutCardGroupKey } from "./about-card-groups";
 
 export type AboutSection = {
   id?: string;
-  groupKey: string;
+  groupKey: AboutCardGroupKey;
   eyebrow: string;
   titleBefore: string;
   titleHighlight: string | null;
@@ -16,62 +16,8 @@ export type AboutSection = {
   isActive: boolean;
 };
 
-type AboutSectionRow = {
-  id: string;
-  group_key: string;
-  eyebrow: string | null;
-  title_before: string | null;
-  title_highlight: string | null;
-  title_after: string | null;
-  description: string | null;
-  child_widget_type: string | null;
-  layout: string | null;
-  accent: string | null;
-  display_order: number | null;
-  is_active: boolean | null;
-};
-
 export async function getAboutSections(): Promise<AboutSection[]> {
-  try {
-    const { data, error } = await supabaseAdmin()
-      .from("about_sections")
-      .select("id, group_key, eyebrow, title_before, title_highlight, title_after, description, child_widget_type, layout, accent, display_order, is_active")
-      .eq("is_active", true)
-      .order("display_order", { ascending: true });
-
-    if (error) throw error;
-    if (!data || data.length === 0) return FALLBACK_ABOUT_SECTIONS;
-    return (data as AboutSectionRow[]).map(toSection).filter((section): section is AboutSection => Boolean(section));
-  } catch (err) {
-    console.error("[about-sections] load failed, using fallback:", err);
-    return FALLBACK_ABOUT_SECTIONS;
-  }
-}
-
-function toSection(row: AboutSectionRow): AboutSection | null {
-  const fallback = FALLBACK_ABOUT_SECTIONS.find((section) => section.groupKey === row.group_key);
-  return {
-    id: row.id,
-    groupKey: row.group_key,
-    eyebrow: row.eyebrow ?? fallback?.eyebrow ?? "",
-    titleBefore: row.title_before ?? fallback?.titleBefore ?? "",
-    titleHighlight: row.title_highlight ?? fallback?.titleHighlight ?? null,
-    titleAfter: row.title_after ?? fallback?.titleAfter ?? null,
-    description: row.description ?? fallback?.description ?? null,
-    childWidgetType: parseChildWidgetType(row.child_widget_type, fallback?.childWidgetType ?? "icon-card"),
-    layout: parseLayout(row.layout, fallback?.layout ?? "three"),
-    accent: row.accent ?? fallback?.accent ?? "#6C3CF4",
-    displayOrder: row.display_order ?? fallback?.displayOrder ?? 100,
-    isActive: row.is_active ?? true,
-  };
-}
-
-function parseChildWidgetType(value: string | null | undefined, fallback: AboutSection["childWidgetType"]) {
-  return value === "profile-card" || value === "avatar-card" || value === "icon-card" ? value : fallback;
-}
-
-function parseLayout(value: string | null | undefined, fallback: AboutSection["layout"]) {
-  return value === "two" || value === "three" || value === "four" ? value : fallback;
+  return FALLBACK_ABOUT_SECTIONS;
 }
 
 export const FALLBACK_ABOUT_SECTIONS: AboutSection[] = [

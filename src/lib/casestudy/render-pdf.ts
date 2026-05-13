@@ -33,7 +33,7 @@ export async function renderHtmlToPdf(html: string): Promise<Buffer> {
     });
     const page = await browser.newPage();
     await page.emulateMediaType("print");
-    await page.setContent(html, { waitUntil: "networkidle0", timeout: 30_000 });
+    await page.setContent(html, { waitUntil: "load", timeout: 30_000 });
     const pdf = await page.pdf({
       format: "A4",
       printBackground: true,
