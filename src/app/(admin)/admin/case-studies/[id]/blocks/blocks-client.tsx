@@ -14,7 +14,6 @@ import {
   Save,
   Trash2,
 } from "lucide-react";
-import { supabaseAdmin } from "@/lib/admin/supabase-browser";
 import { CaseStudyWidget } from "@/components/case-studies/CaseStudyWidgetRenderer";
 import { CASE_STUDY_BLOCK_TYPES, type CaseStudyBlock, type CaseStudyBlockType } from "@/lib/landing/case-study-block-types";
 
@@ -61,6 +60,21 @@ const WIDGET_LABELS: Record<CaseStudyBlockType, string> = {
 
 const TONES: Tone[] = ["blue", "indigo", "purple", "green", "red", "orange", "yellow"];
 
+async function adminJson<T>(url: string, init: RequestInit): Promise<T> {
+  const res = await fetch(url, {
+    ...init,
+    headers: {
+      "content-type": "application/json",
+      ...(init.headers ?? {}),
+    },
+  });
+  const payload = await res.json().catch(() => ({}));
+  if (!res.ok) {
+    throw new Error(payload.error || payload.message || "Request failed");
+  }
+  return payload as T;
+}
+
 export function CaseStudyBlocksClient({
   caseStudyId,
   caseTitle,
@@ -83,14 +97,13 @@ export function CaseStudyBlocksClient({
 
   const caseInfoMutation = useMutation({
     mutationFn: async () => {
-      const { error } = await supabaseAdmin
-        .from("case_studies")
-        .update({
+      await adminJson(`/api/admin/case-studies/${caseStudyId}/builder`, {
+        method: "PATCH",
+        body: JSON.stringify({
           title: caseInfo.title.trim() || "Untitled case study",
           short_description: caseInfo.description.trim() || null,
-        })
-        .eq("id", caseStudyId);
-      if (error) throw error;
+        }),
+      });
     },
     onSuccess: () => {
       setCaseInfoFocused(false);
@@ -101,11 +114,10 @@ export function CaseStudyBlocksClient({
 
   const saveMutation = useMutation({
     mutationFn: async (block: EditableBlock) => {
-      const { error } = await supabaseAdmin
-        .from("case_study_blocks")
-        .update(toPayload(block))
-        .eq("id", block.id);
-      if (error) throw error;
+      await adminJson(`/api/admin/case-studies/${caseStudyId}/blocks/${block.id}`, {
+        method: "PATCH",
+        body: JSON.stringify(toPayload(block)),
+      });
     },
     onSuccess: () => {
       setSelectedId(null);
@@ -117,13 +129,11 @@ export function CaseStudyBlocksClient({
   const createMutation = useMutation({
     mutationFn: async (type: CaseStudyBlockType) => {
       const block = makeDefaultBlock(type, caseStudyId, nextOrder(blocks));
-      const { data, error } = await supabaseAdmin
-        .from("case_study_blocks")
-        .insert(toInsertPayload(block))
-        .select("id, case_study_id, type, title, subtitle, content, config, display_order, is_active, updated_at")
-        .single();
-      if (error) throw error;
-      return fromRow(data as CaseStudyBlockRow);
+      const data = await adminJson<{ row: CaseStudyBlockRow }>(`/api/admin/case-studies/${caseStudyId}/blocks`, {
+        method: "POST",
+        body: JSON.stringify(toInsertPayload(block)),
+      });
+      return fromRow(data.row);
     },
     onSuccess: (block) => {
       setBlocks((current) => [...current, block].sort(byOrder));
@@ -143,8 +153,9 @@ export function CaseStudyBlocksClient({
 
   const deleteMutation = useMutation({
     mutationFn: async (block: EditableBlock) => {
-      const { error } = await supabaseAdmin.from("case_study_blocks").delete().eq("id", block.id);
-      if (error) throw error;
+      await adminJson(`/api/admin/case-studies/${caseStudyId}/blocks/${block.id}`, {
+        method: "DELETE",
+      });
       return block.id;
     },
     onSuccess: (id) => {
@@ -161,13 +172,11 @@ export function CaseStudyBlocksClient({
   const duplicateMutation = useMutation({
     mutationFn: async (block: EditableBlock) => {
       const copy = { ...block, title: `${block.title || WIDGET_LABELS[block.type]} copy`, displayOrder: nextOrder(blocks) };
-      const { data, error } = await supabaseAdmin
-        .from("case_study_blocks")
-        .insert(toInsertPayload(copy))
-        .select("id, case_study_id, type, title, subtitle, content, config, display_order, is_active, updated_at")
-        .single();
-      if (error) throw error;
-      return fromRow(data as CaseStudyBlockRow);
+      const data = await adminJson<{ row: CaseStudyBlockRow }>(`/api/admin/case-studies/${caseStudyId}/blocks`, {
+        method: "POST",
+        body: JSON.stringify(toInsertPayload(copy)),
+      });
+      return fromRow(data.row);
     },
     onSuccess: (block) => {
       setBlocks((current) => [...current, block].sort(byOrder));
@@ -179,17 +188,15 @@ export function CaseStudyBlocksClient({
 
   const orderMutation = useMutation({
     mutationFn: async (ordered: EditableBlock[]) => {
-      await Promise.all(
-        ordered.map((block, index) =>
-          supabaseAdmin
-            .from("case_study_blocks")
-            .update({ display_order: (index + 1) * 10 })
-            .eq("id", block.id)
-            .then(({ error }) => {
-              if (error) throw error;
-            })
-        )
-      );
+      await adminJson(`/api/admin/case-studies/${caseStudyId}/blocks/reorder`, {
+        method: "POST",
+        body: JSON.stringify({
+          items: ordered.map((block, index) => ({
+            id: block.id,
+            display_order: (index + 1) * 10,
+          })),
+        }),
+      });
     },
     onSuccess: () => toast.success("Order saved"),
     onError: (err: Error) => toast.error(err.message || "Order save failed"),
