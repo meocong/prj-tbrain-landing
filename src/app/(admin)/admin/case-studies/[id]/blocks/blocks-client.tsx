@@ -20,6 +20,7 @@ import { CASE_STUDY_BLOCK_TYPES, type CaseStudyBlock, type CaseStudyBlockType } 
 
 type JsonConfig = Record<string, unknown>;
 type Tone = "blue" | "indigo" | "purple" | "green" | "red" | "orange" | "yellow";
+type GraphColor = "blue" | "green" | "yellow" | "orange" | "purple" | "pink" | "slate";
 
 export type CaseStudyBlockRow = {
   id: string;
@@ -56,10 +57,12 @@ const WIDGET_LABELS: Record<CaseStudyBlockType, string> = {
   process_steps: "Process steps",
   outcome: "Outcome",
   image: "Image",
+  workflow_graph: "Workflow graph",
   cta: "CTA",
 };
 
 const TONES: Tone[] = ["blue", "indigo", "purple", "green", "red", "orange", "yellow"];
+const GRAPH_COLORS: GraphColor[] = ["blue", "green", "yellow", "orange", "purple", "pink", "slate"];
 
 async function adminJson<T>(url: string, init: RequestInit): Promise<T> {
   const res = await fetch(url, {
@@ -642,6 +645,10 @@ function InlineWidgetEditor({
     );
   }
 
+  if (block.type === "workflow_graph") {
+    return <WorkflowGraphInlineEditor block={block} onChange={onChange} />;
+  }
+
   return (
     <section className="relative rounded-2xl border-2 border-[#6C3CF4] bg-gradient-to-r from-emerald-600 to-blue-700 p-8 text-center text-white shadow-xl">
       <InlineInput value={block.title} onChange={(title) => onChange({ ...block, title })} className="text-center text-3xl font-bold text-white" />
@@ -649,6 +656,157 @@ function InlineWidgetEditor({
       <div className="mx-auto mt-6 grid max-w-xl gap-3 md:grid-cols-2">
         <InlineInput value={stringValue(block.config.label)} onChange={(label) => patchConfig({ label })} className="rounded-lg bg-white px-4 py-3 text-center font-bold text-emerald-700" />
         <InlineInput value={stringValue(block.config.href)} onChange={(href) => patchConfig({ href })} className="rounded-lg bg-white/15 px-4 py-3 text-center text-sm text-white" />
+      </div>
+    </section>
+  );
+}
+
+function WorkflowGraphInlineEditor({ block, onChange }: { block: EditableBlock; onChange: (block: EditableBlock) => void }) {
+  const nodes = asObjectArray(block.config.nodes);
+  const edges = asObjectArray(block.config.edges);
+  const nodeIds = nodes.map((node) => stringValue(node.id)).filter(Boolean);
+
+  function patchConfig(patch: JsonConfig) {
+    onChange({ ...block, config: { ...block.config, ...patch } });
+  }
+
+  function updateNode(index: number, patch: JsonConfig) {
+    patchConfig({ nodes: nodes.map((node, nodeIndex) => (nodeIndex === index ? { ...node, ...patch } : node)) });
+  }
+
+  function renameNode(index: number, rawId: string) {
+    const currentId = stringValue(nodes[index]?.id);
+    const nextId = uniqueGraphNodeId(nodes, slugGraphId(rawId || currentId || `node-${index + 1}`), index);
+    patchConfig({
+      nodes: nodes.map((node, nodeIndex) => (nodeIndex === index ? { ...node, id: nextId } : node)),
+      edges: edges.map((edge) => ({
+        ...edge,
+        from: stringValue(edge.from) === currentId ? nextId : edge.from,
+        to: stringValue(edge.to) === currentId ? nextId : edge.to,
+      })),
+    });
+  }
+
+  function updateEdge(index: number, patch: JsonConfig) {
+    patchConfig({ edges: edges.map((edge, edgeIndex) => (edgeIndex === index ? { ...edge, ...patch } : edge)) });
+  }
+
+  function addNode() {
+    const id = uniqueGraphNodeId(nodes, `node-${nodes.length + 1}`);
+    patchConfig({
+      nodes: [
+        ...nodes,
+        {
+          id,
+          label: "NODE",
+          subtitle: "Layer",
+          color: GRAPH_COLORS[nodes.length % GRAPH_COLORS.length],
+          x: nodes.length ? Math.max(...nodes.map((node) => numberValue(node.x))) + 1 : 0,
+          y: 1,
+        },
+      ],
+    });
+  }
+
+  function removeNode(index: number) {
+    const id = stringValue(nodes[index]?.id);
+    patchConfig({
+      nodes: nodes.filter((_, nodeIndex) => nodeIndex !== index),
+      edges: edges.filter((edge) => stringValue(edge.from) !== id && stringValue(edge.to) !== id),
+    });
+  }
+
+  function addEdge() {
+    if (nodeIds.length < 2) return;
+    patchConfig({ edges: [...edges, { from: nodeIds[0], to: nodeIds[1], label: "" }] });
+  }
+
+  return (
+    <section className="relative mb-12 rounded-3xl border-2 border-[#6C3CF4] bg-white/80 p-4 shadow-md">
+      <div className="grid gap-3 md:grid-cols-2">
+        <InlineInput value={block.title} onChange={(title) => onChange({ ...block, title })} placeholder="Workflow title" className="rounded-lg border border-blue-100 bg-white/80 text-sm font-semibold text-[#222222]" />
+        <InlineInput value={block.subtitle} onChange={(subtitle) => onChange({ ...block, subtitle })} placeholder="Optional subtitle" className="rounded-lg border border-blue-100 bg-white/80 text-sm text-[#222222]" />
+      </div>
+
+      <div className="mt-4 overflow-hidden rounded-2xl bg-slate-50 p-4">
+        <CaseStudyWidget block={toPublicBlock(block)} fallbackMetrics={[]} />
+      </div>
+
+      <div className="mt-4 grid gap-4 lg:grid-cols-[1fr_360px]">
+        <div className="rounded-2xl border bg-white p-4" style={{ borderColor: "var(--border-default)" }}>
+          <div className="mb-3 flex items-center justify-between gap-3">
+            <p className="text-sm font-semibold" style={{ color: "var(--text-primary)" }}>Nodes</p>
+            <button type="button" onClick={addNode} className="btn-secondary cursor-pointer text-xs">
+              <Plus className="h-3.5 w-3.5" /> Add node
+            </button>
+          </div>
+          <div className="space-y-3">
+            {nodes.map((node, index) => (
+              <div key={`${stringValue(node.id)}-${index}`} className="rounded-xl border p-3" style={{ borderColor: "var(--border-subtle)" }}>
+                <div className="mb-3 flex items-center justify-between gap-2">
+                  <span className="text-xs font-semibold" style={{ color: "var(--text-muted)" }}>Node {index + 1}</span>
+                  <button type="button" onClick={() => removeNode(index)} className="cursor-pointer text-xs text-red-600">Remove</button>
+                </div>
+                <div className="grid gap-3 md:grid-cols-2">
+                  <Field label="ID">
+                    <input value={stringValue(node.id)} onChange={(event) => renameNode(index, event.target.value)} className="input-field" />
+                  </Field>
+                  <Field label="Color">
+                    <select value={normalizeGraphColor(node.color)} onChange={(event) => updateNode(index, { color: event.target.value })} className="input-field cursor-pointer">
+                      {GRAPH_COLORS.map((color) => <option key={color} value={color}>{color}</option>)}
+                    </select>
+                  </Field>
+                  <Field label="Label">
+                    <input value={stringValue(node.label)} onChange={(event) => updateNode(index, { label: event.target.value })} className="input-field" />
+                  </Field>
+                  <Field label="Subtitle">
+                    <input value={stringValue(node.subtitle)} onChange={(event) => updateNode(index, { subtitle: event.target.value })} className="input-field" />
+                  </Field>
+                  <Field label="Column">
+                    <input type="number" min={0} max={12} value={numberValue(node.x)} onChange={(event) => updateNode(index, { x: numberValue(event.target.value) })} className="input-field" />
+                  </Field>
+                  <Field label="Row">
+                    <input type="number" min={0} max={12} value={numberValue(node.y)} onChange={(event) => updateNode(index, { y: numberValue(event.target.value) })} className="input-field" />
+                  </Field>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="rounded-2xl border bg-white p-4" style={{ borderColor: "var(--border-default)" }}>
+          <div className="mb-3 flex items-center justify-between gap-3">
+            <p className="text-sm font-semibold" style={{ color: "var(--text-primary)" }}>Arrows</p>
+            <button type="button" onClick={addEdge} disabled={nodeIds.length < 2} className="btn-secondary cursor-pointer text-xs disabled:cursor-not-allowed disabled:opacity-50">
+              <Plus className="h-3.5 w-3.5" /> Add arrow
+            </button>
+          </div>
+          <div className="space-y-3">
+            {edges.map((edge, index) => (
+              <div key={index} className="rounded-xl border p-3" style={{ borderColor: "var(--border-subtle)" }}>
+                <div className="mb-3 flex items-center justify-between gap-2">
+                  <span className="text-xs font-semibold" style={{ color: "var(--text-muted)" }}>Arrow {index + 1}</span>
+                  <button type="button" onClick={() => patchConfig({ edges: edges.filter((_, edgeIndex) => edgeIndex !== index) })} className="cursor-pointer text-xs text-red-600">Remove</button>
+                </div>
+                <div className="grid gap-3">
+                  <Field label="From">
+                    <select value={stringValue(edge.from)} onChange={(event) => updateEdge(index, { from: event.target.value })} className="input-field cursor-pointer">
+                      {nodeIds.map((id) => <option key={id} value={id}>{id}</option>)}
+                    </select>
+                  </Field>
+                  <Field label="To">
+                    <select value={stringValue(edge.to)} onChange={(event) => updateEdge(index, { to: event.target.value })} className="input-field cursor-pointer">
+                      {nodeIds.map((id) => <option key={id} value={id}>{id}</option>)}
+                    </select>
+                  </Field>
+                  <Field label="Label">
+                    <input value={stringValue(edge.label)} onChange={(event) => updateEdge(index, { label: event.target.value })} className="input-field" placeholder="Optional arrow label" />
+                  </Field>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     </section>
   );
@@ -1159,6 +1317,26 @@ function defaultContent(type: CaseStudyBlockType): { title: string; subtitle?: s
           caption: "Optional image caption",
         },
       };
+    case "workflow_graph":
+      return {
+        title: "Multi-Layer Quality Workflow",
+        config: {
+          nodes: [
+            { id: "maker", label: "MAKER", subtitle: "Layer 1", color: "blue", x: 0, y: 1 },
+            { id: "review", label: "REVIEW", subtitle: "RV1 + RV2 / Layer 2", color: "green", x: 1, y: 1 },
+            { id: "sample-1", label: "SAMPLE 1", subtitle: "Layer 3", color: "yellow", x: 2, y: 0 },
+            { id: "sample-2", label: "SAMPLE 2", subtitle: "Layer 4", color: "orange", x: 2, y: 2 },
+            { id: "final-qa", label: "FINAL QA", subtitle: "Layer 5", color: "purple", x: 3, y: 1 },
+          ],
+          edges: [
+            { from: "maker", to: "review", label: "" },
+            { from: "review", to: "sample-1", label: "" },
+            { from: "review", to: "sample-2", label: "" },
+            { from: "sample-1", to: "final-qa", label: "" },
+            { from: "sample-2", to: "final-qa", label: "" },
+          ],
+        },
+      };
     case "cta":
       return {
         title: "Need Expert Data Services?",
@@ -1178,6 +1356,7 @@ function defaultDescription(type: CaseStudyBlockType) {
     process_steps: "Implementation timeline cards",
     outcome: "Results and client benefits",
     image: "Full-width image with caption",
+    workflow_graph: "Editable node-and-arrow workflow diagram",
     cta: "Final call to action",
   };
   return map[type];
@@ -1195,10 +1374,43 @@ function stringValue(value: unknown) {
   return typeof value === "string" ? value : "";
 }
 
+function numberValue(value: unknown, fallback = 0) {
+  if (typeof value === "number" && Number.isFinite(value)) return value;
+  const next = Number(value);
+  return Number.isFinite(next) ? next : fallback;
+}
+
 function normalizeTone(value: unknown): Tone {
   const tone = typeof value === "string" ? value : "";
   if (TONES.includes(tone as Tone)) return tone as Tone;
   return "blue";
+}
+
+function normalizeGraphColor(value: unknown): GraphColor {
+  const color = typeof value === "string" ? value : "";
+  if (GRAPH_COLORS.includes(color as GraphColor)) return color as GraphColor;
+  return "blue";
+}
+
+function slugGraphId(value: string) {
+  return value
+    .trim()
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "") || "node";
+}
+
+function uniqueGraphNodeId(nodes: JsonConfig[], preferred: string, ignoreIndex = -1) {
+  const base = slugGraphId(preferred);
+  const existing = new Set(
+    nodes
+      .map((node, index) => (index === ignoreIndex ? "" : stringValue(node.id)))
+      .filter(Boolean),
+  );
+  if (!existing.has(base)) return base;
+  let suffix = 2;
+  while (existing.has(`${base}-${suffix}`)) suffix += 1;
+  return `${base}-${suffix}`;
 }
 
 function toneBg(tone: Tone, shade: 100 | 500 | 600) {
