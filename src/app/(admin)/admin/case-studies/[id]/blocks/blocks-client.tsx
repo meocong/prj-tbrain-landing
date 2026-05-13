@@ -14,6 +14,7 @@ import {
   Save,
   Trash2,
 } from "lucide-react";
+import { InlineRichTextEditor } from "@/components/admin/editor/InlineRichTextEditor";
 import { CaseStudyWidget } from "@/components/case-studies/CaseStudyWidgetRenderer";
 import { CASE_STUDY_BLOCK_TYPES, type CaseStudyBlock, type CaseStudyBlockType } from "@/lib/landing/case-study-block-types";
 
@@ -739,10 +740,12 @@ function InlineInput({ value, onChange, placeholder, className }: { value: strin
 
 function InlineArea({ value, onChange, className }: { value: string; onChange: (value: string) => void; className?: string }) {
   return (
-    <textarea
-      value={value}
-      onChange={(event) => onChange(event.target.value)}
-      className={`w-full resize-y border border-transparent bg-transparent px-2 py-1 outline-none transition focus:border-[#6C3CF4]/50 focus:bg-white/70 ${className ?? ""}`}
+    <InlineRichTextEditor
+      content={value}
+      onChange={onChange}
+      placeholder="Write rich text..."
+      className={className}
+      minHeightClassName="min-h-[96px]"
     />
   );
 }

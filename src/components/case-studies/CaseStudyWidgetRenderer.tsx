@@ -10,6 +10,9 @@ const METRIC_ACCENTS = [
   { border: "border-purple-600", text: "text-purple-600" },
   { border: "border-pink-600", text: "text-pink-600" },
 ];
+const RICH_TEXT_FLOW =
+  "[&_p]:my-0 [&_p+p]:mt-2 [&_ul]:my-2 [&_ol]:my-2 [&_li]:my-1 [&_a]:text-[#6C3CF4] [&_a]:underline [&_strong]:font-semibold " +
+  "[&_img]:my-4 [&_img]:max-w-full [&_img]:rounded-xl [&_img]:shadow-md";
 
 export function CaseStudyWidgetRenderer({
   blocks,
@@ -86,7 +89,7 @@ function TextCard({ block }: { block: CaseStudyBlock }) {
   return (
     <section className={`${shell} backdrop-blur-sm rounded-2xl p-8 shadow-md`}>
       <LegacyHeading title={block.title || ""} tone="blue" />
-      <div className="space-y-4 text-[#222222] leading-relaxed text-lg" dangerouslySetInnerHTML={{ __html: block.content || "" }} />
+      <div className={`space-y-4 text-[#222222] leading-relaxed text-lg ${RICH_TEXT_FLOW}`} dangerouslySetInnerHTML={{ __html: block.content || "" }} />
     </section>
   );
 }
@@ -104,7 +107,7 @@ function ObjectiveGrid({ block }: { block: CaseStudyBlock }) {
                 <span className="text-3xl">{item.icon}</span>
               </div>
               <h3 className="font-bold text-lg text-[#222222] mb-2">{item.title}</h3>
-              <p className="text-gray-600 text-sm" dangerouslySetInnerHTML={{ __html: item.body }} />
+              <div className={`text-gray-600 text-sm ${RICH_TEXT_FLOW}`} dangerouslySetInnerHTML={{ __html: item.body }} />
             </div>
           ))}
         </div>
@@ -127,7 +130,7 @@ function ChallengeCards({ block }: { block: CaseStudyBlock }) {
               </span>
               {card.title}
             </h3>
-            <p className="text-[#222222] ml-13" dangerouslySetInnerHTML={{ __html: card.body }} />
+            <div className={`text-[#222222] ml-13 ${RICH_TEXT_FLOW}`} dangerouslySetInnerHTML={{ __html: card.body }} />
           </div>
         ))}
       </div>
@@ -148,7 +151,7 @@ function QaFramework({ block }: { block: CaseStudyBlock }) {
     <section className="mb-12 bg-gradient-to-br from-indigo-50/80 to-purple-50/80 backdrop-blur-sm rounded-2xl p-8 shadow-md">
       <LegacyHeading title={block.title || ""} tone="indigo" />
       {block.content && (
-        <div className="text-[#222222] leading-relaxed text-lg mb-8" dangerouslySetInnerHTML={{ __html: block.content }} />
+        <div className={`text-[#222222] leading-relaxed text-lg mb-8 ${RICH_TEXT_FLOW}`} dangerouslySetInnerHTML={{ __html: block.content }} />
       )}
 
       <div className="mb-8 bg-white/90 rounded-xl p-8 shadow-inner">
@@ -173,7 +176,7 @@ function QaFramework({ block }: { block: CaseStudyBlock }) {
                     </div>
                   </div>
                   <div className="flex-1">
-                    <p className="text-sm text-gray-600" dangerouslySetInnerHTML={{ __html: gate.body }} />
+                    <div className={`text-sm text-gray-600 ${RICH_TEXT_FLOW}`} dangerouslySetInnerHTML={{ __html: gate.body }} />
                   </div>
                 </div>
               ))}
@@ -200,7 +203,7 @@ function QaFramework({ block }: { block: CaseStudyBlock }) {
               <span className="text-2xl">{card.icon}</span>
             </div>
             <h4 className="text-lg font-bold text-[#222222] mb-2">{card.title}</h4>
-            <p className="text-gray-600 text-sm" dangerouslySetInnerHTML={{ __html: card.body }} />
+            <div className={`text-gray-600 text-sm ${RICH_TEXT_FLOW}`} dangerouslySetInnerHTML={{ __html: card.body }} />
           </div>
         ))}
       </div>
@@ -219,7 +222,7 @@ function LayerRow({ layer }: { layer: WidgetItem }) {
       </div>
       <div className={`flex-1 ${toneBg(layer.tone, 50)} rounded-lg p-4`}>
         <h4 className="font-bold text-[#222222] mb-1">{layer.title}</h4>
-        <p className="text-sm text-gray-600" dangerouslySetInnerHTML={{ __html: layer.body }} />
+        <div className={`text-sm text-gray-600 ${RICH_TEXT_FLOW}`} dangerouslySetInnerHTML={{ __html: layer.body }} />
       </div>
     </div>
   );
@@ -247,7 +250,7 @@ function ProcessSteps({ block }: { block: CaseStudyBlock }) {
               </div>
               <div>
                 <h3 className="text-lg font-bold text-[#222222] mb-2">{step.title}</h3>
-                <p className="text-gray-600 text-sm" dangerouslySetInnerHTML={{ __html: step.body }} />
+                <div className={`text-gray-600 text-sm ${RICH_TEXT_FLOW}`} dangerouslySetInnerHTML={{ __html: step.body }} />
               </div>
             </div>
           </div>
@@ -270,7 +273,7 @@ function OutcomeBlock({ block }: { block: CaseStudyBlock }) {
               <div className={`text-6xl font-bold ${toneText(card.tone, 600)}`}>{card.value}</div>
               <div className="text-gray-600 font-semibold mt-2">{card.label}</div>
             </div>
-            <p className="text-sm text-gray-600 text-center" dangerouslySetInnerHTML={{ __html: card.body }} />
+            <div className={`text-sm text-gray-600 text-center ${RICH_TEXT_FLOW}`} dangerouslySetInnerHTML={{ __html: card.body }} />
           </div>
         ))}
       </div>
