@@ -37,7 +37,7 @@ import { StatsGrid } from "./stats-grid";
 export const metadata: Metadata = {
   title: "About Us",
   description:
-    "Tbrain — the improvement layer for agentic AI. Custom expert data, benchmark creation, evaluation, and domain pods for frontier AI teams.",
+    "Tbrain is the improvement layer for agentic AI. Custom expert data, benchmark creation, evaluation, and domain pods for frontier AI teams.",
   alternates: { canonical: "/about" },
   openGraph: {
     title: "About Tbrain",
@@ -229,7 +229,7 @@ export default async function AboutPage() {
             </h2>
             <p className="mx-auto mt-5 max-w-2xl text-base leading-relaxed" style={{ color: "var(--text-secondary)" }}>
               Pre-training, post-training, fine-tuning, and agentic evaluation
-              workflows — each delivered by a specialized expert pod.
+              workflows, each delivered by a specialized expert pod.
             </p>
           </div>
           <div className="mx-auto mt-12 grid max-w-5xl grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">

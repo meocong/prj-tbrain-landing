@@ -10,17 +10,17 @@ import { ExpertsSection } from "@/components/marketing/sections/ExpertsSection";
 import { ContactCTA } from "@/components/marketing/sections/ContactCTA";
 
 export const metadata: Metadata = {
-  title: "Tbrain — Trusted Human Infrastructure for Agentic AI",
+  title: "Tbrain | Trusted Human Infrastructure for Agentic AI",
   description:
-    "Trusted human infrastructure for agentic AI — coding, robotics, evaluation, RLHF, SFT, and post-training data programs.",
+    "Trusted human infrastructure for agentic AI across coding, robotics, evaluation, RLHF, SFT, and post-training data programs.",
   openGraph: {
-    title: "Tbrain — Trusted Human Infrastructure for Agentic AI",
+    title: "Tbrain | Trusted Human Infrastructure for Agentic AI",
     description: "The data factory behind coding, robotics, agentic workflows, evaluation, and post-training programs.",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Tbrain — Trusted Human Infrastructure for Agentic AI",
+    title: "Tbrain | Trusted Human Infrastructure for Agentic AI",
     description: "The data factory behind coding, robotics, agentic workflows, evaluation, and post-training programs.",
   },
 };

@@ -63,7 +63,7 @@ export function WorkflowLoop() {
           style={{ color: "var(--text-secondary)" }}
         >
           Every reviewer verdict feeds back into the knowledge layer. Agents
-          get smarter with every batch — no quarterly retraining cycles.
+          get smarter with every batch, without quarterly retraining cycles.
         </p>
       </div>
 
@@ -157,7 +157,7 @@ export function WorkflowLoop() {
           className="mt-10 text-center text-sm italic"
           style={{ color: "var(--text-muted)" }}
         >
-          The dashed line is not just decoration — every verdict really does
+          The dashed line is not just decoration. Every verdict really does
           flow back into the knowledge layer via the workflow engine.
         </p>
       </div>

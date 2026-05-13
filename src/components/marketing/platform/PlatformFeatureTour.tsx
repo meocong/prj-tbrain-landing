@@ -41,7 +41,7 @@ const TOURS: Tour[] = [
     eyebrow: "Agent Knowledge Base",
     title: "Versioned grounding for every agent",
     body:
-      "Each agent reads from a curated knowledge base — versioned, searchable, categorized — so you can audit which guides any answer was grounded in. Add a doc once and every agent that needs it picks it up.",
+      "Each agent reads from a curated knowledge base that is versioned, searchable, and categorized, so you can audit which guides any answer was grounded in. Add a doc once and every agent that needs it picks it up.",
     bullets: [
       "Per-agent and per-project knowledge scopes",
       "Categories + search + change history",
@@ -99,9 +99,14 @@ export function PlatformFeatureTour() {
 function FeatureRow({ tour, index }: { tour: Tour; index: number }) {
   const ref = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
-  const redactionAreas = index === 2
-    ? [{ top: 14, left: 4, width: 92, height: 82 }]
-    : [{ top: 18, left: 4, width: 92, height: 70 }];
+  const redactionAreas = tour.src === "/images/platform/knowledge.png"
+    ? [
+        { top: 35, left: 4, width: 92, height: 12 },
+        { top: 49, left: 4, width: 92, height: 12 },
+        { top: 63, left: 4, width: 92, height: 12 },
+        { top: 77, left: 4, width: 92, height: 12 },
+      ]
+    : [];
 
   useEffect(() => {
     const el = ref.current;
@@ -183,7 +188,7 @@ function FeatureRow({ tour, index }: { tour: Tour; index: number }) {
           {redactionAreas.map((area, areaIndex) => (
             <div
               key={`${tour.src}-${areaIndex}`}
-              className="pointer-events-none absolute rounded-xl backdrop-blur-md"
+              className="pointer-events-none absolute rounded-lg backdrop-blur-md"
               style={{
                 top: `${area.top}%`,
                 left: `${area.left}%`,
