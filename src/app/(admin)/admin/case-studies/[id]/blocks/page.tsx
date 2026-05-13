@@ -67,7 +67,7 @@ export default async function CaseStudyBlocksPage({ params }: { params: Promise<
         </div>
       </div>
 
-      <CaseStudyBlocksClient caseStudyId={id} caseTitle={current.title} rows={rows} />
+      <CaseStudyBlocksClient caseStudyId={id} caseTitle={current.title} caseDescription={current.short_description ?? ""} rows={rows} />
     </div>
   );
 }

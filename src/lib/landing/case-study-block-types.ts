@@ -6,6 +6,7 @@ export const CASE_STUDY_BLOCK_TYPES = [
   "qa_framework",
   "process_steps",
   "outcome",
+  "image",
   "cta",
 ] as const;
 
