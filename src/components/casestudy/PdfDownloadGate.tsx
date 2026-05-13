@@ -66,7 +66,7 @@ export function PdfDownloadGate({ slug, title }: Props) {
         className="inline-flex items-center gap-2 rounded-full bg-[#6C3CF4] px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-[#5a2fd3]"
       >
         <Download className="h-4 w-4" />
-        Download printable brochure (PDF)
+        Download PDF
       </button>
 
       {open && (
