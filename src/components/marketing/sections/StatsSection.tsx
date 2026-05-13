@@ -8,7 +8,7 @@ const PILLARS = [
   {
     icon: ShieldCheck,
     title: "Lab-grade precision",
-    body: "Optical capture, IMU, and multi-camera rigs — not video-estimated approximations.",
+    body: "Optical capture, IMU, and multi-camera rigs, not video-estimated approximations.",
     accent: "#A78BFA",
     kicker: "01",
   },

@@ -15,7 +15,7 @@ const PILLARS = [
     accent: "#A78BFA",
     href: "/data/physical-ai",
     description:
-      "Lab-grade human motion capture — not estimated from video — for training humanoid policies, imitation learning, and embodied agents.",
+      "Lab-grade human motion capture, not estimated from video, for training humanoid policies, imitation learning, and embodied agents.",
     visual: "physical",
   },
   {
@@ -48,7 +48,7 @@ const PILLARS = [
     accent: "#34D399",
     href: "/services",
     description:
-      "Classification, detection, instance & semantic segmentation — calibrated for frontier vision models.",
+      "Classification, detection, instance and semantic segmentation calibrated for frontier vision models.",
     visual: "image",
   },
   {
@@ -70,7 +70,7 @@ const PILLARS = [
     accent: "#F59E0B",
     href: "/services",
     description:
-      "Every sample runs through our confidence models — flagging edge cases before they hit your training run.",
+      "Every sample runs through our confidence models, flagging edge cases before they hit your training run.",
     visual: "qc",
   },
 ];

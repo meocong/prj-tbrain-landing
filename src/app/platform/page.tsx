@@ -11,12 +11,12 @@ import { getExpertOsFeatures } from "@/lib/landing/expert-os";
 import { VideoBackground } from "@/components/marketing/fx/VideoBackground";
 
 export const metadata: Metadata = {
-  title: "Expert OS — Agent & Expert Management Platform",
+  title: "Expert OS | Agent & Expert Management Platform",
   description:
     "Expert OS is Tbrain's management platform for agent knowledge, expert operations, automated evaluation, and agentic workflows.",
   alternates: { canonical: "/platform" },
   openGraph: {
-    title: "Expert OS — Agent & Expert Management Platform",
+    title: "Expert OS | Agent & Expert Management Platform",
     description:
       "AI-native operations for the human side of agentic AI: knowledge bases, LLM-as-judge, agentic workflows, and agent identity.",
     url: "/platform",
@@ -117,7 +117,7 @@ export default async function PlatformPage() {
             Built for <span className="gradient-text">agent operations</span>
           </h2>
           <p className="mx-auto mb-12 max-w-2xl text-center text-base leading-relaxed" style={{ color: "var(--text-secondary)" }}>
-            Three capabilities that ship together — knowledge, automated
+            Three capabilities that ship together: knowledge, automated
             evaluation, and agentic workflows with persistent agent identity.
           </p>
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
@@ -220,7 +220,7 @@ export default async function PlatformPage() {
               Drag, drop, <span className="gradient-text">ship a pipeline</span>
             </h2>
             <p className="mx-auto mt-5 max-w-2xl text-base leading-relaxed md:text-lg" style={{ color: "var(--text-secondary)" }}>
-              Visual builder backed by Temporal. 24 node types — Auto QC, AI judge, branch, human review, webhook, foreach, subflow — composed without code, durable to retries and pauses.
+              Visual builder backed by Temporal. 24 node types including Auto QC, AI judge, branch, human review, webhook, foreach, and subflow, all composed without code and durable to retries and pauses.
             </p>
           </div>
           <WorkflowBuilderShowcase />
