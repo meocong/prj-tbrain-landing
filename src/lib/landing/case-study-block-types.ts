@@ -7,6 +7,7 @@ export const CASE_STUDY_BLOCK_TYPES = [
   "process_steps",
   "outcome",
   "image",
+  "workflow_graph",
   "cta",
 ] as const;
 
