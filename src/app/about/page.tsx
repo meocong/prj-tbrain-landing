@@ -30,6 +30,7 @@ import {
   Wrench,
 } from "lucide-react";
 import { getAboutCardGroups } from "@/lib/landing/about-cards";
+import { getAboutSections, type AboutSection } from "@/lib/landing/about-sections";
 import { getServices } from "@/lib/landing/services";
 import { StatsGrid } from "./stats-grid";
 
@@ -74,13 +75,52 @@ const ICON_MAP: Record<string, React.ElementType> = {
   FlaskConical,
 };
 
+function SectionHeading({
+  section,
+  as = "h2",
+  headingClassName = "mt-4 text-3xl font-medium md:text-5xl",
+}: {
+  section: AboutSection;
+  as?: "h2" | "h3";
+  headingClassName?: string;
+}) {
+  const Heading = as;
+
+  return (
+    <div className="mx-auto max-w-3xl text-center">
+      <p className="font-family_avt text-xs uppercase tracking-[0.2em]" style={{ color: "var(--text-muted)" }}>
+        {section.eyebrow}
+      </p>
+      <Heading className={headingClassName} style={{ fontFamily: "var(--font-heading)", color: "var(--text-primary)" }}>
+        {section.titleBefore}
+        {section.titleHighlight ? (
+          <>
+            {" "}
+            <span className="gradient-text">{section.titleHighlight}</span>
+          </>
+        ) : null}
+        {section.titleAfter ? ` ${section.titleAfter}` : null}
+      </Heading>
+      {section.description ? (
+        <p className="mx-auto mt-5 max-w-2xl text-base leading-relaxed" style={{ color: "var(--text-secondary)" }}>
+          {section.description}
+        </p>
+      ) : null}
+    </div>
+  );
+}
+
 export default async function AboutPage() {
-  const [services, domains, aboutCards] = await Promise.all([
+  const [services, domains, aboutCards, aboutSections] = await Promise.all([
     getServices("service"),
     getServices("domain"),
     getAboutCardGroups(),
+    getAboutSections(),
   ]);
 
+  const sectionByGroup = Object.fromEntries(aboutSections.map((section) => [section.groupKey, section])) as Partial<
+    Record<AboutSection["groupKey"], AboutSection>
+  >;
   const companyCards = aboutCards.company;
   const valueCards = aboutCards.value;
   const sampleProjects = aboutCards.sample_projects;
@@ -114,21 +154,9 @@ export default async function AboutPage() {
         </section>
 
         {/* Company, mission, and team */}
-        <section className="container mx-auto mt-24 px-3">
-          <div className="mx-auto max-w-3xl text-center">
-            <p className="font-family_avt text-xs uppercase tracking-[0.2em]" style={{ color: "var(--text-muted)" }}>
-              / company
-            </p>
-            <h2 className="mt-4 text-3xl font-medium md:text-5xl" style={{ fontFamily: "var(--font-heading)" }}>
-              Built for the messy middle between{" "}
-              <span className="gradient-text">models and ground truth</span>
-            </h2>
-            <p className="mx-auto mt-5 max-w-2xl text-base leading-relaxed" style={{ color: "var(--text-secondary)" }}>
-              Tbrain is a data and evaluation partner for teams that need more
-              than generic annotation: expert judgment, managed workflows, and
-              measurable quality.
-            </p>
-          </div>
+        {sectionByGroup.company && (
+          <section className="container mx-auto mt-24 px-3">
+          <SectionHeading section={sectionByGroup.company} />
 
           <div className="mx-auto mt-12 grid max-w-6xl gap-5 md:grid-cols-3">
             {companyCards.map((card) => {
@@ -161,23 +189,13 @@ export default async function AboutPage() {
               );
             })}
           </div>
-        </section>
+          </section>
+        )}
 
         {/* How we deliver value */}
-        <section className="container mx-auto mt-24 px-3">
-          <div className="mx-auto max-w-3xl text-center">
-            <p className="font-family_avt text-xs uppercase tracking-[0.2em]" style={{ color: "var(--text-muted)" }}>
-              / how we deliver value
-            </p>
-            <h2 className="mt-4 text-3xl font-medium md:text-5xl" style={{ fontFamily: "var(--font-heading)" }}>
-              Optimized for <span className="gradient-text">scaling complexity</span>
-            </h2>
-            <p className="mx-auto mt-5 max-w-2xl text-base leading-relaxed" style={{ color: "var(--text-secondary)" }}>
-              Legacy marketplaces break on high-stakes AI work. Tbrain provides
-              verifiable software systems and expert-led loops required for
-              agents to self-improve.
-            </p>
-          </div>
+        {sectionByGroup.value && (
+          <section className="container mx-auto mt-24 px-3">
+          <SectionHeading section={sectionByGroup.value} />
 
           <div className="mx-auto mt-12 grid max-w-5xl gap-5 md:grid-cols-3">
             {valueCards.map((card) => {
@@ -197,7 +215,8 @@ export default async function AboutPage() {
               );
             })}
           </div>
-        </section>
+          </section>
+        )}
 
         {/* What we deliver — Services (merged from /services) */}
         <section id="services" className="container mx-auto mt-24 scroll-mt-28 px-3">
@@ -276,15 +295,9 @@ export default async function AboutPage() {
         )}
 
         {/* Sample Projects */}
-        <section className="container mx-auto mt-24 px-3">
-          <div className="mx-auto max-w-3xl text-center">
-            <p className="font-family_avt text-xs uppercase tracking-[0.2em]" style={{ color: "var(--text-muted)" }}>
-              / sample projects
-            </p>
-            <h2 className="mt-4 text-3xl font-medium md:text-5xl" style={{ fontFamily: "var(--font-heading)" }}>
-              Programs that turn expertise into <span className="gradient-text">model signal</span>
-            </h2>
-          </div>
+        {sectionByGroup.sample_projects && (
+          <section className="container mx-auto mt-24 px-3">
+          <SectionHeading section={sectionByGroup.sample_projects} />
           <div className="mx-auto mt-12 grid max-w-5xl gap-5 md:grid-cols-3">
             {sampleProjects.map((project) => {
               const Icon = (ICON_MAP[project.icon ?? ""] || Bot) as React.ComponentType<{ className?: string }>;
@@ -303,18 +316,13 @@ export default async function AboutPage() {
               );
             })}
           </div>
-        </section>
+          </section>
+        )}
 
         {/* Technical Expertise */}
-        <section className="container mx-auto mt-24 px-3">
-          <div className="mx-auto max-w-3xl text-center">
-            <p className="font-family_avt text-xs uppercase tracking-[0.2em]" style={{ color: "var(--text-muted)" }}>
-              / technical expertise
-            </p>
-            <h2 className="mt-4 text-3xl font-medium md:text-5xl" style={{ fontFamily: "var(--font-heading)" }}>
-              Deep technical expertise across <span className="gradient-text">hard domains</span>
-            </h2>
-          </div>
+        {sectionByGroup.expertise && (
+          <section className="container mx-auto mt-24 px-3">
+          <SectionHeading section={sectionByGroup.expertise} />
           <div className="mx-auto mt-12 grid max-w-5xl gap-4 md:grid-cols-2">
             {expertise.map((area) => {
               const Icon = (ICON_MAP[area.icon ?? ""] || CheckCircle) as React.ComponentType<{ className?: string }>;
@@ -333,24 +341,14 @@ export default async function AboutPage() {
               );
             })}
           </div>
-        </section>
+          </section>
+        )}
 
         {/* Team */}
         <section className="container mx-auto mt-24 px-3">
-          <div className="mx-auto max-w-3xl text-center">
-            <p className="font-family_avt text-xs uppercase tracking-[0.2em]" style={{ color: "var(--text-muted)" }}>
-              / team
-            </p>
-            <h2 className="mt-4 text-3xl font-medium md:text-5xl" style={{ fontFamily: "var(--font-heading)" }}>
-              The operators behind <span className="gradient-text">Tbrain programs</span>
-            </h2>
-            <p className="mx-auto mt-5 max-w-2xl text-base leading-relaxed" style={{ color: "var(--text-secondary)" }}>
-              Tbrain combines AI training data operators, engineering delivery
-              leaders, and domain experts to build evaluation, annotation, and
-              human-feedback programs for high-stakes AI work.
-            </p>
-          </div>
+          {sectionByGroup.team && <SectionHeading section={sectionByGroup.team} />}
 
+          {sectionByGroup.team && (
           <div className="mx-auto mt-12 grid max-w-5xl gap-5 md:grid-cols-2">
             {coreProfiles.map((person) => {
               const projects = Array.isArray(person.meta.projects)
@@ -405,6 +403,7 @@ export default async function AboutPage() {
               );
             })}
           </div>
+          )}
 
           <div
             className="mx-auto mt-12 grid max-w-6xl gap-0 overflow-hidden rounded-3xl md:grid-cols-[0.9fr_1.1fr]"
@@ -463,19 +462,13 @@ export default async function AboutPage() {
             </div>
           </div>
 
-          <div className="mx-auto mt-12 max-w-3xl text-center">
-            <p className="font-family_avt text-xs uppercase tracking-[0.22em]" style={{ color: "var(--text-muted)" }}>
-              / expert network
-            </p>
-            <h3 className="mt-3 text-3xl font-semibold md:text-5xl" style={{ fontFamily: "var(--font-heading)", color: "var(--text-primary)" }}>
-              Domain experts when accuracy depends on depth
-            </h3>
-            <p className="mx-auto mt-5 max-w-2xl text-base leading-relaxed" style={{ color: "var(--text-secondary)" }}>
-              Tbrain works with specialized contributors across STEM, medical,
-              coding, data science, robotics, and other technical domains where
-              generic labeling teams are not enough.
-            </p>
-          </div>
+          {sectionByGroup.experts && (
+            <>
+          <SectionHeading
+            section={sectionByGroup.experts}
+            as="h3"
+            headingClassName="mt-3 text-3xl font-semibold md:text-5xl"
+          />
 
           <div className="mx-auto mt-12 grid max-w-5xl gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {experts.map((expert) => (
@@ -499,6 +492,8 @@ export default async function AboutPage() {
               </article>
             ))}
           </div>
+            </>
+          )}
         </section>
 
         {/* CTA */}

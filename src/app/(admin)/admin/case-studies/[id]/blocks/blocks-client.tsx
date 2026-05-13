@@ -5,17 +5,17 @@ import type { ReactNode } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { toast } from "sonner";
 import {
+  ArrowDown,
+  ArrowUp,
   Copy,
   Eye,
   GripVertical,
-  Layers,
   Plus,
   Save,
   Trash2,
-  Wand2,
 } from "lucide-react";
 import { supabaseAdmin } from "@/lib/admin/supabase-browser";
-import { CaseStudyWidget, CaseStudyWidgetRenderer } from "@/components/case-studies/CaseStudyWidgetRenderer";
+import { CaseStudyWidget } from "@/components/case-studies/CaseStudyWidgetRenderer";
 import { CASE_STUDY_BLOCK_TYPES, type CaseStudyBlock, type CaseStudyBlockType } from "@/lib/landing/case-study-block-types";
 
 type JsonConfig = Record<string, unknown>;
@@ -55,6 +55,7 @@ const WIDGET_LABELS: Record<CaseStudyBlockType, string> = {
   qa_framework: "QA framework",
   process_steps: "Process steps",
   outcome: "Outcome",
+  image: "Image",
   cta: "CTA",
 };
 
@@ -62,17 +63,41 @@ const TONES: Tone[] = ["blue", "indigo", "purple", "green", "red", "orange", "ye
 
 export function CaseStudyBlocksClient({
   caseStudyId,
+  caseTitle,
+  caseDescription,
   rows,
 }: {
   caseStudyId: string;
+  caseTitle: string;
+  caseDescription: string;
   rows: CaseStudyBlockRow[];
 }) {
   const [blocks, setBlocks] = useState<EditableBlock[]>(() => rows.map(fromRow).sort(byOrder));
-  const [selectedId, setSelectedId] = useState<string | null>(() => rows[0]?.id ?? null);
+  const [caseInfo, setCaseInfo] = useState({ title: caseTitle, description: caseDescription });
+  const [caseInfoFocused, setCaseInfoFocused] = useState(false);
+  const [selectedId, setSelectedId] = useState<string | null>(null);
   const [dragId, setDragId] = useState<string | null>(null);
   const [showAdd, setShowAdd] = useState(false);
-  const selected = blocks.find((block) => block.id === selectedId) ?? blocks[0] ?? null;
-  const previewBlocks = useMemo(() => blocks.filter((block) => block.isActive).sort(byOrder).map(toPublicBlock), [blocks]);
+  const selected = blocks.find((block) => block.id === selectedId) ?? null;
+  const orderedBlocks = useMemo(() => [...blocks].sort(byOrder), [blocks]);
+
+  const caseInfoMutation = useMutation({
+    mutationFn: async () => {
+      const { error } = await supabaseAdmin
+        .from("case_studies")
+        .update({
+          title: caseInfo.title.trim() || "Untitled case study",
+          short_description: caseInfo.description.trim() || null,
+        })
+        .eq("id", caseStudyId);
+      if (error) throw error;
+    },
+    onSuccess: () => {
+      setCaseInfoFocused(false);
+      toast.success("Case study info saved");
+    },
+    onError: (err: Error) => toast.error(err.message || "Save case study info failed"),
+  });
 
   const saveMutation = useMutation({
     mutationFn: async (block: EditableBlock) => {
@@ -82,7 +107,10 @@ export function CaseStudyBlocksClient({
         .eq("id", block.id);
       if (error) throw error;
     },
-    onSuccess: () => toast.success("Widget saved"),
+    onSuccess: () => {
+      setSelectedId(null);
+      toast.success("Widget saved");
+    },
     onError: (err: Error) => toast.error(err.message || "Save failed"),
   });
 
@@ -101,6 +129,13 @@ export function CaseStudyBlocksClient({
       setBlocks((current) => [...current, block].sort(byOrder));
       setSelectedId(block.id);
       setShowAdd(false);
+      if (block.type === "image") {
+        requestAnimationFrame(() => {
+          const node = document.querySelector<HTMLElement>(`[data-case-widget-id="${block.id}"]`);
+          node?.scrollIntoView({ behavior: "smooth", block: "center", inline: "nearest" });
+          node?.focus({ preventScroll: true });
+        });
+      }
       toast.success("Widget added");
     },
     onError: (err: Error) => toast.error(err.message || "Add widget failed"),
@@ -115,7 +150,7 @@ export function CaseStudyBlocksClient({
     onSuccess: (id) => {
       setBlocks((current) => {
         const next = current.filter((block) => block.id !== id);
-        setSelectedId(next[0]?.id ?? null);
+        setSelectedId(null);
         return next;
       });
       toast.success("Widget deleted");
@@ -179,139 +214,106 @@ export function CaseStudyBlocksClient({
     });
   }
 
+  function moveBlock(blockId: string, direction: "up" | "down") {
+    setBlocks((current) => {
+      const ordered = [...current].sort(byOrder);
+      const from = ordered.findIndex((block) => block.id === blockId);
+      const to = direction === "up" ? from - 1 : from + 1;
+      if (from < 0 || to < 0 || to >= ordered.length) return current;
+      const next = [...ordered];
+      const [moved] = next.splice(from, 1);
+      next.splice(to, 0, moved);
+      const nextOrdered = next.map((block, index) => ({ ...block, displayOrder: (index + 1) * 10 }));
+      orderMutation.mutate(nextOrdered);
+      return nextOrdered;
+    });
+  }
+
   return (
-    <div className="grid gap-5 xl:grid-cols-[360px_minmax(0,1fr)]">
-      <aside className="space-y-3">
-        <div className="glass-card p-4">
-          <button type="button" onClick={() => setShowAdd(true)} className="btn-primary w-full justify-center text-sm">
+    <div className="space-y-5">
+      <div className="glass-card flex flex-wrap items-center justify-between gap-3 p-3">
+        <div>
+          <p className="text-sm font-semibold" style={{ color: "var(--text-primary)" }}>Detail page widgets</p>
+          <p className="mt-1 text-xs" style={{ color: "var(--text-muted)" }}>
+            Drag sections to reorder. Click any widget to edit its content directly in place.
+          </p>
+        </div>
+        <div className="flex items-center gap-2">
+          {orderMutation.isPending && <span className="text-[11px]" style={{ color: "var(--text-muted)" }}>Saving order...</span>}
+          <button type="button" onClick={() => setShowAdd(true)} className="btn-primary cursor-pointer text-sm">
             <Plus className="h-4 w-4" /> Add widget
           </button>
         </div>
+      </div>
 
-        <div className="glass-card p-3">
-          <div className="mb-3 flex items-center justify-between px-1">
-            <p className="text-xs font-semibold uppercase tracking-wide" style={{ color: "var(--text-muted)" }}>
-              Drag to reorder
-            </p>
-            {orderMutation.isPending && <span className="text-[11px]" style={{ color: "var(--text-muted)" }}>Saving...</span>}
-          </div>
-          <div className="space-y-2">
-            {blocks.map((block) => (
-              <button
-                key={block.id}
-                type="button"
-                draggable
-                onDragStart={() => setDragId(block.id)}
-                onDragOver={(event) => event.preventDefault()}
-                onDrop={() => reorder(block.id)}
-                onDragEnd={() => setDragId(null)}
-                onClick={() => setSelectedId(block.id)}
-                className={`w-full rounded-xl border p-3 text-left transition ${selected?.id === block.id ? "shadow-md" : "hover:shadow-sm"}`}
-                style={{
-                  background: selected?.id === block.id ? "rgba(124, 58, 237, 0.08)" : "var(--bg-elevated, #fff)",
-                  borderColor: selected?.id === block.id ? "rgba(124, 58, 237, 0.45)" : "var(--border-default)",
-                }}
-              >
-                <div className="flex items-start gap-2">
-                  <GripVertical className="mt-0.5 h-4 w-4 shrink-0" style={{ color: "var(--text-muted)" }} />
-                  <div className="min-w-0 flex-1">
-                    <div className="flex items-center gap-2">
-                      <span className={block.isActive ? "badge-success" : "badge-muted"}>{block.isActive ? "Active" : "Hidden"}</span>
-                      <code className="truncate text-[11px]" style={{ color: "var(--text-muted)" }}>{block.displayOrder}</code>
-                    </div>
-                    <p className="mt-2 truncate text-sm font-semibold" style={{ color: "var(--text-primary)" }}>
-                      {block.title || WIDGET_LABELS[block.type]}
-                    </p>
-                    <p className="mt-1 text-xs" style={{ color: "var(--text-muted)" }}>{WIDGET_LABELS[block.type]}</p>
-                  </div>
-                </div>
-              </button>
-            ))}
-            {!blocks.length && (
-              <div className="rounded-xl border border-dashed p-5 text-center" style={{ borderColor: "var(--border-default)" }}>
-                <Layers className="mx-auto mb-2 h-5 w-5" style={{ color: "var(--text-muted)" }} />
-                <p className="text-sm" style={{ color: "var(--text-muted)" }}>No widgets yet.</p>
+      <div className="overflow-x-auto rounded-2xl border bg-white p-4" style={{ borderColor: "var(--border-default)" }}>
+        <div className="min-h-[720px] min-w-[860px] rounded-2xl bg-slate-50">
+          <main className="mx-auto max-w-[1128px] px-4 py-12" onClick={() => { setSelectedId(null); setCaseInfoFocused(false); }}>
+            <header
+              className="group/case-info relative mb-12 rounded-3xl transition"
+              onClick={(event) => {
+                event.stopPropagation();
+                setSelectedId(null);
+                setCaseInfoFocused(true);
+              }}
+            >
+              <div className={`absolute -inset-x-3 -inset-y-3 rounded-3xl border transition ${caseInfoFocused ? "border-[#6C3CF4] bg-[#6C3CF4]/[0.05] shadow-[0_0_0_4px_rgba(108,60,244,0.12)]" : "border-transparent group-hover/case-info:border-[#6C3CF4]/30 group-hover/case-info:bg-[#6C3CF4]/[0.02]"}`} />
+              <div className={`absolute left-3 top-0 z-20 flex -translate-y-[calc(100%+0.5rem)] items-center gap-1 rounded-full border bg-white/95 p-1 shadow-sm transition ${caseInfoFocused ? "opacity-100" : "opacity-0 group-hover/case-info:opacity-100"}`} style={{ borderColor: "var(--border-default)" }}>
+                <button type="button" onClick={(event) => { event.stopPropagation(); caseInfoMutation.mutate(); }} disabled={caseInfoMutation.isPending} className="inline-flex h-9 cursor-pointer items-center gap-1 rounded-full bg-[#6C3CF4] px-3 text-xs font-semibold text-white shadow-sm hover:bg-[#5b2ee0] disabled:opacity-60" title="Save case study info">
+                  <Save className="h-3.5 w-3.5" /> {caseInfoMutation.isPending ? "Saving" : "Save"}
+                </button>
               </div>
-            )}
-          </div>
+              <div className="relative">
+                <input
+                  value={caseInfo.title}
+                  onFocus={() => setCaseInfoFocused(true)}
+                  onChange={(event) => setCaseInfo((current) => ({ ...current, title: event.target.value }))}
+                  className="w-full rounded-xl border border-transparent bg-transparent px-2 py-1 text-4xl font-semibold leading-[1.1] text-[#222222] outline-none transition focus:border-[#6C3CF4]/40 focus:bg-white/70 lg:text-5xl"
+                  placeholder="Case study title"
+                />
+                <textarea
+                  value={caseInfo.description}
+                  onFocus={() => setCaseInfoFocused(true)}
+                  onChange={(event) => setCaseInfo((current) => ({ ...current, description: event.target.value }))}
+                  className="mt-4 min-h-[64px] w-full resize-none rounded-xl border border-transparent bg-transparent px-2 py-1 text-lg italic text-[#78818f] outline-none transition focus:border-[#6C3CF4]/40 focus:bg-white/70"
+                  placeholder="Short description shown under the title"
+                />
+              </div>
+            </header>
+
+            <div className="space-y-2">
+              {orderedBlocks.map((block) => (
+                <EditableBlockFrame
+                  key={block.id}
+                  block={block}
+                  selected={selected?.id === block.id}
+                  dragged={dragId === block.id}
+                  saving={saveMutation.isPending && selected?.id === block.id}
+                  deleting={deleteMutation.isPending && selected?.id === block.id}
+                  onSelect={() => setSelectedId(block.id)}
+                  onChange={updateSelected}
+                  onSave={(next) => saveMutation.mutate(next)}
+                  onToggleActive={() => {
+                    const next = { ...block, isActive: !block.isActive };
+                    updateSelected(next);
+                    saveMutation.mutate(next);
+                  }}
+                  onDuplicate={() => duplicateMutation.mutate(block)}
+                  onMoveUp={() => moveBlock(block.id, "up")}
+                  onMoveDown={() => moveBlock(block.id, "down")}
+                  onDelete={() => {
+                    if (confirm("Delete this widget?")) deleteMutation.mutate(block);
+                  }}
+                  onDragStart={() => setDragId(block.id)}
+                  onDrop={() => reorder(block.id)}
+                  onDragEnd={() => setDragId(null)}
+                />
+              ))}
+              <AddBlockTile onCreate={() => setShowAdd(true)} />
+            </div>
+          </main>
         </div>
-      </aside>
-
-      <section className="min-w-0 space-y-5">
-        {selected ? (
-          <>
-            <div className="glass-card p-5">
-              <div className="mb-5 flex flex-wrap items-center justify-between gap-3">
-                <div>
-                  <p className="text-xs font-semibold uppercase tracking-wide" style={{ color: "var(--text-muted)" }}>{WIDGET_LABELS[selected.type]}</p>
-                  <h2 className="mt-1 text-xl font-bold" style={{ color: "var(--text-primary)" }}>{selected.title || "Untitled widget"}</h2>
-                </div>
-                <div className="flex flex-wrap items-center gap-2">
-                  <button
-                    type="button"
-                    onClick={() => {
-                      const next = { ...selected, isActive: !selected.isActive };
-                      updateSelected(next);
-                      saveMutation.mutate(next);
-                    }}
-                    className="btn-secondary text-xs"
-                  >
-                    <Eye className="h-3.5 w-3.5" /> {selected.isActive ? "Hide" : "Show"}
-                  </button>
-                  <button type="button" onClick={() => duplicateMutation.mutate(selected)} disabled={duplicateMutation.isPending} className="btn-secondary text-xs">
-                    <Copy className="h-3.5 w-3.5" /> Duplicate
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => {
-                      if (confirm("Delete this widget?")) deleteMutation.mutate(selected);
-                    }}
-                    disabled={deleteMutation.isPending}
-                    className="btn-secondary text-xs"
-                    style={{ color: "#dc2626", borderColor: "rgba(220,38,38,0.3)" }}
-                  >
-                    <Trash2 className="h-3.5 w-3.5" /> Delete
-                  </button>
-                  <button type="button" onClick={() => saveMutation.mutate(selected)} disabled={saveMutation.isPending} className="btn-primary text-xs">
-                    <Save className="h-3.5 w-3.5" /> {saveMutation.isPending ? "Saving..." : "Save"}
-                  </button>
-                </div>
-              </div>
-
-              <WidgetEditor block={selected} onChange={updateSelected} />
-            </div>
-
-            <div className="glass-card overflow-hidden">
-              <div className="border-b px-5 py-3" style={{ borderColor: "var(--border-subtle)" }}>
-                <p className="text-xs font-semibold uppercase tracking-wide" style={{ color: "var(--text-muted)" }}>Selected widget preview</p>
-              </div>
-              <div className="bg-slate-50 p-5">
-                <div className="mx-auto max-w-[960px]">
-                  <CaseStudyWidget block={toPublicBlock(selected)} fallbackMetrics={[]} />
-                </div>
-              </div>
-            </div>
-
-            <div className="glass-card overflow-hidden">
-              <div className="border-b px-5 py-3" style={{ borderColor: "var(--border-subtle)" }}>
-                <p className="text-xs font-semibold uppercase tracking-wide" style={{ color: "var(--text-muted)" }}>Full detail preview</p>
-              </div>
-              <div className="max-h-[720px] overflow-auto bg-slate-50 p-5">
-                <div className="mx-auto max-w-[960px]">
-                  <CaseStudyWidgetRenderer blocks={previewBlocks} fallbackMetrics={[]} />
-                </div>
-              </div>
-            </div>
-          </>
-        ) : (
-          <div className="glass-card p-8 text-center">
-            <Wand2 className="mx-auto mb-3 h-6 w-6" style={{ color: "var(--text-muted)" }} />
-            <p className="text-sm" style={{ color: "var(--text-muted)" }}>
-              Add a widget to start composing the case study detail page.
-            </p>
-          </div>
-        )}
-      </section>
+      </div>
 
       {showAdd && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4">
@@ -321,7 +323,7 @@ export function CaseStudyBlocksClient({
                 <h3 className="text-lg font-bold" style={{ color: "var(--text-primary)" }}>Add widget</h3>
                 <p className="text-xs" style={{ color: "var(--text-muted)" }}>Choose a UI block. It will be created with editable default content.</p>
               </div>
-              <button type="button" onClick={() => setShowAdd(false)} className="btn-secondary text-xs">Close</button>
+              <button type="button" onClick={() => setShowAdd(false)} className="btn-secondary cursor-pointer text-xs">Close</button>
             </div>
             <div className="grid gap-3 sm:grid-cols-2">
               {CASE_STUDY_BLOCK_TYPES.map((type) => (
@@ -330,7 +332,7 @@ export function CaseStudyBlocksClient({
                   type="button"
                   onClick={() => createMutation.mutate(type)}
                   disabled={createMutation.isPending}
-                  className="rounded-xl border p-4 text-left transition hover:shadow-md"
+                  className="cursor-pointer rounded-xl border p-4 text-left transition hover:shadow-md"
                   style={{ borderColor: "var(--border-default)" }}
                 >
                   <p className="font-semibold" style={{ color: "var(--text-primary)" }}>{WIDGET_LABELS[type]}</p>
@@ -343,6 +345,455 @@ export function CaseStudyBlocksClient({
       )}
     </div>
   );
+}
+
+function EditableBlockFrame({
+  block,
+  selected,
+  dragged,
+  saving,
+  deleting,
+  onSelect,
+  onChange,
+  onSave,
+  onToggleActive,
+  onDuplicate,
+  onMoveUp,
+  onMoveDown,
+  onDelete,
+  onDragStart,
+  onDrop,
+  onDragEnd,
+}: {
+  block: EditableBlock;
+  selected: boolean;
+  dragged: boolean;
+  saving: boolean;
+  deleting: boolean;
+  onSelect: () => void;
+  onChange: (block: EditableBlock) => void;
+  onSave: (block: EditableBlock) => void;
+  onToggleActive: () => void;
+  onDuplicate: () => void;
+  onMoveUp: () => void;
+  onMoveDown: () => void;
+  onDelete: () => void;
+  onDragStart: () => void;
+  onDrop: () => void;
+  onDragEnd: () => void;
+}) {
+  return (
+    <section
+      data-case-widget-id={block.id}
+      tabIndex={-1}
+      className={`group/case-widget relative rounded-3xl transition ${!block.isActive ? "opacity-45 grayscale" : ""} ${dragged ? "scale-[0.99] opacity-60" : ""}`}
+      onDragOver={(event) => event.preventDefault()}
+      onDrop={(event) => {
+        event.preventDefault();
+        onDrop();
+      }}
+      onDragEnd={onDragEnd}
+      onClick={(event) => {
+        event.stopPropagation();
+        onSelect();
+      }}
+    >
+      <div className={`absolute -inset-x-3 -inset-y-3 rounded-3xl border transition ${selected ? "border-[#6C3CF4] bg-[#6C3CF4]/[0.05] shadow-[0_0_0_4px_rgba(108,60,244,0.12)]" : dragged ? "border-[#6C3CF4]/60 bg-[#6C3CF4]/[0.04]" : "border-transparent group-hover/case-widget:border-[#6C3CF4]/30 group-hover/case-widget:bg-[#6C3CF4]/[0.02]"}`} />
+      <div className={`absolute left-3 top-0 z-20 flex -translate-y-[calc(100%+0.5rem)] items-center gap-1 rounded-full border bg-white/95 p-1 shadow-sm transition ${selected ? "opacity-100" : "opacity-0 group-hover/case-widget:opacity-100"}`} style={{ borderColor: "var(--border-default)" }}>
+        <button
+          type="button"
+          draggable
+          onClick={(event) => event.stopPropagation()}
+          onDragStart={(event) => {
+            event.stopPropagation();
+            event.dataTransfer.effectAllowed = "move";
+            onDragStart();
+          }}
+          onDragEnd={onDragEnd}
+          className="flex h-9 w-9 cursor-grab items-center justify-center rounded-full hover:bg-slate-100 active:cursor-grabbing"
+          title="Drag widget"
+        >
+          <GripVertical className="h-4 w-4" />
+        </button>
+        <button type="button" onClick={(event) => { event.stopPropagation(); onMoveUp(); }} className="flex h-9 w-9 cursor-pointer items-center justify-center rounded-full hover:bg-slate-100" title="Move up">
+          <ArrowUp className="h-4 w-4" />
+        </button>
+        <button type="button" onClick={(event) => { event.stopPropagation(); onMoveDown(); }} className="flex h-9 w-9 cursor-pointer items-center justify-center rounded-full hover:bg-slate-100" title="Move down">
+          <ArrowDown className="h-4 w-4" />
+        </button>
+        <button type="button" onClick={(event) => { event.stopPropagation(); onToggleActive(); }} className="cursor-pointer rounded-full p-1.5 hover:bg-slate-100" title={block.isActive ? "Hide" : "Show"}>
+          <Eye className="h-3.5 w-3.5" />
+        </button>
+        <button type="button" onClick={(event) => { event.stopPropagation(); onDuplicate(); }} className="cursor-pointer rounded-full p-1.5 hover:bg-slate-100" title="Duplicate">
+          <Copy className="h-3.5 w-3.5" />
+        </button>
+        <button type="button" onClick={(event) => { event.stopPropagation(); onDelete(); }} className="cursor-pointer rounded-full p-1.5 text-red-600 hover:bg-red-50" title="Delete" disabled={deleting}>
+          <Trash2 className="h-3.5 w-3.5" />
+        </button>
+        {selected && (
+          <button type="button" onClick={(event) => { event.stopPropagation(); onSave(block); }} disabled={saving} className="ml-1 inline-flex cursor-pointer h-9 items-center gap-1 rounded-full bg-[#6C3CF4] px-3 text-xs font-semibold text-white shadow-sm hover:bg-[#5b2ee0] disabled:opacity-60" title="Save widget">
+            <Save className="h-3.5 w-3.5" /> {saving ? "Saving" : "Save"}
+          </button>
+        )}
+      </div>
+      <div className="absolute right-3 top-3 z-20 rounded-full bg-white/95 px-3 py-1 text-[11px] font-semibold uppercase tracking-wider opacity-0 shadow-sm transition group-hover/case-widget:opacity-100" style={{ color: "var(--text-muted)" }}>
+        {WIDGET_LABELS[block.type]} {block.isActive ? "" : "Hidden"}
+      </div>
+      <div className="relative" onClick={selected ? (event) => event.stopPropagation() : undefined}>
+        {selected ? (
+          <InlineWidgetEditor block={block} onChange={onChange} />
+        ) : (
+          <button type="button" onClick={onSelect} className="block w-full cursor-pointer text-left">
+            <CaseStudyWidget block={toPublicBlock(block)} fallbackMetrics={[]} />
+          </button>
+        )}
+      </div>
+    </section>
+  );
+}
+
+function AddBlockTile({ onCreate }: { onCreate: () => void }) {
+  return (
+    <button
+      type="button"
+      onClick={onCreate}
+      className="mb-8 flex cursor-pointer min-h-[148px] w-full flex-col items-center justify-center rounded-3xl border border-dashed bg-white p-6 text-center transition hover:border-[#6C3CF4] hover:bg-[#6C3CF4]/[0.03]"
+      style={{ borderColor: "var(--border-default)", color: "var(--text-muted)" }}
+    >
+      <span className="mb-3 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-[#6C3CF4]/10 text-[#6C3CF4]">
+        <Plus className="h-5 w-5" />
+      </span>
+      <span className="text-sm font-semibold" style={{ color: "var(--text-primary)" }}>Add case study widget</span>
+      <span className="mt-1 text-xs">Add metrics, text sections, QA framework, process, outcome, or CTA into this preview.</span>
+    </button>
+  );
+}
+
+function InlineWidgetEditor({
+  block,
+  onChange,
+}: {
+  block: EditableBlock;
+  onChange: (block: EditableBlock) => void;
+}) {
+  const patchConfig = (patch: JsonConfig) => onChange({ ...block, config: { ...block.config, ...patch } });
+
+  if (block.type === "metrics_grid") {
+    const metrics = asObjectArray(block.config.metrics);
+    return (
+      <div className="relative mb-16 rounded-3xl border-2 border-[#6C3CF4] p-4">
+        <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
+          {metrics.map((metric, index) => (
+            <div key={index} className="rounded-2xl border-t-4 border-blue-600 bg-white/80 p-5 text-center shadow-lg">
+              <InlineInput value={stringValue(metric.value)} onChange={(value) => patchArray(block, "metrics", index, { ...metric, value }, patchConfig)} className="text-center text-4xl font-bold text-blue-600" />
+              <InlineInput value={stringValue(metric.label)} onChange={(label) => patchArray(block, "metrics", index, { ...metric, label }, patchConfig)} className="mt-2 text-center text-sm font-medium text-gray-600" />
+              <MiniRemove onClick={() => removeArrayItem(block, "metrics", index, patchConfig)} />
+            </div>
+          ))}
+          <InlineAdd onClick={() => patchConfig({ metrics: [...metrics, { value: "100%", label: "Metric label" }] })} label="Metric" />
+        </div>
+      </div>
+    );
+  }
+
+  if (block.type === "text_card") {
+    const shell = stringValue(block.config.variant) === "blue_gradient" ? "bg-gradient-to-br from-blue-50/80 to-indigo-50/80" : "bg-white/80";
+    return (
+      <section className={`relative mb-12 rounded-2xl border-2 border-[#6C3CF4] ${shell} p-8 shadow-md`}>
+        <LegacyInlineHeading value={block.title} onChange={(title) => onChange({ ...block, title })} tone="blue" />
+        <InlineArea value={block.content} onChange={(content) => onChange({ ...block, content })} className="min-h-[120px] text-lg leading-relaxed text-[#222222]" />
+        <InlineVariant value={stringValue(block.config.variant)} onChange={(variant) => patchConfig({ variant })} />
+      </section>
+    );
+  }
+
+  if (block.type === "objective_grid") {
+    const items = asObjectArray(block.config.items);
+    return (
+      <section className="relative mb-12 rounded-3xl border-2 border-[#6C3CF4] p-4">
+        <LegacyInlineHeading value={block.title} onChange={(title) => onChange({ ...block, title })} tone="indigo" />
+        <div className="rounded-2xl bg-white/80 p-8 shadow-md">
+          <div className="grid gap-6 md:grid-cols-3">
+            {items.map((item, index) => (
+              <InlineItemCard key={index} item={item} fields={["icon", "title", "body", "tone"]} onChange={(next) => patchArray(block, "items", index, next, patchConfig)} onRemove={() => removeArrayItem(block, "items", index, patchConfig)} />
+            ))}
+            <InlineAdd onClick={() => patchConfig({ items: [...items, { icon: "🎯", title: "Objective", body: "Describe the objective.", tone: "blue" }] })} label="Card" />
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  if (block.type === "challenge_cards") {
+    const cards = asObjectArray(block.config.cards);
+    return (
+      <section className="relative mb-12 rounded-3xl border-2 border-[#6C3CF4] p-4">
+        <LegacyInlineHeading value={block.title} onChange={(title) => onChange({ ...block, title })} tone="red" />
+        <div className="space-y-6">
+          {cards.map((card, index) => (
+            <InlineWideCard key={index} item={card} fields={["icon", "title", "body", "tone"]} onChange={(next) => patchArray(block, "cards", index, next, patchConfig)} onRemove={() => removeArrayItem(block, "cards", index, patchConfig)} />
+          ))}
+          <InlineAdd onClick={() => patchConfig({ cards: [...cards, { icon: "1", title: "Challenge", body: "Describe the challenge.", tone: "red" }] })} label="Challenge" />
+        </div>
+      </section>
+    );
+  }
+
+  if (block.type === "qa_framework") {
+    const layers = asObjectArray(block.config.layers);
+    const sampleGates = asObjectArray(block.config.sampleGates);
+    const solutionCards = asObjectArray(block.config.solutionCards);
+    return (
+      <section className="relative mb-12 rounded-2xl border-2 border-[#6C3CF4] bg-gradient-to-br from-indigo-50/80 to-purple-50/80 p-8 shadow-md">
+        <LegacyInlineHeading value={block.title} onChange={(title) => onChange({ ...block, title })} tone="indigo" />
+        <InlineArea value={block.content} onChange={(content) => onChange({ ...block, content })} className="mb-8 min-h-[80px] text-lg leading-relaxed text-[#222222]" />
+        <div className="mb-8 rounded-xl bg-white/90 p-8 shadow-inner">
+          <InlineInput value={stringValue(block.config.frameworkTitle) || "5-Layer Quality Assurance Framework"} onChange={(frameworkTitle) => patchConfig({ frameworkTitle })} className="mb-8 text-center text-2xl font-bold text-[#222222]" />
+          <div className="space-y-4">
+            {layers.map((layer, index) => (
+              <InlineWideCard key={index} item={layer} fields={["num", "label", "title", "body", "tone"]} onChange={(next) => patchArray(block, "layers", index, next, patchConfig)} onRemove={() => removeArrayItem(block, "layers", index, patchConfig)} />
+            ))}
+            <InlineAdd onClick={() => patchConfig({ layers: [...layers, { num: "L1", label: "Layer", title: "QA Layer", body: "Describe the layer.", tone: "blue" }] })} label="QA layer" />
+          </div>
+        </div>
+        <div className="rounded-xl border-2 border-yellow-400 bg-yellow-50 p-6">
+          <InlineInput value={stringValue(block.config.sampleGateTitle) || "Parallel Statistical Quality Gates"} onChange={(sampleGateTitle) => patchConfig({ sampleGateTitle })} className="mb-4 text-center font-bold text-[#222222]" />
+          <div className="grid gap-4 md:grid-cols-2">
+            {sampleGates.map((gate, index) => (
+              <InlineWideCard key={index} item={gate} fields={["num", "label", "body", "tone"]} onChange={(next) => patchArray(block, "sampleGates", index, next, patchConfig)} onRemove={() => removeArrayItem(block, "sampleGates", index, patchConfig)} />
+            ))}
+            <InlineAdd onClick={() => patchConfig({ sampleGates: [...sampleGates, { num: "5%", label: "Sample", body: "Describe the gate.", tone: "yellow" }] })} label="Gate" />
+          </div>
+        </div>
+        <div className="mt-6 grid gap-6 md:grid-cols-3">
+          {solutionCards.map((card, index) => (
+            <InlineItemCard key={index} item={card} fields={["icon", "title", "body", "tone"]} onChange={(next) => patchArray(block, "solutionCards", index, next, patchConfig)} onRemove={() => removeArrayItem(block, "solutionCards", index, patchConfig)} />
+          ))}
+          <InlineAdd onClick={() => patchConfig({ solutionCards: [...solutionCards, { icon: "✓", title: "Solution", body: "Describe the solution.", tone: "green" }] })} label="Solution" />
+        </div>
+      </section>
+    );
+  }
+
+  if (block.type === "process_steps") {
+    const steps = asObjectArray(block.config.steps);
+    return (
+      <section className="relative mb-12 rounded-3xl border-2 border-[#6C3CF4] p-4">
+        <LegacyInlineHeading value={block.title} onChange={(title) => onChange({ ...block, title })} tone="blue" />
+        <div className="space-y-4">
+          {steps.map((step, index) => (
+            <InlineWideCard key={index} item={step} fields={["number", "title", "body", "tone"]} onChange={(next) => patchArray(block, "steps", index, next, patchConfig)} onRemove={() => removeArrayItem(block, "steps", index, patchConfig)} />
+          ))}
+          <InlineAdd onClick={() => patchConfig({ steps: [...steps, { number: "1", title: "Step title", body: "Describe this step.", tone: "blue" }] })} label="Step" />
+        </div>
+      </section>
+    );
+  }
+
+  if (block.type === "outcome") {
+    const cards = asObjectArray(block.config.cards);
+    const benefits = asStringArray(block.config.benefits);
+    return (
+      <section className="relative mb-12 rounded-2xl border-2 border-[#6C3CF4] bg-gradient-to-br from-green-50/80 to-emerald-50/80 p-8 shadow-md">
+        <LegacyInlineHeading value={block.title} onChange={(title) => onChange({ ...block, title })} tone="green" />
+        <div className="mb-8 grid gap-6 md:grid-cols-2">
+          {cards.map((card, index) => (
+            <InlineItemCard key={index} item={card} fields={["value", "label", "body", "tone"]} onChange={(next) => patchArray(block, "cards", index, next, patchConfig)} onRemove={() => removeArrayItem(block, "cards", index, patchConfig)} />
+          ))}
+          <InlineAdd onClick={() => patchConfig({ cards: [...cards, { value: "100%", label: "Result", body: "Describe the result.", tone: "green" }] })} label="Outcome" />
+        </div>
+        <div className="rounded-xl bg-white/90 p-6 shadow-md">
+          <InlineInput value={stringValue(block.config.benefitsTitle) || "Client Benefits"} onChange={(benefitsTitle) => patchConfig({ benefitsTitle })} className="mb-4 text-xl font-bold text-[#222222]" />
+          <div className="space-y-2">
+            {benefits.map((benefit, index) => (
+              <div key={index} className="flex items-center gap-2">
+                <InlineInput value={benefit} onChange={(value) => patchConfig({ benefits: benefits.map((item, itemIndex) => itemIndex === index ? value : item) })} className="flex-1 text-[#222222]" />
+                <MiniRemove onClick={() => patchConfig({ benefits: benefits.filter((_, itemIndex) => itemIndex !== index) })} />
+              </div>
+            ))}
+            <InlineAdd onClick={() => patchConfig({ benefits: [...benefits, "New benefit"] })} label="Benefit" />
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  if (block.type === "image") {
+    const src = stringValue(block.config.src);
+    return (
+      <section className="relative mb-12 rounded-3xl border-2 border-[#6C3CF4] bg-white/80 p-4 shadow-md">
+        <div className="grid gap-3 md:grid-cols-3">
+          <InlineInput value={src} onChange={(value) => patchConfig({ src: value })} placeholder="Image URL, e.g. /images/project.jpg" className="md:col-span-2 rounded-lg border border-blue-100 bg-white/80 text-sm text-[#222222]" />
+          <InlineInput value={stringValue(block.config.alt)} onChange={(alt) => patchConfig({ alt })} placeholder="Alt text for accessibility" className="rounded-lg border border-blue-100 bg-white/80 text-sm text-[#222222]" />
+        </div>
+        <div className="mt-4 overflow-hidden rounded-2xl bg-slate-100">
+          {src ? <img src={src} alt={stringValue(block.config.alt) || block.title || "Case study image"} className="h-auto w-full object-cover" /> : <div className="flex min-h-[220px] items-center justify-center text-sm text-slate-500">Image URL is empty</div>}
+        </div>
+        <InlineInput value={stringValue(block.config.caption)} onChange={(caption) => patchConfig({ caption })} placeholder="Caption (optional)" className="mt-3 text-center text-sm text-gray-600" />
+      </section>
+    );
+  }
+
+  return (
+    <section className="relative rounded-2xl border-2 border-[#6C3CF4] bg-gradient-to-r from-emerald-600 to-blue-700 p-8 text-center text-white shadow-xl">
+      <InlineInput value={block.title} onChange={(title) => onChange({ ...block, title })} className="text-center text-3xl font-bold text-white" />
+      <InlineInput value={block.subtitle} onChange={(subtitle) => onChange({ ...block, subtitle })} className="mx-auto mt-4 max-w-2xl text-center text-xl text-emerald-100" />
+      <div className="mx-auto mt-6 grid max-w-xl gap-3 md:grid-cols-2">
+        <InlineInput value={stringValue(block.config.label)} onChange={(label) => patchConfig({ label })} className="rounded-lg bg-white px-4 py-3 text-center font-bold text-emerald-700" />
+        <InlineInput value={stringValue(block.config.href)} onChange={(href) => patchConfig({ href })} className="rounded-lg bg-white/15 px-4 py-3 text-center text-sm text-white" />
+      </div>
+    </section>
+  );
+}
+
+function LegacyInlineHeading({ value, onChange, tone }: { value: string; onChange: (value: string) => void; tone: Tone }) {
+  return (
+    <h2 className="mb-6 flex items-center text-3xl font-bold text-[#222222]">
+      <div className={`mr-4 h-8 w-2 rounded-full ${toneBg(tone, 600)}`} />
+      <InlineInput value={value} onChange={onChange} className="min-w-0 flex-1 text-3xl font-bold text-[#222222]" />
+    </h2>
+  );
+}
+
+function InlineItemCard({
+  item,
+  fields,
+  onChange,
+  onRemove,
+}: {
+  item: JsonConfig;
+  fields: string[];
+  onChange: (item: JsonConfig) => void;
+  onRemove: () => void;
+}) {
+  const tone = normalizeTone(item.tone);
+  return (
+    <article className="relative h-full rounded-xl bg-white/90 p-5 text-center shadow-md">
+      <MiniRemove onClick={onRemove} />
+      {fields.includes("icon") && <InlineInput value={stringValue(item.icon)} onChange={(icon) => onChange({ ...item, icon })} className="mx-auto mb-3 h-12 w-12 rounded-full bg-slate-100 text-center text-2xl" />}
+      {fields.includes("value") && <InlineInput value={stringValue(item.value)} onChange={(value) => onChange({ ...item, value })} className={`text-center text-5xl font-bold ${toneText(tone, 600)}`} />}
+      {fields.includes("num") && <InlineInput value={stringValue(item.num)} onChange={(num) => onChange({ ...item, num })} className={`mx-auto mb-2 h-12 w-20 rounded-xl text-center text-xl font-bold text-white ${toneBg(tone, 500)}`} />}
+      {fields.includes("number") && <InlineInput value={stringValue(item.number)} onChange={(number) => onChange({ ...item, number })} className={`mx-auto mb-2 h-12 w-12 rounded-full text-center text-xl font-bold ${toneBg(tone, 100)} ${toneText(tone, 700)}`} />}
+      {fields.includes("label") && <InlineInput value={stringValue(item.label)} onChange={(label) => onChange({ ...item, label })} className="mt-2 text-center text-sm font-semibold text-gray-600" />}
+      {fields.includes("title") && <InlineInput value={stringValue(item.title)} onChange={(title) => onChange({ ...item, title })} className="mt-2 text-center text-lg font-bold text-[#222222]" />}
+      {fields.includes("body") && <InlineArea value={stringValue(item.body)} onChange={(body) => onChange({ ...item, body })} className="mt-2 min-h-[72px] text-center text-sm leading-relaxed text-gray-600" />}
+      {fields.includes("tone") && <ToneDots value={tone} onChange={(nextTone) => onChange({ ...item, tone: nextTone })} />}
+    </article>
+  );
+}
+
+function InlineWideCard({
+  item,
+  fields,
+  onChange,
+  onRemove,
+}: {
+  item: JsonConfig;
+  fields: string[];
+  onChange: (item: JsonConfig) => void;
+  onRemove: () => void;
+}) {
+  const tone = normalizeTone(item.tone);
+  const badge = stringValue(item.icon || item.num || item.number || item.label);
+  return (
+    <article className={`relative rounded-xl border-l-4 bg-white/90 p-5 shadow-md ${toneBorder(tone)}`}>
+      <MiniRemove onClick={onRemove} />
+      <div className="flex items-start gap-4 pr-7">
+        {(fields.includes("icon") || fields.includes("num") || fields.includes("number") || fields.includes("label")) && (
+          <InlineInput
+            value={badge}
+            onChange={(value) => {
+              const key = fields.includes("icon") ? "icon" : fields.includes("num") ? "num" : fields.includes("number") ? "number" : "label";
+              onChange({ ...item, [key]: value });
+            }}
+            className={`h-12 w-16 shrink-0 rounded-xl text-center font-bold ${toneBg(tone, 100)} ${toneText(tone, 700)}`}
+          />
+        )}
+        <div className="min-w-0 flex-1">
+          {fields.includes("title") && <InlineInput value={stringValue(item.title)} onChange={(title) => onChange({ ...item, title })} className="text-lg font-bold text-[#222222]" />}
+          {fields.includes("body") && <InlineArea value={stringValue(item.body)} onChange={(body) => onChange({ ...item, body })} className="mt-2 min-h-[64px] text-sm leading-relaxed text-gray-600" />}
+          {fields.includes("tone") && <ToneDots value={tone} onChange={(nextTone) => onChange({ ...item, tone: nextTone })} />}
+        </div>
+      </div>
+    </article>
+  );
+}
+
+function InlineInput({ value, onChange, placeholder, className }: { value: string; onChange: (value: string) => void; placeholder?: string; className?: string }) {
+  return (
+    <input
+      value={value}
+      placeholder={placeholder}
+      onChange={(event) => onChange(event.target.value)}
+      className={`w-full border border-transparent bg-transparent px-2 py-1 outline-none transition focus:border-[#6C3CF4]/50 focus:bg-white/70 ${className ?? ""}`}
+    />
+  );
+}
+
+function InlineArea({ value, onChange, className }: { value: string; onChange: (value: string) => void; className?: string }) {
+  return (
+    <textarea
+      value={value}
+      onChange={(event) => onChange(event.target.value)}
+      className={`w-full resize-y border border-transparent bg-transparent px-2 py-1 outline-none transition focus:border-[#6C3CF4]/50 focus:bg-white/70 ${className ?? ""}`}
+    />
+  );
+}
+
+function InlineAdd({ label, onClick }: { label: string; onClick: () => void }) {
+  return (
+    <button type="button" onClick={onClick} className="flex min-h-[120px] cursor-pointer items-center justify-center rounded-xl border border-dashed bg-white/70 px-4 py-5 text-sm font-semibold text-[#6C3CF4] hover:border-[#6C3CF4] hover:bg-white">
+      <Plus className="mr-2 h-4 w-4" /> Add {label}
+    </button>
+  );
+}
+
+function MiniRemove({ onClick }: { onClick: () => void }) {
+  return (
+    <button type="button" onClick={onClick} className="absolute right-2 top-2 cursor-pointer rounded-full bg-white/90 p-1 text-red-600 opacity-0 shadow-sm transition hover:bg-red-50 group-hover/case-widget:opacity-100">
+      <Trash2 className="h-3.5 w-3.5" />
+    </button>
+  );
+}
+
+function InlineVariant({ value, onChange }: { value: string; onChange: (value: string) => void }) {
+  return (
+    <div className="mt-4 flex gap-2">
+      {[
+        ["", "White"],
+        ["blue_gradient", "Blue"],
+      ].map(([next, label]) => (
+        <button key={next} type="button" onClick={() => onChange(next)} className={value === next ? "btn-primary cursor-pointer text-xs" : "btn-secondary cursor-pointer text-xs"}>
+          {label}
+        </button>
+      ))}
+    </div>
+  );
+}
+
+function ToneDots({ value, onChange }: { value: Tone; onChange: (tone: Tone) => void }) {
+  return (
+    <div className="mt-3 flex flex-wrap gap-1">
+      {TONES.map((tone) => (
+        <button
+          key={tone}
+          type="button"
+          onClick={() => onChange(tone)}
+          className={`h-5 w-5 cursor-pointer rounded-full border-2 ${toneBg(tone, 500)} ${value === tone ? "border-slate-900" : "border-white"}`}
+          title={tone}
+        />
+      ))}
+    </div>
+  );
+}
+
+function patchArray(_block: EditableBlock, key: string, index: number, item: JsonConfig, patchConfig: (patch: JsonConfig) => void) {
+  const items = asObjectArray(_block.config[key]);
+  patchConfig({ [key]: items.map((current, itemIndex) => itemIndex === index ? item : current) });
+}
+
+function removeArrayItem(block: EditableBlock, key: string, index: number, patchConfig: (patch: JsonConfig) => void) {
+  patchConfig({ [key]: asObjectArray(block.config[key]).filter((_, itemIndex) => itemIndex !== index) });
 }
 
 function WidgetEditor({ block, onChange }: { block: EditableBlock; onChange: (block: EditableBlock) => void }) {
@@ -470,6 +921,22 @@ function WidgetEditor({ block, onChange }: { block: EditableBlock; onChange: (bl
         </>
       )}
 
+      {block.type === "image" && (
+        <>
+          <Field label="Image URL">
+            <input value={stringValue(block.config.src)} onChange={(event) => patchConfig({ src: event.target.value })} className="input-field" placeholder="/images/example.jpg or https://..." />
+          </Field>
+          <div className="grid gap-4 md:grid-cols-2">
+            <Field label="Alt text">
+              <input value={stringValue(block.config.alt)} onChange={(event) => patchConfig({ alt: event.target.value })} className="input-field" placeholder="Describe the image for accessibility" />
+            </Field>
+            <Field label="Caption">
+              <input value={stringValue(block.config.caption)} onChange={(event) => patchConfig({ caption: event.target.value })} className="input-field" placeholder="Optional caption shown below the image" />
+            </Field>
+          </div>
+        </>
+      )}
+
       {block.type === "cta" && (
         <div className="grid gap-4 md:grid-cols-2">
           <Field label="Button label">
@@ -505,7 +972,7 @@ function ArrayEditor({
     <div className="rounded-xl border p-4" style={{ borderColor: "var(--border-default)" }}>
       <div className="mb-3 flex items-center justify-between gap-3">
         <p className="text-sm font-semibold" style={{ color: "var(--text-primary)" }}>{label}</p>
-        <button type="button" onClick={() => onChange([...items, emptyItem])} className="btn-secondary text-xs">
+        <button type="button" onClick={() => onChange([...items, emptyItem])} className="btn-secondary cursor-pointer text-xs">
           <Plus className="h-3.5 w-3.5" /> Add
         </button>
       </div>
@@ -514,7 +981,7 @@ function ArrayEditor({
           <div key={index} className="rounded-xl border p-3" style={{ borderColor: "var(--border-subtle)" }}>
             <div className="mb-3 flex items-center justify-between">
               <span className="text-xs font-semibold" style={{ color: "var(--text-muted)" }}>Item {index + 1}</span>
-              <button type="button" onClick={() => onChange(items.filter((_, itemIndex) => itemIndex !== index))} className="text-xs" style={{ color: "#dc2626" }}>
+              <button type="button" onClick={() => onChange(items.filter((_, itemIndex) => itemIndex !== index))} className="cursor-pointer text-xs" style={{ color: "#dc2626" }}>
                 Remove
               </button>
             </div>
@@ -545,7 +1012,7 @@ function StringListEditor({ label, items, onChange }: { label: string; items: st
     <div className="rounded-xl border p-4" style={{ borderColor: "var(--border-default)" }}>
       <div className="mb-3 flex items-center justify-between gap-3">
         <p className="text-sm font-semibold" style={{ color: "var(--text-primary)" }}>{label}</p>
-        <button type="button" onClick={() => onChange([...items, "New benefit"])} className="btn-secondary text-xs">
+        <button type="button" onClick={() => onChange([...items, "New benefit"])} className="btn-secondary cursor-pointer text-xs">
           <Plus className="h-3.5 w-3.5" /> Add
         </button>
       </div>
@@ -553,7 +1020,7 @@ function StringListEditor({ label, items, onChange }: { label: string; items: st
         {items.map((item, index) => (
           <div key={index} className="flex gap-2">
             <input value={item} onChange={(event) => onChange(items.map((current, itemIndex) => itemIndex === index ? event.target.value : current))} className="input-field" />
-            <button type="button" onClick={() => onChange(items.filter((_, itemIndex) => itemIndex !== index))} className="btn-secondary text-xs" style={{ color: "#dc2626" }}>
+            <button type="button" onClick={() => onChange(items.filter((_, itemIndex) => itemIndex !== index))} className="btn-secondary cursor-pointer text-xs" style={{ color: "#dc2626" }}>
               Remove
             </button>
           </div>
@@ -673,6 +1140,15 @@ function defaultContent(type: CaseStudyBlockType): { title: string; subtitle?: s
           benefits: ["Clear business benefit"],
         },
       };
+    case "image":
+      return {
+        title: "",
+        config: {
+          src: "/images/code-screen.jpg",
+          alt: "Case study project visual",
+          caption: "Optional image caption",
+        },
+      };
     case "cta":
       return {
         title: "Need Expert Data Services?",
@@ -691,6 +1167,7 @@ function defaultDescription(type: CaseStudyBlockType) {
     qa_framework: "Layered QA diagram and solution cards",
     process_steps: "Implementation timeline cards",
     outcome: "Results and client benefits",
+    image: "Full-width image with caption",
     cta: "Final call to action",
   };
   return map[type];
@@ -706,6 +1183,51 @@ function asStringArray(value: unknown): string[] {
 
 function stringValue(value: unknown) {
   return typeof value === "string" ? value : "";
+}
+
+function normalizeTone(value: unknown): Tone {
+  const tone = typeof value === "string" ? value : "";
+  if (TONES.includes(tone as Tone)) return tone as Tone;
+  return "blue";
+}
+
+function toneBg(tone: Tone, shade: 100 | 500 | 600) {
+  const map: Record<Tone, Record<number, string>> = {
+    blue: { 100: "bg-blue-100", 500: "bg-blue-500", 600: "bg-blue-600" },
+    indigo: { 100: "bg-indigo-100", 500: "bg-indigo-500", 600: "bg-indigo-600" },
+    purple: { 100: "bg-purple-100", 500: "bg-purple-500", 600: "bg-purple-600" },
+    green: { 100: "bg-green-100", 500: "bg-green-500", 600: "bg-green-600" },
+    red: { 100: "bg-red-100", 500: "bg-red-500", 600: "bg-red-600" },
+    orange: { 100: "bg-orange-100", 500: "bg-orange-500", 600: "bg-orange-600" },
+    yellow: { 100: "bg-yellow-100", 500: "bg-yellow-500", 600: "bg-yellow-600" },
+  };
+  return map[tone][shade];
+}
+
+function toneText(tone: Tone, shade: 600 | 700) {
+  const map: Record<Tone, Record<number, string>> = {
+    blue: { 600: "text-blue-600", 700: "text-blue-700" },
+    indigo: { 600: "text-indigo-600", 700: "text-indigo-700" },
+    purple: { 600: "text-purple-600", 700: "text-purple-700" },
+    green: { 600: "text-green-600", 700: "text-green-700" },
+    red: { 600: "text-red-600", 700: "text-red-700" },
+    orange: { 600: "text-orange-600", 700: "text-orange-700" },
+    yellow: { 600: "text-yellow-600", 700: "text-yellow-700" },
+  };
+  return map[tone][shade];
+}
+
+function toneBorder(tone: Tone) {
+  const map: Record<Tone, string> = {
+    blue: "border-blue-500",
+    indigo: "border-indigo-500",
+    purple: "border-purple-500",
+    green: "border-green-500",
+    red: "border-red-500",
+    orange: "border-orange-500",
+    yellow: "border-yellow-500",
+  };
+  return map[tone];
 }
 
 function fieldLabel(field: string) {
