@@ -77,7 +77,7 @@ export default async function PlatformPage() {
               Expert OS Platform
             </span>
             <h1
-              className="mx-auto mt-6 max-w-4xl text-[34px] font-semibold leading-[1.1] sm:text-4xl md:text-6xl"
+              className="mx-auto mt-6 max-w-4xl text-[34px] font-semibold leading-[1.08] sm:text-5xl md:text-7xl"
               style={{ fontFamily: "var(--font-heading)", letterSpacing: "0" }}
             >
               <span className="block md:inline">The management</span>{" "}
@@ -109,24 +109,27 @@ export default async function PlatformPage() {
         </section>
 
         {/* Features */}
-        <section className="container mx-auto mt-24 max-w-5xl px-3">
+        <section className="container mx-auto mt-24 max-w-6xl px-3">
+          <p className="font-family_avt mb-3 text-center text-xs uppercase tracking-[0.22em]" style={{ color: "var(--text-muted)" }}>
+            / agent operations
+          </p>
           <h2
-            className="text-center text-3xl font-semibold mb-3"
+            className="text-center text-3xl font-semibold md:text-4xl"
             style={{ fontFamily: "var(--font-heading)" }}
           >
             Built for <span className="gradient-text">agent operations</span>
           </h2>
-          <p className="mx-auto mb-12 max-w-2xl text-center text-base leading-relaxed" style={{ color: "var(--text-secondary)" }}>
+          <p className="mx-auto mb-12 mt-3 max-w-2xl text-center text-base leading-relaxed" style={{ color: "var(--text-secondary)" }}>
             Three capabilities that ship together: knowledge, automated
             evaluation, and agentic workflows with persistent agent identity.
           </p>
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+          <div className="grid grid-cols-1 gap-5 md:grid-cols-3">
             {features.map((f) => {
               const Icon = (ICON_MAP[f.icon] || Sparkles) as React.ComponentType<{ className?: string; style?: React.CSSProperties }>;
               return (
                 <div
                   key={f.id}
-                  className="rounded-2xl p-6 md:p-8"
+                  className="flex h-full flex-col rounded-2xl p-6 md:p-7"
                   style={{ background: "var(--bg-card)", border: "1px solid var(--border-subtle)", boxShadow: "var(--shadow-card)" }}
                 >
                   <div
@@ -151,8 +154,11 @@ export default async function PlatformPage() {
         {/* How it works */}
         <section className="container mx-auto mt-24 max-w-4xl px-3">
           <div className="rounded-3xl p-8 md:p-12" style={{ background: "var(--bg-card)", border: "1px solid var(--border-subtle)" }}>
+            <p className="font-family_avt mb-3 text-center text-xs uppercase tracking-[0.22em]" style={{ color: "var(--text-muted)" }}>
+              / operating model
+            </p>
             <h2
-              className="text-center text-3xl font-semibold"
+              className="text-center text-3xl font-semibold md:text-4xl"
               style={{ fontFamily: "var(--font-heading)" }}
             >
               How <span className="gradient-text">Expert OS</span> works
@@ -183,6 +189,14 @@ export default async function PlatformPage() {
 
         {/* Animated KPI band — production proof at a glance */}
         <section className="container mx-auto mt-24 max-w-6xl px-3">
+          <div className="mb-10 text-center">
+            <p className="font-family_avt text-xs uppercase tracking-[0.22em]" style={{ color: "var(--text-muted)" }}>
+              / production proof
+            </p>
+            <h2 className="mt-3 text-3xl font-semibold md:text-4xl" style={{ fontFamily: "var(--font-heading)", color: "var(--text-primary)" }}>
+              Metrics that stay <span className="gradient-text">auditable</span>
+            </h2>
+          </div>
           <PlatformKpiBand />
         </section>
 
@@ -193,7 +207,7 @@ export default async function PlatformPage() {
               / platform in action
             </p>
             <h2
-              className="mt-3 text-3xl font-semibold md:text-5xl leading-tight"
+              className="mt-3 text-3xl font-semibold leading-tight md:text-4xl"
               style={{ fontFamily: "var(--font-heading)" }}
             >
               <span className="gradient-text">Real surfaces</span>, running today
@@ -214,7 +228,7 @@ export default async function PlatformPage() {
               / workflow builder
             </p>
             <h2
-              className="mt-3 text-3xl font-semibold md:text-5xl leading-tight"
+              className="mt-3 text-3xl font-semibold leading-tight md:text-4xl"
               style={{ fontFamily: "var(--font-heading)" }}
             >
               Drag, drop, <span className="gradient-text">ship a pipeline</span>

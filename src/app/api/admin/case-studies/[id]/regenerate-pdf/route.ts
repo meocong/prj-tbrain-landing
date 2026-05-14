@@ -2,8 +2,8 @@ import { NextResponse, type NextRequest } from "next/server";
 import { requireAdmin } from "@/lib/admin/server/list";
 import { supabaseAdmin } from "@/lib/terminal-bench/supabase/admin";
 import { uploadBuffer } from "@/lib/terminal-bench/gcs";
-import { renderCaseStudyPrintHtml } from "@/lib/casestudy/print-html";
-import { renderHtmlToPdf } from "@/lib/casestudy/render-pdf";
+import { renderUrlToPdf } from "@/lib/casestudy/render-pdf";
+import { publicBaseUrl } from "@/lib/terminal-bench/email";
 import type { CaseStudy } from "@/lib/landing/case-studies";
 
 export const runtime = "nodejs";
@@ -62,8 +62,8 @@ export async function POST(
 
   let pdf: Buffer;
   try {
-    const html = await renderCaseStudyPrintHtml(study);
-    pdf = await renderHtmlToPdf(html);
+    const url = `${publicBaseUrl()}/casestudy/${study.slug}?pdf=1`;
+    pdf = await renderUrlToPdf(url);
   } catch (err) {
     console.error("[regenerate-pdf] render failed", err);
     return NextResponse.json({ error: "pdf_render_failed" }, { status: 500 });

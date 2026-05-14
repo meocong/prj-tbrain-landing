@@ -337,13 +337,13 @@ export const STATIC_IMAGES: StaticImage[] = [
     "path": "/images/platform/dashboard.png",
     "name": "dashboard",
     "ext": "png",
-    "size_bytes": 131332
+    "size_bytes": 88175
   },
   {
     "path": "/images/platform/knowledge.png",
     "name": "knowledge",
     "ext": "png",
-    "size_bytes": 204233
+    "size_bytes": 102794
   },
   {
     "path": "/images/platform/project-overview.png",

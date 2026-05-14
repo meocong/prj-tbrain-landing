@@ -8,7 +8,7 @@ import type { Browser } from "puppeteer-core";
  *   1. PUPPETEER_EXECUTABLE_PATH env (Docker image, dev with system Chrome)
  *   2. @sparticuz/chromium (works on AWS Lambda / Vercel Functions)
  */
-export async function renderHtmlToPdf(html: string): Promise<Buffer> {
+async function launchBrowser() {
   const explicit = process.env.PUPPETEER_EXECUTABLE_PATH;
   const puppeteer = (await import("puppeteer-core")).default;
 
@@ -24,16 +24,31 @@ export async function renderHtmlToPdf(html: string): Promise<Buffer> {
     args = chromium.args;
   }
 
+  return puppeteer.launch({
+    args,
+    executablePath,
+    headless: true,
+  });
+}
+
+export async function renderUrlToPdf(url: string): Promise<Buffer> {
   let browser: Browser | null = null;
   try {
-    browser = await puppeteer.launch({
-      args,
-      executablePath,
-      headless: true,
-    });
+    browser = await launchBrowser();
     const page = await browser.newPage();
-    await page.emulateMediaType("print");
-    await page.setContent(html, { waitUntil: "networkidle0", timeout: 30_000 });
+    await page.setViewport({ width: 1440, height: 1800, deviceScaleFactor: 1 });
+    await page.emulateMediaType("screen");
+    await page.goto(url, { waitUntil: "networkidle0", timeout: 45_000 });
+    await page.addStyleTag({
+      content: `
+        @page { size: A4; margin: 12mm; }
+        html, body { background: #ffffff !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        header, footer, .wrap, [data-pdf-hidden="true"] { display: none !important; }
+        main { padding-top: 0 !important; padding-bottom: 0 !important; background-image: none !important; }
+        section, article, .case-study-widget, .case-study-body, .case-study-body > * { break-inside: avoid; page-break-inside: avoid; }
+        img, svg, canvas { max-width: 100% !important; break-inside: avoid; page-break-inside: avoid; }
+      `,
+    });
     const pdf = await page.pdf({
       format: "A4",
       printBackground: true,

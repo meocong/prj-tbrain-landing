@@ -38,14 +38,14 @@ const TOURS: Tour[] = [
   },
   {
     src: "/images/platform/knowledge.png",
-    eyebrow: "Agent Knowledge Base",
-    title: "Versioned grounding for every agent",
+    eyebrow: "Agent knowledge",
+    title: "Central docs with project-aware scoping",
     body:
-      "Each agent reads from a curated knowledge base that is versioned, searchable, and categorized, so you can audit which guides any answer was grounded in. Add a doc once and every agent that needs it picks it up.",
+      "The knowledge workspace lets ops teams manage shared AI docs, filter by category or project, and edit content inline in one place. The current screenshot is taken from the admin knowledge screen, so it intentionally shows the editor panel sitting above the document list.",
     bullets: [
-      "Per-agent and per-project knowledge scopes",
-      "Categories + search + change history",
-      "One-click attach into the workflow context",
+      "Shared and project-specific documents in one workspace",
+      "Category, project, and keyword filtering for fast retrieval",
+      "Inline editing flow for quick capture and screenshot-ready mock data",
     ],
   },
   {
@@ -99,14 +99,6 @@ export function PlatformFeatureTour() {
 function FeatureRow({ tour, index }: { tour: Tour; index: number }) {
   const ref = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
-  const redactionAreas = tour.src === "/images/platform/knowledge.png"
-    ? [
-        { top: 35, left: 4, width: 92, height: 12 },
-        { top: 49, left: 4, width: 92, height: 12 },
-        { top: 63, left: 4, width: 92, height: 12 },
-        { top: 77, left: 4, width: 92, height: 12 },
-      ]
-    : [];
 
   useEffect(() => {
     const el = ref.current;
@@ -183,21 +175,9 @@ function FeatureRow({ tour, index }: { tour: Tour; index: number }) {
             alt={tour.title}
             fill
             sizes="(min-width: 768px) 50vw, 100vw"
+            unoptimized
             className="object-cover object-top"
           />
-          {redactionAreas.map((area, areaIndex) => (
-            <div
-              key={`${tour.src}-${areaIndex}`}
-              className="pointer-events-none absolute rounded-lg backdrop-blur-md"
-              style={{
-                top: `${area.top}%`,
-                left: `${area.left}%`,
-                width: `${area.width}%`,
-                height: `${area.height}%`,
-                background: "rgba(11,13,18,0.48)",
-              }}
-            />
-          ))}
           <div
             className="pointer-events-none absolute inset-0"
             style={{
