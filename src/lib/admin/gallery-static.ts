@@ -343,7 +343,7 @@ export const STATIC_IMAGES: StaticImage[] = [
     "path": "/images/platform/knowledge.png",
     "name": "knowledge",
     "ext": "png",
-    "size_bytes": 102794
+    "size_bytes": 127905
   },
   {
     "path": "/images/platform/project-overview.png",
