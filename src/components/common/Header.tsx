@@ -115,11 +115,11 @@ const Header = () => {
 
   return (
     <header
-      className={`fixed left-0 right-0 top-0 z-50 w-full p-3 transition-[background-color,border-color,backdrop-filter] duration-300 ${tokens.wrapper}`}
+      className={`fixed left-0 right-0 top-0 z-50 w-full transition-[background-color,border-color,backdrop-filter] duration-300 ${tokens.wrapper}`}
     >
-      <div className="container mx-auto">
-        <div className="flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-2">
+      <div className="mx-auto max-w-7xl px-6 py-3 md:px-8">
+        <div className="flex items-center justify-between gap-6">
+          <Link href="/" className="flex shrink-0 items-center gap-2">
             <Image
               src={Logo}
               width={123}
@@ -131,7 +131,7 @@ const Header = () => {
             />
           </Link>
 
-          <nav className="hidden items-center gap-5 xl:gap-7 lg:flex">
+          <nav className="hidden items-center gap-5 lg:flex xl:gap-7">
             {NAV_ITEMS.map((item) =>
               item.isDropdown ? (
                 <div key={item.href} className="relative" ref={dropdownRef}>
@@ -147,7 +147,7 @@ const Header = () => {
                   </button>
                   {dataOpen && (
                     <div
-                      className={`absolute left-1/2 top-full mt-2 -translate-x-1/2 rounded-xl p-2 min-w-[240px] ${tokens.dropdown}`}
+                      className={`absolute left-1/2 top-full mt-2 min-w-[240px] -translate-x-1/2 rounded-xl p-2 ${tokens.dropdown}`}
                     >
                       {DATA_ITEMS.map((d) => (
                         <Link
@@ -214,9 +214,7 @@ const Header = () => {
               className="mt-2 pt-2"
               style={{ borderTop: useDarkTokens ? "1px solid rgba(255,255,255,0.08)" : "1px solid rgba(243,244,246,1)" }}
             >
-              <p
-                className={`px-4 py-1 text-xs font-medium ${tokens.dropdownSub}`}
-              >
+              <p className={`px-4 py-1 text-xs font-medium ${tokens.dropdownSub}`}>
                 Data Products
               </p>
               {DATA_ITEMS.map((d) => (

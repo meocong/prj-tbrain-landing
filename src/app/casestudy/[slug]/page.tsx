@@ -42,10 +42,13 @@ const SECTION_ACCENTS = [
 
 export default async function CaseStudyDetailPage({
   params,
+  searchParams,
 }: {
   params: Promise<{ slug: string }>;
+  searchParams?: Promise<{ pdf?: string }>;
 }) {
   const { slug } = await params;
+  const isPdfRender = (await searchParams)?.pdf === "1";
   const study = await getCaseStudyBySlug(slug);
   if (!study) notFound();
 
@@ -60,15 +63,17 @@ export default async function CaseStudyDetailPage({
 
   return (
     <div>
-      <Header />
+      {!isPdfRender && <Header />}
       <main
-        className="bg-center bg-no-repeat bg-cover pt-24 pb-24"
-        style={{ backgroundImage: `url(${post_bg.src})` }}
+        className={`bg-center bg-no-repeat bg-cover pb-24 ${isPdfRender ? "pt-0" : "pt-24"}`}
+        style={{ backgroundImage: isPdfRender ? undefined : `url(${post_bg.src})` }}
       >
-        <div className="wrap !fixed top-[400px] w-full">
-          <div className="one top-0 left-0 h-80 w-80"></div>
-          <div className="two top-0 right-0 h-80 w-80"></div>
-        </div>
+        {!isPdfRender && (
+          <div className="wrap !fixed top-[400px] w-full">
+            <div className="one top-0 left-0 h-80 w-80"></div>
+            <div className="two top-0 right-0 h-80 w-80"></div>
+          </div>
+        )}
         <section className="container mx-auto max-w-[1128px] px-4">
           <header className="mb-12">
             <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
@@ -82,7 +87,7 @@ export default async function CaseStudyDetailPage({
                   </p>
                 )}
               </div>
-              {study.pdfGcsObject && (
+              {study.pdfGcsObject && !isPdfRender && (
                 <div className="shrink-0">
                   <PdfDownloadGate slug={study.slug} title={study.title} />
                 </div>
@@ -105,7 +110,7 @@ export default async function CaseStudyDetailPage({
           )}
         </section>
       </main>
-      <Footer />
+      {!isPdfRender && <Footer />}
     </div>
   );
 }

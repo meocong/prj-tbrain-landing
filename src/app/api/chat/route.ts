@@ -57,6 +57,10 @@ AI-native BPO platform with:
 - Contact info@tbrain.ai or visit /contact for a quote
 
 # Key Rules
+- Match the user's language. If they write Vietnamese, reply in natural Vietnamese.
+- Never answer with placeholders or single-token replies such as "M", "Hey", or "Something".
+- If the user asks who they are, say you do not have enough identity information unless they provided it in the chat.
+- If the message is vague, profane, or unclear, ask one short clarifying question instead of guessing.
 - If asked to talk to a real person: provide email info@tbrain.ai and suggest the contact form at /contact
 - Never make up specific pricing — say "pricing is custom, contact us for a quote"
 - Keep responses concise (2-4 sentences typically)
@@ -133,19 +137,36 @@ async function nextMessageCount(sessionId: string): Promise<number> {
   }
 }
 
+function deterministicReply(messages: Msg[]): string | null {
+  const latest = messages[messages.length - 1]?.content.trim() ?? "";
+  const lower = latest.toLowerCase();
+  const hasVietnamese = /[àáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđ]/i.test(latest);
+
+  if (/\b(who am i|do you know me)\b/i.test(latest) || /\b(tôi là ai|mình là ai|biết tôi là ai|biết mình là ai)\b/i.test(lower)) {
+    return hasVietnamese
+      ? "Mình chưa có đủ thông tin để biết bạn là ai. Nếu bạn chia sẻ tên, công ty hoặc nhu cầu, mình có thể hỗ trợ cụ thể hơn."
+      : "I don’t have enough information to know who you are yet. Share your name, company, or use case and I can help more specifically.";
+  }
+
+  if (/^(hi|hello|hey|yo|chào|alo|hello bot)$/i.test(lower)) {
+    return hasVietnamese
+      ? "Chào bạn! Mình có thể giúp bạn tìm hiểu về Tbrain, dữ liệu AI, platform, pricing hoặc cách liên hệ team."
+      : "Hey! I can help with Tbrain’s AI data services, platform, pricing approach, or how to contact the team.";
+  }
+
+  if (/^(what tf|wtf|what the fuck|tf)$/i.test(lower)) {
+    return "What would you like me to help with? I can answer questions about Tbrain’s data services, platform, case studies, or pricing approach.";
+  }
+
+  return null;
+}
+
 export async function POST(req: NextRequest) {
   // Rate limit
   const ip = getClientIp(req.headers);
   const rl = checkRateLimit(`chat:${ip}`, RATE_LIMITS.chat);
   if (!rl.allowed) {
     return Response.json({ error: "rate_limited" }, { status: 429 });
-  }
-
-  let provider;
-  try {
-    provider = await resolveAIProvider();
-  } catch {
-    return Response.json({ error: "Chat not configured" }, { status: 503 });
   }
 
   let messages: Msg[] | undefined;
@@ -184,6 +205,33 @@ export async function POST(req: NextRequest) {
       path: "/",
       maxAge: COOKIE_MAX_AGE,
     });
+  }
+
+  const deterministic = deterministicReply(messages);
+  if (deterministic) {
+    const encoder = new TextEncoder();
+    const readable = new ReadableStream({
+      start(controller) {
+        controller.enqueue(encoder.encode(`data: ${JSON.stringify({ text: deterministic })}\n\n`));
+        controller.enqueue(encoder.encode("data: [DONE]\n\n"));
+        controller.close();
+        if (sessionId) void persistMessage(sessionId, "assistant", deterministic);
+      },
+    });
+    return new Response(readable, {
+      headers: {
+        "Content-Type": "text/event-stream",
+        "Cache-Control": "no-cache",
+        Connection: "keep-alive",
+      },
+    });
+  }
+
+  let provider;
+  try {
+    provider = await resolveAIProvider();
+  } catch {
+    return Response.json({ error: "Chat not configured" }, { status: 503 });
   }
 
   const client = new Anthropic({

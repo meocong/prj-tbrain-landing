@@ -1,8 +1,8 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { getCaseStudyBySlug } from "@/lib/landing/case-studies";
-import { renderCaseStudyPrintHtml } from "@/lib/casestudy/print-html";
-import { renderHtmlToPdf } from "@/lib/casestudy/render-pdf";
+import { renderUrlToPdf } from "@/lib/casestudy/render-pdf";
 import { downloadBuffer, signDownloadUrl } from "@/lib/terminal-bench/gcs";
+import { publicBaseUrl } from "@/lib/terminal-bench/email";
 import { supabaseAdmin } from "@/lib/terminal-bench/supabase/admin";
 import { checkRateLimit, getClientIp, RATE_LIMITS } from "@/lib/rate-limit";
 
@@ -42,8 +42,8 @@ async function handlePreview(slug: string) {
   if (study.pdfGcsObject) {
     pdf = await downloadBuffer(study.pdfGcsObject);
   } else {
-    const html = await renderCaseStudyPrintHtml(study);
-    pdf = await renderHtmlToPdf(html);
+    const url = `${publicBaseUrl()}/casestudy/${slug}?pdf=1`;
+    pdf = await renderUrlToPdf(url);
   }
 
   return new NextResponse(new Uint8Array(pdf), {
