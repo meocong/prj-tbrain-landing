@@ -1,6 +1,6 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { jwtVerify } from "jose";
-import { createServerClient } from "@supabase/ssr";
+import { createServerClient, type CookieOptions } from "@supabase/ssr";
 
 const SESSION_COOKIE = "tb_session";
 
@@ -21,7 +21,12 @@ async function isTbAuthenticated(req: NextRequest): Promise<boolean> {
   }
 }
 
-async function isAdminAuthenticated(req: NextRequest): Promise<boolean> {
+type RefreshedCookies = Array<{ name: string; value: string; options: CookieOptions }>;
+
+async function readAdminUser(
+  req: NextRequest,
+  refreshedCookies: RefreshedCookies
+): Promise<boolean> {
   try {
     const supabase = createServerClient(
       process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -32,8 +37,8 @@ async function isAdminAuthenticated(req: NextRequest): Promise<boolean> {
           getAll() {
             return req.cookies.getAll();
           },
-          setAll() {
-            // Middleware can't set cookies in the response this way; handled by NextResponse
+          setAll(cookies) {
+            refreshedCookies.push(...cookies);
           },
         },
       }
@@ -47,6 +52,13 @@ async function isAdminAuthenticated(req: NextRequest): Promise<boolean> {
   }
 }
 
+function attachCookies(res: NextResponse, cookies: RefreshedCookies): NextResponse {
+  for (const { name, value, options } of cookies) {
+    res.cookies.set(name, value, options);
+  }
+  return res;
+}
+
 export async function middleware(req: NextRequest) {
   const { pathname, search } = req.nextUrl;
 
@@ -56,14 +68,15 @@ export async function middleware(req: NextRequest) {
     if (pathname === "/admin/login") return NextResponse.next();
     if (pathname.startsWith("/admin/auth/")) return NextResponse.next();
 
-    const ok = await isAdminAuthenticated(req);
-    if (ok) return NextResponse.next();
+    const refreshed: RefreshedCookies = [];
+    const ok = await readAdminUser(req, refreshed);
+    if (ok) return attachCookies(NextResponse.next(), refreshed);
 
     // Redirect to admin login
     const url = req.nextUrl.clone();
     url.pathname = "/admin/login";
     url.search = `?redirect=${encodeURIComponent(pathname + search)}`;
-    return NextResponse.redirect(url);
+    return attachCookies(NextResponse.redirect(url), refreshed);
   }
 
   // ── Terminal Bench data routes ──
