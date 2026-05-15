@@ -3,6 +3,7 @@ import { contactSchema } from "@/lib/validation";
 import { supabaseAdmin } from "@/lib/terminal-bench/supabase/admin";
 import { checkRateLimit, getClientIp, RATE_LIMITS } from "@/lib/rate-limit";
 import { sendEmail } from "@/lib/terminal-bench/email";
+import { getAdminRecipients } from "@/lib/admin/email-recipients";
 import ContactConfirmation from "@/emails/ContactConfirmation";
 import ContactAdminNotification from "@/emails/ContactAdminNotification";
 import { createElement } from "react";
@@ -119,10 +120,9 @@ export async function POST(req: NextRequest) {
     console.error("[contact] confirmation email failed:", err);
   }
 
-  const adminEmail = process.env.ADMIN_EMAIL ?? "drake@tbrain.ai";
   try {
     await sendEmail({
-      to: adminEmail,
+      to: getAdminRecipients(),
       subject: `New contact: ${fullName} (${company || "N/A"})`,
       template: createElement(ContactAdminNotification, {
         email,
