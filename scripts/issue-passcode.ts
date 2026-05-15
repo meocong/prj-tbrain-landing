@@ -51,7 +51,7 @@ async function main() {
 
   const { data: batch } = await db
     .from("batches")
-    .select("id, slug, name")
+    .select("id, slug, name, product_id")
     .eq("project", "terminal-bench")
     .eq("slug", args.batch)
     .single();
@@ -93,8 +93,9 @@ async function main() {
     console.log(`  code  : ${passcode}`);
     console.log(`  until : ${expiresAt}`);
   } else {
-    const { error: bpErr } = await db.from("batch_passcodes").insert({
+    const { error: bpErr } = await db.from("passcodes").insert({
       batch_id: batch.id,
+      product_id: batch.product_id,
       label: args.batchLabel,
       passcode_hash: hash,
       passcode_prefix: prefix,
