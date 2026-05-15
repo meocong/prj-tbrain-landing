@@ -25,6 +25,13 @@ const jetbrainsMono = JetBrains_Mono({
   display: "swap",
 });
 
+const DEFAULT_OG_IMAGE = {
+  url: "/images/hero-poster.jpg",
+  width: 1920,
+  height: 1080,
+  alt: "Tbrain — AI Training Data & Evaluation",
+};
+
 export const metadata: Metadata = {
   title: {
     default: "Tbrain — AI Training Data & Evaluation",
@@ -36,6 +43,11 @@ export const metadata: Metadata = {
     process.env.PUBLIC_BASE_URL || "https://tbrain.ai"
   ),
   alternates: { canonical: "/" },
+  icons: {
+    icon: "/favicon.ico",
+    shortcut: "/favicon.ico",
+  },
+  manifest: "/manifest.webmanifest",
   openGraph: {
     type: "website",
     locale: "en_US",
@@ -44,12 +56,14 @@ export const metadata: Metadata = {
     title: "Tbrain — AI Training Data & Evaluation",
     description:
       "High-quality AI training data, RLHF, and evaluation services. Production-grade datasets for building better AI models.",
+    images: [DEFAULT_OG_IMAGE],
   },
   twitter: {
     card: "summary_large_image",
     title: "Tbrain — AI Training Data & Evaluation",
     description:
       "High-quality AI training data, RLHF, and evaluation services. Production-grade datasets for building better AI models.",
+    images: [DEFAULT_OG_IMAGE.url],
   },
 };
 
@@ -68,7 +82,7 @@ const ORGANIZATION_JSONLD = {
       contactType: "sales",
       email: "info@tbrain.ai",
       areaServed: "Worldwide",
-      availableLanguage: ["en", "vi"],
+      availableLanguage: ["en"],
     },
   ],
 };

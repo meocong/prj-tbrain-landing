@@ -7,8 +7,22 @@ import { CaseStudyWidgetRenderer, LegacyCta, MetricsGrid } from "@/components/ca
 import { PdfDownloadGate } from "@/components/casestudy/PdfDownloadGate";
 import { notFound } from "next/navigation";
 import post_bg from "@/assets/images/post_bg.png";
+import { supabaseAdmin } from "@/lib/terminal-bench/supabase/admin";
 
 export const revalidate = 300;
+
+export async function generateStaticParams() {
+  try {
+    const db = supabaseAdmin();
+    const { data } = await db
+      .from("case_studies")
+      .select("slug")
+      .eq("is_active", true);
+    return (data ?? []).map((c: { slug: string }) => ({ slug: c.slug }));
+  } catch {
+    return [];
+  }
+}
 
 export async function generateMetadata({
   params,
@@ -61,8 +75,48 @@ export default async function CaseStudyDetailPage({
     ? "Need Expert CAD Annotation Services?"
     : "Need Expert Data Services?";
 
+  const baseUrl = process.env.PUBLIC_BASE_URL || "https://tbrain.ai";
+  const studyUrl = `${baseUrl}/casestudy/${study.slug}`;
+  const studyImage = study.image?.startsWith("http") ? study.image : `${baseUrl}${study.image}`;
+  const articleJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: study.title,
+    description: study.shortDescription || study.description,
+    image: study.image ? [studyImage] : undefined,
+    author: [{ "@type": "Organization", name: "Tbrain" }],
+    publisher: {
+      "@type": "Organization",
+      name: "Tbrain",
+      logo: { "@type": "ImageObject", url: `${baseUrl}/favicon.ico` },
+    },
+    mainEntityOfPage: { "@type": "WebPage", "@id": studyUrl },
+    articleSection: study.industry || "Case Study",
+  };
+  const breadcrumbJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: `${baseUrl}/` },
+      { "@type": "ListItem", position: 2, name: "Case Studies", item: `${baseUrl}/casestudy` },
+      { "@type": "ListItem", position: 3, name: study.title, item: studyUrl },
+    ],
+  };
+
   return (
     <div>
+      {!isPdfRender && (
+        <>
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
+          />
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+          />
+        </>
+      )}
       {!isPdfRender && <Header />}
       <main
         className={`bg-center bg-no-repeat bg-cover pb-24 ${isPdfRender ? "pt-0" : "pt-24"}`}

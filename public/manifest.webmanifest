@@ -1,0 +1,17 @@
+{
+  "name": "Tbrain — AI Training Data & Evaluation",
+  "short_name": "Tbrain",
+  "description": "High-quality AI training data, RLHF, and evaluation services.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#0b0b10",
+  "theme_color": "#6C3CF4",
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "any",
+      "type": "image/x-icon"
+    }
+  ]
+}

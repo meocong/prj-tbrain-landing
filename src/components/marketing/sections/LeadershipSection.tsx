@@ -93,7 +93,7 @@ export function LeadershipSection() {
                       {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img
                         src={`/icons/${logo}`}
-                        alt=""
+                        alt={`${logo.replace(/_logo\.svg$/, "").replace(/_/g, " ")} logo`}
                         width={32}
                         height={32}
                         loading="lazy"

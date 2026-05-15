@@ -11,7 +11,10 @@ export const metadata: Metadata = {
   title: "Blog",
   description:
     "Insights on AI training data, robotics, evaluation, and building better AI from the Tbrain team.",
-  alternates: { canonical: "/blog" },
+  alternates: {
+    canonical: "/blog",
+    types: { "application/rss+xml": "/blog/feed.xml" },
+  },
   openGraph: {
     title: "Blog — Tbrain",
     description:
