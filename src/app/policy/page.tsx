@@ -186,7 +186,7 @@ export default async function Page() {
           <div>
             Email: info@tbrain.ai
             <br />
-            Address: 1209 N Orange St, Wilmington, DE 19801 USA
+            Address: Florida, USA · Hanoi, Vietnam
           </div>
         </section>
       </main>
