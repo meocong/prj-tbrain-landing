@@ -8,18 +8,23 @@ import Link from "next/link";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
+export const metadata = {
+  title: "Terminal Bench Showcase",
+  robots: { index: false, follow: false },
+};
 
 export default async function BatchGridPage({
   params,
 }: {
-  params: { batchSlug: string };
+  params: Promise<{ batchSlug: string }>;
 }) {
+  const { batchSlug } = await params;
   const db = supabaseAdmin();
   const { data: batch } = await db
     .from("batches")
     .select("id, slug, name, description, gcs_batch_zip_object")
     .eq("project", "terminal-bench")
-    .eq("slug", params.batchSlug)
+    .eq("slug", batchSlug)
     .maybeSingle();
 
   if (!batch) notFound();
@@ -38,12 +43,13 @@ export default async function BatchGridPage({
 
   // Authorisation happens in middleware; here we just confirm the batch is
   // inside the session's whitelist so we can show a "download batch" button.
-  const token = cookies().get(SESSION_COOKIE)?.value;
+  const cookieStore = await cookies();
+  const token = cookieStore.get(SESSION_COOKIE)?.value;
   const claims = token ? await verifySessionJwt(token) : null;
   const canDownloadBatch =
     claims?.batchIds.includes(batch.id) && !!batch.gcs_batch_zip_object;
 
-  headers(); // ensures server component runs dynamically
+  await headers(); // ensures server component runs dynamically
 
   return (
     <main className="container mx-auto max-w-6xl px-6 py-16 md:py-24">

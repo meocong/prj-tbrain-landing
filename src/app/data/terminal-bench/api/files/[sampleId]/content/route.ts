@@ -15,7 +15,8 @@ function clientIp(req: NextRequest): string {
   return req.headers.get("x-real-ip") ?? "0.0.0.0";
 }
 
-export async function GET(req: NextRequest, { params }: { params: { sampleId: string } }) {
+export async function GET(req: NextRequest, { params }: { params: Promise<{ sampleId: string }> }) {
+  const { sampleId } = await params;
   const token = req.cookies.get(SESSION_COOKIE)?.value;
   const claims = token ? await verifySessionJwt(token) : null;
   if (!claims) return NextResponse.json({ error: "unauthorized" }, { status: 401 });
@@ -28,7 +29,7 @@ export async function GET(req: NextRequest, { params }: { params: { sampleId: st
   const { data: sample } = await db
     .from("samples")
     .select("id, batch_id")
-    .eq("id", params.sampleId)
+    .eq("id", sampleId)
     .maybeSingle();
   if (!sample || !claims.batchIds.includes(sample.batch_id)) {
     return NextResponse.json({ error: "forbidden" }, { status: 403 });
@@ -46,10 +47,17 @@ export async function GET(req: NextRequest, { params }: { params: { sampleId: st
     return NextResponse.json({ error: "too_large", size: file.size_bytes }, { status: 413 });
   }
 
-  const buf = await downloadBuffer(file.gcs_object);
-  const text = buf.toString("utf8");
+  let html: string;
+  let text: string;
   const lang = langForPath(file.path);
-  const html = await highlightToHtml(text, lang);
+  try {
+    const buf = await downloadBuffer(file.gcs_object);
+    text = buf.toString("utf8");
+    html = await highlightToHtml(text, lang);
+  } catch (err) {
+    console.error("[tb/files] read+highlight failed:", err);
+    return NextResponse.json({ error: "read_failed" }, { status: 502 });
+  }
 
   await logEvent({
     clientId: claims.clientId,

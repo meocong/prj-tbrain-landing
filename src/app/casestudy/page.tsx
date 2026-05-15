@@ -1,15 +1,20 @@
-"use client";
-
 import React from 'react';
 import { Star } from 'lucide-react';
 import Header from '@/components/common/Header';
 import post_bg from "@/assets/images/post_bg.png";
 import Footer from "@/components/common/Footer";
 import { CaseStudyContent } from "@/components/casestudy/CaseStudyContent";
-import { usePathname } from 'next/navigation';
+import { getCaseStudies } from "@/lib/landing/case-studies";
 
-export default function Page() {
-  const pathname = usePathname();
+export const revalidate = 300;
+
+export const metadata = {
+  title: "Case Studies | Tbrain",
+  description: "Featured Tbrain data programs and AI evaluation case studies.",
+};
+
+export default async function Page() {
+  const studies = await getCaseStudies();
 
   return (
     <div>
@@ -49,7 +54,7 @@ export default function Page() {
           </div>
 
           {/* Case Study Content */}
-          <CaseStudyContent />
+          <CaseStudyContent studies={studies} />
         </section>
       </main>
 

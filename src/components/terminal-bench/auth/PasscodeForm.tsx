@@ -14,6 +14,7 @@ export function PasscodeForm({ siteKey }: { siteKey: string | null }) {
   const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
+  const isLocalDev = process.env.NODE_ENV !== "production";
 
   async function onSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -23,7 +24,11 @@ export function PasscodeForm({ siteKey }: { siteKey: string | null }) {
       const res = await fetch("/data/terminal-bench/api/auth/passcode", {
         method: "POST",
         headers: { "content-type": "application/json" },
-        body: JSON.stringify({ passcode, batchSlug, turnstileToken }),
+        body: JSON.stringify({
+          passcode,
+          batchSlug,
+          turnstileToken: isLocalDev ? "dev-bypass" : turnstileToken,
+        }),
       });
       if (res.status === 429) {
         router.replace("/data/terminal-bench/blocked");
@@ -59,7 +64,7 @@ export function PasscodeForm({ siteKey }: { siteKey: string | null }) {
         />
       </label>
 
-      {siteKey ? (
+      {siteKey && !isLocalDev ? (
         <div className="flex justify-center">
           <Turnstile
             siteKey={siteKey}
@@ -78,7 +83,7 @@ export function PasscodeForm({ siteKey }: { siteKey: string | null }) {
 
       <button
         type="submit"
-        disabled={submitting || !passcode || (siteKey !== null && !turnstileToken)}
+        disabled={submitting || !passcode || (!isLocalDev && siteKey !== null && !turnstileToken)}
         className="w-full rounded-xl bg-[#6C3CF4] px-6 py-3.5 text-sm font-semibold text-white transition-all hover:bg-[#5a2fd3] disabled:opacity-60"
       >
         {submitting ? "Checking…" : "Enter showcase →"}

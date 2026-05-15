@@ -1,0 +1,142 @@
+import { NextResponse, type NextRequest } from "next/server";
+import { contactSchema } from "@/lib/validation";
+import { supabaseAdmin } from "@/lib/terminal-bench/supabase/admin";
+import { checkRateLimit, getClientIp, RATE_LIMITS } from "@/lib/rate-limit";
+import { sendEmail } from "@/lib/terminal-bench/email";
+import ContactConfirmation from "@/emails/ContactConfirmation";
+import ContactAdminNotification from "@/emails/ContactAdminNotification";
+import { createElement } from "react";
+
+export const runtime = "nodejs";
+
+const TURNSTILE_VERIFY_URL =
+  "https://challenges.cloudflare.com/turnstile/v0/siteverify";
+
+function isLocalRequest(req: NextRequest): boolean {
+  const host = req.headers.get("host") ?? "";
+  return host.startsWith("localhost") || host.startsWith("127.0.0.1") || host.startsWith("[::1]");
+}
+
+async function verifyTurnstile(token: string, req: NextRequest): Promise<boolean> {
+  const secret = process.env.TURNSTILE_SECRET_KEY;
+  if (!secret) return true; // Skip in dev
+  if (process.env.NODE_ENV !== "production" && isLocalRequest(req) && token === "dev-bypass") return true;
+
+  const res = await fetch(TURNSTILE_VERIFY_URL, {
+    method: "POST",
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    body: new URLSearchParams({ secret, response: token }),
+  });
+  const data = await res.json();
+  return data.success === true;
+}
+
+export async function POST(req: NextRequest) {
+  // Rate limit
+  const ip = getClientIp(req.headers);
+  const rl = checkRateLimit(`contact:${ip}`, RATE_LIMITS.contact);
+  if (!rl.allowed) {
+    return NextResponse.json({ error: "rate_limited" }, { status: 429 });
+  }
+
+  const body = await req.json();
+  const parsed = contactSchema.safeParse(body);
+
+  if (!parsed.success) {
+    return NextResponse.json(
+      { error: "validation_error", issues: parsed.error.issues },
+      { status: 400 }
+    );
+  }
+
+  const {
+    email,
+    fullName,
+    company,
+    role,
+    phone,
+    message,
+    turnstileToken,
+    utm_source,
+    utm_medium,
+    utm_campaign,
+    utm_term,
+    utm_content,
+    referrer,
+  } = parsed.data;
+  const utm = { utm_source, utm_medium, utm_campaign, utm_term, utm_content, referrer };
+
+  // Verify Turnstile
+  const turnstileOk = await verifyTurnstile(turnstileToken, req);
+  if (!turnstileOk) {
+    return NextResponse.json({ error: "captcha_failed" }, { status: 403 });
+  }
+
+  const db = supabaseAdmin();
+
+  // Upsert client record (preserve first-touch UTM — only set if not already
+  // populated by an earlier form submission)
+  const { data: client } = await db
+    .from("clients")
+    .upsert(
+      {
+        email,
+        full_name: fullName,
+        company: company || null,
+        role: role || null,
+        phone: phone || null,
+        source: "contact_form",
+        updated_at: new Date().toISOString(),
+        ...utm,
+      },
+      { onConflict: "email" }
+    )
+    .select("id")
+    .single();
+
+  // Store contact submission
+  await db.from("contact_submissions").insert({
+    email,
+    full_name: fullName,
+    company: company || null,
+    role: role || null,
+    phone: phone || null,
+    message,
+    source: "contact_form",
+    client_id: client?.id ?? null,
+    ...utm,
+  });
+
+  // Both emails are best-effort — the contact record is already in the DB, so
+  // a Resend outage shouldn't surface as a 500 to the visitor.
+  try {
+    await sendEmail({
+      to: email,
+      subject: "We received your message - Tbrain",
+      template: createElement(ContactConfirmation, { fullName }),
+    });
+  } catch (err) {
+    console.error("[contact] confirmation email failed:", err);
+  }
+
+  const adminEmail = process.env.ADMIN_EMAIL ?? "drake@tbrain.ai";
+  try {
+    await sendEmail({
+      to: adminEmail,
+      subject: `New contact: ${fullName} (${company || "N/A"})`,
+      template: createElement(ContactAdminNotification, {
+        email,
+        fullName,
+        company,
+        role,
+        phone,
+        message,
+      }),
+      replyTo: email,
+    });
+  } catch (err) {
+    console.error("[contact] admin notification failed:", err);
+  }
+
+  return NextResponse.json({ ok: true });
+}

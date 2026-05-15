@@ -1,12 +1,15 @@
 import { Metadata } from "next";
-
-export const metadata: Metadata = {
-  title: "Tbrain",
-  description: "Full-service human resource agency for AI training experts",
-};
 import post_bg from "@/assets/images/post_bg.png";
 import Footer from "@/components/common/Footer";
 import Header from "@/components/common/Header";
+
+export const metadata: Metadata = {
+  title: "Privacy Policy",
+  description:
+    "How Tbrain collects, uses, and protects personal information for our AI training data services. Last updated November 2024.",
+  alternates: { canonical: "/policy" },
+  robots: { index: true, follow: false },
+};
 
 export default async function Page() {
   return (
@@ -21,12 +24,15 @@ export default async function Page() {
         </div>
         <section
           id="home"
-          className="container mx-auto px-3 pt-24 pb-24 relative max-w-[1128px]"
+          className="container mx-auto max-w-6xl px-4 pt-24 pb-24 relative"
         >
-          <div className="w-full text-[#222222] text-4xl lg:text-5xl font-semibold leading-[52px] mb-[32px]">
+          <h1
+            className="text-4xl font-semibold tracking-tight md:text-6xl"
+            style={{ fontFamily: "var(--font-heading)", color: "var(--text-primary)" }}
+          >
             Privacy Policy for Tbrain LLC
-          </div>
-          <div className="italic mb-5">Last Updated: Nov 4, 2024</div>
+          </h1>
+          <p className="italic mt-4 mb-8" style={{ color: "var(--text-muted)" }}>Last Updated: Nov 4, 2024</p>
           <div className="mb-5">
             Tbrain LLC (&quot;Tbrain,&quot; &quot;we,&quot; &quot;our,&quot; or
             &quot;us&quot;) is committed to safeguarding your privacy. This
@@ -180,7 +186,7 @@ export default async function Page() {
           <div>
             Email: info@tbrain.ai
             <br />
-            Address: 30 N Gould St Ste N, Sheridan, WY 82801 USA
+            Address: Florida, USA · Hanoi, Vietnam
           </div>
         </section>
       </main>

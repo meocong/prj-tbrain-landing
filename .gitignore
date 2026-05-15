@@ -32,6 +32,15 @@ yarn-error.log*
 # vercel
 .vercel
 
+# raw video assets (only compressed copies in public/videos/ ship)
+incoming-videos/
+
+# local image backups (pre-blur originals, screenshot archives)
+backup-images/
+
+# misc local docs (client feedback, internal notes)
+docs/website_revisions.docx
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts

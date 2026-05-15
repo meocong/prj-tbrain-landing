@@ -91,7 +91,7 @@ export async function GET(req: NextRequest) {
   const expiresAt = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString();
 
   const { data: grant, error: grantErr } = await db
-    .from("access_grants")
+    .from("passcodes")
     .upsert(
       {
         client_id: client.id,
@@ -114,7 +114,7 @@ export async function GET(req: NextRequest) {
     return htmlPage("Error", "<h1>Server error</h1><p>Could not create grant.</p>");
   }
 
-  await db
+  const { error: markErr } = await db
     .from("access_requests")
     .update({
       status: "approved",
@@ -123,6 +123,12 @@ export async function GET(req: NextRequest) {
       issued_passcode_last4: passcode.slice(-4),
     })
     .eq("id", requestId);
+  if (markErr) {
+    // Grant + email still proceed — we'd rather double-approve than leave the
+    // client without their passcode. Logged so the admin can manually fix the
+    // request row (status would still show "pending").
+    console.error("[terminal-bench] approve: mark-approved update failed:", markErr);
+  }
 
   const base = publicBaseUrl();
   const enterUrl = `${base}/data/terminal-bench/enter?b=${encodeURIComponent(batch?.slug ?? "")}`;

@@ -1,0 +1,14 @@
+import { createBrowserClient } from "@supabase/ssr";
+
+export const supabaseAdmin = createBrowserClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL || "",
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "",
+  {
+    cookieOptions: {
+      name: "landing-admin-auth-token",
+    },
+    db: {
+      schema: "tbrain_landing",
+    },
+  }
+);

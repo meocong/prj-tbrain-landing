@@ -51,7 +51,7 @@ async function loadStats(): Promise<Stat[]> {
 export async function TrustStrip() {
   const stats = await loadStats();
   return (
-    <section className="border-y border-[#E5E7EB] bg-[#FAFAF7]">
+    <section className="border-y border-[#E5E7EB] bg-[#FAFAF7] dark:border-white/10 dark:bg-[#020617]">
       <div className="container mx-auto max-w-7xl px-6 py-12 md:py-16">
         <div className="grid grid-cols-2 gap-8 md:grid-cols-4 md:gap-6">
           {stats.map((s) => (

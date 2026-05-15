@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { supabaseAdmin } from "@/lib/terminal-bench/supabase/admin";
+import { SectionHeading } from "@/components/terminal-bench/shared/SectionHeading";
 
 interface Tile {
   slug: string;
@@ -60,15 +61,14 @@ export async function SampleGalleryPreview() {
 
   return (
     <section className="container mx-auto max-w-7xl px-6 py-24 md:py-32">
-      <div className="mb-10 flex flex-wrap items-end justify-between gap-6">
-        <div>
-          <p className="font-family_avt text-xs uppercase tracking-[0.2em] text-[#78818f]">
-            / this month&apos;s batch{batchName ? ` · ${batchName}` : ""}
-          </p>
-          <h2 className="mt-4 max-w-3xl text-4xl font-medium leading-tight text-[#0e1b2e] md:text-5xl">
-            {tiles.length} samples. <span className="gradient-text">Ready to inspect.</span>
-          </h2>
-        </div>
+      <div className="mb-10 flex flex-col items-center gap-4 text-center">
+        <SectionHeading
+          label={`this month\'s batch${batchName ? ` · ${batchName}` : ""}`}
+          className="mb-0"
+          centered
+        >
+          {tiles.length} samples. <span className="gradient-text">Ready to inspect.</span>
+        </SectionHeading>
         <Link
           href="/data/terminal-bench/enter"
           className="group font-family_avt text-xs uppercase tracking-widest text-[#6C3CF4] hover:text-[#5a2fd3]"
@@ -78,7 +78,7 @@ export async function SampleGalleryPreview() {
         </Link>
       </div>
 
-      <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
+      <div className="flex flex-wrap justify-center gap-5">
         {tiles.map((t) => {
           const redirectTo = `/data/terminal-bench/s/${t.batchSlug}/${t.slug}`;
           const href = `/data/terminal-bench/enter?b=${t.batchSlug}&redirect=${encodeURIComponent(redirectTo)}`;
@@ -87,7 +87,7 @@ export async function SampleGalleryPreview() {
             <Link
               key={t.slug}
               href={href}
-              className="group relative flex flex-col gap-5 rounded-2xl border border-[#E5E7EB] bg-white p-6 transition-all hover:-translate-y-0.5 hover:border-[#6C3CF4]/40 hover:shadow-[0_18px_40px_-24px_rgba(108,60,244,0.35)]"
+              className="group relative flex w-full max-w-[360px] flex-col gap-5 rounded-2xl border border-[#E5E7EB] bg-white p-6 transition-all hover:-translate-y-0.5 hover:border-[#6C3CF4]/40 hover:shadow-[0_18px_40px_-24px_rgba(108,60,244,0.35)]"
             >
               <div className="flex items-start justify-between gap-3">
                 <p className="font-mono text-xs text-[#78818f]">tbrain-{t.slug}</p>

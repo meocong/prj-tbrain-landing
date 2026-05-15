@@ -22,6 +22,13 @@ type PostDetail = {
   content: string;
   slug: string;
   date: string;
+  excerpt?: string;
+  featuredImage?: {
+    node: {
+      sourceUrl: string;
+      altText: string;
+    };
+  } | null;
   categories: { edges: { node: { name: string; slug: string } }[] };
 };
 
