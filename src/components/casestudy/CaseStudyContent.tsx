@@ -4,54 +4,31 @@ import React from 'react';
 import { ArrowRight } from 'lucide-react';
 import Image from "next/image";
 import Link from "next/link";
-import datalabeling from "@/assets/images/labeling.svg";
-const caseStudies = [
-  {
-    id: 1,
-    path: '/casestudy/details/agent',
-    title: 'Evaluation and Benchmarks for Agents',
-    excerpt: 'A global enterprise engaged Tbrain to stand up 6 domain-specific Q&A agents and a practical evaluation framework. We delivered production-grade agents grounded in authentic, approved knowledge in just 1 month from kickoff to handoff.',
-    image: 'https://qdrant.tech/img/ai-agent.svg',
-    featured: true
-  },
-  {
-    id: 2,
-    
-    title: "High-Accuracy CAD Annotation",
-    excerpt: "Revolutionizing manufacturing processes with AI-powered analytics and predictive modeling. Smart resource allocation and quality control systems that reduce costs and improve efficiency.",
-    path: "/casestudy/details/manufacturing",
-    featuredImage: {
-      node: {
-        sourceUrl: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&h=500&fit=crop",
-        altText: "Manufacturing Intelligence"
-      }
-    },
-    category: "Manufacturing AI"
-  },
-  {
-    id: 3,
-    path: '/casestudy/details/scalable',
-    title: 'Scalable Multimodal AI System',
-    excerpt: 'Scaled from zero to 48,000 high-quality multimodal annotations in just 4 months. Our team delivered consistent, production-ready labeled data across text, image, and audio modalities, enabling rapid model training and deployment.',
-        image: datalabeling.src,
+import type { CaseStudy } from "@/lib/landing/case-studies";
 
-    category: 'Enterprise AI'
-  }
-];
+export function CaseStudyContent({ studies }: { studies: CaseStudy[] }) {
+  const [filteredStudies, setFilteredStudies] = React.useState(studies);
 
-export function CaseStudyContent() {
-  const [filteredStudies, setFilteredStudies] = React.useState(caseStudies);
+  React.useEffect(() => {
+    setFilteredStudies(studies);
+  }, [studies]);
 
   const handleSearch = (query: string) => {
-    const filtered = caseStudies.filter(study =>
+    const normalized = query.trim().toLowerCase();
+    if (!normalized) {
+      setFilteredStudies(studies);
+      return;
+    }
+    const filtered = studies.filter(study =>
       study.title.toLowerCase().includes(query.toLowerCase()) ||
-      study.excerpt.toLowerCase().includes(query.toLowerCase())
+      study.shortDescription.toLowerCase().includes(query.toLowerCase()) ||
+      study.description.toLowerCase().includes(query.toLowerCase())
     );
     setFilteredStudies(filtered);
   };
 
-  const featuredStudy = caseStudies.find(s => s.featured);
-  const regularStudies = filteredStudies.filter(s => !s.featured);
+  const featuredStudy = filteredStudies[0];
+  const regularStudies = filteredStudies.slice(1);
 
   return (
     <>
@@ -62,7 +39,7 @@ export function CaseStudyContent() {
             <Image
               fill
               className="object-cover transition-transform duration-300 group-hover:scale-105"
-              src={featuredStudy.image ?? ""}
+              src={featuredStudy.image}
               alt={featuredStudy.title}
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             />
@@ -70,22 +47,22 @@ export function CaseStudyContent() {
               Featured
             </div>
             <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm text-[#6c3cf4] px-3 py-1 rounded-full text-xs font-medium">
-              {featuredStudy.category}
+              {featuredStudy.shortDescription}
             </div>
           </div>
           <div className="flex-1 flex flex-col justify-between">
             <div>
-              <Link href={featuredStudy.path}>
+              <Link href={`/casestudy/${featuredStudy.slug}`}>
                 <h2 className="text-[#0e1b2e] text-2xl md:text-3xl font-semibold leading-tight mb-4 hover:text-[#6c3cf4] transition-colors">
                   {featuredStudy.title}
                 </h2>
               </Link>
               <p className="text-[#78818f] text-base font-normal leading-relaxed mb-6">
-                {featuredStudy.excerpt}
+                {featuredStudy.description}
               </p>
             </div>
             <Link
-              href='/casestudy/details/agent'
+              href={`/casestudy/${featuredStudy.slug}`}
               className="inline-flex items-center gap-2 text-[#6c3cf4] text-base font-semibold hover:gap-3 transition-all group"
             >
               View more details
@@ -117,25 +94,25 @@ export function CaseStudyContent() {
                 <Image
                   fill
                   className="object-cover transition-transform duration-300 group-hover:scale-105"
-                  src={study.image ?? study.featuredImage?.node.sourceUrl ?? ""}
+                  src={study.image}
                   alt={study.title}
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 />
                 <div className="absolute top-3 right-3 bg-white/90 backdrop-blur-sm text-[#6c3cf4] px-3 py-1 rounded-full text-xs font-medium">
-                  {study.category}
+                  {study.shortDescription}
                 </div>
               </div>
               <div className="p-6 flex flex-col flex-grow">
-                <Link href={study.path}>
+                <Link href={`/casestudy/${study.slug}`}>
                   <h3 className="text-[#0e1b2e] text-xl font-semibold leading-tight mb-3 hover:text-[#6c3cf4] transition-colors">
                     {study.title}
                   </h3>
                 </Link>
                 <p className="text-[#78818f] text-sm font-normal leading-relaxed mb-4 line-clamp-3 flex-grow">
-                  {study.excerpt}
+                  {study.description}
                 </p>
                 <Link
-                  href={study.path}
+                  href={`/casestudy/${study.slug}`}
                   className="inline-flex items-center gap-2 text-[#6c3cf4] text-sm font-semibold hover:gap-3 transition-all group mt-auto"
                 >
                   Learn More

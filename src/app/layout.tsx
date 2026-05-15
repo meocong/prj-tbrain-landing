@@ -1,38 +1,139 @@
-"use client";
-import { Inter } from "next/font/google";
-import "./globals.css";
-import { Suspense, useEffect } from "react";
-import Aos from "aos";
+import type { Metadata } from "next";
+import { DM_Sans, Space_Grotesk, JetBrains_Mono } from "next/font/google";
+import { Suspense } from "react";
+import { Providers } from "@/components/providers";
 import Analytics from "@/components/analytics/Analytics";
-import Script from "next/script";
-const inter = Inter({ subsets: ["latin"] });
+import { UtmCapture } from "@/components/analytics/UtmCapture";
+import ChatWidget from "@/components/chat/ChatWidgetLoader";
+import "./globals.css";
+
+const dmSans = DM_Sans({
+  subsets: ["latin"],
+  variable: "--font-body",
+  display: "swap",
+});
+
+const spaceGrotesk = Space_Grotesk({
+  subsets: ["latin"],
+  variable: "--font-heading",
+  display: "swap",
+});
+
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  variable: "--font-mono",
+  display: "swap",
+});
+
+const DEFAULT_OG_IMAGE = {
+  url: "/images/hero-poster.jpg",
+  width: 1920,
+  height: 1080,
+  alt: "Tbrain — AI Training Data & Evaluation",
+};
+
+export const metadata: Metadata = {
+  title: {
+    default: "Tbrain — AI Training Data & Evaluation",
+    template: "%s | Tbrain",
+  },
+  description:
+    "High-quality AI training data, RLHF, and evaluation services. Production-grade datasets for building better AI models.",
+  metadataBase: new URL(
+    process.env.PUBLIC_BASE_URL || "https://tbrain.ai"
+  ),
+  alternates: { canonical: "/" },
+  icons: {
+    icon: "/favicon.ico",
+    shortcut: "/favicon.ico",
+  },
+  manifest: "/manifest.webmanifest",
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    siteName: "Tbrain",
+    url: "/",
+    title: "Tbrain — AI Training Data & Evaluation",
+    description:
+      "High-quality AI training data, RLHF, and evaluation services. Production-grade datasets for building better AI models.",
+    images: [DEFAULT_OG_IMAGE],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Tbrain — AI Training Data & Evaluation",
+    description:
+      "High-quality AI training data, RLHF, and evaluation services. Production-grade datasets for building better AI models.",
+    images: [DEFAULT_OG_IMAGE.url],
+  },
+};
+
+const ORGANIZATION_JSONLD = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "Tbrain",
+  url: process.env.PUBLIC_BASE_URL || "https://tbrain.ai",
+  logo: `${process.env.PUBLIC_BASE_URL || "https://tbrain.ai"}/favicon.ico`,
+  sameAs: [
+    "https://www.linkedin.com/company/tbrain-ai",
+  ],
+  contactPoint: [
+    {
+      "@type": "ContactPoint",
+      contactType: "sales",
+      email: "info@tbrain.ai",
+      areaServed: "Worldwide",
+      availableLanguage: ["en"],
+    },
+  ],
+};
+
+const WEBSITE_JSONLD = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "Tbrain",
+  url: process.env.PUBLIC_BASE_URL || "https://tbrain.ai",
+};
+
+const THEME_INIT = `
+(function(){try{
+  var key='tbrain-theme';
+  var t=localStorage.getItem(key);
+  var dark = t==='dark' || (t==null && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
+  document.documentElement.classList.toggle('dark', dark);
+  document.documentElement.style.colorScheme = dark ? 'dark' : 'light';
+}catch(e){}})();
+`;
 
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  useEffect(() => {
-    Aos.init({
-      duration: 1000,
-      offset: 0,
-    });
-  }, []);
-
   return (
-    <html suppressHydrationWarning={true} lang="en">
-      <body className={inter.className}>
-        <Suspense fallback={<div></div>}>
-          <Analytics />
-          <Script
-            src="https://tbrain.arcanic.ai/embed.js"
-            data-chat-service="TbrainAI"
-            data-url="https://tbrain.arcanic.ai/"
-            data-chat-width="450px"
-            data-chat-height="600px"
-          />
-        </Suspense>
-        {children}
+    <html
+      suppressHydrationWarning
+      lang="en"
+      data-scroll-behavior="smooth"
+      className={`${dmSans.variable} ${spaceGrotesk.variable} ${jetbrainsMono.variable}`}
+    >
+      <body>
+        <script dangerouslySetInnerHTML={{ __html: THEME_INIT }} />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(ORGANIZATION_JSONLD) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(WEBSITE_JSONLD) }}
+        />
+        <Providers>
+          <Suspense fallback={null}>
+            <Analytics />
+          </Suspense>
+          <UtmCapture />
+          {children}
+          <ChatWidget />
+        </Providers>
       </body>
     </html>
   );

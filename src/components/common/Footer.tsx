@@ -1,133 +1,184 @@
-'use client'
-import React from "react";
+"use client";
+
+import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import iconLinkedin from "@/assets/icons/LinkedinLogo.svg";
 import Logo from "@/assets/images/logo.svg";
+import { toast } from "sonner";
+import { Send } from "lucide-react";
+import { readUtm } from "@/lib/utm";
+
+function NewsletterForm() {
+  const [email, setEmail] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [done, setDone] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!email) return;
+    setLoading(true);
+    try {
+      const res = await fetch("/api/newsletter", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, ...readUtm() }),
+      });
+      if (res.ok) {
+        setDone(true);
+        toast.success("Subscribed!");
+      } else {
+        toast.error("Failed to subscribe");
+      }
+    } catch {
+      toast.error("Network error");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  if (done) {
+    return <p className="text-sm font-medium" style={{ color: "var(--footer-accent)" }}>Thanks for subscribing!</p>;
+  }
+
+  return (
+    <form onSubmit={handleSubmit} className="flex gap-2">
+      <input
+        type="email"
+        required
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        placeholder="your@email.com"
+        className="rounded-lg px-3 py-2 text-sm outline-none transition-colors"
+        style={{
+          minWidth: "200px",
+          background: "var(--footer-input-bg)",
+          border: "1px solid var(--footer-border)",
+          color: "var(--footer-text)",
+        }}
+      />
+      <button
+        type="submit"
+        disabled={loading}
+        className="inline-flex items-center gap-1.5 rounded-lg px-4 py-2 text-sm font-medium text-white transition-opacity"
+        style={{
+          background: "linear-gradient(135deg, #6C3CF4, #8B5CF6)",
+          boxShadow: "0 8px 24px -6px rgba(108,60,244,0.45)",
+          opacity: loading ? 0.7 : 1,
+        }}
+      >
+        <Send className="h-3.5 w-3.5" />
+        {loading ? "..." : "Subscribe"}
+      </button>
+    </form>
+  );
+}
+
+const FOOTER_LINKS = [
+  { label: "About", href: "/about" },
+  { label: "Platform", href: "/platform" },
+  { label: "Case Studies", href: "/casestudy" },
+  { label: "Contact", href: "/contact" },
+  { label: "Privacy Policy", href: "/policy" },
+];
 
 const Footer = () => {
   return (
-    <footer className="relative mt-16 overflow-hidden bg-white">
-      {/* Subtle gradient background - very light */}
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-purple-50/30 to-blue-50/30"></div>
+    <footer
+      className="relative overflow-hidden"
+      style={{
+        background: "var(--footer-bg)",
+        color: "var(--footer-text)",
+        borderTop: "1px solid var(--footer-border)",
+      }}
+    >
+      {/* Ambient glow */}
+      <div
+        aria-hidden
+        className="absolute -top-40 left-1/2 -translate-x-1/2 h-[400px] w-[800px] rounded-full pointer-events-none"
+        style={{
+          background: "var(--footer-glow)",
+          filter: "blur(60px)",
+        }}
+      />
 
-      {/* Decorative Grid Pattern - very subtle */}
-      <div className="absolute inset-0 opacity-[0.02]">
-        <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <pattern id="footer-grid" width="40" height="40" patternUnits="userSpaceOnUse">
-              <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#6C3CF4" strokeWidth="0.5" />
-            </pattern>
-          </defs>
-          <rect width="100%" height="100%" fill="url(#footer-grid)" />
-        </svg>
-      </div>
-
-      {/* Decorative elements - matching page style */}
-      <div className="absolute left-[10%] top-4 opacity-20">
-        <div className="text-[#6C3CF4] text-2xl">✦</div>
-      </div>
-      <div className="absolute right-[15%] top-6 opacity-20">
-        <div className="text-[#6C3CF4] text-xl">+</div>
-      </div>
-
-      {/* Main Content - Compact */}
-      <div className="relative z-10 mx-auto w-full max-w-7xl px-6 py-8">
-        
-        {/* Top border accent */}
-        <div className="w-full h-[1px] bg-gradient-to-r from-transparent via-purple-200 to-transparent mb-6"></div>
-
-        {/* Logo Section - Smaller */}
-        <div className="flex justify-center mb-5">
-          <Link href="/" className="group">
-            <div className="bg-white rounded-xl p-3 shadow-sm group-hover:shadow-md transition-all duration-300 border border-gray-100">
-              <Image 
-                src={Logo} 
-                width={110} 
-                height={36} 
-                alt="Tbrain Logo"
-                priority
-                className="object-contain"
+      <div className="relative z-10 mx-auto w-full max-w-7xl px-6 py-14">
+        <div className="grid grid-cols-1 gap-10 md:grid-cols-3">
+          <div>
+            <Link href="/" className="inline-block">
+              <Image
+                src={Logo}
+                width={110}
+                height={36}
+                alt="Tbrain"
+                className="theme-logo object-contain"
               />
+            </Link>
+            <p className="mt-4 text-sm leading-relaxed" style={{ color: "var(--footer-muted)" }}>
+              The data factory for robotics, agents, and post-training.
+              Ground-truth data, purpose-built for frontier AI.
+            </p>
+          </div>
+
+          <div>
+            <h4 className="text-xs font-semibold uppercase tracking-widest" style={{ color: "var(--footer-subtle)" }}>
+              Quick links
+            </h4>
+            <div className="mt-4 grid grid-cols-2 gap-y-2.5">
+              {FOOTER_LINKS.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className="text-sm transition-colors hover:text-[#6C3CF4]"
+                  style={{ color: "var(--footer-link)" }}
+                >
+                  {link.label}
+                </Link>
+              ))}
             </div>
-          </Link>
-        </div>
+          </div>
 
-        {/* Navigation Links - Larger Text, Single Row */}
-        <div className="flex flex-wrap justify-center items-center gap-x-8 gap-y-2 mb-6">
-          <Link
-            href="/#about"
-            className="text-base font-semibold text-[#78818f] hover:text-[#6C3CF4] transition-colors duration-200"
-          >
-            About Us
-          </Link>
-          <Link
-            href="/policy"
-            className="text-base font-semibold text-[#78818f] hover:text-[#6C3CF4] transition-colors duration-200"
-          >
-            Privacy Policy
-          </Link>
-          <Link
-            href="/#skills"
-            className="text-base font-semibold text-[#78818f] hover:text-[#6C3CF4] transition-colors duration-200"
-          >
-            Technical Expertise
-          </Link>
-          <Link
-            href="/#contact"
-            className="text-base font-semibold text-[#78818f] hover:text-[#6C3CF4] transition-colors duration-200"
-          >
-            Contact
-          </Link>
-        </div>
-
-        {/* Divider - Thinner */}
-        <div className="w-full max-w-3xl mx-auto h-[1px] bg-gray-200 mb-5"></div>
-
-        {/* Bottom Section - Compact & Inline */}
-        <div className="flex flex-col md:flex-row items-center justify-center gap-6 md:gap-8">
-          
-          {/* Social Link - Inline */}
-          <a
-            href="https://www.linkedin.com/company/tbrain-ai"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-2 px-5 py-2 bg-white hover:bg-gray-50 rounded-full transition-all duration-300 border border-gray-200 hover:border-[#6C3CF4] hover:shadow-md group"
-            aria-label="Follow us on LinkedIn"
-          >
-            <Image src={iconLinkedin} width={22} height={22} alt="linkedin" />
-            <span className="text-[15px] font-semibold text-[#0e1b2e] group-hover:text-[#6C3CF4] transition-colors">
-              Follow on LinkedIn
-            </span>
-          </a>
-
-          {/* Divider vertical on desktop */}
-          <div className="hidden md:block w-[1px] h-8 bg-gray-200"></div>
-
-          {/* Address - Inline */}
-          <div className="flex items-center gap-2 text-[15px] font-medium text-[#78818f]">
-            <svg className="w-5 h-5 text-[#6C3CF4]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-            </svg>
-            <span>Sheridan, WY, USA • Hanoi, Vietnam</span>
+          <div>
+            <h4 className="text-xs font-semibold uppercase tracking-widest" style={{ color: "var(--footer-subtle)" }}>
+              Stay updated
+            </h4>
+            <p className="mt-4 text-sm" style={{ color: "var(--footer-muted)" }}>
+              The latest on AI training data and evaluation.
+            </p>
+            <div className="mt-3">
+              <NewsletterForm />
+            </div>
           </div>
         </div>
 
-        {/* Copyright - Bottom */}
-        <div className="text-center mt-6 pt-5 border-t border-gray-100">
-          <p className="text-base font-semibold text-[#0e1b2e]">
-            © Tbrain 2026 • <span className="text-[#6C3CF4]">Human-in-the-Loop AI Validation</span>
-          </p>
-          <p className="text-sm text-[#78818f] mt-1">
-            Empowering Smarter AI with High-Quality Data
+        <div className="mt-10 h-px w-full" style={{ background: "var(--footer-border)" }} />
+
+        <div className="mt-6 flex flex-col items-start justify-between gap-4 md:flex-row md:items-center">
+          <div className="flex items-center gap-4 flex-wrap">
+            <a
+              href="https://www.linkedin.com/company/tbrain-ai"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 rounded-full px-3.5 py-1.5 text-xs font-medium transition-colors"
+              style={{
+                background: "var(--footer-chip-bg)",
+                border: "1px solid var(--footer-border)",
+                color: "var(--footer-link)",
+              }}
+            >
+              <Image src={iconLinkedin} width={16} height={16} alt="LinkedIn" className="theme-logo opacity-80" />
+              LinkedIn
+            </a>
+            <span className="text-xs" style={{ color: "var(--footer-muted)" }}>
+              Florida & Hanoi
+            </span>
+          </div>
+          <p className="text-xs" style={{ color: "var(--footer-muted)" }}>
+            &copy; Tbrain {new Date().getFullYear()} &bull;{" "}
+            <span style={{ color: "var(--footer-accent)" }}>Human-in-the-Loop AI Validation</span>
           </p>
         </div>
-
       </div>
-
-      {/* Bottom subtle accent */}
-      <div className="w-full h-[2px] bg-gradient-to-r from-transparent via-[#6C3CF4]/20 to-transparent"></div>
     </footer>
   );
 };

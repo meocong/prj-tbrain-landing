@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Turnstile } from "@marsidev/react-turnstile";
+import { readUtm } from "@/lib/utm";
 
 const TEAM_SIZES = ["1-10", "11-50", "51-200", "200+"];
 const TARGET_USES = [
@@ -25,6 +26,7 @@ export function RequestAccessForm({ siteKey }: { siteKey: string | null }) {
   const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
+  const isLocalDev = process.env.NODE_ENV !== "production";
 
   function toggleTarget(id: string) {
     setTargetUse((prev) =>
@@ -49,7 +51,8 @@ export function RequestAccessForm({ siteKey }: { siteKey: string | null }) {
           useCase,
           targetUse,
           batchSlug: "april-2026",
-          turnstileToken,
+          turnstileToken: isLocalDev ? "dev-bypass" : turnstileToken,
+          ...readUtm(),
         }),
       });
       if (!res.ok) {
@@ -150,7 +153,7 @@ export function RequestAccessForm({ siteKey }: { siteKey: string | null }) {
         />
       </Field>
 
-      {siteKey ? (
+      {siteKey && !isLocalDev ? (
         <div className="flex justify-center">
           <Turnstile
             siteKey={siteKey}
@@ -169,7 +172,7 @@ export function RequestAccessForm({ siteKey }: { siteKey: string | null }) {
 
       <button
         type="submit"
-        disabled={submitting || (siteKey !== null && !turnstileToken)}
+        disabled={submitting || (!isLocalDev && siteKey !== null && !turnstileToken)}
         className="w-full rounded-xl bg-[#6C3CF4] px-6 py-3.5 text-sm font-semibold text-white transition-all hover:bg-[#5a2fd3] disabled:opacity-60"
       >
         {submitting ? "Sending…" : "Submit request →"}

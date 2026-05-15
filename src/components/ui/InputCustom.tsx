@@ -18,7 +18,7 @@ const InputCustom = ({ label, type, placeholder, name, value, onChange }: InputC
                 className="outline-none border-none w-full text-lg leading-[1.5rem] caret-[#682EC3]"
                 placeholder={placeholder}
             />
-            <div className="absolute -top-3.5 px-2 text-black font-medium text-base left-[3%] z-1 max-w-max h-8 bg-white">
+            <div className="absolute -top-3.5 px-2 text-black font-medium text-base left-[3%] z-10 max-w-max h-8 bg-white">
                 {label} <span className=" text-red-600">*</span>
             </div>
         </div>

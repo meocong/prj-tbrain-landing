@@ -2,6 +2,7 @@ import Link from "next/link";
 
 export const metadata = {
   title: "Too many attempts · Terminal Bench",
+  robots: { index: false, follow: false },
 };
 
 export default function BlockedPage() {

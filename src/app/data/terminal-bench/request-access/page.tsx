@@ -2,6 +2,9 @@ import { RequestAccessForm } from "@/components/terminal-bench/auth/RequestAcces
 
 export const metadata = {
   title: "Request access — Terminal Bench",
+  description: "Request access to Terminal Bench sample tasks, benchmark data, and downloadable evaluation artifacts.",
+  alternates: { canonical: "/data/terminal-bench/request-access" },
+  robots: { index: false, follow: true },
 };
 
 export default function RequestAccessPage() {
