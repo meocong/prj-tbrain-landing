@@ -170,7 +170,7 @@ const Footer = () => {
               LinkedIn
             </a>
             <span className="text-xs" style={{ color: "var(--footer-muted)" }}>
-              Wilmington, DE
+              Florida & Hanoi
             </span>
           </div>
           <p className="text-xs" style={{ color: "var(--footer-muted)" }}>

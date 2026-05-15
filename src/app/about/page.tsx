@@ -480,7 +480,7 @@ export default async function AboutPage() {
             <div className="relative aspect-[3/4] md:aspect-auto md:min-h-[440px]">
               <Image
                 src="/images/office.png"
-                alt="Tbrain office in Wilmington, DE"
+                alt="Tbrain office in Hanoi"
                 fill
                 sizes="(max-width: 768px) 100vw, 45vw"
                 className="object-cover"
@@ -494,11 +494,11 @@ export default async function AboutPage() {
                 className="mt-3 text-3xl font-semibold md:text-4xl"
                 style={{ fontFamily: "var(--font-heading)", color: "var(--text-primary)" }}
               >
-                Built in <span className="gradient-text">Wilmington, DE</span>, shipping for frontier AI
+                Built in <span className="gradient-text">Florida & Hanoi</span>, shipping for frontier AI
               </h3>
               <p className="mt-5 text-base leading-relaxed" style={{ color: "var(--text-secondary)" }}>
                 Engineers, expert ops, and program managers work side by side from
-                our Wilmington headquarters. Daily standups, shared review queues, and
+                our Hanoi office. Daily standups, shared review queues, and
                 domain pods keep delivery tight across timezones.
               </p>
               <dl className="mt-8 grid grid-cols-3 gap-4">
@@ -507,7 +507,7 @@ export default async function AboutPage() {
                     HQ
                   </dt>
                   <dd className="mt-1 text-sm font-medium" style={{ color: "var(--text-primary)" }}>
-                    Wilmington, DE
+                    Florida & Hanoi
                   </dd>
                 </div>
                 <div>
