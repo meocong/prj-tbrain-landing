@@ -2,6 +2,7 @@ import { NextResponse, type NextRequest } from "next/server";
 import { verifyApproveToken } from "@/lib/terminal-bench/auth";
 import { supabaseAdmin } from "@/lib/terminal-bench/supabase/admin";
 import { sendEmail } from "@/lib/terminal-bench/email";
+import { getAdminReplyTo } from "@/lib/admin/email-recipients";
 import { ClientRejection } from "@/emails/ClientRejection";
 import React from "react";
 
@@ -46,14 +47,12 @@ export async function GET(req: NextRequest) {
     })
     .eq("id", requestId);
 
-  // Rejection email is optional — only send when ADMIN_EMAIL is configured so
-  // replies land in Tâm's inbox.
   try {
     await sendEmail({
       to: reqRow.email,
       subject: "Re: your Terminal Bench access request",
       template: React.createElement(ClientRejection, { fullName: reqRow.full_name ?? "there" }),
-      replyTo: process.env.ADMIN_EMAIL ?? undefined,
+      replyTo: getAdminReplyTo(),
     });
   } catch (err) {
     console.error("[terminal-bench] rejection email failed:", err);
