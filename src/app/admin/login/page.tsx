@@ -23,10 +23,24 @@ export default function AdminLoginPage() {
   const [ssoLoading, setSsoLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  // Check for callback error
+  // Check for callback / auth-context error
   useEffect(() => {
     const err = searchParams.get("error");
-    if (err) setError("Authentication failed. Please try again.");
+    if (!err) return;
+    const blockedEmail = searchParams.get("email");
+    if (err === "not_admin") {
+      setError(
+        blockedEmail
+          ? `${blockedEmail} is not authorized for admin access. Ask an existing super admin to add you, or sign in with a different account.`
+          : "Your account is not authorized for admin access."
+      );
+    } else if (err === "auth_callback_failed") {
+      setError(
+        "Sign-in could not be completed. The auth provider rejected the request — check that the email exists, third-party cookies are allowed, then try again."
+      );
+    } else {
+      setError(`Authentication failed (${err}). Please try again.`);
+    }
   }, [searchParams]);
 
   const handleEmailLogin = async (e: React.FormEvent) => {
