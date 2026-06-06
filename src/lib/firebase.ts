@@ -7,6 +7,7 @@ const appId = process.env.NEXT_PUBLIC_FIREBASE_APP_ID;
 
 let app: FirebaseApp | undefined;
 let analytics: Analytics | undefined;
+let analyticsPromise: Promise<Analytics | undefined> | null = null;
 
 if (projectId && apiKey && appId) {
   const firebaseConfig = {
@@ -20,12 +21,28 @@ if (projectId && apiKey && appId) {
   };
 
   app = getApps().length ? getApps()[0] : initializeApp(firebaseConfig);
+}
 
-  if (typeof window !== "undefined") {
-    isSupported().then((supported) => {
+/**
+ * Initialise Firebase Analytics on demand. MUST only be called after the user
+ * has granted cookie consent — getAnalytics() sets Google Analytics cookies
+ * (_ga, _ga_*) and uses Firebase installation identifiers. Idempotent.
+ */
+export async function enableAnalytics(): Promise<Analytics | undefined> {
+  if (analytics) return analytics;
+  if (!app || typeof window === "undefined") return undefined;
+  if (!analyticsPromise) {
+    analyticsPromise = isSupported().then((supported) => {
       if (supported && app) analytics = getAnalytics(app);
+      return analytics;
     });
   }
+  return analyticsPromise;
+}
+
+/** Already-initialised analytics instance, if any. */
+export function getAnalyticsInstance(): Analytics | undefined {
+  return analytics;
 }
 
 export { app, analytics };

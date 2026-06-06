@@ -6,7 +6,7 @@ import Header from "@/components/common/Header";
 export const metadata: Metadata = {
   title: "Privacy Policy",
   description:
-    "How Tbrain collects, uses, and protects personal information for our AI training data services. Last updated November 2024.",
+    "How Tbrain collects, uses, and protects personal information for our AI training data services. Last updated June 2026.",
   alternates: { canonical: "/policy" },
   robots: { index: true, follow: false },
 };
@@ -32,7 +32,7 @@ export default async function Page() {
           >
             Privacy Policy for Tbrain LLC
           </h1>
-          <p className="italic mt-4 mb-8" style={{ color: "var(--text-muted)" }}>Last Updated: Nov 4, 2024</p>
+          <p className="italic mt-4 mb-8" style={{ color: "var(--text-muted)" }}>Last Updated: Jun 5, 2026</p>
           <div className="mb-5">
             Tbrain LLC (&quot;Tbrain,&quot; &quot;we,&quot; &quot;our,&quot; or
             &quot;us&quot;) is committed to safeguarding your privacy. This
@@ -156,9 +156,28 @@ export default async function Page() {
             9. Cookies and Tracking Technologies
           </div>
           <div className="mb-5">
-            Our Services use cookies and similar technologies to enhance user
-            experience and analyze usage. You can manage your cookie preferences
-            through your browser settings.
+            We use two categories of cookies and similar technologies:
+          </div>
+          <ul className="mb-5 list-disc pl-10">
+            <li>
+              <span className="font-semibold">Strictly necessary</span>: required
+              to operate the site, such as authentication/session cookies for
+              logged-in areas and anti-bot protection (Cloudflare Turnstile).
+              These are always active and do not require consent.
+            </li>
+            <li>
+              <span className="font-semibold">Analytics (optional)</span>: with
+              your consent, we use Google Analytics for Firebase to understand
+              how the site is used (for example, pages viewed). These cookies are
+              only set after you click &quot;Accept&quot; on our cookie banner.
+            </li>
+          </ul>
+          <div className="mb-5">
+            When you first visit, a banner lets you accept or reject non-essential
+            cookies. If you reject, no analytics cookies are set. You can also
+            clear cookies and site data through your browser settings at any time,
+            which will cause the banner to appear again so you can change your
+            choice.
           </div>
           <div className="mb-5 font-semibold">
             10. International Data Transfers
