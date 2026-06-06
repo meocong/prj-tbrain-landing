@@ -5,6 +5,7 @@ import { Providers } from "@/components/providers";
 import Analytics from "@/components/analytics/Analytics";
 import { UtmCapture } from "@/components/analytics/UtmCapture";
 import ChatWidget from "@/components/chat/ChatWidgetLoader";
+import CookieConsent from "@/components/common/CookieConsent";
 import "./globals.css";
 
 const dmSans = DM_Sans({
@@ -133,6 +134,7 @@ export default function RootLayout({
           <UtmCapture />
           {children}
           <ChatWidget />
+          <CookieConsent />
         </Providers>
       </body>
     </html>
