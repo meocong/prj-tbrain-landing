@@ -8,6 +8,7 @@ import Logo from "@/assets/images/logo.svg";
 import { toast } from "sonner";
 import { Send } from "lucide-react";
 import { readUtm } from "@/lib/utm";
+import { openConsentBanner } from "@/lib/consent";
 
 function NewsletterForm() {
   const [email, setEmail] = useState("");
@@ -135,6 +136,14 @@ const Footer = () => {
                   {link.label}
                 </Link>
               ))}
+              <button
+                type="button"
+                onClick={openConsentBanner}
+                className="text-left text-sm transition-colors hover:text-[#6C3CF4]"
+                style={{ color: "var(--footer-link)" }}
+              >
+                Cookie settings
+              </button>
             </div>
           </div>
 
