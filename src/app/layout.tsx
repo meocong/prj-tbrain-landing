@@ -3,6 +3,7 @@ import { DM_Sans, Space_Grotesk, JetBrains_Mono } from "next/font/google";
 import { Suspense } from "react";
 import { Providers } from "@/components/providers";
 import Analytics from "@/components/analytics/Analytics";
+import Ga4 from "@/components/analytics/Ga4";
 import { UtmCapture } from "@/components/analytics/UtmCapture";
 import ChatWidget from "@/components/chat/ChatWidgetLoader";
 import CookieConsent from "@/components/common/CookieConsent";
@@ -130,6 +131,7 @@ export default function RootLayout({
         <Providers>
           <Suspense fallback={null}>
             <Analytics />
+            <Ga4 />
           </Suspense>
           <UtmCapture />
           {children}
