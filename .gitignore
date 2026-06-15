@@ -44,3 +44,6 @@ docs/website_revisions.docx
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Vercel token (local only)
+.env.vercel
