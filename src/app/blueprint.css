@@ -1,0 +1,143 @@
+/* ════════════════════════════════════════════════════════════════════
+   BLUEPRINT THEME — "The Robotics Data Foundry"
+   Living-engineering-blueprint visual language for the Physical AI
+   homepage + /data/physical-ai. Dark navy "drafting table" + cyan
+   technical line-art + purple brand accent. Self-contained (does not
+   depend on the light/dark theme tokens) so a sheet renders the same
+   regardless of the user's theme.
+   ════════════════════════════════════════════════════════════════════ */
+
+:root {
+  /* Surfaces */
+  --bp-bg: #0B0A1F;          /* deep indigo-navy drafting table */
+  --bp-bg-2: #0E0A28;        /* deck navy */
+  --bp-panel: #14122E;       /* raised panel / title block */
+  --bp-panel-2: #1A1740;     /* hover / inner panel */
+
+  /* Grid + lines */
+  --bp-grid: 26px;           /* fine grid pitch */
+  --bp-line: rgba(0, 229, 199, 0.10);
+  --bp-line-strong: rgba(0, 229, 199, 0.22);
+  --bp-edge: rgba(123, 167, 255, 0.16);
+
+  /* Accents */
+  --bp-cyan: #00E5C7;        /* forge / blueprint ink */
+  --bp-cyan-soft: #5EEAD4;
+  --bp-purple: #8B6CF6;
+  --bp-brand: #6C3CF4;
+  --bp-amber: #F5A623;       /* QC reject / warning */
+  --bp-red: #FF5C7A;
+
+  /* Ink (text on navy) */
+  --bp-ink: #E8F0FF;
+  --bp-ink-dim: rgba(232, 240, 255, 0.64);
+  --bp-ink-faint: rgba(232, 240, 255, 0.40);
+
+  /* Glows */
+  --bp-glow-cyan: 0 0 24px rgba(0, 229, 199, 0.28);
+  --bp-glow-purple: 0 0 28px rgba(108, 60, 244, 0.30);
+  --bp-forge: linear-gradient(135deg, #6C3CF4 0%, #00E5C7 100%);
+}
+
+/* ── Graph-paper background ───────────────────────────────────────── */
+.bp-grid {
+  background-color: var(--bp-bg);
+  background-image:
+    linear-gradient(var(--bp-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--bp-line) 1px, transparent 1px),
+    linear-gradient(var(--bp-line-strong) 1px, transparent 1px),
+    linear-gradient(90deg, var(--bp-line-strong) 1px, transparent 1px);
+  background-size:
+    var(--bp-grid) var(--bp-grid),
+    var(--bp-grid) var(--bp-grid),
+    calc(var(--bp-grid) * 5) calc(var(--bp-grid) * 5),
+    calc(var(--bp-grid) * 5) calc(var(--bp-grid) * 5);
+}
+.bp-grid-fade {
+  -webkit-mask-image: radial-gradient(ellipse 100% 80% at 50% 30%, #000 35%, transparent 80%);
+  mask-image: radial-gradient(ellipse 100% 80% at 50% 30%, #000 35%, transparent 80%);
+}
+
+/* ── Mono technical label ─────────────────────────────────────────── */
+.bp-mono {
+  font-family: var(--font-mono, "JetBrains Mono", monospace);
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+}
+.bp-fig {
+  font-family: var(--font-mono, monospace);
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  font-size: 11px;
+  color: var(--bp-cyan);
+}
+
+/* ── Corner registration ticks (drawing frame) ───────────────────── */
+.bp-frame { position: relative; }
+.bp-frame::before,
+.bp-frame::after {
+  content: "";
+  position: absolute;
+  width: 14px; height: 14px;
+  border-color: var(--bp-line-strong);
+  border-style: solid;
+  pointer-events: none;
+}
+.bp-frame::before { top: 10px; left: 10px; border-width: 1px 0 0 1px; }
+.bp-frame::after  { bottom: 10px; right: 10px; border-width: 0 1px 1px 0; }
+
+/* ── Bill-of-materials status chips ──────────────────────────────── */
+.bp-status { font-family: var(--font-mono, monospace); font-size: 10px; letter-spacing: 0.12em; }
+.bp-status-stby { color: var(--bp-ink-faint); }
+.bp-status-mov  { color: var(--bp-cyan); }
+.bp-status-sep  { color: var(--bp-amber); }
+
+/* ════════════════════════════════════════════════════════════════════
+   Keyframes
+   ════════════════════════════════════════════════════════════════════ */
+@keyframes bpDrawLine {              /* SVG self-drawing line-art */
+  from { stroke-dashoffset: var(--bp-dash, 1000); }
+  to   { stroke-dashoffset: 0; }
+}
+@keyframes bpScan {                  /* stereo scan sweep */
+  0%   { transform: translateY(-100%); opacity: 0; }
+  10%  { opacity: 1; }
+  90%  { opacity: 1; }
+  100% { transform: translateY(100%); opacity: 0; }
+}
+@keyframes bpNodePulse {             /* pipeline node energize */
+  0%, 100% { opacity: 0.35; }
+  50%      { opacity: 1; box-shadow: var(--bp-glow-cyan); }
+}
+@keyframes bpForgeFlow {             /* data packet down a line */
+  0%   { offset-distance: 0%; opacity: 0; }
+  8%   { opacity: 1; }
+  92%  { opacity: 1; }
+  100% { offset-distance: 100%; opacity: 0; }
+}
+@keyframes bpBlink {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0.25; }
+}
+@keyframes bpFloat {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-6px); }
+}
+@keyframes bpDashMarch {
+  to { stroke-dashoffset: -40; }
+}
+
+/* utility animation hooks */
+.bp-anim-scan   { animation: bpScan 3.4s cubic-bezier(0.45,0,0.55,1) infinite; }
+.bp-anim-blink  { animation: bpBlink 1.6s steps(1,end) infinite; }
+.bp-anim-float  { animation: bpFloat 5s ease-in-out infinite; }
+.bp-anim-march  { stroke-dasharray: 4 5; animation: bpDashMarch 1.4s linear infinite; }
+
+/* ── Reduced motion: freeze blueprint motion, keep content visible ── */
+@media (prefers-reduced-motion: reduce) {
+  .bp-anim-scan,
+  .bp-anim-blink,
+  .bp-anim-float,
+  .bp-anim-march { animation: none !important; }
+  .bp-draw { stroke-dashoffset: 0 !important; }
+}
