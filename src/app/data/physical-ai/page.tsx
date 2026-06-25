@@ -8,26 +8,27 @@ import { UseCasesGrid } from "./_sections/UseCasesGrid";
 import { ModalitiesGrid } from "./_sections/ModalitiesGrid";
 import { AccuracyTiers } from "./_sections/AccuracyTiers";
 import { RefDatasets } from "./_sections/RefDatasets";
+import { DirectionsExplorer, FactorySystem, PricingLadder } from "./_sections/FoundryDeep";
 import { CapabilitiesMarquee } from "@/components/marketing/sections/CapabilitiesMarquee";
 import { ContactCTA } from "@/components/marketing/sections/ContactCTA";
 
 export const metadata: Metadata = {
-  title: "Physical AI — Custom Human Motion Data Programs",
+  title: "Physical AI — The Robotics Data Foundry",
   description:
-    "Custom lab-grade data programs for humanoid robots: whole-body control, dexterous manipulation, imitation learning, and sim-to-real transfer. Scope the target task, capture method, and export format with Tbrain.",
+    "How Tbrain forges lab-grade robot training data: the EgoKit factory system, the 11 Physical AI research directions and the data each needs, AI-native QC, and RLDS/LeRobot delivery.",
   alternates: { canonical: "/data/physical-ai" },
   openGraph: {
-    title: "Physical AI — Custom Human Motion Data Programs",
+    title: "Physical AI — The Robotics Data Foundry",
     description:
-      "Cinema-grade motion capture programs scoped for humanoids, manipulation, and sim-to-real transfer.",
+      "The EgoKit factory system, 11 research directions, AI-native QC, and RLDS-ready delivery for robot foundation models.",
     url: "/data/physical-ai",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Physical AI — Custom Human Motion Data Programs",
+    title: "Physical AI — The Robotics Data Foundry",
     description:
-      "Cinema-grade motion capture programs scoped for humanoids, manipulation, and sim-to-real transfer.",
+      "The EgoKit factory system, 11 research directions, AI-native QC, and RLDS-ready delivery for robot foundation models.",
   },
 };
 
@@ -44,11 +45,14 @@ export default function PhysicalAIPage() {
       <main style={{ color: "white" }}>
         <HeroPhysical />
         <CapabilitiesMarquee />
+        <FactorySystem />
+        <DirectionsExplorer />
         <PipelineStrip />
         <BentoWhy />
         <UseCasesGrid />
         <ModalitiesGrid />
         <AccuracyTiers />
+        <PricingLadder />
         <RefDatasets />
         <ContactCTA />
       </main>

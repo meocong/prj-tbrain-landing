@@ -22,6 +22,51 @@ export type CaseStudy = {
 function fallbackCaseStudies(): CaseStudy[] {
   return [
     {
+      slug: "egocentric-foundation-model",
+      title: "Egocentric Data for a Robot Foundation Model",
+      shortDescription: "Lab-grade first-person manipulation data, RLDS-ready",
+      description:
+        "A frontier robotics team needed diverse egocentric manipulation data to pretrain a cross-embodiment VLA. Tbrain ran the EgoKit factory pack across home, market, and workshop environments, synchronized capture against a hardware clock, auto-filtered broken demonstrations with AI-native QC, and delivered everything in RLDS / LeRobot format.",
+      image: "/images/robotics-hero.jpg",
+      industry: "Physical AI / VLA",
+      metrics: [
+        { value: "Egocentric", label: "Capture type" },
+        { value: "RLDS", label: "Delivery format" },
+        { value: "≥85%", label: "QC pass-rate" },
+        { value: "≤48h", label: "Turnaround" },
+      ],
+    },
+    {
+      slug: "world-model-ground-truth",
+      title: "Real-World Video to Ground a World Model",
+      shortDescription: "Diverse, action-labeled video synthetic data can't fake",
+      description:
+        "A world-model lab trained on game and simulated environments needed real, action-paired video to anchor its predictions in physics. Tbrain supplied long egocentric sequences from East-Asian kitchens, markets, and workshops — with synchronized action labels and language captions — as ground truth for sim-to-real transfer.",
+      image: "/images/mocap-studio.jpg",
+      industry: "World models",
+      metrics: [
+        { value: "Multi-env", label: "Diversity" },
+        { value: "Action-paired", label: "Labels" },
+        { value: "Long-form", label: "Sequences" },
+        { value: "Asian", label: "Environments" },
+      ],
+    },
+    {
+      slug: "teleop-cold-start",
+      title: "Teleop Cold-Start for a Manipulation Startup",
+      shortDescription: "Fast, QC'd demos to bootstrap a new task",
+      description:
+        "A mid-tier robotics startup needed cold-start data for a new manipulation task without standing up a collection org. Tbrain delivered pre-QC'd teleoperation and UMI demonstrations, plugged directly into the customer's training pipeline in days, exported to LeRobot.",
+      image: "/images/data-dashboard.jpg",
+      industry: "Robotics startup",
+      metrics: [
+        { value: "Teleop + UMI", label: "Data type" },
+        { value: "Days", label: "To first batch" },
+        { value: "LeRobot", label: "Format" },
+        { value: "3-layer", label: "Human QA" },
+      ],
+    },
+    {
       slug: "agent-evaluation",
       title: "Evaluation and Benchmarks for Agents",
       shortDescription: "Delivering enterprise-grade AI agents at unprecedented speed",
