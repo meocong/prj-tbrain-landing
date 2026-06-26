@@ -220,3 +220,6 @@ export function PackHeroArt({ className = "" }: { className?: string }) {
     </div>
   );
 }
+
+/* shared primitives for WorkerHero */
+export { Defs, CX, PARTS, PartG, Bom };
