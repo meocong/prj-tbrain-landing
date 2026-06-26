@@ -6,7 +6,6 @@ import Footer from "@/components/common/Footer";
 import { HeroFoundry } from "@/components/marketing/sections/foundry/HeroFoundry";
 import {
   ProblemSheet,
-  CapturePackSheet,
   WhatWeCaptureSheet,
   RealSamplesSheet,
   LadderSheet,
@@ -14,6 +13,7 @@ import {
   WhyTbrainSheet,
   BeyondRobotics,
 } from "@/components/marketing/sections/foundry/Sheets";
+import { CapturePackExplode } from "@/components/marketing/sections/foundry/PackExplodeScroll";
 import {
   SystemInAction,
   QCFlowSheet,
@@ -83,7 +83,7 @@ export default function Home() {
         <HeroFoundry />
         <AnchorStrip />
         <ProblemSheet />
-        <CapturePackSheet />
+        <CapturePackExplode />
         <SystemInAction />
         <QCFlowSheet />
         <WhatWeCaptureSheet />
