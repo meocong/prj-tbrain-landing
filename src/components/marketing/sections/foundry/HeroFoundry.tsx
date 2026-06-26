@@ -4,7 +4,7 @@ import { ArrowRight, ChevronDown } from "lucide-react";
 import Link from "next/link";
 import { FOUNDRY_HERO, COLLECTION_PACK } from "@/lib/landing/physical-ai";
 import { FigLabel, IsoAxis, TitleBlock } from "@/components/marketing/blueprint/kit";
-import { PackExploded } from "./PackDiagram";
+import { PackHeroArt } from "./PackExplodeScroll";
 
 export function HeroFoundry() {
   const d = COLLECTION_PACK.drawing;
@@ -47,7 +47,7 @@ export function HeroFoundry() {
             <FigLabel>TBRAIN · MK-001</FigLabel>
             <IsoAxis />
           </div>
-          <PackExploded />
+          <PackHeroArt />
           <TitleBlock unit={d.unit} title={d.title} dwg={d.dwg} scale={d.scale} sheet={d.sheet} className="mt-3 hidden md:block" />
         </div>
       </div>
