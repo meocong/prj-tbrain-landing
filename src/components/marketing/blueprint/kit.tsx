@@ -1,7 +1,8 @@
 /**
  * Blueprint UI kit — the "living engineering blueprint" primitives shared by
  * the Foundry homepage and /data/physical-ai. Presentational + server-safe
- * (no hooks), styled via tokens/classes in src/app/blueprint.css.
+ * (no hooks), styled via theme-aware tokens in src/app/blueprint.css so they
+ * render in both light (default) and dark.
  */
 import type { ReactNode, CSSProperties } from "react";
 
@@ -9,20 +10,16 @@ import type { ReactNode, CSSProperties } from "react";
 export function FigLabel({ children, className = "" }: { children: ReactNode; className?: string }) {
   return (
     <div className={`bp-fig inline-flex items-center gap-2 ${className}`}>
-      <span aria-hidden style={{ width: 18, height: 1, background: "var(--bp-cyan)", opacity: 0.7 }} />
+      <span aria-hidden style={{ width: 18, height: 1, background: "var(--bp-cyan)", opacity: 0.8 }} />
       {children}
     </div>
   );
 }
 
-/* ── Isometric axis indicator (top-right of a sheet) ──────────────── */
+/* ── Isometric axis indicator ─────────────────────────────────────── */
 export function IsoAxis({ className = "" }: { className?: string }) {
   return (
-    <svg
-      width="58" height="58" viewBox="0 0 58 58" aria-hidden
-      className={className}
-      style={{ color: "var(--bp-ink-faint)" }}
-    >
+    <svg width="56" height="56" viewBox="0 0 58 58" aria-hidden className={className} style={{ color: "var(--bp-ink-faint)" }}>
       <g stroke="currentColor" strokeWidth="1" fill="none">
         <line x1="29" y1="30" x2="29" y2="6" />
         <line x1="29" y1="30" x2="9" y2="42" />
@@ -35,31 +32,14 @@ export function IsoAxis({ className = "" }: { className?: string }) {
   );
 }
 
-/* ── Engineering title block (bottom-right of a sheet) ────────────── */
+/* ── Engineering title block ──────────────────────────────────────── */
 export function TitleBlock({
   unit, title, dwg, scale, sheet, className = "",
 }: { unit: string; title: string; dwg: string; scale: string; sheet: string; className?: string }) {
-  const rows = [
-    ["UNIT", unit],
-    ["TITLE", title],
-    ["DWG NO.", dwg],
-    ["SCALE", scale],
-    ["SHEET", sheet],
-  ];
+  const rows = [["UNIT", unit], ["TITLE", title], ["DWG NO.", dwg], ["SCALE", scale], ["SHEET", sheet]];
   return (
-    <div
-      className={className}
-      style={{
-        border: "1px solid var(--bp-line-strong)",
-        background: "rgba(11,10,31,0.72)",
-        backdropFilter: "blur(4px)",
-        fontFamily: "var(--font-mono)",
-        minWidth: 230,
-      }}
-    >
-      <div className="bp-mono" style={{ fontSize: 9, color: "var(--bp-ink-faint)", padding: "5px 10px", borderBottom: "1px solid var(--bp-line)" }}>
-        DRAWING
-      </div>
+    <div className={`bp-card ${className}`} style={{ fontFamily: "var(--font-mono)", minWidth: 230, borderRadius: 8 }}>
+      <div className="bp-mono" style={{ fontSize: 9, color: "var(--bp-ink-faint)", padding: "5px 10px", borderBottom: "1px solid var(--bp-line)" }}>DRAWING</div>
       {rows.map(([k, v]) => (
         <div key={k} className="flex" style={{ borderTop: "1px solid var(--bp-line)" }}>
           <div className="bp-mono" style={{ fontSize: 9, color: "var(--bp-ink-faint)", padding: "5px 10px", width: 78, borderRight: "1px solid var(--bp-line)" }}>{k}</div>
@@ -73,30 +53,16 @@ export function TitleBlock({
 /* ── Bill of Materials panel ──────────────────────────────────────── */
 export interface BomRow { num: string; part: string; status?: "STBY" | "MOV" | "SEP" }
 
-export function BillOfMaterials({
-  rows, count, className = "",
-}: { rows: BomRow[]; count?: string; className?: string }) {
+export function BillOfMaterials({ rows, count, className = "" }: { rows: BomRow[]; count?: string; className?: string }) {
   return (
-    <div
-      className={className}
-      style={{
-        border: "1px solid var(--bp-line-strong)",
-        background: "rgba(11,10,31,0.72)",
-        backdropFilter: "blur(4px)",
-        minWidth: 240,
-      }}
-    >
-      <div
-        className="bp-mono flex items-center justify-between"
-        style={{ fontSize: 9, color: "var(--bp-ink-faint)", padding: "7px 12px", borderBottom: "1px solid var(--bp-line)" }}
-      >
-        <span>Bill of Materials</span>
-        <span style={{ color: "var(--bp-cyan)" }}>{count ?? `${rows.length} / ${rows.length}`}</span>
+    <div className={`bp-card ${className}`} style={{ minWidth: 240 }}>
+      <div className="bp-mono flex items-center justify-between" style={{ fontSize: 9, color: "var(--bp-ink-faint)", padding: "7px 12px", borderBottom: "1px solid var(--bp-line)" }}>
+        <span>Bill of Materials</span><span style={{ color: "var(--bp-cyan)" }}>{count ?? `${rows.length} / ${rows.length}`}</span>
       </div>
       {rows.map((r) => (
         <div key={r.num} className="flex items-center justify-between" style={{ borderTop: "1px solid var(--bp-line)", padding: "6px 12px" }}>
           <div className="flex items-center gap-3" style={{ minWidth: 0 }}>
-            <span className="bp-mono" style={{ fontSize: 10, color: "var(--bp-cyan-soft)" }}>{r.num}</span>
+            <span className="bp-mono" style={{ fontSize: 10, color: "var(--bp-cyan)" }}>{r.num}</span>
             <span style={{ fontSize: 12, color: "var(--bp-ink-dim)", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{r.part}</span>
           </div>
           <span className={`bp-status bp-status-${(r.status ?? "STBY").toLowerCase()}`}>{r.status ?? "STBY"}</span>
@@ -125,49 +91,25 @@ export function BlueprintButton({
   children, variant = "solid", style, ...props
 }: React.AnchorHTMLAttributes<HTMLAnchorElement> & { variant?: "solid" | "ghost" }) {
   const base: CSSProperties = {
-    display: "inline-flex", alignItems: "center", gap: 8,
-    padding: "11px 20px", borderRadius: 8, fontSize: 14, fontWeight: 700,
-    fontFamily: "var(--font-heading)", textDecoration: "none",
+    display: "inline-flex", alignItems: "center", gap: 8, padding: "11px 20px", borderRadius: 8,
+    fontSize: 14, fontWeight: 700, fontFamily: "var(--font-heading)", textDecoration: "none",
     transition: "transform .2s ease, box-shadow .2s ease",
   };
-  const solid: CSSProperties = {
-    background: "var(--bp-cyan)", color: "#06231F",
-    boxShadow: "0 10px 30px -10px rgba(0,229,199,0.6)",
-  };
-  const ghost: CSSProperties = {
-    background: "rgba(232,240,255,0.04)", color: "var(--bp-ink)",
-    border: "1px solid var(--bp-line-strong)",
-  };
-  return (
-    <a {...props} style={{ ...base, ...(variant === "solid" ? solid : ghost), ...style }}>
-      {children}
-    </a>
-  );
+  const solid: CSSProperties = { background: "var(--bp-cyan)", color: "var(--bp-on-cyan)", boxShadow: "0 8px 22px -12px var(--bp-cyan)" };
+  const ghost: CSSProperties = { background: "transparent", color: "var(--bp-ink)", border: "1px solid var(--bp-line-strong)" };
+  return <a {...props} style={{ ...base, ...(variant === "solid" ? solid : ghost), ...style }}>{children}</a>;
 }
 
 /* ── Sheet wrapper — a single drawing sheet ───────────────────────── */
 export function Sheet({
   id, fig, children, axis = true, titleBlock, className = "", contentClassName = "", style,
 }: {
-  id?: string;
-  fig?: string;
-  children: ReactNode;
-  axis?: boolean;
+  id?: string; fig?: string; children: ReactNode; axis?: boolean;
   titleBlock?: { unit: string; title: string; dwg: string; scale: string; sheet: string };
-  className?: string;
-  contentClassName?: string;
-  style?: CSSProperties;
+  className?: string; contentClassName?: string; style?: CSSProperties;
 }) {
   return (
-    <section
-      id={id}
-      className={`bp-grid bp-frame relative overflow-hidden ${className}`}
-      style={{ color: "var(--bp-ink)", paddingTop: 88, paddingBottom: 88, ...style }}
-    >
-      {/* faint forge glow */}
-      <div aria-hidden className="pointer-events-none absolute inset-0" style={{
-        background: "radial-gradient(ellipse 70% 50% at 50% 0%, rgba(108,60,244,0.10), transparent 60%)",
-      }} />
+    <section id={id} className={`bp-grid bp-frame relative overflow-hidden ${className}`} style={{ color: "var(--bp-ink)", paddingTop: 84, paddingBottom: 84, ...style }}>
       <div className={`container relative z-10 mx-auto px-5 ${contentClassName}`}>
         {fig && (
           <div className="mb-8 flex items-start justify-between">
@@ -177,9 +119,7 @@ export function Sheet({
         )}
         {children}
       </div>
-      {titleBlock && (
-        <TitleBlock {...titleBlock} className="absolute bottom-6 right-6 z-10 hidden lg:block" />
-      )}
+      {titleBlock && <TitleBlock {...titleBlock} className="absolute bottom-6 right-6 z-10 hidden lg:block" />}
     </section>
   );
 }
@@ -188,15 +128,8 @@ export function Sheet({
 export function SheetHeading({ title, lead, className = "" }: { title: string; lead?: string; className?: string }) {
   return (
     <div className={`max-w-3xl ${className}`}>
-      <h2
-        className="font-semibold"
-        style={{ fontFamily: "var(--font-heading)", fontSize: "clamp(28px, 4vw, 46px)", lineHeight: 1.08, color: "var(--bp-ink)", letterSpacing: "-0.01em" }}
-      >
-        {title}
-      </h2>
-      {lead && (
-        <p className="mt-5" style={{ fontSize: 17, lineHeight: 1.7, color: "var(--bp-ink-dim)" }}>{lead}</p>
-      )}
+      <h2 className="font-semibold" style={{ fontFamily: "var(--font-heading)", fontSize: "clamp(28px, 4vw, 46px)", lineHeight: 1.08, color: "var(--bp-ink)", letterSpacing: "-0.01em" }}>{title}</h2>
+      {lead && <p className="mt-5" style={{ fontSize: 17, lineHeight: 1.7, color: "var(--bp-ink-dim)" }}>{lead}</p>}
     </div>
   );
 }

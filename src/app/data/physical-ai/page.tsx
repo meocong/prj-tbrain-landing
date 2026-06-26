@@ -9,7 +9,7 @@ import { ModalitiesGrid } from "./_sections/ModalitiesGrid";
 import { AccuracyTiers } from "./_sections/AccuracyTiers";
 import { RefDatasets } from "./_sections/RefDatasets";
 import { DirectionsExplorer, FactorySystem, PricingLadder } from "./_sections/FoundryDeep";
-import { SystemInAction, SensorRichness, Partners } from "@/components/marketing/sections/foundry/SystemShowcase";
+import { SystemInAction, QCFlowSheet, SensorRichness, Partners } from "@/components/marketing/sections/foundry/SystemShowcase";
 import { CapabilitiesMarquee } from "@/components/marketing/sections/CapabilitiesMarquee";
 import { ContactCTA } from "@/components/marketing/sections/ContactCTA";
 
@@ -35,7 +35,7 @@ export const metadata: Metadata = {
 
 export default function PhysicalAIPage() {
   return (
-    <div style={{ background: "#020617" }}>
+    <div className="dark" style={{ background: "#0E0C24" }}>
       <link
         rel="preload"
         as="image"
@@ -48,6 +48,7 @@ export default function PhysicalAIPage() {
         <CapabilitiesMarquee />
         <FactorySystem />
         <SystemInAction />
+        <QCFlowSheet />
         <DirectionsExplorer />
         <SensorRichness />
         <PipelineStrip />
