@@ -133,11 +133,47 @@
 .bp-anim-float  { animation: bpFloat 5s ease-in-out infinite; }
 .bp-anim-march  { stroke-dasharray: 4 5; animation: bpDashMarch 1.4s linear infinite; }
 
+/* ── Card hover: lift + cyan edge glow ───────────────────────────── */
+.bp-card {
+  transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease, background-color .25s ease;
+}
+.bp-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--bp-cyan) !important;
+  box-shadow: 0 14px 40px -22px rgba(0,229,199,0.5), inset 0 0 0 1px rgba(0,229,199,0.18);
+}
+
+/* ── Self-drawing SVG line-art (reveals like a draftsman's pen) ───── */
+.bp-draw :is(path, line, rect, circle, polyline) {
+  stroke-dasharray: 900;
+  stroke-dashoffset: 900;
+  animation: bpDrawLine 2.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* ── Scan sweep overlay (place inside a position:relative box) ────── */
+.bp-scan {
+  position: absolute; left: 0; right: 0; top: 0; height: 42%;
+  pointer-events: none; mix-blend-mode: screen;
+  background: linear-gradient(180deg, transparent, rgba(0,229,199,0.14), transparent);
+  animation: bpScan 3.6s cubic-bezier(0.45,0,0.55,1) infinite;
+}
+
+/* ── Live BOM status pulse ───────────────────────────────────────── */
+@keyframes bpStatusPulse { 0%,100% { opacity: 0.5; } 50% { opacity: 1; } }
+.bp-status-mov { animation: bpStatusPulse 1.5s ease-in-out infinite; }
+.bp-status-sep { animation: bpBlink 1.2s steps(1,end) infinite; }
+
 /* ── Reduced motion: freeze blueprint motion, keep content visible ── */
 @media (prefers-reduced-motion: reduce) {
   .bp-anim-scan,
   .bp-anim-blink,
   .bp-anim-float,
-  .bp-anim-march { animation: none !important; }
-  .bp-draw { stroke-dashoffset: 0 !important; }
+  .bp-anim-march,
+  .bp-scan,
+  .bp-status-mov,
+  .bp-status-sep { animation: none !important; }
+  .bp-card:hover { transform: none !important; }
+  .bp-draw :is(path, line, rect, circle, polyline) {
+    stroke-dashoffset: 0 !important; animation: none !important;
+  }
 }

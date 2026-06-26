@@ -9,18 +9,19 @@ import { ModalitiesGrid } from "./_sections/ModalitiesGrid";
 import { AccuracyTiers } from "./_sections/AccuracyTiers";
 import { RefDatasets } from "./_sections/RefDatasets";
 import { DirectionsExplorer, FactorySystem, PricingLadder } from "./_sections/FoundryDeep";
+import { SystemInAction, SensorRichness, Partners } from "@/components/marketing/sections/foundry/SystemShowcase";
 import { CapabilitiesMarquee } from "@/components/marketing/sections/CapabilitiesMarquee";
 import { ContactCTA } from "@/components/marketing/sections/ContactCTA";
 
 export const metadata: Metadata = {
   title: "Physical AI — The Robotics Data Foundry",
   description:
-    "How Tbrain forges lab-grade robot training data: the EgoKit factory system, the 11 Physical AI research directions and the data each needs, AI-native QC, and RLDS/LeRobot delivery.",
+    "How Tbrain forges lab-grade robot training data: the Tbrain capture system, the 11 Physical AI research directions and the data each needs, AI-native QC, and RLDS/LeRobot delivery.",
   alternates: { canonical: "/data/physical-ai" },
   openGraph: {
     title: "Physical AI — The Robotics Data Foundry",
     description:
-      "The EgoKit factory system, 11 research directions, AI-native QC, and RLDS-ready delivery for robot foundation models.",
+      "The Tbrain capture system, 11 research directions, AI-native QC, and RLDS-ready delivery for robot foundation models.",
     url: "/data/physical-ai",
     type: "website",
   },
@@ -28,7 +29,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Physical AI — The Robotics Data Foundry",
     description:
-      "The EgoKit factory system, 11 research directions, AI-native QC, and RLDS-ready delivery for robot foundation models.",
+      "The Tbrain capture system, 11 research directions, AI-native QC, and RLDS-ready delivery for robot foundation models.",
   },
 };
 
@@ -46,13 +47,16 @@ export default function PhysicalAIPage() {
         <HeroPhysical />
         <CapabilitiesMarquee />
         <FactorySystem />
+        <SystemInAction />
         <DirectionsExplorer />
+        <SensorRichness />
         <PipelineStrip />
         <BentoWhy />
         <UseCasesGrid />
         <ModalitiesGrid />
         <AccuracyTiers />
         <PricingLadder />
+        <Partners />
         <RefDatasets />
         <ContactCTA />
       </main>
