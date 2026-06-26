@@ -95,9 +95,10 @@ export function HeroFoundry() {
 
         {/* ── 3D pack ── */}
         <div className="hero-reveal hero-reveal-3 relative h-[380px] sm:h-[480px] lg:h-[560px]">
-          <div className="absolute left-0 top-0 z-20"><FigLabel>EGOKIT · MK-001</FigLabel></div>
+          <div className="absolute left-0 top-0 z-20"><FigLabel>TBRAIN · MK-001</FigLabel></div>
           <IsoAxis className="absolute right-0 top-0 z-20" />
           <EgoKitPack3DLazy interactive className="absolute inset-0" fallback={<PackPoster />} />
+          <div className="bp-scan" style={{ zIndex: 15 }} />
           <BillOfMaterials rows={BOM_ROWS} count={`${BOM_ROWS.filter(r => r.status !== "STBY").length} / ${BOM_ROWS.length}`} className="absolute bottom-0 left-0 z-20 hidden sm:block" />
           <TitleBlock {...{ unit: COLLECTION_PACK.drawing.unit, title: COLLECTION_PACK.drawing.title, dwg: COLLECTION_PACK.drawing.dwg, scale: COLLECTION_PACK.drawing.scale, sheet: COLLECTION_PACK.drawing.sheet }} className="absolute bottom-0 right-0 z-20 hidden md:block" />
         </div>

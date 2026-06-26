@@ -6,19 +6,19 @@
  * list. Anchor proof is anonymized ("frontier labs"); proof points are
  * published research stats only.
  *
- * Source research: tbrain-robotics-research/research/directions.json,
- * directions_synth.json, Tbrain-Robotics-Data-Strategy-EN.md, and the
- * EgoKit Factory Data Collection System spec.
+ * The capture pack is Tbrain's own purpose-built hardware + pipeline (NOT an
+ * off-the-shelf kit). Source research: tbrain-robotics-research/research/*,
+ * and the Tbrain Capture System spec.
  */
 
 /* ────────────────────────────────────────────────────────────────────
    Hero
    ──────────────────────────────────────────────────────────────────── */
 export const FOUNDRY_HERO = {
-  fig: "FIG.01 — EGOKIT WORKER PACK · MK-001 · REV A",
+  fig: "FIG.01 — TBRAIN CAPTURE PACK · MK-001 · REV A",
   eyebrow: "Data is the bottleneck — not compute.",
   title: "The Robotics Data Foundry for Physical AI",
-  sub: "We forge lab-grade, action-paired datasets — egocentric, UMI, teleoperation — captured by our own factory packs, synchronized and QC'd by an AI-native pipeline, delivered RLDS-ready. Not a concept. A working data engine.",
+  sub: "We forge lab-grade, action-paired datasets — egocentric, UMI, teleoperation — captured on our own purpose-built hardware, synchronized and QC'd by an AI-native pipeline, delivered RLDS-ready. Not a concept. A working data engine.",
   ctaPrimary: { label: "See a sample dataset", href: "/contact" },
   ctaSecondary: { label: "How the foundry works", href: "/data/physical-ai" },
   trust: "Trusted by 3 of the world's leading AI labs · LeRobot / RLDS standard · Tailscale zero-trust",
@@ -61,7 +61,7 @@ export const PROBLEM = {
 } as const;
 
 /* ────────────────────────────────────────────────────────────────────
-   FIG.01 — EgoKit collection pack (Bill of Materials)
+   FIG.01 — Tbrain Capture Pack (Bill of Materials)
    ──────────────────────────────────────────────────────────────────── */
 export interface BomItem {
   num: string;       // "01"
@@ -71,16 +71,16 @@ export interface BomItem {
 }
 
 export const COLLECTION_PACK = {
-  fig: "FIG.01 — EGOKIT WORKER PACK",
-  title: "A real capture rig — built to collect, tuned for the factory",
-  lead: "Mecka and Claru ship concept art. We ship hardware. Each worker wears a stereo egocentric pack that captures RGB + depth + IMU, timestamps it against a hardware clock, caches offline, and syncs to the factory — at 50 to 500 packs in parallel.",
+  fig: "FIG.01 — TBRAIN CAPTURE PACK",
+  title: "Our own capture rig — purpose-built to collect, tuned for the factory",
+  lead: "Mecka and Claru ship concept art. We ship hardware. The Tbrain Capture Pack is developed in-house — device, capture firmware, and data pipeline are all ours. Each worker wears a stereo egocentric pack that records RGB + depth + IMU, timestamps it against a hardware clock, caches offline, and syncs to the factory — at 50 to 500 packs in parallel.",
   bom: [
-    { num: "01", part: "Intel RealSense D455", spec: "Stereo RGB + depth + IMU", role: "First-person capture aligned to the robot's eye view" },
-    { num: "02", part: "Raspberry Pi 5 (8GB)", spec: "On-pack compute", role: "Capture, timestamp sync, local pipeline" },
+    { num: "01", part: "Stereo depth camera", spec: "Stereo RGB + depth + IMU", role: "First-person capture aligned to the robot's eye view" },
+    { num: "02", part: "On-pack compute (SBC)", spec: "8GB, on-board", role: "Capture, timestamp sync, local pipeline" },
     { num: "03", part: "NVMe SSD", spec: "256GB cache", role: "Offline-first local buffer — never drop a frame" },
     { num: "04", part: "Power bank", spec: "20,000mAh PD", role: "A full 8–10h collection shift" },
-    { num: "05", part: "Belt box (3D-printed)", spec: "Wearable enclosure", role: "Comfortable all-day field capture" },
-    { num: "06", part: "GoPro head-strap + mount", spec: "Head-mounted rig", role: "Stable egocentric viewpoint" },
+    { num: "05", part: "Tbrain belt enclosure", spec: "In-house wearable", role: "Comfortable all-day field capture" },
+    { num: "06", part: "Head-mount rig", spec: "Stabilized mount", role: "Stable egocentric viewpoint" },
   ] as BomItem[],
   specs: [
     { k: "Hardware-clock sync", v: "Per-frame timestamp alignment across every stream" },
@@ -88,7 +88,7 @@ export const COLLECTION_PACK = {
     { k: "Fleet scale", v: "50 → 500 packs collecting in parallel" },
     { k: "Zero-trust", v: "Tailscale secure tunnel, role-based access, audit log" },
   ],
-  drawing: { unit: "EGOKIT", title: "WORKER PACK", dwg: "MK-001 · REV A", scale: "1:2 · ISO 30°", sheet: "1 OF 1" },
+  drawing: { unit: "TBRAIN", title: "CAPTURE PACK", dwg: "MK-001 · REV A", scale: "1:2 · ISO 30°", sheet: "1 OF 1" },
 } as const;
 
 /* ────────────────────────────────────────────────────────────────────
@@ -106,7 +106,7 @@ export const FOUNDRY_LINE = {
   title: "From raw motion to RLDS-ready dataset",
   lead: "Every pack feeds one pipeline. Capture is synchronized, cached, synced overnight to edge storage, then forged into standardized, QC'd datasets in the cloud AI pipeline.",
   stages: [
-    { id: "capture", label: "Capture", detail: "D455 stereo + depth + IMU", layer: "pack" },
+    { id: "capture", label: "Capture", detail: "Stereo + depth + IMU", layer: "pack" },
     { id: "sync", label: "Timestamp sync", detail: "Hardware-clock alignment", layer: "pack" },
     { id: "cache", label: "Local cache", detail: "NVMe offline buffer", layer: "pack" },
     { id: "night", label: "Night sync", detail: "Off-peak background upload", layer: "factory" },
@@ -144,7 +144,46 @@ export const QC = {
 } as const;
 
 /* ────────────────────────────────────────────────────────────────────
-   FIG.04 — The data ladder (easy → hard product map)
+   FIG.04 — Professional quality-assurance process (end to end)
+   ──────────────────────────────────────────────────────────────────── */
+export interface ProcessStep {
+  step: string;
+  title: string;
+  detail: string;
+  gate: string; // the acceptance checkpoint
+}
+
+export const QUALITY_PROCESS = {
+  fig: "FIG.04 — QUALITY ASSURANCE PROCESS",
+  title: "A professional pipeline, with a checkpoint at every stage",
+  lead: "Quality isn't a final step — it's enforced end to end. Every batch passes a defined gate before it advances, from capture SOP to signed-off delivery.",
+  steps: [
+    { step: "01", title: "Capture SOP", detail: "Calibrated rig, scripted task, environment logged. Operators trained to a standard.", gate: "Calibration + sync check pass" },
+    { step: "02", title: "Ingest & sync", detail: "Streams aligned to the hardware clock; metadata and provenance attached.", gate: "Timestamp drift < tolerance" },
+    { step: "03", title: "AI confidence filter", detail: "Model scores every episode; the broken 20–30% are auto-rejected before human time is spent.", gate: "Confidence ≥ threshold" },
+    { step: "04", title: "3-layer human QA", detail: "L1 annotator → L2 reviewer → L3 PM audit, each with a checklist and sampling.", gate: "Pass-rate ≥ 85%" },
+    { step: "05", title: "Standardize & label", detail: "Language, success/fail, segmentation; exported to RLDS / LeRobot.", gate: "Schema + format validation" },
+    { step: "06", title: "Sign-off & deliver", detail: "Batch report, unit-economics, and acceptance sign-off; delivered over zero-trust.", gate: "Customer acceptance" },
+  ] as ProcessStep[],
+} as const;
+
+/* ────────────────────────────────────────────────────────────────────
+   Security & trust
+   ──────────────────────────────────────────────────────────────────── */
+export const SECURITY = {
+  fig: "FIG.05 — SECURITY & DATA GOVERNANCE",
+  title: "Built for frontier-lab trust",
+  lead: "Selling to the most demanding AI teams means security and data governance are non-negotiable — engineered in from day one.",
+  items: [
+    { k: "Zero-trust delivery", v: "Tailscale encrypted tunnels, role-based access, full audit log on every transfer." },
+    { k: "ISO 27001 → SOC 2", v: "Active certification roadmap; controls and policies mapped from the start." },
+    { k: "IP & data sovereignty", v: "Clear ownership terms, transparent storage location, signed releases for every environment." },
+    { k: "Provenance & traceability", v: "Every episode carries metadata: operator, rig, environment, consent, processing history." },
+  ],
+} as const;
+
+/* ────────────────────────────────────────────────────────────────────
+   FIG.06 — The data ladder (easy → hard product map)
    ──────────────────────────────────────────────────────────────────── */
 export interface LadderRung {
   step: string;
@@ -155,7 +194,7 @@ export interface LadderRung {
 }
 
 export const DATA_LADDER = {
-  fig: "FIG.04 — PRODUCT MAP · EASY → HARD",
+  fig: "FIG.06 — PRODUCT MAP · EASY → HARD",
   title: "We climb difficulty and margin, deliberately",
   lead: "Start with the data type that's cheap on hardware and where we hit quality immediately. Nail the first batch, earn references, then climb — no detours.",
   rungs: [
@@ -168,10 +207,10 @@ export const DATA_LADDER = {
 } as const;
 
 /* ────────────────────────────────────────────────────────────────────
-   FIG.05 — Real-world environments
+   FIG.07 — Real-world environments
    ──────────────────────────────────────────────────────────────────── */
 export const ENVIRONMENTS = {
-  fig: "FIG.05 — ENVIRONMENT LIBRARY",
+  fig: "FIG.07 — ENVIRONMENT LIBRARY",
   title: "Data synthetic never sees",
   lead: "A diverse, real-world environment library is the asset simulation can't fake and US-centric vendors don't have. We capture the East-Asian, industrial, and agricultural settings world-model labs are starved for.",
   items: [
@@ -185,7 +224,23 @@ export const ENVIRONMENTS = {
 } as const;
 
 /* ────────────────────────────────────────────────────────────────────
-   FIG.06 — 11 research directions (which data each needs)
+   Data modalities we deliver
+   ──────────────────────────────────────────────────────────────────── */
+export const MODALITIES = {
+  fig: "FIG.08 — DATA MODALITIES",
+  title: "What we deliver",
+  items: [
+    { k: "Egocentric RGB-D", v: "First-person stereo + depth" },
+    { k: "3D hand & wrist pose", v: "MANO-style, per-finger" },
+    { k: "Proprioception", v: "Joint angles, gripper, IMU" },
+    { k: "Action labels", v: "Synchronized, frame-accurate" },
+    { k: "Language", v: "Task instructions & captions" },
+    { k: "Success / fail + QC", v: "Verified outcome flags" },
+  ],
+} as const;
+
+/* ────────────────────────────────────────────────────────────────────
+   FIG.09 — 11 research directions (which data each needs)
    ──────────────────────────────────────────────────────────────────── */
 export interface Direction {
   id: string;
@@ -215,7 +270,7 @@ export const DIRECTIONS: Direction[] = [
     kicker: "First-person human video teaches the 'human prior' for manipulation.",
     why: "1 hr of egocentric video ≈ 10× the demos of teleop (EgoMimic). NVIDIA found log-linear scaling: more ego hours → steadily better robots.",
     dataNeeded: "Ego RGB + 3D hand pose + SLAM + captions",
-    tbrainData: "EgoKit pack — our flagship", fit: 3, hotness: "Very hot",
+    tbrainData: "Tbrain Capture Pack — our flagship", fit: 3, hotness: "Very hot",
     group: "create-data", axis: "VLA · Imitation",
   },
   {
@@ -293,7 +348,7 @@ export const DIRECTIONS: Direction[] = [
 ];
 
 export const DIRECTIONS_SYNTH = {
-  fig: "FIG.06 — RESEARCH DIRECTIONS",
+  fig: "FIG.09 — RESEARCH DIRECTIONS",
   title: "Whatever you're building, here's the data it needs",
   lead: "Eleven research directions, two clusters: ways to create data cheaper, and ways to turn data into robot brains. Each one consumes a specific kind of data — and most of them consume exactly what we forge.",
   gameEgoExplainer: {
@@ -368,3 +423,93 @@ export const PROOF_POINTS = [
   { stat: "62 hrs", claim: "Robot video + 1M hrs web video → zero-shot grasp", src: "Meta V-JEPA 2" },
   { stat: "~10,000 hrs", claim: "Across 7 platforms trains one VLA (π0)", src: "Physical Intelligence" },
 ] as const;
+
+/* ────────────────────────────────────────────────────────────────────
+   The system, in action — operator app, monitor, local cluster
+   ──────────────────────────────────────────────────────────────────── */
+export const SYSTEM = {
+  fig: "FIG.02·B — THE SYSTEM IN ACTION",
+  title: "See the whole collection machine",
+  lead: "Not a render — a working system. The capture pack feeds a factory local cluster; operators drive it from an app; supervisors watch the whole fleet sync in real time.",
+  workerApp: {
+    title: "Operator app",
+    status: "RECORDING",
+    time: "01:32:45",
+    rows: [
+      { k: "Battery", v: "82%" },
+      { k: "Storage", v: "180 GB free" },
+      { k: "Sync pending", v: "12.4 GB" },
+      { k: "Session", v: "EP-2026-0617-0142" },
+    ],
+  },
+  monitor: {
+    title: "Supervisor monitor",
+    fleet: 50, recording: 47, synced: 42, idle: 3,
+  },
+  cluster: [
+    { k: "Capture packs", v: "WiFi 6 / private 5G", layer: "edge" },
+    { k: "MinIO edge", v: "S3-compatible store", layer: "factory" },
+    { k: "PostgreSQL", v: "Metadata + fleet state", layer: "factory" },
+    { k: "NAS RAID", v: "40–100 TB buffer", layer: "factory" },
+    { k: "Night sync → R2", v: "Off-peak, resumable", layer: "cloud" },
+    { k: "GKE AI pipeline", v: "Auto-label · QC · RLDS", layer: "cloud" },
+  ],
+} as const;
+
+/* Multi-sensor richness — what every episode actually contains */
+export const SENSORS = {
+  fig: "FIG.13 — WHAT EVERY EPISODE CONTAINS",
+  title: "Eight synchronized streams — not just a video clip",
+  lead: "Quality lives in the data, not only the process. Every episode is a multi-sensor bundle, frame-aligned to a hardware clock.",
+  streams: [
+    { k: "Stereo RGB", v: "Dual-camera first-person" },
+    { k: "Depth", v: "Per-pixel, aligned to RGB" },
+    { k: "IMU", v: "6-axis, 200 Hz motion" },
+    { k: "Audio / voice", v: "Operator narration + ambient" },
+    { k: "3D hand & wrist pose", v: "MANO-style, per-finger" },
+    { k: "Head / device pose", v: "SLAM / VIO, drift-corrected" },
+    { k: "Language", v: "Task instruction + step captions" },
+    { k: "Hardware timestamps", v: "Per-frame sync across streams" },
+  ],
+} as const;
+
+/* For world-model teams — Mecka-style pitch, our angle */
+export const WORLD_MODEL = {
+  fig: "FIG.14 — FOR WORLD-MODEL TEAMS",
+  kicker: "Built for the people training world models",
+  body: "Your model imagines the next frame. To keep those imagined worlds honest, it needs (frame, action) pairs grounded in real physics — long, continuous, multi-sensor, from places simulation never renders. We forge exactly that: real ground truth that anchors your generated worlds to reality.",
+  points: [
+    { k: "Long-horizon continuity", v: "Minutes-long, unbroken sequences — not 2-second clips." },
+    { k: "Action-paired ground truth", v: "Every frame carries synchronized action + state." },
+    { k: "Diversity sim can't fake", v: "Real friction, deformables, lighting, clutter." },
+    { k: "Multi-sensor anchoring", v: "RGB-D + IMU + audio + pose to ground every prediction." },
+  ],
+} as const;
+
+/* How much we can ship */
+export const AVAILABILITY = {
+  fig: "FIG.15 — DATA AVAILABILITY",
+  title: "Capacity that scales with your program",
+  lead: "Built to ship volume fast — and to grow from a pilot batch to a continuous pipeline.",
+  stats: [
+    { value: 500, suffix: "", k: "Parallel capture packs" },
+    { value: 10000, suffix: "+", k: "Episodes / month at scale" },
+    { value: 6, suffix: "+", k: "Environment categories" },
+    { value: 8, suffix: "", k: "Synchronized streams" },
+  ],
+} as const;
+
+/* Capture partner ecosystem — factories & environments */
+export const PARTNERS = {
+  fig: "FIG.16 — CAPTURE PARTNER ECOSYSTEM",
+  title: "An ecosystem that produces real environments",
+  lead: "Diverse real-world data needs diverse real-world places and skilled hands. We source both through a partner network across Vietnam's manufacturing belt — a model like Figure × Brookfield, at data scale.",
+  items: [
+    { k: "Manufacturing & electronics assembly", v: "Dexterous, disciplined operators trained for precise capture." },
+    { k: "Restaurants & home kitchens", v: "Filming-rights partnerships for cooking, dishes, tidying." },
+    { k: "Markets, retail & food service", v: "Picking, bagging, handling at real commercial pace." },
+    { k: "Workshops & repair", v: "Assembly, tool use, fine manipulation." },
+    { k: "Farms & agriculture", v: "Sorting, harvesting, packing — outdoor variability." },
+    { k: "Vocational schools & industrial parks", v: "Fast, ethical staffing with transparent wages." },
+  ],
+} as const;

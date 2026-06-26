@@ -1,15 +1,15 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowRight, Check, X, Cpu, Cctv, HardDrive, BatteryFull, Box, Camera } from "lucide-react";
+import { ArrowRight, Check, X, Cpu, Cctv, HardDrive, BatteryFull, Box, Camera, ShieldCheck, Lock, FileCheck, Fingerprint } from "lucide-react";
 import { Sheet, SheetHeading, FigLabel, Annotation } from "@/components/marketing/blueprint/kit";
 import { RevealOnScroll, StaggerContainer, STAGGER_ITEM } from "@/components/marketing/fx/RevealOnScroll";
 import { CountUp } from "@/components/marketing/fx/CountUp";
 import { FactoryLine3DLazy } from "@/components/marketing/three/Lazy3D";
 import { motion } from "framer-motion";
 import {
-  PROBLEM, COLLECTION_PACK, FOUNDRY_LINE, QC, DATA_LADDER,
-  ENVIRONMENTS, DIRECTIONS, DIRECTIONS_SYNTH, USE_CASES, STANDARDS, PROOF_POINTS,
+  PROBLEM, COLLECTION_PACK, FOUNDRY_LINE, QC, QUALITY_PROCESS, SECURITY, DATA_LADDER,
+  ENVIRONMENTS, MODALITIES, DIRECTIONS, DIRECTIONS_SYNTH, USE_CASES, STANDARDS, PROOF_POINTS,
 } from "@/lib/landing/physical-ai";
 
 /* shared panel styling */
@@ -21,6 +21,7 @@ const panel: React.CSSProperties = {
 };
 
 const PART_ICONS = [Cctv, Cpu, HardDrive, BatteryFull, Box, Camera];
+const SEC_ICONS = [Lock, ShieldCheck, FileCheck, Fingerprint];
 
 /* ════════════════════════ FIG.00 — Problem ════════════════════════ */
 export function ProblemSheet() {
@@ -31,7 +32,7 @@ export function ProblemSheet() {
       </RevealOnScroll>
       <StaggerContainer className="mt-12 grid gap-5 md:grid-cols-3">
         {PROBLEM.points.map((p) => (
-          <motion.div key={p.k} variants={STAGGER_ITEM} style={panel} className="p-6">
+          <motion.div key={p.k} variants={STAGGER_ITEM} style={panel} className="bp-card p-6">
             <div className="bp-mono mb-3 flex items-center gap-2" style={{ fontSize: 10, color: "var(--bp-amber)" }}>
               <X className="h-3.5 w-3.5" /> Constraint
             </div>
@@ -55,7 +56,7 @@ export function CollectionPackSheet() {
   return (
     <Sheet
       fig={COLLECTION_PACK.fig}
-      titleBlock={{ unit: "EGOKIT", title: "WORKER PACK", dwg: "MK-001 · REV A", scale: "1:2 · ISO 30°", sheet: "1 OF 1" }}
+      titleBlock={{ unit: "TBRAIN", title: "CAPTURE PACK", dwg: "MK-001 · REV A", scale: "1:2 · ISO 30°", sheet: "1 OF 1" }}
     >
       <RevealOnScroll>
         <SheetHeading title={COLLECTION_PACK.title} lead={COLLECTION_PACK.lead} />
@@ -64,7 +65,7 @@ export function CollectionPackSheet() {
       <div className="mt-12 grid gap-8 lg:grid-cols-[1.1fr_0.9fr]">
         {/* Parts list (engineering BOM) */}
         <RevealOnScroll>
-          <div style={panel} className="overflow-hidden">
+          <div style={panel} className="bp-card overflow-hidden">
             <div className="bp-mono flex items-center justify-between px-5 py-3" style={{ fontSize: 10, color: "var(--bp-ink-faint)", borderBottom: "1px solid var(--bp-line)" }}>
               <span>Bill of Materials</span><span style={{ color: "var(--bp-cyan)" }}>6 ITEMS</span>
             </div>
@@ -91,13 +92,13 @@ export function CollectionPackSheet() {
         <RevealOnScroll delay={0.1}>
           <div className="grid gap-4">
             {COLLECTION_PACK.specs.map((s) => (
-              <div key={s.k} style={panel} className="p-5">
+              <div key={s.k} style={panel} className="bp-card p-5">
                 <div className="bp-mono" style={{ fontSize: 10, color: "var(--bp-cyan)" }}>{s.k}</div>
                 <div className="mt-1.5" style={{ fontSize: 15, color: "var(--bp-ink-dim)" }}>{s.v}</div>
               </div>
             ))}
             <div className="rounded-xl p-5" style={{ ...panel, borderColor: "var(--bp-cyan)" }}>
-              <Annotation index="✦" label="Mecka & Claru ship concept art." sub="WE SHIP HARDWARE — AND FORGE THE DATA FROM IT" />
+              <Annotation index="✦" label="Mecka & Claru ship concept art." sub="WE SHIP HARDWARE WE BUILT — AND FORGE THE DATA FROM IT" />
             </div>
           </div>
         </RevealOnScroll>
@@ -110,10 +111,10 @@ export function CollectionPackSheet() {
 function FactoryPoster() {
   return (
     <div className="flex h-full w-full items-center justify-center">
-      <svg viewBox="0 0 320 120" className="w-[90%]" aria-hidden>
-        <line x1="20" y1="60" x2="300" y2="60" stroke="#00E5C7" strokeWidth="1" opacity="0.5" />
+      <svg viewBox="0 0 320 120" className="bp-draw w-[90%]" aria-hidden>
+        <line x1="20" y1="60" x2="300" y2="60" stroke="#00E5C7" strokeWidth="1" opacity="0.5" fill="none" />
         {[40, 90, 140, 190, 240, 290].map((x, i) => (
-          <rect key={x} x={x - 9} y={51} width="18" height="18" rx="3" fill="#14122E" stroke={i < 3 ? "#6C3CF4" : "#00E5C7"} />
+          <rect key={x} x={x - 9} y={51} width="18" height="18" rx="3" fill="none" stroke={i < 3 ? "#6C3CF4" : "#00E5C7"} />
         ))}
       </svg>
     </div>
@@ -130,6 +131,7 @@ export function FoundryLineSheet() {
       <RevealOnScroll delay={0.05}>
         <div className="relative mt-10 h-[300px] overflow-hidden rounded-xl sm:h-[360px]" style={panel}>
           <FactoryLine3DLazy className="absolute inset-0" fallback={<FactoryPoster />} />
+          <div className="bp-scan" />
           <div className="absolute left-4 top-3 z-10"><FigLabel>MK-001 · PIPELINE</FigLabel></div>
         </div>
       </RevealOnScroll>
@@ -138,7 +140,7 @@ export function FoundryLineSheet() {
       <div className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
         {FOUNDRY_LINE.stages.map((s, i) => (
           <RevealOnScroll key={s.id} delay={i * 0.04}>
-            <div style={panel} className="h-full p-4">
+            <div style={panel} className="bp-card h-full p-4">
               <div className="bp-mono flex items-center justify-between" style={{ fontSize: 9, color: "var(--bp-ink-faint)" }}>
                 <span>{String(i + 1).padStart(2, "0")}</span>
                 <span style={{ color: s.layer === "cloud" ? "var(--bp-cyan)" : s.layer === "factory" ? "var(--bp-cyan-soft)" : "var(--bp-purple)" }}>{s.layer.toUpperCase()}</span>
@@ -196,7 +198,7 @@ export function QCSheet() {
         <RevealOnScroll delay={0.1}>
           <div className="grid grid-cols-2 gap-4">
             {QC.stats.map((s) => (
-              <div key={s.k} style={panel} className="p-5">
+              <div key={s.k} style={panel} className="bp-card p-5">
                 <div className="font-semibold" style={{ fontFamily: "var(--font-heading)", fontSize: 30, color: "var(--bp-cyan)" }}>
                   <CountUp value={s.value} suffix={s.suffix} />
                 </div>
@@ -210,7 +212,62 @@ export function QCSheet() {
   );
 }
 
-/* ════════════════════════ FIG.04 — Ladder ═════════════════════════ */
+/* ════════════════ FIG.04 — Quality assurance process ══════════════ */
+export function QualityProcessSheet() {
+  return (
+    <Sheet fig={QUALITY_PROCESS.fig}>
+      <RevealOnScroll>
+        <SheetHeading title={QUALITY_PROCESS.title} lead={QUALITY_PROCESS.lead} />
+      </RevealOnScroll>
+      <div className="mt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+        {QUALITY_PROCESS.steps.map((s, i) => (
+          <RevealOnScroll key={s.step} delay={i * 0.05}>
+            <div style={panel} className="bp-card h-full p-6">
+              <div className="flex items-center gap-3">
+                <span className="bp-mono" style={{ fontSize: 13, color: "var(--bp-cyan)" }}>{s.step}</span>
+                <span style={{ fontWeight: 700, fontSize: 16, color: "var(--bp-ink)" }}>{s.title}</span>
+              </div>
+              <p className="mt-3" style={{ fontSize: 13.5, lineHeight: 1.6, color: "var(--bp-ink-dim)" }}>{s.detail}</p>
+              <div className="mt-4 flex items-center gap-2 rounded-md px-3 py-2" style={{ background: "rgba(0,229,199,0.07)" }}>
+                <Check className="h-3.5 w-3.5 shrink-0" style={{ color: "var(--bp-cyan)" }} />
+                <span className="bp-mono" style={{ fontSize: 9.5, color: "var(--bp-cyan-soft)" }}>GATE · {s.gate}</span>
+              </div>
+            </div>
+          </RevealOnScroll>
+        ))}
+      </div>
+    </Sheet>
+  );
+}
+
+/* ════════════════════ FIG.05 — Security ═══════════════════════════ */
+export function SecuritySheet() {
+  return (
+    <Sheet fig={SECURITY.fig} axis={false}>
+      <RevealOnScroll>
+        <SheetHeading title={SECURITY.title} lead={SECURITY.lead} />
+      </RevealOnScroll>
+      <div className="mt-12 grid gap-4 sm:grid-cols-2">
+        {SECURITY.items.map((s, i) => {
+          const Icon = SEC_ICONS[i] ?? Lock;
+          return (
+            <RevealOnScroll key={s.k} delay={i * 0.06}>
+              <div style={panel} className="bp-card flex h-full gap-4 p-6">
+                <Icon className="mt-0.5 h-5 w-5 shrink-0" style={{ color: "var(--bp-cyan)" }} />
+                <div>
+                  <div style={{ fontWeight: 700, color: "var(--bp-ink)" }}>{s.k}</div>
+                  <p className="mt-1" style={{ fontSize: 13.5, lineHeight: 1.6, color: "var(--bp-ink-dim)" }}>{s.v}</p>
+                </div>
+              </div>
+            </RevealOnScroll>
+          );
+        })}
+      </div>
+    </Sheet>
+  );
+}
+
+/* ════════════════════════ FIG.06 — Ladder ═════════════════════════ */
 export function LadderSheet() {
   return (
     <Sheet fig={DATA_LADDER.fig}>
@@ -220,7 +277,7 @@ export function LadderSheet() {
       <div className="mt-12 grid gap-3">
         {DATA_LADDER.rungs.map((r, i) => (
           <RevealOnScroll key={r.step} delay={i * 0.05}>
-            <div className="flex flex-col gap-3 rounded-xl p-5 sm:flex-row sm:items-center" style={{ ...panel, marginLeft: `${i * 6}%` }}>
+            <div className="bp-card flex flex-col gap-3 rounded-xl p-5 sm:flex-row sm:items-center" style={{ ...panel, marginLeft: `${i * 6}%` }}>
               <span className="bp-mono" style={{ fontSize: 12, color: "var(--bp-cyan)" }}>{r.step}</span>
               <span className="flex-1" style={{ fontWeight: 700, color: "var(--bp-ink)" }}>{r.name}</span>
               <span className="bp-mono" style={{ fontSize: 10, color: "var(--bp-ink-dim)" }}>{r.difficulty}</span>
@@ -234,7 +291,7 @@ export function LadderSheet() {
   );
 }
 
-/* ════════════════════ FIG.05 — Environments ═══════════════════════ */
+/* ════════════════════ FIG.07 — Environments ═══════════════════════ */
 export function EnvironmentsSheet() {
   return (
     <Sheet fig={ENVIRONMENTS.fig}>
@@ -243,7 +300,7 @@ export function EnvironmentsSheet() {
       </RevealOnScroll>
       <StaggerContainer className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {ENVIRONMENTS.items.map((e) => (
-          <motion.div key={e.name} variants={STAGGER_ITEM} style={panel} className="p-5">
+          <motion.div key={e.name} variants={STAGGER_ITEM} style={panel} className="bp-card p-5">
             <div style={{ fontWeight: 700, color: "var(--bp-ink)" }}>{e.name}</div>
             <div style={{ fontSize: 13, color: "var(--bp-ink-dim)", marginTop: 3 }}>{e.note}</div>
           </motion.div>
@@ -253,7 +310,26 @@ export function EnvironmentsSheet() {
   );
 }
 
-/* ════════════════════ FIG.06 — Directions teaser ══════════════════ */
+/* ════════════════════ FIG.08 — Modalities ═════════════════════════ */
+export function ModalitiesStrip() {
+  return (
+    <Sheet fig={MODALITIES.fig} axis={false}>
+      <RevealOnScroll>
+        <SheetHeading title={MODALITIES.title} />
+      </RevealOnScroll>
+      <StaggerContainer className="mt-10 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+        {MODALITIES.items.map((m) => (
+          <motion.div key={m.k} variants={STAGGER_ITEM} style={panel} className="bp-card flex items-baseline justify-between gap-3 p-4">
+            <span style={{ fontWeight: 600, color: "var(--bp-ink)" }}>{m.k}</span>
+            <span className="bp-mono text-right" style={{ fontSize: 10, color: "var(--bp-ink-faint)" }}>{m.v}</span>
+          </motion.div>
+        ))}
+      </StaggerContainer>
+    </Sheet>
+  );
+}
+
+/* ════════════════════ FIG.09 — Directions teaser ══════════════════ */
 export function DirectionsTeaser() {
   return (
     <Sheet fig={DIRECTIONS_SYNTH.fig}>
@@ -275,7 +351,7 @@ export function DirectionsTeaser() {
       {/* directions chips */}
       <StaggerContainer className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
         {DIRECTIONS.map((d) => (
-          <motion.div key={d.id} variants={STAGGER_ITEM} style={panel} className="p-4">
+          <motion.div key={d.id} variants={STAGGER_ITEM} style={panel} className="bp-card p-4">
             <div className="flex items-center justify-between">
               <span style={{ fontWeight: 700, color: "var(--bp-ink)" }}>{d.name}</span>
               <span className="bp-mono" style={{ fontSize: 9, color: d.fit === 3 ? "var(--bp-cyan)" : "var(--bp-ink-faint)" }}>FIT {d.fit}/3</span>
@@ -298,14 +374,14 @@ export function DirectionsTeaser() {
   );
 }
 
-/* ════════════════════ Standards + proof ═══════════════════════════ */
+/* ════════════════════ FIG.10 — Standards + proof ══════════════════ */
 export function StandardsStrip() {
   return (
-    <Sheet fig="FIG.07 — DELIVERY & STANDARDS" axis={false}>
+    <Sheet fig="FIG.10 — DELIVERY & STANDARDS" axis={false}>
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {STANDARDS.map((s) => (
           <RevealOnScroll key={s.k}>
-            <div style={panel} className="h-full p-5">
+            <div style={panel} className="bp-card h-full p-5">
               <div style={{ fontWeight: 700, color: "var(--bp-cyan)" }}>{s.k}</div>
               <div style={{ fontSize: 13.5, color: "var(--bp-ink-dim)", marginTop: 4 }}>{s.v}</div>
             </div>
@@ -315,7 +391,7 @@ export function StandardsStrip() {
       <RevealOnScroll delay={0.1}>
         <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {PROOF_POINTS.map((p) => (
-            <div key={p.claim} className="rounded-xl p-5 text-center" style={panel}>
+            <div key={p.claim} className="bp-card rounded-xl p-5 text-center" style={panel}>
               <div className="font-semibold" style={{ fontFamily: "var(--font-heading)", fontSize: 26, color: "var(--bp-ink)" }}>{p.stat}</div>
               <div style={{ fontSize: 12.5, color: "var(--bp-ink-dim)", marginTop: 4 }}>{p.claim}</div>
               <div className="bp-mono mt-2" style={{ fontSize: 9, color: "var(--bp-ink-faint)" }}>{p.src}</div>
@@ -327,16 +403,16 @@ export function StandardsStrip() {
   );
 }
 
-/* ════════════════════ Use cases teaser ════════════════════════════ */
+/* ════════════════════ FIG.11 — Use cases teaser ═══════════════════ */
 export function UseCasesTeaser() {
   return (
-    <Sheet fig="FIG.08 — USE CASES" axis={false}>
+    <Sheet fig="FIG.11 — USE CASES" axis={false}>
       <RevealOnScroll>
         <SheetHeading title="Who we forge data for" lead="Four segments, one foundry. Each gets the data their models actually need — captured, QC'd, and delivered to standard." />
       </RevealOnScroll>
       <StaggerContainer className="mt-12 grid gap-5 md:grid-cols-2">
         {USE_CASES.map((u) => (
-          <motion.div key={u.segment} variants={STAGGER_ITEM} style={panel} className="p-6">
+          <motion.div key={u.segment} variants={STAGGER_ITEM} style={panel} className="bp-card p-6">
             <div style={{ fontWeight: 700, fontSize: 18, color: "var(--bp-ink)" }}>{u.segment}</div>
             <div className="bp-mono mt-1" style={{ fontSize: 10, color: "var(--bp-ink-faint)" }}>{u.who}</div>
             <p className="mt-3" style={{ fontSize: 14, lineHeight: 1.6, color: "var(--bp-ink-dim)" }}><span style={{ color: "var(--bp-amber)" }}>Need · </span>{u.need}</p>

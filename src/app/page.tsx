@@ -9,6 +9,8 @@ import {
   CollectionPackSheet,
   FoundryLineSheet,
   QCSheet,
+  QualityProcessSheet,
+  SecuritySheet,
   LadderSheet,
   EnvironmentsSheet,
   DirectionsTeaser,
@@ -16,12 +18,19 @@ import {
   UseCasesTeaser,
   BeyondRobotics,
 } from "@/components/marketing/sections/foundry/Sheets";
+import {
+  SystemInAction,
+  SensorRichness,
+  WorldModelPitch,
+  Availability,
+  Partners,
+} from "@/components/marketing/sections/foundry/SystemShowcase";
 import { ANCHOR_TRUST } from "@/lib/landing/physical-ai";
 
 export const metadata: Metadata = {
   title: "Tbrain | The Robotics Data Foundry for Physical AI",
   description:
-    "Lab-grade, action-paired robot training data — egocentric, UMI, teleoperation — captured by our own factory packs, QC'd by an AI-native pipeline, delivered RLDS-ready for Physical AI.",
+    "Lab-grade, action-paired robot training data — egocentric, UMI, teleoperation — captured on our own purpose-built hardware, QC'd by an AI-native pipeline, delivered RLDS-ready for Physical AI.",
   alternates: { canonical: "/" },
   openGraph: {
     title: "Tbrain | The Robotics Data Foundry for Physical AI",
@@ -95,10 +104,17 @@ export default function Home() {
         <ProblemSheet />
         <CollectionPackSheet />
         <FoundryLineSheet />
+        <SystemInAction />
         <QCSheet />
+        <QualityProcessSheet />
+        <SecuritySheet />
+        <SensorRichness />
         <LadderSheet />
         <EnvironmentsSheet />
+        <WorldModelPitch />
         <DirectionsTeaser />
+        <Availability />
+        <Partners />
         <StandardsStrip />
         <UseCasesTeaser />
         <BeyondRobotics />

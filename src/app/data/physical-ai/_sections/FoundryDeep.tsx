@@ -125,7 +125,7 @@ export function DirectionsExplorer() {
 
 /* ── Factory system architecture ──────────────────────────────────── */
 const LAYERS = [
-  { name: "Worker pack", tag: "EDGE", color: "var(--bp-purple)", items: ["RealSense D455 capture", "Raspberry Pi 5 compute", "NVMe offline cache", "Tailscale client"] },
+  { name: "Capture pack", tag: "EDGE", color: "var(--bp-purple)", items: ["Stereo depth capture", "On-pack compute (SBC)", "NVMe offline cache", "Tailscale client"] },
   { name: "Factory server", tag: "LOCAL", color: "var(--bp-cyan-soft)", items: ["MinIO edge (S3)", "PostgreSQL metadata", "Fleet dashboard", "TrueNAS / Synology RAID"] },
   { name: "Cloud AI pipeline", tag: "CLOUD", color: "var(--bp-cyan)", items: ["Cloudflare R2 storage", "GKE preprocessing", "Auto-labeling + QC", "RLDS / LeRobot export"] },
 ];
@@ -145,7 +145,7 @@ function FactoryPoster() {
 
 export function FactorySystem() {
   return (
-    <Sheet fig="FIG.09 — EGOKIT FACTORY SYSTEM" titleBlock={{ unit: "EGOKIT", title: "FACTORY SYSTEM", dwg: "MK-001 · REV A", scale: "ISO 30°", sheet: "1 OF 1" }}>
+    <Sheet fig="FIG.12 — TBRAIN CAPTURE SYSTEM" titleBlock={{ unit: "TBRAIN", title: "CAPTURE SYSTEM", dwg: "MK-001 · REV A", scale: "ISO 30°", sheet: "1 OF 1" }}>
       <RevealOnScroll>
         <SheetHeading title="A real factory, end to end" lead="Three layers turn raw field capture into standardized datasets: a wearable pack, a local factory server, and a cloud AI pipeline — secured with Tailscale zero-trust." />
       </RevealOnScroll>
