@@ -3,7 +3,7 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import Header from "@/components/common/Header";
 import Footer from "@/components/common/Footer";
-import { HeroFoundry } from "@/components/marketing/sections/foundry/HeroFoundry";
+import { WorkerHero } from "@/components/marketing/sections/foundry/WorkerHero";
 import {
   ProblemSheet,
   WhatWeCaptureSheet,
@@ -13,7 +13,6 @@ import {
   WhyTbrainSheet,
   BeyondRobotics,
 } from "@/components/marketing/sections/foundry/Sheets";
-import { CapturePackExplode } from "@/components/marketing/sections/foundry/PackExplodeScroll";
 import {
   SystemInAction,
   QCFlowSheet,
@@ -80,10 +79,9 @@ export default function Home() {
     <div style={{ background: "var(--bp-bg)" }}>
       <Header />
       <main>
-        <HeroFoundry />
+        <WorkerHero />
         <AnchorStrip />
         <ProblemSheet />
-        <CapturePackExplode />
         <SystemInAction />
         <QCFlowSheet />
         <WhatWeCaptureSheet />
