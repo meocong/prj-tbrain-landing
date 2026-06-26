@@ -1,178 +1,145 @@
 /* ════════════════════════════════════════════════════════════════════
    BLUEPRINT THEME — "The Robotics Data Foundry"
-   Living-engineering-blueprint visual language for the Physical AI
-   homepage + /data/physical-ai. Dark navy "drafting table" + cyan
-   technical line-art + purple brand accent. Self-contained (does not
-   depend on the light/dark theme tokens) so a sheet renders the same
-   regardless of the user's theme.
+   Light "engineering paper" PRIMARY + refined DARK variant. Theme-aware:
+   light values in :root, dark under .dark (site toggles .dark on <html>).
+   Readability-first: faint grid as texture, text always on solid cards.
    ════════════════════════════════════════════════════════════════════ */
 
+/* ── LIGHT (default) — engineering paper ─────────────────────────── */
 :root {
-  /* Surfaces */
-  --bp-bg: #0B0A1F;          /* deep indigo-navy drafting table */
-  --bp-bg-2: #0E0A28;        /* deck navy */
-  --bp-panel: #14122E;       /* raised panel / title block */
-  --bp-panel-2: #1A1740;     /* hover / inner panel */
+  --bp-bg: #F6F6F2;            /* warm paper */
+  --bp-bg-2: #FFFFFF;
+  --bp-surface: #FFFFFF;       /* cards */
+  --bp-surface-2: #FBFBF8;
+  --bp-panel: #FFFFFF;
 
-  /* Grid + lines */
-  --bp-grid: 26px;           /* fine grid pitch */
-  --bp-line: rgba(0, 229, 199, 0.10);
-  --bp-line-strong: rgba(0, 229, 199, 0.22);
-  --bp-edge: rgba(123, 167, 255, 0.16);
+  --bp-grid: 28px;
+  --bp-grid-line: rgba(20, 22, 30, 0.045);   /* very faint */
+  --bp-grid-strong: rgba(20, 22, 30, 0.075);
+  --bp-line: rgba(20, 22, 30, 0.12);          /* borders */
+  --bp-line-strong: rgba(20, 22, 30, 0.18);
 
-  /* Accents */
-  --bp-cyan: #00E5C7;        /* forge / blueprint ink */
-  --bp-cyan-soft: #5EEAD4;
-  --bp-purple: #8B6CF6;
-  --bp-brand: #6C3CF4;
-  --bp-amber: #F5A623;       /* QC reject / warning */
-  --bp-red: #FF5C7A;
+  --bp-ink: #16171C;
+  --bp-ink-dim: #4B4F5A;
+  --bp-ink-faint: #888D99;
 
-  /* Ink (text on navy) */
-  --bp-ink: #E8F0FF;
-  --bp-ink-dim: rgba(232, 240, 255, 0.64);
-  --bp-ink-faint: rgba(232, 240, 255, 0.40);
+  --bp-cyan: #0A9E90;          /* teal — readable on white */
+  --bp-cyan-soft: #0FB7A6;
+  --bp-purple: #6C3CF4;
+  --bp-amber: #B5701A;
+  --bp-red: #D14D63;
+  --bp-on-cyan: #FFFFFF;       /* text on the cyan button */
 
-  /* Glows */
-  --bp-glow-cyan: 0 0 24px rgba(0, 229, 199, 0.28);
-  --bp-glow-purple: 0 0 28px rgba(108, 60, 244, 0.30);
-  --bp-forge: linear-gradient(135deg, #6C3CF4 0%, #00E5C7 100%);
+  --bp-forge: linear-gradient(135deg, #6C3CF4 0%, #0A9E90 100%);
+  --bp-card-shadow: 0 1px 2px rgba(16,17,28,0.05), 0 10px 26px -18px rgba(16,17,28,0.18);
+  --bp-card-shadow-hover: 0 2px 4px rgba(16,17,28,0.06), 0 18px 40px -22px rgba(10,158,144,0.35);
 }
 
-/* ── Graph-paper background ───────────────────────────────────────── */
+/* ── DARK (refined, via .dark on <html>) ─────────────────────────── */
+.dark {
+  --bp-bg: #0E0C24;
+  --bp-bg-2: #14122E;
+  --bp-surface: rgba(26, 23, 64, 0.55);
+  --bp-surface-2: rgba(20, 18, 46, 0.6);
+  --bp-panel: #14122E;
+
+  --bp-grid-line: rgba(0, 229, 199, 0.045);
+  --bp-grid-strong: rgba(0, 229, 199, 0.10);
+  --bp-line: rgba(0, 229, 199, 0.16);
+  --bp-line-strong: rgba(0, 229, 199, 0.26);
+
+  --bp-ink: #EAF0FF;
+  --bp-ink-dim: rgba(234, 240, 255, 0.66);
+  --bp-ink-faint: rgba(234, 240, 255, 0.42);
+
+  --bp-cyan: #00E5C7;
+  --bp-cyan-soft: #5EEAD4;
+  --bp-purple: #8B6CF6;
+  --bp-amber: #F5A623;
+  --bp-red: #FF5C7A;
+  --bp-on-cyan: #06231F;
+
+  --bp-card-shadow: 0 1px 2px rgba(0,0,0,0.3), 0 14px 34px -20px rgba(0,0,0,0.6);
+  --bp-card-shadow-hover: 0 2px 4px rgba(0,0,0,0.35), 0 18px 40px -22px rgba(0,229,199,0.4);
+}
+
+/* ── Graph-paper background (faint, masked) ──────────────────────── */
 .bp-grid {
   background-color: var(--bp-bg);
   background-image:
-    linear-gradient(var(--bp-line) 1px, transparent 1px),
-    linear-gradient(90deg, var(--bp-line) 1px, transparent 1px),
-    linear-gradient(var(--bp-line-strong) 1px, transparent 1px),
-    linear-gradient(90deg, var(--bp-line-strong) 1px, transparent 1px);
+    linear-gradient(var(--bp-grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--bp-grid-line) 1px, transparent 1px),
+    linear-gradient(var(--bp-grid-strong) 1px, transparent 1px),
+    linear-gradient(90deg, var(--bp-grid-strong) 1px, transparent 1px);
   background-size:
     var(--bp-grid) var(--bp-grid),
     var(--bp-grid) var(--bp-grid),
-    calc(var(--bp-grid) * 5) calc(var(--bp-grid) * 5),
-    calc(var(--bp-grid) * 5) calc(var(--bp-grid) * 5);
-}
-.bp-grid-fade {
-  -webkit-mask-image: radial-gradient(ellipse 100% 80% at 50% 30%, #000 35%, transparent 80%);
-  mask-image: radial-gradient(ellipse 100% 80% at 50% 30%, #000 35%, transparent 80%);
+    calc(var(--bp-grid) * 6) calc(var(--bp-grid) * 6),
+    calc(var(--bp-grid) * 6) calc(var(--bp-grid) * 6);
 }
 
 /* ── Mono technical label ─────────────────────────────────────────── */
 .bp-mono {
   font-family: var(--font-mono, "JetBrains Mono", monospace);
   text-transform: uppercase;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.16em;
 }
 .bp-fig {
   font-family: var(--font-mono, monospace);
   text-transform: uppercase;
-  letter-spacing: 0.22em;
+  letter-spacing: 0.2em;
   font-size: 11px;
   color: var(--bp-cyan);
+}
+
+/* ── Card surface (text always sits here, never on bare grid) ────── */
+.bp-card {
+  background: var(--bp-surface);
+  border: 1px solid var(--bp-line);
+  border-radius: 12px;
+  box-shadow: var(--bp-card-shadow);
+}
+.bp-card-hover { transition: transform .22s ease, box-shadow .22s ease, border-color .22s ease; }
+.bp-card-hover:hover {
+  transform: translateY(-2px);
+  border-color: var(--bp-cyan);
+  box-shadow: var(--bp-card-shadow-hover);
 }
 
 /* ── Corner registration ticks (drawing frame) ───────────────────── */
 .bp-frame { position: relative; }
 .bp-frame::before,
 .bp-frame::after {
-  content: "";
-  position: absolute;
-  width: 14px; height: 14px;
-  border-color: var(--bp-line-strong);
-  border-style: solid;
-  pointer-events: none;
+  content: ""; position: absolute; width: 14px; height: 14px;
+  border-color: var(--bp-line-strong); border-style: solid; pointer-events: none;
 }
-.bp-frame::before { top: 10px; left: 10px; border-width: 1px 0 0 1px; }
-.bp-frame::after  { bottom: 10px; right: 10px; border-width: 0 1px 1px 0; }
+.bp-frame::before { top: 12px; left: 12px; border-width: 1px 0 0 1px; }
+.bp-frame::after  { bottom: 12px; right: 12px; border-width: 0 1px 1px 0; }
 
-/* ── Bill-of-materials status chips ──────────────────────────────── */
-.bp-status { font-family: var(--font-mono, monospace); font-size: 10px; letter-spacing: 0.12em; }
+/* ── Status chips ────────────────────────────────────────────────── */
+.bp-status { font-family: var(--font-mono, monospace); font-size: 10px; letter-spacing: 0.1em; }
 .bp-status-stby { color: var(--bp-ink-faint); }
 .bp-status-mov  { color: var(--bp-cyan); }
 .bp-status-sep  { color: var(--bp-amber); }
 
 /* ════════════════════════════════════════════════════════════════════
-   Keyframes
+   Purposeful motion only (draw-in, recording blink). Flow/reveal/count
+   are driven by framer-motion in components.
    ════════════════════════════════════════════════════════════════════ */
-@keyframes bpDrawLine {              /* SVG self-drawing line-art */
-  from { stroke-dashoffset: var(--bp-dash, 1000); }
-  to   { stroke-dashoffset: 0; }
-}
-@keyframes bpScan {                  /* stereo scan sweep */
-  0%   { transform: translateY(-100%); opacity: 0; }
-  10%  { opacity: 1; }
-  90%  { opacity: 1; }
-  100% { transform: translateY(100%); opacity: 0; }
-}
-@keyframes bpNodePulse {             /* pipeline node energize */
-  0%, 100% { opacity: 0.35; }
-  50%      { opacity: 1; box-shadow: var(--bp-glow-cyan); }
-}
-@keyframes bpForgeFlow {             /* data packet down a line */
-  0%   { offset-distance: 0%; opacity: 0; }
-  8%   { opacity: 1; }
-  92%  { opacity: 1; }
-  100% { offset-distance: 100%; opacity: 0; }
-}
-@keyframes bpBlink {
-  0%, 100% { opacity: 1; }
-  50%      { opacity: 0.25; }
-}
-@keyframes bpFloat {
-  0%, 100% { transform: translateY(0); }
-  50%      { transform: translateY(-6px); }
-}
-@keyframes bpDashMarch {
-  to { stroke-dashoffset: -40; }
-}
+@keyframes bpDrawLine { from { stroke-dashoffset: var(--bp-dash, 1000); } to { stroke-dashoffset: 0; } }
+@keyframes bpBlink { 0%,100% { opacity: 1; } 50% { opacity: 0.25; } }
 
-/* utility animation hooks */
-.bp-anim-scan   { animation: bpScan 3.4s cubic-bezier(0.45,0,0.55,1) infinite; }
-.bp-anim-blink  { animation: bpBlink 1.6s steps(1,end) infinite; }
-.bp-anim-float  { animation: bpFloat 5s ease-in-out infinite; }
-.bp-anim-march  { stroke-dasharray: 4 5; animation: bpDashMarch 1.4s linear infinite; }
-
-/* ── Card hover: lift + cyan edge glow ───────────────────────────── */
-.bp-card {
-  transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease, background-color .25s ease;
-}
-.bp-card:hover {
-  transform: translateY(-3px);
-  border-color: var(--bp-cyan) !important;
-  box-shadow: 0 14px 40px -22px rgba(0,229,199,0.5), inset 0 0 0 1px rgba(0,229,199,0.18);
-}
-
-/* ── Self-drawing SVG line-art (reveals like a draftsman's pen) ───── */
+/* self-drawing SVG line-art (diagrams) */
 .bp-draw :is(path, line, rect, circle, polyline) {
-  stroke-dasharray: 900;
-  stroke-dashoffset: 900;
-  animation: bpDrawLine 2.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  stroke-dasharray: 1100; stroke-dashoffset: 1100;
+  animation: bpDrawLine 1.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
+.bp-blink { animation: bpBlink 1.4s steps(1, end) infinite; }   /* REC indicator only */
 
-/* ── Scan sweep overlay (place inside a position:relative box) ────── */
-.bp-scan {
-  position: absolute; left: 0; right: 0; top: 0; height: 42%;
-  pointer-events: none; mix-blend-mode: screen;
-  background: linear-gradient(180deg, transparent, rgba(0,229,199,0.14), transparent);
-  animation: bpScan 3.6s cubic-bezier(0.45,0,0.55,1) infinite;
-}
-
-/* ── Live BOM status pulse ───────────────────────────────────────── */
-@keyframes bpStatusPulse { 0%,100% { opacity: 0.5; } 50% { opacity: 1; } }
-.bp-status-mov { animation: bpStatusPulse 1.5s ease-in-out infinite; }
-.bp-status-sep { animation: bpBlink 1.2s steps(1,end) infinite; }
-
-/* ── Reduced motion: freeze blueprint motion, keep content visible ── */
+/* ── Reduced motion: freeze, keep content visible ────────────────── */
 @media (prefers-reduced-motion: reduce) {
-  .bp-anim-scan,
-  .bp-anim-blink,
-  .bp-anim-float,
-  .bp-anim-march,
-  .bp-scan,
-  .bp-status-mov,
-  .bp-status-sep { animation: none !important; }
-  .bp-card:hover { transform: none !important; }
+  .bp-blink { animation: none !important; }
+  .bp-card-hover:hover { transform: none !important; }
   .bp-draw :is(path, line, rect, circle, polyline) {
     stroke-dashoffset: 0 !important; animation: none !important;
   }

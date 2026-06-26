@@ -65,22 +65,24 @@ export const PROBLEM = {
    ──────────────────────────────────────────────────────────────────── */
 export interface BomItem {
   num: string;       // "01"
-  part: string;      // component name
+  part: string;      // real component name
   spec: string;      // technical spec
+  quality: string;   // why it's good (quality/grade)
+  stream: string;    // the data stream it produces
   role: string;      // what data capability it gives
 }
 
 export const COLLECTION_PACK = {
   fig: "FIG.01 — TBRAIN CAPTURE PACK",
-  title: "Our own capture rig — purpose-built to collect, tuned for the factory",
-  lead: "Mecka and Claru ship concept art. We ship hardware. The Tbrain Capture Pack is developed in-house — device, capture firmware, and data pipeline are all ours. Each worker wears a stereo egocentric pack that records RGB + depth + IMU, timestamps it against a hardware clock, caches offline, and syncs to the factory — at 50 to 500 packs in parallel.",
+  title: "Our own rig — built from best-in-class components",
+  lead: "Mecka and Claru ship concept art. We ship hardware. The Tbrain Capture Pack is our own design — enclosure, capture firmware, and data pipeline are in-house — assembled from research-grade parts. It records synchronized RGB + depth + IMU + audio, timestamps everything to a hardware clock, caches offline, and syncs to the factory — at 50 to 500 packs in parallel.",
   bom: [
-    { num: "01", part: "Stereo depth camera", spec: "Stereo RGB + depth + IMU", role: "First-person capture aligned to the robot's eye view" },
-    { num: "02", part: "On-pack compute (SBC)", spec: "8GB, on-board", role: "Capture, timestamp sync, local pipeline" },
-    { num: "03", part: "NVMe SSD", spec: "256GB cache", role: "Offline-first local buffer — never drop a frame" },
-    { num: "04", part: "Power bank", spec: "20,000mAh PD", role: "A full 8–10h collection shift" },
-    { num: "05", part: "Tbrain belt enclosure", spec: "In-house wearable", role: "Comfortable all-day field capture" },
-    { num: "06", part: "Head-mount rig", spec: "Stabilized mount", role: "Stable egocentric viewpoint" },
+    { num: "01", part: "Intel RealSense D455", spec: "Stereo depth + RGB + IMU", quality: "Global shutter · ~87° FOV · depth ≤ 6m", stream: "RGB · Depth · IMU", role: "Research-grade first-person capture, aligned to the robot's eye view" },
+    { num: "02", part: "GoPro (head-mount)", spec: "Egocentric RGB", quality: "HyperSmooth · up to 5.3K · fisheye ~155° for UMI", stream: "Stabilized RGB", role: "Wide, stable first-person video — UMI-compatible" },
+    { num: "03", part: "Raspberry Pi 5 (8GB)", spec: "On-pack compute", quality: "Quad-core · runs capture + hardware-clock sync", stream: "Sync · timestamps", role: "Captures, synchronizes, runs the local pipeline" },
+    { num: "04", part: "NVMe SSD (256GB)", spec: "Offline cache", quality: "High-throughput, never drops a frame", stream: "Buffered episodes", role: "Offline-first local buffer in the field" },
+    { num: "05", part: "Power bank (20,000mAh PD)", spec: "Field power", quality: "A full 8–10h collection shift", stream: "—", role: "All-day capture without a tether" },
+    { num: "06", part: "Tbrain belt enclosure", spec: "In-house, 3D-printed", quality: "Ergonomic, all-day wearable — our design", stream: "—", role: "Houses the rig comfortably for field operators" },
   ] as BomItem[],
   specs: [
     { k: "Hardware-clock sync", v: "Per-frame timestamp alignment across every stream" },
@@ -511,5 +513,76 @@ export const PARTNERS = {
     { k: "Workshops & repair", v: "Assembly, tool use, fine manipulation." },
     { k: "Farms & agriculture", v: "Sorting, harvesting, packing — outdoor variability." },
     { k: "Vocational schools & industrial parks", v: "Fast, ethical staffing with transparent wages." },
+  ],
+} as const;
+
+/* ────────────────────────────────────────────────────────────────────
+   What we capture — data types & value (Mecka "World Model Inputs" style)
+   ──────────────────────────────────────────────────────────────────── */
+export interface WmInput { k: string; from: string; v: string; }
+
+export const WORLD_MODEL_INPUTS = {
+  fig: "FIG.06 — WHAT WE CAPTURE",
+  title: "Every input a world model or VLA needs",
+  lead: "Raw video isn't enough. We deliver ten synchronized, model-ready data types — the inputs a robot model actually trains on — labeled and QC'd, not just recorded.",
+  inputs: [
+    { k: "Pixel & appearance", from: "RGB", v: "Texture, objects, materials — what the scene looks like." },
+    { k: "Depth & spatial", from: "RealSense depth", v: "3D geometry, distances, grasp points." },
+    { k: "Motion & dynamics", from: "IMU 200 Hz", v: "Acceleration, rotation, contact events." },
+    { k: "Hand & gripper action", from: "3D pose", v: "The action being performed — frame by frame." },
+    { k: "Egomotion & viewpoint", from: "SLAM / VIO", v: "Camera & head trajectory, drift-corrected." },
+    { k: "Sound & voice", from: "Audio", v: "Operator narration, intent, ambient cues." },
+    { k: "Task semantics", from: "Language", v: "What the task is, step by step." },
+    { k: "Action conditioning", from: "Synced actions", v: "(frame, action) pairs — the world-model fuel." },
+    { k: "Outcome supervision", from: "Success / fail + QC", v: "Did it work — verified, not guessed." },
+    { k: "Object & scene", from: "Segmentation", v: "Masks, tracking, scene parsing." },
+  ] as WmInput[],
+} as const;
+
+/* The QC flow (with gates + what gets rejected) */
+export interface QcStep { step: string; title: string; note: string; gate: string; rejects?: string[]; }
+
+export const QC_FLOW = {
+  fig: "FIG.05·B — QC FLOW",
+  title: "Where we reject what others ship",
+  lead: "Cheap farms ship whatever they record. Our QC flow gates every batch — an AI filter kills broken demos before a human looks, then three human layers verify the rest.",
+  steps: [
+    { step: "01", title: "Ingest & calibrate", note: "Streams aligned to the hardware clock; provenance attached.", gate: "Calibration + sync check" },
+    { step: "02", title: "AI confidence filter", note: "A model scores every episode and auto-rejects the broken 20–30%.", gate: "Confidence ≥ threshold", rejects: ["Sync drift", "Occluded hands", "Tracking loss", "Motion blur"] },
+    { step: "03", title: "L1 annotate", note: "Language, segmentation, success/fail — to a checklist.", gate: "Checklist pass" },
+    { step: "04", title: "L2 review", note: "A second reviewer verifies every accepted episode.", gate: "Reviewer sign-off" },
+    { step: "05", title: "L3 PM audit", note: "10% sampled audit holds the batch to standard.", gate: "Pass-rate ≥ 85%" },
+    { step: "06", title: "Standardize & deliver", note: "Exported to RLDS / LeRobot with a batch report.", gate: "Schema + acceptance" },
+  ] as QcStep[],
+} as const;
+
+/* Real data, not concept — 6 actual sample types */
+export interface RealSample { name: string; img: string; note: string; }
+
+export const REAL_SAMPLES = {
+  fig: "FIG.07 — REAL DATA, NOT CONCEPT",
+  title: "Samples we've actually collected",
+  lead: "Six real robot-data types, downloadable and inspectable in LeRobot / RLDS — proof the pipeline ships, not slideware.",
+  montage: "/images/real-samples/montage.png",
+  items: [
+    { name: "UMI · egocentric gripper", img: "/images/real-samples/umi.png", note: "Fisheye + 6-DoF gripper pose" },
+    { name: "ALOHA · bimanual teleop", img: "/images/real-samples/aloha.png", note: "4-camera + joint trajectories" },
+    { name: "Mobile manipulation", img: "/images/real-samples/mobile.png", note: "Navigation + manipulation" },
+    { name: "Open-X · single-arm real", img: "/images/real-samples/openx.png", note: "Real arm + depth" },
+    { name: "Simulation teleop", img: "/images/real-samples/sim.png", note: "Sim-to-real seed data" },
+    { name: "Push-T · 2D", img: "/images/real-samples/pusht.png", note: "State / action / reward synced" },
+  ] as RealSample[],
+} as const;
+
+/* Why Tbrain — Vietnam edge */
+export const VIETNAM_EDGE = {
+  fig: "FIG.10 — WHY TBRAIN",
+  title: "Foundry quality, Vietnam economics",
+  lead: "We don't race to the bottom on price. We win on quality, reliability, and a sourcing base no US-centric vendor has.",
+  items: [
+    { k: "3–5× labor cost advantage", v: "Survive at prices where US rivals lose money — without cutting quality." },
+    { k: "Dexterous, disciplined workforce", v: "Electronics-assembly and craft operators used to precise manual work." },
+    { k: "Environments synthetic can't fake", v: "Asian kitchens, markets, workshops, farms — diversity that beats raw count." },
+    { k: "Reliability, not just cheap", v: "AI-native QC, 3-layer review, zero-trust delivery, ISO→SOC 2 roadmap." },
   ],
 } as const;
