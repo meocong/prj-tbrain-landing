@@ -2,12 +2,27 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Sparkles, ChevronDown } from "lucide-react";
 import { VideoBackground } from "@/components/marketing/fx/VideoBackground";
+import type { CSSProperties } from "react";
+
+/* The hero is a dark cinematic video band — its text must stay light in BOTH themes.
+   Scope the dark --bp-* tokens to this section so the rest of the page can be light. */
+const HERO_DARK_TOKENS = {
+  background: "#020617",
+  color: "var(--bp-ink)",
+  minHeight: "100vh",
+  "--bp-bg": "#0E0C24", "--bp-bg-2": "#14122E",
+  "--bp-surface": "rgba(26,23,64,0.55)", "--bp-surface-2": "rgba(20,18,46,0.6)", "--bp-panel": "#14122E",
+  "--bp-grid-line": "rgba(255,255,255,0.05)", "--bp-grid-strong": "rgba(255,255,255,0.10)",
+  "--bp-line": "rgba(255,255,255,0.16)", "--bp-line-strong": "rgba(255,255,255,0.26)",
+  "--bp-ink": "#EAF0FF", "--bp-ink-dim": "rgba(234,240,255,0.72)", "--bp-ink-faint": "rgba(234,240,255,0.45)",
+  "--bp-cyan": "#00E5C7", "--bp-cyan-soft": "#5EEAD4", "--bp-purple": "#8B6CF6", "--bp-amber": "#F5A623", "--bp-red": "#FF5C7A",
+} as CSSProperties;
 
 export function HeroPhysical() {
   return (
     <section
       className="relative overflow-hidden"
-      style={{ background: "#020617", minHeight: "100vh", color: "white" }}
+      style={HERO_DARK_TOKENS}
     >
       <VideoBackground
         sources={[
@@ -39,15 +54,15 @@ export function HeroPhysical() {
         className="absolute inset-0 pointer-events-none"
         style={{
           backgroundImage:
-            "linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px)",
+            "linear-gradient(var(--bp-grid-line) 1px, transparent 1px), linear-gradient(90deg, var(--bp-grid-line) 1px, transparent 1px)",
           backgroundSize: "80px 80px",
           maskImage: "radial-gradient(ellipse at center, black 40%, transparent 75%)",
           WebkitMaskImage: "radial-gradient(ellipse at center, black 40%, transparent 75%)",
         }}
       />
 
-      <div className="container mx-auto relative z-10 min-h-screen px-4 pt-28 pb-16">
-        <div className="grid items-center gap-10 md:grid-cols-[1fr_420px] md:gap-12 md:pt-12">
+      <div className="container mx-auto relative z-10 flex min-h-screen items-center px-4 pt-28 pb-20">
+        <div className="grid w-full items-center gap-10 md:grid-cols-[1fr_420px] md:gap-12">
           <div>
             <div
               className="hero-reveal hero-reveal-0 mb-6 inline-flex items-center gap-2 rounded-full px-3.5 py-1.5 text-xs font-medium"
@@ -61,7 +76,7 @@ export function HeroPhysical() {
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full" style={{ background: "#10B981", opacity: 0.6 }} />
                 <span className="relative inline-flex h-2 w-2 rounded-full" style={{ background: "#10B981" }} />
               </span>
-              <span style={{ color: "rgba(226,232,240,0.92)" }}>Physical AI &amp; Robotics</span>
+              <span style={{ color: "var(--bp-ink)" }}>Physical AI &amp; Robotics</span>
               <Sparkles className="h-3 w-3" style={{ color: "#34D399" }} />
             </div>
 
@@ -85,12 +100,12 @@ export function HeroPhysical() {
 
             <p
               className="hero-reveal hero-reveal-2 mt-6 max-w-xl text-base md:text-lg leading-relaxed"
-              style={{ color: "rgba(226,232,240,0.72)" }}
+              style={{ color: "var(--bp-ink-dim)" }}
             >
-              Custom demonstration data programs for teams training humanoids
-              to cook, clean, fold laundry, and work warehouse floors. Tell us
-              the target tasks, robot body, and export format — we scope the
-              capture pipeline around your training run.
+              Custom demonstration-data programs for teams training humanoids —
+              cooking, cleaning, folding laundry, warehouse work. Tell us the
+              tasks, robot body, and export format; we scope the capture
+              pipeline to your run.
             </p>
 
             <div className="hero-reveal hero-reveal-3 mt-8 flex flex-col items-start gap-3 sm:flex-row">
@@ -109,9 +124,9 @@ export function HeroPhysical() {
                 href="#modalities"
                 className="inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-semibold transition-colors"
                 style={{
-                  background: "rgba(255,255,255,0.05)",
-                  border: "1px solid rgba(255,255,255,0.16)",
-                  color: "white",
+                  background: "var(--bp-surface)",
+                  border: "1px solid var(--bp-line)",
+                  color: "var(--bp-ink)",
                   backdropFilter: "blur(10px)",
                 }}
               >
@@ -121,14 +136,14 @@ export function HeroPhysical() {
 
             <div
               className="hero-reveal hero-reveal-4 mt-10 flex flex-wrap items-center gap-x-5 gap-y-2 text-xs md:text-sm uppercase tracking-wider"
-              style={{ color: "rgba(226,232,240,0.55)" }}
+              style={{ color: "var(--bp-ink-dim)" }}
             >
               <span>Optical MOCAP</span>
-              <span className="h-3 w-px" style={{ background: "rgba(255,255,255,0.2)" }} />
+              <span className="h-3 w-px" style={{ background: "var(--bp-line)" }} />
               <span>Multi-modal</span>
-              <span className="h-3 w-px" style={{ background: "rgba(255,255,255,0.2)" }} />
+              <span className="h-3 w-px" style={{ background: "var(--bp-line)" }} />
               <span>Scene-aware</span>
-              <span className="h-3 w-px" style={{ background: "rgba(255,255,255,0.2)" }} />
+              <span className="h-3 w-px" style={{ background: "var(--bp-line)" }} />
               <span>Sim-ready exports</span>
             </div>
           </div>
@@ -181,7 +196,7 @@ export function HeroPhysical() {
 
         <div
           className="hero-reveal hero-reveal-5 absolute bottom-6 left-1/2 flex -translate-x-1/2 flex-col items-center gap-1"
-          style={{ color: "rgba(226,232,240,0.4)", animationIterationCount: 1 }}
+          style={{ color: "var(--bp-ink-faint)", animationIterationCount: 1 }}
         >
           <span className="text-[10px] uppercase tracking-widest">Scroll</span>
           <ChevronDown className="h-4 w-4" />

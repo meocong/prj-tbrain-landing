@@ -238,6 +238,48 @@ export const STATIC_IMAGES: StaticImage[] = [
     "size_bytes": 77862
   },
   {
+    "path": "/images/env/electronics.jpg",
+    "name": "electronics",
+    "ext": "jpg",
+    "size_bytes": 262439
+  },
+  {
+    "path": "/images/env/hand.jpg",
+    "name": "hand",
+    "ext": "jpg",
+    "size_bytes": 217092
+  },
+  {
+    "path": "/images/env/kitchen.jpg",
+    "name": "kitchen",
+    "ext": "jpg",
+    "size_bytes": 220615
+  },
+  {
+    "path": "/images/env/pov.jpg",
+    "name": "pov",
+    "ext": "jpg",
+    "size_bytes": 301656
+  },
+  {
+    "path": "/images/env/sorting.jpg",
+    "name": "sorting",
+    "ext": "jpg",
+    "size_bytes": 242948
+  },
+  {
+    "path": "/images/env/textile.jpg",
+    "name": "textile",
+    "ext": "jpg",
+    "size_bytes": 256461
+  },
+  {
+    "path": "/images/env/warehouse.jpg",
+    "name": "warehouse",
+    "ext": "jpg",
+    "size_bytes": 232580
+  },
+  {
     "path": "/images/facebook.png",
     "name": "facebook",
     "ext": "png",
@@ -298,10 +340,46 @@ export const STATIC_IMAGES: StaticImage[] = [
     "size_bytes": 271106
   },
   {
+    "path": "/images/modalities/mocap.jpg",
+    "name": "mocap",
+    "ext": "jpg",
+    "size_bytes": 82961
+  },
+  {
+    "path": "/images/modalities/qa.jpg",
+    "name": "qa",
+    "ext": "jpg",
+    "size_bytes": 97203
+  },
+  {
+    "path": "/images/modalities/spatial.jpg",
+    "name": "spatial",
+    "ext": "jpg",
+    "size_bytes": 140534
+  },
+  {
+    "path": "/images/modalities/teleop.jpg",
+    "name": "teleop",
+    "ext": "jpg",
+    "size_bytes": 87969
+  },
+  {
+    "path": "/images/modalities/umi.jpg",
+    "name": "umi",
+    "ext": "jpg",
+    "size_bytes": 73281
+  },
+  {
     "path": "/images/office.png",
     "name": "office",
     "ext": "png",
     "size_bytes": 2439245
+  },
+  {
+    "path": "/images/parts/headrig.jpg",
+    "name": "headrig",
+    "ext": "jpg",
+    "size_bytes": 214962
   },
   {
     "path": "/images/physical-poster.jpg",
@@ -382,6 +460,48 @@ export const STATIC_IMAGES: StaticImage[] = [
     "size_bytes": 52839
   },
   {
+    "path": "/images/real-samples/aloha.png",
+    "name": "aloha",
+    "ext": "png",
+    "size_bytes": 108911
+  },
+  {
+    "path": "/images/real-samples/mobile.png",
+    "name": "mobile",
+    "ext": "png",
+    "size_bytes": 82340
+  },
+  {
+    "path": "/images/real-samples/montage.png",
+    "name": "montage",
+    "ext": "png",
+    "size_bytes": 388564
+  },
+  {
+    "path": "/images/real-samples/openx.png",
+    "name": "openx",
+    "ext": "png",
+    "size_bytes": 158522
+  },
+  {
+    "path": "/images/real-samples/pusht.png",
+    "name": "pusht",
+    "ext": "png",
+    "size_bytes": 35942
+  },
+  {
+    "path": "/images/real-samples/sim.png",
+    "name": "sim",
+    "ext": "png",
+    "size_bytes": 19790
+  },
+  {
+    "path": "/images/real-samples/umi.png",
+    "name": "umi",
+    "ext": "png",
+    "size_bytes": 156553
+  },
+  {
     "path": "/images/robot-hand.jpg",
     "name": "robot-hand",
     "ext": "jpg",
@@ -398,6 +518,42 @@ export const STATIC_IMAGES: StaticImage[] = [
     "name": "robotics-hero",
     "ext": "jpg",
     "size_bytes": 50107
+  },
+  {
+    "path": "/images/samples/cup.jpg",
+    "name": "cup",
+    "ext": "jpg",
+    "size_bytes": 20569
+  },
+  {
+    "path": "/images/samples/defect.jpg",
+    "name": "defect",
+    "ext": "jpg",
+    "size_bytes": 19720
+  },
+  {
+    "path": "/images/samples/door.jpg",
+    "name": "door",
+    "ext": "jpg",
+    "size_bytes": 11105
+  },
+  {
+    "path": "/images/samples/fridge.jpg",
+    "name": "fridge",
+    "ext": "jpg",
+    "size_bytes": 18112
+  },
+  {
+    "path": "/images/samples/wipe.jpg",
+    "name": "wipe",
+    "ext": "jpg",
+    "size_bytes": 15435
+  },
+  {
+    "path": "/images/samples/workstation.jpg",
+    "name": "workstation",
+    "ext": "jpg",
+    "size_bytes": 17936
   },
   {
     "path": "/images/scientist-lab.jpg",
@@ -434,5 +590,11 @@ export const STATIC_IMAGES: StaticImage[] = [
     "name": "twitter",
     "ext": "png",
     "size_bytes": 488
+  },
+  {
+    "path": "/images/worker-hero-poster.jpg",
+    "name": "worker-hero-poster",
+    "ext": "jpg",
+    "size_bytes": 115436
   }
 ];

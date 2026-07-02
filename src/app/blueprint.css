@@ -76,6 +76,48 @@
     var(--bp-grid) var(--bp-grid),
     calc(var(--bp-grid) * 6) calc(var(--bp-grid) * 6),
     calc(var(--bp-grid) * 6) calc(var(--bp-grid) * 6);
+  animation: bp-grid-drift 14s linear infinite;
+}
+
+/* Ambient "living blueprint" — the fine grid drifts one cell (seamless loop),
+   the coarse grid stays put. Faint + slow, so it never competes with content. */
+@keyframes bp-grid-drift {
+  to {
+    background-position:
+      var(--bp-grid) var(--bp-grid),
+      var(--bp-grid) var(--bp-grid),
+      0 0,
+      0 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .bp-grid { animation: none; }
+}
+
+/* Ambient aurora — a slow drifting cyan/purple glow behind Sheet content.
+   Sits at z-0 (content is z-10), pointer-events-none, faint — never disturbs. */
+.bp-aurora {
+  position: absolute;
+  inset: -20%;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(38% 44% at 25% 30%, color-mix(in srgb, var(--bp-cyan) 14%, transparent) 0%, transparent 62%),
+    radial-gradient(42% 50% at 78% 68%, color-mix(in srgb, var(--bp-purple) 13%, transparent) 0%, transparent 62%);
+  animation: bp-aurora-drift 20s ease-in-out infinite alternate;
+  will-change: transform;
+}
+@keyframes bp-aurora-drift {
+  from { transform: translate3d(-3%, -2%, 0) scale(1.05); }
+  to   { transform: translate3d(3%, 3%, 0) scale(1.16); }
+}
+
+/* Slowly rotating isometric axis gizmo (the XYZ marker). */
+.bp-axis { transform-origin: 50% 50%; animation: bp-axis-rot 30s linear infinite; }
+@keyframes bp-axis-rot { to { transform: rotate(360deg); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .bp-aurora, .bp-axis { animation: none; }
 }
 
 /* ── Mono technical label ─────────────────────────────────────────── */
@@ -105,6 +147,17 @@
   border-color: var(--bp-cyan);
   box-shadow: var(--bp-card-shadow-hover);
 }
+
+/* ── Interactive row hover (diagram / module rows) ───────────────── */
+.bp-row { transition: background .18s ease, transform .18s ease, box-shadow .18s ease; }
+.bp-row:hover {
+  background: color-mix(in srgb, var(--bp-cyan) 14%, transparent) !important;
+  transform: translateX(3px);
+  box-shadow: inset 2px 0 0 var(--bp-cyan);
+}
+
+/* Hero accent glow (screen-blend) is tuned for dark — dim it on light paper. */
+html:not(.dark) .physical-hero-glow { opacity: 0.3; }
 
 /* ── Corner registration ticks (drawing frame) ───────────────────── */
 .bp-frame { position: relative; }

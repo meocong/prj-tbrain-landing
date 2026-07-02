@@ -1,16 +1,27 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowRight, Check, X } from "lucide-react";
+import { ArrowRight, Check, X, Zap, Scan, Cpu, Boxes, Bot, Rocket, Globe, ShieldCheck } from "lucide-react";
 import { Sheet, SheetHeading, FigLabel, Annotation } from "@/components/marketing/blueprint/kit";
 import { RevealOnScroll, StaggerContainer, STAGGER_ITEM } from "@/components/marketing/fx/RevealOnScroll";
 import { CountUp } from "@/components/marketing/fx/CountUp";
 import { PackDiagram } from "./PackDiagram";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import {
   PROBLEM, COLLECTION_PACK, WORLD_MODEL_INPUTS, REAL_SAMPLES, DATA_LADDER,
-  DIRECTIONS, DIRECTIONS_SYNTH, VIETNAM_EDGE, PROOF_POINTS, AVAILABILITY, PARTNERS,
+  DIRECTIONS, DIRECTIONS_SYNTH, USE_CASES, VIETNAM_EDGE, AVAILABILITY,
 } from "@/lib/landing/physical-ai";
+
+const USECASE_ICONS = [Cpu, Boxes, Bot, Rocket];
+const EDGE_ICONS = [Scan, ShieldCheck, Globe, Boxes, Zap];
+const SCENES = [
+  { img: "/images/env/electronics.jpg", name: "Electronics assembly", note: "Soldering · fine parts" },
+  { img: "/images/env/textile.jpg", name: "Textile & garment", note: "Folding · fabric" },
+  { img: "/images/env/sorting.jpg", name: "Sorting station", note: "Pick · place · sort" },
+  { img: "/images/env/kitchen.jpg", name: "Commercial kitchen", note: "Knife work · plating" },
+  { img: "/images/env/warehouse.jpg", name: "Warehouse", note: "Picking · scanning" },
+  { img: "/images/env/hand.jpg", name: "Dexterous manipulation", note: "Hand-object · wrist cam" },
+];
 
 /* ════════════════════════ Problem ════════════════════════ */
 export function ProblemSheet() {
@@ -81,19 +92,30 @@ export function WhatWeCaptureSheet() {
 
 /* ════════════════════ Real data, not concept ════════════════════ */
 export function RealSamplesSheet() {
+  const reduce = useReducedMotion() ?? false;
   return (
     <Sheet fig={REAL_SAMPLES.fig} axis={false}>
       <RevealOnScroll><SheetHeading title={REAL_SAMPLES.title} lead={REAL_SAMPLES.lead} /></RevealOnScroll>
-      <StaggerContainer className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      <StaggerContainer className="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {REAL_SAMPLES.items.map((s) => (
-          <motion.div key={s.name} variants={STAGGER_ITEM} className="bp-card bp-card-hover overflow-hidden">
-            <div style={{ aspectRatio: "16 / 10", background: "var(--bp-surface-2)", overflow: "hidden" }}>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={s.img} alt={s.name} loading="lazy" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+          <motion.div key={s.name} variants={STAGGER_ITEM} className="bp-card bp-card-hover overflow-hidden" style={s.reject ? { borderColor: "var(--bp-amber)" } : undefined}>
+            <div className="relative" style={{ aspectRatio: "16 / 10", background: "#0a0a14", overflow: "hidden" }}>
+              {reduce ? (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img src={s.poster} alt={s.name} loading="lazy" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+              ) : (
+                // eslint-disable-next-line jsx-a11y/media-has-caption
+                <video autoPlay loop muted playsInline preload="none" poster={s.poster} style={{ width: "100%", height: "100%", objectFit: "cover" }}>
+                  <source src={s.video} type="video/mp4" />
+                </video>
+              )}
+              <span className="bp-mono absolute left-2 top-2 inline-flex items-center gap-1 rounded px-1.5 py-0.5" style={{ fontSize: 8, color: s.reject ? "var(--bp-amber)" : "#fff", background: "rgba(0,0,0,0.55)" }}>
+                {s.reject ? "✕ REJECTED" : "● REC"}
+              </span>
             </div>
             <div className="p-4">
               <div style={{ fontWeight: 700, fontSize: 14, color: "var(--bp-ink)" }}>{s.name}</div>
-              <div className="bp-mono mt-1" style={{ fontSize: 9.5, color: "var(--bp-ink-faint)" }}>{s.note}</div>
+              <div className="bp-mono mt-1" style={{ fontSize: 9.5, color: s.reject ? "var(--bp-amber)" : "var(--bp-ink-faint)" }}>{s.note}</div>
             </div>
           </motion.div>
         ))}
@@ -102,44 +124,97 @@ export function RealSamplesSheet() {
   );
 }
 
-/* ════════════════════ Data ladder + pricing completeness ════════════════════ */
-const LEVELS = [
-  { lvl: "RAW", desc: "Unprocessed video / episode from the field." },
-  { lvl: "+ SENSOR", desc: "Synced, calibrated, standardized multi-sensor." },
-  { lvl: "+ LABEL", desc: "Language, success/fail, segmentation." },
-  { lvl: "+ VERIFIED", desc: "AI-filtered, 3-layer QA'd, RLDS/LeRobot." },
-];
+/* ════════════════════ Sample captures (real environments) ════════════════════ */
+export function SampleCapturesSheet() {
+  return (
+    <Sheet fig="FIG.02 — CAPTURE ENVIRONMENTS" axis={false}>
+      <RevealOnScroll>
+        <SheetHeading
+          title="The environments we capture across"
+          lead="The real, non-residential settings our operator network runs in — factories, commercial kitchens, warehouses, and workshops — the environment diversity world models are starved for."
+        />
+      </RevealOnScroll>
+      <StaggerContainer className="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {SCENES.map((s) => (
+          <motion.div key={s.name} variants={STAGGER_ITEM} className="bp-card bp-card-hover group relative overflow-hidden transition-[transform,box-shadow] duration-300 will-change-transform hover:-translate-y-1.5 hover:shadow-[0_24px_50px_-20px_rgba(0,229,199,0.45)]" style={{ padding: 0 }}>
+            <div className="relative" style={{ aspectRatio: "16 / 10", overflow: "hidden" }}>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={s.img} alt={s.name} loading="lazy" className="h-full w-full object-cover transition-transform duration-[800ms] ease-out group-hover:scale-110" />
+              <div className="absolute inset-0 transition-opacity duration-300 group-hover:opacity-95" style={{ background: "linear-gradient(to top, rgba(5,5,12,0.88), rgba(5,5,12,0.1) 55%, transparent)" }} />
+              <div aria-hidden className="pointer-events-none absolute inset-y-0 -left-1/3 w-1/3 -skew-x-12 opacity-0 transition-all duration-700 ease-out group-hover:left-[115%] group-hover:opacity-100" style={{ background: "linear-gradient(90deg, transparent, rgba(255,255,255,0.18), transparent)" }} />
+              <div aria-hidden className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100" style={{ boxShadow: "inset 0 0 0 1px color-mix(in srgb, var(--bp-cyan) 50%, transparent)" }} />
+              <div className="absolute inset-x-0 bottom-0 p-3.5 transition-transform duration-300 group-hover:-translate-y-0.5">
+                <div style={{ fontWeight: 700, fontSize: 14.5, color: "#fff" }}>{s.name}</div>
+                <div className="bp-mono mt-0.5" style={{ fontSize: 9.5, color: "rgba(255,255,255,0.72)" }}>{s.note}</div>
+              </div>
+            </div>
+          </motion.div>
+        ))}
+      </StaggerContainer>
+    </Sheet>
+  );
+}
 
+/* ════════════════════ Data for what you're building (merged) ════════════════════ */
+export function DataForWhatYouBuild() {
+  return (
+    <Sheet fig="FIG.06 — DATA FOR WHAT YOU'RE BUILDING">
+      <RevealOnScroll><SheetHeading title="Whatever you're building, here's the data it needs" lead="Raw video isn't enough. We deliver model-ready inputs — labeled, synchronized, QC'd — matched to exactly what you're training." /></RevealOnScroll>
+
+      <RevealOnScroll delay={0.1}>
+        <div className="mt-10">
+          <div className="bp-mono mb-3" style={{ fontSize: 10, color: "var(--bp-ink-faint)" }}>MATCHED TO WHAT YOU'RE BUILDING</div>
+          <StaggerContainer className="grid gap-4 sm:grid-cols-2">
+            {USE_CASES.map((u, i) => {
+              const Icon = USECASE_ICONS[i] ?? Cpu;
+              return (
+                <motion.div key={u.segment} variants={STAGGER_ITEM} className="bp-card bp-card-hover p-5">
+                  <div className="flex items-center gap-2.5">
+                    <span className="flex h-9 w-9 items-center justify-center rounded-lg" style={{ background: "color-mix(in srgb, var(--bp-cyan) 12%, transparent)" }}><Icon className="h-4.5 w-4.5" style={{ color: "var(--bp-cyan)", height: 18, width: 18 }} /></span>
+                    <div style={{ fontWeight: 700, fontSize: 15, color: "var(--bp-ink)" }}>{u.segment}</div>
+                  </div>
+                  <div className="mt-3 flex flex-wrap gap-1.5">
+                    {u.data.map((d) => (
+                      <span key={d} className="bp-mono rounded-full px-2.5 py-1" style={{ fontSize: 9, color: "var(--bp-cyan)", background: "color-mix(in srgb, var(--bp-cyan) 10%, transparent)" }}>{d}</span>
+                    ))}
+                  </div>
+                </motion.div>
+              );
+            })}
+          </StaggerContainer>
+
+          <div className="mt-8">
+            <Link href="/data/physical-ai" className="inline-flex items-center gap-2 rounded-lg px-5 py-2.5 text-sm font-bold" style={{ fontFamily: "var(--font-heading)", background: "var(--bp-cyan)", color: "var(--bp-on-cyan)" }}>
+              Explore all 11 research directions <ArrowRight className="h-4 w-4" />
+            </Link>
+          </div>
+        </div>
+      </RevealOnScroll>
+    </Sheet>
+  );
+}
+
+/* ════════════════════ Data ladder ════════════════════ */
 export function LadderSheet() {
   return (
     <Sheet fig={DATA_LADDER.fig}>
       <RevealOnScroll><SheetHeading title={DATA_LADDER.title} lead={DATA_LADDER.lead} /></RevealOnScroll>
       <div className="mt-12 grid gap-3">
-        {DATA_LADDER.rungs.map((r, i) => (
-          <RevealOnScroll key={r.step} delay={i * 0.05}>
-            <div className="bp-card flex flex-col gap-3 p-5 sm:flex-row sm:items-center" style={{ marginLeft: `${i * 5}%` }}>
-              <span className="bp-mono" style={{ fontSize: 12, color: "var(--bp-cyan)" }}>{r.step}</span>
-              <span className="flex-1" style={{ fontWeight: 700, color: "var(--bp-ink)" }}>{r.name}</span>
-              <span className="bp-mono" style={{ fontSize: 10, color: "var(--bp-ink-dim)" }}>{r.difficulty}</span>
-              <span className="bp-mono" style={{ fontSize: 10, color: "var(--bp-ink-faint)" }}>{r.buyers}</span>
-              <span className="bp-mono rounded-full px-3 py-1" style={{ fontSize: 10, color: "var(--bp-cyan)", background: "color-mix(in srgb, var(--bp-cyan) 12%, transparent)" }}>{r.phase}</span>
-            </div>
-          </RevealOnScroll>
-        ))}
-      </div>
-      <RevealOnScroll delay={0.1}>
-        <div className="mt-8">
-          <div className="bp-mono mb-3" style={{ fontSize: 10, color: "var(--bp-ink-faint)" }}>PRICING BY COMPLETENESS — buy the level you need</div>
-          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-            {LEVELS.map((l, i) => (
-              <div key={l.lvl} className="bp-card p-4" style={{ borderColor: i === LEVELS.length - 1 ? "var(--bp-cyan)" : undefined }}>
-                <div className="bp-mono" style={{ fontSize: 12, color: i === LEVELS.length - 1 ? "var(--bp-cyan)" : "var(--bp-ink)" }}>{l.lvl}</div>
-                <p className="mt-1.5" style={{ fontSize: 12.5, lineHeight: 1.5, color: "var(--bp-ink-dim)" }}>{l.desc}</p>
+        {DATA_LADDER.rungs.map((r, i) => {
+          const pc = r.phase === "Now" ? "var(--bp-cyan)" : r.phase.startsWith("Year") ? "var(--bp-amber)" : "var(--bp-purple)";
+          return (
+            <RevealOnScroll key={r.step} delay={i * 0.05}>
+              <div className="bp-card flex flex-col gap-3 p-5 sm:flex-row sm:items-center" style={{ marginLeft: `${i * 5}%` }}>
+                <span className="bp-mono" style={{ fontSize: 12, color: "var(--bp-cyan)" }}>{r.step}</span>
+                <span className="flex-1" style={{ fontWeight: 700, color: "var(--bp-ink)" }}>{r.name}</span>
+                <span className="bp-mono" style={{ fontSize: 10, color: "var(--bp-ink-dim)" }}>{r.difficulty}</span>
+                <span className="bp-mono" style={{ fontSize: 10, color: "var(--bp-ink-faint)" }}>{r.buyers}</span>
+                <span className="bp-mono rounded-full px-3 py-1" style={{ fontSize: 10, color: pc, background: `color-mix(in srgb, ${pc} 14%, transparent)`, border: `1px solid color-mix(in srgb, ${pc} 30%, transparent)` }}>{r.phase}</span>
               </div>
-            ))}
-          </div>
-        </div>
-      </RevealOnScroll>
+            </RevealOnScroll>
+          );
+        })}
+      </div>
     </Sheet>
   );
 }
@@ -188,13 +263,17 @@ export function WhyTbrainSheet() {
     <Sheet fig={VIETNAM_EDGE.fig}>
       <RevealOnScroll><SheetHeading title={VIETNAM_EDGE.title} lead={VIETNAM_EDGE.lead} /></RevealOnScroll>
 
-      <StaggerContainer className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        {VIETNAM_EDGE.items.map((e) => (
-          <motion.div key={e.k} variants={STAGGER_ITEM} className="bp-card bp-card-hover p-5">
-            <div style={{ fontWeight: 700, color: "var(--bp-cyan)" }}>{e.k}</div>
-            <p className="mt-1.5" style={{ fontSize: 13, lineHeight: 1.55, color: "var(--bp-ink-dim)" }}>{e.v}</p>
-          </motion.div>
-        ))}
+      <StaggerContainer className="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-5">
+        {VIETNAM_EDGE.items.map((e, i) => {
+          const Icon = EDGE_ICONS[i] ?? ShieldCheck;
+          return (
+            <motion.div key={e.k} variants={STAGGER_ITEM} className="bp-card bp-card-hover p-5">
+              <span className="flex h-10 w-10 items-center justify-center rounded-xl" style={{ background: "color-mix(in srgb, var(--bp-cyan) 12%, transparent)" }}><Icon style={{ color: "var(--bp-cyan)", height: 20, width: 20 }} /></span>
+              <div className="mt-3" style={{ fontWeight: 700, fontSize: 14.5, lineHeight: 1.25, color: "var(--bp-ink)" }}>{e.k}</div>
+              <div className="bp-mono mt-1.5" style={{ fontSize: 9.5, lineHeight: 1.4, color: "var(--bp-ink-faint)" }}>{e.v}</div>
+            </motion.div>
+          );
+        })}
       </StaggerContainer>
 
       {/* availability stats */}
@@ -208,31 +287,6 @@ export function WhyTbrainSheet() {
               <div className="bp-mono mt-1" style={{ fontSize: 9.5, color: "var(--bp-ink-faint)" }}>{s.k}</div>
             </div>
           ))}
-        </div>
-      </RevealOnScroll>
-
-      {/* proof points */}
-      <RevealOnScroll delay={0.12}>
-        <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {PROOF_POINTS.map((p) => (
-            <div key={p.claim} className="bp-card p-5 text-center">
-              <div className="font-semibold" style={{ fontFamily: "var(--font-heading)", fontSize: 24, color: "var(--bp-ink)" }}>{p.stat}</div>
-              <div style={{ fontSize: 12, color: "var(--bp-ink-dim)", marginTop: 4 }}>{p.claim}</div>
-              <div className="bp-mono mt-2" style={{ fontSize: 9, color: "var(--bp-ink-faint)" }}>{p.src}</div>
-            </div>
-          ))}
-        </div>
-      </RevealOnScroll>
-
-      {/* partner ecosystem (condensed) */}
-      <RevealOnScroll delay={0.16}>
-        <div className="mt-6 rounded-xl p-6 bp-card">
-          <div className="bp-mono mb-3" style={{ fontSize: 10, color: "var(--bp-ink-faint)" }}>{PARTNERS.title} — {PARTNERS.lead}</div>
-          <div className="flex flex-wrap gap-2">
-            {PARTNERS.items.map((p) => (
-              <span key={p.k} className="bp-mono rounded-full px-3 py-1.5" style={{ fontSize: 10, color: "var(--bp-ink-dim)", border: "1px solid var(--bp-line)" }}>{p.k}</span>
-            ))}
-          </div>
         </div>
       </RevealOnScroll>
     </Sheet>
