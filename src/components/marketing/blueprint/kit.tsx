@@ -19,7 +19,7 @@ export function FigLabel({ children, className = "" }: { children: ReactNode; cl
 /* ── Isometric axis indicator ─────────────────────────────────────── */
 export function IsoAxis({ className = "" }: { className?: string }) {
   return (
-    <svg width="56" height="56" viewBox="0 0 58 58" aria-hidden className={className} style={{ color: "var(--bp-ink-faint)" }}>
+    <svg width="56" height="56" viewBox="0 0 58 58" aria-hidden className={`${className} bp-axis`} style={{ color: "var(--bp-ink-faint)" }}>
       <g stroke="currentColor" strokeWidth="1" fill="none">
         <line x1="29" y1="30" x2="29" y2="6" />
         <line x1="29" y1="30" x2="9" y2="42" />
@@ -109,7 +109,8 @@ export function Sheet({
   className?: string; contentClassName?: string; style?: CSSProperties;
 }) {
   return (
-    <section id={id} className={`bp-grid bp-frame relative overflow-hidden ${className}`} style={{ color: "var(--bp-ink)", paddingTop: 84, paddingBottom: 84, ...style }}>
+    <section id={id} className={`bp-grid bp-frame relative overflow-hidden ${className}`} style={{ color: "var(--bp-ink)", paddingTop: "clamp(44px, 7vw, 84px)", paddingBottom: "clamp(44px, 7vw, 84px)", ...style }}>
+      <div aria-hidden className="bp-aurora" />
       <div className={`container relative z-10 mx-auto px-5 ${contentClassName}`}>
         {fig && (
           <div className="mb-8 flex items-start justify-between">

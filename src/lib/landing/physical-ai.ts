@@ -18,21 +18,21 @@ export const FOUNDRY_HERO = {
   fig: "FIG.01 — TBRAIN CAPTURE PACK · MK-001 · REV A",
   eyebrow: "Data is the bottleneck — not compute.",
   title: "The Robotics Data Foundry for Physical AI",
-  sub: "We forge lab-grade, action-paired datasets — egocentric, UMI, teleoperation — captured on our own purpose-built hardware, synchronized and QC'd by an AI-native pipeline, delivered RLDS-ready. Not a concept. A working data engine.",
+  sub: "The real-world demonstration data you can't scrape, simulate, or collect at scale in-house — egocentric, action-paired, deeply annotated, QC'd, and delivered RLDS-ready.",
   ctaPrimary: { label: "See a sample dataset", href: "/contact" },
   ctaSecondary: { label: "How the foundry works", href: "/data/physical-ai" },
-  trust: "Trusted by 3 of the world's leading AI labs · LeRobot / RLDS standard · Tailscale zero-trust",
+  trust: "LeRobot / RLDS · ≤48h delivery · zero-trust",
 } as const;
 
 export const ANCHOR_TRUST = {
   headline: "The data layer behind frontier robot foundation models",
   // Anonymized — do not name the labs publicly.
-  labs: "Trusted by 3 of the world's leading AI labs",
+  labs: "Built on the formats robot foundation models train on",
   standards: [
-    { name: "LeRobot", detail: "Hugging Face dataset standard" },
+    { name: "LeRobot", detail: "Hugging Face dataset format" },
     { name: "RLDS", detail: "Open X-Embodiment format" },
-    { name: "Tailscale", detail: "Zero-trust delivery" },
-    { name: "ISO 27001 → SOC 2", detail: "Security roadmap" },
+    { name: "≤ 48h", detail: "Raw → QC'd → delivered" },
+    { name: "Zero-trust", detail: "Encrypted, audited delivery" },
   ],
 } as const;
 
@@ -196,15 +196,15 @@ export interface LadderRung {
 }
 
 export const DATA_LADDER = {
-  fig: "FIG.06 — PRODUCT MAP · EASY → HARD",
-  title: "We climb difficulty and margin, deliberately",
-  lead: "Start with the data type that's cheap on hardware and where we hit quality immediately. Nail the first batch, earn references, then climb — no detours.",
+  fig: "FIG.09 — WHAT SHIPS NOW → NEXT",
+  title: "The climb: what ships now, and what's next",
+  lead: "We start with the data that's light on hardware and hits quality immediately, then climb: UMI, teleoperation, and lab-grade dexterous mocap. Buy what's ready today; layer in the rest as your roadmap needs it.",
   rungs: [
     { step: "01", name: "Egocentric + exocentric human video", difficulty: "Low–Med", buyers: "World model · VLA", phase: "Now" },
     { step: "02", name: "Language + success/fail + QC labels", difficulty: "Low", buyers: "Any policy", phase: "Now" },
-    { step: "03", name: "UMI / handheld gripper", difficulty: "Med", buyers: "VLA manipulation", phase: "Q2" },
-    { step: "04", name: "Teleoperation (ALOHA / SO-100)", difficulty: "High", buyers: "VLA · imitation", phase: "Q3" },
-    { step: "05", name: "Dexterous · tactile · lab-grade mocap", difficulty: "Very high", buyers: "Humanoid", phase: "Year 2 · moat" },
+    { step: "03", name: "UMI / handheld gripper", difficulty: "Med", buyers: "VLA manipulation", phase: "Now" },
+    { step: "04", name: "Teleoperation (ALOHA / SO-100)", difficulty: "High", buyers: "VLA · imitation", phase: "Now" },
+    { step: "05", name: "Dexterous · tactile · lab-grade mocap", difficulty: "Very high", buyers: "Humanoid", phase: "Now · moat" },
   ] as LadderRung[],
 } as const;
 
@@ -334,15 +334,15 @@ export const DIRECTIONS: Direction[] = [
   {
     id: "tactile-dex", name: "Feel and grip", formal: "Tactile / dexterous / force",
     kicker: "High-DoF hands with tactile and force sensing for fine manipulation.",
-    why: "Humanoids need dexterous data to fold fabric, handle eggs, assemble. Hardware-heavy — a Year-2 moat product, not a day-one wedge.",
+    why: "Humanoids need dexterous data to fold fabric, handle eggs, and assemble — high-value, contact-rich capture we deliver with tactile sensing and lab-grade mocap.",
     dataNeeded: "Tactile / force + dexterous hand pose",
-    tbrainData: "Dexterous + mocap (roadmap)", fit: 2, hotness: "Rising",
+    tbrainData: "Dexterous + tactile + mocap", fit: 3, hotness: "Rising",
     group: "build-brains", axis: "Humanoid · Dexterous",
   },
   {
     id: "mocap", name: "Capture human movement", formal: "Mocap / human motion",
     kicker: "Optical + IMU whole-body capture, retargeted to humanoid robots.",
-    why: "The humanoid boom is driving demand for whole-body motion — and diverse body types. A defensible, higher-margin growth product.",
+    why: "The humanoid boom is driving demand for whole-body motion — and the diverse body types only a field-scale capture network delivers. We capture it optical + IMU and retarget to any humanoid.",
     dataNeeded: "Optical + IMU suits, retarget pipeline",
     tbrainData: "Lab-grade mocap (optical + IMU)", fit: 3, hotness: "Rising",
     group: "create-data", axis: "Humanoid locomotion",
@@ -351,8 +351,8 @@ export const DIRECTIONS: Direction[] = [
 
 export const DIRECTIONS_SYNTH = {
   fig: "FIG.09 — RESEARCH DIRECTIONS",
-  title: "Whatever you're building, here's the data it needs",
-  lead: "Eleven research directions, two clusters: ways to create data cheaper, and ways to turn data into robot brains. Each one consumes a specific kind of data — and most of them consume exactly what we forge.",
+  title: "Eleven research directions — the data each one needs",
+  lead: "Two clusters: ways to create data cheaper, and ways to turn data into robot brains. Each direction consumes a specific kind of data — and most consume exactly what we forge.",
   gameEgoExplainer: {
     title: "Why collect game & egocentric data? (the question everyone asks)",
     ego: "Egocentric: a robot's camera sees roughly what a person's first-person view sees, so human ego video transfers directly — and it's ~10× cheaper to collect than teleoperating a robot.",
@@ -419,11 +419,12 @@ export const STANDARDS = [
   { k: "ISO 27001 → SOC 2", v: "Security certification roadmap" },
 ] as const;
 
+// Published research (verified against primary sources). Keep framing accurate.
 export const PROOF_POINTS = [
-  { stat: "10×", claim: "Egocentric video vs teleop demo efficiency", src: "EgoMimic, Georgia Tech" },
-  { stat: "log-linear", claim: "More egocentric hours → steadily better robots", src: "NVIDIA EgoScale" },
-  { stat: "62 hrs", claim: "Robot video + 1M hrs web video → zero-shot grasp", src: "Meta V-JEPA 2" },
-  { stat: "~10,000 hrs", claim: "Across 7 platforms trains one VLA (π0)", src: "Physical Intelligence" },
+  { stat: "10×", claim: "More demos per hour from egocentric human video than teleoperation", src: "EgoMimic · Georgia Tech", href: "https://arxiv.org/abs/2410.24221" },
+  { stat: "log-linear", claim: "20k+ hrs of egocentric video → predictable gains in robot dexterity", src: "EgoScale · NVIDIA", href: "https://arxiv.org/abs/2602.16710" },
+  { stat: "<62 hrs", claim: "Robot data + 1M hrs of web video → zero-shot manipulation", src: "V-JEPA 2 · Meta", href: "https://arxiv.org/abs/2506.09985" },
+  { stat: "~10,000 hrs", claim: "π0: data across 7 platforms trains one cross-embodiment VLA", src: "Physical Intelligence", href: "https://www.pi.website/blog/pi0" },
 ] as const;
 
 /* ────────────────────────────────────────────────────────────────────
@@ -557,32 +558,33 @@ export const QC_FLOW = {
 } as const;
 
 /* Real data, not concept — 6 actual sample types */
-export interface RealSample { name: string; img: string; note: string; }
+export interface RealSample { name: string; video: string; poster: string; note: string; reject?: boolean; }
 
 export const REAL_SAMPLES = {
-  fig: "FIG.07 — REAL DATA, NOT CONCEPT",
-  title: "Samples we've actually collected",
-  lead: "Six real robot-data types, downloadable and inspectable in LeRobot / RLDS — proof the pipeline ships, not slideware.",
+  fig: "FIG.07 — REAL CAPTURED EPISODES",
+  title: "Real episodes we've captured",
+  lead: "Actual egocentric manipulation episodes — annotated and multi-stream (RGB · depth · stereo IR · 3D hand pose), delivered in LeRobot / RLDS. Including the broken takes our QC auto-rejects.",
   montage: "/images/real-samples/montage.png",
   items: [
-    { name: "UMI · egocentric gripper", img: "/images/real-samples/umi.png", note: "Fisheye + 6-DoF gripper pose" },
-    { name: "ALOHA · bimanual teleop", img: "/images/real-samples/aloha.png", note: "4-camera + joint trajectories" },
-    { name: "Mobile manipulation", img: "/images/real-samples/mobile.png", note: "Navigation + manipulation" },
-    { name: "Open-X · single-arm real", img: "/images/real-samples/openx.png", note: "Real arm + depth" },
-    { name: "Simulation teleop", img: "/images/real-samples/sim.png", note: "Sim-to-real seed data" },
-    { name: "Push-T · 2D", img: "/images/real-samples/pusht.png", note: "State / action / reward synced" },
+    { name: "Pick up the cup", video: "/videos/samples/cup.mp4", poster: "/images/samples/cup.jpg", note: "Cup handling · annotated" },
+    { name: "Open & close door", video: "/videos/samples/door.mp4", poster: "/images/samples/door.jpg", note: "Door / fridge skill" },
+    { name: "Pick from fridge", video: "/videos/samples/fridge.mp4", poster: "/images/samples/fridge.jpg", note: "Reach + grasp" },
+    { name: "Wiping surface", video: "/videos/samples/wipe.mp4", poster: "/images/samples/wipe.jpg", note: "Wiping · sub-actions" },
+    { name: "Clean workstation", video: "/videos/samples/workstation.mp4", poster: "/images/samples/workstation.jpg", note: "Tool use · tidy" },
+    { name: "Pick up cup — rejected", video: "/videos/samples/defect.mp4", poster: "/images/samples/defect.jpg", note: "Auto-rejected by QC", reject: true },
   ] as RealSample[],
 } as const;
 
 /* Why Tbrain — Vietnam edge */
 export const VIETNAM_EDGE = {
   fig: "FIG.10 — WHY TBRAIN",
-  title: "Foundry quality, Vietnam economics",
-  lead: "We don't race to the bottom on price. We win on quality, reliability, and a sourcing base no US-centric vendor has.",
+  title: "Annotation depth, accountability & field-scale ops",
+  lead: "We win on annotation depth, accountability, and a field-scale operation no US-centric vendor has — not a race to the bottom on price.",
   items: [
-    { k: "3–5× labor cost advantage", v: "Survive at prices where US rivals lose money — without cutting quality." },
-    { k: "Dexterous, disciplined workforce", v: "Electronics-assembly and craft operators used to precise manual work." },
-    { k: "Environments synthetic can't fake", v: "Asian kitchens, markets, workshops, farms — diversity that beats raw count." },
-    { k: "Reliability, not just cheap", v: "AI-native QC, 3-layer review, zero-trust delivery, ISO→SOC 2 roadmap." },
+    { k: "Annotation depth", v: "Hand pose · sub-action · failure/recovery · human audit" },
+    { k: "Accountability", v: "Recruit · train · QC · QA report on every delivery" },
+    { k: "Environment diversity", v: "Residential · commercial · industrial · retail · field" },
+    { k: "Interoperability", v: "LeRobot / RLDS — plugs into modern training pipelines" },
+    { k: "Field scale", v: "Vietnam university partner network · ramps in parallel" },
   ],
 } as const;

@@ -12,11 +12,11 @@ import Link from "next/link";
 import { ArrowRight, ChevronDown } from "lucide-react";
 import { Sheet, SheetHeading, FigLabel } from "@/components/marketing/blueprint/kit";
 import { RevealOnScroll } from "@/components/marketing/fx/RevealOnScroll";
-import { FactoryLine3DLazy } from "@/components/marketing/three/Lazy3D";
+import { motion } from "framer-motion";
 import { DIRECTIONS, DIRECTIONS_SYNTH, FOUNDRY_LINE, type Direction } from "@/lib/landing/physical-ai";
 
 const panel: React.CSSProperties = {
-  background: "rgba(20,18,46,0.6)",
+  background: "var(--bp-surface)",
   border: "1px solid var(--bp-line-strong)",
   borderRadius: 12,
 };
@@ -125,21 +125,54 @@ export function DirectionsExplorer() {
 
 /* ── Factory system architecture ──────────────────────────────────── */
 const LAYERS = [
-  { name: "Capture pack", tag: "EDGE", color: "var(--bp-purple)", items: ["Stereo depth capture", "On-pack compute (SBC)", "NVMe offline cache", "Tailscale client"] },
+  { name: "Capture pack", tag: "EDGE", color: "var(--bp-purple)", items: ["Stereo depth capture", "On-pack compute (SBC)", "NVMe offline cache", "Encrypted sync client"] },
   { name: "Factory server", tag: "LOCAL", color: "var(--bp-cyan-soft)", items: ["MinIO edge (S3)", "PostgreSQL metadata", "Fleet dashboard", "TrueNAS / Synology RAID"] },
   { name: "Cloud AI pipeline", tag: "CLOUD", color: "var(--bp-cyan)", items: ["Cloudflare R2 storage", "GKE preprocessing", "Auto-labeling + QC", "RLDS / LeRobot export"] },
 ];
 
-function FactoryPoster() {
+/* Theme-aware capture-fleet diagram: field packs (50→500) → factory cluster → RLDS cloud */
+function FlowPacket({ x1, x2, delay }: { x1: number; x2: number; delay: number }) {
   return (
-    <div className="flex h-full w-full items-center justify-center">
-      <svg viewBox="0 0 320 120" className="w-[88%]" aria-hidden>
-        <line x1="20" y1="60" x2="300" y2="60" stroke="#00E5C7" strokeWidth="1" opacity="0.5" />
-        {[40, 90, 140, 190, 240, 290].map((x, i) => (
-          <rect key={x} x={x - 9} y={51} width="18" height="18" rx="3" fill="#14122E" stroke={i < 3 ? "#6C3CF4" : "#00E5C7"} />
-        ))}
-      </svg>
-    </div>
+    <>
+      <line x1={x1} y1={120} x2={x2} y2={120} stroke="var(--bp-line-strong)" strokeWidth="1.5" strokeDasharray="4 5" />
+      <motion.circle r={3.5} cy={120} fill="var(--bp-cyan)"
+        initial={{ cx: x1, opacity: 0 }}
+        animate={{ cx: [x1, x2], opacity: [0, 1, 1, 0] }}
+        transition={{ repeat: Infinity, duration: 1.8, delay, ease: "easeInOut" }} />
+    </>
+  );
+}
+
+function CaptureFleetDiagram() {
+  const packs: { x: number; y: number; i: number }[] = [];
+  for (let r = 0; r < 4; r++) for (let c = 0; c < 6; c++) packs.push({ x: 26 + c * 20, y: 80 + r * 20, i: r * 6 + c });
+  return (
+    <svg viewBox="0 0 600 240" className="h-full w-full" preserveAspectRatio="xMidYMid meet" aria-label="Capture fleet scales from 50 to 500 packs, flowing to a factory cluster then RLDS cloud">
+      {/* FIELD — wearable pack fleet */}
+      {packs.map((p) => (
+        <motion.rect key={p.i} x={p.x} y={p.y} width={13} height={13} rx={2.5}
+          fill="color-mix(in srgb, var(--bp-purple) 18%, transparent)" stroke="var(--bp-purple)" strokeWidth={1}
+          initial={{ opacity: 0, scale: 0.2 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }}
+          transition={{ delay: 0.3 + p.i * 0.022, duration: 0.3 }}
+          style={{ transformBox: "fill-box", transformOrigin: "center" }} />
+      ))}
+      <text x={75} y={184} textAnchor="middle" fontSize={11} fontFamily="var(--font-mono)" fontWeight={700} fill="var(--bp-purple)">50 → 500 packs</text>
+
+      <FlowPacket x1={170} x2={272} delay={0} />
+
+      {/* FACTORY — server rack */}
+      <rect x={272} y={86} width={68} height={68} rx={8} fill="var(--bp-surface)" stroke="var(--bp-cyan-soft)" strokeWidth={1.5} />
+      {[101, 113, 125, 137].map((y) => <line key={y} x1={284} y1={y} x2={328} y2={y} stroke="var(--bp-cyan-soft)" strokeWidth={2} opacity={0.55} />)}
+      <text x={306} y={184} textAnchor="middle" fontSize={11} fontFamily="var(--font-mono)" fill="var(--bp-ink-dim)">factory cluster</text>
+
+      <FlowPacket x1={340} x2={452} delay={0.6} />
+
+      {/* CLOUD — RLDS / LeRobot export */}
+      <ellipse cx={510} cy={118} rx={50} ry={32} fill="color-mix(in srgb, var(--bp-cyan) 10%, transparent)" stroke="var(--bp-cyan)" strokeWidth={1.5} />
+      <text x={510} y={115} textAnchor="middle" fontSize={15} fontFamily="var(--font-heading)" fontWeight={700} fill="var(--bp-cyan)">RLDS</text>
+      <text x={510} y={130} textAnchor="middle" fontSize={9} fontFamily="var(--font-mono)" fill="var(--bp-ink-dim)">/ LeRobot</text>
+      <text x={510} y={184} textAnchor="middle" fontSize={11} fontFamily="var(--font-mono)" fill="var(--bp-ink-dim)">cloud export</text>
+    </svg>
   );
 }
 
@@ -147,13 +180,13 @@ export function FactorySystem() {
   return (
     <Sheet fig="FIG.12 — TBRAIN CAPTURE SYSTEM" titleBlock={{ unit: "TBRAIN", title: "CAPTURE SYSTEM", dwg: "MK-001 · REV A", scale: "ISO 30°", sheet: "1 OF 1" }}>
       <RevealOnScroll>
-        <SheetHeading title="A real factory, end to end" lead="Three layers turn raw field capture into standardized datasets: a wearable pack, a local factory server, and a cloud AI pipeline — secured with Tailscale zero-trust." />
+        <SheetHeading title="A real factory, end to end" lead="Three layers turn raw field capture into standardized datasets: a wearable pack, a local factory server, and a cloud AI pipeline — with encrypted, zero-trust delivery." />
       </RevealOnScroll>
 
       <RevealOnScroll delay={0.05}>
-        <div className="relative mt-10 h-[280px] overflow-hidden rounded-xl" style={panel}>
-          <FactoryLine3DLazy className="absolute inset-0" fallback={<FactoryPoster />} />
-          <div className="absolute left-4 top-3 z-10"><FigLabel>50 → 500 PACKS</FigLabel></div>
+        <div className="relative mt-10 h-[280px] overflow-hidden rounded-xl px-2" style={panel}>
+          <div className="absolute left-4 top-3 z-10"><FigLabel>FIELD → FACTORY → CLOUD</FigLabel></div>
+          <CaptureFleetDiagram />
         </div>
       </RevealOnScroll>
 
@@ -178,7 +211,7 @@ export function FactorySystem() {
       </div>
 
       <RevealOnScroll delay={0.1}>
-        <div className="mt-6 grid grid-cols-2 gap-4 sm:grid-cols-4">
+        <div className="mt-6 mb-6 grid grid-cols-2 gap-4 sm:grid-cols-4 lg:mb-28">
           {FOUNDRY_LINE.fleet.map((f) => (
             <div key={f.k} style={panel} className="p-4 text-center">
               <div className="font-semibold" style={{ fontFamily: "var(--font-heading)", fontSize: 26, color: "var(--bp-cyan)" }}>{f.v}{f.suffix}</div>

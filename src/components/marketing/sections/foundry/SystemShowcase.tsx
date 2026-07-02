@@ -13,6 +13,7 @@ import { Sheet, SheetHeading, FigLabel } from "@/components/marketing/blueprint/
 import { RevealOnScroll, StaggerContainer, STAGGER_ITEM } from "@/components/marketing/fx/RevealOnScroll";
 import { CountUp } from "@/components/marketing/fx/CountUp";
 import { SYSTEM, SENSORS, WORLD_MODEL, AVAILABILITY, PARTNERS, QC_FLOW } from "@/lib/landing/physical-ai";
+import { PipelineFlow } from "./PipelineFlow";
 
 const SENSOR_ICONS = [Camera, Box, Activity, Mic, Hand, Compass, Languages, Clock];
 
@@ -52,32 +53,54 @@ function OperatorApp() {
   );
 }
 
-/* ── Supervisor fleet monitor ─────────────────────────────────────── */
+/* ── Supervisor fleet monitor — per-device ops console ─────────────── */
+const DEVICES = [
+  { id: "WORKER-018 · EP-0142", status: "REC", gb: 180, batt: 82, sync: 64 },
+  { id: "WORKER-022 · EP-0143", status: "REC", gb: 96, batt: 71, sync: 30 },
+  { id: "WORKER-007 · EP-0139", status: "SYNC", gb: 240, batt: 90, sync: 100 },
+  { id: "WORKER-031 · EP-0144", status: "REC", gb: 51, batt: 38, sync: 12 },
+  { id: "WORKER-005 · EP-0138", status: "IDLE", gb: 220, batt: 100, sync: 100 },
+  { id: "WORKER-014 · EP-0141", status: "SYNC", gb: 132, batt: 67, sync: 78 },
+] as const;
+
+const stColor = (s: string) => (s === "REC" ? "var(--bp-cyan)" : s === "SYNC" ? "var(--bp-purple)" : "var(--bp-ink-faint)");
+
 function FleetMonitor() {
   const m = SYSTEM.monitor;
-  const chips = Array.from({ length: 30 }, (_, i) => (i % 7 === 6 ? 2 : i % 3 === 2 ? 1 : 0));
-  const dot = (s: number) => (s === 0 ? "var(--bp-cyan)" : s === 1 ? "var(--bp-purple)" : "var(--bp-ink-faint)");
   return (
     <div className="bp-card h-full p-5">
       <div className="bp-mono flex items-center justify-between" style={{ fontSize: 10, color: "var(--bp-ink-faint)" }}>
-        <span>{m.title} · Fleet overview</span><span style={{ color: "var(--bp-cyan)" }}>{m.fleet} WORKERS</span>
+        <span>{m.title} · Fleet overview</span><span style={{ color: "var(--bp-cyan)" }}>{m.fleet} DEVICES</span>
       </div>
       <div className="mt-4 grid grid-cols-3 gap-3">
-        {[["Recording", m.recording, "var(--bp-cyan)"], ["Synced", m.synced, "var(--bp-purple)"], ["Idle", m.idle, "var(--bp-ink-faint)"]].map(([k, v, c]) => (
-          <div key={k as string} className="rounded-lg p-3 text-center" style={{ background: "var(--bp-surface-2)" }}>
-            <div className="font-semibold" style={{ fontFamily: "var(--font-heading)", fontSize: 24, color: c as string }}><CountUp value={v as number} /></div>
-            <div className="bp-mono mt-0.5" style={{ fontSize: 8.5, color: "var(--bp-ink-faint)" }}>{k as string}</div>
+        {([["Recording", m.recording, "var(--bp-cyan)"], ["Synced", m.synced, "var(--bp-purple)"], ["Idle", m.idle, "var(--bp-ink-faint)"]] as const).map(([k, v, c]) => (
+          <div key={k} className="rounded-lg p-3 text-center" style={{ background: "var(--bp-surface-2)" }}>
+            <div className="font-semibold" style={{ fontFamily: "var(--font-heading)", fontSize: 24, color: c }}><CountUp value={v as number} /></div>
+            <div className="bp-mono mt-0.5" style={{ fontSize: 8.5, color: "var(--bp-ink-faint)" }}>{k}</div>
           </div>
         ))}
       </div>
-      <div className="mt-4 grid grid-cols-10 gap-1.5">
-        {chips.map((s, i) => (
-          <motion.span key={i} initial={{ opacity: 0.4 }} animate={s === 0 ? { opacity: [0.4, 1, 0.4] } : { opacity: 0.85 }} transition={s === 0 ? { duration: 1.6, repeat: Infinity, delay: (i % 10) * 0.1 } : {}} style={{ height: 14, borderRadius: 3, background: dot(s) }} />
+      {/* per-device rows */}
+      <div className="mt-4 overflow-hidden rounded-lg" style={{ border: "1px solid var(--bp-line)" }}>
+        <div className="bp-mono grid grid-cols-[1.7fr_0.6fr_0.6fr_1fr] gap-2 px-3 py-1.5" style={{ fontSize: 8.5, color: "var(--bp-ink-faint)", background: "var(--bp-surface-2)", borderBottom: "1px solid var(--bp-line)" }}>
+          <span>DEVICE</span><span>BATT</span><span>FREE</span><span>SYNC</span>
+        </div>
+        {DEVICES.map((d, i) => (
+          <div key={d.id} className="grid grid-cols-[1.7fr_0.6fr_0.6fr_1fr] items-center gap-2 px-3 py-2" style={{ borderBottom: i < DEVICES.length - 1 ? "1px solid var(--bp-line)" : undefined }}>
+            <div className="flex min-w-0 items-center gap-2">
+              <span className={d.status === "REC" ? "bp-blink" : ""} style={{ width: 7, height: 7, borderRadius: 99, flexShrink: 0, background: stColor(d.status) }} />
+              <span className="bp-mono truncate" style={{ fontSize: 10, color: "var(--bp-ink-dim)" }}>{d.id}</span>
+            </div>
+            <span className="bp-mono" style={{ fontSize: 10, color: d.batt < 50 ? "var(--bp-amber)" : "var(--bp-ink-dim)" }}>{d.batt}%</span>
+            <span className="bp-mono" style={{ fontSize: 10, color: "var(--bp-ink-faint)" }}>{d.gb}G</span>
+            <div className="flex items-center gap-1.5">
+              <div style={{ flex: 1, height: 4, borderRadius: 99, background: "var(--bp-surface-2)", overflow: "hidden" }}>
+                <motion.div initial={{ width: 0 }} whileInView={{ width: `${d.sync}%` }} viewport={{ once: true }} transition={{ duration: 0.9, delay: i * 0.06 }} style={{ height: "100%", background: stColor(d.status) }} />
+              </div>
+              <span className="bp-mono" style={{ fontSize: 8, width: 28, color: stColor(d.status) }}>{d.status}</span>
+            </div>
+          </div>
         ))}
-      </div>
-      <div className="mt-4 flex items-center justify-between rounded-lg px-3 py-2" style={{ background: "var(--bp-surface-2)" }}>
-        <span className="bp-mono" style={{ fontSize: 9, color: "var(--bp-ink-faint)" }}>WORKER-018 · EP-0142</span>
-        <span className="bp-mono" style={{ fontSize: 9, color: "var(--bp-cyan)" }}>● REC · 180GB FREE</span>
       </div>
     </div>
   );
@@ -157,6 +180,54 @@ export function QCFlowSheet() {
           </motion.div>
         ))}
       </StaggerContainer>
+    </Sheet>
+  );
+}
+
+/* ── Episode manifest (metadata every episode carries) ────────────── */
+const MANIFEST = [
+  { k: "Operator", v: "OP-2207 · trained, verified" },
+  { k: "Rig", v: "MK-001 · REV A" },
+  { k: "Environment", v: "Home kitchen · Hanoi" },
+  { k: "Consent / release", v: "Signed ✓" },
+  { k: "Streams", v: "RGB · Depth · IMU · Audio · Pose · Lang" },
+  { k: "Sync", v: "Hardware clock · per-frame" },
+  { k: "Provenance", v: "Capture → auto-label → QC → RLDS" },
+  { k: "Outcome", v: "Success · QC-verified" },
+];
+
+function EpisodeManifest() {
+  return (
+    <div className="bp-card h-full p-5">
+      <div className="bp-mono flex items-center justify-between" style={{ fontSize: 10, color: "var(--bp-ink-faint)" }}>
+        <span>EPISODE MANIFEST</span><span style={{ color: "var(--bp-cyan)" }}>EP-2026-0617-0142</span>
+      </div>
+      <p className="mt-2 mb-3" style={{ fontSize: 13.5, lineHeight: 1.5, color: "var(--bp-ink-dim)" }}>Every episode is a <strong style={{ color: "var(--bp-ink)" }}>tagged record</strong>, not just a clip — full provenance travels with the data.</p>
+      <div className="grid gap-1.5">
+        {MANIFEST.map((r, i) => (
+          <motion.div key={r.k} initial={{ opacity: 0, x: -8 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true, margin: "-40px" }} transition={{ duration: 0.4, delay: i * 0.06 }}
+            className="flex items-center justify-between gap-3 rounded-md px-3 py-2" style={{ background: "var(--bp-surface-2)" }}>
+            <span className="bp-mono shrink-0" style={{ fontSize: 9.5, color: "var(--bp-ink-faint)" }}>{r.k}</span>
+            <span className="text-right" style={{ fontSize: 11.5, color: "var(--bp-ink-dim)" }}>{r.v}</span>
+          </motion.div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+/* ── How the foundry works (homepage: animated pipeline) ──────────── */
+export function HowItWorks() {
+  return (
+    <Sheet fig="FIG.02 — HOW THE FOUNDRY WORKS">
+      <RevealOnScroll><SheetHeading title="How the foundry works" lead="One pipeline, end to end: collect in the field → sync to the factory cluster → QC out what others ship → deliver RLDS-ready. A working machine, not a render." /></RevealOnScroll>
+
+      <RevealOnScroll delay={0.05}><div className="mt-10"><PipelineFlow /></div></RevealOnScroll>
+      <div className="mt-6 grid gap-6 lg:grid-cols-[0.8fr_1.2fr]">
+        <RevealOnScroll><div className="bp-card flex h-full items-center justify-center p-6"><OperatorApp /></div></RevealOnScroll>
+        <RevealOnScroll delay={0.1}><EpisodeManifest /></RevealOnScroll>
+      </div>
+      <RevealOnScroll delay={0.05}><div className="mt-6"><FleetMonitor /></div></RevealOnScroll>
     </Sheet>
   );
 }
