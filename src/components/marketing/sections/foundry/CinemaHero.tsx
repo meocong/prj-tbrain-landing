@@ -18,7 +18,7 @@
 import { useState, useEffect } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import Link from "next/link";
-import { ArrowRight, Check, Video, Clock, ShieldCheck, PackageCheck } from "lucide-react";
+import { ArrowRight, Check, Video, Clock, ShieldCheck, PackageCheck, Scan } from "lucide-react";
 import { FOUNDRY_HERO, PROBLEM, PROOF_POINTS, HERO_MIX } from "@/lib/landing/physical-ai";
 import { Defs } from "./PackExplodeScroll";
 
@@ -307,6 +307,7 @@ function ProblemBand() {
 const FOUNDRY_STEPS = [
   { icon: Video, k: "Collect", v: "50–500 capture packs in the real world" },
   { icon: Clock, k: "Sync", v: "Hardware-clock aligned, offline-first" },
+  { icon: Scan, k: "Annotate", v: "MANO hand + object masks + verb-noun" },
   { icon: ShieldCheck, k: "QC", v: "AI filter + 3-layer human review" },
   { icon: PackageCheck, k: "Deliver", v: "RLDS / LeRobot · ≤48h · zero-trust" },
 ];
