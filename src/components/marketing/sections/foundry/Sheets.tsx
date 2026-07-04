@@ -244,19 +244,7 @@ export function WhyTbrainSheet() {
     <Sheet fig={VIETNAM_EDGE.fig}>
       <RevealOnScroll><SheetHeading title={VIETNAM_EDGE.title} lead={VIETNAM_EDGE.lead} /></RevealOnScroll>
 
-      {/* Raw source showcase — annotated overlay temporarily removed pending re-track */}
-      <div className="mt-10">
-        <div className="bp-card mx-auto" style={{ padding: 0, borderRadius: 12, overflow: "hidden", maxWidth: 720 }}>
-          <div className="bp-mono flex items-center justify-between" style={{ padding: "9px 14px", fontSize: 10, color: "var(--bp-ink-faint)", borderBottom: "1px solid var(--bp-line)", letterSpacing: "0.06em" }}>
-            <span>RAW SOURCE · EGOCENTRIC</span>
-            <span style={{ color: "var(--bp-ink-dim)" }}>rgb.mp4 · 1920×1080 · 30 fps</span>
-          </div>
-          {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
-          <video src="/videos/textile-raw/arrange_02.webm" poster="/images/textile-raw/arrange_02.jpg" muted loop autoPlay playsInline preload="metadata" style={{ width: "100%", display: "block", background: "#0b1220" }} />
-        </div>
-      </div>
-
-      <StaggerContainer className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-5">
+      <StaggerContainer className="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-5">
         {VIETNAM_EDGE.items.map((e, i) => {
           const Icon = EDGE_ICONS[i] ?? ShieldCheck;
           return (
