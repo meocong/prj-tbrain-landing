@@ -18,7 +18,7 @@ export const FOUNDRY_HERO = {
   fig: "FIG.01 — TBRAIN CAPTURE PACK · MK-001 · REV A",
   eyebrow: "Industrial data · real production environments · not scraped, not simulated.",
   title: "The Robotics Data Foundry for Physical AI",
-  sub: "Real capture packs, worn by operators on the factory floor — egocentric, action-paired, deeply annotated. Sourced through a Vietnam industrial network across multiple production sites, QC'd, and delivered RLDS-ready.",
+  sub: "Real capture packs, worn by operators on the factory floor — egocentric, action-paired, deeply annotated. Sourced through an expansive industrial network (not only Vietnam) across multiple production sites, QC'd, and delivered RLDS-ready.",
   ctaPrimary: { label: "See a sample dataset", href: "/contact" },
   ctaSecondary: { label: "How the foundry works", href: "/data/physical-ai" },
   trust: "Industrial network · real production · LeRobot / RLDS · ≤48h delivery",
@@ -27,7 +27,7 @@ export const FOUNDRY_HERO = {
 export const ANCHOR_TRUST = {
   headline: "Industrial data · real production environments · at network scale",
   // Anonymized — do not name the labs publicly.
-  labs: "Sourced through a Vietnam industrial network — factories, workshops, assembly lines",
+  labs: "Sourced through an expansive industrial network (not only Vietnam) — factories, workshops, assembly lines",
   standards: [
     { name: "Industrial", detail: "Real factory floors · not staged" },
     { name: "Multi-site", detail: "Textile · kitchen · electronics roadmap" },
@@ -44,11 +44,11 @@ export const ANCHOR_TRUST = {
    to worker-hero.mp4 if these are not yet on disk. */
 export const HERO_MIX = {
   clips: [
-    { src: "/videos/hero-mix/4.webm", mp4: "/videos/hero-mix/4.mp4", poster: "/videos/hero-mix/4.jpg", label: "Exocentric mocap · partner-signed", source: "partner" },
     { src: "/videos/hero-mix/5.webm", mp4: "/videos/hero-mix/5.mp4", poster: "/videos/hero-mix/5.jpg", label: "Egocentric · GoPro rig · folding shorts", source: "in-house" },
-    { src: "/videos/hero-mix/1.webm", mp4: "/videos/hero-mix/1.mp4", poster: "/videos/hero-mix/1.jpg", label: "Real production · textile factory · Vietnam", source: "in-house" },
+    { src: "/videos/hero-mix/1.webm", mp4: "/videos/hero-mix/1.mp4", poster: "/videos/hero-mix/1.jpg", label: "Real production · textile factory", source: "in-house" },
     { src: "/videos/hero-mix/2.webm", mp4: "/videos/hero-mix/2.mp4", poster: "/videos/hero-mix/2.jpg", label: "Industrial · textile factory · Vietnam", source: "in-house" },
     { src: "/videos/hero-mix/3.webm", mp4: "/videos/hero-mix/3.mp4", poster: "/videos/hero-mix/3.jpg", label: "Real production · manipulation", source: "in-house" },
+    { src: "/videos/hero-mix/4.webm", mp4: "/videos/hero-mix/4.mp4", poster: "/videos/hero-mix/4.jpg", label: "Exocentric mocap · partner-signed", source: "partner" },
   ],
   fallback: { src: "/videos/worker-hero.webm", mp4: "/videos/worker-hero.mp4", poster: "/images/worker-hero-poster.jpg" },
   clipDurationSec: 10,
