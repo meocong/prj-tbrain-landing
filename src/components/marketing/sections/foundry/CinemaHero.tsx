@@ -19,14 +19,78 @@ import { useState, useEffect } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import Link from "next/link";
 import { ArrowRight, Check, Video, Clock, ShieldCheck, PackageCheck } from "lucide-react";
-import { FOUNDRY_HERO, PROBLEM, PROOF_POINTS } from "@/lib/landing/physical-ai";
+import { FOUNDRY_HERO, PROBLEM, PROOF_POINTS, HERO_MIX } from "@/lib/landing/physical-ai";
 import { Defs } from "./PackExplodeScroll";
 
-/* Hero media — operator in the capture rig (Higgsfield render). Reduced-motion → poster still. */
-const HERO_VIDEO_MP4 = "/videos/worker-hero.mp4";
-const HERO_VIDEO_WEBM = "/videos/worker-hero.webm";
-const HERO_POSTER = "/images/worker-hero-poster.jpg";
+/* Hero media — cross-fades 3 ops-provided clips. Falls back to worker-hero
+   when hero-mix videos aren't yet on disk (rclone pull pending). */
+const HERO_POSTER = HERO_MIX.fallback.poster;
 const HERO_FIT = "absolute inset-0 h-full w-full object-cover [object-position:58%_26%] md:[object-position:58%_30%] lg:[object-position:57%_32%]";
+
+/* HeroMix — cycles HERO_MIX.clips at HERO_MIX.clipDurationSec; on error → fallback. */
+function HeroMix({ reduce }: { reduce: boolean }) {
+  const [idx, setIdx] = useState(0);
+  const [errored, setErrored] = useState<boolean[]>(() => HERO_MIX.clips.map(() => false));
+  const activeErrored = errored[idx];
+  const allErrored = errored.every(Boolean);
+
+  useEffect(() => {
+    if (reduce || allErrored) return;
+    const t = setTimeout(() => setIdx((i) => (i + 1) % HERO_MIX.clips.length), HERO_MIX.clipDurationSec * 1000);
+    return () => clearTimeout(t);
+  }, [idx, reduce, allErrored]);
+
+  if (reduce || allErrored) {
+    // Reduced-motion or all clips failed → static fallback video (worker-hero) or poster.
+    if (reduce) {
+      // eslint-disable-next-line @next/next/no-img-element
+      return <img src={HERO_POSTER} alt="" aria-hidden className={HERO_FIT} />;
+    }
+    return (
+      // eslint-disable-next-line jsx-a11y/media-has-caption
+      <video autoPlay loop muted playsInline preload="metadata" poster={HERO_POSTER} className={HERO_FIT}>
+        <source src={HERO_MIX.fallback.src} type="video/webm" />
+        <source src={HERO_MIX.fallback.mp4} type="video/mp4" />
+      </video>
+    );
+  }
+
+  // Render ALL clips as stacked layers; toggle opacity for seamless cross-fade.
+  // Only active + next clip play; others paused to save decoder budget.
+  const nextIdx = (idx + 1) % HERO_MIX.clips.length;
+  return (
+    <div className="absolute inset-0">
+      {HERO_MIX.clips.map((clip, i) => {
+        const active = i === idx;
+        const preloaded = i === idx || i === nextIdx;
+        return (
+          <motion.video
+            key={clip.src}
+            initial={false}
+            animate={{ opacity: active ? 1 : 0 }}
+            transition={{ duration: 1.4, ease: "easeInOut" }}
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload={preloaded ? "auto" : "none"}
+            poster={clip.poster}
+            className={HERO_FIT}
+            style={{ pointerEvents: "none" }}
+            onError={() => setErrored((prev) => prev.map((e, k) => (k === i ? true : e)))}
+          >
+            <source src={clip.src} type="video/webm" />
+            <source src={clip.mp4} type="video/mp4" />
+          </motion.video>
+        );
+      })}
+      {activeErrored && (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img key="fallback-poster" src={HERO_POSTER} alt="" aria-hidden className={HERO_FIT} />
+      )}
+    </div>
+  );
+}
 
 const PILLS = ["Egocentric capture", "AI-native QC", "RLDS-ready"];
 
@@ -94,16 +158,7 @@ function HeroVideo() {
 
   return (
     <section className="relative min-h-[100svh] w-full overflow-hidden bg-black">
-      {reduce ? (
-        // eslint-disable-next-line @next/next/no-img-element
-        <img src={HERO_POSTER} alt="" aria-hidden className={HERO_FIT} />
-      ) : (
-        // eslint-disable-next-line jsx-a11y/media-has-caption
-        <video autoPlay loop muted playsInline preload="metadata" poster={HERO_POSTER} className={HERO_FIT}>
-          <source src={HERO_VIDEO_WEBM} type="video/webm" />
-          <source src={HERO_VIDEO_MP4} type="video/mp4" />
-        </video>
-      )}
+      <HeroMix reduce={reduce} />
       {/* legibility: solid dark left for white text; bottom blends into the next (themed) section */}
       <div aria-hidden className="absolute inset-0" style={{ background: "linear-gradient(105deg, rgba(5,5,12,0.86) 0%, rgba(5,5,12,0.4) 42%, transparent 70%)" }} />
       <div aria-hidden className="absolute inset-x-0 bottom-0" style={{ height: "34%", background: "linear-gradient(to top, var(--bp-bg), transparent)" }} />

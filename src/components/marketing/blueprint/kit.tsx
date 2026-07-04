@@ -109,7 +109,7 @@ export function Sheet({
   className?: string; contentClassName?: string; style?: CSSProperties;
 }) {
   return (
-    <section id={id} className={`bp-grid bp-frame relative overflow-hidden ${className}`} style={{ color: "var(--bp-ink)", paddingTop: "clamp(44px, 7vw, 84px)", paddingBottom: "clamp(44px, 7vw, 84px)", ...style }}>
+    <section id={id} className={`bp-grid bp-frame relative overflow-hidden ${className}`} style={{ color: "var(--bp-ink)", paddingTop: "clamp(32px, 4.5vw, 56px)", paddingBottom: "clamp(32px, 4.5vw, 56px)", ...style }}>
       <div aria-hidden className="bp-aurora" />
       <div className={`container relative z-10 mx-auto px-5 ${contentClassName}`}>
         {fig && (
@@ -129,8 +129,8 @@ export function Sheet({
 export function SheetHeading({ title, lead, className = "" }: { title: string; lead?: string; className?: string }) {
   return (
     <div className={`max-w-3xl ${className}`}>
-      <h2 className="font-semibold" style={{ fontFamily: "var(--font-heading)", fontSize: "clamp(28px, 4vw, 46px)", lineHeight: 1.08, color: "var(--bp-ink)", letterSpacing: "-0.01em" }}>{title}</h2>
-      {lead && <p className="mt-5" style={{ fontSize: 17, lineHeight: 1.7, color: "var(--bp-ink-dim)" }}>{lead}</p>}
+      <h2 className="font-semibold" style={{ fontFamily: "var(--font-heading)", fontSize: "clamp(24px, 3.2vw, 36px)", lineHeight: 1.1, color: "var(--bp-ink)", letterSpacing: "-0.01em" }}>{title}</h2>
+      {lead && <p className="mt-3" style={{ fontSize: 15, lineHeight: 1.6, color: "var(--bp-ink-dim)" }}>{lead}</p>}
     </div>
   );
 }
