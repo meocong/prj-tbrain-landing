@@ -5,13 +5,19 @@ import Header from "@/components/common/Header";
 import Footer from "@/components/common/Footer";
 import { CinemaHero } from "@/components/marketing/sections/foundry/CinemaHero";
 import {
-  SampleCapturesSheet,
   DataForWhatYouBuild,
   WhyTbrainSheet,
   BeyondRobotics,
 } from "@/components/marketing/sections/foundry/Sheets";
 import { HowItWorks } from "@/components/marketing/sections/foundry/SystemShowcase";
 import { Catalog, EngagementLadder } from "@/components/marketing/sections/foundry/DeckSections";
+import { LiveTicker } from "@/components/marketing/sections/foundry/LiveTicker";
+import { HardwareShowcase } from "@/components/marketing/sections/foundry/HardwareShowcase";
+import { ModelStackCard } from "@/components/marketing/sections/foundry/ModelStackCard";
+import { CapturesGallery } from "@/components/marketing/sections/foundry/CapturesGallery";
+import { RerunEmbed } from "@/components/marketing/sections/foundry/RerunEmbed";
+import { LerobotPreview } from "@/components/marketing/sections/foundry/LerobotPreview";
+import { PublicDatasetWall } from "@/components/marketing/sections/foundry/PublicDatasetWall";
 import { ANCHOR_TRUST } from "@/lib/landing/physical-ai";
 
 export const metadata: Metadata = {
@@ -34,7 +40,6 @@ export const metadata: Metadata = {
 
 export const revalidate = 86400;
 
-/* Structured data — the robotics-data service + its modality catalog (SEO). */
 const BASE_URL = process.env.PUBLIC_BASE_URL || "https://tbrain.ai";
 const SERVICE_JSONLD = {
   "@context": "https://schema.org",
@@ -60,7 +65,6 @@ const SERVICE_JSONLD = {
   },
 };
 
-/* Anonymized anchor-trust strip (no named labs — NDA). */
 function AnchorStrip() {
   return (
     <section className="bp-grid" style={{ borderTop: "1px solid var(--bp-line)", borderBottom: "1px solid var(--bp-line)", paddingTop: 28, paddingBottom: 28 }}>
@@ -101,15 +105,52 @@ export default function PhysicalAIPage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(SERVICE_JSONLD) }} />
       <Header />
       <main>
+        {/* 01 · Cinema hero */}
         <CinemaHero />
+
+        {/* 02 · Live ticker — delivered vs capacity */}
+        <LiveTicker />
+
+        {/* 03 · Anchor trust strip */}
         <AnchorStrip />
-        <SampleCapturesSheet />
-        <HowItWorks />
-        <DataForWhatYouBuild />
+
+        {/* 04 · Capture ledger — real episodes surface first */}
+        <CapturesGallery />
+
+        {/* 05 · LeRobot v2 export preview — proof of schema */}
+        <LerobotPreview />
+
+        {/* 06 · Ten modalities · one export contract */}
         <Catalog />
+
+        {/* 07 · Rerun episode viewer */}
+        <RerunEmbed />
+
+        {/* 08 · Auto-label model stack — 8 models · one pipeline */}
+        <ModelStackCard />
+
+        {/* 09 · How it works — pipeline + operator app + fleet */}
+        <HowItWorks />
+
+        {/* 10 · Hardware pack + operator app concept */}
+        <HardwareShowcase />
+
+        {/* 11 · Data for what you build (use cases) */}
+        <DataForWhatYouBuild />
+
+        {/* 14 · Public egocentric dataset wall */}
+        <PublicDatasetWall />
+
+        {/* 15 · Why Tbrain */}
         <WhyTbrainSheet />
+
+        {/* 16 · Engagement ladder */}
         <EngagementLadder />
+
+        {/* 17 · Beyond robotics footer band */}
         <BeyondRobotics />
+
+        {/* 18 · CTA */}
         <FoundryCTA />
       </main>
       <Footer />

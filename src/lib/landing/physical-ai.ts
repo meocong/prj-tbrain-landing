@@ -16,31 +16,46 @@
    ──────────────────────────────────────────────────────────────────── */
 export const FOUNDRY_HERO = {
   fig: "FIG.01 — TBRAIN CAPTURE PACK · MK-001 · REV A",
-  eyebrow: "Data is the bottleneck — not compute.",
+  eyebrow: "Industrial data · real production environments · not scraped, not simulated.",
   title: "The Robotics Data Foundry for Physical AI",
-  sub: "The real-world demonstration data you can't scrape, simulate, or collect at scale in-house — egocentric, action-paired, deeply annotated, QC'd, and delivered RLDS-ready.",
+  sub: "Real capture packs, worn by operators on the factory floor — egocentric, action-paired, deeply annotated. Sourced through a Vietnam industrial network across multiple production sites, QC'd, and delivered RLDS-ready.",
   ctaPrimary: { label: "See a sample dataset", href: "/contact" },
   ctaSecondary: { label: "How the foundry works", href: "/data/physical-ai" },
-  trust: "LeRobot / RLDS · ≤48h delivery · zero-trust",
+  trust: "Industrial network · real production · LeRobot / RLDS · ≤48h delivery",
 } as const;
 
 export const ANCHOR_TRUST = {
-  headline: "The data layer behind frontier robot foundation models",
+  headline: "Industrial data · real production environments · at network scale",
   // Anonymized — do not name the labs publicly.
-  labs: "Built on the formats robot foundation models train on",
+  labs: "Sourced through a Vietnam industrial network — factories, workshops, assembly lines",
   standards: [
-    { name: "LeRobot", detail: "Hugging Face dataset format" },
-    { name: "RLDS", detail: "Open X-Embodiment format" },
+    { name: "Industrial", detail: "Real factory floors · not staged" },
+    { name: "Multi-site", detail: "Textile · kitchen · electronics roadmap" },
+    { name: "LeRobot / RLDS", detail: "Ready for the training loop" },
     { name: "≤ 48h", detail: "Raw → QC'd → delivered" },
-    { name: "Zero-trust", detail: "Encrypted, audited delivery" },
   ],
 } as const;
 
 /* ────────────────────────────────────────────────────────────────────
    The problem
    ──────────────────────────────────────────────────────────────────── */
+/* Hero cross-fade — ops-team specified 3 clips, 10s each.
+   Placeholder paths point at ops-content pipeline output; component falls back
+   to worker-hero.mp4 if these are not yet on disk. */
+export const HERO_MIX = {
+  clips: [
+    { src: "/videos/hero-mix/4.webm", mp4: "/videos/hero-mix/4.mp4", poster: "/videos/hero-mix/4.jpg", label: "Exocentric mocap · partner-signed", source: "partner" },
+    { src: "/videos/hero-mix/5.webm", mp4: "/videos/hero-mix/5.mp4", poster: "/videos/hero-mix/5.jpg", label: "Egocentric · GoPro rig · folding shorts", source: "in-house" },
+    { src: "/videos/hero-mix/1.webm", mp4: "/videos/hero-mix/1.mp4", poster: "/videos/hero-mix/1.jpg", label: "Real production · textile factory · Vietnam", source: "in-house" },
+    { src: "/videos/hero-mix/2.webm", mp4: "/videos/hero-mix/2.mp4", poster: "/videos/hero-mix/2.jpg", label: "Industrial · textile factory · Vietnam", source: "in-house" },
+    { src: "/videos/hero-mix/3.webm", mp4: "/videos/hero-mix/3.mp4", poster: "/videos/hero-mix/3.jpg", label: "Real production · manipulation", source: "in-house" },
+  ],
+  fallback: { src: "/videos/worker-hero.webm", mp4: "/videos/worker-hero.mp4", poster: "/images/worker-hero-poster.jpg" },
+  clipDurationSec: 10,
+} as const;
+
 export const PROBLEM = {
-  fig: "FIG.00 — PROBLEM STATEMENT",
+  fig: "FIG.01 — PROBLEM STATEMENT",
   heading: "Physical AI is blocked by real-world data",
   lead: "Robot foundation models don't lack compute. They lack synchronized, action-paired data captured in the messy real world — and every lab is hitting the same wall.",
   points: [
@@ -104,7 +119,7 @@ export interface PipelineStage {
 }
 
 export const FOUNDRY_LINE = {
-  fig: "FIG.02 — FOUNDRY LINE / DATA PIPELINE",
+  fig: "FIG.06 — FOUNDRY LINE / DATA PIPELINE",
   title: "From raw motion to RLDS-ready dataset",
   lead: "Every pack feeds one pipeline. Capture is synchronized, cached, synced overnight to edge storage, then forged into standardized, QC'd datasets in the cloud AI pipeline.",
   stages: [
@@ -211,18 +226,35 @@ export const DATA_LADDER = {
 /* ────────────────────────────────────────────────────────────────────
    FIG.07 — Real-world environments
    ──────────────────────────────────────────────────────────────────── */
+/* Capture environments — 4 real (ops-provided drive drops), 2 sourced (public/partner).
+   Video paths match scripts/encode-ops-content.mjs output.
+   Component falls back to `stock` still if video not yet on disk. */
+export interface EnvSlot {
+  key: string;
+  name: string;
+  note: string;
+  video?: string;    // /videos/env/{key}.webm — from ops-team Drive
+  poster: string;    // /images/env/{key}.jpg
+  stock: string;     // legacy stock fallback used until video lands
+  source: "OPS" | "PUBLIC";
+  driveRef?: string;
+  durationHint: string;
+}
 export const ENVIRONMENTS = {
-  fig: "FIG.07 — ENVIRONMENT LIBRARY",
-  title: "Data synthetic never sees",
-  lead: "A diverse, real-world environment library is the asset simulation can't fake and US-centric vendors don't have. We capture the East-Asian, industrial, and agricultural settings world-model labs are starved for.",
+  fig: "FIG.05 — CAPTURE ENVIRONMENTS",
+  title: "Seven textile-factory skills · one schema",
+  lead: "Real ops from a running Vietnamese textile line — sewing, ironing, tagging, printing, QC, sorting, packing. Seventy-one raw wearable-cam sessions ingested, fourteen already flowing through the auto-label pipeline. Same 8-model stack, same 8-check diag, same LeRobot export.",
   items: [
-    { name: "Home kitchens", note: "Cooking, dishes, tidying" },
-    { name: "Wet markets & retail", note: "Picking, bagging, handling" },
-    { name: "Small workshops", note: "Assembly, tool use, repair" },
-    { name: "Agriculture", note: "Sorting, harvesting, packing" },
-    { name: "Warehouse & food service", note: "Commercial manipulation" },
-    { name: "In-the-wild egocentric", note: "Walking, multi-room tasks" },
-  ],
+    { key: "may_san_pham", name: "Sewing · hem machine",        note: "Wearable-cam · factory-floor egocentric",         video: "/videos/env/may_san_pham.webm", poster: "/images/env/may_san_pham-poster.jpg", stock: "/images/env/textile.jpg",     source: "OPS", driveRef: "1LTXPUhGmBgsCRDSKfTGX3aot4RRxb7kq", durationHint: "10s" },
+    { key: "is_san_pham",  name: "Ironing",                     note: "Contact-heavy · long-horizon manipulation",       video: "/videos/env/is_san_pham.webm",  poster: "/images/env/is_san_pham-poster.jpg",  stock: "/images/env/textile.jpg",     source: "OPS", driveRef: "1LTXPUhGmBgsCRDSKfTGX3aot4RRxb7kq", durationHint: "10s" },
+    { key: "gan_tag",      name: "Product tagging",             note: "Fine-motor · dexterous tool use",                 video: "/videos/env/gan_tag.webm",      poster: "/images/env/gan_tag-poster.jpg",      stock: "/images/env/textile.jpg",     source: "OPS", driveRef: "1LTXPUhGmBgsCRDSKfTGX3aot4RRxb7kq", durationHint: "10s" },
+    { key: "in_ma_so",     name: "Code printing on fabric",     note: "Two-handed · alignment task",                     video: "/videos/env/in_ma_so.webm",     poster: "/images/env/in_ma_so-poster.jpg",     stock: "/images/env/textile.jpg",     source: "OPS", driveRef: "1LTXPUhGmBgsCRDSKfTGX3aot4RRxb7kq", durationHint: "10s" },
+    { key: "kiem_tra_qc",  name: "Quality inspection",          note: "Vision-driven · pass / fail decisions",           video: "/videos/env/kiem_tra_qc.webm",  poster: "/images/env/kiem_tra_qc-poster.jpg",  stock: "/images/env/sorting.jpg",     source: "OPS", driveRef: "1LTXPUhGmBgsCRDSKfTGX3aot4RRxb7kq", durationHint: "10s" },
+    { key: "sap_xep_vai",  name: "Fabric sorting & feed",       note: "Pick + place · machine feeding",                  video: "/videos/env/sap_xep_vai.webm",  poster: "/images/env/sap_xep_vai-poster.jpg",  stock: "/images/env/sorting.jpg",     source: "OPS", driveRef: "1LTXPUhGmBgsCRDSKfTGX3aot4RRxb7kq", durationHint: "10s" },
+    { key: "dong_goi",     name: "Packaging into bag",          note: "Deformable-object handling",                      video: "/videos/env/dong_goi.webm",     poster: "/images/env/dong_goi-poster.jpg",     stock: "/images/env/warehouse.jpg",   source: "OPS", driveRef: "1LTXPUhGmBgsCRDSKfTGX3aot4RRxb7kq", durationHint: "10s" },
+    { key: "kitchen",      name: "Kitchen · pantry",            note: "Delivered · reference from kitchen ledger",       video: "/videos/real-captures/wiping_pantry_surface.webm", poster: "/images/real-captures/wiping_pantry_surface-loop.jpg", stock: "/images/env/kitchen.jpg", source: "OPS", durationHint: "delivered" },
+    { key: "electronics",  name: "Electronics assembly",        note: "Roadmap · sourced reference",                     video: undefined,                       poster: "/images/env/electronics.jpg",         stock: "/images/env/electronics.jpg", source: "PUBLIC", durationHint: "sourced" },
+  ] as EnvSlot[],
 } as const;
 
 /* ────────────────────────────────────────────────────────────────────
@@ -442,7 +474,7 @@ export const SYSTEM = {
       { k: "Battery", v: "82%" },
       { k: "Storage", v: "180 GB free" },
       { k: "Sync pending", v: "12.4 GB" },
-      { k: "Session", v: "EP-2026-0617-0142" },
+      { k: "Session", v: "pick_up_the_cup · reference" },
     ],
   },
   monitor: {
@@ -489,17 +521,29 @@ export const WORLD_MODEL = {
   ],
 } as const;
 
-/* How much we can ship */
+/* Two-tier availability — never mix delivered vs aspirational */
 export const AVAILABILITY = {
-  fig: "FIG.15 — DATA AVAILABILITY",
-  title: "Capacity that scales with your program",
-  lead: "Built to ship volume fast — and to grow from a pilot batch to a continuous pipeline.",
-  stats: [
-    { value: 500, suffix: "", k: "Parallel capture packs" },
-    { value: 10000, suffix: "+", k: "Episodes / month at scale" },
-    { value: 6, suffix: "+", k: "Environment categories" },
-    { value: 8, suffix: "", k: "Synchronized streams" },
-  ],
+  fig: "FIG.04 — WHAT SHIPS NOW → NEXT",
+  title: "Delivered today. Scaling to program.",
+  lead: "One rule: verifiable numbers on the left, aspirational capacity on the right — labeled, not blended. We don't ship stats we can't defend to a research engineer.",
+  delivered: {
+    tag: "Delivered today",
+    stats: [
+      { value: 10,   suffix: "",  k: "Real capture skills on disk" },
+      { value: 5016, suffix: "",  k: "Annotated frames · LeRobot v2" },
+      { value: 8,    suffix: "",  k: "Episodes · parquet + video + depth" },
+      { value: 8,    suffix: "",  k: "Auto-label models in prod pipeline" },
+    ],
+  },
+  capacity: {
+    tag: "Capacity 2026",
+    stats: [
+      { value: 500,   suffix: "",  k: "Parallel capture packs at scale" },
+      { value: 10000, suffix: "+", k: "Episodes / month at scale" },
+      { value: 6,     suffix: "+", k: "Environment categories" },
+      { value: 8,     suffix: "",  k: "Synchronized streams / episode" },
+    ],
+  },
 } as const;
 
 /* Capture partner ecosystem — factories & environments */
@@ -557,27 +601,296 @@ export const QC_FLOW = {
   ] as QcStep[],
 } as const;
 
-/* Real data, not concept — 6 actual sample types */
-export interface RealSample { name: string; video: string; poster: string; note: string; reject?: boolean; }
+/* Real captures scanned from /data/tbrain/captures — QC status per labels/summary.json */
+export type QcState = "PASS" | "PARTIAL" | "FAIL_LABEL" | "PARTNER" | "LABELING";
+export interface QcMeta {
+  state: QcState;
+  passCount: number;
+  total: number;
+  failedCheck?: string;
+  note?: string;
+}
+export type SampleGroup = "KITCHEN" | "TEXTILE";
+export interface RealSample {
+  name: string;
+  skill: string;
+  video: string;
+  poster: string;
+  note: string;
+  defect?: boolean;
+  frames?: number;
+  seconds?: number;
+  sensor?: string;
+  takes?: number;      // >1 = grouped card
+  group: SampleGroup;
+  qc: QcMeta;
+}
 
 export const REAL_SAMPLES = {
-  fig: "FIG.07 — REAL CAPTURED EPISODES",
-  title: "Real episodes we've captured",
-  lead: "Actual egocentric manipulation episodes — annotated and multi-stream (RGB · depth · stereo IR · 3D hand pose), delivered in LeRobot / RLDS. Including the broken takes our QC auto-rejects.",
-  montage: "/images/real-samples/montage.png",
+  fig: "FIG.10 — CAPTURE LEDGER",
+  title: "Real episodes · shipped and in-flight",
+  lead: "Two environments, one ledger. Kitchen: seven delivered, one grouped mobile take pending re-run. Textile: eight auto-labeled takes — six with solid MANO mesh on both hands, two with intermittent overlay (dropout on high-motion frames) — we publish only what passes visual sanity.",
+  montage: "/images/deliverables/all6-montage.png",
+  groups: {
+    KITCHEN: { label: "Kitchen ledger", note: "Delivered · QC-verified" },
+    TEXTILE: { label: "Textile factory", note: "8 auto-labeled · 6 solid · 2 intermittent" },
+  },
   items: [
-    { name: "Pick up the cup", video: "/videos/samples/cup.mp4", poster: "/images/samples/cup.jpg", note: "Cup handling · annotated" },
-    { name: "Open & close door", video: "/videos/samples/door.mp4", poster: "/images/samples/door.jpg", note: "Door / fridge skill" },
-    { name: "Pick from fridge", video: "/videos/samples/fridge.mp4", poster: "/images/samples/fridge.jpg", note: "Reach + grasp" },
-    { name: "Wiping surface", video: "/videos/samples/wipe.mp4", poster: "/images/samples/wipe.jpg", note: "Wiping · sub-actions" },
-    { name: "Clean workstation", video: "/videos/samples/workstation.mp4", poster: "/images/samples/workstation.jpg", note: "Tool use · tidy" },
-    { name: "Pick up cup — rejected", video: "/videos/samples/defect.mp4", poster: "/images/samples/defect.jpg", note: "Auto-rejected by QC", reject: true },
+    // Kitchen · PASS (5)
+    { group: "KITCHEN", name: "Pick up the cup",         skill: "pick_up_the_cup",         video: "/videos/real-captures/pick_up_the_cup.webm",              poster: "/images/real-captures/pick_up_the_cup-loop.jpg",              note: "Reference episode · MANO 21-kpt hand + verb-noun label", frames: 271, seconds: 18, sensor: "Stereo depth cam",    qc: { state: "PASS", passCount: 14, total: 14 } },
+    { group: "KITCHEN", name: "Open & close door",       skill: "open_and_close_door",     video: "/videos/real-captures/open_and_close_door.webm",          poster: "/images/real-captures/open_and_close_door-loop.jpg",          note: "Two-phase task · sub-action segments",                    frames: 234, seconds: 16, sensor: "Stereo depth cam",    qc: { state: "PASS", passCount: 14, total: 14 } },
+    { group: "KITCHEN", name: "Pick from fridge",        skill: "pick_up_item_from_fridge", video: "/videos/real-captures/pick_up_item_from_fridge.webm",     poster: "/images/real-captures/pick_up_item_from_fridge-loop.jpg",     note: "Reach + grasp under occlusion",                          frames: 339, seconds: 23, sensor: "Stereo depth cam",    qc: { state: "PASS", passCount: 13, total: 14, note: "1 optional check skipped" } },
+    { group: "KITCHEN", name: "Wiping pantry surface",   skill: "wiping_pantry_surface",   video: "/videos/real-captures/wiping_pantry_surface.webm",        poster: "/images/real-captures/wiping_pantry_surface-loop.jpg",        note: "Long-horizon · continuous contact",                       frames: 680, seconds: 59, sensor: "Stereo depth cam",    qc: { state: "PASS", passCount: 14, total: 14 } },
+    { group: "KITCHEN", name: "Clean workstation",       skill: "clean_workstation",       video: "/videos/real-captures/clean_workstation.webm",            poster: "/images/real-captures/clean_workstation-loop.jpg",            note: "Tool use · multi-object rearrange",                       frames: 839, seconds: 56, sensor: "Stereo depth cam",    qc: { state: "PASS", passCount: 13, total: 14, note: "1 optional check skipped" } },
+    // Kitchen · PASS defect (2)
+    { group: "KITCHEN", name: "Pick up cup — defect",    skill: "pick_up_cup_defect",      video: "/videos/real-captures/pick_up_cup_defect.webm",           poster: "/images/real-captures/pick_up_cup_defect-loop.jpg",           note: "Intentional-defect capture · trains failure detection",   defect: true, frames: 642, seconds: 43, sensor: "Stereo depth cam", qc: { state: "PASS", passCount: 14, total: 14, note: "Defect on purpose — QC passes" } },
+    { group: "KITCHEN", name: "Clean workstation — defect", skill: "clean_workstation_defect", video: "/videos/real-captures/clean_workstation_defect.webm", poster: "/images/real-captures/clean_workstation_defect-loop.jpg",    note: "Intentional-defect capture · tool-switch stress test",     defect: true, frames: 1041, seconds: 70, sensor: "Stereo depth cam", qc: { state: "PASS", passCount: 14, total: 14, note: "Defect on purpose — QC passes" } },
+    // Kitchen · mobile PASS (1) — grouped tagging card
+    { group: "KITCHEN", name: "Retail tagging (mobile)", skill: "gan_tag_grouped",         video: "/videos/real-captures/gan_tag_cho_san_pham.webm",         poster: "/images/real-captures/gan_tag_cho_san_pham-loop.jpg",         note: "Mobile portrait capture · 3 takes",                       takes: 3, frames: 3752, seconds: 125, sensor: "Mobile phone",           qc: { state: "PARTIAL", passCount: 0, total: 14, note: "QC re-run pending" } },
+    // Textile · PARTIAL (solid MANO mesh on both hands · QC gate pending) — 6 clean takes after HaWoR rerun + burn fix
+    { group: "TEXTILE", name: "Ironing · T01",                 skill: "iron_product_01",         video: "/videos/textile-annotated/iron_01.webm",     poster: "/images/textile-annotated/iron_01.jpg",     note: "MANO mesh on both hands · object · pants",        frames: 450, seconds: 15, sensor: "Wearable capture pack", qc: { state: "PARTIAL", passCount: 0, total: 14, note: "Auto-label passes visual sanity · QC gate pending" } },
+    { group: "TEXTILE", name: "Ironing · T02",                 skill: "iron_product_02",         video: "/videos/textile-annotated/iron_02.webm",     poster: "/images/textile-annotated/iron_02.jpg",     note: "Hand overlay clean · SAM3 tracked garment instead of iron tool", frames: 450, seconds: 15, sensor: "Wearable capture pack", qc: { state: "PARTIAL", passCount: 0, total: 14, note: "Object detection off · re-prompt queued" } },
+    { group: "TEXTILE", name: "Sew on hem machine",            skill: "sew_hem_02",              video: "/videos/textile-annotated/sew_02.webm",      poster: "/images/textile-annotated/sew_02.jpg",      note: "MANO mesh on both hands · object · cloth",        frames: 450, seconds: 15, sensor: "Wearable capture pack", qc: { state: "PARTIAL", passCount: 0, total: 14, note: "Auto-label passes visual sanity · QC gate pending" } },
+    { group: "TEXTILE", name: "Fabric sort + feed · T01",      skill: "arrange_fabric_01",       video: "/videos/textile-annotated/arrange_01.webm",  poster: "/images/textile-annotated/arrange_01.jpg",  note: "MANO mesh on both hands · object · cloth",        frames: 450, seconds: 15, sensor: "Wearable capture pack", qc: { state: "PARTIAL", passCount: 0, total: 14, note: "Auto-label passes visual sanity · QC gate pending" } },
+    { group: "TEXTILE", name: "Fabric sort + feed · T02",      skill: "arrange_fabric_02",       video: "/videos/textile-annotated/arrange_02.webm",  poster: "/images/textile-annotated/arrange_02.jpg",  note: "Hand overlay clean · SAM3 color-confused (cardboard as fabric)", frames: 450, seconds: 15, sensor: "Wearable capture pack", qc: { state: "PARTIAL", passCount: 0, total: 14, note: "Object detection off · re-prompt queued" } },
+    { group: "TEXTILE", name: "Package into bag · T02",        skill: "package_product_02",      video: "/videos/textile-annotated/package_02.webm",  poster: "/images/textile-annotated/package_02.jpg",  note: "MANO mesh on both hands · objects · cloth + bag", frames: 450, seconds: 15, sensor: "Wearable capture pack", qc: { state: "PARTIAL", passCount: 0, total: 14, note: "Auto-label passes visual sanity · QC gate pending" } },
+    { group: "TEXTILE", name: "Sew on hem machine · T01",      skill: "sew_hem_01",              video: "/videos/textile-annotated/sew_01.webm",      poster: "/images/textile-annotated/sew_01.jpg",      note: "MANO mesh · dropout on high-motion frames",       frames: 450, seconds: 15, sensor: "Wearable capture pack", qc: { state: "PARTIAL", passCount: 0, total: 14, note: "Overlay intermittent · re-track queued" } },
+    { group: "TEXTILE", name: "Package into bag · T01",        skill: "package_product_01",      video: "/videos/textile-annotated/package_01.webm",  poster: "/images/textile-annotated/package_01.jpg",  note: "MANO mesh · dropout when hand off-frame",         frames: 450, seconds: 15, sensor: "Wearable capture pack", qc: { state: "PARTIAL", passCount: 0, total: 14, note: "Overlay intermittent · re-track queued" } },
   ] as RealSample[],
+} as const;
+
+/* ────────────────────────────────────────────────────────────────────
+   Auto-label model stack — anonymized (generic role · tier).
+   No brand names, no HF handles, no GPU model, no ports, no env vars.
+   ──────────────────────────────────────────────────────────────────── */
+export type ModelTier = "FRONTIER" | "RESEARCH" | "FOUNDATION" | "LIGHT";
+export interface ModelSpec {
+  name: string;         // Generic role label
+  role: string;         // Short tag under name
+  tier: ModelTier;
+  task: string;         // What it does in one sentence
+  inputs: string;       // IN: description
+  outputs: string;      // OUT: description
+  vram: number;         // GB (rendered as bar 0–24)
+  latency: string;      // Human-readable
+  runtime: "gpu · isolated" | "gpu-node · remote" | "cpu";
+  determ?: boolean;
+  notes?: string;
+}
+
+export const MODEL_STACK = {
+  fig: "FIG.08 — AUTO-LABEL MODEL STACK",
+  title: "Eight production models · one pipeline",
+  lead: "Every capture flows through eight pinned, versioned, VRAM-profiled models before a human sees it. Each is swappable behind a role interface — the pipeline stays the same regardless of the underlying weights.",
+  models: [
+    { name: "Segmenter",              role: "Video object + hand masks",         tier: "FRONTIER",   task: "Frame-accurate masks for every object and both hands.",              inputs: "RGB video · 720p",           outputs: "Masks · per-frame · track-linked",     vram: 10,   latency: "0.3 s/frame",         runtime: "gpu · isolated",  notes: "Video-native · masks travel with track_id." },
+    { name: "3D Hand + Camera",       role: "MANO 21-kpt + SLAM",                tier: "RESEARCH",   task: "Reconstructs 3D hand pose plus the camera trajectory.",              inputs: "RGB video",                  outputs: "21-kpt MANO hand · R,t camera pose",    vram: 13,   latency: "1.2× clip length",    runtime: "gpu · isolated",  notes: "DROID-style SLAM · MANO body pinned." },
+    { name: "Monocular Depth",        role: "Per-pixel depth + intrinsics",      tier: "FOUNDATION", task: "Predicts dense depth and camera intrinsics from a single frame.",    inputs: "RGB frame",                  outputs: "Depth map · 3×3 intrinsics K",          vram: 5,    latency: "0.4 s/frame",         runtime: "gpu · isolated",  notes: "Feeds 6-DoF pose tracker." },
+    { name: "Mesh Reconstruction",    role: "Object → .glb mesh",                tier: "FRONTIER",   task: "Reconstructs a per-object 3D mesh from monocular input.",            inputs: "RGB frame · object mask",    outputs: ".glb mesh · watertight",                vram: 14,   latency: "2–4 s / object",      runtime: "gpu · isolated",  notes: "Multi-checkpoint encoder/decoder chain." },
+    { name: "6-DoF Pose Tracker",     role: "Per-frame per-object pose",         tier: "RESEARCH",   task: "Tracks object 6-DoF pose using depth + mask + prior mesh.",          inputs: "Depth · mask · mesh",        outputs: "4×4 pose matrix · per object · per frame", vram: 6, latency: "0.4 s / frame / obj", runtime: "gpu · isolated",  notes: "Swappable behind a common interface." },
+    { name: "Frontier VLA",           role: "Verb + noun · 8-frame windows",     tier: "FRONTIER",   task: "Classifies action verb and object noun on every 8-frame window.",    inputs: "8 RGB frames · task prompt", outputs: "Verb · noun · confidence",              vram: 22,   latency: "2.5 s / window",      runtime: "gpu-node · remote", determ: true, notes: "Deterministic decoding · 86 % verb-noun accuracy on internal eval." },
+    { name: "Lightweight Hand",       role: "21-kpt fallback",                   tier: "LIGHT",      task: "Fast bbox → 21 keypoints when the frontier model drops the hand.",   inputs: "RGB bbox",                   outputs: "21 hand keypoints · confidence",        vram: 0,    latency: "0.02 s / frame",      runtime: "cpu",             notes: "Patches gaps · runs on CPU." },
+    { name: "Lightweight Body",       role: "33-kpt body pose",                  tier: "LIGHT",      task: "Full-body keypoints for humanoid-transfer downstream tasks.",         inputs: "RGB frame",                  outputs: "33 body keypoints",                     vram: 0,    latency: "0.05 s / frame",      runtime: "cpu",             notes: "Runs on CPU · humanoid retarget input." },
+  ] as ModelSpec[],
+  peakVram: "Peak sequential VRAM: ~22 GB · verified on NVIDIA data-center GPUs.",
+} as const;
+
+/* ────────────────────────────────────────────────────────────────────
+   HITL Studio — real screenshots from the running system
+   ──────────────────────────────────────────────────────────────────── */
+export interface HitlShot { src: string; caption: string; backend: string; }
+
+export interface HitlTab {
+  key: "segmenter" | "hand" | "vla" | "burn";
+  label: string;
+  backendLabel: string;
+  image: string;
+  images?: string[]; // burn tab: 4-frame strip
+  caption: string;
+  alt: string;
+}
+
+export const HITL_STUDIO = {
+  fig: "FIG.09 — AUTO-LABEL PIPELINE · COCKPIT",
+  title: "Cockpit",
+  lead: "One annotation workspace, three model-backed assistants. Click once to propagate a mask, draw a bbox to drop keypoints, and let the frontier VLA score every window. What a reviewer touches becomes the ground-truth label for the pipeline.",
+  ls: {
+    // Public-safe labels — no hostname, no port.
+    host: "Annotation workspace",
+    backends: [
+      { name: "Segmenter backend",   model: "Frontier segmenter",            task: "Click → mask · ±15 frame fill" },
+      { name: "Hand-kpt backend",    model: "Lightweight hand detector",     task: "Bbox → 21 MANO keypoints" },
+      { name: "VLA backend",         model: "Frontier VLA",                   task: "8-frame window → verb + noun" },
+    ],
+    projects: [
+      { k: "Video project",    v: "Bounding boxes + track_id · video-native" },
+      { k: "Keypoint project", v: "42 keypoints per keyframe · per-hand overlay" },
+    ],
+  },
+  tabs: [
+    {
+      key: "segmenter",
+      label: "Segmenter",
+      backendLabel: "Segmenter backend",
+      image: "/images/hitl/hitl_capture_thumb.jpg",
+      caption: "Click once — mask propagates ±15 frames across the video. Reviewer verifies, edits if needed, and moves on.",
+      alt: "Segmenter cockpit screenshot",
+    },
+    {
+      key: "hand",
+      label: "Hand keypoints",
+      backendLabel: "Hand-kpt backend",
+      image: "/images/hitl/hitl_clean_thumb.jpg",
+      caption: "Draw a bounding box on the hand — the backend drops 21 anatomical keypoints with per-joint confidence.",
+      alt: "Hand keypoints cockpit screenshot",
+    },
+    {
+      key: "vla",
+      label: "Verb + noun",
+      backendLabel: "VLA backend",
+      image: "/images/hitl/hitl_wiping_thumb.jpg",
+      caption: "Every 8-frame window is scored deterministically for action verb and object noun. Same prompt, same output, every run.",
+      alt: "Verb + noun cockpit screenshot",
+    },
+    {
+      key: "burn",
+      label: "Overlay preview",
+      backendLabel: "Burn pipeline",
+      image: "/images/hitl/annotated_sample.jpg",
+      images: [
+        "/images/hitl/preview_first.jpg",
+        "/images/hitl/preview_mid.jpg",
+        "/images/hitl/preview_last.jpg",
+        "/images/hitl/reel_frame.png",
+      ],
+      caption: "Once QC passes, every stream is burned back into a single annotated video — hand pose, object bbox, track_id, action label per frame.",
+      alt: "Burn overlay preview strip",
+    },
+  ] as HitlTab[],
+} as const;
+
+/* ────────────────────────────────────────────────────────────────────
+   8-check auto-label QC diagnostic (real, from AUTOLABEL_QA.md)
+   ──────────────────────────────────────────────────────────────────── */
+export interface DiagCheck { key: string; label: string; criterion: string; failMode: string; }
+
+export const QC_DIAG = {
+  fig: "FIG.09 — AUTO-LABEL PIPELINE · DIAGNOSTIC",
+  title: "Diagnostic · eight named gates",
+  lead: "Before HITL sees a single frame, `tbrain-ego diag` runs eight quantitative checks against the auto-label output. If a capture fails any gate, it's tagged and either re-processed or rejected. These are the exact check names in production.",
+  cmd: "$ auto-label diag <capture>",
+  checks: [
+    { key: "K_consistency",       label: "Intrinsics match",       criterion: "|K_depth − K_hand| / K < 5%",                      failMode: "Camera-model disagreement" },
+    { key: "frame_alignment",     label: "Frame alignment",        criterion: "len(tracker output) == frame count",               failMode: "Off-by-N frame drift" },
+    { key: "hand_detect_rate",    label: "Hand detected",           criterion: "Hand tracker valid frames > 10%",                  failMode: "Hands out of view · pipeline unusable" },
+    { key: "filter_pass_rate",    label: "Filter pass rate",        criterion: "hands_in_labels / raw detections > 40%",           failMode: "Fallback dominates · low quality" },
+    { key: "kpt_outlier_pct",     label: "Keypoint jitter",         criterion: "< 5% frames with > 200 px jump",                   failMode: "Tracking drift · joint teleport" },
+    { key: "camera_trajectory",   label: "Camera trajectory",       criterion: "‖R_c2w − I‖ ≥ 1e-3",                              failMode: "SLAM never converged · flat scene" },
+    { key: "kpts_3d_dual_frame",  label: "3D dual-frame",           criterion: "Both world + cam frames present",                  failMode: "Missing frame · downstream break" },
+    { key: "object_world_scale",  label: "Object world scale",      criterion: "0.1 m < mean ‖t‖ < 5.0 m",                        failMode: "Scale collapse · object at ∞" },
+  ] as DiagCheck[],
+  bottomLine: "8/8 pass ⇒ eligible for HITL. Anything less ⇒ rejected, re-run, or downgraded to reference-only.",
+} as const;
+
+/* ────────────────────────────────────────────────────────────────────
+   LeRobot v2 export snapshot (real from meta/info.json)
+   ──────────────────────────────────────────────────────────────────── */
+export const LEROBOT_EXPORT = {
+  fig: "FIG.12 — LeROBOT v2 EXPORT",
+  title: "Shipped in the format frontier labs already train on",
+  lead: "No proprietary schema. No conversion contract. Every batch exports directly to LeRobot v2 parquet + video, drops into your pipeline the day you sign, and mirrors to RLDS on request.",
+  meta: {
+    dataset_name: "tbrain_ego_v2",
+    robot_type: "egocentric_human",
+    codebase_version: "v2.0",
+    total_episodes: 8,
+    total_frames: 5016,
+    total_tasks: 6,
+    total_videos: 16,
+    total_chunks: 1,
+    chunks_size: 1000,
+    fps: 15.0,
+    resolution: "640×480 · h264 · yuv420p",
+    streams: ["observation.images.rgb", "observation.images.depth", "action_type"],
+  },
+  snippet: `{
+  "dataset_name": "tbrain_ego_v2",
+  "robot_type":   "egocentric_human",
+  "total_episodes": 8,
+  "total_frames":   5016,
+  "total_tasks":    6,
+  "total_videos":   16,
+  "fps": 15.0,
+  "features": {
+    "observation.images.rgb":   { "dtype": "video", "shape": [3, 480, 640] },
+    "observation.images.depth": { "dtype": "video", "shape": [3, 480, 640], "is_depth_map": true },
+    "action_type": { "dtype": "string" }
+  }
+}`,
+} as const;
+
+/* ────────────────────────────────────────────────────────────────────
+   Partner-profile data-type deliverables
+   (7 modality bundles in tbrain-robotics-research/Tbrain-Robotics-Data-Deliverables)
+   ──────────────────────────────────────────────────────────────────── */
+export interface PartnerModality { key: string; name: string; source: string; video?: string; poster?: string; note: string; own: boolean; }
+
+export const PARTNER_MODALITIES = {
+  fig: "FIG.13 — MODALITY LIBRARY",
+  title: "Every data type in one shipping catalog",
+  lead: "Egocentric is our own capture. UMI, ALOHA, mobile-manipulation, PushT, sim-teleop and OpenX single-arm come through validated partner profiles — same LeRobot v2 schema, same QC-gate contract. If your foundation model consumes it, we ship it.",
+  items: [
+    { key: "egocentric",   name: "Egocentric human video",   source: "Tbrain Capture Pack",           video: "/videos/real-captures/pick_up_the_cup.webm", poster: "/images/real-captures/pick_up_the_cup-loop.jpg", note: "8 episodes shipped · MANO hand + depth + verb-noun", own: true },
+    { key: "aloha",        name: "ALOHA bimanual teleop",    source: "Partner profile · 4-camera",    video: "/videos/deliverables/aloha-4cam.mp4",         poster: "",                                                note: "4-cam synchronized · dual-arm imitation learning",   own: false },
+    { key: "umi",          name: "UMI / handheld gripper",   source: "Partner profile · $700 rig",     video: "",                                            poster: "/images/deliverables/all6-montage.png",           note: "6-DoF SLAM pose + gripper trajectory",               own: false },
+    { key: "mobile-manip", name: "Mobile manipulation",      source: "Partner profile · wheeled base", video: "",                                            poster: "/images/deliverables/all6-montage.png",           note: "Base + arm coordinated demos",                       own: false },
+    { key: "openx",        name: "OpenX single-arm real",    source: "Partner profile · OpenX",       video: "",                                            poster: "/images/deliverables/all6-montage.png",           note: "Single-arm real robot · cross-embodiment ready",     own: false },
+    { key: "pusht",        name: "PushT · 2D simple",        source: "Partner profile · 2D pushing",  video: "/videos/deliverables/pusht.mp4",              poster: "",                                                note: "Diffusion Policy explainer benchmark",               own: false },
+    { key: "sim-teleop",   name: "Simulation teleop",        source: "Partner profile · Isaac Lab",   video: "",                                            poster: "/images/deliverables/all6-montage.png",           note: "MimicGen-ready seed · sim + real bridged",           own: false },
+    { key: "exo-mocap",    name: "Exocentric mocap",         source: "Partner profile · signed",       video: "/videos/modalities/exo-mocap.webm",           poster: "/images/modalities/exo-mocap.jpg",                note: "Throwing motion · body-scale mocap · retarget-ready", own: false },
+  ] as PartnerModality[],
+  disclosure: "Own = captured on Tbrain hardware. Partner profile = validated third-party sample bundles delivered under the same QC-gate contract.",
+} as const;
+
+/* ────────────────────────────────────────────────────────────────────
+   Public egocentric datasets — reference wall (not ours, credited)
+   ──────────────────────────────────────────────────────────────────── */
+export interface PublicDataset { name: string; org: string; hours: string; domain: string; sensor: string; href: string; }
+
+export const PUBLIC_DATASETS = {
+  fig: "FIG.15 — PUBLIC REFERENCE WALL",
+  title: "We build on top of the open frontier",
+  lead: "Public egocentric datasets set the ceiling for what a research team already expects. We benchmark to them, extend them into East-Asian environments simulation never sees, and deliver in the same schemas. Everything below is credited public work — not ours.",
+  items: [
+    { name: "Ego4D",           org: "Meta AI · 88 orgs",         hours: "3,025 h",  domain: "Multi-domain · 74 cities", sensor: "Head-mounted, 855 wearers", href: "https://ego4d-data.org" },
+    { name: "EPIC-Kitchens",   org: "Univ. Bristol · Toronto",   hours: "100 h",    domain: "Kitchen · cooking",         sensor: "Head-mounted GoPro",         href: "https://epic-kitchens.github.io" },
+    { name: "EGTEA Gaze+",     org: "Georgia Tech",              hours: "28 h",     domain: "Kitchen · 86 sessions",     sensor: "Eye-gaze + head cam",        href: "https://cbs.ic.gatech.edu/fpv/" },
+    { name: "EgoCom",          org: "Facebook AI Research",      hours: "38 h",     domain: "Human conversation",        sensor: "Multi-modal ego",            href: "https://github.com/facebookresearch/EgoCom-Dataset" },
+    { name: "TREK-150",        org: "Univ. Bologna",             hours: "1.5 h",    domain: "First-person tracking",     sensor: "Head-mounted",               href: "https://machinelearning.uniud.it/datasets/trek150/" },
+  ] as PublicDataset[],
+  disclosure: "Public references only · we do not resell public data · all links go to the original project pages.",
+} as const;
+
+/* ────────────────────────────────────────────────────────────────────
+   Rerun episode viewer (one real episode)
+   ──────────────────────────────────────────────────────────────────── */
+export const RERUN_EMBED = {
+  fig: "FIG.11 — RERUN EPISODE VIEWER",
+  title: "Every episode is a multi-track Rerun scene",
+  lead: "Rerun is how our engineers actually debug a capture — RGB, depth, hand skeleton, object pose, camera trajectory, all frame-scrubbable. We publish one .rrd from a real episode so you can open the same view we do.",
+  rrd: "/videos/rerun/aloha-4cam.rrd",
+  fallbackVideo: "/videos/deliverables/aloha-4cam.mp4",
+  externalLabel: "Open in Rerun web viewer",
+  externalHrefPrefix: "https://app.rerun.io/version/0.24.0/index.html?url=",
+  tracks: [
+    "camera/rgb", "camera/depth", "hand/left · 21 kpt", "hand/right · 21 kpt",
+    "object/bbox · track_id", "object/pose · 6-DoF", "camera/trajectory · SLAM",
+  ],
 } as const;
 
 /* Why Tbrain — Vietnam edge */
 export const VIETNAM_EDGE = {
-  fig: "FIG.10 — WHY TBRAIN",
+  fig: "FIG.16 — WHY TBRAIN",
   title: "Annotation depth, accountability & field-scale ops",
   lead: "We win on annotation depth, accountability, and a field-scale operation no US-centric vendor has — not a race to the bottom on price.",
   items: [

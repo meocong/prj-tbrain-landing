@@ -22,24 +22,45 @@ const STATUS = {
   soon: { label: "Coming soon", c: "var(--bp-amber)" },
 } as const;
 
+/* Modality tiles — playback video when on disk, else fall back to still.
+   `origin`: OWN = Tbrain capture, PARTNER = validated partner profile. */
 const MODULES = [
-  { id: "A", icon: Video, name: "Egocentric Video", sub: "VLA · world-model", status: "now" as const, img: "/images/env/pov.jpg" },
-  { id: "B", icon: Boxes, name: "Spatial Capture", sub: "RGB-D · stereo · IMU", status: "soon" as const, img: "/images/modalities/spatial.jpg" },
-  { id: "C", icon: Grip, name: "UMI / Gripper", sub: "handheld manipulation", status: "now" as const, img: "/images/modalities/umi.jpg" },
-  { id: "D", icon: Cpu, name: "Teleoperation", sub: "robot-arm demos", status: "now" as const, img: "/images/modalities/teleop.jpg" },
-  { id: "E", icon: Activity, name: "Mocap / Motion", sub: "humanoid · retarget", status: "now" as const, img: "/images/modalities/mocap.jpg" },
-  { id: "F", icon: ShieldCheck, name: "Annotation / QA", sub: "formatting · cleanup", status: "all" as const, img: "/images/modalities/qa.jpg" },
+  { id: "A", icon: Video,       name: "Egocentric Video",  sub: "VLA · world-model",  status: "now"  as const, img: "/images/real-captures/pick_up_the_cup-loop.jpg", video: "/videos/real-captures/pick_up_the_cup.webm", origin: "OWN"     as const },
+  { id: "B", icon: Boxes,       name: "Spatial Capture",   sub: "RGB-D · stereo · IMU", status: "soon" as const, img: "/images/modalities/spatial.jpg",   video: undefined,                              origin: "OWN"     as const },
+  { id: "C", icon: Grip,        name: "UMI / Gripper",     sub: "handheld manipulation", status: "now"  as const, img: "/images/modalities/umi.jpg",       video: undefined,                              origin: "PARTNER" as const },
+  { id: "D", icon: Cpu,         name: "Teleoperation",     sub: "robot-arm demos",    status: "now"  as const, img: "/images/modalities/teleop.jpg",    video: "/videos/deliverables/aloha-4cam.mp4",  origin: "PARTNER" as const },
+  { id: "E", icon: Activity,    name: "Mocap / Motion",    sub: "humanoid · retarget · exo throwing", status: "now"  as const, img: "/images/modalities/exo-mocap.jpg", video: "/videos/modalities/exo-mocap.webm",    origin: "PARTNER" as const },
+  { id: "F", icon: ShieldCheck, name: "Annotation / QA",   sub: "formatting · cleanup", status: "all"  as const, img: "/images/modalities/qa.jpg",        video: undefined,                              origin: "OWN"     as const },
 ];
 
-/* Image card w/ graceful icon fallback: shows the photo when present, the icon until it's dropped in. */
+/* Video-first card w/ graceful fallback: video → image → icon. Origin chip labels OWN vs PARTNER. */
 function ModuleCard({ m }: { m: (typeof MODULES)[number] }) {
   const [imgOk, setImgOk] = useState(true);
+  const [videoOk, setVideoOk] = useState<boolean | null>(null);
   const st = STATUS[m.status];
-  const showImg = !!m.img && imgOk;
+  const showVideo = !!m.video && videoOk !== false;
+  const showImg = !showVideo && !!m.img && imgOk;
+  const originTone = m.origin === "OWN"
+    ? { c: "var(--bp-cyan)",  label: "OWN · TBRAIN" }
+    : { c: "var(--bp-purple)", label: "PARTNER PROFILE" };
   return (
     <motion.div variants={STAGGER_ITEM} className="bp-card bp-card-hover group relative overflow-hidden transition-[transform,box-shadow] duration-300 will-change-transform hover:-translate-y-1.5 hover:shadow-[0_24px_50px_-20px_rgba(0,229,199,0.45)]" style={{ padding: 0 }}>
       <div className="relative" style={{ aspectRatio: "16 / 10", overflow: "hidden", background: "var(--bp-surface-2)" }}>
-        {showImg ? (
+        {showVideo ? (
+          // eslint-disable-next-line jsx-a11y/media-has-caption
+          <video
+            src={m.video}
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="metadata"
+            poster={m.img}
+            onError={() => setVideoOk(false)}
+            onLoadedData={() => setVideoOk(true)}
+            className="h-full w-full object-cover transition-transform duration-[800ms] ease-out group-hover:scale-110"
+          />
+        ) : showImg ? (
           // eslint-disable-next-line @next/next/no-img-element
           <img src={m.img} alt={m.name} loading="lazy" onError={() => setImgOk(false)} className="h-full w-full object-cover transition-transform duration-[800ms] ease-out group-hover:scale-110" />
         ) : (
@@ -49,16 +70,18 @@ function ModuleCard({ m }: { m: (typeof MODULES)[number] }) {
             </span>
           </div>
         )}
-        {showImg && <div className="absolute inset-0 transition-opacity duration-300 group-hover:opacity-95" style={{ background: "linear-gradient(to top, rgba(5,5,12,0.9), rgba(5,5,12,0.12) 58%, transparent)" }} />}
-        {/* light sheen sweep on hover */}
-        {showImg && <div aria-hidden className="pointer-events-none absolute inset-y-0 -left-1/3 w-1/3 -skew-x-12 opacity-0 transition-all duration-700 ease-out group-hover:left-[115%] group-hover:opacity-100" style={{ background: "linear-gradient(90deg, transparent, rgba(255,255,255,0.18), transparent)" }} />}
-        {/* cyan edge glow on hover */}
+        {(showVideo || showImg) && <div className="absolute inset-0 transition-opacity duration-300 group-hover:opacity-95" style={{ background: "linear-gradient(to top, rgba(5,5,12,0.9), rgba(5,5,12,0.12) 58%, transparent)" }} />}
+        {(showVideo || showImg) && <div aria-hidden className="pointer-events-none absolute inset-y-0 -left-1/3 w-1/3 -skew-x-12 opacity-0 transition-all duration-700 ease-out group-hover:left-[115%] group-hover:opacity-100" style={{ background: "linear-gradient(90deg, transparent, rgba(255,255,255,0.18), transparent)" }} />}
         <div aria-hidden className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100" style={{ boxShadow: "inset 0 0 0 1px color-mix(in srgb, var(--bp-cyan) 50%, transparent)" }} />
-        <span className="bp-mono absolute left-2 top-2 rounded px-1.5 py-0.5" style={{ fontSize: 9, color: showImg ? "#fff" : "var(--bp-ink-faint)", background: showImg ? "rgba(0,0,0,0.42)" : "transparent" }}>MODULE {m.id}</span>
-        <span className="bp-mono absolute right-2 top-2 rounded-full px-2 py-0.5" style={{ fontSize: 9, color: st.c, background: `color-mix(in srgb, ${st.c} 16%, transparent)`, border: `1px solid color-mix(in srgb, ${st.c} 34%, transparent)`, backdropFilter: showImg ? "blur(4px)" : undefined }}>{st.label}</span>
+
+        <div className="absolute left-2 top-2 flex flex-col gap-1">
+          <span className="bp-mono rounded px-1.5 py-0.5" style={{ fontSize: 9, color: showVideo || showImg ? "#fff" : "var(--bp-ink-faint)", background: showVideo || showImg ? "rgba(0,0,0,0.42)" : "transparent" }}>MODULE {m.id}</span>
+          <span className="bp-mono rounded px-1.5 py-0.5" style={{ fontSize: 8.5, letterSpacing: "0.06em", color: originTone.c, background: `color-mix(in srgb, ${originTone.c} 18%, transparent)` }}>{originTone.label}</span>
+        </div>
+        <span className="bp-mono absolute right-2 top-2 rounded-full px-2 py-0.5" style={{ fontSize: 9, color: st.c, background: `color-mix(in srgb, ${st.c} 16%, transparent)`, border: `1px solid color-mix(in srgb, ${st.c} 34%, transparent)`, backdropFilter: showVideo || showImg ? "blur(4px)" : undefined }}>{st.label}</span>
         <div className="absolute inset-x-0 bottom-0 p-3.5 transition-transform duration-300 group-hover:-translate-y-0.5">
-          <div className="font-semibold" style={{ fontFamily: "var(--font-heading)", fontSize: 16, color: showImg ? "#fff" : "var(--bp-ink)" }}>{m.name}</div>
-          <div className="bp-mono mt-0.5" style={{ fontSize: 10.5, color: showImg ? "rgba(255,255,255,0.75)" : "var(--bp-ink-dim)" }}>{m.sub}</div>
+          <div className="font-semibold" style={{ fontFamily: "var(--font-heading)", fontSize: 16, color: showVideo || showImg ? "#fff" : "var(--bp-ink)" }}>{m.name}</div>
+          <div className="bp-mono mt-0.5" style={{ fontSize: 10.5, color: showVideo || showImg ? "rgba(255,255,255,0.75)" : "var(--bp-ink-dim)" }}>{m.sub}</div>
         </div>
       </div>
     </motion.div>
@@ -67,9 +90,9 @@ function ModuleCard({ m }: { m: (typeof MODULES)[number] }) {
 
 export function Catalog() {
   return (
-    <Sheet fig="FIG.08 — THE FULL RANGE">
+    <Sheet fig="FIG.13 — TEN MODALITIES · ONE EXPORT">
       <RevealOnScroll>
-        <SheetHeading title="We deliver the full range of robot-training data" lead="Egocentric, spatial, UMI grippers, teleoperated robot arms, and lab-grade mocap — every modality your model needs, delivered on one standardized, QC'd pipeline in RLDS / LeRobot." />
+        <SheetHeading title="Ten modalities. One export contract." lead="Egocentric · spatial · UMI · teleop · mocap · annotation — sourced from a Vietnam industrial network of factories and workshops, every modality exports to the same LeRobot v2 schema. Nothing about your training loop changes when you swap sources." />
       </RevealOnScroll>
       <div className="relative mt-12">
         <motion.div aria-hidden className="pointer-events-none absolute -inset-x-8 -top-8 bottom-0"
@@ -99,7 +122,7 @@ const GOVERNANCE = [
 
 export function EngagementLadder() {
   return (
-    <Sheet fig="FIG.07 — HOW TO ENGAGE">
+    <Sheet fig="FIG.17 — HOW TO ENGAGE">
       <RevealOnScroll>
         <SheetHeading title="Enter anywhere: license, pilot, produce, retain" lead="There's no big upfront commitment. Most buyers begin with inventory or a low-risk pilot, then scale into production and a retainer." />
       </RevealOnScroll>

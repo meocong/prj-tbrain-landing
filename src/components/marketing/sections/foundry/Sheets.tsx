@@ -10,18 +10,12 @@ import { motion, useReducedMotion } from "framer-motion";
 import {
   PROBLEM, COLLECTION_PACK, WORLD_MODEL_INPUTS, REAL_SAMPLES, DATA_LADDER,
   DIRECTIONS, DIRECTIONS_SYNTH, USE_CASES, VIETNAM_EDGE, AVAILABILITY,
+  ENVIRONMENTS,
 } from "@/lib/landing/physical-ai";
+import { EnvTile } from "./EnvTile";
 
 const USECASE_ICONS = [Cpu, Boxes, Bot, Rocket];
 const EDGE_ICONS = [Scan, ShieldCheck, Globe, Boxes, Zap];
-const SCENES = [
-  { img: "/images/env/electronics.jpg", name: "Electronics assembly", note: "Soldering · fine parts" },
-  { img: "/images/env/textile.jpg", name: "Textile & garment", note: "Folding · fabric" },
-  { img: "/images/env/sorting.jpg", name: "Sorting station", note: "Pick · place · sort" },
-  { img: "/images/env/kitchen.jpg", name: "Commercial kitchen", note: "Knife work · plating" },
-  { img: "/images/env/warehouse.jpg", name: "Warehouse", note: "Picking · scanning" },
-  { img: "/images/env/hand.jpg", name: "Dexterous manipulation", note: "Hand-object · wrist cam" },
-];
 
 /* ════════════════════════ Problem ════════════════════════ */
 export function ProblemSheet() {
@@ -98,7 +92,7 @@ export function RealSamplesSheet() {
       <RevealOnScroll><SheetHeading title={REAL_SAMPLES.title} lead={REAL_SAMPLES.lead} /></RevealOnScroll>
       <StaggerContainer className="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {REAL_SAMPLES.items.map((s) => (
-          <motion.div key={s.name} variants={STAGGER_ITEM} className="bp-card bp-card-hover overflow-hidden" style={s.reject ? { borderColor: "var(--bp-amber)" } : undefined}>
+          <motion.div key={s.name} variants={STAGGER_ITEM} className="bp-card bp-card-hover overflow-hidden" style={s.defect ? { borderColor: "var(--bp-amber)" } : undefined}>
             <div className="relative" style={{ aspectRatio: "16 / 10", background: "#0a0a14", overflow: "hidden" }}>
               {reduce ? (
                 // eslint-disable-next-line @next/next/no-img-element
@@ -109,13 +103,13 @@ export function RealSamplesSheet() {
                   <source src={s.video} type="video/mp4" />
                 </video>
               )}
-              <span className="bp-mono absolute left-2 top-2 inline-flex items-center gap-1 rounded px-1.5 py-0.5" style={{ fontSize: 8, color: s.reject ? "var(--bp-amber)" : "#fff", background: "rgba(0,0,0,0.55)" }}>
-                {s.reject ? "✕ REJECTED" : "● REC"}
+              <span className="bp-mono absolute left-2 top-2 inline-flex items-center gap-1 rounded px-1.5 py-0.5" style={{ fontSize: 8, color: s.defect ? "var(--bp-amber)" : "#fff", background: "rgba(0,0,0,0.55)" }}>
+                {s.defect ? "✕ REJECTED" : "● REC"}
               </span>
             </div>
             <div className="p-4">
               <div style={{ fontWeight: 700, fontSize: 14, color: "var(--bp-ink)" }}>{s.name}</div>
-              <div className="bp-mono mt-1" style={{ fontSize: 9.5, color: s.reject ? "var(--bp-amber)" : "var(--bp-ink-faint)" }}>{s.note}</div>
+              <div className="bp-mono mt-1" style={{ fontSize: 9.5, color: s.defect ? "var(--bp-amber)" : "var(--bp-ink-faint)" }}>{s.note}</div>
             </div>
           </motion.div>
         ))}
@@ -127,27 +121,14 @@ export function RealSamplesSheet() {
 /* ════════════════════ Sample captures (real environments) ════════════════════ */
 export function SampleCapturesSheet() {
   return (
-    <Sheet fig="FIG.02 — CAPTURE ENVIRONMENTS" axis={false}>
+    <Sheet fig={ENVIRONMENTS.fig} axis={false}>
       <RevealOnScroll>
-        <SheetHeading
-          title="The environments we capture across"
-          lead="The real, non-residential settings our operator network runs in — factories, commercial kitchens, warehouses, and workshops — the environment diversity world models are starved for."
-        />
+        <SheetHeading title={ENVIRONMENTS.title} lead={ENVIRONMENTS.lead} />
       </RevealOnScroll>
       <StaggerContainer className="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {SCENES.map((s) => (
-          <motion.div key={s.name} variants={STAGGER_ITEM} className="bp-card bp-card-hover group relative overflow-hidden transition-[transform,box-shadow] duration-300 will-change-transform hover:-translate-y-1.5 hover:shadow-[0_24px_50px_-20px_rgba(0,229,199,0.45)]" style={{ padding: 0 }}>
-            <div className="relative" style={{ aspectRatio: "16 / 10", overflow: "hidden" }}>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={s.img} alt={s.name} loading="lazy" className="h-full w-full object-cover transition-transform duration-[800ms] ease-out group-hover:scale-110" />
-              <div className="absolute inset-0 transition-opacity duration-300 group-hover:opacity-95" style={{ background: "linear-gradient(to top, rgba(5,5,12,0.88), rgba(5,5,12,0.1) 55%, transparent)" }} />
-              <div aria-hidden className="pointer-events-none absolute inset-y-0 -left-1/3 w-1/3 -skew-x-12 opacity-0 transition-all duration-700 ease-out group-hover:left-[115%] group-hover:opacity-100" style={{ background: "linear-gradient(90deg, transparent, rgba(255,255,255,0.18), transparent)" }} />
-              <div aria-hidden className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100" style={{ boxShadow: "inset 0 0 0 1px color-mix(in srgb, var(--bp-cyan) 50%, transparent)" }} />
-              <div className="absolute inset-x-0 bottom-0 p-3.5 transition-transform duration-300 group-hover:-translate-y-0.5">
-                <div style={{ fontWeight: 700, fontSize: 14.5, color: "#fff" }}>{s.name}</div>
-                <div className="bp-mono mt-0.5" style={{ fontSize: 9.5, color: "rgba(255,255,255,0.72)" }}>{s.note}</div>
-              </div>
-            </div>
+        {ENVIRONMENTS.items.map((s) => (
+          <motion.div key={s.key} variants={STAGGER_ITEM}>
+            <EnvTile slot={s} />
           </motion.div>
         ))}
       </StaggerContainer>
@@ -158,7 +139,7 @@ export function SampleCapturesSheet() {
 /* ════════════════════ Data for what you're building (merged) ════════════════════ */
 export function DataForWhatYouBuild() {
   return (
-    <Sheet fig="FIG.06 — DATA FOR WHAT YOU'RE BUILDING">
+    <Sheet fig="FIG.14 — DATA FOR WHAT YOU'RE BUILDING">
       <RevealOnScroll><SheetHeading title="Whatever you're building, here's the data it needs" lead="Raw video isn't enough. We deliver model-ready inputs — labeled, synchronized, QC'd — matched to exactly what you're training." /></RevealOnScroll>
 
       <RevealOnScroll delay={0.1}>
@@ -279,7 +260,7 @@ export function WhyTbrainSheet() {
       {/* availability stats */}
       <RevealOnScroll delay={0.08}>
         <div className="mt-6 grid grid-cols-2 gap-4 rounded-xl p-6 bp-card lg:grid-cols-4">
-          {AVAILABILITY.stats.map((s) => (
+          {AVAILABILITY.capacity.stats.map((s) => (
             <div key={s.k} className="text-center">
               <div className="font-semibold" style={{ fontFamily: "var(--font-heading)", fontSize: 34, color: "var(--bp-cyan)" }}>
                 <CountUp value={s.value} suffix={s.suffix} format={(n) => n.toLocaleString()} />

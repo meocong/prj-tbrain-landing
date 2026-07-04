@@ -12,8 +12,9 @@ import { Mic, Camera, Activity, Hand, Compass, Languages, Clock, Box, X, Check }
 import { Sheet, SheetHeading, FigLabel } from "@/components/marketing/blueprint/kit";
 import { RevealOnScroll, StaggerContainer, STAGGER_ITEM } from "@/components/marketing/fx/RevealOnScroll";
 import { CountUp } from "@/components/marketing/fx/CountUp";
-import { SYSTEM, SENSORS, WORLD_MODEL, AVAILABILITY, PARTNERS, QC_FLOW } from "@/lib/landing/physical-ai";
+import { SYSTEM, SENSORS, WORLD_MODEL, AVAILABILITY, PARTNERS, QC_FLOW, REAL_SAMPLES } from "@/lib/landing/physical-ai";
 import { PipelineFlow } from "./PipelineFlow";
+import { QcChip } from "./QcChip";
 
 const SENSOR_ICONS = [Camera, Box, Activity, Mic, Hand, Compass, Languages, Clock];
 
@@ -48,56 +49,42 @@ function OperatorApp() {
           </div>
         </div>
       </div>
-      <div className="bp-mono mt-3 text-center" style={{ fontSize: 9, color: "var(--bp-ink-faint)" }}>OPERATOR APP · ANDROID</div>
+      <div className="bp-mono mt-3 text-center" style={{ fontSize: 9, color: "var(--bp-ink-faint)" }}>OPERATOR APP · REFERENCE SESSION</div>
     </div>
   );
 }
 
-/* ── Supervisor fleet monitor — per-device ops console ─────────────── */
-const DEVICES = [
-  { id: "WORKER-018 · EP-0142", status: "REC", gb: 180, batt: 82, sync: 64 },
-  { id: "WORKER-022 · EP-0143", status: "REC", gb: 96, batt: 71, sync: 30 },
-  { id: "WORKER-007 · EP-0139", status: "SYNC", gb: 240, batt: 90, sync: 100 },
-  { id: "WORKER-031 · EP-0144", status: "REC", gb: 51, batt: 38, sync: 12 },
-  { id: "WORKER-005 · EP-0138", status: "IDLE", gb: 220, batt: 100, sync: 100 },
-  { id: "WORKER-014 · EP-0141", status: "SYNC", gb: 132, batt: 67, sync: 78 },
-] as const;
-
-const stColor = (s: string) => (s === "REC" ? "var(--bp-cyan)" : s === "SYNC" ? "var(--bp-purple)" : "var(--bp-ink-faint)");
-
+/* ── Real captures ledger — driven by REAL_SAMPLES (single source of truth) */
 function FleetMonitor() {
-  const m = SYSTEM.monitor;
+  const rows = REAL_SAMPLES.items.slice(0, 8);
+  const pass = REAL_SAMPLES.items.filter((s) => s.qc.state === "PASS").length;
+  const partial = REAL_SAMPLES.items.filter((s) => s.qc.state === "PARTIAL").length;
+  const labeling = REAL_SAMPLES.items.filter((s) => s.qc.state === "LABELING").length;
+  const fail = REAL_SAMPLES.items.filter((s) => s.qc.state === "FAIL_LABEL").length;
   return (
     <div className="bp-card h-full p-5">
       <div className="bp-mono flex items-center justify-between" style={{ fontSize: 10, color: "var(--bp-ink-faint)" }}>
-        <span>{m.title} · Fleet overview</span><span style={{ color: "var(--bp-cyan)" }}>{m.fleet} DEVICES</span>
+        <span>Capture ledger · live</span><span style={{ color: "var(--bp-cyan)" }}>{REAL_SAMPLES.items.length} EPISODES</span>
       </div>
-      <div className="mt-4 grid grid-cols-3 gap-3">
-        {([["Recording", m.recording, "var(--bp-cyan)"], ["Synced", m.synced, "var(--bp-purple)"], ["Idle", m.idle, "var(--bp-ink-faint)"]] as const).map(([k, v, c]) => (
+      <div className="mt-4 grid grid-cols-4 gap-3">
+        {([["PASS", pass, "var(--bp-cyan)"], ["LABELING", labeling, "#4cb5ff"], ["PARTIAL", partial, "var(--bp-amber)"], ["FAIL LABEL", fail, "#ff5f57"]] as const).map(([k, v, c]) => (
           <div key={k} className="rounded-lg p-3 text-center" style={{ background: "var(--bp-surface-2)" }}>
             <div className="font-semibold" style={{ fontFamily: "var(--font-heading)", fontSize: 24, color: c }}><CountUp value={v as number} /></div>
             <div className="bp-mono mt-0.5" style={{ fontSize: 8.5, color: "var(--bp-ink-faint)" }}>{k}</div>
           </div>
         ))}
       </div>
-      {/* per-device rows */}
       <div className="mt-4 overflow-hidden rounded-lg" style={{ border: "1px solid var(--bp-line)" }}>
-        <div className="bp-mono grid grid-cols-[1.7fr_0.6fr_0.6fr_1fr] gap-2 px-3 py-1.5" style={{ fontSize: 8.5, color: "var(--bp-ink-faint)", background: "var(--bp-surface-2)", borderBottom: "1px solid var(--bp-line)" }}>
-          <span>DEVICE</span><span>BATT</span><span>FREE</span><span>SYNC</span>
+        <div className="bp-mono grid grid-cols-[1.9fr_0.7fr_0.9fr_1.2fr] gap-2 px-3 py-1.5" style={{ fontSize: 8.5, color: "var(--bp-ink-faint)", background: "var(--bp-surface-2)", borderBottom: "1px solid var(--bp-line)" }}>
+          <span>EPISODE</span><span>FRAMES</span><span>SENSOR</span><span>QC</span>
         </div>
-        {DEVICES.map((d, i) => (
-          <div key={d.id} className="grid grid-cols-[1.7fr_0.6fr_0.6fr_1fr] items-center gap-2 px-3 py-2" style={{ borderBottom: i < DEVICES.length - 1 ? "1px solid var(--bp-line)" : undefined }}>
-            <div className="flex min-w-0 items-center gap-2">
-              <span className={d.status === "REC" ? "bp-blink" : ""} style={{ width: 7, height: 7, borderRadius: 99, flexShrink: 0, background: stColor(d.status) }} />
-              <span className="bp-mono truncate" style={{ fontSize: 10, color: "var(--bp-ink-dim)" }}>{d.id}</span>
-            </div>
-            <span className="bp-mono" style={{ fontSize: 10, color: d.batt < 50 ? "var(--bp-amber)" : "var(--bp-ink-dim)" }}>{d.batt}%</span>
-            <span className="bp-mono" style={{ fontSize: 10, color: "var(--bp-ink-faint)" }}>{d.gb}G</span>
-            <div className="flex items-center gap-1.5">
-              <div style={{ flex: 1, height: 4, borderRadius: 99, background: "var(--bp-surface-2)", overflow: "hidden" }}>
-                <motion.div initial={{ width: 0 }} whileInView={{ width: `${d.sync}%` }} viewport={{ once: true }} transition={{ duration: 0.9, delay: i * 0.06 }} style={{ height: "100%", background: stColor(d.status) }} />
-              </div>
-              <span className="bp-mono" style={{ fontSize: 8, width: 28, color: stColor(d.status) }}>{d.status}</span>
+        {rows.map((d, i) => (
+          <div key={d.skill} className="grid grid-cols-[1.9fr_0.7fr_0.9fr_1.2fr] items-center gap-2 px-3 py-2" style={{ borderBottom: i < rows.length - 1 ? "1px solid var(--bp-line)" : undefined }}>
+            <span className="bp-mono truncate" style={{ fontSize: 10, color: "var(--bp-ink-dim)" }}>{d.skill}</span>
+            <span className="bp-mono" style={{ fontSize: 10, color: "var(--bp-ink-dim)" }}>{(d.frames ?? 0).toLocaleString()}</span>
+            <span className="bp-mono truncate" style={{ fontSize: 10, color: "var(--bp-ink-faint)" }}>{d.sensor ?? "—"}</span>
+            <div className="flex items-center justify-end">
+              <QcChip qc={d.qc} defect={d.defect} inline />
             </div>
           </div>
         ))}
@@ -186,21 +173,21 @@ export function QCFlowSheet() {
 
 /* ── Episode manifest (metadata every episode carries) ────────────── */
 const MANIFEST = [
-  { k: "Operator", v: "OP-2207 · trained, verified" },
-  { k: "Rig", v: "MK-001 · REV A" },
-  { k: "Environment", v: "Home kitchen · Hanoi" },
+  { k: "Skill", v: "pick_up_the_cup" },
+  { k: "Operator", v: "Trained · verified" },
+  { k: "Sensor", v: "Stereo depth cam · 640×480 · 15 fps" },
+  { k: "Environment", v: "Hanoi · Asia/Ho_Chi_Minh" },
+  { k: "Streams", v: "RGB · Depth · IMU · 21-kpt hand · pose" },
   { k: "Consent / release", v: "Signed ✓" },
-  { k: "Streams", v: "RGB · Depth · IMU · Audio · Pose · Lang" },
   { k: "Sync", v: "Hardware clock · per-frame" },
-  { k: "Provenance", v: "Capture → auto-label → QC → RLDS" },
-  { k: "Outcome", v: "Success · QC-verified" },
+  { k: "Provenance", v: "Capture → 8-model auto-label → 8-check diag → HITL → RLDS/LeRobot" },
 ];
 
 function EpisodeManifest() {
   return (
     <div className="bp-card h-full p-5">
       <div className="bp-mono flex items-center justify-between" style={{ fontSize: 10, color: "var(--bp-ink-faint)" }}>
-        <span>EPISODE MANIFEST</span><span style={{ color: "var(--bp-cyan)" }}>EP-2026-0617-0142</span>
+        <span>EPISODE MANIFEST · REFERENCE</span><span style={{ color: "var(--bp-cyan)" }}>pick_up_the_cup · reference session</span>
       </div>
       <p className="mt-2 mb-3" style={{ fontSize: 13.5, lineHeight: 1.5, color: "var(--bp-ink-dim)" }}>Every episode is a <strong style={{ color: "var(--bp-ink)" }}>tagged record</strong>, not just a clip — full provenance travels with the data.</p>
       <div className="grid gap-1.5">
@@ -219,8 +206,8 @@ function EpisodeManifest() {
 /* ── How the foundry works (homepage: animated pipeline) ──────────── */
 export function HowItWorks() {
   return (
-    <Sheet fig="FIG.02 — HOW THE FOUNDRY WORKS">
-      <RevealOnScroll><SheetHeading title="How the foundry works" lead="One pipeline, end to end: collect in the field → sync to the factory cluster → QC out what others ship → deliver RLDS-ready. A working machine, not a render." /></RevealOnScroll>
+    <Sheet fig="FIG.06 — FROM PACK TO PARQUET">
+      <RevealOnScroll><SheetHeading title="From pack to parquet" lead="Field capture → offline cache → factory MinIO → cloud R2 → auto-label → HITL → LeRobot v2 parquet. Same clock domain, same schema, from the operator's belt to your training loader." /></RevealOnScroll>
 
       <RevealOnScroll delay={0.05}><div className="mt-10"><PipelineFlow /></div></RevealOnScroll>
       <div className="mt-6 grid gap-6 lg:grid-cols-[0.8fr_1.2fr]">
@@ -285,7 +272,7 @@ export function Availability() {
       <RevealOnScroll><SheetHeading title={AVAILABILITY.title} lead={AVAILABILITY.lead} /></RevealOnScroll>
       <RevealOnScroll delay={0.05}>
         <div className="mt-10 grid grid-cols-2 gap-4 lg:grid-cols-4">
-          {AVAILABILITY.stats.map((s) => (
+          {AVAILABILITY.capacity.stats.map((s) => (
             <div key={s.k} className="bp-card p-6 text-center">
               <div className="font-semibold" style={{ fontFamily: "var(--font-heading)", fontSize: 40, color: "var(--bp-cyan)" }}><CountUp value={s.value} suffix={s.suffix} format={(n) => n.toLocaleString()} /></div>
               <div className="bp-mono mt-1" style={{ fontSize: 10, color: "var(--bp-ink-faint)" }}>{s.k}</div>
