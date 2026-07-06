@@ -51,19 +51,21 @@ function StageBody() {
   const body = AUTO_LABEL_STAGES.find((s) => s.key === "body")!;
   return (
     <StagePanel fig={body.fig} title={body.title} model={body.model} detail={body.detail} output={body.output} honestNote={body.honestNote}>
-      <div className="grid gap-3 lg:grid-cols-3">
-        {(body.overlayImages ?? []).map((src, i) => {
-          const label = ["t=25%", "t=50%", "t=75%"][i] ?? "";
-          return (
-            <div key={src} className="bp-card overflow-hidden" style={{ borderRadius: 10 }}>
-              <div className="bp-mono flex items-center justify-between" style={{ padding: "6px 12px", fontSize: 10, color: "var(--bp-ink-faint)", borderBottom: "1px solid var(--bp-line)" }}>
-                <span>pick_up_the_cup · {label}</span>
-                <span style={{ color: "var(--bp-cyan)" }}>Sapiens 308-kpt</span>
-              </div>
-              <img src={src} alt={`Sapiens body overlay at ${label}`} style={{ width: "100%", display: "block" }} />
-            </div>
-          );
-        })}
+      <div className="grid gap-3 lg:grid-cols-[minmax(0,1.6fr)_minmax(0,1fr)]">
+        <div className="bp-card overflow-hidden" style={{ borderRadius: 10 }}>
+          <div className="bp-mono flex items-center justify-between" style={{ padding: "6px 12px", fontSize: 10, color: "var(--bp-ink-faint)", borderBottom: "1px solid var(--bp-line)" }}>
+            <span>Exocentric mocap · body pose primary</span>
+            <span style={{ color: "var(--bp-cyan)" }}>partner · signed</span>
+          </div>
+          <video src="/videos/modalities/exo-mocap.webm" poster="/images/modalities/exo-mocap.jpg" muted loop autoPlay playsInline preload="metadata" style={{ width: "100%", display: "block" }} />
+        </div>
+        <div className="bp-card overflow-hidden" style={{ borderRadius: 10 }}>
+          <div className="bp-mono flex items-center justify-between" style={{ padding: "6px 12px", fontSize: 10, color: "var(--bp-ink-faint)", borderBottom: "1px solid var(--bp-line)" }}>
+            <span>Sapiens 308-kpt · ego · SUPPRESSED</span>
+            <span style={{ color: "#ff9a4d" }}>secondary</span>
+          </div>
+          <img src="/images/body-kpts/pick_up_the_cup_t50.jpg" alt="Sapiens body suppressed on egocentric capture" style={{ width: "100%", display: "block" }} />
+        </div>
       </div>
     </StagePanel>
   );
@@ -218,7 +220,7 @@ export default function AutoLabelPage() {
       <main>
         <SubpageHero
           fig="FIG.05 — AUTO-LABEL PIPELINE"
-          eyebrow="Physical AI · Data Foundry · V5"
+          eyebrow="Physical AI · Robotics data foundry"
           title="8 models · one auto-label pipeline"
           lead="From raw rgb.mp4 to schema_v3 labels.json in ≤48h. Hand kpts, body kpts, object masks, depth, verb-noun, and a full provenance trail — visualized on real captures, not mockups."
           meta={[

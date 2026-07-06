@@ -115,19 +115,19 @@ export default function PhysicalAIPage() {
         {/* 03 · Anchor trust strip */}
         <AnchorStrip />
 
-        {/* 03b · V5 · At-a-glance stat row */}
+        {/* 03b · At-a-glance stat row */}
         <GlanceStats />
 
-        {/* 04 · V5 · Pipeline overview — canonical 5-phase diagram */}
+        {/* 04 · Pipeline overview — canonical 5-phase diagram */}
         <PipelineOverview />
 
         {/* 05 · Capture ledger — real episodes surface first */}
         <CapturesGallery />
 
-        {/* 06 · V5 · Auto-label deep dive — 4-tab per-stage · full detail on /auto-label */}
+        {/* 06 · Auto-label deep dive — 4-tab per-stage · full detail on /auto-label */}
         <AutoLabelDeepDive />
 
-        {/* 07 · V5 · QC flow — 15 hard rules teaser · full detail on /quality */}
+        {/* 07 · QC flow — 15 hard rules teaser · full detail on /quality */}
         <QCFlow />
 
         {/* 08 · Rerun episode viewer */}
