@@ -41,7 +41,7 @@ export function PageNav({ items }: { items: NavItem[] }) {
           padding: "14px 16px",
           borderRadius: 12,
           background: "color-mix(in srgb, var(--bp-bg) 82%, transparent)",
-          backdropFilter: "blur(8px)",
+          WebkitBackdropFilter: "blur(8px)", backdropFilter: "blur(8px)",
         }}
       >
         <div

@@ -88,7 +88,7 @@ export function BentoWhy() {
                   style={{
                     background: "linear-gradient(165deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.015) 100%)",
                     border: "1px solid rgba(255,255,255,0.08)",
-                    backdropFilter: "blur(10px)",
+                    WebkitBackdropFilter: "blur(10px)", backdropFilter: "blur(10px)",
                   }}
                 >
                   {/* Background image (dim) */}

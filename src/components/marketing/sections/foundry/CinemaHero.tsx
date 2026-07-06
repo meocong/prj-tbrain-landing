@@ -249,11 +249,16 @@ function DataGapDiagram() {
       <svg viewBox="0 0 600 240" className="w-full" preserveAspectRatio="xMidYMid meet" aria-label="Models scale faster than real-world data">
         <line x1="40" y1="208" x2="572" y2="208" stroke="var(--bp-line)" strokeWidth="1" />
         <motion.path d="M40 200 C 240 188, 380 120, 564 36 L 564 178 C 380 182, 240 192, 40 200 Z" fill="color-mix(in srgb, var(--bp-cyan) 9%, transparent)"
-          initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ duration: 0.8, delay: 0.7 }} />
+          initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true, amount: 0.1 }} transition={{ duration: 0.8, delay: 0.7 }} />
+        {/* Safari fix: pathLength={1} + strokeDasharray + strokeDashoffset ensures the
+            stroke-dashoffset animation renders on iOS Safari 15+ hydration */}
         <motion.path d="M40 200 C 240 188, 380 120, 564 36" fill="none" stroke="var(--bp-cyan)" strokeWidth="3" strokeLinecap="round"
-          initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} viewport={{ once: true }} transition={{ duration: 1.2, ease: "easeInOut" }} />
+          pathLength={1} strokeDasharray="1 1"
+          initial={{ strokeDashoffset: 1 }} whileInView={{ strokeDashoffset: 0 }} viewport={{ once: true, amount: 0.1 }} transition={{ duration: 1.2, ease: "easeInOut" }} />
+        {/* Amber: dashed appearance via opacity fade (Safari-safe) instead of stroke-dashoffset,
+            because dashed-pattern draw animations render inconsistently on iOS Safari */}
         <motion.path d="M40 200 C 240 190, 380 182, 564 174" fill="none" stroke="var(--bp-amber)" strokeWidth="3" strokeDasharray="7 5" strokeLinecap="round"
-          initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} viewport={{ once: true }} transition={{ duration: 1.2, delay: 0.3, ease: "easeInOut" }} />
+          initial={{ opacity: 0, pathLength: 0 }} whileInView={{ opacity: 1, pathLength: 1 }} viewport={{ once: true, amount: 0.1 }} transition={{ duration: 1.2, delay: 0.3, ease: "easeInOut" }} />
         <motion.g initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ delay: 1.1, duration: 0.5 }}>
           <line x1="516" y1="56" x2="516" y2="174" stroke="var(--bp-ink-faint)" strokeWidth="1" strokeDasharray="3 4" />
           <text x="504" y="109" textAnchor="end" fontSize="11" fontFamily="var(--font-mono)" fill="var(--bp-ink-dim)">the gap</text>

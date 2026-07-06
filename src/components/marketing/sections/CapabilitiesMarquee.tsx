@@ -64,7 +64,7 @@ function MarqueeRow({ reverse, speed, className = "" }: { reverse: boolean; spee
               background: "var(--marquee-chip-bg)",
               border: "1px solid var(--marquee-chip-border)",
               color: "var(--marquee-chip-text)",
-              backdropFilter: "blur(8px)",
+              WebkitBackdropFilter: "blur(8px)", backdropFilter: "blur(8px)",
             }}
           >
             <span className="h-1.5 w-1.5 rounded-full shrink-0" style={{ background: i % 3 === 0 ? "#A78BFA" : i % 3 === 1 ? "#10B981" : "#F59E0B" }} />
