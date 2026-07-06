@@ -31,6 +31,12 @@ export const PIPELINE_OVERVIEW = {
 /* ────────────────────────────────────────────────────────────────────
    Auto-Label stage cards (deep dive)
    ──────────────────────────────────────────────────────────────────── */
+export interface StageOverlay {
+  src: string;
+  cap: string;         // capture id
+  pred: string;        // what the model predicted (visible under the frame)
+  status: "PASS" | "PARTIAL" | "FAIL" | "SUPPRESSED";
+}
 export interface StageCard {
   key: string;
   fig: string;
@@ -43,6 +49,7 @@ export interface StageCard {
   overlayVideo?: string;
   overlayPoster?: string;
   overlayImages?: string[];
+  overlays?: StageOverlay[];    // richer per-image caption metadata
   jsonSnippet?: string;
   honestNote?: string;
 }
@@ -112,11 +119,11 @@ export const AUTO_LABEL_STAGES: StageCard[] = [
     detail: "High-fidelity body pose comes from partner-signed exocentric mocap sessions. Sapiens 308-kpt runs on every capture and lands in the manifest, but after the pipeline hardening pass (burn v1b0cce1) the dense body layer is OFF by default in the annotated.mp4 — the bystander skeleton no longer leaks. Kpts remain in the manifest for downstream research + retrained gates surface partial-body detections.",
     output: "body_dense (308 × 2 · conf) · exo mocap skeleton (partner) · min_kpts gate · dense default off",
     honestNote: "The watermark surface exposes silent Sapiens failures. The dense body layer is off in the visualization by default (bystander skeleton hidden). Landing viz suppresses ego frames where topology is invalid (nose Y > hip Y). Raw kpts still ride in the manifest with the full provenance trail.",
-    overlayImages: [
-      "/images/body-kpts/pick_up_the_cup_t50.jpg",
-      "/images/body-kpts/iron_product_t50.jpg",
-      "/images/body-kpts/sew_hem_t50.jpg",
-      "/images/body-kpts/arrange_fabric_t50.jpg",
+    overlays: [
+      { src: "/images/body-kpts/pick_up_the_cup_t50.jpg", cap: "pick_up_the_cup · 20260617T01",  pred: "body_dense 0/17 above threshold",  status: "SUPPRESSED" },
+      { src: "/images/body-kpts/iron_product_t50.jpg",     cap: "iron_product · 20260626T01",     pred: "body_dense 0/17 · nose_Y > hip_Y",  status: "SUPPRESSED" },
+      { src: "/images/body-kpts/sew_hem_t50.jpg",          cap: "sew_hem · 20260626T02",          pred: "body_dense 0/17 · nose_Y > hip_Y",  status: "SUPPRESSED" },
+      { src: "/images/body-kpts/arrange_fabric_t50.jpg",   cap: "arrange_fabric · 20260626T01",   pred: "body_dense 0/17 · nose_Y > hip_Y",  status: "SUPPRESSED" },
     ],
   },
   {
@@ -127,11 +134,11 @@ export const AUTO_LABEL_STAGES: StageCard[] = [
     detail: "Text-prompted video segmenter finds and tracks every relevant object across the full episode. Emits per-frame masks + tracklet IDs consumed by 6-DoF pose.",
     output: "objects[].track_id · mask · bbox · pose_6dof",
     honestNote: "We ship failures transparently. On iron_T02 the segmenter locked onto shorts instead of the iron; the summary.json flag surfaces it. The pipeline hardening pass added mask/bbox 1.5× ratio drop (drifted masks skipped) and a class HIDE + 12% cap. Downstream retrain, never a silent overwrite.",
-    overlayImages: [
-      "/videos/masks/pick_up_the_cup__tracked_cup_cup.jpg",
-      "/videos/masks/pick_up_the_cup__tracked_right_hand_right_hand.jpg",
-      "/videos/masks/sew_hem__tracked_fabric_fabric.jpg",
-      "/videos/masks/arrange_fabric__tracked_fabric_fabric.jpg",
+    overlays: [
+      { src: "/videos/masks/pick_up_the_cup__tracked_cup_cup.jpg",              cap: "pick_up_the_cup · 20260617T01",  pred: "tracked cup · track_id=3",  status: "PASS" },
+      { src: "/videos/masks/pick_up_the_cup__tracked_right_hand_right_hand.jpg", cap: "pick_up_the_cup · 20260617T01",  pred: "tracked right_hand · id=1", status: "PASS" },
+      { src: "/videos/masks/sew_hem__tracked_fabric_fabric.jpg",                 cap: "sew_hem · 20260626T02",          pred: "tracked fabric · id=2",     status: "PASS" },
+      { src: "/videos/masks/arrange_fabric__tracked_fabric_fabric.jpg",          cap: "arrange_fabric · 20260626T01",   pred: "tracked fabric · id=1",     status: "PASS" },
     ],
   },
   {
@@ -141,9 +148,9 @@ export const AUTO_LABEL_STAGES: StageCard[] = [
     model: "MoGe · monocular pointmap",
     detail: "Metric monocular depth + pointmap for the object camera view. Feeds object 6-DoF pose (world-scale ‖t‖ sanity-checked against 0.1–5m industrial range).",
     output: "depth (H × W) · pointmap (H × W × 3) · intrinsics",
-    overlayImages: [
-      "/images/depth/pick_up_the_cup_rgb_depth.jpg",
-      "/images/real-captures/pick_up_the_cup-loop.jpg",
+    overlays: [
+      { src: "/images/depth/pick_up_the_cup_rgb_depth.jpg",  cap: "pick_up_the_cup · 20260617T01", pred: "MoGe pointmap · ‖t‖_mean 1.45m", status: "PASS" },
+      { src: "/images/real-captures/pick_up_the_cup-loop.jpg", cap: "pick_up_the_cup · 20260617T01", pred: "RGB source frame · 15fps",       status: "PASS" },
     ],
   },
   {
