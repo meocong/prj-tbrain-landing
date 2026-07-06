@@ -14,10 +14,17 @@ const TABS = [
   { key: "depth",  label: "Depth · MoGe" },
 ];
 
+const STATUS_COLOR: Record<string, string> = {
+  PASS:       "#5ee08a",
+  PARTIAL:    "#ff9a4d",
+  FAIL:       "#ff5f57",
+  SUPPRESSED: "#8fa0c8",
+};
+
 function StagePreview({ stageKey }: { stageKey: string }) {
   const stage = AUTO_LABEL_STAGES.find((s) => s.key === stageKey)!;
   const hasVideo = stage.rawVideo && stage.overlayVideo;
-  const images = stage.overlayImages ?? [];
+  const overlays = stage.overlays ?? (stage.overlayImages ?? []).map((src) => ({ src, cap: "", pred: "", status: "PASS" as const }));
 
   return (
     <div className="grid gap-4 lg:grid-cols-2">
@@ -38,16 +45,28 @@ function StagePreview({ stageKey }: { stageKey: string }) {
           </div>
         </>
       )}
-      {!hasVideo && images.length > 0 && (
+      {!hasVideo && overlays.length > 0 && (
         <>
-          {images.slice(0, 4).map((src) => (
-            <div key={src} className="bp-card overflow-hidden" style={{ borderRadius: 12 }}>
-              <img src={src} alt={`${stage.title} example`} style={{ width: "100%", display: "block" }}  loading="lazy" />
-            </div>
-          ))}
+          {overlays.slice(0, 4).map((o) => {
+            const color = STATUS_COLOR[o.status] ?? STATUS_COLOR.PASS;
+            return (
+              <div key={o.src} className="bp-card overflow-hidden" style={{ borderRadius: 12, borderColor: `color-mix(in srgb, ${color} 40%, var(--bp-line))` }}>
+                <div className="bp-mono flex items-center justify-between gap-2" style={{ padding: "6px 12px", fontSize: 10, color: "var(--bp-ink-faint)", borderBottom: "1px solid var(--bp-line)" }}>
+                  <span style={{ whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{o.cap || `${stage.title} example`}</span>
+                  <span style={{ color, fontWeight: 700, letterSpacing: "0.06em", flexShrink: 0 }}>{o.status}</span>
+                </div>
+                <img src={o.src} alt={o.pred || `${stage.title} example`} style={{ width: "100%", display: "block" }} loading="lazy" />
+                {o.pred && (
+                  <div className="bp-mono" style={{ padding: "6px 12px", fontSize: 10, color: "var(--bp-ink-dim)", borderTop: "1px solid var(--bp-line)", background: "color-mix(in srgb, var(--bp-cyan) 3%, transparent)" }}>
+                    <span style={{ color: "var(--bp-cyan)" }}>predict · </span>{o.pred}
+                  </div>
+                )}
+              </div>
+            );
+          })}
         </>
       )}
-      {!hasVideo && images.length === 0 && (
+      {!hasVideo && overlays.length === 0 && (
         <div className="lg:col-span-2 bp-card relative overflow-hidden" style={{ padding: 24, borderRadius: 12, minHeight: 220 }}>
           <svg viewBox="0 0 400 220" className="h-full w-full" preserveAspectRatio="xMidYMid meet" aria-hidden>
             <defs>
