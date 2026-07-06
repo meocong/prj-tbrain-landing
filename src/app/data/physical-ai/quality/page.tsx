@@ -281,11 +281,6 @@ export default function QualityPage() {
         ]}
       />
       <main>
-        <Breadcrumb trail={[
-          { label: "Tbrain", href: "/" },
-          { label: "Physical AI", href: "/data/physical-ai" },
-          { label: "QC playbook" },
-        ]} />
         <SubpageHero
           fig="FIG.06 — QC PLAYBOOK"
           eyebrow="Physical AI · Robotics data foundry"
@@ -297,6 +292,13 @@ export default function QualityPage() {
             { k: "Ship rate", v: "92%" },
             { k: "Provenance", v: "per-field" },
           ]}
+          accent="amber"
+          badge={{ label: "You're on QC", color: "#ff9a4d" }}
+          breadcrumb={<Breadcrumb trail={[
+            { label: "Tbrain", href: "/" },
+            { label: "Physical AI", href: "/data/physical-ai" },
+            { label: "QC playbook" },
+          ]} />}
         />
 
         <PipelineOverview highlight="qc" showAnchors={false} />

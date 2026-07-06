@@ -15,28 +15,6 @@ const TASK_QUEUE = [
   { id: 1251, cap: "package_product · 20260626T02", status: "queued", reason: "action_seg · partial verb" },
 ];
 
-const HAND_KPTS = [
-  { x: 62, y: 68, label: "wrist" },
-  { x: 60, y: 60, label: "thumb_cmc" },
-  { x: 57, y: 52, label: "thumb_tip" },
-  { x: 66, y: 55, label: "index_pip" },
-  { x: 69, y: 48, label: "index_tip" },
-  { x: 72, y: 55, label: "middle_pip" },
-  { x: 75, y: 49, label: "middle_tip" },
-  { x: 76, y: 58, label: "ring_pip" },
-  { x: 79, y: 52, label: "ring_tip" },
-  { x: 80, y: 62, label: "pinky_pip" },
-  { x: 83, y: 56, label: "pinky_tip" },
-];
-
-const HAND_LINKS: [number, number][] = [
-  [0, 1], [1, 2],
-  [0, 3], [3, 4],
-  [0, 5], [5, 6],
-  [0, 7], [7, 8],
-  [0, 9], [9, 10],
-];
-
 export function LabelStudioCard() {
   return (
     <div className="bp-card overflow-hidden" style={{ borderRadius: 14, background: "#0d1524" }}>
@@ -69,34 +47,27 @@ export function LabelStudioCard() {
           </ul>
         </div>
 
-        {/* Center · frame view + overlays */}
+        {/* Center · real annotated burn (auto-label preview) */}
         <div style={{ position: "relative", background: "#050a12", minHeight: 420 }}>
-          {/* Frame poster */}
-          <img
-            src="/images/real-captures/pick_up_the_cup-loop.jpg"
-            alt="Task frame preview"
-            style={{ width: "100%", height: "100%", objectFit: "cover", position: "absolute", inset: 0, opacity: 0.9 }}
+          <video
+            src="/videos/textile-annotated/pick_up_the_cup.webm"
+            poster="/images/real-captures/pick_up_the_cup-loop.jpg"
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="metadata"
+            style={{ width: "100%", height: "100%", objectFit: "cover", position: "absolute", inset: 0 }}
           />
-          {/* SVG overlay · MANO kpts + link skeleton */}
-          <svg viewBox="0 0 100 100" preserveAspectRatio="none" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", pointerEvents: "none" }}>
-            {HAND_LINKS.map(([a, b], i) => (
-              <line key={i} x1={HAND_KPTS[a].x} y1={HAND_KPTS[a].y} x2={HAND_KPTS[b].x} y2={HAND_KPTS[b].y}
-                stroke="#00e5c7" strokeWidth={0.35} vectorEffect="non-scaling-stroke" strokeOpacity={0.9} />
-            ))}
-            {HAND_KPTS.map((k, i) => (
-              <circle key={i} cx={k.x} cy={k.y} r={0.7} fill="#4cb5ff" stroke="white" strokeWidth={0.15} vectorEffect="non-scaling-stroke" />
-            ))}
-            {/* mask outline mock */}
-            <path d="M 52,58 Q 48,68 55,74 Q 65,78 72,72 Q 76,64 68,58 Q 60,54 52,58 Z"
-              fill="none" stroke="#f0a2ff" strokeWidth={0.35} strokeDasharray="1.2 0.8" vectorEffect="non-scaling-stroke" />
-            <text x="72" y="76" fontSize="2" fill="#f0a2ff" fontFamily="var(--font-mono, monospace)">obj/cup · track_id=3</text>
-          </svg>
           {/* HUD */}
           <div className="bp-mono absolute left-3 top-3" style={{ fontSize: 10, color: "#4cb5ff", background: "rgba(11,18,32,0.85)", padding: "5px 8px", borderRadius: 6 }}>
             frame 136 / 273 · 15 fps
           </div>
           <div className="bp-mono absolute right-3 top-3" style={{ fontSize: 10, color: "#00e5c7", background: "rgba(11,18,32,0.85)", padding: "5px 8px", borderRadius: 6 }}>
-            hand/right · pre-populated · MANO 21-kpt
+            auto-label burn · MANO 21-kpt overlay
+          </div>
+          <div className="bp-mono absolute left-3 bottom-16" style={{ fontSize: 9.5, color: "#8fa0c8", background: "rgba(11,18,32,0.85)", padding: "4px 7px", borderRadius: 4 }}>
+            avg 2.3 min · this task
           </div>
           {/* Scrubbing bar */}
           <div className="absolute bottom-0 left-0 right-0" style={{ background: "rgba(11,18,32,0.92)", borderTop: "1px solid var(--bp-line)", padding: "10px 14px" }}>

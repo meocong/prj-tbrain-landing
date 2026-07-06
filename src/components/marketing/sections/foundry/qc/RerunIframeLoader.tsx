@@ -30,8 +30,13 @@ export function RerunIframeLoader({
 }: Props) {
   const [loaded, setLoaded] = useState(false);
   const [origin, setOrigin] = useState("");
+  const [isLocal, setIsLocal] = useState(false);
   useEffect(() => {
-    if (typeof window !== "undefined") setOrigin(window.location.origin);
+    if (typeof window !== "undefined") {
+      setOrigin(window.location.origin);
+      const h = window.location.hostname;
+      setIsLocal(h === "localhost" || h === "127.0.0.1" || h.endsWith(".local"));
+    }
   }, []);
   const embedHref = origin
     ? `https://app.rerun.io/version/${rrdVersion}/index.html?url=${encodeURIComponent(origin + rrdPath)}`
@@ -59,29 +64,36 @@ export function RerunIframeLoader({
             <div className="absolute inset-0 flex flex-col items-center justify-center gap-4">
               <motion.button
                 type="button"
-                onClick={() => setLoaded(true)}
-                whileHover={{ scale: 1.03 }}
-                whileTap={{ scale: 0.98 }}
+                onClick={() => !isLocal && setLoaded(true)}
+                disabled={isLocal}
+                whileHover={!isLocal ? { scale: 1.03 } : {}}
+                whileTap={!isLocal ? { scale: 0.98 } : {}}
                 className="inline-flex items-center gap-2.5"
                 style={{
                   padding: "12px 20px",
-                  background: "linear-gradient(100deg, #4cb5ff 0%, #00e5c7 100%)",
-                  color: "#0b1220",
+                  background: isLocal ? "rgba(143,160,200,0.2)" : "linear-gradient(100deg, #4cb5ff 0%, #00e5c7 100%)",
+                  color: isLocal ? "#8fa0c8" : "#0b1220",
                   borderRadius: 999,
                   border: "none",
-                  cursor: "pointer",
+                  cursor: isLocal ? "not-allowed" : "pointer",
                   fontFamily: "var(--font-heading)",
                   fontSize: 14,
                   fontWeight: 700,
-                  boxShadow: "0 12px 32px -12px rgba(0,229,199,0.55)",
+                  boxShadow: isLocal ? "none" : "0 12px 32px -12px rgba(0,229,199,0.55)",
                 }}
               >
-                <Play className="h-4 w-4" style={{ fill: "#0b1220" }} />
-                Load live Rerun scene
+                <Play className="h-4 w-4" style={{ fill: isLocal ? "#8fa0c8" : "#0b1220" }} />
+                {isLocal ? "Live scene · production only" : "Load live Rerun scene"}
               </motion.button>
-              <div className="bp-mono text-center" style={{ fontSize: 10.5, color: "#8fa0c8", letterSpacing: "0.06em", maxWidth: 420, lineHeight: 1.5 }}>
-                44MB · streams RGB · depth · MANO 21-kpt · body 308-kpt ·<br />object masks + pose · SLAM trajectory · action_segments
-              </div>
+              {isLocal ? (
+                <div className="bp-mono text-center" style={{ fontSize: 10.5, color: "#ff9a4d", letterSpacing: "0.06em", maxWidth: 460, lineHeight: 1.5, border: "1px solid rgba(255,154,77,0.35)", padding: "10px 14px", borderRadius: 8, background: "rgba(255,154,77,0.08)" }}>
+                  Dev-only: app.rerun.io cannot reach localhost.<br />Deploy to a public host (or run the Rerun desktop viewer) to stream the .rrd inline.
+                </div>
+              ) : (
+                <div className="bp-mono text-center" style={{ fontSize: 10.5, color: "#8fa0c8", letterSpacing: "0.06em", maxWidth: 420, lineHeight: 1.5 }}>
+                  44MB · streams RGB · depth · MANO 21-kpt · body 308-kpt ·<br />object masks + pose · SLAM trajectory · action_segments
+                </div>
+              )}
               {embedHref && (
                 <a
                   href={embedHref}

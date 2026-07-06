@@ -94,15 +94,16 @@ export function AutoLabelDeepDive() {
               onClick={() => setTab(t.key)}
               className="bp-mono"
               style={{
-                fontSize: 11,
-                padding: "10px 16px",
+                fontSize: 10.5,
+                padding: "10px 14px",
                 borderRadius: 8,
                 border: activeTab ? "1px solid var(--bp-cyan)" : "1px solid var(--bp-line-strong)",
                 background: activeTab ? "color-mix(in srgb, var(--bp-cyan) 12%, transparent)" : "transparent",
                 color: activeTab ? "var(--bp-cyan)" : "var(--bp-ink)",
-                letterSpacing: "0.06em",
+                letterSpacing: "0.04em",
                 textTransform: "uppercase",
                 cursor: "pointer",
+                whiteSpace: "nowrap",
               }}
             >
               {t.label}
