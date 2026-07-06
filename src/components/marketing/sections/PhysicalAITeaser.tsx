@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
+import { MeshBackdrop } from "@/components/marketing/fx/MeshBackdrop";
 
 const LINKS = [
   { label: "Robotics data foundry · overview", href: "/data/physical-ai", desc: "Egocentric capture packs · 8-model auto-label · zero-trust QC" },
@@ -27,7 +28,7 @@ export function PhysicalAITeaser() {
         color: "#e8ecf5",
       }}
     >
-      <div aria-hidden style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse 70% 50% at 20% 30%, rgba(76,181,255,0.14), transparent 55%), radial-gradient(ellipse 60% 40% at 80% 70%, rgba(0,229,199,0.10), transparent 60%)", pointerEvents: "none" }} />
+      <MeshBackdrop variant="cyan" gridOpacity={0.05} />
       <div className="container relative z-10 mx-auto max-w-6xl px-5">
         <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.2fr)] lg:items-center">
           {/* Left · pitch */}

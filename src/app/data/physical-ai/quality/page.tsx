@@ -9,6 +9,7 @@ import { LabelStudioCard } from "@/components/marketing/sections/foundry/qc/Labe
 import { RerunCapturedCard } from "@/components/marketing/sections/foundry/qc/RerunCapturedCard";
 import { SubpageHero, Sheet, SheetHeading } from "@/components/marketing/blueprint/kit";
 import { PageNav } from "@/components/marketing/blueprint/PageNav";
+import { ScrollProgress } from "@/components/marketing/fx/ScrollProgress";
 import { CountUp } from "@/components/marketing/fx/CountUp";
 import { HARD_RULES, HUMAN_QC, PROVENANCE_LOG, QC_DELTA } from "@/lib/landing/physical-ai-qc";
 
@@ -258,6 +259,7 @@ export default function QualityPage() {
   return (
     <div style={{ background: "var(--bp-bg)" }}>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(QUALITY_JSONLD) }} />
+      <ScrollProgress />
       <Header />
       <PageNav
         items={[

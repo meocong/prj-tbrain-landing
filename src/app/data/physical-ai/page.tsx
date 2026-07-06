@@ -4,6 +4,7 @@ import { ArrowRight } from "lucide-react";
 import Header from "@/components/common/Header";
 import Footer from "@/components/common/Footer";
 import { CinemaHero } from "@/components/marketing/sections/foundry/CinemaHero";
+import { ScrollProgress } from "@/components/marketing/fx/ScrollProgress";
 import {
   DataForWhatYouBuild,
   WhyTbrainSheet,
@@ -106,6 +107,7 @@ export default function PhysicalAIPage() {
   return (
     <div style={{ background: "var(--bp-bg)" }}>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(SERVICE_JSONLD) }} />
+      <ScrollProgress />
       <Header />
       <main>
         {/* 01 · Cinema hero */}
