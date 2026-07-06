@@ -298,6 +298,7 @@ export default function QualityPage() {
           ]}
           accent="amber"
           badge={{ label: "You're on QC", color: "#ff9a4d" }}
+          bgMedia={{ video: "/videos/textile-annotated/pick_up_the_cup.webm", poster: "/images/real-captures/pick_up_the_cup-loop.jpg", opacity: 0.24 }}
           breadcrumb={<Breadcrumb trail={[
             { label: "Tbrain", href: "/" },
             { label: "Physical AI", href: "/data/physical-ai" },

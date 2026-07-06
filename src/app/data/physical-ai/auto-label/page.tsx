@@ -295,6 +295,7 @@ export default function AutoLabelPage() {
           ]}
           accent="cyan"
           badge={{ label: "You're on Auto-Label" }}
+          bgMedia={{ video: "/videos/textile-annotated/iron_01.webm", poster: "/images/textile-annotated/iron_01.jpg", opacity: 0.28 }}
           breadcrumb={<Breadcrumb trail={[
             { label: "Tbrain", href: "/" },
             { label: "Physical AI", href: "/data/physical-ai" },

@@ -137,7 +137,7 @@ export function SheetHeading({ title, lead, className = "" }: { title: string; l
 
 /* ── Subpage hero — used by /auto-label + /quality subpages ──────── */
 export function SubpageHero({
-  fig, eyebrow, title, lead, meta, badge, accent, breadcrumb, className = "",
+  fig, eyebrow, title, lead, meta, badge, accent, breadcrumb, bgMedia, className = "",
 }: {
   fig: string;
   eyebrow?: string;
@@ -147,14 +147,38 @@ export function SubpageHero({
   badge?: { label: string; color?: string };
   accent?: "cyan" | "amber" | "violet";
   breadcrumb?: ReactNode;
+  bgMedia?: { video?: string; poster: string; opacity?: number };
   className?: string;
 }) {
   const accentColor = accent === "amber" ? "#ff9a4d" : accent === "violet" ? "#a78bfa" : "var(--bp-cyan)";
+  const mediaOpacity = bgMedia?.opacity ?? 0.24;
   return (
     <section className={`bp-grid bp-frame relative overflow-hidden ${className}`} style={{ paddingTop: "clamp(88px, 12vw, 148px)", paddingBottom: "clamp(48px, 6vw, 88px)" }}>
+      {bgMedia && (
+        <>
+          {bgMedia.video ? (
+            <video
+              src={bgMedia.video}
+              poster={bgMedia.poster}
+              autoPlay
+              muted
+              loop
+              playsInline
+              preload="metadata"
+              aria-hidden
+              className="pointer-events-none absolute inset-0 h-full w-full object-cover"
+              style={{ opacity: mediaOpacity }}
+            />
+          ) : (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img src={bgMedia.poster} alt="" aria-hidden className="pointer-events-none absolute inset-0 h-full w-full object-cover" style={{ opacity: mediaOpacity }} loading="lazy" />
+          )}
+          <div aria-hidden className="pointer-events-none absolute inset-0" style={{ background: "linear-gradient(180deg, rgba(6,6,14,0.55) 0%, rgba(6,6,14,0.85) 70%, var(--bp-bg) 100%)" }} />
+        </>
+      )}
       <div aria-hidden className="bp-aurora" />
       {accent && (
-        <div aria-hidden className="pointer-events-none absolute inset-0" style={{ background: `radial-gradient(ellipse 60% 55% at 20% 15%, color-mix(in srgb, ${accentColor} 12%, transparent), transparent 60%)` }} />
+        <div aria-hidden className="pointer-events-none absolute inset-0" style={{ background: `radial-gradient(ellipse 60% 55% at 20% 15%, color-mix(in srgb, ${accentColor} 14%, transparent), transparent 60%)` }} />
       )}
       <div className="container relative z-10 mx-auto px-5">
         {breadcrumb && <div className="mb-6">{breadcrumb}</div>}

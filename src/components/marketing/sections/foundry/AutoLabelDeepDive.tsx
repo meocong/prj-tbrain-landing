@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { Sheet, SheetHeading } from "@/components/marketing/blueprint/kit";
 import { AUTO_LABEL_STAGES } from "@/lib/landing/physical-ai-qc";
 
@@ -27,7 +27,7 @@ function StagePreview({ stageKey }: { stageKey: string }) {
             <div className="bp-mono flex items-center justify-between" style={{ padding: "8px 14px", fontSize: 10, color: "var(--bp-ink-faint)", borderBottom: "1px solid var(--bp-line)" }}>
               <span>RAW · rgb.mp4</span>
             </div>
-            <video src={stage.rawVideo} muted loop autoPlay playsInline preload="metadata" style={{ width: "100%", display: "block" }} />
+            <video src={stage.rawVideo} muted loop autoPlay playsInline preload="metadata" poster={stage.overlayPoster} style={{ width: "100%", display: "block" }} />
           </div>
           <div className="bp-card overflow-hidden" style={{ borderRadius: 12 }}>
             <div className="bp-mono flex items-center justify-between" style={{ padding: "8px 14px", fontSize: 10, color: "var(--bp-ink-faint)", borderBottom: "1px solid var(--bp-line)" }}>
@@ -76,7 +76,6 @@ function StagePreview({ stageKey }: { stageKey: string }) {
 
 export function AutoLabelDeepDive() {
   const [tab, setTab] = useState("hand");
-  const active = AUTO_LABEL_STAGES.find((s) => s.key === tab)!;
   return (
     <Sheet id="auto-label" fig="FIG.05 — AUTO-LABEL · 4 SIGNATURE OUTPUTS" axis>
       <SheetHeading
@@ -112,29 +111,34 @@ export function AutoLabelDeepDive() {
         })}
       </div>
 
-      {/* Active tab body */}
-      <div className="mt-6">
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={tab}
-            initial={{ opacity: 0, y: 8 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -8 }}
-            transition={{ duration: 0.25 }}
-          >
-            <div className="bp-card" style={{ padding: 22, borderRadius: 14 }}>
-              <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,2fr)]">
-                <div>
-                  <div className="bp-mono" style={{ fontSize: 11, color: "var(--bp-ink-faint)", letterSpacing: "0.06em" }}>{active.fig}</div>
-                  <h3 className="mt-2 font-semibold" style={{ fontFamily: "var(--font-heading)", fontSize: "clamp(20px, 2.4vw, 28px)", lineHeight: 1.1, color: "var(--bp-ink)" }}>{active.title}</h3>
-                  <p className="mt-3" style={{ fontSize: 14, lineHeight: 1.6, color: "var(--bp-ink-dim)" }}>{active.detail}</p>
-                  <div className="mt-4 bp-mono" style={{ fontSize: 11, color: "var(--bp-cyan)" }}>output · {active.output}</div>
+      {/* Tab bodies · all mounted · videos never restart on tab switch */}
+      <div className="mt-6 relative">
+        {TABS.map((t) => {
+          const stage = AUTO_LABEL_STAGES.find((s) => s.key === t.key)!;
+          const shown = t.key === tab;
+          return (
+            <motion.div
+              key={t.key}
+              initial={false}
+              animate={{ opacity: shown ? 1 : 0 }}
+              transition={{ duration: 0.25 }}
+              style={{ display: shown ? "block" : "none" }}
+              aria-hidden={!shown}
+            >
+              <div className="bp-card" style={{ padding: 22, borderRadius: 14 }}>
+                <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,2fr)]">
+                  <div>
+                    <div className="bp-mono" style={{ fontSize: 11, color: "var(--bp-ink-faint)", letterSpacing: "0.06em" }}>{stage.fig}</div>
+                    <h3 className="mt-2 font-semibold" style={{ fontFamily: "var(--font-heading)", fontSize: "clamp(20px, 2.4vw, 28px)", lineHeight: 1.1, color: "var(--bp-ink)" }}>{stage.title}</h3>
+                    <p className="mt-3" style={{ fontSize: 14, lineHeight: 1.6, color: "var(--bp-ink-dim)" }}>{stage.detail}</p>
+                    <div className="mt-4 bp-mono" style={{ fontSize: 11, color: "var(--bp-cyan)" }}>output · {stage.output}</div>
+                  </div>
+                  <StagePreview stageKey={t.key} />
                 </div>
-                <StagePreview stageKey={tab} />
               </div>
-            </div>
-          </motion.div>
-        </AnimatePresence>
+            </motion.div>
+          );
+        })}
       </div>
 
       {/* CTA */}
