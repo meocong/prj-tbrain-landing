@@ -6,6 +6,7 @@ import Footer from "@/components/common/Footer";
 import { PipelineOverview } from "@/components/marketing/sections/foundry/PipelineOverview";
 import { QCFlow } from "@/components/marketing/sections/foundry/QCFlow";
 import { SubpageHero, Sheet, SheetHeading } from "@/components/marketing/blueprint/kit";
+import { PageNav } from "@/components/marketing/blueprint/PageNav";
 import { CountUp } from "@/components/marketing/fx/CountUp";
 import { HARD_RULES, HUMAN_QC, PROVENANCE_LOG, QC_DELTA } from "@/lib/landing/physical-ai-qc";
 
@@ -274,6 +275,18 @@ export default function QualityPage() {
   return (
     <div style={{ background: "var(--bp-bg)" }}>
       <Header />
+      <PageNav
+        items={[
+          { id: "pipeline", label: "Pipeline overview" },
+          { id: "hard-rules", label: "Layer 1 · Hard rules" },
+          { id: "ai-filter", label: "Layer 2 · AI filter" },
+          { id: "label-studio", label: "Layer 3 · Label Studio" },
+          { id: "human-qc", label: "Layer 4 · Reviewer" },
+          { id: "provenance", label: "Provenance trail" },
+          { id: "rerun-proof", label: "Rerun proof" },
+          { id: "delta", label: "Ship-rate delta" },
+        ]}
+      />
       <main>
         <SubpageHero
           fig="FIG.06 — QC PLAYBOOK"

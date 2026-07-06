@@ -8,6 +8,7 @@ import { DescriptionMetadata } from "@/components/marketing/sections/foundry/Des
 import { AutoLabelDeepDive } from "@/components/marketing/sections/foundry/AutoLabelDeepDive";
 import { RerunEmbed } from "@/components/marketing/sections/foundry/RerunEmbed";
 import { SubpageHero, Sheet, SheetHeading, StagePanel } from "@/components/marketing/blueprint/kit";
+import { PageNav } from "@/components/marketing/blueprint/PageNav";
 import { AUTO_LABEL_STAGES } from "@/lib/landing/physical-ai-qc";
 
 export const metadata: Metadata = {
@@ -171,6 +172,18 @@ export default function AutoLabelPage() {
   return (
     <div style={{ background: "var(--bp-bg)" }}>
       <Header />
+      <PageNav
+        items={[
+          { id: "pipeline", label: "Pipeline overview" },
+          { id: "description-metadata", label: "Description + metadata" },
+          { id: "stage-hand", label: "Hand · MANO" },
+          { id: "stage-body", label: "Body · Sapiens" },
+          { id: "stage-masks", label: "Object masks" },
+          { id: "stage-depth", label: "Depth · MoGe" },
+          { id: "stage-rerun", label: "Rerun scene" },
+          { id: "auto-label", label: "Deep dive tabs" },
+        ]}
+      />
       <main>
         <SubpageHero
           fig="FIG.05 — AUTO-LABEL PIPELINE"

@@ -48,10 +48,11 @@ const POSTS_PER_PAGE = 6;
 export default async function BlogPage({
   searchParams,
 }: {
-  searchParams: Promise<{ page?: string }>;
+  searchParams: Promise<{ page?: string; category?: string }>;
 }) {
   const sp = await searchParams;
   const currentPage = Math.max(1, Number(sp.page) || 1);
+  const activeCategory = (sp.category || "").trim().toLowerCase();
   let posts: BlogPost[] = [];
 
   try {
@@ -76,11 +77,20 @@ export default async function BlogPage({
     }
   } catch { /* DB unavailable */ }
 
-  const totalPosts = posts.length;
+  const allCategories = Array.from(
+    new Set(posts.map((p) => p.category).filter((c): c is string => !!c))
+  ).sort((a, b) => a.localeCompare(b));
+
+  const filtered = activeCategory
+    ? posts.filter((p) => (p.category ?? "").toLowerCase() === activeCategory)
+    : posts;
+
+  const totalPosts = filtered.length;
   const totalPages = Math.ceil((totalPosts - 1) / POSTS_PER_PAGE); // -1 for featured
-  const featured = posts[0];
-  const allRest = posts.slice(1);
+  const featured = filtered[0];
+  const allRest = filtered.slice(1);
   const rest = allRest.slice((currentPage - 1) * POSTS_PER_PAGE, currentPage * POSTS_PER_PAGE);
+  const qs = activeCategory ? `&category=${encodeURIComponent(activeCategory)}` : "";
 
   return (
     <div>
@@ -98,7 +108,40 @@ export default async function BlogPage({
             Insights on AI training data, robotics, evaluation, and building better AI.
           </p>
 
-          <div className="mt-12 h-px" style={{ background: "var(--border-subtle)" }} />
+          {/* Category chips */}
+          {allCategories.length > 0 && (
+            <div className="mt-10 flex flex-wrap items-center gap-2">
+              <Link
+                href="/blog"
+                className={`rounded-full px-4 py-1.5 text-sm font-medium transition-colors ${
+                  !activeCategory
+                    ? "bg-[#6C3CF4] text-white"
+                    : "border border-gray-200 text-gray-600 hover:border-[#6C3CF4] hover:text-[#6C3CF4]"
+                }`}
+              >
+                All
+              </Link>
+              {allCategories.map((c) => {
+                const key = c.toLowerCase();
+                const on = key === activeCategory;
+                return (
+                  <Link
+                    key={c}
+                    href={`/blog?category=${encodeURIComponent(key)}`}
+                    className={`rounded-full px-4 py-1.5 text-sm font-medium transition-colors ${
+                      on
+                        ? "bg-[#6C3CF4] text-white"
+                        : "border border-gray-200 text-gray-600 hover:border-[#6C3CF4] hover:text-[#6C3CF4]"
+                    }`}
+                  >
+                    {c}
+                  </Link>
+                );
+              })}
+            </div>
+          )}
+
+          <div className="mt-8 h-px" style={{ background: "var(--border-subtle)" }} />
 
           {/* Featured post */}
           {featured && (
@@ -205,7 +248,7 @@ export default async function BlogPage({
             <div className="mt-14 flex items-center justify-center gap-2">
               {currentPage > 1 && (
                 <Link
-                  href={`/blog?page=${currentPage - 1}`}
+                  href={`/blog?page=${currentPage - 1}${qs}`}
                   className="rounded-lg px-3 py-2 text-sm font-medium transition-colors hover:bg-gray-100"
                   style={{ color: "#6b7280" }}
                 >
@@ -215,7 +258,7 @@ export default async function BlogPage({
               {Array.from({ length: totalPages }, (_, i) => i + 1).map((p) => (
                 <Link
                   key={p}
-                  href={`/blog?page=${p}`}
+                  href={`/blog?page=${p}${qs}`}
                   className={`rounded-lg px-3.5 py-2 text-sm font-medium transition-colors ${
                     p === currentPage
                       ? "bg-[#6C3CF4] text-white"
@@ -227,7 +270,7 @@ export default async function BlogPage({
               ))}
               {currentPage < totalPages && (
                 <Link
-                  href={`/blog?page=${currentPage + 1}`}
+                  href={`/blog?page=${currentPage + 1}${qs}`}
                   className="rounded-lg px-3 py-2 text-sm font-medium transition-colors hover:bg-gray-100"
                   style={{ color: "#6b7280" }}
                 >
