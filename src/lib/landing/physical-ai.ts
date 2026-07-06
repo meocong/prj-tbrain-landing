@@ -18,7 +18,7 @@ export const FOUNDRY_HERO = {
   fig: "FIG.01 — TBRAIN CAPTURE PACK · MK-001 · REV A",
   eyebrow: "Industrial data · real production environments · not scraped, not simulated.",
   title: "The Robotics Data Foundry for Physical AI",
-  sub: "Real capture packs, worn by operators on the factory floor — egocentric, action-paired, deeply annotated. Sourced through an expansive industrial network (not only Vietnam) across multiple production sites, QC'd, and delivered RLDS-ready.",
+  sub: "Real capture packs, worn by operators on the factory floor — egocentric, action-paired, deeply annotated. Sourced through an industrial partner network across Asia, QC'd, and delivered RLDS-ready.",
   ctaPrimary: { label: "See a sample dataset", href: "/contact" },
   ctaSecondary: { label: "How the foundry works", href: "/data/physical-ai" },
   trust: "Industrial network · real production · LeRobot / RLDS · ≤48h delivery",
@@ -27,7 +27,7 @@ export const FOUNDRY_HERO = {
 export const ANCHOR_TRUST = {
   headline: "Industrial data · real production environments · at network scale",
   // Anonymized — do not name the labs publicly.
-  labs: "Sourced through an expansive industrial network (not only Vietnam) — factories, workshops, assembly lines",
+  labs: "Industrial partner network across Asia — factories, workshops, assembly lines",
   standards: [
     { name: "Industrial", detail: "Real factory floors · not staged" },
     { name: "Multi-site", detail: "Textile · kitchen · electronics roadmap" },
@@ -524,7 +524,7 @@ export const WORLD_MODEL = {
 /* Two-tier availability — never mix delivered vs aspirational */
 export const AVAILABILITY = {
   fig: "FIG.04 — WHAT SHIPS NOW → NEXT",
-  title: "What ships today · what ships next",
+  title: "20 skills shipped · 500-pack fleet next",
   lead: "One rule: verifiable numbers on the left, aspirational capacity on the right — labeled, not blended. We don't ship stats we can't defend to a research engineer.",
   delivered: {
     tag: "Delivered today",
@@ -628,8 +628,8 @@ export interface RealSample {
 
 export const REAL_SAMPLES = {
   fig: "FIG.10 — CAPTURE LEDGER",
-  title: "Sample episodes · examples, not exhaustive",
-  lead: "A representative slice of what a buyer receives — kitchen episodes with QC verdicts + textile raw egocentric captures. Full catalog on request. Every episode shown here ships with the same manifest and Rerun scene.",
+  title: "Real captures · pick one, open its Rerun scene",
+  lead: "Fourteen episodes shipped this quarter across kitchen + textile lines; six on this page. Every card opens its own annotated burn, its own manifest, its own Rerun scene. Click any tile.",
   montage: "/images/deliverables/all6-montage.png",
   groups: {
     KITCHEN: { label: "Kitchen ledger", note: "Delivered · QC-verified" },

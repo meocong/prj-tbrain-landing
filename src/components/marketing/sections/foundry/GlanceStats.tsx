@@ -28,14 +28,11 @@ export function GlanceStats() {
             <div style={{ position: "absolute", left: 0, top: 4, width: 3, height: 44, background: s.color, borderRadius: 3, boxShadow: `0 0 12px ${s.color}` }} />
             <div style={{
               fontFamily: "var(--font-heading)",
-              fontSize: "clamp(38px, 5.2vw, 64px)",
+              fontSize: "clamp(42px, 5.4vw, 68px)",
               fontWeight: 700,
               lineHeight: 1,
               letterSpacing: "-0.03em",
-              background: `linear-gradient(135deg, ${s.color} 0%, #ffffff 100%)`,
-              WebkitBackgroundClip: "text",
-              backgroundClip: "text",
-              WebkitTextFillColor: "transparent",
+              color: s.color,
               paddingLeft: 14,
             }}>
               <CountUp value={s.v} duration={1.6} />{s.suffix ?? ""}

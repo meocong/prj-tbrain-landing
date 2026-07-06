@@ -13,7 +13,6 @@ import {
 import { Catalog, EngagementLadder } from "@/components/marketing/sections/foundry/DeckSections";
 import { LiveTicker } from "@/components/marketing/sections/foundry/LiveTicker";
 import { HardwareShowcase } from "@/components/marketing/sections/foundry/HardwareShowcase";
-import { CapturePackExplode } from "@/components/marketing/sections/foundry/PackExplodeScroll";
 import { CapturesGallery } from "@/components/marketing/sections/foundry/CapturesGallery";
 import { RerunEmbed } from "@/components/marketing/sections/foundry/RerunEmbed";
 import { PublicDatasetWall } from "@/components/marketing/sections/foundry/PublicDatasetWall";
@@ -95,7 +94,7 @@ function FoundryCTA() {
     <section className="bp-grid bp-frame relative overflow-hidden" style={{ paddingTop: 92, paddingBottom: 100 }}>
       <div aria-hidden className="pointer-events-none absolute inset-0" style={{ background: "radial-gradient(ellipse 60% 60% at 50% 50%, color-mix(in srgb, var(--bp-cyan) 9%, transparent), transparent 60%)" }} />
       <div className="container relative z-10 mx-auto max-w-3xl px-5 text-center">
-        <h2 className="font-semibold" style={{ fontFamily: "var(--font-heading)", fontSize: "clamp(30px,5vw,52px)", lineHeight: 1.06, color: "var(--bp-ink)" }}>Forge your next dataset with us</h2>
+        <h2 className="font-semibold" style={{ fontFamily: "var(--font-heading)", fontSize: "clamp(32px,5.2vw,56px)", lineHeight: 1.04, letterSpacing: "-0.025em", color: "var(--bp-ink)" }}>Forge your next dataset with us</h2>
         <p className="mx-auto mt-5 max-w-xl" style={{ fontSize: 17, color: "var(--bp-ink-dim)" }}>Tell us the task, the embodiment, and the format. We&apos;ll scope a sample batch — captured, QC&apos;d, and delivered RLDS-ready.</p>
         <div className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
           <Link href="/contact" className="inline-flex items-center gap-2 rounded-lg px-6 py-3 text-sm font-bold" style={{ fontFamily: "var(--font-heading)", background: "var(--bp-cyan)", color: "var(--bp-on-cyan)", boxShadow: "0 8px 22px -12px var(--bp-cyan)" }}>See a sample dataset <ArrowRight className="h-4 w-4" /></Link>
@@ -118,9 +117,6 @@ export default function PhysicalAIPage() {
 
         {/* 01b · Cinema wall · 6-cell real video wall */}
         <CinemaWall />
-
-        {/* 01c · Scroll-driven capture pack decompose */}
-        <CapturePackExplode />
 
         {/* 02 · Live ticker — delivered vs capacity */}
         <LiveTicker />

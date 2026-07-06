@@ -74,8 +74,8 @@ export function CinemaWall() {
   const auxCells = CELLS.slice(1);
 
   return (
-    <section ref={sectionRef} className="relative w-full overflow-hidden" style={{ background: "#000", color: "#fff" }}>
-      <div className="relative grid gap-[1px]" style={{ gridTemplateColumns: "1fr 1fr", gridTemplateRows: "auto", background: "#000" }}>
+    <section ref={sectionRef} className="relative w-full overflow-hidden" style={{ background: "#06060E", color: "#fff" }}>
+      <div className="relative grid gap-[1px]" style={{ gridTemplateColumns: "1fr 1fr", gridTemplateRows: "auto", background: "#06060E" }}>
         {/* Hero cell — huge */}
         <motion.div
           className="relative row-span-3 aspect-[4/3] overflow-hidden lg:aspect-auto"
@@ -102,8 +102,8 @@ export function CinemaWall() {
           </svg>
 
           {/* Top chip */}
-          <div className="absolute left-8 top-8 flex items-center gap-2 rounded-full border border-white/12 bg-black/40 px-3 py-1.5 backdrop-blur-md" style={{ fontFamily: "var(--font-mono, monospace)", fontSize: 11, letterSpacing: "0.14em" }}>
-            <motion.span animate={{ opacity: [1, 0.2, 1] }} transition={{ duration: 1.1, repeat: Infinity }} style={{ width: 7, height: 7, borderRadius: 8, background: "#ff5f57", boxShadow: "0 0 8px #ff5f57" }} />
+          <div className="absolute left-8 top-8 flex items-center gap-2 rounded-full border border-white/15 px-3 py-1.5" style={{ background: "rgba(6,6,14,0.72)", fontFamily: "var(--font-mono, monospace)", fontSize: 11, letterSpacing: "0.14em" }}>
+            <motion.span animate={reduce ? {} : { opacity: [1, 0.25, 1] }} transition={{ duration: 1.1, repeat: Infinity }} style={{ width: 7, height: 7, borderRadius: 8, background: "#ff5f57" }} />
             <span style={{ color: "#fff", fontWeight: 700 }}>RECORDING · REAL PRODUCTION</span>
           </div>
 
@@ -115,9 +115,9 @@ export function CinemaWall() {
             <div className="bp-mono" style={{ fontSize: 11, color: "#4cb5ff", letterSpacing: "0.14em", textTransform: "uppercase" }}>
               FIG.02 · CAPTURE WALL · 6 CONCURRENT SESSIONS
             </div>
-            <h2 className="font-semibold text-white" style={{ fontFamily: "var(--font-heading)", fontSize: "clamp(2.6rem, 6.8vw, 5.6rem)", lineHeight: 0.98, letterSpacing: "-0.028em" }}>
+            <h2 className="font-semibold text-white" style={{ fontFamily: "var(--font-heading)", fontSize: "clamp(2.6rem, 6.8vw, 5.6rem)", lineHeight: 1.0, letterSpacing: "-0.028em" }}>
               Real production.<br />
-              <span style={{ background: "linear-gradient(100deg,#22e3c8,#8b6cf6)", WebkitBackgroundClip: "text", backgroundClip: "text", WebkitTextFillColor: "transparent" }}>Zero staging.</span>
+              <span style={{ fontWeight: 700, background: "linear-gradient(100deg,#22e3c8,#4cb5ff)", WebkitBackgroundClip: "text", backgroundClip: "text", WebkitTextFillColor: "transparent" }}>Zero staging.</span>
             </h2>
             <p className="max-w-lg text-white/70" style={{ fontSize: "clamp(14px,1.3vw,17px)", lineHeight: 1.55 }}>
               Every clip on this wall is a real capture from a real factory floor — auto-labeled, QC&apos;d against 15 machine-checkable rules, and diffable against its Rerun scene.
@@ -173,8 +173,8 @@ export function CinemaWall() {
             {/* darken bottom */}
             <div aria-hidden className="absolute inset-x-0 bottom-0" style={{ height: "50%", background: "linear-gradient(0deg, rgba(0,0,0,0.85) 0%, transparent 100%)" }} />
             {/* tag */}
-            <div className="absolute left-3 top-3 flex items-center gap-1.5 rounded-full border border-white/15 bg-black/40 px-2.5 py-1 backdrop-blur-md" style={{ fontFamily: "var(--font-mono, monospace)", fontSize: 9, letterSpacing: "0.12em", color: "#4cb5ff", fontWeight: 700 }}>
-              <span style={{ width: 5, height: 5, borderRadius: 6, background: "#4cb5ff", boxShadow: "0 0 6px #4cb5ff" }} />
+            <div className="absolute left-3 top-3 flex items-center gap-1.5 rounded-full border border-white/15 px-2.5 py-1" style={{ background: "rgba(6,6,14,0.72)", fontFamily: "var(--font-mono, monospace)", fontSize: 9, letterSpacing: "0.12em", color: "#4cb5ff", fontWeight: 700 }}>
+              <span style={{ width: 5, height: 5, borderRadius: 6, background: "#4cb5ff" }} />
               {c.tag}
             </div>
             {/* frame counter */}
@@ -186,7 +186,7 @@ export function CinemaWall() {
       </div>
 
       {/* Bottom rolling ticker */}
-      <div className="relative border-t border-white/10 bg-black" style={{ padding: "16px 0" }}>
+      <div className="relative border-t border-white/10" style={{ background: "#06060E", padding: "16px 0" }}>
         <div className="container mx-auto flex flex-wrap items-center justify-between gap-3 px-5">
           <div className="flex items-center gap-3">
             <span className="bp-mono" style={{ fontSize: 10.5, color: "#8fa0c8", letterSpacing: "0.14em", textTransform: "uppercase" }}>

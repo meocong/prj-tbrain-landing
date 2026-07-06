@@ -92,7 +92,7 @@ export function Catalog() {
   return (
     <Sheet fig="FIG.13 — TEN MODALITIES · ONE EXPORT">
       <RevealOnScroll>
-        <SheetHeading title="Ten modalities. One export contract." lead="Egocentric · spatial · UMI · teleop · mocap · annotation — sourced from an expansive industrial network (not only Vietnam) of factories and workshops, every modality exports to the same LeRobot v2 schema. Nothing about your training loop changes when you swap sources." />
+        <SheetHeading title="Ten modalities. One export contract." lead="Egocentric · spatial · UMI · teleop · mocap · annotation — sourced from an industrial partner network across Asia, every modality exports to the same LeRobot v2 schema. Nothing about your training loop changes when you swap sources." />
       </RevealOnScroll>
       <div className="relative mt-12">
         <motion.div aria-hidden className="pointer-events-none absolute -inset-x-8 -top-8 bottom-0"

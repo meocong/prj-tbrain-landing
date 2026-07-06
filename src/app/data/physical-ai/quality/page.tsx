@@ -249,7 +249,7 @@ function CTA() {
     <section className="bp-grid bp-frame relative overflow-hidden" style={{ paddingTop: 72, paddingBottom: 88 }}>
       <div aria-hidden className="pointer-events-none absolute inset-0" style={{ background: "radial-gradient(ellipse 60% 60% at 50% 50%, color-mix(in srgb, var(--bp-cyan) 9%, transparent), transparent 60%)" }} />
       <div className="container relative z-10 mx-auto max-w-3xl px-5 text-center">
-        <h2 className="font-semibold" style={{ fontFamily: "var(--font-heading)", fontSize: "clamp(28px, 4vw, 44px)", lineHeight: 1.1, color: "var(--bp-ink)" }}>Ask for a sample QC report on any capture</h2>
+        <h2 style={{ fontFamily: "var(--font-heading)", fontWeight: 500, fontSize: "clamp(30px, 4.4vw, 48px)", lineHeight: 1.04, letterSpacing: "-0.02em", color: "var(--bp-ink)" }}>Ask for a sample QC report on any capture</h2>
         <p className="mx-auto mt-4 max-w-xl" style={{ fontSize: 16, color: "var(--bp-ink-dim)" }}>
           We ship a full summary.json + .rrd with every episode. Pick a task, and we&apos;ll walk you through the hard rules on a real capture.
         </p>
