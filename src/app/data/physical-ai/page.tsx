@@ -142,8 +142,8 @@ export default function PhysicalAIPage() {
         {/* 07 · QC flow — 15 hard rules teaser · full detail on /quality */}
         <QCFlow />
 
-        {/* 08 · Rerun episode viewer */}
-        <RerunEmbed />
+        {/* 08 · Rerun episode viewer · teaser (full viewer on /auto-label) */}
+        <RerunEmbed variant="teaser" />
 
         {/* 08b · Ten modalities · one export contract (moved up per v5.5) */}
         <Catalog />

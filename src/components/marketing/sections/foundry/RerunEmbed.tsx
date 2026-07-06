@@ -5,7 +5,7 @@ import { RERUN_EMBED } from "@/lib/landing/physical-ai";
 import { Sheet, SheetHeading } from "@/components/marketing/blueprint/kit";
 import { motion, useReducedMotion } from "framer-motion";
 
-export function RerunEmbed() {
+export function RerunEmbed({ variant = "full" }: { variant?: "full" | "teaser" } = {}) {
   const [origin, setOrigin] = useState<string>("");
   useEffect(() => {
     if (typeof window !== "undefined") setOrigin(window.location.origin);
@@ -15,6 +15,42 @@ export function RerunEmbed() {
     if (!origin) return "";
     return `${RERUN_EMBED.externalHrefPrefix}${encodeURIComponent(origin + RERUN_EMBED.rrd)}`;
   }, [origin]);
+
+  if (variant === "teaser") {
+    return (
+      <Sheet id="rerun-embed" fig={RERUN_EMBED.fig} axis={false}>
+        <SheetHeading title={RERUN_EMBED.title} lead="Open any capture as a scrubbable multi-track scene. Full viewer lives on the auto-label deep dive." />
+        <div className="mt-6 bp-card relative overflow-hidden" style={{ borderRadius: 14, background: "#050a12", height: 240 }}>
+          <video
+            src={RERUN_EMBED.fallbackVideo}
+            poster="/images/real-captures/pick_up_the_cup-loop.jpg"
+            muted
+            loop
+            autoPlay
+            playsInline
+            preload="metadata"
+            className="absolute inset-0 h-full w-full object-cover"
+            style={{ opacity: 0.55 }}
+          />
+          <div aria-hidden style={{ position: "absolute", inset: 0, background: "linear-gradient(180deg, rgba(5,10,18,0.25), rgba(5,10,18,0.85))" }} />
+          {rerunHref && (
+            <a
+              href={rerunHref}
+              target="_blank"
+              rel="noreferrer"
+              className="absolute bottom-4 right-4 bp-mono"
+              style={{ zIndex: 3, fontSize: 12, padding: "10px 14px", borderRadius: 8, background: "var(--bp-cyan)", color: "#0b1220", fontWeight: 700, textDecoration: "none", boxShadow: "0 8px 22px -12px var(--bp-cyan)" }}
+            >
+              ↗ Open sample scene in Rerun
+            </a>
+          )}
+          <div className="absolute bottom-4 left-4 bp-mono" style={{ fontSize: 10.5, color: "#8fa0c8", letterSpacing: "0.1em", textTransform: "uppercase" }}>
+            9 tracks · scrubbable · v0.24
+          </div>
+        </div>
+      </Sheet>
+    );
+  }
 
   return (
     <Sheet id="rerun-embed" fig={RERUN_EMBED.fig} axis={false}>
