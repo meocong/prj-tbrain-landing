@@ -18,6 +18,7 @@ import { PublicDatasetWall } from "@/components/marketing/sections/foundry/Publi
 import { PipelineOverview } from "@/components/marketing/sections/foundry/PipelineOverview";
 import { AutoLabelDeepDive } from "@/components/marketing/sections/foundry/AutoLabelDeepDive";
 import { QCFlow } from "@/components/marketing/sections/foundry/QCFlow";
+import { GlanceStats } from "@/components/marketing/sections/foundry/GlanceStats";
 import { ANCHOR_TRUST } from "@/lib/landing/physical-ai";
 
 export const metadata: Metadata = {
@@ -113,6 +114,9 @@ export default function PhysicalAIPage() {
 
         {/* 03 · Anchor trust strip */}
         <AnchorStrip />
+
+        {/* 03b · V5 · At-a-glance stat row */}
+        <GlanceStats />
 
         {/* 04 · V5 · Pipeline overview — canonical 5-phase diagram */}
         <PipelineOverview />

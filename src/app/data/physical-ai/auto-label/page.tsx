@@ -28,6 +28,25 @@ export const metadata: Metadata = {
 
 export const revalidate = 86400;
 
+const BASE_URL = process.env.PUBLIC_BASE_URL || "https://tbrain.ai";
+const AUTOLABEL_JSONLD = {
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  headline: "Auto-Label · 8 Models · Physical AI Data Foundry",
+  description:
+    "How Tbrain auto-labels egocentric captures — hand kpts, body kpts, object masks, depth, verb-noun, schema_v3 provenance.",
+  url: `${BASE_URL}/data/physical-ai/auto-label`,
+  author: { "@type": "Organization", name: "Tbrain", url: BASE_URL },
+  publisher: { "@type": "Organization", name: "Tbrain", url: BASE_URL },
+  about: [
+    { "@type": "Thing", name: "Egocentric video annotation" },
+    { "@type": "Thing", name: "MANO hand keypoints" },
+    { "@type": "Thing", name: "Object segmentation and tracking" },
+    { "@type": "Thing", name: "Monocular depth estimation" },
+    { "@type": "Thing", name: "Vision-language verb-noun classification" },
+  ],
+};
+
 function StageBody() {
   const body = AUTO_LABEL_STAGES.find((s) => s.key === "body")!;
   return (
@@ -118,9 +137,9 @@ function StageRerun() {
     <StagePanel fig={rerun.fig} title={rerun.title} model={rerun.model} detail={rerun.detail} output={rerun.output}>
       <div className="bp-card overflow-hidden" style={{ borderRadius: 10 }}>
         <div className="bp-mono flex items-center justify-between" style={{ padding: "8px 14px", fontSize: 11, color: "var(--bp-ink-faint)", borderBottom: "1px solid var(--bp-line)" }}>
-          <span>PROOF VIDEO · aloha-4cam (sample public capture)</span>
+          <span>PROOF · pick_up_the_cup · 273 frames · schema_v3</span>
           <a
-            href="https://app.rerun.io/version/0.24.0/index.html?url=https%3A%2F%2Fwww.tbrain.ai%2Fvideos%2Frerun%2Faloha-4cam.rrd"
+            href="https://app.rerun.io/version/0.24.0/index.html?url=https%3A%2F%2Fwww.tbrain.ai%2Fvideos%2Frerun%2Fpick_up_the_cup.rrd"
             target="_blank"
             rel="noopener noreferrer"
             className="bp-mono"
@@ -129,7 +148,7 @@ function StageRerun() {
             Open in Rerun ↗
           </a>
         </div>
-        <video src="/videos/deliverables/aloha-4cam.mp4" muted loop autoPlay playsInline preload="metadata" style={{ width: "100%", display: "block" }} />
+        <video src="/videos/real-captures/pick_up_the_cup.webm" poster="/images/real-captures/pick_up_the_cup-loop.jpg" muted loop autoPlay playsInline preload="metadata" style={{ width: "100%", display: "block" }} />
       </div>
     </StagePanel>
   );
@@ -180,6 +199,7 @@ function HardRulesBridge() {
 export default function AutoLabelPage() {
   return (
     <div style={{ background: "var(--bp-bg)" }}>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(AUTOLABEL_JSONLD) }} />
       <Header />
       <PageNav
         items={[

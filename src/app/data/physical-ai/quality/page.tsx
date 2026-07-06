@@ -25,6 +25,24 @@ export const metadata: Metadata = {
 
 export const revalidate = 86400;
 
+const BASE_URL = process.env.PUBLIC_BASE_URL || "https://tbrain.ai";
+const QUALITY_JSONLD = {
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  headline: "QC Playbook · Physical AI Data Foundry",
+  description:
+    "Tbrain's zero-trust QC pipeline — 15 hard rules, AI filter, 3 human review layers, schema_v3 provenance, Rerun proof.",
+  url: `${BASE_URL}/data/physical-ai/quality`,
+  author: { "@type": "Organization", name: "Tbrain", url: BASE_URL },
+  publisher: { "@type": "Organization", name: "Tbrain", url: BASE_URL },
+  about: [
+    { "@type": "Thing", name: "Data quality control" },
+    { "@type": "Thing", name: "Label Studio human-in-the-loop annotation" },
+    { "@type": "Thing", name: "Schema versioning and provenance" },
+    { "@type": "Thing", name: "Rerun scene inspection" },
+  ],
+};
+
 const CATEGORY_COLOR: Record<string, string> = {
   calibration: "#4cb5ff",
   detection:   "#00e5c7",
@@ -192,9 +210,9 @@ function RerunProof() {
       <div className="mt-8 grid gap-4 lg:grid-cols-[minmax(0,2fr)_minmax(0,1fr)]">
         <div className="bp-card overflow-hidden" style={{ borderRadius: 12 }}>
           <div className="bp-mono flex items-center justify-between" style={{ padding: "10px 16px", fontSize: 11, color: "var(--bp-ink-faint)", borderBottom: "1px solid var(--bp-line)" }}>
-            <span>PROOF · aloha-4cam (sample public capture)</span>
+            <span>PROOF · pick_up_the_cup · 273 frames · 15/15 rules PASS</span>
             <a
-              href="https://app.rerun.io/version/0.24.0/index.html?url=https%3A%2F%2Fwww.tbrain.ai%2Fvideos%2Frerun%2Faloha-4cam.rrd"
+              href="https://app.rerun.io/version/0.24.0/index.html?url=https%3A%2F%2Fwww.tbrain.ai%2Fvideos%2Frerun%2Fpick_up_the_cup.rrd"
               target="_blank"
               rel="noopener noreferrer"
               className="bp-mono"
@@ -203,7 +221,7 @@ function RerunProof() {
               Open in Rerun ↗
             </a>
           </div>
-          <video src="/videos/deliverables/aloha-4cam.mp4" muted loop autoPlay playsInline preload="metadata" style={{ width: "100%", display: "block" }} />
+          <video src="/videos/real-captures/pick_up_the_cup.webm" poster="/images/real-captures/pick_up_the_cup-loop.jpg" muted loop autoPlay playsInline preload="metadata" style={{ width: "100%", display: "block" }} />
         </div>
         <div className="bp-card" style={{ padding: 20, borderRadius: 14 }}>
           <div className="bp-mono" style={{ fontSize: 11, color: "var(--bp-ink-faint)", letterSpacing: "0.06em" }}>TRACKS SHIPPED</div>
@@ -274,6 +292,7 @@ function CTA() {
 export default function QualityPage() {
   return (
     <div style={{ background: "var(--bp-bg)" }}>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(QUALITY_JSONLD) }} />
       <Header />
       <PageNav
         items={[
