@@ -242,7 +242,7 @@ function CTA() {
     <section className="bp-grid bp-frame relative overflow-hidden" style={{ paddingTop: 72, paddingBottom: 88 }}>
       <div aria-hidden className="pointer-events-none absolute inset-0" style={{ background: "radial-gradient(ellipse 60% 60% at 50% 50%, color-mix(in srgb, var(--bp-cyan) 9%, transparent), transparent 60%)" }} />
       <div className="container relative z-10 mx-auto max-w-3xl px-5 text-center">
-        <h2 style={{ fontFamily: "var(--font-heading)", fontWeight: 500, fontSize: "clamp(30px, 4.4vw, 48px)", lineHeight: 1.04, letterSpacing: "-0.02em", color: "var(--bp-ink)" }}>Ship in RLDS, LeRobot, or your schema</h2>
+        <h2 className="font-semibold" style={{ fontFamily: "var(--font-heading)", fontSize: "clamp(30px, 4.4vw, 48px)", lineHeight: 1.04, letterSpacing: "-0.02em", color: "var(--bp-ink)" }}>Ship in RLDS, LeRobot, or your schema</h2>
         <p className="mx-auto mt-4 max-w-xl" style={{ fontSize: 16, color: "var(--bp-ink-dim)" }}>
           Every capture ships with the full manifest — no proprietary format, no conversion contract.
         </p>

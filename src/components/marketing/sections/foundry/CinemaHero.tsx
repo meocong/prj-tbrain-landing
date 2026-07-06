@@ -185,7 +185,7 @@ function HeroVideo() {
               className="mt-5 font-semibold text-white"
               style={{ fontFamily: "var(--font-heading)", fontSize: "clamp(2.2rem, 6.2vw, 5.2rem)", lineHeight: 1.04, letterSpacing: "-0.025em" }}>
               The Robotics Data{" "}
-              <span style={{ fontWeight: 500, background: "linear-gradient(100deg,#22e3c8,#8b6cf6)", WebkitBackgroundClip: "text", backgroundClip: "text", WebkitTextFillColor: "transparent" }}>Foundry</span>{" "}
+              <span style={{ fontWeight: 700, background: "linear-gradient(100deg,#22e3c8,#8b6cf6)", WebkitBackgroundClip: "text", backgroundClip: "text", WebkitTextFillColor: "transparent" }}>Foundry</span>{" "}
               for Physical AI
             </motion.h1>
 
@@ -289,7 +289,7 @@ function ProblemBand() {
             <span style={{ width: 18, height: 1, background: "var(--bp-purple)" }} /> THE PROBLEM
           </div>
           {/* Section H2 sits heavier than hero H1 (weight-inversion). */}
-          <h2 className="mt-4 max-w-3xl" style={{ fontFamily: "var(--font-heading)", fontWeight: 500, fontSize: "clamp(28px,4.6vw,54px)", lineHeight: 1.02, letterSpacing: "-0.025em" }}>
+          <h2 className="mt-4 max-w-3xl" style={{ fontFamily: "var(--font-heading)", fontWeight: 600, fontSize: "clamp(28px,4.6vw,54px)", lineHeight: 1.04, letterSpacing: "-0.02em" }}>
             Physical AI is blocked by real-world data — <span style={{ color: "var(--bp-ink-faint)", fontWeight: 500 }}>not compute.</span>
           </h2>
           <p className="mt-5 max-w-2xl" style={{ fontSize: 17, lineHeight: 1.6, color: "var(--bp-ink-dim)" }}>{PROBLEM.lead}</p>
@@ -391,7 +391,7 @@ function ConceptBand() {
           <div className="inline-flex items-center gap-2 bp-mono" style={{ fontSize: 11, letterSpacing: "0.14em", color: "var(--bp-cyan)" }}>
             <span style={{ width: 18, height: 1, background: "var(--bp-cyan)" }} /> THE FOUNDRY
           </div>
-          <h2 className="mt-4 max-w-3xl" style={{ fontFamily: "var(--font-heading)", fontWeight: 500, fontSize: "clamp(26px,4.2vw,48px)", lineHeight: 1.02, letterSpacing: "-0.025em" }}>
+          <h2 className="mt-4 max-w-3xl" style={{ fontFamily: "var(--font-heading)", fontWeight: 600, fontSize: "clamp(26px,4.2vw,48px)", lineHeight: 1.04, letterSpacing: "-0.02em" }}>
             So we built a foundry for it
           </h2>
           <p className="mt-5 max-w-2xl" style={{ fontSize: 17, lineHeight: 1.6, color: "var(--bp-ink-dim)" }}>
@@ -414,7 +414,7 @@ function DecomposeGrid() {
           <div className="inline-flex items-center gap-2 bp-mono" style={{ fontSize: 11, letterSpacing: "0.14em", color: "var(--bp-cyan)" }}>
             <span style={{ width: 18, height: 1, background: "var(--bp-cyan)" }} /> FIG.01 — THE DELIVERY SPEC
           </div>
-          <h2 className="mt-4 max-w-2xl" style={{ fontFamily: "var(--font-heading)", fontWeight: 500, fontSize: "clamp(28px,4.4vw,52px)", lineHeight: 1.02, letterSpacing: "-0.025em" }}>
+          <h2 className="mt-4 max-w-2xl" style={{ fontFamily: "var(--font-heading)", fontWeight: 600, fontSize: "clamp(28px,4.4vw,52px)", lineHeight: 1.04, letterSpacing: "-0.02em" }}>
             Built to the spec world-model teams ask for
           </h2>
           <p className="mt-4 max-w-xl" style={{ fontSize: 16, lineHeight: 1.6, color: "var(--bp-ink-dim)" }}>
