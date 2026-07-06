@@ -877,14 +877,15 @@ export const PUBLIC_DATASETS = {
 export const RERUN_EMBED = {
   fig: "FIG.11 — RERUN EPISODE VIEWER",
   title: "Every episode is a multi-track Rerun scene",
-  lead: "Rerun is how our engineers actually debug a capture — RGB, depth, hand skeleton, object pose, camera trajectory, all frame-scrubbable. We publish one .rrd from a real episode so you can open the same view we do.",
-  rrd: "/videos/rerun/aloha-4cam.rrd",
-  fallbackVideo: "/videos/deliverables/aloha-4cam.mp4",
+  lead: "Rerun is how our engineers actually debug a capture — RGB, depth, hand skeleton, object pose, camera trajectory, all frame-scrubbable. We publish a real episode .rrd (pick_up_the_cup · 273 frames · 15 hard-rules PASS) so you can open the same view we do.",
+  rrd: "/videos/rerun/pick_up_the_cup.rrd",
+  fallbackVideo: "/videos/real-captures/pick_up_the_cup.webm",
   externalLabel: "Open in Rerun web viewer",
   externalHrefPrefix: "https://app.rerun.io/version/0.24.0/index.html?url=",
   tracks: [
     "camera/rgb", "camera/depth", "hand/left · 21 kpt", "hand/right · 21 kpt",
-    "object/bbox · track_id", "object/pose · 6-DoF", "camera/trajectory · SLAM",
+    "body_dense · 308 kpt", "object/mask · track_id", "object/pose · 6-DoF",
+    "camera/trajectory · SLAM", "action_segments · verb-noun",
   ],
 } as const;
 
