@@ -13,6 +13,7 @@ import { SubpageHero, Sheet, SheetHeading, StagePanel } from "@/components/marke
 import { PageNav } from "@/components/marketing/blueprint/PageNav";
 import { ScrollProgress } from "@/components/marketing/fx/ScrollProgress";
 import { SapiensDiagnosticPanel } from "@/components/marketing/sections/foundry/SapiensDiagnosticPanel";
+import { RerunIframeLoader } from "@/components/marketing/sections/foundry/qc/RerunIframeLoader";
 import { AUTO_LABEL_STAGES } from "@/lib/landing/physical-ai-qc";
 
 export const metadata: Metadata = {
@@ -142,21 +143,11 @@ function StageRerun() {
   const rerun = AUTO_LABEL_STAGES.find((s) => s.key === "rerun")!;
   return (
     <StagePanel fig={rerun.fig} title={rerun.title} model={rerun.model} detail={rerun.detail} output={rerun.output}>
-      <div className="bp-card overflow-hidden" style={{ borderRadius: 10 }}>
-        <div className="bp-mono flex items-center justify-between" style={{ padding: "8px 14px", fontSize: 11, color: "var(--bp-ink-faint)", borderBottom: "1px solid var(--bp-line)" }}>
-          <span>PROOF · pick_up_the_cup · 273 frames · schema_v3</span>
-          <a
-            href="https://app.rerun.io/version/0.24.0/index.html?url=https%3A%2F%2Fwww.tbrain.ai%2Fvideos%2Frerun%2Fpick_up_the_cup.rrd"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="bp-mono"
-            style={{ fontSize: 11, color: "var(--bp-cyan)" }}
-          >
-            Open in Rerun ↗
-          </a>
-        </div>
-        <video src="/videos/real-captures/pick_up_the_cup.webm" poster="/images/real-captures/pick_up_the_cup-loop.jpg" muted loop autoPlay playsInline preload="metadata" style={{ width: "100%", display: "block" }} />
-      </div>
+      <RerunIframeLoader
+        rrdPath="/videos/rerun/pick_up_the_cup.rrd"
+        poster="/images/real-captures/pick_up_the_cup-loop.jpg"
+        height={480}
+      />
     </StagePanel>
   );
 }
