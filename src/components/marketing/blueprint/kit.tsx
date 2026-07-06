@@ -137,26 +137,41 @@ export function SheetHeading({ title, lead, className = "" }: { title: string; l
 
 /* ── Subpage hero — used by /auto-label + /quality subpages ──────── */
 export function SubpageHero({
-  fig, eyebrow, title, lead, meta, className = "",
+  fig, eyebrow, title, lead, meta, badge, accent, breadcrumb, className = "",
 }: {
   fig: string;
   eyebrow?: string;
   title: string;
   lead: string;
   meta?: { k: string; v: string }[];
+  badge?: { label: string; color?: string };
+  accent?: "cyan" | "amber" | "violet";
+  breadcrumb?: ReactNode;
   className?: string;
 }) {
+  const accentColor = accent === "amber" ? "#ff9a4d" : accent === "violet" ? "#a78bfa" : "var(--bp-cyan)";
   return (
-    <section className={`bp-grid bp-frame relative overflow-hidden ${className}`} style={{ paddingTop: "clamp(80px, 12vw, 140px)", paddingBottom: "clamp(48px, 6vw, 88px)" }}>
+    <section className={`bp-grid bp-frame relative overflow-hidden ${className}`} style={{ paddingTop: "clamp(88px, 12vw, 148px)", paddingBottom: "clamp(48px, 6vw, 88px)" }}>
       <div aria-hidden className="bp-aurora" />
+      {accent && (
+        <div aria-hidden className="pointer-events-none absolute inset-0" style={{ background: `radial-gradient(ellipse 60% 55% at 20% 15%, color-mix(in srgb, ${accentColor} 12%, transparent), transparent 60%)` }} />
+      )}
       <div className="container relative z-10 mx-auto px-5">
+        {breadcrumb && <div className="mb-6">{breadcrumb}</div>}
         <div className="flex items-start justify-between">
           <FigLabel>{fig}</FigLabel>
           <IsoAxis className="hidden sm:block" />
         </div>
-        {eyebrow && (
-          <div className="mt-8 bp-mono" style={{ fontSize: 12, letterSpacing: "0.12em", color: "var(--bp-cyan)", textTransform: "uppercase" }}>{eyebrow}</div>
-        )}
+        <div className="mt-8 flex flex-wrap items-center gap-3">
+          {eyebrow && (
+            <div className="bp-mono" style={{ fontSize: 12, letterSpacing: "0.12em", color: accentColor, textTransform: "uppercase" }}>{eyebrow}</div>
+          )}
+          {badge && (
+            <span className="bp-mono" style={{ fontSize: 10.5, padding: "4px 10px", borderRadius: 999, background: `color-mix(in srgb, ${badge.color ?? accentColor} 14%, transparent)`, color: badge.color ?? accentColor, border: `1px solid color-mix(in srgb, ${badge.color ?? accentColor} 40%, transparent)`, letterSpacing: "0.08em", textTransform: "uppercase", fontWeight: 700 }}>
+              {badge.label}
+            </span>
+          )}
+        </div>
         <h1 className="mt-4 max-w-4xl font-semibold" style={{ fontFamily: "var(--font-heading)", fontSize: "clamp(36px, 5.4vw, 68px)", lineHeight: 1.02, letterSpacing: "-0.02em", color: "var(--bp-ink)" }}>{title}</h1>
         <p className="mt-6 max-w-2xl" style={{ fontSize: 18, lineHeight: 1.55, color: "var(--bp-ink-dim)" }}>{lead}</p>
         {meta && meta.length > 0 && (

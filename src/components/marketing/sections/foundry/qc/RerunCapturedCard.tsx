@@ -66,26 +66,10 @@ export function RerunCapturedCard() {
                 camera/rgb
               </div>
             </div>
-            <div style={{ position: "relative", background: "linear-gradient(135deg, #1a2a4a 0%, #0f1a2f 100%)" }}>
-              <svg viewBox="0 0 100 100" preserveAspectRatio="none" style={{ width: "100%", height: "100%" }}>
-                {/* fake depth heatmap */}
-                <defs>
-                  <linearGradient id="depth" x1="0" x2="0" y1="0" y2="1">
-                    <stop offset="0" stopColor="#3f00ff" />
-                    <stop offset=".5" stopColor="#00e5c7" />
-                    <stop offset="1" stopColor="#ffbb00" />
-                  </linearGradient>
-                </defs>
-                <rect width="100" height="100" fill="url(#depth)" opacity="0.65" />
-                {/* fake pointcloud */}
-                {Array.from({ length: 60 }).map((_, i) => {
-                  const x = (i * 17) % 100;
-                  const y = (i * 23) % 100;
-                  return <circle key={i} cx={x} cy={y} r={0.4} fill="white" opacity={0.5} />;
-                })}
-              </svg>
+            <div style={{ position: "relative", background: "#0f1a2f" }}>
+              <img src="/images/depth/pick_up_the_cup_rgb_depth.jpg" alt="MoGe depth composite" style={{ width: "100%", height: "100%", objectFit: "cover" }} loading="lazy" />
               <div className="bp-mono absolute left-2 top-2" style={{ fontSize: 9, color: "#4cb5ff", background: "rgba(5,10,18,0.9)", padding: "3px 6px", borderRadius: 4 }}>
-                camera/depth + trajectory
+                camera/depth · MoGe
               </div>
             </div>
           </div>

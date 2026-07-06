@@ -259,25 +259,6 @@ function CTA() {
   );
 }
 
-function HardRulesBridge() {
-  return (
-    <Sheet fig="FIG.05H — QC BRIDGE" axis={false}>
-      <div className="grid gap-6 lg:grid-cols-[minmax(0,2fr)_minmax(0,1fr)] items-center">
-        <div>
-          <SheetHeading
-            title="Every stage output is validated before humans see it"
-            lead="15 hard rules run after every auto-label pass. FAIL/PARTIAL routes into Label Studio; only PASS ships. Every fix keeps the provenance trail intact."
-          />
-        </div>
-        <div>
-          <Link href="/data/physical-ai/quality" className="bp-mono" style={{ fontSize: 13, color: "var(--bp-cyan)", display: "inline-flex", alignItems: "center", gap: 6, padding: "12px 20px", border: "1px solid var(--bp-cyan)", borderRadius: 8 }}>
-            See QC playbook <ArrowRight className="h-4 w-4" />
-          </Link>
-        </div>
-      </div>
-    </Sheet>
-  );
-}
 
 export default function AutoLabelPage() {
   return (
@@ -301,11 +282,6 @@ export default function AutoLabelPage() {
         ]}
       />
       <main>
-        <Breadcrumb trail={[
-          { label: "Tbrain", href: "/" },
-          { label: "Physical AI", href: "/data/physical-ai" },
-          { label: "Auto-Label pipeline" },
-        ]} />
         <SubpageHero
           fig="FIG.05 — AUTO-LABEL PIPELINE"
           eyebrow="Physical AI · Robotics data foundry"
@@ -317,6 +293,13 @@ export default function AutoLabelPage() {
             { k: "Schema", v: "v3.0" },
             { k: "Provenance", v: "per-field" },
           ]}
+          accent="cyan"
+          badge={{ label: "You're on Auto-Label" }}
+          breadcrumb={<Breadcrumb trail={[
+            { label: "Tbrain", href: "/" },
+            { label: "Physical AI", href: "/data/physical-ai" },
+            { label: "Auto-Label pipeline" },
+          ]} />}
         />
 
         <PipelineOverview highlight="auto-label" showAnchors={false} />
@@ -362,8 +345,6 @@ export default function AutoLabelPage() {
         <PalettePanel />
 
         <LerobotPreview />
-
-        <HardRulesBridge />
 
         <AutoLabelDeepDive />
 
