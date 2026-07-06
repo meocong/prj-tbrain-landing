@@ -15,6 +15,7 @@ import { Breadcrumb, PrevNextFooter } from "@/components/marketing/blueprint/Sub
 import { ScrollProgress } from "@/components/marketing/fx/ScrollProgress";
 import { SapiensDiagnosticPanel } from "@/components/marketing/sections/foundry/SapiensDiagnosticPanel";
 import { RerunIframeLoader } from "@/components/marketing/sections/foundry/qc/RerunIframeLoader";
+import { PalettePanel } from "@/components/marketing/sections/foundry/PalettePanel";
 import { AUTO_LABEL_STAGES } from "@/lib/landing/physical-ai-qc";
 
 export const metadata: Metadata = {
@@ -294,6 +295,7 @@ export default function AutoLabelPage() {
           { id: "stage-masks", label: "Object masks" },
           { id: "stage-depth", label: "Depth · MoGe" },
           { id: "stage-rerun", label: "Rerun scene" },
+          { id: "palette", label: "Palette + watermarks" },
           { id: "lerobot-export", label: "LeRobot v2 export" },
           { id: "auto-label", label: "Deep dive tabs" },
         ]}
@@ -356,6 +358,8 @@ export default function AutoLabelPage() {
         </section>
 
         <RerunEmbed />
+
+        <PalettePanel />
 
         <LerobotPreview />
 

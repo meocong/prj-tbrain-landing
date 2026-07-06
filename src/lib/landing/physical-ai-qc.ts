@@ -108,10 +108,10 @@ export const AUTO_LABEL_STAGES: StageCard[] = [
     key: "body",
     fig: "FIG.05D — KEYPOINTS · BODY",
     title: "Body pose · exocentric mocap · Sapiens secondary",
-    model: "mocap primary · sapiens 308-kpt secondary",
-    detail: "High-fidelity body pose comes from partner-signed exocentric mocap sessions — full 3-D skeleton, retarget-ready for humanoid and dexterous topologies. Sapiens 308-kpt runs on every capture and lands in schema_v3.body_dense, but on tight ego-view captures where the wearer's body is out-of-frame or the face is never visible, Sapiens degrades to a secondary signal (kpts suppressed from visualization; retained in labels.json for downstream research).",
-    output: "body_dense (308 × 2 · conf) · exo mocap skeleton (partner)",
-    honestNote: "Sapiens is topologically incoherent on egocentric captures (nose lands below hips, both hands collapse to the same pixel). Landing viz suppresses those frames; QC hard-rules body_dense_rate check ships the honest metric. High-fidelity body pose is provided by exocentric mocap where the person is in a third-person view.",
+    model: "mocap primary · sapiens 308-kpt secondary · F11 gate",
+    detail: "High-fidelity body pose comes from partner-signed exocentric mocap sessions. Sapiens 308-kpt runs on every capture and lands in schema_v3.body_dense, but after the F11 hardening pass (burn v1b0cce1) body_dense is OFF by default in the annotated.mp4 — the bystander skeleton no longer leaks. Kpts remain in labels.json for downstream research + retrained gates surface partial-body detections.",
+    output: "body_dense (308 × 2 · conf) · exo mocap skeleton (partner) · F2 min_kpts gate · F11 default off",
+    honestNote: "F2 exposes silent Sapiens failures with a watermark. F11 turns body_dense off in the visualization by default (bystander skeleton hidden). Landing viz suppresses ego frames where topology is invalid (nose Y > hip Y). Body_dense kpts still ride in labels.json.body_dense with the schema_v3 provenance trail.",
   },
   {
     key: "masks",
@@ -120,7 +120,7 @@ export const AUTO_LABEL_STAGES: StageCard[] = [
     model: "video segmenter",
     detail: "Text-prompted video segmenter finds and tracks every relevant object across the full episode. Emits per-frame masks + tracklet IDs consumed by 6-DoF pose.",
     output: "objects[].track_id · mask · bbox · pose_6dof",
-    honestNote: "We ship failures transparently. On iron_T02 the segmenter locked onto shorts instead of the iron; the summary.json flag surfaces it. Downstream retrain, not silent overwrite.",
+    honestNote: "We ship failures transparently. On iron_T02 the segmenter locked onto shorts instead of the iron; the summary.json flag surfaces it. Burn hardening pass added F9 (mask/bbox 1.5× ratio drop → drifted masks skipped) and F10 (class HIDE + 12% cap → SAM3 hand-tracking killed). Downstream retrain, never a silent overwrite.",
   },
   {
     key: "depth",
