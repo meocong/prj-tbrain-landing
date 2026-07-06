@@ -220,6 +220,78 @@ export const STATIC_IMAGES: StaticImage[] = [
     "size_bytes": 33889
   },
   {
+    "path": "/images/body-kpts/arrange_fabric_t25.jpg",
+    "name": "arrange_fabric_t25",
+    "ext": "jpg",
+    "size_bytes": 68936
+  },
+  {
+    "path": "/images/body-kpts/arrange_fabric_t50.jpg",
+    "name": "arrange_fabric_t50",
+    "ext": "jpg",
+    "size_bytes": 68056
+  },
+  {
+    "path": "/images/body-kpts/arrange_fabric_t75.jpg",
+    "name": "arrange_fabric_t75",
+    "ext": "jpg",
+    "size_bytes": 68219
+  },
+  {
+    "path": "/images/body-kpts/iron_product_t25.jpg",
+    "name": "iron_product_t25",
+    "ext": "jpg",
+    "size_bytes": 64978
+  },
+  {
+    "path": "/images/body-kpts/iron_product_t50.jpg",
+    "name": "iron_product_t50",
+    "ext": "jpg",
+    "size_bytes": 70441
+  },
+  {
+    "path": "/images/body-kpts/iron_product_t75.jpg",
+    "name": "iron_product_t75",
+    "ext": "jpg",
+    "size_bytes": 70435
+  },
+  {
+    "path": "/images/body-kpts/pick_up_the_cup_t25.jpg",
+    "name": "pick_up_the_cup_t25",
+    "ext": "jpg",
+    "size_bytes": 89169
+  },
+  {
+    "path": "/images/body-kpts/pick_up_the_cup_t50.jpg",
+    "name": "pick_up_the_cup_t50",
+    "ext": "jpg",
+    "size_bytes": 79572
+  },
+  {
+    "path": "/images/body-kpts/pick_up_the_cup_t75.jpg",
+    "name": "pick_up_the_cup_t75",
+    "ext": "jpg",
+    "size_bytes": 83864
+  },
+  {
+    "path": "/images/body-kpts/sew_hem_t25.jpg",
+    "name": "sew_hem_t25",
+    "ext": "jpg",
+    "size_bytes": 73334
+  },
+  {
+    "path": "/images/body-kpts/sew_hem_t50.jpg",
+    "name": "sew_hem_t50",
+    "ext": "jpg",
+    "size_bytes": 74492
+  },
+  {
+    "path": "/images/body-kpts/sew_hem_t75.jpg",
+    "name": "sew_hem_t75",
+    "ext": "jpg",
+    "size_bytes": 66869
+  },
+  {
     "path": "/images/code-screen.jpg",
     "name": "code-screen",
     "ext": "jpg",
@@ -242,6 +314,36 @@ export const STATIC_IMAGES: StaticImage[] = [
     "name": "all6-montage",
     "ext": "png",
     "size_bytes": 388564
+  },
+  {
+    "path": "/images/depth/pick_up_the_cup_rgb_depth.jpg",
+    "name": "pick_up_the_cup_rgb_depth",
+    "ext": "jpg",
+    "size_bytes": 68957
+  },
+  {
+    "path": "/images/descriptions/arrange_fabric.jpg",
+    "name": "arrange_fabric",
+    "ext": "jpg",
+    "size_bytes": 78496
+  },
+  {
+    "path": "/images/descriptions/iron_product.jpg",
+    "name": "iron_product",
+    "ext": "jpg",
+    "size_bytes": 82666
+  },
+  {
+    "path": "/images/descriptions/pick_up_the_cup.jpg",
+    "name": "pick_up_the_cup",
+    "ext": "jpg",
+    "size_bytes": 129126
+  },
+  {
+    "path": "/images/descriptions/sew_hem.jpg",
+    "name": "sew_hem",
+    "ext": "jpg",
+    "size_bytes": 84518
   },
   {
     "path": "/images/diagrams/diagram-ladder.svg",
@@ -962,6 +1064,54 @@ export const STATIC_IMAGES: StaticImage[] = [
     "name": "sew_02",
     "ext": "jpg",
     "size_bytes": 42012
+  },
+  {
+    "path": "/images/textile-raw/arrange_01.jpg",
+    "name": "arrange_01",
+    "ext": "jpg",
+    "size_bytes": 43028
+  },
+  {
+    "path": "/images/textile-raw/arrange_02.jpg",
+    "name": "arrange_02",
+    "ext": "jpg",
+    "size_bytes": 37924
+  },
+  {
+    "path": "/images/textile-raw/iron_01.jpg",
+    "name": "iron_01",
+    "ext": "jpg",
+    "size_bytes": 38874
+  },
+  {
+    "path": "/images/textile-raw/iron_02.jpg",
+    "name": "iron_02",
+    "ext": "jpg",
+    "size_bytes": 44589
+  },
+  {
+    "path": "/images/textile-raw/package_01.jpg",
+    "name": "package_01",
+    "ext": "jpg",
+    "size_bytes": 23639
+  },
+  {
+    "path": "/images/textile-raw/package_02.jpg",
+    "name": "package_02",
+    "ext": "jpg",
+    "size_bytes": 39714
+  },
+  {
+    "path": "/images/textile-raw/sew_01.jpg",
+    "name": "sew_01",
+    "ext": "jpg",
+    "size_bytes": 39973
+  },
+  {
+    "path": "/images/textile-raw/sew_02.jpg",
+    "name": "sew_02",
+    "ext": "jpg",
+    "size_bytes": 42317
   },
   {
     "path": "/images/twitter.png",

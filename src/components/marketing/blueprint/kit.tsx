@@ -134,3 +134,78 @@ export function SheetHeading({ title, lead, className = "" }: { title: string; l
     </div>
   );
 }
+
+/* ── Subpage hero — used by /auto-label + /quality subpages ──────── */
+export function SubpageHero({
+  fig, eyebrow, title, lead, meta, className = "",
+}: {
+  fig: string;
+  eyebrow?: string;
+  title: string;
+  lead: string;
+  meta?: { k: string; v: string }[];
+  className?: string;
+}) {
+  return (
+    <section className={`bp-grid bp-frame relative overflow-hidden ${className}`} style={{ paddingTop: "clamp(80px, 12vw, 140px)", paddingBottom: "clamp(48px, 6vw, 88px)" }}>
+      <div aria-hidden className="bp-aurora" />
+      <div className="container relative z-10 mx-auto px-5">
+        <div className="flex items-start justify-between">
+          <FigLabel>{fig}</FigLabel>
+          <IsoAxis className="hidden sm:block" />
+        </div>
+        {eyebrow && (
+          <div className="mt-8 bp-mono" style={{ fontSize: 12, letterSpacing: "0.12em", color: "var(--bp-cyan)", textTransform: "uppercase" }}>{eyebrow}</div>
+        )}
+        <h1 className="mt-4 max-w-4xl font-semibold" style={{ fontFamily: "var(--font-heading)", fontSize: "clamp(36px, 5.4vw, 68px)", lineHeight: 1.02, letterSpacing: "-0.02em", color: "var(--bp-ink)" }}>{title}</h1>
+        <p className="mt-6 max-w-2xl" style={{ fontSize: 18, lineHeight: 1.55, color: "var(--bp-ink-dim)" }}>{lead}</p>
+        {meta && meta.length > 0 && (
+          <div className="mt-10 grid grid-cols-2 gap-4 md:grid-cols-4">
+            {meta.map((m) => (
+              <div key={m.k} className="bp-card" style={{ padding: "14px 16px", borderRadius: 10 }}>
+                <div className="bp-mono" style={{ fontSize: 10, color: "var(--bp-ink-faint)", letterSpacing: "0.08em", textTransform: "uppercase" }}>{m.k}</div>
+                <div className="mt-1" style={{ fontFamily: "var(--font-heading)", fontSize: 22, fontWeight: 600, color: "var(--bp-cyan)" }}>{m.v}</div>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+    </section>
+  );
+}
+
+/* ── Stage panel — side-by-side asset tile with mono label chrome ── */
+export function StagePanel({
+  fig, title, model, detail, output, children, honestNote, className = "",
+}: {
+  fig: string;
+  title: string;
+  model: string;
+  detail: string;
+  output?: string;
+  children: ReactNode;
+  honestNote?: string;
+  className?: string;
+}) {
+  return (
+    <div className={`bp-card overflow-hidden ${className}`} style={{ borderRadius: 14 }}>
+      <div className="bp-mono flex items-center justify-between" style={{ padding: "10px 16px", fontSize: 11, color: "var(--bp-ink-faint)", borderBottom: "1px solid var(--bp-line)" }}>
+        <span>{fig}</span>
+        <span style={{ color: "var(--bp-cyan)" }}>{model}</span>
+      </div>
+      <div style={{ padding: "22px 22px 24px" }}>
+        <h3 className="font-semibold" style={{ fontFamily: "var(--font-heading)", fontSize: "clamp(22px, 2.4vw, 30px)", lineHeight: 1.1, color: "var(--bp-ink)", letterSpacing: "-0.01em" }}>{title}</h3>
+        <p className="mt-3 max-w-2xl" style={{ fontSize: 15, lineHeight: 1.6, color: "var(--bp-ink-dim)" }}>{detail}</p>
+        {output && (
+          <div className="mt-4 bp-mono" style={{ fontSize: 11, color: "var(--bp-ink-faint)", letterSpacing: "0.04em" }}>output · <span style={{ color: "var(--bp-accent, var(--bp-cyan))" }}>{output}</span></div>
+        )}
+        <div className="mt-6">{children}</div>
+        {honestNote && (
+          <div className="mt-6 bp-mono" style={{ padding: "12px 14px", fontSize: 12, lineHeight: 1.55, color: "var(--bp-ink-dim)", borderLeft: "2px solid #ff9a4d", background: "rgba(255,154,77,0.06)" }}>
+            <span style={{ color: "#ff9a4d", fontWeight: 700 }}>honest note · </span>{honestNote}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
