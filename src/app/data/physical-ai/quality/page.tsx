@@ -7,6 +7,7 @@ import { PipelineOverview } from "@/components/marketing/sections/foundry/Pipeli
 import { QCFlow } from "@/components/marketing/sections/foundry/QCFlow";
 import { LabelStudioCard } from "@/components/marketing/sections/foundry/qc/LabelStudioCard";
 import { RerunCapturedCard } from "@/components/marketing/sections/foundry/qc/RerunCapturedCard";
+import { RerunIframeLoader } from "@/components/marketing/sections/foundry/qc/RerunIframeLoader";
 import { SubpageHero, Sheet, SheetHeading } from "@/components/marketing/blueprint/kit";
 import { PageNav } from "@/components/marketing/blueprint/PageNav";
 import { ScrollProgress } from "@/components/marketing/fx/ScrollProgress";
@@ -200,7 +201,12 @@ function RerunProof() {
         title="Every ship-ready capture ships with its Rerun scene"
         lead="No screenshots, no cherry-picked metrics — just the raw multi-track scene. Open it in the same viewer our engineers use. Any regression, any claim, any anomaly is scrubbable by the buyer, not just by us."
       />
-      <div className="mt-8">
+      <div className="mt-8 grid gap-4">
+        <RerunIframeLoader
+          rrdPath="/videos/rerun/pick_up_the_cup.rrd"
+          poster="/images/real-captures/pick_up_the_cup-loop.jpg"
+          height={520}
+        />
         <RerunCapturedCard />
       </div>
     </Sheet>
