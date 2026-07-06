@@ -79,6 +79,22 @@ export function SapiensDiagnosticPanel() {
         <span style={{ color: "#00e5c7", fontWeight: 700 }}>gate rationale · </span>
         On egocentric captures the wearer&apos;s head-mounted camera looks down; Sapiens predicts &quot;nose&quot; below &quot;hips&quot; — impossible in a coherent skeleton. The gate flags TOPOLOGY_INVALID and suppresses face + dense kpts from the visualization. The raw kpts stay in <code style={{ color: "#4cb5ff" }}>labels.json.body_dense</code> so downstream research on partial-body detection retains full access. High-fidelity body pose comes from partner-signed exocentric mocap instead.
       </div>
+      {/* Real-cap thumbnail strip · every ego capture in the audit */}
+      <div className="grid grid-cols-4 gap-0" style={{ borderTop: "1px solid var(--bp-line)" }}>
+        {[
+          { src: "/images/body-kpts/pick_up_the_cup_t50.jpg", cap: "pick_up_the_cup · body 0/17" },
+          { src: "/images/body-kpts/iron_product_t50.jpg", cap: "iron_product · body 0/17" },
+          { src: "/images/body-kpts/sew_hem_t50.jpg", cap: "sew_hem · body 0/17" },
+          { src: "/images/body-kpts/arrange_fabric_t50.jpg", cap: "arrange_fabric · body 0/17" },
+        ].map((c, i) => (
+          <div key={c.src} className="relative" style={{ borderRight: i < 3 ? "1px solid var(--bp-line)" : "none" }}>
+            <img src={c.src} alt={c.cap} style={{ width: "100%", display: "block", aspectRatio: "16/9", objectFit: "cover" }} loading="lazy" />
+            <div className="bp-mono absolute inset-x-0 bottom-0" style={{ background: "linear-gradient(0deg, rgba(5,10,18,0.92) 0%, transparent 100%)", padding: "20px 8px 6px", fontSize: 9, color: "#ff9a4d", letterSpacing: "0.04em", textAlign: "center" }}>
+              {c.cap}
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }

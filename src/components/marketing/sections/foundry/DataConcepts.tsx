@@ -84,19 +84,26 @@ export function DataConcepts() {
         lead="Beyond hours-of-video and per-frame stats, these are the invariants that decide whether a dataset generalizes off your machine. We publish ours."
       />
       <div className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        {CONCEPTS.map((c) => {
+        {CONCEPTS.map((c, i) => {
           const Icon = c.icon;
+          const HALO_COLORS = ["#4cb5ff", "#00e5c7", "#a78bfa", "#ff9a4d", "#5ee08a", "#f0a2ff", "#4cb5ff", "#00e5c7"];
+          const halo = HALO_COLORS[i % HALO_COLORS.length];
           return (
-            <div key={c.key} className="bp-card group" style={{ padding: 20, borderRadius: 14, transition: "border-color .2s ease" }}>
-              <div className="flex items-center justify-between">
+            <div key={c.key} className="bp-card group relative overflow-hidden" style={{ padding: 20, borderRadius: 14, transition: "border-color .2s ease" }}>
+              <div aria-hidden style={{ position: "absolute", top: -30, right: -30, width: 100, height: 100, background: `radial-gradient(closest-side, ${halo}22, transparent 70%)`, pointerEvents: "none" }} />
+              <div className="relative flex items-center justify-between">
                 <span className="bp-mono" style={{ fontSize: 10, color: "var(--bp-ink-faint)", letterSpacing: "0.08em" }}>{c.fig}</span>
-                <Icon className="h-5 w-5" style={{ color: "var(--bp-cyan)" }} />
+                <div style={{ display: "flex", alignItems: "center", justifyContent: "center", width: 34, height: 34, borderRadius: 8, background: `color-mix(in srgb, ${halo} 14%, transparent)`, border: `1px solid ${halo}55` }}>
+                  <Icon className="h-4 w-4" style={{ color: halo }} />
+                </div>
               </div>
-              <h3 className="mt-3 font-semibold" style={{ fontFamily: "var(--font-heading)", fontSize: 16, color: "var(--bp-ink)", lineHeight: 1.15 }}>{c.title}</h3>
-              <p className="mt-2" style={{ fontSize: 12.5, color: "var(--bp-ink-dim)", lineHeight: 1.5 }}>{c.lead}</p>
-              <ul className="bp-mono mt-3 space-y-1" style={{ fontSize: 10.5, color: "var(--bp-ink-faint)", lineHeight: 1.5 }}>
+              <h3 className="relative mt-3 font-semibold" style={{ fontFamily: "var(--font-heading)", fontSize: 16, color: "var(--bp-ink)", lineHeight: 1.15 }}>{c.title}</h3>
+              <p className="relative mt-2" style={{ fontSize: 12.5, color: "var(--bp-ink-dim)", lineHeight: 1.5 }}>{c.lead}</p>
+              <ul className="bp-mono relative mt-3 space-y-1" style={{ fontSize: 10.5, color: "var(--bp-ink-faint)", lineHeight: 1.5 }}>
                 {c.keys.map((k) => (
-                  <li key={k}>· {k}</li>
+                  <li key={k} className="flex items-center gap-1.5">
+                    <span style={{ width: 4, height: 4, borderRadius: 4, background: halo, boxShadow: `0 0 4px ${halo}` }} /> {k}
+                  </li>
                 ))}
               </ul>
             </div>
