@@ -11,6 +11,7 @@ import { LerobotPreview } from "@/components/marketing/sections/foundry/LerobotP
 import { RerunEmbed } from "@/components/marketing/sections/foundry/RerunEmbed";
 import { SubpageHero, Sheet, SheetHeading, StagePanel } from "@/components/marketing/blueprint/kit";
 import { PageNav } from "@/components/marketing/blueprint/PageNav";
+import { ScrollProgress } from "@/components/marketing/fx/ScrollProgress";
 import { SapiensDiagnosticPanel } from "@/components/marketing/sections/foundry/SapiensDiagnosticPanel";
 import { AUTO_LABEL_STAGES } from "@/lib/landing/physical-ai-qc";
 
@@ -206,6 +207,7 @@ export default function AutoLabelPage() {
   return (
     <div style={{ background: "var(--bp-bg)" }}>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(AUTOLABEL_JSONLD) }} />
+      <ScrollProgress />
       <Header />
       <PageNav
         items={[

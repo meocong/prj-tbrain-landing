@@ -1,26 +1,48 @@
 "use client";
 
+import { motion } from "framer-motion";
 import { CountUp } from "@/components/marketing/fx/CountUp";
+import { MeshBackdrop } from "@/components/marketing/fx/MeshBackdrop";
 
-const STATS: { k: string; v: number; suffix?: string; sub: string }[] = [
-  { k: "Models · auto-label pipeline",  v: 8,   sub: "Hand · body · masks · depth · verb-noun" },
-  { k: "Hard rules · per capture",       v: 15,  sub: "Machine-checkable QC gate" },
-  { k: "Ship rate · after QC",           v: 92,  suffix: "%", sub: "Auto-accept + Label Studio + reviewer" },
-  { k: "Delivery latency",               v: 48,  suffix: "h", sub: "Raw → LeRobot v2 · zero-trust" },
+const STATS: { k: string; v: number; suffix?: string; sub: string; color: string }[] = [
+  { k: "Models · auto-label pipeline",  v: 8,   sub: "Hand · body · masks · depth · verb-noun", color: "#4cb5ff" },
+  { k: "Hard rules · per capture",       v: 15,  sub: "Machine-checkable QC gate", color: "#00e5c7" },
+  { k: "Ship rate · after QC",           v: 92,  suffix: "%", sub: "Auto-accept + Label Studio + reviewer", color: "#5ee08a" },
+  { k: "Delivery latency",               v: 48,  suffix: "h", sub: "Raw → LeRobot v2 · zero-trust", color: "#a78bfa" },
 ];
 
 export function GlanceStats() {
   return (
-    <section className="bp-grid" style={{ borderBottom: "1px solid var(--bp-line)", paddingTop: 40, paddingBottom: 40, background: "color-mix(in srgb, var(--bp-cyan) 3%, transparent)" }}>
-      <div className="container mx-auto grid grid-cols-2 gap-6 px-5 lg:grid-cols-4">
-        {STATS.map((s) => (
-          <div key={s.k} className="text-center lg:text-left">
-            <div style={{ fontFamily: "var(--font-heading)", fontSize: "clamp(32px, 4.4vw, 52px)", fontWeight: 600, lineHeight: 1, letterSpacing: "-0.02em", color: "var(--bp-cyan)" }}>
+    <section className="relative overflow-hidden" style={{ padding: "clamp(56px,7vw,96px) 0", color: "#e8ecf5" }}>
+      <MeshBackdrop variant="aurora" gridOpacity={0.05} />
+      <div className="container relative z-10 mx-auto grid grid-cols-2 gap-8 px-5 lg:grid-cols-4">
+        {STATS.map((s, i) => (
+          <motion.div
+            key={s.k}
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.45, delay: i * 0.08 }}
+            className="relative text-center lg:text-left"
+          >
+            <div style={{ position: "absolute", left: 0, top: 4, width: 3, height: 44, background: s.color, borderRadius: 3, boxShadow: `0 0 12px ${s.color}` }} />
+            <div style={{
+              fontFamily: "var(--font-heading)",
+              fontSize: "clamp(38px, 5.2vw, 64px)",
+              fontWeight: 700,
+              lineHeight: 1,
+              letterSpacing: "-0.03em",
+              background: `linear-gradient(135deg, ${s.color} 0%, #ffffff 100%)`,
+              WebkitBackgroundClip: "text",
+              backgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+              paddingLeft: 14,
+            }}>
               <CountUp value={s.v} duration={1.6} />{s.suffix ?? ""}
             </div>
-            <div className="bp-mono mt-2" style={{ fontSize: 10.5, letterSpacing: "0.08em", textTransform: "uppercase", color: "var(--bp-ink-faint)" }}>{s.k}</div>
-            <div className="mt-1" style={{ fontSize: 12.5, color: "var(--bp-ink-dim)" }}>{s.sub}</div>
-          </div>
+            <div className="bp-mono mt-3" style={{ paddingLeft: 14, fontSize: 10.5, letterSpacing: "0.1em", textTransform: "uppercase", color: "#8fa0c8" }}>{s.k}</div>
+            <div className="mt-1.5" style={{ paddingLeft: 14, fontSize: 13, color: "#a9b5cf", lineHeight: 1.5 }}>{s.sub}</div>
+          </motion.div>
         ))}
       </div>
     </section>
