@@ -183,8 +183,8 @@
   --color-rose: #F43F5E;
 
   /* Fonts */
-  --font-heading: var(--font-heading, "Space Grotesk", "DM Sans", sans-serif);
-  --font-body: var(--font-body, "DM Sans", sans-serif);
+  --font-heading: var(--font-heading, "Inter", sans-serif);
+  --font-body: var(--font-body, "Inter", sans-serif);
   --font-mono: var(--font-mono, "JetBrains Mono", monospace);
 
   /* Shadows */
