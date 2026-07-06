@@ -13,6 +13,7 @@ import {
 import { Catalog, EngagementLadder } from "@/components/marketing/sections/foundry/DeckSections";
 import { LiveTicker } from "@/components/marketing/sections/foundry/LiveTicker";
 import { HardwareShowcase } from "@/components/marketing/sections/foundry/HardwareShowcase";
+import { CapturePackExplode } from "@/components/marketing/sections/foundry/PackExplodeScroll";
 import { CapturesGallery } from "@/components/marketing/sections/foundry/CapturesGallery";
 import { RerunEmbed } from "@/components/marketing/sections/foundry/RerunEmbed";
 import { PublicDatasetWall } from "@/components/marketing/sections/foundry/PublicDatasetWall";
@@ -116,6 +117,9 @@ export default function PhysicalAIPage() {
 
         {/* 01b · Cinema wall · 6-cell real video wall */}
         <CinemaWall />
+
+        {/* 01c · Scroll-driven capture pack decompose */}
+        <CapturePackExplode />
 
         {/* 02 · Live ticker — delivered vs capacity */}
         <LiveTicker />

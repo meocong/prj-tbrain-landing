@@ -22,6 +22,7 @@ import { ArrowRight, Check, Video, Clock, ShieldCheck, PackageCheck, Scan } from
 import { FOUNDRY_HERO, PROBLEM, PROOF_POINTS, HERO_MIX } from "@/lib/landing/physical-ai";
 import { Defs } from "./PackExplodeScroll";
 import { HeroSideRail } from "./HeroSideRail";
+import { HeroMobileRail } from "./HeroMobileRail";
 
 /* Hero media — cross-fades 3 ops-provided clips. Falls back to worker-hero
    when hero-mix videos aren't yet on disk (rclone pull pending). */
@@ -166,6 +167,7 @@ function HeroVideo() {
 
       <CaptureHUD reduce={reduce} />
       <HeroSideRail />
+      <HeroMobileRail />
 
       <div className="absolute inset-0 z-10 flex flex-col px-5 sm:px-10 lg:px-14 pb-6 sm:pb-12 lg:pb-16">
         <div className="flex-1" />
