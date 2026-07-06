@@ -20,6 +20,7 @@ import { AutoLabelDeepDive } from "@/components/marketing/sections/foundry/AutoL
 import { QCFlow } from "@/components/marketing/sections/foundry/QCFlow";
 import { GlanceStats } from "@/components/marketing/sections/foundry/GlanceStats";
 import { DataConcepts } from "@/components/marketing/sections/foundry/DataConcepts";
+import { RealVideoStrip } from "@/components/marketing/sections/foundry/RealVideoStrip";
 import { ANCHOR_TRUST } from "@/lib/landing/physical-ai";
 
 export const metadata: Metadata = {
@@ -121,6 +122,9 @@ export default function PhysicalAIPage() {
 
         {/* 04 · Pipeline overview — canonical 5-phase diagram */}
         <PipelineOverview />
+
+        {/* 04b · Full-bleed real video strip */}
+        <RealVideoStrip />
 
         {/* 05 · Capture ledger — real episodes surface first */}
         <CapturesGallery />
