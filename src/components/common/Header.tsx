@@ -9,8 +9,7 @@ import { Menu, X, ChevronDown } from "lucide-react";
 import { ThemeToggle } from "@/components/theme/ThemeToggle";
 
 const DATA_ITEMS = [
-  { label: "Terminal Bench", href: "/data/terminal-bench", description: "AI agent evaluation benchmark" },
-  { label: "Physical AI · overview", href: "/data/physical-ai", description: "Robotics data foundry · full landing" },
+  { label: "Overview", href: "/data/physical-ai", description: "Robotics data foundry · full landing" },
   { label: "Auto-Label pipeline", href: "/data/physical-ai/auto-label", description: "8 models · one contract · per-stage deep dive" },
   { label: "QC playbook", href: "/data/physical-ai/quality", description: "15 hard rules + 3 human review layers" },
 ];
@@ -20,7 +19,8 @@ const NAV_ITEMS = [
   { label: "About", href: "/about" },
   { label: "Platform", href: "/platform" },
   { label: "Case Studies", href: "/casestudy" },
-  { label: "Data", href: "/data", isDropdown: true },
+  { label: "Physical AI", href: "/data/physical-ai", isDropdown: true },
+  { label: "Terminal Bench", href: "/data/terminal-bench" },
   { label: "Contact", href: "/contact" },
 ];
 

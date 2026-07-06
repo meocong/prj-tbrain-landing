@@ -16,7 +16,7 @@ export interface PipelinePhase {
 }
 
 export const PIPELINE_OVERVIEW = {
-  fig: "FIG.04 — FOUNDRY PIPELINE · V5",
+  fig: "FIG.04 — FOUNDRY PIPELINE",
   title: "One pipeline · five phases · every stage diffable",
   lead: "From factory floor to LeRobot v2 in ≤48h. Every phase leaves a machine-readable trace so any downstream claim can be verified.",
   phases: [
@@ -107,16 +107,11 @@ export const AUTO_LABEL_STAGES: StageCard[] = [
   {
     key: "body",
     fig: "FIG.05D — KEYPOINTS · BODY",
-    title: "Body · 308-kpt Sapiens dense",
-    model: "sapiens · 308-kpt dense",
-    detail: "Whole-body dense keypoint regression: 17 COCO body joints + 6 feet + 68 face + 21+21 hand + 175 dense mesh points. Feeds retargeting to humanoid and dexterous robot topologies. Runs only where the body is in-frame; tight ego-view captures fall back to MANO hand kpts.",
-    output: "body_dense · kpts (N × 308 × 2) · conf",
-    overlayImages: [
-      "/images/body-kpts/pick_up_the_cup_t25.jpg",
-      "/images/body-kpts/pick_up_the_cup_t50.jpg",
-      "/images/body-kpts/pick_up_the_cup_t75.jpg",
-    ],
-    honestNote: "On tight ego-view captures where only hands + workspace enter the frame (textile factory shots), Sapiens body detection returns zero body kpts — we honor that and fall back to the 21-kpt HaWoR hand tracker for those episodes.",
+    title: "Body pose · exocentric mocap · Sapiens secondary",
+    model: "mocap primary · sapiens 308-kpt secondary",
+    detail: "High-fidelity body pose comes from partner-signed exocentric mocap sessions — full 3-D skeleton, retarget-ready for humanoid and dexterous topologies. Sapiens 308-kpt runs on every capture and lands in schema_v3.body_dense, but on tight ego-view captures where the wearer's body is out-of-frame or the face is never visible, Sapiens degrades to a secondary signal (kpts suppressed from visualization; retained in labels.json for downstream research).",
+    output: "body_dense (308 × 2 · conf) · exo mocap skeleton (partner)",
+    honestNote: "Sapiens is topologically incoherent on egocentric captures (nose lands below hips, both hands collapse to the same pixel). Landing viz suppresses those frames; QC hard-rules body_dense_rate check ships the honest metric. High-fidelity body pose is provided by exocentric mocap where the person is in a third-person view.",
   },
   {
     key: "masks",

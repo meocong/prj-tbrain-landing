@@ -5,6 +5,8 @@ import Header from "@/components/common/Header";
 import Footer from "@/components/common/Footer";
 import { PipelineOverview } from "@/components/marketing/sections/foundry/PipelineOverview";
 import { QCFlow } from "@/components/marketing/sections/foundry/QCFlow";
+import { LabelStudioCard } from "@/components/marketing/sections/foundry/qc/LabelStudioCard";
+import { RerunCapturedCard } from "@/components/marketing/sections/foundry/qc/RerunCapturedCard";
 import { SubpageHero, Sheet, SheetHeading } from "@/components/marketing/blueprint/kit";
 import { PageNav } from "@/components/marketing/blueprint/PageNav";
 import { CountUp } from "@/components/marketing/fx/CountUp";
@@ -117,24 +119,14 @@ function Layer2AIFilter() {
 }
 
 function Layer3LabelStudio() {
-  const tiles = [
-    { src: "/images/hitl/annotated_sample.jpg", label: "Kpt correction · pre-populated task" },
-    { src: "/images/hitl/hitl_capture_thumb.jpg", label: "Capture reviewer · frame scrubbing" },
-    { src: "/images/hitl/hitl_clean_thumb.jpg", label: "Verb-noun review · segment editor" },
-  ];
   return (
     <Sheet id="label-studio" fig="FIG.06C — LAYER 3 · LABEL STUDIO" axis>
       <SheetHeading
         title="Label Studio · humans on the last mile, not the first"
-        lead="Only PARTIAL/FAIL captures reach Label Studio, pre-populated with auto-label output. Annotators correct kpt drift, adjust masks, override verb-noun. Every correction is a labeled diff back into the training loop."
+        lead="Only PARTIAL/FAIL captures reach Label Studio, pre-populated with auto-label output. Annotators correct kpt drift, adjust masks, override verb-noun — never annotate from a blank slate. Every correction lands as a labeled diff back into the training loop."
       />
-      <div className="mt-8 grid gap-4 md:grid-cols-3">
-        {tiles.map((t) => (
-          <div key={t.src} className="bp-card overflow-hidden" style={{ borderRadius: 12 }}>
-            <img src={t.src} alt={t.label} style={{ width: "100%", display: "block", aspectRatio: "16/10", objectFit: "cover" }} />
-            <div className="bp-mono" style={{ padding: "10px 14px", fontSize: 11, color: "var(--bp-ink-dim)", borderTop: "1px solid var(--bp-line)" }}>{t.label}</div>
-          </div>
-        ))}
+      <div className="mt-8">
+        <LabelStudioCard />
       </div>
     </Sheet>
   );
@@ -207,35 +199,8 @@ function RerunProof() {
         title="Every ship-ready capture ships with its Rerun scene"
         lead="No screenshots, no cherry-picked metrics — just the raw multi-track scene. Open it in the same viewer our engineers use. Any regression, any claim, any anomaly is scrubbable by the buyer, not just by us."
       />
-      <div className="mt-8 grid gap-4 lg:grid-cols-[minmax(0,2fr)_minmax(0,1fr)]">
-        <div className="bp-card overflow-hidden" style={{ borderRadius: 12 }}>
-          <div className="bp-mono flex items-center justify-between" style={{ padding: "10px 16px", fontSize: 11, color: "var(--bp-ink-faint)", borderBottom: "1px solid var(--bp-line)" }}>
-            <span>PROOF · pick_up_the_cup · 273 frames · 15/15 rules PASS</span>
-            <a
-              href="https://app.rerun.io/version/0.24.0/index.html?url=https%3A%2F%2Fwww.tbrain.ai%2Fvideos%2Frerun%2Fpick_up_the_cup.rrd"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="bp-mono"
-              style={{ fontSize: 11, color: "var(--bp-cyan)" }}
-            >
-              Open in Rerun ↗
-            </a>
-          </div>
-          <video src="/videos/real-captures/pick_up_the_cup.webm" poster="/images/real-captures/pick_up_the_cup-loop.jpg" muted loop autoPlay playsInline preload="metadata" style={{ width: "100%", display: "block" }} />
-        </div>
-        <div className="bp-card" style={{ padding: 20, borderRadius: 14 }}>
-          <div className="bp-mono" style={{ fontSize: 11, color: "var(--bp-ink-faint)", letterSpacing: "0.06em" }}>TRACKS SHIPPED</div>
-          <ul className="mt-3 space-y-2 bp-mono" style={{ fontSize: 12, color: "var(--bp-ink-dim)", lineHeight: 1.5 }}>
-            <li>· camera/rgb</li>
-            <li>· camera/depth</li>
-            <li>· hand/left · 21-kpt</li>
-            <li>· hand/right · 21-kpt</li>
-            <li>· body · 308-kpt dense</li>
-            <li>· object/mask · track_id</li>
-            <li>· object/pose · 6-DoF</li>
-            <li>· camera/trajectory · SLAM</li>
-          </ul>
-        </div>
+      <div className="mt-8">
+        <RerunCapturedCard />
       </div>
     </Sheet>
   );
@@ -309,7 +274,7 @@ export default function QualityPage() {
       <main>
         <SubpageHero
           fig="FIG.06 — QC PLAYBOOK"
-          eyebrow="Physical AI · Data Foundry · V5"
+          eyebrow="Physical AI · Robotics data foundry"
           title="Zero-trust QC · hard rules + AI filter + 3-layer human review"
           lead="Every capture crosses 15 machine-checkable hard rules, an AI filter, and up to three human review layers before it ships. Every fix keeps the schema_v3 provenance trail intact, and every episode leaves a Rerun scene the buyer can open."
           meta={[
