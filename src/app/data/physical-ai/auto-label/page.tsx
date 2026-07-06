@@ -11,6 +11,7 @@ import { LerobotPreview } from "@/components/marketing/sections/foundry/LerobotP
 import { RerunEmbed } from "@/components/marketing/sections/foundry/RerunEmbed";
 import { SubpageHero, Sheet, SheetHeading, StagePanel } from "@/components/marketing/blueprint/kit";
 import { PageNav } from "@/components/marketing/blueprint/PageNav";
+import { SapiensDiagnosticPanel } from "@/components/marketing/sections/foundry/SapiensDiagnosticPanel";
 import { AUTO_LABEL_STAGES } from "@/lib/landing/physical-ai-qc";
 
 export const metadata: Metadata = {
@@ -51,7 +52,7 @@ function StageBody() {
   const body = AUTO_LABEL_STAGES.find((s) => s.key === "body")!;
   return (
     <StagePanel fig={body.fig} title={body.title} model={body.model} detail={body.detail} output={body.output} honestNote={body.honestNote}>
-      <div className="grid gap-3 lg:grid-cols-[minmax(0,1.6fr)_minmax(0,1fr)]">
+      <div className="grid gap-4 lg:grid-cols-[minmax(0,1.6fr)_minmax(0,1fr)]">
         <div className="bp-card overflow-hidden" style={{ borderRadius: 10 }}>
           <div className="bp-mono flex items-center justify-between" style={{ padding: "6px 12px", fontSize: 10, color: "var(--bp-ink-faint)", borderBottom: "1px solid var(--bp-line)" }}>
             <span>Exocentric mocap · body pose primary</span>
@@ -61,11 +62,14 @@ function StageBody() {
         </div>
         <div className="bp-card overflow-hidden" style={{ borderRadius: 10 }}>
           <div className="bp-mono flex items-center justify-between" style={{ padding: "6px 12px", fontSize: 10, color: "var(--bp-ink-faint)", borderBottom: "1px solid var(--bp-line)" }}>
-            <span>Sapiens 308-kpt · ego · SUPPRESSED</span>
-            <span style={{ color: "#ff9a4d" }}>secondary</span>
+            <span>Sapiens 308-kpt · ego capture</span>
+            <span style={{ color: "#ff9a4d" }}>secondary · gated</span>
           </div>
-          <img src="/images/body-kpts/pick_up_the_cup_t50.jpg" alt="Sapiens body suppressed on egocentric capture" style={{ width: "100%", display: "block" }} />
+          <img src="/images/body-kpts/pick_up_the_cup_t50.jpg" alt="Sapiens body on egocentric capture, face + dense gated" style={{ width: "100%", display: "block" }} />
         </div>
+      </div>
+      <div className="mt-4">
+        <SapiensDiagnosticPanel />
       </div>
     </StagePanel>
   );

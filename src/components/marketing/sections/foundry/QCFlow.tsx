@@ -5,6 +5,7 @@ import { ArrowRight, ShieldCheck } from "lucide-react";
 import { Sheet, SheetHeading } from "@/components/marketing/blueprint/kit";
 import { CountUp } from "@/components/marketing/fx/CountUp";
 import { HARD_RULES, HUMAN_QC, QC_DELTA } from "@/lib/landing/physical-ai-qc";
+import { RadialRulesDashboard } from "./qc/RadialRulesDashboard";
 
 const CATEGORY_COLOR: Record<string, string> = {
   calibration: "#4cb5ff",
@@ -24,26 +25,8 @@ export function QCFlow() {
       />
 
       <div className="mt-8 grid gap-4 lg:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)]">
-        {/* Hard-rules badge grid */}
-        <div className="bp-card" style={{ padding: 20, borderRadius: 14 }}>
-          <div className="bp-mono flex items-center justify-between" style={{ fontSize: 11, color: "var(--bp-ink-faint)", letterSpacing: "0.06em" }}>
-            <span>LAYER 1 · HARD RULES · 15 CHECKS</span>
-            <span style={{ color: "var(--bp-cyan)" }}>15/15 pass · sample capture</span>
-          </div>
-          <div className="mt-4 grid grid-cols-1 gap-2 sm:grid-cols-2">
-            {HARD_RULES.map((r) => (
-              <div key={r.id} className="flex items-start gap-3" style={{ padding: "10px 12px", border: "1px solid var(--bp-line)", borderRadius: 10 }}>
-                <span style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", width: 22, height: 22, borderRadius: 6, background: `color-mix(in srgb, ${CATEGORY_COLOR[r.category]} 20%, transparent)`, color: CATEGORY_COLOR[r.category], flexShrink: 0 }}>
-                  <ShieldCheck className="h-3 w-3" />
-                </span>
-                <div style={{ minWidth: 0 }}>
-                  <div style={{ fontSize: 12.5, color: "var(--bp-ink)", fontWeight: 600, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{r.label}</div>
-                  <div className="bp-mono" style={{ fontSize: 10, color: "var(--bp-ink-faint)", marginTop: 2 }}>{r.threshold} · {r.sampleOk}</div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
+        {/* Radial dashboard */}
+        <RadialRulesDashboard />
 
         {/* Human QC + delta */}
         <div className="flex flex-col gap-4">
