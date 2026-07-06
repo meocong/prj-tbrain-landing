@@ -6,11 +6,11 @@ import Footer from "@/components/common/Footer";
 import { CinemaHero } from "@/components/marketing/sections/foundry/CinemaHero";
 import { ScrollProgress } from "@/components/marketing/fx/ScrollProgress";
 import {
-  DataForWhatYouBuild,
   WhyTbrainSheet,
   BeyondRobotics,
 } from "@/components/marketing/sections/foundry/Sheets";
-import { Catalog, EngagementLadder } from "@/components/marketing/sections/foundry/DeckSections";
+import { EngagementLadder } from "@/components/marketing/sections/foundry/DeckSections";
+import { BuyerLens } from "@/components/marketing/sections/foundry/BuyerLens";
 import { LiveTicker } from "@/components/marketing/sections/foundry/LiveTicker";
 import { HardwareShowcase } from "@/components/marketing/sections/foundry/HardwareShowcase";
 import { CapturesGallery } from "@/components/marketing/sections/foundry/CapturesGallery";
@@ -20,7 +20,6 @@ import { PipelineOverview } from "@/components/marketing/sections/foundry/Pipeli
 import { AutoLabelDeepDive } from "@/components/marketing/sections/foundry/AutoLabelDeepDive";
 import { QCFlow } from "@/components/marketing/sections/foundry/QCFlow";
 import { GlanceStats } from "@/components/marketing/sections/foundry/GlanceStats";
-import { DataConcepts } from "@/components/marketing/sections/foundry/DataConcepts";
 import { RealVideoStrip } from "@/components/marketing/sections/foundry/RealVideoStrip";
 import { CinemaWall } from "@/components/marketing/sections/foundry/CinemaWall";
 import { LiveCaptureStream } from "@/components/marketing/sections/foundry/LiveCaptureStream";
@@ -145,19 +144,14 @@ export default function PhysicalAIPage() {
         {/* 08 · Rerun episode viewer · teaser (full viewer on /auto-label) */}
         <RerunEmbed variant="teaser" />
 
-        {/* 08b · Ten modalities · one export contract (moved up per v5.5) */}
-        <Catalog />
+        {/* 08b · Buyer lens · 3-tab merged (Ship + Build + Check) — replaces
+             Catalog + DataConcepts + DataForWhatYouBuild */}
+        <BuyerLens />
 
-        {/* 09 · Data concepts · the invariants a buyer should ask */}
-        <DataConcepts />
-
-        {/* 10 · Hardware pack + operator app concept */}
+        {/* 09 · Hardware pack + operator app concept */}
         <HardwareShowcase />
 
-        {/* 11 · Data for what you build (use cases) */}
-        <DataForWhatYouBuild />
-
-        {/* 12 · Public egocentric dataset wall */}
+        {/* 10 · Public egocentric dataset wall */}
         <PublicDatasetWall />
 
         {/* 13 · Why Tbrain */}
