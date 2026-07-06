@@ -199,18 +199,19 @@ function HeroVideo() {
             <motion.form initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.28 }}
               onSubmit={(e) => { e.preventDefault(); if (email.trim()) setSent(true); }}
               className="relative mt-7 max-w-[440px]">
-              <div className="relative flex items-center rounded-full border border-white/15 focus-within:border-[color:var(--bp-cyan)] focus-within:ring-2 focus-within:ring-[color:var(--bp-focus-ring)] focus-within:ring-offset-2 focus-within:ring-offset-[#06060E] transition-colors" style={{ background: "rgba(6,6,14,0.55)" }}>
+              <div className="relative flex items-center rounded-full transition-colors focus-within:ring-2 focus-within:ring-[color:var(--bp-focus-ring)] focus-within:ring-offset-2 focus-within:ring-offset-[#06060E]" style={{ background: "rgba(6,6,14,0.72)", border: "1px solid rgba(255,255,255,0.14)", backdropFilter: "blur(12px)", WebkitBackdropFilter: "blur(12px)" }}>
                 {sent ? (
-                  <span className="flex items-center gap-2 px-5 py-3.5 text-sm text-white sm:py-4">
+                  <span className="flex items-center gap-2 px-5 py-3.5 text-sm sm:py-4" style={{ color: "#fff" }}>
                     <Check className="h-4 w-4" style={{ color: "#22e3c8" }} /> Thanks — we&apos;ll reach out about a sample batch.
                   </span>
                 ) : (
                   <>
                     <input type="email" required value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Your work email"
                       aria-label="Work email"
-                      className="w-full bg-transparent px-5 py-3.5 text-sm text-white placeholder-white/45 outline-none sm:py-4 sm:px-6" />
+                      className="w-full bg-transparent px-5 py-3.5 text-sm outline-none sm:py-4 sm:px-6"
+                      style={{ color: "#fff" }} />
                     <button type="submit" className="absolute right-1.5 inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-xs font-semibold sm:px-5 sm:py-2.5 sm:text-sm cursor-pointer"
-                      style={{ background: "#fff", color: "#0b0b14" }}>
+                      style={{ background: "linear-gradient(100deg, #22e3c8 0%, #4cb5ff 100%)", color: "#0b0b14", boxShadow: "0 6px 18px -8px rgba(34,227,200,0.55)" }}>
                       Request a sample <ArrowRight className="h-3.5 w-3.5" />
                     </button>
                   </>
@@ -228,16 +229,18 @@ function HeroVideo() {
           <motion.div initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.36 }}
             className="hidden flex-col items-end gap-2.5 sm:flex">
             {PILLS.map((p) => (
-              <span key={p} className="rounded-full border border-white/12 bg-black/30 px-4 py-2 text-sm text-white/85 backdrop-blur-md">{p}</span>
+              <span key={p} className="rounded-full border border-white/15 px-4 py-2.5 text-sm text-white/85" style={{ background: "rgba(6,6,14,0.55)" }}>{p}</span>
             ))}
             <span className="mt-1 text-[11px] tracking-wide text-white/40" style={{ fontFamily: "var(--font-mono, monospace)" }}>{FOUNDRY_HERO.trust}</span>
           </motion.div>
         </div>
       </div>
 
-      <div className="absolute bottom-4 left-1/2 z-10 hidden -translate-x-1/2 flex-col items-center gap-1 text-white/55 md:flex">
-        <span className="text-[10px] tracking-[0.2em]" style={{ fontFamily: "var(--font-mono, monospace)" }}>SCROLL — DECOMPOSE THE RIG</span>
-        <motion.span animate={{ y: [0, 6, 0] }} transition={{ duration: 1.6, repeat: Infinity }}>↓</motion.span>
+      <div className="absolute bottom-4 left-1/2 z-10 hidden -translate-x-1/2 flex-col items-center gap-1 text-white/55 md:flex" aria-hidden>
+        <span className="text-[10px] tracking-[0.2em]" style={{ fontFamily: "var(--font-mono, monospace)" }}>SCROLL — SEE THE FOUNDRY</span>
+        <motion.span animate={reduce ? {} : { y: [0, 6, 0] }} transition={{ duration: 1.6, repeat: Infinity }} style={{ display: "inline-flex" }}>
+          <ChevronDown className="h-4 w-4" />
+        </motion.span>
       </div>
     </section>
   );
@@ -287,8 +290,9 @@ function ProblemBand() {
           <div className="inline-flex items-center gap-2 bp-mono" style={{ fontSize: 11, letterSpacing: "0.14em", color: "var(--bp-purple)" }}>
             <span style={{ width: 18, height: 1, background: "var(--bp-purple)" }} /> THE PROBLEM
           </div>
-          <h2 className="mt-4 max-w-3xl font-semibold" style={{ fontFamily: "var(--font-heading)", fontSize: "clamp(28px,4.6vw,54px)", lineHeight: 1.04, letterSpacing: "-0.02em" }}>
-            Physical AI is blocked by real-world data — <span style={{ color: "var(--bp-ink-faint)" }}>not compute.</span>
+          {/* Section H2 sits heavier than hero H1 (weight-inversion). */}
+          <h2 className="mt-4 max-w-3xl" style={{ fontFamily: "var(--font-heading)", fontWeight: 500, fontSize: "clamp(28px,4.6vw,54px)", lineHeight: 1.02, letterSpacing: "-0.025em" }}>
+            Physical AI is blocked by real-world data — <span style={{ color: "var(--bp-ink-faint)", fontWeight: 300 }}>not compute.</span>
           </h2>
           <p className="mt-5 max-w-2xl" style={{ fontSize: 17, lineHeight: 1.6, color: "var(--bp-ink-dim)" }}>{PROBLEM.lead}</p>
         </motion.div>
@@ -300,9 +304,9 @@ function ProblemBand() {
             <motion.a key={p.src} href={p.href} target="_blank" rel="noopener noreferrer"
               initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-60px" }} transition={{ duration: 0.5, delay: i * 0.07 }}
               className="bp-card bp-card-hover group p-5">
-              <div className="font-semibold" style={{ fontFamily: "var(--font-heading)", fontSize: "clamp(24px,3vw,36px)", lineHeight: 1, background: STAT_GRADIENT, WebkitBackgroundClip: "text", backgroundClip: "text", WebkitTextFillColor: "transparent" }}>{p.stat}</div>
+              <div style={{ fontFamily: "var(--font-heading)", fontWeight: 600, fontSize: "clamp(24px,3vw,36px)", lineHeight: 1, color: "var(--bp-cyan)", letterSpacing: "-0.02em" }}>{p.stat}</div>
               <p className="mt-3 text-[13px] leading-relaxed" style={{ color: "var(--bp-ink-dim)" }}>{p.claim}</p>
-              <div className="bp-mono mt-3 inline-flex items-center gap-1" style={{ fontSize: 11, color: "var(--bp-ink-faint)" }}>{p.src} ↗</div>
+              <div className="bp-mono mt-3 inline-flex items-center gap-1" style={{ fontSize: 11, color: "var(--bp-ink-faint)" }}>{p.src} <ArrowUpRight className="h-3 w-3" aria-hidden /></div>
             </motion.a>
           ))}
         </div>
@@ -354,7 +358,7 @@ function EcosystemDiagram() {
       </div>
       <Arrow />
       <div className="bp-card bp-card-hover p-5" style={{ borderColor: "var(--bp-cyan)", boxShadow: "0 0 0 1px var(--bp-cyan), 0 18px 40px -22px color-mix(in srgb, var(--bp-cyan) 50%, transparent)" }}>
-        <div className="font-semibold" style={{ fontFamily: "var(--font-heading)", fontSize: 18, color: "var(--bp-ink)" }}>Tbrain · the data foundry</div>
+        <div style={{ fontFamily: "var(--font-heading)", fontWeight: 600, fontSize: 20, color: "var(--bp-ink)", letterSpacing: "-0.01em" }}>Tbrain · the data foundry</div>
         <div className="bp-mono mb-3 mt-0.5" style={{ fontSize: 10, color: "var(--bp-cyan)" }}>CAPTURE · SYNC · QC · ANNOTATE → RLDS</div>
         <div className="grid gap-2">
           {FOUNDRY_STEPS.map((s, i) => (
@@ -389,7 +393,7 @@ function ConceptBand() {
           <div className="inline-flex items-center gap-2 bp-mono" style={{ fontSize: 11, letterSpacing: "0.14em", color: "var(--bp-cyan)" }}>
             <span style={{ width: 18, height: 1, background: "var(--bp-cyan)" }} /> THE FOUNDRY
           </div>
-          <h2 className="mt-4 max-w-3xl font-semibold" style={{ fontFamily: "var(--font-heading)", fontSize: "clamp(26px,4.2vw,48px)", lineHeight: 1.05, letterSpacing: "-0.02em" }}>
+          <h2 className="mt-4 max-w-3xl" style={{ fontFamily: "var(--font-heading)", fontWeight: 500, fontSize: "clamp(26px,4.2vw,48px)", lineHeight: 1.02, letterSpacing: "-0.025em" }}>
             So we built a foundry for it
           </h2>
           <p className="mt-5 max-w-2xl" style={{ fontSize: 17, lineHeight: 1.6, color: "var(--bp-ink-dim)" }}>
@@ -412,7 +416,7 @@ function DecomposeGrid() {
           <div className="inline-flex items-center gap-2 bp-mono" style={{ fontSize: 11, letterSpacing: "0.14em", color: "var(--bp-cyan)" }}>
             <span style={{ width: 18, height: 1, background: "var(--bp-cyan)" }} /> FIG.01 — THE DELIVERY SPEC
           </div>
-          <h2 className="mt-4 max-w-2xl font-semibold" style={{ fontFamily: "var(--font-heading)", fontSize: "clamp(28px,4.4vw,52px)", lineHeight: 1.05, letterSpacing: "-0.02em" }}>
+          <h2 className="mt-4 max-w-2xl" style={{ fontFamily: "var(--font-heading)", fontWeight: 500, fontSize: "clamp(28px,4.4vw,52px)", lineHeight: 1.02, letterSpacing: "-0.025em" }}>
             Built to the spec world-model teams ask for
           </h2>
           <p className="mt-4 max-w-xl" style={{ fontSize: 16, lineHeight: 1.6, color: "var(--bp-ink-dim)" }}>
@@ -425,8 +429,8 @@ function DecomposeGrid() {
           <div className="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2 lg:grid-cols-3">
             {EGO.map((e) => (
               <div key={e.k} className="pt-4" style={{ borderTop: "1px solid var(--bp-line)" }}>
-                <div className="font-semibold" style={{ fontFamily: "var(--font-heading)", fontSize: 15, color: "var(--bp-ink)" }}>{e.k}</div>
-                <div className="mt-1 text-sm leading-relaxed" style={{ color: "var(--bp-ink-dim)" }}>{e.v}</div>
+                <div style={{ fontFamily: "var(--font-body, var(--font-sans, system-ui))", fontSize: 14, fontWeight: 700, letterSpacing: "-0.005em", color: "var(--bp-ink)" }}>{e.k}</div>
+                <div style={{ fontFamily: "var(--font-body, var(--font-sans, system-ui))", fontSize: 13, fontWeight: 400, lineHeight: 1.55, marginTop: 4, color: "var(--bp-ink-dim)" }}>{e.v}</div>
               </div>
             ))}
           </div>

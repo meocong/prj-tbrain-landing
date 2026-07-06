@@ -129,7 +129,7 @@ export function Sheet({
 export function SheetHeading({ title, lead, className = "" }: { title: string; lead?: string; className?: string }) {
   return (
     <div className={`max-w-3xl ${className}`}>
-      <h2 className="font-semibold" style={{ fontFamily: "var(--font-heading)", fontSize: "clamp(24px, 3.2vw, 36px)", lineHeight: 1.1, color: "var(--bp-ink)", letterSpacing: "-0.01em" }}>{title}</h2>
+      <h2 className="font-semibold" style={{ fontFamily: "var(--font-heading)", fontSize: "clamp(26px, 3.4vw, 40px)", lineHeight: 1.06, color: "var(--bp-ink)", letterSpacing: "-0.02em" }}>{title}</h2>
       {lead && <p className="mt-3" style={{ fontSize: 15, lineHeight: 1.6, color: "var(--bp-ink-dim)" }}>{lead}</p>}
     </div>
   );
@@ -172,14 +172,14 @@ export function SubpageHero({
             </span>
           )}
         </div>
-        <h1 className="mt-4 max-w-4xl font-semibold" style={{ fontFamily: "var(--font-heading)", fontSize: "clamp(36px, 5.4vw, 68px)", lineHeight: 1.02, letterSpacing: "-0.02em", color: "var(--bp-ink)" }}>{title}</h1>
+        <h1 className="mt-4 max-w-4xl font-semibold" style={{ fontFamily: "var(--font-heading)", fontSize: "clamp(36px, 5.4vw, 68px)", lineHeight: 1.02, letterSpacing: "-0.025em", color: "var(--bp-ink)" }}>{title}</h1>
         <p className="mt-6 max-w-2xl" style={{ fontSize: 18, lineHeight: 1.55, color: "var(--bp-ink-dim)" }}>{lead}</p>
         {meta && meta.length > 0 && (
           <div className="mt-10 grid grid-cols-2 gap-4 md:grid-cols-4">
             {meta.map((m) => (
               <div key={m.k} className="bp-card" style={{ padding: "14px 16px", borderRadius: 10 }}>
                 <div className="bp-mono" style={{ fontSize: 10, color: "var(--bp-ink-faint)", letterSpacing: "0.08em", textTransform: "uppercase" }}>{m.k}</div>
-                <div className="mt-1" style={{ fontFamily: "var(--font-heading)", fontSize: 22, fontWeight: 600, color: "var(--bp-cyan)" }}>{m.v}</div>
+                <div className="mt-1 font-semibold" style={{ fontFamily: "var(--font-heading)", fontSize: 22, color: "var(--bp-cyan)" }}>{m.v}</div>
               </div>
             ))}
           </div>
@@ -209,7 +209,7 @@ export function StagePanel({
         <span style={{ color: "var(--bp-cyan)" }}>{model}</span>
       </div>
       <div style={{ padding: "22px 22px 24px" }}>
-        <h3 className="font-semibold" style={{ fontFamily: "var(--font-heading)", fontSize: "clamp(22px, 2.4vw, 30px)", lineHeight: 1.1, color: "var(--bp-ink)", letterSpacing: "-0.01em" }}>{title}</h3>
+        <h3 style={{ fontFamily: "var(--font-heading)", fontWeight: 600, fontSize: "clamp(22px, 2.6vw, 32px)", lineHeight: 1.06, color: "var(--bp-ink)", letterSpacing: "-0.015em" }}>{title}</h3>
         <p className="mt-3 max-w-2xl" style={{ fontSize: 15, lineHeight: 1.6, color: "var(--bp-ink-dim)" }}>{detail}</p>
         {output && (
           <div className="mt-4 bp-mono" style={{ fontSize: 11, color: "var(--bp-ink-faint)", letterSpacing: "0.04em" }}>output · <span style={{ color: "var(--bp-accent, var(--bp-cyan))" }}>{output}</span></div>
