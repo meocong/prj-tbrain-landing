@@ -228,12 +228,20 @@ Sample episode → [/data/physical-ai/quality#rerun-proof](/data/physical-ai/qua
 ];
 
 const APPLY = process.argv.includes("--apply");
-const client = createClient(SUPABASE_URL, SUPABASE_KEY, { auth: { persistSession: false } });
+const PUBLISH = process.argv.includes("--publish");  // DANGER: makes posts live on tbrain.ai/blog
+const STATUS = PUBLISH ? "published" : "draft";
+const client = createClient(SUPABASE_URL, SUPABASE_KEY, {
+  auth: { persistSession: false },
+  db: { schema: "tbrain_landing" },
+});
 
 async function main() {
   console.log(`[seed] target: ${SUPABASE_URL}`);
+  console.log(`[seed] status will be: ${STATUS}${PUBLISH ? " (WILL APPEAR ON tbrain.ai/blog)" : " (hidden from public /blog — visible only in /admin/content)"}`);
   if (!APPLY) {
-    console.log("[seed] DRY-RUN mode. Nothing will be written. Re-run with --apply to insert.");
+    console.log("[seed] DRY-RUN mode. Nothing will be written.");
+    console.log("[seed] Re-run with --apply to insert as draft.");
+    console.log("[seed] Re-run with --apply --publish to insert as published (LIVE on tbrain.ai).");
     for (const post of POSTS) {
       console.log(`  · would upsert: ${post.slug} · ${post.title}`);
     }
@@ -251,8 +259,8 @@ async function main() {
       category: post.category,
       tags: post.tags,
       author_name: post.author_name,
-      status: "published",
-      published_at: NOW,
+      status: STATUS,
+      published_at: PUBLISH ? NOW : null,
       seo_title: post.title,
       seo_description: post.excerpt,
       og_image_url: post.cover_image_url,
