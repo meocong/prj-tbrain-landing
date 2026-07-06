@@ -181,11 +181,9 @@ function HeroVideo() {
               {FOUNDRY_HERO.eyebrow}
             </motion.div>
 
-            {/* Impeccable weight-inversion: hero H1 uses feather-light 200; section
-                H2s (Problem / Concept / Decompose) run heavier 500 for gravity. */}
             <motion.h1 initial={{ opacity: 0, y: 22 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.12 }}
-              className="mt-5 text-white"
-              style={{ fontFamily: "var(--font-heading)", fontWeight: 200, fontSize: "clamp(2.4rem, 6.8vw, 5.6rem)", lineHeight: 0.98, letterSpacing: "-0.035em" }}>
+              className="mt-5 font-semibold text-white"
+              style={{ fontFamily: "var(--font-heading)", fontSize: "clamp(2.2rem, 6.2vw, 5.2rem)", lineHeight: 1.04, letterSpacing: "-0.025em" }}>
               The Robotics Data{" "}
               <span style={{ fontWeight: 500, background: "linear-gradient(100deg,#22e3c8,#8b6cf6)", WebkitBackgroundClip: "text", backgroundClip: "text", WebkitTextFillColor: "transparent" }}>Foundry</span>{" "}
               for Physical AI
@@ -292,7 +290,7 @@ function ProblemBand() {
           </div>
           {/* Section H2 sits heavier than hero H1 (weight-inversion). */}
           <h2 className="mt-4 max-w-3xl" style={{ fontFamily: "var(--font-heading)", fontWeight: 500, fontSize: "clamp(28px,4.6vw,54px)", lineHeight: 1.02, letterSpacing: "-0.025em" }}>
-            Physical AI is blocked by real-world data — <span style={{ color: "var(--bp-ink-faint)", fontWeight: 300 }}>not compute.</span>
+            Physical AI is blocked by real-world data — <span style={{ color: "var(--bp-ink-faint)", fontWeight: 500 }}>not compute.</span>
           </h2>
           <p className="mt-5 max-w-2xl" style={{ fontSize: 17, lineHeight: 1.6, color: "var(--bp-ink-dim)" }}>{PROBLEM.lead}</p>
         </motion.div>
