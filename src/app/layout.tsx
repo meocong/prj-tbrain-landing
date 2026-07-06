@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { DM_Sans, Space_Grotesk, JetBrains_Mono } from "next/font/google";
+import { Inter, JetBrains_Mono } from "next/font/google";
 import { Suspense } from "react";
 import { Providers } from "@/components/providers";
 import Analytics from "@/components/analytics/Analytics";
@@ -9,18 +9,17 @@ import ChatWidget from "@/components/chat/ChatWidgetLoader";
 import CookieConsent from "@/components/common/CookieConsent";
 import "./globals.css";
 
-const dmSans = DM_Sans({
+/* Inter — canonical tbrain brand face. Same variable serves body + heading. */
+const inter = Inter({
   subsets: ["latin"],
   variable: "--font-body",
+  weight: ["400", "500", "600", "700", "800"],
   display: "swap",
 });
-
-/* Space Grotesk — proportional geometric sans. Clean legibility at every
-   scale from hero H1 (68px) down to card H4 (14px). Weights 400/500/600/700. */
-const spaceGrotesk = Space_Grotesk({
+const interHeading = Inter({
   subsets: ["latin"],
   variable: "--font-heading",
-  weight: ["400", "500", "600", "700"],
+  weight: ["400", "500", "600", "700", "800"],
   display: "swap",
 });
 
@@ -119,7 +118,7 @@ export default function RootLayout({
       suppressHydrationWarning
       lang="en"
       data-scroll-behavior="smooth"
-      className={`${dmSans.variable} ${spaceGrotesk.variable} ${jetbrainsMono.variable}`}
+      className={`${inter.variable} ${interHeading.variable} ${jetbrainsMono.variable}`}
     >
       <body>
         <script dangerouslySetInnerHTML={{ __html: THEME_INIT }} />
