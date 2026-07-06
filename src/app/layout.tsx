@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { DM_Sans, Alumni_Sans, JetBrains_Mono } from "next/font/google";
+import { DM_Sans, Space_Grotesk, JetBrains_Mono } from "next/font/google";
 import { Suspense } from "react";
 import { Providers } from "@/components/providers";
 import Analytics from "@/components/analytics/Analytics";
@@ -15,13 +15,12 @@ const dmSans = DM_Sans({
   display: "swap",
 });
 
-/* Alumni Sans — high-contrast display face with weights 100→900.
-   Enables Impeccable weight-inversion (hero H1 100/200, section H2 500/600)
-   and adds gravitas Space Grotesk cannot match. */
-const alumniSans = Alumni_Sans({
+/* Space Grotesk — proportional geometric sans. Clean legibility at every
+   scale from hero H1 (68px) down to card H4 (14px). Weights 400/500/600/700. */
+const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
   variable: "--font-heading",
-  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+  weight: ["400", "500", "600", "700"],
   display: "swap",
 });
 
@@ -120,7 +119,7 @@ export default function RootLayout({
       suppressHydrationWarning
       lang="en"
       data-scroll-behavior="smooth"
-      className={`${dmSans.variable} ${alumniSans.variable} ${jetbrainsMono.variable}`}
+      className={`${dmSans.variable} ${spaceGrotesk.variable} ${jetbrainsMono.variable}`}
     >
       <body>
         <script dangerouslySetInnerHTML={{ __html: THEME_INIT }} />
