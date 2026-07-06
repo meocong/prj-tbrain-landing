@@ -61,7 +61,7 @@ export function RerunCapturedCard() {
         <div style={{ position: "relative" }}>
           <div className="grid" style={{ gridTemplateColumns: "1fr 1fr", height: "100%" }}>
             <div style={{ position: "relative", borderRight: "1px solid var(--bp-line)" }}>
-              <img src="/images/real-captures/pick_up_the_cup-loop.jpg" alt="" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+              <img src="/images/real-captures/pick_up_the_cup-loop.jpg" alt="" style={{ width: "100%", height: "100%", objectFit: "cover" }}  loading="lazy" />
               <div className="bp-mono absolute left-2 top-2" style={{ fontSize: 9, color: "#4cb5ff", background: "rgba(5,10,18,0.9)", padding: "3px 6px", borderRadius: 4 }}>
                 camera/rgb
               </div>

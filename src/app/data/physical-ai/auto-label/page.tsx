@@ -67,7 +67,7 @@ function StageBody() {
             <span>Sapiens 308-kpt · ego capture</span>
             <span style={{ color: "#ff9a4d" }}>secondary · gated</span>
           </div>
-          <img src="/images/body-kpts/pick_up_the_cup_t50.jpg" alt="Sapiens body on egocentric capture, face + dense gated" style={{ width: "100%", display: "block" }} />
+          <img src="/images/body-kpts/pick_up_the_cup_t50.jpg" alt="Sapiens body on egocentric capture, face + dense gated" style={{ width: "100%", display: "block" }}  loading="lazy" />
         </div>
       </div>
       <div className="mt-4">
@@ -103,22 +103,70 @@ function StageHand() {
 
 function StageMasks() {
   const masks = AUTO_LABEL_STAGES.find((s) => s.key === "masks")!;
-  const clips = [
-    { name: "pick_up_the_cup · cup", src: "/videos/masks/pick_up_the_cup__tracked_cup_cup.webm", poster: "/videos/masks/pick_up_the_cup__tracked_cup_cup.jpg" },
-    { name: "iron_product · target", src: "/videos/masks/iron_product__tracked_pants_pants.webm", poster: "/videos/masks/iron_product__tracked_pants_pants.jpg" },
+  const successClips = [
+    { name: "pick_up_the_cup · cup",           src: "/videos/masks/pick_up_the_cup__tracked_cup_cup.webm",           poster: "/videos/masks/pick_up_the_cup__tracked_cup_cup.jpg", tag: "OK" },
+    { name: "pick_up_the_cup · right hand",    src: "/videos/masks/pick_up_the_cup__tracked_right_hand_right_hand.webm", poster: "/videos/masks/pick_up_the_cup__tracked_right_hand_right_hand.jpg", tag: "OK" },
+    { name: "sew_hem · fabric",                src: "/videos/masks/sew_hem__tracked_fabric_fabric.webm",             poster: "/videos/masks/sew_hem__tracked_fabric_fabric.jpg", tag: "OK" },
+    { name: "arrange_fabric · fabric",         src: "/videos/masks/arrange_fabric__tracked_fabric_fabric.webm",      poster: "/videos/masks/arrange_fabric__tracked_fabric_fabric.jpg", tag: "OK" },
   ];
+  const failClip = {
+    name: "iron_product · target: iron · SAM tracked: pants",
+    src: "/videos/masks/iron_product__tracked_pants_pants.webm",
+    poster: "/videos/masks/iron_product__tracked_pants_pants.jpg",
+  };
   return (
-    <StagePanel fig={masks.fig} title={masks.title} model={masks.model} detail={masks.detail} output={masks.output} honestNote={masks.honestNote}>
-      <div className="grid gap-3 lg:grid-cols-2">
-        {clips.map((c) => (
+    <StagePanel fig={masks.fig} title={masks.title} model={masks.model} detail={masks.detail} output={masks.output}>
+      {/* success grid */}
+      <div className="mb-4 bp-mono" style={{ fontSize: 10, color: "var(--bp-cyan)", letterSpacing: "0.14em", textTransform: "uppercase" }}>
+        · PASS · 4 tracked objects
+      </div>
+      <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+        {successClips.map((c) => (
           <div key={c.name} className="bp-card overflow-hidden" style={{ borderRadius: 10 }}>
-            <div className="bp-mono flex items-center justify-between" style={{ padding: "6px 12px", fontSize: 10, color: "var(--bp-ink-faint)", borderBottom: "1px solid var(--bp-line)" }}>
-              <span>{c.name}</span>
-              <span style={{ color: "var(--bp-cyan)" }}>tracked · masked</span>
+            <div className="bp-mono flex items-center justify-between" style={{ padding: "6px 10px", fontSize: 9.5, color: "var(--bp-ink-faint)", borderBottom: "1px solid var(--bp-line)" }}>
+              <span style={{ whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{c.name}</span>
+              <span style={{ color: "#5ee08a", fontWeight: 700, letterSpacing: "0.08em" }}>{c.tag}</span>
             </div>
             <video src={c.src} poster={c.poster} muted loop autoPlay playsInline preload="metadata" style={{ width: "100%", display: "block" }} />
           </div>
         ))}
+      </div>
+
+      {/* honest failure surface */}
+      <div className="mt-8">
+        <div className="bp-mono" style={{ fontSize: 10, color: "#ff9a4d", letterSpacing: "0.14em", textTransform: "uppercase" }}>
+          · HONEST FAILURE · we ship this flag, not silence
+        </div>
+        <div className="mt-3 grid gap-4 lg:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)]">
+          <div className="bp-card overflow-hidden" style={{ borderRadius: 10, border: "1px solid rgba(255,154,77,0.4)" }}>
+            <div className="bp-mono flex items-center justify-between" style={{ padding: "8px 12px", fontSize: 10, color: "#ff9a4d", borderBottom: "1px solid rgba(255,154,77,0.3)", background: "rgba(255,154,77,0.06)" }}>
+              <span>{failClip.name}</span>
+              <span style={{ color: "#ff9a4d", fontWeight: 700, letterSpacing: "0.08em" }}>WRONG_OBJECT</span>
+            </div>
+            <video src={failClip.src} poster={failClip.poster} muted loop autoPlay playsInline preload="metadata" style={{ width: "100%", display: "block" }} />
+          </div>
+          <div className="bp-card" style={{ padding: 18, borderRadius: 10, background: "rgba(255,154,77,0.04)" }}>
+            <div className="bp-mono" style={{ fontSize: 10.5, color: "#ff9a4d", letterSpacing: "0.08em", textTransform: "uppercase", fontWeight: 700 }}>
+              summary.json flag
+            </div>
+            <pre className="bp-mono mt-3" style={{ margin: 0, fontSize: 11, color: "#c8d3f0", background: "#0b1220", padding: "12px 14px", borderRadius: 8, lineHeight: 1.55, overflowX: "auto" }}>
+{`{
+  "check": "sam_target_match",
+  "expected": "iron",
+  "tracked":  "pants",
+  "confidence": 0.62,
+  "reason": "prompt disambiguation
+   fabric ≈ pants when hand
+   overlaps the iron",
+  "action": "escalate → LS
+   correction task"
+}`}
+            </pre>
+            <div className="mt-3" style={{ fontSize: 12.5, color: "var(--bp-ink-dim)", lineHeight: 1.5 }}>
+              The segmenter locked onto the shorts instead of the iron. The QC flag surfaces this — no silent overwrite. Downstream retrain uses this diff to sharpen prompt disambiguation.
+            </div>
+          </div>
+        </div>
       </div>
     </StagePanel>
   );
@@ -128,12 +176,47 @@ function StageDepth() {
   const depth = AUTO_LABEL_STAGES.find((s) => s.key === "depth")!;
   return (
     <StagePanel fig={depth.fig} title={depth.title} model={depth.model} detail={depth.detail} output={depth.output}>
-      <div className="grid gap-3">
-        {(depth.overlayImages ?? []).map((src) => (
-          <div key={src} className="overflow-hidden" style={{ borderRadius: 10, border: "1px solid var(--bp-line)" }}>
-            <img src={src} alt="Monocular depth pointmap" style={{ width: "100%", display: "block" }} />
+      <div className="grid gap-4 lg:grid-cols-[minmax(0,1.6fr)_minmax(0,1fr)]">
+        <div>
+          {(depth.overlayImages ?? []).map((src) => (
+            <div key={src} className="overflow-hidden" style={{ borderRadius: 10, border: "1px solid var(--bp-line)" }}>
+              <img src={src} alt="Monocular depth pointmap RGB + depth heatmap" style={{ width: "100%", display: "block" }} loading="lazy" />
+            </div>
+          ))}
+        </div>
+        <div className="bp-card" style={{ padding: 18, borderRadius: 12 }}>
+          <div className="bp-mono" style={{ fontSize: 10.5, color: "var(--bp-ink-faint)", letterSpacing: "0.08em", textTransform: "uppercase" }}>
+            output tensor
           </div>
-        ))}
+          <pre className="bp-mono mt-2" style={{ margin: 0, fontSize: 11, color: "#c8d3f0", background: "#0b1220", padding: "12px 14px", borderRadius: 8, lineHeight: 1.55, overflowX: "auto" }}>
+{`pointmap.shape:
+  (H, W, 3) · metric · f32
+intrinsics.txt:
+  fx, fy, cx, cy · per-cap
+
+world_scale check:
+  ||t||_mean = 1.45 m
+  bound       0.1 .. 5 m
+  · PASS
+
+feeds → object 6-DoF pose
+feeds → SLAM alignment`}
+          </pre>
+          <div className="mt-4 grid grid-cols-3 gap-2 text-center">
+            <div>
+              <div style={{ fontFamily: "var(--font-heading)", fontSize: 22, fontWeight: 700, color: "var(--bp-cyan)" }}>1.45m</div>
+              <div className="bp-mono" style={{ fontSize: 9.5, color: "var(--bp-ink-faint)", letterSpacing: "0.04em" }}>‖t‖ mean</div>
+            </div>
+            <div>
+              <div style={{ fontFamily: "var(--font-heading)", fontSize: 22, fontWeight: 700, color: "#5ee08a" }}>PASS</div>
+              <div className="bp-mono" style={{ fontSize: 9.5, color: "var(--bp-ink-faint)", letterSpacing: "0.04em" }}>scale check</div>
+            </div>
+            <div>
+              <div style={{ fontFamily: "var(--font-heading)", fontSize: 22, fontWeight: 700, color: "#a78bfa" }}>8%</div>
+              <div className="bp-mono" style={{ fontSize: 9.5, color: "var(--bp-ink-faint)", letterSpacing: "0.04em" }}>K err vs hand-cam</div>
+            </div>
+          </div>
+        </div>
       </div>
     </StagePanel>
   );

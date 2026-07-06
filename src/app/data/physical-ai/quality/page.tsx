@@ -143,7 +143,7 @@ function Layer4Reviewer() {
       />
       <div className="mt-8 grid gap-4 lg:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)]">
         <div className="bp-card overflow-hidden" style={{ borderRadius: 12 }}>
-          <img src="/images/platform/project-overview.png" alt="Reviewer sign-off dashboard" style={{ width: "100%", display: "block" }} />
+          <img src="/images/platform/project-overview.png" alt="Reviewer sign-off dashboard" style={{ width: "100%", display: "block" }}  loading="lazy" />
           <div className="bp-mono" style={{ padding: "10px 14px", fontSize: 11, color: "var(--bp-ink-dim)", borderTop: "1px solid var(--bp-line)" }}>Reviewer dashboard · task queue · sign-off + escalate</div>
         </div>
         <div className="bp-card" style={{ padding: 20, borderRadius: 14 }}>
