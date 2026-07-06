@@ -9,18 +9,14 @@ import {
   WhyTbrainSheet,
   BeyondRobotics,
 } from "@/components/marketing/sections/foundry/Sheets";
-import { HowItWorks } from "@/components/marketing/sections/foundry/SystemShowcase";
 import { Catalog, EngagementLadder } from "@/components/marketing/sections/foundry/DeckSections";
 import { LiveTicker } from "@/components/marketing/sections/foundry/LiveTicker";
 import { HardwareShowcase } from "@/components/marketing/sections/foundry/HardwareShowcase";
-import { ModelStackCard } from "@/components/marketing/sections/foundry/ModelStackCard";
 import { CapturesGallery } from "@/components/marketing/sections/foundry/CapturesGallery";
 import { RerunEmbed } from "@/components/marketing/sections/foundry/RerunEmbed";
-import { LerobotPreview } from "@/components/marketing/sections/foundry/LerobotPreview";
 import { PublicDatasetWall } from "@/components/marketing/sections/foundry/PublicDatasetWall";
 import { PipelineOverview } from "@/components/marketing/sections/foundry/PipelineOverview";
 import { AutoLabelDeepDive } from "@/components/marketing/sections/foundry/AutoLabelDeepDive";
-import { DescriptionMetadata } from "@/components/marketing/sections/foundry/DescriptionMetadata";
 import { QCFlow } from "@/components/marketing/sections/foundry/QCFlow";
 import { ANCHOR_TRUST } from "@/lib/landing/physical-ai";
 
@@ -124,49 +120,37 @@ export default function PhysicalAIPage() {
         {/* 05 · Capture ledger — real episodes surface first */}
         <CapturesGallery />
 
-        {/* 06 · V5 · Auto-label deep dive — 4-tab per-stage */}
+        {/* 06 · V5 · Auto-label deep dive — 4-tab per-stage · full detail on /auto-label */}
         <AutoLabelDeepDive />
 
-        {/* 07 · V5 · Description + metadata — Qwen3-VL + schema_v3 */}
-        <DescriptionMetadata />
-
-        {/* 08 · V5 · QC flow — 15 hard rules + human review + delta */}
+        {/* 07 · V5 · QC flow — 15 hard rules teaser · full detail on /quality */}
         <QCFlow />
 
-        {/* 09 · Rerun episode viewer */}
+        {/* 08 · Rerun episode viewer */}
         <RerunEmbed />
 
-        {/* 10 · LeRobot v2 export preview */}
-        <LerobotPreview />
-
-        {/* 11 · Ten modalities · one export contract */}
+        {/* 09 · Ten modalities · one export contract */}
         <Catalog />
 
-        {/* 12 · Auto-label model stack — 8 models · one pipeline */}
-        <ModelStackCard />
-
-        {/* 13 · How it works — pipeline + operator app + fleet */}
-        <HowItWorks />
-
-        {/* 14 · Hardware pack + operator app concept */}
+        {/* 10 · Hardware pack + operator app concept */}
         <HardwareShowcase />
 
-        {/* 15 · Data for what you build (use cases) */}
+        {/* 11 · Data for what you build (use cases) */}
         <DataForWhatYouBuild />
 
-        {/* 16 · Public egocentric dataset wall */}
+        {/* 12 · Public egocentric dataset wall */}
         <PublicDatasetWall />
 
-        {/* 17 · Why Tbrain */}
+        {/* 13 · Why Tbrain */}
         <WhyTbrainSheet />
 
-        {/* 18 · Engagement ladder */}
+        {/* 14 · Engagement ladder */}
         <EngagementLadder />
 
-        {/* 19 · Beyond robotics footer band */}
+        {/* 15 · Beyond robotics footer band */}
         <BeyondRobotics />
 
-        {/* 20 · CTA */}
+        {/* 16 · CTA */}
         <FoundryCTA />
       </main>
       <Footer />

@@ -9,8 +9,10 @@ import { Menu, X, ChevronDown } from "lucide-react";
 import { ThemeToggle } from "@/components/theme/ThemeToggle";
 
 const DATA_ITEMS = [
-  { label: "Terminal Bench", href: "/data/terminal-bench", description: "AI Agent Evaluation" },
-  { label: "Physical AI", href: "/data/physical-ai", description: "Robot Training Data" },
+  { label: "Terminal Bench", href: "/data/terminal-bench", description: "AI agent evaluation benchmark" },
+  { label: "Physical AI · overview", href: "/data/physical-ai", description: "Robotics data foundry · full landing" },
+  { label: "Auto-Label pipeline", href: "/data/physical-ai/auto-label", description: "8 models · one contract · per-stage deep dive" },
+  { label: "QC playbook", href: "/data/physical-ai/quality", description: "15 hard rules + 3 human review layers" },
 ];
 
 const NAV_ITEMS = [
@@ -126,8 +128,10 @@ const Header = () => {
               height={40}
               alt="Tbrain"
               priority
+              loading="eager"
+              fetchPriority="high"
               className="object-contain"
-              style={{ filter: tokens.logoFilter }}
+              style={{ width: "auto", height: 40, filter: tokens.logoFilter }}
             />
           </Link>
 
@@ -147,7 +151,7 @@ const Header = () => {
                   </button>
                   {dataOpen && (
                     <div
-                      className={`absolute left-1/2 top-full mt-2 min-w-[240px] -translate-x-1/2 rounded-xl p-2 ${tokens.dropdown}`}
+                      className={`absolute left-1/2 top-full mt-2 min-w-[320px] -translate-x-1/2 rounded-xl p-2 ${tokens.dropdown}`}
                     >
                       {DATA_ITEMS.map((d) => (
                         <Link

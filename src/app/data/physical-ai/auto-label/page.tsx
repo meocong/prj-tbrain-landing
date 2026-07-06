@@ -6,6 +6,8 @@ import Footer from "@/components/common/Footer";
 import { PipelineOverview } from "@/components/marketing/sections/foundry/PipelineOverview";
 import { DescriptionMetadata } from "@/components/marketing/sections/foundry/DescriptionMetadata";
 import { AutoLabelDeepDive } from "@/components/marketing/sections/foundry/AutoLabelDeepDive";
+import { ModelStackCard } from "@/components/marketing/sections/foundry/ModelStackCard";
+import { LerobotPreview } from "@/components/marketing/sections/foundry/LerobotPreview";
 import { RerunEmbed } from "@/components/marketing/sections/foundry/RerunEmbed";
 import { SubpageHero, Sheet, SheetHeading, StagePanel } from "@/components/marketing/blueprint/kit";
 import { PageNav } from "@/components/marketing/blueprint/PageNav";
@@ -29,13 +31,20 @@ export const revalidate = 86400;
 function StageBody() {
   const body = AUTO_LABEL_STAGES.find((s) => s.key === "body")!;
   return (
-    <StagePanel fig={body.fig} title={body.title} model={body.model} detail={body.detail} output={body.output}>
-      <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-        {(body.overlayImages ?? []).map((src) => (
-          <div key={src} className="overflow-hidden" style={{ borderRadius: 10, border: "1px solid var(--bp-line)" }}>
-            <img src={src} alt="Sapiens 308-kpt body overlay" style={{ width: "100%", display: "block" }} />
-          </div>
-        ))}
+    <StagePanel fig={body.fig} title={body.title} model={body.model} detail={body.detail} output={body.output} honestNote={body.honestNote}>
+      <div className="grid gap-3 lg:grid-cols-3">
+        {(body.overlayImages ?? []).map((src, i) => {
+          const label = ["t=25%", "t=50%", "t=75%"][i] ?? "";
+          return (
+            <div key={src} className="bp-card overflow-hidden" style={{ borderRadius: 10 }}>
+              <div className="bp-mono flex items-center justify-between" style={{ padding: "6px 12px", fontSize: 10, color: "var(--bp-ink-faint)", borderBottom: "1px solid var(--bp-line)" }}>
+                <span>pick_up_the_cup · {label}</span>
+                <span style={{ color: "var(--bp-cyan)" }}>Sapiens 308-kpt</span>
+              </div>
+              <img src={src} alt={`Sapiens body overlay at ${label}`} style={{ width: "100%", display: "block" }} />
+            </div>
+          );
+        })}
       </div>
     </StagePanel>
   );
@@ -175,12 +184,14 @@ export default function AutoLabelPage() {
       <PageNav
         items={[
           { id: "pipeline", label: "Pipeline overview" },
+          { id: "model-stack", label: "8-model stack" },
           { id: "description-metadata", label: "Description + metadata" },
           { id: "stage-hand", label: "Hand · MANO" },
           { id: "stage-body", label: "Body · Sapiens" },
           { id: "stage-masks", label: "Object masks" },
           { id: "stage-depth", label: "Depth · MoGe" },
           { id: "stage-rerun", label: "Rerun scene" },
+          { id: "lerobot-export", label: "LeRobot v2 export" },
           { id: "auto-label", label: "Deep dive tabs" },
         ]}
       />
@@ -199,6 +210,8 @@ export default function AutoLabelPage() {
         />
 
         <PipelineOverview highlight="auto-label" showAnchors={false} />
+
+        <ModelStackCard />
 
         <section id="stage-description">
           <DescriptionMetadata />
@@ -235,6 +248,8 @@ export default function AutoLabelPage() {
         </section>
 
         <RerunEmbed />
+
+        <LerobotPreview />
 
         <HardRulesBridge />
 
