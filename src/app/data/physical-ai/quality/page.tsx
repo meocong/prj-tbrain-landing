@@ -10,6 +10,7 @@ import { RerunCapturedCard } from "@/components/marketing/sections/foundry/qc/Re
 import { RerunIframeLoader } from "@/components/marketing/sections/foundry/qc/RerunIframeLoader";
 import { SubpageHero, Sheet, SheetHeading } from "@/components/marketing/blueprint/kit";
 import { PageNav } from "@/components/marketing/blueprint/PageNav";
+import { Breadcrumb, PrevNextFooter } from "@/components/marketing/blueprint/SubpageNav";
 import { ScrollProgress } from "@/components/marketing/fx/ScrollProgress";
 import { CountUp } from "@/components/marketing/fx/CountUp";
 import { HARD_RULES, HUMAN_QC, PROVENANCE_LOG, QC_DELTA } from "@/lib/landing/physical-ai-qc";
@@ -280,6 +281,11 @@ export default function QualityPage() {
         ]}
       />
       <main>
+        <Breadcrumb trail={[
+          { label: "Tbrain", href: "/" },
+          { label: "Physical AI", href: "/data/physical-ai" },
+          { label: "QC playbook" },
+        ]} />
         <SubpageHero
           fig="FIG.06 — QC PLAYBOOK"
           eyebrow="Physical AI · Robotics data foundry"
@@ -304,6 +310,10 @@ export default function QualityPage() {
         <DeltaStats />
         <QCFlow />
         <CTA />
+        <PrevNextFooter
+          prev={{ label: "Auto-Label pipeline", href: "/data/physical-ai/auto-label", sub: "8 models · one contract · per-stage deep dive" }}
+          next={{ label: "Physical AI overview", href: "/data/physical-ai", sub: "Landing · foundry story · 20 sections" }}
+        />
       </main>
       <Footer />
     </div>
