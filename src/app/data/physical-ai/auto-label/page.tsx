@@ -21,11 +21,11 @@ import { AUTO_LABEL_STAGES } from "@/lib/landing/physical-ai-qc";
 export const metadata: Metadata = {
   title: "Auto-Label · 8 Models · Physical AI Data Foundry",
   description:
-    "How Tbrain auto-labels egocentric captures — hand kpts, body kpts, object masks, depth, verb-noun, and schema_v3 provenance. Every stage visualized on real captures.",
+    "How Tbrain auto-labels egocentric captures — hand kpts, body kpts, object masks, depth, verb-noun, and per-field provenance. Every stage visualized on real captures.",
   alternates: { canonical: "/data/physical-ai/auto-label" },
   openGraph: {
     title: "Auto-Label · 8 Models · One Contract",
-    description: "From raw rgb.mp4 to schema_v3 labels.json in ≤48h.",
+    description: "From raw rgb.mp4 to a fully-provenanced manifest in ≤48h.",
     url: "/data/physical-ai/auto-label",
     type: "website",
   },
@@ -39,7 +39,7 @@ const AUTOLABEL_JSONLD = {
   "@type": "TechArticle",
   headline: "Auto-Label · 8 Models · Physical AI Data Foundry",
   description:
-    "How Tbrain auto-labels egocentric captures — hand kpts, body kpts, object masks, depth, verb-noun, schema_v3 provenance.",
+    "How Tbrain auto-labels egocentric captures — hand kpts, body kpts, object masks, depth, verb-noun, per-field provenance.",
   url: `${BASE_URL}/data/physical-ai/auto-label`,
   author: { "@type": "Organization", name: "Tbrain", url: BASE_URL },
   publisher: { "@type": "Organization", name: "Tbrain", url: BASE_URL },
@@ -244,7 +244,7 @@ function CTA() {
       <div className="container relative z-10 mx-auto max-w-3xl px-5 text-center">
         <h2 className="font-semibold" style={{ fontFamily: "var(--font-heading)", fontSize: "clamp(28px, 4vw, 44px)", lineHeight: 1.1, color: "var(--bp-ink)" }}>Ship in RLDS, LeRobot, or your schema</h2>
         <p className="mx-auto mt-4 max-w-xl" style={{ fontSize: 16, color: "var(--bp-ink-dim)" }}>
-          Every capture ships with the full schema_v3 labels.json — no proprietary format, no conversion contract.
+          Every capture ships with the full manifest — no proprietary format, no conversion contract.
         </p>
         <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
           <Link href="/data/physical-ai/quality" className="inline-flex items-center gap-2 rounded-lg px-6 py-3 text-sm font-bold" style={{ fontFamily: "var(--font-heading)", background: "var(--bp-cyan)", color: "var(--bp-on-cyan)", boxShadow: "0 8px 22px -12px var(--bp-cyan)" }}>
@@ -266,7 +266,7 @@ function HardRulesBridge() {
         <div>
           <SheetHeading
             title="Every stage output is validated before humans see it"
-            lead="15 hard rules run after every auto-label pass. FAIL/PARTIAL routes into Label Studio; only PASS ships. Every fix keeps the schema_v3 provenance trail intact."
+            lead="15 hard rules run after every auto-label pass. FAIL/PARTIAL routes into Label Studio; only PASS ships. Every fix keeps the provenance trail intact."
           />
         </div>
         <div>
@@ -310,7 +310,7 @@ export default function AutoLabelPage() {
           fig="FIG.05 — AUTO-LABEL PIPELINE"
           eyebrow="Physical AI · Robotics data foundry"
           title="8 models · one auto-label pipeline"
-          lead="From raw rgb.mp4 to schema_v3 labels.json in ≤48h. Hand kpts, body kpts, object masks, depth, verb-noun, and a full provenance trail — visualized on real captures, not mockups."
+          lead="From raw rgb.mp4 to a fully-provenanced manifest in ≤48h. Hand kpts, body kpts, object masks, depth, verb-noun, and a full provenance trail — visualized on real captures, not mockups."
           meta={[
             { k: "Models", v: "8" },
             { k: "Latency", v: "≤ 48h" },

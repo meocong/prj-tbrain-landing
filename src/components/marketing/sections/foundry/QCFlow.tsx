@@ -21,7 +21,7 @@ export function QCFlow() {
     <Sheet id="qc" fig="FIG.06 — QC · HARD RULES + AI + HUMAN" axis>
       <SheetHeading
         title="Zero-trust QC · 15 hard rules → AI filter → 3 human layers"
-        lead="Every capture crosses a 15-check gate before a human ever sees it. Only PARTIAL/FAIL results route into Label Studio, where three human layers ship the last 8%. Every fix keeps the schema_v3 provenance trail intact."
+        lead="Every capture crosses a 15-check gate before a human ever sees it. Only PARTIAL/FAIL results route into Label Studio, where three human layers ship the last 8%. Every fix keeps the provenance trail intact."
       />
 
       <div className="mt-8 grid gap-4 lg:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)]">

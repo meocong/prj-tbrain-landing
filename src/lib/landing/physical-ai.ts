@@ -89,8 +89,8 @@ export interface BomItem {
 
 export const COLLECTION_PACK = {
   fig: "FIG.01 — TBRAIN CAPTURE PACK",
-  title: "Our own rig — built from best-in-class components",
-  lead: "Mecka and Claru ship concept art. We ship hardware. The Tbrain Capture Pack is our own design — enclosure, capture firmware, and data pipeline are in-house — assembled from research-grade parts. It records synchronized RGB + depth + IMU + audio, timestamps everything to a hardware clock, caches offline, and syncs to the factory — at 50 to 500 packs in parallel.",
+  title: "The Tbrain Capture Pack",
+  lead: "Enclosure, capture firmware, and data pipeline are in-house — assembled from research-grade parts. It records synchronized RGB + depth + IMU + audio, timestamps everything to a hardware clock, caches offline, and syncs to the factory — at 50 to 500 packs in parallel.",
   bom: [
     { num: "01", part: "Intel RealSense D455", spec: "Stereo depth + RGB + IMU", quality: "Global shutter · ~87° FOV · depth ≤ 6m", stream: "RGB · Depth · IMU", role: "Research-grade first-person capture, aligned to the robot's eye view" },
     { num: "02", part: "GoPro (head-mount)", spec: "Egocentric RGB", quality: "HyperSmooth · up to 5.3K · fisheye ~155° for UMI", stream: "Stabilized RGB", role: "Wide, stable first-person video — UMI-compatible" },
@@ -628,8 +628,8 @@ export interface RealSample {
 
 export const REAL_SAMPLES = {
   fig: "FIG.10 — CAPTURE LEDGER",
-  title: "Real episodes · shipped and in-flight",
-  lead: "Two environments, one ledger. Kitchen: seven delivered episodes with QC verdicts. Textile: eight raw egocentric captures — MANO + object masks + verb-noun labels are exported downstream, annotation samples shown in the annotation section.",
+  title: "Sample episodes · examples, not exhaustive",
+  lead: "A representative slice of what a buyer receives — kitchen episodes with QC verdicts + textile raw egocentric captures. Full catalog on request. Every episode shown here ships with the same manifest and Rerun scene.",
   montage: "/images/deliverables/all6-montage.png",
   groups: {
     KITCHEN: { label: "Kitchen ledger", note: "Delivered · QC-verified" },
@@ -892,7 +892,7 @@ export const RERUN_EMBED = {
 /* Why Tbrain — Vietnam edge */
 export const VIETNAM_EDGE = {
   fig: "FIG.16 — WHY TBRAIN",
-  title: "Annotation depth, accountability & field-scale ops",
+  title: "Why buyers pick our foundry",
   lead: "We win on annotation depth, accountability, and a field-scale operation no US-centric vendor has — not a race to the bottom on price.",
   items: [
     { k: "Annotation depth", v: "Hand pose · sub-action · failure/recovery · human audit" },

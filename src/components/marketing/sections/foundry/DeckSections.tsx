@@ -3,7 +3,7 @@
 /**
  * DeckSections — homepage sections aligned to the Tbrain Robotics Offerings deck.
  *   Catalog          — "Six modules, one delivery pipeline" (A–F + statuses)
- *   EngagementLadder — "Enter anywhere: license, pilot, produce, retain"
+ *   EngagementLadder — "Enter anywhere"
  * Theme-aware (var(--bp-*)), responsive (1-col mobile base), subtle reveals.
  */
 import { useState } from "react";
@@ -124,7 +124,7 @@ export function EngagementLadder() {
   return (
     <Sheet fig="FIG.17 — HOW TO ENGAGE">
       <RevealOnScroll>
-        <SheetHeading title="Enter anywhere: license, pilot, produce, retain" lead="There's no big upfront commitment. Most buyers begin with inventory or a low-risk pilot, then scale into production and a retainer." />
+        <SheetHeading title="Enter anywhere" lead="There's no big upfront commitment. Most buyers begin with inventory or a low-risk pilot, then scale into production and a retainer." />
       </RevealOnScroll>
       <div className="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {ENGAGE.map((e, i) => (

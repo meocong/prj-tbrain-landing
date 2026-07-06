@@ -10,7 +10,7 @@ export function DescriptionMetadata() {
     <Sheet id="description-metadata" fig="FIG.05A/B — DESCRIPTION + METADATA" axis>
       <SheetHeading
         title="Every clip has a verb-noun · every field has a version"
-        lead="Beyond kpts and masks, every capture ships with structured semantics — action segments plus a schema_v3 provenance trail that names the exact model and git SHA that produced each field."
+        lead="Beyond kpts and masks, every capture ships with structured semantics — action segments plus a provenance trail that names the exact model and git SHA that produced each field."
       />
 
       <div className="mt-8 grid gap-4 lg:grid-cols-2">

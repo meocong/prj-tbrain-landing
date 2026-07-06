@@ -22,9 +22,9 @@ const TICKER = [
   "17 tasks captured",
   "60+ episodes in queue",
   "15 hard-rules PASS on live sample",
-  "schema_v3 · git 1b0cce1",
+  "provenance trail · git 1b0cce1",
   "≤ 48h delivery · LeRobot v2",
-  "8-model auto-label · zero staging",
+  "auto-label · zero staging",
 ];
 
 function LazyLoop({ src, poster, index }: { src: string; poster: string; index: number }) {
@@ -122,25 +122,37 @@ export function CinemaWall() {
             <p className="max-w-lg text-white/70" style={{ fontSize: "clamp(14px,1.3vw,17px)", lineHeight: 1.55 }}>
               Every clip on this wall is a real capture from a real factory floor — auto-labeled, QC&apos;d against 15 machine-checkable rules, and diffable against its Rerun scene.
             </p>
-            {/* Live counter */}
-            <div className="grid grid-cols-3 gap-6 pt-4 border-t border-white/10">
+            {/* Live counter — 5-tile */}
+            <div className="grid grid-cols-3 gap-4 pt-4 border-t border-white/10 lg:grid-cols-5">
               <div>
-                <div style={{ fontFamily: "var(--font-heading)", fontSize: "clamp(28px,3vw,40px)", fontWeight: 700, color: "#22e3c8", lineHeight: 1 }}>
+                <div style={{ fontFamily: "var(--font-heading)", fontSize: "clamp(24px,2.4vw,34px)", fontWeight: 700, color: "#22e3c8", lineHeight: 1 }}>
                   <CountUp value={17} duration={1.5} />
                 </div>
-                <div className="bp-mono mt-1" style={{ fontSize: 10, color: "#8fa0c8", letterSpacing: "0.08em", textTransform: "uppercase" }}>tasks live</div>
+                <div className="bp-mono mt-1" style={{ fontSize: 9.5, color: "#8fa0c8", letterSpacing: "0.08em", textTransform: "uppercase" }}>tasks</div>
               </div>
               <div>
-                <div style={{ fontFamily: "var(--font-heading)", fontSize: "clamp(28px,3vw,40px)", fontWeight: 700, color: "#4cb5ff", lineHeight: 1 }}>
+                <div style={{ fontFamily: "var(--font-heading)", fontSize: "clamp(24px,2.4vw,34px)", fontWeight: 700, color: "#4cb5ff", lineHeight: 1 }}>
                   <CountUp value={273} duration={1.5} />
                 </div>
-                <div className="bp-mono mt-1" style={{ fontSize: 10, color: "#8fa0c8", letterSpacing: "0.08em", textTransform: "uppercase" }}>frames · sample</div>
+                <div className="bp-mono mt-1" style={{ fontSize: 9.5, color: "#8fa0c8", letterSpacing: "0.08em", textTransform: "uppercase" }}>frames · sample</div>
               </div>
               <div>
-                <div style={{ fontFamily: "var(--font-heading)", fontSize: "clamp(28px,3vw,40px)", fontWeight: 700, color: "#a78bfa", lineHeight: 1 }}>
+                <div style={{ fontFamily: "var(--font-heading)", fontSize: "clamp(24px,2.4vw,34px)", fontWeight: 700, color: "#a78bfa", lineHeight: 1 }}>
+                  <CountUp value={60} duration={1.5} />+
+                </div>
+                <div className="bp-mono mt-1" style={{ fontSize: 9.5, color: "#8fa0c8", letterSpacing: "0.08em", textTransform: "uppercase" }}>caps · queue</div>
+              </div>
+              <div>
+                <div style={{ fontFamily: "var(--font-heading)", fontSize: "clamp(24px,2.4vw,34px)", fontWeight: 700, color: "#ff9a4d", lineHeight: 1 }}>
                   15/15
                 </div>
-                <div className="bp-mono mt-1" style={{ fontSize: 10, color: "#8fa0c8", letterSpacing: "0.08em", textTransform: "uppercase" }}>hard rules PASS</div>
+                <div className="bp-mono mt-1" style={{ fontSize: 9.5, color: "#8fa0c8", letterSpacing: "0.08em", textTransform: "uppercase" }}>hard rules PASS</div>
+              </div>
+              <div>
+                <div style={{ fontFamily: "var(--font-heading)", fontSize: "clamp(24px,2.4vw,34px)", fontWeight: 700, color: "#5ee08a", lineHeight: 1 }}>
+                  92<span style={{ fontSize: "0.6em", color: "#8fa0c8" }}>%</span>
+                </div>
+                <div className="bp-mono mt-1" style={{ fontSize: 9.5, color: "#8fa0c8", letterSpacing: "0.08em", textTransform: "uppercase" }}>first-pass ship</div>
               </div>
             </div>
           </motion.div>
@@ -192,7 +204,7 @@ export function CinemaWall() {
             </motion.span>
           </div>
           <div className="bp-mono flex items-center gap-3" style={{ fontSize: 10.5, color: "#8fa0c8", letterSpacing: "0.06em" }}>
-            <span>6 clips live</span>
+            <span>6 sample clips · 17 tasks total</span>
             <span style={{ opacity: 0.4 }}>·</span>
             <span>4 ego + 1 tabletop + 1 exo</span>
             <span style={{ opacity: 0.4 }}>·</span>

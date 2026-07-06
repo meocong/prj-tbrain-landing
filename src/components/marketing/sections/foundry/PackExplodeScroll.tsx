@@ -179,7 +179,7 @@ export function CapturePackExplode() {
         <div className="flex items-start justify-between">
           <div>
             <FigLabel>FIG.01 — TBRAIN CAPTURE PACK · EXPLODED</FigLabel>
-            <h2 className="mt-4 max-w-xl font-semibold" style={{ fontFamily: "var(--font-heading)", fontSize: "clamp(26px,4vw,44px)", lineHeight: 1.08 }}>Our own rig — built from research-grade parts</h2>
+            <h2 className="mt-4 max-w-xl font-semibold" style={{ fontFamily: "var(--font-heading)", fontSize: "clamp(26px,4vw,44px)", lineHeight: 1.08 }}>Every sensor on the rig, named</h2>
             <p className="mt-3 max-w-md" style={{ fontSize: 15, color: "var(--bp-ink-dim)" }}>Scroll to disassemble it. Each part names the data stream it produces.</p>
           </div>
           <IsoAxis className="hidden lg:block" />

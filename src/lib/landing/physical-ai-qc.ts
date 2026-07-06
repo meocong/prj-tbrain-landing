@@ -74,10 +74,10 @@ export const AUTO_LABEL_STAGES: StageCard[] = [
   {
     key: "metadata",
     fig: "FIG.05B — METADATA",
-    title: "Metadata · schema_v3 provenance trail",
-    model: "labels.json · schema_v3",
-    detail: "Every capture ships with a schema_v3 labels.json that records not just the labels but the exact model + version + git SHA that produced each field. Any claim we make is diffable.",
-    output: "labels.json · models { hands, object_seg, object_mesh, object_pose, depth, action }",
+    title: "Metadata · provenance trail",
+    model: "manifest · versioned schema",
+    detail: "Every capture ships with a manifest that records not just the labels but the exact model + version + git SHA that produced each field. Any claim we make is diffable.",
+    output: "manifest · models { hands, object_seg, object_mesh, object_pose, depth, action }",
     jsonSnippet: `{
   "schema_version": "3.0_tbrain_ego",
   "clip_id": "pick_up_the_cup__t01",
@@ -108,10 +108,10 @@ export const AUTO_LABEL_STAGES: StageCard[] = [
     key: "body",
     fig: "FIG.05D — KEYPOINTS · BODY",
     title: "Body pose · exocentric mocap · Sapiens secondary",
-    model: "mocap primary · sapiens 308-kpt secondary · F11 gate",
-    detail: "High-fidelity body pose comes from partner-signed exocentric mocap sessions. Sapiens 308-kpt runs on every capture and lands in schema_v3.body_dense, but after the F11 hardening pass (burn v1b0cce1) body_dense is OFF by default in the annotated.mp4 — the bystander skeleton no longer leaks. Kpts remain in labels.json for downstream research + retrained gates surface partial-body detections.",
-    output: "body_dense (308 × 2 · conf) · exo mocap skeleton (partner) · F2 min_kpts gate · F11 default off",
-    honestNote: "F2 exposes silent Sapiens failures with a watermark. F11 turns body_dense off in the visualization by default (bystander skeleton hidden). Landing viz suppresses ego frames where topology is invalid (nose Y > hip Y). Body_dense kpts still ride in labels.json.body_dense with the schema_v3 provenance trail.",
+    model: "mocap primary · sapiens 308-kpt secondary · topology gate",
+    detail: "High-fidelity body pose comes from partner-signed exocentric mocap sessions. Sapiens 308-kpt runs on every capture and lands in the manifest, but after the pipeline hardening pass (burn v1b0cce1) the dense body layer is OFF by default in the annotated.mp4 — the bystander skeleton no longer leaks. Kpts remain in the manifest for downstream research + retrained gates surface partial-body detections.",
+    output: "body_dense (308 × 2 · conf) · exo mocap skeleton (partner) · min_kpts gate · dense default off",
+    honestNote: "The watermark surface exposes silent Sapiens failures. The dense body layer is off in the visualization by default (bystander skeleton hidden). Landing viz suppresses ego frames where topology is invalid (nose Y > hip Y). Raw kpts still ride in the manifest with the full provenance trail.",
   },
   {
     key: "masks",
@@ -169,7 +169,7 @@ export const HARD_RULES: HardRule[] = [
   { id: "body_pose_rate",         label: "Body pose detection rate",          category: "detection",   threshold: "> 40%",                  detail: "Fraction of frames with a full body pose. Feeds retargeting; below floor the operator is off-camera too long.",                             sampleOk: "191/271 · 70.5%" },
   { id: "body_dense_rate",        label: "Body dense-kpt rate",               category: "detection",   threshold: "> 60% · conf",           detail: "Sapiens 308-kpt coverage. Includes mean confidence so a low-conf pass gets flagged before ship.",                                          sampleOk: "271/271 · 100% · conf=0.57" },
   { id: "grasp_event_density",    label: "Grasp event density",               category: "semantic",    threshold: "> 0.05 / frame",         detail: "Derived from hand + object overlap. Low density on a manipulation clip means one of hand-track or object-track failed.",                  sampleOk: "110 events / 271 frames · 40.6" },
-  { id: "schema_v3_provenance",   label: "Schema + provenance trail",         category: "provenance",  threshold: "schema_v3 · git_sha",    detail: "Every field must record the model + version + git SHA that produced it. Non-negotiable — anchors the diffability contract.",             sampleOk: "schema_v3 · git_sha=1b0cce1" },
+  { id: "schema_provenance",      label: "Schema + provenance trail",         category: "provenance",  threshold: "model + version + git_sha", detail: "Every field must record the model + version + git SHA that produced it. Non-negotiable — anchors the diffability contract.",             sampleOk: "provenance · git_sha=1b0cce1" },
 ];
 
 /* ────────────────────────────────────────────────────────────────────
@@ -194,10 +194,10 @@ export const HUMAN_QC = {
     },
   ],
   workflow: [
-    { step: "01", label: "Auto-label produces labels.json + rerun.rrd", detail: "8 models run on the raw capture" },
-    { step: "02", label: "15 hard rules run · reject or PASS/PARTIAL",  detail: "Auto-reject removes obvious junk" },
-    { step: "03", label: "PARTIAL/FAIL_LABEL routed to Label Studio",   detail: "Only what needs a human touches a human" },
-    { step: "04", label: "Reviewer signs off · updates schema_v3",       detail: "Every fix keeps the provenance trail" },
+    { step: "01", label: "Auto-label produces the manifest + rerun.rrd", detail: "Eight models run on the raw capture" },
+    { step: "02", label: "15 hard rules run · reject or PASS/PARTIAL",   detail: "Auto-reject removes obvious junk" },
+    { step: "03", label: "PARTIAL/FAIL_LABEL routed to Label Studio",    detail: "Only what needs a human touches a human" },
+    { step: "04", label: "Reviewer signs off · updates the manifest",    detail: "Every fix keeps the provenance trail" },
     { step: "05", label: "Re-run hard rules · PASS ships",               detail: "Zero-trust · a passing rule set is ship-ready" },
   ],
 } as const;
@@ -236,6 +236,6 @@ export const QC_DELTA = {
     { k: "After hard-rules gate",    v: 78,   sub: "auto-accept · 22% reject" },
     { k: "After AI-filter refine",   v: 85,   sub: "confidence + smoothing"   },
     { k: "After Label Studio fix",   v: 92,   sub: "human kpt + mask fix"     },
-    { k: "After reviewer sign-off",  v: 92,   sub: "ship-ready · schema_v3"   },
+    { k: "After reviewer sign-off",  v: 92,   sub: "ship-ready · provenance-locked" },
   ],
 } as const;

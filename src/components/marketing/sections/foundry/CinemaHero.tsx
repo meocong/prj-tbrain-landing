@@ -21,7 +21,6 @@ import Link from "next/link";
 import { ArrowRight, Check, Video, Clock, ShieldCheck, PackageCheck, Scan } from "lucide-react";
 import { FOUNDRY_HERO, PROBLEM, PROOF_POINTS, HERO_MIX } from "@/lib/landing/physical-ai";
 import { Defs } from "./PackExplodeScroll";
-import { HeroSideRail } from "./HeroSideRail";
 import { HeroMobileRail } from "./HeroMobileRail";
 
 /* Hero media — cross-fades 3 ops-provided clips. Falls back to worker-hero
@@ -166,7 +165,6 @@ function HeroVideo() {
       <div aria-hidden className="absolute inset-x-0 bottom-0" style={{ height: "34%", background: "linear-gradient(to top, var(--bp-bg), transparent)" }} />
 
       <CaptureHUD reduce={reduce} />
-      <HeroSideRail />
       <HeroMobileRail />
 
       <div className="absolute inset-0 z-10 flex flex-col px-5 sm:px-10 lg:px-14 pb-6 sm:pb-12 lg:pb-16">
