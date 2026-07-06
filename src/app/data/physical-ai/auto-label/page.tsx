@@ -11,6 +11,7 @@ import { LerobotPreview } from "@/components/marketing/sections/foundry/LerobotP
 import { RerunEmbed } from "@/components/marketing/sections/foundry/RerunEmbed";
 import { SubpageHero, Sheet, SheetHeading, StagePanel } from "@/components/marketing/blueprint/kit";
 import { PageNav } from "@/components/marketing/blueprint/PageNav";
+import { Breadcrumb, PrevNextFooter } from "@/components/marketing/blueprint/SubpageNav";
 import { ScrollProgress } from "@/components/marketing/fx/ScrollProgress";
 import { SapiensDiagnosticPanel } from "@/components/marketing/sections/foundry/SapiensDiagnosticPanel";
 import { RerunIframeLoader } from "@/components/marketing/sections/foundry/qc/RerunIframeLoader";
@@ -298,6 +299,11 @@ export default function AutoLabelPage() {
         ]}
       />
       <main>
+        <Breadcrumb trail={[
+          { label: "Tbrain", href: "/" },
+          { label: "Physical AI", href: "/data/physical-ai" },
+          { label: "Auto-Label pipeline" },
+        ]} />
         <SubpageHero
           fig="FIG.05 — AUTO-LABEL PIPELINE"
           eyebrow="Physical AI · Robotics data foundry"
@@ -358,6 +364,10 @@ export default function AutoLabelPage() {
         <AutoLabelDeepDive />
 
         <CTA />
+        <PrevNextFooter
+          prev={{ label: "Physical AI overview", href: "/data/physical-ai", sub: "Landing · foundry story · 20 sections" }}
+          next={{ label: "QC playbook", href: "/data/physical-ai/quality", sub: "15 hard rules · 3 human review layers" }}
+        />
       </main>
       <Footer />
     </div>
