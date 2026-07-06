@@ -8,6 +8,8 @@ import { QCFlow } from "@/components/marketing/sections/foundry/QCFlow";
 import { LabelStudioCard } from "@/components/marketing/sections/foundry/qc/LabelStudioCard";
 import { RerunCapturedCard } from "@/components/marketing/sections/foundry/qc/RerunCapturedCard";
 import { RerunIframeLoader } from "@/components/marketing/sections/foundry/qc/RerunIframeLoader";
+import { HitlWorkflowDiagram } from "@/components/marketing/sections/foundry/qc/HitlWorkflowDiagram";
+import { LabelSpeedPanel } from "@/components/marketing/sections/foundry/qc/LabelSpeedPanel";
 import { SubpageHero, Sheet, SheetHeading } from "@/components/marketing/blueprint/kit";
 import { PageNav } from "@/components/marketing/blueprint/PageNav";
 import { Breadcrumb, PrevNextFooter } from "@/components/marketing/blueprint/SubpageNav";
@@ -128,7 +130,9 @@ function Layer3LabelStudio() {
         title="Label Studio · humans on the last mile, not the first"
         lead="Only PARTIAL/FAIL captures reach Label Studio, pre-populated with auto-label output. Annotators correct kpt drift, adjust masks, override verb-noun — never annotate from a blank slate. Every correction lands as a labeled diff back into the training loop."
       />
-      <div className="mt-8">
+      <div className="mt-8 space-y-6">
+        <HitlWorkflowDiagram />
+        <LabelSpeedPanel />
         <LabelStudioCard />
       </div>
     </Sheet>

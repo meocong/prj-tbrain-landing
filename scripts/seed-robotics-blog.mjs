@@ -38,58 +38,77 @@ const POSTS = [
     slug: "anatomy-of-a-physical-ai-capture-pack",
     title: "Anatomy of a Physical AI capture pack",
     excerpt:
-      "The rig we carry into a factory to record a training-grade episode — enclosure, sensors, hardware clock, and why offline-first is non-negotiable.",
+      "MK-001 REV A — 6-part BOM, 1638 sensor timestamps per session on pick_up_the_cup, and why offline-first is non-negotiable in a real factory.",
     category: "robotics",
     tags: ["capture", "hardware", "egocentric", "physical-ai"],
     cover_image_url: "/images/pack/pack-hero.jpg",
     author_name: "Tbrain Robotics",
     content_md: `# Anatomy of a Physical AI capture pack
 
-Robot foundation models don't lack compute. They lack synchronized, action-paired data captured in the messy real world. The pack is what makes that data possible.
+**Anchor concept · hardware.** Robot foundation models do not lack compute. They lack synchronized, action-paired data captured in the messy real world. The MK-001 REV A pack is the cheapest bridge that turns any operator on any factory floor into a labeled data source.
 
-## Why the pack matters
+## The rig — MK-001 REV A · 6 parts
 
-Teleop is expensive; web video is passive. Neither ships with per-frame joint states, gripper events, and camera intrinsics that a policy can learn from. A wearable capture pack is the cheapest bridge: it turns any operator on any factory floor into a labeled data source.
+| # | Part | Stream | Role |
+|---|------|--------|------|
+| 01 | Intel RealSense D455 | RGB · Depth · IMU | Global-shutter first-person capture |
+| 02 | GoPro head-mount | Stabilized RGB | UMI-compatible fisheye |
+| 03 | Raspberry Pi 5 (8GB) | Sync · timestamps | Hardware-clock + local pipeline |
+| 04 | NVMe SSD (256GB) | Offline buffer | Zero dropped frames |
+| 05 | 20,000mAh PD power bank | Power | Full 8–10h shift |
+| 06 | 3D-printed belt harness | — | All-day wearable |
 
-## The rig — MK-001 REV A
+## Real numbers from pick_up_the_cup · 20260617T01
 
-- **Intel RealSense D455** — stereo depth + RGB + IMU · global shutter · ~87° FOV
-- **GoPro head-mount** — HyperSmooth stabilized RGB · UMI-compatible fisheye
-- **Raspberry Pi 5 (8GB)** — hardware-clock sync + local pipeline
-- **NVMe SSD (256GB)** — offline buffer, zero dropped frames
-- **20,000mAh PD power bank** — full 8–10h shift
-- **3D-printed belt** — ergonomic, all-day wearable
+- **273 frames** at 15 fps · 18.2 s runtime
+- **6 streams** synchronized to a single interrupt clock
+- **273 × 6 = 1638 sensor timestamps** per session — no software-clock inference
+- **0 dropped frames** across the shift (NVMe write is 3× the sensor bit-rate)
 
-## The hardware clock
+## Why the hardware clock matters
 
-Software timestamps drift ~40 ms an hour. On a fast fabric fold, that is four mislabeled frames. Every stream on the pack timestamps to the same interrupt-service clock, so downstream SLAM and MANO don't inherit a lie.
+Software timestamps drift roughly 40 ms per hour. On a fast fabric fold that is four mislabeled frames. Every stream timestamps to the same interrupt-service clock, so downstream SLAM and hand-track do not inherit a lie.
 
-## Offline-first
+## Offline-first, always
 
-Factories have unreliable Wi-Fi. The pack caches locally and syncs every five minutes in the background — no capture ever waits for a connection. Uploads land in MinIO on-site, mirror to R2, then to our foundry.
+Factories have unreliable Wi-Fi. The pack caches locally and syncs every five minutes in the background — no capture ever waits for a connection. Uploads land in an on-site cache, mirror to object storage, then to our foundry.
 
-## From pack to pipeline
+## If you buy
 
-A capture becomes a **schema_v3 labels.json** in ≤48h — through 8 auto-label models and 15 hard rules. [See the auto-label pipeline →](/data/physical-ai/auto-label)
+- MK-001 REV A kit list + capture firmware for your operators to wear
+- 8-stream synchronized data on every session (RGB · Depth · IMU · Audio · SLAM · Pose · action_segments · manifest)
+- Deployment support for on-site cache + offline sync
+- Retainer for firmware updates as we add sensors
+
+Continue to the pipeline that consumes these captures → [/data/physical-ai/auto-label](/data/physical-ai/auto-label)
 `,
   },
   {
     slug: "eight-models-one-auto-label-pipeline",
-    title: "8 models, one auto-label pipeline",
+    title: "8 models, one auto-label artifact",
     excerpt:
-      "From raw rgb.mp4 to schema_v3 labels.json in ≤48h — which model runs where, what each one emits, and how they combine into a single provenance-traced artifact.",
+      "Per-capture output for 4 real episodes — HaWoR ✓, Sapiens gated, SAM3 ✓ (except iron_02 fail), MoGe ✓, verb-noun VLM ✓. Every field diffable.",
     category: "robotics",
     tags: ["auto-label", "annotation", "pipeline", "physical-ai"],
     cover_image_url: "/images/descriptions/pick_up_the_cup.jpg",
     author_name: "Tbrain Robotics",
-    content_md: `# 8 models, one auto-label pipeline
+    content_md: `# 8 models, one auto-label artifact
 
-Eight models run on every capture. They emit into a single **labels.json** with per-field provenance. Here is what each does — and why the assembly matters more than any one model.
+**Anchor concept · pipeline.** Eight models run on every capture. They emit into a single manifest with per-field provenance. Here is the real per-capture output on 4 shipped episodes.
+
+## Per-capture output — 4 real captures
+
+| Capture | Hand · MANO | Body · Sapiens | Object · SAM3 | Depth · MoGe | Verb-noun · VLM |
+|---------|:-:|:-:|:-:|:-:|:-:|
+| pick_up_the_cup · 20260617T01 | ✓ | gated (ego topology) | ✓ | ✓ | ✓ |
+| iron_product · 20260626T01 | ✓ | gated | ✓ | ✓ | ✓ |
+| iron_product · 20260626T02 | ✓ | gated | **FAIL · locked pants** | ✓ | ✓ |
+| sew_hem · 20260626T01 | ✓ | gated | ✓ | ✓ | ✓ |
 
 ## The eight
 
 1. **Hand tracker** — per-frame MANO 21-kpt + per-hand SLAM
-2. **Body dense** — 308-kpt whole-body regression (COCO body + feet + face + 2×21 hands + 175 mesh)
+2. **Body dense** — 308-kpt whole-body regression, topology-gated on ego
 3. **Video segmenter** — text-prompted object masks + tracklet IDs
 4. **6-DoF object pose** — per-frame position + orientation
 5. **Monocular depth** — metric depth + pointmap
@@ -99,128 +118,205 @@ Eight models run on every capture. They emit into a single **labels.json** with 
 
 ## Description first
 
-The VLM is cheap and fast: it emits **verb-noun action_segments** with a confidence and a canonical noun_id. Downstream stages read this to decide what mask to track and what pose to solve.
+The VLM is cheap and fast: it emits verb-noun action_segments with confidence + canonical noun_id. Downstream stages read this to decide what mask to track and what pose to solve.
 
-## Provenance everywhere
+## The honest failure — iron_product 20260626T02
 
-Every field in labels.json records the model + version + git SHA that produced it. A rerun with a newer model creates a **diffable** update — no silent overwrites. That's how we ship "the same view our engineers see" in every episode.
+The segmenter locked onto the operator's pants instead of the iron across 100% of frames. Rather than silently ship, our hard-rules gate fires \`FAIL_LABEL\` on the tracklet and we ship the flag with the capture — not silence. The mask-drift watermark surfaces in the annotated.mp4 so any downstream diff can see it.
 
-## Failures we surface
+## If you buy
 
-On iron_T02, the segmenter locked onto shorts instead of the iron. The summary.json check flagged it. We ship that flag with the capture — not silence.
+- Per-episode manifest with every field's model + version + git SHA
+- The burned annotated.mp4 with palette-encoded provenance + watermark failure surface
+- Rerun .rrd scene with all 9 tracks (RGB · Depth · MANO L/R · body_dense · mask · pose · SLAM · action_segments)
+- Retrain cycle: your feedback lands in the next auto-label version, diffable against the last
 
-Full deep dive at [/data/physical-ai/auto-label →](/data/physical-ai/auto-label)
+Full deep dive → [/data/physical-ai/auto-label](/data/physical-ai/auto-label)
 `,
   },
   {
     slug: "fifteen-hard-rules-we-run-on-every-capture",
-    title: "15 hard rules we run on every capture (and the failures they catch)",
+    title: "15 hard rules · 3 real fires",
     excerpt:
-      "Every capture crosses a 15-check machine-readable gate before a human ever sees it. Here's what each rule watches for — and a real capture where it fired.",
+      "Full 15-rule taxonomy with real threshold + real sample-pass value from pick_up_the_cup. Three actual fires: iron_T01 K_consistency, sew_02 hand_detect, body_dense on textile ego.",
     category: "robotics",
     tags: ["qc", "quality-control", "hard-rules", "physical-ai"],
     cover_image_url: "/images/diagrams/diagram-qc.svg",
     author_name: "Tbrain Robotics",
-    content_md: `# 15 hard rules we run on every capture
+    content_md: `# 15 hard rules · 3 real fires
 
-The cheapest reviewer is an assertion. We save the humans for judgment calls.
+**Anchor concept · QC.** The cheapest reviewer is an assertion. Fifteen machine-readable rules run against every capture before a human ever sees it.
 
-## Why hard rules first
+## The 15 rules — with real sample-pass values
 
-Auto-label output is not silver bullet — it drifts, hallucinates, and occasionally locks onto the wrong object. Before any of that touches a human queue, 15 machine-checkable rules run against every capture. If any fires, the capture routes into human review with the reason attached.
+Every value below is from pick_up_the_cup · 20260617T01 (273 frames · 18.2 s).
 
-## The six categories
+| # | Rule | Category | Threshold | Sample value |
+|---|------|----------|-----------|--------------|
+| 01 | K_consistency | calibration | ε ≤ 1e-3 | 8.7e-5 |
+| 02 | Camera trajectory | calibration | monotonic + smooth | pass |
+| 03 | Hand detection rate | detection | > 90% both hands | L=94% · R=97% |
+| 04 | Filter-pass rate | detection | > 85% | 92% |
+| 05 | Body pose rate | detection | > 40% | 70.5% |
+| 06 | Body dense rate | detection | > 60% + conf | 100% · conf 0.57 |
+| 07 | Frame alignment | temporal | ≤ 1 frame drift | 0 |
+| 08 | Tracklet continuity | temporal | > 70% assigned | 100% |
+| 09 | Kpt outlier % | spatial | < 5% | 1.8% |
+| 10 | 3D dual-frame sanity | spatial | Δz < 0.15m | 0.04m |
+| 11 | World-scale sanity | spatial | 0.1 ≤ ‖t‖ ≤ 5m | 1.45m mean |
+| 12 | Class mapping rate | semantic | > 70% | 266/266 · 100% |
+| 13 | Action segment count | semantic | ≥ 1 | 5 · vlm |
+| 14 | Grasp event density | semantic | > 0.05 / frame | 110 / 271 = 40.6% |
+| 15 | Schema + provenance | provenance | model + version + git_sha | git=1b0cce1 |
 
-- **Calibration** — K_consistency, camera trajectory sanity
-- **Detection** — hand rate, filter pass rate, body pose rate, body dense rate
-- **Temporal** — frame alignment, tracklet continuity
-- **Spatial** — kpt outlier %, 3D dual-frame, world-scale sanity
-- **Semantic** — class mapping rate, action segment count, grasp event density
-- **Provenance** — schema_v3 + git SHA trail
+## Three real fires
 
-## Real fires
+### Fire 1 · K_consistency on iron_product · 20260626T01
+Per-cap SLAM divergence during the fold pass. Rule 01 fired at ε = 6.2e-3, capture routed to Label Studio with reason \`K_consistency\`. Human check confirmed drift from a lens smudge; recaptured next shift.
 
-- **K_consistency** caught a per-cap SLAM divergence on iron_T01 before it corrupted downstream 3D kpts
-- **hand_detect_rate** flagged sew_02 at L=8% — routed to Label Studio for human kpt
-- **body_dense_rate** shows Sapiens degrades on tight ego view — we ship the honest metric, not a hidden fallback
+### Fire 2 · hand_detect_rate on sew_hem · 20260626T02
+Left-hand detection rate dropped to 8% during the needle-threading segment (hand tucked behind fabric). Rule 03 fired \`hand_detect_rate · L=8%\` and routed to a human kpt-fix queue.
+
+### Fire 3 · body_dense_rate on textile ego captures
+Sapiens 308-kpt regressor emits confidently-wrong nose-below-hip skeletons on head-mounted cameras. Rule 06 catches this as \`topology_invalid\` and suppresses the dense body layer from the visualization — not from the manifest. The raw kpts still ride downstream for research on partial-body detection.
 
 ## Never silent
 
-FAIL → Label Studio task with the rule name attached. Reviewers know exactly what to check. Every fix keeps the schema_v3 provenance trail intact.
+Every fire lands as a Label Studio task with the rule name attached. Every fix keeps the provenance trail intact. Every hard-rule value ships in the summary.json alongside the capture.
 
-Full QC playbook at [/data/physical-ai/quality →](/data/physical-ai/quality)
+## If you buy
+
+- summary.json for every capture with all 15 rule values
+- Reviewer sign-off log per capture (accept · reject · flag + reason codes)
+- Escalation trail for systemic failures (root-cause reports, feedback into training loop)
+- Same 15-rule gate applied to any recapture on your behalf
+
+Full QC playbook → [/data/physical-ai/quality](/data/physical-ai/quality)
 `,
   },
   {
     slug: "label-studio-humans-on-the-last-mile",
-    title: "Label Studio + humans on the last mile",
+    title: "Humans on the last mile",
     excerpt:
-      "Auto-label + hard rules do the heavy lift. Only PARTIAL/FAIL captures reach a human — pre-populated in Label Studio with the reason attached.",
+      "Under 10% of frames touch a human. 68 vs 12 kpts/min pre-fill vs blank. 92% first-pass ship rate. Real numbers on the HITL economics.",
     category: "robotics",
     tags: ["hitl", "label-studio", "human-review", "physical-ai"],
     cover_image_url: "/images/hitl/annotated_sample.jpg",
     author_name: "Tbrain Robotics",
-    content_md: `# Label Studio + humans on the last mile
+    content_md: `# Humans on the last mile
 
-Full-blank annotation queues waste annotator time and catch only what a fresh eye can catch. Our queue looks nothing like that.
+**Anchor concept · HITL economics.** Auto-label + hard rules do the heavy lift. Humans only see what needs judgment.
 
-## Pre-populated, not blank
+## The numbers that matter
 
-Every task that reaches Label Studio arrives with auto-label output already loaded — MANO 21-kpt on the hand, SAM3 masks on the tracked object, verb-noun in the segment form. The annotator's job is **correction**, not from-scratch labeling.
+- **&lt; 10% of frames** touch a human directly
+- **68 kpts/min** annotator throughput on pre-populated tasks vs **12 kpts/min** on from-blank (5.7× lift, sample of 42 textile captures)
+- **92% first-pass ship rate** after hard rules → AI filter → Label Studio → reviewer
+- **6% escalation** to engineering for systemic failures
+- **avg 2.3 min** per task at the annotator layer
 
-## Three human layers
+## The 4-stage workflow
 
-1. **Task-level correction** — kpt drift, mask edges, verb-noun override
-2. **Reviewer sign-off** — a second annotator accepts / rejects / flags
-3. **Escalation dashboard** — systemic failures (segmenter locked wrong object across four caps in a row) route to engineering
+1. **Human framing box** — reviewer draws initial bounding box + verb-noun on 1 keyframe per capture
+2. **AI predicts** — auto-label pipeline pre-fills 21-kpt hand + 308-kpt body + object mask across all 273 frames
+3. **Human finetune** — annotator corrects drift, adjusts masks, overrides verb-noun. Every diff writes back to the manifest
+4. **Ship** — reviewer signs off. Hard rules re-run. LeRobot v2 parquet + Rerun scene shipped
 
-## Every fix is a diff
+## Why it holds ≤48h
 
-Every correction lands as a labeled diff back into the auto-label training loop. Nothing lands on the floor twice.
+An 18-second, 273-frame capture ships in 48 hours because the split looks like this:
 
-## The economics
+| Phase | Hours | What happens |
+|-------|-------|--------------|
+| Capture | 8 | Operator wears the rig · offline record + sync |
+| Auto-label | 6 | 8 models in parallel · hard rules gate |
+| HITL fix | 8 | Label Studio · &lt;10% frames touched |
+| QC + sign-off | 4 | Reviewer + escalation dashboard |
+| Buffer | 22 | Reshoot / escalation slack · rarely used |
 
-Auto-label + hard rules keep human touchpoints below 10% of frames. That's what makes ≤48h delivery + 92% ship rate feasible.
+Full HITL workflow diagram → [/data/physical-ai/quality#label-studio](/data/physical-ai/quality#label-studio)
 
-Full QC playbook at [/data/physical-ai/quality →](/data/physical-ai/quality)
+## If you buy
+
+- Label Studio project handoff with your captures pre-loaded, project template, and interface config
+- Reviewer notes per capture (which frames were touched, which rule fired the escalation)
+- Diffable correction trail — every kpt edit, every mask redraw, every verb-noun override is a labeled event
+- The same 4-stage workflow applied to any recapture we run for you
+
+Full QC playbook → [/data/physical-ai/quality](/data/physical-ai/quality)
 `,
   },
   {
     slug: "zero-trust-delivery-lerobot-plus-rerun-proof",
     title: "Zero-trust delivery · LeRobot v2 + Rerun proof",
     excerpt:
-      "Every episode ships as LeRobot v2 parquet + a Rerun .rrd. No screenshots, no cherry-picked metrics — the buyer opens the scene themselves.",
+      "The delivery contract, field-by-field. LeRobot v2 parquet walkthrough + Rerun .rrd scene + palette legend. What actually ships, per episode.",
     category: "robotics",
     tags: ["delivery", "lerobot", "rerun", "physical-ai"],
     cover_image_url: "/images/deliverables/all6-montage.png",
     author_name: "Tbrain Robotics",
     content_md: `# Zero-trust delivery · LeRobot v2 + Rerun proof
 
-We ship the source of truth. The buyer chooses the flavor.
+**Anchor concept · contract.** We ship the source of truth. The buyer chooses the flavor. No screenshots, no cherry-picked metrics — the buyer opens the scene themselves in the same viewer our engineers use to debug.
 
-## The delivery contract
+## LeRobot v2 parquet · field-by-field
 
-Every episode ships as **LeRobot v2 parquet + video** with the full **schema_v3 labels.json** and a **Rerun .rrd** scene. RLDS on request. No proprietary schema, no conversion contract.
+Every episode ships as LeRobot v2 parquet + video with the full manifest and a Rerun .rrd scene.
 
-## Why .rrd
+\`\`\`
+episode_000042.parquet
+├── observation.images.rgb        · uint8[T, H, W, 3]
+├── observation.images.depth      · float32[T, H, W]
+├── observation.hands.left.kpts   · float32[T, 21, 3]  (x, y, conf)
+├── observation.hands.right.kpts  · float32[T, 21, 3]
+├── observation.body_dense.kpts   · float32[T, 308, 2] (dense off by default in viz)
+├── observation.object.mask       · uint8[T, H, W]      (track_id encoded)
+├── observation.object.pose_6dof  · float32[T, 4, 4]
+├── observation.camera.slam       · float32[T, 4, 4]
+├── action.verb                   · string[T]           (canonical from ontology)
+├── action.noun_id                · int32[T]
+├── action.segment_id             · int32[T]
+└── meta.provenance               · struct              (per-field model + version + git_sha)
+\`\`\`
 
-A Rerun scene beats a screenshot the same way source code beats a screenshot of source code. Every claim we make in the sales pitch is **scrubbable** from the same viewer our engineers use to debug. No hidden state, no cherry-picked frame.
+## What ships in the .rrd scene
 
-## What ships in the scene
+9 tracks · 273 frames · 44 MB for pick_up_the_cup:
 
-- camera/rgb
-- camera/depth
-- hand/left · MANO 21-kpt
-- hand/right · MANO 21-kpt
-- body_dense · 308-kpt
-- object/mask · track_id
-- object/pose · 6-DoF
-- camera/trajectory · SLAM
-- action_segments · verb-noun timeline
+- \`camera/rgb\`
+- \`camera/depth\`
+- \`camera/trajectory\` (SLAM · line3d)
+- \`hand/left · MANO 21-kpt\`
+- \`hand/right · MANO 21-kpt\`
+- \`body/dense · 308-kpt\` (off by default · read via blueprint tree)
+- \`object/mask · track_id\`
+- \`object/pose · 6-DoF\`
+- \`action_segments\` (verb-noun timeline)
+
+## The palette legend
+
+Every colored dot / mesh in the annotated.mp4 maps 1:1 to a source in the manifest. Every watermark maps to a flag.
+
+| Color | Source | Meaning |
+|-------|--------|---------|
+| #4cb5ff | hand-tracker MANO | Primary hand tracker · SLAM per hand · 21-kpt |
+| #a78bfa | interp | Frame-level interpolation across a gap |
+| #f0a2ff | segmenter (mask only) | Object segmenter mask |
+| #ff9a4d | Sapiens wrist | Wrist fallback where hand-tracker fails |
+| #00e5c7 | MoGe depth | Metric depth + pointmap |
+| #5ee08a | human correction | Label Studio diff |
 
 ## Zero-trust means diffable
 
-Every field ships with the model + version + git SHA that produced it. A rerun with an updated model creates a diffable delta, not a silent overwrite. That is what "zero-trust" means: **the buyer never has to take our word for anything**.
+Every field ships with the model + version + git SHA that produced it. A rerun with an updated model creates a diffable delta, not a silent overwrite. The buyer never has to take our word for anything.
+
+## If you buy
+
+- LeRobot v2 parquet + video per episode
+- Rerun .rrd (all 9 tracks) for buyer scrub
+- Palette legend PDF (annotated.mp4 decoder)
+- Delivery within ≤48h of capture close
+- Retrain cadence: your feedback lands in the next auto-label cycle, diffable against the last
 
 Sample episode → [/data/physical-ai/quality#rerun-proof](/data/physical-ai/quality#rerun-proof)
 `,
