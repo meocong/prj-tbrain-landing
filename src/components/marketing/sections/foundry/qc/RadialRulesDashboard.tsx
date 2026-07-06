@@ -41,7 +41,7 @@ export function RadialRulesDashboard() {
     <div className="bp-card overflow-hidden" style={{ borderRadius: 16, background: "linear-gradient(180deg, #0d1524 0%, #050a12 100%)" }}>
       <div className="bp-mono flex items-center justify-between" style={{ padding: "10px 16px", fontSize: 11, color: "#8fa0c8", borderBottom: "1px solid var(--bp-line)" }}>
         <span>LAYER 1 · HARD RULES · 15 CHECKS · LIVE</span>
-        <span style={{ color: "#00e5c7" }}>schema_v3 · pick_up_the_cup 20260617T01</span>
+        <span style={{ color: "#00e5c7" }}>live · pick_up_the_cup 20260617T01</span>
       </div>
 
       <div className="grid gap-4 p-5 lg:grid-cols-[220px_minmax(0,1fr)]">
@@ -143,7 +143,7 @@ export function RadialRulesDashboard() {
             <span style={{ opacity: 0.4 }}>|</span>
             <span>reject rate global 22%</span>
             <span style={{ opacity: 0.4 }}>|</span>
-            <span>schema_v3 · git 1b0cce1</span>
+            <span>provenance · git 1b0cce1</span>
           </div>
         </div>
       </div>

@@ -17,7 +17,7 @@ const EGO_ROWS: Row[] = [
   { k: "Δ (nose - hip)",    v: "+37.5  · positive = TOPOLOGY_INVALID", ok: false },
   { k: "body kpt count",   v: "0 / 17 above threshold", ok: false },
   { k: "gate condition",   v: "nose_Y < hip_Y  AND  body_count ≥ 6", ok: false },
-  { k: "action",           v: "suppress face + dense from viz  · retain kpts in labels.json.body_dense", ok: false },
+  { k: "action",           v: "suppress face + dense from viz  · retain raw kpts in the manifest", ok: false },
 ];
 
 const TABLETOP_ROWS: Row[] = [
@@ -77,7 +77,7 @@ export function SapiensDiagnosticPanel() {
 
       <div className="bp-mono" style={{ padding: "12px 14px", fontSize: 10.5, color: "#8fa0c8", borderTop: "1px solid var(--bp-line)", lineHeight: 1.55 }}>
         <span style={{ color: "#00e5c7", fontWeight: 700 }}>gate rationale · </span>
-        On egocentric captures the wearer&apos;s head-mounted camera looks down; Sapiens predicts &quot;nose&quot; below &quot;hips&quot; — impossible in a coherent skeleton. The gate flags TOPOLOGY_INVALID and suppresses face + dense kpts from the visualization. The raw kpts stay in <code style={{ color: "#4cb5ff" }}>labels.json.body_dense</code> so downstream research on partial-body detection retains full access. High-fidelity body pose comes from partner-signed exocentric mocap instead.
+        On egocentric captures the wearer&apos;s head-mounted camera looks down; Sapiens predicts &quot;nose&quot; below &quot;hips&quot; — impossible in a coherent skeleton. The gate flags TOPOLOGY_INVALID and suppresses face + dense kpts from the visualization. The raw kpts stay in the manifest so downstream research on partial-body detection retains full access. High-fidelity body pose comes from partner-signed exocentric mocap instead.
       </div>
       {/* Real-cap thumbnail strip · every ego capture in the audit */}
       <div className="grid grid-cols-4 gap-0" style={{ borderTop: "1px solid var(--bp-line)" }}>

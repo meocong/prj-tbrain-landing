@@ -149,11 +149,11 @@ export default function PhysicalAIPage() {
         {/* 08 · Rerun episode viewer */}
         <RerunEmbed />
 
-        {/* 08b · Data concepts · the invariants a buyer should ask */}
-        <DataConcepts />
-
-        {/* 09 · Ten modalities · one export contract */}
+        {/* 08b · Ten modalities · one export contract (moved up per v5.5) */}
         <Catalog />
+
+        {/* 09 · Data concepts · the invariants a buyer should ask */}
+        <DataConcepts />
 
         {/* 10 · Hardware pack + operator app concept */}
         <HardwareShowcase />

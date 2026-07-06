@@ -13,8 +13,8 @@ const STATS: { k: string; v: number; suffix?: string; sub: string; color: string
 
 export function GlanceStats() {
   return (
-    <section className="relative overflow-hidden" style={{ padding: "clamp(56px,7vw,96px) 0", color: "#e8ecf5" }}>
-      <MeshBackdrop variant="aurora" gridOpacity={0.05} />
+    <section className="relative overflow-hidden" style={{ padding: "clamp(48px,6vw,80px) 0", color: "#e8ecf5" }}>
+      <MeshBackdrop variant="cyan" gridOpacity={0.03} />
       <div className="container relative z-10 mx-auto grid grid-cols-2 gap-8 px-5 lg:grid-cols-4">
         {STATS.map((s, i) => (
           <motion.div

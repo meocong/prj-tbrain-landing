@@ -29,7 +29,7 @@ export function RerunEmbed() {
             <span style={{ width: 8, height: 8, borderRadius: 8, background: "#ffbd2e" }} />
             <span style={{ width: 8, height: 8, borderRadius: 8, background: "#28c840" }} />
             <span style={{ marginLeft: 10, color: "var(--bp-cyan)" }}>Rerun · aloha-4cam.rrd</span>
-            <span style={{ marginLeft: "auto" }}>9 tracks · 273 frames · schema_v3</span>
+            <span style={{ marginLeft: "auto" }}>9 tracks · 273 frames · with manifest</span>
           </div>
 
           <RerunLoop src={RERUN_EMBED.fallbackVideo} />

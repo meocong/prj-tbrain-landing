@@ -18,7 +18,7 @@ import { HARD_RULES, HUMAN_QC, PROVENANCE_LOG, QC_DELTA } from "@/lib/landing/ph
 export const metadata: Metadata = {
   title: "QC Playbook · Physical AI Data Foundry",
   description:
-    "Tbrain's zero-trust QC pipeline — 15 hard rules, AI filter, and 3 human-review layers. Every ship-ready capture leaves a schema_v3 provenance trail and a Rerun scene.",
+    "Tbrain's zero-trust QC pipeline — 15 hard rules, AI filter, and 3 human-review layers. Every ship-ready capture leaves a per-field provenance trail and a Rerun scene.",
   alternates: { canonical: "/data/physical-ai/quality" },
   openGraph: {
     title: "Zero-Trust QC · 15 Hard Rules + 3-Layer Human Review",
@@ -36,7 +36,7 @@ const QUALITY_JSONLD = {
   "@type": "TechArticle",
   headline: "QC Playbook · Physical AI Data Foundry",
   description:
-    "Tbrain's zero-trust QC pipeline — 15 hard rules, AI filter, 3 human review layers, schema_v3 provenance, Rerun proof.",
+    "Tbrain's zero-trust QC pipeline — 15 hard rules, AI filter, 3 human review layers, per-field provenance, Rerun proof.",
   url: `${BASE_URL}/data/physical-ai/quality`,
   author: { "@type": "Organization", name: "Tbrain", url: BASE_URL },
   publisher: { "@type": "Organization", name: "Tbrain", url: BASE_URL },
@@ -171,7 +171,7 @@ function ProvenanceLogSection() {
     <Sheet id="provenance" fig="FIG.06E — PROVENANCE TRAIL" axis>
       <SheetHeading
         title="Every field records the model that produced it"
-        lead="labels.json.models is not decorative — downstream diffs, model rollouts, and root-cause reports all read this trail. Any claim we make is diffable."
+        lead="The manifest is not decorative — downstream diffs, model rollouts, and root-cause reports all read this trail. Any claim we make is diffable."
       />
       <div className="mt-8 bp-card" style={{ padding: 0, borderRadius: 14, overflow: "hidden" }}>
         <div className="bp-mono grid grid-cols-[80px_1fr_100px_140px_1fr] gap-3" style={{ padding: "10px 16px", fontSize: 10, color: "var(--bp-ink-faint)", letterSpacing: "0.08em", textTransform: "uppercase", borderBottom: "1px solid var(--bp-line)" }}>
@@ -290,7 +290,7 @@ export default function QualityPage() {
           fig="FIG.06 — QC PLAYBOOK"
           eyebrow="Physical AI · Robotics data foundry"
           title="Zero-trust QC · hard rules + AI filter + 3-layer human review"
-          lead="Every capture crosses 15 machine-checkable hard rules, an AI filter, and up to three human review layers before it ships. Every fix keeps the schema_v3 provenance trail intact, and every episode leaves a Rerun scene the buyer can open."
+          lead="Every capture crosses 15 machine-checkable hard rules, an AI filter, and up to three human review layers before it ships. Every fix keeps the provenance trail intact, and every episode leaves a Rerun scene the buyer can open."
           meta={[
             { k: "Hard rules", v: "15" },
             { k: "Human layers", v: "3" },
@@ -311,7 +311,7 @@ export default function QualityPage() {
         <QCFlow />
         <CTA />
         <PrevNextFooter
-          prev={{ label: "Auto-Label pipeline", href: "/data/physical-ai/auto-label", sub: "8 models · one contract · per-stage deep dive" }}
+          prev={{ label: "Auto-Label pipeline", href: "/data/physical-ai/auto-label", sub: "Per-stage deep dive · one contract" }}
           next={{ label: "Physical AI overview", href: "/data/physical-ai", sub: "Landing · foundry story · 20 sections" }}
         />
       </main>

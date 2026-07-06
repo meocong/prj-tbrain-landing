@@ -46,7 +46,7 @@ export function LabelStudioCard() {
         <span style={{ width: 8, height: 8, borderRadius: 8, background: "#ffbd2e" }} />
         <span style={{ width: 8, height: 8, borderRadius: 8, background: "#28c840" }} />
         <span style={{ marginLeft: 10 }}>Label Studio · project: physical_ai/textile_v2 · task 1247/1892</span>
-        <span style={{ marginLeft: "auto", color: "#00e5c7" }}>schema_v3 · pre-populated</span>
+        <span style={{ marginLeft: "auto", color: "#00e5c7" }}>auto-label · pre-populated</span>
       </div>
 
       <div className="grid" style={{ gridTemplateColumns: "220px 1fr 260px", minHeight: 420 }}>
@@ -149,7 +149,7 @@ export function LabelStudioCard() {
               </button>
             </div>
             <div className="bp-mono mt-3" style={{ fontSize: 10, color: "#8fa0c8" }}>
-              Every fix writes back to labels.json.models.action.overrides · schema_v3.
+              Every fix writes back to the manifest as an override · diffable per capture.
             </div>
           </div>
         </div>

@@ -48,8 +48,26 @@ function StagePreview({ stageKey }: { stageKey: string }) {
         </>
       )}
       {!hasVideo && images.length === 0 && (
-        <div className="lg:col-span-2 bp-card" style={{ padding: 32, borderRadius: 12, textAlign: "center", color: "var(--bp-ink-dim)" }}>
-          <div className="bp-mono" style={{ fontSize: 12 }}>Preview asset pending</div>
+        <div className="lg:col-span-2 bp-card relative overflow-hidden" style={{ padding: 24, borderRadius: 12, minHeight: 220 }}>
+          <svg viewBox="0 0 400 220" className="h-full w-full" preserveAspectRatio="xMidYMid meet" aria-hidden>
+            <defs>
+              <linearGradient id="stagePreviewBg" x1="0" x2="1" y1="0" y2="1">
+                <stop offset="0" stopColor="var(--bp-cyan)" stopOpacity="0.08" />
+                <stop offset="1" stopColor="var(--bp-purple)" stopOpacity="0.04" />
+              </linearGradient>
+            </defs>
+            <rect width="400" height="220" fill="url(#stagePreviewBg)" rx="8" />
+            <g stroke="var(--bp-cyan)" strokeOpacity="0.35" strokeWidth="1" fill="none">
+              <rect x="20" y="20" width="140" height="90" rx="4" />
+              <rect x="170" y="20" width="210" height="90" rx="4" />
+              <rect x="20" y="120" width="360" height="80" rx="4" />
+            </g>
+            <g fontFamily="var(--font-mono)" fontSize="9" fill="var(--bp-cyan)" letterSpacing="1">
+              <text x="30" y="38">INPUT · rgb.mp4</text>
+              <text x="180" y="38">{stage.model.toUpperCase()} · MODEL OUTPUT</text>
+              <text x="30" y="138">OUTPUT · {stage.output.slice(0, 42)}</text>
+            </g>
+          </svg>
         </div>
       )}
     </div>
@@ -62,8 +80,8 @@ export function AutoLabelDeepDive() {
   return (
     <Sheet id="auto-label" fig="FIG.05 — AUTO-LABEL · 4 SIGNATURE OUTPUTS" axis>
       <SheetHeading
-        title="8 models, one contract"
-        lead="Every raw capture runs through eight models in parallel. Four outputs are the ones a robotics team touches first — the rest live in the schema_v3 labels.json trail."
+        title="Per-stage deep dive"
+        lead="Every raw capture runs through the auto-label pipeline in parallel. Four outputs are the ones a robotics team touches first — the rest live in the provenance manifest that ships alongside the video."
       />
 
       {/* Tab bar */}
@@ -124,7 +142,7 @@ export function AutoLabelDeepDive() {
           Description, metadata, object masks, depth, Rerun proof — the full 8-model pipeline lives on the deep dive page.
         </p>
         <Link href="/data/physical-ai/auto-label" className="bp-mono" style={{ fontSize: 13, color: "var(--bp-cyan)", display: "inline-flex", alignItems: "center", gap: 6, padding: "10px 16px", border: "1px solid var(--bp-cyan)", borderRadius: 8 }}>
-          See full 8-model pipeline <ArrowRight className="h-4 w-4" />
+          See the full pipeline <ArrowRight className="h-4 w-4" />
         </Link>
       </div>
     </Sheet>

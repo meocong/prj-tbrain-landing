@@ -10,7 +10,7 @@ import { ThemeToggle } from "@/components/theme/ThemeToggle";
 
 const DATA_ITEMS = [
   { label: "Overview", href: "/data/physical-ai", description: "Robotics data foundry · full landing" },
-  { label: "Auto-Label pipeline", href: "/data/physical-ai/auto-label", description: "8 models · one contract · per-stage deep dive" },
+  { label: "Auto-Label pipeline", href: "/data/physical-ai/auto-label", description: "Per-stage deep dive · one contract" },
   { label: "QC playbook", href: "/data/physical-ai/quality", description: "15 hard rules + 3 human review layers" },
 ];
 
