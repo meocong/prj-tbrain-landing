@@ -47,10 +47,11 @@ export function StaggerContainer({
   stagger?: number;
   amount?: number;
 }) {
+  const shouldReduce = useReducedMotion();
   return (
     <motion.div
       className={className}
-      initial="hidden"
+      initial={shouldReduce ? "visible" : "hidden"}
       whileInView="visible"
       viewport={{ once: true, amount }}
       variants={{

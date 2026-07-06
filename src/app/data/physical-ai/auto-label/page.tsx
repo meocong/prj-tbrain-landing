@@ -8,7 +8,6 @@ import { DescriptionMetadata } from "@/components/marketing/sections/foundry/Des
 import { AutoLabelDeepDive } from "@/components/marketing/sections/foundry/AutoLabelDeepDive";
 import { ModelStackCard } from "@/components/marketing/sections/foundry/ModelStackCard";
 import { LerobotPreview } from "@/components/marketing/sections/foundry/LerobotPreview";
-import { RerunEmbed } from "@/components/marketing/sections/foundry/RerunEmbed";
 import { SubpageHero, Sheet, SheetHeading, StagePanel } from "@/components/marketing/blueprint/kit";
 import { PageNav } from "@/components/marketing/blueprint/PageNav";
 import { Breadcrumb, PrevNextFooter } from "@/components/marketing/blueprint/SubpageNav";
@@ -340,8 +339,6 @@ export default function AutoLabelPage() {
             <StageRerun />
           </div>
         </section>
-
-        <RerunEmbed />
 
         <PalettePanel />
 
