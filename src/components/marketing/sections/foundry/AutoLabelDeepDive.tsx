@@ -42,7 +42,7 @@ function StagePreview({ stageKey }: { stageKey: string }) {
         <>
           {images.slice(0, 4).map((src) => (
             <div key={src} className="bp-card overflow-hidden" style={{ borderRadius: 12 }}>
-              <img src={src} alt={`${stage.title} example`} style={{ width: "100%", display: "block" }} />
+              <img src={src} alt={`${stage.title} example`} style={{ width: "100%", display: "block" }}  loading="lazy" />
             </div>
           ))}
         </>

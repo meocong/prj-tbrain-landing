@@ -46,7 +46,7 @@ function HeroMix({ reduce }: { reduce: boolean }) {
     // Reduced-motion or all clips failed → static fallback video (worker-hero) or poster.
     if (reduce) {
       // eslint-disable-next-line @next/next/no-img-element
-      return <img src={HERO_POSTER} alt="" aria-hidden className={HERO_FIT} />;
+      return <img src={HERO_POSTER} alt="" aria-hidden className={HERO_FIT}  loading="lazy" />;
     }
     return (
       // eslint-disable-next-line jsx-a11y/media-has-caption
@@ -88,7 +88,7 @@ function HeroMix({ reduce }: { reduce: boolean }) {
       })}
       {activeErrored && (
         // eslint-disable-next-line @next/next/no-img-element
-        <img key="fallback-poster" src={HERO_POSTER} alt="" aria-hidden className={HERO_FIT} />
+        <img key="fallback-poster" src={HERO_POSTER} alt="" aria-hidden className={HERO_FIT}  loading="lazy" />
       )}
     </div>
   );

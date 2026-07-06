@@ -26,7 +26,7 @@ export function DescriptionMetadata() {
             <div className="mt-4 grid grid-cols-2 gap-2">
               {(desc.overlayImages ?? []).slice(0, 4).map((src) => (
                 <div key={src} className="overflow-hidden" style={{ borderRadius: 10, border: "1px solid var(--bp-line)" }}>
-                  <img src={src} alt="Qwen3-VL description composite" style={{ width: "100%", display: "block" }} />
+                  <img src={src} alt="Qwen3-VL description composite" style={{ width: "100%", display: "block" }}  loading="lazy" />
                 </div>
               ))}
             </div>
