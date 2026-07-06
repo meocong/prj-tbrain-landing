@@ -18,7 +18,7 @@
 import { useState, useEffect } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import Link from "next/link";
-import { ArrowRight, Check, Video, Clock, ShieldCheck, PackageCheck, Scan } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Check, ChevronDown, RotateCw, Video, Clock, ShieldCheck, PackageCheck, Scan } from "lucide-react";
 import { FOUNDRY_HERO, PROBLEM, PROOF_POINTS, HERO_MIX } from "@/lib/landing/physical-ai";
 import { Defs } from "./PackExplodeScroll";
 import { HeroMobileRail } from "./HeroMobileRail";
@@ -104,7 +104,8 @@ const EGO = [
   { k: "QC'd · ≤48h", v: "AI-native quality control, fast turnaround." },
 ];
 
-const STAT_GRADIENT = "linear-gradient(100deg,var(--bp-cyan),var(--bp-purple))";
+/* Proof-point stats now use solid --bp-cyan; the cyan→purple gradient is
+   reserved for a single hero moment ("Foundry") to avoid repeat-gradient slop. */
 
 /* ── Live-capture HUD — REC + streams + input→robot (the "it's a working rig" cue) */
 function CaptureHUD({ reduce }: { reduce: boolean }) {
@@ -119,15 +120,15 @@ function CaptureHUD({ reduce }: { reduce: boolean }) {
   const STREAMS = ["RGB", "Depth", "IMU", "Audio", "Pose", "Lang"];
   return (
     <div className="pointer-events-none absolute right-6 top-24 z-20 hidden w-[214px] flex-col gap-2.5 lg:flex">
-      <div className="flex items-center justify-between rounded-xl border border-white/12 bg-black/40 px-3.5 py-2.5 backdrop-blur-md">
+      <div className="flex items-center justify-between rounded-xl border border-white/15 px-3.5 py-2.5" style={{ background: "rgba(6,6,14,0.72)" }}>
         <span className="inline-flex items-center gap-2">
-          <motion.span style={{ width: 8, height: 8, borderRadius: 99, background: "#ff4d5e", boxShadow: "0 0 8px #ff4d5e" }}
-            animate={reduce ? {} : { opacity: [1, 0.2, 1] }} transition={{ duration: 1.1, repeat: Infinity }} />
+          <motion.span style={{ width: 8, height: 8, borderRadius: 99, background: "#ff4d5e" }}
+            animate={reduce ? {} : { opacity: [1, 0.25, 1] }} transition={{ duration: 1.1, repeat: Infinity }} />
           <span style={{ fontFamily: "var(--font-mono, monospace)", fontSize: 11, letterSpacing: "0.14em", color: "#fff" }}>REC</span>
         </span>
         <span style={{ fontFamily: "var(--font-mono, monospace)", fontSize: 13, color: "#fff", fontVariantNumeric: "tabular-nums" }}>{time}</span>
       </div>
-      <div className="rounded-xl border border-white/12 bg-black/40 px-3.5 py-3 backdrop-blur-md">
+      <div className="rounded-xl border border-white/15 px-3.5 py-3" style={{ background: "rgba(6,6,14,0.72)" }}>
         <div style={{ fontFamily: "var(--font-mono, monospace)", fontSize: 9, letterSpacing: "0.12em", color: "rgba(255,255,255,0.45)" }}>CAPTURING · 8 STREAMS</div>
         <div className="mt-2 grid grid-cols-2 gap-x-3 gap-y-1.5">
           {STREAMS.map((s, i) => (
@@ -139,11 +140,13 @@ function CaptureHUD({ reduce }: { reduce: boolean }) {
           ))}
         </div>
         <div className="mt-2.5 flex items-center gap-1.5" style={{ fontFamily: "var(--font-mono, monospace)", fontSize: 9, color: "rgba(127,243,228,0.9)" }}>
-          <motion.span animate={reduce ? {} : { rotate: 360 }} transition={{ duration: 3, repeat: Infinity, ease: "linear" }} style={{ display: "inline-block" }}>⟲</motion.span>
+          <motion.span animate={reduce ? {} : { rotate: 360 }} transition={{ duration: 3, repeat: Infinity, ease: "linear" }} style={{ display: "inline-flex" }} aria-hidden>
+            <RotateCw className="h-3 w-3" />
+          </motion.span>
           hardware-clock synced
         </div>
       </div>
-      <div className="flex items-center gap-2 rounded-xl border px-3.5 py-2.5 backdrop-blur-md" style={{ borderColor: "color-mix(in srgb, #22e3c8 35%, transparent)", background: "color-mix(in srgb, #22e3c8 10%, rgba(0,0,0,0.4))" }}>
+      <div className="flex items-center gap-2 rounded-xl border px-3.5 py-2.5" style={{ borderColor: "color-mix(in srgb, #22e3c8 35%, transparent)", background: "color-mix(in srgb, #22e3c8 12%, rgba(6,6,14,0.72))" }}>
         <ArrowRight className="h-3.5 w-3.5" style={{ color: "#22e3c8" }} />
         <span style={{ fontFamily: "var(--font-mono, monospace)", fontSize: 10, color: "#bff6ee" }}>trains VLA · robot policy</span>
       </div>
@@ -158,7 +161,7 @@ function HeroVideo() {
   const reduce = useReducedMotion() ?? false;
 
   return (
-    <section className="relative min-h-[100svh] w-full overflow-hidden bg-black">
+    <section className="relative min-h-[100svh] w-full overflow-hidden" style={{ background: "#06060E" }}>
       <HeroMix reduce={reduce} />
       {/* legibility: solid dark left for white text; bottom blends into the next (themed) section */}
       <div aria-hidden className="absolute inset-0" style={{ background: "linear-gradient(105deg, rgba(5,5,12,0.86) 0%, rgba(5,5,12,0.4) 42%, transparent 70%)" }} />
@@ -172,17 +175,19 @@ function HeroVideo() {
         <div className="flex flex-col gap-8 sm:flex-row sm:items-end sm:justify-between">
           <div className="max-w-[720px]">
             <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.05 }}
-              className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-black/25 px-3 py-1.5 backdrop-blur-md"
-              style={{ fontFamily: "var(--font-mono, monospace)", fontSize: 11, letterSpacing: "0.06em", color: "#7ff3e4" }}>
-              <span style={{ width: 7, height: 7, borderRadius: 99, background: "#22e3c8", boxShadow: "0 0 10px #22e3c8" }} />
+              className="inline-flex items-center gap-2 rounded-full border border-white/15 px-3 py-1.5"
+              style={{ background: "rgba(6,6,14,0.6)", fontFamily: "var(--font-mono, monospace)", fontSize: 11, letterSpacing: "0.06em", color: "#7ff3e4" }}>
+              <span style={{ width: 7, height: 7, borderRadius: 99, background: "#22e3c8" }} />
               {FOUNDRY_HERO.eyebrow}
             </motion.div>
 
+            {/* Impeccable weight-inversion: hero H1 uses feather-light 200; section
+                H2s (Problem / Concept / Decompose) run heavier 500 for gravity. */}
             <motion.h1 initial={{ opacity: 0, y: 22 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.12 }}
-              className="mt-5 font-semibold text-white"
-              style={{ fontFamily: "var(--font-heading)", fontSize: "clamp(2.2rem, 6.2vw, 5.2rem)", lineHeight: 1.04, letterSpacing: "-0.025em" }}>
+              className="mt-5 text-white"
+              style={{ fontFamily: "var(--font-heading)", fontWeight: 200, fontSize: "clamp(2.4rem, 6.8vw, 5.6rem)", lineHeight: 0.98, letterSpacing: "-0.035em" }}>
               The Robotics Data{" "}
-              <span style={{ background: "linear-gradient(100deg,#22e3c8,#8b6cf6)", WebkitBackgroundClip: "text", backgroundClip: "text", WebkitTextFillColor: "transparent" }}>Foundry</span>{" "}
+              <span style={{ fontWeight: 500, background: "linear-gradient(100deg,#22e3c8,#8b6cf6)", WebkitBackgroundClip: "text", backgroundClip: "text", WebkitTextFillColor: "transparent" }}>Foundry</span>{" "}
               for Physical AI
             </motion.h1>
 
@@ -194,7 +199,7 @@ function HeroVideo() {
             <motion.form initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.28 }}
               onSubmit={(e) => { e.preventDefault(); if (email.trim()) setSent(true); }}
               className="relative mt-7 max-w-[440px]">
-              <div className="relative flex items-center rounded-full border border-white/15 bg-black/30 backdrop-blur-md">
+              <div className="relative flex items-center rounded-full border border-white/15 focus-within:border-[color:var(--bp-cyan)] focus-within:ring-2 focus-within:ring-[color:var(--bp-focus-ring)] focus-within:ring-offset-2 focus-within:ring-offset-[#06060E] transition-colors" style={{ background: "rgba(6,6,14,0.55)" }}>
                 {sent ? (
                   <span className="flex items-center gap-2 px-5 py-3.5 text-sm text-white sm:py-4">
                     <Check className="h-4 w-4" style={{ color: "#22e3c8" }} /> Thanks — we&apos;ll reach out about a sample batch.
@@ -202,8 +207,9 @@ function HeroVideo() {
                 ) : (
                   <>
                     <input type="email" required value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Your work email"
+                      aria-label="Work email"
                       className="w-full bg-transparent px-5 py-3.5 text-sm text-white placeholder-white/45 outline-none sm:py-4 sm:px-6" />
-                    <button type="submit" className="absolute right-1.5 inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-xs font-semibold sm:px-5 sm:py-2.5 sm:text-sm"
+                    <button type="submit" className="absolute right-1.5 inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-xs font-semibold sm:px-5 sm:py-2.5 sm:text-sm cursor-pointer"
                       style={{ background: "#fff", color: "#0b0b14" }}>
                       Request a sample <ArrowRight className="h-3.5 w-3.5" />
                     </button>
@@ -214,7 +220,7 @@ function HeroVideo() {
 
             <div className="mt-5 flex flex-wrap gap-2 sm:hidden">
               {PILLS.map((p) => (
-                <span key={p} className="rounded-full border border-white/12 bg-black/30 px-3 py-1.5 text-xs text-white/85 backdrop-blur-md">{p}</span>
+                <span key={p} className="rounded-full border border-white/15 px-3 py-2 text-xs text-white/85" style={{ background: "rgba(6,6,14,0.55)" }}>{p}</span>
               ))}
             </div>
           </div>

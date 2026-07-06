@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 import { MeshBackdrop } from "@/components/marketing/fx/MeshBackdrop";
 
 const LINKS = [
-  { label: "Robotics data foundry · overview", href: "/data/physical-ai", desc: "Egocentric capture packs · 8-model auto-label · zero-trust QC" },
+  { label: "Robotics data foundry · overview", href: "/data/physical-ai", desc: "Egocentric capture packs · auto-label · zero-trust QC" },
   { label: "Auto-Label pipeline", href: "/data/physical-ai/auto-label", desc: "Hand + body kpts · masks · depth · verb-noun · provenance" },
   { label: "QC playbook", href: "/data/physical-ai/quality", desc: "15 hard rules · Label Studio · 3-layer human review" },
 ];

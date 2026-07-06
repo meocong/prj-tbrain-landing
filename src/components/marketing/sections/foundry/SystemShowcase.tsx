@@ -180,7 +180,7 @@ const MANIFEST = [
   { k: "Streams", v: "RGB · Depth · IMU · 21-kpt hand · pose" },
   { k: "Consent / release", v: "Signed ✓" },
   { k: "Sync", v: "Hardware clock · per-frame" },
-  { k: "Provenance", v: "Capture → 8-model auto-label → 8-check diag → HITL → RLDS/LeRobot" },
+  { k: "Provenance", v: "Capture → auto-label → hard-rules gate → HITL → RLDS/LeRobot" },
 ];
 
 function EpisodeManifest() {

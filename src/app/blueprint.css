@@ -23,16 +23,19 @@
   --bp-ink-dim: #4B4F5A;
   --bp-ink-faint: #888D99;
 
-  --bp-cyan: #0A9E90;          /* teal — readable on white */
-  --bp-cyan-soft: #0FB7A6;
-  --bp-purple: #6C3CF4;
-  --bp-amber: #B5701A;
-  --bp-red: #D14D63;
+  /* WCAG AA-passing teal for body text on warm paper (≥4.5:1 vs #F6F6F2). */
+  --bp-cyan: #067A6E;
+  --bp-cyan-soft: #0A9E90;     /* legacy tint — use for surfaces / hovers only */
+  --bp-cyan-strong: #04574F;   /* for tight small-caps mono captions */
+  --bp-purple: #5A2CE0;
+  --bp-amber: #8A5510;         /* darkened for AA on paper */
+  --bp-red: #B93A50;
   --bp-on-cyan: #FFFFFF;       /* text on the cyan button */
+  --bp-focus-ring: color-mix(in srgb, var(--bp-cyan) 60%, transparent);
 
-  --bp-forge: linear-gradient(135deg, #6C3CF4 0%, #0A9E90 100%);
+  --bp-forge: linear-gradient(135deg, #5A2CE0 0%, #067A6E 100%);
   --bp-card-shadow: 0 1px 2px rgba(16,17,28,0.05), 0 10px 26px -18px rgba(16,17,28,0.18);
-  --bp-card-shadow-hover: 0 2px 4px rgba(16,17,28,0.06), 0 18px 40px -22px rgba(10,158,144,0.35);
+  --bp-card-shadow-hover: 0 2px 4px rgba(16,17,28,0.06), 0 18px 40px -22px rgba(6,122,110,0.35);
 }
 
 /* ── DARK (refined, via .dark on <html>) ─────────────────────────── */
@@ -54,10 +57,12 @@
 
   --bp-cyan: #00E5C7;
   --bp-cyan-soft: #5EEAD4;
+  --bp-cyan-strong: #22E3C8;
   --bp-purple: #8B6CF6;
   --bp-amber: #F5A623;
   --bp-red: #FF5C7A;
   --bp-on-cyan: #06231F;
+  --bp-focus-ring: color-mix(in srgb, var(--bp-cyan) 65%, transparent);
 
   --bp-card-shadow: 0 1px 2px rgba(0,0,0,0.3), 0 14px 34px -20px rgba(0,0,0,0.6);
   --bp-card-shadow-hover: 0 2px 4px rgba(0,0,0,0.35), 0 18px 40px -22px rgba(0,229,199,0.4);
@@ -196,4 +201,20 @@ html:not(.dark) .physical-hero-glow { opacity: 0.3; }
   .bp-draw :is(path, line, rect, circle, polyline) {
     stroke-dashoffset: 0 !important; animation: none !important;
   }
+}
+
+/* ── Interaction baseline: cursor + keyboard focus ─────────────────
+   UX Pro Max checklist: cursor-pointer on clickables, visible focus. */
+.bp-grid a[href],
+.bp-grid button:not(:disabled),
+.bp-grid [role="button"],
+.bp-grid input[type="submit"],
+.bp-grid input[type="button"] {
+  cursor: pointer;
+}
+
+.bp-grid :is(a, button, input, textarea, select, [tabindex]):focus-visible {
+  outline: 2px solid var(--bp-focus-ring);
+  outline-offset: 2px;
+  border-radius: 4px;
 }
