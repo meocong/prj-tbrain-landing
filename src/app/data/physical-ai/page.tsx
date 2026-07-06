@@ -19,6 +19,7 @@ import { PipelineOverview } from "@/components/marketing/sections/foundry/Pipeli
 import { AutoLabelDeepDive } from "@/components/marketing/sections/foundry/AutoLabelDeepDive";
 import { QCFlow } from "@/components/marketing/sections/foundry/QCFlow";
 import { GlanceStats } from "@/components/marketing/sections/foundry/GlanceStats";
+import { DataConcepts } from "@/components/marketing/sections/foundry/DataConcepts";
 import { ANCHOR_TRUST } from "@/lib/landing/physical-ai";
 
 export const metadata: Metadata = {
@@ -132,6 +133,9 @@ export default function PhysicalAIPage() {
 
         {/* 08 · Rerun episode viewer */}
         <RerunEmbed />
+
+        {/* 08b · Data concepts · the invariants a buyer should ask */}
+        <DataConcepts />
 
         {/* 09 · Ten modalities · one export contract */}
         <Catalog />
