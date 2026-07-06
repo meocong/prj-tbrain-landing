@@ -183,8 +183,9 @@
   --color-rose: #F43F5E;
 
   /* Fonts */
-  --font-heading: var(--font-heading, "Inter", sans-serif);
+  /* Single Inter instance — alias heading to body for one download */
   --font-body: var(--font-body, "Inter", sans-serif);
+  --font-heading: var(--font-body, "Inter", sans-serif);
   --font-mono: var(--font-mono, "JetBrains Mono", monospace);
 
   /* Shadows */

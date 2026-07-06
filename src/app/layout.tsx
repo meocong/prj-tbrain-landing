@@ -9,16 +9,11 @@ import ChatWidget from "@/components/chat/ChatWidgetLoader";
 import CookieConsent from "@/components/common/CookieConsent";
 import "./globals.css";
 
-/* Inter — canonical tbrain brand face. Same variable serves body + heading. */
+/* Inter — canonical tbrain brand face. One instance · aliased to
+   both --font-body and --font-heading via CSS (no dedup waste). */
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-body",
-  weight: ["400", "500", "600", "700", "800"],
-  display: "swap",
-});
-const interHeading = Inter({
-  subsets: ["latin"],
-  variable: "--font-heading",
   weight: ["400", "500", "600", "700", "800"],
   display: "swap",
 });
@@ -118,7 +113,7 @@ export default function RootLayout({
       suppressHydrationWarning
       lang="en"
       data-scroll-behavior="smooth"
-      className={`${inter.variable} ${interHeading.variable} ${jetbrainsMono.variable}`}
+      className={`${inter.variable} ${jetbrainsMono.variable}`}
     >
       <body>
         <script dangerouslySetInnerHTML={{ __html: THEME_INIT }} />

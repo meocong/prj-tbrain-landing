@@ -96,8 +96,8 @@ export const AUTO_LABEL_STAGES: StageCard[] = [
   {
     key: "hand",
     fig: "FIG.05C — KEYPOINTS · HAND",
-    title: "Hand · 21-kpt MANO + SLAM",
-    model: "hand tracker · MANO",
+    title: "Hand keypoints",
+    model: "MANO 21-kpt + per-hand SLAM",
     detail: "Per-frame 21-keypoint MANO mesh + SLAM camera trajectory for each hand independently. Interpolated frames flagged; low-coverage caps escalated to Label Studio.",
     output: "hands.left/right · kpts_2d · kpts_3d_world · kpts_3d_cam · source",
     rawVideo: "/videos/textile-raw/iron_01.webm",
@@ -107,8 +107,8 @@ export const AUTO_LABEL_STAGES: StageCard[] = [
   {
     key: "body",
     fig: "FIG.05D — KEYPOINTS · BODY",
-    title: "Body pose · exocentric mocap · Sapiens secondary",
-    model: "mocap primary · sapiens 308-kpt secondary · topology gate",
+    title: "Body pose",
+    model: "Exocentric mocap primary · Sapiens 308-kpt secondary",
     detail: "High-fidelity body pose comes from partner-signed exocentric mocap sessions. Sapiens 308-kpt runs on every capture and lands in the manifest, but after the pipeline hardening pass (burn v1b0cce1) the dense body layer is OFF by default in the annotated.mp4 — the bystander skeleton no longer leaks. Kpts remain in the manifest for downstream research + retrained gates surface partial-body detections.",
     output: "body_dense (308 × 2 · conf) · exo mocap skeleton (partner) · min_kpts gate · dense default off",
     honestNote: "The watermark surface exposes silent Sapiens failures. The dense body layer is off in the visualization by default (bystander skeleton hidden). Landing viz suppresses ego frames where topology is invalid (nose Y > hip Y). Raw kpts still ride in the manifest with the full provenance trail.",
@@ -122,8 +122,8 @@ export const AUTO_LABEL_STAGES: StageCard[] = [
   {
     key: "masks",
     fig: "FIG.05E — OBJECT MASKS",
-    title: "Object masks · tracked across the episode",
-    model: "video segmenter",
+    title: "Object masks",
+    model: "SAM3 · tracked per episode",
     detail: "Text-prompted video segmenter finds and tracks every relevant object across the full episode. Emits per-frame masks + tracklet IDs consumed by 6-DoF pose.",
     output: "objects[].track_id · mask · bbox · pose_6dof",
     honestNote: "We ship failures transparently. On iron_T02 the segmenter locked onto shorts instead of the iron; the summary.json flag surfaces it. The pipeline hardening pass added mask/bbox 1.5× ratio drop (drifted masks skipped) and a class HIDE + 12% cap. Downstream retrain, never a silent overwrite.",
@@ -137,8 +137,8 @@ export const AUTO_LABEL_STAGES: StageCard[] = [
   {
     key: "depth",
     fig: "FIG.05F — DEPTH · POINTMAP",
-    title: "Depth · monocular pointmap",
-    model: "mono-depth · pointmap",
+    title: "Depth",
+    model: "MoGe · monocular pointmap",
     detail: "Metric monocular depth + pointmap for the object camera view. Feeds object 6-DoF pose (world-scale ‖t‖ sanity-checked against 0.1–5m industrial range).",
     output: "depth (H × W) · pointmap (H × W × 3) · intrinsics",
     overlayImages: [
