@@ -22,6 +22,7 @@ import { QCFlow } from "@/components/marketing/sections/foundry/QCFlow";
 import { GlanceStats } from "@/components/marketing/sections/foundry/GlanceStats";
 import { DataConcepts } from "@/components/marketing/sections/foundry/DataConcepts";
 import { RealVideoStrip } from "@/components/marketing/sections/foundry/RealVideoStrip";
+import { CinemaWall } from "@/components/marketing/sections/foundry/CinemaWall";
 import { ANCHOR_TRUST } from "@/lib/landing/physical-ai";
 
 export const metadata: Metadata = {
@@ -112,6 +113,9 @@ export default function PhysicalAIPage() {
       <main>
         {/* 01 · Cinema hero */}
         <CinemaHero />
+
+        {/* 01b · Cinema wall · 6-cell real video wall */}
+        <CinemaWall />
 
         {/* 02 · Live ticker — delivered vs capacity */}
         <LiveTicker />
