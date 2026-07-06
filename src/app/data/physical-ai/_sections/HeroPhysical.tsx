@@ -69,7 +69,7 @@ export function HeroPhysical() {
               style={{
                 background: "rgba(16,185,129,0.08)",
                 border: "1px solid rgba(16,185,129,0.24)",
-                backdropFilter: "blur(10px)",
+                WebkitBackdropFilter: "blur(10px)", backdropFilter: "blur(10px)",
               }}
             >
               <span className="relative flex h-2 w-2">
@@ -127,7 +127,7 @@ export function HeroPhysical() {
                   background: "var(--bp-surface)",
                   border: "1px solid var(--bp-line)",
                   color: "var(--bp-ink)",
-                  backdropFilter: "blur(10px)",
+                  WebkitBackdropFilter: "blur(10px)", backdropFilter: "blur(10px)",
                 }}
               >
                 Explore modalities

@@ -72,7 +72,7 @@ export default async function PlatformPage() {
             overlay="var(--platform-hero-video-overlay)"
           />
           <div className="container relative z-10 mx-auto max-w-5xl">
-            <span className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-xs font-medium" style={{ background: "var(--hero-chip-bg)", border: "1px solid var(--hero-chip-border)", color: "#6C3CF4", backdropFilter: "blur(10px)" }}>
+            <span className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-xs font-medium" style={{ background: "var(--hero-chip-bg)", border: "1px solid var(--hero-chip-border)", color: "#6C3CF4", WebkitBackdropFilter: "blur(10px)", backdropFilter: "blur(10px)" }}>
               <Sparkles className="h-3 w-3" />
               Expert OS Platform
             </span>
@@ -100,7 +100,7 @@ export default async function PlatformPage() {
               <Link
                 href="/services"
                 className="inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-semibold transition-colors"
-                style={{ background: "rgba(15,23,42,0.04)", border: "1px solid rgba(15,23,42,0.10)", color: "var(--text-primary)", backdropFilter: "blur(10px)" }}
+                style={{ background: "rgba(15,23,42,0.04)", border: "1px solid rgba(15,23,42,0.10)", color: "var(--text-primary)", WebkitBackdropFilter: "blur(10px)", backdropFilter: "blur(10px)" }}
               >
                 Explore services
               </Link>
