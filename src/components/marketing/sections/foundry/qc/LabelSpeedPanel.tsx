@@ -33,7 +33,7 @@ export function LabelSpeedPanel() {
         Pre-populated annotators are 5.7× faster than from-blank
       </h3>
       <p className="mt-3 max-w-2xl" style={{ fontSize: 14, color: "var(--bp-ink-dim)", lineHeight: 1.55 }}>
-        Every capture arrives in Label Studio with 8-model outputs already drawn on the frame. Annotators correct — they don&apos;t create. That&apos;s how a 273-frame capture ships in ≤48h.
+        Every capture arrives in Label Studio with the pipeline output already drawn on the frame. Annotators correct — they don&apos;t create. That&apos;s how a 273-frame capture ships in ≤48h.
       </p>
 
       <div className="mt-8 grid gap-6 lg:grid-cols-2">

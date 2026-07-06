@@ -243,7 +243,7 @@ export interface EnvSlot {
 export const ENVIRONMENTS = {
   fig: "FIG.05 — CAPTURE ENVIRONMENTS",
   title: "Seven textile-factory skills · one schema",
-  lead: "Real ops from a running Vietnamese textile line — sewing, ironing, tagging, printing, QC, sorting, packing. Seventy-one raw wearable-cam sessions ingested, fourteen already flowing through the auto-label pipeline. Same 8-model stack, same 8-check diag, same LeRobot export.",
+  lead: "Real ops from a running Vietnamese textile line — sewing, ironing, tagging, printing, QC, sorting, packing. Seventy-one raw wearable-cam sessions ingested, fourteen already flowing through the auto-label pipeline. Same pipeline, same hard-rules gate, same LeRobot export.",
   items: [
     { key: "may_san_pham", name: "Sewing · hem machine",        note: "Wearable-cam · factory-floor egocentric",         video: "/videos/env/may_san_pham.webm", poster: "/images/env/may_san_pham-poster.jpg", stock: "/images/env/textile.jpg",     source: "OPS", driveRef: "1LTXPUhGmBgsCRDSKfTGX3aot4RRxb7kq", durationHint: "10s" },
     { key: "is_san_pham",  name: "Ironing",                     note: "Contact-heavy · long-horizon manipulation",       video: "/videos/env/is_san_pham.webm",  poster: "/images/env/is_san_pham-poster.jpg",  stock: "/images/env/textile.jpg",     source: "OPS", driveRef: "1LTXPUhGmBgsCRDSKfTGX3aot4RRxb7kq", durationHint: "10s" },
@@ -524,7 +524,7 @@ export const WORLD_MODEL = {
 /* Two-tier availability — never mix delivered vs aspirational */
 export const AVAILABILITY = {
   fig: "FIG.04 — WHAT SHIPS NOW → NEXT",
-  title: "Delivered today. Scaling to program.",
+  title: "What ships today · what ships next",
   lead: "One rule: verifiable numbers on the left, aspirational capacity on the right — labeled, not blended. We don't ship stats we can't defend to a research engineer.",
   delivered: {
     tag: "Delivered today",
