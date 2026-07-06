@@ -120,10 +120,10 @@ export const AUTO_LABEL_STAGES: StageCard[] = [
     output: "body_dense (308 × 2 · conf) · exo mocap skeleton (partner) · min_kpts gate · dense default off",
     honestNote: "The watermark surface exposes silent Sapiens failures. The dense body layer is off in the visualization by default (bystander skeleton hidden). Landing viz suppresses ego frames where topology is invalid (nose Y > hip Y). Raw kpts still ride in the manifest with the full provenance trail.",
     overlays: [
-      { src: "/images/body-kpts/pick_up_the_cup_t50.jpg", cap: "pick_up_the_cup · 20260617T01",  pred: "body_dense 0/17 above threshold",  status: "SUPPRESSED" },
-      { src: "/images/body-kpts/iron_product_t50.jpg",     cap: "iron_product · 20260626T01",     pred: "body_dense 0/17 · nose_Y > hip_Y",  status: "SUPPRESSED" },
-      { src: "/images/body-kpts/sew_hem_t50.jpg",          cap: "sew_hem · 20260626T02",          pred: "body_dense 0/17 · nose_Y > hip_Y",  status: "SUPPRESSED" },
-      { src: "/images/body-kpts/arrange_fabric_t50.jpg",   cap: "arrange_fabric · 20260626T01",   pred: "body_dense 0/17 · nose_Y > hip_Y",  status: "SUPPRESSED" },
+      { src: "/images/body-kpts/pick_up_the_cup_t50.jpg", cap: "pick_up_the_cup · 20260617T01",  pred: "topology gate fired · dense body hidden · raw kpts in manifest",  status: "SUPPRESSED" },
+      { src: "/images/body-kpts/iron_product_t50.jpg",     cap: "iron_product · 20260626T01",     pred: "topology gate fired · dense body hidden · raw kpts in manifest",  status: "SUPPRESSED" },
+      { src: "/images/body-kpts/sew_hem_t50.jpg",          cap: "sew_hem · 20260626T02",          pred: "topology gate fired · dense body hidden · raw kpts in manifest",  status: "SUPPRESSED" },
+      { src: "/images/body-kpts/arrange_fabric_t50.jpg",   cap: "arrange_fabric · 20260626T01",   pred: "topology gate fired · dense body hidden · raw kpts in manifest",  status: "SUPPRESSED" },
     ],
   },
   {
@@ -137,7 +137,7 @@ export const AUTO_LABEL_STAGES: StageCard[] = [
     overlays: [
       { src: "/videos/masks/pick_up_the_cup__tracked_cup_cup.jpg",              cap: "pick_up_the_cup · 20260617T01",  pred: "tracked cup · track_id=3",  status: "PASS" },
       { src: "/videos/masks/pick_up_the_cup__tracked_right_hand_right_hand.jpg", cap: "pick_up_the_cup · 20260617T01",  pred: "tracked right_hand · id=1", status: "PASS" },
-      { src: "/videos/masks/sew_hem__tracked_fabric_fabric.jpg",                 cap: "sew_hem · 20260626T02",          pred: "tracked fabric · id=2",     status: "PASS" },
+      { src: "/videos/masks/sew_hem__tracked_fabric_fabric.jpg",                 cap: "sew_hem · 20260626T02",          pred: "fabric mask thin on this frame · escalated",  status: "PARTIAL" },
       { src: "/videos/masks/arrange_fabric__tracked_fabric_fabric.jpg",          cap: "arrange_fabric · 20260626T01",   pred: "tracked fabric · id=1",     status: "PASS" },
     ],
   },
