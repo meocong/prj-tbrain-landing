@@ -4,7 +4,6 @@ import { ArrowRight, ShieldCheck } from "lucide-react";
 import Header from "@/components/common/Header";
 import Footer from "@/components/common/Footer";
 import { PipelineOverview } from "@/components/marketing/sections/foundry/PipelineOverview";
-import { QCFlow } from "@/components/marketing/sections/foundry/QCFlow";
 import { LabelStudioCard } from "@/components/marketing/sections/foundry/qc/LabelStudioCard";
 import { RerunCapturedCard } from "@/components/marketing/sections/foundry/qc/RerunCapturedCard";
 import { RerunIframeLoader } from "@/components/marketing/sections/foundry/qc/RerunIframeLoader";
@@ -315,7 +314,6 @@ export default function QualityPage() {
         <ProvenanceLogSection />
         <RerunProof />
         <DeltaStats />
-        <QCFlow />
         <CTA />
         <PrevNextFooter
           prev={{ label: "Auto-Label pipeline", href: "/data/physical-ai/auto-label", sub: "Per-stage deep dive · one contract" }}
