@@ -137,7 +137,7 @@ export const AUTO_LABEL_STAGES: StageCard[] = [
     overlays: [
       { src: "/videos/masks/pick_up_the_cup__tracked_cup_cup.jpg",              cap: "pick_up_the_cup · 20260617T01",  pred: "tracked cup · track_id=3",  status: "PASS" },
       { src: "/videos/masks/pick_up_the_cup__tracked_right_hand_right_hand.jpg", cap: "pick_up_the_cup · 20260617T01",  pred: "tracked right_hand · id=1", status: "PASS" },
-      { src: "/videos/masks/sew_hem__tracked_fabric_fabric.jpg",                 cap: "sew_hem · 20260626T02",          pred: "fabric mask thin on this frame · escalated",  status: "PARTIAL" },
+      { src: "/videos/masks/sew_hem__tracked_fabric_fabric.jpg",                 cap: "sew_hem · 20260626T01",          pred: "tracked fabric · id=2 · full-mask frame",     status: "PASS" },
       { src: "/videos/masks/arrange_fabric__tracked_fabric_fabric.jpg",          cap: "arrange_fabric · 20260626T01",   pred: "tracked fabric · id=1",     status: "PASS" },
     ],
   },
