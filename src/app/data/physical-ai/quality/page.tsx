@@ -222,28 +222,28 @@ function Layer3LabelStudio() {
         <LabelStudioCard />
         <div className="bp-card overflow-hidden" style={{ borderRadius: 14 }}>
           <div className="bp-mono flex items-center justify-between" style={{ padding: "10px 14px", fontSize: 10.5, color: "var(--bp-ink-faint)", letterSpacing: "0.06em", borderBottom: "1px solid var(--bp-line)", textTransform: "uppercase" }}>
-            <span>Annotator ops · CTV portal · task management + QC review</span>
-            <span style={{ color: "#00e5c7" }}>internal · 151 reviewers</span>
+            <span>Live annotator · video review · bbox tracks + action verbs + metadata</span>
+            <span style={{ color: "#00e5c7" }}>real capture · 1684 frames · MANO overlay</span>
           </div>
-          <div className="grid gap-0" style={{ gridTemplateColumns: "minmax(0,1.5fr) minmax(0,1fr)" }}>
-            <div style={{ background: "#0b1220" }}>
-              <img src="/images/platform/project-overview.png" alt="Tbrain CTV Platform · project overview" style={{ width: "100%", display: "block" }} loading="lazy" />
+          <div className="grid gap-0" style={{ gridTemplateColumns: "minmax(0,1.6fr) minmax(0,1fr)" }}>
+            <div style={{ background: "#ffffff", display: "flex", alignItems: "stretch" }}>
+              <img src="/images/label-studio/annotator-canvas.jpg" alt="Label Studio annotator canvas — egocentric video, MANO hand kpts + bbox tracks + timeline" style={{ width: "100%", height: "auto", display: "block", objectFit: "cover" }} loading="lazy" />
             </div>
             <div style={{ padding: 18, background: "rgba(76,181,255,0.03)", display: "flex", flexDirection: "column", gap: 12, borderLeft: "1px solid var(--bp-line)" }}>
               <div>
-                <div className="bp-mono" style={{ fontSize: 10.5, color: "var(--bp-ink-faint)", letterSpacing: "0.08em", textTransform: "uppercase" }}>Batch → task → submission → QC</div>
+                <div className="bp-mono" style={{ fontSize: 10.5, color: "var(--bp-ink-faint)", letterSpacing: "0.08em", textTransform: "uppercase" }}>Video review · pre-populated</div>
                 <h4 className="mt-2 font-semibold" style={{ fontFamily: "var(--font-heading)", fontSize: 20, lineHeight: 1.2, color: "var(--bp-ink)", letterSpacing: "-0.01em" }}>
-                  Ops surface behind every Label Studio task
+                  Reviewers land on a filled canvas, not an empty task
                 </h4>
               </div>
               <p style={{ fontSize: 13, color: "var(--bp-ink-dim)", lineHeight: 1.55 }}>
-                Reviewers land here first. Assignments, batches, QC queue, pass-rate, and Needs-Attention rows drive the same task flow that lands in the annotator UI on the left. No screenshots — the same platform we run in production.
+                Auto-label output (MANO 21-kpt · Sapiens · SAM3 mask · verb-noun) is pushed as pre-annotations. The reviewer corrects, never draws from scratch. Every correction lands as a labeled diff back into the training loop.
               </p>
               <div className="grid grid-cols-3 gap-3">
                 {[
-                  { k: "1000", v: "tasks / batch" },
-                  { k: "96%", v: "pass rate" },
-                  { k: "151", v: "reviewers" },
+                  { k: "1684", v: "frames / task" },
+                  { k: "21+", v: "MANO kpts / hand" },
+                  { k: "24", v: "action verbs" },
                 ].map((s) => (
                   <div key={s.v}>
                     <div style={{ fontFamily: "var(--font-heading)", fontSize: 22, fontWeight: 700, color: "var(--bp-cyan)", letterSpacing: "-0.02em" }}>{s.k}</div>
@@ -252,7 +252,7 @@ function Layer3LabelStudio() {
                 ))}
               </div>
               <div className="bp-mono" style={{ fontSize: 10, color: "var(--bp-ink-faint)", letterSpacing: "0.06em", marginTop: "auto" }}>
-                overview · dashboard · campaigns · batches · tasks · submissions · QC review · team · knowledge
+                bbox · labels · action_type · narration_edit · quality · skill_confirm · rgb_path · imu_path
               </div>
             </div>
           </div>
