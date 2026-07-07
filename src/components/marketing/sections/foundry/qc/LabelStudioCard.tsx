@@ -106,8 +106,8 @@ export function LabelStudioCard() {
         {/* Center · real annotated burn + synthetic reviewer cursor */}
         <div style={{ position: "relative", background: "#050a12" }}>
           <video
-            src="/videos/textile-annotated/pick_up_the_cup.webm"
-            poster="/images/real-captures/pick_up_the_cup-loop.jpg"
+            src="/videos/textile-annotated/sew_01.webm"
+            poster="/images/textile-annotated/sew_01.jpg"
             autoPlay
             muted
             loop
