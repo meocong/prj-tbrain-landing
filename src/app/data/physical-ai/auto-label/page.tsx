@@ -5,7 +5,6 @@ import Header from "@/components/common/Header";
 import Footer from "@/components/common/Footer";
 import { PipelineOverview } from "@/components/marketing/sections/foundry/PipelineOverview";
 import { DescriptionMetadata } from "@/components/marketing/sections/foundry/DescriptionMetadata";
-import { AutoLabelDeepDive } from "@/components/marketing/sections/foundry/AutoLabelDeepDive";
 import { ModelStackCard } from "@/components/marketing/sections/foundry/ModelStackCard";
 import { LerobotPreview } from "@/components/marketing/sections/foundry/LerobotPreview";
 import { SubpageHero, Sheet, SheetHeading, StagePanel } from "@/components/marketing/blueprint/kit";
@@ -277,7 +276,6 @@ export default function AutoLabelPage() {
           { id: "stage-rerun", label: "Rerun scene" },
           { id: "palette", label: "Palette + watermarks" },
           { id: "lerobot-export", label: "LeRobot v2 export" },
-          { id: "auto-label", label: "Deep dive tabs" },
         ]}
       />
       <main>
@@ -343,8 +341,6 @@ export default function AutoLabelPage() {
         <PalettePanel />
 
         <LerobotPreview />
-
-        <AutoLabelDeepDive />
 
         <CTA />
         <PrevNextFooter
