@@ -227,7 +227,17 @@ function Layer3LabelStudio() {
           </div>
           <div className="grid gap-0" style={{ gridTemplateColumns: "minmax(0,1.6fr) minmax(0,1fr)" }}>
             <div style={{ background: "#ffffff", display: "flex", alignItems: "stretch" }}>
-              <img src="/images/label-studio/annotator-canvas.jpg" alt="Label Studio annotator canvas — egocentric video, MANO hand kpts + bbox tracks + timeline" style={{ width: "100%", height: "auto", display: "block", objectFit: "cover" }} loading="lazy" />
+              <video
+                src="/videos/label-studio/annotator.webm"
+                poster="/videos/label-studio/annotator-poster.jpg"
+                autoPlay
+                muted
+                loop
+                playsInline
+                preload="metadata"
+                style={{ width: "100%", height: "auto", display: "block", objectFit: "cover" }}
+                aria-label="Label Studio annotation UI — egocentric video with MANO hand kpts, timeline scrubbing, bbox track editing"
+              />
             </div>
             <div style={{ padding: 18, background: "rgba(76,181,255,0.03)", display: "flex", flexDirection: "column", gap: 12, borderLeft: "1px solid var(--bp-line)" }}>
               <div>
