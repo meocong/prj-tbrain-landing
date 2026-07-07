@@ -173,7 +173,7 @@ export function SubpageHero({
             // eslint-disable-next-line @next/next/no-img-element
             <img src={bgMedia.poster} alt="" aria-hidden className="pointer-events-none absolute inset-0 h-full w-full object-cover" style={{ opacity: mediaOpacity }} loading="lazy" />
           )}
-          <div aria-hidden className="pointer-events-none absolute inset-0" style={{ background: "linear-gradient(180deg, rgba(6,6,14,0.55) 0%, rgba(6,6,14,0.85) 70%, var(--bp-bg) 100%)" }} />
+          <div aria-hidden className="pointer-events-none absolute inset-0" style={{ background: "linear-gradient(180deg, rgba(6,6,14,0.35) 0%, rgba(6,6,14,0.68) 70%, var(--bp-bg) 100%)" }} />
         </>
       )}
       <div aria-hidden className="bp-aurora" />

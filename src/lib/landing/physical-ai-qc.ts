@@ -21,7 +21,7 @@ export const PIPELINE_OVERVIEW = {
   lead: "From factory floor to LeRobot v2 in ≤48h. Every phase leaves a machine-readable trace so any downstream claim can be verified.",
   phases: [
     { id: "collect",    label: "Collect",    detail: "Egocentric capture pack · offline-first · hardware-clock sync",       color: "cyan",   substages: ["RGB", "Depth", "IMU"] },
-    { id: "auto-label", label: "Auto-Label", detail: "8 models · hand + body kpts · masks · depth · verb-noun",             color: "accent", substages: ["MANO", "Sapiens", "SAM3", "MoGe", "Qwen3-VL"] },
+    { id: "auto-label", label: "Auto-Label", detail: "8 models · hand + body kpts · masks · depth · verb-noun",             color: "accent", substages: ["Hand", "Body", "Objects"] },
     { id: "qc",         label: "QC",         detail: "15 hard rules · AI filter · auto-reject before human review",         color: "amber",  substages: ["Hard rules", "AI filter"] },
     { id: "human-qc",   label: "Human QC",   detail: "Label Studio task queue · 3-layer human review · escalation path",    color: "violet", substages: ["LS tasks", "Kpt fix", "Verb review"] },
     { id: "deliver",    label: "Deliver",    detail: "LeRobot v2 parquet · RLDS · Rerun proof shipped with every episode",  color: "green",  substages: ["LeRobot v2", "RLDS", ".rrd"] },

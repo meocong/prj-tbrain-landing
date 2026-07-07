@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowRight, ShieldCheck } from "lucide-react";
+import { ArrowRight, ShieldCheck, Ruler, Eye, Clock3, Box, Tag, Fingerprint, Brain, Layers, Radar } from "lucide-react";
 import Header from "@/components/common/Header";
 import Footer from "@/components/common/Footer";
 import { PipelineOverview } from "@/components/marketing/sections/foundry/PipelineOverview";
@@ -58,6 +58,24 @@ const CATEGORY_COLOR: Record<string, string> = {
   provenance:  "#f0a2ff",
 };
 
+const CATEGORY_ICON: Record<string, typeof ShieldCheck> = {
+  calibration: Ruler,
+  detection:   Eye,
+  temporal:    Clock3,
+  spatial:     Box,
+  semantic:    Tag,
+  provenance:  Fingerprint,
+};
+
+const CATEGORY_LEAD: Record<string, string> = {
+  calibration: "Camera intrinsics + trajectory sanity — every capture's K matches what the SLAM pipeline expects, no per-clip drift.",
+  detection:   "Detector coverage across hands, body, filter pass, dense-body — flags silent model failures before they ship.",
+  temporal:    "Frame timing + object continuity across the episode — flags timing drift, tracklet ID thrashing.",
+  spatial:     "Keypoint outlier %, 3D dual-frame agreement, world-scale ‖t‖ in industrial workspace bounds.",
+  semantic:    "Ontology mapping, action-segment count, grasp density — the meaning of the frames, not the pixels.",
+  provenance:  "Manifest completeness — every field maps to model + version + git SHA. Non-negotiable.",
+};
+
 function Layer1HardRules() {
   const byCategory = HARD_RULES.reduce<Record<string, typeof HARD_RULES>>((acc, r) => {
     (acc[r.category] ??= []).push(r);
@@ -70,30 +88,48 @@ function Layer1HardRules() {
         lead="Every rule maps to a real failure mode we've caught in the field. If any fires, the capture routes into human review with the exact reason attached."
       />
       <div className="mt-10 grid gap-6 lg:grid-cols-2">
-        {Object.entries(byCategory).map(([cat, rules]) => (
-          <div key={cat} className="bp-card" style={{ padding: 20, borderRadius: 14 }}>
-            <div className="bp-mono flex items-center justify-between" style={{ fontSize: 11, color: "var(--bp-ink-faint)", letterSpacing: "0.08em", textTransform: "uppercase" }}>
-              <span>· {cat}</span>
-              <span style={{ color: CATEGORY_COLOR[cat] }}>{rules.length} checks</span>
-            </div>
-            <ul className="mt-3 space-y-3">
-              {rules.map((r) => (
-                <li key={r.id} className="flex items-start gap-3">
-                  <span style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", width: 26, height: 26, borderRadius: 6, background: `color-mix(in srgb, ${CATEGORY_COLOR[cat]} 20%, transparent)`, color: CATEGORY_COLOR[cat], flexShrink: 0 }}>
-                    <ShieldCheck className="h-3.5 w-3.5" />
-                  </span>
-                  <div style={{ minWidth: 0 }}>
-                    <div style={{ fontSize: 13.5, color: "var(--bp-ink)", fontWeight: 600 }}>{r.label}</div>
-                    <div style={{ fontSize: 12.5, color: "var(--bp-ink-dim)", lineHeight: 1.5, marginTop: 3 }}>{r.detail}</div>
-                    <div className="bp-mono" style={{ fontSize: 10.5, color: "var(--bp-ink-faint)", marginTop: 4 }}>
-                      threshold · <span style={{ color: CATEGORY_COLOR[cat] }}>{r.threshold}</span> · sample · <span style={{ color: "var(--bp-ink-dim)" }}>{r.sampleOk}</span>
-                    </div>
+        {Object.entries(byCategory).map(([cat, rules]) => {
+          const CatIcon = CATEGORY_ICON[cat] ?? ShieldCheck;
+          const color = CATEGORY_COLOR[cat];
+          return (
+            <div key={cat} className="bp-card" style={{ padding: 20, borderRadius: 14 }}>
+              <div className="flex items-start gap-3">
+                <div style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", width: 44, height: 44, borderRadius: 10, background: `color-mix(in srgb, ${color} 18%, transparent)`, color: color, border: `1px solid color-mix(in srgb, ${color} 40%, transparent)`, flexShrink: 0 }}>
+                  <CatIcon className="h-5 w-5" />
+                </div>
+                <div style={{ minWidth: 0, flex: 1 }}>
+                  <div className="bp-mono flex items-center justify-between" style={{ fontSize: 11, color: color, letterSpacing: "0.08em", textTransform: "uppercase", fontWeight: 700 }}>
+                    <span>· {cat}</span>
+                    <span style={{ color: color, opacity: 0.7 }}>{rules.length} checks</span>
                   </div>
-                </li>
-              ))}
-            </ul>
-          </div>
-        ))}
+                  <p style={{ fontSize: 12.5, color: "var(--bp-ink-dim)", lineHeight: 1.5, marginTop: 3 }}>{CATEGORY_LEAD[cat] ?? ""}</p>
+                </div>
+              </div>
+              <ul className="mt-4 space-y-3 border-t pt-4" style={{ borderColor: "var(--bp-line)" }}>
+                {rules.map((r) => (
+                  <li key={r.id} className="flex items-start gap-3">
+                    <span style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", width: 22, height: 22, borderRadius: 4, background: `color-mix(in srgb, ${color} 22%, transparent)`, color: color, flexShrink: 0, fontFamily: "var(--font-mono)", fontSize: 9, fontWeight: 700 }}>
+                      {String(rules.indexOf(r) + 1).padStart(2, "0")}
+                    </span>
+                    <div style={{ minWidth: 0, flex: 1 }}>
+                      <div style={{ fontSize: 13.5, color: "var(--bp-ink)", fontWeight: 600 }}>{r.label}</div>
+                      <div style={{ fontSize: 12.5, color: "var(--bp-ink-dim)", lineHeight: 1.5, marginTop: 3 }}>{r.detail}</div>
+                      <div className="bp-mono mt-2 flex items-center gap-2" style={{ fontSize: 10 }}>
+                        <span style={{ padding: "2px 7px", borderRadius: 4, background: `color-mix(in srgb, ${color} 10%, transparent)`, color: color, letterSpacing: "0.04em" }}>
+                          gate · {r.threshold}
+                        </span>
+                        <span style={{ color: "var(--bp-ink-faint)" }}>→</span>
+                        <span style={{ padding: "2px 7px", borderRadius: 4, background: "color-mix(in srgb, #5ee08a 12%, transparent)", color: "#5ee08a", fontWeight: 700, letterSpacing: "0.04em" }}>
+                          {r.sampleOk}
+                        </span>
+                      </div>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          );
+        })}
       </div>
     </Sheet>
   );
@@ -297,7 +333,7 @@ export default function QualityPage() {
           ]}
           accent="amber"
           badge={{ label: "You're on QC", color: "#ff9a4d" }}
-          bgMedia={{ video: "/videos/textile-annotated/pick_up_the_cup.webm", poster: "/images/real-captures/pick_up_the_cup-loop.jpg", opacity: 0.24 }}
+          bgMedia={{ video: "/videos/textile-annotated/pick_up_the_cup.webm", poster: "/images/real-captures/pick_up_the_cup-loop.jpg", opacity: 0.38 }}
           breadcrumb={<Breadcrumb trail={[
             { label: "Tbrain", href: "/" },
             { label: "Physical AI", href: "/data/physical-ai" },
