@@ -136,23 +136,74 @@ function Layer1HardRules() {
 }
 
 function Layer2AIFilter() {
+  const items = [
+    {
+      k: "Confidence smoothing",
+      icon: Brain,
+      v: "Per-frame kpt confidence dips are smoothed if temporally isolated. Sustained dips escalate to Label Studio.",
+      signal: "conf < 0.55 for 4+ frames → escalate",
+      example: "wrist kpt dips 0.42 for 2 frames (occluded by cup), rebounds to 0.87 — smoothed. Would have flagged 40% of ~/. usable captures under a naive threshold.",
+      poster: "/images/body-kpts/pick_up_the_cup_t50.jpg",
+      chip: "Sapiens 308-kpt · temporal window: 8 frames",
+    },
+    {
+      k: "Cross-modal consistency",
+      icon: Layers,
+      v: "The segmenter mask and the depth pointmap must agree on the object envelope within a tolerance — catches SAM-vs-object mismatch (iron_T02 flag).",
+      signal: "mask ⊕ depth IoU < 0.68 → flag",
+      example: "iron_T02: SAM3 mask included the towel behind the iron. Depth pointmap disagreed (Δ = 14cm on the mask boundary). Flagged, reviewer tightened the mask.",
+      poster: "/videos/masks/iron_product__tracked_pants_pants.jpg",
+      chip: "SAM3 mask ⊕ MoGe depth · IoU gate",
+    },
+    {
+      k: "Out-of-distribution",
+      icon: Radar,
+      v: "Novel objects flagged with an ontology_missing tag. Not a reject — a signal to add an ontology entry before ship.",
+      signal: "verb-noun ∉ ontology → tag ontology_missing",
+      example: "capture used a fabric-clamp our ontology didn't cover. Not rejected — flagged, ontology PR opened, all 3 captures re-tagged before ship.",
+      poster: "/videos/masks/arrange_fabric__tracked_fabric_fabric.jpg",
+      chip: "VLM verb-noun · 240-verb ontology",
+    },
+  ];
   return (
     <Sheet id="ai-filter" fig="FIG.06B — LAYER 2 · AI FILTER" axis={false}>
       <SheetHeading
         title="AI filter · what the hard rules can't reason about"
         lead="Where the hard-rules gate is thresholds, the AI filter is judgment: confidence-weighted smoothing, cross-modal consistency (does the mask agree with the depth?), and out-of-distribution detection."
       />
-      <div className="mt-8 grid gap-4 lg:grid-cols-3">
-        {[
-          { k: "Confidence smoothing", v: "Per-frame kpt confidence dips are smoothed if temporally isolated. Sustained dips escalate to Label Studio." },
-          { k: "Cross-modal consistency", v: "The segmenter mask and the depth pointmap must agree on the object envelope within a tolerance — catches SAM-vs-object mismatch (iron_T02 flag)." },
-          { k: "Out-of-distribution", v: "Novel objects flagged with an ontology_missing tag. Not a reject — a signal to add an ontology entry before ship." },
-        ].map((row) => (
-          <div key={row.k} className="bp-card" style={{ padding: 20, borderRadius: 14 }}>
-            <div style={{ fontSize: 14, color: "var(--bp-ink)", fontWeight: 600 }}>{row.k}</div>
-            <p className="mt-2" style={{ fontSize: 13, color: "var(--bp-ink-dim)", lineHeight: 1.55 }}>{row.v}</p>
-          </div>
-        ))}
+      <div className="mt-8 grid gap-5 lg:grid-cols-3">
+        {items.map((row) => {
+          const Icon = row.icon;
+          return (
+            <div key={row.k} className="bp-card overflow-hidden" style={{ borderRadius: 14, display: "flex", flexDirection: "column" }}>
+              <div className="relative" style={{ height: 160, background: "#0a0a12", overflow: "hidden" }}>
+                <img src={row.poster} alt={row.k} style={{ width: "100%", height: "100%", objectFit: "cover", opacity: 0.85 }} loading="lazy" />
+                <div aria-hidden style={{ position: "absolute", inset: 0, background: "linear-gradient(180deg, rgba(6,6,14,0) 0%, rgba(6,6,14,0.85) 100%)" }} />
+                <div className="bp-mono" style={{ position: "absolute", top: 10, left: 10, fontSize: 10, letterSpacing: "0.08em", textTransform: "uppercase", color: "#00e5c7", padding: "3px 7px", borderRadius: 4, background: "rgba(0,229,199,0.12)", border: "1px solid rgba(0,229,199,0.35)" }}>
+                  AI FILTER · JUDGMENT
+                </div>
+                <div style={{ position: "absolute", bottom: 10, left: 12, right: 12, display: "flex", alignItems: "center", gap: 8 }}>
+                  <div style={{ width: 34, height: 34, borderRadius: 8, display: "flex", alignItems: "center", justifyContent: "center", background: "rgba(0,229,199,0.16)", border: "1px solid rgba(0,229,199,0.45)", color: "#00e5c7", flexShrink: 0 }}>
+                    <Icon className="h-4 w-4" />
+                  </div>
+                  <div style={{ fontSize: 14, fontWeight: 700, color: "#fff", letterSpacing: "-0.01em" }}>{row.k}</div>
+                </div>
+              </div>
+              <div style={{ padding: 16, display: "flex", flexDirection: "column", gap: 10, flex: 1 }}>
+                <p style={{ fontSize: 13, color: "var(--bp-ink-dim)", lineHeight: 1.55 }}>{row.v}</p>
+                <div className="bp-mono" style={{ fontSize: 10.5, padding: "6px 8px", borderRadius: 6, background: "rgba(0,229,199,0.08)", border: "1px solid rgba(0,229,199,0.25)", color: "#00e5c7", letterSpacing: "0.04em" }}>
+                  {row.signal}
+                </div>
+                <div style={{ fontSize: 12, color: "var(--bp-ink-faint)", lineHeight: 1.5, borderLeft: "2px solid var(--bp-line-strong)", paddingLeft: 8 }}>
+                  <span style={{ fontWeight: 700, color: "var(--bp-ink-dim)" }}>Example ·</span> {row.example}
+                </div>
+                <div className="bp-mono" style={{ fontSize: 10, color: "var(--bp-ink-faint)", letterSpacing: "0.06em", marginTop: "auto" }}>
+                  {row.chip}
+                </div>
+              </div>
+            </div>
+          );
+        })}
       </div>
     </Sheet>
   );
