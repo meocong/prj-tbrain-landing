@@ -220,6 +220,43 @@ function Layer3LabelStudio() {
         <HitlWorkflowDiagram />
         <LabelSpeedPanel />
         <LabelStudioCard />
+        <div className="bp-card overflow-hidden" style={{ borderRadius: 14 }}>
+          <div className="bp-mono flex items-center justify-between" style={{ padding: "10px 14px", fontSize: 10.5, color: "var(--bp-ink-faint)", letterSpacing: "0.06em", borderBottom: "1px solid var(--bp-line)", textTransform: "uppercase" }}>
+            <span>Annotator ops · CTV portal · task management + QC review</span>
+            <span style={{ color: "#00e5c7" }}>internal · 151 reviewers</span>
+          </div>
+          <div className="grid gap-0" style={{ gridTemplateColumns: "minmax(0,1.5fr) minmax(0,1fr)" }}>
+            <div style={{ background: "#0b1220" }}>
+              <img src="/images/platform/project-overview.png" alt="Tbrain CTV Platform · project overview" style={{ width: "100%", display: "block" }} loading="lazy" />
+            </div>
+            <div style={{ padding: 18, background: "rgba(76,181,255,0.03)", display: "flex", flexDirection: "column", gap: 12, borderLeft: "1px solid var(--bp-line)" }}>
+              <div>
+                <div className="bp-mono" style={{ fontSize: 10.5, color: "var(--bp-ink-faint)", letterSpacing: "0.08em", textTransform: "uppercase" }}>Batch → task → submission → QC</div>
+                <h4 className="mt-2 font-semibold" style={{ fontFamily: "var(--font-heading)", fontSize: 20, lineHeight: 1.2, color: "var(--bp-ink)", letterSpacing: "-0.01em" }}>
+                  Ops surface behind every Label Studio task
+                </h4>
+              </div>
+              <p style={{ fontSize: 13, color: "var(--bp-ink-dim)", lineHeight: 1.55 }}>
+                Reviewers land here first. Assignments, batches, QC queue, pass-rate, and Needs-Attention rows drive the same task flow that lands in the annotator UI on the left. No screenshots — the same platform we run in production.
+              </p>
+              <div className="grid grid-cols-3 gap-3">
+                {[
+                  { k: "1000", v: "tasks / batch" },
+                  { k: "96%", v: "pass rate" },
+                  { k: "151", v: "reviewers" },
+                ].map((s) => (
+                  <div key={s.v}>
+                    <div style={{ fontFamily: "var(--font-heading)", fontSize: 22, fontWeight: 700, color: "var(--bp-cyan)", letterSpacing: "-0.02em" }}>{s.k}</div>
+                    <div className="bp-mono" style={{ fontSize: 9.5, color: "var(--bp-ink-faint)", letterSpacing: "0.04em", marginTop: 2 }}>{s.v}</div>
+                  </div>
+                ))}
+              </div>
+              <div className="bp-mono" style={{ fontSize: 10, color: "var(--bp-ink-faint)", letterSpacing: "0.06em", marginTop: "auto" }}>
+                overview · dashboard · campaigns · batches · tasks · submissions · QC review · team · knowledge
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </Sheet>
   );
