@@ -7,7 +7,7 @@
  */
 import { useEffect, useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
-import { Check, X, ArrowLeft, ArrowRight, Circle, ChevronDown, Command } from "lucide-react";
+import { Check, X, ArrowLeft, ArrowRight, Circle, ChevronDown, Command, ExternalLink } from "lucide-react";
 
 const TASK_QUEUE = [
   { id: 1247, cap: "pick_up_the_cup · 20260617T01", reason: "manual sample" },
@@ -70,6 +70,10 @@ export function LabelStudioCard() {
         </span>
         <span style={{ marginLeft: 10 }}>task 1247 / 1892</span>
         <span style={{ marginLeft: "auto", color: "#00e5c7" }}>auto-label · pre-populated</span>
+        <a href="https://label.tbrain.ai/" target="_blank" rel="noopener noreferrer" style={{ marginLeft: 12, display: "inline-flex", alignItems: "center", gap: 4, padding: "3px 8px", borderRadius: 4, background: "rgba(76,181,255,0.14)", color: "#4cb5ff", fontWeight: 700, letterSpacing: "0.06em", textDecoration: "none" }}>
+          <ExternalLink className="h-3 w-3" />
+          Open live label.tbrain.ai
+        </a>
       </div>
 
       <div className="grid" style={{ gridTemplateColumns: "220px 1fr 260px", minHeight: 440 }}>

@@ -21,6 +21,7 @@ const NAV_ITEMS = [
   { label: "Case Studies", href: "/casestudy" },
   { label: "Physical AI", href: "/data/physical-ai", isDropdown: true },
   { label: "Terminal Bench", href: "/data/terminal-bench" },
+  { label: "Blog", href: "/blog" },
   { label: "Contact", href: "/contact" },
 ];
 

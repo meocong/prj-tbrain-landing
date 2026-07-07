@@ -182,7 +182,7 @@ export function PipelineDiagram({ highlight, compact = false }: { highlight?: st
 
               {/* substages chips */}
               {p.substages && (
-                <foreignObject x={x + 18} y={y0 + boxH - (compact ? 40 : 50)} width={boxW - 36} height={compact ? 30 : 38}>
+                <foreignObject x={x + 18} y={y0 + boxH - (compact ? 48 : 62)} width={boxW - 36} height={compact ? 42 : 56}>
                   <div suppressHydrationWarning style={{ display: "flex", flexWrap: "wrap", gap: 5 }}>
                     {p.substages.map((s, si) => (
                       <motion.span
