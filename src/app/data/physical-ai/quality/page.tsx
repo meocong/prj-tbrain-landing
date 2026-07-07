@@ -223,7 +223,7 @@ function Layer3LabelStudio() {
         <div className="bp-card overflow-hidden" style={{ borderRadius: 14 }}>
           <div className="bp-mono flex items-center justify-between" style={{ padding: "10px 14px", fontSize: 10.5, color: "var(--bp-ink-faint)", letterSpacing: "0.06em", borderBottom: "1px solid var(--bp-line)", textTransform: "uppercase" }}>
             <span>Live annotator · video review · bbox tracks + action verbs + metadata</span>
-            <span style={{ color: "#00e5c7" }}>real capture · 2091 frames · MANO overlay</span>
+            <span style={{ color: "#00e5c7" }}>real capture · 450 frames · MANO + SAM3 overlay</span>
           </div>
           <div className="grid gap-0" style={{ gridTemplateColumns: "minmax(0,1.6fr) minmax(0,1fr)" }}>
             <div style={{ background: "#ffffff", display: "flex", alignItems: "stretch" }}>
@@ -251,7 +251,7 @@ function Layer3LabelStudio() {
               </p>
               <div className="grid grid-cols-3 gap-3">
                 {[
-                  { k: "2091", v: "frames / task" },
+                  { k: "450", v: "frames / task" },
                   { k: "21+", v: "MANO kpts / hand" },
                   { k: "24", v: "action verbs" },
                 ].map((s) => (
