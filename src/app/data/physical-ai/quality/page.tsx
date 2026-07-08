@@ -239,7 +239,7 @@ function Layer3LabelStudio() {
                 aria-label="Label Studio annotation UI — egocentric video with MANO hand kpts, timeline scrubbing, bbox track editing"
               />
             </div>
-            <div style={{ padding: 18, background: "rgba(76,181,255,0.03)", display: "flex", flexDirection: "column", gap: 12, borderLeft: "1px solid var(--bp-line)" }}>
+            <div style={{ padding: 18, background: "rgba(76,181,255,0.03)", display: "flex", flexDirection: "column", gap: 14, borderLeft: "1px solid var(--bp-line)" }}>
               <div>
                 <div className="bp-mono" style={{ fontSize: 10.5, color: "var(--bp-ink-faint)", letterSpacing: "0.08em", textTransform: "uppercase" }}>Video review · pre-populated</div>
                 <h4 className="mt-2 font-semibold" style={{ fontFamily: "var(--font-heading)", fontSize: 20, lineHeight: 1.2, color: "var(--bp-ink)", letterSpacing: "-0.01em" }}>
@@ -247,7 +247,7 @@ function Layer3LabelStudio() {
                 </h4>
               </div>
               <p style={{ fontSize: 13, color: "var(--bp-ink-dim)", lineHeight: 1.55 }}>
-                Auto-label output (MANO 21-kpt · Sapiens · SAM3 mask · verb-noun) is pushed as pre-annotations. The reviewer corrects, never draws from scratch. Every correction lands as a labeled diff back into the training loop.
+                Auto-label output (MANO 21-kpt · Sapiens 308-kpt · SAM3 mask · MoGe depth · verb-noun) is pushed as pre-annotations. Reviewer corrects, never draws from scratch. Every correction lands as a labeled diff back into the training loop.
               </p>
               <div className="grid grid-cols-3 gap-3">
                 {[
@@ -261,8 +261,43 @@ function Layer3LabelStudio() {
                   </div>
                 ))}
               </div>
-              <div className="bp-mono" style={{ fontSize: 10, color: "var(--bp-ink-faint)", letterSpacing: "0.06em", marginTop: "auto" }}>
-                bbox · labels · action_type · narration_edit · quality · skill_confirm · rgb_path · imu_path
+
+              {/* Batch progress bar */}
+              <div style={{ borderTop: "1px solid var(--bp-line)", paddingTop: 12 }}>
+                <div className="bp-mono flex items-center justify-between" style={{ fontSize: 10, color: "var(--bp-ink-faint)", letterSpacing: "0.06em", marginBottom: 6 }}>
+                  <span>BATCH · doasido / v2</span>
+                  <span style={{ color: "#5ee08a" }}>184 / 500 · 37%</span>
+                </div>
+                <div style={{ height: 5, borderRadius: 3, background: "var(--bp-line)", overflow: "hidden" }}>
+                  <div style={{ height: "100%", width: "37%", background: "linear-gradient(90deg, var(--bp-cyan), #5ee08a)" }} />
+                </div>
+                <div className="bp-mono grid grid-cols-3 gap-3 mt-2" style={{ fontSize: 10, color: "var(--bp-ink-faint)", letterSpacing: "0.04em" }}>
+                  <div><span style={{ color: "#5ee08a" }}>168</span> pass</div>
+                  <div><span style={{ color: "#ff9a4d" }}>13</span> flag</div>
+                  <div><span style={{ color: "#e26d5c" }}>3</span> reject</div>
+                </div>
+              </div>
+
+              {/* Keyboard shortcuts */}
+              <div className="bp-mono" style={{ fontSize: 10, color: "var(--bp-ink-dim)", letterSpacing: "0.04em", borderTop: "1px solid var(--bp-line)", paddingTop: 10, display: "flex", flexWrap: "wrap", gap: 6 }}>
+                {[
+                  { k: "1", v: "accept" },
+                  { k: "2", v: "reject" },
+                  { k: "F", v: "flag" },
+                  { k: "SPACE", v: "play" },
+                  { k: "←/→", v: "step 1f" },
+                ].map(({ k, v }) => (
+                  <span key={k} style={{ display: "inline-flex", alignItems: "center", gap: 4 }}>
+                    <span style={{ padding: "1px 5px", borderRadius: 3, background: "rgba(255,255,255,0.06)", border: "1px solid var(--bp-line-strong)", color: "var(--bp-ink)", fontWeight: 700 }}>{k}</span>
+                    <span>{v}</span>
+                  </span>
+                ))}
+              </div>
+
+              {/* Provenance chip - model stack */}
+              <div className="bp-mono" style={{ fontSize: 10, color: "var(--bp-ink-faint)", letterSpacing: "0.06em", borderTop: "1px solid var(--bp-line)", paddingTop: 10, lineHeight: 1.6, marginTop: "auto" }}>
+                <div style={{ color: "var(--bp-cyan)", fontWeight: 700, marginBottom: 4 }}>PRE-ANNOTATION MODEL STACK</div>
+                bbox · labels · action_type · narration_edit · quality · skill_confirm · rgb_path · imu_path · audio_path
               </div>
             </div>
           </div>
