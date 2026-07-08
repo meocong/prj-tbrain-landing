@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { Sheet, SheetHeading } from "@/components/marketing/blueprint/kit";
 import { RevealOnScroll } from "@/components/marketing/fx/RevealOnScroll";
+import { PACK_IN_PRODUCTION } from "@/lib/landing/physical-ai";
 
 const PACK_CALLOUTS = [
   { k: "Head unit", v: "Stereo camera + IMU · 25–35° down-tilt · quick-release" },
@@ -95,6 +96,71 @@ export function HardwareShowcase() {
           </article>
         </RevealOnScroll>
       </div>
+
+      {/* FIG.07b — Pack in production: 5 field photos of the same rig, worn. */}
+      <RevealOnScroll delay={0.12}>
+        <div className="mt-8">
+          <div className="flex items-baseline justify-between gap-3 flex-wrap" style={{ borderBottom: "1px solid var(--bp-line)", paddingBottom: 8 }}>
+            <div className="flex items-baseline gap-3">
+              <span className="bp-mono" style={{ fontSize: 10, letterSpacing: "0.14em", color: "var(--bp-cyan)", fontWeight: 700 }}>
+                {PACK_IN_PRODUCTION.fig}
+              </span>
+              <span style={{ fontFamily: "var(--font-heading)", fontSize: 18, fontWeight: 600, color: "var(--bp-ink)" }}>
+                {PACK_IN_PRODUCTION.title}
+              </span>
+            </div>
+            <span className="bp-mono" style={{ fontSize: 11, color: "var(--bp-ink-faint)" }}>zero staging · signed operator</span>
+          </div>
+          <p className="mt-3" style={{ fontSize: 14, color: "var(--bp-ink-dim)", lineHeight: 1.55, maxWidth: 780 }}>
+            {PACK_IN_PRODUCTION.lead}
+          </p>
+          <div className="mt-5 grid gap-3 grid-cols-2 sm:grid-cols-3 lg:grid-cols-5">
+            {PACK_IN_PRODUCTION.photos.map((p) => (
+              <figure
+                key={p.src}
+                className="bp-card relative overflow-hidden"
+                style={{ padding: 0, borderRadius: 12 }}
+              >
+                <div className="relative w-full" style={{ aspectRatio: "4 / 3", background: "#050a12" }}>
+                  <Image
+                    src={p.src}
+                    alt={p.alt}
+                    fill
+                    loading="lazy"
+                    sizes="(min-width: 1024px) 20vw, (min-width: 640px) 33vw, 50vw"
+                    className="object-cover"
+                  />
+                  <span
+                    className="bp-mono absolute left-2 top-2"
+                    style={{
+                      fontSize: 9,
+                      letterSpacing: "0.1em",
+                      padding: "3px 7px",
+                      borderRadius: 4,
+                      background: "rgba(6,6,14,0.72)",
+                      color: "#22E3C8",
+                      border: "1px solid rgba(0,229,199,0.35)",
+                    }}
+                  >
+                    {p.chip}
+                  </span>
+                </div>
+                <figcaption
+                  style={{
+                    fontSize: 11.5,
+                    color: "var(--bp-ink-dim)",
+                    padding: "8px 10px",
+                    borderTop: "1px solid var(--bp-line)",
+                    lineHeight: 1.4,
+                  }}
+                >
+                  {p.caption}
+                </figcaption>
+              </figure>
+            ))}
+          </div>
+        </div>
+      </RevealOnScroll>
     </Sheet>
   );
 }

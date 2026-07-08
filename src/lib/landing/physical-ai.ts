@@ -49,9 +49,57 @@ export const HERO_MIX = {
     { src: "/videos/hero-mix/2.webm", mp4: "/videos/hero-mix/2.mp4", poster: "/videos/hero-mix/2.jpg", label: "Industrial · textile factory · Vietnam", source: "in-house" },
     { src: "/videos/hero-mix/3.webm", mp4: "/videos/hero-mix/3.mp4", poster: "/videos/hero-mix/3.jpg", label: "Real production · manipulation", source: "in-house" },
     { src: "/videos/hero-mix/4.webm", mp4: "/videos/hero-mix/4.mp4", poster: "/videos/hero-mix/4.jpg", label: "Exocentric mocap · partner-signed", source: "partner" },
+    { src: "/videos/hero-mix/6.webm", mp4: "/videos/hero-mix/6.mp4", poster: "/videos/hero-mix/6.jpg", label: "Egocentric + wrist · triple-GoPro rig · folding", source: "in-house" },
   ],
   fallback: { src: "/videos/worker-hero.webm", mp4: "/videos/worker-hero.mp4", poster: "/images/worker-hero-poster.jpg" },
   clipDurationSec: 10,
+} as const;
+
+/* Pack-in-production evidence strip — five field photos captured while
+   operators wear the rig. Used by HardwareShowcase "In production" band. */
+export interface PackFieldPhoto {
+  src: string;
+  alt: string;
+  caption: string;
+  chip: string;   // small mono chip (e.g. "SETUP", "WORN", "REALSENSE")
+}
+
+export const PACK_IN_PRODUCTION = {
+  fig: "FIG.07b — PACK IN PRODUCTION",
+  title: "Same pack, worn on the line",
+  lead: "Not a studio render. Not a staged shoot. These are the same six-piece pack — head unit, forearms, waist — worn by operators during a real textile shift.",
+  photos: [
+    {
+      src: "/images/pack/in-production/setup-wide.jpg",
+      alt: "Full workstation set-up — capture pack, RealSense tripod, GoPro rig",
+      chip: "SETUP",
+      caption: "Full rig on-site — head + forearm + waist units + secondary RealSense",
+    },
+    {
+      src: "/images/pack/in-production/folding.jpg",
+      alt: "Operator wearing GoPro head-band, folding textiles",
+      chip: "WORN · FOLD",
+      caption: "GoPro head-band + waist pack · folding · full 8h shift",
+    },
+    {
+      src: "/images/pack/in-production/finishing.jpg",
+      alt: "Operator with three GoPros — head + two forearms — finishing product",
+      chip: "3× GOPRO",
+      caption: "Head + both forearms recording · finishing product",
+    },
+    {
+      src: "/images/pack/in-production/realsense-01.jpg",
+      alt: "RealSense depth camera capturing the operator's workstation",
+      chip: "REALSENSE",
+      caption: "Fixed RealSense · secondary exo-view · aligned to pack clock",
+    },
+    {
+      src: "/images/pack/in-production/realsense-02.jpg",
+      alt: "RealSense depth capture of operator performing a task",
+      chip: "EXO · TASK",
+      caption: "Cross-modal check — mask vs depth agreement gate",
+    },
+  ] as PackFieldPhoto[],
 } as const;
 
 export const PROBLEM = {
