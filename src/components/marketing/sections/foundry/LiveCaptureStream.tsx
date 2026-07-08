@@ -24,10 +24,10 @@ const CAPS = [
 export function LiveCaptureStream() {
   const items = [...CAPS, ...CAPS]; // duplicate for seamless loop
   return (
-    <section className="relative overflow-hidden" style={{ borderTop: "1px solid var(--bp-line)", borderBottom: "1px solid var(--bp-line)", padding: "14px 0", background: "color-mix(in srgb, #050a12 88%, transparent)" }}>
+    <section className="relative overflow-hidden" style={{ borderTop: "1px solid rgba(255,255,255,0.08)", borderBottom: "1px solid rgba(255,255,255,0.08)", padding: "14px 0", background: "#06060E" }}>
       <div className="container mx-auto flex items-center gap-4 px-5">
-        <div className="flex items-center gap-2 bp-mono" style={{ fontSize: 10, color: "var(--bp-ink-faint)", letterSpacing: "0.14em", textTransform: "uppercase", flexShrink: 0 }}>
-          <motion.span animate={{ opacity: [1, 0.15, 1] }} transition={{ duration: 1.1, repeat: Infinity }} style={{ width: 6, height: 6, borderRadius: 6, background: "#ff5f57", boxShadow: "0 0 6px #ff5f57" }} />
+        <div className="flex items-center gap-2 bp-mono" style={{ fontSize: 10, color: "#8fa0c8", letterSpacing: "0.14em", textTransform: "uppercase", flexShrink: 0 }}>
+          <motion.span animate={{ opacity: [1, 0.15, 1] }} transition={{ duration: 1.1, repeat: Infinity }} style={{ width: 6, height: 6, borderRadius: 6, background: "#ff5f57" }} />
           Live capture stream
         </div>
         <div className="relative flex-1 overflow-hidden" style={{ maskImage: "linear-gradient(90deg, transparent 0, #000 6%, #000 94%, transparent 100%)", WebkitMaskImage: "linear-gradient(90deg, transparent 0, #000 6%, #000 94%, transparent 100%)" }}>
@@ -37,10 +37,10 @@ export function LiveCaptureStream() {
             transition={{ duration: 60, repeat: Infinity, ease: "linear" }}
           >
             {items.map((c, i) => (
-              <div key={`${c.name}-${i}`} className="flex items-center gap-2 bp-mono" style={{ padding: "5px 12px", borderRadius: 999, background: "color-mix(in srgb, var(--bp-cyan) 5%, transparent)", border: "1px solid var(--bp-line)", whiteSpace: "nowrap", flexShrink: 0 }}>
-                <span style={{ width: 5, height: 5, borderRadius: 5, background: c.color, boxShadow: `0 0 5px ${c.color}` }} />
-                <span style={{ fontSize: 10.5, color: "var(--bp-ink)" }}>{c.name}</span>
-                <span style={{ fontSize: 10, color: "var(--bp-ink-faint)" }}>· {c.op}</span>
+              <div key={`${c.name}-${i}`} className="flex items-center gap-2 bp-mono" style={{ padding: "5px 12px", borderRadius: 999, background: "rgba(0,229,199,0.05)", border: "1px solid rgba(255,255,255,0.12)", whiteSpace: "nowrap", flexShrink: 0 }}>
+                <span style={{ width: 5, height: 5, borderRadius: 5, background: c.color }} />
+                <span style={{ fontSize: 10.5, color: "#e8ecf5" }}>{c.name}</span>
+                <span style={{ fontSize: 10, color: "#8fa0c8" }}>· {c.op}</span>
                 <span style={{ fontSize: 10, color: c.color, fontWeight: 700, letterSpacing: "0.08em" }}>· {c.qc}</span>
               </div>
             ))}
