@@ -4,7 +4,7 @@
  * LiveCaptureStream — horizontally scrolling ticker of "recent captures"
  * with pass/fail indicators. Real capture names + honest QC states.
  */
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 
 const CAPS = [
   { name: "pick_up_the_cup__20260617T01",   task: "pick",    op: "op mobile",   qc: "PASS",   color: "#5ee08a" },
@@ -22,19 +22,20 @@ const CAPS = [
 ];
 
 export function LiveCaptureStream() {
-  const items = [...CAPS, ...CAPS]; // duplicate for seamless loop
+  const reduce = useReducedMotion();
+  const items = reduce ? CAPS : [...CAPS, ...CAPS]; // duplicate only when scrolling
   return (
     <section className="relative overflow-hidden" style={{ borderTop: "1px solid rgba(255,255,255,0.08)", borderBottom: "1px solid rgba(255,255,255,0.08)", padding: "14px 0", background: "#06060E" }}>
       <div className="container mx-auto flex items-center gap-4 px-5">
         <div className="flex items-center gap-2 bp-mono" style={{ fontSize: 10, color: "#8fa0c8", letterSpacing: "0.14em", textTransform: "uppercase", flexShrink: 0 }}>
-          <motion.span animate={{ opacity: [1, 0.15, 1] }} transition={{ duration: 1.1, repeat: Infinity }} style={{ width: 6, height: 6, borderRadius: 6, background: "#ff5f57" }} />
+          <motion.span animate={reduce ? {} : { opacity: [1, 0.15, 1] }} transition={reduce ? undefined : { duration: 1.1, repeat: Infinity }} style={{ width: 6, height: 6, borderRadius: 6, background: "#ff5f57" }} />
           Live capture stream
         </div>
         <div className="relative flex-1 overflow-hidden" style={{ maskImage: "linear-gradient(90deg, transparent 0, #000 6%, #000 94%, transparent 100%)", WebkitMaskImage: "linear-gradient(90deg, transparent 0, #000 6%, #000 94%, transparent 100%)" }}>
           <motion.div
             className="flex items-center gap-3"
-            animate={{ x: ["0%", "-50%"] }}
-            transition={{ duration: 60, repeat: Infinity, ease: "linear" }}
+            animate={reduce ? undefined : { x: ["0%", "-50%"] }}
+            transition={reduce ? undefined : { duration: 60, repeat: Infinity, ease: "linear" }}
           >
             {items.map((c, i) => (
               <div key={`${c.name}-${i}`} className="flex items-center gap-2 bp-mono" style={{ padding: "5px 12px", borderRadius: 999, background: "rgba(0,229,199,0.05)", border: "1px solid rgba(255,255,255,0.12)", whiteSpace: "nowrap", flexShrink: 0 }}>

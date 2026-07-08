@@ -56,14 +56,16 @@ function HeroMix({ reduce }: { reduce: boolean }) {
     );
   }
 
-  // Render ALL clips as stacked layers; toggle opacity for seamless cross-fade.
-  // Only active + next clip play; others paused to save decoder budget.
+  // Only mount active + next clip <video>. Others render nothing so browser
+  // never opens 6 decoders / fetches 6 sources on hero mount (~-25MB, mobile
+  // decoder budget preserved). All other clips remain in the cycle via idx.
   const nextIdx = (idx + 1) % HERO_MIX.clips.length;
   return (
     <div className="absolute inset-0">
       {HERO_MIX.clips.map((clip, i) => {
         const active = i === idx;
-        const preloaded = i === idx || i === nextIdx;
+        const mounted = i === idx || i === nextIdx;
+        if (!mounted) return null;
         return (
           <motion.video
             key={clip.src}
@@ -74,7 +76,7 @@ function HeroMix({ reduce }: { reduce: boolean }) {
             muted
             loop
             playsInline
-            preload={preloaded ? "auto" : "none"}
+            preload="auto"
             poster={clip.poster}
             className={HERO_FIT}
             style={{ pointerEvents: "none" }}
