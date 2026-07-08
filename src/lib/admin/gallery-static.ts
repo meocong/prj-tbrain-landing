@@ -223,37 +223,37 @@ export const STATIC_IMAGES: StaticImage[] = [
     "path": "/images/body-kpts/arrange_fabric_t25.jpg",
     "name": "arrange_fabric_t25",
     "ext": "jpg",
-    "size_bytes": 235806
+    "size_bytes": 237504
   },
   {
     "path": "/images/body-kpts/arrange_fabric_t50.jpg",
     "name": "arrange_fabric_t50",
     "ext": "jpg",
-    "size_bytes": 228161
+    "size_bytes": 229878
   },
   {
     "path": "/images/body-kpts/arrange_fabric_t75.jpg",
     "name": "arrange_fabric_t75",
     "ext": "jpg",
-    "size_bytes": 229329
+    "size_bytes": 231125
   },
   {
     "path": "/images/body-kpts/iron_product_t25.jpg",
     "name": "iron_product_t25",
     "ext": "jpg",
-    "size_bytes": 220725
+    "size_bytes": 221527
   },
   {
     "path": "/images/body-kpts/iron_product_t50.jpg",
     "name": "iron_product_t50",
     "ext": "jpg",
-    "size_bytes": 252153
+    "size_bytes": 253931
   },
   {
     "path": "/images/body-kpts/iron_product_t75.jpg",
     "name": "iron_product_t75",
     "ext": "jpg",
-    "size_bytes": 250397
+    "size_bytes": 246739
   },
   {
     "path": "/images/body-kpts/pick_up_the_cup_t25.jpg",
@@ -271,25 +271,25 @@ export const STATIC_IMAGES: StaticImage[] = [
     "path": "/images/body-kpts/pick_up_the_cup_t75.jpg",
     "name": "pick_up_the_cup_t75",
     "ext": "jpg",
-    "size_bytes": 65933
+    "size_bytes": 65273
   },
   {
     "path": "/images/body-kpts/sew_hem_t25.jpg",
     "name": "sew_hem_t25",
     "ext": "jpg",
-    "size_bytes": 258241
+    "size_bytes": 260095
   },
   {
     "path": "/images/body-kpts/sew_hem_t50.jpg",
     "name": "sew_hem_t50",
     "ext": "jpg",
-    "size_bytes": 254986
+    "size_bytes": 254048
   },
   {
     "path": "/images/body-kpts/sew_hem_t75.jpg",
     "name": "sew_hem_t75",
     "ext": "jpg",
-    "size_bytes": 240091
+    "size_bytes": 238125
   },
   {
     "path": "/images/code-screen.jpg",
@@ -997,67 +997,67 @@ export const STATIC_IMAGES: StaticImage[] = [
     "path": "/images/textile-annotated/arrange_01.jpg",
     "name": "arrange_01",
     "ext": "jpg",
-    "size_bytes": 50403
+    "size_bytes": 189376
   },
   {
     "path": "/images/textile-annotated/arrange_02.jpg",
     "name": "arrange_02",
     "ext": "jpg",
-    "size_bytes": 48134
+    "size_bytes": 185832
   },
   {
     "path": "/images/textile-annotated/iron_01.jpg",
     "name": "iron_01",
     "ext": "jpg",
-    "size_bytes": 54456
+    "size_bytes": 210818
   },
   {
     "path": "/images/textile-annotated/iron_02.jpg",
     "name": "iron_02",
     "ext": "jpg",
-    "size_bytes": 49301
+    "size_bytes": 189580
   },
   {
     "path": "/images/textile-annotated/package_01.jpg",
     "name": "package_01",
     "ext": "jpg",
-    "size_bytes": 47252
+    "size_bytes": 112474
   },
   {
     "path": "/images/textile-annotated/package_02.jpg",
     "name": "package_02",
     "ext": "jpg",
-    "size_bytes": 51925
+    "size_bytes": 193343
   },
   {
     "path": "/images/textile-annotated/pick_up_the_cup.jpg",
     "name": "pick_up_the_cup",
     "ext": "jpg",
-    "size_bytes": 27126
+    "size_bytes": 43613
   },
   {
     "path": "/images/textile-annotated/print_01.jpg",
     "name": "print_01",
     "ext": "jpg",
-    "size_bytes": 7605
+    "size_bytes": 169097
   },
   {
     "path": "/images/textile-annotated/print_02.jpg",
     "name": "print_02",
     "ext": "jpg",
-    "size_bytes": 38860
+    "size_bytes": 187943
   },
   {
     "path": "/images/textile-annotated/quality_01.jpg",
     "name": "quality_01",
     "ext": "jpg",
-    "size_bytes": 30327
+    "size_bytes": 74330
   },
   {
     "path": "/images/textile-annotated/quality_02.jpg",
     "name": "quality_02",
     "ext": "jpg",
-    "size_bytes": 90896
+    "size_bytes": 160205
   },
   {
     "path": "/images/textile-annotated/quality_check.jpg",
@@ -1069,13 +1069,13 @@ export const STATIC_IMAGES: StaticImage[] = [
     "path": "/images/textile-annotated/sew_01.jpg",
     "name": "sew_01",
     "ext": "jpg",
-    "size_bytes": 59075
+    "size_bytes": 224417
   },
   {
     "path": "/images/textile-annotated/sew_02.jpg",
     "name": "sew_02",
     "ext": "jpg",
-    "size_bytes": 51873
+    "size_bytes": 192155
   },
   {
     "path": "/images/textile-raw/arrange_01.jpg",
