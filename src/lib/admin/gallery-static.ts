@@ -223,73 +223,73 @@ export const STATIC_IMAGES: StaticImage[] = [
     "path": "/images/body-kpts/arrange_fabric_t25.jpg",
     "name": "arrange_fabric_t25",
     "ext": "jpg",
-    "size_bytes": 68936
+    "size_bytes": 235806
   },
   {
     "path": "/images/body-kpts/arrange_fabric_t50.jpg",
     "name": "arrange_fabric_t50",
     "ext": "jpg",
-    "size_bytes": 68056
+    "size_bytes": 228161
   },
   {
     "path": "/images/body-kpts/arrange_fabric_t75.jpg",
     "name": "arrange_fabric_t75",
     "ext": "jpg",
-    "size_bytes": 68219
+    "size_bytes": 229329
   },
   {
     "path": "/images/body-kpts/iron_product_t25.jpg",
     "name": "iron_product_t25",
     "ext": "jpg",
-    "size_bytes": 64978
+    "size_bytes": 220725
   },
   {
     "path": "/images/body-kpts/iron_product_t50.jpg",
     "name": "iron_product_t50",
     "ext": "jpg",
-    "size_bytes": 70441
+    "size_bytes": 252153
   },
   {
     "path": "/images/body-kpts/iron_product_t75.jpg",
     "name": "iron_product_t75",
     "ext": "jpg",
-    "size_bytes": 70435
+    "size_bytes": 250397
   },
   {
     "path": "/images/body-kpts/pick_up_the_cup_t25.jpg",
     "name": "pick_up_the_cup_t25",
     "ext": "jpg",
-    "size_bytes": 89169
+    "size_bytes": 59688
   },
   {
     "path": "/images/body-kpts/pick_up_the_cup_t50.jpg",
     "name": "pick_up_the_cup_t50",
     "ext": "jpg",
-    "size_bytes": 79572
+    "size_bytes": 68350
   },
   {
     "path": "/images/body-kpts/pick_up_the_cup_t75.jpg",
     "name": "pick_up_the_cup_t75",
     "ext": "jpg",
-    "size_bytes": 83864
+    "size_bytes": 65933
   },
   {
     "path": "/images/body-kpts/sew_hem_t25.jpg",
     "name": "sew_hem_t25",
     "ext": "jpg",
-    "size_bytes": 73334
+    "size_bytes": 258241
   },
   {
     "path": "/images/body-kpts/sew_hem_t50.jpg",
     "name": "sew_hem_t50",
     "ext": "jpg",
-    "size_bytes": 74492
+    "size_bytes": 254986
   },
   {
     "path": "/images/body-kpts/sew_hem_t75.jpg",
     "name": "sew_hem_t75",
     "ext": "jpg",
-    "size_bytes": 66869
+    "size_bytes": 240091
   },
   {
     "path": "/images/code-screen.jpg",
@@ -751,13 +751,13 @@ export const STATIC_IMAGES: StaticImage[] = [
     "path": "/images/real-captures/clean_workstation_defect-loop.jpg",
     "name": "clean_workstation_defect-loop",
     "ext": "jpg",
-    "size_bytes": 14306
+    "size_bytes": 45511
   },
   {
     "path": "/images/real-captures/clean_workstation-loop.jpg",
     "name": "clean_workstation-loop",
     "ext": "jpg",
-    "size_bytes": 19703
+    "size_bytes": 43587
   },
   {
     "path": "/images/real-captures/cleaning_pantry_surface_defect__op_unknown__20260617T01.jpg",
@@ -769,7 +769,7 @@ export const STATIC_IMAGES: StaticImage[] = [
     "path": "/images/real-captures/cleaning_pantry_surface_defect-loop.jpg",
     "name": "cleaning_pantry_surface_defect-loop",
     "ext": "jpg",
-    "size_bytes": 9093
+    "size_bytes": 127500
   },
   {
     "path": "/images/real-captures/gan_tag_cho_san_pham__op_mobile__20260626T01.jpg",
@@ -793,7 +793,7 @@ export const STATIC_IMAGES: StaticImage[] = [
     "path": "/images/real-captures/gan_tag_cho_san_pham-loop.jpg",
     "name": "gan_tag_cho_san_pham-loop",
     "ext": "jpg",
-    "size_bytes": 23985
+    "size_bytes": 221504
   },
   {
     "path": "/images/real-captures/open_and_close_door__op_unknown__20260617T01.jpg",
@@ -805,7 +805,7 @@ export const STATIC_IMAGES: StaticImage[] = [
     "path": "/images/real-captures/open_and_close_door-loop.jpg",
     "name": "open_and_close_door-loop",
     "ext": "jpg",
-    "size_bytes": 9926
+    "size_bytes": 34697
   },
   {
     "path": "/images/real-captures/pick_up_cup_defect__op_unknown__20260617T01.jpg",
@@ -817,7 +817,7 @@ export const STATIC_IMAGES: StaticImage[] = [
     "path": "/images/real-captures/pick_up_cup_defect-loop.jpg",
     "name": "pick_up_cup_defect-loop",
     "ext": "jpg",
-    "size_bytes": 21423
+    "size_bytes": 33223
   },
   {
     "path": "/images/real-captures/pick_up_item_from_fridge__op_unknown__20260617T01.jpg",
@@ -829,7 +829,7 @@ export const STATIC_IMAGES: StaticImage[] = [
     "path": "/images/real-captures/pick_up_item_from_fridge-loop.jpg",
     "name": "pick_up_item_from_fridge-loop",
     "ext": "jpg",
-    "size_bytes": 17481
+    "size_bytes": 42431
   },
   {
     "path": "/images/real-captures/pick_up_the_cup__op_anna__20260701T01.jpg",
@@ -847,7 +847,7 @@ export const STATIC_IMAGES: StaticImage[] = [
     "path": "/images/real-captures/pick_up_the_cup-loop.jpg",
     "name": "pick_up_the_cup-loop",
     "ext": "jpg",
-    "size_bytes": 20348
+    "size_bytes": 42771
   },
   {
     "path": "/images/real-captures/smoke_test__op_smoke__20260701T01.jpg",
@@ -865,7 +865,7 @@ export const STATIC_IMAGES: StaticImage[] = [
     "path": "/images/real-captures/wiping_pantry_surface-loop.jpg",
     "name": "wiping_pantry_surface-loop",
     "ext": "jpg",
-    "size_bytes": 11195
+    "size_bytes": 38794
   },
   {
     "path": "/images/real-samples/aloha.png",
@@ -997,37 +997,43 @@ export const STATIC_IMAGES: StaticImage[] = [
     "path": "/images/textile-annotated/arrange_01.jpg",
     "name": "arrange_01",
     "ext": "jpg",
-    "size_bytes": 43363
+    "size_bytes": 50403
   },
   {
     "path": "/images/textile-annotated/arrange_02.jpg",
     "name": "arrange_02",
     "ext": "jpg",
-    "size_bytes": 47730
+    "size_bytes": 48134
   },
   {
     "path": "/images/textile-annotated/iron_01.jpg",
     "name": "iron_01",
     "ext": "jpg",
-    "size_bytes": 51033
+    "size_bytes": 54456
   },
   {
     "path": "/images/textile-annotated/iron_02.jpg",
     "name": "iron_02",
     "ext": "jpg",
-    "size_bytes": 46734
+    "size_bytes": 49301
   },
   {
     "path": "/images/textile-annotated/package_01.jpg",
     "name": "package_01",
     "ext": "jpg",
-    "size_bytes": 23568
+    "size_bytes": 47252
   },
   {
     "path": "/images/textile-annotated/package_02.jpg",
     "name": "package_02",
     "ext": "jpg",
-    "size_bytes": 46101
+    "size_bytes": 51925
+  },
+  {
+    "path": "/images/textile-annotated/pick_up_the_cup.jpg",
+    "name": "pick_up_the_cup",
+    "ext": "jpg",
+    "size_bytes": 27126
   },
   {
     "path": "/images/textile-annotated/print_01.jpg",
@@ -1054,16 +1060,22 @@ export const STATIC_IMAGES: StaticImage[] = [
     "size_bytes": 90896
   },
   {
+    "path": "/images/textile-annotated/quality_check.jpg",
+    "name": "quality_check",
+    "ext": "jpg",
+    "size_bytes": 40569
+  },
+  {
     "path": "/images/textile-annotated/sew_01.jpg",
     "name": "sew_01",
     "ext": "jpg",
-    "size_bytes": 54510
+    "size_bytes": 59075
   },
   {
     "path": "/images/textile-annotated/sew_02.jpg",
     "name": "sew_02",
     "ext": "jpg",
-    "size_bytes": 42012
+    "size_bytes": 51873
   },
   {
     "path": "/images/textile-raw/arrange_01.jpg",
