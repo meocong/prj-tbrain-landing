@@ -5,8 +5,8 @@
  * moves through 4 keypoints; right-side pills flip drift → OK in sync as the
  * cursor lands on each. Feels alive without pretending to be a real screencap.
  */
-import { useEffect, useState } from "react";
-import { motion, useReducedMotion } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { Check, X, ArrowLeft, ArrowRight, Circle, ChevronDown, Command } from "lucide-react";
 
 const TASK_QUEUE = [
@@ -28,10 +28,16 @@ const KPTS = [
 const HOLD_MS = 2400;
 const MOVE_MS = 700;
 
+type PulseKind = "none" | "accept" | "reject";
+
 export function LabelStudioCard() {
   const reduce = useReducedMotion();
   const [idx, setIdx] = useState(0);
   const [fixed, setFixed] = useState<boolean[]>([false, false, false, false]);
+  const [pulse, setPulse] = useState<PulseKind>("none");
+  const [savedCount, setSavedCount] = useState(142);
+  const cardRef = useRef<HTMLDivElement>(null);
+  const inViewRef = useRef(false);
 
   useEffect(() => {
     if (reduce) {
@@ -56,10 +62,40 @@ export function LabelStudioCard() {
     return () => clearInterval(t);
   }, [idx, reduce]);
 
+  const firePulse = (k: Exclude<PulseKind, "none">) => {
+    setPulse(k);
+    if (k === "accept") setSavedCount((n) => n + 1);
+  };
+
+  useEffect(() => {
+    if (pulse === "none") return;
+    const t = setTimeout(() => setPulse("none"), 1400);
+    return () => clearTimeout(t);
+  }, [pulse]);
+
+  useEffect(() => {
+    const el = cardRef.current;
+    if (!el) return;
+    const io = new IntersectionObserver(
+      (entries) => { for (const e of entries) inViewRef.current = e.isIntersecting; },
+      { threshold: 0.35 }
+    );
+    io.observe(el);
+    const onKey = (e: KeyboardEvent) => {
+      if (!inViewRef.current) return;
+      const tag = (document.activeElement?.tagName || "").toLowerCase();
+      if (tag === "input" || tag === "textarea" || tag === "select") return;
+      if (e.key === "1") { e.preventDefault(); firePulse("accept"); }
+      else if (e.key === "2") { e.preventDefault(); firePulse("reject"); }
+    };
+    window.addEventListener("keydown", onKey);
+    return () => { io.disconnect(); window.removeEventListener("keydown", onKey); };
+  }, []);
+
   const cursor = KPTS[idx];
 
   return (
-    <div className="bp-card overflow-hidden" style={{ borderRadius: 14, background: "#0d1524" }}>
+    <div ref={cardRef} className="bp-card overflow-hidden" style={{ borderRadius: 14, background: "#0d1524" }}>
       {/* Chrome */}
       <div className="flex items-center gap-2 bp-mono" style={{ padding: "10px 14px", fontSize: 10, color: "#8fa0c8", borderBottom: "1px solid var(--bp-line)" }}>
         <span style={{ width: 8, height: 8, borderRadius: 8, background: "#ff5f57" }} />
@@ -209,12 +245,100 @@ export function LabelStudioCard() {
             </div>
 
             <div className="mt-6 flex gap-2">
-              <button className="bp-mono flex-1 rounded-md px-3 py-2 font-semibold" style={{ fontSize: 11, background: "#4cb5ff", color: "#0b1220", border: "none" }}>
-                <Check className="mr-1 inline h-3.5 w-3.5" />Accept · save diff
-              </button>
-              <button className="bp-mono rounded-md px-3 py-2" style={{ fontSize: 11, background: "transparent", color: "#ff9a4d", border: "1px solid #ff9a4d" }}>
-                <X className="mr-1 inline h-3.5 w-3.5" />Reject
-              </button>
+              <motion.button
+                type="button"
+                onClick={() => firePulse("accept")}
+                whileTap={reduce ? undefined : { scale: 0.96 }}
+                whileHover={reduce ? undefined : { scale: 1.015 }}
+                transition={{ duration: 0.12, ease: "easeOut" }}
+                aria-label="Accept and save diff (1)"
+                className="bp-mono flex-1 rounded-md px-3 py-2 font-semibold relative overflow-hidden cursor-pointer"
+                style={{
+                  fontSize: 11,
+                  background: pulse === "accept" ? "#22e3c8" : "#4cb5ff",
+                  color: "#0b1220",
+                  border: "none",
+                  transition: "background 220ms ease",
+                }}
+              >
+                <AnimatePresence mode="wait" initial={false}>
+                  {pulse === "accept" ? (
+                    <motion.span
+                      key="saved"
+                      initial={reduce ? false : { y: 8, opacity: 0 }}
+                      animate={{ y: 0, opacity: 1 }}
+                      exit={reduce ? { opacity: 0 } : { y: -8, opacity: 0 }}
+                      transition={{ duration: 0.18 }}
+                      className="inline-flex items-center gap-1"
+                    >
+                      <Check className="h-3.5 w-3.5" />Saved · diff #{savedCount}
+                    </motion.span>
+                  ) : (
+                    <motion.span
+                      key="accept"
+                      initial={reduce ? false : { y: 8, opacity: 0 }}
+                      animate={{ y: 0, opacity: 1 }}
+                      exit={reduce ? { opacity: 0 } : { y: -8, opacity: 0 }}
+                      transition={{ duration: 0.18 }}
+                      className="inline-flex items-center gap-1"
+                    >
+                      <Check className="h-3.5 w-3.5" />Accept · save diff
+                    </motion.span>
+                  )}
+                </AnimatePresence>
+                {pulse === "accept" && !reduce && (
+                  <motion.span
+                    aria-hidden
+                    initial={{ scale: 0.85, opacity: 0.65 }}
+                    animate={{ scale: 2.1, opacity: 0 }}
+                    transition={{ duration: 0.6, ease: "easeOut" }}
+                    style={{ position: "absolute", inset: 0, borderRadius: 6, border: "2px solid #22e3c8", pointerEvents: "none" }}
+                  />
+                )}
+              </motion.button>
+              <motion.button
+                type="button"
+                onClick={() => firePulse("reject")}
+                whileTap={reduce ? undefined : { scale: 0.96 }}
+                whileHover={reduce ? undefined : { scale: 1.015 }}
+                animate={pulse === "reject" && !reduce ? { x: [0, -4, 4, -3, 3, 0] } : { x: 0 }}
+                transition={{ duration: 0.32 }}
+                aria-label="Reject and send back to auto-label (2)"
+                className="bp-mono rounded-md px-3 py-2 relative overflow-hidden cursor-pointer"
+                style={{
+                  fontSize: 11,
+                  background: pulse === "reject" ? "rgba(255,154,77,0.16)" : "transparent",
+                  color: "#ff9a4d",
+                  border: "1px solid #ff9a4d",
+                  transition: "background 220ms ease",
+                }}
+              >
+                <AnimatePresence mode="wait" initial={false}>
+                  {pulse === "reject" ? (
+                    <motion.span
+                      key="sent"
+                      initial={reduce ? false : { y: 8, opacity: 0 }}
+                      animate={{ y: 0, opacity: 1 }}
+                      exit={reduce ? { opacity: 0 } : { y: -8, opacity: 0 }}
+                      transition={{ duration: 0.18 }}
+                      className="inline-flex items-center gap-1"
+                    >
+                      <X className="h-3.5 w-3.5" />Sent back
+                    </motion.span>
+                  ) : (
+                    <motion.span
+                      key="reject"
+                      initial={reduce ? false : { y: 8, opacity: 0 }}
+                      animate={{ y: 0, opacity: 1 }}
+                      exit={reduce ? { opacity: 0 } : { y: -8, opacity: 0 }}
+                      transition={{ duration: 0.18 }}
+                      className="inline-flex items-center gap-1"
+                    >
+                      <X className="h-3.5 w-3.5" />Reject
+                    </motion.span>
+                  )}
+                </AnimatePresence>
+              </motion.button>
             </div>
           </div>
 

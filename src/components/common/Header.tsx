@@ -16,7 +16,6 @@ const DATA_ITEMS = [
 
 const NAV_ITEMS = [
   { label: "Home", href: "/" },
-  { label: "About", href: "/about" },
   { label: "Platform", href: "/platform" },
   { label: "Case Studies", href: "/casestudy" },
   { label: "Physical AI", href: "/data/physical-ai", isDropdown: true },
