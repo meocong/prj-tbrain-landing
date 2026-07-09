@@ -174,14 +174,29 @@ function StageMasks() {
 
 function StageDepth() {
   const depth = AUTO_LABEL_STAGES.find((s) => s.key === "depth")!;
+  const shots = depth.overlays ?? (depth.overlayImages ?? []).map((src) => ({ src, cap: "", pred: "", status: "PASS" as const }));
   return (
     <StagePanel fig={depth.fig} title={depth.title} model={depth.model} detail={depth.detail} output={depth.output}>
       <div className="grid gap-4 lg:grid-cols-[minmax(0,1.6fr)_minmax(0,1fr)]">
-        <div>
-          {(depth.overlayImages ?? []).map((src) => (
-            <div key={src} className="overflow-hidden" style={{ borderRadius: 10, border: "1px solid var(--bp-line)" }}>
-              <img src={src} alt="Monocular depth pointmap RGB + depth heatmap" style={{ width: "100%", display: "block" }} loading="lazy" />
-            </div>
+        <div className="grid gap-3 sm:grid-cols-2">
+          {shots.map((o) => (
+            <figure key={o.src} className="bp-card overflow-hidden" style={{ margin: 0, borderRadius: 10, padding: 0 }}>
+              <div className="relative" style={{ background: "#050a12" }}>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={o.src} alt={o.cap || "Monocular depth pointmap · RGB + depth heatmap"} style={{ width: "100%", display: "block", aspectRatio: "16 / 10", objectFit: "cover" }} loading="lazy" />
+                {o.status && (
+                  <span className="bp-mono absolute left-2 top-2" style={{ fontSize: 9, letterSpacing: "0.1em", padding: "3px 7px", borderRadius: 4, background: "rgba(6,6,14,0.72)", color: "#22e3c8", border: "1px solid rgba(0,229,199,0.35)" }}>
+                    {o.status}
+                  </span>
+                )}
+              </div>
+              {(o.cap || o.pred) && (
+                <figcaption style={{ padding: "8px 10px", borderTop: "1px solid var(--bp-line)", fontSize: 11, color: "var(--bp-ink-dim)", lineHeight: 1.4 }}>
+                  <div className="bp-mono" style={{ fontSize: 10, color: "var(--bp-ink-faint)", letterSpacing: "0.06em" }}>{o.cap}</div>
+                  {o.pred && <div style={{ marginTop: 2 }}>{o.pred}</div>}
+                </figcaption>
+              )}
+            </figure>
           ))}
         </div>
         <div className="bp-card" style={{ padding: 18, borderRadius: 12 }}>
