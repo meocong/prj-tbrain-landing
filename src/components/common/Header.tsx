@@ -100,6 +100,10 @@ const Header = () => {
         logoFilter: "none",
       };
 
+  // Logo follows the THEME, not the hero/scroll state: coloured brand mark in
+  // light mode everywhere (incl. over dark heroes), white in dark mode.
+  const logoFilter = isDarkTheme ? "brightness(0) invert(1)" : "none";
+
   return (
     <header
       className={`fixed left-0 right-0 top-0 z-50 w-full transition-[background-color,border-color,backdrop-filter] duration-300 ${tokens.wrapper}`}
@@ -116,7 +120,7 @@ const Header = () => {
               loading="eager"
               fetchPriority="high"
               className="h-10 w-auto object-contain"
-              style={{ filter: tokens.logoFilter }}
+              style={{ filter: logoFilter }}
             />
           </Link>
 
