@@ -16,7 +16,17 @@
 
 BEGIN;
 
-ALTER TABLE tbrain_landing.passcodes
-  ADD CONSTRAINT IF NOT EXISTS passcodes_client_batch_unique UNIQUE (client_id, batch_id);
+-- Postgres has no `ADD CONSTRAINT IF NOT EXISTS` — guard via DO block.
+DO $$
+BEGIN
+  IF NOT EXISTS (
+    SELECT 1 FROM pg_constraint
+     WHERE conname = 'passcodes_client_batch_unique'
+       AND conrelid = 'tbrain_landing.passcodes'::regclass
+  ) THEN
+    ALTER TABLE tbrain_landing.passcodes
+      ADD CONSTRAINT passcodes_client_batch_unique UNIQUE (client_id, batch_id);
+  END IF;
+END $$;
 
 COMMIT;

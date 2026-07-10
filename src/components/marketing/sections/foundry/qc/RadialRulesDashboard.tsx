@@ -32,9 +32,12 @@ export function RadialRulesDashboard() {
   const segAngle = 360 / total;
   const gap = 3;
 
+  // Round to fixed precision so the SVG `d` string is byte-identical between the
+  // server and client render (raw float precision differs → hydration mismatch).
+  const rnd = (n: number) => Math.round(n * 1000) / 1000;
   const polar = (cx: number, cy: number, r: number, angle: number) => {
     const a = ((angle - 90) * Math.PI) / 180;
-    return [cx + r * Math.cos(a), cy + r * Math.sin(a)];
+    return [rnd(cx + r * Math.cos(a)), rnd(cy + r * Math.sin(a))];
   };
 
   return (

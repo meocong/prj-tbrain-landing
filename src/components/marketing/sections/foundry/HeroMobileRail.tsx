@@ -43,7 +43,7 @@ export function HeroMobileRail() {
           return (
             <motion.div
               key={p.k}
-              animate={{ background: on ? `color-mix(in srgb, ${p.color} 30%, rgba(11,18,32,0))` : "transparent", flex: on ? 2 : 1 }}
+              animate={{ background: on ? `${p.color}4D` : "rgba(11,18,32,0)", flex: on ? 2 : 1 }}
               transition={{ duration: 0.4 }}
               className="flex items-center justify-center overflow-hidden rounded-full"
               style={{

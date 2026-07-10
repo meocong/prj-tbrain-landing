@@ -337,7 +337,7 @@ export const STATIC_IMAGES: StaticImage[] = [
     "path": "/images/descriptions/pick_up_the_cup.jpg",
     "name": "pick_up_the_cup",
     "ext": "jpg",
-    "size_bytes": 129126
+    "size_bytes": 81945
   },
   {
     "path": "/images/descriptions/sew_hem.jpg",
@@ -997,67 +997,67 @@ export const STATIC_IMAGES: StaticImage[] = [
     "path": "/images/textile-annotated/arrange_01.jpg",
     "name": "arrange_01",
     "ext": "jpg",
-    "size_bytes": 188858
+    "size_bytes": 200509
   },
   {
     "path": "/images/textile-annotated/arrange_02.jpg",
     "name": "arrange_02",
     "ext": "jpg",
-    "size_bytes": 185218
+    "size_bytes": 165879
   },
   {
     "path": "/images/textile-annotated/iron_01.jpg",
     "name": "iron_01",
     "ext": "jpg",
-    "size_bytes": 211023
+    "size_bytes": 216757
   },
   {
     "path": "/images/textile-annotated/iron_02.jpg",
     "name": "iron_02",
     "ext": "jpg",
-    "size_bytes": 192686
+    "size_bytes": 188729
   },
   {
     "path": "/images/textile-annotated/package_01.jpg",
     "name": "package_01",
     "ext": "jpg",
-    "size_bytes": 112432
+    "size_bytes": 119547
   },
   {
     "path": "/images/textile-annotated/package_02.jpg",
     "name": "package_02",
     "ext": "jpg",
-    "size_bytes": 193347
+    "size_bytes": 206144
   },
   {
     "path": "/images/textile-annotated/pick_up_the_cup.jpg",
     "name": "pick_up_the_cup",
     "ext": "jpg",
-    "size_bytes": 44144
+    "size_bytes": 45461
   },
   {
     "path": "/images/textile-annotated/print_01.jpg",
     "name": "print_01",
     "ext": "jpg",
-    "size_bytes": 168282
+    "size_bytes": 152134
   },
   {
     "path": "/images/textile-annotated/print_02.jpg",
     "name": "print_02",
     "ext": "jpg",
-    "size_bytes": 189392
+    "size_bytes": 189736
   },
   {
     "path": "/images/textile-annotated/quality_01.jpg",
     "name": "quality_01",
     "ext": "jpg",
-    "size_bytes": 73979
+    "size_bytes": 74282
   },
   {
     "path": "/images/textile-annotated/quality_02.jpg",
     "name": "quality_02",
     "ext": "jpg",
-    "size_bytes": 160301
+    "size_bytes": 161371
   },
   {
     "path": "/images/textile-annotated/quality_check.jpg",
@@ -1069,13 +1069,13 @@ export const STATIC_IMAGES: StaticImage[] = [
     "path": "/images/textile-annotated/sew_01.jpg",
     "name": "sew_01",
     "ext": "jpg",
-    "size_bytes": 221557
+    "size_bytes": 238278
   },
   {
     "path": "/images/textile-annotated/sew_02.jpg",
     "name": "sew_02",
     "ext": "jpg",
-    "size_bytes": 192068
+    "size_bytes": 203484
   },
   {
     "path": "/images/textile-raw/arrange_01.jpg",

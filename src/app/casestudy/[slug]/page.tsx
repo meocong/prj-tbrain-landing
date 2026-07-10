@@ -6,7 +6,6 @@ import { getCaseStudyBlocks } from "@/lib/landing/case-study-blocks";
 import { CaseStudyWidgetRenderer, LegacyCta, MetricsGrid } from "@/components/case-studies/CaseStudyWidgetRenderer";
 import { PdfDownloadGate } from "@/components/casestudy/PdfDownloadGate";
 import { notFound } from "next/navigation";
-import post_bg from "@/assets/images/post_bg.png";
 import { supabaseAdmin } from "@/lib/terminal-bench/supabase/admin";
 
 export const revalidate = 300;
@@ -45,14 +44,7 @@ export async function generateMetadata({
   };
 }
 
-const SECTION_ACCENTS = [
-  { bar: "bg-blue-600", shell: "bg-gradient-to-br from-blue-50/80 to-indigo-50/80", border: "border-blue-500" },
-  { bar: "bg-indigo-600", shell: "", border: "border-indigo-500" },
-  { bar: "bg-red-600", shell: "", border: "border-red-500" },
-  { bar: "bg-indigo-600", shell: "bg-gradient-to-br from-indigo-50/80 to-purple-50/80", border: "border-indigo-500" },
-  { bar: "bg-green-600", shell: "bg-gradient-to-br from-green-50/80 to-emerald-50/80", border: "border-green-500" },
-  { bar: "bg-blue-600", shell: "", border: "border-blue-500" },
-];
+const SECTION_TOKENS = ["var(--bp-cyan)", "var(--bp-purple)", "var(--bp-amber)", "var(--bp-cyan-strong)", "var(--bp-cyan)", "var(--bp-purple)"];
 
 export default async function CaseStudyDetailPage({
   params,
@@ -119,24 +111,23 @@ export default async function CaseStudyDetailPage({
       )}
       {!isPdfRender && <Header />}
       <main
-        className={`bg-center bg-no-repeat bg-cover pb-24 ${isPdfRender ? "pt-0" : "pt-24"}`}
-        style={{ backgroundImage: isPdfRender ? undefined : `url(${post_bg.src})` }}
+        className={`pb-24 ${isPdfRender ? "pt-0" : "pt-32"}`}
+        style={{ background: isPdfRender ? undefined : "var(--bp-bg)" }}
       >
-        {!isPdfRender && (
-          <div className="wrap !fixed top-[400px] w-full">
-            <div className="one top-0 left-0 h-80 w-80"></div>
-            <div className="two top-0 right-0 h-80 w-80"></div>
-          </div>
-        )}
-        <section className="container mx-auto max-w-[1128px] px-4">
+        <section className="container mx-auto max-w-[1128px] px-5">
           <header className="mb-12">
             <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
               <div className="min-w-0 flex-1">
-                <h1 className="text-[#222222] text-4xl lg:text-5xl font-semibold leading-[1.1]">
+                {(study.industry || "Case study") && (
+                  <div className="bp-mono" style={{ fontSize: 11, letterSpacing: "0.14em", textTransform: "uppercase", color: "var(--bp-cyan)" }}>
+                    {study.industry || "Case study"}
+                  </div>
+                )}
+                <h1 className="mt-3" style={{ fontFamily: "var(--font-heading)", fontWeight: 300, fontSize: "clamp(36px,5.4vw,64px)", lineHeight: 1.0, letterSpacing: "-0.03em", color: "var(--bp-ink)" }}>
                   {study.title}
                 </h1>
                 {study.shortDescription && (
-                  <p className="mt-4 text-lg text-[#78818f] italic">
+                  <p className="mt-5 max-w-2xl" style={{ fontSize: 18, lineHeight: 1.55, color: "var(--bp-ink-dim)" }}>
                     {study.shortDescription}
                   </p>
                 )}
@@ -172,22 +163,15 @@ export default async function CaseStudyDetailPage({
 type CaseSection = { title: string; body: string };
 
 function LegacySection({ section, index }: { section: CaseSection; index: number }) {
-  const accent = SECTION_ACCENTS[index % SECTION_ACCENTS.length];
-  const isChallenge = /challenge/i.test(section.title);
-  const isOutcome = /outcome|result/i.test(section.title);
-  const isSolution = /solution|approach|framework/i.test(section.title);
-  const shellClass = accent.shell || "bg-white/80";
-
+  const accent = SECTION_TOKENS[index % SECTION_TOKENS.length];
   return (
-    <section
-      className={`${shellClass} rounded-2xl p-8 shadow-md backdrop-blur-sm ${isChallenge ? "case-study-challenge" : ""} ${isOutcome ? "case-study-outcome" : ""} ${isSolution ? "case-study-solution" : ""}`}
-    >
-      <h2 className="mb-6 flex items-center text-3xl font-bold text-[#222222]">
-        <span className={`mr-4 h-8 w-2 rounded-full ${accent.bar}`} />
+    <section className="bp-card" style={{ padding: "clamp(24px,3vw,40px)", borderRadius: 16 }}>
+      <h2 className="mb-6 flex items-center" style={{ fontFamily: "var(--font-heading)", fontWeight: 600, fontSize: "clamp(24px,3vw,34px)", letterSpacing: "-0.02em", color: "var(--bp-ink)" }}>
+        <span style={{ marginRight: 14, height: 26, width: 3, borderRadius: 3, background: accent, flexShrink: 0 }} />
         {section.title}
       </h2>
       <div
-        className={`case-study-body case-study-body--legacy ${accent.border}`}
+        className="case-study-body"
         dangerouslySetInnerHTML={{ __html: section.body }}
       />
     </section>
@@ -218,7 +202,13 @@ function splitCaseStudySections(html: string): CaseSection[] {
 }
 
 function stripTags(value: string) {
-  return value.replace(/<[^>]*>/g, "");
+  return value
+    .replace(/<[^>]*>/g, "")
+    .replace(/&amp;/g, "&")
+    .replace(/&lt;/g, "<")
+    .replace(/&gt;/g, ">")
+    .replace(/&quot;/g, '"')
+    .replace(/&#0?39;|&apos;/g, "'");
 }
 
 function escapeHtml(value: string) {

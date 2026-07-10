@@ -16,6 +16,23 @@ const COLOR_MAP: Record<string, string> = {
   green:  "#5ee08a",
 };
 
+/* Each phase card links to its detail: Auto-Label → the 8-model deep dive,
+   QC + Human QC → the QC playbook, Collect → the rig, Deliver → the ledger. */
+const PHASE_HREF: Record<string, string> = {
+  "collect":    "#hardware-showcase",
+  "auto-label": "/data/physical-ai/auto-label",
+  "qc":         "/data/physical-ai/quality",
+  "human-qc":   "/data/physical-ai/quality",
+  "deliver":    "#captures-gallery",
+};
+const PHASE_HREF_LABEL: Record<string, string> = {
+  "collect":    "see the capture rig",
+  "auto-label": "open the auto-label deep dive",
+  "qc":         "open the QC playbook",
+  "human-qc":   "open the QC playbook",
+  "deliver":    "see delivered episodes",
+};
+
 export function PipelineDiagram({ highlight, compact = false }: { highlight?: string; compact?: boolean }) {
   const phases = PIPELINE_OVERVIEW.phases;
   const [hoverIdx, setHoverIdx] = useState<number | null>(null);
@@ -80,8 +97,16 @@ export function PipelineDiagram({ highlight, compact = false }: { highlight?: st
           const emph = isHighlight || isHover;
           const stroke = emph ? c : "var(--bp-line-strong)";
           const strokeWidth = emph ? 2 : 1;
+          const href = PHASE_HREF[p.id];
           return (
-            <g key={p.id} onMouseEnter={() => setHoverIdx(i)} onMouseLeave={() => setHoverIdx(null)} style={{ cursor: "pointer" }}>
+            <a
+              key={p.id}
+              href={href}
+              aria-label={`${p.label} — ${PHASE_HREF_LABEL[p.id] ?? ""}`}
+              onMouseEnter={() => setHoverIdx(i)}
+              onMouseLeave={() => setHoverIdx(null)}
+              style={{ cursor: href ? "pointer" : "default" }}
+            >
               {/* connector */}
               {i > 0 && (
                 <>
@@ -209,7 +234,12 @@ export function PipelineDiagram({ highlight, compact = false }: { highlight?: st
                   </div>
                 </foreignObject>
               )}
-            </g>
+
+              {/* clickable affordance — small ↗ on hover for phases with a target */}
+              {href && emph && (
+                <text x={x + boxW - 30} y={y0 + boxH - 16} fontFamily="var(--font-mono)" fontSize="12" fill={c} filter="url(#phase-glow)">↗</text>
+              )}
+            </a>
           );
         })}
 
