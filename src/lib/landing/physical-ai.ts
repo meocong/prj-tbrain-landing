@@ -49,7 +49,6 @@ export const HERO_MIX = {
     { src: "/videos/hero-mix/2.webm", mp4: "/videos/hero-mix/2.mp4", poster: "/videos/hero-mix/2.jpg", label: "Industrial · textile factory · Vietnam", source: "in-house" },
     { src: "/videos/hero-mix/3.webm", mp4: "/videos/hero-mix/3.mp4", poster: "/videos/hero-mix/3.jpg", label: "Real production · manipulation", source: "in-house" },
     { src: "/videos/hero-mix/4.webm", mp4: "/videos/hero-mix/4.mp4", poster: "/videos/hero-mix/4.jpg", label: "Exocentric mocap · partner-signed", source: "partner" },
-    { src: "/videos/hero-mix/6.webm", mp4: "/videos/hero-mix/6.mp4", poster: "/videos/hero-mix/6.jpg", label: "Egocentric + wrist · triple-GoPro rig · folding", source: "in-house" },
   ],
   fallback: { src: "/videos/worker-hero.webm", mp4: "/videos/worker-hero.mp4", poster: "/images/worker-hero-poster.jpg" },
   clipDurationSec: 10,
