@@ -64,19 +64,26 @@ export function CaseStudyWidget({
   }
 }
 
+const METRIC_TOKENS = ["var(--bp-cyan)", "var(--bp-cyan-strong)", "var(--bp-purple)", "var(--bp-amber)"];
+
 export function MetricsGrid({ metrics }: { metrics: CaseStudyMetric[] }) {
   if (!metrics.length) return null;
   return (
     <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-16">
       {metrics.slice(0, 4).map((metric, i) => {
-        const a = METRIC_ACCENTS[i % METRIC_ACCENTS.length];
+        const accent = METRIC_TOKENS[i % METRIC_TOKENS.length];
         return (
           <div
             key={`${metric.value}-${metric.label}-${i}`}
-            className={`bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg p-6 text-center border-t-4 ${a.border} hover:shadow-xl transition-all`}
+            className="bp-card text-center"
+            style={{ padding: "22px 18px", borderRadius: 14, borderTop: `2px solid ${accent}` }}
           >
-            <div className={`text-5xl font-bold ${a.text} mb-2`}>{metric.value}</div>
-            <div className="text-gray-600 text-sm font-medium">{metric.label}</div>
+            <div style={{ fontFamily: "var(--font-heading)", fontSize: "clamp(34px,4.4vw,52px)", fontWeight: 600, lineHeight: 1, letterSpacing: "-0.03em", color: accent }}>
+              {metric.value}
+            </div>
+            <div className="bp-mono mt-2" style={{ fontSize: 10.5, letterSpacing: "0.08em", textTransform: "uppercase", color: "var(--bp-ink-faint)" }}>
+              {metric.label}
+            </div>
           </div>
         );
       })}
@@ -408,14 +415,15 @@ export function LegacyCta({
   const href = asString(config.href, "https://www.linkedin.com/company/tbrain-ai");
   const label = asString(config.label, "Connect Us Today");
   return (
-    <section className="bg-gradient-to-r from-emerald-600 to-blue-700 rounded-2xl p-8 text-center text-white shadow-xl">
-      <h2 className="text-3xl font-bold mb-4">{title}</h2>
-      {subtitle && <p className="text-xl text-emerald-100 mb-6">{subtitle}</p>}
+    <section className="bp-frame relative overflow-hidden text-center" style={{ borderRadius: 18, padding: "clamp(40px,5vw,64px) 24px", background: "var(--bp-forge)" }}>
+      <h2 style={{ fontFamily: "var(--font-heading)", fontWeight: 500, fontSize: "clamp(26px,3.6vw,40px)", lineHeight: 1.05, letterSpacing: "-0.02em", color: "#fff" }}>{title}</h2>
+      {subtitle && <p className="mx-auto mt-4 max-w-xl" style={{ fontSize: 16, color: "rgba(255,255,255,0.82)" }}>{subtitle}</p>}
       <Link
         href={href}
         target="_blank"
         rel="noopener noreferrer"
-        className="inline-flex items-center gap-3 bg-white text-emerald-700 font-bold py-3 px-8 rounded-lg hover:bg-emerald-50 transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105 group"
+        className="mt-7 inline-flex items-center gap-3 rounded-lg py-3 px-8 font-bold transition-all duration-200 hover:scale-[1.03] group"
+        style={{ fontFamily: "var(--font-heading)", background: "#fff", color: "#1a1145" }}
       >
         <svg className="w-6 h-6 transition-transform group-hover:scale-110" fill="currentColor" viewBox="0 0 24 24">
           <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>

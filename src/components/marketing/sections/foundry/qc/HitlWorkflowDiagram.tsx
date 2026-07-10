@@ -5,6 +5,7 @@
  * human-in-the-loop flow: Human box → AI Predict → Human finetune → Ship.
  * Each stage carries a live-look counter. Particle-flow arrows link stages.
  */
+import { Fragment } from "react";
 import { motion } from "framer-motion";
 import { Crop, Zap, Hand, PackageCheck } from "lucide-react";
 import { CountUp } from "@/components/marketing/fx/CountUp";
@@ -78,9 +79,8 @@ export function HitlWorkflowDiagram() {
         {STAGES.map((s, i) => {
           const Icon = s.icon;
           return (
-            <>
+            <Fragment key={s.key}>
               <motion.div
-                key={s.key}
                 initial={{ opacity: 0, y: 12 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.2 }}
@@ -113,7 +113,7 @@ export function HitlWorkflowDiagram() {
                 </div>
               </motion.div>
               {i < STAGES.length - 1 && <ParticleArrow color={s.color} />}
-            </>
+            </Fragment>
           );
         })}
       </div>

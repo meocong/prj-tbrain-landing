@@ -24,12 +24,15 @@ const NAV_ITEMS = [
 // so they DON'T need dark tokens.
 const HERO_DARK_PAGES = new Set([
   "/data/terminal-bench",
+  // physical-ai has a hardcoded-dark HERO but a theme-aware body — header must
+  // be white over the hero, then flip to light (coloured logo) on scroll in
+  // light mode. (Was in ALWAYS_DARK, which kept a dark bar + white logo over the
+  // light body when scrolled.)
+  "/data/physical-ai",
 ]);
 
 // Pages where the entire wrapper is hardcoded dark — header always white.
-const ALWAYS_DARK_PAGES = new Set([
-  "/data/physical-ai",
-]);
+const ALWAYS_DARK_PAGES = new Set<string>([]);
 
 const Header = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -112,8 +115,8 @@ const Header = () => {
               priority
               loading="eager"
               fetchPriority="high"
-              className="object-contain"
-              style={{ width: "auto", height: 40, filter: tokens.logoFilter }}
+              className="h-10 w-auto object-contain"
+              style={{ filter: tokens.logoFilter }}
             />
           </Link>
 

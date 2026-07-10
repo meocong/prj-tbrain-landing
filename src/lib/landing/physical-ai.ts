@@ -20,7 +20,7 @@ export const FOUNDRY_HERO = {
   title: "The Robotics Data Foundry for Physical AI",
   sub: "Real capture packs, worn by operators on the factory floor — egocentric, action-paired, deeply annotated. Sourced through an industrial partner network across Asia, QC'd, and delivered RLDS-ready.",
   ctaPrimary: { label: "See a sample dataset", href: "/contact" },
-  ctaSecondary: { label: "How the foundry works", href: "/data/physical-ai" },
+  ctaSecondary: { label: "How the foundry works", href: "/data/physical-ai#pipeline" },
   trust: "Industrial network · real production · LeRobot / RLDS · ≤48h delivery",
 } as const;
 
