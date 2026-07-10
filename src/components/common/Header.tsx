@@ -1,24 +1,18 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useEffect } from "react";
 import Logo from "@/assets/images/logo.svg";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, X, ChevronDown } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { ThemeToggle } from "@/components/theme/ThemeToggle";
-
-const DATA_ITEMS = [
-  { label: "Overview", href: "/data/physical-ai", description: "Robotics data foundry · full landing" },
-  { label: "Auto-Label pipeline", href: "/data/physical-ai/auto-label", description: "Per-stage deep dive · one contract" },
-  { label: "QC playbook", href: "/data/physical-ai/quality", description: "15 hard rules + 3 human review layers" },
-];
 
 const NAV_ITEMS = [
   { label: "Home", href: "/" },
   { label: "Platform", href: "/platform" },
   { label: "Case Studies", href: "/casestudy" },
-  { label: "Physical AI", href: "/data/physical-ai", isDropdown: true },
+  { label: "Physical AI", href: "/data/physical-ai" },
   { label: "Terminal Bench", href: "/data/terminal-bench" },
   { label: "Blog", href: "/blog" },
   { label: "Contact", href: "/contact" },
@@ -39,24 +33,12 @@ const ALWAYS_DARK_PAGES = new Set([
 
 const Header = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [dataOpen, setDataOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [isDarkTheme, setIsDarkTheme] = useState(false);
   const pathname = usePathname();
-  const dropdownRef = useRef<HTMLDivElement>(null);
   const heroIsDark = HERO_DARK_PAGES.has(pathname);
   const alwaysDark = ALWAYS_DARK_PAGES.has(pathname);
   const useDarkTokens = isDarkTheme || alwaysDark || (heroIsDark && !scrolled);
-
-  useEffect(() => {
-    const handleClick = (e: MouseEvent) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
-        setDataOpen(false);
-      }
-    };
-    document.addEventListener("mousedown", handleClick);
-    return () => document.removeEventListener("mousedown", handleClick);
-  }, []);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 60);
@@ -136,50 +118,18 @@ const Header = () => {
           </Link>
 
           <nav className="hidden items-center gap-5 lg:flex xl:gap-7">
-            {NAV_ITEMS.map((item) =>
-              item.isDropdown ? (
-                <div key={item.href} className="relative" ref={dropdownRef}>
-                  <button
-                    onClick={() => setDataOpen(!dataOpen)}
-                    className={`flex items-center gap-1 text-sm font-medium transition-colors ${
-                      isActive(item.href) ? tokens.linkActive : tokens.link
-                    }`}
-                    style={isActive(item.href) ? { color: tokens.accent } : undefined}
-                  >
-                    {item.label}
-                    <ChevronDown className={`h-3.5 w-3.5 transition-transform ${dataOpen ? "rotate-180" : ""}`} />
-                  </button>
-                  {dataOpen && (
-                    <div
-                      className={`absolute left-1/2 top-full mt-2 min-w-[320px] -translate-x-1/2 rounded-xl p-2 ${tokens.dropdown}`}
-                    >
-                      {DATA_ITEMS.map((d) => (
-                        <Link
-                          key={d.href}
-                          href={d.href}
-                          onClick={() => setDataOpen(false)}
-                          className={`block rounded-lg px-4 py-2.5 transition-colors ${tokens.dropdownHover}`}
-                        >
-                          <div className={`text-sm font-medium ${tokens.dropdownText}`}>{d.label}</div>
-                          <div className={`text-xs ${tokens.dropdownSub}`}>{d.description}</div>
-                        </Link>
-                      ))}
-                    </div>
-                  )}
-                </div>
-              ) : (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className={`text-sm font-medium transition-colors ${
-                    isActive(item.href) ? tokens.linkActive : tokens.link
-                  }`}
-                  style={isActive(item.href) ? { color: tokens.accent } : undefined}
-                >
-                  {item.label}
-                </Link>
-              )
-            )}
+            {NAV_ITEMS.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className={`text-sm font-medium transition-colors ${
+                  isActive(item.href) ? tokens.linkActive : tokens.link
+                }`}
+                style={isActive(item.href) ? { color: tokens.accent } : undefined}
+              >
+                {item.label}
+              </Link>
+            ))}
           </nav>
 
           <div className="flex items-center gap-2">
@@ -196,7 +146,7 @@ const Header = () => {
 
         {mobileOpen && (
           <nav className={`mt-4 rounded-2xl p-4 lg:hidden ${tokens.mobileMenu}`}>
-            {NAV_ITEMS.filter((i) => !i.isDropdown).map((item) => (
+            {NAV_ITEMS.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
@@ -214,33 +164,6 @@ const Header = () => {
                 {item.label}
               </Link>
             ))}
-            <div
-              className="mt-2 pt-2"
-              style={{ borderTop: useDarkTokens ? "1px solid rgba(255,255,255,0.08)" : "1px solid rgba(243,244,246,1)" }}
-            >
-              <p className={`px-4 py-1 text-xs font-medium ${tokens.dropdownSub}`}>
-                Data Products
-              </p>
-              {DATA_ITEMS.map((d) => (
-                <Link
-                  key={d.href}
-                  href={d.href}
-                  onClick={() => setMobileOpen(false)}
-                  className={`block rounded-lg px-4 py-3 text-sm font-medium transition-colors ${
-                    isActive(d.href)
-                      ? useDarkTokens
-                        ? "bg-white/10 text-white"
-                        : "bg-[#6C3CF4]/5 text-[#6C3CF4]"
-                      : useDarkTokens
-                        ? "text-white/80 hover:bg-white/5"
-                        : "text-[#0e1b2e] hover:bg-gray-50"
-                  }`}
-                >
-                  {d.label}
-                  <span className={`ml-2 text-xs ${tokens.dropdownSub}`}>{d.description}</span>
-                </Link>
-              ))}
-            </div>
           </nav>
         )}
       </div>
