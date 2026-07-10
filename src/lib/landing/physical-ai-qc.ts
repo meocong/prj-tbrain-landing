@@ -149,8 +149,10 @@ export const AUTO_LABEL_STAGES: StageCard[] = [
     detail: "Metric monocular depth + pointmap for the object camera view. Feeds object 6-DoF pose (world-scale ‖t‖ sanity-checked against 0.1–5m industrial range).",
     output: "depth (H × W) · pointmap (H × W × 3) · intrinsics",
     overlays: [
-      { src: "/images/depth/pick_up_the_cup_rgb_depth.jpg",  cap: "pick_up_the_cup · 20260617T01", pred: "MoGe pointmap · ‖t‖_mean 1.45m", status: "PASS" },
-      { src: "/images/real-captures/pick_up_the_cup-loop.jpg", cap: "pick_up_the_cup · 20260617T01", pred: "RGB source frame · 15fps",       status: "PASS" },
+      { src: "/images/depth/pick_up_the_cup_rgb_depth.jpg", cap: "pick_up_the_cup · 20260617T01", pred: "MoGe pointmap · ‖t‖_mean 1.45m",  status: "PASS" },
+      { src: "/images/depth/sew_01_rgb_depth.jpg",          cap: "sew_hem · 20260626T01",         pred: "MoGe pointmap · z 0.91–3.22m",  status: "PASS" },
+      { src: "/images/depth/arrange_01_rgb_depth.jpg",      cap: "arrange_fabric · 20260626T01",  pred: "MoGe pointmap · z 1.20–3.16m",  status: "PASS" },
+      { src: "/images/depth/iron_01_rgb_depth.jpg",         cap: "iron_product · 20260626T01",    pred: "MoGe pointmap · z 1.27–2.71m",  status: "PASS" },
     ],
   },
   {
