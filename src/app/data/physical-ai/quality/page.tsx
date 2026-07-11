@@ -467,7 +467,7 @@ export default function QualityPage() {
             { k: "Provenance", v: "per-field" },
           ]}
           accent="amber"
-          badge={{ label: "You're on QC", color: "#ff9a4d" }}
+          badge={{ label: "You're on QC", color: "var(--bp-amber)" }}
           bgMedia={{ video: "/videos/textile-annotated/iron_01.webm", poster: "/images/textile-annotated/iron_01.jpg", opacity: 0.4 }}
           breadcrumb={<Breadcrumb trail={[
             { label: "Tbrain", href: "/" },

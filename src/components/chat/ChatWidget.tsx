@@ -117,6 +117,8 @@ export function ChatWidget() {
       {/* Toggle Button */}
       <motion.button
         onClick={() => setIsOpen(!isOpen)}
+        aria-label={isOpen ? "Close chat" : "Open chat"}
+        aria-expanded={isOpen}
         className="fixed bottom-6 right-6 z-50 flex h-14 w-14 items-center justify-center rounded-full shadow-lg"
         style={{ backgroundColor: "var(--color-brand-600)" }}
         whileHover={{ scale: 1.05 }}

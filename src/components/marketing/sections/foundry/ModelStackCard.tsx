@@ -10,7 +10,7 @@ const VRAM_CEIL = 24;
 const TIER_TONES: Record<ModelTier, { fg: string; bg: string; label: string }> = {
   FRONTIER:   { fg: "var(--bp-cyan)",   bg: "rgba(0,229,199,0.16)",   label: "FRONTIER" },
   RESEARCH:   { fg: "var(--bp-purple)", bg: "rgba(150,100,255,0.16)", label: "RESEARCH" },
-  FOUNDATION: { fg: "#4cb5ff",          bg: "rgba(76,181,255,0.16)",  label: "FOUNDATION" },
+  FOUNDATION: { fg: "var(--bp-blue)",   bg: "rgba(76,181,255,0.16)",  label: "FOUNDATION" },
   LIGHT:      { fg: "var(--bp-ink-dim)", bg: "rgba(255,255,255,0.06)", label: "LIGHTWEIGHT" },
 };
 
