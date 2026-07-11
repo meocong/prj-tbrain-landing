@@ -42,7 +42,7 @@ export default function CookieConsent() {
       <div
         className="flex w-full max-w-3xl flex-col gap-4 rounded-xl border p-5 shadow-lg backdrop-blur-md sm:flex-row sm:items-center sm:justify-between"
         style={{
-          backgroundColor: "var(--bg-card)",
+          backgroundColor: "var(--bp-panel)",
           borderColor: "var(--border-default)",
           color: "var(--text-primary)",
         }}
