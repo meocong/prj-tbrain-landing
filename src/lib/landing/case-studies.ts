@@ -86,8 +86,7 @@ function fallbackCaseStudies(): CaseStudy[] {
       shortDescription: "Delivering mission-critical data for AI-powered manufacturing intelligence",
       description:
         "Tbrain partnered with a leading AI-powered manufacturing company to process and review 500 complex CAD drawings across 15 annotation fields within a strict 30-day delivery window.",
-      image:
-        "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&h=500&fit=crop",
+      image: "/images/automation-cinema-poster.jpg",
       metrics: [
         { value: "500", label: "CAD Drawings" },
         { value: "15", label: "Annotation Fields" },
