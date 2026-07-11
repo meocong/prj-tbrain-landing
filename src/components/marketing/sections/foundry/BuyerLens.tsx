@@ -202,7 +202,7 @@ const CHECK: CheckItem[] = [
   {
     key: "ontology", icon: Layers, name: "Ontology",
     lead: "200-entry industrial ontology. VLM output outside gets an ontology_missing flag — never silent.",
-    color: "#4cb5ff",
+    color: "var(--bp-blue)",
     question: "Does the vendor define a canonical noun_id list, and what happens to nouns outside it?",
     ourAnswer: "200-entry industrial ontology maps every verb-noun to a canonical noun_id. Anything outside surfaces as ontology_missing in the manifest — the buyer decides: extend the ontology or drop the capture.",
     redFlag: "Vendor emits free-form nouns without an ID mapping · every dataset diverges silently.",
@@ -211,7 +211,7 @@ const CHECK: CheckItem[] = [
   {
     key: "taxonomy", icon: Boxes, name: "Modality taxonomy",
     lead: "Egocentric · exocentric · UMI · ALOHA · mobile-manip · OpenX · PushT · sim-teleop · exo-mocap. Ten slots.",
-    color: "#00e5c7",
+    color: "var(--bp-cyan)",
     question: "How is each capture tagged so downstream filters can select cleanly?",
     ourAnswer: "Every capture declares its modality slot + sensor stack + operator kind + environment in the manifest. Ten slots covered · no fuzzy 'demo' catch-all.",
     redFlag: "Vendor mixes ego + teleop under one 'video' label · your dataloader can't split them.",
@@ -220,7 +220,7 @@ const CHECK: CheckItem[] = [
   {
     key: "sampling", icon: Filter, name: "Sampling",
     lead: "Diversity over volume. Reject a capture that adds nothing to the operator × task × environment × verb grid.",
-    color: "#a78bfa",
+    color: "var(--bp-purple)",
     question: "How do they avoid shipping 200 identical episodes for hour count?",
     ourAnswer: "Every capture computes a coverage delta against the operator × task × environment × verb grid. Delta ≈ 0 → reject before auto-label runs. We chase distribution coverage, not raw hours.",
     redFlag: "Vendor sells 'hours' as the primary metric · no per-capture diversity report.",
@@ -229,7 +229,7 @@ const CHECK: CheckItem[] = [
   {
     key: "splits", icon: GitBranch, name: "Splits",
     lead: "Train/val/test cut on operator AND environment. Random splits over-predict generalization.",
-    color: "#ff9a4d",
+    color: "var(--bp-amber)",
     question: "How are train/val/test cut? Random splits inflate your eval numbers.",
     ourAnswer: "Splits cut on operator AND environment axes. Model trained on operator A + factory X is eval'd on operator B + factory Y — the only split that predicts field generalization.",
     redFlag: "Vendor ships random splits · your ship-day eval is 20+ pts optimistic.",
@@ -238,7 +238,7 @@ const CHECK: CheckItem[] = [
   {
     key: "provenance", icon: Fingerprint, name: "Provenance",
     lead: "Every field records the model + version + git SHA. Reruns produce diffable updates, no silent overwrites.",
-    color: "#5ee08a",
+    color: "var(--bp-green)",
     question: "Can you diff yesterday's dataset against today's, field by field?",
     ourAnswer: "Every field in the manifest records the model + version + git SHA that produced it. A re-run with a newer model produces a new manifest; the diff is machine-readable. No silent overwrites, no black-box updates.",
     redFlag: "Vendor emits labels only · you can't tell why frame N changed.",
@@ -247,7 +247,7 @@ const CHECK: CheckItem[] = [
   {
     key: "versioning", icon: ScaleIcon, name: "Versioning",
     lead: "schema_version pinned per capture. Bumps ship as additive, backward-compatible migrations.",
-    color: "#f0a2ff",
+    color: "var(--bp-pink)",
     question: "What happens when the vendor bumps their schema mid-program?",
     ourAnswer: "Every capture ships with schema_version + a global capture_id (task__operator__timestamp). Downstream can pin. When we bump schema we ship a migration diff — additive, backward-compatible.",
     redFlag: "Breaking schema bumps land silently · dataloader breaks after a re-pull.",
@@ -256,7 +256,7 @@ const CHECK: CheckItem[] = [
   {
     key: "augmentation", icon: Sparkles, name: "Augmentation",
     lead: "We ship raw. No synthetic frames, no color-jitter baked in, no cropped versions. Consumers own augmentation.",
-    color: "#4cb5ff",
+    color: "var(--bp-blue)",
     question: "Is what you receive raw, or has the vendor pre-augmented?",
     ourAnswer: "We ship raw + minimal-augment. No synthetic frames, no color-jitter baked in, no cropped versions in the ship contract. Consumers own augmentation. If it isn't real, it isn't in the ship.",
     redFlag: "Vendor pre-crops / pre-jitters · you can't run your own aug pipeline honestly.",
@@ -265,7 +265,7 @@ const CHECK: CheckItem[] = [
   {
     key: "safety", icon: ShieldCheck, name: "Consent + safety",
     lead: "Per-task consent. Face + brand + workspace blur before delivery. Any consent failure quarantines.",
-    color: "#00e5c7",
+    color: "var(--bp-cyan)",
     question: "Whose face is on your training data?",
     ourAnswer: "Every operator signs consent per task. Face-blur + brand-blur + workspace-blur pipelines run before delivery. Any capture that fails consent spot-check is quarantined — buyers get a clean parquet with a documented provenance chain.",
     redFlag: "Vendor cannot produce consent per operator × task · legal exposure.",
@@ -276,9 +276,9 @@ const CHECK: CheckItem[] = [
 type TabKey = "ship" | "build" | "check";
 
 const TABS: { key: TabKey; label: string; accent: string; count: number }[] = [
-  { key: "ship",  label: "What we ship",   accent: "#4cb5ff", count: SHIP.length },
-  { key: "build", label: "What you build", accent: "#a78bfa", count: USE_CASES.length },
-  { key: "check", label: "What to check",  accent: "#00e5c7", count: CHECK.length },
+  { key: "ship",  label: "What we ship",   accent: "var(--bp-blue)", count: SHIP.length },
+  { key: "build", label: "What you build", accent: "var(--bp-purple)", count: USE_CASES.length },
+  { key: "check", label: "What to check",  accent: "var(--bp-cyan)", count: CHECK.length },
 ];
 
 export function BuyerLens() {
@@ -358,7 +358,7 @@ function ShipGrid({ selected, onSelect }: { selected: string; onSelect: (id: str
             key={m.id}
             onClick={() => onSelect(m.id)}
             className="bp-card group text-left overflow-hidden"
-            style={{ padding: 0, borderColor: on ? "#4cb5ff" : "var(--bp-line)", boxShadow: on ? "0 0 0 1px #4cb5ff, 0 12px 32px -18px rgba(76,181,255,0.5)" : undefined, cursor: "pointer" }}
+            style={{ padding: 0, borderColor: on ? "var(--bp-blue)" : "var(--bp-line)", boxShadow: on ? "0 0 0 1px var(--bp-blue), 0 12px 32px -18px color-mix(in srgb, var(--bp-blue) 50%, transparent)" : undefined, cursor: "pointer" }}
           >
             <div className="relative" style={{ aspectRatio: "16 / 10", overflow: "hidden", background: "var(--bp-surface-2)" }}>
               {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -369,8 +369,8 @@ function ShipGrid({ selected, onSelect }: { selected: string; onSelect: (id: str
               </div>
               <div className="absolute bottom-2 left-2 right-2 flex items-end justify-between">
                 <div>
-                  <div style={{ fontFamily: "var(--font-heading)", fontSize: 15, color: "#fff", fontWeight: 600 }}>{m.name}</div>
-                  <div className="bp-mono" style={{ fontSize: 10, color: "rgba(255,255,255,0.7)" }}>{m.sub}</div>
+                  <div style={{ fontFamily: "var(--font-heading)", fontSize: 15, color: "#fff", fontWeight: 600, textShadow: "0 1px 2px rgba(0,0,0,0.7)" }}>{m.name}</div>
+                  <div className="bp-mono" style={{ fontSize: 10, color: "rgba(255,255,255,0.7)", textShadow: "0 1px 2px rgba(0,0,0,0.7)" }}>{m.sub}</div>
                 </div>
               </div>
             </div>
@@ -393,18 +393,18 @@ function BuildGrid({ selected, onSelect }: { selected: string; onSelect: (id: st
             key={u.segment}
             onClick={() => onSelect(u.segment)}
             className="bp-card text-left"
-            style={{ padding: 18, borderRadius: 12, borderColor: on ? "#a78bfa" : "var(--bp-line)", boxShadow: on ? "0 0 0 1px #a78bfa, 0 12px 32px -18px rgba(167,139,250,0.5)" : undefined, cursor: "pointer" }}
+            style={{ padding: 18, borderRadius: 12, borderColor: on ? "var(--bp-purple)" : "var(--bp-line)", boxShadow: on ? "0 0 0 1px var(--bp-purple), 0 12px 32px -18px color-mix(in srgb, var(--bp-purple) 50%, transparent)" : undefined, cursor: "pointer" }}
           >
             <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-              <span style={{ width: 32, height: 32, borderRadius: 8, background: "color-mix(in srgb, #a78bfa 18%, transparent)", display: "inline-flex", alignItems: "center", justifyContent: "center" }}>
-                <Icon className="h-4 w-4" style={{ color: "#a78bfa" }} />
+              <span style={{ width: 32, height: 32, borderRadius: 8, background: "color-mix(in srgb, var(--bp-purple) 18%, transparent)", display: "inline-flex", alignItems: "center", justifyContent: "center" }}>
+                <Icon className="h-4 w-4" style={{ color: "var(--bp-purple)" }} />
               </span>
               <div style={{ fontFamily: "var(--font-heading)", fontSize: 15, color: "var(--bp-ink)", fontWeight: 600 }}>{u.segment}</div>
             </div>
             <p className="mt-3" style={{ fontSize: 12.5, color: "var(--bp-ink-dim)", lineHeight: 1.5 }}>{u.who}</p>
             <div className="mt-3 flex flex-wrap gap-1.5">
               {u.data.slice(0, 3).map((d) => (
-                <span key={d} className="bp-mono" style={{ fontSize: 9.5, padding: "2px 7px", borderRadius: 999, background: "color-mix(in srgb, #a78bfa 12%, transparent)", color: "#a78bfa" }}>{d}</span>
+                <span key={d} className="bp-mono" style={{ fontSize: 9.5, padding: "2px 7px", borderRadius: 999, background: "color-mix(in srgb, var(--bp-purple) 12%, transparent)", color: "var(--bp-purple)" }}>{d}</span>
               ))}
             </div>
           </button>
@@ -476,7 +476,7 @@ function PanelCard({ accent, children, eyebrow }: { accent: string; eyebrow: str
 /* ─── Ship module detail ─── */
 function ShipDetail({ id }: { id: string }) {
   const m = SHIP.find((s) => s.id === id)!;
-  const accent = "#4cb5ff";
+  const accent = "var(--bp-blue)";
   return (
     <PanelCard accent={accent} eyebrow={`Module ${m.id} · ${m.status.toUpperCase()}`}>
       {/* Media */}
@@ -489,8 +489,8 @@ function ShipDetail({ id }: { id: string }) {
         )}
         <div aria-hidden className="absolute inset-0" style={{ background: "linear-gradient(0deg, rgba(5,10,18,0.55), transparent 55%)" }} />
         <div className="absolute bottom-2 left-2">
-          <div style={{ fontFamily: "var(--font-heading)", fontSize: 20, fontWeight: 700, color: "#fff", lineHeight: 1.1 }}>{m.name}</div>
-          <div className="bp-mono" style={{ fontSize: 10.5, color: "rgba(255,255,255,0.75)" }}>{m.sub}</div>
+          <div style={{ fontFamily: "var(--font-heading)", fontSize: 20, fontWeight: 700, color: "#fff", lineHeight: 1.1, textShadow: "0 1px 2px rgba(0,0,0,0.7)" }}>{m.name}</div>
+          <div className="bp-mono" style={{ fontSize: 10.5, color: "rgba(255,255,255,0.75)", textShadow: "0 1px 2px rgba(0,0,0,0.7)" }}>{m.sub}</div>
         </div>
       </div>
 
@@ -509,7 +509,7 @@ function ShipDetail({ id }: { id: string }) {
       {/* LeRobot v2 fields */}
       <div className="mt-5">
         <div className="bp-mono" style={{ fontSize: 10, color: "var(--bp-ink-faint)", letterSpacing: "0.08em", textTransform: "uppercase" }}>LeRobot v2 fields · per episode</div>
-        <div className="mt-2 rounded-lg bp-mono" style={{ background: "#050a12", padding: "10px 12px", border: `1px solid color-mix(in srgb, ${accent} 26%, transparent)`, fontSize: 10.5, color: "#c8d3f0", lineHeight: 1.7 }}>
+        <div className="mt-2 rounded-lg bp-mono" style={{ background: "var(--bp-code-panel)", padding: "10px 12px", border: `1px solid color-mix(in srgb, ${accent} 26%, transparent)`, fontSize: 10.5, color: "var(--bp-code-ink)", lineHeight: 1.7 }}>
           {m.fields.map((f) => (
             <div key={f} style={{ whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
               <span style={{ color: accent, marginRight: 6 }}>·</span>{f}
@@ -523,7 +523,7 @@ function ShipDetail({ id }: { id: string }) {
         <div className="bp-mono" style={{ fontSize: 10, color: "var(--bp-ink-faint)", letterSpacing: "0.08em", textTransform: "uppercase" }}>Sample captures</div>
         <div className="mt-2 flex flex-wrap gap-1.5">
           {m.captures.map((c) => (
-            <span key={c} className="bp-mono" style={{ fontSize: 10.5, padding: "3px 8px", borderRadius: 999, background: "color-mix(in srgb, #4cb5ff 12%, transparent)", color: accent }}>{c}</span>
+            <span key={c} className="bp-mono" style={{ fontSize: 10.5, padding: "3px 8px", borderRadius: 999, background: "color-mix(in srgb, var(--bp-blue) 12%, transparent)", color: accent }}>{c}</span>
           ))}
         </div>
       </div>
@@ -547,7 +547,7 @@ function ShipDetail({ id }: { id: string }) {
 function BuildDetail({ segment }: { segment: string }) {
   const u = USE_CASES.find((x) => x.segment === segment)!;
   const b = BUILD_DETAILS[segment];
-  const accent = "#a78bfa";
+  const accent = "var(--bp-purple)";
   return (
     <PanelCard accent={accent} eyebrow="Segment detail">
       <h3 className="mt-2 font-semibold" style={{ fontFamily: "var(--font-heading)", fontSize: 22, color: "var(--bp-ink)", lineHeight: 1.15 }}>{u.segment}</h3>
@@ -616,8 +616,8 @@ function CheckDetail({ keyId }: { keyId: string }) {
         <p className="mt-1.5" style={{ fontSize: 13, color: "var(--bp-ink-dim)", lineHeight: 1.6 }}>{c.ourAnswer}</p>
       </div>
 
-      <div className="mt-4 rounded-lg" style={{ padding: "10px 12px", background: "color-mix(in srgb, #ff5f57 8%, transparent)", border: "1px solid color-mix(in srgb, #ff5f57 30%, transparent)" }}>
-        <div className="bp-mono" style={{ fontSize: 10, color: "#ff5f57", letterSpacing: "0.08em", textTransform: "uppercase", fontWeight: 700 }}>Red flag on a vendor</div>
+      <div className="mt-4 rounded-lg" style={{ padding: "10px 12px", background: "color-mix(in srgb, var(--bp-red) 8%, transparent)", border: "1px solid color-mix(in srgb, var(--bp-red) 30%, transparent)" }}>
+        <div className="bp-mono" style={{ fontSize: 10, color: "var(--bp-red)", letterSpacing: "0.08em", textTransform: "uppercase", fontWeight: 700 }}>Red flag on a vendor</div>
         <p className="mt-1" style={{ fontSize: 12.5, color: "var(--bp-ink-dim)", lineHeight: 1.55 }}>{c.redFlag}</p>
       </div>
 

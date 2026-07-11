@@ -9,11 +9,11 @@ import { useEffect, useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 
 const PHASES = [
-  { k: "collect",    label: "COLLECT",    detail: "50–500 packs",       color: "#4cb5ff" },
-  { k: "sync",       label: "SYNC",       detail: "hardware clock",     color: "#4cb5ff" },
-  { k: "auto-label", label: "AUTO-LABEL", detail: "8 models · ≤48h",    color: "#00e5c7" },
-  { k: "qc",         label: "QC",         detail: "15 rules · 92% ship",color: "#ff9a4d" },
-  { k: "deliver",    label: "DELIVER",    detail: "LeRobot v2 · .rrd",  color: "#5ee08a" },
+  { k: "collect",    label: "COLLECT",    detail: "50–500 packs",       color: "var(--bp-blue)" },
+  { k: "sync",       label: "SYNC",       detail: "hardware clock",     color: "var(--bp-blue)" },
+  { k: "auto-label", label: "AUTO-LABEL", detail: "8 models · ≤48h",    color: "var(--bp-cyan)" },
+  { k: "qc",         label: "QC",         detail: "15 rules · 92% ship",color: "var(--bp-amber)" },
+  { k: "deliver",    label: "DELIVER",    detail: "LeRobot v2 · .rrd",  color: "var(--bp-green)" },
 ];
 
 export function HeroSideRail() {
@@ -37,10 +37,10 @@ export function HeroSideRail() {
         style={{
           padding: "8px 12px",
           borderRadius: 8,
-          background: "rgba(11,18,32,0.55)",
+          background: "color-mix(in srgb, var(--bp-panel) 55%, transparent)",
           backdropFilter: "blur(8px)",
           WebkitBackdropFilter: "blur(8px)",
-          border: "1px solid rgba(255,255,255,0.08)",
+          border: "1px solid var(--bp-line)",
           fontSize: 10,
           color: "rgba(255,255,255,0.55)",
           letterSpacing: "0.14em",
@@ -51,7 +51,7 @@ export function HeroSideRail() {
         <motion.span
           animate={{ opacity: [1, 0.2, 1] }}
           transition={{ duration: 1.1, repeat: Infinity }}
-          style={{ width: 6, height: 6, borderRadius: 6, background: "#22e3c8", boxShadow: "0 0 6px #22e3c8" }}
+          style={{ width: 6, height: 6, borderRadius: 6, background: "var(--bp-cyan)", boxShadow: "0 0 6px var(--bp-cyan)" }}
         />
       </div>
 
@@ -60,7 +60,7 @@ export function HeroSideRail() {
         return (
           <motion.div
             key={p.k}
-            animate={{ borderColor: on ? p.color : "rgba(255,255,255,0.08)", background: on ? `color-mix(in srgb, ${p.color} 14%, rgba(11,18,32,0.55))` : "rgba(11,18,32,0.55)" }}
+            animate={{ borderColor: on ? p.color : "var(--bp-line)", background: on ? `color-mix(in srgb, ${p.color} 14%, color-mix(in srgb, var(--bp-panel) 55%, transparent))` : "color-mix(in srgb, var(--bp-panel) 55%, transparent)" }}
             transition={{ duration: 0.4 }}
             className="bp-mono"
             style={{
@@ -106,10 +106,10 @@ export function HeroSideRail() {
           marginTop: 6,
           padding: "8px 12px",
           borderRadius: 8,
-          background: "rgba(11,18,32,0.55)",
+          background: "color-mix(in srgb, var(--bp-panel) 55%, transparent)",
           backdropFilter: "blur(8px)",
           WebkitBackdropFilter: "blur(8px)",
-          border: "1px solid rgba(255,255,255,0.08)",
+          border: "1px solid var(--bp-line)",
           fontSize: 10,
           color: "rgba(255,255,255,0.55)",
           letterSpacing: "0.04em",
@@ -117,7 +117,7 @@ export function HeroSideRail() {
         }}
       >
         <div style={{ color: "rgba(255,255,255,0.6)", letterSpacing: "0.14em", textTransform: "uppercase", marginBottom: 4 }}>next delivery</div>
-        <div style={{ color: "#22e3c8" }}>ETA 34h 12m · 6 episodes</div>
+        <div style={{ color: "var(--bp-cyan)" }}>ETA 34h 12m · 6 episodes</div>
       </div>
     </div>
   );
