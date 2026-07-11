@@ -162,7 +162,7 @@ export default async function BlogPage({
               <div className="mt-8">
                 <div className="flex items-center gap-3 text-sm" style={{ color: "#6b7280" }}>
                   {featured.category && (
-                    <span className="font-medium text-[#6C3CF4]">{featured.category}</span>
+                    <span className="font-medium text-[#5A2CE0]">{featured.category}</span>
                   )}
                   <span>
                     {new Date(featured.date).toLocaleDateString("en-US", {
@@ -206,7 +206,7 @@ export default async function BlogPage({
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2 text-sm" style={{ color: "#6b7280" }}>
                     {post.category && (
-                      <span className="font-medium text-[#6C3CF4]">{post.category}</span>
+                      <span className="font-medium text-[#5A2CE0]">{post.category}</span>
                     )}
                     <span>
                       {new Date(post.date).toLocaleDateString("en-US", {
