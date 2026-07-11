@@ -9,12 +9,12 @@ import { HARD_RULES } from "@/lib/landing/physical-ai-qc";
 import { CountUp } from "@/components/marketing/fx/CountUp";
 
 const CATEGORY_COLOR: Record<string, string> = {
-  calibration: "#4cb5ff",
-  detection:   "#00e5c7",
-  temporal:    "#a78bfa",
-  spatial:     "#ff9a4d",
-  semantic:    "#5ee08a",
-  provenance:  "#f0a2ff",
+  calibration: "var(--bp-blue)",
+  detection:   "var(--bp-cyan)",
+  temporal:    "var(--bp-purple)",
+  spatial:     "var(--bp-amber)",
+  semantic:    "var(--bp-green)",
+  provenance:  "var(--bp-pink)",
 };
 
 export function RadialRulesDashboard() {
@@ -41,10 +41,10 @@ export function RadialRulesDashboard() {
   };
 
   return (
-    <div className="bp-card overflow-hidden" style={{ borderRadius: 16, background: "linear-gradient(180deg, #0d1524 0%, #050a12 100%)" }}>
-      <div className="bp-mono flex items-center justify-between" style={{ padding: "10px 16px", fontSize: 11, color: "#8fa0c8", borderBottom: "1px solid var(--bp-line)" }}>
+    <div className="bp-card overflow-hidden" style={{ borderRadius: 16, background: "var(--bp-panel)" }}>
+      <div className="bp-mono flex items-center justify-between" style={{ padding: "10px 16px", fontSize: 11, color: "var(--bp-ink-faint)", borderBottom: "1px solid var(--bp-line)" }}>
         <span>LAYER 1 · HARD RULES · 15 CHECKS · LIVE</span>
-        <span style={{ color: "#00e5c7" }}>live · pick_up_the_cup 20260617T01</span>
+        <span style={{ color: "var(--bp-cyan)" }}>live · pick_up_the_cup 20260617T01</span>
       </div>
 
       <div className="grid gap-4 p-5 lg:grid-cols-[220px_minmax(0,1fr)]">
@@ -81,14 +81,14 @@ export function RadialRulesDashboard() {
               );
             })}
             {/* center core */}
-            <circle cx={CX} cy={CY} r={R - 22} fill="#050a12" stroke="rgba(255,255,255,0.06)" strokeWidth="1" />
+            <circle cx={CX} cy={CY} r={R - 22} fill="var(--bp-surface)" stroke="var(--bp-line)" strokeWidth="1" />
             {/* pulse ring */}
             <motion.circle
               cx={CX}
               cy={CY}
               r={R - 22}
               fill="none"
-              stroke="#00e5c7"
+              stroke="var(--bp-cyan)"
               strokeWidth="1"
               filter="url(#ring-glow)"
               initial={{ opacity: 0.7 }}
@@ -96,14 +96,14 @@ export function RadialRulesDashboard() {
               transition={{ duration: 2.6, repeat: Infinity, ease: "easeOut" }}
             />
             {/* center numbers */}
-            <text x={CX} y={CY - 4} textAnchor="middle" fontFamily="var(--font-heading)" fontSize="40" fontWeight="700" fill="#00e5c7">{passing}/{total}</text>
-            <text x={CX} y={CY + 20} textAnchor="middle" fontFamily="var(--font-mono)" fontSize="10" fill="#8fa0c8" letterSpacing="0.14em">PASS · {(ratio * 100).toFixed(0)}%</text>
+            <text x={CX} y={CY - 4} textAnchor="middle" fontFamily="var(--font-heading)" fontSize="40" fontWeight="700" fill="var(--bp-cyan)">{passing}/{total}</text>
+            <text x={CX} y={CY + 20} textAnchor="middle" fontFamily="var(--font-mono)" fontSize="10" fill="var(--bp-ink-faint)" letterSpacing="0.14em">PASS · {(ratio * 100).toFixed(0)}%</text>
           </svg>
         </div>
 
         {/* Category legend + counts */}
         <div>
-          <div className="bp-mono" style={{ fontSize: 10, color: "#8fa0c8", letterSpacing: "0.08em", textTransform: "uppercase" }}>
+          <div className="bp-mono" style={{ fontSize: 10, color: "var(--bp-ink-faint)", letterSpacing: "0.08em", textTransform: "uppercase" }}>
             categories · gate composition
           </div>
           <div className="mt-3 grid grid-cols-1 gap-2 sm:grid-cols-2">
@@ -123,11 +123,11 @@ export function RadialRulesDashboard() {
               >
                 <div className="flex items-center justify-between">
                   <span className="bp-mono" style={{ fontSize: 11, color: CATEGORY_COLOR[cat], letterSpacing: "0.08em", textTransform: "uppercase", fontWeight: 700 }}>{cat}</span>
-                  <span className="bp-mono" style={{ fontSize: 11, color: "#c8d3f0" }}>
+                  <span className="bp-mono" style={{ fontSize: 11, color: "var(--bp-ink-dim)" }}>
                     <CountUp value={cnt} duration={1.2} />/{cnt}
                   </span>
                 </div>
-                <div className="mt-1.5" style={{ height: 3, background: "rgba(255,255,255,0.06)", borderRadius: 2, overflow: "hidden" }}>
+                <div className="mt-1.5" style={{ height: 3, background: "var(--bp-line)", borderRadius: 2, overflow: "hidden" }}>
                   <motion.div
                     initial={{ width: 0 }}
                     whileInView={{ width: "100%" }}
@@ -140,8 +140,8 @@ export function RadialRulesDashboard() {
             ))}
           </div>
 
-          <div className="bp-mono mt-4 flex flex-wrap items-center gap-3" style={{ fontSize: 10.5, color: "#8fa0c8" }}>
-            <span style={{ color: "#00e5c7" }}>● 15 · pass</span>
+          <div className="bp-mono mt-4 flex flex-wrap items-center gap-3" style={{ fontSize: 10.5, color: "var(--bp-ink-faint)" }}>
+            <span style={{ color: "var(--bp-cyan)" }}>● 15 · pass</span>
             <span>· 0 partial · 0 fail</span>
             <span style={{ opacity: 0.4 }}>|</span>
             <span>reject rate global 22%</span>
