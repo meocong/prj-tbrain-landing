@@ -144,6 +144,7 @@ export function HardwareShowcase() {
                         background: "rgba(6,6,14,0.72)",
                         color: "#22E3C8",
                         border: "1px solid rgba(0,229,199,0.35)",
+                        textShadow: "0 1px 2px rgba(0,0,0,0.7)",
                       }}
                     >
                       {p.chip}

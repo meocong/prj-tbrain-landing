@@ -30,7 +30,7 @@ export function DescriptionMetadata() {
                 </div>
               ))}
             </div>
-            <pre className="bp-mono mt-5" style={{ margin: 0, padding: "14px 16px", fontSize: 11, lineHeight: 1.65, color: "#c8d3f0", background: "#0b1220", borderRadius: 10, overflowX: "auto" }}>
+            <pre className="bp-mono mt-5" style={{ margin: 0, padding: "14px 16px", fontSize: 11, lineHeight: 1.65, color: "var(--bp-code-ink)", background: "var(--bp-code-panel)", borderRadius: 10, overflowX: "auto" }}>
               {desc.jsonSnippet}
             </pre>
           </div>
@@ -46,7 +46,7 @@ export function DescriptionMetadata() {
             <h3 className="font-semibold" style={{ fontFamily: "var(--font-heading)", fontSize: 22, lineHeight: 1.1, color: "var(--bp-ink)" }}>{meta.title}</h3>
             <p className="mt-3" style={{ fontSize: 14, lineHeight: 1.6, color: "var(--bp-ink-dim)" }}>{meta.detail}</p>
             <div className="mt-4 bp-mono" style={{ fontSize: 11, color: "var(--bp-cyan)" }}>output · {meta.output}</div>
-            <pre className="bp-mono mt-4" style={{ margin: 0, padding: "14px 16px", fontSize: 11, lineHeight: 1.65, color: "#c8d3f0", background: "#0b1220", borderRadius: 10, overflowX: "auto" }}>
+            <pre className="bp-mono mt-4" style={{ margin: 0, padding: "14px 16px", fontSize: 11, lineHeight: 1.65, color: "var(--bp-code-ink)", background: "var(--bp-code-panel)", borderRadius: 10, overflowX: "auto" }}>
               {meta.jsonSnippet}
             </pre>
           </div>

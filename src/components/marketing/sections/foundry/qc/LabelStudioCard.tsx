@@ -95,46 +95,46 @@ export function LabelStudioCard() {
   const cursor = KPTS[idx];
 
   return (
-    <div ref={cardRef} className="bp-card overflow-hidden" style={{ borderRadius: 14, background: "#0d1524" }}>
+    <div ref={cardRef} className="bp-card overflow-hidden" style={{ borderRadius: 14, background: "var(--bp-panel)" }}>
       {/* Chrome */}
-      <div className="flex items-center gap-2 bp-mono" style={{ padding: "10px 14px", fontSize: 10, color: "#8fa0c8", borderBottom: "1px solid var(--bp-line)" }}>
-        <span style={{ width: 8, height: 8, borderRadius: 8, background: "#ff5f57" }} />
+      <div className="flex items-center gap-2 bp-mono" style={{ padding: "10px 14px", fontSize: 10, color: "var(--bp-ink-faint)", borderBottom: "1px solid var(--bp-line)" }}>
+        <span style={{ width: 8, height: 8, borderRadius: 8, background: "var(--bp-red)" }} />
         <span style={{ width: 8, height: 8, borderRadius: 8, background: "#ffbd2e" }} />
         <span style={{ width: 8, height: 8, borderRadius: 8, background: "#28c840" }} />
-        <span style={{ marginLeft: 10, display: "inline-flex", alignItems: "center", gap: 6, padding: "2px 8px", borderRadius: 4, background: "rgba(255,255,255,0.06)" }}>
+        <span style={{ marginLeft: 10, display: "inline-flex", alignItems: "center", gap: 6, padding: "2px 8px", borderRadius: 4, background: "color-mix(in srgb, var(--bp-ink) 8%, transparent)" }}>
           project: physical_ai/textile_v2 <ChevronDown className="h-3 w-3" />
         </span>
         <span style={{ marginLeft: 10 }}>task 1247 / 1892</span>
-        <span style={{ marginLeft: "auto", color: "#00e5c7" }}>auto-label · pre-populated</span>
+        <span style={{ marginLeft: "auto", color: "var(--bp-cyan)" }}>auto-label · pre-populated</span>
       </div>
 
       <div className="grid" style={{ gridTemplateColumns: "220px 1fr 260px", minHeight: 440 }}>
         {/* Left · task queue */}
         <div style={{ borderRight: "1px solid var(--bp-line)", padding: 0 }}>
-          <div className="bp-mono" style={{ padding: "10px 14px", fontSize: 10, color: "#8fa0c8", letterSpacing: "0.08em", textTransform: "uppercase", borderBottom: "1px solid var(--bp-line)" }}>
+          <div className="bp-mono" style={{ padding: "10px 14px", fontSize: 10, color: "var(--bp-ink-faint)", letterSpacing: "0.08em", textTransform: "uppercase", borderBottom: "1px solid var(--bp-line)" }}>
             Queue · 5 open
           </div>
           <ul style={{ margin: 0, padding: 0, listStyle: "none" }}>
             {TASK_QUEUE.map((t, i) => {
               const active = i === 0;
               return (
-                <li key={t.id} style={{ padding: "10px 14px", borderBottom: "1px solid rgba(255,255,255,0.05)", background: active ? "rgba(76,181,255,0.09)" : "transparent", position: "relative" }}>
+                <li key={t.id} style={{ padding: "10px 14px", borderBottom: "1px solid var(--bp-line)", background: active ? "color-mix(in srgb, var(--bp-blue) 9%, transparent)" : "transparent", position: "relative" }}>
                   {active && (
                     <motion.span
                       aria-hidden
                       animate={reduce ? {} : { opacity: [0.4, 1, 0.4] }}
                       transition={{ duration: 1.2, repeat: Infinity }}
-                      style={{ position: "absolute", left: 0, top: 0, bottom: 0, width: 2, background: "#4cb5ff", boxShadow: "0 0 6px #4cb5ff" }}
+                      style={{ position: "absolute", left: 0, top: 0, bottom: 0, width: 2, background: "var(--bp-blue)", boxShadow: "0 0 6px var(--bp-blue)" }}
                     />
                   )}
-                  <div className="bp-mono" style={{ fontSize: 10.5, color: active ? "#4cb5ff" : "#c8d3f0" }}>#{t.id}</div>
-                  <div style={{ fontSize: 11.5, color: "#e8ecf5", marginTop: 2, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{t.cap}</div>
-                  <div className="bp-mono" style={{ fontSize: 9.5, color: "#8fa0c8", marginTop: 3 }}>{t.reason}</div>
+                  <div className="bp-mono" style={{ fontSize: 10.5, color: active ? "var(--bp-blue)" : "var(--bp-ink-dim)" }}>#{t.id}</div>
+                  <div style={{ fontSize: 11.5, color: "var(--bp-ink)", marginTop: 2, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{t.cap}</div>
+                  <div className="bp-mono" style={{ fontSize: 9.5, color: "var(--bp-ink-faint)", marginTop: 3 }}>{t.reason}</div>
                 </li>
               );
             })}
           </ul>
-          <div className="bp-mono" style={{ padding: "10px 14px", fontSize: 9.5, color: "#8fa0c8", borderTop: "1px solid var(--bp-line)", letterSpacing: "0.08em", textTransform: "uppercase" }}>
+          <div className="bp-mono" style={{ padding: "10px 14px", fontSize: 9.5, color: "var(--bp-ink-faint)", borderTop: "1px solid var(--bp-line)", letterSpacing: "0.08em", textTransform: "uppercase" }}>
             reviewer · nguyen.t
           </div>
         </div>
@@ -200,19 +200,19 @@ export function LabelStudioCard() {
 
         {/* Right · annotation form · live pill flip */}
         <div style={{ borderLeft: "1px solid var(--bp-line)", display: "flex", flexDirection: "column" }}>
-          <div className="bp-mono" style={{ padding: "10px 14px", fontSize: 10, color: "#8fa0c8", letterSpacing: "0.08em", textTransform: "uppercase", borderBottom: "1px solid var(--bp-line)" }}>
+          <div className="bp-mono" style={{ padding: "10px 14px", fontSize: 10, color: "var(--bp-ink-faint)", letterSpacing: "0.08em", textTransform: "uppercase", borderBottom: "1px solid var(--bp-line)" }}>
             Correction form
           </div>
           <div style={{ padding: 14, flex: 1 }}>
-            <div className="bp-mono" style={{ fontSize: 10, color: "#8fa0c8", textTransform: "uppercase", letterSpacing: "0.06em" }}>Segment 1 · verb / noun</div>
+            <div className="bp-mono" style={{ fontSize: 10, color: "var(--bp-ink-faint)", textTransform: "uppercase", letterSpacing: "0.06em" }}>Segment 1 · verb / noun</div>
             <div className="mt-1 flex gap-2">
               <span className="bp-mono" style={{ padding: "5px 10px", background: "#4cb5ff", color: "#0b1220", borderRadius: 6, fontSize: 11, fontWeight: 700 }}>pick</span>
               <span className="bp-mono" style={{ padding: "5px 10px", background: "#4cb5ff", color: "#0b1220", borderRadius: 6, fontSize: 11, fontWeight: 700 }}>cup</span>
-              <span className="bp-mono" style={{ padding: "5px 10px", background: "rgba(0,229,199,0.14)", color: "#00e5c7", borderRadius: 6, fontSize: 10.5, fontWeight: 700 }}>conf 0.90</span>
+              <span className="bp-mono" style={{ padding: "5px 10px", background: "color-mix(in srgb, var(--bp-cyan) 14%, transparent)", color: "var(--bp-cyan)", borderRadius: 6, fontSize: 10.5, fontWeight: 700 }}>conf 0.90</span>
             </div>
 
-            <div className="bp-mono mt-5" style={{ fontSize: 10, color: "#8fa0c8", textTransform: "uppercase", letterSpacing: "0.06em" }}>Hand kpts · pre-populated</div>
-            <ul className="bp-mono mt-2 space-y-1" style={{ fontSize: 11, color: "#c8d3f0", lineHeight: 1.5 }}>
+            <div className="bp-mono mt-5" style={{ fontSize: 10, color: "var(--bp-ink-faint)", textTransform: "uppercase", letterSpacing: "0.06em" }}>Hand kpts · pre-populated</div>
+            <ul className="bp-mono mt-2 space-y-1" style={{ fontSize: 11, color: "var(--bp-ink-dim)", lineHeight: 1.5 }}>
               {KPTS.map((k, i) => {
                 const isFixed = fixed[i];
                 const isActive = idx === i && !isFixed;
@@ -229,7 +229,7 @@ export function LabelStudioCard() {
                       initial={{ opacity: 0.4, scale: 0.94 }}
                       animate={{ opacity: 1, scale: 1 }}
                       transition={{ duration: 0.25 }}
-                      style={{ color: isFixed ? "#22e3c8" : "#ff9a4d", fontWeight: 700 }}
+                      style={{ color: isFixed ? "var(--bp-cyan)" : "var(--bp-amber)", fontWeight: 700 }}
                     >
                       {isFixed ? "OK" : `drift ${k.diff.replace(/[+-]/, "")}`}
                     </motion.span>
@@ -238,10 +238,10 @@ export function LabelStudioCard() {
               })}
             </ul>
 
-            <div className="bp-mono mt-5" style={{ fontSize: 10, color: "#8fa0c8", textTransform: "uppercase", letterSpacing: "0.06em" }}>Object mask · SAM3</div>
+            <div className="bp-mono mt-5" style={{ fontSize: 10, color: "var(--bp-ink-faint)", textTransform: "uppercase", letterSpacing: "0.06em" }}>Object mask · SAM3</div>
             <div className="mt-1 flex items-center gap-2">
-              <Circle className="h-3 w-3" style={{ color: "#f0a2ff" }} />
-              <span className="bp-mono" style={{ fontSize: 11, color: "#e8ecf5" }}>cup · track_id 3</span>
+              <Circle className="h-3 w-3" style={{ color: "var(--bp-pink)" }} />
+              <span className="bp-mono" style={{ fontSize: 11, color: "var(--bp-ink)" }}>cup · track_id 3</span>
             </div>
 
             <div className="mt-6 flex gap-2">
@@ -307,9 +307,9 @@ export function LabelStudioCard() {
                 className="bp-mono rounded-md px-3 py-2 relative overflow-hidden cursor-pointer"
                 style={{
                   fontSize: 11,
-                  background: pulse === "reject" ? "rgba(255,154,77,0.16)" : "transparent",
-                  color: "#ff9a4d",
-                  border: "1px solid #ff9a4d",
+                  background: pulse === "reject" ? "color-mix(in srgb, var(--bp-amber) 16%, transparent)" : "transparent",
+                  color: "var(--bp-amber)",
+                  border: "1px solid var(--bp-amber)",
                   transition: "background 220ms ease",
                 }}
               >
@@ -343,11 +343,11 @@ export function LabelStudioCard() {
           </div>
 
           {/* Keyboard shortcut hints */}
-          <div className="bp-mono flex items-center gap-3" style={{ padding: "8px 14px", fontSize: 9.5, color: "#8fa0c8", borderTop: "1px solid var(--bp-line)", background: "rgba(0,0,0,0.25)", letterSpacing: "0.06em" }}>
+          <div className="bp-mono flex items-center gap-3" style={{ padding: "8px 14px", fontSize: 9.5, color: "var(--bp-ink-faint)", borderTop: "1px solid var(--bp-line)", background: "color-mix(in srgb, var(--bp-ink) 6%, transparent)", letterSpacing: "0.06em" }}>
             <Command className="h-3 w-3" />
-            <span><kbd style={{ padding: "1px 4px", background: "rgba(255,255,255,0.08)", borderRadius: 3, fontSize: 9 }}>1</kbd> accept</span>
-            <span><kbd style={{ padding: "1px 4px", background: "rgba(255,255,255,0.08)", borderRadius: 3, fontSize: 9 }}>2</kbd> reject</span>
-            <span><kbd style={{ padding: "1px 4px", background: "rgba(255,255,255,0.08)", borderRadius: 3, fontSize: 9 }}>f</kbd> flag</span>
+            <span><kbd style={{ padding: "1px 4px", background: "color-mix(in srgb, var(--bp-ink) 8%, transparent)", borderRadius: 3, fontSize: 9 }}>1</kbd> accept</span>
+            <span><kbd style={{ padding: "1px 4px", background: "color-mix(in srgb, var(--bp-ink) 8%, transparent)", borderRadius: 3, fontSize: 9 }}>2</kbd> reject</span>
+            <span><kbd style={{ padding: "1px 4px", background: "color-mix(in srgb, var(--bp-ink) 8%, transparent)", borderRadius: 3, fontSize: 9 }}>f</kbd> flag</span>
             <span style={{ marginLeft: "auto", fontStyle: "italic" }}>demo · not a live annotator</span>
           </div>
         </div>

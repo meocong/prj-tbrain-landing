@@ -58,7 +58,7 @@ export function RerunEmbed({ variant = "full" }: { variant?: "full" | "teaser" }
 
       <div className="mt-10 grid gap-6 lg:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)]">
         {/* Video preview panel */}
-        <div className="bp-card" style={{ padding: 0, borderRadius: 14, overflow: "hidden", background: "#050a12", position: "relative" }}>
+        <div className="bp-card" style={{ padding: 0, borderRadius: 14, overflow: "hidden", background: "var(--bp-panel)", position: "relative" }}>
           {/* window chrome */}
           <div className="flex items-center gap-2 bp-mono" style={{ padding: "10px 14px", fontSize: 10, color: "var(--bp-ink-faint)", borderBottom: "1px solid var(--bp-line)" }}>
             <span style={{ width: 8, height: 8, borderRadius: 8, background: "#ff5f57" }} />

@@ -47,7 +47,7 @@ export function CapturesGallery() {
 
 function GroupHeader({ group, count }: { group: SampleGroup; count: number }) {
   const g = REAL_SAMPLES.groups[group];
-  const accent = group === "KITCHEN" ? "var(--bp-cyan)" : "#4cb5ff";
+  const accent = group === "KITCHEN" ? "var(--bp-cyan)" : "var(--bp-blue)";
   return (
     <div className="flex items-baseline justify-between gap-3 flex-wrap" style={{ borderBottom: "1px solid var(--bp-line)", paddingBottom: 8 }}>
       <div className="flex items-baseline gap-3">
@@ -74,7 +74,7 @@ function CaptureCard({ c }: { c: RealSample }) {
         padding: 0,
         borderRadius: 12,
         overflow: "hidden",
-        background: "#0b1220",
+        background: "var(--bp-panel)",
         borderColor: BORDER_BY_STATE[c.qc.state],
       }}
     >
@@ -105,19 +105,19 @@ function CaptureCard({ c }: { c: RealSample }) {
         </span>
       )}
 
-      {/* Card is an always-dark video tile (#0b1220) → footer text hardcoded
-          light so it reads in both themes (theme ink would be dark-on-dark). */}
-      <div style={{ padding: "10px 12px", borderTop: "1px solid rgba(255,255,255,0.08)" }}>
-        <div style={{ fontFamily: "var(--font-heading)", fontSize: 13, fontWeight: 600, color: "#e8ecf5", lineHeight: 1.25 }}>
+      {/* Card chrome is theme-aware (var(--bp-panel)); the video sub-container
+          below keeps its own dark bg (#0b1220) so footage still pops. */}
+      <div style={{ padding: "10px 12px", borderTop: "1px solid var(--bp-line)" }}>
+        <div style={{ fontFamily: "var(--font-heading)", fontSize: 13, fontWeight: 600, color: "var(--bp-ink)", lineHeight: 1.25 }}>
           {c.name}
         </div>
-        <div className="bp-mono flex flex-wrap items-baseline gap-x-2 gap-y-0.5 mt-1.5" style={{ fontSize: 9.5, color: "#8fa0c8" }}>
+        <div className="bp-mono flex flex-wrap items-baseline gap-x-2 gap-y-0.5 mt-1.5" style={{ fontSize: 9.5, color: "var(--bp-ink-faint)" }}>
           {c.frames ? <span>{c.frames.toLocaleString()}f</span> : null}
           {c.seconds ? <><span style={{ opacity: 0.4 }}>·</span><span>{c.seconds}s</span></> : null}
           {c.sensor ? <><span style={{ opacity: 0.4 }}>·</span><span>{c.sensor}</span></> : null}
         </div>
         {c.note && (
-          <div style={{ fontSize: 11, color: "#a9b5cf", marginTop: 6, lineHeight: 1.4 }}>{c.note}</div>
+          <div style={{ fontSize: 11, color: "var(--bp-ink-dim)", marginTop: 6, lineHeight: 1.4 }}>{c.note}</div>
         )}
       </div>
     </motion.article>
@@ -159,14 +159,14 @@ function CaptureLoop({ src, poster, alt }: { src: string; poster: string; alt: s
 
   if (shouldReduce) {
     return (
-      <div className="relative w-full" style={{ aspectRatio: "4 / 3" }}>
+      <div className="relative w-full" style={{ aspectRatio: "4 / 3", background: "#0b1220" }}>
         <Image src={poster} alt={alt} fill sizes="(min-width: 1024px) 25vw, 50vw" className="object-cover" unoptimized />
       </div>
     );
   }
 
   return (
-    <div className="relative w-full" style={{ aspectRatio: "4 / 3" }}>
+    <div className="relative w-full" style={{ aspectRatio: "4 / 3", background: "#0b1220" }}>
       <video
         ref={ref}
         src={src}

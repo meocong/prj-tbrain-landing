@@ -37,46 +37,46 @@ function Row({ r }: { r: Row }) {
   return (
     <div className="flex items-start gap-3" style={{
       padding: "8px 12px",
-      borderTop: "1px solid rgba(255,255,255,0.04)",
+      borderTop: "1px solid var(--bp-line)",
       background: failing ? "rgba(255,154,77,0.04)" : "transparent",
     }}>
-      <div className="bp-mono" style={{ fontSize: 10.5, color: "#8fa0c8", width: 130, flexShrink: 0, letterSpacing: "0.04em" }}>
+      <div className="bp-mono" style={{ fontSize: 10.5, color: "var(--bp-ink-faint)", width: 130, flexShrink: 0, letterSpacing: "0.04em" }}>
         {r.k}
       </div>
-      <div className="bp-mono flex-1" style={{ fontSize: 11.5, color: failing ? "#ff9a4d" : passing ? "#5ee08a" : "#c8d3f0", lineHeight: 1.5 }}>
+      <div className="bp-mono flex-1" style={{ fontSize: 11.5, color: failing ? "var(--bp-amber)" : passing ? "var(--bp-green)" : "var(--bp-ink-dim)", lineHeight: 1.5 }}>
         {r.v}
       </div>
-      {failing && <AlertTriangle className="h-3.5 w-3.5" style={{ color: "#ff9a4d", flexShrink: 0, marginTop: 3 }} />}
-      {passing && <CheckCircle2 className="h-3.5 w-3.5" style={{ color: "#5ee08a", flexShrink: 0, marginTop: 3 }} />}
+      {failing && <AlertTriangle className="h-3.5 w-3.5" style={{ color: "var(--bp-amber)", flexShrink: 0, marginTop: 3 }} />}
+      {passing && <CheckCircle2 className="h-3.5 w-3.5" style={{ color: "var(--bp-green)", flexShrink: 0, marginTop: 3 }} />}
     </div>
   );
 }
 
 export function SapiensDiagnosticPanel() {
   return (
-    <div className="bp-card overflow-hidden" style={{ borderRadius: 14, background: "#050a12" }}>
-      <div className="bp-mono flex items-center justify-between" style={{ padding: "10px 14px", fontSize: 11, color: "#8fa0c8", borderBottom: "1px solid var(--bp-line)" }}>
+    <div className="bp-card overflow-hidden" style={{ borderRadius: 14, background: "var(--bp-panel)" }}>
+      <div className="bp-mono flex items-center justify-between" style={{ padding: "10px 14px", fontSize: 11, color: "var(--bp-ink-faint)", borderBottom: "1px solid var(--bp-line)" }}>
         <span>DIAGNOSTIC · sapiens_body/kpts.npz · topology gate</span>
-        <span style={{ color: "#ff9a4d" }}>SUPPRESSED · 2 egocentric caps</span>
+        <span style={{ color: "var(--bp-amber)" }}>SUPPRESSED · 2 egocentric caps</span>
       </div>
 
       <div className="grid gap-0 lg:grid-cols-2">
         <div style={{ borderRight: "1px solid var(--bp-line)" }}>
-          <div className="bp-mono" style={{ padding: "10px 14px", fontSize: 10, color: "#8fa0c8", letterSpacing: "0.08em", textTransform: "uppercase" }}>
+          <div className="bp-mono" style={{ padding: "10px 14px", fontSize: 10, color: "var(--bp-ink-faint)", letterSpacing: "0.08em", textTransform: "uppercase" }}>
             cap 1 · textile ego
           </div>
           {EGO_ROWS.map((r, i) => <Row key={i} r={r} />)}
         </div>
         <div>
-          <div className="bp-mono" style={{ padding: "10px 14px", fontSize: 10, color: "#8fa0c8", letterSpacing: "0.08em", textTransform: "uppercase" }}>
+          <div className="bp-mono" style={{ padding: "10px 14px", fontSize: 10, color: "var(--bp-ink-faint)", letterSpacing: "0.08em", textTransform: "uppercase" }}>
             cap 2 · tabletop ego
           </div>
           {TABLETOP_ROWS.map((r, i) => <Row key={i} r={r} />)}
         </div>
       </div>
 
-      <div className="bp-mono" style={{ padding: "12px 14px", fontSize: 10.5, color: "#8fa0c8", borderTop: "1px solid var(--bp-line)", lineHeight: 1.55 }}>
-        <span style={{ color: "#00e5c7", fontWeight: 700 }}>gate rationale · </span>
+      <div className="bp-mono" style={{ padding: "12px 14px", fontSize: 10.5, color: "var(--bp-ink-faint)", borderTop: "1px solid var(--bp-line)", lineHeight: 1.55 }}>
+        <span style={{ color: "var(--bp-cyan)", fontWeight: 700 }}>gate rationale · </span>
         On egocentric captures the wearer&apos;s head-mounted camera looks down; Sapiens predicts &quot;nose&quot; below &quot;hips&quot; — impossible in a coherent skeleton. The gate flags TOPOLOGY_INVALID and suppresses face + dense kpts from the visualization. The raw kpts stay in the manifest so downstream research on partial-body detection retains full access. High-fidelity body pose comes from partner-signed exocentric mocap instead.
       </div>
       {/* Real-cap thumbnail strip · every ego capture in the audit */}
@@ -89,7 +89,7 @@ export function SapiensDiagnosticPanel() {
         ].map((c, i) => (
           <div key={c.src} className="relative" style={{ borderRight: i < 3 ? "1px solid var(--bp-line)" : "none" }}>
             <img src={c.src} alt={c.cap} style={{ width: "100%", display: "block", aspectRatio: "16/9", objectFit: "cover" }} loading="lazy" />
-            <div className="bp-mono absolute inset-x-0 bottom-0" style={{ background: "linear-gradient(0deg, rgba(5,10,18,0.92) 0%, transparent 100%)", padding: "20px 8px 6px", fontSize: 9, color: "#ff9a4d", letterSpacing: "0.04em", textAlign: "center" }}>
+            <div className="bp-mono absolute inset-x-0 bottom-0" style={{ background: "linear-gradient(0deg, rgba(5,10,18,0.92) 0%, transparent 100%)", padding: "20px 8px 6px", fontSize: 9, color: "#ff9a4d", letterSpacing: "0.04em", textAlign: "center", textShadow: "0 1px 2px rgba(0,0,0,0.7)" }}>
               {c.cap}
             </div>
           </div>

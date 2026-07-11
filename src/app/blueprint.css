@@ -37,6 +37,12 @@
   --bp-green: #146030;
   --bp-blue:  #1C55A8;
   --bp-pink:  #97288C;
+  /* Theme-aware "console / code / JSON" surface — light IDE panel in light mode,
+     dark terminal in dark. Replaces hardcoded #050a12/#0b1220 console panels. */
+  --bp-code-bg:   #F1F1EC;
+  --bp-code-panel: #FBFBF8;
+  --bp-code-ink:  #2A2E37;
+  --bp-code-line: rgba(20, 22, 30, 0.10);
   /* Hero media scrim. Light: pale wash so the faint bg-video never drops dark
      ink text below AA (was a dark cinematic scrim → dark-on-dark in light). */
   --bp-hero-scrim: linear-gradient(180deg, rgba(246,246,242,0.62) 0%, rgba(246,246,242,0.86) 68%, var(--bp-bg) 100%);
@@ -74,6 +80,10 @@
   --bp-green: #5EE08A;
   --bp-blue:  #4CB5FF;
   --bp-pink:  #F0A2FF;
+  --bp-code-bg:   #070C16;
+  --bp-code-panel: #0B1220;
+  --bp-code-ink:  #C8D3F0;
+  --bp-code-line: rgba(255, 255, 255, 0.08);
   --bp-hero-scrim: linear-gradient(180deg, rgba(6,6,14,0.35) 0%, rgba(6,6,14,0.68) 70%, var(--bp-bg) 100%);
   --bp-on-cyan: #06231F;
   --bp-focus-ring: color-mix(in srgb, var(--bp-cyan) 65%, transparent);

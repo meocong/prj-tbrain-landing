@@ -56,8 +56,8 @@ export function LerobotPreview() {
             background: "linear-gradient(90deg, rgba(76,181,255,0.08), rgba(0,229,199,0.06) 40%, transparent)",
           }}
         >
-          <span style={{ width: 6, height: 6, borderRadius: 6, background: "#4cb5ff", boxShadow: "0 0 8px #4cb5ff" }} />
-          <span style={{ color: "#4cb5ff", letterSpacing: "0.06em", fontWeight: 700 }}>+8 auto-labeled</span>
+          <span style={{ width: 6, height: 6, borderRadius: 6, background: "var(--bp-blue)", boxShadow: "0 0 8px var(--bp-blue)" }} />
+          <span style={{ color: "var(--bp-blue)", letterSpacing: "0.06em", fontWeight: 700 }}>+8 auto-labeled</span>
           <span style={{ opacity: 0.5 }}>·</span>
           <span>textile · iron + sew + sort + package</span>
           <span style={{ opacity: 0.5 }}>·</span>
@@ -72,7 +72,7 @@ export function LerobotPreview() {
       <div className="mt-6 grid gap-4 lg:grid-cols-[minmax(0,1.6fr)_minmax(0,1fr)]">
         <div
           className="bp-card"
-          style={{ padding: 0, borderRadius: 12, overflow: "hidden", background: "#0b1220" }}
+          style={{ padding: 0, borderRadius: 12, overflow: "hidden", background: "var(--bp-code-panel)" }}
         >
           <div
             className="flex items-center justify-between bp-mono"
@@ -88,7 +88,7 @@ export function LerobotPreview() {
               padding: "16px 18px",
               fontSize: 11.5,
               lineHeight: 1.65,
-              color: "#c8d3f0",
+              color: "var(--bp-code-ink)",
               whiteSpace: "pre-wrap",
               overflowX: "auto",
             }}

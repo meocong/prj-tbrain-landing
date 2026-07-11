@@ -9,15 +9,15 @@ import { motion } from "framer-motion";
 import { RERUN_EMBED } from "@/lib/landing/physical-ai";
 
 const TRACK_TREE: { path: string; kind: string; color: string }[] = [
-  { path: "camera/rgb",              kind: "video",   color: "#4cb5ff" },
-  { path: "camera/depth",            kind: "video",   color: "#4cb5ff" },
-  { path: "camera/trajectory",       kind: "line3d",  color: "#a78bfa" },
-  { path: "hand/left · MANO 21-kpt", kind: "points2d", color: "#00e5c7" },
-  { path: "hand/right · MANO 21-kpt",kind: "points2d", color: "#00e5c7" },
-  { path: "body/dense · 308-kpt",    kind: "points2d", color: "#ff9a4d" },
-  { path: "object/mask · track_id",  kind: "mask",    color: "#f0a2ff" },
-  { path: "object/pose · 6-DoF",     kind: "transform", color: "#f0a2ff" },
-  { path: "action_segments",         kind: "log",     color: "#5ee08a" },
+  { path: "camera/rgb",              kind: "video",   color: "var(--bp-blue)" },
+  { path: "camera/depth",            kind: "video",   color: "var(--bp-blue)" },
+  { path: "camera/trajectory",       kind: "line3d",  color: "var(--bp-purple)" },
+  { path: "hand/left · MANO 21-kpt", kind: "points2d", color: "var(--bp-cyan)" },
+  { path: "hand/right · MANO 21-kpt",kind: "points2d", color: "var(--bp-cyan)" },
+  { path: "body/dense · 308-kpt",    kind: "points2d", color: "var(--bp-amber)" },
+  { path: "object/mask · track_id",  kind: "mask",    color: "var(--bp-pink)" },
+  { path: "object/pose · 6-DoF",     kind: "transform", color: "var(--bp-pink)" },
+  { path: "action_segments",         kind: "log",     color: "var(--bp-green)" },
 ];
 
 const TIMELINE_EVENTS = [
@@ -30,28 +30,28 @@ const TIMELINE_EVENTS = [
 export function RerunCapturedCard() {
   const rerunHref = `${RERUN_EMBED.externalHrefPrefix}${encodeURIComponent("https://www.tbrain.ai/videos/rerun/pick_up_the_cup.rrd")}`;
   return (
-    <div className="bp-card overflow-hidden" style={{ borderRadius: 14, background: "#050a12", color: "#e8ecf5" }}>
+    <div className="bp-card overflow-hidden" style={{ borderRadius: 14, background: "var(--bp-panel)", color: "var(--bp-ink)" }}>
       {/* Chrome */}
-      <div className="flex items-center gap-2 bp-mono" style={{ padding: "10px 14px", fontSize: 10, color: "#8fa0c8", borderBottom: "1px solid var(--bp-line)" }}>
+      <div className="flex items-center gap-2 bp-mono" style={{ padding: "10px 14px", fontSize: 10, color: "var(--bp-ink-faint)", borderBottom: "1px solid var(--bp-line)" }}>
         <span style={{ width: 8, height: 8, borderRadius: 8, background: "#ff5f57" }} />
         <span style={{ width: 8, height: 8, borderRadius: 8, background: "#ffbd2e" }} />
         <span style={{ width: 8, height: 8, borderRadius: 8, background: "#28c840" }} />
-        <span style={{ marginLeft: 10, color: "#4cb5ff" }}>Rerun · pick_up_the_cup.rrd</span>
+        <span style={{ marginLeft: 10, color: "var(--bp-blue)" }}>Rerun · pick_up_the_cup.rrd</span>
         <span style={{ marginLeft: "auto" }}>9 tracks · 273 frames · with manifest</span>
       </div>
 
       <div className="grid" style={{ gridTemplateColumns: "220px 1fr", minHeight: 380 }}>
         {/* Blueprint tree */}
         <div style={{ borderRight: "1px solid var(--bp-line)" }}>
-          <div className="bp-mono" style={{ padding: "10px 14px", fontSize: 10, color: "#8fa0c8", letterSpacing: "0.08em", textTransform: "uppercase", borderBottom: "1px solid var(--bp-line)" }}>
+          <div className="bp-mono" style={{ padding: "10px 14px", fontSize: 10, color: "var(--bp-ink-faint)", letterSpacing: "0.08em", textTransform: "uppercase", borderBottom: "1px solid var(--bp-line)" }}>
             Blueprint
           </div>
           <ul style={{ margin: 0, padding: "8px 0", listStyle: "none" }}>
             {TRACK_TREE.map((t) => (
               <li key={t.path} className="bp-mono flex items-center gap-2" style={{ padding: "6px 14px", fontSize: 11 }}>
                 <span style={{ width: 6, height: 6, borderRadius: 6, background: t.color, boxShadow: `0 0 6px ${t.color}` }} />
-                <span style={{ color: "#e8ecf5" }}>{t.path}</span>
-                <span style={{ marginLeft: "auto", fontSize: 9, color: "#8fa0c8" }}>{t.kind}</span>
+                <span style={{ color: "var(--bp-ink)" }}>{t.path}</span>
+                <span style={{ marginLeft: "auto", fontSize: 9, color: "var(--bp-ink-faint)" }}>{t.kind}</span>
               </li>
             ))}
           </ul>
