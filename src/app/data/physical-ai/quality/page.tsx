@@ -49,13 +49,15 @@ const QUALITY_JSONLD = {
   ],
 };
 
+// Theme-aware tokens: bright neon in dark, AA-dark on paper in light. Drawn as
+// text on light tints, so raw neon (#4cb5ff/#5ee08a/#f0a2ff) fails AA in light.
 const CATEGORY_COLOR: Record<string, string> = {
-  calibration: "#4cb5ff",
-  detection:   "#00e5c7",
-  temporal:    "#a78bfa",
-  spatial:     "#ff9a4d",
-  semantic:    "#5ee08a",
-  provenance:  "#f0a2ff",
+  calibration: "var(--bp-blue)",
+  detection:   "var(--bp-cyan)",
+  temporal:    "var(--bp-purple)",
+  spatial:     "var(--bp-amber)",
+  semantic:    "var(--bp-green)",
+  provenance:  "var(--bp-pink)",
 };
 
 const CATEGORY_ICON: Record<string, typeof ShieldCheck> = {
@@ -119,7 +121,7 @@ function Layer1HardRules() {
                           gate · {r.threshold}
                         </span>
                         <span style={{ color: "var(--bp-ink-faint)" }}>→</span>
-                        <span style={{ padding: "2px 7px", borderRadius: 4, background: "color-mix(in srgb, #5ee08a 12%, transparent)", color: "#5ee08a", fontWeight: 700, letterSpacing: "0.04em" }}>
+                        <span style={{ padding: "2px 7px", borderRadius: 4, background: "color-mix(in srgb, var(--bp-green) 12%, transparent)", color: "var(--bp-green)", fontWeight: 700, letterSpacing: "0.04em" }}>
                           {r.sampleOk}
                         </span>
                       </div>

@@ -16,6 +16,17 @@ const COLOR_MAP: Record<string, string> = {
   green:  "#5ee08a",
 };
 
+/* Theme-aware text colour per phase — the raw COLOR_MAP neon fails AA as TEXT
+   on paper (light). Tokens stay neon in dark, go AA-dark in light. Decorative
+   SVG (gradients, particles, pips, strokes) keeps the literal COLOR_MAP. */
+const INK_MAP: Record<string, string> = {
+  cyan:   "var(--bp-blue)",
+  accent: "var(--bp-cyan)",
+  amber:  "var(--bp-amber)",
+  violet: "var(--bp-purple)",
+  green:  "var(--bp-green)",
+};
+
 /* Each phase card links to its detail: Auto-Label → the 8-model deep dive,
    QC + Human QC → the QC playbook, Collect → the rig, Deliver → the ledger. */
 const PHASE_HREF: Record<string, string> = {
@@ -92,6 +103,7 @@ export function PipelineDiagram({ highlight, compact = false }: { highlight?: st
         {phases.map((p, i) => {
           const x = padX + i * (boxW + gap);
           const c = COLOR_MAP[p.color] || COLOR_MAP.cyan;
+          const ic = INK_MAP[p.color] || INK_MAP.cyan;
           const isHighlight = highlight === p.id;
           const isHover = hoverIdx === i;
           const emph = isHighlight || isHover;
@@ -170,7 +182,7 @@ export function PipelineDiagram({ highlight, compact = false }: { highlight?: st
               </text>
 
               {/* phase label */}
-              <text x={x + 18} y={y0 + 52} fontFamily="var(--font-heading)" fontSize={compact ? "20" : "26"} fontWeight="600" fill={c} filter={emph ? "url(#phase-glow)" : undefined}>
+              <text x={x + 18} y={y0 + 52} fontFamily="var(--font-heading)" fontSize={compact ? "20" : "26"} fontWeight="600" fill={ic} filter={emph ? "url(#phase-glow)" : undefined}>
                 {p.label}
               </text>
 
@@ -220,11 +232,11 @@ export function PipelineDiagram({ highlight, compact = false }: { highlight?: st
                           fontSize: 9.5,
                           padding: "3px 7px",
                           borderRadius: 5,
-                          border: `1px solid ${c}`,
-                          color: c,
+                          border: `1px solid color-mix(in srgb, ${ic} 45%, transparent)`,
+                          color: ic,
                           letterSpacing: "0.04em",
                           textTransform: "uppercase",
-                          background: `color-mix(in srgb, ${c} 10%, transparent)`,
+                          background: `color-mix(in srgb, ${ic} 12%, transparent)`,
                           display: "inline-block",
                         }}
                       >
@@ -237,7 +249,7 @@ export function PipelineDiagram({ highlight, compact = false }: { highlight?: st
 
               {/* clickable affordance — small ↗ on hover for phases with a target */}
               {href && emph && (
-                <text x={x + boxW - 30} y={y0 + boxH - 16} fontFamily="var(--font-mono)" fontSize="12" fill={c} filter="url(#phase-glow)">↗</text>
+                <text x={x + boxW - 30} y={y0 + boxH - 16} fontFamily="var(--font-mono)" fontSize="12" fill={ic} filter="url(#phase-glow)">↗</text>
               )}
             </a>
           );
@@ -273,7 +285,7 @@ export function PipelineDiagram({ highlight, compact = false }: { highlight?: st
               borderLeft: `3px solid ${COLOR_MAP[phases[hoverIdx].color]}`,
             }}
           >
-            <span style={{ color: COLOR_MAP[phases[hoverIdx].color], fontWeight: 700, letterSpacing: "0.06em", textTransform: "uppercase" }}>
+            <span style={{ color: INK_MAP[phases[hoverIdx].color], fontWeight: 700, letterSpacing: "0.06em", textTransform: "uppercase" }}>
               {phases[hoverIdx].label}
             </span>
             <span style={{ margin: "0 8px", opacity: 0.4 }}>·</span>

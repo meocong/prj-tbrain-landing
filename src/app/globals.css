@@ -306,13 +306,13 @@
   --footer-bg: #FFFFFF;
   --footer-text: #0F172A;
   --footer-link: #475569;
-  --footer-muted: #64748B;
-  --footer-subtle: #94A3B8;
+  --footer-muted: #505B6B;   /* AA on white incl. over the purple glow */
+  --footer-subtle: #5A6473;  /* was #94A3B8 = 2.5:1 for "Quick links"/"Stay updated" */
   --footer-border: rgba(226, 232, 240, 0.9);
   --footer-chip-bg: #F8FAFC;
   --footer-input-bg: #F8FAFC;
-  --footer-accent: #6C3CF4;
-  --footer-glow: radial-gradient(ellipse, rgba(108,60,244,0.1) 0%, transparent 60%);
+  --footer-accent: #5A2CE0;   /* AA-passing violet on light (was #6C3CF4 = borderline) */
+  --footer-glow: radial-gradient(ellipse, rgba(108,60,244,0.07) 0%, transparent 60%);
   --marquee-border: rgba(15, 23, 42, 0.06);
   --marquee-chip-bg: rgba(15, 23, 42, 0.04);
   --marquee-chip-border: rgba(15, 23, 42, 0.09);
@@ -369,8 +369,8 @@
   --footer-bg: #020617;
   --footer-text: #F8FAFC;
   --footer-link: rgba(226, 232, 240, 0.78);
-  --footer-muted: rgba(226, 232, 240, 0.58);
-  --footer-subtle: rgba(226, 232, 240, 0.45);
+  --footer-muted: rgba(226, 232, 240, 0.6);
+  --footer-subtle: rgba(226, 232, 240, 0.62);   /* was 0.45 = 3.8:1 on #020617 */
   --footer-border: rgba(255, 255, 255, 0.08);
   --footer-chip-bg: rgba(255, 255, 255, 0.04);
   --footer-input-bg: rgba(255, 255, 255, 0.06);
