@@ -150,7 +150,7 @@ export function SubpageHero({
   bgMedia?: { video?: string; poster: string; opacity?: number };
   className?: string;
 }) {
-  const accentColor = accent === "amber" ? "#ff9a4d" : accent === "violet" ? "#a78bfa" : "var(--bp-cyan)";
+  const accentColor = accent === "amber" ? "var(--bp-amber)" : accent === "violet" ? "var(--bp-purple)" : "var(--bp-cyan)";
   const mediaOpacity = bgMedia?.opacity ?? 0.24;
   return (
     <section className={`bp-grid bp-frame relative overflow-hidden ${className}`} style={{ paddingTop: "clamp(88px, 12vw, 148px)", paddingBottom: "clamp(48px, 6vw, 88px)" }}>
@@ -173,7 +173,7 @@ export function SubpageHero({
             // eslint-disable-next-line @next/next/no-img-element
             <img src={bgMedia.poster} alt="" aria-hidden className="pointer-events-none absolute inset-0 h-full w-full object-cover" style={{ opacity: mediaOpacity }} loading="lazy" />
           )}
-          <div aria-hidden className="pointer-events-none absolute inset-0" style={{ background: "linear-gradient(180deg, rgba(6,6,14,0.35) 0%, rgba(6,6,14,0.68) 70%, var(--bp-bg) 100%)" }} />
+          <div aria-hidden className="pointer-events-none absolute inset-0" style={{ background: "var(--bp-hero-scrim)" }} />
         </>
       )}
       <div aria-hidden className="bp-aurora" />

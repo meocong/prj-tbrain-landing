@@ -47,7 +47,7 @@ export default function CookieConsent() {
           color: "var(--text-primary)",
         }}
       >
-        <p className="text-sm leading-relaxed" style={{ color: "var(--text-muted)" }}>
+        <p className="text-sm leading-relaxed" style={{ color: "var(--text-secondary)" }}>
           We use strictly-necessary cookies to run this site. With your consent
           we also use analytics cookies to understand how the site is used. See
           our{" "}

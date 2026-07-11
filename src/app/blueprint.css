@@ -21,15 +21,25 @@
 
   --bp-ink: #16171C;
   --bp-ink-dim: #4B4F5A;
-  --bp-ink-faint: #888D99;
+  --bp-ink-faint: #6B7078;     /* AA on paper/white (was #888D99 = 3.0:1) */
 
-  /* WCAG AA-passing teal for body text on warm paper (≥4.5:1 vs #F6F6F2). */
-  --bp-cyan: #067A6E;
+  /* AA-passing teal — darkened so it clears 4.5:1 even on faint-tinted cards
+     (not just pure #F6F6F2), where accents are drawn as small mono labels. */
+  --bp-cyan: #05655B;
   --bp-cyan-soft: #0A9E90;     /* legacy tint — use for surfaces / hovers only */
   --bp-cyan-strong: #04574F;   /* for tight small-caps mono captions */
   --bp-purple: #5A2CE0;
-  --bp-amber: #8A5510;         /* darkened for AA on paper */
+  --bp-amber: #7E4A0D;         /* AA on paper + faint amber tints */
   --bp-red: #B93A50;
+  /* Theme-aware accents: dark-enough for AA text on paper (light), bright on
+     dark. Used where a neon category/status colour is drawn AS TEXT on a light
+     tint — the literal neon (#5ee08a/#4cb5ff/#f0a2ff) fails AA on paper. */
+  --bp-green: #146030;
+  --bp-blue:  #1C55A8;
+  --bp-pink:  #97288C;
+  /* Hero media scrim. Light: pale wash so the faint bg-video never drops dark
+     ink text below AA (was a dark cinematic scrim → dark-on-dark in light). */
+  --bp-hero-scrim: linear-gradient(180deg, rgba(246,246,242,0.62) 0%, rgba(246,246,242,0.86) 68%, var(--bp-bg) 100%);
   --bp-on-cyan: #FFFFFF;       /* text on the cyan button */
   --bp-focus-ring: color-mix(in srgb, var(--bp-cyan) 60%, transparent);
 
@@ -53,7 +63,7 @@
 
   --bp-ink: #EAF0FF;
   --bp-ink-dim: rgba(234, 240, 255, 0.66);
-  --bp-ink-faint: rgba(234, 240, 255, 0.42);
+  --bp-ink-faint: rgba(234, 240, 255, 0.6);   /* was 0.42 — too dim on tinted surfaces */
 
   --bp-cyan: #00E5C7;
   --bp-cyan-soft: #5EEAD4;
@@ -61,6 +71,10 @@
   --bp-purple: #8B6CF6;
   --bp-amber: #F5A623;
   --bp-red: #FF5C7A;
+  --bp-green: #5EE08A;
+  --bp-blue:  #4CB5FF;
+  --bp-pink:  #F0A2FF;
+  --bp-hero-scrim: linear-gradient(180deg, rgba(6,6,14,0.35) 0%, rgba(6,6,14,0.68) 70%, var(--bp-bg) 100%);
   --bp-on-cyan: #06231F;
   --bp-focus-ring: color-mix(in srgb, var(--bp-cyan) 65%, transparent);
 

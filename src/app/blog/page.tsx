@@ -224,7 +224,7 @@ export default async function BlogPage({
                   <p className="mt-2 text-base leading-relaxed line-clamp-2" style={{ color: "#6b7280" }}>
                     {post.excerpt}
                   </p>
-                  <div className="mt-3 flex items-center gap-1 text-sm" style={{ color: "#9ca3af" }}>
+                  <div className="mt-3 flex items-center gap-1 text-sm" style={{ color: "#6b7280" }}>
                     <Clock className="h-3.5 w-3.5" />
                     {post.readTime}
                   </div>
@@ -280,13 +280,13 @@ export default async function BlogPage({
             </div>
           )}
 
-          <p className="mt-6 text-center text-xs" style={{ color: "#9ca3af" }}>
+          <p className="mt-6 text-center text-xs" style={{ color: "#6b7280" }}>
             {totalPosts} articles
           </p>
 
           {posts.length === 0 && (
             <div className="mt-16 text-center">
-              <p className="text-lg" style={{ color: "#9ca3af" }}>No posts yet.</p>
+              <p className="text-lg" style={{ color: "#6b7280" }}>No posts yet.</p>
             </div>
           )}
         </div>

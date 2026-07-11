@@ -173,12 +173,12 @@ export function CinemaWall() {
             {/* darken bottom */}
             <div aria-hidden className="absolute inset-x-0 bottom-0" style={{ height: "50%", background: "linear-gradient(0deg, rgba(0,0,0,0.85) 0%, transparent 100%)" }} />
             {/* tag */}
-            <div className="absolute left-3 top-3 flex items-center gap-1.5 rounded-full border border-white/15 px-2.5 py-1" style={{ background: "rgba(6,6,14,0.72)", fontFamily: "var(--font-mono, monospace)", fontSize: 9, letterSpacing: "0.12em", color: "#4cb5ff", fontWeight: 700 }}>
-              <span style={{ width: 5, height: 5, borderRadius: 6, background: "#4cb5ff" }} />
+            <div className="absolute left-3 top-3 flex items-center gap-1.5 rounded-full border border-white/15 px-2.5 py-1" style={{ background: "rgba(6,6,14,0.9)", fontFamily: "var(--font-mono, monospace)", fontSize: 9, letterSpacing: "0.12em", color: "#7cc8ff", fontWeight: 700, textShadow: "0 1px 2px rgba(0,0,0,0.8)" }}>
+              <span style={{ width: 5, height: 5, borderRadius: 6, background: "#7cc8ff" }} />
               {c.tag}
             </div>
             {/* frame counter */}
-            <div className="absolute right-3 top-3 bp-mono" style={{ fontSize: 9, color: "#8fa0c8", background: "rgba(0,0,0,0.55)", padding: "3px 7px", borderRadius: 4, letterSpacing: "0.08em" }}>
+            <div className="absolute right-3 top-3 bp-mono" style={{ fontSize: 9, color: "#c8d3f0", background: "rgba(0,0,0,0.78)", padding: "3px 7px", borderRadius: 4, letterSpacing: "0.08em", textShadow: "0 1px 2px rgba(0,0,0,0.8)" }}>
               LIVE
             </div>
           </motion.div>

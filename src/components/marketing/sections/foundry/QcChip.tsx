@@ -1,11 +1,15 @@
 import type { QcMeta } from "@/lib/landing/physical-ai";
 
+// The chip sits over capture video (bright fabric frames) in both themes, so it
+// is a solid dark pill with BRIGHT text — theme tokens would go dark-on-dark on
+// the pill in light mode. Colour tint moves to the border for identity.
+const PILL_BG = "rgba(8,10,20,0.82)";
 const TONES = {
-  PASS:       { bg: "rgba(0,229,199,0.14)",   fg: "var(--bp-cyan)",   label: "PASS" },
-  PARTIAL:    { bg: "rgba(255,189,46,0.14)",  fg: "var(--bp-amber)",  label: "PARTIAL" },
-  FAIL_LABEL: { bg: "rgba(255,95,87,0.16)",   fg: "#ff5f57",          label: "FAIL LABEL" },
-  PARTNER:    { bg: "rgba(150,100,255,0.14)", fg: "var(--bp-purple)", label: "PARTNER" },
-  LABELING:   { bg: "rgba(76,181,255,0.14)",  fg: "#4cb5ff",          label: "LABELING" },
+  PASS:       { fg: "#5ee08a", label: "PASS" },
+  PARTIAL:    { fg: "#ffbd2e", label: "PARTIAL" },
+  FAIL_LABEL: { fg: "#ff5f57", label: "FAIL LABEL" },
+  PARTNER:    { fg: "#a78bfa", label: "PARTNER" },
+  LABELING:   { fg: "#4cb5ff", label: "LABELING" },
 } as const;
 
 export function QcChip({ qc, defect, className = "", inline = false }: { qc: QcMeta; defect?: boolean; className?: string; inline?: boolean }) {
@@ -23,8 +27,10 @@ export function QcChip({ qc, defect, className = "", inline = false }: { qc: QcM
         borderRadius: 4,
         fontSize: inline ? 9 : 10,
         letterSpacing: "0.05em",
-        background: tone.bg,
+        background: PILL_BG,
+        border: `1px solid color-mix(in srgb, ${tone.fg} 45%, transparent)`,
         color: tone.fg,
+        textShadow: "0 1px 2px rgba(0,0,0,0.8)",
         whiteSpace: "nowrap",
       }}
       title={qc.failedCheck ?? qc.note ?? ""}
@@ -35,7 +41,7 @@ export function QcChip({ qc, defect, className = "", inline = false }: { qc: QcM
         <span style={{ opacity: 0.75, fontWeight: 400 }}>· {pct}</span>
       )}
       {defect && (
-        <span style={{ opacity: 0.85, color: "var(--bp-amber)" }}>· DEFECT</span>
+        <span style={{ opacity: 0.9, color: "#ffbd2e" }}>· DEFECT</span>
       )}
       {qc.failedCheck && (
         <span style={{ opacity: 0.85 }}>· {qc.failedCheck}</span>
