@@ -48,3 +48,4 @@ next-env.d.ts
 # Vercel token (local only)
 .env.vercel
 scripts/.cs-backup-*.json
+scripts/.cs-prod-backup-*.json
