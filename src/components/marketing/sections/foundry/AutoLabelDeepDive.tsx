@@ -5,6 +5,7 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
 import { Sheet, SheetHeading } from "@/components/marketing/blueprint/kit";
+import { LazyVideo } from "@/components/marketing/fx/LazyVideo";
 import { AUTO_LABEL_STAGES } from "@/lib/landing/physical-ai-qc";
 
 const TABS = [
@@ -34,14 +35,14 @@ function StagePreview({ stageKey }: { stageKey: string }) {
             <div className="bp-mono flex items-center justify-between" style={{ padding: "8px 14px", fontSize: 10, color: "var(--bp-ink-faint)", borderBottom: "1px solid var(--bp-line)" }}>
               <span>RAW · rgb.mp4</span>
             </div>
-            <video src={stage.rawVideo} muted loop autoPlay playsInline preload="none" poster={stage.overlayPoster} style={{ width: "100%", display: "block" }} />
+            <LazyVideo src={stage.rawVideo!} poster={stage.overlayPoster!} alt={`${stage.title} raw`} />
           </div>
           <div className="bp-card overflow-hidden" style={{ borderRadius: 12 }}>
             <div className="bp-mono flex items-center justify-between" style={{ padding: "8px 14px", fontSize: 10, color: "var(--bp-ink-faint)", borderBottom: "1px solid var(--bp-line)" }}>
               <span>OVERLAY · {stage.model}</span>
               <span style={{ color: "var(--bp-cyan)" }}>{stage.output.split("·")[0].trim()}</span>
             </div>
-            <video src={stage.overlayVideo} muted loop autoPlay playsInline preload="none" poster={stage.overlayPoster} style={{ width: "100%", display: "block" }} />
+            <LazyVideo src={stage.overlayVideo!} poster={stage.overlayPoster!} alt={`${stage.title} overlay`} />
           </div>
         </>
       )}
