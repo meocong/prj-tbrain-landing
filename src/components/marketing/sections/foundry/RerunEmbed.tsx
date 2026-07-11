@@ -45,7 +45,7 @@ export function RerunEmbed({ variant = "full" }: { variant?: "full" | "teaser" }
             </a>
           )}
           <div className="absolute bottom-4 left-4 bp-mono" style={{ fontSize: 10.5, color: "#8fa0c8", letterSpacing: "0.1em", textTransform: "uppercase" }}>
-            9 tracks · scrubbable · v0.24
+            9 tracks · scrubbable · v0.25
           </div>
         </div>
       </Sheet>

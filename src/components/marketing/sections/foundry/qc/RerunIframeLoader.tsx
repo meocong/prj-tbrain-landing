@@ -12,7 +12,7 @@ import { Play, Maximize2 } from "lucide-react";
 interface Props {
   rrdPath: string;         // e.g. /videos/rerun/pick_up_the_cup.rrd
   poster: string;
-  rrdVersion?: string;     // rerun app version, default 0.24.0
+  rrdVersion?: string;     // rerun app version — must be >= .rrd encoder (0.25.x)
   height?: number;
   cap?: string;
   frames?: number;
@@ -22,7 +22,7 @@ interface Props {
 export function RerunIframeLoader({
   rrdPath,
   poster,
-  rrdVersion = "0.24.0",
+  rrdVersion = "0.25.1",
   height = 460,
   cap = "pick_up_the_cup",
   frames = 273,

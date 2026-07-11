@@ -928,7 +928,7 @@ export const RERUN_EMBED = {
   rrd: "/videos/rerun/pick_up_the_cup.rrd",
   fallbackVideo: "/videos/real-captures/pick_up_the_cup.webm",
   externalLabel: "Open in Rerun web viewer",
-  externalHrefPrefix: "https://app.rerun.io/version/0.24.0/index.html?url=",
+  externalHrefPrefix: "https://app.rerun.io/version/0.25.1/index.html?url=",
   tracks: [
     "camera/rgb", "camera/depth", "hand/left · 21 kpt", "hand/right · 21 kpt",
     "body_dense · 308 kpt", "object/mask · track_id", "object/pose · 6-DoF",
