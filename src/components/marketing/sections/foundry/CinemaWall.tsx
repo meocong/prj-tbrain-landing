@@ -186,10 +186,10 @@ export function CinemaWall() {
       </div>
 
       {/* Bottom rolling ticker */}
-      <div className="relative border-t border-white/10" style={{ background: "#06060E", padding: "16px 0" }}>
+      <div className="relative" style={{ background: "var(--bp-panel)", borderTop: "1px solid var(--bp-line)", padding: "16px 0" }}>
         <div className="container mx-auto flex flex-wrap items-center justify-between gap-3 px-5">
           <div className="flex items-center gap-3">
-            <span className="bp-mono" style={{ fontSize: 10.5, color: "#8fa0c8", letterSpacing: "0.14em", textTransform: "uppercase" }}>
+            <span className="bp-mono" style={{ fontSize: 10.5, color: "var(--bp-ink-faint)", letterSpacing: "0.14em", textTransform: "uppercase" }}>
               status
             </span>
             <motion.span
@@ -198,12 +198,12 @@ export function CinemaWall() {
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.4 }}
               className="bp-mono"
-              style={{ fontSize: 12.5, color: "#22e3c8" }}
+              style={{ fontSize: 12.5, color: "var(--bp-cyan)" }}
             >
               ● {TICKER[tickerIdx]}
             </motion.span>
           </div>
-          <div className="bp-mono flex items-center gap-3" style={{ fontSize: 10.5, color: "#8fa0c8", letterSpacing: "0.06em" }}>
+          <div className="bp-mono flex items-center gap-3" style={{ fontSize: 10.5, color: "var(--bp-ink-faint)", letterSpacing: "0.06em" }}>
             <span>6 sample clips · 17 tasks total</span>
             <span style={{ opacity: 0.4 }}>·</span>
             <span>4 ego + 1 tabletop + 1 exo</span>

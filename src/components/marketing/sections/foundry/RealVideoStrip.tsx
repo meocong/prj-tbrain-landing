@@ -49,7 +49,7 @@ function LazyLoopVideo({ src, poster }: { src: string; poster: string }) {
 
 export function RealVideoStrip() {
   return (
-    <section className="relative w-full overflow-hidden" style={{ background: "#050a12" }}>
+    <section className="relative w-full overflow-hidden" style={{ background: "var(--bp-panel)" }}>
       <div className="grid grid-cols-2 lg:grid-cols-4" style={{ gap: 1, background: "#4cb5ff" }}>
         {CELLS.map((c, i) => (
           <motion.div
@@ -102,11 +102,11 @@ export function RealVideoStrip() {
         ))}
       </div>
       <div className="container mx-auto flex flex-wrap items-center justify-between gap-3 px-5" style={{ padding: "24px 20px" }}>
-        <div className="bp-mono" style={{ fontSize: 11, color: "#8fa0c8", letterSpacing: "0.08em", textTransform: "uppercase" }}>
+        <div className="bp-mono" style={{ fontSize: 11, color: "var(--bp-ink-faint)", letterSpacing: "0.08em", textTransform: "uppercase" }}>
           Real captures · zero staging · every clip auto-labeled + QC'd on this landing
         </div>
-        <div className="flex items-center gap-3 bp-mono" style={{ fontSize: 10.5, color: "#8fa0c8" }}>
-          <span style={{ color: "#4cb5ff" }}>● 4 clips live-looping</span>
+        <div className="flex items-center gap-3 bp-mono" style={{ fontSize: 10.5, color: "var(--bp-ink-faint)" }}>
+          <span style={{ color: "var(--bp-blue)" }}>● 4 clips live-looping</span>
           <span style={{ opacity: 0.5 }}>·</span>
           <span>ego + tabletop</span>
           <span style={{ opacity: 0.5 }}>·</span>
