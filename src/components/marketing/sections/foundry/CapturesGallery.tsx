@@ -105,17 +105,19 @@ function CaptureCard({ c }: { c: RealSample }) {
         </span>
       )}
 
-      <div style={{ padding: "10px 12px", borderTop: "1px solid var(--bp-line)" }}>
-        <div style={{ fontFamily: "var(--font-heading)", fontSize: 13, fontWeight: 600, color: "var(--bp-ink)", lineHeight: 1.25 }}>
+      {/* Card is an always-dark video tile (#0b1220) → footer text hardcoded
+          light so it reads in both themes (theme ink would be dark-on-dark). */}
+      <div style={{ padding: "10px 12px", borderTop: "1px solid rgba(255,255,255,0.08)" }}>
+        <div style={{ fontFamily: "var(--font-heading)", fontSize: 13, fontWeight: 600, color: "#e8ecf5", lineHeight: 1.25 }}>
           {c.name}
         </div>
-        <div className="bp-mono flex flex-wrap items-baseline gap-x-2 gap-y-0.5 mt-1.5" style={{ fontSize: 9.5, color: "var(--bp-ink-faint)" }}>
+        <div className="bp-mono flex flex-wrap items-baseline gap-x-2 gap-y-0.5 mt-1.5" style={{ fontSize: 9.5, color: "#8fa0c8" }}>
           {c.frames ? <span>{c.frames.toLocaleString()}f</span> : null}
           {c.seconds ? <><span style={{ opacity: 0.4 }}>·</span><span>{c.seconds}s</span></> : null}
           {c.sensor ? <><span style={{ opacity: 0.4 }}>·</span><span>{c.sensor}</span></> : null}
         </div>
         {c.note && (
-          <div style={{ fontSize: 11, color: "var(--bp-ink-dim)", marginTop: 6, lineHeight: 1.4 }}>{c.note}</div>
+          <div style={{ fontSize: 11, color: "#a9b5cf", marginTop: 6, lineHeight: 1.4 }}>{c.note}</div>
         )}
       </div>
     </motion.article>
