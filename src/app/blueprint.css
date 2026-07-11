@@ -21,7 +21,7 @@
 
   --bp-ink: #16171C;
   --bp-ink-dim: #4B4F5A;
-  --bp-ink-faint: #6B7078;     /* AA on paper/white (was #888D99 = 3.0:1) */
+  --bp-ink-faint: #656A72;     /* AA on paper/white + faint-tinted cards (was #888D99 = 3.0:1) */
 
   /* AA-passing teal — darkened so it clears 4.5:1 even on faint-tinted cards
      (not just pure #F6F6F2), where accents are drawn as small mono labels. */

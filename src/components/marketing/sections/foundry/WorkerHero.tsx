@@ -86,7 +86,7 @@ function Stage({ reduce }: { reduce: boolean }) {
       <div className="container relative z-10 mx-auto flex h-full max-w-7xl flex-col justify-center px-5">
         <motion.div className="max-w-2xl" style={reduce ? { display: "none" } : { opacity: heroOpacity, y: heroY }}>
           <FigLabel>{FOUNDRY_HERO.fig}</FigLabel>
-          <div className="bp-mono mt-5 inline-flex items-center gap-2 rounded-full px-3 py-1.5" style={{ fontSize: 11, color: "var(--bp-cyan)", border: "1px solid var(--bp-line)", background: "color-mix(in srgb, var(--bp-cyan) 8%, transparent)", WebkitBackdropFilter: "blur(6px)", backdropFilter: "blur(6px)" }}>
+          <div className="bp-mono mt-5 inline-flex items-center gap-2 rounded-full px-3 py-1.5" style={{ fontSize: 11, color: "var(--bp-cyan)", border: "1px solid var(--bp-line)", background: "color-mix(in srgb, var(--bp-cyan) 12%, var(--bp-surface) 80%)", WebkitBackdropFilter: "blur(6px)", backdropFilter: "blur(6px)" }}>
             <span style={{ width: 7, height: 7, borderRadius: 99, background: "var(--bp-cyan)" }} />{FOUNDRY_HERO.eyebrow}
           </div>
           <h1 className="mt-6 font-semibold" style={{ fontFamily: "var(--font-heading)", fontSize: "clamp(42px, 6.6vw, 82px)", lineHeight: 1.01, letterSpacing: "-0.025em" }}>
