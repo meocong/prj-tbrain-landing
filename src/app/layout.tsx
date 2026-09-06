@@ -4,6 +4,7 @@ import { Suspense } from "react";
 import { Providers } from "@/components/providers";
 import Analytics from "@/components/analytics/Analytics";
 import { UtmCapture } from "@/components/analytics/UtmCapture";
+import { GoogleAnalytics } from "@/components/analytics/GoogleAnalytics";
 import ChatWidget from "@/components/chat/ChatWidgetLoader";
 import "./globals.css";
 
@@ -36,6 +37,10 @@ export const metadata: Metadata = {
     process.env.PUBLIC_BASE_URL || "https://tbrain.ai"
   ),
   alternates: { canonical: "/" },
+  icons: {
+    icon: "/icon.png",
+    apple: "/apple-icon.png",
+  },
   openGraph: {
     type: "website",
     locale: "en_US",
@@ -58,7 +63,7 @@ const ORGANIZATION_JSONLD = {
   "@type": "Organization",
   name: "Tbrain",
   url: process.env.PUBLIC_BASE_URL || "https://tbrain.ai",
-  logo: `${process.env.PUBLIC_BASE_URL || "https://tbrain.ai"}/favicon.ico`,
+  logo: `${process.env.PUBLIC_BASE_URL || "https://tbrain.ai"}/icon.png`,
   sameAs: [
     "https://www.linkedin.com/company/tbrain-ai",
   ],
@@ -117,6 +122,7 @@ export default function RootLayout({
             <Analytics />
           </Suspense>
           <UtmCapture />
+          <GoogleAnalytics />
           {children}
           <ChatWidget />
         </Providers>

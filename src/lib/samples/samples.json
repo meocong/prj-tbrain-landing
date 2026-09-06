@@ -1,0 +1,1641 @@
+[
+ {
+  "slug": "cowl-installation",
+  "domain": "ots",
+  "title": "Install the front cowl on a motorcycle",
+  "task": "cowl-installation",
+  "skill": "Repair & Maintenance",
+  "environment": "Motorcycle Repair, Service Bay",
+  "locale": "Hanoi",
+  "rig": "DAS Ego V6",
+  "durationSec": 226.367,
+  "resolution": "stereo pair",
+  "fps": 30,
+  "streams": [
+   "RGB stereo",
+   "IMU 200 Hz",
+   "VIO",
+   "Camera info",
+   "Task annotation",
+   "Environment annotation"
+  ],
+  "formats": [
+   ".mcap",
+   ".metadata.json"
+  ],
+  "size": "486 MB",
+  "spec": [
+   [
+    "Industry",
+    "Automotive and Transport"
+   ],
+   [
+    "NAICS",
+    "811490"
+   ],
+   [
+    "Station",
+    "Service Bay"
+   ],
+   [
+    "Device",
+    "DAS Ego V6 / fw 2.1.18"
+   ],
+   [
+    "Shutter",
+    "global"
+   ],
+   [
+    "Calibration",
+    "2026-08-24 (pass)"
+   ],
+   [
+    "IMU rate",
+    "200 Hz"
+   ],
+   [
+    "Streams",
+    "4"
+   ],
+   [
+    "Clock drift",
+    "0.046 ms"
+   ],
+   [
+    "Stereo alignment",
+    "0.07 px"
+   ],
+   [
+    "Sync check",
+    "pass"
+   ],
+   [
+    "Operator",
+    "Motorcycle mechanic, 25\u201330, Right-handed"
+   ],
+   [
+    "Consent",
+    "recorded per session"
+   ],
+   [
+    "Delivered size",
+    "486 MB"
+   ]
+  ]
+ },
+ {
+  "slug": "haircut-neckline",
+  "domain": "ots",
+  "title": "Trim the neckline of a customer's haircut",
+  "task": "hair-cutting",
+  "skill": "Tool Use & Technical Manipulation",
+  "environment": "Barber Shop, Makeup Area",
+  "locale": "Hanoi",
+  "rig": "DAS Ego V6",
+  "durationSec": 237.0,
+  "resolution": "stereo pair",
+  "fps": 30,
+  "streams": [
+   "RGB stereo",
+   "IMU 200 Hz",
+   "VIO",
+   "Camera info",
+   "Task annotation",
+   "Environment annotation"
+  ],
+  "formats": [
+   ".mcap",
+   ".metadata.json"
+  ],
+  "size": "505 MB",
+  "spec": [
+   [
+    "Industry",
+    "Beauty and Personal Care"
+   ],
+   [
+    "NAICS",
+    "812111"
+   ],
+   [
+    "Station",
+    "Makeup Area"
+   ],
+   [
+    "Device",
+    "DAS Ego V6 / fw 2.1.18"
+   ],
+   [
+    "Shutter",
+    "global"
+   ],
+   [
+    "Calibration",
+    "2026-08-24 (pass)"
+   ],
+   [
+    "IMU rate",
+    "200 Hz"
+   ],
+   [
+    "Streams",
+    "4"
+   ],
+   [
+    "Clock drift",
+    "-0.007 ms"
+   ],
+   [
+    "Stereo alignment",
+    "0.022 px"
+   ],
+   [
+    "Sync check",
+    "pass"
+   ],
+   [
+    "Operator",
+    "Barber, 25\u201330, Right-handed"
+   ],
+   [
+    "Consent",
+    "recorded per session"
+   ],
+   [
+    "Delivered size",
+    "505 MB"
+   ]
+  ]
+ },
+ {
+  "slug": "motor-rewind",
+  "domain": "ots",
+  "title": "Thread and route the copper wires of a motor",
+  "task": "motor-threading",
+  "skill": "Pick and Place / Object Handling",
+  "environment": "Appliance Repair, Work Bench",
+  "locale": "Hanoi",
+  "rig": "DAS Ego V6",
+  "durationSec": 241.483,
+  "resolution": "stereo pair",
+  "fps": 30,
+  "streams": [
+   "RGB stereo",
+   "IMU 200 Hz",
+   "VIO",
+   "Camera info",
+   "Task annotation",
+   "Environment annotation"
+  ],
+  "formats": [
+   ".mcap",
+   ".metadata.json"
+  ],
+  "size": "517 MB",
+  "spec": [
+   [
+    "Industry",
+    "Repair Services"
+   ],
+   [
+    "NAICS",
+    "811412"
+   ],
+   [
+    "Station",
+    "Work Bench"
+   ],
+   [
+    "Device",
+    "DAS Ego V6 / fw 2.1.7"
+   ],
+   [
+    "Shutter",
+    "global"
+   ],
+   [
+    "Calibration",
+    "2026-08-24 (pass)"
+   ],
+   [
+    "IMU rate",
+    "200 Hz"
+   ],
+   [
+    "Streams",
+    "4"
+   ],
+   [
+    "Clock drift",
+    "0.009 ms"
+   ],
+   [
+    "Stereo alignment",
+    "0.019 px"
+   ],
+   [
+    "Sync check",
+    "pass"
+   ],
+   [
+    "Operator",
+    "Appliance repair technician, 55\u201360, Right-handed"
+   ],
+   [
+    "Consent",
+    "recorded per session"
+   ],
+   [
+    "Delivered size",
+    "517 MB"
+   ]
+  ]
+ },
+ {
+  "slug": "engine-clean",
+  "domain": "ots",
+  "title": "Clean a car engine",
+  "task": "engine-cleaning",
+  "skill": "Cleaning & Sanitation",
+  "environment": "Auto Repair, Engine Repair Station",
+  "locale": "Hanoi",
+  "rig": "Robocap",
+  "durationSec": 163.0,
+  "resolution": "stereo pair",
+  "fps": 30,
+  "streams": [
+   "RGB stereo",
+   "IMU 200 Hz",
+   "VIO",
+   "Camera info",
+   "Task annotation",
+   "Environment annotation"
+  ],
+  "formats": [
+   ".mcap",
+   ".metadata.json"
+  ],
+  "size": "329 MB",
+  "spec": [
+   [
+    "Industry",
+    "Automotive and Transport"
+   ],
+   [
+    "NAICS",
+    "811111"
+   ],
+   [
+    "Station",
+    "Engine Repair Station"
+   ],
+   [
+    "Device",
+    "Robocap / fw 1.2.13"
+   ],
+   [
+    "Shutter",
+    "rolling"
+   ],
+   [
+    "Calibration",
+    "2026-04-29 (pass)"
+   ],
+   [
+    "IMU rate",
+    "201 Hz"
+   ],
+   [
+    "Streams",
+    "4"
+   ],
+   [
+    "Clock drift",
+    "0.0 ms"
+   ],
+   [
+    "Stereo alignment",
+    "0.0 px"
+   ],
+   [
+    "Sync check",
+    "pass"
+   ],
+   [
+    "Operator",
+    "Maintenance worker, 25\u201330, Right-handed"
+   ],
+   [
+    "Consent",
+    "recorded per session"
+   ],
+   [
+    "Delivered size",
+    "329 MB"
+   ]
+  ]
+ },
+ {
+  "slug": "auto-electrical",
+  "domain": "ots",
+  "title": "Service an automotive electrical component",
+  "task": "vehicle-maintaining",
+  "skill": "Mechanical / Automotive Work",
+  "environment": "Auto Repair, Repair Bench",
+  "locale": "Hanoi",
+  "rig": "Robocap",
+  "durationSec": 240.0,
+  "resolution": "stereo pair",
+  "fps": 30,
+  "streams": [
+   "RGB stereo",
+   "IMU 200 Hz",
+   "VIO",
+   "Camera info",
+   "Task annotation",
+   "Environment annotation"
+  ],
+  "formats": [
+   ".mcap",
+   ".metadata.json"
+  ],
+  "size": "485 MB",
+  "spec": [
+   [
+    "Industry",
+    "Automotive and Transport"
+   ],
+   [
+    "NAICS",
+    "811111"
+   ],
+   [
+    "Station",
+    "Repair Bench"
+   ],
+   [
+    "Device",
+    "Robocap / fw 1.2.13"
+   ],
+   [
+    "Shutter",
+    "rolling"
+   ],
+   [
+    "Calibration",
+    "2026-04-27 (pass)"
+   ],
+   [
+    "IMU rate",
+    "202 Hz"
+   ],
+   [
+    "Streams",
+    "4"
+   ],
+   [
+    "Clock drift",
+    "0.0 ms"
+   ],
+   [
+    "Stereo alignment",
+    "0.0 px"
+   ],
+   [
+    "Sync check",
+    "pass"
+   ],
+   [
+    "Operator",
+    "Mechanic, 20\u201325, Right-handed"
+   ],
+   [
+    "Consent",
+    "recorded per session"
+   ],
+   [
+    "Delivered size",
+    "485 MB"
+   ]
+  ]
+ },
+ {
+  "slug": "signboard-install",
+  "domain": "ots",
+  "title": "Install a signboard on a wall",
+  "task": "signboard-installation",
+  "skill": "Assembly & Installation",
+  "environment": "Sign Shop, Sports Field Sidelines",
+  "locale": "Xa Van Giang",
+  "rig": "Robocap",
+  "durationSec": 220.0,
+  "resolution": "stereo pair",
+  "fps": 30,
+  "streams": [
+   "RGB stereo",
+   "IMU 200 Hz",
+   "VIO",
+   "Camera info",
+   "Task annotation",
+   "Environment annotation"
+  ],
+  "formats": [
+   ".mcap",
+   ".metadata.json"
+  ],
+  "size": "445 MB",
+  "spec": [
+   [
+    "Industry",
+    "Printing and Design"
+   ],
+   [
+    "NAICS",
+    "339950"
+   ],
+   [
+    "Station",
+    "Sports Field Sidelines"
+   ],
+   [
+    "Device",
+    "Robocap / fw 1.2.13"
+   ],
+   [
+    "Shutter",
+    "rolling"
+   ],
+   [
+    "Calibration",
+    "2026-05-08 (pass)"
+   ],
+   [
+    "IMU rate",
+    "201 Hz"
+   ],
+   [
+    "Streams",
+    "4"
+   ],
+   [
+    "Clock drift",
+    "0.0 ms"
+   ],
+   [
+    "Stereo alignment",
+    "0.0 px"
+   ],
+   [
+    "Sync check",
+    "pass"
+   ],
+   [
+    "Operator",
+    "Sign maker, 35\u201340, Right-handed"
+   ],
+   [
+    "Consent",
+    "recorded per session"
+   ],
+   [
+    "Delivered size",
+    "445 MB"
+   ]
+  ]
+ },
+ {
+  "slug": "garment-sewing",
+  "domain": "ots",
+  "title": "Sew garments and cut excess threads",
+  "task": "garment-sewing",
+  "skill": "Clothing & Laundry",
+  "environment": "Sewing Factory, Sewing Station",
+  "locale": "Hung Yen",
+  "rig": "Robocap",
+  "durationSec": 260.979,
+  "resolution": "stereo pair",
+  "fps": 30,
+  "streams": [
+   "RGB stereo",
+   "IMU 200 Hz",
+   "VIO",
+   "Camera info",
+   "Task annotation",
+   "Environment annotation"
+  ],
+  "formats": [
+   ".mcap",
+   ".metadata.json"
+  ],
+  "size": "528 MB",
+  "spec": [
+   [
+    "Industry",
+    "Clothing and Fashion"
+   ],
+   [
+    "NAICS",
+    "315250"
+   ],
+   [
+    "Station",
+    "Sewing Station"
+   ],
+   [
+    "Device",
+    "Robocap / fw 1.2.13"
+   ],
+   [
+    "Shutter",
+    "rolling"
+   ],
+   [
+    "Calibration",
+    "2026-04-29 (pass)"
+   ],
+   [
+    "IMU rate",
+    "201 Hz"
+   ],
+   [
+    "Streams",
+    "4"
+   ],
+   [
+    "Clock drift",
+    "0.0 ms"
+   ],
+   [
+    "Stereo alignment",
+    "0.0 px"
+   ],
+   [
+    "Sync check",
+    "pass"
+   ],
+   [
+    "Operator",
+    "Tailor / seamstress, 40\u201345, Right-handed"
+   ],
+   [
+    "Consent",
+    "recorded per session"
+   ],
+   [
+    "Delivered size",
+    "528 MB"
+   ]
+  ]
+ },
+ {
+  "slug": "noodle-prep",
+  "domain": "ots",
+  "title": "Prepare mixed noodles and fried pastries",
+  "task": "noodle-cooking",
+  "skill": "Food Preparation & Cooking",
+  "environment": "Restaurant, Kitchen",
+  "locale": "Hanoi",
+  "rig": "Robocap",
+  "durationSec": 205.767,
+  "resolution": "stereo pair",
+  "fps": 30,
+  "streams": [
+   "RGB stereo",
+   "IMU 200 Hz",
+   "VIO",
+   "Camera info",
+   "Task annotation",
+   "Environment annotation"
+  ],
+  "formats": [
+   ".mcap",
+   ".metadata.json"
+  ],
+  "size": "417 MB",
+  "spec": [
+   [
+    "Industry",
+    "Food and Beverage"
+   ],
+   [
+    "NAICS",
+    "722310"
+   ],
+   [
+    "Station",
+    "Kitchen"
+   ],
+   [
+    "Device",
+    "Robocap / fw 1.2.13"
+   ],
+   [
+    "Shutter",
+    "rolling"
+   ],
+   [
+    "Calibration",
+    "2026-04-29 (pass)"
+   ],
+   [
+    "IMU rate",
+    "200 Hz"
+   ],
+   [
+    "Streams",
+    "4"
+   ],
+   [
+    "Clock drift",
+    "0.0 ms"
+   ],
+   [
+    "Stereo alignment",
+    "0.0 px"
+   ],
+   [
+    "Sync check",
+    "pass"
+   ],
+   [
+    "Operator",
+    "Food prep worker, 20\u201325, Right-handed"
+   ],
+   [
+    "Consent",
+    "recorded per session"
+   ],
+   [
+    "Delivered size",
+    "417 MB"
+   ]
+  ]
+ },
+ {
+  "slug": "laptop-repair",
+  "domain": "ots",
+  "title": "Repair a laptop",
+  "task": "laptop-repair",
+  "skill": "Electronics & Diagnostics",
+  "environment": "Computer Repair, Workbench",
+  "locale": "Hanoi",
+  "rig": "DAS Ego V6",
+  "durationSec": 230.244,
+  "resolution": "stereo pair",
+  "fps": 30,
+  "streams": [
+   "RGB stereo",
+   "IMU 200 Hz",
+   "VIO",
+   "Camera info",
+   "Task annotation",
+   "Environment annotation"
+  ],
+  "formats": [
+   ".mcap",
+   ".metadata.json"
+  ],
+  "size": "492 MB",
+  "spec": [
+   [
+    "Industry",
+    "Repair Services"
+   ],
+   [
+    "NAICS",
+    "811212"
+   ],
+   [
+    "Station",
+    "Workbench"
+   ],
+   [
+    "Device",
+    "DAS Ego V6 / fw 2.1.7"
+   ],
+   [
+    "Shutter",
+    "global"
+   ],
+   [
+    "Calibration",
+    "2026-08-24 (pass)"
+   ],
+   [
+    "IMU rate",
+    "200 Hz"
+   ],
+   [
+    "Streams",
+    "4"
+   ],
+   [
+    "Clock drift",
+    "0.037 ms"
+   ],
+   [
+    "Stereo alignment",
+    "0.086 px"
+   ],
+   [
+    "Sync check",
+    "pass"
+   ],
+   [
+    "Operator",
+    "Computer repair technician, 20\u201325, Right-handed"
+   ],
+   [
+    "Consent",
+    "recorded per session"
+   ],
+   [
+    "Delivered size",
+    "492 MB"
+   ]
+  ]
+ },
+ {
+  "slug": "ceiling-panels",
+  "domain": "ots",
+  "title": "Cut and install ceiling panels from scaffolding",
+  "task": "panel-installation",
+  "skill": "Construction & Building",
+  "environment": "Construction Company, Construction Site",
+  "locale": "Thai Nguyen",
+  "rig": "Robocap",
+  "durationSec": 236.0,
+  "resolution": "stereo pair",
+  "fps": 30,
+  "streams": [
+   "RGB stereo",
+   "IMU 200 Hz",
+   "VIO",
+   "Camera info",
+   "Task annotation",
+   "Environment annotation"
+  ],
+  "formats": [
+   ".mcap",
+   ".metadata.json"
+  ],
+  "size": "477 MB",
+  "spec": [
+   [
+    "Industry",
+    "Construction and Hardware"
+   ],
+   [
+    "NAICS",
+    "236220"
+   ],
+   [
+    "Station",
+    "Construction Site"
+   ],
+   [
+    "Device",
+    "Robocap / fw 1.2.13"
+   ],
+   [
+    "Shutter",
+    "rolling"
+   ],
+   [
+    "Calibration",
+    "2026-04-25 (pass)"
+   ],
+   [
+    "IMU rate",
+    "201 Hz"
+   ],
+   [
+    "Streams",
+    "4"
+   ],
+   [
+    "Clock drift",
+    "0.0 ms"
+   ],
+   [
+    "Stereo alignment",
+    "0.0 px"
+   ],
+   [
+    "Sync check",
+    "pass"
+   ],
+   [
+    "Operator",
+    "Construction laborer, 35\u201340, Right-handed"
+   ],
+   [
+    "Consent",
+    "recorded per session"
+   ],
+   [
+    "Delivered size",
+    "477 MB"
+   ]
+  ]
+ },
+ {
+  "slug": "gtav-coop-host",
+  "domain": "game",
+  "title": "Coop run, host viewport",
+  "task": "gtav-coop-host",
+  "skill": "Grand Theft Auto V",
+  "environment": "two-player coop, agent 12 (host)",
+  "locale": "PC",
+  "rig": "GameDataCollector",
+  "durationSec": 163.9,
+  "resolution": "1920 x 1080",
+  "fps": 60,
+  "streams": [
+   "Screen capture 60 fps",
+   "Per-frame keystrokes",
+   "Semantic actions",
+   "Mouse delta",
+   "Camera-to-world 4x4",
+   "Pinhole intrinsics",
+   "Shared clock",
+   "Cross-agent visibility"
+  ],
+  "formats": [
+   ".mp4",
+   ".csv",
+   "session.json",
+   "key_bindings.json"
+  ],
+  "size": "181 MB",
+  "spec": [
+   [
+    "Title",
+    "Grand Theft Auto V"
+   ],
+   [
+    "Session type",
+    "two-player coop, agent 12 (host)"
+   ],
+   [
+    "Capture",
+    "1920 x 1080 at 60 fps"
+   ],
+   [
+    "Frames",
+    "9,837"
+   ],
+   [
+    "Telemetry columns",
+    "27"
+   ],
+   [
+    "Camera pose",
+    "populated"
+   ],
+   [
+    "Input record",
+    "keys, semantic actions, mouse buttons, mouse delta"
+   ],
+   [
+    "Delivered size",
+    "181 MB"
+   ],
+   [
+    "Stress category",
+    "action_following"
+   ],
+   [
+    "Shared session",
+    "coop_20260616_171435_h12"
+   ],
+   [
+    "Clock offset",
+    "933.5 ms host / 7.0 ms member"
+   ]
+  ]
+ },
+ {
+  "slug": "gtav-coop-member",
+  "domain": "game",
+  "title": "Coop run, member viewport",
+  "task": "gtav-coop-member",
+  "skill": "Grand Theft Auto V",
+  "environment": "two-player coop, agent 13 (member)",
+  "locale": "PC",
+  "rig": "GameDataCollector",
+  "durationSec": 164.0,
+  "resolution": "1920 x 1080",
+  "fps": 60,
+  "streams": [
+   "Screen capture 60 fps",
+   "Per-frame keystrokes",
+   "Semantic actions",
+   "Mouse delta",
+   "Camera-to-world 4x4",
+   "Pinhole intrinsics",
+   "Shared clock",
+   "Cross-agent visibility"
+  ],
+  "formats": [
+   ".mp4",
+   ".csv",
+   "session.json",
+   "key_bindings.json"
+  ],
+  "size": "161 MB",
+  "spec": [
+   [
+    "Title",
+    "Grand Theft Auto V"
+   ],
+   [
+    "Session type",
+    "two-player coop, agent 13 (member)"
+   ],
+   [
+    "Capture",
+    "1920 x 1080 at 60 fps"
+   ],
+   [
+    "Frames",
+    "9,842"
+   ],
+   [
+    "Telemetry columns",
+    "27"
+   ],
+   [
+    "Camera pose",
+    "populated"
+   ],
+   [
+    "Input record",
+    "keys, semantic actions, mouse buttons, mouse delta"
+   ],
+   [
+    "Delivered size",
+    "161 MB"
+   ],
+   [
+    "Shared session",
+    "coop_20260616_171435_h12"
+   ],
+   [
+    "Clock offset",
+    "933.5 ms host / 7.0 ms member"
+   ]
+  ]
+ },
+ {
+  "slug": "mhw",
+  "domain": "game",
+  "title": "Hunt traversal and engagement",
+  "task": "mhw",
+  "skill": "Monster Hunter World",
+  "environment": "single agent, Ancient Forest",
+  "locale": "PC",
+  "rig": "GameDataCollector",
+  "durationSec": 62.0,
+  "resolution": "1920 x 1080",
+  "fps": 60,
+  "streams": [
+   "Screen capture 60 fps",
+   "Per-frame keystrokes",
+   "Semantic actions",
+   "Mouse delta",
+   "Camera-to-world 4x4",
+   "Pinhole intrinsics"
+  ],
+  "formats": [
+   ".mp4",
+   ".csv",
+   "session.json",
+   "key_bindings.json"
+  ],
+  "size": "601 MB",
+  "spec": [
+   [
+    "Title",
+    "Monster Hunter World"
+   ],
+   [
+    "Session type",
+    "single agent, Ancient Forest"
+   ],
+   [
+    "Capture",
+    "1920 x 1080 at 60 fps"
+   ],
+   [
+    "Frames",
+    "3,717"
+   ],
+   [
+    "Telemetry columns",
+    "27"
+   ],
+   [
+    "Camera pose",
+    "populated"
+   ],
+   [
+    "Input record",
+    "keys, semantic actions, mouse buttons, mouse delta"
+   ],
+   [
+    "Delivered size",
+    "601 MB"
+   ]
+  ]
+ },
+ {
+  "slug": "justcause3",
+  "domain": "game",
+  "title": "Traversal and vehicle use",
+  "task": "justcause3",
+  "skill": "Just Cause 3",
+  "environment": "single agent",
+  "locale": "PC",
+  "rig": "GameDataCollector",
+  "durationSec": 76.6,
+  "resolution": "1920 x 1080",
+  "fps": 60,
+  "streams": [
+   "Screen capture 60 fps",
+   "Per-frame keystrokes",
+   "Semantic actions",
+   "Mouse delta"
+  ],
+  "formats": [
+   ".mp4",
+   ".csv",
+   "session.json",
+   "key_bindings.json"
+  ],
+  "size": "153 MB",
+  "spec": [
+   [
+    "Title",
+    "Just Cause 3"
+   ],
+   [
+    "Session type",
+    "single agent"
+   ],
+   [
+    "Capture",
+    "1920 x 1080 at 60 fps"
+   ],
+   [
+    "Frames",
+    "4,595"
+   ],
+   [
+    "Telemetry columns",
+    "27 (pose columns empty)"
+   ],
+   [
+    "Camera pose",
+    "not extracted for this title"
+   ],
+   [
+    "Input record",
+    "keys, semantic actions, mouse buttons, mouse delta"
+   ],
+   [
+    "Delivered size",
+    "153 MB"
+   ]
+  ]
+ },
+ {
+  "slug": "snowrunner",
+  "domain": "game",
+  "title": "Off-road vehicle control",
+  "task": "snowrunner",
+  "skill": "SnowRunner",
+  "environment": "single agent",
+  "locale": "PC",
+  "rig": "GameDataCollector",
+  "durationSec": 120.9,
+  "resolution": "1920 x 1080",
+  "fps": 60,
+  "streams": [
+   "Screen capture 60 fps",
+   "Per-frame keystrokes",
+   "Semantic actions",
+   "Mouse delta"
+  ],
+  "formats": [
+   ".mp4",
+   ".csv",
+   "session.json",
+   "key_bindings.json"
+  ],
+  "size": "161 MB",
+  "spec": [
+   [
+    "Title",
+    "SnowRunner"
+   ],
+   [
+    "Session type",
+    "single agent"
+   ],
+   [
+    "Capture",
+    "1920 x 1080 at 60 fps"
+   ],
+   [
+    "Frames",
+    "7,253"
+   ],
+   [
+    "Telemetry columns",
+    "27 (pose columns empty)"
+   ],
+   [
+    "Camera pose",
+    "not extracted for this title"
+   ],
+   [
+    "Input record",
+    "keys, semantic actions, mouse buttons, mouse delta"
+   ],
+   [
+    "Delivered size",
+    "161 MB"
+   ]
+  ]
+ },
+ {
+  "slug": "outerworlds",
+  "domain": "game",
+  "title": "Exploration and dialogue",
+  "task": "outerworlds",
+  "skill": "The Outer Worlds",
+  "environment": "single agent",
+  "locale": "PC",
+  "rig": "GameDataCollector",
+  "durationSec": 122.0,
+  "resolution": "1920 x 1080",
+  "fps": 60,
+  "streams": [
+   "Screen capture 60 fps",
+   "Per-frame keystrokes",
+   "Semantic actions",
+   "Mouse delta"
+  ],
+  "formats": [
+   ".mp4",
+   ".csv",
+   "session.json",
+   "key_bindings.json"
+  ],
+  "size": "220 MB",
+  "spec": [
+   [
+    "Title",
+    "The Outer Worlds"
+   ],
+   [
+    "Session type",
+    "single agent"
+   ],
+   [
+    "Capture",
+    "1920 x 1080 at 60 fps"
+   ],
+   [
+    "Frames",
+    "7,317"
+   ],
+   [
+    "Telemetry columns",
+    "27 (pose columns empty)"
+   ],
+   [
+    "Camera pose",
+    "not extracted for this title"
+   ],
+   [
+    "Input record",
+    "keys, semantic actions, mouse buttons, mouse delta"
+   ],
+   [
+    "Delivered size",
+    "220 MB"
+   ]
+  ]
+ },
+ {
+  "slug": "robo-wrists",
+  "domain": "robotics",
+  "title": "Pour water with wrist cameras in frame",
+  "task": "robo-wrists",
+  "skill": "Pouring",
+  "environment": "Kitchen counter",
+  "locale": "Vietnam",
+  "rig": "Head-mounted phone",
+  "durationSec": 16.5,
+  "resolution": "3840 x 2160",
+  "fps": 30,
+  "streams": [
+   "RGB video",
+   "Wrist cameras in frame"
+  ],
+  "formats": [
+   ".mp4"
+  ],
+  "size": "65 MB",
+  "spec": [
+   [
+    "Collection",
+    "Everyday tasks"
+   ],
+   [
+    "Capture rig",
+    "Head mounted, wrists in frame"
+   ],
+   [
+    "Resolution",
+    "3840 x 2160"
+   ],
+   [
+    "Frame rate",
+    "30 fps"
+   ],
+   [
+    "Source length",
+    "16 s"
+   ],
+   [
+    "Delivered size",
+    "65 MB"
+   ],
+   [
+    "Annotation",
+    "task label, on request"
+   ]
+  ],
+  "orientation": "landscape"
+ },
+ {
+  "slug": "robo-pouring",
+  "domain": "robotics",
+  "title": "Pour three cups in sequence",
+  "task": "robo-pouring",
+  "skill": "Pouring",
+  "environment": "Home kitchen",
+  "locale": "Vietnam",
+  "rig": "Head-mounted phone",
+  "durationSec": 43.7,
+  "resolution": "720 x 1280",
+  "fps": 30,
+  "streams": [
+   "RGB video"
+  ],
+  "formats": [
+   ".mp4"
+  ],
+  "size": "12 MB",
+  "spec": [
+   [
+    "Collection",
+    "Everyday tasks"
+   ],
+   [
+    "Capture rig",
+    "Head mounted phone"
+   ],
+   [
+    "Resolution",
+    "720 x 1280 (vertical)"
+   ],
+   [
+    "Frame rate",
+    "30 fps"
+   ],
+   [
+    "Source length",
+    "44 s"
+   ],
+   [
+    "Delivered size",
+    "12 MB"
+   ],
+   [
+    "Annotation",
+    "task label, on request"
+   ]
+  ],
+  "orientation": "vertical"
+ },
+ {
+  "slug": "robo-pineapple",
+  "domain": "robotics",
+  "title": "Chop a pineapple",
+  "task": "robo-pineapple",
+  "skill": "Cutting and food prep",
+  "environment": "Home kitchen",
+  "locale": "Vietnam",
+  "rig": "Head-mounted phone",
+  "durationSec": 32.6,
+  "resolution": "3840 x 2160",
+  "fps": 30,
+  "streams": [
+   "RGB video"
+  ],
+  "formats": [
+   ".mp4"
+  ],
+  "size": "163 MB",
+  "spec": [
+   [
+    "Collection",
+    "Everyday tasks"
+   ],
+   [
+    "Capture rig",
+    "Head mounted, 4K"
+   ],
+   [
+    "Resolution",
+    "3840 x 2160"
+   ],
+   [
+    "Frame rate",
+    "30 fps"
+   ],
+   [
+    "Source length",
+    "33 s"
+   ],
+   [
+    "Delivered size",
+    "163 MB"
+   ],
+   [
+    "Annotation",
+    "task label, on request"
+   ]
+  ],
+  "orientation": "landscape"
+ },
+ {
+  "slug": "robo-folding",
+  "domain": "robotics",
+  "title": "Fold laundry",
+  "task": "robo-folding",
+  "skill": "Folding and textiles",
+  "environment": "Living room",
+  "locale": "Vietnam",
+  "rig": "Head-mounted phone",
+  "durationSec": 32.6,
+  "resolution": "1280 x 720",
+  "fps": 30,
+  "streams": [
+   "RGB video"
+  ],
+  "formats": [
+   ".mp4"
+  ],
+  "size": "8 MB",
+  "spec": [
+   [
+    "Collection",
+    "Everyday tasks"
+   ],
+   [
+    "Capture rig",
+    "Head mounted"
+   ],
+   [
+    "Resolution",
+    "1280 x 720"
+   ],
+   [
+    "Frame rate",
+    "30 fps"
+   ],
+   [
+    "Source length",
+    "33 s"
+   ],
+   [
+    "Delivered size",
+    "8 MB"
+   ],
+   [
+    "Annotation",
+    "task label, on request"
+   ]
+  ],
+  "orientation": "landscape"
+ },
+ {
+  "slug": "robo-sewing",
+  "domain": "robotics",
+  "title": "Sew at a second location",
+  "task": "robo-sewing",
+  "skill": "Sewing",
+  "environment": "Garment workshop",
+  "locale": "Vietnam",
+  "rig": "Head-mounted phone",
+  "durationSec": 22.2,
+  "resolution": "720 x 1280",
+  "fps": 30,
+  "streams": [
+   "RGB video"
+  ],
+  "formats": [
+   ".mp4"
+  ],
+  "size": "6 MB",
+  "spec": [
+   [
+    "Collection",
+    "Factory floor"
+   ],
+   [
+    "Capture rig",
+    "Head mounted phone"
+   ],
+   [
+    "Resolution",
+    "720 x 1280 (vertical)"
+   ],
+   [
+    "Frame rate",
+    "30 fps"
+   ],
+   [
+    "Source length",
+    "22 s"
+   ],
+   [
+    "Delivered size",
+    "6 MB"
+   ],
+   [
+    "Annotation",
+    "task label, on request"
+   ]
+  ],
+  "orientation": "vertical"
+ },
+ {
+  "slug": "robo-qc",
+  "domain": "robotics",
+  "title": "Quality check technical parts",
+  "task": "robo-qc",
+  "skill": "Inspection",
+  "environment": "Assembly bench",
+  "locale": "Vietnam",
+  "rig": "Head-mounted phone",
+  "durationSec": 37.1,
+  "resolution": "1080 x 1920",
+  "fps": 30,
+  "streams": [
+   "RGB video"
+  ],
+  "formats": [
+   ".mp4"
+  ],
+  "size": "21 MB",
+  "spec": [
+   [
+    "Collection",
+    "Factory floor"
+   ],
+   [
+    "Capture rig",
+    "Head mounted phone"
+   ],
+   [
+    "Resolution",
+    "1080 x 1920 (vertical)"
+   ],
+   [
+    "Frame rate",
+    "30 fps"
+   ],
+   [
+    "Source length",
+    "37 s"
+   ],
+   [
+    "Delivered size",
+    "21 MB"
+   ],
+   [
+    "Annotation",
+    "task label, on request"
+   ]
+  ],
+  "orientation": "vertical"
+ },
+ {
+  "slug": "robo-gripper1",
+  "domain": "robotics",
+  "title": "Gripper handling, sequence one",
+  "task": "robo-gripper1",
+  "skill": "Gripper manipulation",
+  "environment": "Office",
+  "locale": "Vietnam",
+  "rig": "Gripper-mounted GoPro",
+  "durationSec": 15.9,
+  "resolution": "1920 x 1080",
+  "fps": 59,
+  "streams": [
+   "RGB video"
+  ],
+  "formats": [
+   ".mp4"
+  ],
+  "size": "29 MB",
+  "spec": [
+   [
+    "Collection",
+    "Gripper"
+   ],
+   [
+    "Capture rig",
+    "Gripper mounted GoPro"
+   ],
+   [
+    "Resolution",
+    "1920 x 1080"
+   ],
+   [
+    "Frame rate",
+    "60 fps"
+   ],
+   [
+    "Source length",
+    "16 s"
+   ],
+   [
+    "Delivered size",
+    "29 MB"
+   ],
+   [
+    "Annotation",
+    "task label, on request"
+   ]
+  ],
+  "orientation": "landscape"
+ },
+ {
+  "slug": "robo-gripper2",
+  "domain": "robotics",
+  "title": "Gripper handling, sequence two",
+  "task": "robo-gripper2",
+  "skill": "Gripper manipulation",
+  "environment": "Office",
+  "locale": "Vietnam",
+  "rig": "Gripper-mounted GoPro",
+  "durationSec": 15.8,
+  "resolution": "1920 x 1080",
+  "fps": 59,
+  "streams": [
+   "RGB video"
+  ],
+  "formats": [
+   ".mp4"
+  ],
+  "size": "47 MB",
+  "spec": [
+   [
+    "Collection",
+    "Gripper"
+   ],
+   [
+    "Capture rig",
+    "Gripper mounted GoPro"
+   ],
+   [
+    "Resolution",
+    "1920 x 1080"
+   ],
+   [
+    "Frame rate",
+    "60 fps"
+   ],
+   [
+    "Source length",
+    "16 s"
+   ],
+   [
+    "Delivered size",
+    "47 MB"
+   ],
+   [
+    "Annotation",
+    "task label, on request"
+   ]
+  ],
+  "orientation": "landscape"
+ }
+]
