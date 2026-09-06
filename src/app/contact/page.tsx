@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import Header from "@/components/common/Header";
 import Footer from "@/components/common/Footer";
 import { Turnstile } from "@marsidev/react-turnstile";
@@ -19,7 +19,29 @@ export default function ContactPage() {
   });
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [sampleContext, setSampleContext] = useState<string | null>(null);
   const turnstileRef = useRef<string>("");
+
+  // Arrivals from the sample library carry the sample they were looking at.
+  // Prefill the message so the enquiry reaches sales with its context attached.
+  // Read from location rather than useSearchParams to avoid a CSR bailout on
+  // this otherwise statically rendered page.
+  useEffect(() => {
+    const sp = new URLSearchParams(window.location.search);
+    const title = sp.get("sample_title");
+    const slug = sp.get("sample");
+    if (!title && !slug) {
+      if (sp.get("utm_source") === "samples") setSampleContext("the sample library");
+      return;
+    }
+    const label = title ?? slug!;
+    setSampleContext(label);
+    setForm((f) =>
+      f.message
+        ? f
+        : { ...f, message: `I would like the full set for "${label}" (${slug ?? "sample"}).\n\n` },
+    );
+  }, []);
   const isLocalDev = process.env.NODE_ENV !== "production";
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -148,6 +170,11 @@ export default function ContactPage() {
               <label className="mb-1.5 block text-sm font-medium" style={{ color: "var(--text-secondary)" }}>
                 Message *
               </label>
+              {sampleContext && (
+                <p className="mb-2 text-xs" style={{ color: "var(--text-secondary)" }}>
+                  Coming from {sampleContext}. We will include the matching files and schema docs.
+                </p>
+              )}
               <textarea
                 required
                 rows={5}

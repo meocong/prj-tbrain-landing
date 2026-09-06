@@ -3,6 +3,7 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import Header from "@/components/common/Header";
 import Footer from "@/components/common/Footer";
+import { PdfDownloadGate } from "@/components/casestudy/PdfDownloadGate";
 import { getCaseStudyBySlug } from "@/lib/landing/case-studies";
 import { notFound } from "next/navigation";
 import post_bg from "@/assets/images/post_bg.png";
@@ -78,14 +79,23 @@ export default async function CaseStudyDetailPage({
         </div>
         <section className="container mx-auto max-w-[1128px] px-4">
           <header className="mb-12">
-            <h1 className="text-[#222222] text-4xl lg:text-5xl font-semibold leading-[1.1]">
-              {study.title}
-            </h1>
-            {study.shortDescription && (
-              <p className="mt-4 text-lg text-[#78818f] italic">
-                {study.shortDescription}
-              </p>
-            )}
+            <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
+              <div className="min-w-0 flex-1">
+                <h1 className="text-[#222222] text-4xl lg:text-5xl font-semibold leading-[1.1]">
+                  {study.title}
+                </h1>
+                {study.shortDescription && (
+                  <p className="mt-4 text-lg text-[#78818f] italic">
+                    {study.shortDescription}
+                  </p>
+                )}
+              </div>
+              {study.pdfGcsObject && (
+                <div className="shrink-0">
+                  <PdfDownloadGate slug={study.slug} title={study.title} />
+                </div>
+              )}
+            </div>
           </header>
 
           {study.metrics.length > 0 && (
