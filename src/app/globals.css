@@ -1160,6 +1160,67 @@ html.dark body {
   background: color-mix(in srgb, var(--sm-accent-soft) 100%, var(--sm-text) 6%);
 }
 
+/* ── Rail and toolbar selects ──
+   A `<select>` cannot be a chip: Job has 32 values against Skill group's 15,
+   and 32 rows would be a longer list than the grid it filters. So it stays a
+   select and is made to answer the pointer the way the chips beside it do.
+
+   The focus rule has to live here, not in a class list. The site-wide ring is
+   `*:focus-visible { outline: 2px; outline-offset: 2px }` near the top of this
+   file, and it is UNLAYERED while every Tailwind utility sits in
+   `@layer utilities` — unlayered CSS beats layered CSS outright, whatever the
+   specificity. `outline-none` on the element therefore does nothing on focus,
+   which is where the two stacked purple rings around a 33px control came from.
+   Answering it needs a rule at the same (unlayered) level.
+
+   What replaces it is not "no focus ring": it is the same accent, drawn as the
+   field's own border plus a soft halo, so the control reads as focused without
+   a second rounded rectangle floating 2px outside the first.
+
+   Colour lives here rather than in an inline `style` prop, which is how the
+   rest of this page paints. It has to: an inline declaration outranks every
+   rule below, so with `background` and `border` set on the element the hover,
+   focus and active states all resolved to the resting colours and nothing
+   moved. */
+.samples-scope .sm-select {
+  background: var(--sm-band);
+  border: 1px solid var(--sm-hairline);
+  color: var(--sm-text);
+  transition:
+    border-color 0.15s ease,
+    background-color 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+/* `!important` on the three state rules below, and only on the two properties
+   that need it. `.dark select` up at line ~1001 paints background, border and
+   colour with `!important`, so in dark mode every state here resolved to the
+   resting colours: hover did nothing, focus drew no border, and a narrowed
+   filter looked identical to an open one. Beating an `!important` takes an
+   `!important`; nothing weaker exists.
+
+   The RESTING colours are deliberately left to that rule. The search field
+   directly above is an `input` and gets the same treatment, and the two boxed
+   controls in one rail have to match at rest — winning that fight would only
+   split them apart. `box-shadow` needs no `!important`: that rule sets none. */
+.samples-scope .sm-select:hover {
+  border-color: var(--sm-rule) !important;
+}
+
+.samples-scope .sm-select:focus-visible {
+  outline: none;
+  border-color: var(--sm-accent) !important;
+  box-shadow: 0 0 0 3px var(--sm-accent-soft);
+}
+
+/* Narrowed, the select carries the same cue an active chip does — otherwise
+   the one facet that is a dropdown is also the one facet whose "on" state is
+   invisible from the rail. */
+.samples-scope .sm-select[data-active="true"] {
+  border-color: color-mix(in srgb, var(--sm-accent) 45%, transparent) !important;
+  background-color: var(--sm-accent-soft) !important;
+}
+
 /* ── Reduced Motion ── */
 @media (prefers-reduced-motion: reduce) {
   *,

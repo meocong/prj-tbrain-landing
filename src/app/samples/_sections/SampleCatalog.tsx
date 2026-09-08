@@ -553,20 +553,45 @@ export function SampleCatalog() {
               </RailGroup>
 
               <RailGroup title="Job">
-                <select
-                  value={f.job}
-                  onChange={(e) => setF((p) => ({ ...p, job: e.target.value }))}
-                  aria-label="Filter by job"
-                  className="mx-2.5 w-[calc(100%-1.25rem)] rounded-lg px-2.5 py-1.5 text-[12.5px] outline-none"
-                  style={{ background: C.band, border: `1px solid ${C.hairline}`, color: C.text }}
-                >
-                  <option value="all">Any job</option>
-                  {jobs.map((j) => (
-                    <option key={j} value={j}>
-                      {j}
-                    </option>
-                  ))}
-                </select>
+                {/* `px-2.5` cancels RailGroup's `-mx-2.5` the same way a chip's
+                    own padding does. It used to be `mx-2.5 w-[calc(100%-1.25rem)]`
+                    on the select itself — arithmetic that had to be redone by
+                    hand every time that inset changed. */}
+                <div className="relative px-2.5">
+                  <select
+                    value={f.job}
+                    onChange={(e) => setF((p) => ({ ...p, job: e.target.value }))}
+                    aria-label="Filter by job"
+                    data-active={f.job !== "all"}
+                    className="sm-select w-full appearance-none rounded-lg py-1.5 pl-2.5 pr-8 text-[12.5px]"
+                  >
+                    {/* Counts, because every other control in this rail has
+                        them: a chip says how many samples it would leave and
+                        greys itself out at zero. Without them the one facet
+                        that hides its options behind a click was also the only
+                        one you had to pick blind. Each is counted with the job
+                        facet lifted, so the numbers stay reachable — same rule
+                        as `countFor` everywhere else. */}
+                    <option value="all">Any job ({shown.length})</option>
+                    {jobs.map((j) => (
+                      <option key={j} value={j}>
+                        {j} ({countFor("job", (s) => s.job, j)})
+                      </option>
+                    ))}
+                  </select>
+                  {/* The native control's own indicator is a macOS double
+                      caret in a raised box — the one piece of system chrome on
+                      a page that draws every other edge as a hairline.
+                      `appearance-none` drops it; this is the same lucide
+                      chevron the mobile Filters toggle and the modal already
+                      use. `pr-8` above reserves its column so a long job title
+                      truncates before it reaches the icon. */}
+                  <ChevronDown
+                    aria-hidden
+                    className="pointer-events-none absolute right-5 top-1/2 h-3.5 w-3.5 -translate-y-1/2"
+                    style={{ color: C.textDim }}
+                  />
+                </div>
               </RailGroup>
             </div>
           </aside>
@@ -600,18 +625,28 @@ export function SampleCatalog() {
                 )}
                 <label className="flex items-center gap-2 text-[12.5px]" style={{ color: C.textDim }}>
                   Sort
-                  <select
-                    value={sort}
-                    onChange={(e) => setSort(e.target.value as SortKey)}
-                    className="rounded-lg px-2.5 py-1.5 text-[12.5px] outline-none"
-                    style={{ background: C.band, border: `1px solid ${C.hairline}`, color: C.text }}
-                  >
-                    {SORTS.map((s) => (
-                      <option key={s.key} value={s.key}>
-                        {s.label}
-                      </option>
-                    ))}
-                  </select>
+                  {/* Same treatment as the Job select, from the same class.
+                      Two selects on one screen styled apart is the drift this
+                      page keeps having to undo. No `data-active`: a sort order
+                      is always set, so "on" says nothing here. */}
+                  <span className="relative inline-flex">
+                    <select
+                      value={sort}
+                      onChange={(e) => setSort(e.target.value as SortKey)}
+                      className="sm-select appearance-none rounded-lg py-1.5 pl-2.5 pr-8 text-[12.5px]"
+                    >
+                      {SORTS.map((s) => (
+                        <option key={s.key} value={s.key}>
+                          {s.label}
+                        </option>
+                      ))}
+                    </select>
+                    <ChevronDown
+                      aria-hidden
+                      className="pointer-events-none absolute right-2.5 top-1/2 h-3.5 w-3.5 -translate-y-1/2"
+                      style={{ color: C.textDim }}
+                    />
+                  </span>
                 </label>
               </div>
             </div>
