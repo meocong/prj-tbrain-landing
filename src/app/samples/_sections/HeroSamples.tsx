@@ -82,14 +82,32 @@ export function HeroSamples() {
           </p>
 
           <div className="mt-8 flex flex-wrap items-center gap-6">
-            <Link
+            {/* A plain anchor, scrolled by hand.
+                As a next/link this appended rather than replaced the fragment:
+                from /samples#deck a click produced /samples#deck#deck, which
+                matches no id, so the page sat still. That is the state anyone
+                who has already used the button once is in, and anyone who opens
+                a shared /samples#deck link and scrolls back up.
+                Scrolling explicitly also lets the fixed header be accounted for
+                instead of covering the top of the section. */}
+            <a
               href="#deck"
+              onClick={(e) => {
+                const deck = document.getElementById("deck");
+                if (!deck) return; // let the browser handle it
+                e.preventDefault();
+                deck.scrollIntoView({
+                  behavior: reduce ? "auto" : "smooth",
+                  block: "start",
+                });
+                history.replaceState(null, "", "#deck");
+              }}
               className="group inline-flex items-center gap-2 rounded-full px-7 py-3.5 text-sm font-semibold transition-transform active:scale-[0.98]"
               style={{ background: "#ffffff", color: "#0b0d13" }}
             >
               Browse samples
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-            </Link>
+            </a>
             <Link
               href={requestUrl({ from: "hero" })}
               onClick={() => track("open_request_access", { from: "hero" })}
