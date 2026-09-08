@@ -25,23 +25,26 @@ export const PRODUCT_LINES: ProductLine[] = [
   {
     slug: "robotics",
     name: "Robotics",
-    positioning: "Egocentric, mocap, gripper, teleop",
+    positioning: "Egocentric stereo, head IMU, VIO",
     headline: "Skilled manual work, captured from the operator's own viewpoint",
-    body: "Seven collections spanning factory floors, homes, offices and a calibrated studio. Head-mounted capture is the backbone; wrist cameras, full-body mocap, depth and bimanual teleoperation extend it where a policy needs more than RGB.",
+    // Every figure and modality below is what the 79 records on this line
+    // actually carry. The previous copy advertised wrist cameras, Xsens mocap,
+    // RGB-D and LiDAR point cloud and bimanual teleoperation; no sample in the
+    // catalogue ships any of them, and "Teleop episodes 10" sat beside zero
+    // teleop records. "Capture rigs 6" sat beside one rig, Robocap.
+    body: "Seventy tasks across twenty-four workstations, from factory floors to repair benches and kitchens. Head-mounted stereo is the whole rig: two synchronised cameras, a head IMU at roughly 200 Hz, and visual-inertial odometry, delivered as MCAP with the task and environment annotation in band.",
     facts: [
-      { label: "Collections", value: "7" },
-      { label: "Sample tasks ready", value: "14" },
-      { label: "Capture rigs", value: "6" },
+      { label: "Distinct tasks", value: "70" },
+      { label: "Skill groups", value: "15" },
+      { label: "Capture rig", value: "Robocap" },
     ],
     modalities: [
-      "Egocentric RGB",
-      "Stereo pair",
-      "Wrist cameras",
-      "Xsens mocap (MVNX, FBX)",
-      "RGB-D and LiDAR point cloud",
-      "Bimanual teleop (LeRobot v2)",
-      "Gripper",
-      "Stereo audio",
+      "Egocentric RGB stereo",
+      "Head IMU at 200 Hz",
+      "Visual-inertial odometry",
+      "Camera intrinsics and extrinsics",
+      "Task annotation",
+      "Environment annotation",
     ],
     status: "sample-ready",
   },
@@ -52,7 +55,7 @@ export const PRODUCT_LINES: ProductLine[] = [
     headline: "Frame-aligned video, keystrokes and camera pose from live play",
     body: "Every session ships the video next to a 27-column telemetry table: camera-to-world matrix, pinhole intrinsics, the exact keys and mouse deltas held on each frame, and the semantic action they map to. Two-player coop sessions add a shared clock and per-agent visibility.",
     facts: [
-      { label: "Titles captured", value: "8" },
+      { label: "Titles captured", value: "13" },
       { label: "Capture rate", value: "60 fps at 1080p" },
       { label: "Telemetry columns", value: "27" },
     ],
@@ -110,8 +113,12 @@ export const DELIVERY_LAYERS = [
   {
     key: "action",
     title: "Action stream",
-    detail: "What the operator did, frame by frame. Keystrokes and mouse deltas for game capture, hand and gripper state for robotics.",
-    metric: "60 Hz",
+    // Was "60 Hz", which is the game rate only: the egocentric lines record at
+    // 30 fps. The old detail also promised "hand and gripper state for
+    // robotics"; no record in the catalogue ships either, so it now names the
+    // head IMU and odometry that the egocentric captures actually carry.
+    detail: "What the operator did, frame by frame. Keystrokes, mouse deltas and the semantic action they map to on game capture; head IMU and visual-inertial odometry on the egocentric lines.",
+    metric: "30 to 60 Hz",
   },
   {
     key: "annotation",
@@ -128,7 +135,10 @@ export const DELIVERY_LAYERS = [
   {
     key: "integrity",
     title: "Integrity",
-    detail: "Metadata written twice, in band and as a sidecar, so the two can be diffed. Every file carries a checksum that verifies on its own.",
+    // "Every file" was too broad: the checksum rides the MCAP deliveries, which
+    // is 118 of the 126 records. The eight game sessions ship mp4 plus csv and
+    // carry no SHA-256 row.
+    detail: "Metadata written twice, in band and as a sidecar, so the two can be diffed. Every MCAP delivery carries a checksum that verifies on its own.",
     metric: "SHA-256",
   },
 ] as const;
@@ -195,7 +205,7 @@ export const ACCESS_PATHS = [
     body: "If we have already spoken, your passcode opens the full sample set and the download links without another form.",
     detail: "Seven day session",
     cta: "Enter passcode",
-    href: "/samples/enter",
+    href: "/samples/enter?redirect=%2Fsamples%2Fs",
     primary: false,
   },
 ] as const;
@@ -250,7 +260,10 @@ export const TERMS = [
 
 /** Formats a buyer can load without writing a converter. */
 export const FORMATS = [
-  { name: "LeRobot v2", detail: "Teleoperation episodes as parquet plus per-camera video, loads in LeRobot and GR00T" },
+  // LeRobot v2 was listed first and described teleoperation episodes as parquet.
+  // Nothing in the catalogue ships it, and the teleop claim it rested on has
+  // been removed from the robotics line. Put it back when a teleop record lands.
   { name: "MCAP", detail: "Egocentric deliveries open directly in Foxglove or Lichtblick, both free" },
   { name: "MP4 + CSV + JSON", detail: "Game sessions: video, per-frame telemetry, session record and key bindings" },
+  { name: "Rerun .rrd", detail: "Recent game sessions also ship a Rerun recording, so the trajectory and inputs can be scrubbed in rerun.io without writing a loader" },
 ] as const;

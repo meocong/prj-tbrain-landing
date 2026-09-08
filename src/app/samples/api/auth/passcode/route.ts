@@ -96,6 +96,7 @@ export async function POST(req: NextRequest) {
       clientId: p.client_id ?? undefined,
       grantId: p.id,
       sessionId,
+      project: PROJECT,
     });
 
     await Promise.all([

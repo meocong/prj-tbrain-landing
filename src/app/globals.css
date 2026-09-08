@@ -121,6 +121,43 @@
 @layer base {
   * { @apply border-border outline-ring/50; }
   body { @apply bg-background text-foreground; }
+
+  /* Tailwind v4 changed preflight so `button` and `[role="button"]` resolve to
+     `cursor: default` rather than `pointer`. Every interactive control on the
+     site therefore showed an arrow, and the codebase had started patching it
+     one component at a time. Put the hand back globally instead.
+
+     Anchors already get `pointer` from the UA stylesheet, but only when they
+     carry an `href` — a bare <a> used as a click target does not, so it is
+     listed here too.
+
+     Disabled controls are excluded and marked explicitly: a hand over a button
+     that will not respond is a worse lie than an arrow. */
+  button:not(:disabled),
+  [role="button"]:not([aria-disabled="true"]),
+  a[href],
+  label[for],
+  summary,
+  select:not(:disabled),
+  input[type="checkbox"]:not(:disabled),
+  input[type="radio"]:not(:disabled),
+  input[type="range"]:not(:disabled),
+  input[type="file"]:not(:disabled),
+  input[type="color"]:not(:disabled),
+  input[type="submit"]:not(:disabled),
+  input[type="reset"]:not(:disabled),
+  input[type="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+
+  button:disabled,
+  [role="button"][aria-disabled="true"],
+  select:disabled,
+  input:disabled,
+  textarea:disabled,
+  fieldset:disabled button {
+    cursor: not-allowed;
+  }
 }
 
 /* ── Extended Theme (Surface, Brand, Semantic) ── */
@@ -987,6 +1024,140 @@ html.dark body {
     linear-gradient(to right, rgba(132, 101, 255, 0.5), rgba(14, 165, 233, 0.22));
   background-clip: padding-box, border-box;
   background-origin: padding-box, border-box;
+}
+
+/* ─────────────────────────────────────────────────────────────────────
+   Samples pages (/samples, /samples/enter)
+
+   These pages paint through inline `style` from _sections/tokens.ts, which
+   the `dark:` variant cannot reach. So the palette lives here as custom
+   properties and the `.dark` class on <html> swaps it.
+
+   The dim step carries 10-11px labels across the whole metadata table, so
+   it is held above 4.5:1 in both themes rather than at the 3:1 that reads
+   fine on a 48px heading:
+     dark   rgba(226,232,240,0.58) on #07090F  → 5.75:1
+     light  rgba(15,23,42,0.62)    on #FBFBFD  → 4.98:1
+   The accent is likewise not one colour: #A78BFA is 2.6:1 on a light base,
+   so light mode drops to the site's brand primary at 5.7:1.
+   ───────────────────────────────────────────────────────────────────── */
+.samples-scope {
+  --sm-base: #FBFBFD;
+  --sm-base-rgb: 251, 251, 253;
+  --sm-band: #F2F3F8;
+  --sm-hairline: rgba(15, 23, 42, 0.12);
+  --sm-hairline-soft: rgba(15, 23, 42, 0.07);
+  --sm-text: #0B0E17;
+  --sm-text-mid: rgba(15, 23, 42, 0.68);
+  --sm-text-dim: rgba(15, 23, 42, 0.62);
+  --sm-value: rgba(15, 23, 42, 0.86);
+  --sm-accent: #6C3CF4;
+  --sm-accent-soft: rgba(108, 60, 244, 0.1);
+  --sm-positive: #047857;
+  --sm-danger: #B91C1C;
+  --sm-rule: rgba(15, 23, 42, 0.22);
+  --sm-wash: rgba(15, 23, 42, 0.05);
+  --sm-playhead: rgba(15, 23, 42, 0.75);
+
+  /* Pills. Colour is the signal on a card: what the task is, how hard it was,
+     what recorded it, what ships, and whether it passed its quality gate. */
+  --sm-on-accent: #FFFFFF;
+  --sm-pill-skill-bg: rgba(108, 60, 244, 0.10);
+  --sm-pill-skill-fg: #5B2FD0;
+  --sm-pill-skill-bd: rgba(108, 60, 244, 0.28);
+  --sm-pill-hard-bg: rgba(180, 83, 9, 0.10);
+  --sm-pill-hard-fg: #B45309;
+  --sm-pill-hard-bd: rgba(180, 83, 9, 0.28);
+  --sm-pill-device-bg: rgba(2, 132, 199, 0.10);
+  --sm-pill-device-fg: #0369A1;
+  --sm-pill-device-bd: rgba(2, 132, 199, 0.26);
+  --sm-pill-ok-bg: rgba(4, 120, 87, 0.10);
+  --sm-pill-ok-fg: #047857;
+  --sm-pill-ok-bd: rgba(4, 120, 87, 0.26);
+}
+
+.dark .samples-scope {
+  --sm-base: #07090F;
+  --sm-base-rgb: 7, 9, 15;
+  --sm-band: #0B0E17;
+  --sm-hairline: rgba(255, 255, 255, 0.09);
+  --sm-hairline-soft: rgba(255, 255, 255, 0.06);
+  --sm-text: rgba(245, 246, 248, 0.96);
+  --sm-text-mid: rgba(226, 232, 240, 0.72);
+  --sm-text-dim: rgba(226, 232, 240, 0.58);
+  --sm-value: rgba(226, 232, 240, 0.88);
+  --sm-accent: #A78BFA;
+  --sm-accent-soft: rgba(167, 139, 250, 0.14);
+  --sm-positive: #10B981;
+  --sm-danger: #FCA5A5;
+  --sm-rule: rgba(255, 255, 255, 0.22);
+  --sm-wash: rgba(255, 255, 255, 0.05);
+  --sm-playhead: rgba(255, 255, 255, 0.75);
+
+  --sm-on-accent: #0B0620;
+  --sm-pill-skill-bg: rgba(167, 139, 250, 0.12);
+  --sm-pill-skill-fg: #C4B5FD;
+  --sm-pill-skill-bd: rgba(167, 139, 250, 0.34);
+  --sm-pill-hard-bg: rgba(245, 158, 11, 0.12);
+  --sm-pill-hard-fg: #FCD34D;
+  --sm-pill-hard-bd: rgba(245, 158, 11, 0.34);
+  --sm-pill-device-bg: rgba(56, 189, 248, 0.10);
+  --sm-pill-device-fg: #7DD3FC;
+  --sm-pill-device-bd: rgba(56, 189, 248, 0.30);
+  --sm-pill-ok-bg: rgba(16, 185, 129, 0.10);
+  --sm-pill-ok-fg: #6EE7B7;
+  --sm-pill-ok-bd: rgba(16, 185, 129, 0.30);
+}
+
+/* Native video chrome is drawn by the UA, so it needs the theme announced
+   rather than inherited from a painted background. */
+.samples-scope video::-webkit-media-controls-panel {
+  background-image: linear-gradient(transparent, rgba(7, 9, 15, 0.65));
+}
+
+/* ── Filter chips in the catalogue rail ──
+   These live in CSS rather than inline `style` because an inline declaration
+   outranks any class, so a `hover:` utility on the element would never win.
+   State is announced with `data-active` and read here.
+
+   The rail is a long list of near-identical rows; without a hover the reader
+   cannot tell which one the pointer will actually hit. The count shifts with
+   the label so the whole row reads as one target rather than two. */
+.samples-scope .sm-chip {
+  color: var(--sm-text-mid);
+  background: transparent;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.samples-scope .sm-chip .sm-chip-count {
+  color: var(--sm-text-dim);
+  transition: color 0.15s ease;
+}
+
+.samples-scope .sm-chip:hover:not(:disabled),
+.samples-scope .sm-chip:focus-visible:not(:disabled) {
+  background: var(--sm-wash);
+  color: var(--sm-text);
+}
+
+.samples-scope .sm-chip:hover:not(:disabled) .sm-chip-count,
+.samples-scope .sm-chip:focus-visible:not(:disabled) .sm-chip-count {
+  color: var(--sm-text-mid);
+}
+
+.samples-scope .sm-chip[data-active="true"] {
+  background: var(--sm-accent-soft);
+  color: var(--sm-text);
+}
+
+.samples-scope .sm-chip[data-active="true"] .sm-chip-count {
+  color: var(--sm-accent);
+}
+
+/* Deselecting is the other half of the control, so an active chip has to
+   answer the pointer too — just in the other direction. */
+.samples-scope .sm-chip[data-active="true"]:hover {
+  background: color-mix(in srgb, var(--sm-accent-soft) 100%, var(--sm-text) 6%);
 }
 
 /* ── Reduced Motion ── */

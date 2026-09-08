@@ -13,9 +13,16 @@ export type SampleEvent =
   | "filter_rig"
   | "play_preview"
   | "expand_record"
+  | "copy_record"
   | "scrub_telemetry"
   | "open_request_access"
-  | "open_passcode";
+  | "open_passcode"
+  /** Passcode accepted. The conversion Tam actually asks about. */
+  | "unlock_success"
+  /** A signed download was started, by slug and asset. */
+  | "download_asset"
+  /** The whole-library archive, from the vault page. */
+  | "download_full_set";
 
 export function track(event: SampleEvent, params: Record<string, unknown> = {}) {
   if (typeof window === "undefined") return;

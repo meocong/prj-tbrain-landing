@@ -1,48 +1,75 @@
 "use client";
 
-import { useCallback, useMemo, useRef, useState } from "react";
-import { ChevronDown } from "lucide-react";
-import samples from "@/lib/samples/samples.json";
-import { C } from "./tokens";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import Link from "next/link";
+import { Check, ChevronDown, Copy, Search, SlidersHorizontal, X } from "lucide-react";
+import samples from "@/lib/samples/samples.json";
+import { SKILL_GROUPS, JOBS, INDUSTRIES } from "@/lib/samples/taxonomy";
+import { groupSpec, LONG_VALUE } from "@/lib/samples/spec-sections";
+import { publicSpec } from "@/lib/samples/redact.mjs";
 import { track } from "@/lib/samples/track";
 import { requestUrl } from "@/lib/samples/request-link";
+import { AccessStrip } from "./AccessActions";
+import { LiveTelemetry } from "./LiveTelemetry";
+import { C, OVER_MEDIA, PILL, type Sample } from "./tokens";
+import { SampleModal } from "./SampleModal";
 
 /**
- * The catalog, not a gallery. Every card carries its delivery record: rig,
- * capture spec, streams and shipped formats are readable without interacting,
- * and the complete record expands in place. Filters narrow the set and the
- * readout above the grid always reports what is currently on screen.
+ * Faceted catalog.
+ *
+ * Facets live in a left rail rather than a top bar: four controls already
+ * filled the width, and search and sort had nowhere to go. They are multi
+ * select, because a buyer wants "cleaning and food prep", not one or the
+ * other. Counts are computed against the set filtered by every *other* facet,
+ * so a chip showing a number can never lead to an empty grid.
+ *
+ * Jobs stay a select. 235 chips is a wall, not a filter.
  */
-
-interface Sample {
-  slug: string;
-  domain: "robotics" | "game" | "ots";
-  title: string;
-  skill: string;
-  environment: string;
-  locale: string;
-  rig: string;
-  durationSec: number;
-  resolution: string;
-  fps: number;
-  streams: string[];
-  formats: string[];
-  size: string;
-  spec: [string, string][];
-  orientation?: string;
-}
 
 const ALL = samples as unknown as Sample[];
 
+/** Cards revealed per step. Eight rows at the widest three-column layout. */
+const PAGE = 24;
+
 const DOMAINS = [
-  { key: "all", label: "Everything" },
   { key: "robotics", label: "Robotics" },
   { key: "game", label: "Video game" },
   { key: "ots", label: "Off the shelf" },
 ] as const;
 
-type DomainKey = (typeof DOMAINS)[number]["key"];
+const VIEWPOINTS = [
+  { key: "first-person", label: "First person" },
+  { key: "third-person", label: "Third person" },
+] as const;
+
+const SORTS = [
+  { key: "longest", label: "Longest source" },
+  { key: "shortest", label: "Shortest source" },
+  { key: "live", label: "Live data first" },
+  { key: "title", label: "Title" },
+] as const;
+
+type SortKey = (typeof SORTS)[number]["key"];
+
+interface Filters {
+  domain: string[];
+  viewpoint: string[];
+  skillGroup: string[];
+  industry: string[];
+  rig: string[];
+  job: string;
+  q: string;
+}
+
+const EMPTY: Filters = {
+  domain: [],
+  viewpoint: [],
+  skillGroup: [],
+  industry: [],
+  rig: [],
+  job: "all",
+  q: "",
+};
 
 function mmss(total: number) {
   const m = Math.floor(total / 60);
@@ -50,258 +77,582 @@ function mmss(total: number) {
   return `${m}:${String(s).padStart(2, "0")}`;
 }
 
+/** Within a facet the selected values are OR-ed; across facets they are AND-ed. */
+function matches(s: Sample, f: Filters, skip?: keyof Filters) {
+  const on = (k: keyof Filters) => k !== skip;
+  if (on("domain") && f.domain.length && !f.domain.includes(s.domain)) return false;
+  if (on("viewpoint") && f.viewpoint.length && !f.viewpoint.includes(s.viewpoint)) return false;
+  if (on("skillGroup") && f.skillGroup.length && !(s.skillGroup && f.skillGroup.includes(s.skillGroup)))
+    return false;
+  if (on("industry") && f.industry.length && !(s.industry && f.industry.includes(s.industry)))
+    return false;
+  if (on("rig") && f.rig.length && !f.rig.includes(s.rig)) return false;
+  if (on("job") && f.job !== "all" && s.job !== f.job) return false;
+  if (on("q") && f.q.trim()) {
+    const q = f.q.trim().toLowerCase();
+    const hay = `${s.title} ${s.label} ${s.environment} ${s.rig} ${s.skillGroup ?? ""} ${s.job ?? ""}`;
+    if (!hay.toLowerCase().includes(q)) return false;
+  }
+  return true;
+}
+
+/**
+ * One field of the shipped record.
+ *
+ * Values are left aligned under a fixed label column rather than pushed to the
+ * right edge: a checksum that wraps reads as one block that way, and a column of
+ * values with a common left edge can be scanned without reading each one. Long
+ * values stack under their label and take the full measure, because a 64
+ * character checksum beside a label leaves nothing to wrap into.
+ */
 function SpecRow({ label, value }: { label: string; value: string }) {
+  const long = value.length > LONG_VALUE;
+  // A checksum, uuid or path is one unbroken token and has to be split mid-word
+  // to fit. A sentence must not be: `break-all` on prose gives "mag_mi ddle.db".
+  const token = !/\s/.test(value);
   return (
     <div
-      className="flex items-baseline justify-between gap-4 py-1.5"
+      className={`py-[5px] ${long ? "" : "grid grid-cols-[minmax(6.5rem,auto)_1fr] items-baseline gap-x-4"}`}
       style={{ borderTop: `1px solid ${C.hairlineSoft}` }}
     >
-      <dt className="shrink-0 text-[11px]" style={{ color: C.textDim }}>
+      <dt className="text-[11.5px] leading-relaxed" style={{ color: C.textDim }}>
         {label}
       </dt>
-      <dd className="text-right font-mono text-[11px]" style={{ color: "rgba(226,232,240,0.85)" }}>
+      <dd
+        className={`font-mono text-[12px] leading-relaxed ${long ? "mt-0.5" : ""} ${
+          token ? "break-all" : "break-words"
+        }`}
+        style={{ color: C.value }}
+      >
         {value}
       </dd>
     </div>
   );
 }
 
-function Card({ sample }: { sample: Sample }) {
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const [open, setOpen] = useState(false);
+/** Copies the record as JSON, which is the shape a buyer pastes into a ticket. */
+function CopyRecord({ sample }: { sample: Sample }) {
+  const [done, setDone] = useState(false);
 
+  const copy = async () => {
+    const record = {
+      slug: sample.slug,
+      domain: sample.domain,
+      title: sample.title,
+      duration_sec: sample.durationSec,
+      resolution: sample.resolution,
+      fps: sample.fps,
+      streams: sample.streams,
+      formats: sample.formats,
+      size: sample.size,
+      // Same redaction the rendered record gets: this button exists so a buyer
+      // can paste the record into a ticket, and a pasted record travels further
+      // than the page does.
+      ...Object.fromEntries(publicSpec(sample.spec)),
+    };
+    try {
+      await navigator.clipboard.writeText(JSON.stringify(record, null, 2));
+      track("copy_record", { slug: sample.slug, domain: sample.domain });
+      setDone(true);
+      setTimeout(() => setDone(false), 2000);
+    } catch {
+      // Clipboard is blocked on insecure origins and in some embeds. The values
+      // are selectable text either way, so there is nothing to recover from.
+    }
+  };
+
+  return (
+    <button
+      type="button"
+      onClick={copy}
+      className="inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 font-mono text-[10px] uppercase tracking-[0.16em] transition-colors"
+      style={{ border: `1px solid ${C.hairline}`, color: done ? C.accent : C.textMid }}
+    >
+      {done ? <Check className="h-3 w-3" /> : <Copy className="h-3 w-3" />}
+      {done ? "Copied" : "Copy JSON"}
+    </button>
+  );
+}
+
+function Card({ sample, onOpen }: { sample: Sample; onOpen: () => void }) {
+  const [video, setVideo] = useState<HTMLVideoElement | null>(null);
+
+  // Hover-to-play is a browsing affordance, and at tile size it is the only way
+  // to tell two sewing lines apart. The record layer owns the transport once it
+  // is open; nothing here competes with it.
   const play = useCallback(() => {
-    const v = videoRef.current;
-    if (!v || !v.paused) return;
+    if (!video || !video.paused) return;
     track("play_preview", { slug: sample.slug, domain: sample.domain });
-    v.play().catch(() => undefined);
-  }, [sample.slug, sample.domain]);
+    video.play().catch(() => undefined);
+  }, [video, sample.slug, sample.domain]);
+
   const stop = useCallback(() => {
-    const v = videoRef.current;
-    if (!v) return;
-    v.pause();
-    v.currentTime = 0;
-  }, []);
+    if (!video) return;
+    video.pause();
+    video.currentTime = 0;
+  }, [video]);
+
+  const open = () => {
+    track("expand_record", { slug: sample.slug, domain: sample.domain });
+    onOpen();
+  };
 
   return (
     <article className="flex flex-col" style={{ borderTop: `1px solid ${C.hairline}` }}>
-      <div
-        className="group relative overflow-hidden"
+      {/* The rule above is the card's top edge, and this label was sitting on it
+          with no padding at all. It also wraps to two lines on the longer
+          preview strings, so a row mixing one- and two-line labels started its
+          videos at different heights. Reserve two lines' worth either way and
+          clamp at two, so every card in a row opens its media on the same
+          baseline. */}
+      <p
+        className="line-clamp-2 min-h-[30px] pb-2.5 pt-3 font-mono text-[10px] uppercase leading-[1.5] tracking-[0.14em]"
+        style={{ color: C.textDim }}
+      >
+        {sample.preview}
+      </p>
+
+      {/* The whole tile opens the record. A tile that only responds on one small
+          link makes the reader hunt for the hit area on every row. */}
+      <button
+        type="button"
+        onClick={open}
         onMouseEnter={play}
         onMouseLeave={stop}
         onFocus={play}
         onBlur={stop}
-        tabIndex={0}
+        aria-haspopup="dialog"
+        className="group relative block w-full overflow-hidden text-left"
       >
         <video
-          ref={videoRef}
-          className="aspect-[4/3] w-full object-cover"
+          ref={setVideo}
+          className="aspect-[4/3] w-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+          style={{ background: "#000" }}
           src={`/samples/clips/${sample.slug}.mp4`}
           poster={`/samples/posters/${sample.slug}.jpg`}
           muted
           loop
           playsInline
-          preload="none"
+          preload="metadata"
           aria-label={sample.title}
         />
         <span
-          className="pointer-events-none absolute right-3 top-3 rounded-full px-2 py-0.5 font-mono text-[10px] backdrop-blur-sm"
-          style={{ background: "rgba(7,9,15,0.78)", color: "rgba(255,255,255,0.82)" }}
+          className="pointer-events-none absolute left-3 top-3 rounded-full px-2 py-0.5 font-mono text-[10px] backdrop-blur-sm"
+          style={{ background: OVER_MEDIA.scrim, color: OVER_MEDIA.textDim }}
         >
+          {sample.viewpoint === "first-person" ? "1st person" : "3rd person"}
+        </span>
+        <span
+          className="pointer-events-none absolute right-3 top-3 flex items-center gap-2 rounded-full px-2 py-0.5 font-mono text-[10px] backdrop-blur-sm"
+          style={{ background: OVER_MEDIA.scrim, color: OVER_MEDIA.text }}
+        >
+          {/* Fixed violet: this badge sits on footage, not on the page. */}
+          {sample.telemetry && <span style={{ color: "#C4B5FD" }}>live</span>}
           {mmss(sample.durationSec)}
         </span>
-      </div>
+      </button>
 
       <div className="flex flex-1 flex-col px-1 pb-6 pt-5">
         <p className="font-mono text-[10px] uppercase tracking-[0.16em]" style={{ color: C.accent }}>
-          {sample.skill}
+          {sample.label}
         </p>
-        <h3
-          className="mt-2 text-base font-medium leading-snug"
+        <button
+          type="button"
+          onClick={open}
+          aria-haspopup="dialog"
+          className="mt-2 text-left text-base font-medium leading-snug transition-colors hover:opacity-80"
           style={{ fontFamily: "var(--font-heading)" }}
         >
           {sample.title}
-        </h3>
-        <p className="mt-1.5 text-[13px]" style={{ color: C.textMid }}>
-          {sample.environment}. {sample.locale}.
-        </p>
-
-        <dl className="mt-4">
-          <SpecRow label="Rig" value={sample.rig} />
-          <SpecRow label="Capture" value={`${sample.resolution} at ${sample.fps} fps`} />
-          <SpecRow label="Ships as" value={sample.formats.join("  ")} />
-          <SpecRow label="Full file" value={sample.size} />
-        </dl>
-
-        <p
-          className="mt-3 font-mono text-[10px] leading-relaxed"
-          style={{ color: C.textDim }}
-        >
-          {sample.streams.join("  /  ")}
-        </p>
-
-        <button
-          type="button"
-          onClick={() => {
-            if (!open) track("expand_record", { slug: sample.slug, domain: sample.domain });
-            setOpen((v) => !v);
-          }}
-          aria-expanded={open}
-          className="mt-4 inline-flex items-center gap-1.5 self-start font-mono text-[10px] uppercase tracking-[0.16em] transition-colors"
-          style={{ color: open ? C.text : C.textDim }}
-        >
-          {open ? "Hide record" : "Full record"}
-          <ChevronDown
-            className="h-3 w-3 transition-transform"
-            style={{ transform: open ? "rotate(180deg)" : undefined }}
-          />
         </button>
+        <p className="mt-2 text-[12.5px]" style={{ color: C.textMid }}>
+          {sample.breadcrumb.map((b, i) => (
+            <span key={`${b}-${i}`}>
+              {i > 0 && <span style={{ color: C.textDim }}> › </span>}
+              <span style={{ color: i === 0 ? C.value : C.textMid }}>{b}</span>
+            </span>
+          ))}
+        </p>
 
-        {open && (
-          <dl className="mt-3">
-            {sample.spec.map(([k, v]) => (
-              <SpecRow key={k} label={k} value={v} />
-            ))}
-          </dl>
-        )}
+        <ul className="mt-3 flex flex-wrap gap-1.5">
+          {sample.pills.map((pill) => {
+            const st = PILL[pill.k];
+            return (
+              <li
+                key={pill.t}
+                className="rounded-full px-2.5 py-1 text-[11px]"
+                style={{ background: st.bg, color: st.fg, border: `1px solid ${st.bd}` }}
+              >
+                {pill.t}
+              </li>
+            );
+          })}
+        </ul>
 
-        <Link
-          href={requestUrl({ from: "card", sample: sample.slug, title: sample.title })}
-          onClick={() => track("open_request_access", { from: "card", slug: sample.slug })}
-          className="mt-4 inline-flex items-center gap-1.5 self-start text-[13px] font-medium underline decoration-1 underline-offset-[5px]"
-          style={{ color: C.textMid, textDecorationColor: "rgba(255,255,255,0.22)" }}
-        >
-          Request this sample
-        </Link>
+        <div className="mt-4 flex flex-wrap items-center gap-3">
+          <button
+            type="button"
+            onClick={open}
+            aria-haspopup="dialog"
+            className="inline-flex items-center gap-1.5 font-mono text-[10px] uppercase tracking-[0.16em] transition-colors"
+            style={{ color: C.textDim }}
+          >
+            {sample.telemetry ? "Full metadata and live record" : "Full metadata"}
+            <ChevronDown className="h-3 w-3 -rotate-90" />
+          </button>
+        </div>
       </div>
     </article>
   );
 }
 
-export function SampleCatalog() {
-  const [domain, setDomain] = useState<DomainKey>("all");
-  const [rig, setRig] = useState<string>("all");
-
-  const rigs = useMemo(() => {
-    const pool = domain === "all" ? ALL : ALL.filter((s) => s.domain === domain);
-    return Array.from(new Set(pool.map((s) => s.rig))).sort();
-  }, [domain]);
-
-  const shown = useMemo(
-    () =>
-      ALL.filter((s) => domain === "all" || s.domain === domain).filter(
-        (s) => rig === "all" || s.rig === rig,
-      ),
-    [domain, rig],
+function Chip({
+  label,
+  count,
+  active,
+  onClick,
+}: {
+  label: string;
+  count: number;
+  active: boolean;
+  onClick: () => void;
+}) {
+  const dead = count === 0 && !active;
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      disabled={dead}
+      aria-pressed={active}
+      data-active={active}
+      className="sm-chip flex w-full items-center justify-between gap-3 rounded-lg px-2.5 py-1.5 text-left text-[12.5px] disabled:opacity-30"
+    >
+      <span className="truncate">{label}</span>
+      <span className="sm-chip-count shrink-0 font-mono text-[10px]">{count}</span>
+    </button>
   );
+}
 
-  const counts = useMemo(() => {
-    const minutes = shown.reduce((a, s) => a + s.durationSec, 0) / 60;
-    return {
-      n: shown.length,
-      minutes: minutes.toFixed(1),
-      skills: new Set(shown.map((s) => s.skill)).size,
-      rigs: new Set(shown.map((s) => s.rig)).size,
-    };
-  }, [shown]);
+/**
+ * `first` drops the rule above the topmost group. The rail sits beside the grid
+ * toolbar, and the two rules landed 15px apart — close enough to read as one
+ * divider that had been broken, rather than as two columns each with their own.
+ * The search field above it is already a closed box; it needs no second edge.
+ */
+function RailGroup({
+  title,
+  first,
+  children,
+}: {
+  title: string;
+  first?: boolean;
+  children: React.ReactNode;
+}) {
+  return (
+    <div
+      className={first ? "pb-5 pt-6" : "py-5"}
+      style={first ? undefined : { borderTop: `1px solid ${C.hairline}` }}
+    >
+      <p className="mb-2 font-mono text-[10px] uppercase tracking-[0.16em]" style={{ color: C.textDim }}>
+        {title}
+      </p>
+      <div className="-mx-2.5 space-y-0.5">{children}</div>
+    </div>
+  );
+}
 
-  const selectDomain = (key: DomainKey) => {
-    track("filter_domain", { domain: key });
-    setDomain(key);
-    setRig("all");
+export function SampleCatalog() {
+  const [active, setActive] = useState<Sample | null>(null);
+  const [f, setF] = useState<Filters>(EMPTY);
+  const [sort, setSort] = useState<SortKey>("longest");
+  // Six facet groups is a long scroll before the grid on a phone, so the rail
+  // collapses below lg and is always open from lg up.
+  const [railOpen, setRailOpen] = useState(false);
+
+  const toggle = (key: "domain" | "viewpoint" | "skillGroup" | "industry" | "rig", v: string) => {
+    track("filter_rig", { facet: key, value: v });
+    setF((p) => {
+      const list = p[key];
+      return { ...p, [key]: list.includes(v) ? list.filter((x) => x !== v) : [...list, v] };
+    });
   };
 
+  /** Count a value as if that facet were not applied, so numbers stay reachable. */
+  const countFor = useCallback(
+    (key: keyof Filters, pick: (s: Sample) => string | null, v: string) =>
+      ALL.filter((s) => matches(s, f, key)).filter((s) => pick(s) === v).length,
+    [f],
+  );
+
+  const shown = useMemo(() => {
+    const out = ALL.filter((s) => matches(s, f));
+    const by: Record<SortKey, (a: Sample, b: Sample) => number> = {
+      longest: (a, b) => b.durationSec - a.durationSec,
+      shortest: (a, b) => a.durationSec - b.durationSec,
+      live: (a, b) => Number(b.telemetry) - Number(a.telemetry) || a.title.localeCompare(b.title),
+      title: (a, b) => a.title.localeCompare(b.title),
+    };
+    return [...out].sort(by[sort]);
+  }, [f, sort]);
+
+  const rigs = useMemo(() => Array.from(new Set(ALL.map((s) => s.rig))).sort(), []);
+  const jobs = useMemo(
+    () => JOBS.filter((j) => ALL.some((s) => s.job === j)),
+    [],
+  );
+
+  const dirty =
+    f.domain.length + f.viewpoint.length + f.skillGroup.length + f.industry.length + f.rig.length > 0 ||
+    f.job !== "all" ||
+    f.q.trim() !== "";
+
+  const totals = useMemo(() => {
+    const minutes = shown.reduce((a, s) => a + s.durationSec, 0) / 60;
+    return { minutes: minutes.toFixed(1), live: shown.filter((s) => s.telemetry).length };
+  }, [shown]);
+
+  // The grid is capped and extended by a button rather than paged by number.
+  // What costs something here is mounted <video> elements — every card holds one
+  // and plays it on hover — not rows of markup, so the cap has to bound those.
+  // A numbered pager would also throw away scroll position on every step and put
+  // a second navigation model next to the facet rail, which already narrows.
+  const [limit, setLimit] = useState(PAGE);
+  useEffect(() => setLimit(PAGE), [f, sort]);
+  const page = shown.slice(0, limit);
+  const rest = shown.length - page.length;
+
   return (
-    <section id="deck" style={{ background: C.base, color: C.text }}>
+    <>    <section id="deck" style={{ background: C.base, color: C.text }}>
       <div className="mx-auto max-w-[1400px] px-4 pt-24 md:pt-28 lg:px-10 xl:px-16">
         <div className="flex flex-wrap items-end justify-between gap-6">
           <h2
             className="text-3xl font-medium tracking-tight md:text-5xl"
             style={{ fontFamily: "var(--font-heading)", letterSpacing: "-0.03em", lineHeight: 1.06 }}
           >
-            {ALL.length} delivery files,{" "}
-            <span style={{ color: C.textDim }}>pulled unmodified</span>
+            {ALL.length} files{" "}
+            <span style={{ color: C.textDim }}>from real deliveries</span>
           </h2>
           <p className="max-w-sm text-sm leading-relaxed" style={{ color: C.textMid }}>
-            Previews are downscaled to 640 x 480 so a first look never waits on a download. The
-            delivered files carry every lens, every stream and the full record below each clip.
+            {/* The resolution used to be stated here as "640 x 480", which held
+                for 18 of the 131 clips; the other 113 encode at 576 x 432. Each
+                card already prints its own preview size, measured per file, so
+                the one figure that cannot be right for every clip is gone. */}
+            Previews are 8 second cuts, downscaled from the delivery file. Where the capture
+            recorded per-frame data, open the record and it runs beside the clip.
           </p>
         </div>
 
-        <div
-          className="mt-10 flex flex-wrap items-center gap-x-2 gap-y-3 pb-5"
-          style={{ borderBottom: `1px solid ${C.hairline}` }}
-        >
-          {DOMAINS.map((d) => {
-            const active = d.key === domain;
-            const n = d.key === "all" ? ALL.length : ALL.filter((s) => s.domain === d.key).length;
-            return (
-              <button
-                key={d.key}
-                type="button"
-                onClick={() => selectDomain(d.key)}
-                aria-pressed={active}
-                className="rounded-full px-4 py-1.5 text-[13px] font-medium transition-colors"
-                style={
-                  active
-                    ? { background: C.text, color: C.base }
-                    : { border: `1px solid ${C.hairline}`, color: C.textMid }
-                }
-              >
-                {d.label}
-                <span className="ml-2 font-mono text-[11px] opacity-60">{n}</span>
-              </button>
-            );
-          })}
+        <AccessStrip />
+      </div>
 
-          <label className="ml-auto flex items-center gap-2 text-[13px]" style={{ color: C.textDim }}>
-            Rig
-            <select
-              value={rig}
-              onChange={(e) => {
-                track("filter_rig", { rig: e.target.value, domain });
-                setRig(e.target.value);
-              }}
-              className="rounded-full px-3 py-1.5 text-[13px] outline-none"
+      <div className="mx-auto max-w-[1400px] px-4 pb-24 pt-10 lg:px-10 xl:px-16">
+        <div className="grid gap-10 lg:grid-cols-12 lg:gap-12">
+          <aside className="lg:col-span-3">
+            <button
+              type="button"
+              onClick={() => setRailOpen((v) => !v)}
+              aria-expanded={railOpen}
+              className="mb-4 flex w-full items-center justify-between rounded-lg px-3 py-2.5 text-[13px] lg:hidden"
               style={{ background: C.band, border: `1px solid ${C.hairline}`, color: C.text }}
             >
-              <option value="all">All rigs</option>
-              {rigs.map((r) => (
-                <option key={r} value={r}>
-                  {r}
-                </option>
-              ))}
-            </select>
-          </label>
-        </div>
+              <span className="inline-flex items-center gap-2">
+                <SlidersHorizontal className="h-3.5 w-3.5" />
+                Filters
+              </span>
+              <ChevronDown
+                className="h-3.5 w-3.5 transition-transform"
+                style={{ transform: railOpen ? "rotate(180deg)" : undefined }}
+              />
+            </button>
 
-        <p className="mt-4 font-mono text-[11px]" style={{ color: C.textDim }}>
-          {counts.n} samples
-          <span className="mx-2">/</span>
-          {counts.minutes} minutes of source
-          <span className="mx-2">/</span>
-          {counts.skills} categories
-          <span className="mx-2">/</span>
-          {counts.rigs} rigs
-        </p>
-      </div>
+            <div className={`${railOpen ? "block" : "hidden"} lg:sticky lg:top-24 lg:block`}>
+              <label className="relative block">
+                <Search
+                  className="pointer-events-none absolute left-3 top-1/2 h-3.5 w-3.5 -translate-y-1/2"
+                  style={{ color: C.textDim }}
+                />
+                <input
+                  value={f.q}
+                  onChange={(e) => setF((p) => ({ ...p, q: e.target.value }))}
+                  placeholder="Search tasks, rigs, sites"
+                  aria-label="Search samples"
+                  className="w-full rounded-lg py-2 pl-9 pr-3 text-[13px] outline-none"
+                  style={{ background: C.band, border: `1px solid ${C.hairline}`, color: C.text }}
+                />
+              </label>
 
-      <div className="mx-auto max-w-[1400px] px-4 pb-24 lg:px-10 xl:px-16">
-        {shown.length === 0 ? (
-          <p
-            className="mt-16 py-20 text-center text-sm"
-            style={{ color: C.textDim, borderTop: `1px solid ${C.hairline}` }}
-          >
-            No samples match that combination. Reset the rig filter to see the rest.
-          </p>
-        ) : (
-          <div className="mt-8 grid gap-x-8 gap-y-2 sm:grid-cols-2 lg:grid-cols-3">
-            {shown.map((s) => (
-              <Card key={s.slug} sample={s} />
-            ))}
+              <RailGroup title="Line" first>
+                {DOMAINS.map((d) => (
+                  <Chip
+                    key={d.key}
+                    label={d.label}
+                    active={f.domain.includes(d.key)}
+                    count={countFor("domain", (s) => s.domain, d.key)}
+                    onClick={() => toggle("domain", d.key)}
+                  />
+                ))}
+              </RailGroup>
+
+              <RailGroup title="Viewpoint">
+                {VIEWPOINTS.map((v) => (
+                  <Chip
+                    key={v.key}
+                    label={v.label}
+                    active={f.viewpoint.includes(v.key)}
+                    count={countFor("viewpoint", (s) => s.viewpoint, v.key)}
+                    onClick={() => toggle("viewpoint", v.key)}
+                  />
+                ))}
+              </RailGroup>
+
+              <RailGroup title="Skill group">
+                {SKILL_GROUPS.map((g) => (
+                  <Chip
+                    key={g}
+                    label={g}
+                    active={f.skillGroup.includes(g)}
+                    count={countFor("skillGroup", (s) => s.skillGroup, g)}
+                    onClick={() => toggle("skillGroup", g)}
+                  />
+                ))}
+              </RailGroup>
+
+              <RailGroup title="Industry">
+                {INDUSTRIES.map((i) => (
+                  <Chip
+                    key={i}
+                    label={i}
+                    active={f.industry.includes(i)}
+                    count={countFor("industry", (s) => s.industry, i)}
+                    onClick={() => toggle("industry", i)}
+                  />
+                ))}
+              </RailGroup>
+
+              <RailGroup title="Rig">
+                {rigs.map((r) => (
+                  <Chip
+                    key={r}
+                    label={r}
+                    active={f.rig.includes(r)}
+                    count={countFor("rig", (s) => s.rig, r)}
+                    onClick={() => toggle("rig", r)}
+                  />
+                ))}
+              </RailGroup>
+
+              <RailGroup title="Job">
+                <select
+                  value={f.job}
+                  onChange={(e) => setF((p) => ({ ...p, job: e.target.value }))}
+                  aria-label="Filter by job"
+                  className="mx-2.5 w-[calc(100%-1.25rem)] rounded-lg px-2.5 py-1.5 text-[12.5px] outline-none"
+                  style={{ background: C.band, border: `1px solid ${C.hairline}`, color: C.text }}
+                >
+                  <option value="all">Any job</option>
+                  {jobs.map((j) => (
+                    <option key={j} value={j}>
+                      {j}
+                    </option>
+                  ))}
+                </select>
+              </RailGroup>
+            </div>
+          </aside>
+
+          <div className="lg:col-span-9">
+            {/* No rule under the toolbar. Every card already draws one above
+                itself, and the first row of them lands on exactly the same
+                pixel — four 1px lines at one y, doubling in weight where they
+                overlapped and dropping to a single line across the 32px column
+                gaps, which read as a broken divider. The card rules are the
+                divider, and they stay consistent with every row below. */}
+            <div className="flex flex-wrap items-center justify-between gap-4 pb-5">
+              <p className="font-mono text-[11px]" style={{ color: C.textDim }}>
+                {shown.length} of {ALL.length} samples
+                <span className="mx-2">/</span>
+                {totals.minutes} minutes of source
+                <span className="mx-2">/</span>
+                {totals.live} with live data
+              </p>
+              <div className="flex items-center gap-4">
+                {dirty && (
+                  <button
+                    type="button"
+                    onClick={() => setF(EMPTY)}
+                    className="inline-flex items-center gap-1 font-mono text-[10px] uppercase tracking-[0.16em]"
+                    style={{ color: C.textDim }}
+                  >
+                    <X className="h-3 w-3" />
+                    Clear
+                  </button>
+                )}
+                <label className="flex items-center gap-2 text-[12.5px]" style={{ color: C.textDim }}>
+                  Sort
+                  <select
+                    value={sort}
+                    onChange={(e) => setSort(e.target.value as SortKey)}
+                    className="rounded-lg px-2.5 py-1.5 text-[12.5px] outline-none"
+                    style={{ background: C.band, border: `1px solid ${C.hairline}`, color: C.text }}
+                  >
+                    {SORTS.map((s) => (
+                      <option key={s.key} value={s.key}>
+                        {s.label}
+                      </option>
+                    ))}
+                  </select>
+                </label>
+              </div>
+            </div>
+
+            {shown.length === 0 ? (
+              <div className="py-24 text-center">
+                <p className="text-sm" style={{ color: C.textMid }}>
+                  Nothing matches that combination.
+                </p>
+                <p className="mx-auto mt-2 max-w-md text-[13px]" style={{ color: C.textDim }}>
+                  Game sessions carry no skill group, industry or job, so those three narrow to the
+                  robotics and off-the-shelf lines.
+                </p>
+                <button
+                  type="button"
+                  onClick={() => setF(EMPTY)}
+                  className="mt-6 rounded-full px-5 py-2 text-[13px] font-semibold"
+                  style={{ background: C.text, color: C.base }}
+                >
+                  Clear filters
+                </button>
+              </div>
+            ) : (
+              <>
+                <div className="grid gap-x-8 gap-y-2 sm:grid-cols-2 2xl:grid-cols-3">
+                  {page.map((s) => (
+                    <Card key={s.slug} sample={s} onOpen={() => setActive(s)} />
+                  ))}
+                </div>
+
+                {rest > 0 && (
+                  <div className="mt-10 flex flex-col items-center gap-2">
+                    <button
+                      type="button"
+                      onClick={() => setLimit((n) => n + PAGE)}
+                      className="rounded-full px-6 py-3 text-[13px] font-semibold transition-transform active:scale-[0.98]"
+                      style={{ border: `1px solid ${C.rule}`, color: C.text }}
+                    >
+                      Show {Math.min(rest, PAGE)} more
+                    </button>
+                    <p className="font-mono text-[11px]" style={{ color: C.textDim }}>
+                      {page.length} of {shown.length} shown
+                    </p>
+                  </div>
+                )}
+              </>
+            )}
           </div>
-        )}
+        </div>
       </div>
     </section>
+      <SampleModal sample={active} onClose={() => setActive(null)} />
+    </>
   );
 }

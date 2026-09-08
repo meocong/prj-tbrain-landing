@@ -35,9 +35,9 @@ export const metadata: Metadata = {
 
 export default function SamplesPage() {
   return (
-    <div style={{ background: "#07090F" }}>
+    <div className="samples-scope" style={{ background: "var(--sm-base)" }}>
       <Header />
-      <main style={{ color: "rgba(245,246,248,0.96)" }}>
+      <main style={{ color: "var(--sm-text)" }}>
         <HeroSamples />
         <SampleCatalog />
         <CorpusLines />
