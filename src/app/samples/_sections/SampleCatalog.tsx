@@ -432,14 +432,24 @@ export function SampleCatalog() {
             {ALL.length} files{" "}
             <span style={{ color: C.textDim }}>from real deliveries</span>
           </h2>
-          <p className="max-w-sm text-sm leading-relaxed" style={{ color: C.textMid }}>
-            {/* The resolution used to be stated here as "640 x 480", which held
-                for 18 of the 131 clips; the other 113 encode at 576 x 432. Each
-                card already prints its own preview size, measured per file, so
-                the one figure that cannot be right for every clip is gone. */}
-            Each preview is an 8-second cut, downscaled from the delivery file. Open a record to
-            read its metadata in full; where the capture carried per-frame data, the telemetry
-            runs beside the clip.
+          {/* One sentence, and only the part a reader cannot work out by
+              looking. Two more used to sit here — open a record for its
+              metadata, telemetry runs beside the clip — but the hero says both
+              a screen earlier, the cards are visibly clickable, and the access
+              strip directly below owns everything about getting the files. All
+              three together read as a paragraph to skip.
+
+              The resolution used to be stated here as "640 x 480", which held
+              for 18 of the 131 clips; the other 113 encode at 576 x 432. Each
+              card already prints its own preview size, measured per file, so
+              the one figure that cannot be right for every clip is gone.
+
+              `max-w-md` is wide enough that what is left sets on one line
+              (405px of it) rather than wrapping to two. The cap was `sm` to
+              stop three sentences running the width of the header; with one
+              sentence the same cap is what forces the wrap. */}
+          <p className="max-w-md text-sm leading-relaxed" style={{ color: C.textMid }}>
+            Previews are 8-second cuts, downscaled from the delivery file.
           </p>
         </div>
 
