@@ -1,6 +1,6 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { jwtVerify } from "jose";
-import { createServerClient } from "@supabase/ssr";
+import { createServerClient, type CookieOptions } from "@supabase/ssr";
 
 const SESSION_COOKIE = "tb_session";
 
@@ -21,7 +21,12 @@ async function isTbAuthenticated(req: NextRequest): Promise<boolean> {
   }
 }
 
-async function isAdminAuthenticated(req: NextRequest): Promise<boolean> {
+type RefreshedCookies = Array<{ name: string; value: string; options: CookieOptions }>;
+
+async function readAdminUser(
+  req: NextRequest,
+  refreshedCookies: RefreshedCookies
+): Promise<boolean> {
   try {
     const supabase = createServerClient(
       process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -32,8 +37,8 @@ async function isAdminAuthenticated(req: NextRequest): Promise<boolean> {
           getAll() {
             return req.cookies.getAll();
           },
-          setAll() {
-            // Middleware can't set cookies in the response this way; handled by NextResponse
+          setAll(cookies) {
+            refreshedCookies.push(...cookies);
           },
         },
       }
@@ -47,33 +52,15 @@ async function isAdminAuthenticated(req: NextRequest): Promise<boolean> {
   }
 }
 
-async function isSamplesAuthenticated(req: NextRequest): Promise<boolean> {
-  const token = req.cookies.get(SESSION_COOKIE)?.value;
-  if (!token) return false;
-  try {
-    const { payload } = await jwtVerify(token, secret());
-    // Both products sign into the same cookie with the same secret, so a valid
-    // signature is not enough: a terminal-bench passcode must not open the
-    // sample library. Only /samples/api/auth/passcode stamps this claim.
-    return (payload as { project?: string }).project === "samples";
-  } catch {
-    return false;
+function attachCookies(res: NextResponse, cookies: RefreshedCookies): NextResponse {
+  for (const { name, value, options } of cookies) {
+    res.cookies.set(name, value, options);
   }
+  return res;
 }
 
 export async function middleware(req: NextRequest) {
   const { pathname, search } = req.nextUrl;
-
-  // ── Sample library vault ──
-  // The catalogue at /samples is public on purpose: it is the sales surface.
-  // Only /samples/s, where the real delivery files are listed, needs a session.
-  if (pathname.startsWith("/samples/s")) {
-    if (await isSamplesAuthenticated(req)) return NextResponse.next();
-    const url = req.nextUrl.clone();
-    url.pathname = "/samples/enter";
-    url.search = `?redirect=${encodeURIComponent(pathname + search)}`;
-    return NextResponse.redirect(url);
-  }
 
   // ── Admin routes ──
   if (pathname.startsWith("/admin")) {
@@ -81,14 +68,15 @@ export async function middleware(req: NextRequest) {
     if (pathname === "/admin/login") return NextResponse.next();
     if (pathname.startsWith("/admin/auth/")) return NextResponse.next();
 
-    const ok = await isAdminAuthenticated(req);
-    if (ok) return NextResponse.next();
+    const refreshed: RefreshedCookies = [];
+    const ok = await readAdminUser(req, refreshed);
+    if (ok) return attachCookies(NextResponse.next(), refreshed);
 
     // Redirect to admin login
     const url = req.nextUrl.clone();
     url.pathname = "/admin/login";
     url.search = `?redirect=${encodeURIComponent(pathname + search)}`;
-    return NextResponse.redirect(url);
+    return attachCookies(NextResponse.redirect(url), refreshed);
   }
 
   // ── Terminal Bench data routes ──
@@ -130,6 +118,5 @@ export const config = {
     "/admin/:path*",
     "/data/terminal-bench/s/:path*",
     "/data/terminal-bench/api/:path*",
-    "/samples/s/:path*",
   ],
 };

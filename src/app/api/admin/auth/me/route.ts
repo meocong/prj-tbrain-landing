@@ -11,12 +11,21 @@ export async function GET() {
   } = await supabase.auth.getUser();
 
   if (!user?.email) {
+    console.error("[auth/me] no email on session", { user });
     return NextResponse.json({ error: "unauthorized" }, { status: 401 });
   }
 
   const adminUser = await getAdminUser(user.email);
   if (!adminUser) {
-    return NextResponse.json({ error: "not_admin" }, { status: 403 });
+    console.error("[auth/me] not_admin — Supabase email not in admin_users", {
+      email: user.email,
+      providers: user.app_metadata?.providers,
+      identityEmail: user.identities?.[0]?.identity_data?.email,
+    });
+    return NextResponse.json(
+      { error: "not_admin", email: user.email },
+      { status: 403 }
+    );
   }
 
   return NextResponse.json({

@@ -2,6 +2,7 @@
 
 import { useRef } from "react";
 import { motion, useScroll, useTransform, useReducedMotion } from "framer-motion";
+import { SectionHeading } from "@/components/terminal-bench/shared/SectionHeading";
 
 const STEPS = [
   {
@@ -58,14 +59,9 @@ export function TaskLifecycle() {
   return (
     <section className="relative bg-white dark:bg-[#020617]">
       <div className="container mx-auto max-w-7xl px-6 py-24 md:py-32">
-        <div className="mb-14">
-          <p className="font-family_avt text-xs uppercase tracking-[0.2em] text-[#78818f]">
-            / task lifecycle
-          </p>
-          <h2 className="mt-4 max-w-4xl text-4xl font-medium leading-tight text-[#0e1b2e] md:text-6xl">
-            From prompt to verdict, <span className="gradient-text">reproducibly</span>.
-          </h2>
-        </div>
+        <SectionHeading label="task lifecycle" centered>
+          From prompt to verdict, <span className="gradient-text">reproducibly</span>.
+        </SectionHeading>
 
         <div ref={trackRef} className="relative">
           {/* Progress track on desktop */}

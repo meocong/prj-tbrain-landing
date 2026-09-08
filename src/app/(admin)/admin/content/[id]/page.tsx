@@ -188,7 +188,7 @@ export default function EditPostPage() {
             <h3 className="text-sm font-semibold" style={{ color: "var(--text-primary)" }}>Cover Image</h3>
             {form.coverImageUrl ? (
               <div className="relative">
-                <img src={form.coverImageUrl} alt="" className="w-full rounded-lg object-cover h-32" />
+                <img src={form.coverImageUrl} alt="Cover image preview" className="w-full rounded-lg object-cover h-32" />
                 <button onClick={() => setForm(f => ({ ...f, coverImageUrl: "" }))} className="absolute top-1 right-1 rounded-full bg-black/50 px-2 py-0.5 text-[10px] text-white">Remove</button>
               </div>
             ) : null}

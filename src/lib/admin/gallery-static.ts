@@ -325,7 +325,7 @@ export const STATIC_IMAGES: StaticImage[] = [
     "path": "/images/platform/batches-list.png",
     "name": "batches-list",
     "ext": "png",
-    "size_bytes": 172130
+    "size_bytes": 161505
   },
   {
     "path": "/images/platform/ctv-active-tasks.png",
@@ -337,19 +337,19 @@ export const STATIC_IMAGES: StaticImage[] = [
     "path": "/images/platform/dashboard.png",
     "name": "dashboard",
     "ext": "png",
-    "size_bytes": 131332
+    "size_bytes": 90455
   },
   {
     "path": "/images/platform/knowledge.png",
     "name": "knowledge",
     "ext": "png",
-    "size_bytes": 204233
+    "size_bytes": 127905
   },
   {
     "path": "/images/platform/project-overview.png",
     "name": "project-overview",
     "ext": "png",
-    "size_bytes": 143943
+    "size_bytes": 146927
   },
   {
     "path": "/images/platform/projects.png",

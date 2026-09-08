@@ -1,4 +1,5 @@
 import { highlightToHtml } from "@/lib/terminal-bench/highlight";
+import { SectionHeading } from "@/components/terminal-bench/shared/SectionHeading";
 import { CollapsibleSolve } from "./CollapsibleSolve";
 
 const PREVIEW_SH = `#!/usr/bin/env bash
@@ -22,22 +23,19 @@ export async function LiveSolveDiff() {
   return (
     <section className="relative bg-[#FAFAF7] dark:bg-[#020617]">
       <div className="container mx-auto max-w-6xl px-6 py-24 md:py-32">
-        <div className="mb-10 grid items-end gap-6 md:grid-cols-[1.5fr_1fr]">
-          <div>
-            <p className="font-family_avt text-xs uppercase tracking-[0.2em] text-[#78818f]">
-              / real artifact
-            </p>
-            <h2 className="mt-4 max-w-3xl text-4xl font-medium leading-tight text-[#0e1b2e] md:text-5xl">
+        <div className="mb-10 flex flex-col items-center gap-6 text-center">
+          <div className="max-w-3xl">
+            <SectionHeading label="real artifact" className="mb-0" centered>
               One expert solution. <span className="gradient-text">Readable preview.</span>
-            </h2>
-            <p className="mt-5 max-w-xl text-base leading-relaxed text-[#78818f]">
+            </SectionHeading>
+            <p className="mt-5 mx-auto max-w-xl text-base leading-relaxed text-[#78818f]">
               This compact <code className="font-mono text-[#0e1b2e]">solve.sh</code>{" "}
               preview shows how a Terminal Bench sample is patched and verified
               inside <code className="font-mono text-[#0e1b2e]">tbrain-{FEATURED_SLUG}</code>.
               Full artifacts remain available inside the showcase.
             </p>
           </div>
-          <div className="grid grid-cols-2 gap-4 text-[#0e1b2e] md:justify-self-end">
+          <div className="grid grid-cols-2 gap-8 text-center text-[#0e1b2e]">
             <div>
               <p className="text-3xl font-medium md:text-4xl">{lineCount}</p>
               <p className="font-family_avt mt-1 text-[11px] uppercase tracking-widest text-[#78818f]">

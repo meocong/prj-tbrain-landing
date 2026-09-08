@@ -2,6 +2,7 @@ import { NextResponse, type NextRequest } from "next/server";
 import { signApproveToken, verifyTurnstile } from "@/lib/terminal-bench/auth";
 import { supabaseAdmin } from "@/lib/terminal-bench/supabase/admin";
 import { sendEmail, publicBaseUrl } from "@/lib/terminal-bench/email";
+import { getAdminRecipients } from "@/lib/admin/email-recipients";
 import { AdminRequestNotification } from "@/emails/AdminRequestNotification";
 import React from "react";
 
@@ -116,11 +117,9 @@ export async function POST(req: NextRequest) {
   const approveUrl = `${base}/data/terminal-bench/api/auth/approve?t=${encodeURIComponent(token)}`;
   const rejectUrl = `${base}/data/terminal-bench/api/auth/reject?t=${encodeURIComponent(token)}`;
 
-  const adminEmail = process.env.ADMIN_EMAIL ?? "drake@tbrain.ai";
-
   try {
     await sendEmail({
-      to: adminEmail,
+      to: getAdminRecipients(),
       subject: `New Terminal Bench request — ${company}`,
       template: React.createElement(AdminRequestNotification, {
         fullName,

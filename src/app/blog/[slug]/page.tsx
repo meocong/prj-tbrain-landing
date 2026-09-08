@@ -13,6 +13,23 @@ import type { CmsPost } from "@/lib/admin/types";
 // ISR: cache rendered post for 5 minutes; admin edits surface within that window.
 export const revalidate = 300;
 
+// Pre-render the most-recent published posts at build time so the first hit is
+// already cached. Older posts fall back to on-demand ISR.
+export async function generateStaticParams() {
+  try {
+    const db = supabaseAdmin();
+    const { data } = await db
+      .from("cms_posts")
+      .select("slug")
+      .eq("status", "published")
+      .order("published_at", { ascending: false, nullsFirst: false })
+      .limit(20);
+    return (data ?? []).map((p: { slug: string }) => ({ slug: p.slug }));
+  } catch {
+    return [];
+  }
+}
+
 export async function generateMetadata({
   params,
 }: {
@@ -109,11 +126,25 @@ export default async function BlogPostPage({
     },
   };
 
+  const breadcrumbJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: `${baseUrl}/` },
+      { "@type": "ListItem", position: 2, name: "Blog", item: `${baseUrl}/blog` },
+      { "@type": "ListItem", position: 3, name: post.title, item: `${baseUrl}/blog/${post.slug}` },
+    ],
+  };
+
   return (
     <div>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
       />
       <Header />
       <main className="pb-24 pt-32">

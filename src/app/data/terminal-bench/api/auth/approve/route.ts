@@ -7,6 +7,7 @@ import {
 } from "@/lib/terminal-bench/auth";
 import { supabaseAdmin } from "@/lib/terminal-bench/supabase/admin";
 import { sendEmail, publicBaseUrl } from "@/lib/terminal-bench/email";
+import { getAdminReplyTo } from "@/lib/admin/email-recipients";
 import { ClientPasscodeDelivery } from "@/emails/ClientPasscodeDelivery";
 import React from "react";
 
@@ -143,7 +144,7 @@ export async function GET(req: NextRequest) {
         batchName: batch?.name ?? "Terminal Bench showcase",
         enterUrl,
       }),
-      replyTo: process.env.ADMIN_EMAIL ?? undefined,
+      replyTo: getAdminReplyTo(),
     });
   } catch (err) {
     console.error("[terminal-bench] passcode email failed:", err);

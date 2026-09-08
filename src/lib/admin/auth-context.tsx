@@ -50,6 +50,40 @@ export function AdminAuthProvider({ children }: { children: ReactNode }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    let cancelled = false;
+
+    async function bounceUnauthorized(email: string | null | undefined) {
+      // Authenticated with Supabase but the email isn't in admin_users.
+      // Sign the user out so a retry isn't stuck on the same dead session,
+      // then send them back to login with a clear reason.
+      try {
+        await supabaseAdmin.auth.signOut();
+      } catch {
+        /* ignore — we're redirecting anyway */
+      }
+      if (cancelled) return;
+      const params = new URLSearchParams({ error: "not_admin" });
+      if (email) params.set("email", email);
+      window.location.replace(`/admin/login?${params.toString()}`);
+    }
+
+    async function loadAdminUser(sessionEmail?: string | null) {
+      const res = await fetch("/api/admin/auth/me");
+      if (res.ok) {
+        const data = await res.json();
+        if (cancelled) return;
+        setAdminUser(data.adminUser);
+        setPermissions(data.permissions);
+        return;
+      }
+      if (res.status === 403) {
+        const body = await res.json().catch(() => ({}));
+        await bounceUnauthorized(body?.email ?? sessionEmail ?? null);
+      }
+      // 401 or other: AdminAuthProvider only wraps protected layouts so
+      // middleware will redirect to login on the next navigation anyway.
+    }
+
     const fetchAuth = async () => {
       try {
         const {
@@ -62,18 +96,11 @@ export function AdminAuthProvider({ children }: { children: ReactNode }) {
         }
 
         setUser(session.user);
-
-        // Fetch admin user with permissions from API
-        const res = await fetch("/api/admin/auth/me");
-        if (res.ok) {
-          const data = await res.json();
-          setAdminUser(data.adminUser);
-          setPermissions(data.permissions);
-        }
-      } catch {
-        // Auth failed — user is not admin
+        await loadAdminUser(session.user.email);
+      } catch (err) {
+        console.error("[admin-auth] fetchAuth error:", err);
       } finally {
-        setLoading(false);
+        if (!cancelled) setLoading(false);
       }
     };
 
@@ -84,12 +111,7 @@ export function AdminAuthProvider({ children }: { children: ReactNode }) {
     } = supabaseAdmin.auth.onAuthStateChange(async (_event, session) => {
       if (session?.user) {
         setUser(session.user);
-        const res = await fetch("/api/admin/auth/me");
-        if (res.ok) {
-          const data = await res.json();
-          setAdminUser(data.adminUser);
-          setPermissions(data.permissions);
-        }
+        await loadAdminUser(session.user.email);
       } else {
         setUser(null);
         setAdminUser(null);
@@ -97,7 +119,10 @@ export function AdminAuthProvider({ children }: { children: ReactNode }) {
       }
     });
 
-    return () => subscription.unsubscribe();
+    return () => {
+      cancelled = true;
+      subscription.unsubscribe();
+    };
   }, []);
 
   const signOut = async () => {
