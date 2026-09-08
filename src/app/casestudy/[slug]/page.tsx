@@ -7,8 +7,22 @@ import { PdfDownloadGate } from "@/components/casestudy/PdfDownloadGate";
 import { getCaseStudyBySlug } from "@/lib/landing/case-studies";
 import { notFound } from "next/navigation";
 import post_bg from "@/assets/images/post_bg.png";
+import { supabaseAdmin } from "@/lib/terminal-bench/supabase/admin";
 
 export const revalidate = 300;
+
+export async function generateStaticParams() {
+  try {
+    const db = supabaseAdmin();
+    const { data } = await db
+      .from("case_studies")
+      .select("slug")
+      .eq("is_active", true);
+    return (data ?? []).map((c: { slug: string }) => ({ slug: c.slug }));
+  } catch {
+    return [];
+  }
+}
 
 export async function generateMetadata({
   params,
@@ -52,10 +66,13 @@ const SECTION_ACCENTS = [
 
 export default async function CaseStudyDetailPage({
   params,
+  searchParams,
 }: {
   params: Promise<{ slug: string }>;
+  searchParams?: Promise<{ pdf?: string }>;
 }) {
   const { slug } = await params;
+  const isPdfRender = (await searchParams)?.pdf === "1";
   const study = await getCaseStudyBySlug(slug);
   if (!study) notFound();
 
@@ -66,17 +83,59 @@ export default async function CaseStudyDetailPage({
     ? "Need Expert CAD Annotation Services?"
     : "Need Expert Data Services?";
 
+  const baseUrl = process.env.PUBLIC_BASE_URL || "https://tbrain.ai";
+  const studyUrl = `${baseUrl}/casestudy/${study.slug}`;
+  const studyImage = study.image?.startsWith("http") ? study.image : `${baseUrl}${study.image}`;
+  const articleJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: study.title,
+    description: study.shortDescription || study.description,
+    image: study.image ? [studyImage] : undefined,
+    author: [{ "@type": "Organization", name: "Tbrain" }],
+    publisher: {
+      "@type": "Organization",
+      name: "Tbrain",
+      logo: { "@type": "ImageObject", url: `${baseUrl}/favicon.ico` },
+    },
+    mainEntityOfPage: { "@type": "WebPage", "@id": studyUrl },
+    articleSection: study.industry || "Case Study",
+  };
+  const breadcrumbJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: `${baseUrl}/` },
+      { "@type": "ListItem", position: 2, name: "Case Studies", item: `${baseUrl}/casestudy` },
+      { "@type": "ListItem", position: 3, name: study.title, item: studyUrl },
+    ],
+  };
+
   return (
     <div>
-      <Header />
+      {!isPdfRender && (
+        <>
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
+          />
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+          />
+        </>
+      )}
+      {!isPdfRender && <Header />}
       <main
-        className="bg-center bg-no-repeat bg-cover pt-24 pb-24"
-        style={{ backgroundImage: `url(${post_bg.src})` }}
+        className={`bg-center bg-no-repeat bg-cover pb-24 ${isPdfRender ? "pt-0" : "pt-24"}`}
+        style={{ backgroundImage: isPdfRender ? undefined : `url(${post_bg.src})` }}
       >
-        <div className="wrap !fixed top-[400px] w-full">
-          <div className="one top-0 left-0 h-80 w-80"></div>
-          <div className="two top-0 right-0 h-80 w-80"></div>
-        </div>
+        {!isPdfRender && (
+          <div className="wrap !fixed top-[400px] w-full">
+            <div className="one top-0 left-0 h-80 w-80"></div>
+            <div className="two top-0 right-0 h-80 w-80"></div>
+          </div>
+        )}
         <section className="container mx-auto max-w-[1128px] px-4">
           <header className="mb-12">
             <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
@@ -90,7 +149,7 @@ export default async function CaseStudyDetailPage({
                   </p>
                 )}
               </div>
-              {study.pdfGcsObject && (
+              {study.pdfGcsObject && !isPdfRender && (
                 <div className="shrink-0">
                   <PdfDownloadGate slug={study.slug} title={study.title} />
                 </div>
@@ -144,7 +203,7 @@ export default async function CaseStudyDetailPage({
           </section>
         </section>
       </main>
-      <Footer />
+      {!isPdfRender && <Footer />}
     </div>
   );
 }

@@ -1,6 +1,6 @@
 "use client";
 
-import { Brain, Bot, Scale, Users, RefreshCw } from "lucide-react";
+import { ArrowRight, Brain, Bot, Scale, Users, RefreshCw } from "lucide-react";
 
 const STEPS = [
   {
@@ -68,49 +68,63 @@ export function WorkflowLoop() {
       </div>
 
       <div className="relative mx-auto max-w-5xl">
-        {/* Animated dashed connector — desktop only */}
         <svg
           aria-hidden
-          className="absolute inset-0 hidden md:block pointer-events-none"
-          width="100%"
-          height="100%"
+          className="absolute inset-x-8 -bottom-12 hidden h-28 md:block pointer-events-none"
           preserveAspectRatio="none"
-          viewBox="0 0 1000 220"
+          viewBox="0 0 1000 120"
         >
           <defs>
-            <linearGradient id="loop-line" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stopColor="#6C3CF4" stopOpacity="0.5" />
-              <stop offset="50%" stopColor="#8b5cf6" stopOpacity="0.6" />
-              <stop offset="100%" stopColor="#10B981" stopOpacity="0.5" />
+            <linearGradient id="loop-return-line" x1="100%" y1="0%" x2="0%" y2="0%">
+              <stop offset="0%" stopColor="#10B981" stopOpacity="0.45" />
+              <stop offset="55%" stopColor="#8b5cf6" stopOpacity="0.45" />
+              <stop offset="100%" stopColor="#6C3CF4" stopOpacity="0.55" />
             </linearGradient>
+            <marker
+              id="loop-return-arrow"
+              markerWidth="7"
+              markerHeight="7"
+              refX="6"
+              refY="3.5"
+              orient="auto"
+            >
+              <path d="M 0 0 L 7 3.5 L 0 7 z" fill="#6C3CF4" opacity="0.72" />
+            </marker>
           </defs>
           <path
-            d="M 100 110 L 900 110"
+            d="M 955 24 C 760 106 240 106 45 24"
             fill="none"
-            stroke="url(#loop-line)"
-            strokeWidth="2"
-            strokeDasharray="6 6"
+            stroke="url(#loop-return-line)"
+            strokeWidth="1.75"
+            strokeDasharray="6 8"
+            strokeLinecap="round"
+            markerEnd="url(#loop-return-arrow)"
             className="loop-dash"
           />
-          {/* Feedback arc — bends back from end to start */}
-          <path
-            d="M 900 110 Q 900 200 500 200 Q 100 200 100 110"
-            fill="none"
-            stroke="url(#loop-line)"
-            strokeWidth="2"
-            strokeDasharray="6 6"
-            className="loop-dash"
-            opacity="0.7"
-          />
+          <circle cx="955" cy="24" r="4" fill="#10B981" opacity="0.75" />
         </svg>
 
         <div className="relative grid grid-cols-1 gap-6 md:grid-cols-5">
           {STEPS.map((step, i) => {
             const Icon = step.icon;
             return (
-              <div
-                key={step.title}
-                className="relative rounded-2xl p-5 text-center backdrop-blur-sm"
+              <div key={step.title} className="relative">
+                {i > 0 ? (
+                  <div
+                    aria-hidden
+                    className="absolute -left-5 top-1/2 z-10 hidden h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full md:flex"
+                    style={{
+                      background: "var(--bg-card)",
+                      border: "1px solid var(--border-subtle)",
+                      boxShadow: "var(--shadow-card)",
+                      color: step.color,
+                    }}
+                  >
+                    <ArrowRight className="h-4 w-4" />
+                  </div>
+                ) : null}
+                <div
+                  className="relative rounded-2xl p-5 text-center backdrop-blur-sm"
                 style={{
                   background: "var(--bg-card)",
                   border: "1px solid var(--border-subtle)",
@@ -148,13 +162,14 @@ export function WorkflowLoop() {
                 >
                   {step.body}
                 </p>
+                </div>
               </div>
             );
           })}
         </div>
 
         <p
-          className="mt-10 text-center text-sm italic"
+          className="mt-14 text-center text-sm italic"
           style={{ color: "var(--text-muted)" }}
         >
           The dashed line is not just decoration. Every verdict really does

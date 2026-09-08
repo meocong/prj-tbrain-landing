@@ -89,27 +89,29 @@ export default function TerminalBenchLanding() {
 
       {/* What it is */}
       <section className="relative bg-white dark:bg-[#020617]">
-        <div className="container mx-auto max-w-5xl px-6 py-24 md:py-32">
-          <p className="font-family_avt text-xs uppercase tracking-[0.2em] text-[#78818f]">
-            / what is terminal bench
-          </p>
-          <h2 className="mt-4 max-w-4xl text-4xl font-medium leading-tight text-[#0e1b2e] md:text-6xl">
-            LLM evals miss the terminal. <span className="gradient-text">Agents live there.</span>
-          </h2>
-          <div className="mt-10 grid gap-8 text-base leading-relaxed text-[#78818f] md:grid-cols-2 md:gap-12 md:text-lg">
-            <p>
-              Benchmarks that score agents on static code snippets or single-turn
-              QA miss the actual job: executing commands, reading output, editing
-              files, and recovering from errors — at the shell prompt, across
-              long-running sessions.
+        <div className="container mx-auto max-w-7xl px-6 py-24 md:py-32">
+          <div className="mx-auto max-w-5xl">
+            <p className="font-family_avt text-center text-xs uppercase tracking-[0.2em] text-[#78818f]">
+              / what is terminal bench
             </p>
-            <p>
-              Terminal Bench samples are expert-authored tasks with a
-              deterministic verifier. They boot the agent into a real Docker
-              environment, hand it <code className="font-mono text-[#0e1b2e]">instruction.md</code>,
-              and then score the final state of the filesystem — not the LLM&apos;s
-              self-report.
-            </p>
+            <h2 className="mt-4 mx-auto max-w-4xl text-center text-4xl font-medium leading-tight text-[#0e1b2e] md:text-6xl">
+              LLM evals miss the terminal. <span className="gradient-text">Agents live there.</span>
+            </h2>
+            <div className="mt-10 grid gap-8 text-base leading-relaxed text-[#78818f] md:grid-cols-2 md:gap-12 md:text-lg">
+              <p>
+                Benchmarks that score agents on static code snippets or single-turn
+                QA miss the actual job: executing commands, reading output, editing
+                files, and recovering from errors — at the shell prompt, across
+                long-running sessions.
+              </p>
+              <p>
+                Terminal Bench samples are expert-authored tasks with a
+                deterministic verifier. They boot the agent into a real Docker
+                environment, hand it <code className="font-mono text-[#0e1b2e]">instruction.md</code>,
+                and then score the final state of the filesystem — not the LLM&apos;s
+                self-report.
+              </p>
+            </div>
           </div>
         </div>
       </section>
@@ -117,25 +119,27 @@ export default function TerminalBenchLanding() {
       <TaskLifecycle />
 
       {/* Anatomy */}
-      <section className="container mx-auto max-w-6xl px-6 py-24 md:py-32">
-        <SectionHeading label="anatomy of a sample">
-          Four artifacts. <span className="gradient-text">Every sample.</span>
-        </SectionHeading>
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
-          {ARTIFACTS.map((it) => (
-            <div
-              key={it.name}
-              className="rounded-2xl border border-[#E5E7EB] bg-white p-6 transition-all hover:border-[#6C3CF4]/40 hover:shadow-lg"
-            >
-              <p className="font-family_avt text-xs uppercase tracking-widest text-[#6C3CF4]">
-                file
-              </p>
-              <p className="mt-3 font-mono text-lg text-[#0e1b2e]">{it.name}</p>
-              <p className="mt-4 text-sm leading-relaxed text-[#78818f]">
-                {it.desc}
-              </p>
-            </div>
-          ))}
+      <section className="container mx-auto max-w-7xl px-6 py-24 md:py-32">
+        <div className="mx-auto max-w-6xl">
+          <SectionHeading label="anatomy of a sample" centered>
+            Four artifacts. <span className="gradient-text">Every sample.</span>
+          </SectionHeading>
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
+            {ARTIFACTS.map((it) => (
+              <div
+                key={it.name}
+                className="rounded-2xl border border-[#E5E7EB] bg-white p-6 transition-all hover:border-[#6C3CF4]/40 hover:shadow-lg"
+              >
+                <p className="font-family_avt text-xs uppercase tracking-widest text-[#6C3CF4]">
+                  file
+                </p>
+                <p className="mt-3 font-mono text-lg text-[#0e1b2e]">{it.name}</p>
+                <p className="mt-4 text-sm leading-relaxed text-[#78818f]">
+                  {it.desc}
+                </p>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -144,67 +148,71 @@ export default function TerminalBenchLanding() {
       <SampleGalleryPreview />
 
       {/* Why terminal bench */}
-      <section className="container mx-auto max-w-5xl px-6 py-24 md:py-32">
-        <SectionHeading label="why terminal bench">
-          We build the hardest tasks your agents{" "}
-          <span className="gradient-text">haven&apos;t seen yet</span>.
-        </SectionHeading>
-        <div>
-          {FEATURES.map((f) => (
-            <NumberedBlock key={f.n} n={f.n} title={f.title}>
-              {f.body}
-            </NumberedBlock>
-          ))}
-          <div className="border-t border-[#E5E7EB]" />
+      <section className="container mx-auto max-w-7xl px-6 py-24 md:py-32">
+        <div className="mx-auto max-w-5xl">
+          <SectionHeading label="why terminal bench" centered>
+            We build the hardest tasks your agents{" "}
+            <span className="gradient-text">haven&apos;t seen yet</span>.
+          </SectionHeading>
+          <div>
+            {FEATURES.map((f) => (
+              <NumberedBlock key={f.n} n={f.n} title={f.title}>
+                {f.body}
+              </NumberedBlock>
+            ))}
+            <div className="border-t border-[#E5E7EB]" />
+          </div>
         </div>
       </section>
 
       {/* How to access */}
       <section className="bg-[#FAFAF7] dark:bg-[#020617]">
-        <div className="container mx-auto max-w-5xl px-6 py-24 md:py-32">
-          <SectionHeading label="how to access">
-            Two paths in. <span className="gradient-text">Zero guesswork.</span>
-          </SectionHeading>
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-            <div className="rounded-3xl border border-[#E5E7EB] bg-white p-8">
-              <p className="font-family_avt text-xs uppercase tracking-widest text-[#6C3CF4]">
-                path one
-              </p>
-              <h3 className="mt-3 text-2xl font-semibold text-[#0e1b2e]">
-                Have a passcode?
-              </h3>
-              <p className="mt-4 text-base leading-relaxed text-[#78818f]">
-                If our sales team has sent you a{" "}
-                <code className="font-mono">TB-XXXX-XXXX</code> passcode, enter
-                it to open the current batch.
-              </p>
-              <div className="mt-6">
-                <Link
-                  href="/data/terminal-bench/enter"
-                  className="inline-flex items-center gap-2 rounded-xl bg-[#6C3CF4] px-6 py-3 text-sm font-semibold text-white transition-all hover:bg-[#5a2fd3] hover:shadow-lg"
-                >
-                  Enter showcase →
-                </Link>
+        <div className="container mx-auto max-w-7xl px-6 py-24 md:py-32">
+          <div className="mx-auto max-w-5xl">
+            <SectionHeading label="how to access" centered>
+              Two paths in. <span className="gradient-text">Zero guesswork.</span>
+            </SectionHeading>
+            <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+              <div className="rounded-3xl border border-[#E5E7EB] bg-white p-8">
+                <p className="font-family_avt text-xs uppercase tracking-widest text-[#6C3CF4]">
+                  path one
+                </p>
+                <h3 className="mt-3 text-2xl font-semibold text-[#0e1b2e]">
+                  Have a passcode?
+                </h3>
+                <p className="mt-4 text-base leading-relaxed text-[#78818f]">
+                  If our sales team has sent you a{" "}
+                  <code className="font-mono">TB-XXXX-XXXX</code> passcode, enter
+                  it to open the current batch.
+                </p>
+                <div className="mt-6">
+                  <Link
+                    href="/data/terminal-bench/enter"
+                    className="inline-flex items-center gap-2 rounded-xl bg-[#6C3CF4] px-6 py-3 text-sm font-semibold text-white transition-all hover:bg-[#5a2fd3] hover:shadow-lg"
+                  >
+                    Enter showcase →
+                  </Link>
+                </div>
               </div>
-            </div>
-            <div className="rounded-3xl border border-[#E5E7EB] bg-white p-8">
-              <p className="font-family_avt text-xs uppercase tracking-widest text-[#6C3CF4]">
-                path two
-              </p>
-              <h3 className="mt-3 text-2xl font-semibold text-[#0e1b2e]">
-                Request access
-              </h3>
-              <p className="mt-4 text-base leading-relaxed text-[#78818f]">
-                Tell us about your team and intended use. Our sales team
-                reviews each request and usually responds within one business day.
-              </p>
-              <div className="mt-6">
-                <Link
-                  href="/data/terminal-bench/request-access"
-                  className="inline-flex items-center gap-2 rounded-xl border border-[#0e1b2e] px-6 py-3 text-sm font-semibold text-[#0e1b2e] transition-all hover:bg-[#0e1b2e] hover:text-white"
-                >
-                  Request access +
-                </Link>
+              <div className="rounded-3xl border border-[#E5E7EB] bg-white p-8">
+                <p className="font-family_avt text-xs uppercase tracking-widest text-[#6C3CF4]">
+                  path two
+                </p>
+                <h3 className="mt-3 text-2xl font-semibold text-[#0e1b2e]">
+                  Request access
+                </h3>
+                <p className="mt-4 text-base leading-relaxed text-[#78818f]">
+                  Tell us about your team and intended use. Our sales team
+                  reviews each request and usually responds within one business day.
+                </p>
+                <div className="mt-6">
+                  <Link
+                    href="/data/terminal-bench/request-access"
+                    className="inline-flex items-center gap-2 rounded-xl border border-[#0e1b2e] px-6 py-3 text-sm font-semibold text-[#0e1b2e] transition-all hover:bg-[#0e1b2e] hover:text-white"
+                  >
+                    Request access +
+                  </Link>
+                </div>
               </div>
             </div>
           </div>

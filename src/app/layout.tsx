@@ -4,7 +4,6 @@ import { Suspense } from "react";
 import { Providers } from "@/components/providers";
 import Analytics from "@/components/analytics/Analytics";
 import { UtmCapture } from "@/components/analytics/UtmCapture";
-import { GoogleAnalytics } from "@/components/analytics/GoogleAnalytics";
 import ChatWidget from "@/components/chat/ChatWidgetLoader";
 import "./globals.css";
 
@@ -26,6 +25,13 @@ const jetbrainsMono = JetBrains_Mono({
   display: "swap",
 });
 
+const DEFAULT_OG_IMAGE = {
+  url: "/images/hero-poster.jpg",
+  width: 1920,
+  height: 1080,
+  alt: "Tbrain — AI Training Data & Evaluation",
+};
+
 export const metadata: Metadata = {
   title: {
     default: "Tbrain — AI Training Data & Evaluation",
@@ -38,9 +44,10 @@ export const metadata: Metadata = {
   ),
   alternates: { canonical: "/" },
   icons: {
-    icon: "/icon.png",
-    apple: "/apple-icon.png",
+    icon: "/favicon.ico",
+    shortcut: "/favicon.ico",
   },
+  manifest: "/manifest.webmanifest",
   openGraph: {
     type: "website",
     locale: "en_US",
@@ -49,12 +56,14 @@ export const metadata: Metadata = {
     title: "Tbrain — AI Training Data & Evaluation",
     description:
       "High-quality AI training data, RLHF, and evaluation services. Production-grade datasets for building better AI models.",
+    images: [DEFAULT_OG_IMAGE],
   },
   twitter: {
     card: "summary_large_image",
     title: "Tbrain — AI Training Data & Evaluation",
     description:
       "High-quality AI training data, RLHF, and evaluation services. Production-grade datasets for building better AI models.",
+    images: [DEFAULT_OG_IMAGE.url],
   },
 };
 
@@ -63,7 +72,7 @@ const ORGANIZATION_JSONLD = {
   "@type": "Organization",
   name: "Tbrain",
   url: process.env.PUBLIC_BASE_URL || "https://tbrain.ai",
-  logo: `${process.env.PUBLIC_BASE_URL || "https://tbrain.ai"}/icon.png`,
+  logo: `${process.env.PUBLIC_BASE_URL || "https://tbrain.ai"}/favicon.ico`,
   sameAs: [
     "https://www.linkedin.com/company/tbrain-ai",
   ],
@@ -73,7 +82,7 @@ const ORGANIZATION_JSONLD = {
       contactType: "sales",
       email: "info@tbrain.ai",
       areaServed: "Worldwide",
-      availableLanguage: ["en", "vi"],
+      availableLanguage: ["en"],
     },
   ],
 };
@@ -122,7 +131,6 @@ export default function RootLayout({
             <Analytics />
           </Suspense>
           <UtmCapture />
-          <GoogleAnalytics />
           {children}
           <ChatWidget />
         </Providers>

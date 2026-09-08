@@ -1,4 +1,4 @@
--- Revert case_study_blocks type CHECK to the pre-019 set (drops 'image').
+-- Revert case_study_blocks type CHECK to the post-019 set (drops 'workflow_graph').
 
 BEGIN;
 
@@ -15,6 +15,7 @@ ALTER TABLE tbrain_landing.case_study_blocks
     'qa_framework',
     'process_steps',
     'outcome',
+    'image',
     'cta'
   ));
 

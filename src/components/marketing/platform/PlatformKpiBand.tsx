@@ -38,10 +38,9 @@ export function PlatformKpiBand() {
       ref={ref}
       className="relative overflow-hidden rounded-3xl px-6 py-10 md:px-12 md:py-14"
       style={{
-        background:
-          "linear-gradient(135deg, #0b0d12 0%, #1a1530 45%, #0b0d12 100%)",
-        border: "1px solid rgba(108,60,244,0.25)",
-        boxShadow: "0 25px 80px -30px rgba(108,60,244,0.45)",
+        background: "var(--bg-card)",
+        border: "1px solid var(--border-subtle)",
+        boxShadow: "var(--shadow-card)",
       }}
     >
       {/* subtle grid pattern */}
@@ -50,7 +49,7 @@ export function PlatformKpiBand() {
         className="absolute inset-0 pointer-events-none"
         style={{
           backgroundImage:
-            "linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px)",
+            "linear-gradient(rgba(108,60,244,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(108,60,244,0.05) 1px, transparent 1px)",
           backgroundSize: "48px 48px",
           maskImage:
             "radial-gradient(ellipse at center, black 30%, transparent 75%)",
@@ -64,17 +63,17 @@ export function PlatformKpiBand() {
         className="absolute -top-32 left-1/2 h-80 w-[120%] -translate-x-1/2 pointer-events-none"
         style={{
           background:
-            "radial-gradient(ellipse 60% 60% at center, rgba(108,60,244,0.35) 0%, transparent 70%)",
+            "radial-gradient(ellipse 60% 60% at center, rgba(108,60,244,0.16) 0%, transparent 70%)",
         }}
       />
 
-      <div className="relative grid grid-cols-2 gap-6 md:grid-cols-3 lg:grid-cols-6">
+      <div className="relative grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-6">
         {KPIS.map((k) => (
           <KpiCell key={k.label} kpi={k} animate={start} />
         ))}
       </div>
 
-      <p className="relative mt-6 text-center text-[11px] italic" style={{ color: "rgba(255,255,255,0.55)" }}>
+      <p className="relative mt-6 text-center text-[11px] italic" style={{ color: "var(--text-muted)" }}>
         Aggregated from a representative 1,000-task evaluation campaign run on Expert OS.
       </p>
     </div>
@@ -107,12 +106,12 @@ function KpiCell({ kpi, animate }: { kpi: Kpi; animate: boolean }) {
   const display = kpi.value === 0 ? "0" : n.toLocaleString();
 
   return (
-    <div className="text-center">
+    <div className="rounded-2xl px-3 py-4 text-center" style={{ background: "rgba(108,60,244,0.04)", border: "1px solid var(--border-subtle)" }}>
       <div
         className="text-4xl md:text-5xl font-bold leading-none"
         style={{
           fontFamily: "var(--font-heading)",
-          background: "linear-gradient(120deg, #ffffff 0%, #c4b5fd 60%, #6C3CF4 100%)",
+          background: "linear-gradient(120deg, #6C3CF4 0%, #8B5CF6 55%, #10B981 100%)",
           WebkitBackgroundClip: "text",
           WebkitTextFillColor: "transparent",
           backgroundClip: "text",
@@ -122,7 +121,7 @@ function KpiCell({ kpi, animate }: { kpi: Kpi; animate: boolean }) {
         {display}
         {kpi.suffix}
       </div>
-      <div className="mt-2 text-[11px] uppercase tracking-[0.18em]" style={{ color: "rgba(255,255,255,0.6)" }}>
+      <div className="mt-2 text-[11px] uppercase tracking-[0.18em]" style={{ color: "var(--text-muted)" }}>
         {kpi.label}
       </div>
     </div>
