@@ -208,13 +208,19 @@ function LaneChart() {
 }
 
 /**
- * The two clips are cut from the same shared-clock window. Each machine reports its
- * own clock_offset_ms, so the host is seeked 926.5 ms earlier than the member to put
- * both viewports on the same instant of the session.
+ * Viewports we ship a preview for, not viewports the session recorded.
+ *
+ * The session has two agents and the telemetry beside it still describes both —
+ * the shared clock, the separation trace, the in-view percentage all come from
+ * the two-agent record. What varies is how many cuts are published. The member
+ * clip was dropped and its entry left behind, so the grid held a half-width hole
+ * with a floating label and no video in it.
+ *
+ * The grid now follows this array's length: one entry runs full width, two or
+ * more split. Add the member cut back and the pair returns with no code change.
  */
 const COOP_VIEWS = [
   { key: "host", label: "Agent 12", role: "host", src: "/samples/clips/gtav-coop-host.mp4", poster: "/samples/posters/gtav-coop-host.jpg" },
-  { key: "member", label: "Agent 13", role: "member", src: "/samples/clips/gtav-coop-member.mp4", poster: "/samples/posters/gtav-coop-member.jpg" },
 ] as const;
 
 function CoopViews() {
@@ -235,7 +241,7 @@ function CoopViews() {
 
   return (
     <div
-      className="grid gap-3 sm:grid-cols-2"
+      className={`grid gap-3 ${COOP_VIEWS.length > 1 ? "sm:grid-cols-2" : ""}`}
       onMouseEnter={play}
       onMouseLeave={stop}
       onFocus={play}
@@ -289,9 +295,21 @@ function CoopPanel() {
         <h3 className="text-lg font-medium" style={{ fontFamily: "var(--font-heading)" }}>
           Two players, one clock
         </h3>
+        {/* Reads correctly whether one cut is published or both, so restoring
+            the member clip needs no edit here either. */}
         <p className="mt-2 text-sm leading-relaxed" style={{ color: C.textMid }}>
-          Both viewports are the same instant of one {coop.game} session, aligned on the shared
-          clock. The member is watching the host drive ahead.
+          {COOP_VIEWS.length > 1 ? (
+            <>
+              Both viewports are the same instant of one {coop.game} session, aligned on the shared
+              clock. The member is watching the host drive ahead.
+            </>
+          ) : (
+            <>
+              The clip is agent 12&apos;s viewport of a {coop.agents}-player {coop.game} session.
+              Both machines wrote to a shared clock, so the separation traced below is measured
+              between them on the same frames, not estimated from this one view.
+            </>
+          )}
         </p>
 
         <svg
