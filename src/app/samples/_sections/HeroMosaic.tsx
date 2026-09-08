@@ -95,7 +95,11 @@ export function HeroMosaic({
   if (slugs.length === 0) return null;
 
   return (
-    <div className="relative isolate flex h-svh min-h-[620px] w-full flex-col overflow-hidden lg:max-h-[900px]">
+    // Exactly one viewport tall, with no upper cap. A `max-h` here silently
+    // undoes `h-svh` on any screen taller than the cap: the wall stops early and
+    // the catalogue's white background shows below it, which reads as an
+    // unfinished gap rather than as a deliberate end to the hero.
+    <div className="relative isolate flex h-svh min-h-[620px] w-full flex-col overflow-hidden">
       <div
         aria-hidden
         className="absolute -inset-[28%] -z-10"
