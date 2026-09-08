@@ -9,8 +9,9 @@ import { C } from "./tokens";
  *
  * Two rules carried over from Beacon:
  *  - a field the capture did not record prints `null`, it is not hidden and it
- *    is never interpolated. Three of the six game titles have empty pose
- *    columns and the panel says so.
+ *    is never interpolated. Three of the eight game titles — `justcause3`,
+ *    `snowrunner` and `outerworlds`, each with a null `axisConvention` — carry
+ *    `p`, `yaw` and `pitch` as null for every row, and the panel says so.
  *  - values are written straight to the DOM from a rAF loop, so playback does
  *    not re-render React 60 times a second.
  *
