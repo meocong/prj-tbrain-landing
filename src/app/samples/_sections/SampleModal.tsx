@@ -241,22 +241,30 @@ export function SampleModal({
                 animate="show"
                 transition={{ duration: 0.45, ease: EASE, delay: reduce ? 0 : 0.12 }}
               >
-                {/* The clip absorbs whatever the caption and the readout below
-                    do not use, rather than claiming a fixed height and pushing
-                    them out of a pane that cannot scroll. At a fixed
+                {/* The clip's box absorbs whatever the caption and the readout
+                    below do not use, rather than claiming a fixed height and
+                    pushing them out of a pane that cannot scroll. At a fixed
                     `min(32vh,300px)` the readout was clipped by 86px on a 700px
                     viewport — silently, because the pane hides its overflow.
                     `object-contain` means shrinking only letterboxes. */}
                 <div className="lg:min-h-0 lg:flex-1">
-                  {/* Every preview, all three lines, encodes to 640x480. The
-                      black bars on the robotics cuts are baked into the source
-                      — a wide stereo strip letterboxed into a 4:3 canvas — so
-                      `object-cover` would crop real footage to hide them. Fix
-                      belongs in preview generation. */}
+                  {/* The slack around the clip paints as page, not as black.
+                      The pane's height is whatever the caption and readout leave
+                      over, so its box is almost never 4:3 — taller on a tall
+                      window, wider on a short one — and `object-contain` has to
+                      pad one axis or the other. Painted black that padding read
+                      as a black frame belonging to the video, on sources that
+                      are exactly 4:3 (576x432) and need no frame at all. Painted
+                      as page it reads as the clip sitting on the panel.
+
+                      Some robotics cuts do carry baked-in bars — a wide stereo
+                      strip letterboxed into the 4:3 canvas at encode time. Those
+                      stay: `object-cover` would crop real footage to hide them,
+                      and the fix belongs in preview generation. */}
                   <video
                     ref={setVideo}
                     className="aspect-[4/3] w-full object-contain lg:aspect-auto lg:h-full"
-                    style={{ background: "#000" }}
+                    style={{ background: C.base }}
                     src={`/samples/clips/${sample.slug}.mp4`}
                     poster={`/samples/posters/${sample.slug}.jpg`}
                     muted
