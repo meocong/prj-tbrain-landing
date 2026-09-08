@@ -437,8 +437,9 @@ export function SampleCatalog() {
                 for 18 of the 131 clips; the other 113 encode at 576 x 432. Each
                 card already prints its own preview size, measured per file, so
                 the one figure that cannot be right for every clip is gone. */}
-            Previews are 8 second cuts, downscaled from the delivery file. Where the capture
-            recorded per-frame data, open the record and it runs beside the clip.
+            Each preview is an 8-second cut, downscaled from the delivery file. Open a record to
+            read its metadata in full; where the capture carried per-frame data, the telemetry
+            runs beside the clip.
           </p>
         </div>
 
