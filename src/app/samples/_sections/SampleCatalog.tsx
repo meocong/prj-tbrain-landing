@@ -572,7 +572,15 @@ export function SampleCatalog() {
                         one you had to pick blind. Each is counted with the job
                         facet lifted, so the numbers stay reachable — same rule
                         as `countFor` everywhere else. */}
-                    <option value="all">Any job ({shown.length})</option>
+                    {/* Not `shown.length`: that is the count AFTER this facet
+                        has narrowed, so picking Cook made the reset option read
+                        "Any job (17)" — the number it is there to escape. Every
+                        count in this control answers the same question, "how
+                        many if I pick this", so this one lifts the job facet
+                        exactly as `countFor` does for the rows below. */}
+                    <option value="all">
+                      Any job ({ALL.filter((s) => matches(s, f, "job")).length})
+                    </option>
                     {jobs.map((j) => (
                       <option key={j} value={j}>
                         {j} ({countFor("job", (s) => s.job, j)})
