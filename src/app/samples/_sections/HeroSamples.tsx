@@ -12,16 +12,19 @@ import { requestUrl } from "@/lib/samples/request-link";
 /**
  * Records whose delivered segment holds no hands-forward frame.
  *
- * The wall is an argument about manual work, so every tile has to show a pair
- * of hands doing something. `engine-clean` cannot: it points at the operator's
- * own shoulder and a splash guard for its whole 163 seconds, checked at one
- * frame every 7.7s across the segment. It stays in the catalogue — it is a real
- * delivery — but it does not earn a tile above the fold.
+ * Empty, and that is the honest state: the wall is an argument about manual
+ * work, so every tile has to show a pair of hands doing something, and every
+ * record still in `samples.json` does. The one that did not — `engine-clean`,
+ * which pointed at the operator's own shoulder and a splash guard for its whole
+ * 163 seconds — left the catalogue entirely when records without complete
+ * metadata were cut, so there is nothing left to exclude.
  *
- * Only slugs that exist in `samples.json` belong here; an entry naming a record
- * that has since been removed silently excludes nothing.
+ * It stayed listed here after that cut, which made this look like a live
+ * exclusion while it filtered nothing. Only slugs that exist in `samples.json`
+ * belong here; an entry naming a record that has since been removed silently
+ * excludes nothing and reads as though it does.
  */
-const NO_HANDS = new Set(["engine-clean"]);
+const NO_HANDS = new Set<string>([]);
 
 /**
  * Every other published slug, in catalogue order. The wall wants the set, not a
