@@ -2256,7 +2256,7 @@
   "skillGroup": null,
   "industry": null,
   "job": null,
-  "viewpoint": "third-person",
+  "viewpoint": "first-person",
   "label": "The Outer Worlds",
   "telemetry": true,
   "breadcrumb": [
@@ -2304,7 +2304,7 @@
   "environment": "single agent, PC",
   "locale": "PC",
   "rig": "GameDataCollector",
-  "viewpoint": "third-person",
+  "viewpoint": "first-person",
   "skillGroup": null,
   "industry": null,
   "job": null,
