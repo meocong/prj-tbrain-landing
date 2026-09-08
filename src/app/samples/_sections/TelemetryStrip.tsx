@@ -3,7 +3,7 @@
 import { useMemo, useRef } from "react";
 import { motion, useMotionValue, useTransform, useReducedMotion } from "framer-motion";
 import { RevealOnScroll } from "@/components/marketing/fx/RevealOnScroll";
-import { C } from "./tokens";
+import { C, OVER_MEDIA } from "./tokens";
 import wd from "@/lib/samples/telemetry-watchdogs.json";
 import coop from "@/lib/samples/telemetry-gta-coop.json";
 
@@ -96,7 +96,7 @@ function LaneChart() {
   return (
     <div className="min-w-0">
       <div className="mb-3 flex items-baseline justify-between gap-4">
-        <p className="text-xs uppercase tracking-wider" style={{ color: "rgba(226,232,240,0.42)" }}>
+        <p className="text-xs uppercase tracking-wider" style={{ color: C.textDim }}>
           Input state per frame
         </p>
         <motion.p className="font-mono text-xs" style={{ color: ACCENT }}>
@@ -117,7 +117,7 @@ function LaneChart() {
               <li
                 key={l.name}
                 className="flex items-center justify-end truncate font-mono text-[10px] sm:text-[11px]"
-                style={{ height: LANE_H, color: "rgba(226,232,240,0.55)" }}
+                style={{ height: LANE_H, color: C.textMid }}
               >
                 {l.name}
               </li>
@@ -137,7 +137,7 @@ function LaneChart() {
                 const y = i * (LANE_H + LANE_GAP);
                 return (
                   <g key={l.name}>
-                    <rect x={0} y={y} width={W} height={LANE_H} rx={3} fill="rgba(255,255,255,0.035)" />
+                    <rect x={0} y={y} width={W} height={LANE_H} rx={3} fill={C.wash} />
                     {l.runs.map((r, j) => (
                       <rect
                         key={j}
@@ -160,7 +160,7 @@ function LaneChart() {
               style={{
                 left: playheadLeft,
                 opacity: playheadOpacity,
-                background: "rgba(255,255,255,0.75)",
+                background: C.playhead,
               }}
             />
           </div>
@@ -169,7 +169,7 @@ function LaneChart() {
         <div className="mt-4 flex gap-3">
           <div
             className="flex w-24 shrink-0 items-center justify-end font-mono text-[10px] sm:w-28 sm:text-[11px]"
-            style={{ color: "rgba(226,232,240,0.55)" }}
+            style={{ color: C.textMid }}
           >
             MouseDelta
           </div>
@@ -181,7 +181,7 @@ function LaneChart() {
             role="img"
             aria-label="Mouse movement magnitude across the session"
           >
-            <path d={mouse} fill="none" stroke="#10B981" strokeWidth={1.2} vectorEffect="non-scaling-stroke" />
+            <path d={mouse} fill="none" stroke={C.positive} strokeWidth={1.2} vectorEffect="non-scaling-stroke" />
           </svg>
         </div>
       </div>
@@ -194,10 +194,10 @@ function LaneChart() {
           { k: "Telemetry columns", v: "27" },
         ].map((s) => (
           <div key={s.k}>
-            <dt className="text-[10px] uppercase tracking-wider" style={{ color: "rgba(226,232,240,0.42)" }}>
+            <dt className="text-[10px] uppercase tracking-wider" style={{ color: C.textDim }}>
               {s.k}
             </dt>
-            <dd className="mt-0.5 font-mono text-sm" style={{ color: "rgba(255,255,255,0.9)" }}>
+            <dd className="mt-0.5 font-mono text-sm" style={{ color: C.value }}>
               {s.v}
             </dd>
           </div>
@@ -259,7 +259,7 @@ function CoopViews() {
           />
           <figcaption
             className="absolute left-2 top-2 rounded-full px-2.5 py-0.5 font-mono text-[10px] backdrop-blur-sm"
-            style={{ background: "rgba(2,6,23,0.74)", color: "rgba(255,255,255,0.88)" }}
+            style={{ background: OVER_MEDIA.scrim, color: OVER_MEDIA.text }}
           >
             {view.label} / {view.role}
           </figcaption>
@@ -289,7 +289,7 @@ function CoopPanel() {
         <h3 className="text-lg font-medium" style={{ fontFamily: "var(--font-heading)" }}>
           Two players, one clock
         </h3>
-        <p className="mt-2 text-sm leading-relaxed" style={{ color: "rgba(226,232,240,0.62)" }}>
+        <p className="mt-2 text-sm leading-relaxed" style={{ color: C.textMid }}>
           Both viewports are the same instant of one {coop.game} session, aligned on the shared
           clock. The member is watching the host drive ahead.
         </p>
@@ -304,7 +304,7 @@ function CoopPanel() {
         >
           <path d={path} fill="none" stroke={ACCENT} strokeWidth={1.4} vectorEffect="non-scaling-stroke" />
         </svg>
-        <p className="mt-1.5 text-[11px]" style={{ color: "rgba(226,232,240,0.42)" }}>
+        <p className="mt-1.5 text-[11px]" style={{ color: C.textDim }}>
           Distance between agents across {coop.durationSec}s
         </p>
 
@@ -315,10 +315,10 @@ function CoopPanel() {
             { k: "In view", v: `${fovPct}%` },
           ].map((s) => (
             <div key={s.k}>
-              <dt className="text-[10px] uppercase tracking-wider" style={{ color: "rgba(226,232,240,0.42)" }}>
+              <dt className="text-[10px] uppercase tracking-wider" style={{ color: C.textDim }}>
                 {s.k}
               </dt>
-              <dd className="mt-0.5 font-mono text-sm" style={{ color: "rgba(255,255,255,0.9)" }}>
+              <dd className="mt-0.5 font-mono text-sm" style={{ color: C.value }}>
                 {s.v}
               </dd>
             </div>

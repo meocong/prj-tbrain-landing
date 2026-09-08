@@ -17,6 +17,7 @@ const NAV_ITEMS = [
   { label: "Home", href: "/" },
   { label: "About", href: "/about" },
   { label: "Platform", href: "/platform" },
+  { label: "Samples", href: "/samples" },
   { label: "Case Studies", href: "/casestudy" },
   { label: "Data", href: "/data", isDropdown: true },
   { label: "Contact", href: "/contact" },
@@ -28,6 +29,9 @@ const NAV_ITEMS = [
 // so they DON'T need dark tokens.
 const HERO_DARK_PAGES = new Set([
   "/data/terminal-bench",
+  // The samples hero is a full-bleed wall of footage under a dark scrim in both
+  // themes, so the light-theme nav would otherwise sit dark on dark over it.
+  "/samples",
 ]);
 
 // Pages where the entire wrapper is hardcoded dark — header always white.

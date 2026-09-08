@@ -2,11 +2,13 @@
 
 import { useRef, useState } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { Turnstile } from "@marsidev/react-turnstile";
 import { ArrowRight, Loader2 } from "lucide-react";
 import { track } from "@/lib/samples/track";
 import { requestUrl } from "@/lib/samples/request-link";
+import { resetUnlocked } from "../_sections/useUnlocked";
+import { C } from "../_sections/tokens";
 
 type State = { kind: "idle" } | { kind: "checking" } | { kind: "error"; message: string };
 
@@ -24,8 +26,20 @@ const MESSAGES: Record<string, string> = {
   missing_passcode: "Enter the passcode from your access email.",
 };
 
+/**
+ * Only same-origin, absolute-path redirects. The `redirect` param is attacker
+ * controllable — a bare `router.push` on it would turn this form into an open
+ * redirect that borrows our domain's credibility.
+ */
+function safeRedirect(raw: string | null): string {
+  if (!raw) return "/samples/s";
+  if (!raw.startsWith("/") || raw.startsWith("//")) return "/samples/s";
+  return raw;
+}
+
 export function PasscodeForm() {
   const router = useRouter();
+  const params = useSearchParams();
   const [value, setValue] = useState("");
   const [state, setState] = useState<State>({ kind: "idle" });
   const turnstileRef = useRef<string>("");
@@ -59,8 +73,15 @@ export function PasscodeForm() {
       });
 
       if (res.ok) {
-        track("open_passcode", { result: "success" });
-        router.push("/samples?unlocked=1");
+        track("unlock_success", { result: "success" });
+        // The catalogue caches the answer to "is this browser unlocked?" for
+        // the page load. Without this, navigating back to /samples in the same
+        // tab would still show the locked bar against a live session.
+        resetUnlocked();
+        // Land on the downloads rather than back on the catalogue: the visitor
+        // typed a passcode because they came for files, not for the pitch.
+        router.push(safeRedirect(params.get("redirect")));
+        router.refresh();
         return;
       }
 
@@ -80,7 +101,7 @@ export function PasscodeForm() {
   return (
     <form onSubmit={onSubmit} noValidate className="mt-8 max-w-md">
       <div className="flex flex-col gap-2">
-        <label htmlFor="passcode" className="text-sm font-medium" style={{ color: "rgba(255,255,255,0.92)" }}>
+        <label htmlFor="passcode" className="text-sm font-medium" style={{ color: C.text }}>
           Access passcode
         </label>
         <input
@@ -98,18 +119,18 @@ export function PasscodeForm() {
           aria-describedby={invalid ? "passcode-error" : "passcode-help"}
           className="w-full rounded-xl px-4 py-3 font-mono text-base outline-none transition-colors"
           style={{
-            background: "rgba(255,255,255,0.04)",
-            border: invalid ? "1px solid rgba(248,113,113,0.6)" : "1px solid rgba(255,255,255,0.16)",
-            color: "#FFFFFF",
-            boxShadow: invalid ? "0 0 0 3px rgba(248,113,113,0.14)" : undefined,
+            background: C.band,
+            border: `1px solid ${invalid ? C.danger : C.hairline}`,
+            color: C.text,
+            boxShadow: invalid ? `0 0 0 3px color-mix(in srgb, ${C.danger} 18%, transparent)` : undefined,
           }}
         />
         {invalid ? (
-          <p id="passcode-error" role="alert" className="text-sm" style={{ color: "#FCA5A5" }}>
+          <p id="passcode-error" role="alert" className="text-sm" style={{ color: C.danger }}>
             {state.message}
           </p>
         ) : (
-          <p id="passcode-help" className="text-sm" style={{ color: "rgba(226,232,240,0.6)" }}>
+          <p id="passcode-help" className="text-sm" style={{ color: C.textDim }}>
             Format TB-XXXX-XXXX. The session stays open for seven days on this browser.
           </p>
         )}
@@ -131,7 +152,7 @@ export function PasscodeForm() {
           type="submit"
           disabled={state.kind === "checking"}
           className="inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-semibold transition-transform active:scale-[0.98] disabled:opacity-70"
-          style={{ background: "#A78BFA", color: "#0B0620" }}
+          style={{ background: C.accent, color: "#FFFFFF" }}
         >
           {state.kind === "checking" ? (
             <>
@@ -149,7 +170,7 @@ export function PasscodeForm() {
         <Link
           href={requestUrl({ from: "passcode_page" })}
           className="text-sm underline underline-offset-4"
-          style={{ color: "rgba(226,232,240,0.72)" }}
+          style={{ color: C.textMid }}
         >
           No passcode yet
         </Link>

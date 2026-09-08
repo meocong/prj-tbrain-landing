@@ -1,0 +1,2764 @@
+{
+  "bucket": "tbrain-landing",
+  "generatedAt": "2026-09-08T02:09:20.073Z",
+  "fullSet": {
+    "object": "samples/library/tbrain-sample-library.zip",
+    "bytes": 148119065,
+    "filename": "tbrain-sample-library.zip",
+    "contentType": "application/zip",
+    "count": 131
+  },
+  "samples": {
+    "cowl-installation": {
+      "preview": {
+        "object": "samples/library/packs/cowl-installation-preview.zip",
+        "bytes": 1909459,
+        "filename": "cowl-installation-preview.zip",
+        "contentType": "application/zip"
+      },
+      "metadata": {
+        "object": "samples/library/metadata/cowl-installation.metadata.json",
+        "bytes": 2258,
+        "filename": "cowl-installation.metadata.json",
+        "contentType": "application/json"
+      },
+      "full": {
+        "object": null,
+        "bytes": 509607936,
+        "filename": "cowl-installation.mcap",
+        "contentType": "application/octet-stream",
+        "note": "MCAP with the stereo pair, IMU, VIO and annotations"
+      }
+    },
+    "haircut-neckline": {
+      "preview": {
+        "object": "samples/library/packs/haircut-neckline-preview.zip",
+        "bytes": 1482162,
+        "filename": "haircut-neckline-preview.zip",
+        "contentType": "application/zip"
+      },
+      "metadata": {
+        "object": "samples/library/metadata/haircut-neckline.metadata.json",
+        "bytes": 2229,
+        "filename": "haircut-neckline.metadata.json",
+        "contentType": "application/json"
+      },
+      "full": {
+        "object": null,
+        "bytes": 529530880,
+        "filename": "haircut-neckline.mcap",
+        "contentType": "application/octet-stream",
+        "note": "MCAP with the stereo pair, IMU, VIO and annotations"
+      }
+    },
+    "motor-rewind": {
+      "preview": {
+        "object": "samples/library/packs/motor-rewind-preview.zip",
+        "bytes": 2297396,
+        "filename": "motor-rewind-preview.zip",
+        "contentType": "application/zip"
+      },
+      "metadata": {
+        "object": "samples/library/metadata/motor-rewind.metadata.json",
+        "bytes": 2272,
+        "filename": "motor-rewind.metadata.json",
+        "contentType": "application/json"
+      },
+      "full": {
+        "object": null,
+        "bytes": 542113792,
+        "filename": "motor-rewind.mcap",
+        "contentType": "application/octet-stream",
+        "note": "MCAP with the stereo pair, IMU, VIO and annotations"
+      }
+    },
+    "engine-clean": {
+      "preview": {
+        "object": "samples/library/packs/engine-clean-preview.zip",
+        "bytes": 1525785,
+        "filename": "engine-clean-preview.zip",
+        "contentType": "application/zip"
+      },
+      "metadata": {
+        "object": "samples/library/metadata/engine-clean.metadata.json",
+        "bytes": 2191,
+        "filename": "engine-clean.metadata.json",
+        "contentType": "application/json"
+      },
+      "full": {
+        "object": null,
+        "bytes": 344981504,
+        "filename": "engine-clean.mcap",
+        "contentType": "application/octet-stream",
+        "note": "MCAP with the stereo pair, IMU, VIO and annotations"
+      }
+    },
+    "auto-electrical": {
+      "preview": {
+        "object": "samples/library/packs/auto-electrical-preview.zip",
+        "bytes": 758179,
+        "filename": "auto-electrical-preview.zip",
+        "contentType": "application/zip"
+      },
+      "metadata": {
+        "object": "samples/library/metadata/auto-electrical.metadata.json",
+        "bytes": 2280,
+        "filename": "auto-electrical.metadata.json",
+        "contentType": "application/json"
+      },
+      "full": {
+        "object": null,
+        "bytes": 508559360,
+        "filename": "auto-electrical.mcap",
+        "contentType": "application/octet-stream",
+        "note": "MCAP with the stereo pair, IMU, VIO and annotations"
+      }
+    },
+    "signboard-install": {
+      "preview": {
+        "object": "samples/library/packs/signboard-install-preview.zip",
+        "bytes": 1703596,
+        "filename": "signboard-install-preview.zip",
+        "contentType": "application/zip"
+      },
+      "metadata": {
+        "object": "samples/library/metadata/signboard-install.metadata.json",
+        "bytes": 2208,
+        "filename": "signboard-install.metadata.json",
+        "contentType": "application/json"
+      },
+      "full": {
+        "object": null,
+        "bytes": 466616320,
+        "filename": "signboard-install.mcap",
+        "contentType": "application/octet-stream",
+        "note": "MCAP with the stereo pair, IMU, VIO and annotations"
+      }
+    },
+    "garment-sewing": {
+      "preview": {
+        "object": "samples/library/packs/garment-sewing-preview.zip",
+        "bytes": 2221654,
+        "filename": "garment-sewing-preview.zip",
+        "contentType": "application/zip"
+      },
+      "metadata": {
+        "object": "samples/library/metadata/garment-sewing.metadata.json",
+        "bytes": 2228,
+        "filename": "garment-sewing.metadata.json",
+        "contentType": "application/json"
+      },
+      "full": {
+        "object": null,
+        "bytes": 553648128,
+        "filename": "garment-sewing.mcap",
+        "contentType": "application/octet-stream",
+        "note": "MCAP with the stereo pair, IMU, VIO and annotations"
+      }
+    },
+    "noodle-prep": {
+      "preview": {
+        "object": "samples/library/packs/noodle-prep-preview.zip",
+        "bytes": 1393442,
+        "filename": "noodle-prep-preview.zip",
+        "contentType": "application/zip"
+      },
+      "metadata": {
+        "object": "samples/library/metadata/noodle-prep.metadata.json",
+        "bytes": 2211,
+        "filename": "noodle-prep.metadata.json",
+        "contentType": "application/json"
+      },
+      "full": {
+        "object": null,
+        "bytes": 437256192,
+        "filename": "noodle-prep.mcap",
+        "contentType": "application/octet-stream",
+        "note": "MCAP with the stereo pair, IMU, VIO and annotations"
+      }
+    },
+    "laptop-repair": {
+      "preview": {
+        "object": "samples/library/packs/laptop-repair-preview.zip",
+        "bytes": 1195136,
+        "filename": "laptop-repair-preview.zip",
+        "contentType": "application/zip"
+      },
+      "metadata": {
+        "object": "samples/library/metadata/laptop-repair.metadata.json",
+        "bytes": 2169,
+        "filename": "laptop-repair.metadata.json",
+        "contentType": "application/json"
+      },
+      "full": {
+        "object": null,
+        "bytes": 515899392,
+        "filename": "laptop-repair.mcap",
+        "contentType": "application/octet-stream",
+        "note": "MCAP with the stereo pair, IMU, VIO and annotations"
+      }
+    },
+    "ceiling-panels": {
+      "preview": {
+        "object": "samples/library/packs/ceiling-panels-preview.zip",
+        "bytes": 1647325,
+        "filename": "ceiling-panels-preview.zip",
+        "contentType": "application/zip"
+      },
+      "metadata": {
+        "object": "samples/library/metadata/ceiling-panels.metadata.json",
+        "bytes": 2366,
+        "filename": "ceiling-panels.metadata.json",
+        "contentType": "application/json"
+      },
+      "full": {
+        "object": null,
+        "bytes": 500170752,
+        "filename": "ceiling-panels.mcap",
+        "contentType": "application/octet-stream",
+        "note": "MCAP with the stereo pair, IMU, VIO and annotations"
+      }
+    },
+    "gtav-coop-host": {
+      "preview": {
+        "object": "samples/library/packs/gtav-coop-host-preview.zip",
+        "bytes": 329222,
+        "filename": "gtav-coop-host-preview.zip",
+        "contentType": "application/zip"
+      },
+      "metadata": {
+        "object": "samples/library/metadata/gtav-coop-host.metadata.json",
+        "bytes": 1857,
+        "filename": "gtav-coop-host.metadata.json",
+        "contentType": "application/json"
+      },
+      "full": {
+        "object": null,
+        "bytes": 189792256,
+        "filename": "gtav-coop-host-session.zip",
+        "contentType": "application/octet-stream",
+        "note": "Screen capture mp4, frames.csv, session.json, key_bindings.json"
+      }
+    },
+    "mhw": {
+      "preview": {
+        "object": "samples/library/packs/mhw-preview.zip",
+        "bytes": 1047189,
+        "filename": "mhw-preview.zip",
+        "contentType": "application/zip"
+      },
+      "metadata": {
+        "object": "samples/library/metadata/mhw.metadata.json",
+        "bytes": 1482,
+        "filename": "mhw.metadata.json",
+        "contentType": "application/json"
+      },
+      "full": {
+        "object": null,
+        "bytes": 630194176,
+        "filename": "mhw-session.zip",
+        "contentType": "application/octet-stream",
+        "note": "Screen capture mp4, frames.csv, session.json, key_bindings.json"
+      }
+    },
+    "justcause3": {
+      "preview": {
+        "object": "samples/library/packs/justcause3-preview.zip",
+        "bytes": 571731,
+        "filename": "justcause3-preview.zip",
+        "contentType": "application/zip"
+      },
+      "metadata": {
+        "object": "samples/library/metadata/justcause3.metadata.json",
+        "bytes": 1406,
+        "filename": "justcause3.metadata.json",
+        "contentType": "application/json"
+      },
+      "full": {
+        "object": null,
+        "bytes": 160432128,
+        "filename": "justcause3-session.zip",
+        "contentType": "application/octet-stream",
+        "note": "Screen capture mp4, frames.csv, session.json, key_bindings.json"
+      }
+    },
+    "snowrunner": {
+      "preview": {
+        "object": "samples/library/packs/snowrunner-preview.zip",
+        "bytes": 369068,
+        "filename": "snowrunner-preview.zip",
+        "contentType": "application/zip"
+      },
+      "metadata": {
+        "object": "samples/library/metadata/snowrunner.metadata.json",
+        "bytes": 1402,
+        "filename": "snowrunner.metadata.json",
+        "contentType": "application/json"
+      },
+      "full": {
+        "object": null,
+        "bytes": 168820736,
+        "filename": "snowrunner-session.zip",
+        "contentType": "application/octet-stream",
+        "note": "Screen capture mp4, frames.csv, session.json, key_bindings.json"
+      }
+    },
+    "outerworlds": {
+      "preview": {
+        "object": "samples/library/packs/outerworlds-preview.zip",
+        "bytes": 887275,
+        "filename": "outerworlds-preview.zip",
+        "contentType": "application/zip"
+      },
+      "metadata": {
+        "object": "samples/library/metadata/outerworlds.metadata.json",
+        "bytes": 1413,
+        "filename": "outerworlds.metadata.json",
+        "contentType": "application/json"
+      },
+      "full": {
+        "object": null,
+        "bytes": 230686720,
+        "filename": "outerworlds-session.zip",
+        "contentType": "application/octet-stream",
+        "note": "Screen capture mp4, frames.csv, session.json, key_bindings.json"
+      }
+    },
+    "borderlands2": {
+      "preview": {
+        "object": "samples/library/packs/borderlands2-preview.zip",
+        "bytes": 595758,
+        "filename": "borderlands2-preview.zip",
+        "contentType": "application/zip"
+      },
+      "metadata": {
+        "object": "samples/library/metadata/borderlands2.metadata.json",
+        "bytes": 1562,
+        "filename": "borderlands2.metadata.json",
+        "contentType": "application/json"
+      },
+      "full": {
+        "object": null,
+        "bytes": 100663296,
+        "filename": "borderlands2-session.zip",
+        "contentType": "application/octet-stream",
+        "note": "Screen capture mp4, frames.csv, session.json, key_bindings.json"
+      }
+    },
+    "beamng": {
+      "preview": {
+        "object": "samples/library/packs/beamng-preview.zip",
+        "bytes": 606986,
+        "filename": "beamng-preview.zip",
+        "contentType": "application/zip"
+      },
+      "metadata": {
+        "object": "samples/library/metadata/beamng.metadata.json",
+        "bytes": 1566,
+        "filename": "beamng.metadata.json",
+        "contentType": "application/json"
+      },
+      "full": {
+        "object": null,
+        "bytes": 342884352,
+        "filename": "beamng-session.zip",
+        "contentType": "application/octet-stream",
+        "note": "Screen capture mp4, frames.csv, session.json, key_bindings.json"
+      }
+    },
+    "dragons-dogma-2": {
+      "preview": {
+        "object": "samples/library/packs/dragons-dogma-2-preview.zip",
+        "bytes": 848900,
+        "filename": "dragons-dogma-2-preview.zip",
+        "contentType": "application/zip"
+      },
+      "metadata": {
+        "object": "samples/library/metadata/dragons-dogma-2.metadata.json",
+        "bytes": 1575,
+        "filename": "dragons-dogma-2.metadata.json",
+        "contentType": "application/json"
+      },
+      "full": {
+        "object": null,
+        "bytes": 395313152,
+        "filename": "dragons-dogma-2-session.zip",
+        "contentType": "application/octet-stream",
+        "note": "Screen capture mp4, frames.csv, session.json, key_bindings.json"
+      }
+    },
+    "table-cleaning": {
+      "preview": {
+        "object": "samples/library/packs/table-cleaning-preview.zip",
+        "bytes": 925615,
+        "filename": "table-cleaning-preview.zip",
+        "contentType": "application/zip"
+      },
+      "metadata": {
+        "object": "samples/library/metadata/table-cleaning.metadata.json",
+        "bytes": 2297,
+        "filename": "table-cleaning.metadata.json",
+        "contentType": "application/json"
+      },
+      "full": {
+        "object": null,
+        "bytes": 1265631232,
+        "filename": "table-cleaning.mcap",
+        "contentType": "application/octet-stream",
+        "note": "MCAP with the stereo pair, IMU, VIO and annotations"
+      }
+    },
+    "jacket-folding": {
+      "preview": {
+        "object": "samples/library/packs/jacket-folding-preview.zip",
+        "bytes": 591006,
+        "filename": "jacket-folding-preview.zip",
+        "contentType": "application/zip"
+      },
+      "metadata": {
+        "object": "samples/library/metadata/jacket-folding.metadata.json",
+        "bytes": 2186,
+        "filename": "jacket-folding.metadata.json",
+        "contentType": "application/json"
+      },
+      "full": {
+        "object": null,
+        "bytes": 256901120,
+        "filename": "jacket-folding.mcap",
+        "contentType": "application/octet-stream",
+        "note": "MCAP with the stereo pair, IMU, VIO and annotations"
+      }
+    },
+    "trash-clearing": {
+      "preview": {
+        "object": "samples/library/packs/trash-clearing-preview.zip",
+        "bytes": 743674,
+        "filename": "trash-clearing-preview.zip",
+        "contentType": "application/zip"
+      },
+      "metadata": {
+        "object": "samples/library/metadata/trash-clearing.metadata.json",
+        "bytes": 2318,
+        "filename": "trash-clearing.metadata.json",
+        "contentType": "application/json"
+      },
+      "full": {
+        "object": null,
+        "bytes": 1120927744,
+        "filename": "trash-clearing.mcap",
+        "contentType": "application/octet-stream",
+        "note": "MCAP with the stereo pair, IMU, VIO and annotations"
+      }
+    },
+    "plant-watering": {
+      "preview": {
+        "object": "samples/library/packs/plant-watering-preview.zip",
+        "bytes": 1034922,
+        "filename": "plant-watering-preview.zip",
+        "contentType": "application/zip"
+      },
+      "metadata": {
+        "object": "samples/library/metadata/plant-watering.metadata.json",
+        "bytes": 2288,
+        "filename": "plant-watering.metadata.json",
+        "contentType": "application/json"
+      },
+      "full": {
+        "object": null,
+        "bytes": 542113792,
+        "filename": "plant-watering.mcap",
+        "contentType": "application/octet-stream",
+        "note": "MCAP with the stereo pair, IMU, VIO and annotations"
+      }
+    },
+    "body-assembly": {
+      "preview": {
+        "object": "samples/library/packs/body-assembly-preview.zip",
+        "bytes": 1282554,
+        "filename": "body-assembly-preview.zip",
+        "contentType": "application/zip"
+      },
+      "metadata": {
+        "object": "samples/library/metadata/body-assembly.metadata.json",
+        "bytes": 2229,
+        "filename": "body-assembly.metadata.json",
+        "contentType": "application/json"
+      },
+      "full": {
+        "object": null,
+        "bytes": 1138753536,
+        "filename": "body-assembly.mcap",
+        "contentType": "application/octet-stream",
+        "note": "MCAP with the stereo pair, IMU, VIO and annotations"
+      }
+    },
+    "motorcycle-washing": {
+      "preview": {
+        "object": "samples/library/packs/motorcycle-washing-preview.zip",
+        "bytes": 1321805,
+        "filename": "motorcycle-washing-preview.zip",
+        "contentType": "application/zip"
+      },
+      "metadata": {
+        "object": "samples/library/metadata/motorcycle-washing.metadata.json",
+        "bytes": 2231,
+        "filename": "motorcycle-washing.metadata.json",
+        "contentType": "application/json"
+      },
+      "full": {
+        "object": null,
+        "bytes": 1535115264,
+        "filename": "motorcycle-washing.mcap",
+        "contentType": "application/octet-stream",
+        "note": "MCAP with the stereo pair, IMU, VIO and annotations"
+      }
+    },
+    "scooter-repair": {
+      "preview": {
+        "object": "samples/library/packs/scooter-repair-preview.zip",
+        "bytes": 1040774,
+        "filename": "scooter-repair-preview.zip",
+        "contentType": "application/zip"
+      },
+      "metadata": {
+        "object": "samples/library/metadata/scooter-repair.metadata.json",
+        "bytes": 2263,
+        "filename": "scooter-repair.metadata.json",
+        "contentType": "application/json"
+      },
+      "full": {
+        "object": null,
+        "bytes": 634388480,
+        "filename": "scooter-repair.mcap",
+        "contentType": "application/octet-stream",
+        "note": "MCAP with the stereo pair, IMU, VIO and annotations"
+      }
+    },
+    "engine-repair": {
+      "preview": {
+        "object": "samples/library/packs/engine-repair-preview.zip",
+        "bytes": 704788,
+        "filename": "engine-repair-preview.zip",
+        "contentType": "application/zip"
+      },
+      "metadata": {
+        "object": "samples/library/metadata/engine-repair.metadata.json",
+        "bytes": 2182,
+        "filename": "engine-repair.metadata.json",
+        "contentType": "application/json"
+      },
+      "full": {
+        "object": null,
+        "bytes": 1006632960,
+        "filename": "engine-repair-segment.zip",
+        "contentType": "application/octet-stream",
+        "note": "Six camera mp4s, imu_left.db, imu_right.db, mag_middle.db"
+      }
+    },
+    "part-sorting": {
+      "preview": {
+        "object": "samples/library/packs/part-sorting-preview.zip",
+        "bytes": 1252609,
+        "filename": "part-sorting-preview.zip",
+        "contentType": "application/zip"
+      },
+      "metadata": {
+        "object": "samples/library/metadata/part-sorting.metadata.json",
+        "bytes": 2277,
+        "filename": "part-sorting.metadata.json",
+        "contentType": "application/json"
+      },
+      "full": {
+        "object": null,
+        "bytes": 200278016,
+        "filename": "part-sorting.mcap",
+        "contentType": "application/octet-stream",
+        "note": "MCAP with the stereo pair, IMU, VIO and annotations"
+      }
+    },
+    "wheel-balancing": {
+      "preview": {
+        "object": "samples/library/packs/wheel-balancing-preview.zip",
+        "bytes": 1100191,
+        "filename": "wheel-balancing-preview.zip",
+        "contentType": "application/zip"
+      },
+      "metadata": {
+        "object": "samples/library/metadata/wheel-balancing.metadata.json",
+        "bytes": 2336,
+        "filename": "wheel-balancing.metadata.json",
+        "contentType": "application/json"
+      },
+      "full": {
+        "object": null,
+        "bytes": 1216348160,
+        "filename": "wheel-balancing.mcap",
+        "contentType": "application/octet-stream",
+        "note": "MCAP with the stereo pair, IMU, VIO and annotations"
+      }
+    },
+    "maintenance-repair": {
+      "preview": {
+        "object": "samples/library/packs/maintenance-repair-preview.zip",
+        "bytes": 749838,
+        "filename": "maintenance-repair-preview.zip",
+        "contentType": "application/zip"
+      },
+      "metadata": {
+        "object": "samples/library/metadata/maintenance-repair.metadata.json",
+        "bytes": 2197,
+        "filename": "maintenance-repair.metadata.json",
+        "contentType": "application/json"
+      },
+      "full": {
+        "object": null,
+        "bytes": 0,
+        "filename": "maintenance-repair.mcap",
+        "contentType": "application/octet-stream",
+        "note": "MCAP with the stereo pair, IMU, VIO and annotations"
+      }
+    },
+    "hair-cutting": {
+      "preview": {
+        "object": "samples/library/packs/hair-cutting-preview.zip",
+        "bytes": 1657925,
+        "filename": "hair-cutting-preview.zip",
+        "contentType": "application/zip"
+      },
+      "metadata": {
+        "object": "samples/library/metadata/hair-cutting.metadata.json",
+        "bytes": 2246,
+        "filename": "hair-cutting.metadata.json",
+        "contentType": "application/json"
+      },
+      "full": {
+        "object": null,
+        "bytes": 1673527296,
+        "filename": "hair-cutting.mcap",
+        "contentType": "application/octet-stream",
+        "note": "MCAP with the stereo pair, IMU, VIO and annotations"
+      }
+    },
+    "fabric-sewing": {
+      "preview": {
+        "object": "samples/library/packs/fabric-sewing-preview.zip",
+        "bytes": 872711,
+        "filename": "fabric-sewing-preview.zip",
+        "contentType": "application/zip"
+      },
+      "metadata": {
+        "object": "samples/library/metadata/fabric-sewing.metadata.json",
+        "bytes": 2184,
+        "filename": "fabric-sewing.metadata.json",
+        "contentType": "application/json"
+      },
+      "full": {
+        "object": null,
+        "bytes": 1476395008,
+        "filename": "fabric-sewing-segment.zip",
+        "contentType": "application/octet-stream",
+        "note": "Six camera mp4s, imu_left.db, imu_right.db, mag_middle.db"
+      }
+    },
+    "item-organizing": {
+      "preview": {
+        "object": "samples/library/packs/item-organizing-preview.zip",
+        "bytes": 1192672,
+        "filename": "item-organizing-preview.zip",
+        "contentType": "application/zip"
+      },
+      "metadata": {
+        "object": "samples/library/metadata/item-organizing.metadata.json",
+        "bytes": 2203,
+        "filename": "item-organizing.metadata.json",
+        "contentType": "application/json"
+      },
+      "full": {
+        "object": null,
+        "bytes": 221249536,
+        "filename": "item-organizing-segment.zip",
+        "contentType": "application/octet-stream",
+        "note": "Six camera mp4s, imu_left.db, imu_right.db, mag_middle.db"
+      }
+    },
+    "bag-holding": {
+      "preview": {
+        "object": "samples/library/packs/bag-holding-preview.zip",
+        "bytes": 1003873,
+        "filename": "bag-holding-preview.zip",
+        "contentType": "application/zip"
+      },
+      "metadata": {
+        "object": "samples/library/metadata/bag-holding.metadata.json",
+        "bytes": 2175,
+        "filename": "bag-holding.metadata.json",
+        "contentType": "application/json"
+      },
+      "full": {
+        "object": null,
+        "bytes": 184549376,
+        "filename": "bag-holding-segment.zip",
+        "contentType": "application/octet-stream",
+        "note": "Six camera mp4s, imu_left.db, imu_right.db, mag_middle.db"
+      }
+    },
+    "clothe-ironing": {
+      "preview": {
+        "object": "samples/library/packs/clothe-ironing-preview.zip",
+        "bytes": 1465545,
+        "filename": "clothe-ironing-preview.zip",
+        "contentType": "application/zip"
+      },
+      "metadata": {
+        "object": "samples/library/metadata/clothe-ironing.metadata.json",
+        "bytes": 2237,
+        "filename": "clothe-ironing.metadata.json",
+        "contentType": "application/json"
+      },
+      "full": {
+        "object": null,
+        "bytes": 1301282816,
+        "filename": "clothe-ironing-segment.zip",
+        "contentType": "application/octet-stream",
+        "note": "Six camera mp4s, imu_left.db, imu_right.db, mag_middle.db"
+      }
+    },
+    "cabinet-installation": {
+      "preview": {
+        "object": "samples/library/packs/cabinet-installation-preview.zip",
+        "bytes": 595217,
+        "filename": "cabinet-installation-preview.zip",
+        "contentType": "application/zip"
+      },
+      "metadata": {
+        "object": "samples/library/metadata/cabinet-installation.metadata.json",
+        "bytes": 2251,
+        "filename": "cabinet-installation.metadata.json",
+        "contentType": "application/json"
+      },
+      "full": {
+        "object": null,
+        "bytes": 1204813824,
+        "filename": "cabinet-installation-segment.zip",
+        "contentType": "application/octet-stream",
+        "note": "Six camera mp4s, imu_left.db, imu_right.db, mag_middle.db"
+      }
+    },
+    "door-cleaning": {
+      "preview": {
+        "object": "samples/library/packs/door-cleaning-preview.zip",
+        "bytes": 941698,
+        "filename": "door-cleaning-preview.zip",
+        "contentType": "application/zip"
+      },
+      "metadata": {
+        "object": "samples/library/metadata/door-cleaning.metadata.json",
+        "bytes": 2239,
+        "filename": "door-cleaning.metadata.json",
+        "contentType": "application/json"
+      },
+      "full": {
+        "object": null,
+        "bytes": 1604321280,
+        "filename": "door-cleaning.mcap",
+        "contentType": "application/octet-stream",
+        "note": "MCAP with the stereo pair, IMU, VIO and annotations"
+      }
+    },
+    "furniture-removal": {
+      "preview": {
+        "object": "samples/library/packs/furniture-removal-preview.zip",
+        "bytes": 907432,
+        "filename": "furniture-removal-preview.zip",
+        "contentType": "application/zip"
+      },
+      "metadata": {
+        "object": "samples/library/metadata/furniture-removal.metadata.json",
+        "bytes": 2259,
+        "filename": "furniture-removal.metadata.json",
+        "contentType": "application/json"
+      },
+      "full": {
+        "object": null,
+        "bytes": 1461714944,
+        "filename": "furniture-removal.mcap",
+        "contentType": "application/octet-stream",
+        "note": "MCAP with the stereo pair, IMU, VIO and annotations"
+      }
+    },
+    "sheet-folding": {
+      "preview": {
+        "object": "samples/library/packs/sheet-folding-preview.zip",
+        "bytes": 1222710,
+        "filename": "sheet-folding-preview.zip",
+        "contentType": "application/zip"
+      },
+      "metadata": {
+        "object": "samples/library/metadata/sheet-folding.metadata.json",
+        "bytes": 2213,
+        "filename": "sheet-folding.metadata.json",
+        "contentType": "application/json"
+      },
+      "full": {
+        "object": null,
+        "bytes": 347078656,
+        "filename": "sheet-folding.mcap",
+        "contentType": "application/octet-stream",
+        "note": "MCAP with the stereo pair, IMU, VIO and annotations"
+      }
+    },
+    "tarpaulin-folding": {
+      "preview": {
+        "object": "samples/library/packs/tarpaulin-folding-preview.zip",
+        "bytes": 733495,
+        "filename": "tarpaulin-folding-preview.zip",
+        "contentType": "application/zip"
+      },
+      "metadata": {
+        "object": "samples/library/metadata/tarpaulin-folding.metadata.json",
+        "bytes": 2279,
+        "filename": "tarpaulin-folding.metadata.json",
+        "contentType": "application/json"
+      },
+      "full": {
+        "object": null,
+        "bytes": 565182464,
+        "filename": "tarpaulin-folding.mcap",
+        "contentType": "application/octet-stream",
+        "note": "MCAP with the stereo pair, IMU, VIO and annotations"
+      }
+    },
+    "floor-collecting": {
+      "preview": {
+        "object": "samples/library/packs/floor-collecting-preview.zip",
+        "bytes": 660232,
+        "filename": "floor-collecting-preview.zip",
+        "contentType": "application/zip"
+      },
+      "metadata": {
+        "object": "samples/library/metadata/floor-collecting.metadata.json",
+        "bytes": 2269,
+        "filename": "floor-collecting.metadata.json",
+        "contentType": "application/json"
+      },
+      "full": {
+        "object": null,
+        "bytes": 553648128,
+        "filename": "floor-collecting.mcap",
+        "contentType": "application/octet-stream",
+        "note": "MCAP with the stereo pair, IMU, VIO and annotations"
+      }
+    },
+    "paint-mixing": {
+      "preview": {
+        "object": "samples/library/packs/paint-mixing-preview.zip",
+        "bytes": 914482,
+        "filename": "paint-mixing-preview.zip",
+        "contentType": "application/zip"
+      },
+      "metadata": {
+        "object": "samples/library/metadata/paint-mixing.metadata.json",
+        "bytes": 2243,
+        "filename": "paint-mixing.metadata.json",
+        "contentType": "application/json"
+      },
+      "full": {
+        "object": null,
+        "bytes": 376438784,
+        "filename": "paint-mixing.mcap",
+        "contentType": "application/octet-stream",
+        "note": "MCAP with the stereo pair, IMU, VIO and annotations"
+      }
+    },
+    "handle-tightening": {
+      "preview": {
+        "object": "samples/library/packs/handle-tightening-preview.zip",
+        "bytes": 741002,
+        "filename": "handle-tightening-preview.zip",
+        "contentType": "application/zip"
+      },
+      "metadata": {
+        "object": "samples/library/metadata/handle-tightening.metadata.json",
+        "bytes": 2231,
+        "filename": "handle-tightening.metadata.json",
+        "contentType": "application/json"
+      },
+      "full": {
+        "object": null,
+        "bytes": 1517289472,
+        "filename": "handle-tightening-segment.zip",
+        "contentType": "application/octet-stream",
+        "note": "Six camera mp4s, imu_left.db, imu_right.db, mag_middle.db"
+      }
+    },
+    "wall-cleaning": {
+      "preview": {
+        "object": "samples/library/packs/wall-cleaning-preview.zip",
+        "bytes": 854803,
+        "filename": "wall-cleaning-preview.zip",
+        "contentType": "application/zip"
+      },
+      "metadata": {
+        "object": "samples/library/metadata/wall-cleaning.metadata.json",
+        "bytes": 2196,
+        "filename": "wall-cleaning.metadata.json",
+        "contentType": "application/json"
+      },
+      "full": {
+        "object": null,
+        "bytes": 1101004800,
+        "filename": "wall-cleaning-segment.zip",
+        "contentType": "application/octet-stream",
+        "note": "Six camera mp4s, imu_left.db, imu_right.db, mag_middle.db"
+      }
+    },
+    "wall-demolition": {
+      "preview": {
+        "object": "samples/library/packs/wall-demolition-preview.zip",
+        "bytes": 736047,
+        "filename": "wall-demolition-preview.zip",
+        "contentType": "application/zip"
+      },
+      "metadata": {
+        "object": "samples/library/metadata/wall-demolition.metadata.json",
+        "bytes": 2200,
+        "filename": "wall-demolition.metadata.json",
+        "contentType": "application/json"
+      },
+      "full": {
+        "object": null,
+        "bytes": 806354944,
+        "filename": "wall-demolition-segment.zip",
+        "contentType": "application/octet-stream",
+        "note": "Six camera mp4s, imu_left.db, imu_right.db, mag_middle.db"
+      }
+    },
+    "component-testing": {
+      "preview": {
+        "object": "samples/library/packs/component-testing-preview.zip",
+        "bytes": 1167616,
+        "filename": "component-testing-preview.zip",
+        "contentType": "application/zip"
+      },
+      "metadata": {
+        "object": "samples/library/metadata/component-testing.metadata.json",
+        "bytes": 2225,
+        "filename": "component-testing.metadata.json",
+        "contentType": "application/json"
+      },
+      "full": {
+        "object": null,
+        "bytes": 1185939456,
+        "filename": "component-testing-segment.zip",
+        "contentType": "application/octet-stream",
+        "note": "Six camera mp4s, imu_left.db, imu_right.db, mag_middle.db"
+      }
+    },
+    "room-organizing": {
+      "preview": {
+        "object": "samples/library/packs/room-organizing-preview.zip",
+        "bytes": 786230,
+        "filename": "room-organizing-preview.zip",
+        "contentType": "application/zip"
+      },
+      "metadata": {
+        "object": "samples/library/metadata/room-organizing.metadata.json",
+        "bytes": 2175,
+        "filename": "room-organizing.metadata.json",
+        "contentType": "application/json"
+      },
+      "full": {
+        "object": null,
+        "bytes": 324009984,
+        "filename": "room-organizing-segment.zip",
+        "contentType": "application/octet-stream",
+        "note": "Six camera mp4s, imu_left.db, imu_right.db, mag_middle.db"
+      }
+    },
+    "wall-hanging": {
+      "preview": {
+        "object": "samples/library/packs/wall-hanging-preview.zip",
+        "bytes": 1057797,
+        "filename": "wall-hanging-preview.zip",
+        "contentType": "application/zip"
+      },
+      "metadata": {
+        "object": "samples/library/metadata/wall-hanging.metadata.json",
+        "bytes": 2174,
+        "filename": "wall-hanging.metadata.json",
+        "contentType": "application/json"
+      },
+      "full": {
+        "object": null,
+        "bytes": 1557135360,
+        "filename": "wall-hanging-segment.zip",
+        "contentType": "application/octet-stream",
+        "note": "Six camera mp4s, imu_left.db, imu_right.db, mag_middle.db"
+      }
+    },
+    "component-testing-2": {
+      "preview": {
+        "object": "samples/library/packs/component-testing-2-preview.zip",
+        "bytes": 902027,
+        "filename": "component-testing-2-preview.zip",
+        "contentType": "application/zip"
+      },
+      "metadata": {
+        "object": "samples/library/metadata/component-testing-2.metadata.json",
+        "bytes": 2248,
+        "filename": "component-testing-2.metadata.json",
+        "contentType": "application/json"
+      },
+      "full": {
+        "object": null,
+        "bytes": 1290797056,
+        "filename": "component-testing-2-segment.zip",
+        "contentType": "application/octet-stream",
+        "note": "Six camera mp4s, imu_left.db, imu_right.db, mag_middle.db"
+      }
+    },
+    "wood-sanding": {
+      "preview": {
+        "object": "samples/library/packs/wood-sanding-preview.zip",
+        "bytes": 735781,
+        "filename": "wood-sanding-preview.zip",
+        "contentType": "application/zip"
+      },
+      "metadata": {
+        "object": "samples/library/metadata/wood-sanding.metadata.json",
+        "bytes": 2213,
+        "filename": "wood-sanding.metadata.json",
+        "contentType": "application/json"
+      },
+      "full": {
+        "object": null,
+        "bytes": 1529872384,
+        "filename": "wood-sanding-segment.zip",
+        "contentType": "application/octet-stream",
+        "note": "Six camera mp4s, imu_left.db, imu_right.db, mag_middle.db"
+      }
+    },
+    "dish-washing": {
+      "preview": {
+        "object": "samples/library/packs/dish-washing-preview.zip",
+        "bytes": 1470883,
+        "filename": "dish-washing-preview.zip",
+        "contentType": "application/zip"
+      },
+      "metadata": {
+        "object": "samples/library/metadata/dish-washing.metadata.json",
+        "bytes": 2120,
+        "filename": "dish-washing.metadata.json",
+        "contentType": "application/json"
+      },
+      "full": {
+        "object": null,
+        "bytes": 1447034880,
+        "filename": "dish-washing-segment.zip",
+        "contentType": "application/octet-stream",
+        "note": "Six camera mp4s, imu_left.db, imu_right.db, mag_middle.db"
+      }
+    },
+    "pot-carrying": {
+      "preview": {
+        "object": "samples/library/packs/pot-carrying-preview.zip",
+        "bytes": 1315451,
+        "filename": "pot-carrying-preview.zip",
+        "contentType": "application/zip"
+      },
+      "metadata": {
+        "object": "samples/library/metadata/pot-carrying.metadata.json",
+        "bytes": 2142,
+        "filename": "pot-carrying.metadata.json",
+        "contentType": "application/json"
+      },
+      "full": {
+        "object": null,
+        "bytes": 1328545792,
+        "filename": "pot-carrying-segment.zip",
+        "contentType": "application/octet-stream",
+        "note": "Six camera mp4s, imu_left.db, imu_right.db, mag_middle.db"
+      }
+    },
+    "food-cooking": {
+      "preview": {
+        "object": "samples/library/packs/food-cooking-preview.zip",
+        "bytes": 1518564,
+        "filename": "food-cooking-preview.zip",
+        "contentType": "application/zip"
+      },
+      "metadata": {
+        "object": "samples/library/metadata/food-cooking.metadata.json",
+        "bytes": 2145,
+        "filename": "food-cooking.metadata.json",
+        "contentType": "application/json"
+      },
+      "full": {
+        "object": null,
+        "bytes": 1472200704,
+        "filename": "food-cooking-segment.zip",
+        "contentType": "application/octet-stream",
+        "note": "Six camera mp4s, imu_left.db, imu_right.db, mag_middle.db"
+      }
+    },
+    "container-arranging": {
+      "preview": {
+        "object": "samples/library/packs/container-arranging-preview.zip",
+        "bytes": 734808,
+        "filename": "container-arranging-preview.zip",
+        "contentType": "application/zip"
+      },
+      "metadata": {
+        "object": "samples/library/metadata/container-arranging.metadata.json",
+        "bytes": 2231,
+        "filename": "container-arranging.metadata.json",
+        "contentType": "application/json"
+      },
+      "full": {
+        "object": null,
+        "bytes": 1153433600,
+        "filename": "container-arranging-segment.zip",
+        "contentType": "application/octet-stream",
+        "note": "Six camera mp4s, imu_left.db, imu_right.db, mag_middle.db"
+      }
+    },
+    "container-closing": {
+      "preview": {
+        "object": "samples/library/packs/container-closing-preview.zip",
+        "bytes": 1006407,
+        "filename": "container-closing-preview.zip",
+        "contentType": "application/zip"
+      },
+      "metadata": {
+        "object": "samples/library/metadata/container-closing.metadata.json",
+        "bytes": 2159,
+        "filename": "container-closing.metadata.json",
+        "contentType": "application/json"
+      },
+      "full": {
+        "object": null,
+        "bytes": 1209008128,
+        "filename": "container-closing-segment.zip",
+        "contentType": "application/octet-stream",
+        "note": "Six camera mp4s, imu_left.db, imu_right.db, mag_middle.db"
+      }
+    },
+    "vegetable-picking": {
+      "preview": {
+        "object": "samples/library/packs/vegetable-picking-preview.zip",
+        "bytes": 1119957,
+        "filename": "vegetable-picking-preview.zip",
+        "contentType": "application/zip"
+      },
+      "metadata": {
+        "object": "samples/library/metadata/vegetable-picking.metadata.json",
+        "bytes": 2203,
+        "filename": "vegetable-picking.metadata.json",
+        "contentType": "application/json"
+      },
+      "full": {
+        "object": null,
+        "bytes": 1271922688,
+        "filename": "vegetable-picking-segment.zip",
+        "contentType": "application/octet-stream",
+        "note": "Six camera mp4s, imu_left.db, imu_right.db, mag_middle.db"
+      }
+    },
+    "food-serving": {
+      "preview": {
+        "object": "samples/library/packs/food-serving-preview.zip",
+        "bytes": 859387,
+        "filename": "food-serving-preview.zip",
+        "contentType": "application/zip"
+      },
+      "metadata": {
+        "object": "samples/library/metadata/food-serving.metadata.json",
+        "bytes": 2173,
+        "filename": "food-serving.metadata.json",
+        "contentType": "application/json"
+      },
+      "full": {
+        "object": null,
+        "bytes": 1288699904,
+        "filename": "food-serving.mcap",
+        "contentType": "application/octet-stream",
+        "note": "MCAP with the stereo pair, IMU, VIO and annotations"
+      }
+    },
+    "noodle-cooking": {
+      "preview": {
+        "object": "samples/library/packs/noodle-cooking-preview.zip",
+        "bytes": 975880,
+        "filename": "noodle-cooking-preview.zip",
+        "contentType": "application/zip"
+      },
+      "metadata": {
+        "object": "samples/library/metadata/noodle-cooking.metadata.json",
+        "bytes": 2236,
+        "filename": "noodle-cooking.metadata.json",
+        "contentType": "application/json"
+      },
+      "full": {
+        "object": null,
+        "bytes": 915406848,
+        "filename": "noodle-cooking.mcap",
+        "contentType": "application/octet-stream",
+        "note": "MCAP with the stereo pair, IMU, VIO and annotations"
+      }
+    },
+    "bed-making": {
+      "preview": {
+        "object": "samples/library/packs/bed-making-preview.zip",
+        "bytes": 405625,
+        "filename": "bed-making-preview.zip",
+        "contentType": "application/zip"
+      },
+      "metadata": {
+        "object": "samples/library/metadata/bed-making.metadata.json",
+        "bytes": 2075,
+        "filename": "bed-making.metadata.json",
+        "contentType": "application/json"
+      },
+      "full": {
+        "object": null,
+        "bytes": 292552704,
+        "filename": "bed-making.mcap",
+        "contentType": "application/octet-stream",
+        "note": "MCAP with the stereo pair, IMU, VIO and annotations"
+      }
+    },
+    "dish-preparation": {
+      "preview": {
+        "object": "samples/library/packs/dish-preparation-preview.zip",
+        "bytes": 998158,
+        "filename": "dish-preparation-preview.zip",
+        "contentType": "application/zip"
+      },
+      "metadata": {
+        "object": "samples/library/metadata/dish-preparation.metadata.json",
+        "bytes": 2066,
+        "filename": "dish-preparation.metadata.json",
+        "contentType": "application/json"
+      },
+      "full": {
+        "object": null,
+        "bytes": 858783744,
+        "filename": "dish-preparation-segment.zip",
+        "contentType": "application/octet-stream",
+        "note": "Six camera mp4s, imu_left.db, imu_right.db, mag_middle.db"
+      }
+    },
+    "component-assembly": {
+      "preview": {
+        "object": "samples/library/packs/component-assembly-preview.zip",
+        "bytes": 917696,
+        "filename": "component-assembly-preview.zip",
+        "contentType": "application/zip"
+      },
+      "metadata": {
+        "object": "samples/library/metadata/component-assembly.metadata.json",
+        "bytes": 2268,
+        "filename": "component-assembly.metadata.json",
+        "contentType": "application/json"
+      },
+      "full": {
+        "object": null,
+        "bytes": 1239416832,
+        "filename": "component-assembly-segment.zip",
+        "contentType": "application/octet-stream",
+        "note": "Six camera mp4s, imu_left.db, imu_right.db, mag_middle.db"
+      }
+    },
+    "machine-cleaning": {
+      "preview": {
+        "object": "samples/library/packs/machine-cleaning-preview.zip",
+        "bytes": 696436,
+        "filename": "machine-cleaning-preview.zip",
+        "contentType": "application/zip"
+      },
+      "metadata": {
+        "object": "samples/library/metadata/machine-cleaning.metadata.json",
+        "bytes": 2341,
+        "filename": "machine-cleaning.metadata.json",
+        "contentType": "application/json"
+      },
+      "full": {
+        "object": null,
+        "bytes": 1510998016,
+        "filename": "machine-cleaning.mcap",
+        "contentType": "application/octet-stream",
+        "note": "MCAP with the stereo pair, IMU, VIO and annotations"
+      }
+    },
+    "stone-sanding": {
+      "preview": {
+        "object": "samples/library/packs/stone-sanding-preview.zip",
+        "bytes": 867867,
+        "filename": "stone-sanding-preview.zip",
+        "contentType": "application/zip"
+      },
+      "metadata": {
+        "object": "samples/library/metadata/stone-sanding.metadata.json",
+        "bytes": 2255,
+        "filename": "stone-sanding.metadata.json",
+        "contentType": "application/json"
+      },
+      "full": {
+        "object": null,
+        "bytes": 663748608,
+        "filename": "stone-sanding.mcap",
+        "contentType": "application/octet-stream",
+        "note": "MCAP with the stereo pair, IMU, VIO and annotations"
+      }
+    },
+    "board-installation": {
+      "preview": {
+        "object": "samples/library/packs/board-installation-preview.zip",
+        "bytes": 1103912,
+        "filename": "board-installation-preview.zip",
+        "contentType": "application/zip"
+      },
+      "metadata": {
+        "object": "samples/library/metadata/board-installation.metadata.json",
+        "bytes": 2331,
+        "filename": "board-installation.metadata.json",
+        "contentType": "application/json"
+      },
+      "full": {
+        "object": null,
+        "bytes": 1153433600,
+        "filename": "board-installation.mcap",
+        "contentType": "application/octet-stream",
+        "note": "MCAP with the stereo pair, IMU, VIO and annotations"
+      }
+    },
+    "frame-assembly": {
+      "preview": {
+        "object": "samples/library/packs/frame-assembly-preview.zip",
+        "bytes": 1245810,
+        "filename": "frame-assembly-preview.zip",
+        "contentType": "application/zip"
+      },
+      "metadata": {
+        "object": "samples/library/metadata/frame-assembly.metadata.json",
+        "bytes": 2264,
+        "filename": "frame-assembly.metadata.json",
+        "contentType": "application/json"
+      },
+      "full": {
+        "object": null,
+        "bytes": 176160768,
+        "filename": "frame-assembly.mcap",
+        "contentType": "application/octet-stream",
+        "note": "MCAP with the stereo pair, IMU, VIO and annotations"
+      }
+    },
+    "product-wrapping": {
+      "preview": {
+        "object": "samples/library/packs/product-wrapping-preview.zip",
+        "bytes": 880593,
+        "filename": "product-wrapping-preview.zip",
+        "contentType": "application/zip"
+      },
+      "metadata": {
+        "object": "samples/library/metadata/product-wrapping.metadata.json",
+        "bytes": 2244,
+        "filename": "product-wrapping.metadata.json",
+        "contentType": "application/json"
+      },
+      "full": {
+        "object": null,
+        "bytes": 1060110336,
+        "filename": "product-wrapping-segment.zip",
+        "contentType": "application/octet-stream",
+        "note": "Six camera mp4s, imu_left.db, imu_right.db, mag_middle.db"
+      }
+    },
+    "board-placing": {
+      "preview": {
+        "object": "samples/library/packs/board-placing-preview.zip",
+        "bytes": 918470,
+        "filename": "board-placing-preview.zip",
+        "contentType": "application/zip"
+      },
+      "metadata": {
+        "object": "samples/library/metadata/board-placing.metadata.json",
+        "bytes": 2256,
+        "filename": "board-placing.metadata.json",
+        "contentType": "application/json"
+      },
+      "full": {
+        "object": null,
+        "bytes": 1120927744,
+        "filename": "board-placing-segment.zip",
+        "contentType": "application/octet-stream",
+        "note": "Six camera mp4s, imu_left.db, imu_right.db, mag_middle.db"
+      }
+    },
+    "appliance-repair": {
+      "preview": {
+        "object": "samples/library/packs/appliance-repair-preview.zip",
+        "bytes": 1084052,
+        "filename": "appliance-repair-preview.zip",
+        "contentType": "application/zip"
+      },
+      "metadata": {
+        "object": "samples/library/metadata/appliance-repair.metadata.json",
+        "bytes": 2244,
+        "filename": "appliance-repair.metadata.json",
+        "contentType": "application/json"
+      },
+      "full": {
+        "object": null,
+        "bytes": 740294656,
+        "filename": "appliance-repair-segment.zip",
+        "contentType": "application/octet-stream",
+        "note": "Six camera mp4s, imu_left.db, imu_right.db, mag_middle.db"
+      }
+    },
+    "wood-sanding-2": {
+      "preview": {
+        "object": "samples/library/packs/wood-sanding-2-preview.zip",
+        "bytes": 924307,
+        "filename": "wood-sanding-2-preview.zip",
+        "contentType": "application/zip"
+      },
+      "metadata": {
+        "object": "samples/library/metadata/wood-sanding-2.metadata.json",
+        "bytes": 2277,
+        "filename": "wood-sanding-2.metadata.json",
+        "contentType": "application/json"
+      },
+      "full": {
+        "object": null,
+        "bytes": 1383071744,
+        "filename": "wood-sanding-2-segment.zip",
+        "contentType": "application/octet-stream",
+        "note": "Six camera mp4s, imu_left.db, imu_right.db, mag_middle.db"
+      }
+    },
+    "box-cleaning": {
+      "preview": {
+        "object": "samples/library/packs/box-cleaning-preview.zip",
+        "bytes": 860924,
+        "filename": "box-cleaning-preview.zip",
+        "contentType": "application/zip"
+      },
+      "metadata": {
+        "object": "samples/library/metadata/box-cleaning.metadata.json",
+        "bytes": 2162,
+        "filename": "box-cleaning.metadata.json",
+        "contentType": "application/json"
+      },
+      "full": {
+        "object": null,
+        "bytes": 562036736,
+        "filename": "box-cleaning-segment.zip",
+        "contentType": "application/octet-stream",
+        "note": "Six camera mp4s, imu_left.db, imu_right.db, mag_middle.db"
+      }
+    },
+    "led-soldering": {
+      "preview": {
+        "object": "samples/library/packs/led-soldering-preview.zip",
+        "bytes": 1144897,
+        "filename": "led-soldering-preview.zip",
+        "contentType": "application/zip"
+      },
+      "metadata": {
+        "object": "samples/library/metadata/led-soldering.metadata.json",
+        "bytes": 2197,
+        "filename": "led-soldering.metadata.json",
+        "contentType": "application/json"
+      },
+      "full": {
+        "object": null,
+        "bytes": 1108344832,
+        "filename": "led-soldering-segment.zip",
+        "contentType": "application/octet-stream",
+        "note": "Six camera mp4s, imu_left.db, imu_right.db, mag_middle.db"
+      }
+    },
+    "paper-stripping": {
+      "preview": {
+        "object": "samples/library/packs/paper-stripping-preview.zip",
+        "bytes": 723539,
+        "filename": "paper-stripping-preview.zip",
+        "contentType": "application/zip"
+      },
+      "metadata": {
+        "object": "samples/library/metadata/paper-stripping.metadata.json",
+        "bytes": 2234,
+        "filename": "paper-stripping.metadata.json",
+        "contentType": "application/json"
+      },
+      "full": {
+        "object": null,
+        "bytes": 1105199104,
+        "filename": "paper-stripping-segment.zip",
+        "contentType": "application/octet-stream",
+        "note": "Six camera mp4s, imu_left.db, imu_right.db, mag_middle.db"
+      }
+    },
+    "sheet-organizing": {
+      "preview": {
+        "object": "samples/library/packs/sheet-organizing-preview.zip",
+        "bytes": 1014997,
+        "filename": "sheet-organizing-preview.zip",
+        "contentType": "application/zip"
+      },
+      "metadata": {
+        "object": "samples/library/metadata/sheet-organizing.metadata.json",
+        "bytes": 2229,
+        "filename": "sheet-organizing.metadata.json",
+        "contentType": "application/json"
+      },
+      "full": {
+        "object": null,
+        "bytes": 125829120,
+        "filename": "sheet-organizing-segment.zip",
+        "contentType": "application/octet-stream",
+        "note": "Six camera mp4s, imu_left.db, imu_right.db, mag_middle.db"
+      }
+    },
+    "sheet-laminating": {
+      "preview": {
+        "object": "samples/library/packs/sheet-laminating-preview.zip",
+        "bytes": 737950,
+        "filename": "sheet-laminating-preview.zip",
+        "contentType": "application/zip"
+      },
+      "metadata": {
+        "object": "samples/library/metadata/sheet-laminating.metadata.json",
+        "bytes": 2255,
+        "filename": "sheet-laminating.metadata.json",
+        "contentType": "application/json"
+      },
+      "full": {
+        "object": null,
+        "bytes": 805306368,
+        "filename": "sheet-laminating-segment.zip",
+        "contentType": "application/octet-stream",
+        "note": "Six camera mp4s, imu_left.db, imu_right.db, mag_middle.db"
+      }
+    },
+    "wire-cutting": {
+      "preview": {
+        "object": "samples/library/packs/wire-cutting-preview.zip",
+        "bytes": 1072466,
+        "filename": "wire-cutting-preview.zip",
+        "contentType": "application/zip"
+      },
+      "metadata": {
+        "object": "samples/library/metadata/wire-cutting.metadata.json",
+        "bytes": 2167,
+        "filename": "wire-cutting.metadata.json",
+        "contentType": "application/json"
+      },
+      "full": {
+        "object": null,
+        "bytes": 1409286144,
+        "filename": "wire-cutting-segment.zip",
+        "contentType": "application/octet-stream",
+        "note": "Six camera mp4s, imu_left.db, imu_right.db, mag_middle.db"
+      }
+    },
+    "wire-connecting": {
+      "preview": {
+        "object": "samples/library/packs/wire-connecting-preview.zip",
+        "bytes": 1021460,
+        "filename": "wire-connecting-preview.zip",
+        "contentType": "application/zip"
+      },
+      "metadata": {
+        "object": "samples/library/metadata/wire-connecting.metadata.json",
+        "bytes": 2241,
+        "filename": "wire-connecting.metadata.json",
+        "contentType": "application/json"
+      },
+      "full": {
+        "object": null,
+        "bytes": 1370488832,
+        "filename": "wire-connecting-segment.zip",
+        "contentType": "application/octet-stream",
+        "note": "Six camera mp4s, imu_left.db, imu_right.db, mag_middle.db"
+      }
+    },
+    "motor-measuring": {
+      "preview": {
+        "object": "samples/library/packs/motor-measuring-preview.zip",
+        "bytes": 986930,
+        "filename": "motor-measuring-preview.zip",
+        "contentType": "application/zip"
+      },
+      "metadata": {
+        "object": "samples/library/metadata/motor-measuring.metadata.json",
+        "bytes": 2246,
+        "filename": "motor-measuring.metadata.json",
+        "contentType": "application/json"
+      },
+      "full": {
+        "object": null,
+        "bytes": 1106247680,
+        "filename": "motor-measuring-segment.zip",
+        "contentType": "application/octet-stream",
+        "note": "Six camera mp4s, imu_left.db, imu_right.db, mag_middle.db"
+      }
+    },
+    "motor-disassembly": {
+      "preview": {
+        "object": "samples/library/packs/motor-disassembly-preview.zip",
+        "bytes": 1563792,
+        "filename": "motor-disassembly-preview.zip",
+        "contentType": "application/zip"
+      },
+      "metadata": {
+        "object": "samples/library/metadata/motor-disassembly.metadata.json",
+        "bytes": 2251,
+        "filename": "motor-disassembly.metadata.json",
+        "contentType": "application/json"
+      },
+      "full": {
+        "object": null,
+        "bytes": 1215299584,
+        "filename": "motor-disassembly.mcap",
+        "contentType": "application/octet-stream",
+        "note": "MCAP with the stereo pair, IMU, VIO and annotations"
+      }
+    },
+    "harness-securing": {
+      "preview": {
+        "object": "samples/library/packs/harness-securing-preview.zip",
+        "bytes": 1252419,
+        "filename": "harness-securing-preview.zip",
+        "contentType": "application/zip"
+      },
+      "metadata": {
+        "object": "samples/library/metadata/harness-securing.metadata.json",
+        "bytes": 2253,
+        "filename": "harness-securing.metadata.json",
+        "contentType": "application/json"
+      },
+      "full": {
+        "object": null,
+        "bytes": 1331691520,
+        "filename": "harness-securing.mcap",
+        "contentType": "application/octet-stream",
+        "note": "MCAP with the stereo pair, IMU, VIO and annotations"
+      }
+    },
+    "sole-stitching": {
+      "preview": {
+        "object": "samples/library/packs/sole-stitching-preview.zip",
+        "bytes": 810870,
+        "filename": "sole-stitching-preview.zip",
+        "contentType": "application/zip"
+      },
+      "metadata": {
+        "object": "samples/library/metadata/sole-stitching.metadata.json",
+        "bytes": 2145,
+        "filename": "sole-stitching.metadata.json",
+        "contentType": "application/json"
+      },
+      "full": {
+        "object": null,
+        "bytes": 1278214144,
+        "filename": "sole-stitching-segment.zip",
+        "contentType": "application/octet-stream",
+        "note": "Six camera mp4s, imu_left.db, imu_right.db, mag_middle.db"
+      }
+    },
+    "inventory-counting": {
+      "preview": {
+        "object": "samples/library/packs/inventory-counting-preview.zip",
+        "bytes": 955028,
+        "filename": "inventory-counting-preview.zip",
+        "contentType": "application/zip"
+      },
+      "metadata": {
+        "object": "samples/library/metadata/inventory-counting.metadata.json",
+        "bytes": 2272,
+        "filename": "inventory-counting.metadata.json",
+        "contentType": "application/json"
+      },
+      "full": {
+        "object": null,
+        "bytes": 292552704,
+        "filename": "inventory-counting.mcap",
+        "contentType": "application/octet-stream",
+        "note": "MCAP with the stereo pair, IMU, VIO and annotations"
+      }
+    },
+    "vegetable-weeding": {
+      "preview": {
+        "object": "samples/library/packs/vegetable-weeding-preview.zip",
+        "bytes": 6062062,
+        "filename": "vegetable-weeding-preview.zip",
+        "contentType": "application/zip"
+      },
+      "metadata": {
+        "object": "samples/library/metadata/vegetable-weeding.metadata.json",
+        "bytes": 2080,
+        "filename": "vegetable-weeding.metadata.json",
+        "contentType": "application/json"
+      },
+      "full": {
+        "object": null,
+        "bytes": 1075838976,
+        "filename": "vegetable-weeding-segment.zip",
+        "contentType": "application/octet-stream",
+        "note": "Six camera mp4s, imu_left.db, imu_right.db, mag_middle.db"
+      }
+    },
+    "vegetable-harvesting": {
+      "preview": {
+        "object": "samples/library/packs/vegetable-harvesting-preview.zip",
+        "bytes": 4441013,
+        "filename": "vegetable-harvesting-preview.zip",
+        "contentType": "application/zip"
+      },
+      "metadata": {
+        "object": "samples/library/metadata/vegetable-harvesting.metadata.json",
+        "bytes": 2103,
+        "filename": "vegetable-harvesting.metadata.json",
+        "contentType": "application/json"
+      },
+      "full": {
+        "object": null,
+        "bytes": 1153433600,
+        "filename": "vegetable-harvesting-segment.zip",
+        "contentType": "application/octet-stream",
+        "note": "Six camera mp4s, imu_left.db, imu_right.db, mag_middle.db"
+      }
+    },
+    "weed-removal": {
+      "preview": {
+        "object": "samples/library/packs/weed-removal-preview.zip",
+        "bytes": 3211615,
+        "filename": "weed-removal-preview.zip",
+        "contentType": "application/zip"
+      },
+      "metadata": {
+        "object": "samples/library/metadata/weed-removal.metadata.json",
+        "bytes": 2083,
+        "filename": "weed-removal.metadata.json",
+        "contentType": "application/json"
+      },
+      "full": {
+        "object": null,
+        "bytes": 1330642944,
+        "filename": "weed-removal-segment.zip",
+        "contentType": "application/octet-stream",
+        "note": "Six camera mp4s, imu_left.db, imu_right.db, mag_middle.db"
+      }
+    },
+    "wall-plastering": {
+      "preview": {
+        "object": "samples/library/packs/wall-plastering-preview.zip",
+        "bytes": 1150984,
+        "filename": "wall-plastering-preview.zip",
+        "contentType": "application/zip"
+      },
+      "metadata": {
+        "object": "samples/library/metadata/wall-plastering.metadata.json",
+        "bytes": 2107,
+        "filename": "wall-plastering.metadata.json",
+        "contentType": "application/json"
+      },
+      "full": {
+        "object": null,
+        "bytes": 1157627904,
+        "filename": "wall-plastering-segment.zip",
+        "contentType": "application/octet-stream",
+        "note": "Six camera mp4s, imu_left.db, imu_right.db, mag_middle.db"
+      }
+    },
+    "tea-pouring": {
+      "preview": {
+        "object": "samples/library/packs/tea-pouring-preview.zip",
+        "bytes": 597668,
+        "filename": "tea-pouring-preview.zip",
+        "contentType": "application/zip"
+      },
+      "metadata": {
+        "object": "samples/library/metadata/tea-pouring.metadata.json",
+        "bytes": 2188,
+        "filename": "tea-pouring.metadata.json",
+        "contentType": "application/json"
+      },
+      "full": {
+        "object": null,
+        "bytes": 1233125376,
+        "filename": "tea-pouring.mcap",
+        "contentType": "application/octet-stream",
+        "note": "MCAP with the stereo pair, IMU, VIO and annotations"
+      }
+    },
+    "curtain-pulling": {
+      "preview": {
+        "object": "samples/library/packs/curtain-pulling-preview.zip",
+        "bytes": 854715,
+        "filename": "curtain-pulling-preview.zip",
+        "contentType": "application/zip"
+      },
+      "metadata": {
+        "object": "samples/library/metadata/curtain-pulling.metadata.json",
+        "bytes": 2082,
+        "filename": "curtain-pulling.metadata.json",
+        "contentType": "application/json"
+      },
+      "full": {
+        "object": null,
+        "bytes": 227540992,
+        "filename": "curtain-pulling.mcap",
+        "contentType": "application/octet-stream",
+        "note": "MCAP with the stereo pair, IMU, VIO and annotations"
+      }
+    },
+    "cup-sealing": {
+      "preview": {
+        "object": "samples/library/packs/cup-sealing-preview.zip",
+        "bytes": 686202,
+        "filename": "cup-sealing-preview.zip",
+        "contentType": "application/zip"
+      },
+      "metadata": {
+        "object": "samples/library/metadata/cup-sealing.metadata.json",
+        "bytes": 2118,
+        "filename": "cup-sealing.metadata.json",
+        "contentType": "application/json"
+      },
+      "full": {
+        "object": null,
+        "bytes": 364904448,
+        "filename": "cup-sealing.mcap",
+        "contentType": "application/octet-stream",
+        "note": "MCAP with the stereo pair, IMU, VIO and annotations"
+      }
+    },
+    "screen-cleaning": {
+      "preview": {
+        "object": "samples/library/packs/screen-cleaning-preview.zip",
+        "bytes": 871285,
+        "filename": "screen-cleaning-preview.zip",
+        "contentType": "application/zip"
+      },
+      "metadata": {
+        "object": "samples/library/metadata/screen-cleaning.metadata.json",
+        "bytes": 2177,
+        "filename": "screen-cleaning.metadata.json",
+        "contentType": "application/json"
+      },
+      "full": {
+        "object": null,
+        "bytes": 270532608,
+        "filename": "screen-cleaning.mcap",
+        "contentType": "application/octet-stream",
+        "note": "MCAP with the stereo pair, IMU, VIO and annotations"
+      }
+    },
+    "flower-cutting": {
+      "preview": {
+        "object": "samples/library/packs/flower-cutting-preview.zip",
+        "bytes": 1589028,
+        "filename": "flower-cutting-preview.zip",
+        "contentType": "application/zip"
+      },
+      "metadata": {
+        "object": "samples/library/metadata/flower-cutting.metadata.json",
+        "bytes": 2061,
+        "filename": "flower-cutting.metadata.json",
+        "contentType": "application/json"
+      },
+      "full": {
+        "object": null,
+        "bytes": 830472192,
+        "filename": "flower-cutting-segment.zip",
+        "contentType": "application/octet-stream",
+        "note": "Six camera mp4s, imu_left.db, imu_right.db, mag_middle.db"
+      }
+    },
+    "leaf-sweeping": {
+      "preview": {
+        "object": "samples/library/packs/leaf-sweeping-preview.zip",
+        "bytes": 1811760,
+        "filename": "leaf-sweeping-preview.zip",
+        "contentType": "application/zip"
+      },
+      "metadata": {
+        "object": "samples/library/metadata/leaf-sweeping.metadata.json",
+        "bytes": 2034,
+        "filename": "leaf-sweeping.metadata.json",
+        "contentType": "application/json"
+      },
+      "full": {
+        "object": null,
+        "bytes": 1501560832,
+        "filename": "leaf-sweeping-segment.zip",
+        "contentType": "application/octet-stream",
+        "note": "Six camera mp4s, imu_left.db, imu_right.db, mag_middle.db"
+      }
+    },
+    "pavement-sweeping": {
+      "preview": {
+        "object": "samples/library/packs/pavement-sweeping-preview.zip",
+        "bytes": 2780790,
+        "filename": "pavement-sweeping-preview.zip",
+        "contentType": "application/zip"
+      },
+      "metadata": {
+        "object": "samples/library/metadata/pavement-sweeping.metadata.json",
+        "bytes": 2059,
+        "filename": "pavement-sweeping.metadata.json",
+        "contentType": "application/json"
+      },
+      "full": {
+        "object": null,
+        "bytes": 946864128,
+        "filename": "pavement-sweeping-segment.zip",
+        "contentType": "application/octet-stream",
+        "note": "Six camera mp4s, imu_left.db, imu_right.db, mag_middle.db"
+      }
+    },
+    "outlet-installation": {
+      "preview": {
+        "object": "samples/library/packs/outlet-installation-preview.zip",
+        "bytes": 499332,
+        "filename": "outlet-installation-preview.zip",
+        "contentType": "application/zip"
+      },
+      "metadata": {
+        "object": "samples/library/metadata/outlet-installation.metadata.json",
+        "bytes": 2076,
+        "filename": "outlet-installation.metadata.json",
+        "contentType": "application/json"
+      },
+      "full": {
+        "object": null,
+        "bytes": 1361051648,
+        "filename": "outlet-installation-segment.zip",
+        "contentType": "application/octet-stream",
+        "note": "Six camera mp4s, imu_left.db, imu_right.db, mag_middle.db"
+      }
+    },
+    "outlet-wiring": {
+      "preview": {
+        "object": "samples/library/packs/outlet-wiring-preview.zip",
+        "bytes": 869874,
+        "filename": "outlet-wiring-preview.zip",
+        "contentType": "application/zip"
+      },
+      "metadata": {
+        "object": "samples/library/metadata/outlet-wiring.metadata.json",
+        "bytes": 2187,
+        "filename": "outlet-wiring.metadata.json",
+        "contentType": "application/json"
+      },
+      "full": {
+        "object": null,
+        "bytes": 534773760,
+        "filename": "outlet-wiring-segment.zip",
+        "contentType": "application/octet-stream",
+        "note": "Six camera mp4s, imu_left.db, imu_right.db, mag_middle.db"
+      }
+    },
+    "bed-making-2": {
+      "preview": {
+        "object": "samples/library/packs/bed-making-2-preview.zip",
+        "bytes": 888881,
+        "filename": "bed-making-2-preview.zip",
+        "contentType": "application/zip"
+      },
+      "metadata": {
+        "object": "samples/library/metadata/bed-making-2.metadata.json",
+        "bytes": 2020,
+        "filename": "bed-making-2.metadata.json",
+        "contentType": "application/json"
+      },
+      "full": {
+        "object": null,
+        "bytes": 987758592,
+        "filename": "bed-making-2-segment.zip",
+        "contentType": "application/octet-stream",
+        "note": "Six camera mp4s, imu_left.db, imu_right.db, mag_middle.db"
+      }
+    },
+    "flower-cutting-2": {
+      "preview": {
+        "object": "samples/library/packs/flower-cutting-2-preview.zip",
+        "bytes": 1181737,
+        "filename": "flower-cutting-2-preview.zip",
+        "contentType": "application/zip"
+      },
+      "metadata": {
+        "object": "samples/library/metadata/flower-cutting-2.metadata.json",
+        "bytes": 2068,
+        "filename": "flower-cutting-2.metadata.json",
+        "contentType": "application/json"
+      },
+      "full": {
+        "object": null,
+        "bytes": 1328545792,
+        "filename": "flower-cutting-2-segment.zip",
+        "contentType": "application/octet-stream",
+        "note": "Six camera mp4s, imu_left.db, imu_right.db, mag_middle.db"
+      }
+    },
+    "grass-cutting": {
+      "preview": {
+        "object": "samples/library/packs/grass-cutting-preview.zip",
+        "bytes": 1681402,
+        "filename": "grass-cutting-preview.zip",
+        "contentType": "application/zip"
+      },
+      "metadata": {
+        "object": "samples/library/metadata/grass-cutting.metadata.json",
+        "bytes": 2059,
+        "filename": "grass-cutting.metadata.json",
+        "contentType": "application/json"
+      },
+      "full": {
+        "object": null,
+        "bytes": 0,
+        "filename": "grass-cutting-segment.zip",
+        "contentType": "application/octet-stream",
+        "note": "Six camera mp4s, imu_left.db, imu_right.db, mag_middle.db"
+      }
+    },
+    "fabric-inspection": {
+      "preview": {
+        "object": "samples/library/packs/fabric-inspection-preview.zip",
+        "bytes": 607598,
+        "filename": "fabric-inspection-preview.zip",
+        "contentType": "application/zip"
+      },
+      "metadata": {
+        "object": "samples/library/metadata/fabric-inspection.metadata.json",
+        "bytes": 2116,
+        "filename": "fabric-inspection.metadata.json",
+        "contentType": "application/json"
+      },
+      "full": {
+        "object": null,
+        "bytes": 1078984704,
+        "filename": "fabric-inspection-segment.zip",
+        "contentType": "application/octet-stream",
+        "note": "Six camera mp4s, imu_left.db, imu_right.db, mag_middle.db"
+      }
+    },
+    "dish-clearing": {
+      "preview": {
+        "object": "samples/library/packs/dish-clearing-preview.zip",
+        "bytes": 1019638,
+        "filename": "dish-clearing-preview.zip",
+        "contentType": "application/zip"
+      },
+      "metadata": {
+        "object": "samples/library/metadata/dish-clearing.metadata.json",
+        "bytes": 2042,
+        "filename": "dish-clearing.metadata.json",
+        "contentType": "application/json"
+      },
+      "full": {
+        "object": null,
+        "bytes": 413138944,
+        "filename": "dish-clearing-segment.zip",
+        "contentType": "application/octet-stream",
+        "note": "Six camera mp4s, imu_left.db, imu_right.db, mag_middle.db"
+      }
+    },
+    "tray-arranging": {
+      "preview": {
+        "object": "samples/library/packs/tray-arranging-preview.zip",
+        "bytes": 949841,
+        "filename": "tray-arranging-preview.zip",
+        "contentType": "application/zip"
+      },
+      "metadata": {
+        "object": "samples/library/metadata/tray-arranging.metadata.json",
+        "bytes": 2116,
+        "filename": "tray-arranging.metadata.json",
+        "contentType": "application/json"
+      },
+      "full": {
+        "object": null,
+        "bytes": 1387266048,
+        "filename": "tray-arranging-segment.zip",
+        "contentType": "application/octet-stream",
+        "note": "Six camera mp4s, imu_left.db, imu_right.db, mag_middle.db"
+      }
+    },
+    "wheel-reinstallation": {
+      "preview": {
+        "object": "samples/library/packs/wheel-reinstallation-preview.zip",
+        "bytes": 990503,
+        "filename": "wheel-reinstallation-preview.zip",
+        "contentType": "application/zip"
+      },
+      "metadata": {
+        "object": "samples/library/metadata/wheel-reinstallation.metadata.json",
+        "bytes": 2182,
+        "filename": "wheel-reinstallation.metadata.json",
+        "contentType": "application/json"
+      },
+      "full": {
+        "object": null,
+        "bytes": 1171259392,
+        "filename": "wheel-reinstallation.mcap",
+        "contentType": "application/octet-stream",
+        "note": "MCAP with the stereo pair, IMU, VIO and annotations"
+      }
+    },
+    "tool-charging": {
+      "preview": {
+        "object": "samples/library/packs/tool-charging-preview.zip",
+        "bytes": 589280,
+        "filename": "tool-charging-preview.zip",
+        "contentType": "application/zip"
+      },
+      "metadata": {
+        "object": "samples/library/metadata/tool-charging.metadata.json",
+        "bytes": 2165,
+        "filename": "tool-charging.metadata.json",
+        "contentType": "application/json"
+      },
+      "full": {
+        "object": null,
+        "bytes": 112197632,
+        "filename": "tool-charging-segment.zip",
+        "contentType": "application/octet-stream",
+        "note": "Six camera mp4s, imu_left.db, imu_right.db, mag_middle.db"
+      }
+    },
+    "vegetable-serving": {
+      "preview": {
+        "object": "samples/library/packs/vegetable-serving-preview.zip",
+        "bytes": 722328,
+        "filename": "vegetable-serving-preview.zip",
+        "contentType": "application/zip"
+      },
+      "metadata": {
+        "object": "samples/library/metadata/vegetable-serving.metadata.json",
+        "bytes": 2150,
+        "filename": "vegetable-serving.metadata.json",
+        "contentType": "application/json"
+      },
+      "full": {
+        "object": null,
+        "bytes": 409993216,
+        "filename": "vegetable-serving-segment.zip",
+        "contentType": "application/octet-stream",
+        "note": "Six camera mp4s, imu_left.db, imu_right.db, mag_middle.db"
+      }
+    },
+    "table-clearing": {
+      "preview": {
+        "object": "samples/library/packs/table-clearing-preview.zip",
+        "bytes": 1193591,
+        "filename": "table-clearing-preview.zip",
+        "contentType": "application/zip"
+      },
+      "metadata": {
+        "object": "samples/library/metadata/table-clearing.metadata.json",
+        "bytes": 2170,
+        "filename": "table-clearing.metadata.json",
+        "contentType": "application/json"
+      },
+      "full": {
+        "object": null,
+        "bytes": 281018368,
+        "filename": "table-clearing-segment.zip",
+        "contentType": "application/octet-stream",
+        "note": "Six camera mp4s, imu_left.db, imu_right.db, mag_middle.db"
+      }
+    },
+    "device-connecting": {
+      "preview": {
+        "object": "samples/library/packs/device-connecting-preview.zip",
+        "bytes": 1415174,
+        "filename": "device-connecting-preview.zip",
+        "contentType": "application/zip"
+      },
+      "metadata": {
+        "object": "samples/library/metadata/device-connecting.metadata.json",
+        "bytes": 2118,
+        "filename": "device-connecting.metadata.json",
+        "contentType": "application/json"
+      },
+      "full": {
+        "object": null,
+        "bytes": 1302331392,
+        "filename": "device-connecting-segment.zip",
+        "contentType": "application/octet-stream",
+        "note": "Six camera mp4s, imu_left.db, imu_right.db, mag_middle.db"
+      }
+    },
+    "hand-washing": {
+      "preview": {
+        "object": "samples/library/packs/hand-washing-preview.zip",
+        "bytes": 1622381,
+        "filename": "hand-washing-preview.zip",
+        "contentType": "application/zip"
+      },
+      "metadata": {
+        "object": "samples/library/metadata/hand-washing.metadata.json",
+        "bytes": 2082,
+        "filename": "hand-washing.metadata.json",
+        "contentType": "application/json"
+      },
+      "full": {
+        "object": null,
+        "bytes": 188743680,
+        "filename": "hand-washing-segment.zip",
+        "contentType": "application/octet-stream",
+        "note": "Six camera mp4s, imu_left.db, imu_right.db, mag_middle.db"
+      }
+    },
+    "component-inspection": {
+      "preview": {
+        "object": "samples/library/packs/component-inspection-preview.zip",
+        "bytes": 746224,
+        "filename": "component-inspection-preview.zip",
+        "contentType": "application/zip"
+      },
+      "metadata": {
+        "object": "samples/library/metadata/component-inspection.metadata.json",
+        "bytes": 2125,
+        "filename": "component-inspection.metadata.json",
+        "contentType": "application/json"
+      },
+      "full": {
+        "object": null,
+        "bytes": 1326448640,
+        "filename": "component-inspection-segment.zip",
+        "contentType": "application/octet-stream",
+        "note": "Six camera mp4s, imu_left.db, imu_right.db, mag_middle.db"
+      }
+    },
+    "component-grinding": {
+      "preview": {
+        "object": "samples/library/packs/component-grinding-preview.zip",
+        "bytes": 1236898,
+        "filename": "component-grinding-preview.zip",
+        "contentType": "application/zip"
+      },
+      "metadata": {
+        "object": "samples/library/metadata/component-grinding.metadata.json",
+        "bytes": 2154,
+        "filename": "component-grinding.metadata.json",
+        "contentType": "application/json"
+      },
+      "full": {
+        "object": null,
+        "bytes": 1229979648,
+        "filename": "component-grinding-segment.zip",
+        "contentType": "application/octet-stream",
+        "note": "Six camera mp4s, imu_left.db, imu_right.db, mag_middle.db"
+      }
+    },
+    "wire-coiling": {
+      "preview": {
+        "object": "samples/library/packs/wire-coiling-preview.zip",
+        "bytes": 1500106,
+        "filename": "wire-coiling-preview.zip",
+        "contentType": "application/zip"
+      },
+      "metadata": {
+        "object": "samples/library/metadata/wire-coiling.metadata.json",
+        "bytes": 2074,
+        "filename": "wire-coiling.metadata.json",
+        "contentType": "application/json"
+      },
+      "full": {
+        "object": null,
+        "bytes": 333447168,
+        "filename": "wire-coiling-segment.zip",
+        "contentType": "application/octet-stream",
+        "note": "Six camera mp4s, imu_left.db, imu_right.db, mag_middle.db"
+      }
+    },
+    "equipment-moving": {
+      "preview": {
+        "object": "samples/library/packs/equipment-moving-preview.zip",
+        "bytes": 2105847,
+        "filename": "equipment-moving-preview.zip",
+        "contentType": "application/zip"
+      },
+      "metadata": {
+        "object": "samples/library/metadata/equipment-moving.metadata.json",
+        "bytes": 2124,
+        "filename": "equipment-moving.metadata.json",
+        "contentType": "application/json"
+      },
+      "full": {
+        "object": null,
+        "bytes": 458227712,
+        "filename": "equipment-moving-segment.zip",
+        "contentType": "application/octet-stream",
+        "note": "Six camera mp4s, imu_left.db, imu_right.db, mag_middle.db"
+      }
+    },
+    "device-inserting": {
+      "preview": {
+        "object": "samples/library/packs/device-inserting-preview.zip",
+        "bytes": 859402,
+        "filename": "device-inserting-preview.zip",
+        "contentType": "application/zip"
+      },
+      "metadata": {
+        "object": "samples/library/metadata/device-inserting.metadata.json",
+        "bytes": 2191,
+        "filename": "device-inserting.metadata.json",
+        "contentType": "application/json"
+      },
+      "full": {
+        "object": null,
+        "bytes": 664797184,
+        "filename": "device-inserting-segment.zip",
+        "contentType": "application/octet-stream",
+        "note": "Six camera mp4s, imu_left.db, imu_right.db, mag_middle.db"
+      }
+    },
+    "lighting-setup": {
+      "preview": {
+        "object": "samples/library/packs/lighting-setup-preview.zip",
+        "bytes": 620538,
+        "filename": "lighting-setup-preview.zip",
+        "contentType": "application/zip"
+      },
+      "metadata": {
+        "object": "samples/library/metadata/lighting-setup.metadata.json",
+        "bytes": 2145,
+        "filename": "lighting-setup.metadata.json",
+        "contentType": "application/json"
+      },
+      "full": {
+        "object": null,
+        "bytes": 447741952,
+        "filename": "lighting-setup-segment.zip",
+        "contentType": "application/octet-stream",
+        "note": "Six camera mp4s, imu_left.db, imu_right.db, mag_middle.db"
+      }
+    },
+    "client-posing": {
+      "preview": {
+        "object": "samples/library/packs/client-posing-preview.zip",
+        "bytes": 466500,
+        "filename": "client-posing-preview.zip",
+        "contentType": "application/zip"
+      },
+      "metadata": {
+        "object": "samples/library/metadata/client-posing.metadata.json",
+        "bytes": 2146,
+        "filename": "client-posing.metadata.json",
+        "contentType": "application/json"
+      },
+      "full": {
+        "object": null,
+        "bytes": 1290797056,
+        "filename": "client-posing-segment.zip",
+        "contentType": "application/octet-stream",
+        "note": "Six camera mp4s, imu_left.db, imu_right.db, mag_middle.db"
+      }
+    },
+    "dish-washing-2": {
+      "preview": {
+        "object": "samples/library/packs/dish-washing-2-preview.zip",
+        "bytes": 988529,
+        "filename": "dish-washing-2-preview.zip",
+        "contentType": "application/zip"
+      },
+      "metadata": {
+        "object": "samples/library/metadata/dish-washing-2.metadata.json",
+        "bytes": 2068,
+        "filename": "dish-washing-2.metadata.json",
+        "contentType": "application/json"
+      },
+      "full": {
+        "object": null,
+        "bytes": 335544320,
+        "filename": "dish-washing-2-segment.zip",
+        "contentType": "application/octet-stream",
+        "note": "Six camera mp4s, imu_left.db, imu_right.db, mag_middle.db"
+      }
+    },
+    "order-verifying": {
+      "preview": {
+        "object": "samples/library/packs/order-verifying-preview.zip",
+        "bytes": 1035043,
+        "filename": "order-verifying-preview.zip",
+        "contentType": "application/zip"
+      },
+      "metadata": {
+        "object": "samples/library/metadata/order-verifying.metadata.json",
+        "bytes": 2105,
+        "filename": "order-verifying.metadata.json",
+        "contentType": "application/json"
+      },
+      "full": {
+        "object": null,
+        "bytes": 63963136,
+        "filename": "order-verifying-segment.zip",
+        "contentType": "application/octet-stream",
+        "note": "Six camera mp4s, imu_left.db, imu_right.db, mag_middle.db"
+      }
+    },
+    "tire-inflating": {
+      "preview": {
+        "object": "samples/library/packs/tire-inflating-preview.zip",
+        "bytes": 664172,
+        "filename": "tire-inflating-preview.zip",
+        "contentType": "application/zip"
+      },
+      "metadata": {
+        "object": "samples/library/metadata/tire-inflating.metadata.json",
+        "bytes": 2077,
+        "filename": "tire-inflating.metadata.json",
+        "contentType": "application/json"
+      },
+      "full": {
+        "object": null,
+        "bytes": 77594624,
+        "filename": "tire-inflating.mcap",
+        "contentType": "application/octet-stream",
+        "note": "MCAP with the stereo pair, IMU, VIO and annotations"
+      }
+    },
+    "bathroom-scrubbing": {
+      "preview": {
+        "object": "samples/library/packs/bathroom-scrubbing-preview.zip",
+        "bytes": 691595,
+        "filename": "bathroom-scrubbing-preview.zip",
+        "contentType": "application/zip"
+      },
+      "metadata": {
+        "object": "samples/library/metadata/bathroom-scrubbing.metadata.json",
+        "bytes": 2050,
+        "filename": "bathroom-scrubbing.metadata.json",
+        "contentType": "application/json"
+      },
+      "full": {
+        "object": null,
+        "bytes": 1264582656,
+        "filename": "bathroom-scrubbing-segment.zip",
+        "contentType": "application/octet-stream",
+        "note": "Six camera mp4s, imu_left.db, imu_right.db, mag_middle.db"
+      }
+    },
+    "bed-making-3": {
+      "preview": {
+        "object": "samples/library/packs/bed-making-3-preview.zip",
+        "bytes": 905394,
+        "filename": "bed-making-3-preview.zip",
+        "contentType": "application/zip"
+      },
+      "metadata": {
+        "object": "samples/library/metadata/bed-making-3.metadata.json",
+        "bytes": 2015,
+        "filename": "bed-making-3.metadata.json",
+        "contentType": "application/json"
+      },
+      "full": {
+        "object": null,
+        "bytes": 616562688,
+        "filename": "bed-making-3-segment.zip",
+        "contentType": "application/octet-stream",
+        "note": "Six camera mp4s, imu_left.db, imu_right.db, mag_middle.db"
+      }
+    },
+    "bed-making-4": {
+      "preview": {
+        "object": "samples/library/packs/bed-making-4-preview.zip",
+        "bytes": 1008965,
+        "filename": "bed-making-4-preview.zip",
+        "contentType": "application/zip"
+      },
+      "metadata": {
+        "object": "samples/library/metadata/bed-making-4.metadata.json",
+        "bytes": 2020,
+        "filename": "bed-making-4.metadata.json",
+        "contentType": "application/json"
+      },
+      "full": {
+        "object": null,
+        "bytes": 1219493888,
+        "filename": "bed-making-4-segment.zip",
+        "contentType": "application/octet-stream",
+        "note": "Six camera mp4s, imu_left.db, imu_right.db, mag_middle.db"
+      }
+    },
+    "hair-cutting-2": {
+      "preview": {
+        "object": "samples/library/packs/hair-cutting-2-preview.zip",
+        "bytes": 1443705,
+        "filename": "hair-cutting-2-preview.zip",
+        "contentType": "application/zip"
+      },
+      "metadata": {
+        "object": "samples/library/metadata/hair-cutting-2.metadata.json",
+        "bytes": 2063,
+        "filename": "hair-cutting-2.metadata.json",
+        "contentType": "application/json"
+      },
+      "full": {
+        "object": null,
+        "bytes": 1277165568,
+        "filename": "hair-cutting-2.mcap",
+        "contentType": "application/octet-stream",
+        "note": "MCAP with the stereo pair, IMU, VIO and annotations"
+      }
+    },
+    "bag-cutting": {
+      "preview": {
+        "object": "samples/library/packs/bag-cutting-preview.zip",
+        "bytes": 696815,
+        "filename": "bag-cutting-preview.zip",
+        "contentType": "application/zip"
+      },
+      "metadata": {
+        "object": "samples/library/metadata/bag-cutting.metadata.json",
+        "bytes": 2151,
+        "filename": "bag-cutting.metadata.json",
+        "contentType": "application/json"
+      },
+      "full": {
+        "object": null,
+        "bytes": 1459617792,
+        "filename": "bag-cutting-segment.zip",
+        "contentType": "application/octet-stream",
+        "note": "Six camera mp4s, imu_left.db, imu_right.db, mag_middle.db"
+      }
+    },
+    "food-cleaning": {
+      "preview": {
+        "object": "samples/library/packs/food-cleaning-preview.zip",
+        "bytes": 1145659,
+        "filename": "food-cleaning-preview.zip",
+        "contentType": "application/zip"
+      },
+      "metadata": {
+        "object": "samples/library/metadata/food-cleaning.metadata.json",
+        "bytes": 2130,
+        "filename": "food-cleaning.metadata.json",
+        "contentType": "application/json"
+      },
+      "full": {
+        "object": null,
+        "bytes": 512753664,
+        "filename": "food-cleaning-segment.zip",
+        "contentType": "application/octet-stream",
+        "note": "Six camera mp4s, imu_left.db, imu_right.db, mag_middle.db"
+      }
+    },
+    "food-serving-2": {
+      "preview": {
+        "object": "samples/library/packs/food-serving-2-preview.zip",
+        "bytes": 779415,
+        "filename": "food-serving-2-preview.zip",
+        "contentType": "application/zip"
+      },
+      "metadata": {
+        "object": "samples/library/metadata/food-serving-2.metadata.json",
+        "bytes": 2084,
+        "filename": "food-serving-2.metadata.json",
+        "contentType": "application/json"
+      },
+      "full": {
+        "object": null,
+        "bytes": 188743680,
+        "filename": "food-serving-2-segment.zip",
+        "contentType": "application/octet-stream",
+        "note": "Six camera mp4s, imu_left.db, imu_right.db, mag_middle.db"
+      }
+    },
+    "item-organizing-2": {
+      "preview": {
+        "object": "samples/library/packs/item-organizing-2-preview.zip",
+        "bytes": 824242,
+        "filename": "item-organizing-2-preview.zip",
+        "contentType": "application/zip"
+      },
+      "metadata": {
+        "object": "samples/library/metadata/item-organizing-2.metadata.json",
+        "bytes": 2128,
+        "filename": "item-organizing-2.metadata.json",
+        "contentType": "application/json"
+      },
+      "full": {
+        "object": null,
+        "bytes": 374341632,
+        "filename": "item-organizing-2-segment.zip",
+        "contentType": "application/octet-stream",
+        "note": "Six camera mp4s, imu_left.db, imu_right.db, mag_middle.db"
+      }
+    },
+    "food-preparation": {
+      "preview": {
+        "object": "samples/library/packs/food-preparation-preview.zip",
+        "bytes": 1012569,
+        "filename": "food-preparation-preview.zip",
+        "contentType": "application/zip"
+      },
+      "metadata": {
+        "object": "samples/library/metadata/food-preparation.metadata.json",
+        "bytes": 2145,
+        "filename": "food-preparation.metadata.json",
+        "contentType": "application/json"
+      },
+      "full": {
+        "object": null,
+        "bytes": 1270874112,
+        "filename": "food-preparation-segment.zip",
+        "contentType": "application/octet-stream",
+        "note": "Six camera mp4s, imu_left.db, imu_right.db, mag_middle.db"
+      }
+    },
+    "panel-attachment": {
+      "preview": {
+        "object": "samples/library/packs/panel-attachment-preview.zip",
+        "bytes": 317115,
+        "filename": "panel-attachment-preview.zip",
+        "contentType": "application/zip"
+      },
+      "metadata": {
+        "object": "samples/library/metadata/panel-attachment.metadata.json",
+        "bytes": 2139,
+        "filename": "panel-attachment.metadata.json",
+        "contentType": "application/json"
+      },
+      "full": {
+        "object": null,
+        "bytes": 1078984704,
+        "filename": "panel-attachment-segment.zip",
+        "contentType": "application/octet-stream",
+        "note": "Six camera mp4s, imu_left.db, imu_right.db, mag_middle.db"
+      }
+    },
+    "shoe-sorting-2": {
+      "preview": {
+        "object": "samples/library/packs/shoe-sorting-2-preview.zip",
+        "bytes": 1226924,
+        "filename": "shoe-sorting-2-preview.zip",
+        "contentType": "application/zip"
+      },
+      "metadata": {
+        "object": "samples/library/metadata/shoe-sorting-2.metadata.json",
+        "bytes": 2034,
+        "filename": "shoe-sorting-2.metadata.json",
+        "contentType": "application/json"
+      },
+      "full": {
+        "object": null,
+        "bytes": 1472200704,
+        "filename": "shoe-sorting-2-segment.zip",
+        "contentType": "application/octet-stream",
+        "note": "Six camera mp4s, imu_left.db, imu_right.db, mag_middle.db"
+      }
+    },
+    "flower-cutting-3": {
+      "preview": {
+        "object": "samples/library/packs/flower-cutting-3-preview.zip",
+        "bytes": 1468192,
+        "filename": "flower-cutting-3-preview.zip",
+        "contentType": "application/zip"
+      },
+      "metadata": {
+        "object": "samples/library/metadata/flower-cutting-3.metadata.json",
+        "bytes": 2089,
+        "filename": "flower-cutting-3.metadata.json",
+        "contentType": "application/json"
+      },
+      "full": {
+        "object": null,
+        "bytes": 1259339776,
+        "filename": "flower-cutting-3-segment.zip",
+        "contentType": "application/octet-stream",
+        "note": "Six camera mp4s, imu_left.db, imu_right.db, mag_middle.db"
+      }
+    },
+    "flower-arranging": {
+      "preview": {
+        "object": "samples/library/packs/flower-arranging-preview.zip",
+        "bytes": 2084920,
+        "filename": "flower-arranging-preview.zip",
+        "contentType": "application/zip"
+      },
+      "metadata": {
+        "object": "samples/library/metadata/flower-arranging.metadata.json",
+        "bytes": 2053,
+        "filename": "flower-arranging.metadata.json",
+        "contentType": "application/json"
+      },
+      "full": {
+        "object": null,
+        "bytes": 1396703232,
+        "filename": "flower-arranging-segment.zip",
+        "contentType": "application/octet-stream",
+        "note": "Six camera mp4s, imu_left.db, imu_right.db, mag_middle.db"
+      }
+    },
+    "flower-pruning": {
+      "preview": {
+        "object": "samples/library/packs/flower-pruning-preview.zip",
+        "bytes": 1131076,
+        "filename": "flower-pruning-preview.zip",
+        "contentType": "application/zip"
+      },
+      "metadata": {
+        "object": "samples/library/metadata/flower-pruning.metadata.json",
+        "bytes": 2057,
+        "filename": "flower-pruning.metadata.json",
+        "contentType": "application/json"
+      },
+      "full": {
+        "object": null,
+        "bytes": 1314914304,
+        "filename": "flower-pruning-segment.zip",
+        "contentType": "application/octet-stream",
+        "note": "Six camera mp4s, imu_left.db, imu_right.db, mag_middle.db"
+      }
+    },
+    "flower-arranging-2": {
+      "preview": {
+        "object": "samples/library/packs/flower-arranging-2-preview.zip",
+        "bytes": 1322069,
+        "filename": "flower-arranging-2-preview.zip",
+        "contentType": "application/zip"
+      },
+      "metadata": {
+        "object": "samples/library/metadata/flower-arranging-2.metadata.json",
+        "bytes": 2079,
+        "filename": "flower-arranging-2.metadata.json",
+        "contentType": "application/json"
+      },
+      "full": {
+        "object": null,
+        "bytes": 1224736768,
+        "filename": "flower-arranging-2-segment.zip",
+        "contentType": "application/octet-stream",
+        "note": "Six camera mp4s, imu_left.db, imu_right.db, mag_middle.db"
+      }
+    },
+    "trash-disposing": {
+      "preview": {
+        "object": "samples/library/packs/trash-disposing-preview.zip",
+        "bytes": 1044116,
+        "filename": "trash-disposing-preview.zip",
+        "contentType": "application/zip"
+      },
+      "metadata": {
+        "object": "samples/library/metadata/trash-disposing.metadata.json",
+        "bytes": 2101,
+        "filename": "trash-disposing.metadata.json",
+        "contentType": "application/json"
+      },
+      "full": {
+        "object": null,
+        "bytes": 1244659712,
+        "filename": "trash-disposing-segment.zip",
+        "contentType": "application/octet-stream",
+        "note": "Six camera mp4s, imu_left.db, imu_right.db, mag_middle.db"
+      }
+    }
+  }
+}

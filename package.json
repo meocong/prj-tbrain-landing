@@ -13,7 +13,8 @@
     "type-check": "tsc --noEmit",
     "ingest:tb": "tsx scripts/ingest-tb.ts",
     "issue:passcode": "tsx scripts/issue-passcode.ts",
-    "email:preview": "email dev --dir ./src/emails"
+    "email:preview": "email dev --dir ./src/emails",
+    "samples:stage": "node --env-file=.env.local scripts/samples/stage-packs.mjs"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.90.0",

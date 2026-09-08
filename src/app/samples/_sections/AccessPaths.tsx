@@ -71,7 +71,7 @@ export function AccessPaths() {
                     path.primary
                       ? { background: C.text, color: C.base, padding: "0.85rem 1.6rem" }
                       : {
-                          border: "1px solid rgba(255,255,255,0.22)",
+                          border: `1px solid ${C.rule}`,
                           color: C.text,
                           padding: "0.85rem 1.6rem",
                         }

@@ -47,8 +47,33 @@ async function isAdminAuthenticated(req: NextRequest): Promise<boolean> {
   }
 }
 
+async function isSamplesAuthenticated(req: NextRequest): Promise<boolean> {
+  const token = req.cookies.get(SESSION_COOKIE)?.value;
+  if (!token) return false;
+  try {
+    const { payload } = await jwtVerify(token, secret());
+    // Both products sign into the same cookie with the same secret, so a valid
+    // signature is not enough: a terminal-bench passcode must not open the
+    // sample library. Only /samples/api/auth/passcode stamps this claim.
+    return (payload as { project?: string }).project === "samples";
+  } catch {
+    return false;
+  }
+}
+
 export async function middleware(req: NextRequest) {
   const { pathname, search } = req.nextUrl;
+
+  // ── Sample library vault ──
+  // The catalogue at /samples is public on purpose: it is the sales surface.
+  // Only /samples/s, where the real delivery files are listed, needs a session.
+  if (pathname.startsWith("/samples/s")) {
+    if (await isSamplesAuthenticated(req)) return NextResponse.next();
+    const url = req.nextUrl.clone();
+    url.pathname = "/samples/enter";
+    url.search = `?redirect=${encodeURIComponent(pathname + search)}`;
+    return NextResponse.redirect(url);
+  }
 
   // ── Admin routes ──
   if (pathname.startsWith("/admin")) {
@@ -105,5 +130,6 @@ export const config = {
     "/admin/:path*",
     "/data/terminal-bench/s/:path*",
     "/data/terminal-bench/api/:path*",
+    "/samples/s/:path*",
   ],
 };

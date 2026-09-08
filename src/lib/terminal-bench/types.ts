@@ -57,6 +57,14 @@ export interface SessionClaims {
   clientId?: string;
   grantId?: string;
   sessionId: string;
+  /**
+   * Which product the passcode was redeemed against. Both products sign with
+   * the same secret into the same `tb_session` cookie, so without this claim a
+   * terminal-bench passcode would also open the sample library. Absent on
+   * tokens minted before this claim existed, which is why the sample routes
+   * require it explicitly rather than treating absence as "any project".
+   */
+  project?: "terminal-bench" | "samples";
   iat: number;
   exp: number;
 }
