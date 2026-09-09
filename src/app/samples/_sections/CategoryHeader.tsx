@@ -4,7 +4,7 @@ import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import samples from "@/lib/samples/samples.json";
 import { packStats, statsForCategory, type Category } from "@/lib/samples/categories";
-import { HeroMosaic } from "./HeroMosaic";
+import { HeroReel } from "./HeroReel";
 import { C } from "./tokens";
 
 /**
@@ -16,13 +16,15 @@ import { C } from "./tokens";
  * page selling video was 500px of prose and no video. A two-column version with
  * four posters beside the title was better and still read as a document.
  *
- * This is the same wall `/samples` opens with, scoped to one category: the
- * records in it, drifting, with the type printed over them. Two reasons that is
- * the right answer rather than a new invention.
+ * It is now a reel of this category's own records — one clip full frame,
+ * running into the next — with the name and the nine figures printed on it.
  *
- * It is the site's own language. `/samples` already establishes that a hero
- * here is footage with type on it; a category page that opened some other way
- * would read as a different site one click in.
+ * Not the mosaic `/samples` opens with, which was the version before this. A
+ * drifting wall of thirty tiles is the right argument for a front door, where
+ * the claim is "catalogue"; a category page makes a narrower claim about one
+ * kind of capture, and at tile size nothing is legible, so the wall said "lots"
+ * where this page has to say "this". Footage with type on it either way, so it
+ * still reads as the same site one click in.
  *
  * And it is the one thing the competition cannot answer. `claru.ai/explore` and
  * `/explore/egocentric` both return zero `<img>` and zero `<video>`, read
@@ -37,13 +39,15 @@ import { C } from "./tokens";
  * scale claim lands on the footage that backs it.
  */
 
-type Row = { slug: string; modality: string };
+type Row = { slug: string; modality: string; title: string };
 const ALL = samples as unknown as Row[];
 
 export function CategoryHeader({ category: c }: { category: Category }) {
   const s = statsForCategory(c);
   const stats = packStats(c);
-  const slugs = c.modality ? ALL.filter((r) => r.modality === c.modality).map((r) => r.slug) : [];
+  const reel = c.modality
+    ? ALL.filter((r) => r.modality === c.modality).map((r) => ({ slug: r.slug, title: r.title }))
+    : [];
 
   const copy = (
     <>
@@ -86,7 +90,7 @@ export function CategoryHeader({ category: c }: { category: Category }) {
 
       {stats.length > 0 && (
         /* On the footage rather than under it: the figures are a claim about
-           what is in the wall behind them, and separating the two put a rule
+           the records playing behind them, and separating the two put a rule
            between a number and its evidence. */
         <dl
           className="mt-10 grid grid-cols-2 gap-x-6 gap-y-6 sm:grid-cols-4 xl:grid-cols-8"
@@ -113,12 +117,12 @@ export function CategoryHeader({ category: c }: { category: Category }) {
     </>
   );
 
-  if (slugs.length > 0) {
+  if (reel.length > 0) {
     return (
       <section className="relative">
-        <HeroMosaic slugs={slugs} heightClass="h-[76svh] min-h-[600px]">
+        <HeroReel items={reel} heightClass="h-[76svh] min-h-[600px]">
           {copy}
-        </HeroMosaic>
+        </HeroReel>
       </section>
     );
   }
