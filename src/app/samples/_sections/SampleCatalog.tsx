@@ -88,8 +88,36 @@ interface Filters {
   industry: string[];
   rig: string[];
   job: string;
+  /**
+   * Facets that exist on one category and nowhere else, keyed by the `spec`
+   * field they read.
+   *
+   * The rail was six fixed groups written for egocentric — Source, Viewpoint,
+   * Skill group, Industry, Rig, Job — and every category got all six whether
+   * its records carried them or not. Gaming has no trade, no industry and one
+   * viewpoint, so a gaming buyer was handed five controls that could not narrow
+   * anything and one that could. Its real axes are in `spec`: Title, Session
+   * type, Stress category.
+   */
+  spec: Record<string, string[]>;
   q: string;
 }
+
+/**
+ * The `spec` keys each category offers as facets.
+ *
+ * Egocentric's axes are typed fields on `Sample` and stay above; this is for
+ * the ones that only exist inside `spec`, which differ per category by nature.
+ */
+const SPEC_FACETS: Record<string, { key: string; title: string }[]> = {
+  gaming: [
+    { key: "Title", title: "Game" },
+    { key: "Session type", title: "Session" },
+    { key: "Stress category", title: "Stress" },
+  ],
+};
+
+const specCell = (s: Sample, key: string) => s.spec?.find((p) => p[0] === key)?.[1] ?? null;
 
 const EMPTY: Filters = {
   scope: "egocentric",
@@ -100,6 +128,7 @@ const EMPTY: Filters = {
   industry: [],
   rig: [],
   job: "all",
+  spec: {},
   q: "",
 };
 
@@ -128,6 +157,13 @@ function matches(s: Sample, f: Filters, skip?: keyof Filters) {
     return false;
   if (on("rig") && f.rig.length && !f.rig.includes(s.rig)) return false;
   if (on("job") && f.job !== "all" && s.job !== f.job) return false;
+  if (on("spec")) {
+    for (const [key, picked] of Object.entries(f.spec)) {
+      if (!picked.length) continue;
+      const v = specCell(s, key);
+      if (!v || !picked.includes(v)) return false;
+    }
+  }
   if (on("q") && f.q.trim()) {
     const q = f.q.trim().toLowerCase();
     const hay = `${s.title} ${s.label} ${s.environment} ${s.rig} ${s.skillGroup ?? ""} ${s.job ?? ""}`;
@@ -563,10 +599,48 @@ export function SampleCatalog({ modality }: { modality: string }) {
     return [...out].sort(by[sort]);
   }, [f, sort]);
 
-  const rigs = useMemo(() => Array.from(new Set(ALL.map((s) => s.rig))).sort(), []);
-  const jobs = useMemo(
-    () => JOBS.filter((j) => ALL.some((s) => s.job === j)),
-    [],
+  /* Every facet's options come from the records IN THIS CATEGORY, never from
+     the global taxonomy.
+     The rail was listing SKILL_GROUPS and INDUSTRIES whole, so /samples/egocentric
+     offered "Healthcare & Caregiving 0" and "Home Appliance Interaction 0" —
+     rows that exist in the taxonomy and in no record here — and "Third person 0"
+     under Viewpoint, on a category defined by being first-person. A greyed row
+     reading zero is a control that cannot do anything, and six of them ahead of
+     the ones that can is what made this rail long. */
+  const scoped = useMemo(() => ALL.filter((s) => s.modality === f.scope), [f.scope]);
+  const valuesOf = useCallback(
+    (pick: (s: Sample) => string | null) =>
+      Array.from(new Set(scoped.map(pick).filter(Boolean) as string[])).sort(),
+    [scoped],
+  );
+
+  const rigs = useMemo(() => valuesOf((s) => s.rig), [valuesOf]);
+  const jobs = useMemo(() => JOBS.filter((j) => scoped.some((s) => s.job === j)), [scoped]);
+  const skillGroups = useMemo(
+    () => SKILL_GROUPS.filter((g) => scoped.some((s) => s.skillGroup === g)),
+    [scoped],
+  );
+  const industries = useMemo(
+    () => INDUSTRIES.filter((i) => scoped.some((s) => s.industry === i)),
+    [scoped],
+  );
+  const viewpoints = useMemo(
+    () => VIEWPOINTS.filter((v) => scoped.some((s) => s.viewpoint === v.key)),
+    [scoped],
+  );
+  const sources = useMemo(
+    () => SOURCES.filter((p) => scoped.some((s) => s.provenance === p.key)),
+    [scoped],
+  );
+
+  /** This category's own spec facets, with their values, in config order. */
+  const specFacets = useMemo(
+    () =>
+      (SPEC_FACETS[f.scope] ?? [])
+        .map((cfg) => ({ ...cfg, values: valuesOf((s) => specCell(s, cfg.key)) }))
+        // A facet with one value cannot narrow anything.
+        .filter((x) => x.values.length > 1),
+    [f.scope, valuesOf],
   );
 
   /* Counts, because every other control in this rail has them: a chip says how
@@ -589,6 +663,7 @@ export function SampleCatalog({ modality }: { modality: string }) {
       f.industry.length + f.rig.length >
       0 ||
     f.job !== "all" ||
+    Object.values(f.spec).some((v) => v.length > 0) ||
     f.q.trim() !== "";
 
   const totals = useMemo(() => {
@@ -659,17 +734,12 @@ export function SampleCatalog({ modality }: { modality: string }) {
                 />
               </label>
 
-              {/* Robotics only. Gaming is one modality, so offering the choice
-                  there would be four chips reading zero, each of which would
-                  answer with an egocentric price sheet a gaming buyer did not
-                  ask for. A facet with one value is not a facet. */}
-              {/* The modality facet is gone: inside one category there is one
-                  modality, and a facet with a single value is not a facet. The
-                  Source split survives, because a category holds both
-                  off-the-shelf and custom-collected records. */}
-              {f.scope !== "gaming" && (
+              {/* Every group below renders only where this category has more
+                  than one value for it. A facet with one value is not a facet,
+                  and a facet with none is a row of zeroes. */}
+              {sources.length > 1 && (
                 <RailGroup title="Source" first>
-                  {SOURCES.map((p) => (
+                  {sources.map((p) => (
                     <Chip
                       key={p.key}
                       label={p.label}
@@ -681,72 +751,103 @@ export function SampleCatalog({ modality }: { modality: string }) {
                 </RailGroup>
               )}
 
-              {/* `first` when Source is hidden, so the rail never opens with a
-                  rule floating above nothing. */}
-              <RailGroup title="Viewpoint" first={f.scope === "gaming"}>
-                {VIEWPOINTS.map((v) => (
-                  <Chip
-                    key={v.key}
-                    label={v.label}
-                    active={f.viewpoint.includes(v.key)}
-                    count={countFor("viewpoint", (s) => s.viewpoint, v.key)}
-                    onClick={() => toggle("viewpoint", v.key)}
-                  />
-                ))}
-              </RailGroup>
+              {viewpoints.length > 1 && (
+                <RailGroup title="Viewpoint" first={sources.length <= 1}>
+                  {viewpoints.map((v) => (
+                    <Chip
+                      key={v.key}
+                      label={v.label}
+                      active={f.viewpoint.includes(v.key)}
+                      count={countFor("viewpoint", (s) => s.viewpoint, v.key)}
+                      onClick={() => toggle("viewpoint", v.key)}
+                    />
+                  ))}
+                </RailGroup>
+              )}
 
-              <RailGroup title="Skill group">
-                {SKILL_GROUPS.map((g) => (
-                  <Chip
-                    key={g}
-                    label={g}
-                    active={f.skillGroup.includes(g)}
-                    count={countFor("skillGroup", (s) => s.skillGroup, g)}
-                    onClick={() => toggle("skillGroup", g)}
-                  />
-                ))}
-              </RailGroup>
+              {skillGroups.length > 1 && (
+                <RailGroup title="Skill group">
+                  {skillGroups.map((g) => (
+                    <Chip
+                      key={g}
+                      label={g}
+                      active={f.skillGroup.includes(g)}
+                      count={countFor("skillGroup", (s) => s.skillGroup, g)}
+                      onClick={() => toggle("skillGroup", g)}
+                    />
+                  ))}
+                </RailGroup>
+              )}
 
-              <RailGroup title="Industry">
-                {INDUSTRIES.map((i) => (
-                  <Chip
-                    key={i}
-                    label={i}
-                    active={f.industry.includes(i)}
-                    count={countFor("industry", (s) => s.industry, i)}
-                    onClick={() => toggle("industry", i)}
-                  />
-                ))}
-              </RailGroup>
+              {industries.length > 1 && (
+                <RailGroup title="Industry">
+                  {industries.map((i) => (
+                    <Chip
+                      key={i}
+                      label={i}
+                      active={f.industry.includes(i)}
+                      count={countFor("industry", (s) => s.industry, i)}
+                      onClick={() => toggle("industry", i)}
+                    />
+                  ))}
+                </RailGroup>
+              )}
 
-              <RailGroup title="Rig">
-                {rigs.map((r) => (
-                  <Chip
-                    key={r}
-                    label={r}
-                    active={f.rig.includes(r)}
-                    count={countFor("rig", (s) => s.rig, r)}
-                    onClick={() => toggle("rig", r)}
-                  />
-                ))}
-              </RailGroup>
+              {rigs.length > 1 && (
+                <RailGroup title="Rig">
+                  {rigs.map((r) => (
+                    <Chip
+                      key={r}
+                      label={r}
+                      active={f.rig.includes(r)}
+                      count={countFor("rig", (s) => s.rig, r)}
+                      onClick={() => toggle("rig", r)}
+                    />
+                  ))}
+                </RailGroup>
+              )}
 
-              <RailGroup title="Job">
-                {/* `px-2.5` cancels RailGroup's `-mx-2.5` the same way a chip's
-                    own padding does. It used to be `mx-2.5 w-[calc(100%-1.25rem)]`
-                    on the control itself — arithmetic that had to be redone by
-                    hand every time that inset changed. */}
-                <div className="px-2.5">
-                  <FacetPicker
-                    value={f.job}
-                    options={jobOptions}
-                    onChange={(job) => setF((p) => ({ ...p, job }))}
-                    ariaLabel="Filter by job"
-                    searchPlaceholder="Search jobs"
-                    emptyText="No job matches that."
-                  />
-                </div>
-              </RailGroup>
+              {/* This category's own axes. Gaming's are Game, Session and
+                  Stress; egocentric has none here because its axes are typed
+                  fields and appear above. */}
+              {specFacets.map((facet) => (
+                <RailGroup key={facet.key} title={facet.title}>
+                  {facet.values.map((v) => (
+                    <Chip
+                      key={v}
+                      label={v}
+                      active={(f.spec[facet.key] ?? []).includes(v)}
+                      count={countFor("spec", (s) => specCell(s, facet.key), v)}
+                      onClick={() =>
+                        setF((p) => {
+                          const cur = p.spec[facet.key] ?? [];
+                          const next = cur.includes(v)
+                            ? cur.filter((x) => x !== v)
+                            : [...cur, v];
+                          return { ...p, spec: { ...p.spec, [facet.key]: next } };
+                        })
+                      }
+                    />
+                  ))}
+                </RailGroup>
+              ))}
+
+              {jobs.length > 1 && (
+                <RailGroup title="Job">
+                  {/* `px-2.5` cancels RailGroup's `-mx-2.5` the same way a chip's
+                      own padding does. */}
+                  <div className="px-2.5">
+                    <FacetPicker
+                      value={f.job}
+                      options={jobOptions}
+                      onChange={(job) => setF((p) => ({ ...p, job }))}
+                      ariaLabel="Filter by job"
+                      searchPlaceholder="Search jobs"
+                      emptyText="No job matches that."
+                    />
+                  </div>
+                </RailGroup>
+              )}
             </div>
           </aside>
 
