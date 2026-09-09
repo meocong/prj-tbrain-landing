@@ -92,6 +92,18 @@ export function HeroSamples() {
               Same sentence shape, opposite claim, so it does not read as a
               copy of the competitor Tam sent.
 
+              The second line is NOT the category list, though it was once. A
+              list here is the same fault as the taxonomy above with different
+              words, and the chooser prints those three words verbatim as its
+              own section headings 746px below - measured, not guessed. It also
+              weighted them wrong: Coding & STEM took a quarter of the headline
+              while living on another route entirely, and robotics, which is
+              118 of the 126 samples, took a third.
+
+              So it carries the one claim nothing else says at this size, and
+              the one no competitor's catalogue can make. The subhead used to
+              carry it; a claim this good does not belong in 16px grey.
+
               Tiers, hour counts and prices differ per category and live one
               click down, on the category they belong to. */}
           <h1
@@ -113,7 +125,7 @@ export function HeroSamples() {
                 different sentence for a beat. */}
             <span className="block">Training data for&nbsp;AI, collected by us.</span>
             <span className="block" style={{ color: "rgba(255,255,255,0.48)" }}>
-              Robotics, gaming, coding and STEM.
+              Every sample opens without a form.
             </span>
           </h1>
 
@@ -129,9 +141,9 @@ export function HeroSamples() {
             className="mt-6 max-w-lg text-base leading-relaxed"
             style={{ color: "rgba(255,255,255,0.76)" }}
           >
-            We record it first-hand, off the shelf or to your spec. Every set we sell has real
-            delivery files on this page, playable in full with no form — open a category for its
-            tiers, hours and pricing.
+            Every set we sell has real delivery files on this page. Off the shelf or collected to
+            your spec, shipped as MCAP or LeRobot with calibration, telemetry and annotation in
+            band — open a category for its tiers, hours and pricing.
           </p>
 
           <div className="mt-8 flex flex-wrap items-center gap-6">
