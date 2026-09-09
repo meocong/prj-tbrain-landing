@@ -5,6 +5,7 @@ import Link from "next/link";
 import { Check, ChevronDown, Copy, Search, SlidersHorizontal, X } from "lucide-react";
 import samples from "@/lib/samples/samples.json";
 import { SKILL_GROUPS, JOBS, INDUSTRIES } from "@/lib/samples/taxonomy";
+import { FacetPicker, SortPicker } from "./Fields";
 import { groupSpec, LONG_VALUE } from "@/lib/samples/spec-sections";
 import { publicSpec } from "@/lib/samples/redact.mjs";
 import { track } from "@/lib/samples/track";
@@ -401,6 +402,21 @@ export function SampleCatalog() {
     [],
   );
 
+  /* Counts, because every other control in this rail has them: a chip says how
+     many samples it would leave and greys itself out at zero, so the one facet
+     that hides its options behind a click was also the only one you had to pick
+     blind. Each is counted with the job facet lifted, which is what keeps the
+     numbers reachable — `countFor`'s rule, applied to the reset row too. That
+     row used `shown.length` at first, the count AFTER this facet narrows, so
+     picking Cook made it read "Any job (17)": the number it exists to escape. */
+  const jobOptions = useMemo(
+    () => [
+      { value: "all", label: "Any job", count: ALL.filter((s) => matches(s, f, "job")).length },
+      ...jobs.map((j) => ({ value: j, label: j, count: countFor("job", (s) => s.job, j) })),
+    ],
+    [jobs, f, countFor],
+  );
+
   const dirty =
     f.domain.length + f.viewpoint.length + f.skillGroup.length + f.industry.length + f.rig.length > 0 ||
     f.job !== "all" ||
@@ -555,49 +571,16 @@ export function SampleCatalog() {
               <RailGroup title="Job">
                 {/* `px-2.5` cancels RailGroup's `-mx-2.5` the same way a chip's
                     own padding does. It used to be `mx-2.5 w-[calc(100%-1.25rem)]`
-                    on the select itself — arithmetic that had to be redone by
+                    on the control itself — arithmetic that had to be redone by
                     hand every time that inset changed. */}
-                <div className="relative px-2.5">
-                  <select
+                <div className="px-2.5">
+                  <FacetPicker
                     value={f.job}
-                    onChange={(e) => setF((p) => ({ ...p, job: e.target.value }))}
-                    aria-label="Filter by job"
-                    data-active={f.job !== "all"}
-                    className="sm-select w-full appearance-none rounded-lg py-1.5 pl-2.5 pr-8 text-[12.5px]"
-                  >
-                    {/* Counts, because every other control in this rail has
-                        them: a chip says how many samples it would leave and
-                        greys itself out at zero. Without them the one facet
-                        that hides its options behind a click was also the only
-                        one you had to pick blind. Each is counted with the job
-                        facet lifted, so the numbers stay reachable — same rule
-                        as `countFor` everywhere else. */}
-                    {/* Not `shown.length`: that is the count AFTER this facet
-                        has narrowed, so picking Cook made the reset option read
-                        "Any job (17)" — the number it is there to escape. Every
-                        count in this control answers the same question, "how
-                        many if I pick this", so this one lifts the job facet
-                        exactly as `countFor` does for the rows below. */}
-                    <option value="all">
-                      Any job ({ALL.filter((s) => matches(s, f, "job")).length})
-                    </option>
-                    {jobs.map((j) => (
-                      <option key={j} value={j}>
-                        {j} ({countFor("job", (s) => s.job, j)})
-                      </option>
-                    ))}
-                  </select>
-                  {/* The native control's own indicator is a macOS double
-                      caret in a raised box — the one piece of system chrome on
-                      a page that draws every other edge as a hairline.
-                      `appearance-none` drops it; this is the same lucide
-                      chevron the mobile Filters toggle and the modal already
-                      use. `pr-8` above reserves its column so a long job title
-                      truncates before it reaches the icon. */}
-                  <ChevronDown
-                    aria-hidden
-                    className="pointer-events-none absolute right-5 top-1/2 h-3.5 w-3.5 -translate-y-1/2"
-                    style={{ color: C.textDim }}
+                    options={jobOptions}
+                    onChange={(job) => setF((p) => ({ ...p, job }))}
+                    ariaLabel="Filter by job"
+                    searchPlaceholder="Search jobs"
+                    emptyText="No job matches that."
                   />
                 </div>
               </RailGroup>
@@ -631,31 +614,19 @@ export function SampleCatalog() {
                     Clear
                   </button>
                 )}
-                <label className="flex items-center gap-2 text-[12.5px]" style={{ color: C.textDim }}>
+                <span className="flex items-center gap-2 text-[12.5px]" style={{ color: C.textDim }}>
                   Sort
-                  {/* Same treatment as the Job select, from the same class.
-                      Two selects on one screen styled apart is the drift this
+                  {/* Same trigger class as the Job picker, from the same file.
+                      Two dropdowns on one screen styled apart is the drift this
                       page keeps having to undo. No `data-active`: a sort order
                       is always set, so "on" says nothing here. */}
-                  <span className="relative inline-flex">
-                    <select
-                      value={sort}
-                      onChange={(e) => setSort(e.target.value as SortKey)}
-                      className="sm-select appearance-none rounded-lg py-1.5 pl-2.5 pr-8 text-[12.5px]"
-                    >
-                      {SORTS.map((s) => (
-                        <option key={s.key} value={s.key}>
-                          {s.label}
-                        </option>
-                      ))}
-                    </select>
-                    <ChevronDown
-                      aria-hidden
-                      className="pointer-events-none absolute right-2.5 top-1/2 h-3.5 w-3.5 -translate-y-1/2"
-                      style={{ color: C.textDim }}
-                    />
-                  </span>
-                </label>
+                  <SortPicker
+                    value={sort}
+                    options={SORTS}
+                    onChange={setSort}
+                    ariaLabel="Sort samples"
+                  />
+                </span>
               </div>
             </div>
 
