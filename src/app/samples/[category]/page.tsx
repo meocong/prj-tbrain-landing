@@ -16,6 +16,7 @@ import { LICENSE, QUALIFIER } from "@/lib/samples/license";
 import { SampleCatalog } from "../_sections/SampleCatalog";
 import { TwoRoutes } from "../_sections/TwoRoutes";
 import { FacetIndex } from "../_sections/FacetIndex";
+import { CaptureSpec } from "../_sections/CaptureSpec";
 import { AccessPaths } from "../_sections/AccessPaths";
 import { C } from "../_sections/tokens";
 
@@ -115,6 +116,11 @@ export default async function CategoryPage({
             </p>
           </div>
         </section>
+
+        {/* What records this category, before anything about what is in it.
+            It is the first question a technical buyer asks, and it is the one
+            block that makes this page not interchangeable with the next one. */}
+        <CaptureSpec category={c} />
 
         {/* The facet values as content, before the control that uses them. A
             reader who never opens the rail never learns the catalogue has

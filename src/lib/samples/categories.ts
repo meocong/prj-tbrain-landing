@@ -42,6 +42,16 @@ export interface Category {
    * modality - if one moves, move both.
    */
   held?: { figure: string; unit: string };
+  /**
+   * What records this category and what rides with a frame, for the three that
+   * hold nothing on disk. Where there ARE records, `captureFor` derives this
+   * instead and ignores whatever is written here — a written list beside real
+   * records is a list that will drift.
+   *
+   * Every line below is traceable to `IN_FLIGHT` or `CAPABILITY` for the same
+   * modality. Nothing here is a guess about a rig we have not run.
+   */
+  capture?: { label: string; value: string }[];
 }
 
 export const CATEGORIES: Category[] = [
@@ -70,6 +80,14 @@ export const CATEGORIES: Category[] = [
     shelf: null,
     // IN_FLIGHT.exocentric: "20 hours in collection since 5 September 2026".
     held: { figure: "20 h", unit: "in collection · 15 operators" },
+    // Every line from IN_FLIGHT.exocentric.
+    capture: [
+      { label: "Recorded on", value: "Fixed and handheld cameras, third-person" },
+      { label: "Video", value: "1080p at 30 fps, with audio" },
+      { label: "Clip length", value: "30 seconds to 15 minutes" },
+      { label: "Mix in collection", value: "10 h urban walking · 5 h vehicular navigation · 5 h structured indoor" },
+      { label: "Ships as", value: ".mp4" },
+    ],
   },
   {
     slug: "teleoperation",
@@ -82,6 +100,16 @@ export const CATEGORIES: Category[] = [
     // IN_FLIGHT.teleoperation, counted off the disk rather than off the
     // dataset's own manifest, which disagrees with it.
     held: { figure: "11", unit: "LeRobot episodes · 14,076 frames" },
+    // Every line from IN_FLIGHT.teleoperation, which is counted off the disk
+    // rather than off the dataset's own manifest - the two disagree.
+    capture: [
+      { label: "Recorded on", value: "openarm_gripper_follower, bimanual" },
+      { label: "Video", value: "Three synchronised 640x480 cameras (head, left, right) at 30 fps" },
+      { label: "On every frame", value: "Joint state and action, 16-dimensional" },
+      { label: "Arms", value: "Seven degrees of freedom per arm, plus a gripper each" },
+      { label: "Held now", value: "11 episodes · 14,076 frames · 7 min 49 s · 1.2 GB of video" },
+      { label: "Ships as", value: "LeRobotDataset v2.1 with a GR00T-compatible modality map" },
+    ],
   },
   {
     slug: "mocap",
@@ -95,6 +123,13 @@ export const CATEGORIES: Category[] = [
     // figure is what the rig captures: 17 IMUs at 240 Hz plus per-finger gloves.
     // Not the rate — see the comment on `CapabilityTier.price`.
     held: { figure: "240 Hz", unit: "17 IMUs + per-finger pose" },
+    // Every line from CAPABILITY.mocap, the only tier priced for it.
+    capture: [
+      { label: "Recorded on", value: "Helmet GoPro, SuperView ~150 degrees" },
+      { label: "Body", value: "Xsens MVN HD, 17 IMUs at 240 Hz" },
+      { label: "Hands", value: "Metagloves, per-finger pose" },
+      { label: "Ships as", value: "FBX · BVH · SMPL, alongside the video" },
+    ],
   },
   {
     slug: "gaming",
