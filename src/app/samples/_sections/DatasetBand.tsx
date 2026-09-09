@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, useReducedMotion } from "framer-motion";
-import { DATASETS, LINES, axesFor, statsFor, type LineKey } from "@/lib/samples/datasets";
+import { DATASETS, statsFor } from "@/lib/samples/datasets";
 import { INTEROP } from "@/lib/samples/capability";
 import { LICENSE_SHORT, QUALIFIER } from "@/lib/samples/license";
 import { C, EASE, OVER_MEDIA } from "./tokens";
@@ -27,77 +27,31 @@ import { C, EASE, OVER_MEDIA } from "./tokens";
  * number that can drift from samples.json.
  */
 export function DatasetBand({
-  line,
-  onLine,
+  scope,
   activeSlug,
   onPick,
 }: {
-  line: LineKey;
-  onLine: (line: LineKey) => void;
+  /** The category this page is. The line switch moved to the chooser. */
+  scope: string;
   activeSlug: string | null;
   onPick: (slug: string | null) => void;
 }) {
   const reduce = useReducedMotion();
+  const line = scope === "gaming" ? "gaming" : "robotics";
   const sets = DATASETS.filter((d) => d.line === line);
 
   return (
-    <div className="mt-10">
-      <div className="flex flex-wrap items-center gap-2">
-        {LINES.map((l) => {
-          const on = l.key === line;
-          return (
-            <button
-              key={l.key}
-              type="button"
-              onClick={() => onLine(l.key)}
-              aria-pressed={on}
-              className="rounded-full px-4 py-2 text-[13px] font-medium transition-colors"
-              style={
-                on
-                  ? { background: C.text, color: C.base }
-                  : { border: `1px solid ${C.hairline}`, color: C.textMid }
-              }
-            >
-              {l.label}
-            </button>
-          );
-        })}
-      </div>
-
-      {/* Diversity as named axes, which is how Claru states GEO / DEM / ENV /
-          DEV. Counted from the records on this page, and labelled as such: the
-          deck's figures describe the whole 1,200-hour shelf, and printing those
-          over a grid of 118 playable samples is the quiet overstatement a
-          procurement review exists to catch. */}
-      <dl className="mt-7 grid grid-cols-2 gap-x-8 gap-y-5 sm:grid-cols-4">
-        {axesFor(line).map((a) => (
-          <div key={a.key}>
-            <dt
-              className="font-mono text-[10px] uppercase tracking-[0.18em]"
-              style={{ color: C.textDim }}
-            >
-              {a.label}
-            </dt>
-            <dd
-              className="mt-1 font-mono text-2xl tracking-tight"
-              style={{ color: C.value, lineHeight: 1.1 }}
-            >
-              {a.value}
-            </dd>
-          </div>
-        ))}
-      </dl>
-      <p className="mt-3 text-[12px]" style={{ color: C.textDim }}>
-        Measured across the samples published here, not the full shelf.
-      </p>
-
+    <div className="mt-4">
       {/* Image cards, not prose blocks. Claru's cards are paragraphs because
           they have nothing to show; these sit directly above 118 playable
           posters, so the frame does the work the paragraph was doing badly and
           the line under it says what the set is in fifteen words. The poster is
           the longest record in each set, picked deterministically so the card
           does not change between renders. */}
-      <div className="mt-8 grid gap-x-6 gap-y-8 sm:grid-cols-2 xl:grid-cols-4">
+      {/* One horizontal row that scrolls, not a two-row grid. As a grid these
+          eight cards were 600px of picker standing between arriving and
+          playing something, which is the opposite of what a picker is for. */}
+      <div className="-mx-4 mt-2 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-2 lg:mx-0 lg:px-0">
         {sets.map((d, i) => {
           const s = statsFor(d);
           const on = d.slug === activeSlug;
@@ -107,7 +61,7 @@ export function DatasetBand({
               type="button"
               onClick={() => onPick(on ? null : d.slug)}
               aria-pressed={on}
-              className="group flex flex-col items-start text-left"
+              className="group flex w-[210px] shrink-0 snap-start flex-col items-start text-left"
               initial={reduce ? false : { opacity: 0, y: 14 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.3 }}

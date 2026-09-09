@@ -80,9 +80,10 @@ const SORTS = [
 type SortKey = (typeof SORTS)[number]["key"];
 
 interface Filters {
-  /** Navigation, carried here so `matches` can honour it without a second pass. */
-  line: LineKey;
+  /** The one dataset in view, or none. Navigation, not narrowing. */
   dataset: string | null;
+  /** The category. Fixed by the route; never a facet on this page. */
+  scope: string;
   modality: string[];
   provenance: string[];
   viewpoint: string[];
@@ -94,8 +95,8 @@ interface Filters {
 }
 
 const EMPTY: Filters = {
-  line: "robotics",
   dataset: null,
+  scope: "egocentric",
   modality: [],
   provenance: [],
   viewpoint: [],
@@ -115,10 +116,9 @@ function mmss(total: number) {
 /** Within a facet the selected values are OR-ed; across facets they are AND-ed. */
 function matches(s: Sample, f: Filters, skip?: keyof Filters) {
   const on = (k: keyof Filters) => k !== skip;
-  // Line and dataset sit outside `Filters` and outside `skip`: they are
-  // navigation, so a facet count must be computed WITHIN the line the reader is
-  // in, never across both buyers.
-  if (f.line === "gaming" ? s.modality !== "gaming" : s.modality === "gaming") return false;
+  // Scope and dataset sit outside `skip`: they are the route, not a facet, so a
+  // facet count is always computed WITHIN the category the reader opened.
+  if (s.modality !== f.scope) return false;
   if (f.dataset) {
     const d = DATASETS.find((x) => x.slug === f.dataset);
     if (d && d.skillGroups.length && !(s.skillGroup && d.skillGroups.includes(s.skillGroup)))
@@ -477,7 +477,14 @@ function RailGroup({
   );
 }
 
-export function SampleCatalog() {
+/**
+ * The catalogue for ONE category. It used to own the line switch and render the
+ * whole shelf; the chooser at `/samples` owns that choice now, and this mounts
+ * on `/samples/[category]` already scoped. The facets, the grid, the dataset
+ * band and the record layer are unchanged - they were never the problem, they
+ * were on the wrong page.
+ */
+export function SampleCatalog({ modality }: { modality: string }) {
   const [active, setActive] = useState<Sample | null>(null);
   /* A record is addressable: `/samples?record=<slug>`.
    *
@@ -509,17 +516,23 @@ export function SampleCatalog() {
       window.history.replaceState(null, "", next);
     }
   }, [active]);
-  const [f, setF] = useState<Filters>(EMPTY);
+  const [f, setF] = useState<Filters>({ ...EMPTY, scope: modality });
+
+  // The route is the source of truth for scope; a client nav between categories
+  // remounts nothing, so the filter has to follow it.
+  useEffect(() => {
+    setF((p) => (p.scope === modality ? p : { ...EMPTY, scope: modality }));
+  }, [modality]);
 
   /* Clear empties the facets and leaves the reader where they were. Line and
      dataset are navigation, not narrowing: resetting them would teleport a
      gaming buyer back into the robotics grid for pressing "Clear". */
-  const clear = () => setF({ ...EMPTY, line: f.line, dataset: f.dataset });
+  const clear = () => setF({ ...EMPTY, scope: f.scope, dataset: f.dataset });
 
   /** Records in the reader's line, before any facet narrows them. */
   const inLine = useMemo(
-    () => ALL.filter((s) => (f.line === "gaming" ? s.modality === "gaming" : s.modality !== "gaming")).length,
-    [f.line],
+    () => ALL.filter((s) => s.modality === f.scope).length,
+    [f.scope],
   );
 
   const [sort, setSort] = useState<SortKey>("longest");
@@ -609,41 +622,13 @@ export function SampleCatalog() {
   return (
     <>    <section id="deck" style={{ background: C.base, color: C.text }}>
       <div className="mx-auto max-w-[1400px] px-4 pt-24 md:pt-28 lg:px-10 xl:px-16">
-        <div className="flex flex-wrap items-end justify-between gap-6">
-          <h2
-            className="text-3xl font-medium tracking-tight md:text-5xl"
-            style={{ fontFamily: "var(--font-heading)", letterSpacing: "-0.03em", lineHeight: 1.06 }}
-          >
-            {/* Counts the line the reader is in. It said 126 while the tabs
-                directly below narrowed to 118, so the page contradicted itself
-                one element apart. */}
-            {inLine} files{" "}
-            <span style={{ color: C.textDim }}>from real deliveries</span>
-          </h2>
-          {/* One sentence, and only the part a reader cannot work out by
-              looking. Two more used to sit here — open a record for its
-              metadata, telemetry runs beside the clip — but the hero says both
-              a screen earlier, the cards are visibly clickable, and the access
-              strip directly below owns everything about getting the files. All
-              three together read as a paragraph to skip.
-
-              The resolution used to be stated here as "640 x 480", which held
-              for 18 of the 131 clips; the other 113 encode at 576 x 432. Each
-              card already prints its own preview size, measured per file, so
-              the one figure that cannot be right for every clip is gone.
-
-              `max-w-md` is wide enough that what is left sets on one line
-              (405px of it) rather than wrapping to two. The cap was `sm` to
-              stop three sentences running the width of the header; with one
-              sentence the same cap is what forces the wrap. */}
-          <p className="max-w-md text-sm leading-relaxed" style={{ color: C.textMid }}>
-            Previews are 8-second cuts, downscaled from the delivery file.
-          </p>
-        </div>
-
+        {/* No heading here any more. The category page above states the name,
+            what the category is, the pack summary and the preview caveat, and
+            repeating "118 files from real deliveries" under all of that was the
+            same fact a fourth time - and 3,514px of run-up before the first
+            playable clip. */}
         <DatasetBand
-          line={f.line}
-          onLine={(line) => setF((p) => ({ ...p, line, dataset: null }))}
+          scope={f.scope}
           activeSlug={f.dataset}
           onPick={(dataset) => setF((p) => ({ ...p, dataset }))}
         />
@@ -689,38 +674,27 @@ export function SampleCatalog() {
                   there would be four chips reading zero, each of which would
                   answer with an egocentric price sheet a gaming buyer did not
                   ask for. A facet with one value is not a facet. */}
-              {f.line === "robotics" && (
-                <>
-                  <RailGroup title="Modality" first>
-                {MODALITIES.map((m) => (
-                  <Chip
-                    key={m.key}
-                    label={m.label}
-                    active={f.modality.includes(m.key)}
-                    count={countFor("modality", (s) => s.modality, m.key)}
-                    onClick={() => toggle("modality", m.key)}
-                    quotable={Boolean(CAPABILITY[m.key])}
-                  />
-                ))}
-              </RailGroup>
+              {/* The modality facet is gone: inside one category there is one
+                  modality, and a facet with a single value is not a facet. The
+                  Source split survives, because a category holds both
+                  off-the-shelf and custom-collected records. */}
+              {f.scope !== "gaming" && (
+                <RailGroup title="Source" first>
+                  {SOURCES.map((p) => (
+                    <Chip
+                      key={p.key}
+                      label={p.label}
+                      active={f.provenance.includes(p.key)}
+                      count={countFor("provenance", (s) => s.provenance, p.key)}
+                      onClick={() => toggle("provenance", p.key)}
+                    />
+                  ))}
+                </RailGroup>
+              )}
 
-              <RailGroup title="Source">
-                {SOURCES.map((p) => (
-                  <Chip
-                    key={p.key}
-                    label={p.label}
-                    active={f.provenance.includes(p.key)}
-                    count={countFor("provenance", (s) => s.provenance, p.key)}
-                    onClick={() => toggle("provenance", p.key)}
-                  />
-                ))}
-              </RailGroup>
-
-              </>)}
-
-              {/* Viewpoint is `first` when the modality block is hidden, so the
-                  rail never opens with a rule floating above nothing. */}
-              <RailGroup title="Viewpoint" first={f.line !== "robotics"}>
+              {/* `first` when Source is hidden, so the rail never opens with a
+                  rule floating above nothing. */}
+              <RailGroup title="Viewpoint" first={f.scope === "gaming"}>
                 {VIEWPOINTS.map((v) => (
                   <Chip
                     key={v.key}
@@ -796,7 +770,9 @@ export function SampleCatalog() {
                 divider, and they stay consistent with every row below. */}
             <div className="flex flex-wrap items-center justify-between gap-4 pb-5">
               <p className="font-mono text-[11px]" style={{ color: C.textDim }}>
-                {shown.length} of {ALL.length} samples
+                {/* Denominator is the category, not the whole file. It read
+                    "118 of 126" on a page that only contains 118. */}
+                {shown.length} of {inLine} samples
                 <span className="mx-2">/</span>
                 {totals.minutes} minutes of source
                 <span className="mx-2">/</span>

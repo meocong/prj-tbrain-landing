@@ -2,8 +2,7 @@ import type { Metadata } from "next";
 import Header from "@/components/common/Header";
 import Footer from "@/components/common/Footer";
 import { HeroSamples } from "./_sections/HeroSamples";
-import { CorpusLines } from "./_sections/CorpusLines";
-import { SampleCatalog } from "./_sections/SampleCatalog";
+import { CategoryChooser } from "./_sections/CategoryChooser";
 import { DeliveryLayers } from "./_sections/DeliveryLayers";
 import { TelemetryStrip } from "./_sections/TelemetryStrip";
 import { Evidence } from "./_sections/Evidence";
@@ -42,9 +41,12 @@ export default function SamplesPage() {
     <div className="samples-scope" style={{ background: "var(--sm-base)" }}>
       <Header />
       <main style={{ color: "var(--sm-text)" }}>
+        {/* The front door, not the catalogue. Browsing happens at
+            /samples/[category], where a page has room to say what a category is
+            before showing 118 of it. CorpusLines used to sit here saying the
+            same thing worse, per line rather than per category. */}
         <HeroSamples />
-        <SampleCatalog />
-        <CorpusLines />
+        <CategoryChooser />
         <DeliveryLayers />
         <TelemetryStrip />
         <Evidence />
