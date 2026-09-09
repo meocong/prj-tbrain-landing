@@ -107,12 +107,16 @@ export function HeroSamples() {
               while living on another route entirely, and robotics, which is
               118 of the 126 samples, took a third.
 
-              So it carries the one claim nothing else says at this size, and
-              the one no competitor's catalogue can make. The subhead used to
-              carry it; a claim this good does not belong in 16px grey.
+              Nor is it "Every sample opens without a form", which it was for
+              one commit on the belief that no competitor could say it. Claru
+              says it twice, verbatim: "play approved samples, no form
+              required" on /data-catalog and "No login, no form" on /explore,
+              both read 2026-09-09. It is table stakes here, not an edge.
 
-              Tiers, hour counts and prices differ per category and live one
-              click down, on the category they belong to. */}
+              It carries the second purchase route instead, because either
+              route can be why somebody arrived and the page said one of them
+              nowhere. Tiers, hour counts and ramp times differ per category
+              and live one click down, on the category they belong to. */}
           <h1
             /* `text-balance` is inherited, so each `block` span balances its
                own wrap. Without it the hero column at tablet width broke both
@@ -126,31 +130,33 @@ export function HeroSamples() {
               color: "#ffffff",
             }}
           >
-            {/* Non-breaking space: `text-balance` otherwise picks "Training
-                data for" / "AI, collected by us." as the even split, which
-                strands "AI," at the head of the second line and reads as a
-                different sentence for a beat. */}
             <span className="block">Training data, in whatever shape your model needs.</span>
             <span className="block" style={{ color: "rgba(255,255,255,0.48)" }}>
               Off the shelf, or collected to your spec.
             </span>
           </h1>
 
-          {/* Two claims and a hand-off, in that order.
-              First the one thing no competitor's catalogue does - Claru,
-              HumanoidLayer and Truelabel all put a form between a reader and a
-              frame, and that was buried in a grey line under the fold. Then
-              both purchase routes, because either could be the reason someone
-              is here. Then the hand-off: nothing in this paragraph is specific
-              to a category, and it should not be. Tiers, hours and pricing
-              differ per category and are stated on the category. */}
+          {/* What we sell, then the thing that is actually ours, then a
+              hand-off.
+
+              "Plays without a form" is not the differentiator - see the h1
+              comment; Claru says it too. One level more specific is: the clip
+              plays with its telemetry running beside it, and the .mcap comes
+              off the same card. Claru's /explore plays clips and shows no
+              signal at all; humanoidlayer.dev prints format and licence per
+              card and hosts no player. Nobody read on 2026-09-09 does both.
+
+              Nothing in this paragraph is category-specific and none should
+              be. Tiers, hours and pricing differ per category and are stated
+              on the category, which is what the last clause points at. */}
           <p
             className="mt-6 max-w-lg text-base leading-relaxed"
             style={{ color: "rgba(255,255,255,0.76)" }}
           >
             Video, motion, telemetry, gameplay — we record it ourselves, annotate it, and ship it
-            as MCAP or LeRobot. 126 samples play on this page with no form. Open a category for
-            what is in it, what it costs and how long it takes.
+            as MCAP or LeRobot. 126 samples play on this page with the telemetry running beside
+            them and the delivery file on the same card. Open a category for what is in it, what
+            it costs and how long it takes.
           </p>
 
           <div className="mt-8 flex flex-wrap items-center gap-6">
