@@ -80,8 +80,8 @@ export interface Sample {
    * and `provenance` below, which split it — and new code should read those.
    */
   domain: "robotics" | "game" | "ots";
-  /** What the record is. Three of the four values hold nothing yet. */
-  modality: "egocentric" | "exocentric" | "mocap" | "gaming";
+  /** What the record is. Three of the five values hold nothing yet. */
+  modality: "egocentric" | "exocentric" | "teleoperation" | "mocap" | "gaming";
   /**
    * How it was captured. Deliberately unqualified for stereo: the six-camera
    * rig demonstrated on tbrain-dashboard may be the same Robocap 84 of these

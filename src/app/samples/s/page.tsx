@@ -20,10 +20,32 @@ export const dynamic = "force-dynamic";
 
 const ALL = samples as unknown as Sample[];
 
-const GROUPS: { key: Sample["domain"]; title: string; blurb: string }[] = [
-  { key: "robotics", title: "Robotics", blurb: "Robocap sessions from live production floors, six cameras and two IMUs per segment." },
-  { key: "game", title: "Video games", blurb: "Screen capture with per-frame keystrokes, semantic actions and camera pose." },
-  { key: "ots", title: "Off-the-shelf pack", blurb: "Published egocentric pack: stereo pair, IMU, VIO and task annotation in one MCAP." },
+/**
+ * Grouped by modality, matching the rail on `/samples`.
+ *
+ * This used to split "Robotics" from an "Off-the-shelf pack" as if they were
+ * different kinds of data. They are the same capture on the same rigs; off the
+ * shelf is how you buy it, not what it is. A buyer downloading files wants them
+ * grouped by what they contain.
+ *
+ * Modalities with no published records render nothing, so the three unpublished
+ * lines cost an entry here and nothing on the page.
+ */
+const GROUPS: { key: Sample["modality"]; title: string; blurb: string }[] = [
+  {
+    key: "egocentric",
+    title: "Egocentric",
+    blurb:
+      "Head-mounted capture from live production floors, off the shelf and collected to spec alike: video, IMU, VIO and task annotation in one MCAP.",
+  },
+  {
+    key: "gaming",
+    title: "Gaming",
+    blurb: "Screen capture with per-frame keystrokes, semantic actions and camera pose.",
+  },
+  { key: "teleoperation", title: "Teleoperation", blurb: "Bimanual robot episodes with joint state and action, as a LeRobot dataset." },
+  { key: "exocentric", title: "Exocentric", blurb: "Third-person capture of the same work, seen from outside the body." },
+  { key: "mocap", title: "Mocap", blurb: "Full-body inertial capture with per-finger hand pose." },
 ];
 
 export default async function SamplesVaultPage() {
@@ -89,7 +111,7 @@ export default async function SamplesVaultPage() {
         )}
 
         {GROUPS.map((group) => {
-          const rows = ALL.filter((s) => s.domain === group.key);
+          const rows = ALL.filter((s) => s.modality === group.key);
           if (rows.length === 0) return null;
           return (
             <section key={group.key} className="mt-14">
