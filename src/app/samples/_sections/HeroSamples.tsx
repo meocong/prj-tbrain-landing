@@ -70,11 +70,18 @@ export function HeroSamples() {
               job. A headline that lists our own filing system asks the reader
               to work out what it is for.
 
-              It must also stay ABOVE the categories rather than inside one.
-              One rewrite here read "Data for models that have to act / Human
-              hands, robot arms, live play", which is a robotics headline on a
-              page that also sells gaming and Coding & STEM - it quietly
-              narrowed the whole library to one line of business.
+              It must stay ABOVE the categories rather than inside one, and
+              four drafts failed that in four different ways. "Data for models
+              that have to act / Human hands, robot arms, live play" was a
+              robotics headline on a page that also sells gaming and Coding &
+              STEM. "We record people doing real work" narrowed harder still -
+              "real work" reads as manual labour, and this business is not one
+              modality with extras.
+
+              The level that holds all of it is the offer, not the subject: we
+              collect training data of whatever kind a customer needs, either
+              from the shelf or to their spec, and this page is a sample of it.
+              Anything more specific than that belongs on a category page.
 
               And it has to name the product, not the reader's next action. The
               rewrite after that read "See the data before you buy it", which
@@ -123,9 +130,9 @@ export function HeroSamples() {
                 data for" / "AI, collected by us." as the even split, which
                 strands "AI," at the head of the second line and reads as a
                 different sentence for a beat. */}
-            <span className="block">We record people doing real work.</span>
+            <span className="block">Training data, in whatever shape your model needs.</span>
             <span className="block" style={{ color: "rgba(255,255,255,0.48)" }}>
-              You train on what they actually did.
+              Off the shelf, or collected to your spec.
             </span>
           </h1>
 
@@ -141,9 +148,9 @@ export function HeroSamples() {
             className="mt-6 max-w-lg text-base leading-relaxed"
             style={{ color: "rgba(255,255,255,0.76)" }}
           >
-            A motorcycle mechanic installing a front cowl. A barber trimming a neckline. A player
-            clearing a level. 126 of them play here right now — the same files we deliver, with no
-            form in the way. Open a category for its tiers, hours and pricing.
+            Video, motion, telemetry, gameplay — we record it ourselves, annotate it, and ship it
+            as MCAP or LeRobot. 126 samples play on this page with no form. Open a category for
+            what is in it, what it costs and how long it takes.
           </p>
 
           <div className="mt-8 flex flex-wrap items-center gap-6">
