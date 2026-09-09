@@ -18,6 +18,7 @@ import { CoverageChart } from "../_sections/CoverageChart";
 import { CategoryHeader } from "../_sections/CategoryHeader";
 import { MocapDemo } from "../_sections/MocapDemo";
 import { OtsShelf } from "../_sections/OtsShelf";
+import { GamingSet } from "../_sections/GamingSet";
 import { TeleopSet } from "../_sections/TeleopSet";
 import { CaptureSpec } from "../_sections/CaptureSpec";
 import { AccessPaths } from "../_sections/AccessPaths";
@@ -86,55 +87,31 @@ export default async function CategoryPage({
         </section>
         )}
 
-        {/* Mocap has no clip grid because its product is a pose stream, not
-            footage — but it does have a real bundle, and the explorer is the
-            right instrument for it. It sits where the clips sit on every other
-            category. */}
-        {c.slug === "mocap" && <MocapDemo />}
-
-        {/* Teleoperation's product is three synchronised cameras plus a joint
-            stream, so it gets a three-up on one transport rather than a grid of
-            single clips. Same place the clips sit on every other category. */}
-        {c.slug === "teleoperation" && <TeleopSet />}
 
         {/* What records this category, before anything about what is in it.
             It is the first question a technical buyer asks, and it is the one
             block that makes this page not interchangeable with the next one. */}
         <CaptureSpec category={c} />
 
-        {/* Datasets, facets, grid and the record layer, unchanged. They were
-            never wrong, they were on the wrong page. */}
-        <SampleCatalog modality={c.modality} />
+        {/* The tiers, ABOVE the clips.
+            They were below, moved there when the header was five paragraphs of
+            prose and this block put 3,417px between arriving and playing
+            anything. The header is footage now, so that cost is gone — and
+            measured on the page as it stood, the answer to "what kinds of
+            egocentric are there" sat at 11,929px of a 14,051px page, last
+            before the licence.
 
-        {/* The other purchase route, with footage. Everything in the grid
-            above is a stereo rig delivery — the custom side — and "Off the
-            shelf" was a paragraph about 12,900 episodes nobody could see a
-            frame of. The capability sheet had a Sample Link per skill all
-            along. */}
-        {c.slug === "egocentric" && <OtsShelf />}
+            Both competitors introduce before they sample. claru.ai/data-catalog
+            runs hero, then "Two ways to get the data you need", then "What's in
+            the catalog", and only then "Browse the catalog";
+            /explore/egocentric names Processed and Not processed before it
+            shows a folder. R1 is this block, and R1 is a question a reader has
+            before they look, not after.
 
-        {/* The mix, AFTER the clips. humanoidlayer.dev prints its facet
-            values on the page and we copied that literally, which on 118
-            egocentric records meant 78 workplace strings in one alphabetical
-            paragraph — their catalogue has eight datasets, ours needed the
-            counts. Above the clips it also cost 750px: measured, the first
-            playable clip sat at 3,211px, worse than the 3,417px this page was
-            rebuilt to fix. It is shelf story, so it sits with the shelf story.
-            CaptureSpec stays above because it is short and it is what makes
-            this page not the next one. */}
-        <CoverageChart modality={c.modality} />
-
-        {/* R2, per category: the same two routes as the front door, with this
-            category's own published count on one side and its own cheapest tier
-            and ramp on the other. A reader who saw the front-door version reads
-            the same two paragraphs here, so it is one offer stated twice with
-            different numbers rather than two offers. */}
-        <TwoRoutes category={c} />
-
-        {/* Tiers AFTER the clips, which is the order samples.tbrain.ai uses:
-            ten cards, then the shelf story. Above them this block put 3,417px
-            between arriving and playing anything, on a page whose one advantage
-            over every competitor is that it plays without a form. */}
+            It sits under "How this is captured" because the two are the same
+            subject from two sides: that block is the rig behind the records
+            below, this one is every configuration we run. */
+        }
         {s.tiers.length > 0 && (
           <section>
             <div className="mx-auto max-w-[1400px] px-4 pb-4 pt-14 lg:px-10 xl:px-16">
@@ -249,6 +226,58 @@ export default async function CategoryPage({
             </div>
           </section>
         )}
+
+
+        {/* The per-category set, AFTER the two blocks that introduce it.
+            It was before them, which meant teleoperation opened "play the set"
+            above "how this is captured" — show, then explain. Both competitors
+            do the reverse and so does every other category here now: the rig
+            and the configurations answer questions a reader has before they
+            look, and the set answers the one they have after. */}
+        {/* Mocap has no clip grid because its product is a pose stream, not
+            footage — but it does have a real bundle, and the explorer is the
+            right instrument for it. It sits where the clips sit on every other
+            category. */}
+        {c.slug === "mocap" && <MocapDemo />}
+
+        {/* Teleoperation's product is three synchronised cameras plus a joint
+            stream, so it gets a three-up on one transport rather than a grid of
+            single clips. Same place the clips sit on every other category. */}
+        {c.slug === "teleoperation" && <TeleopSet />}
+
+        {/* Gaming's product is the input stream and the camera pose, not the
+            footage, and the page said that in a facet rail and nowhere else.
+            R8 and R16. */}
+        {c.slug === "gaming" && <GamingSet />}
+
+        {/* Datasets, facets, grid and the record layer, unchanged. They were
+            never wrong, they were on the wrong page. */}
+        <SampleCatalog modality={c.modality} />
+
+        {/* The other purchase route, with footage. Everything in the grid
+            above is a stereo rig delivery — the custom side — and "Off the
+            shelf" was a paragraph about 12,900 episodes nobody could see a
+            frame of. The capability sheet had a Sample Link per skill all
+            along. */}
+        {c.slug === "egocentric" && <OtsShelf />}
+
+        {/* The mix, AFTER the clips. humanoidlayer.dev prints its facet
+            values on the page and we copied that literally, which on 118
+            egocentric records meant 78 workplace strings in one alphabetical
+            paragraph — their catalogue has eight datasets, ours needed the
+            counts. Above the clips it also cost 750px: measured, the first
+            playable clip sat at 3,211px, worse than the 3,417px this page was
+            rebuilt to fix. It is shelf story, so it sits with the shelf story.
+            CaptureSpec stays above because it is short and it is what makes
+            this page not the next one. */}
+        <CoverageChart modality={c.modality} />
+
+        {/* R2, per category: the same two routes as the front door, with this
+            category's own published count on one side and its own cheapest tier
+            and ramp on the other. A reader who saw the front-door version reads
+            the same two paragraphs here, so it is one offer stated twice with
+            different numbers rather than two offers. */}
+        <TwoRoutes category={c} />
 
         {/* Licence, once per page rather than once per card, because it is the
             same for everything in the category. */}
