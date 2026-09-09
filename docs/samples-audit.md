@@ -36,34 +36,36 @@ requirement we have not met.
 
 ## 3. Tam's list, item by item
 
-| # | Requirement | State |
-|---|---|---|
-| R1 | Egocentric splits: Mono, Stereo (2 cam), **Advanced Stereo (6 cam)**, with wrist | **partial.** Five tiers ship from the sheet — Egocentric, RGB-D/LiDAR, Stereo, + wrist, + gripper. There is no "Advanced Stereo (6 cam)" row in the sheet, though the head rig on the published records is six cameras. Needs a decision, not code. |
-| R2 | OTS and custom, per category | **done.** `TwoRoutes`, front door and per category. |
-| R3 | Diversity: environments **residential and non-residential**, task type, difficulty | **not done.** No residential split; difficulty is on 118 of 126 records and appears nowhere. |
-| R4 | MCAP or LeRobot, and other formats | **done.** Per tier and per dataset card. |
-| R5 | Advanced annotation, head tracking, "like tbrain-dashboard" | **not done.** No link to the dashboard demo anywhere on the page. |
-| R6 | Exocentric its own section | **done** as a route; **no footage.** |
-| R7 | Mocap its own section | **done,** with 80 real keyframes and the pose explorer embedded. |
-| R8 | Gaming: how many games, keystrokes, camera matrices | **partial.** All of it is in `spec` — 8 titles, 41,982 frames, per-frame keystrokes, camera-to-world 4×4 — and only the facet rail surfaces any of it. No gaming section like `OtsShelf` / `TeleopSet` / `MocapDemo`. |
-| R9 | Teleops as a section | **done,** 11 episodes and a three-camera synced player. |
-| R10 | Sortable, findable through menus | **done.** Per-category facets, values from that category's records. |
-| R11 | 1–2 downloadable samples per action type + data type | **not done.** Records say "behind access". `samples.tbrain.ai` gates nothing. |
-| R12 | Hours per group and task, and **difficulty level** | **partial.** Hours per skill group are derivable and not shown; difficulty is not shown at all. |
-| R13 | Top level Coding/STEM, Games, Robotics | **done.** |
-| R14 | Filters for environment, **difficulty**, task type | **partial.** Environment and task type yes, difficulty no. |
-| R15 | Robotics leads rather than lists | **done.** Category pages open on their own footage and state what records them. |
-| R16 | Gaming's own context | **not done.** Same gap as R8. |
-| R17 | Egocentric states variety of environments, devices, skills, tasks | **done.** `CoverageChart`, four ranked axes. |
-| R18 | Gaming: **100 h OTS** + custom collection | **not done.** No sheet row prices gaming; the figure is not on the page. |
-| R19 | Hero text rewritten | **done.** |
-| R20 | A section describing what kinds of data we have | **done.** `Coverage`, 32 trades. |
-| R21 | Robotics is not only egocentric | **done.** Five categories. |
-| R22 | Not a report — highlight the parts | **done.** |
+Re-checked on the rendered pages 2026-09-09, after the category work. **15
+done, 4 partial, 3 not done.**
 
-**14 done, 5 partial, 3 not done.**
+### Done
 
----
+R2 both routes per category · R3 residential and non-residential, task type and
+difficulty · R4 MCAP / LeRobot and the per-tier file lists · R7 mocap section ·
+R8 gaming states its titles, keystrokes and camera matrices · R9 teleoperation
+section · R10 findable through menus · R13 three top-level lines · R14
+environment, difficulty and task-type filters · R15 robotics leads · R16 gaming
+in its own vocabulary · R17 egocentric states its variety · R19 hero rewritten ·
+R20 a section naming what kinds of data we hold · R21 robotics is not only
+egocentric · R22 highlighted rather than reported.
+
+### Partial
+
+| # | What is missing |
+|---|---|
+| R1 | **"Advanced Stereo (6 cam)" is not a named tier.** The capability sheet prices five configurations and none of them is that; the head-rig row on the published records says six cameras in three stereo pairs, which is the same hardware described from the other side. Either the sheet is missing a row or the name is ours to retire. |
+| R6 | Exocentric has a route, a spec and a tier, and **no section of its own** — 2,053 words against teleoperation's 6,958, and the only page with no footage, no coverage chart and no set. |
+| R12 | Hours per **skill group** are on the page; hours per **task** are not. 106 distinct tasks, each with a duration, and the chart stops at the group. |
+| R18 | Gaming has no priced tier at all, so its "what we run" block does not render — `CAPABILITY` has no gaming row and inventing one would be worse than the gap. |
+
+### Not done
+
+| # | Why it is still open |
+|---|---|
+| R5 | **Advanced annotation, head-movement tracking, "like tbrain-dashboard".** Nothing on any page links or shows it. The records carry `Task annotation` and `Environment annotation` per frame and the page says so in one row of `CaptureSpec`; the demo Tam pointed at is not referenced anywhere. |
+| R11 | **Downloadable samples per action type.** Measured: zero download links on a category page. `.mcap` appears only in the "Ships as" row, and every route to a file is `passcode` or `Request access`. Our own `samples.tbrain.ai` puts `.mcap` and `.metadata.json` on every card with no gate, so two of our pages disagree. |
+| R18 | Gaming's 100 h off-the-shelf figure. No sheet row prices gaming; the Odyssey document in Drive is a **customer's** requirement spec and must not be published. |
 
 ## 4. What I can build without asking
 
