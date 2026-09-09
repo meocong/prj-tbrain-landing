@@ -46,9 +46,11 @@ const ALL = samples as unknown as Row[];
 export function CategoryHeader({ category: c }: { category: Category }) {
   const s = statsForCategory(c);
   const stats = packStats(c);
-  const reel = c.modality
+  const fromRecords = c.modality
     ? ALL.filter((r) => r.modality === c.modality).map((r) => ({ slug: r.slug, title: r.title }))
     : [];
+  // Records first; a category with none can still name its own footage.
+  const reel = fromRecords.length > 0 ? fromRecords : (c.reel ?? []);
 
   const copy = (
     <>

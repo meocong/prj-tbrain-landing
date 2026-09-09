@@ -1,5 +1,6 @@
 import { coverageFor, type CoverageAxis } from "@/lib/samples/coverage";
 import { C } from "./tokens";
+import { Reveal } from "./Reveal";
 
 /**
  * What the category is made of, as a shape rather than a list.
@@ -31,15 +32,17 @@ export function CoverageChart({ modality }: { modality: string }) {
   return (
     <section style={{ background: C.base, color: C.text }}>
       <div className="mx-auto max-w-[1400px] px-4 pb-10 pt-14 lg:px-10 xl:px-16">
-        <h2 className="font-mono text-[10px] uppercase tracking-[0.18em]" style={{ color: C.textDim }}>
-          What this category is made of
-        </h2>
+        <Reveal variant="rise">
+          <h2 className="font-mono text-[10px] uppercase tracking-[0.18em]" style={{ color: C.textDim }}>
+            What this category is made of
+          </h2>
 
-        <div className="mt-6 grid gap-x-12 gap-y-9 md:grid-cols-2 xl:grid-cols-4">
-          {axes.map((a) => (
-            <Axis key={a.label} axis={a} />
-          ))}
-        </div>
+          <div className="mt-6 grid gap-x-12 gap-y-9 md:grid-cols-2 xl:grid-cols-4">
+            {axes.map((a) => (
+              <Axis key={a.label} axis={a} />
+            ))}
+          </div>
+        </Reveal>
       </div>
     </section>
   );

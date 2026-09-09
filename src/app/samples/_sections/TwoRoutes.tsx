@@ -1,6 +1,7 @@
 import { CATEGORIES, statsForCategory, type Category } from "@/lib/samples/categories";
 import { INTEROP } from "@/lib/samples/capability";
 import { C } from "./tokens";
+import { Reveal } from "./Reveal";
 
 /**
  * The two ways to buy, given a section instead of a clause.
@@ -27,31 +28,33 @@ export function TwoRoutes({ category }: { category?: Category }) {
   return (
     <section style={{ background: C.base, color: C.text }}>
       <div className="mx-auto max-w-[1400px] px-4 pb-20 pt-4 lg:px-10 xl:px-16">
-        <h2 className="font-mono text-[10px] uppercase tracking-[0.18em]" style={{ color: C.textDim }}>
-          Two ways to buy
-        </h2>
+        <Reveal variant="rise">
+          <h2 className="font-mono text-[10px] uppercase tracking-[0.18em]" style={{ color: C.textDim }}>
+            Two ways to buy
+          </h2>
 
-        <div className="mt-6 grid gap-x-12 gap-y-10 md:grid-cols-2">
-          <Route
-            n="01"
-            name="Off the shelf"
-            body="Already recorded, indexed and cleared. Play any of it on this page, read the telemetry beside it, then licence the sets you want. No collection lead time — the files exist."
-            figures={shelf}
-          />
-          <Route
-            n="02"
-            name="Collected to your spec"
-            body="You name the environment, the device, the task mix and the volume. We design the capture, run it in operating businesses with paid professionals, and hand back the same delivery shape as the shelf."
-            figures={spec}
-          />
-        </div>
+          <div className="mt-6 grid gap-x-12 gap-y-10 md:grid-cols-2">
+            <Route
+              n="01"
+              name="Off the shelf"
+              body="Already recorded, indexed and cleared. Play any of it on this page, read the telemetry beside it, then licence the sets you want. No collection lead time — the files exist."
+              figures={shelf}
+            />
+            <Route
+              n="02"
+              name="Collected to your spec"
+              body="You name the environment, the device, the task mix and the volume. We design the capture, run it in operating businesses with paid professionals, and hand back the same delivery shape as the shelf."
+              figures={spec}
+            />
+          </div>
 
-        <p
-          className="mt-10 pt-4 font-mono text-[11px]"
-          style={{ borderTop: `1px solid ${C.hairline}`, color: C.textDim }}
-        >
-          Either route delivers as {INTEROP}
-        </p>
+          <p
+            className="mt-10 pt-4 font-mono text-[11px]"
+            style={{ borderTop: `1px solid ${C.hairline}`, color: C.textDim }}
+          >
+            Either route delivers as {INTEROP}
+          </p>
+        </Reveal>
       </div>
     </section>
   );

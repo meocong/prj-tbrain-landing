@@ -1,6 +1,7 @@
 import { captureFor } from "@/lib/samples/capture";
 import type { Category } from "@/lib/samples/categories";
 import { C } from "./tokens";
+import { Reveal } from "./Reveal";
 
 /**
  * The block that makes one category page not interchangeable with another.
@@ -26,26 +27,28 @@ export function CaptureSpec({ category }: { category: Category }) {
   return (
     <section style={{ background: C.base, color: C.text }}>
       <div className="mx-auto max-w-[1400px] px-4 pb-4 pt-14 lg:px-10 xl:px-16">
-        <h2 className="font-mono text-[10px] uppercase tracking-[0.18em]" style={{ color: C.textDim }}>
-          How this is captured
-        </h2>
+        <Reveal variant="rise">
+          <h2 className="font-mono text-[10px] uppercase tracking-[0.18em]" style={{ color: C.textDim }}>
+            How this is captured
+          </h2>
 
-        <dl className="mt-6">
-          {rows.map((r) => (
-            <div
-              key={r.label}
-              className="grid gap-x-8 gap-y-1 py-3 md:grid-cols-[minmax(0,11rem)_minmax(0,1fr)]"
-              style={{ borderTop: `1px solid ${C.hairline}` }}
-            >
-              <dt className="text-[12.5px]" style={{ color: C.textDim }}>
-                {r.label}
-              </dt>
-              <dd className="font-mono text-[12.5px] leading-relaxed" style={{ color: C.value }}>
-                {r.value}
-              </dd>
-            </div>
-          ))}
-        </dl>
+          <dl className="mt-6">
+            {rows.map((r) => (
+              <div
+                key={r.label}
+                className="grid gap-x-8 gap-y-1 py-3 md:grid-cols-[minmax(0,11rem)_minmax(0,1fr)]"
+                style={{ borderTop: `1px solid ${C.hairline}` }}
+              >
+                <dt className="text-[12.5px]" style={{ color: C.textDim }}>
+                  {r.label}
+                </dt>
+                <dd className="font-mono text-[12.5px] leading-relaxed" style={{ color: C.value }}>
+                  {r.value}
+                </dd>
+              </div>
+            ))}
+          </dl>
+        </Reveal>
       </div>
     </section>
   );

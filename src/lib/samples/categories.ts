@@ -65,6 +65,17 @@ export interface Category {
   rig?: string;
   /** Nominal IMU rate. Not the per-file measured reading — see capture.ts. */
   imuHz?: string;
+  /**
+   * Clips to run behind the header for a category that has footage but no
+   * records in `samples.json`.
+   *
+   * Mocap had a hand-drawn skeleton because "we hold no mocap footage" — which
+   * was wrong twice. The pose bundle carries 80 real keyframes of the capture,
+   * embedded in the explorer as JPEG, and drawing anatomy by hand was the wrong
+   * answer even when it was the only one: the figure read as a rake and the
+   * hand as a box. Real frames beat a drawing of them.
+   */
+  reel?: { slug: string; title: string }[];
 }
 
 export const CATEGORIES: Category[] = [
@@ -117,6 +128,22 @@ export const CATEGORIES: Category[] = [
     // IN_FLIGHT.teleoperation, counted off the disk rather than off the
     // dataset's own manifest, which disagrees with it.
     held: { figure: "11", unit: "episodes · 3 synced cameras each" },
+    // The head camera of all eleven episodes. They are real footage and are not
+    // in `samples.json`, so without this the header fell back to a drawing on a
+    // category that has thirty-three video files.
+    reel: [
+      { slug: "teleop-ep00", title: "Episode 0 · pick and place into the bin" },
+      { slug: "teleop-ep01", title: "Episode 1 · pick and place into the bin" },
+      { slug: "teleop-ep02", title: "Episode 2 · pick and place into the bin" },
+      { slug: "teleop-ep03", title: "Episode 3 · pick and place into the bin" },
+      { slug: "teleop-ep04", title: "Episode 4 · pick and place into the bin" },
+      { slug: "teleop-ep05", title: "Episode 5 · pick and place into the bin" },
+      { slug: "teleop-ep06", title: "Episode 6 · pick and place into the bin" },
+      { slug: "teleop-ep07", title: "Episode 7 · pick and place into the bin" },
+      { slug: "teleop-ep08", title: "Episode 8 · pick and place into the bin" },
+      { slug: "teleop-ep09", title: "Episode 9 · pick and place into the bin" },
+      { slug: "teleop-ep10", title: "Episode 10 · pick and place into the bin" },
+    ],
     // Every line from IN_FLIGHT.teleoperation, which is counted off the disk
     // rather than off the dataset's own manifest - the two disagree.
     capture: [
@@ -144,6 +171,9 @@ export const CATEGORIES: Category[] = [
        synchronised to it — which is a published mocap sample by any reading.
        The figure is what that bundle actually contains. */
     held: { figure: "4,801", unit: "wrist-pose frames · 21 joints per hand" },
+    // 80 keyframes lifted from the deployed pose bundle, played at 8 fps. A
+    // timelapse of a 160-second capture, and the caption says so.
+    reel: [{ slug: "mocap-keyframes", title: "80 keyframes from a 160 s mocap capture" }],
     /* Row C of the capability sheet, "Egocentric + full mocap". The 240 Hz is
        the suit's native rate; the sheet says it is downsampled to 30 Hz for
        delivery, and stating only the native rate would let a buyer plan around
