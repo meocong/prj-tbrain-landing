@@ -15,6 +15,7 @@ import { AccessStrip } from "./AccessActions";
 import { LiveTelemetry } from "./LiveTelemetry";
 import { C, OVER_MEDIA, PILL, type Sample } from "./tokens";
 import { SampleModal } from "./SampleModal";
+import { Reveal } from "./Reveal";
 
 /**
  * Faceted catalog.
@@ -724,6 +725,10 @@ export function SampleCatalog({ modality }: { modality: string }) {
           before the grid it was narrowing. */}
 
       <div className="mx-auto max-w-[1400px] px-4 pb-24 pt-10 lg:px-10 xl:px-16">
+        {/* The rail and the grid arrive together. Individual cards are not
+            staggered here — twenty-four tiles fading in one after another is
+            a page that will not settle. */}
+        <Reveal variant="rise">
         <div className="grid gap-10 lg:grid-cols-12 lg:gap-12">
           <aside className="lg:col-span-3">
             <button
@@ -982,6 +987,7 @@ export function SampleCatalog({ modality }: { modality: string }) {
             <AccessStrip />
           </div>
         </div>
+        </Reveal>
       </div>
     </section>
       <SampleModal sample={active} onClose={() => setActive(null)} />

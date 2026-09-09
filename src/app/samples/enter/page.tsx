@@ -5,6 +5,7 @@ import Header from "@/components/common/Header";
 import Footer from "@/components/common/Footer";
 import { PasscodeForm } from "./PasscodeForm";
 import { C } from "../_sections/tokens";
+import { Reveal } from "../_sections/Reveal";
 
 export const metadata: Metadata = {
   title: "Enter a passcode",
@@ -19,6 +20,7 @@ export default function SamplesEnterPage() {
       <Header />
       <main className="relative overflow-hidden" style={{ color: C.text }}>
         <section className="mx-auto max-w-[1400px] px-4 pb-28 pt-24 md:pb-36 lg:px-10 xl:px-16">
+          <Reveal variant="rise">
           <div className="max-w-xl">
             <Link
               href="/samples"
@@ -45,6 +47,7 @@ export default function SamplesEnterPage() {
               <PasscodeForm />
             </Suspense>
           </div>
+        </Reveal>
         </section>
       </main>
       <Footer />

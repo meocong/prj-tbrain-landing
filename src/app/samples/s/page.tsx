@@ -10,6 +10,7 @@ import { assetsFor, fullSet, humanBytes, downloadHref, FULL_SET_SLUG } from "@/l
 import samples from "@/lib/samples/samples.json";
 import type { Sample } from "../_sections/tokens";
 import { C } from "../_sections/tokens";
+import { Reveal } from "../_sections/Reveal";
 
 export const metadata: Metadata = {
   title: "Sample downloads · Tbrain",
@@ -87,7 +88,12 @@ export default async function SamplesVaultPage() {
           .
         </p>
 
+        {/* Every group arrives on scroll, like the rest of the samples
+            surface. The archive page had none: it is the one route a buyer
+            reaches after signing in, and it moved differently from the pages
+            that sent them there. */}
         {fullSet && (
+          <Reveal variant="rise">
           <section
             className="mt-10 flex flex-col gap-4 p-6 sm:flex-row sm:items-center sm:justify-between"
             style={{ border: `1px solid ${C.hairline}`, background: C.band }}
@@ -108,13 +114,15 @@ export default async function SamplesVaultPage() {
               Download {humanBytes(fullSet.bytes)}
             </a>
           </section>
+          </Reveal>
         )}
 
         {GROUPS.map((group) => {
           const rows = ALL.filter((s) => s.modality === group.key);
           if (rows.length === 0) return null;
           return (
-            <section key={group.key} className="mt-14">
+            <Reveal key={group.key} variant="rise">
+            <section className="mt-14">
               <h2 className="text-[13px] font-medium uppercase tracking-[0.14em]" style={{ color: C.textDim }}>
                 {group.title}
               </h2>
@@ -182,6 +190,7 @@ export default async function SamplesVaultPage() {
                 })}
               </ul>
             </section>
+            </Reveal>
           );
         })}
 
