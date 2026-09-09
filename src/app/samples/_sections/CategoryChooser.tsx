@@ -54,7 +54,10 @@ export function CategoryChooser() {
           style={{ fontFamily: "var(--font-heading)", letterSpacing: "-0.03em", lineHeight: 1.06 }}
         >
           Pick the kind of data you need.{" "}
-          <span style={{ color: C.textDim }}>Every sample plays here, with no form.</span>
+          {/* The hero already says "plays in full with no form" 600px above.
+              Saying it twice spends the headline on a claim the reader has
+              read; this one says what a category page actually gives them. */}
+          <span style={{ color: C.textDim }}>Each one prices and scopes itself.</span>
         </h2>
 
         <p className="mt-5 max-w-2xl text-[15px] leading-relaxed" style={{ color: C.textMid }}>

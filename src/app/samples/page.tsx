@@ -8,14 +8,17 @@ import { TelemetryStrip } from "./_sections/TelemetryStrip";
 import { Evidence } from "./_sections/Evidence";
 import { AccessPaths } from "./_sections/AccessPaths";
 
-// Named by modality, matching the rail. The old title listed "Robotics, Game and
-// Off-the-shelf", which put a purchase route beside two subjects — every
-// off-the-shelf record here is robotics egocentric, on the same rigs as the
-// custom ones, so the third item was never a third kind of data.
-const TITLE = "Sample Library: Egocentric, Gaming and Physical AI Data";
+// Named by the three lines of business, matching the chooser below it.
+//
+// It has been narrowed twice and widened back both times. It once listed
+// "Robotics, Game and Off-the-shelf", which put a purchase route beside two
+// subjects; it then named a single modality, Egocentric, on a page that also
+// sells gaming and Coding & STEM. This page is the front door for all three, so
+// it is titled at that level and the modalities are titled on their own routes.
+const TITLE = "Data Samples: Robotics, Gaming, Coding and STEM";
 const OG_ALT = "Frames from Tbrain sample deliveries: workshop egocentric capture, gripper footage and game sessions";
 const DESCRIPTION =
-  "Play real delivery files from Tbrain's egocentric and gaming corpora, off the shelf or collected to spec. Frame-level telemetry, capture metadata and access to the full sets.";
+  "Play real delivery files from every set Tbrain sells, off the shelf or collected to spec. Frame-level telemetry, capture metadata and access to the full sets.";
 
 export const metadata: Metadata = {
   title: TITLE,
