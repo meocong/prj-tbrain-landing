@@ -9,10 +9,14 @@ import { TelemetryStrip } from "./_sections/TelemetryStrip";
 import { Evidence } from "./_sections/Evidence";
 import { AccessPaths } from "./_sections/AccessPaths";
 
-const TITLE = "Sample Library: Robotics, Game and Off-the-shelf Data";
+// Named by modality, matching the rail. The old title listed "Robotics, Game and
+// Off-the-shelf", which put a purchase route beside two subjects — every
+// off-the-shelf record here is robotics egocentric, on the same rigs as the
+// custom ones, so the third item was never a third kind of data.
+const TITLE = "Sample Library: Egocentric, Gaming and Physical AI Data";
 const OG_ALT = "Frames from Tbrain sample deliveries: workshop egocentric capture, gripper footage and game sessions";
 const DESCRIPTION =
-  "Play real delivery files from Tbrain's robotics, video game and off-the-shelf egocentric corpora. Frame-level telemetry, capture metadata and access to the full sets.";
+  "Play real delivery files from Tbrain's egocentric and gaming corpora, off the shelf or collected to spec. Frame-level telemetry, capture metadata and access to the full sets.";
 
 export const metadata: Metadata = {
   title: TITLE,

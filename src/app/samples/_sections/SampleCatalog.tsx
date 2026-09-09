@@ -32,10 +32,31 @@ const ALL = samples as unknown as Sample[];
 /** Cards revealed per step. Eight rows at the widest three-column layout. */
 const PAGE = 24;
 
-const DOMAINS = [
-  { key: "robotics", label: "Robotics" },
-  { key: "game", label: "Video game" },
+/**
+ * What a record IS. The rail used to offer "Robotics", "Video game" and "Off the
+ * shelf" as one choice, which asked the reader to pick between a subject and a
+ * purchase route: all 39 "off the shelf" records are robotics egocentric stereo,
+ * captured on the same rigs as the 79 filed under "robotics". Picking one
+ * excluded the other for no reason a buyer would recognise.
+ *
+ * The four values are the ones the catalogue is being rebuilt around. Three of
+ * them hold nothing yet — that is the point of listing them: an empty facet is a
+ * statement about the shelf, and the chip disables itself at zero rather than
+ * pretending the line does not exist. Teleoperation is deliberately absent until
+ * someone confirms episodes exist; the capability catalogue names the UMI
+ * gripper under teleoperation but lists no teleoperation row.
+ */
+const MODALITIES = [
+  { key: "egocentric", label: "Egocentric" },
+  { key: "exocentric", label: "Exocentric" },
+  { key: "mocap", label: "Mocap" },
+  { key: "gaming", label: "Gaming" },
+] as const;
+
+/** Where a record came from — the other half of the old `domain` field. */
+const SOURCES = [
   { key: "ots", label: "Off the shelf" },
+  { key: "custom", label: "Custom collection" },
 ] as const;
 
 const VIEWPOINTS = [
@@ -53,7 +74,8 @@ const SORTS = [
 type SortKey = (typeof SORTS)[number]["key"];
 
 interface Filters {
-  domain: string[];
+  modality: string[];
+  provenance: string[];
   viewpoint: string[];
   skillGroup: string[];
   industry: string[];
@@ -63,7 +85,8 @@ interface Filters {
 }
 
 const EMPTY: Filters = {
-  domain: [],
+  modality: [],
+  provenance: [],
   viewpoint: [],
   skillGroup: [],
   industry: [],
@@ -81,7 +104,12 @@ function mmss(total: number) {
 /** Within a facet the selected values are OR-ed; across facets they are AND-ed. */
 function matches(s: Sample, f: Filters, skip?: keyof Filters) {
   const on = (k: keyof Filters) => k !== skip;
-  if (on("domain") && f.domain.length && !f.domain.includes(s.domain)) return false;
+  if (on("modality") && f.modality.length && !f.modality.includes(s.modality)) return false;
+  // `provenance` is null on the game records: no game record states whether it
+  // is off-the-shelf or custom, so narrowing to either has to exclude them
+  // rather than quietly assign them a side.
+  if (on("provenance") && f.provenance.length && !(s.provenance && f.provenance.includes(s.provenance)))
+    return false;
   if (on("viewpoint") && f.viewpoint.length && !f.viewpoint.includes(s.viewpoint)) return false;
   if (on("skillGroup") && f.skillGroup.length && !(s.skillGroup && f.skillGroup.includes(s.skillGroup)))
     return false;
@@ -370,7 +398,10 @@ export function SampleCatalog() {
   // collapses below lg and is always open from lg up.
   const [railOpen, setRailOpen] = useState(false);
 
-  const toggle = (key: "domain" | "viewpoint" | "skillGroup" | "industry" | "rig", v: string) => {
+  const toggle = (
+    key: "modality" | "provenance" | "viewpoint" | "skillGroup" | "industry" | "rig",
+    v: string,
+  ) => {
     track("filter_rig", { facet: key, value: v });
     setF((p) => {
       const list = p[key];
@@ -418,7 +449,9 @@ export function SampleCatalog() {
   );
 
   const dirty =
-    f.domain.length + f.viewpoint.length + f.skillGroup.length + f.industry.length + f.rig.length > 0 ||
+    f.modality.length + f.provenance.length + f.viewpoint.length + f.skillGroup.length +
+      f.industry.length + f.rig.length >
+      0 ||
     f.job !== "all" ||
     f.q.trim() !== "";
 
@@ -508,14 +541,26 @@ export function SampleCatalog() {
                 />
               </label>
 
-              <RailGroup title="Line" first>
-                {DOMAINS.map((d) => (
+              <RailGroup title="Modality" first>
+                {MODALITIES.map((m) => (
                   <Chip
-                    key={d.key}
-                    label={d.label}
-                    active={f.domain.includes(d.key)}
-                    count={countFor("domain", (s) => s.domain, d.key)}
-                    onClick={() => toggle("domain", d.key)}
+                    key={m.key}
+                    label={m.label}
+                    active={f.modality.includes(m.key)}
+                    count={countFor("modality", (s) => s.modality, m.key)}
+                    onClick={() => toggle("modality", m.key)}
+                  />
+                ))}
+              </RailGroup>
+
+              <RailGroup title="Source">
+                {SOURCES.map((p) => (
+                  <Chip
+                    key={p.key}
+                    label={p.label}
+                    active={f.provenance.includes(p.key)}
+                    count={countFor("provenance", (s) => s.provenance, p.key)}
+                    onClick={() => toggle("provenance", p.key)}
                   />
                 ))}
               </RailGroup>
