@@ -242,7 +242,7 @@ the reading was shallow, not because the answers were missing.
 | ~~OTS-Stereo vs OTS-Mono~~ | **answered.** The deck's 1,200 h corpus is stereo on Ego Rig A/B; the xlsx's 12,900-episode corpus is mono head-mounted smartphone. Two corpora, two names. | - |
 | Teleops beyond the one dataset | Sơn | how much of R9 is real |
 | ~~Sơn's list of sample types~~ | **superseded.** `manifest.csv` in the 6-cam pack is the canonical delivery schema in 27 columns, and `samples.json` plus the xlsx cover what exists. A list would confirm, not unblock. | - |
-| Licence | legal / BD | a field on every card. **The only genuine unknown.** |
+| Licence | legal / BD to review | **drafted, shipped as provisional.** `src/lib/samples/license.ts` carries eight terms, each tagged `documented` or `draft`. Four are quotes from the deck, the capability spreadsheet or the records; four are ordinary commercial practice that nothing of ours states, and those four are what legal should read first. Every licence block renders "Indicative terms. The licence agreement governs." beside it. |
 | ~~Coding/STEM samples~~ | **they exist.** `/data/terminal-bench` is a full product with its own gated sample area at `/s/[batchSlug]/[sampleSlug]`, request-access flow and Supabase-backed records. R13's third line has content; it has never been linked into the samples system. | - |
 | ~~Download gate~~ | **answered by precedent.** `samples.tbrain.ai` puts `.mcap` and `.metadata.json` on every card with no gate at all. Our per-sample downloads should match it; `/samples/s` stays gated as the full-archive route. Worth confirming with Tam, not worth blocking on. | - |
 | Hero copy | Tam, from options | R19 |
