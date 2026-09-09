@@ -26,16 +26,36 @@ import samples from "./samples.json";
 export interface CoverageBar {
   name: string;
   count: number;
+  /**
+   * Hours in this bucket, and the value the bar length encodes.
+   *
+   * Ranking by record count and ranking by hours give a different order —
+   * measured on egocentric, "Pick and Place / Object Handling" is first by
+   * count with 14 clips and third by duration with 1.58 h, behind "Tool Use &
+   * Technical Manipulation" at 1.97 h from 13. A buyer licenses hours, so the
+   * bar has to be hours; the count rides along as text because "1.97 h from 13
+   * clips" and "1.97 h from 90" are different products.
+   */
+  hours: number;
 }
 
 export interface CoverageAxis {
   label: string;
   /** Distinct values across the whole category, not just the ones shown. */
   total: number;
-  /** Ranked by count, longest first. */
+  /** Ranked by hours, longest first — unless `ordinal`. */
   top: CoverageBar[];
   /** Distinct values not shown, so the block never implies it is exhaustive. */
   rest: number;
+  /**
+   * A fixed order for an axis that has one.
+   *
+   * Difficulty is a scale, not a set of labels. Ranking it by size would put
+   * easy, medium and hard in whatever order the catalogue happens to have, and
+   * sorting it alphabetically is worse — easy, hard, medium reads as a scale
+   * that goes down and then up. Where this is set the bars follow it.
+   */
+  ordinal?: boolean;
 }
 
 type Row = {
@@ -45,6 +65,7 @@ type Row = {
   industry: string | null;
   skillGroup: string | null;
   environment: string | null;
+  durationSec: number;
   spec: [string, string][];
 };
 const ALL = samples as unknown as Row[];
@@ -55,11 +76,19 @@ const cell = (r: Row, k: string) => r.spec?.find((p) => p[0] === k)?.[1] ?? null
 const SHOWN = 6;
 
 type Pick = (r: Row) => string | null;
+type AxisCfg = { label: string; pick: Pick; order?: string[] };
 
 /** Axes per modality. A category with no entry falls back to nothing. */
-const AXES: Record<string, { label: string; pick: Pick }[]> = {
+const AXES: Record<string, AxisCfg[]> = {
   egocentric: [
     { label: "Skill group", pick: (r) => r.skillGroup },
+    {
+      label: "Difficulty",
+      pick: (r) => cell(r, "Difficulty"),
+      // The scale, not the ranking. 118 of the 126 records carry this and it
+      // was on no page at all, while R3, R12 and R14 all ask for it.
+      order: ["easy", "medium", "hard"],
+    },
     { label: "Trade", pick: (r) => r.job },
     { label: "Industry", pick: (r) => r.industry },
     // The business, not the corner of it. "Auto Repair, Service Bay" and "Auto
@@ -80,22 +109,42 @@ export function coverageFor(modality: string): CoverageAxis[] {
   if (!rows.length || !axes) return [];
 
   return axes
-    .map(({ label, pick }) => {
-      const counts = new Map<string, number>();
+    .map(({ label, pick, order }) => {
+      const buckets = new Map<string, { count: number; sec: number }>();
       for (const r of rows) {
         const v = pick(r);
-        if (v) counts.set(v, (counts.get(v) ?? 0) + 1);
+        if (!v) continue;
+        const b = buckets.get(v) ?? { count: 0, sec: 0 };
+        b.count += 1;
+        b.sec += r.durationSec;
+        buckets.set(v, b);
       }
-      const ranked = [...counts.entries()]
-        .map(([name, count]) => ({ name, count }))
-        // Ties broken alphabetically so the render is stable between builds.
-        .sort((a, b) => b.count - a.count || a.name.localeCompare(b.name));
+
+      const bars = [...buckets.entries()].map(([name, b]) => ({
+        name,
+        count: b.count,
+        hours: b.sec / 3600,
+      }));
+
+      const ranked = order
+        ? // Scale order, and anything the scale does not name goes after it
+          // rather than being dropped — a value we did not expect is a fact
+          // about the data, not a rendering error.
+          bars.sort(
+            (a, b) =>
+              (order.indexOf(a.name.toLowerCase()) + 1 || 99) -
+                (order.indexOf(b.name.toLowerCase()) + 1 || 99) ||
+              a.name.localeCompare(b.name),
+          )
+        : // Ties broken alphabetically so the render is stable between builds.
+          bars.sort((a, b) => b.hours - a.hours || a.name.localeCompare(b.name));
 
       return {
         label,
         total: ranked.length,
         top: ranked.slice(0, SHOWN),
         rest: Math.max(0, ranked.length - SHOWN),
+        ordinal: Boolean(order),
       };
     })
     .filter((a) => a.total > 1);

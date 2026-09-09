@@ -109,7 +109,13 @@ interface Filters {
  * Egocentric's axes are typed fields on `Sample` and stay above; this is for
  * the ones that only exist inside `spec`, which differ per category by nature.
  */
-const SPEC_FACETS: Record<string, { key: string; title: string }[]> = {
+const SPEC_FACETS: Record<string, { key: string; title: string; order?: string[] }[]> = {
+  egocentric: [
+    // A scale, so the chips follow it. Sorted alphabetically they would read
+    // easy, hard, medium — a difficulty scale that goes down and then up.
+    // R3, R12 and R14 all ask for this and it was on no page at all.
+    { key: "Difficulty", title: "Difficulty", order: ["easy", "medium", "hard"] },
+  ],
   gaming: [
     { key: "Title", title: "Game" },
     { key: "Session type", title: "Session" },
@@ -360,12 +366,19 @@ function Chip({
    * stays disabled at zero, where the number really does mean "no such record".
    */
   quotable,
+  /**
+   * The source stores `hard`, not `Hard`. A rail reading Easy / Medium / hard
+   * is a typo the reader blames on us, and title-casing the string in the data
+   * would put presentation in the record.
+   */
+  caps,
 }: {
   label: string;
   count: number;
   active: boolean;
   onClick: () => void;
   quotable?: boolean;
+  caps?: boolean;
 }) {
   const dead = count === 0 && !active && !quotable;
   return (
@@ -375,7 +388,7 @@ function Chip({
       disabled={dead}
       aria-pressed={active}
       data-active={active}
-      className="sm-chip flex w-full items-center justify-between gap-3 rounded-lg px-2.5 py-1.5 text-left text-[12.5px] disabled:opacity-30"
+      className={`sm-chip flex w-full items-center justify-between gap-3 rounded-lg px-2.5 py-1.5 text-left text-[12.5px] disabled:opacity-30${caps ? " capitalize" : ""}`}
     >
       <span className="truncate">{label}</span>
       <span className="sm-chip-count shrink-0 font-mono text-[10px]">{count}</span>
@@ -637,7 +650,19 @@ export function SampleCatalog({ modality }: { modality: string }) {
   const specFacets = useMemo(
     () =>
       (SPEC_FACETS[f.scope] ?? [])
-        .map((cfg) => ({ ...cfg, values: valuesOf((s) => specCell(s, cfg.key)) }))
+        .map((cfg) => {
+          const values = valuesOf((s) => specCell(s, cfg.key));
+          return {
+            ...cfg,
+            values: cfg.order
+              ? [...values].sort(
+                  (a, b) =>
+                    (cfg.order!.indexOf(a.toLowerCase()) + 1 || 99) -
+                    (cfg.order!.indexOf(b.toLowerCase()) + 1 || 99),
+                )
+              : values,
+          };
+        })
         // A facet with one value cannot narrow anything.
         .filter((x) => x.values.length > 1),
     [f.scope, valuesOf],
@@ -816,6 +841,7 @@ export function SampleCatalog({ modality }: { modality: string }) {
                     <Chip
                       key={v}
                       label={v}
+                      caps
                       active={(f.spec[facet.key] ?? []).includes(v)}
                       count={countFor("spec", (s) => specCell(s, facet.key), v)}
                       onClick={() =>

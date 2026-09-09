@@ -14,6 +14,15 @@ import { Reveal } from "./Reveal";
  * a paragraph about 12,900 episodes a reader could not see a frame of. The
  * capability sheet had a `Sample Link` per skill the whole time.
  *
+ * The heading names the SETTING, not just the route, because the first version
+ * did not and the section read as an intruder. The category promises "skilled
+ * manual work ... while they do their job" and 98 of its 118 records are in an
+ * operating business; this corpus is what the sheet calls "Household / factory
+ * / daily environment", and the clips are a cup on a dining table and a
+ * screwdriver on a bedroom desk. Same modality, different shelf — which is
+ * exactly the residential / non-residential split R3 asks for, and it belongs
+ * in the heading rather than in a footnote.
+ *
  * Portrait tiles, because the footage is portrait: all sixty-one clips in those
  * folders are shot on a phone held upright. Letterboxing them into the
  * landscape grid above would hide the one thing that most distinguishes this
@@ -28,7 +37,7 @@ export function OtsShelf() {
       <div className="mx-auto max-w-[1400px] px-4 pb-16 pt-14 lg:px-10 xl:px-16">
         <Reveal variant="rise">
           <h2 className="font-mono text-[10px] uppercase tracking-[0.18em]" style={{ color: C.textDim }}>
-            Off the shelf · already collected
+            Off the shelf · household and daily activity
           </h2>
 
           <p className="mt-5 max-w-2xl text-[14px] leading-relaxed" style={{ color: C.textMid }}>
@@ -37,14 +46,15 @@ export function OtsShelf() {
             sampled skills plays here — sixty-one of them.
           </p>
 
-          <dl className="mt-8 grid grid-cols-2 gap-x-8 gap-y-6 sm:grid-cols-3 xl:grid-cols-6">
+          <dl className="mt-8 grid grid-cols-2 gap-x-8 gap-y-6 sm:grid-cols-4 xl:grid-cols-7">
             {[
               { v: OTS_CORPUS.episodes, l: "Episodes" },
               { v: OTS_CORPUS.hours, l: "Total footage" },
               { v: OTS_CORPUS.domains, l: "Skill domains" },
               { v: OTS_CORPUS.clipLength, l: "Per clip" },
               { v: OTS_CORPUS.fps, l: "Frame rate" },
-              { v: OTS_CORPUS.lead, l: "Lead time" },
+              { v: "Household · daily", l: "Setting" },
+            { v: OTS_CORPUS.lead, l: "Lead time" },
             ].map((s) => (
               <div key={s.l} style={{ borderTop: `1px solid ${C.hairline}` }} className="pt-3">
                 <dd

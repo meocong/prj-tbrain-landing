@@ -85,7 +85,10 @@ export const CATEGORIES: Category[] = [
     name: "Egocentric",
     modality: "egocentric",
     whatItIs:
-      "Head-mounted capture of skilled manual work, filmed from the worker's own viewpoint while they do their job.",
+      // Both shelves, since both are now on the page. The old sentence promised
+      // only the trades-at-work one and made the household corpus below it read
+      // as a mistake.
+      "First-person capture from a head-mounted rig: skilled trades at work in operating businesses, and everyday manipulation at home.",
     // Hedged, but not in Claru's words. Theirs reads "approximately 118k hours
     // ... Approximate, and the figure may overlap across sources" - they broker,
     // so their hours can be counted twice. Ours cannot: we shot all of it, and
@@ -315,7 +318,11 @@ export function packStats(c: Category): PackStat[] {
   const mins = rows.reduce((a, r) => a + r.durationSec, 0) / 60;
 
   return [
-    { value: String(rows.length), label: "Episodes" },
+    // "Episodes" alone stopped being unambiguous once the off-the-shelf shelf
+    // went onto the same page: a header reading 118 with 61 more clips playing
+    // below it invites the reader to work out which number covers what. These
+    // are the delivery files; the pack samples say so themselves.
+    { value: String(rows.length), label: "Delivery files" },
     { value: `${mins.toFixed(0)} min`, label: "Playable here" },
     { value: String(count("Skill group")), label: "Skill groups" },
     { value: String(count("Task id")), label: "Distinct tasks" },
