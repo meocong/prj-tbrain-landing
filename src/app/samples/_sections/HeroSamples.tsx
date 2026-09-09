@@ -147,7 +147,7 @@ export function HeroSamples() {
               card and hosts no player. Nobody read on 2026-09-09 does both.
 
               Nothing in this paragraph is category-specific and none should
-              be. Tiers, hours and pricing differ per category and are stated
+              be. Rigs, tiers and lead times differ per category and are stated
               on the category, which is what the last clause points at. */}
           <p
             className="mt-6 max-w-lg text-base leading-relaxed"
@@ -156,7 +156,7 @@ export function HeroSamples() {
             Video, motion, telemetry, gameplay — we record it ourselves, annotate it, and ship it
             as MCAP or LeRobot. 126 samples play on this page with the telemetry running beside
             them and the delivery file on the same card. Open a category for what is in it, what
-            it costs and how long it takes.
+            records it, and how long it takes.
           </p>
 
           <div className="mt-8 flex flex-wrap items-center gap-6">

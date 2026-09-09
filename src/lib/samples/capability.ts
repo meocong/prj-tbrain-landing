@@ -25,6 +25,20 @@ export interface CapabilityTier {
   ramp: string;
   /** Sustained ceiling, not a first-month figure. */
   ceiling: string;
+  /**
+   * DO NOT RENDER ON THE SAMPLES SURFACE.
+   *
+   * Transcribed from the sheet and kept here because it is the record of what
+   * the sheet says, but `/samples` and `/samples/[category]` must not print a
+   * number with a currency on it — a public page quoting a rate sets an anchor
+   * before anyone has said what they need, and the sheet prices a brief, not a
+   * page view. Every route to a figure is a conversation: `AccessPaths`.
+   *
+   * It was rendered in four places until 2026-09-09: both tier tables, the
+   * chooser's state line, and the spec column of `TwoRoutes`. All four now show
+   * ramp and ceiling instead, which are the two things a buyer actually plans
+   * around and neither of which is a quote.
+   */
   price: string;
 }
 

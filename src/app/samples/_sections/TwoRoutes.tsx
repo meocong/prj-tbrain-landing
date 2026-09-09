@@ -121,23 +121,27 @@ function shelfFigures(c?: Category): string[] {
 }
 
 /**
- * Ramp, ceiling and price. For one category that is its cheapest tier; for the
- * front door it is the cheapest and the fastest across every tier we price, so
- * the figure is a floor rather than a quote.
+ * Ramp, ceiling and rig count. Never `tier.price` - see the comment on that
+ * field in capability.ts. A rate on a public page anchors a brief nobody has
+ * written yet, and the two figures a buyer actually schedules around are how
+ * soon the first delivery lands and how much per month it can sustain.
  */
 function specFigures(c?: Category): string[] {
   const tiers = (c ? [c] : CATEGORIES).flatMap((x) => statsForCategory(x).tiers);
-  if (tiers.length === 0) return ["Priced per brief"];
+  if (tiers.length === 0) return ["Scoped per brief"];
 
   const num = (s: string) => parseFloat(s.replace(/[^0-9.]/g, "")) || Infinity;
-  const cheapest = tiers.reduce((a, b) => (num(a.price) <= num(b.price) ? a : b));
   const fastest = tiers.reduce((a, b) => (num(a.ramp) <= num(b.ramp) ? a : b));
+  const biggest = tiers.reduce((a, b) => (num(a.ceiling) >= num(b.ceiling) ? a : b));
 
-  // The ceiling only appears per category. On the front door the cheapest tier
-  // and the fastest tier are usually not the same row, and printing one row's
-  // ceiling under another row's price would read as a single offer that nothing
-  // in the sheet supports.
   return c
-    ? [`From ${cheapest.price}`, `First delivery in ${fastest.ramp}`, `Up to ${cheapest.ceiling}`]
-    : [`From ${cheapest.price}, across ${tiers.length} priced tiers`, `Fastest ramp ${fastest.ramp}`];
+    ? [
+        `${tiers.length} rig ${tiers.length === 1 ? "configuration" : "configurations"}`,
+        `First delivery in ${fastest.ramp}`,
+        `Up to ${biggest.ceiling}`,
+      ]
+    : [
+        `${tiers.length} rig configurations across the catalogues`,
+        `Fastest first delivery ${fastest.ramp}`,
+      ];
 }
