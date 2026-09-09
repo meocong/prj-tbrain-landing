@@ -88,6 +88,16 @@ interface Filters {
   skillGroup: string[];
   industry: string[];
   rig: string[];
+  /**
+   * Site type — the business, not the corner of it.
+   *
+   * R14 asks for an environment filter and there was none: `environment` was a
+   * chart axis and nothing else, so a buyer could see that the catalogue holds
+   * 31 site types and could not narrow to one. The raw field crosses two axes
+   * ("Auto Repair, Service Bay"), so the facet takes the half before the comma
+   * — 31 values instead of 78 compounds.
+   */
+  site: string[];
   job: string;
   /**
    * Facets that exist on one category and nowhere else, keyed by the `spec`
@@ -134,6 +144,7 @@ const EMPTY: Filters = {
   skillGroup: [],
   industry: [],
   rig: [],
+  site: [],
   job: "all",
   spec: {},
   q: "",
@@ -163,6 +174,10 @@ function matches(s: Sample, f: Filters, skip?: keyof Filters) {
   if (on("industry") && f.industry.length && !(s.industry && f.industry.includes(s.industry)))
     return false;
   if (on("rig") && f.rig.length && !f.rig.includes(s.rig)) return false;
+  if (on("site") && f.site.length) {
+    const site = (s.environment ?? "").split(",")[0]?.trim();
+    if (!site || !f.site.includes(site)) return false;
+  }
   if (on("job") && f.job !== "all" && s.job !== f.job) return false;
   if (on("spec")) {
     for (const [key, picked] of Object.entries(f.spec)) {
@@ -585,7 +600,7 @@ export function SampleCatalog({ modality }: { modality: string }) {
   const [railOpen, setRailOpen] = useState(false);
 
   const toggle = (
-    key: "modality" | "provenance" | "viewpoint" | "skillGroup" | "industry" | "rig",
+    key: "modality" | "provenance" | "viewpoint" | "skillGroup" | "industry" | "rig" | "site",
     v: string,
   ) => {
     track("filter_rig", { facet: key, value: v });
@@ -629,6 +644,10 @@ export function SampleCatalog({ modality }: { modality: string }) {
   );
 
   const rigs = useMemo(() => valuesOf((s) => s.rig), [valuesOf]);
+  const sites = useMemo(
+    () => valuesOf((s) => (s.environment ?? "").split(",")[0]?.trim() || null),
+    [valuesOf],
+  );
   const jobs = useMemo(() => JOBS.filter((j) => scoped.some((s) => s.job === j)), [scoped]);
   const skillGroups = useMemo(
     () => SKILL_GROUPS.filter((g) => scoped.some((s) => s.skillGroup === g)),
@@ -686,7 +705,7 @@ export function SampleCatalog({ modality }: { modality: string }) {
 
   const dirty =
     f.modality.length + f.provenance.length + f.viewpoint.length + f.skillGroup.length +
-      f.industry.length + f.rig.length >
+      f.industry.length + f.rig.length + f.site.length >
       0 ||
     f.job !== "all" ||
     Object.values(f.spec).some((v) => v.length > 0) ||
@@ -818,6 +837,20 @@ export function SampleCatalog({ modality }: { modality: string }) {
                       active={f.industry.includes(i)}
                       count={countFor("industry", (s) => s.industry, i)}
                       onClick={() => toggle("industry", i)}
+                    />
+                  ))}
+                </RailGroup>
+              )}
+
+              {sites.length > 1 && (
+                <RailGroup title="Site type">
+                  {sites.map((v) => (
+                    <Chip
+                      key={v}
+                      label={v}
+                      active={f.site.includes(v)}
+                      count={countFor("site", (s) => (s.environment ?? "").split(",")[0]?.trim() || null, v)}
+                      onClick={() => toggle("site", v)}
                     />
                   ))}
                 </RailGroup>
