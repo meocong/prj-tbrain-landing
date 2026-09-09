@@ -10,6 +10,8 @@ import { publicSpec } from "@/lib/samples/redact.mjs";
 import { track } from "@/lib/samples/track";
 import { requestUrl } from "@/lib/samples/request-link";
 import { CAPABILITY, IN_FLIGHT, INTEROP } from "@/lib/samples/capability";
+import { DATASETS, type LineKey } from "@/lib/samples/datasets";
+import { DatasetBand } from "./DatasetBand";
 import { AccessStrip } from "./AccessActions";
 import { LiveTelemetry } from "./LiveTelemetry";
 import { C, OVER_MEDIA, PILL, type Sample } from "./tokens";
@@ -55,7 +57,6 @@ const MODALITIES = [
   { key: "exocentric", label: "Exocentric" },
   { key: "teleoperation", label: "Teleoperation" },
   { key: "mocap", label: "Mocap" },
-  { key: "gaming", label: "Gaming" },
 ] as const;
 
 /** Where a record came from — the other half of the old `domain` field. */
@@ -79,6 +80,9 @@ const SORTS = [
 type SortKey = (typeof SORTS)[number]["key"];
 
 interface Filters {
+  /** Navigation, carried here so `matches` can honour it without a second pass. */
+  line: LineKey;
+  dataset: string | null;
   modality: string[];
   provenance: string[];
   viewpoint: string[];
@@ -90,6 +94,8 @@ interface Filters {
 }
 
 const EMPTY: Filters = {
+  line: "robotics",
+  dataset: null,
   modality: [],
   provenance: [],
   viewpoint: [],
@@ -109,6 +115,15 @@ function mmss(total: number) {
 /** Within a facet the selected values are OR-ed; across facets they are AND-ed. */
 function matches(s: Sample, f: Filters, skip?: keyof Filters) {
   const on = (k: keyof Filters) => k !== skip;
+  // Line and dataset sit outside `Filters` and outside `skip`: they are
+  // navigation, so a facet count must be computed WITHIN the line the reader is
+  // in, never across both buyers.
+  if (f.line === "gaming" ? s.modality !== "gaming" : s.modality === "gaming") return false;
+  if (f.dataset) {
+    const d = DATASETS.find((x) => x.slug === f.dataset);
+    if (d && d.skillGroups.length && !(s.skillGroup && d.skillGroups.includes(s.skillGroup)))
+      return false;
+  }
   if (on("modality") && f.modality.length && !f.modality.includes(s.modality)) return false;
   // `provenance` is null on the game records: no game record states whether it
   // is off-the-shelf or custom, so narrowing to either has to exclude them
@@ -464,6 +479,10 @@ function RailGroup({
 
 export function SampleCatalog() {
   const [active, setActive] = useState<Sample | null>(null);
+  /* Clear empties the facets and leaves the reader where they were. Line and
+     dataset are navigation, not narrowing: resetting them would teleport a
+     gaming buyer back into the robotics grid for pressing "Clear". */
+  const clear = () => setF({ ...EMPTY, line: f.line, dataset: f.dataset });
 
   /* A record is addressable: `/samples?record=<slug>`.
    *
@@ -613,6 +632,13 @@ export function SampleCatalog() {
         </div>
 
         <AccessStrip />
+
+        <DatasetBand
+          line={f.line}
+          onLine={(line) => setF((p) => ({ ...p, line, dataset: null }))}
+          activeSlug={f.dataset}
+          onPick={(dataset) => setF((p) => ({ ...p, dataset }))}
+        />
       </div>
 
       <div className="mx-auto max-w-[1400px] px-4 pb-24 pt-10 lg:px-10 xl:px-16">
@@ -651,7 +677,13 @@ export function SampleCatalog() {
                 />
               </label>
 
-              <RailGroup title="Modality" first>
+              {/* Robotics only. Gaming is one modality, so offering the choice
+                  there would be four chips reading zero, each of which would
+                  answer with an egocentric price sheet a gaming buyer did not
+                  ask for. A facet with one value is not a facet. */}
+              {f.line === "robotics" && (
+                <>
+                  <RailGroup title="Modality" first>
                 {MODALITIES.map((m) => (
                   <Chip
                     key={m.key}
@@ -676,7 +708,11 @@ export function SampleCatalog() {
                 ))}
               </RailGroup>
 
-              <RailGroup title="Viewpoint">
+              </>)}
+
+              {/* Viewpoint is `first` when the modality block is hidden, so the
+                  rail never opens with a rule floating above nothing. */}
+              <RailGroup title="Viewpoint" first={f.line !== "robotics"}>
                 {VIEWPOINTS.map((v) => (
                   <Chip
                     key={v.key}
@@ -762,7 +798,7 @@ export function SampleCatalog() {
                 {dirty && (
                   <button
                     type="button"
-                    onClick={() => setF(EMPTY)}
+                    onClick={clear}
                     className="inline-flex items-center gap-1 font-mono text-[10px] uppercase tracking-[0.16em]"
                     style={{ color: C.textDim }}
                   >
@@ -805,7 +841,7 @@ export function SampleCatalog() {
                   </p>
                   <button
                     type="button"
-                    onClick={() => setF(EMPTY)}
+                    onClick={clear}
                     className="mt-6 rounded-full px-5 py-2 text-[13px] font-semibold"
                     style={{ background: C.text, color: C.base }}
                   >
