@@ -102,6 +102,29 @@ export function CategoryHeader({ category: c }: { category: Category }) {
         </p>
       )}
 
+      {/* Records first; a category with none still has a figure, and until now
+          the reel branch simply printed nothing — teleoperation and mocap
+          opened on a hero carrying no number at all. */}
+      {stats.length === 0 && c.held && (
+        <dl
+          className="mt-10"
+          style={{ borderTop: "1px solid rgba(255,255,255,0.16)", paddingTop: "1.25rem" }}
+        >
+          <dd
+            className="font-mono text-[30px] tracking-tight md:text-[38px]"
+            style={{ color: "#ffffff", lineHeight: 1 }}
+          >
+            {c.held.figure}
+          </dd>
+          <dt
+            className="mt-2 font-mono text-[9.5px] uppercase tracking-[0.16em]"
+            style={{ color: "rgba(255,255,255,0.56)" }}
+          >
+            {c.held.unit}
+          </dt>
+        </dl>
+      )}
+
       {stats.length > 0 && (
         /* On the footage rather than under it: the figures are a claim about
            the records playing behind them, and separating the two put a rule

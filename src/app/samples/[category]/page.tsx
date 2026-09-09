@@ -23,6 +23,7 @@ import { TeleopSet } from "../_sections/TeleopSet";
 import { TeleopAnatomy } from "../_sections/TeleopAnatomy";
 import { CaptureSpec } from "../_sections/CaptureSpec";
 import { AccessPaths } from "../_sections/AccessPaths";
+import { Reveal } from "../_sections/Reveal";
 import { C } from "../_sections/tokens";
 
 /**
@@ -122,127 +123,130 @@ export default async function CategoryPage({
         {s.tiers.length > 0 && (
           <section>
             <div className="mx-auto max-w-[1400px] px-4 pb-4 pt-14 lg:px-10 xl:px-16">
-              <h2
-                className="font-mono text-[10px] uppercase tracking-[0.18em]"
-                style={{ color: C.textDim }}
-              >
-                What we run in this category
-              </h2>
+              <Reveal variant="rise">
+                <h2
+                  className="font-mono text-[10px] uppercase tracking-[0.18em]"
+                  style={{ color: C.textDim }}
+                >
+                  What we run in this category
+                </h2>
 
-              {/* Diversity, moved down here with the rest of the shelf story.
-                  Above the clips it was four numbers with nothing to anchor
-                  them to.
+                {/* Diversity, moved down here with the rest of the shelf story.
+                    Above the clips it was four numbers with nothing to anchor
+                    them to.
 
-                  Only where the category HAS records. `axesFor` counts a whole
-                  line, so /samples/mocap — which holds nothing — was printing
-                  "31 workplaces · 106 distinct tasks · 32 operator jobs · 27%
-                  graded hard", every figure of it egocentric's, directly under
-                  a heading saying "in this category". */}
-              {s.episodes > 0 && (
-              <dl className="mt-6 grid grid-cols-2 gap-x-8 gap-y-5 sm:grid-cols-4">
-                {axesFor(c.line === "gaming" ? "gaming" : "robotics").map((a) => (
-                  <div key={a.key}>
-                    <dt
-                      className="font-mono text-[10px] uppercase tracking-[0.18em]"
-                      style={{ color: C.textDim }}
-                    >
-                      {a.label}
-                    </dt>
-                    <dd
-                      className="mt-1 font-mono text-2xl tracking-tight"
-                      style={{ color: C.value, lineHeight: 1.1 }}
-                    >
-                      {a.value}
-                    </dd>
-                  </div>
-                ))}
-              </dl>
-              )}
-              {s.episodes > 0 && (
-                <p className="mt-3 text-[12px]" style={{ color: C.textDim }}>
-                  Measured across the samples published here, not the full shelf.
-                </p>
-              )}
-
-              <div className="mt-10">
-                {s.tiers.map((t) => (
-                  <div
-                    key={t.name}
-                    className="grid gap-x-8 gap-y-2 py-5 md:grid-cols-[minmax(0,1.3fr)_auto]"
-                    style={{ borderTop: `1px solid ${C.hairline}` }}
-                  >
-                    <div className="min-w-0">
-                      <p className="text-[15px] font-medium">{t.name}</p>
-                      <p className="mt-1 text-[12.5px] leading-relaxed" style={{ color: C.textDim }}>
-                        {t.rig}
-                        {t.sensors ? ` · ${t.sensors}` : ""}
-                        {t.environment ? ` · ${t.environment}` : ""}
-                      </p>
-                      {/* The column the first transcription left behind, and
-                          the one a technical buyer reads first. "Egocentric
-                          stereo" is a label; `left.mp4 + right.mp4 + imu.csv`
-                          is the thing they have to write a loader for. */}
-                      {t.outputs && (
-                        <p
-                          className="mt-2 font-mono text-[11.5px] leading-relaxed"
-                          style={{ color: C.value }}
-                        >
-                          {t.outputs}
-                        </p>
-                      )}
-                      {/* When you would pick this one. The table listed five
-                          rigs and what each outputs and never said which to
-                          choose; a reader who does not already know what VIO
-                          needs cannot tell stereo from wrist by their file
-                          lists. R1 as an answer rather than as a table. */}
-                      {t.when && (
-                        <p
-                          className="mt-2 max-w-xl text-[12.5px] leading-relaxed"
-                          style={{ color: C.textMid }}
-                        >
-                          {t.when}
-                        </p>
-                      )}
-                      {t.demoHref && (
-                        <a
-                          href={t.demoHref}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="mt-2 inline-block font-mono text-[11px] underline decoration-1 underline-offset-4"
-                          style={{ color: C.accent }}
-                        >
-                          Open the live 3D demo
-                        </a>
-                      )}
+                    Only where the category HAS records. `axesFor` counts a whole
+                    line, so /samples/mocap — which holds nothing — was printing
+                    "31 workplaces · 106 distinct tasks · 32 operator jobs · 27%
+                    graded hard", every figure of it egocentric's, directly under
+                    a heading saying "in this category". */}
+                {s.episodes > 0 && (
+                <dl className="mt-6 grid grid-cols-2 gap-x-8 gap-y-5 sm:grid-cols-4">
+                  {axesFor(c.line === "gaming" ? "gaming" : "robotics").map((a) => (
+                    <div key={a.key}>
+                      <dt
+                        className="font-mono text-[10px] uppercase tracking-[0.18em]"
+                        style={{ color: C.textDim }}
+                      >
+                        {a.label}
+                      </dt>
+                      <dd
+                        className="mt-1 font-mono text-2xl tracking-tight"
+                        style={{ color: C.value, lineHeight: 1.1 }}
+                      >
+                        {a.value}
+                      </dd>
                     </div>
-                    {/* No `t.price` column — see the comment on that field.
-                        `firstMonth` sits under the ceiling because quoting only
-                        the ceiling to somebody scheduling a pilot overstates
-                        month one by up to four times. */}
-                    <p
-                      className="font-mono text-[11.5px] leading-relaxed md:text-right"
-                      style={{ color: C.textMid }}
-                    >
-                      Ready in {t.ramp}
-                      <br />
-                      Up to {t.ceiling}
-                      {t.firstMonth && (
-                        <>
-                          <br />
-                          <span style={{ color: C.textDim }}>{t.firstMonth}</span>
-                        </>
-                      )}
-                    </p>
-                  </div>
-                ))}
-              </div>
+                  ))}
+                </dl>
+                )}
+                {s.episodes > 0 && (
+                  <p className="mt-3 text-[12px]" style={{ color: C.textDim }}>
+                    Measured across the samples published here, not the full shelf.
+                  </p>
+                )}
 
-              <p
-                className="mt-5 pt-4 font-mono text-[11px]"
-                style={{ borderTop: `1px solid ${C.hairline}`, color: C.textDim }}
-              >
-                Delivered as {INTEROP}
-              </p>
+                <div className="mt-10">
+                  {s.tiers.map((t) => (
+                    <div
+                      key={t.name}
+                      className="grid gap-x-8 gap-y-2 py-5 md:grid-cols-[minmax(0,1.3fr)_auto]"
+                      style={{ borderTop: `1px solid ${C.hairline}` }}
+                    >
+                      <div className="min-w-0">
+                        <p className="text-[15px] font-medium">{t.name}</p>
+                        <p className="mt-1 text-[12.5px] leading-relaxed" style={{ color: C.textDim }}>
+                          {t.rig}
+                          {t.sensors ? ` · ${t.sensors}` : ""}
+                          {t.environment ? ` · ${t.environment}` : ""}
+                        </p>
+                        {/* The column the first transcription left behind, and
+                            the one a technical buyer reads first. "Egocentric
+                            stereo" is a label; `left.mp4 + right.mp4 + imu.csv`
+                            is the thing they have to write a loader for. */}
+                        {t.outputs && (
+                          <p
+                            className="mt-2 font-mono text-[11.5px] leading-relaxed"
+                            style={{ color: C.value }}
+                          >
+                            {t.outputs}
+                          </p>
+                        )}
+                        {/* When you would pick this one. The table listed five
+                            rigs and what each outputs and never said which to
+                            choose; a reader who does not already know what VIO
+                            needs cannot tell stereo from wrist by their file
+                            lists. R1 as an answer rather than as a table. */}
+                        {t.when && (
+                          <p
+                            className="mt-2 max-w-xl text-[12.5px] leading-relaxed"
+                            style={{ color: C.textMid }}
+                          >
+                            {t.when}
+                          </p>
+                        )}
+                        {t.demoHref && (
+                          <a
+                            href={t.demoHref}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="mt-2 inline-block font-mono text-[11px] underline decoration-1 underline-offset-4"
+                            style={{ color: C.accent }}
+                          >
+                            Open the live 3D demo
+                          </a>
+                        )}
+                      </div>
+                      {/* No `t.price` column — see the comment on that field.
+                          `firstMonth` sits under the ceiling because quoting only
+                          the ceiling to somebody scheduling a pilot overstates
+                          month one by up to four times. */}
+                      <p
+                        className="font-mono text-[11.5px] leading-relaxed md:text-right"
+                        style={{ color: C.textMid }}
+                      >
+                        Ready in {t.ramp}
+                        <br />
+                        Up to {t.ceiling}
+                        {t.firstMonth && (
+                          <>
+                            <br />
+                            <span style={{ color: C.textDim }}>{t.firstMonth}</span>
+                          </>
+                        )}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+
+                <p
+                  className="mt-5 pt-4 font-mono text-[11px]"
+                  style={{ borderTop: `1px solid ${C.hairline}`, color: C.textDim }}
+                >
+                  Delivered as {INTEROP}
+                </p>
+
+              </Reveal>
             </div>
           </section>
         )}
@@ -301,31 +305,34 @@ export default async function CategoryPage({
             same for everything in the category. */}
         <section>
           <div className="mx-auto max-w-[1400px] px-4 pb-24 lg:px-10 xl:px-16">
-            <h2
-              className="font-mono text-[10px] uppercase tracking-[0.18em]"
-              style={{ color: C.textDim }}
-            >
-              Licence
-            </h2>
-            <dl className="mt-5 grid gap-x-10 md:grid-cols-2">
-              {LICENSE.map((t) => (
-                <div
-                  key={t.label}
-                  className="grid grid-cols-[minmax(0,9rem)_1fr] items-baseline gap-x-5 py-2.5"
-                  style={{ borderTop: `1px solid ${C.hairlineSoft}` }}
-                >
-                  <dt className="text-[12px]" style={{ color: C.textDim }}>
-                    {t.label}
-                  </dt>
-                  <dd className="font-mono text-[12px] leading-relaxed" style={{ color: C.value }}>
-                    {t.value}
-                  </dd>
-                </div>
-              ))}
-            </dl>
-            <p className="mt-4 text-[12px]" style={{ color: C.textDim }}>
-              {QUALIFIER}
-            </p>
+              <Reveal variant="rise">
+              <h2
+                className="font-mono text-[10px] uppercase tracking-[0.18em]"
+                style={{ color: C.textDim }}
+              >
+                Licence
+              </h2>
+              <dl className="mt-5 grid gap-x-10 md:grid-cols-2">
+                {LICENSE.map((t) => (
+                  <div
+                    key={t.label}
+                    className="grid grid-cols-[minmax(0,9rem)_1fr] items-baseline gap-x-5 py-2.5"
+                    style={{ borderTop: `1px solid ${C.hairlineSoft}` }}
+                  >
+                    <dt className="text-[12px]" style={{ color: C.textDim }}>
+                      {t.label}
+                    </dt>
+                    <dd className="font-mono text-[12px] leading-relaxed" style={{ color: C.value }}>
+                      {t.value}
+                    </dd>
+                  </div>
+                ))}
+              </dl>
+              <p className="mt-4 text-[12px]" style={{ color: C.textDim }}>
+                {QUALIFIER}
+              </p>
+
+              </Reveal>
           </div>
         </section>
 
