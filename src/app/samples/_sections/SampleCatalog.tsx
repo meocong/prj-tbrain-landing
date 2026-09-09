@@ -401,8 +401,8 @@ function CapabilityPanel({ modality, onClear }: { modality: string; onClear: () 
         {name} runs on the same pipeline.
       </h3>
       <p className="mt-2 max-w-xl text-[13.5px] leading-relaxed" style={{ color: C.textMid }}>
-        Nothing from this line is on the page yet. It is collected to spec, and these are the
-        terms — the same ones we would send in a quote.
+        Nothing from this line is on the page yet. It is collected to spec. These are the same
+        terms we would send in a quote.
       </p>
 
       {running && (

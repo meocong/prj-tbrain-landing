@@ -2,12 +2,6 @@
 
 import { useEffect, useMemo, useState, type ReactNode } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
-import { ChevronDown } from "lucide-react";
-import samples from "@/lib/samples/samples.json";
-import { EASE } from "./tokens";
-
-/** Counted, not written down: a hardcoded number goes stale the next merge. */
-const CATALOGUE_SIZE = (samples as unknown[]).length;
 
 /** Columns rendered. The last two are hidden below `lg`, the fourth below `sm`. */
 const COLS = 6;
@@ -154,74 +148,7 @@ export function HeroMosaic({
         {children}
       </div>
 
-      <ScrollCue />
     </div>
-  );
-}
-
-/**
- * The one thing a full-bleed hero costs: nothing on screen says the page
- * continues. A viewport of footage with no bottom edge reads as the whole
- * page, so this marks the fold and says what is past it.
- *
- * It hides itself as soon as the reader scrolls — once they are moving, a
- * "scroll down" prompt is noise, and it would otherwise sit over the catalogue.
- */
-function ScrollCue() {
-  const reduce = useReducedMotion();
-  const [past, setPast] = useState(false);
-
-  useEffect(() => {
-    const onScroll = () => setPast(window.scrollY > 40);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
-  // Same scroll the "Browse samples" button performs, for the same reason: a
-  // bare `#deck` href appends rather than replaces the fragment once the page
-  // already carries one, and the click then does nothing.
-  const toDeck = () => {
-    const deck = document.getElementById("deck");
-    if (!deck) return;
-    deck.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
-    history.replaceState(null, "", "#deck");
-  };
-
-  return (
-    <AnimatePresence>
-      {!past && (
-        <motion.button
-          type="button"
-          onClick={toDeck}
-          aria-label="Scroll to the catalogue"
-          className="absolute bottom-7 left-1/2 z-10 flex -translate-x-1/2 flex-col items-center gap-2"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0, transition: { duration: 0.25 } }}
-          transition={{ duration: 0.6, delay: reduce ? 0 : 1.1, ease: EASE }}
-        >
-          <span
-            className="font-mono text-[10px] uppercase tracking-[0.22em]"
-            style={{ color: "rgba(255,255,255,0.66)" }}
-          >
-            All {CATALOGUE_SIZE} samples below
-          </span>
-          <motion.span
-            className="flex h-9 w-9 items-center justify-center rounded-full backdrop-blur-sm"
-            style={{
-              border: "1px solid rgba(255,255,255,0.28)",
-              background: "rgba(6,8,14,0.42)",
-              color: "rgba(255,255,255,0.9)",
-            }}
-            animate={reduce ? undefined : { y: [0, 7, 0] }}
-            transition={{ duration: 1.9, repeat: Infinity, ease: "easeInOut" }}
-          >
-            <ChevronDown className="h-4 w-4" />
-          </motion.span>
-        </motion.button>
-      )}
-    </AnimatePresence>
   );
 }
 

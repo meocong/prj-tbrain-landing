@@ -61,6 +61,16 @@ export function HeroSamples() {
             Sample library
           </span>
 
+          {/* Two lines, not three. Three lines of 72px display type is a
+              font-scale error rather than a copy-length one, and the third line
+              was carrying the whole idea.
+
+              The old headline said "Robotics and game data", which was written
+              when `domain` had three values. The rail now lists five
+              modalities, so the headline and the filters were describing
+              different shelves. These three words map onto them: human capture
+              is egocentric, exocentric and mocap; robot is teleoperation; game
+              is gaming. It also matches the two buyers Tam separates. */}
           <h1
             className="mt-5 text-5xl font-medium tracking-tight md:text-6xl xl:text-7xl"
             style={{
@@ -70,8 +80,7 @@ export function HeroSamples() {
               color: "#ffffff",
             }}
           >
-            <span className="block">Robotics and</span>
-            <span className="block">game data,</span>
+            <span className="block">Human, robot and game capture,</span>
             <span className="block" style={{ color: "rgba(255,255,255,0.48)" }}>
               frame by frame.
             </span>
