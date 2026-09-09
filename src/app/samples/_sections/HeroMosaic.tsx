@@ -47,9 +47,17 @@ const DRIFT = [
 export function HeroMosaic({
   slugs,
   children,
+  heightClass = "h-svh min-h-[620px]",
 }: {
   slugs: string[];
   children: ReactNode;
+  /**
+   * Tailwind height for the wall. Full viewport is right for `/samples`, where
+   * the hero IS the page's opening claim; a category page has to get to its
+   * clips, so it asks for less. Passed rather than hard-coded because the two
+   * heroes are otherwise the same component and should stay that way.
+   */
+  heightClass?: string;
 }) {
   const reduce = useReducedMotion();
   const cols = useVisibleCols();
@@ -99,7 +107,9 @@ export function HeroMosaic({
     // undoes `h-svh` on any screen taller than the cap: the wall stops early and
     // the catalogue's white background shows below it, which reads as an
     // unfinished gap rather than as a deliberate end to the hero.
-    <div className="relative isolate flex h-svh min-h-[620px] w-full flex-col overflow-hidden">
+    <div
+      className={`relative isolate flex w-full flex-col overflow-hidden ${heightClass}`}
+    >
       <div
         aria-hidden
         className="absolute -inset-[28%] -z-10"
