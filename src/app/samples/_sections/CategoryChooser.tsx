@@ -105,6 +105,9 @@ function CategoryCard({
   const s = statsForCategory(c);
   const href = c.externalHref ?? `/samples/${c.slug}`;
   const faces = facesFor(c, FACES);
+  // A category with no records may still carry its own footage.
+  const own = c.reel?.map((x) => x.slug) ?? [];
+  const band = faces.length > 0 ? faces : own;
 
   /* What is true about this line right now, in the order a buyer wants it:
      what they can play, then what is collected but unpublished, then what we
@@ -128,8 +131,8 @@ function CategoryCard({
       transition={{ duration: 0.55, delay: index * 0.05, ease: EASE }}
     >
       <Link href={href} className="group block">
-        {faces.length > 0 ? (
-          <FaceBand slugs={faces} reduce={reduce} />
+        {band.length > 0 ? (
+          <FaceBand slugs={band} reduce={reduce} />
         ) : (
           <HeldBand held={c.held} slug={c.slug} />
         )}

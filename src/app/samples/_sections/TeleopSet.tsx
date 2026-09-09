@@ -3,6 +3,7 @@
 import { useCallback, useRef, useState } from "react";
 import { clipSrc, posterSrc } from "@/lib/samples/categories";
 import { C, OVER_MEDIA } from "./tokens";
+import { Reveal } from "./Reveal";
 
 /**
  * The teleoperation set, playing.
@@ -72,75 +73,77 @@ export function TeleopSet() {
   return (
     <section style={{ background: C.base, color: C.text }}>
       <div className="mx-auto max-w-[1400px] px-4 pb-16 pt-14 lg:px-10 xl:px-16">
-        <h2 className="font-mono text-[10px] uppercase tracking-[0.18em]" style={{ color: C.textDim }}>
-          Play the set
-        </h2>
+        <Reveal variant="rise">
+          <h2 className="font-mono text-[10px] uppercase tracking-[0.18em]" style={{ color: C.textDim }}>
+            Play the set
+          </h2>
 
-        <p className="mt-5 max-w-2xl text-[14px] leading-relaxed" style={{ color: C.textMid }}>
-          Three cameras on one clock, which is what a policy reads. Below them, every episode in
-          the set — one task, eleven attempts, and the variation between them is the data.
-        </p>
+          <p className="mt-5 max-w-2xl text-[14px] leading-relaxed" style={{ color: C.textMid }}>
+            Three cameras on one clock, which is what a policy reads. Below them, every episode in
+            the set — one task, eleven attempts, and the variation between them is the data.
+          </p>
 
-        <div className="mt-8 grid gap-2 sm:grid-cols-3">
-          {VIEWS.map((v, i) => (
-            <div key={v.slug} className="relative" style={{ background: C.band }}>
-              <video
-                ref={(el) => {
-                  refs.current[i] = el;
-                }}
-                src={clipSrc(v.slug)}
-                poster={posterSrc(v.slug)}
-                muted
-                loop
-                playsInline
-                preload="metadata"
-                onTimeUpdate={i === 0 ? resync : undefined}
-                className="block w-full"
-                style={{ aspectRatio: "4 / 3", objectFit: "cover" }}
-              />
-              <span
-                className="pointer-events-none absolute left-2 top-2 px-1.5 py-0.5 font-mono text-[9.5px] uppercase tracking-[0.14em]"
-                style={{ background: OVER_MEDIA.scrim, color: OVER_MEDIA.text }}
-              >
-                {v.label}
-              </span>
-            </div>
-          ))}
-        </div>
+          <div className="mt-8 grid gap-2 sm:grid-cols-3">
+            {VIEWS.map((v, i) => (
+              <div key={v.slug} className="relative" style={{ background: C.band }}>
+                <video
+                  ref={(el) => {
+                    refs.current[i] = el;
+                  }}
+                  src={clipSrc(v.slug)}
+                  poster={posterSrc(v.slug)}
+                  muted
+                  loop
+                  playsInline
+                  preload="metadata"
+                  onTimeUpdate={i === 0 ? resync : undefined}
+                  className="block w-full"
+                  style={{ aspectRatio: "4 / 3", objectFit: "cover" }}
+                />
+                <span
+                  className="pointer-events-none absolute left-2 top-2 px-1.5 py-0.5 font-mono text-[9.5px] uppercase tracking-[0.14em]"
+                  style={{ background: OVER_MEDIA.scrim, color: OVER_MEDIA.text }}
+                >
+                  {v.label}
+                </span>
+              </div>
+            ))}
+          </div>
 
-        <div className="mt-4 flex flex-wrap items-center gap-x-6 gap-y-2">
-          <button
-            type="button"
-            onClick={toggle}
-            className="rounded-full px-5 py-2 font-mono text-[11px] uppercase tracking-[0.16em] transition-transform active:scale-[0.98]"
-            style={{ border: `1px solid ${C.rule}`, color: C.text }}
-          >
-            {playing ? "Pause all three" : "Play all three"}
-          </button>
-          <span className="font-mono text-[11.5px]" style={{ color: C.textDim }}>
-            Episode 0 · 640×480 · 30 fps · 16-dimensional state and action per frame
-          </span>
-        </div>
+          <div className="mt-4 flex flex-wrap items-center gap-x-6 gap-y-2">
+            <button
+              type="button"
+              onClick={toggle}
+              className="rounded-full px-5 py-2 font-mono text-[11px] uppercase tracking-[0.16em] transition-transform active:scale-[0.98]"
+              style={{ border: `1px solid ${C.rule}`, color: C.text }}
+            >
+              {playing ? "Pause all three" : "Play all three"}
+            </button>
+            <span className="font-mono text-[11.5px]" style={{ color: C.textDim }}>
+              Episode 0 · 640×480 · 30 fps · 16-dimensional state and action per frame
+            </span>
+          </div>
 
-        <p className="mt-10 font-mono text-[10px] uppercase tracking-[0.18em]" style={{ color: C.textDim }}>
-          All 11 episodes · head camera
-        </p>
-        <p className="mt-2 max-w-2xl text-[13px]" style={{ color: C.textMid }}>
-          {TASK}
-        </p>
+          <p className="mt-10 font-mono text-[10px] uppercase tracking-[0.18em]" style={{ color: C.textDim }}>
+            All 11 episodes · head camera
+          </p>
+          <p className="mt-2 max-w-2xl text-[13px]" style={{ color: C.textMid }}>
+            {TASK}
+          </p>
 
-        <div className="mt-5 flex gap-2 overflow-x-auto pb-4">
-          {EPISODES.map((slug, i) => (
-            <Tile key={slug} slug={slug} index={i} />
-          ))}
-        </div>
+          <div className="mt-5 flex gap-2 overflow-x-auto pb-4">
+            {EPISODES.map((slug, i) => (
+              <Tile key={slug} slug={slug} index={i} />
+            ))}
+          </div>
 
-        <p className="mt-4 max-w-2xl text-[12px] leading-relaxed" style={{ color: C.textDim }}>
-          Counted off the files: 11 episodes, 14,076 frames, 33 videos. The set&apos;s own
-          <code className="mx-1 font-mono">meta/info.json</code> declares 10, 13,465 and 30, and a
-          LeRobot loader reading its <code className="mx-1 font-mono">splits</code> would drop the
-          last episode without saying so.
-        </p>
+          <p className="mt-4 max-w-2xl text-[12px] leading-relaxed" style={{ color: C.textDim }}>
+            Counted off the files: 11 episodes, 14,076 frames, 33 videos. The set&apos;s own
+            <code className="mx-1 font-mono">meta/info.json</code> declares 10, 13,465 and 30, and a
+            LeRobot loader reading its <code className="mx-1 font-mono">splits</code> would drop the
+            last episode without saying so.
+          </p>
+        </Reveal>
       </div>
     </section>
   );

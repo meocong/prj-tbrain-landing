@@ -1,5 +1,6 @@
 import samples from "@/lib/samples/samples.json";
 import { C } from "./tokens";
+import { Reveal } from "./Reveal";
 
 /**
  * What is actually in the catalogue, on the front door.
@@ -47,41 +48,43 @@ export function Coverage() {
   return (
     <section style={{ background: C.base, color: C.text }}>
       <div className="mx-auto max-w-[1400px] px-4 pb-20 pt-20 lg:px-10 xl:px-16">
-        <h2 className="font-mono text-[10px] uppercase tracking-[0.18em]" style={{ color: C.textDim }}>
-          Who is on the other side of the camera
-        </h2>
+        <Reveal variant="rise">
+          <h2 className="font-mono text-[10px] uppercase tracking-[0.18em]" style={{ color: C.textDim }}>
+            Who is on the other side of the camera
+          </h2>
 
-        <p
-          className="mt-5 max-w-3xl text-2xl leading-snug md:text-[28px]"
-          style={{ fontFamily: "var(--font-heading)", letterSpacing: "-0.02em" }}
-        >
-          {JOBS.join(" · ")}
-        </p>
+          <p
+            className="mt-5 max-w-3xl text-2xl leading-snug md:text-[28px]"
+            style={{ fontFamily: "var(--font-heading)", letterSpacing: "-0.02em" }}
+          >
+            {JOBS.join(" · ")}
+          </p>
 
-        <p className="mt-5 max-w-2xl text-[13px] leading-relaxed" style={{ color: C.textDim }}>
-          Every trade above appears in a sample you can play on this site — paid professionals doing
-          their own job in their own workplace, not actors on a set. The shelf behind them is wider
-          than this page indexes.
-        </p>
+          <p className="mt-5 max-w-2xl text-[13px] leading-relaxed" style={{ color: C.textDim }}>
+            Every trade above appears in a sample you can play on this site — paid professionals doing
+            their own job in their own workplace, not actors on a set. The shelf behind them is wider
+            than this page indexes.
+          </p>
 
-        <dl className="mt-10 grid grid-cols-2 gap-x-8 gap-y-6 sm:grid-cols-4">
-          {COUNTS.map((c) => (
-            <div key={c.label} style={{ borderTop: `1px solid ${C.hairline}` }} className="pt-3">
-              <dt
-                className="font-mono text-[10px] uppercase tracking-[0.18em]"
-                style={{ color: C.textDim }}
-              >
-                {c.label}
-              </dt>
-              <dd
-                className="mt-1 font-mono text-3xl tracking-tight"
-                style={{ color: C.value, lineHeight: 1 }}
-              >
-                {c.value}
-              </dd>
-            </div>
-          ))}
-        </dl>
+          <dl className="mt-10 grid grid-cols-2 gap-x-8 gap-y-6 sm:grid-cols-4">
+            {COUNTS.map((c) => (
+              <div key={c.label} style={{ borderTop: `1px solid ${C.hairline}` }} className="pt-3">
+                <dt
+                  className="font-mono text-[10px] uppercase tracking-[0.18em]"
+                  style={{ color: C.textDim }}
+                >
+                  {c.label}
+                </dt>
+                <dd
+                  className="mt-1 font-mono text-3xl tracking-tight"
+                  style={{ color: C.value, lineHeight: 1 }}
+                >
+                  {c.value}
+                </dd>
+              </div>
+            ))}
+          </dl>
+        </Reveal>
       </div>
     </section>
   );
