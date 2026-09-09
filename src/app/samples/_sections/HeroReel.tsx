@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { useReducedMotion } from "framer-motion";
 import { clipSrc, posterSrc } from "@/lib/samples/categories";
+import { HeroWash } from "./HeroWash";
 
 /**
  * The category hero background: one clip at a time, running into the next.
@@ -143,6 +144,11 @@ export function HeroReel({
           ].join(", "),
         }}
       />
+
+      {/* Over the scrims, not under: they exist to darken footage, and a wash
+          laid before them is just more for them to darken. Same call as
+          HeroMosaic — see HeroWash. */}
+      <HeroWash className="-z-10" />
 
       <div className="flex min-h-0 flex-1 flex-col justify-center px-5 pb-10 pt-28 sm:px-8 lg:px-[max(2.5rem,calc((100vw-1400px)/2+2.5rem))] xl:px-[max(4rem,calc((100vw-1400px)/2+4rem))]">
         {children}

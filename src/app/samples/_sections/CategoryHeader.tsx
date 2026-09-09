@@ -6,6 +6,7 @@ import samples from "@/lib/samples/samples.json";
 import { packStats, statsForCategory, type Category } from "@/lib/samples/categories";
 import { HeroReel } from "./HeroReel";
 import { CategoryDiagram } from "./CategoryDiagram";
+import { GRADIENT_TEXT } from "./HeroWash";
 import { C } from "./tokens";
 
 /**
@@ -63,13 +64,22 @@ export function CategoryHeader({ category: c }: { category: Category }) {
         All categories
       </Link>
 
+      {/* The gradient goes here and not on the front door's h1 for the reason
+          the reference gives by example: physical-ai sets its whole sentence in
+          white and gradients the single word "humanoids." One word carrying it
+          is emphasis; a paragraph carrying it is decoration. A category name is
+          one word, so this is the closest thing on these pages to that shape.
+
+          `pb-1` because the gradient is a background clipped to the glyphs, and
+          the descender on "g" in "Egocentric" and "Teleoperation" is clipped by
+          the line box at lineHeight 0.98 without it. */}
       <h1
-        className="mt-6 text-balance text-5xl font-medium tracking-tight md:text-7xl"
+        className="mt-6 text-balance pb-1 text-5xl font-medium tracking-tight md:text-7xl"
         style={{
           fontFamily: "var(--font-heading)",
           letterSpacing: "-0.035em",
           lineHeight: 0.98,
-          color: "#ffffff",
+          ...GRADIENT_TEXT,
         }}
       >
         {c.name}

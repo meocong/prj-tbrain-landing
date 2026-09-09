@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useState, type ReactNode } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { HeroWash } from "./HeroWash";
 
 /** Columns rendered. The last two are hidden below `lg`, the fourth below `sm`. */
 const COLS = 6;
@@ -153,6 +154,11 @@ export function HeroMosaic({
           ].join(", "),
         }}
       />
+
+      {/* The physical-ai treatment, over the scrims rather than under them:
+          the scrims exist to darken footage, and washing before they land
+          would just be something else for them to darken. */}
+      <HeroWash className="-z-10" />
 
       <div className="flex min-h-0 flex-1 flex-col justify-center px-5 pb-10 pt-28 sm:px-8 lg:px-[max(2.5rem,calc((100vw-1400px)/2+2.5rem))] xl:px-[max(4rem,calc((100vw-1400px)/2+4rem))]">
         {children}
