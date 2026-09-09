@@ -115,6 +115,66 @@ export function GamingSet() {
             </p>
           )}
 
+          {/* The input, as spans. R8's "keystrokes" — the page counted them and
+              never showed one. */}
+          <div className="mt-14">
+            <h3
+              className="font-mono text-[10px] uppercase tracking-[0.18em]"
+              style={{ color: C.textDim }}
+            >
+              What the player did · {titles[0].span.toFixed(1)} s of one session
+            </h3>
+            <p className="mt-3 max-w-2xl text-[13px] leading-relaxed" style={{ color: C.textMid }}>
+              Every row of the shipped telemetry carries the keys held and the semantic action they
+              map to, roughly every 20 ms. Consecutive rows with the same action are one span here —
+              480 marks would say "there was input"; these say what was done.
+            </p>
+
+            <div className="mt-6 space-y-5">
+              {titles
+                .filter((t) => t.track.length > 1)
+                .slice(0, 3)
+                .map((t) => (
+                  <div key={t.slug}>
+                    <div className="flex items-baseline justify-between gap-4">
+                      <p className="truncate text-[13px] font-medium">{t.title}</p>
+                      <p className="shrink-0 font-mono text-[10.5px]" style={{ color: C.textDim }}>
+                        {t.track.length} spans · {t.actions} distinct actions
+                      </p>
+                    </div>
+                    <div
+                      className="relative mt-2 h-[26px] w-full overflow-hidden"
+                      style={{ background: C.wash }}
+                    >
+                      {t.track.map((s, i) => (
+                        <span
+                          key={i}
+                          title={`${s.action} · ${s.from.toFixed(2)}-${s.to.toFixed(2)} s`}
+                          className="absolute top-0 h-full"
+                          style={{
+                            left: `${(s.from / t.span) * 100}%`,
+                            width: `${Math.max(((s.to - s.from) / t.span) * 100, 0.4)}%`,
+                            background: C.accent,
+                            // A hairline of surface between spans, so two
+                            // adjacent actions do not read as one long hold.
+                            borderRight: `1px solid ${C.base}`,
+                          }}
+                        />
+                      ))}
+                    </div>
+                    <p
+                      className="mt-1.5 truncate font-mono text-[10.5px]"
+                      style={{ color: C.textDim }}
+                      title={t.track.map((s) => s.action).join(" → ")}
+                    >
+                      {t.track.slice(0, 4).map((s) => s.action).join(" → ")}
+                      {t.track.length > 4 ? " → …" : ""}
+                    </p>
+                  </div>
+                ))}
+            </div>
+          </div>
+
           {/* Every title, with what a buyer pays for: frames and bytes. */}
           <div className="mt-12 flex gap-3 overflow-x-auto pb-3">
             {titles.map((t) => (

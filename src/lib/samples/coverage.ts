@@ -83,6 +83,21 @@ const AXES: Record<string, AxisCfg[]> = {
   egocentric: [
     { label: "Skill group", pick: (r) => r.skillGroup },
     {
+      // R3, and the split the off-the-shelf shelf below is named for. 104 of
+      // the 118 are in an operating business and 14 are homes, backyards and
+      // hotel rooms — a fact the page implied in a heading and never counted.
+      label: "Setting",
+      pick: (r) =>
+        /^(Backyard|Home|Hotel Room|Bedroom|Residential|Garden)/i.test(
+          (r.environment ?? "").split(",")[0]?.trim() ?? "",
+        )
+          ? "Residential"
+          : r.environment
+            ? "Non-residential"
+            : null,
+      order: ["non-residential", "residential"],
+    },
+    {
       label: "Difficulty",
       pick: (r) => cell(r, "Difficulty"),
       // The scale, not the ranking. 118 of the 126 records carry this and it

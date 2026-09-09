@@ -60,6 +60,15 @@ export interface CapabilityTier {
   firstMonth?: string;
   /** A demo of this tier that a reader can open. Only mocap has one. */
   demoHref?: string;
+  /**
+   * When a buyer would pick this configuration over the one above it.
+   *
+   * The table listed five rigs and what each outputs, and never said which to
+   * choose. A reader who does not already know what VIO needs cannot tell
+   * "Egocentric stereo" from "Egocentric + wrist" by reading their file lists —
+   * that is R1 stated as a table rather than as an answer.
+   */
+  when?: string;
 }
 
 /**
@@ -80,6 +89,8 @@ export const CAPABILITY: Partial<Record<string, CapabilityTier[]>> = {
       outputs: "head.mp4 (RGB) + metadata.json",
       environment: "Household, factory, daily",
       firstMonth: "5,000 h in month one",
+      when:
+        "Volume. The cheapest hour and the fastest ramp, where the model needs breadth rather than geometry.",
     },
     {
       name: "Egocentric (RGB-D / LiDAR)",
@@ -91,6 +102,8 @@ export const CAPABILITY: Partial<Record<string, CapabilityTier[]>> = {
       outputs: "rgb.mp4 + depth .png 16-bit + point cloud .ply / .pcd + metadata.json",
       environment: "Household, factory, daily",
       firstMonth: "1,000 h in month one",
+      when:
+        "Where distance matters — grasp planning, collision, anything that has to know how far away the object is.",
     },
     {
       name: "Egocentric stereo",
@@ -102,6 +115,8 @@ export const CAPABILITY: Partial<Record<string, CapabilityTier[]>> = {
       outputs: "left.mp4 + right.mp4 (+ depth .png 16-bit) + imu.csv, 200-400 Hz time-synced — enables VIO",
       environment: "Household, factory, daily",
       firstMonth: "500 h in month one",
+      when:
+        "Where the model needs to know where the camera was: the IMU and the pair make visual-inertial odometry possible, which mono cannot.",
     },
     {
       name: "Egocentric + wrist",
@@ -113,6 +128,8 @@ export const CAPABILITY: Partial<Record<string, CapabilityTier[]>> = {
       outputs: "head.mp4 + wrist_left.mp4 + wrist_right.mp4 + sync_offset.json + imu_head.csv + imu_wrist.csv",
       environment: "Household, office, factory",
       firstMonth: "500 h in month one",
+      when:
+        "Where the head view loses the hand. A wrist camera keeps the grasp in frame through the whole reach.",
     },
     {
       name: "Egocentric + gripper (UMI)",
@@ -124,6 +141,8 @@ export const CAPABILITY: Partial<Record<string, CapabilityTier[]>> = {
       outputs: "head.mp4 + wrist.mp4 + imu.csv (6-DoF, 200 Hz) + gripper_state.json + task_label.json",
       environment: "Table-top manipulation, workshop or lab",
       firstMonth: "200 h in month one",
+      when:
+        "Where you want the gripper state recorded with the video — a person wearing the rig, not a robot arm.",
     },
   ],
   exocentric: [
@@ -137,6 +156,8 @@ export const CAPABILITY: Partial<Record<string, CapabilityTier[]>> = {
       outputs: "exo.mp4 (RGB) + metadata.json",
       environment: "Household, factory, daily",
       firstMonth: "2,000 h in month one",
+      when:
+        "Where the body matters more than the hands — whole-person pose, approach, and a second person in the scene.",
     },
   ],
   mocap: [
@@ -150,6 +171,8 @@ export const CAPABILITY: Partial<Record<string, CapabilityTier[]>> = {
       outputs: "video .mp4 + full-body IMU mocap streams + hand pose",
       environment: "Studio, controlled",
       firstMonth: "200 h in month one",
+      when:
+        "Where a joint angle is the label. Retargeting to a humanoid, and finger-level dexterity a camera cannot infer.",
       demoHref: "https://pose-demo-3d.surge.sh/",
     },
   ],
@@ -164,6 +187,8 @@ export const CAPABILITY: Partial<Record<string, CapabilityTier[]>> = {
       outputs: "head.mp4 + wrist.mp4 + imu.csv (6-DoF, 200 Hz) + gripper_state.json + task_label.json",
       environment: "Table-top manipulation, workshop or lab",
       firstMonth: "200 h in month one",
+      when:
+        "Where you want the gripper state recorded with the video — a person wearing the rig, not a robot arm.",
     },
   ],
 };

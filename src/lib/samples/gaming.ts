@@ -43,12 +43,50 @@ export interface GamingTitle {
    * one is RUB, so this is a live case and not a hypothetical.
    */
   axis: string | null;
+  /**
+   * The input track: one span per stretch where the same action was held.
+   *
+   * R8 asks for the keystrokes and the page had them only as a count. The rows
+   * carry `k` and `a` at roughly 20 ms — `Down|Right` mapping to
+   * `Brake|SteerRight` — and collapsing consecutive identical rows into spans
+   * turns 480 samples into something a person can read: which action, when, for
+   * how long. Times are seconds from the start of the shipped window.
+   */
+  track: { action: string; from: number; to: number }[];
+  /** Seconds covered by the rows, so the track can be drawn to scale. */
+  span: number;
 }
 
 interface Row {
+  t: number;
   p: [number, number, number] | null;
   k: string | null;
   a: string | null;
+}
+
+/** Spans shorter than this are a keypress bounce, not an action worth drawing. */
+const MIN_SPAN_SEC = 0.06;
+
+/**
+ * Consecutive rows with the same action become one span.
+ *
+ * Drawing 480 marks says "there was input"; drawing the eleven stretches a
+ * driver actually held the brake says what they did.
+ */
+function inputTrack(rows: Row[]) {
+  const out: { action: string; from: number; to: number }[] = [];
+  for (const r of rows) {
+    // `justcause3` stores the STRING "null" where no action was mapped, not a
+    // JSON null. Rendered as-is it draws a span labelled "null" between two
+    // real ones, which reads as a bug in our viewer rather than as a gap in
+    // the capture.
+    const action = r.a && r.a !== "null" ? r.a : null;
+    if (!action) continue;
+    const last = out[out.length - 1];
+    if (last && last.action === action && r.t - last.to < 0.15) last.to = r.t;
+    else out.push({ action, from: r.t, to: r.t });
+  }
+  return out.filter((s) => s.to - s.from >= MIN_SPAN_SEC);
 }
 
 type Sample = { slug: string; modality: string; spec: [string, string][] };
@@ -109,6 +147,8 @@ export function gamingTitles(): GamingTitle[] {
         ((y - minY) / span) * 100,
       ]) as [number, number][],
       axis,
+      track: inputTrack(rows),
+      span: rows.length ? rows[rows.length - 1].t : 0,
     };
   });
 }
