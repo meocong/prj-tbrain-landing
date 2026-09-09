@@ -5,37 +5,83 @@ changes, which files, what "done" means, and what blocks it. Where a note
 contradicts something already built, the contradiction is stated rather than
 resolved silently.
 
-**Status at a glance**
+**Status at a glance** — updated 2026-09-10, after shipping everything that was
+not waiting on someone.
 
 | | Item | State | Blocked by |
 |---|---|---|---|
 | A1 | Cut business address / geohash / locators | **done** | — |
 | A2 | Rig names off the page | **done** | — |
 | A3 | Meta and MCAP stay behind a passcode | **already true** | — |
-| B1 | Match the Tbrain homepage theme | ready | one decision (B1.4) |
-| B2 | Clone the `/data/physical-ai` gradient style | ready | same decision |
-| B3 | Reuse existing landing templates | ready | — |
-| B4 | Top nav missing Physical AI | ready | pick an option |
-| C1 | One big card each, video running | **queued behind Wave 1** | source video |
-| C2 | More visual, less text | ready in part | C1 for the rest |
-| C3 | Gaming: real video, big, autoplaying | **queued behind Wave 1** | 1080p sources |
-| C4 | Mocap stutters | **traced** | the real recording |
+| B1 | Match the Tbrain homepage theme | **done** | — |
+| B2 | Clone the `/data/physical-ai` gradient style | **done** | — |
+| B3 | Reuse existing landing templates | **done, two swaps dropped** | — |
+| B4 | Top nav missing Physical AI | **done** | — |
+| C1 | One big card each, video running | queued | source video |
+| C2 | More visual, less text | **half done** | C1 for the rest |
+| C3 | Gaming: real video, big, autoplaying | queued | 1080p sources |
+| C4 | Mocap stutters | **traced, not fixed** | the real recording |
 | C5 | "cái này ko cần" | **needs pointing at** | Tam |
 | D1 | Don't use low-quality video | **not a selection problem** | re-encode |
-| D2 | Frames must show the hands | ready | — |
+| D2 | Frames must show the hands | queued | runs after the re-encode |
 | D3 | Let Trâm / the team pick the samples | **needs a person** | Tam |
 | E1 | Reorganise egocentric by rig type | **blocked** | E2, E3, E4 |
-| E2 | Stereo must show ≥2 cameras | **blocked** | left+right files |
+| E2 | Stereo must show 2 cameras or more | **blocked** | left+right files |
 | E3 | Six-camera stereo sample | **blocked** | a multi-view sample |
 | E4 | Wrist cam | **blocked** | spreadsheet row + files |
-| F1 | Front door short and to the point | ready | — |
-| F2 | Move the game block into gaming | ready | — |
+| F1 | Front door short and to the point | **done** | — |
+| F2 | Move the game block into gaming | **done** | — |
 
-**The order to work in.** Wave 3 (B1–B4, F1, F2, D2) needs nothing from anyone
-and covers Tam's entire look-and-feel complaint — start there. Wave 1 (C1, C2,
-C3, D1) needs source video. Wave 2 (E) needs three sample types we do not have.
-Wave 4 (C4) needs one file. Rationale under "The measurement that reorders
-everything" below.
+Everything not waiting on an asset or an answer is shipped. What remains is the
+numbered asks at the bottom of this file.
+
+## What shipped, measured at 1440
+
+    /samples             8 sections, 11,789px  ->  6 sections, 6,185px
+                              1,445 words      ->      1,084 words
+    /samples/egocentric       2,641 words      ->      2,654 words
+    nav                  7 items + dropdown    ->      8 items, one row
+    --sm-base                     #07090F      ->      #020617
+
+Production build green: compiled in 13.4s, 65 static pages, all five category
+routes among them. Three CMS fetches fail during the build (`/services`,
+`/expert-os`, `/case-studies`) and fall back to cached content — unrelated pages,
+and a sandbox with no network rather than a regression.
+
+## Three defects found by reading the rendered page, not the source
+
+1. **The catalogue on `/samples/egocentric` never appeared.** Its scroll-reveal
+   wrapper is 7,367px tall and asked for `amount: 0.2` — a fraction of the
+   ELEMENT, so 1,473px visible at once, where an 800px viewport can show at most
+   0.109 of it. Unreachable threshold, so the wrapper sat at `opacity: 0` for
+   the life of the page: 118 records, the main content. Now `"some"`, which has
+   no height term. Every other numeric amount in these sections wraps a
+   124–300px card and is fine; gaming's tallest wrapper is 2,482px and cleared
+   it comfortably.
+
+2. **The front door's primary CTA was invisible in dark mode.** globals.css
+   repaints any inline white background for legacy sections —
+   `.dark [style*="background:#fff"] { ... !important }` — and the hero pill's
+   `background:#ffffff` contains `#fff`. Background forced to a dark scrim,
+   colour left at the near-black written beside it, over video. Tokens now.
+
+3. **`/data` was a 404** and the nav dropdown pointed at it. Gone with B4.
+
+## What could NOT be verified here
+
+IntersectionObserver does not function in the Browser pane this was built in: a
+hand-rolled observer never received its initial callback, and
+`/data/physical-ai`, untouched by this branch, shows the same elements stuck at
+`opacity: 0`. **No scroll-reveal behaviour has been observed working or failing,
+on any page.** Defect 1 rests on the measured 7,367px and on what an
+IntersectionObserver threshold means, not on watching it happen; the fix rests on
+`"some"` having no height term. Both want one look in a real browser.
+
+## The order for what is left
+
+Wave 1 (C1, C3, D1, then D2) needs source video. Wave 2 (E) needs three sample
+types we do not have. Wave 4 (C4) needs one file. Rationale under "The
+measurement that reorders everything" below.
 
 ---
 
