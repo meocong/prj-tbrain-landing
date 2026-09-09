@@ -116,7 +116,7 @@ export const CATEGORIES: Category[] = [
     shelf: null,
     // IN_FLIGHT.teleoperation, counted off the disk rather than off the
     // dataset's own manifest, which disagrees with it.
-    held: { figure: "11", unit: "LeRobot episodes · 14,076 frames" },
+    held: { figure: "11", unit: "episodes · 3 synced cameras each" },
     // Every line from IN_FLIGHT.teleoperation, which is counted off the disk
     // rather than off the dataset's own manifest - the two disagree.
     capture: [

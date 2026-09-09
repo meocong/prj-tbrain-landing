@@ -18,6 +18,7 @@ import { CoverageChart } from "../_sections/CoverageChart";
 import { CategoryHeader } from "../_sections/CategoryHeader";
 import { MocapDemo } from "../_sections/MocapDemo";
 import { OtsShelf } from "../_sections/OtsShelf";
+import { TeleopSet } from "../_sections/TeleopSet";
 import { CaptureSpec } from "../_sections/CaptureSpec";
 import { AccessPaths } from "../_sections/AccessPaths";
 import { C } from "../_sections/tokens";
@@ -90,6 +91,11 @@ export default async function CategoryPage({
             right instrument for it. It sits where the clips sit on every other
             category. */}
         {c.slug === "mocap" && <MocapDemo />}
+
+        {/* Teleoperation's product is three synchronised cameras plus a joint
+            stream, so it gets a three-up on one transport rather than a grid of
+            single clips. Same place the clips sit on every other category. */}
+        {c.slug === "teleoperation" && <TeleopSet />}
 
         {/* What records this category, before anything about what is in it.
             It is the first question a technical buyer asks, and it is the one
