@@ -19,7 +19,14 @@ export function RevealOnScroll({
   delay?: number;
   className?: string;
   variants?: Variants;
-  amount?: number;
+  /**
+   * Framer's own type, not just `number`. A fraction is a fraction OF THE
+   * ELEMENT, so on a block taller than the viewport it asks for more pixels
+   * than the viewport has and the reveal can never fire — `"some"` is the only
+   * safe value there. See the note in samples/_sections/Reveal.tsx, which hit
+   * exactly that with a 7,367px catalogue grid.
+   */
+  amount?: number | "some" | "all";
 }) {
   const shouldReduce = useReducedMotion();
   return (
