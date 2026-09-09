@@ -6,6 +6,7 @@ import { ArrowRight } from "lucide-react";
 import samples from "@/lib/samples/samples.json";
 import { C, EASE, type Sample } from "./tokens";
 import { HeroMosaic } from "./HeroMosaic";
+import { GRADIENT_TEXT, HeroWash } from "./HeroWash";
 import { track } from "@/lib/samples/track";
 import { requestUrl } from "@/lib/samples/request-link";
 
@@ -131,7 +132,17 @@ export function HeroSamples() {
             }}
           >
             <span className="block">Training data, in whatever shape your model needs.</span>
-            <span className="block" style={{ color: "rgba(255,255,255,0.48)" }}>
+            {/* The gradient goes on the second line, not a word inside the
+                first, because of what the two lines are: line one names the
+                product, line two names the choice a buyer is actually here to
+                make. Same split the reference uses — plain lead, coloured
+                payload — one level coarser because ours is a sentence pair
+                rather than a sentence.
+
+                It also replaces a flat rgba(255,255,255,0.48). At 60-72px that
+                grey read as an afterthought, which is the wrong weight for the
+                half of the offer nobody else on this page mentions. */}
+            <span className="block" style={GRADIENT_TEXT}>
               Off the shelf, or collected to your spec.
             </span>
           </h1>
