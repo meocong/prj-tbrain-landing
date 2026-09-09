@@ -3,7 +3,7 @@
 import { motion, useReducedMotion } from "framer-motion";
 import { DATASETS, LINES, axesFor, statsFor, type LineKey } from "@/lib/samples/datasets";
 import { INTEROP } from "@/lib/samples/capability";
-import { C, EASE } from "./tokens";
+import { C, EASE, OVER_MEDIA } from "./tokens";
 
 /**
  * The two buyers, then the datasets each of them shops.
@@ -90,7 +90,13 @@ export function DatasetBand({
         Measured across the samples published here, not the full shelf.
       </p>
 
-      <div className="mt-8 grid gap-x-8 gap-y-0 md:grid-cols-2 xl:grid-cols-3">
+      {/* Image cards, not prose blocks. Claru's cards are paragraphs because
+          they have nothing to show; these sit directly above 118 playable
+          posters, so the frame does the work the paragraph was doing badly and
+          the line under it says what the set is in fifteen words. The poster is
+          the longest record in each set, picked deterministically so the card
+          does not change between renders. */}
+      <div className="mt-8 grid gap-x-6 gap-y-8 sm:grid-cols-2 xl:grid-cols-4">
         {sets.map((d, i) => {
           const s = statsFor(d);
           const on = d.slug === activeSlug;
@@ -100,44 +106,53 @@ export function DatasetBand({
               type="button"
               onClick={() => onPick(on ? null : d.slug)}
               aria-pressed={on}
-              className="group flex flex-col items-start px-1 py-6 text-left"
-              style={{ borderTop: `1px solid ${on ? C.accent : C.hairline}` }}
+              className="group flex flex-col items-start text-left"
               initial={reduce ? false : { opacity: 0, y: 14 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.3 }}
               transition={{ duration: 0.5, delay: i * 0.04, ease: EASE }}
             >
               <span
-                className="font-mono text-[10px] uppercase tracking-[0.16em]"
-                style={{ color: on ? C.accent : C.textDim }}
+                className="relative block w-full overflow-hidden"
+                style={{
+                  aspectRatio: "4 / 3",
+                  background: C.band,
+                  outline: on ? `2px solid ${C.accent}` : "none",
+                  outlineOffset: "-2px",
+                }}
               >
-                {s.episodes} episodes · {s.hours.toFixed(1)} h
+                {s.poster && (
+                  /* eslint-disable-next-line @next/next/no-img-element */
+                  <img
+                    src={`/samples/posters/${s.poster}.jpg`}
+                    alt=""
+                    loading="lazy"
+                    decoding="async"
+                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                    style={{ opacity: on ? 1 : 0.88 }}
+                  />
+                )}
+                <span
+                  className="absolute bottom-2 left-2 rounded-full px-2 py-0.5 font-mono text-[10px]"
+                  style={{ background: OVER_MEDIA.scrim, color: OVER_MEDIA.text }}
+                >
+                  {s.episodes} · {s.hours.toFixed(1)} h
+                </span>
               </span>
 
               <span
-                className="mt-2 text-[17px] font-medium leading-snug"
-                style={{ fontFamily: "var(--font-heading)", letterSpacing: "-0.015em" }}
+                className="mt-3 text-[15px] font-medium leading-snug"
+                style={{
+                  fontFamily: "var(--font-heading)",
+                  letterSpacing: "-0.015em",
+                  color: on ? C.accent : C.text,
+                }}
               >
                 {d.name}
               </span>
 
-              <span
-                className="mt-2 text-[13px] leading-relaxed"
-                style={{ color: C.textMid }}
-              >
+              <span className="mt-1 text-[12.5px] leading-relaxed" style={{ color: C.textMid }}>
                 {d.blurb}
-              </span>
-
-              {/* The three fields both competitors print on every card. Ours can
-                  fill two of them today; licence has no data behind it at all,
-                  and inventing one on a page a buyer procures from would be the
-                  worst possible place to guess. It is named and left open. */}
-              <span
-                className="mt-4 font-mono text-[11px] leading-relaxed"
-                style={{ color: C.textDim }}
-              >
-                {s.workplaces} workplaces · {s.rigs.join(", ")}
-                {s.hardShare !== null && ` · ${Math.round(s.hardShare * 100)}% hard`}
               </span>
             </motion.button>
           );

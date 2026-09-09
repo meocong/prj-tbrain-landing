@@ -479,11 +479,6 @@ function RailGroup({
 
 export function SampleCatalog() {
   const [active, setActive] = useState<Sample | null>(null);
-  /* Clear empties the facets and leaves the reader where they were. Line and
-     dataset are navigation, not narrowing: resetting them would teleport a
-     gaming buyer back into the robotics grid for pressing "Clear". */
-  const clear = () => setF({ ...EMPTY, line: f.line, dataset: f.dataset });
-
   /* A record is addressable: `/samples?record=<slug>`.
    *
    * This page exists so a salesperson can send a link instead of an
@@ -515,6 +510,18 @@ export function SampleCatalog() {
     }
   }, [active]);
   const [f, setF] = useState<Filters>(EMPTY);
+
+  /* Clear empties the facets and leaves the reader where they were. Line and
+     dataset are navigation, not narrowing: resetting them would teleport a
+     gaming buyer back into the robotics grid for pressing "Clear". */
+  const clear = () => setF({ ...EMPTY, line: f.line, dataset: f.dataset });
+
+  /** Records in the reader's line, before any facet narrows them. */
+  const inLine = useMemo(
+    () => ALL.filter((s) => (f.line === "gaming" ? s.modality === "gaming" : s.modality !== "gaming")).length,
+    [f.line],
+  );
+
   const [sort, setSort] = useState<SortKey>("longest");
   // Six facet groups is a long scroll before the grid on a phone, so the rail
   // collapses below lg and is always open from lg up.
@@ -607,7 +614,10 @@ export function SampleCatalog() {
             className="text-3xl font-medium tracking-tight md:text-5xl"
             style={{ fontFamily: "var(--font-heading)", letterSpacing: "-0.03em", lineHeight: 1.06 }}
           >
-            {ALL.length} files{" "}
+            {/* Counts the line the reader is in. It said 126 while the tabs
+                directly below narrowed to 118, so the page contradicted itself
+                one element apart. */}
+            {inLine} files{" "}
             <span style={{ color: C.textDim }}>from real deliveries</span>
           </h2>
           {/* One sentence, and only the part a reader cannot work out by
@@ -630,8 +640,6 @@ export function SampleCatalog() {
             Previews are 8-second cuts, downscaled from the delivery file.
           </p>
         </div>
-
-        <AccessStrip />
 
         <DatasetBand
           line={f.line}
@@ -874,6 +882,12 @@ export function SampleCatalog() {
                 )}
               </>
             )}
+
+            {/* The gate sits under the grid now. It used to open the section,
+                which asked a reader to think about passcodes before they had
+                seen a single frame - and free playback with no form is the one
+                thing this page has that the competitors do not. */}
+            <AccessStrip />
           </div>
         </div>
       </div>

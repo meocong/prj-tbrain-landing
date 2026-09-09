@@ -34,7 +34,12 @@ export interface Dataset {
   name: string;
   /** `skillGroup` values this dataset covers. Empty means "the whole line". */
   skillGroups: string[];
-  /** Written from the records: environments, rigs, tasks. No claims. */
+  /**
+   * One line, for the picker. The paragraph version came straight from Claru,
+   * whose cards are prose because they have no clip to show; ours sit directly
+   * above 118 playable posters, so eight paragraphs were eight paragraphs
+   * between a reader and the thing that sells the page.
+   */
   blurb: string;
 }
 
@@ -49,7 +54,7 @@ export const DATASETS: Dataset[] = [
       "Repair & Maintenance",
     ],
     blurb:
-      "Tool-mediated work on machines that are already broken: cowl installation on a motorcycle, an automotive electrical component serviced on the bench, engine repair, a barber trimming a neckline. Shot across motorcycle and auto repair shops, metal fabrication, woodworking and construction sites. The hardest set in the catalogue.",
+      "Motorcycle cowls, engine repair, bench electrics, a barber's neckline.",
   },
   {
     slug: "cleaning-and-tidying",
@@ -57,7 +62,7 @@ export const DATASETS: Dataset[] = [
     name: "Cleaning and tidying",
     skillGroups: ["Cleaning & Sanitation", "Organization & Tidying", "Dish Handling"],
     blurb:
-      "Surfaces wiped, trash cleared, tools put back, dishes handled. Recorded in offices, restaurants, commercial kitchens, workshops and repair bays rather than staged for the camera, so the mess is real and so is the order it ends in. The largest and the most consistently graded easy.",
+      "Surfaces wiped, trash cleared, tools put back, dishes handled.",
   },
   {
     slug: "handling-and-packing",
@@ -69,7 +74,7 @@ export const DATASETS: Dataset[] = [
       "Inventory & Stock Management",
     ],
     blurb:
-      "Objects picked up, moved, sorted and bagged, plus the fiddly end of it: copper wires threaded and routed through a motor, parts sorted by hand, a bag held open while it is filled. Seventeen distinct workplaces, from sewing factories to restaurants.",
+      "Picked up, moved, sorted, bagged. Copper wire threaded through a motor.",
   },
   {
     slug: "assembly-and-construction",
@@ -77,7 +82,7 @@ export const DATASETS: Dataset[] = [
     name: "Assembly and construction",
     skillGroups: ["Assembly & Installation", "Construction & Building"],
     blurb:
-      "Things built and fixed in place: a signboard mounted on a wall, ceiling panels cut and installed from scaffolding, cabinet installation, body assembly on a factory line. Sign shops, construction companies, hardware manufacturing. Half of it is graded hard.",
+      "Signboards mounted, ceiling panels installed from scaffolding, cabinets fitted.",
   },
   {
     slug: "textiles-and-laundry",
@@ -85,7 +90,7 @@ export const DATASETS: Dataset[] = [
     name: "Textiles and laundry",
     skillGroups: ["Clothing & Laundry"],
     blurb:
-      "Fabric handled by people who do it for a living: garments sewn and excess thread cut, jackets folded, beds made. Sewing and textile factories, a bridal atelier, hotel rooms. The only set recorded on all three egocentric rigs.",
+      "Garments sewn and trimmed, jackets folded, beds made.",
   },
   {
     slug: "food-preparation",
@@ -93,7 +98,7 @@ export const DATASETS: Dataset[] = [
     name: "Food preparation",
     skillGroups: ["Food Preparation & Cooking"],
     blurb:
-      "Cooking as a job rather than a demonstration: mixed noodles and fried pastries prepared to order, dishes plated, tea poured. Restaurant kitchens and canteens attached to workplaces that are not restaurants.",
+      "Noodles and pastries to order, dishes plated, tea poured.",
   },
   {
     slug: "electronics-and-diagnostics",
@@ -101,7 +106,7 @@ export const DATASETS: Dataset[] = [
     name: "Electronics and diagnostics",
     skillGroups: ["Electronics & Diagnostics"],
     blurb:
-      "Fault-finding before repair: a laptop opened up, a scooter diagnosed, components tested, LEDs soldered. Computer and appliance repair shops, sign shops, workshops. Small, and the second-hardest set on the shelf.",
+      "A laptop opened up, a scooter diagnosed, components tested, LEDs soldered.",
   },
   {
     slug: "retail-and-service",
@@ -109,7 +114,7 @@ export const DATASETS: Dataset[] = [
     name: "Retail and service counters",
     skillGroups: ["Retail & Service Operations", "Human Interaction & Handoffs"],
     blurb:
-      "Work done with a customer in frame: an order verified, a table cleared, a client posed at a bridal atelier, a screen wiped down at a service desk. The only set where a second person is part of the task rather than background.",
+      "Work with a customer in frame: orders verified, tables cleared, clients posed.",
   },
   {
     slug: "gameplay",
@@ -117,7 +122,7 @@ export const DATASETS: Dataset[] = [
     name: "Gameplay with frame-aligned input",
     skillGroups: [],
     blurb:
-      "Live play recorded at 60 fps and 1080p with a 27-column telemetry table beside it: the camera-to-world matrix, pinhole intrinsics, the exact keys and mouse deltas held on each frame, and the semantic action they map to. Two-player coop sessions add a shared clock and per-agent visibility.",
+      "Live play at 60 fps with every keystroke and mouse delta aligned to the frame.",
   },
 ];
 
@@ -133,6 +138,8 @@ type Row = {
 const ALL = samples as unknown as Row[];
 
 export interface DatasetStats {
+  /** Slug of the longest record in the set, used as the card's poster. */
+  poster: string | null;
   episodes: number;
   hours: number;
   /** Distinct `Workplace` values. Diversity a buyer can check, not a claim. */
@@ -155,7 +162,9 @@ export function rowsFor(d: Dataset) {
 export function statsFor(d: Dataset): DatasetStats {
   const rows = rowsFor(d);
   const graded = rows.map((r) => cell(r, "Difficulty")).filter(Boolean);
+  const longest = [...rows].sort((a, b) => b.durationSec - a.durationSec)[0];
   return {
+    poster: longest?.slug ?? null,
     episodes: rows.length,
     hours: rows.reduce((a, r) => a + r.durationSec, 0) / 3600,
     workplaces: new Set(rows.map((r) => cell(r, "Workplace")).filter(Boolean)).size,
