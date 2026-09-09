@@ -40,21 +40,21 @@ const PAGE = 24;
  * captured on the same rigs as the 79 filed under "robotics". Picking one
  * excluded the other for no reason a buyer would recognise.
  *
- * The four values are the ones the catalogue is being rebuilt around. Two of
+ * The five values are the ones the catalogue is being rebuilt around. Three of
  * them hold nothing yet, and are listed anyway and left PRESSABLE at zero —
  * unlike every other facet, where zero means no such record. Here zero means
  * unpublished, not unavailable: pressing it returns the price sheet
  * (`CapabilityPanel`), which is what the spreadsheet this page replaces would
  * have answered.
  *
- * Teleoperation is deliberately absent. The capability catalogue names the UMI
- * gripper under teleoperation but lists no teleoperation row, so there is a
- * priced rig and no evidenced episodes — nothing to publish and nothing to
- * quote separately from the UMI tier.
+ * Teleoperation was held back while the only evidence for it was a spreadsheet
+ * subtitle. There is now a dataset — 11 bimanual episodes in LeRobot v2.1 — so
+ * it is a line, and the panel states what is in it rather than quoting a rig.
  */
 const MODALITIES = [
   { key: "egocentric", label: "Egocentric" },
   { key: "exocentric", label: "Exocentric" },
+  { key: "teleoperation", label: "Teleoperation" },
   { key: "mocap", label: "Mocap" },
   { key: "gaming", label: "Gaming" },
 ] as const;

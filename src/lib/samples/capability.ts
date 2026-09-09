@@ -97,18 +97,38 @@ export const CAPABILITY: Partial<Record<string, CapabilityTier[]>> = {
       price: "$720–1,200 / h",
     },
   ],
+  teleoperation: [
+    {
+      name: "Egocentric + gripper (UMI)",
+      rig: "Head-mounted phone + UMI wrist cam",
+      sensors: "UMI gripper kit, optional Xsens gloves",
+      ramp: "14–21 business days",
+      ceiling: "1,000 h / month",
+      price: "$100–150 / h",
+    },
+  ],
 };
 
 /**
- * Collection already running but with nothing published yet. Distinct from a
- * capability: this has a start date and an operator count, so it can be stated
- * as a fact rather than an offer.
+ * Data that exists but is not on this page yet — either being collected now, or
+ * already collected and sitting unprocessed. Kept apart from `CAPABILITY`
+ * because these are facts with counts and dates behind them, not offers, and a
+ * reader can tell the difference.
  */
 export const IN_FLIGHT: Partial<Record<string, string>> = {
   exocentric:
     "20 hours in collection since 5 September 2026 with 15 operators — " +
     "10 h urban walking, 5 h vehicular navigation, 5 h structured indoor. " +
     "1080p30 MP4 with audio, clips 30 s to 15 min.",
+  // Counted from the dataset itself, not from its own manifest, which is wrong:
+  // `info.json` declares 10 episodes / 13,465 frames / 30 videos where the disk
+  // holds 11 / 14,076 / 33. See docs/samples-restructure-plan.md §5.4.
+  teleoperation:
+    "One bimanual pick-and-place set already collected: 11 episodes, " +
+    "14,076 frames at 30 fps (7 min 49 s), on an openarm_gripper_follower — " +
+    "7-DoF per arm plus a gripper each, 16-dimensional state and action. " +
+    "Three synchronised 640×480 cameras (head, left, right), 1.2 GB of video. " +
+    "Ships as LeRobotDataset v2.1 with a GR00T-compatible modality map.",
 };
 
 /** Formats every tier can be delivered in, from the same sheet's summary row. */
