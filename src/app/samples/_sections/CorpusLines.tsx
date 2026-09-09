@@ -1,8 +1,19 @@
 "use client";
 
 import { motion, useReducedMotion } from "framer-motion";
-import { PRODUCT_LINES } from "@/lib/samples/catalog";
+import { PRODUCT_LINES, type ProductLine } from "@/lib/samples/catalog";
 import { C, EASE } from "./tokens";
+
+/* What each state is called on the page. A line with nothing published still
+   gets a row: the reader who filters to mocap wants the terms, and "on request"
+   is a truthful answer where an empty section is not. */
+const STATUS_LABEL: Record<ProductLine["status"], string> = {
+  live: "Published",
+  "sample-ready": "Samples ready",
+  "in-collection": "In collection",
+  held: "Collected, not published",
+  "on-request": "Collected to spec",
+};
 
 /**
  * Editorial rows on a hairline grid. One oversized figure per line carries the
@@ -19,7 +30,7 @@ export function CorpusLines() {
           className="max-w-3xl text-3xl font-medium tracking-tight md:text-5xl"
           style={{ fontFamily: "var(--font-heading)", letterSpacing: "-0.03em", lineHeight: 1.06 }}
         >
-          Three lines,{" "}
+          Five lines,{" "}
           <span style={{ color: C.textDim }}>one delivery standard</span>
         </h2>
 
@@ -50,7 +61,7 @@ export function CorpusLines() {
                     className="mt-5 font-mono text-[10px] uppercase tracking-[0.18em]"
                     style={{ color: line.status === "live" ? C.positive : C.textDim }}
                   >
-                    {line.status === "live" ? "Published" : "Samples ready"}
+                    {STATUS_LABEL[line.status]}
                   </p>
                 </div>
 

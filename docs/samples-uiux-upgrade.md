@@ -76,7 +76,7 @@ h1: 72px, 3 authored lines
 | 3 | **Scroll cue** | `HeroMosaic.tsx` | A reader looking at a hero knows what scrolling is. It is also the second eyebrow in the first viewport. |
 | 4 | **2 `window.addEventListener("scroll")` driving `setState`** | `HeroMosaic.tsx`, `Header.tsx` | Fires every scroll frame and re-renders React each time. `useScroll` or IntersectionObserver do the same job off the render path. |
 | 5 | **31 spec rows, one hairline each** | `SampleCatalog.tsx` `SpecRow` | The single most-flagged dense-list pattern. 31 evenly-ruled rows is a wall; nothing is findable without reading every label. |
-| 6 | **19 eyebrows** | across sections | Budget for a 7-section page is 3. Every section opening with the same mono caps label is what makes a page read as templated. |
+| 6 | ~~19 eyebrows~~ **WITHDRAWN** | across sections | The mechanical count the checklist prescribes gives 19, but only ONE of them is a section eyebrow (the hero's). The other 18 are functional micro-labels: telemetry field keys, stat labels beside figures, status badges. Deleting them would break working UI to satisfy a grep. Budget 3, actual 1. |
 | 7 | **18 en/em dashes in visible copy** | `capability.ts`, `SampleCatalog.tsx` | All introduced today. `5–10 business days`, `$30–40 / h`, `200–400 Hz` should be hyphens; the two prose em-dashes should be full stops. |
 | 8 | **No hours, anywhere** | whole page | The literal thing customers asked for. Toolbar says "126 of 126 samples / 864.4 minutes", which is a filter readout, not a shelf statement. |
 | 9 | **`Streams: 4` / `stereo pair` on Robocap** | `samples.json` | Robocap is a six-camera rig. 84 records read a tier below what they are. Blocked on the delivery check, not on design. |
@@ -190,7 +190,7 @@ Run against the page as it stands, so the next pass has a baseline.
 |---|---|
 | Zero em-dashes in visible copy | **FAIL** - 18 |
 | Hero headline max 2 lines | **FAIL** - 3 |
-| Eyebrow count <= ceil(sections/3) | **FAIL** - 19 against a budget of 3 |
+| Eyebrow count <= ceil(sections/3) | PASS - 1 section eyebrow against a budget of 3. The raw grep says 19; 18 of those are data labels, not eyebrows. |
 | No scroll cues | **FAIL** - one, added today |
 | No `window.addEventListener("scroll")` | **FAIL** - 2 |
 | No `border-t` on every row of a long list | **FAIL** - 31 rows |
@@ -210,3 +210,21 @@ Run against the page as it stands, so the next pass has a baseline.
 
 Six failures, five of them cheap. Four were introduced in the last three commits,
 which is the useful part of running this audit now rather than at the end.
+
+### Resolved 2026-09-09
+
+| Was | Now |
+|---|---|
+| 18 dashes in visible copy | 0 |
+| Hero headline 3 lines | 2 |
+| Hero named the retired axis | names the five modalities |
+| Scroll cue | removed |
+| 2 `window.addEventListener("scroll")` | 0 in `src/` |
+| 31 spec rows each drawing a rule | 30 rows, 0 rules, 6 group headings |
+| No hours anywhere | five lines, each with its own figure and state |
+| Records unaddressable | `/samples?record=<slug>` |
+| 19 eyebrows | withdrawn, the count was wrong |
+
+Still open: the Robocap six-camera relabel, which is blocked on the delivery
+check, and per-modality sections with downloadable samples, which are blocked on
+the restructure data.

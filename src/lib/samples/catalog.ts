@@ -18,45 +18,49 @@ export interface ProductLine {
   body: string;
   facts: { label: string; value: string }[];
   modalities: string[];
-  status: "live" | "sample-ready";
+  /**
+   * Where the line stands, which is not the same question as what we can
+   * collect. `live` and `sample-ready` mean a reader can play something today.
+   * `in-collection` and `held` are facts with a date or a count behind them.
+   * `on-request` means the rig is priced and nothing has been captured for
+   * this page yet - the honest floor, and still worth a row, because a buyer
+   * filtering to mocap wants the terms, not an apology.
+   */
+  status: "live" | "sample-ready" | "in-collection" | "held" | "on-request";
 }
 
 export const PRODUCT_LINES: ProductLine[] = [
   {
-    slug: "robotics",
-    name: "Robotics",
-    positioning: "Egocentric stereo, head IMU, VIO",
+    slug: "egocentric",
+    name: "Egocentric",
+    positioning: "Head-mounted, mono through six-camera stereo",
     headline: "Skilled manual work, captured from the operator's own viewpoint",
-    // Every figure and modality below is what the 79 records on this line
-    // actually carry. The previous copy advertised wrist cameras, Xsens mocap,
-    // RGB-D and LiDAR point cloud and bimanual teleoperation; no sample in the
-    // catalogue ships any of them, and "Teleop episodes 10" sat beside zero
-    // teleop records. "Capture rigs 6" sat beside one rig, Robocap.
-    body: "Seventy tasks across twenty-four workstations, from factory floors to repair benches and kitchens. Head-mounted stereo is the whole rig: two synchronised cameras, a head IMU at roughly 200 Hz, and visual-inertial odometry, delivered as MCAP with the task and environment annotation in band.",
+    body: "Commercial-only: workshops, factories, restaurants, farms, repair shops. Never a private residence, never a staged studio. Episodes average close to five minutes of sustained, tool-mediated work with real failure and recovery, and 82% of them are graded medium or hard.",
     facts: [
-      { label: "Distinct tasks", value: "70" },
-      { label: "Skill groups", value: "15" },
-      { label: "Capture rig", value: "Robocap" },
+      { label: "Hours on the shelf", value: "1,200" },
+      { label: "Episodes", value: "~15,000" },
+      { label: "Playable here", value: "118" },
     ],
     modalities: [
-      "Egocentric RGB stereo",
+      "RGB stereo",
       "Head IMU at 200 Hz",
       "Visual-inertial odometry",
       "Camera intrinsics and extrinsics",
       "Task annotation",
       "Environment annotation",
+      "SHA-256 per file",
     ],
-    status: "sample-ready",
+    status: "live",
   },
   {
-    slug: "video-game",
-    name: "Video game",
+    slug: "gaming",
+    name: "Gaming",
     positioning: "Action-conditioned world model data",
     headline: "Frame-aligned video, keystrokes and camera pose from live play",
     body: "Every session ships the video next to a 27-column telemetry table: camera-to-world matrix, pinhole intrinsics, the exact keys and mouse deltas held on each frame, and the semantic action they map to. Two-player coop sessions add a shared clock and per-agent visibility.",
     facts: [
-      { label: "Titles captured", value: "13" },
-      { label: "Capture rate", value: "60 fps at 1080p" },
+      { label: "Titles playable here", value: "8" },
+      { label: "Capture", value: "60 fps at 1080p" },
       { label: "Telemetry columns", value: "27" },
     ],
     modalities: [
@@ -69,30 +73,67 @@ export const PRODUCT_LINES: ProductLine[] = [
       "Multi-agent shared clock",
       "Cross-agent visibility",
     ],
-    status: "sample-ready",
+    status: "live",
   },
   {
-    slug: "ots",
-    name: "Off the shelf",
-    positioning: "Egocentric stereo, already collected",
-    headline: "1,200 hours of stereo capture recorded inside working businesses",
-    body: "The catalog is commercial-only: workshops, factories, restaurants, farms, repair shops. Never a private residence, never a staged studio. Episodes average close to five minutes of sustained, tool-mediated work with real failure and recovery.",
+    slug: "teleoperation",
+    name: "Teleoperation",
+    positioning: "Bimanual robot, three synchronised cameras",
+    headline: "Robot episodes with joint state and action, not a human wearing a rig",
+    body: "An openarm_gripper_follower running a table-clearing task: seven degrees of freedom per arm plus a gripper each, so state and action are both 16-dimensional. Delivered as a LeRobotDataset with a GR00T-compatible modality map, which is the format most policy training expects to read.",
     facts: [
-      { label: "Hours in catalog", value: "1,200" },
-      { label: "Episodes", value: "15,000" },
-      { label: "Commercial sites", value: "70+" },
+      { label: "Episodes collected", value: "11" },
+      { label: "Cameras", value: "3 at 640x480" },
+      { label: "Format", value: "LeRobot v2.1" },
     ],
     modalities: [
-      "Synchronized stereo",
-      "Head IMU at 200 Hz",
-      "Visual-inertial odometry",
-      "Camera intrinsics and extrinsics",
-      "Task annotation",
-      "Environment annotation",
-      "In-band session metadata",
-      "SHA-256 per file",
+      "Head, left and right camera",
+      "16-dimensional joint state",
+      "16-dimensional action",
+      "Per-episode task annotation",
+      "Parquet frames",
+      "GR00T modality map",
     ],
-    status: "live",
+    status: "held",
+  },
+  {
+    slug: "exocentric",
+    name: "Exocentric",
+    positioning: "Third-person, fixed and handheld",
+    headline: "The same work seen from outside the body",
+    body: "Twenty hours across urban walking, vehicular navigation and structured indoor environments, collected in Hanoi by fifteen operators. Clips run from thirty seconds to fifteen minutes, at 1080p30 with audio embedded.",
+    facts: [
+      { label: "Hours in collection", value: "20" },
+      { label: "Operators", value: "15" },
+      { label: "Started", value: "5 Sep 2026" },
+    ],
+    modalities: [
+      "Third-person RGB",
+      "Embedded audio",
+      "Urban walking",
+      "Vehicular navigation",
+      "Structured indoor",
+    ],
+    status: "in-collection",
+  },
+  {
+    slug: "mocap",
+    name: "Mocap",
+    positioning: "Full-body inertial capture with per-finger pose",
+    headline: "Where hands alone are not enough to describe the movement",
+    body: "A helmet GoPro at roughly 150 degrees of field of view over an Xsens MVN HD suit: seventeen inertial sensors at 240 Hz, plus Metagloves for per-finger hand pose. Exports to FBX, BVH or SMPL alongside the video.",
+    facts: [
+      { label: "Hours per month", value: "1,000" },
+      { label: "Suit", value: "Xsens MVN HD" },
+      { label: "Ready in", value: "14-21 days" },
+    ],
+    modalities: [
+      "Helmet RGB at ~150 degrees",
+      "17-sensor inertial suit at 240 Hz",
+      "Per-finger hand pose",
+      "FBX / BVH / SMPL export",
+    ],
+    status: "on-request",
   },
 ];
 
