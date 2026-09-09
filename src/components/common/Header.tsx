@@ -1,25 +1,38 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useEffect } from "react";
 import Logo from "@/assets/images/logo.svg";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, X, ChevronDown } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { ThemeToggle } from "@/components/theme/ThemeToggle";
 
-const DATA_ITEMS = [
-  { label: "Terminal Bench", href: "/data/terminal-bench", description: "AI Agent Evaluation" },
-  { label: "Physical AI", href: "/data/physical-ai", description: "Robot Training Data" },
-];
-
+/**
+ * Flat, no Data dropdown.
+ *
+ * Tam, 2026-09-09: "Top menu đang thiếu menu item, ví dụ link đến page physical
+ * AI". It was not missing — it was the second child of a "Data" dropdown, one
+ * hover deep, which is the same thing from where a reader stands.
+ *
+ * Two other reasons the dropdown was not earning itself. It held two items, and
+ * its own `href` was `/data`, a route with no page.tsx behind it: harmless on
+ * desktop where `isDropdown` renders a button, and a 404 waiting on any surface
+ * that treated it as a link. Physical AI and Terminal Bench are offerings at the
+ * same level as Platform and Samples, so they sit beside them.
+ *
+ * Measured before committing to it: the nav was 549px of a 1440 viewport and is
+ * 754px flat, and at 1024 the header switches to the mobile sheet anyway. Adding
+ * a ninth item is where this starts to need re-checking.
+ */
 const NAV_ITEMS = [
   { label: "Home", href: "/" },
   { label: "About", href: "/about" },
   { label: "Platform", href: "/platform" },
   { label: "Samples", href: "/samples" },
+  { label: "Physical AI", href: "/data/physical-ai" },
+  { label: "Terminal Bench", href: "/data/terminal-bench" },
   { label: "Case Studies", href: "/casestudy" },
-  { label: "Data", href: "/data", isDropdown: true },
   { label: "Contact", href: "/contact" },
 ];
 
@@ -41,24 +54,12 @@ const ALWAYS_DARK_PAGES = new Set([
 
 const Header = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [dataOpen, setDataOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [isDarkTheme, setIsDarkTheme] = useState(false);
   const pathname = usePathname();
-  const dropdownRef = useRef<HTMLDivElement>(null);
   const heroIsDark = HERO_DARK_PAGES.has(pathname);
   const alwaysDark = ALWAYS_DARK_PAGES.has(pathname);
   const useDarkTokens = isDarkTheme || alwaysDark || (heroIsDark && !scrolled);
-
-  useEffect(() => {
-    const handleClick = (e: MouseEvent) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
-        setDataOpen(false);
-      }
-    };
-    document.addEventListener("mousedown", handleClick);
-    return () => document.removeEventListener("mousedown", handleClick);
-  }, []);
 
   // A sentinel 60px tall at the top of the document, watched by an
   // IntersectionObserver: `scrolled` is simply "the sentinel has left the
@@ -118,10 +119,6 @@ const Header = () => {
         linkActive: "text-white",
         accent: "#A78BFA",
         icon: "text-white",
-        dropdown: "bg-[rgba(15,23,42,0.95)] border border-white/10 backdrop-blur-md",
-        dropdownText: "text-white",
-        dropdownSub: "text-white/55",
-        dropdownHover: "hover:bg-white/5",
         mobileMenu: "bg-[rgba(15,23,42,0.95)] border border-white/10 backdrop-blur-md",
         logoFilter: "brightness(0) invert(1)",
       }
@@ -131,10 +128,6 @@ const Header = () => {
         linkActive: "text-[#6C3CF4]",
         accent: "#6C3CF4",
         icon: "text-[#0e1b2e]",
-        dropdown: "bg-white border border-gray-200 shadow-lg",
-        dropdownText: "text-[#0e1b2e]",
-        dropdownSub: "text-[#78818f]",
-        dropdownHover: "hover:bg-gray-50",
         mobileMenu: "bg-white shadow-lg",
         logoFilter: "none",
       };
@@ -158,50 +151,18 @@ const Header = () => {
           </Link>
 
           <nav className="hidden items-center gap-5 lg:flex xl:gap-7">
-            {NAV_ITEMS.map((item) =>
-              item.isDropdown ? (
-                <div key={item.href} className="relative" ref={dropdownRef}>
-                  <button
-                    onClick={() => setDataOpen(!dataOpen)}
-                    className={`flex items-center gap-1 text-sm font-medium transition-colors ${
-                      isActive(item.href) ? tokens.linkActive : tokens.link
-                    }`}
-                    style={isActive(item.href) ? { color: tokens.accent } : undefined}
-                  >
-                    {item.label}
-                    <ChevronDown className={`h-3.5 w-3.5 transition-transform ${dataOpen ? "rotate-180" : ""}`} />
-                  </button>
-                  {dataOpen && (
-                    <div
-                      className={`absolute left-1/2 top-full mt-2 min-w-[240px] -translate-x-1/2 rounded-xl p-2 ${tokens.dropdown}`}
-                    >
-                      {DATA_ITEMS.map((d) => (
-                        <Link
-                          key={d.href}
-                          href={d.href}
-                          onClick={() => setDataOpen(false)}
-                          className={`block rounded-lg px-4 py-2.5 transition-colors ${tokens.dropdownHover}`}
-                        >
-                          <div className={`text-sm font-medium ${tokens.dropdownText}`}>{d.label}</div>
-                          <div className={`text-xs ${tokens.dropdownSub}`}>{d.description}</div>
-                        </Link>
-                      ))}
-                    </div>
-                  )}
-                </div>
-              ) : (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className={`text-sm font-medium transition-colors ${
-                    isActive(item.href) ? tokens.linkActive : tokens.link
-                  }`}
-                  style={isActive(item.href) ? { color: tokens.accent } : undefined}
-                >
-                  {item.label}
-                </Link>
-              )
-            )}
+            {NAV_ITEMS.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className={`text-sm font-medium transition-colors ${
+                  isActive(item.href) ? tokens.linkActive : tokens.link
+                }`}
+                style={isActive(item.href) ? { color: tokens.accent } : undefined}
+              >
+                {item.label}
+              </Link>
+            ))}
           </nav>
 
           <div className="flex items-center gap-2">
@@ -218,7 +179,7 @@ const Header = () => {
 
         {mobileOpen && (
           <nav className={`mt-4 rounded-2xl p-4 lg:hidden ${tokens.mobileMenu}`}>
-            {NAV_ITEMS.filter((i) => !i.isDropdown).map((item) => (
+            {NAV_ITEMS.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
@@ -236,33 +197,10 @@ const Header = () => {
                 {item.label}
               </Link>
             ))}
-            <div
-              className="mt-2 pt-2"
-              style={{ borderTop: useDarkTokens ? "1px solid rgba(255,255,255,0.08)" : "1px solid rgba(243,244,246,1)" }}
-            >
-              <p className={`px-4 py-1 text-xs font-medium ${tokens.dropdownSub}`}>
-                Data Products
-              </p>
-              {DATA_ITEMS.map((d) => (
-                <Link
-                  key={d.href}
-                  href={d.href}
-                  onClick={() => setMobileOpen(false)}
-                  className={`block rounded-lg px-4 py-3 text-sm font-medium transition-colors ${
-                    isActive(d.href)
-                      ? useDarkTokens
-                        ? "bg-white/10 text-white"
-                        : "bg-[#6C3CF4]/5 text-[#6C3CF4]"
-                      : useDarkTokens
-                        ? "text-white/80 hover:bg-white/5"
-                        : "text-[#0e1b2e] hover:bg-gray-50"
-                  }`}
-                >
-                  {d.label}
-                  <span className={`ml-2 text-xs ${tokens.dropdownSub}`}>{d.description}</span>
-                </Link>
-              ))}
-            </div>
+            {/* No "Data Products" group. It existed to surface the two items
+                the desktop dropdown hid, and they are in the list above now —
+                keeping it would print Physical AI and Terminal Bench twice in
+                one sheet. */}
           </nav>
         )}
       </div>
