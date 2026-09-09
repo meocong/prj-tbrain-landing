@@ -90,6 +90,31 @@ function span(rows: Row[], key: string, unit: string): string | null {
     : `${base} · ${outside} record${outside === 1 ? "" : "s"} outside this band`;
 }
 
+/**
+ * A spec field as its distribution, ranked: `rolling 84 · global 34`.
+ *
+ * A bare list of distinct values would say the catalogue has two shutters and
+ * leave which one a buyer is likely to receive unanswered. The counts answer
+ * it. `normalise` folds the source's own spelling variants — "global shutter"
+ * and "global" are one shutter, "hevc" and "h265" are one codec — and returning
+ * "" from it drops a value entirely, which is how nulls leave.
+ */
+function tally(rows: Row[], key: string, normalise: (v: string) => string): string | null {
+  const counts = new Map<string, number>();
+  for (const r of rows) {
+    const raw = cell(r, key);
+    if (raw == null) continue;
+    const v = normalise(String(raw).trim());
+    if (!v) continue;
+    counts.set(v, (counts.get(v) ?? 0) + 1);
+  }
+  if (counts.size === 0) return null;
+  return [...counts.entries()]
+    .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]))
+    .map(([v, n]) => `${v} ${n}`)
+    .join(" · ");
+}
+
 export function captureFor(c: Category): CaptureRow[] {
   const rows = c.modality ? ALL.filter((r) => r.modality === c.modality) : [];
   if (rows.length === 0) return c.capture ?? fromCapability(c);
@@ -104,19 +129,46 @@ export function captureFor(c: Category): CaptureRow[] {
   );
   const sometimes = signals.filter((s) => !universal.includes(s));
 
-  const out: CaptureRow[] = [
-    { label: "Recorded on", value: uniq(rows.map((r) => r.rig)).sort().join(" · ") },
-    {
-      label: "Video",
-      value: `${uniq(rows.map((r) => r.resolution)).join(" · ")} at ${uniq(
-        rows.map((r) => String(r.fps)),
-      ).join("/")} fps`,
-    },
-    { label: "On every frame", value: universal.join(" · ") },
-  ];
+  /* No model names. "DAS Ego V6 · EgoSense E6 · Robocap" told a buyer nothing
+     they can act on and named our vendor stack on a public page; what they
+     asked is the CONFIGURATION, which is Tam's R1 — how many cameras, what
+     shutter, what rides with the frame. All of it was already in `spec` and
+     none of it was on the page. */
+  const out: CaptureRow[] = [];
+
+  const cams = tally(rows, "Streams", (v) => (v === "null" ? "" : `${v} cameras`));
+  if (cams) out.push({ label: "Head rig", value: cams });
+
+  out.push({
+    label: "Video",
+    value: `${uniq(rows.map((r) => r.resolution)).join(" · ")} at ${uniq(
+      rows.map((r) => String(r.fps)),
+    ).join("/")} fps`,
+  });
+
+  const shutter = tally(rows, "Shutter", (v) => v.replace(/\s*shutter$/i, ""));
+  if (shutter) out.push({ label: "Shutter", value: shutter });
+
+  out.push({ label: "On every frame", value: universal.join(" · ") });
 
   const imu = span(rows, "IMU rate", "Hz");
   if (imu) out.push({ label: "IMU", value: imu });
+
+  // hevc and h265 are the same codec under two names in the source.
+  const codec = tally(rows, "Codec", (v) => (v.toLowerCase() === "hevc" ? "h265" : v));
+  if (codec) out.push({ label: "Codec", value: codec });
+
+  const calibrated = rows.filter((r) => /pass/i.test(cell(r, "Calibration") ?? "")).length;
+  const align = rows
+    .map((r) => parseFloat(String(cell(r, "Alignment error") ?? "").replace(/[^0-9.]/g, "")))
+    .filter((n) => Number.isFinite(n));
+  if (calibrated > 0) {
+    const worst = align.length ? ` · streams aligned within ${Math.max(...align)} ms` : "";
+    out.push({
+      label: "Calibration",
+      value: `${calibrated} of ${rows.length} passed${worst}`,
+    });
+  }
 
   const cols = span(rows, "Telemetry columns", "columns per frame");
   if (cols) out.push({ label: "Telemetry", value: cols });
