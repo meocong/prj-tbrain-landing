@@ -136,8 +136,15 @@ export function captureFor(c: Category): CaptureRow[] {
      none of it was on the page. */
   const out: CaptureRow[] = [];
 
-  const cams = tally(rows, "Streams", (v) => (v === "null" ? "" : `${v} cameras`));
-  if (cams) out.push({ label: "Head rig", value: cams });
+  if (c.rig) out.push({ label: "Head rig", value: c.rig });
+
+  /* `Streams` is the count of video streams DELIVERED, not the count of lenses
+     on the rig, and printing it as "4 cameras" conflated the two. The rig
+     carries six; the "data 6 cam" pack README states the standard delivery is
+     four of them, the required head stereo pair plus the front pair, which is
+     exactly what 116 of the 118 records say. Two different facts, two rows. */
+  const streams = tally(rows, "Streams", (v) => (v === "null" ? "" : `${v} of 6`));
+  if (streams) out.push({ label: "Streams delivered", value: streams });
 
   out.push({
     label: "Video",
@@ -151,8 +158,12 @@ export function captureFor(c: Category): CaptureRow[] {
 
   out.push({ label: "On every frame", value: universal.join(" · ") });
 
-  const imu = span(rows, "IMU rate", "Hz");
-  if (imu) out.push({ label: "IMU", value: imu });
+  /* Nominal, not measured. The records carry a per-file reading — 197.3 to 203
+     across 116 of them, with `bed-making` at 1000.3 and one null — and printing
+     that spread said "this rig cannot hold a rate" when the spread is just
+     measurement noise around a 200 Hz nominal. A spec sheet states the nominal;
+     `span` is kept for fields where the spread is the fact. */
+  if (c.imuHz) out.push({ label: "IMU", value: c.imuHz });
 
   // hevc and h265 are the same codec under two names in the source.
   const codec = tally(rows, "Codec", (v) => (v.toLowerCase() === "hevc" ? "h265" : v));

@@ -10,8 +10,7 @@ import { publicSpec } from "@/lib/samples/redact.mjs";
 import { track } from "@/lib/samples/track";
 import { requestUrl } from "@/lib/samples/request-link";
 import { CAPABILITY, IN_FLIGHT, INTEROP } from "@/lib/samples/capability";
-import { DATASETS, type LineKey } from "@/lib/samples/datasets";
-import { DatasetBand } from "./DatasetBand";
+import { type LineKey } from "@/lib/samples/datasets";
 import { AccessStrip } from "./AccessActions";
 import { LiveTelemetry } from "./LiveTelemetry";
 import { C, OVER_MEDIA, PILL, type Sample } from "./tokens";
@@ -80,8 +79,6 @@ const SORTS = [
 type SortKey = (typeof SORTS)[number]["key"];
 
 interface Filters {
-  /** The one dataset in view, or none. Navigation, not narrowing. */
-  dataset: string | null;
   /** The category. Fixed by the route; never a facet on this page. */
   scope: string;
   modality: string[];
@@ -95,7 +92,6 @@ interface Filters {
 }
 
 const EMPTY: Filters = {
-  dataset: null,
   scope: "egocentric",
   modality: [],
   provenance: [],
@@ -116,14 +112,9 @@ function mmss(total: number) {
 /** Within a facet the selected values are OR-ed; across facets they are AND-ed. */
 function matches(s: Sample, f: Filters, skip?: keyof Filters) {
   const on = (k: keyof Filters) => k !== skip;
-  // Scope and dataset sit outside `skip`: they are the route, not a facet, so a
-  // facet count is always computed WITHIN the category the reader opened.
+  // Scope sits outside `skip`: it is the route, not a facet, so a facet count
+  // is always computed WITHIN the category the reader opened.
   if (s.modality !== f.scope) return false;
-  if (f.dataset) {
-    const d = DATASETS.find((x) => x.slug === f.dataset);
-    if (d && d.skillGroups.length && !(s.skillGroup && d.skillGroups.includes(s.skillGroup)))
-      return false;
-  }
   if (on("modality") && f.modality.length && !f.modality.includes(s.modality)) return false;
   // `provenance` is null on the game records: no game record states whether it
   // is off-the-shelf or custom, so narrowing to either has to exclude them
@@ -527,10 +518,10 @@ export function SampleCatalog({ modality }: { modality: string }) {
     setF((p) => (p.scope === modality ? p : { ...EMPTY, scope: modality }));
   }, [modality]);
 
-  /* Clear empties the facets and leaves the reader where they were. Line and
-     dataset are navigation, not narrowing: resetting them would teleport a
-     gaming buyer back into the robotics grid for pressing "Clear". */
-  const clear = () => setF({ ...EMPTY, scope: f.scope, dataset: f.dataset });
+  /* Clear empties the facets and leaves the reader where they were. Scope is
+     navigation, not narrowing: resetting it would teleport a gaming buyer back
+     into the robotics grid for pressing "Clear". */
+  const clear = () => setF({ ...EMPTY, scope: f.scope });
 
   /** Records in the reader's line, before any facet narrows them. */
   const inLine = useMemo(
@@ -624,18 +615,13 @@ export function SampleCatalog({ modality }: { modality: string }) {
 
   return (
     <>    <section id="deck" style={{ background: C.base, color: C.text }}>
-      <div className="mx-auto max-w-[1400px] px-4 pt-24 md:pt-28 lg:px-10 xl:px-16">
-        {/* No heading here any more. The category page above states the name,
-            what the category is, the pack summary and the preview caveat, and
-            repeating "118 files from real deliveries" under all of that was the
-            same fact a fourth time - and 3,514px of run-up before the first
-            playable clip. */}
-        <DatasetBand
-          scope={f.scope}
-          activeSlug={f.dataset}
-          onPick={(dataset) => setF((p) => ({ ...p, dataset }))}
-        />
-      </div>
+      {/* No heading, and no dataset strip. The heading went because the
+          category page above already states the name, what the category is and
+          the figures. The strip went because it was the third control for one
+          job: it grouped the 16 skill groups into 9 poster cards, the facet
+          rail filters on skill group, and CoverageChart ranks them. Three ways
+          to do one thing is worse than one way, and it was 470px of scroll
+          before the grid it was narrowing. */}
 
       <div className="mx-auto max-w-[1400px] px-4 pb-24 pt-10 lg:px-10 xl:px-16">
         <div className="grid gap-10 lg:grid-cols-12 lg:gap-12">
