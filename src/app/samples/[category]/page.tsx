@@ -20,6 +20,7 @@ import { MocapDemo } from "../_sections/MocapDemo";
 import { OtsShelf } from "../_sections/OtsShelf";
 import { GamingSet } from "../_sections/GamingSet";
 import { TeleopSet } from "../_sections/TeleopSet";
+import { TeleopAnatomy } from "../_sections/TeleopAnatomy";
 import { CaptureSpec } from "../_sections/CaptureSpec";
 import { AccessPaths } from "../_sections/AccessPaths";
 import { C } from "../_sections/tokens";
@@ -87,6 +88,12 @@ export default async function CategoryPage({
         </section>
         )}
 
+
+        {/* Mocap first: its product IS the explorer, and a pose stream behind
+            a spec table is an instrument filed as a document. Every other
+            category's samples sit below their spec because their samples are
+            footage; this one's are the reading. */}
+        {c.slug === "mocap" && <MocapDemo />}
 
         {/* What records this category, before anything about what is in it.
             It is the first question a technical buyer asks, and it is the one
@@ -183,6 +190,19 @@ export default async function CategoryPage({
                           {t.outputs}
                         </p>
                       )}
+                      {/* When you would pick this one. The table listed five
+                          rigs and what each outputs and never said which to
+                          choose; a reader who does not already know what VIO
+                          needs cannot tell stereo from wrist by their file
+                          lists. R1 as an answer rather than as a table. */}
+                      {t.when && (
+                        <p
+                          className="mt-2 max-w-xl text-[12.5px] leading-relaxed"
+                          style={{ color: C.textMid }}
+                        >
+                          {t.when}
+                        </p>
+                      )}
                       {t.demoHref && (
                         <a
                           href={t.demoHref}
@@ -234,16 +254,14 @@ export default async function CategoryPage({
             do the reverse and so does every other category here now: the rig
             and the configurations answer questions a reader has before they
             look, and the set answers the one they have after. */}
-        {/* Mocap has no clip grid because its product is a pose stream, not
-            footage — but it does have a real bundle, and the explorer is the
-            right instrument for it. It sits where the clips sit on every other
-            category. */}
-        {c.slug === "mocap" && <MocapDemo />}
-
         {/* Teleoperation's product is three synchronised cameras plus a joint
             stream, so it gets a three-up on one transport rather than a grid of
             single clips. Same place the clips sit on every other category. */}
         {c.slug === "teleoperation" && <TeleopSet />}
+
+        {/* And the row a policy actually reads. The set above is what a person
+            watches; this is the sixteen numbers under it. */}
+        {c.slug === "teleoperation" && <TeleopAnatomy />}
 
         {/* Gaming's product is the input stream and the camera pose, not the
             footage, and the page said that in a facet rail and nowhere else.

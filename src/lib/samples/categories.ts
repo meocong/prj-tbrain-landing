@@ -240,7 +240,10 @@ export const CATEGORIES: Category[] = [
     // bring the samples the site already has into one system, not to rebuild
     // them, so this card routes out rather than duplicating the catalogue.
     externalHref: "/data/terminal-bench",
-    held: { figure: "terminal-bench", unit: "verified tasks · own sample area" },
+    // The only card with no figure of any kind. terminal-bench tasks are
+    // pass/fail against a written test, which is the one number that matters
+    // about them and the reason this line exists at all.
+    held: { figure: "Pass / fail", unit: "deterministic verification · no judge" },
   },
 ];
 
