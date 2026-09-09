@@ -132,6 +132,26 @@ Same order for every category, so a buyer who reads two learns the shape once:
 | Annotation depth | link to the dashboard demo | R5 |
 | Custom collection | `capability.ts` | R2 |
 
+### 3.2a The delivery schema, from `manifest.csv`
+
+The 6-cam pack ships a `manifest.csv` that is the canonical record shape, 27
+columns:
+
+```
+episode_uuid · session_id · seg_idx · task_id · task_description · skill_group
+task_difficulty · environment_l1/l2/l3 · environment_id · business_name
+city · country · naics_primary_code · operator_id · operator_job
+device_type · device_id · duration_s · n_cameras · video_codec
+mcap_bytes · video_bytes
+```
+
+Two columns the page does not currently carry and should: **`n_cameras`**, which
+is the tier in one number, and **`city` / `country`**, which is the GEO axis
+Claru states and we approximate with a `Site` string.
+
+`device_type` reads `Ego Rig A` / `Ego Rig B` here where our records say
+`Robocap` / `DAS Ego V6`.
+
 ### 3.2b The camera question is answered
 
 Tam's "data 6 cam" folder (`1qj7AE20b2qWBIxymNZBaQKfj7UcEb23A`) is a
@@ -211,15 +231,20 @@ replaces them.
 
 ## 5. Blocked, and by whom
 
+Revised after re-reading every source file end to end. Most of what was listed
+here was already answered in material sent on day one; the list was long because
+the reading was shallow, not because the answers were missing.
+
 | Item | Needs | Blocks |
 |---|---|---|
 | ~~Which tier each record is~~ | **answered** by the 6-cam pack README, §3.2b | - |
 | Rig naming: internal or `Ego Rig A/B` | Tam | rig labels on every card |
-| OTS-Stereo vs OTS-Mono naming | Sơn | category copy |
+| ~~OTS-Stereo vs OTS-Mono~~ | **answered.** The deck's 1,200 h corpus is stereo on Ego Rig A/B; the xlsx's 12,900-episode corpus is mono head-mounted smartphone. Two corpora, two names. | - |
 | Teleops beyond the one dataset | Sơn | how much of R9 is real |
-| Licence | legal / BD | a field on every card |
-| Coding/STEM samples | do any exist? | whether R13's third line has content |
-| Download gate | Tam | R11 |
+| ~~Sơn's list of sample types~~ | **superseded.** `manifest.csv` in the 6-cam pack is the canonical delivery schema in 27 columns, and `samples.json` plus the xlsx cover what exists. A list would confirm, not unblock. | - |
+| Licence | legal / BD | a field on every card. **The only genuine unknown.** |
+| ~~Coding/STEM samples~~ | **they exist.** `/data/terminal-bench` is a full product with its own gated sample area at `/s/[batchSlug]/[sampleSlug]`, request-access flow and Supabase-backed records. R13's third line has content; it has never been linked into the samples system. | - |
+| ~~Download gate~~ | **answered by precedent.** `samples.tbrain.ai` puts `.mcap` and `.metadata.json` on every card with no gate at all. Our per-sample downloads should match it; `/samples/s` stays gated as the full-archive route. Worth confirming with Tam, not worth blocking on. | - |
 | Hero copy | Tam, from options | R19 |
 
 Everything else is unblocked.
