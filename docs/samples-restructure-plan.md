@@ -1,6 +1,7 @@
 # Samples page — restructure plan
 
-Status: **draft, blocked on three answers from Sơn** (§6). Written 2026-09-09.
+Status: **draft, blocked on two answers from Sơn** (§6). Teleoperation was the
+third and is now answered — there is a dataset (§5.4). Written 2026-09-09.
 
 Companion to [`samples-runbook.md`](./samples-runbook.md), which covers how the
 current 126 records were built. This file covers what replaces them.
@@ -46,6 +47,7 @@ rclone backend copyid drive7: <FILE_ID> /tmp/out.txt --drive-export-formats txt
 | Sales deck — OTS Stereo | `11hyiv3jmdBWAYjSA8aNR2IJf_DoTgj3swOHBwYITIn8` | 1,200 h corpus figures, difficulty mix, provenance chain |
 | Ngọc Anh — exocentric proposal | `1zKkyKPQxr2iz_0ShEo-Vf4KhylJAq1QuJqfzT1a6h_s` | the 20 h exocentric collection now in progress |
 | 6-cam demo | `tbrain-dashboard.vercel.app` | 6-camera geometry + chain-of-thought annotation |
+| **Teleop dataset** | folder `1yHbZfuBI9j0GBw-6Jme7htpkuaqXnOpP` | a real LeRobot v2.1 set — see §5.4 |
 | Reference Tam sent | `claru.ai/data-catalog` | competitor framing |
 | `src/lib/samples/samples.json` | in repo | what the page ships today |
 
@@ -64,7 +66,8 @@ rclone backend copyid drive7: <FILE_ID> /tmp/out.txt --drive-export-formats txt
 ```
 
 **Everything non-game is egocentric stereo.** Zero exocentric, zero mocap, zero
-mono, zero wrist-camera, zero teleop, zero Coding/STEM.
+mono, zero wrist-camera, zero teleop, zero Coding/STEM — though teleop data does
+exist off-page (§5.4).
 
 ### The structural bug
 
@@ -129,7 +132,7 @@ clips 30 s – 15 min. No annotation in scope for this batch.
 
 ---
 
-## 5. Three contradictions to settle before writing code
+## 5. What the sources disagree about
 
 ### 5.1 "OTS" names two different corpora
 
@@ -158,16 +161,53 @@ Robocap **is** the 6-cam rig, then 84 records are being described as the
 $80–120/h tier's little sibling. Not confirmable from either repo — the stream
 names came from bucket paths, not committed code. **Needs Sơn.**
 
+### 5.4 Teleoperation exists, and its manifest is wrong
+
+The folder holds a **LeRobotDataset v2.1** with a GR00T-compatible
+`modality.json`. Read from the dataset, not from its own manifest:
+
+| | |
+|---|---|
+| Robot | `openarm_gripper_follower` — bimanual |
+| State / action | 16-dim: left arm 7 · right arm 7 · left gripper 1 · right gripper 1 |
+| Cameras | 3 × 640×480 — `cam_head`, `cam_left`, `cam_right` |
+| Episodes | **11** on disk, 37.4 s – 61.6 s each |
+| Frames | **14,076** at 30 fps = **7 min 49 s** |
+| Videos | **33** files, 1.23 GB |
+| Task | one: *"Pick up all the items on the table and put them into the bin on the right."* |
+
+**`meta/info.json` disagrees with the disk on all three counts:** it declares
+`total_episodes: 10`, `total_frames: 13465`, `total_videos: 30`, and
+`splits: {"train": "0:10"}`. The disk holds 11 parquet files, 11 rows in
+`episodes.jsonl` and 33 videos.
+
+Two consequences, both real:
+
+- A LeRobot loader trusts `splits` and iterates `0:10`, so **episode 10 is
+  silently dropped** — 1,123 frames, 37 s, and no error.
+- `total_frames: 13465` matches neither set: episodes 0–9 sum to 12,953 and all
+  eleven sum to 14,076. It is stale from a state the dataset is no longer in, so
+  it cannot be repaired by picking one of the two episode counts.
+
+Not fixed here — it is Sơn's data in Sơn's Drive, and this page only reads it.
+But it must be corrected before a buyer ingests it, because a wrong episode
+count in a manifest is the exact class of defect a data-quality review looks for.
+
+
 ---
 
 ## 6. Blocking questions
 
-1. **Teleops — do we have data?** Tam: *"check with Son for such data."* See §9;
-   the hardware exists, a dataset may not. Answer decides four tabs or five.
-2. **Is Robocap the 6-camera rig?** Decides whether §5.3 is a relabel or a gap.
-3. **Which corpus is which OTS?** Decides §5.1.
+1. **Is Robocap the 6-camera rig?** Decides whether §5.3 is a relabel or a gap.
+2. **Which corpus is which OTS?** Decides §5.1.
 
-None require work — only answers.
+Neither requires work — only an answer.
+
+~~Teleops — do we have data?~~ **Answered.** Yes, and it is stronger than the
+spreadsheet implied: a bimanual robot dataset in LeRobot v2.1, not a human
+wearing a UMI gripper. It is now the fifth modality. What remains is a QC item,
+not a question: §5.4's manifest counts are wrong and should be regenerated
+before anyone ingests the set.
 
 ---
 
@@ -186,7 +226,7 @@ Robotics & Physical AI   |   Gaming   |   Coding / STEM
 | **Egocentric** | 118 | 1,200 h + 72 h |
 | **Exocentric** | 0 | 20 h in collection; $36–56/h capability |
 | **Mocap** | 0 | $720–1,200/h capability |
-| **Teleops / Simulation** | ? | blocked on §6.1 |
+| **Teleoperation** | 0 published | 11 episodes / 7 m 49 s held, LeRobot v2.1 (§5.4) |
 
 ### Level 3 — inside Egocentric
 
