@@ -65,14 +65,18 @@ export function HeroSamples() {
               font-scale error rather than a copy-length one, and the third line
               was carrying the whole idea.
 
-              The old headline said "Robotics and game data", which was written
-              when `domain` had three values. The rail now lists five
-              modalities, so the headline and the filters were describing
-              different shelves. These three words map onto them: human capture
-              is egocentric, exocentric and mocap; robot is teleoperation; game
-              is gaming. It also matches the two buyers Tam separates. */}
+              R19, and the reason it was on the list: "Human, robot and game
+              capture" was a taxonomy, and the taxonomy is now the chooser's
+              job. A headline that lists our own filing system asks the reader
+              to work out what it is for. R15 says robotics must LEAD the
+              customer rather than list at them, so the first line says what
+              the data is for and the second says what it is made of. */}
           <h1
-            className="mt-5 text-5xl font-medium tracking-tight md:text-6xl xl:text-7xl"
+            /* `text-balance` is inherited, so each `block` span balances its
+               own wrap. Without it the hero column at tablet width broke both
+               lines one word early and left "act." and "play." alone on a
+               line of 60px type. */
+            className="mt-5 text-balance text-5xl font-medium tracking-tight md:text-6xl xl:text-7xl"
             style={{
               fontFamily: "var(--font-heading)",
               letterSpacing: "-0.035em",
@@ -80,17 +84,22 @@ export function HeroSamples() {
               color: "#ffffff",
             }}
           >
-            <span className="block">Human, robot and game capture,</span>
+            <span className="block">Data for models that have to act.</span>
             <span className="block" style={{ color: "rgba(255,255,255,0.48)" }}>
-              frame by frame.
+              Human hands, robot arms, live play.
             </span>
           </h1>
 
+          {/* The one thing no competitor's catalogue does, said plainly and
+              first. Claru, HumanoidLayer and Truelabel all put a form between a
+              reader and a frame; this page does not, and that was buried in a
+              grey line under the fold. */}
           <p
-            className="mt-6 max-w-md text-base leading-relaxed"
+            className="mt-6 max-w-lg text-base leading-relaxed"
             style={{ color: "rgba(255,255,255,0.76)" }}
           >
-            Play a real delivery file, read the telemetry beside it, then request the full set.
+            Every sample on this page plays in full, with no form. Read the telemetry beside it,
+            then take the delivery file as MCAP or LeRobot with calibration and annotation in band.
           </p>
 
           <div className="mt-8 flex flex-wrap items-center gap-6">

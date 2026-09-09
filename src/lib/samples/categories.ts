@@ -30,6 +30,18 @@ export interface Category {
   shelf: string | null;
   /** Where this category's records live, if not on this site. */
   externalHref?: string;
+  /**
+   * What a category with no playable sample can put in the place of a frame.
+   *
+   * Three of the six hold nothing on disk, and a chooser card is mostly its
+   * media band. Repeating the state line there said the same words twice; a
+   * borrowed frame from a neighbouring category would be a lie about what we
+   * can show. So: the one figure that is true about the category, set large.
+   *
+   * Each is copied from the prose in `IN_FLIGHT` or `CAPABILITY` for the same
+   * modality - if one moves, move both.
+   */
+  held?: { figure: string; unit: string };
 }
 
 export const CATEGORIES: Category[] = [
@@ -51,6 +63,8 @@ export const CATEGORIES: Category[] = [
     whatItIs:
       "The same work seen from outside the body: a fixed or handheld camera watching the whole person, not just their hands.",
     shelf: null,
+    // IN_FLIGHT.exocentric: "20 hours in collection since 5 September 2026".
+    held: { figure: "20 h", unit: "in collection · 15 operators" },
   },
   {
     slug: "teleoperation",
@@ -60,6 +74,9 @@ export const CATEGORIES: Category[] = [
     whatItIs:
       "Robot episodes rather than human ones. Joint state and action recorded alongside the cameras, in the format policy training reads.",
     shelf: null,
+    // IN_FLIGHT.teleoperation, counted off the disk rather than off the
+    // dataset's own manifest, which disagrees with it.
+    held: { figure: "11", unit: "LeRobot episodes · 14,076 frames" },
   },
   {
     slug: "mocap",
@@ -69,6 +86,9 @@ export const CATEGORIES: Category[] = [
     whatItIs:
       "Full-body motion capture with per-finger hand pose, for work that hands alone do not describe.",
     shelf: null,
+    // CAPABILITY.mocap, the only tier on it. Nothing is collected, so the true
+    // figure here is the price of collecting it.
+    held: { figure: "$720-1,200", unit: "per hour · collected to spec" },
   },
   {
     slug: "gaming",
@@ -91,10 +111,17 @@ export const CATEGORIES: Category[] = [
     // bring the samples the site already has into one system, not to rebuild
     // them, so this card routes out rather than duplicating the catalogue.
     externalHref: "/data/terminal-bench",
+    held: { figure: "terminal-bench", unit: "verified tasks · own sample area" },
   },
 ];
 
-type Row = { modality: string; durationSec: number; spec: [string, string][] };
+type Row = {
+  slug: string;
+  modality: string;
+  durationSec: number;
+  skillGroup: string | null;
+  spec: [string, string][];
+};
 const ALL = samples as unknown as Row[];
 
 export interface CategoryStats {
@@ -114,6 +141,43 @@ export function statsForCategory(c: Category): CategoryStats {
     inFlight: (c.modality && IN_FLIGHT[c.modality]) || null,
   };
 }
+
+/**
+ * Slugs to show as the face of a category, spread across skill groups.
+ *
+ * The chooser was six text blocks on hairlines: zero images and zero video on
+ * the front door of a catalogue whose entire product is footage. There are 126
+ * posters and 126 clips on disk keyed by exactly this slug — they were sitting
+ * unused one route away.
+ *
+ * Round-robin over skill groups rather than taking the first n, because the
+ * first n of 118 egocentric records are all one group and the strip would show
+ * the same workbench four times. Deterministic, so the server render and the
+ * client hydration agree.
+ */
+export function facesFor(c: Category, n: number): string[] {
+  const rows = c.modality ? ALL.filter((r) => r.modality === c.modality) : [];
+  if (rows.length === 0) return [];
+
+  const groups = new Map<string, Row[]>();
+  for (const r of rows) {
+    const k = r.skillGroup ?? "—";
+    (groups.get(k) ?? groups.set(k, []).get(k)!).push(r);
+  }
+
+  const lanes = [...groups.values()];
+  const out: string[] = [];
+  for (let i = 0; out.length < n && i < rows.length; i++) {
+    for (const lane of lanes) {
+      if (out.length >= n) break;
+      if (lane[i]) out.push(lane[i].slug);
+    }
+  }
+  return out;
+}
+
+export const posterSrc = (slug: string) => `/samples/posters/${slug}.jpg`;
+export const clipSrc = (slug: string) => `/samples/clips/${slug}.mp4`;
 
 export function categoryBySlug(slug: string) {
   return CATEGORIES.find((c) => c.slug === slug) ?? null;
