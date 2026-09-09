@@ -157,6 +157,9 @@ export const OTS_CORPUS = {
    * not the row.
    */
   resolution: "Up to 4K, shot in portrait",
-  lead: "7 business days from agreement",
+  // A stat tile is one figure. "7 business days from agreement" wrapped to
+  // three lines beside six one-line neighbours and broke the row; the
+  // qualifier belongs in the caption under it.
+  lead: "7 business days",
   size: "~160-315 GB by resolution tier",
 } as const;
