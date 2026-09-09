@@ -123,9 +123,9 @@ export function HeroSamples() {
                 data for" / "AI, collected by us." as the even split, which
                 strands "AI," at the head of the second line and reads as a
                 different sentence for a beat. */}
-            <span className="block">Training data for&nbsp;AI, collected by us.</span>
+            <span className="block">We record people doing real work.</span>
             <span className="block" style={{ color: "rgba(255,255,255,0.48)" }}>
-              Every sample opens without a form.
+              You train on what they actually did.
             </span>
           </h1>
 
@@ -141,9 +141,9 @@ export function HeroSamples() {
             className="mt-6 max-w-lg text-base leading-relaxed"
             style={{ color: "rgba(255,255,255,0.76)" }}
           >
-            Every set we sell has real delivery files on this page. Off the shelf or collected to
-            your spec, shipped as MCAP or LeRobot with calibration, telemetry and annotation in
-            band — open a category for its tiers, hours and pricing.
+            A motorcycle mechanic installing a front cowl. A barber trimming a neckline. A player
+            clearing a level. 126 of them play here right now — the same files we deliver, with no
+            form in the way. Open a category for its tiers, hours and pricing.
           </p>
 
           <div className="mt-8 flex flex-wrap items-center gap-6">
