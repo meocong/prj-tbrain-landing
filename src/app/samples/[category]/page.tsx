@@ -14,6 +14,7 @@ import { INTEROP } from "@/lib/samples/capability";
 import { axesFor } from "@/lib/samples/datasets";
 import { LICENSE, QUALIFIER } from "@/lib/samples/license";
 import { SampleCatalog } from "../_sections/SampleCatalog";
+import { TwoRoutes } from "../_sections/TwoRoutes";
 import { AccessPaths } from "../_sections/AccessPaths";
 import { C } from "../_sections/tokens";
 
@@ -117,6 +118,13 @@ export default async function CategoryPage({
         {/* Datasets, facets, grid and the record layer, unchanged. They were
             never wrong, they were on the wrong page. */}
         <SampleCatalog modality={c.modality} />
+
+        {/* R2, per category: the same two routes as the front door, with this
+            category's own published count on one side and its own cheapest tier
+            and ramp on the other. A reader who saw the front-door version reads
+            the same two paragraphs here, so it is one offer stated twice with
+            different numbers rather than two offers. */}
+        <TwoRoutes category={c} />
 
         {/* Tiers AFTER the clips, which is the order samples.tbrain.ai uses:
             ten cards, then the shelf story. Above them this block put 3,417px
