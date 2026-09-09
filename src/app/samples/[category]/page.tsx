@@ -20,7 +20,6 @@ import { MocapDemo } from "../_sections/MocapDemo";
 import { OtsShelf } from "../_sections/OtsShelf";
 import { GamingSet } from "../_sections/GamingSet";
 import { TeleopSet } from "../_sections/TeleopSet";
-import { DeliveryLayers } from "../_sections/DeliveryLayers";
 import { TelemetryStrip } from "../_sections/TelemetryStrip";
 import { Evidence } from "../_sections/Evidence";
 import { TeleopAnatomy } from "../_sections/TeleopAnatomy";
@@ -103,14 +102,6 @@ export default async function CategoryPage({
             It is the first question a technical buyer asks, and it is the one
             block that makes this page not interchangeable with the next one. */}
         <CaptureSpec category={c} />
-
-        {/* What ships with the file, directly under what recorded it. Moved off
-            the front door (F1): "what travels with every file" is the second
-            question a technical buyer asks and the first one they cannot ask
-            before choosing a category, since the answer is the same everywhere
-            but only interesting once they know what the footage is. It was the
-            single largest block on the front door at 2,255px. */}
-        <DeliveryLayers />
 
         {/* The tiers, ABOVE the clips.
             They were below, moved there when the header was five paragraphs of
@@ -359,7 +350,7 @@ export default async function CategoryPage({
         {/* Has it shipped before, and may I train on it. Moved off the front
             door (F1) to sit against the licence table, which answers the second
             half — the two were a page apart there and are one thought. */}
-        <Evidence />
+        <Evidence line={c.line} />
 
         <AccessPaths />
       </main>

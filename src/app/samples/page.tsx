@@ -5,6 +5,7 @@ import { HeroSamples } from "./_sections/HeroSamples";
 import { CategoryChooser } from "./_sections/CategoryChooser";
 import { TwoRoutes } from "./_sections/TwoRoutes";
 import { Coverage } from "./_sections/Coverage";
+import { DeliveryLayers } from "./_sections/DeliveryLayers";
 import { AccessPaths } from "./_sections/AccessPaths";
 
 // Named by the three lines of business, matching the chooser below it.
@@ -78,6 +79,16 @@ export default function SamplesPage() {
             Coverage are the argument for the shelf. */}
         <TwoRoutes />
         <Coverage />
+        {/* Stays on the front door, after a round trip to the category pages
+            and straight back. Its own thesis is cross-domain — "the same six
+            layers ship whether the sample came from a workshop, a studio or a
+            game session" — so on /samples/egocentric it spent 40% of its words
+            describing game capture to a reader who had just chosen not to look
+            at games, and the FORMATS table under it restated the "Delivered as
+            LeRobot v3 · MCAP · HDF5 · RLDS" line that page already prints.
+
+            Compressed in place instead: spacing only, no fact dropped. */}
+        <DeliveryLayers />
         <AccessPaths />
       </main>
       <Footer />

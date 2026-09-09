@@ -14,7 +14,7 @@ export function DeliveryLayers() {
 
   return (
     <section style={{ background: C.band, color: C.text }}>
-      <div className="mx-auto max-w-[1400px] px-4 py-24 md:py-32 lg:px-10 xl:px-16">
+      <div className="mx-auto max-w-[1400px] px-4 py-16 md:py-20 lg:px-10 xl:px-16">
         <Reveal variant="rise">
           <div className="max-w-2xl">
             <h2
@@ -30,11 +30,11 @@ export function DeliveryLayers() {
             </p>
           </div>
 
-          <div className="mt-16 grid sm:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-10 grid sm:grid-cols-2 lg:grid-cols-3">
             {DELIVERY_LAYERS.map((layer, i) => (
               <motion.article
                 key={layer.key}
-                className="px-0 py-8 sm:px-7 lg:py-10"
+                className="px-0 py-6 sm:px-7 lg:py-7"
                 style={{
                   borderTop: `1px solid ${C.hairline}`,
                   borderLeft: i % 3 !== 0 ? `1px solid ${C.hairlineSoft}` : undefined,
@@ -51,7 +51,7 @@ export function DeliveryLayers() {
                   {layer.metric}
                 </p>
                 <h3
-                  className="mt-5 text-lg font-medium"
+                  className="mt-3.5 text-lg font-medium"
                   style={{ fontFamily: "var(--font-heading)" }}
                 >
                   {layer.title}
@@ -63,7 +63,7 @@ export function DeliveryLayers() {
             ))}
           </div>
 
-          <div className="mt-20 grid gap-8 lg:grid-cols-12 lg:gap-10">
+          <div className="mt-14 grid gap-8 lg:grid-cols-12 lg:gap-10">
             <h3
               className="text-2xl font-medium tracking-tight lg:col-span-4 md:text-3xl"
               style={{ fontFamily: "var(--font-heading)", letterSpacing: "-0.02em" }}
