@@ -391,12 +391,19 @@ export function SampleModal({
                           style={{ background: C.hairline }}
                         />
                       </div>
-                      <dl className="mt-1.5">
+                      {/* No rule between rows. A record carries 31 of them, and
+                          a hairline under each turned the group headings into
+                          noise: 31 evenly spaced lines read as one texture, so
+                          nothing was findable without reading every label. The
+                          groups already have a rule at their heading, which is
+                          the one separator this list needs. Alignment does the
+                          rest — a fixed label column and a mono value column
+                          give the eye two straight edges to run down. */}
+                      <dl className="mt-2">
                         {section.rows.map(([k, v]) => (
                           <div
                             key={k}
-                            className="grid grid-cols-[minmax(0,10.5rem)_1fr] items-baseline gap-x-5 py-[7px]"
-                            style={{ borderTop: `1px solid ${C.hairlineSoft}` }}
+                            className="grid grid-cols-[minmax(0,10.5rem)_1fr] items-baseline gap-x-5 py-[5px]"
                           >
                             <dt
                               className="text-[11.5px] leading-relaxed"

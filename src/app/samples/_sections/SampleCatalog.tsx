@@ -6,7 +6,6 @@ import { Check, ChevronDown, Copy, Search, SlidersHorizontal, X } from "lucide-r
 import samples from "@/lib/samples/samples.json";
 import { SKILL_GROUPS, JOBS, INDUSTRIES } from "@/lib/samples/taxonomy";
 import { FacetPicker, SortPicker } from "./Fields";
-import { groupSpec, LONG_VALUE } from "@/lib/samples/spec-sections";
 import { publicSpec } from "@/lib/samples/redact.mjs";
 import { track } from "@/lib/samples/track";
 import { requestUrl } from "@/lib/samples/request-link";
@@ -129,40 +128,6 @@ function matches(s: Sample, f: Filters, skip?: keyof Filters) {
     if (!hay.toLowerCase().includes(q)) return false;
   }
   return true;
-}
-
-/**
- * One field of the shipped record.
- *
- * Values are left aligned under a fixed label column rather than pushed to the
- * right edge: a checksum that wraps reads as one block that way, and a column of
- * values with a common left edge can be scanned without reading each one. Long
- * values stack under their label and take the full measure, because a 64
- * character checksum beside a label leaves nothing to wrap into.
- */
-function SpecRow({ label, value }: { label: string; value: string }) {
-  const long = value.length > LONG_VALUE;
-  // A checksum, uuid or path is one unbroken token and has to be split mid-word
-  // to fit. A sentence must not be: `break-all` on prose gives "mag_mi ddle.db".
-  const token = !/\s/.test(value);
-  return (
-    <div
-      className={`py-[5px] ${long ? "" : "grid grid-cols-[minmax(6.5rem,auto)_1fr] items-baseline gap-x-4"}`}
-      style={{ borderTop: `1px solid ${C.hairlineSoft}` }}
-    >
-      <dt className="text-[11.5px] leading-relaxed" style={{ color: C.textDim }}>
-        {label}
-      </dt>
-      <dd
-        className={`font-mono text-[12px] leading-relaxed ${long ? "mt-0.5" : ""} ${
-          token ? "break-all" : "break-words"
-        }`}
-        style={{ color: C.value }}
-      >
-        {value}
-      </dd>
-    </div>
-  );
 }
 
 /** Copies the record as JSON, which is the shape a buyer pastes into a ticket. */
@@ -499,6 +464,37 @@ function RailGroup({
 
 export function SampleCatalog() {
   const [active, setActive] = useState<Sample | null>(null);
+
+  /* A record is addressable: `/samples?record=<slug>`.
+   *
+   * This page exists so a salesperson can send a link instead of an
+   * attachment, and until now the only way to reach one sample was to open the
+   * catalogue and find it again — the deep link was the missing half of the
+   * premise. The state stays the source of truth and the URL follows it, rather
+   * than the other way round: reading state from the URL on every render would
+   * put a router subscription in the middle of a grid that re-filters on every
+   * keystroke.
+   *
+   * `replaceState`, not `pushState`. Opening and closing five records while
+   * browsing should not bury the previous page under five history entries, and
+   * the modal already closes on Escape and on outside press.
+   */
+  useEffect(() => {
+    const slug = new URLSearchParams(window.location.search).get("record");
+    if (!slug) return;
+    const found = ALL.find((s) => s.slug === slug);
+    if (found) setActive(found);
+  }, []);
+
+  useEffect(() => {
+    const url = new URL(window.location.href);
+    if (active) url.searchParams.set("record", active.slug);
+    else url.searchParams.delete("record");
+    const next = `${url.pathname}${url.search}${url.hash}`;
+    if (next !== `${window.location.pathname}${window.location.search}${window.location.hash}`) {
+      window.history.replaceState(null, "", next);
+    }
+  }, [active]);
   const [f, setF] = useState<Filters>(EMPTY);
   const [sort, setSort] = useState<SortKey>("longest");
   // Six facet groups is a long scroll before the grid on a phone, so the rail
