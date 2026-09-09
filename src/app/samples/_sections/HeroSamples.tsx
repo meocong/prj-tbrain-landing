@@ -71,13 +71,29 @@ export function HeroSamples() {
               to work out what it is for.
 
               It must also stay ABOVE the categories rather than inside one.
-              The first rewrite here read "Data for models that have to act /
-              Human hands, robot arms, live play", which is a robotics headline
-              on a page that also sells gaming and Coding & STEM - it quietly
-              narrowed the whole library to one line of business. This page is
-              the front door for all of them: it says we sell data and that the
-              samples are open, and every tier, hour count and price lives one
-              click down on the category it belongs to. */}
+              One rewrite here read "Data for models that have to act / Human
+              hands, robot arms, live play", which is a robotics headline on a
+              page that also sells gaming and Coding & STEM - it quietly
+              narrowed the whole library to one line of business.
+
+              And it has to name the product, not the reader's next action. The
+              rewrite after that read "See the data before you buy it", which
+              says what you can DO here and never says what is for sale; a
+              stranger finished it without learning this is AI training data.
+              Read 2026-09-09, the pattern is a noun phrase in all three
+              catalogues that sell rather than pitch - Claru "Training data for
+              physical AI", Encord "Train and run AI on the right data",
+              Datarade "Find the right data products, effortlessly" - each with
+              the audience and one figure carried by the subhead.
+
+              "collected by us" is the clause that is ours rather than Claru's.
+              They broker scale (10,000+ collectors, 100+ cities); we record it
+              first-hand in operating businesses with professional operators.
+              Same sentence shape, opposite claim, so it does not read as a
+              copy of the competitor Tam sent.
+
+              Tiers, hour counts and prices differ per category and live one
+              click down, on the category they belong to. */}
           <h1
             /* `text-balance` is inherited, so each `block` span balances its
                own wrap. Without it the hero column at tablet width broke both
@@ -91,7 +107,11 @@ export function HeroSamples() {
               color: "#ffffff",
             }}
           >
-            <span className="block">See the data before you buy it.</span>
+            {/* Non-breaking space: `text-balance` otherwise picks "Training
+                data for" / "AI, collected by us." as the even split, which
+                strands "AI," at the head of the second line and reads as a
+                different sentence for a beat. */}
+            <span className="block">Training data for&nbsp;AI, collected by us.</span>
             <span className="block" style={{ color: "rgba(255,255,255,0.48)" }}>
               Robotics, gaming, coding and STEM.
             </span>
@@ -109,9 +129,9 @@ export function HeroSamples() {
             className="mt-6 max-w-lg text-base leading-relaxed"
             style={{ color: "rgba(255,255,255,0.76)" }}
           >
-            Real delivery files from every set we sell, off the shelf or collected to your spec.
-            Every sample here plays in full with no form — open a category for its tiers, hours
-            and pricing.
+            We record it first-hand, off the shelf or to your spec. Every set we sell has real
+            delivery files on this page, playable in full with no form — open a category for its
+            tiers, hours and pricing.
           </p>
 
           <div className="mt-8 flex flex-wrap items-center gap-6">
