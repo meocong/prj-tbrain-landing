@@ -17,6 +17,7 @@ import { TwoRoutes } from "../_sections/TwoRoutes";
 import { CoverageChart } from "../_sections/CoverageChart";
 import { CategoryHeader } from "../_sections/CategoryHeader";
 import { MocapDemo } from "../_sections/MocapDemo";
+import { OtsShelf } from "../_sections/OtsShelf";
 import { CaptureSpec } from "../_sections/CaptureSpec";
 import { AccessPaths } from "../_sections/AccessPaths";
 import { C } from "../_sections/tokens";
@@ -98,6 +99,13 @@ export default async function CategoryPage({
         {/* Datasets, facets, grid and the record layer, unchanged. They were
             never wrong, they were on the wrong page. */}
         <SampleCatalog modality={c.modality} />
+
+        {/* The other purchase route, with footage. Everything in the grid
+            above is a stereo rig delivery — the custom side — and "Off the
+            shelf" was a paragraph about 12,900 episodes nobody could see a
+            frame of. The capability sheet had a Sample Link per skill all
+            along. */}
+        {c.slug === "egocentric" && <OtsShelf />}
 
         {/* The mix, AFTER the clips. humanoidlayer.dev prints its facet
             values on the page and we copied that literally, which on 118
