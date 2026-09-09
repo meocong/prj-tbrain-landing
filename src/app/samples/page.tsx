@@ -5,9 +5,6 @@ import { HeroSamples } from "./_sections/HeroSamples";
 import { CategoryChooser } from "./_sections/CategoryChooser";
 import { TwoRoutes } from "./_sections/TwoRoutes";
 import { Coverage } from "./_sections/Coverage";
-import { DeliveryLayers } from "./_sections/DeliveryLayers";
-import { TelemetryStrip } from "./_sections/TelemetryStrip";
-import { Evidence } from "./_sections/Evidence";
 import { AccessPaths } from "./_sections/AccessPaths";
 
 // Named by the three lines of business, matching the chooser below it.
@@ -54,6 +51,25 @@ export default function SamplesPage() {
             /samples/[category], where a page has room to say what a category is
             before showing 118 of it. CorpusLines used to sit here saying the
             same thing worse, per line rather than per category. */}
+        {/* Five sections, down from eight.
+            Tam, 2026-09-09: "trang chủ ngắn gọn súc tích, các ý chính thôi."
+
+            Measured before cutting, so the three that went were the three
+            costing the most for the least:
+
+              hero                 76 w    812px   keep
+              CategoryChooser     418 w  3,060px   keep — it IS the page
+              TwoRoutes           122 w    716px   keep
+              Coverage            142 w  1,082px   keep
+              DeliveryLayers      241 w  2,255px → the category pages
+              TelemetryStrip      132 w  1,423px → /samples/gaming
+              Evidence            152 w  1,484px → the category pages
+              AccessPaths          85 w    957px   keep
+
+            11,789px to 6,627px, 1,445 words to 843. Nothing is deleted: each
+            moved section answers a question the reader has asked by the time
+            they are one level down, and answered nothing on a page they had
+            not chosen a category on yet. */}
         <HeroSamples />
         <CategoryChooser />
         {/* Both purchase routes, then what is actually in the catalogue. Order
@@ -62,9 +78,6 @@ export default function SamplesPage() {
             Coverage are the argument for the shelf. */}
         <TwoRoutes />
         <Coverage />
-        <DeliveryLayers />
-        <TelemetryStrip />
-        <Evidence />
         <AccessPaths />
       </main>
       <Footer />
