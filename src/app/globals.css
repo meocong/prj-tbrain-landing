@@ -1053,6 +1053,9 @@ html.dark body {
   --sm-value: rgba(15, 23, 42, 0.86);
   --sm-accent: #6C3CF4;
   --sm-accent-soft: rgba(108, 60, 244, 0.1);
+  /* Light mode's gradient partner. Darker than the dark theme's #10B981, which
+     is 2.3:1 on a near-white base and unreadable as text. */
+  --sm-accent-alt: #047857;
   --sm-positive: #047857;
   --sm-danger: #B91C1C;
   --sm-rule: rgba(15, 23, 42, 0.22);
@@ -1077,9 +1080,15 @@ html.dark body {
 }
 
 .dark .samples-scope {
-  --sm-base: #07090F;
-  --sm-base-rgb: 7, 9, 15;
-  --sm-band: #0B0E17;
+  /* Slate-950, the same base /data/physical-ai paints on, not the near-neutral
+     #07090F these pages used to use. Tam, 2026-09-09: "màu nó đang hơi off" —
+     the accent already matched, so what read as off was two different blacks
+     sitting one nav click apart. Measured: every text tier gains a little
+     contrast on the bluer base rather than losing it (dim 5.76:1 either way,
+     body 8.52:1, accent 7.41:1), so the move is free. */
+  --sm-base: #020617;
+  --sm-base-rgb: 2, 6, 23;
+  --sm-band: #0B1220;
   --sm-hairline: rgba(255, 255, 255, 0.09);
   --sm-hairline-soft: rgba(255, 255, 255, 0.06);
   --sm-text: rgba(245, 246, 248, 0.96);
@@ -1088,6 +1097,11 @@ html.dark body {
   --sm-value: rgba(226, 232, 240, 0.88);
   --sm-accent: #A78BFA;
   --sm-accent-soft: rgba(167, 139, 250, 0.14);
+  /* The second brand colour, for gradients only. It is the same emerald as
+     --sm-positive by value and deliberately a separate token: `positive` means
+     "this check passed" and is read as a status, so painting a hero gradient
+     with it would make every hero look like a pass badge. 7.95:1 on the base. */
+  --sm-accent-alt: #10B981;
   --sm-positive: #10B981;
   --sm-danger: #FCA5A5;
   --sm-rule: rgba(255, 255, 255, 0.22);

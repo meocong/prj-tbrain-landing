@@ -4,7 +4,7 @@ import Link from "next/link";
 import { motion, useReducedMotion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import samples from "@/lib/samples/samples.json";
-import { EASE, type Sample } from "./tokens";
+import { C, EASE, type Sample } from "./tokens";
 import { HeroMosaic } from "./HeroMosaic";
 import { track } from "@/lib/samples/track";
 import { requestUrl } from "@/lib/samples/request-link";
@@ -181,7 +181,20 @@ export function HeroSamples() {
                 history.replaceState(null, "", "#deck");
               }}
               className="group inline-flex items-center gap-2 rounded-full px-7 py-3.5 text-sm font-semibold transition-transform active:scale-[0.98]"
-              style={{ background: "#ffffff", color: "#0b0d13" }}
+              /* Not `background: "#ffffff"`, which this was and which rendered
+                 the page's primary CTA invisible in dark mode. globals.css
+                 carries a site-wide sledgehammer for legacy sections that
+                 hardcode a white card — `.dark [style*="background:#fff"]`,
+                 `!important`, repainting it as a dark scrim. `#ffffff` contains
+                 `#fff`, so the pill matched: background forced to a dark scrim,
+                 colour left at the near-black `#0b0d13` written here. Dark on
+                 dark, over video, with the label unreadable.
+
+                 Tokens instead of a literal, which fixes it twice over: the
+                 selector no longer matches, and the pill inverts with the theme
+                 — near-white on near-black in dark, the reverse in light —
+                 rather than assuming the page behind it is dark. */
+              style={{ background: C.text, color: C.base }}
             >
               Browse samples
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />

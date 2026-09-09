@@ -22,6 +22,8 @@ export const C = {
   textMid: "var(--sm-text-mid)",
   textDim: "var(--sm-text-dim)",
   accent: "var(--sm-accent)",
+  /** Gradient partner. Emerald. Gradients only — never a status, see globals.css. */
+  accentAlt: "var(--sm-accent-alt)",
   positive: "var(--sm-positive)",
 
   /** Tinted fill behind an active filter chip. */
