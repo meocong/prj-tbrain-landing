@@ -16,6 +16,7 @@ import { SampleCatalog } from "../_sections/SampleCatalog";
 import { TwoRoutes } from "../_sections/TwoRoutes";
 import { CoverageChart } from "../_sections/CoverageChart";
 import { CategoryHeader } from "../_sections/CategoryHeader";
+import { MocapDemo } from "../_sections/MocapDemo";
 import { CaptureSpec } from "../_sections/CaptureSpec";
 import { AccessPaths } from "../_sections/AccessPaths";
 import { C } from "../_sections/tokens";
@@ -82,6 +83,12 @@ export default async function CategoryPage({
           </div>
         </section>
         )}
+
+        {/* Mocap has no clip grid because its product is a pose stream, not
+            footage — but it does have a real bundle, and the explorer is the
+            right instrument for it. It sits where the clips sit on every other
+            category. */}
+        {c.slug === "mocap" && <MocapDemo />}
 
         {/* What records this category, before anything about what is in it.
             It is the first question a technical buyer asks, and it is the one

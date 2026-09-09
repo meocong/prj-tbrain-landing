@@ -139,7 +139,11 @@ export const CATEGORIES: Category[] = [
     // CAPABILITY.mocap, the only tier on it. Nothing is collected, so the true
     // figure is what the rig captures: 17 IMUs at 240 Hz plus per-finger gloves.
     // Not the rate — see the comment on `CapabilityTier.price`.
-    held: { figure: "240 Hz", unit: "17 IMUs + per-finger pose" },
+    /* Not "nothing here". The capability sheet's Visualized Demo column links
+       a deployed bundle — 160 s of video with the Xsens hand and wrist pose
+       synchronised to it — which is a published mocap sample by any reading.
+       The figure is what that bundle actually contains. */
+    held: { figure: "4,801", unit: "wrist-pose frames · 21 joints per hand" },
     /* Row C of the capability sheet, "Egocentric + full mocap". The 240 Hz is
        the suit's native rate; the sheet says it is downsampled to 30 Hz for
        delivery, and stating only the native rate would let a buyer plan around
