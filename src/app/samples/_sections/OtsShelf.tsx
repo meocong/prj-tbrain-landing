@@ -13,8 +13,8 @@ import { C, OVER_MEDIA } from "./tokens";
  * a paragraph about 12,900 episodes a reader could not see a frame of. The
  * capability sheet had a `Sample Link` per skill the whole time.
  *
- * Portrait tiles, because the footage is portrait: ten of ten clips pulled from
- * those folders are shot on a phone held upright. Letterboxing them into the
+ * Portrait tiles, because the footage is portrait: all sixty-one clips in those
+ * folders are shot on a phone held upright. Letterboxing them into the
  * landscape grid above would hide the one thing that most distinguishes this
  * corpus from the stereo deliveries, which is that it is phone video.
  *
@@ -31,8 +31,8 @@ export function OtsShelf() {
 
         <p className="mt-5 max-w-2xl text-[14px] leading-relaxed" style={{ color: C.textMid }}>
           A separate corpus from the deliveries above: phone-mounted first-person capture of
-          everyday manipulation, licensed as a pack rather than collected to a brief. Two clips
-          from each sampled skill play here.
+          everyday manipulation, licensed as a pack rather than collected to a brief. Every clip in the five
+          sampled skills plays here — sixty-one of them.
         </p>
 
         <dl className="mt-8 grid grid-cols-2 gap-x-8 gap-y-6 sm:grid-cols-3 xl:grid-cols-6">
@@ -66,18 +66,24 @@ export function OtsShelf() {
           estimates, from each skill&apos;s share of the corpus.
         </p>
 
-        <div className="mt-10 flex gap-6 overflow-x-auto pb-4">
+        {/* A row per skill, not one strip of sixty-one. Fifteen tiles and six
+            tiles belong to different questions, and a single scroller would
+            bury the boundary between them — which is the share each skill has
+            of the corpus, the thing the labels are here to say. */}
+        <div className="mt-12 space-y-10">
           {OTS_SKILLS.map((s) => (
-            <div key={s.slug} className="shrink-0">
-              <div className="flex gap-2">
+            <div key={s.slug}>
+              <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1">
+                <p className="text-[14px] font-medium">{s.name}</p>
+                <p className="font-mono text-[11px]" style={{ color: C.textDim }}>
+                  {s.clips.length} playable · {s.share} of the corpus · {s.episodes} episodes
+                </p>
+              </div>
+              <div className="mt-3 flex gap-2 overflow-x-auto pb-3">
                 {s.clips.map((slug) => (
                   <Tile key={slug} slug={slug} />
                 ))}
               </div>
-              <p className="mt-3 text-[13.5px] font-medium">{s.name}</p>
-              <p className="mt-1 font-mono text-[11px]" style={{ color: C.textDim }}>
-                {s.share} of the corpus · {s.episodes} episodes
-              </p>
             </div>
           ))}
         </div>
@@ -103,7 +109,7 @@ function Tile({ slug }: { slug: string }) {
 
   return (
     <span
-      className="relative block w-[124px] overflow-hidden md:w-[142px]"
+      className="relative block w-[124px] shrink-0 overflow-hidden md:w-[142px]"
       style={{ aspectRatio: "9 / 16", background: C.band }}
       onMouseEnter={play}
       onMouseLeave={stop}

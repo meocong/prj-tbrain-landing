@@ -9,8 +9,8 @@
  * prose and showed none of it.
  *
  * The capability sheet carries a `Sample Link` per skill, pointing at Drive
- * folders of real clips. Five of the nine rows have one. Two clips from each
- * are now on the site.
+ * folders of real clips. Five of the nine rows have one. Every clip in all five is
+ * now on the site: 61 previews.
  *
  * Numbers below are the sheet's, verbatim. The episode counts are its own
  * estimates — it says so: "Episode counts estimated from distribution
@@ -30,22 +30,84 @@ export interface OtsSkill {
 }
 
 export const OTS_SKILLS: OtsSkill[] = [
-  { slug: "cup", name: "Pick up a cup", share: "49%", episodes: "~6,321", clips: ["ots-cup-1", "ots-cup-2"] },
+  {
+    slug: "cup",
+    name: "Pick up a cup",
+    share: "49%",
+    episodes: "~6,321",
+    clips: [
+      "ots-cup-1",
+      "ots-cup-2",
+      "ots-cup-3",
+      "ots-cup-4",
+      "ots-cup-5",
+      "ots-cup-6",
+      "ots-cup-7",
+      "ots-cup-8",
+      "ots-cup-9",
+      "ots-cup-10",
+      "ots-cup-11",
+      "ots-cup-12",
+      "ots-cup-13",
+      "ots-cup-14",
+      "ots-cup-15",
+    ],
+  },
   {
     slug: "screwdriver",
     name: "Use a screwdriver",
     share: "13%",
     episodes: "~1,677",
-    clips: ["ots-screwdriver-1", "ots-screwdriver-2"],
+    clips: [
+      "ots-screwdriver-1",
+      "ots-screwdriver-2",
+      "ots-screwdriver-3",
+      "ots-screwdriver-4",
+      "ots-screwdriver-5",
+      "ots-screwdriver-6",
+      "ots-screwdriver-7",
+      "ots-screwdriver-8",
+      "ots-screwdriver-9",
+      "ots-screwdriver-10",
+      "ots-screwdriver-11",
+      "ots-screwdriver-12",
+      "ots-screwdriver-13",
+      "ots-screwdriver-14",
+      "ots-screwdriver-15",
+    ],
   },
   {
     slug: "fridge",
     name: "Pick up an item from a refrigerator",
     share: "8%",
     episodes: "~1,032",
-    clips: ["ots-fridge-1", "ots-fridge-2"],
+    clips: [
+      "ots-fridge-1",
+      "ots-fridge-2",
+      "ots-fridge-3",
+      "ots-fridge-4",
+      "ots-fridge-5",
+      "ots-fridge-6",
+      "ots-fridge-7",
+      "ots-fridge-8",
+      "ots-fridge-9",
+      "ots-fridge-10",
+    ],
   },
-  { slug: "wipe", name: "Wipe a surface", share: "5%", episodes: "~645", clips: ["ots-wipe-1", "ots-wipe-2"] },
+  {
+    slug: "wipe",
+    name: "Wipe a surface",
+    share: "5%",
+    episodes: "~645",
+    clips: [
+      "ots-wipe-1",
+      "ots-wipe-2",
+      "ots-wipe-3",
+      "ots-wipe-4",
+      "ots-wipe-5",
+      "ots-wipe-6",
+    ],
+  },
   {
     slug: "scissors",
     // The sheet files this under "Other tasks"; the Drive folder behind that
@@ -53,7 +115,23 @@ export const OTS_SKILLS: OtsSkill[] = [
     name: "Cut with scissors",
     share: "1%",
     episodes: "~129",
-    clips: ["ots-scissors-1", "ots-scissors-2"],
+    clips: [
+      "ots-scissors-1",
+      "ots-scissors-2",
+      "ots-scissors-3",
+      "ots-scissors-4",
+      "ots-scissors-5",
+      "ots-scissors-6",
+      "ots-scissors-7",
+      "ots-scissors-8",
+      "ots-scissors-9",
+      "ots-scissors-10",
+      "ots-scissors-11",
+      "ots-scissors-12",
+      "ots-scissors-13",
+      "ots-scissors-14",
+      "ots-scissors-15",
+    ],
   },
 ];
 
