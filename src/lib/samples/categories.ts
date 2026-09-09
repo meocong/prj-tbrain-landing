@@ -24,6 +24,18 @@ export interface Category {
   /** What it IS, in one sentence, for a reader who has not met the word. */
   whatItIs: string;
   /**
+   * What it is FOR — the model or the task it serves.
+   *
+   * All six categories said what they were and none said what they were for,
+   * which is R15: robotics has to lead the customer rather than list at them. A
+   * buyer who knows they are training a manipulation policy was left to work
+   * out for themselves whether that means exocentric or mocap.
+   *
+   * Names a model or a task, never an adjective. "Behaviour cloning and VLA
+   * training" is a use; "high-quality data for robotics" is a mood.
+   */
+  forWhat: string;
+  /**
    * The shelf behind the samples, hedged the way Claru hedges it: a figure and
    * an admission that it is approximate. Null where there is no shelf claim.
    */
@@ -89,6 +101,8 @@ export const CATEGORIES: Category[] = [
       // only the trades-at-work one and made the household corpus below it read
       // as a mistake.
       "First-person capture from a head-mounted rig: skilled trades at work in operating businesses, and everyday manipulation at home.",
+    forWhat:
+      "Behaviour cloning and VLA training where the policy has to see what the hands see: the grasp, the tool, and the order a task is really done in.",
     // Hedged, but not in Claru's words. Theirs reads "approximately 118k hours
     // ... Approximate, and the figure may overlap across sources" - they broker,
     // so their hours can be counted twice. Ours cannot: we shot all of it, and
@@ -106,6 +120,8 @@ export const CATEGORIES: Category[] = [
     modality: "exocentric",
     whatItIs:
       "The same work seen from outside the body: a fixed or handheld camera watching the whole person, not just their hands.",
+    forWhat:
+      "Whole-body pose, scene context, and anything with a second person in frame — the half a head-mounted rig cannot see because it is on the head doing the work.",
     shelf: null,
     // IN_FLIGHT.exocentric: "20 hours in collection since 5 September 2026".
     held: { figure: "20 h", unit: "in collection · 15 operators" },
@@ -126,7 +142,15 @@ export const CATEGORIES: Category[] = [
     name: "Teleoperation",
     modality: "teleoperation",
     whatItIs:
-      "Robot episodes rather than human ones. Joint state and action recorded alongside the cameras, in the format policy training reads.",
+      // Two products, and the page used to name one. It said "robot episodes
+      // rather than human ones" while the tier under it was "Egocentric +
+      // gripper (UMI)" — a PERSON wearing a gripper, not a robot. The held set
+      // is an openarm_gripper_follower, a real bimanual arm. Both are
+      // teleoperation data and a buyer choosing between them needs to know
+      // which one they are looking at.
+      "Joint state and action beside the cameras, in the format policy training reads — from a bimanual robot arm, or from a person wearing a UMI gripper rig.",
+    forWhat:
+      "Action-conditioned policy training. Every frame carries the state the arms were in and the action taken, which is the pair a policy learns from.",
     shelf: null,
     // IN_FLIGHT.teleoperation, counted off the disk rather than off the
     // dataset's own manifest, which disagrees with it.
@@ -165,6 +189,8 @@ export const CATEGORIES: Category[] = [
     modality: "mocap",
     whatItIs:
       "Full-body motion capture with per-finger hand pose, for work that hands alone do not describe.",
+    forWhat:
+      "Retargeting to a humanoid, and dexterous work where the finger matters — 21 joints a hand, not a box drawn round it.",
     shelf: null,
     // CAPABILITY.mocap, the only tier on it. Nothing is collected, so the true
     // figure is what the rig captures: 17 IMUs at 240 Hz plus per-finger gloves.
@@ -196,6 +222,8 @@ export const CATEGORIES: Category[] = [
     modality: "gaming",
     whatItIs:
       "Screen capture from live play with every keystroke, mouse delta and camera pose aligned to the frame it happened on.",
+    forWhat:
+      "World models and agents that act through a UI: the frame, the input that produced the next frame, and where the camera was when it did.",
     shelf: null,
   },
   {
@@ -205,6 +233,8 @@ export const CATEGORIES: Category[] = [
     modality: null,
     whatItIs:
       "Terminal benchmark tasks with deterministic verification, authored and peer-reviewed by engineers in each domain.",
+    forWhat:
+      "Agent evaluation and supervised fine-tuning on tasks that either pass or fail, with no judge in the loop.",
     shelf: null,
     // Already a product with its own gated sample area. Tam's instruction was to
     // bring the samples the site already has into one system, not to rebuild

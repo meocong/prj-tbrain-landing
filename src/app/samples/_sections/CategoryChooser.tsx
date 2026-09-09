@@ -158,6 +158,12 @@ function CategoryCard({
             {c.whatItIs}
           </span>
 
+          {/* And what it is for. A chooser whose six cards each say what a thing
+              is, and none what it serves, makes the reader open all six. */}
+          <span className="mt-2 max-w-xl text-[13px] leading-relaxed" style={{ color: C.textDim }}>
+            {c.forWhat}
+          </span>
+
           <span className="mt-4 font-mono text-[11px]" style={{ color: C.accent }}>
             {state}
           </span>

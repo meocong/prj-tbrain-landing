@@ -82,6 +82,17 @@ export function CategoryHeader({ category: c }: { category: Category }) {
         {c.whatItIs}
       </p>
 
+      {/* What it is FOR, directly under what it is. R15: a page that only says
+          what a thing is leaves the buyer to work out whether it serves them,
+          and all six said only that. Set at the same size, dimmer, because it
+          is the second half of one thought rather than a new one. */}
+      <p
+        className="mt-3 max-w-xl text-[15px] leading-relaxed md:text-base"
+        style={{ color: "rgba(255,255,255,0.6)" }}
+      >
+        {c.forWhat}
+      </p>
+
       {c.shelf && (
         <p
           className="mt-3 max-w-xl text-[13px] leading-relaxed"
@@ -175,6 +186,9 @@ export function CategoryHeader({ category: c }: { category: Category }) {
 
         <p className="mt-5 max-w-xl text-[15px] leading-relaxed md:text-base" style={{ color: C.textMid }}>
           {c.whatItIs}
+        </p>
+        <p className="mt-3 max-w-xl text-[15px] leading-relaxed md:text-base" style={{ color: C.textDim }}>
+          {c.forWhat}
         </p>
 
         {c.held && (

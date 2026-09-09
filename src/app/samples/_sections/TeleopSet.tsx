@@ -83,6 +83,21 @@ export function TeleopSet() {
             the set — one task, eleven attempts, and the variation between them is the data.
           </p>
 
+          {/* Which of the two products this is. The tier table on this page
+              prices "Egocentric + gripper (UMI)", a person wearing a gripper
+              rig; the set below is a robot. Both are teleoperation and the page
+              named only one of them for weeks. */}
+          <p
+            className="mt-4 max-w-2xl px-4 py-3 text-[13px] leading-relaxed"
+            style={{ border: `1px solid ${C.hairline}`, background: C.band, color: C.textMid }}
+          >
+            This set is the robot side: an <span className="font-mono">openarm_gripper_follower</span>,
+            two arms, seven joints each plus a gripper. The configuration priced above it — Egocentric
+            + gripper (UMI) — is the human side, a person wearing a wrist rig, and it delivers{" "}
+            <span className="font-mono">head.mp4 + wrist.mp4 + imu.csv + gripper_state.json</span>{" "}
+            instead. Both are teleoperation; they are not the same recording.
+          </p>
+
           <div className="mt-8 grid gap-2 sm:grid-cols-3">
             {VIEWS.map((v, i) => (
               <div key={v.slug} className="relative" style={{ background: C.band }}>
