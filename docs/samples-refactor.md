@@ -132,6 +132,43 @@ Same order for every category, so a buyer who reads two learns the shape once:
 | Annotation depth | link to the dashboard demo | R5 |
 | Custom collection | `capability.ts` | R2 |
 
+### 3.2b The camera question is answered
+
+Tam's "data 6 cam" folder (`1qj7AE20b2qWBIxymNZBaQKfj7UcEb23A`) is a
+customer-facing pack with its own README, read 2026-09-09. It settles what three
+days of inference could not:
+
+> Our standard delivery carries **four of the six cameras** (the required head
+> stereo pair plus the front pair). This package carries **all six**, including
+> the peripheral pair and its extrinsics.
+
+The rig, in its own words:
+
+| Role | Topic | What it is |
+|---|---|---|
+| `primary_left` / `primary_right` | `/top-{left,right}-camera/image-raw` | **Required** head stereo. Human IPD, aimed down at the hands. |
+| `mid_left` / `mid_right` | `/ego/head_front_{left,right}/image_raw` | Front pair. Holds the work when the wearer's head is up. |
+| `outer_left` / `outer_right` | `/ego/side_of_head_{left,right}/image_raw` | Peripheral pair, widest baseline. Sees the room, not just the task. |
+
+So `stereo pair` on 118 records is wrong in the other direction from what was
+assumed: the standard delivery is not two cameras and not six, it is **four** -
+two stereo pairs. `Streams: 4` on those records is consistent with exactly that.
+
+Three more things that pack settles:
+
+- **The customer-facing rig names are `Ego Rig A` and `Ego Rig B`**, not Robocap
+  and DAS Ego V6. Both are six-camera head-mounted platforms differing in sensor
+  resolution, codec and lens model. Our page prints the internal names.
+- **Intrinsics and extrinsics ship in the mcap**: a `camera_info` per image
+  topic (Kannala-Brandt on Rig B, double-sphere on Rig A) and `/tf_static` with
+  all six relative to the body frame, "so the full rig geometry is
+  reconstructable from the mcap alone".
+- **The mp4s are stream copies**, not re-encodes: the rig's own H.264/H.265,
+  re-anchored to the first keyframe.
+
+Every mcap also carries `/ego/imu`, `/ego/vio/system_info`,
+`/environment_annotation`, `/session_metadata`, `/task_annotation`, `/tf_static`.
+
 ### 3.3 The tier block, which does not exist anywhere yet
 
 The piece Tam asked for twice and we have never built. One row per tier:
@@ -139,14 +176,15 @@ The piece Tam asked for twice and we have never built. One row per tier:
 | Tier | Rig | What it carries | Ready in | Price | Published here |
 |---|---|---|---|---|---|
 | Mono | head-mounted phone | RGB | 5-10 d | $30-40/h | 0 |
-| Stereo (2 cam) | RealSense D455 / Pico 4 Ultra | RGB stereo, IMU 200-400 Hz | 14-21 d | $80-120/h | ? |
-| **Advanced stereo (6 cam)** | Robocap | three stereo pairs, two IMUs, magnetometer | - | - | ? |
+| Stereo (2 cam) | RealSense D455 / Pico 4 Ultra | RGB stereo, IMU 200-400 Hz | 14-21 d | $80-120/h | 0 |
+| **Advanced stereo (6 cam)** | Ego Rig A / B | three stereo pairs; standard delivery ships four of the six | - | - | see §3.2b |
 | With wrist camera | phone + wrist cam | head + wrist, time-synced | 5-10 d | $120-180/h | 0 |
 
-The two `?` are §5.3 of the restructure plan: Robocap is a six-camera rig by
-`KNOWN_CAMERAS` and by the downloads page's own blurb, and `samples.tbrain.ai`
-says the rigs carry more lenses than the pair shown. What is unresolved is which
-tier each **record** belongs to, which needs the delivered MCAP inspected.
+No longer blocked. The 118 published records are the six-camera platform
+delivering its standard four-camera package, so they belong in the advanced tier
+and should say four cameras, two stereo pairs - not `stereo pair`. What remains
+is a copy decision on whether the page uses the internal rig names or the
+customer-facing `Ego Rig A` / `Ego Rig B`.
 
 ---
 
@@ -175,7 +213,8 @@ replaces them.
 
 | Item | Needs | Blocks |
 |---|---|---|
-| Which tier each record is | Sơn: how many cameras the delivered MCAP carries | tier badges, not the tier block |
+| ~~Which tier each record is~~ | **answered** by the 6-cam pack README, §3.2b | - |
+| Rig naming: internal or `Ego Rig A/B` | Tam | rig labels on every card |
 | OTS-Stereo vs OTS-Mono naming | Sơn | category copy |
 | Teleops beyond the one dataset | Sơn | how much of R9 is real |
 | Licence | legal / BD | a field on every card |
