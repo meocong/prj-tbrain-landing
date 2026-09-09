@@ -52,6 +52,19 @@ export interface Category {
    * modality. Nothing here is a guess about a rig we have not run.
    */
   capture?: { label: string; value: string }[];
+  /**
+   * The rig as a configuration, stated rather than derived.
+   *
+   * It was derived from the `Streams` spec field and rendered as "4 cameras
+   * 116 · 2 cameras 1", which is wrong twice over: `Streams` counts the video
+   * streams DELIVERED, not the lenses on the head, and a distribution is not a
+   * configuration. The rig is six cameras in three stereo pairs; four of them
+   * ship as standard, per the "data 6 cam" pack README. Both facts are true and
+   * they are two different rows.
+   */
+  rig?: string;
+  /** Nominal IMU rate. Not the per-file measured reading — see capture.ts. */
+  imuHz?: string;
 }
 
 export const CATEGORIES: Category[] = [
@@ -69,6 +82,8 @@ export const CATEGORIES: Category[] = [
     // here, which is a different admission and should not borrow their sentence.
     shelf:
       "The shelf behind these runs to roughly 15,000 episodes and 1,200 hours, shot across 70+ operating businesses. Counted off our own collection, rounded down.",
+    rig: "6 cameras, three stereo pairs",
+    imuHz: "200 Hz",
   },
   {
     slug: "exocentric",
