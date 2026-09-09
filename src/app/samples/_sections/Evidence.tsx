@@ -12,8 +12,18 @@ import { Reveal } from "./Reveal";
  * before, and may I legally train on it. Work already published on the site
  * answers the first; the capture basis answers the second.
  */
-export function Evidence() {
+export function Evidence({ line }: { line?: string }) {
   const reduce = useReducedMotion();
+
+  /* A term with no `lines` applies everywhere. One with `lines` renders only
+     there — the game-rights card was explaining how commercial titles are
+     licensed on /samples/egocentric, which holds no game. Undefined `line` is
+     the front door, where all of them apply. */
+  const terms = TERMS.filter(
+    // `as const` on TERMS narrows `lines` to its literal members, so the
+    // comparison widens rather than the data losing its type.
+    (t) => !("lines" in t) || !line || (t.lines as readonly string[]).includes(line),
+  );
 
   return (
     <section style={{ background: C.base, color: C.text }}>
@@ -76,7 +86,7 @@ export function Evidence() {
             </div>
 
             <div className="lg:col-span-6 lg:col-start-7">
-              {TERMS.map((t, i) => (
+              {terms.map((t, i) => (
                 <motion.article
                   key={t.title}
                   className="py-8"

@@ -286,18 +286,32 @@ export const PROOF_POINTS = [
  */
 export const TERMS = [
   {
-    title: "Collected, not scraped",
-    body: "Every robotics and off-the-shelf episode is recorded by Tbrain at a partner site under a capture agreement. Consent is recorded per session and travels with the file.",
-  },
-  {
     title: "Operators stay anonymous",
     body: "Operators appear only as an opaque id. Job, experience band and handedness ship with the record because a policy needs them; names do not.",
   },
   {
     title: "Game capture is licensed per engagement",
     body: "Game sessions are recorded from commercial titles. Rights for a given delivery are scoped in writing before anything ships, and we will tell you where a title constrains use.",
+    /* Gaming only. On /samples/egocentric this card explained the rights
+       position for commercial game titles, on a page with no game on it. */
+    lines: ["gaming"],
   },
 ] as const;
+
+/**
+ * `Collected, not scraped` used to lead this list, and it said:
+ *
+ *   "Every robotics and off-the-shelf episode is recorded by Tbrain at a partner
+ *    site under a capture agreement. Consent is recorded per session and travels
+ *    with the file."
+ *
+ * The LICENSE table it now renders beside says the same two things in its own
+ * rows — `Consent: Recorded per session, on every episode` and `Where it was
+ * filmed: Operating businesses only. No private residences, no staged studios.`
+ * — about 200px away on the same page. C2, Tam: "ko quá nhiều chữ". A table row
+ * and a prose card competing to state one fact is the shape that complaint is
+ * about, and the table is the better instrument for it.
+ */
 
 /** Formats a buyer can load without writing a converter. */
 export const FORMATS = [
