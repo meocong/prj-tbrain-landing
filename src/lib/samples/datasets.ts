@@ -132,6 +132,7 @@ type Row = {
   skillGroup: string | null;
   durationSec: number;
   rig: string;
+  formats: string[];
   spec: [string, string][];
 };
 
@@ -147,6 +148,16 @@ export interface DatasetStats {
   rigs: string[];
   /** Only present where every record in the set is graded. */
   hardShare: number | null;
+  /**
+   * What lands on disk, as the extensions the records actually carry.
+   *
+   * Every dataset card on `humanoidlayer.dev` prints Format, License and
+   * Enrichment under the name, read 2026-09-09 — a buyer scanning cards can see
+   * whether a set is RLDS or LeRobot without opening it. Ours printed the
+   * licence and left the format inside the record layer, two clicks down.
+   * Derived from the rows, so a set that mixes formats says so.
+   */
+  formats: string[];
 }
 
 const cell = (r: Row, key: string) => r.spec?.find((p) => p[0] === key)?.[1] ?? null;
@@ -172,6 +183,10 @@ export function statsFor(d: Dataset): DatasetStats {
     hardShare: graded.length
       ? graded.filter((g) => g === "hard").length / graded.length
       : null,
+    // Primary artefact only. A record ships `.mcap` plus `.metadata.json`, or
+    // `.mp4` plus three sidecars; listing all of them on a 210px card is a
+    // wall of dots that says less than the one extension a buyer recognises.
+    formats: [...new Set(rows.map((r) => r.formats?.[0]).filter(Boolean))] as string[],
   };
 }
 

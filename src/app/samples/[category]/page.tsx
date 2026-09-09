@@ -15,6 +15,7 @@ import { axesFor } from "@/lib/samples/datasets";
 import { LICENSE, QUALIFIER } from "@/lib/samples/license";
 import { SampleCatalog } from "../_sections/SampleCatalog";
 import { TwoRoutes } from "../_sections/TwoRoutes";
+import { FacetIndex } from "../_sections/FacetIndex";
 import { AccessPaths } from "../_sections/AccessPaths";
 import { C } from "../_sections/tokens";
 
@@ -114,6 +115,12 @@ export default async function CategoryPage({
             </p>
           </div>
         </section>
+
+        {/* The facet values as content, before the control that uses them. A
+            reader who never opens the rail never learns the catalogue has
+            sixteen skill groups; humanoidlayer.dev prints its facets on the
+            page for exactly that reason. */}
+        <FacetIndex modality={c.modality} />
 
         {/* Datasets, facets, grid and the record layer, unchanged. They were
             never wrong, they were on the wrong page. */}
