@@ -5,6 +5,7 @@ import { createPortal } from "react-dom";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { X } from "lucide-react";
 import { groupSpec } from "@/lib/samples/spec-sections";
+import { PILL_KINDS_DROPPED } from "@/lib/samples/redact.mjs";
 import { LICENSE, QUALIFIER } from "@/lib/samples/license";
 import { C, EASE, OVER_MEDIA, PILL, type Sample } from "./tokens";
 import { LiveTelemetry } from "./LiveTelemetry";
@@ -50,13 +51,13 @@ function mmss(total: number) {
  * and session id appear. So drop the terms the breadcrumb already carries and
  * print whatever is left.
  */
-function sceneLine(environment: string, breadcrumb: string[], locale: string) {
+function sceneLine(environment: string, breadcrumb: string[]) {
   const seen = new Set(breadcrumb.map((b) => b.toLowerCase()));
   const rest = environment
     .split(",")
     .map((p) => p.trim())
     .filter((p) => p && !seen.has(p.toLowerCase()));
-  return [...rest, locale].filter(Boolean).join(". ");
+  return rest.join(". ");
 }
 
 export function SampleModal({
@@ -194,24 +195,30 @@ export function SampleModal({
                     </span>
                   ))}
                 </p>
-                {/* Carried over from the grid tile, where it was the only place
-                    the machine and the session id appeared. */}
+                {/* Without `sample.locale`. It appended the city — `Hanoi`,
+                    and on four records the commune `Xa Van Giang` — to a line
+                    that already names the trade and the kind of premises. That
+                    combination is the locator Tam asked us to cut, and it read
+                    as scene-setting rather than as an address, which is why it
+                    survived the first pass over the spec table. */}
                 <p className="mt-1 text-[12px]" style={{ color: C.textDim }}>
-                  {sceneLine(sample.environment, sample.breadcrumb, sample.locale)}
+                  {sceneLine(sample.environment, sample.breadcrumb)}
                 </p>
                 <ul className="mt-2.5 flex flex-wrap gap-1.5">
-                  {sample.pills.map((pill) => {
-                    const st = PILL[pill.k];
-                    return (
-                      <li
-                        key={pill.t}
-                        className="rounded-full px-2.5 py-1 text-[11px]"
-                        style={{ background: st.bg, color: st.fg, border: `1px solid ${st.bd}` }}
-                      >
-                        {pill.t}
-                      </li>
-                    );
-                  })}
+                  {sample.pills
+                    .filter((p) => !(PILL_KINDS_DROPPED as string[]).includes(p.k))
+                    .map((pill) => {
+                      const st = PILL[pill.k];
+                      return (
+                        <li
+                          key={pill.t}
+                          className="rounded-full px-2.5 py-1 text-[11px]"
+                          style={{ background: st.bg, color: st.fg, border: `1px solid ${st.bd}` }}
+                        >
+                          {pill.t}
+                        </li>
+                      );
+                    })}
                 </ul>
               </div>
 
