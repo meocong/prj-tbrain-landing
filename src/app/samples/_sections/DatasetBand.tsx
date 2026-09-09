@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, useReducedMotion } from "framer-motion";
-import { DATASETS, LINES, statsFor, type LineKey } from "@/lib/samples/datasets";
+import { DATASETS, LINES, axesFor, statsFor, type LineKey } from "@/lib/samples/datasets";
 import { INTEROP } from "@/lib/samples/capability";
 import { C, EASE } from "./tokens";
 
@@ -63,7 +63,34 @@ export function DatasetBand({
         })}
       </div>
 
-      <div className="mt-6 grid gap-x-8 gap-y-0 md:grid-cols-2 xl:grid-cols-3">
+      {/* Diversity as named axes, which is how Claru states GEO / DEM / ENV /
+          DEV. Counted from the records on this page, and labelled as such: the
+          deck's figures describe the whole 1,200-hour shelf, and printing those
+          over a grid of 118 playable samples is the quiet overstatement a
+          procurement review exists to catch. */}
+      <dl className="mt-7 grid grid-cols-2 gap-x-8 gap-y-5 sm:grid-cols-4">
+        {axesFor(line).map((a) => (
+          <div key={a.key}>
+            <dt
+              className="font-mono text-[10px] uppercase tracking-[0.18em]"
+              style={{ color: C.textDim }}
+            >
+              {a.label}
+            </dt>
+            <dd
+              className="mt-1 font-mono text-2xl tracking-tight"
+              style={{ color: C.value, lineHeight: 1.1 }}
+            >
+              {a.value}
+            </dd>
+          </div>
+        ))}
+      </dl>
+      <p className="mt-3 text-[12px]" style={{ color: C.textDim }}>
+        Measured across the samples published here, not the full shelf.
+      </p>
+
+      <div className="mt-8 grid gap-x-8 gap-y-0 md:grid-cols-2 xl:grid-cols-3">
         {sets.map((d, i) => {
           const s = statsFor(d);
           const on = d.slug === activeSlug;

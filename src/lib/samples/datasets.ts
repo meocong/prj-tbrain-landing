@@ -173,3 +173,54 @@ export const LINES = [
 ] as const;
 
 export type LineKey = (typeof LINES)[number]["key"];
+
+/**
+ * Diversity as named axes, the way Claru states GEO / DEM / ENV / DEV.
+ *
+ * Counted from the records ON THIS PAGE, not from the shelf. The deck's figures
+ * describe the whole 1,200-hour corpus (70+ sites, 35 location types, 100+
+ * professions, ~3,000 tasks); these describe the 118 samples a reader can
+ * actually play. Printing the shelf figure over a grid of 118 would be the kind
+ * of quiet overstatement a procurement review is built to catch, so the label
+ * says which one this is.
+ */
+export function axesFor(line: LineKey) {
+  const rows = ALL.filter((r) => (line === "gaming" ? r.modality === "gaming" : r.modality !== "gaming"));
+  const distinct = (f: (r: Row) => string | null) =>
+    new Set(rows.map(f).filter(Boolean)).size;
+
+  if (line === "gaming") {
+    return [
+      { key: "TITLE", label: "Titles", value: String(distinct((r) => cell(r, "Title"))) },
+      { key: "TASK", label: "Session types", value: String(distinct((r) => cell(r, "Session type"))) },
+      { key: "DEV", label: "Capture", value: "1080p at 60 fps" },
+      { key: "SIG", label: "Telemetry columns", value: "27" },
+    ];
+  }
+
+  const graded = rows.map((r) => cell(r, "Difficulty")).filter(Boolean);
+  const hard = graded.filter((g) => g === "hard").length;
+  return [
+    { key: "ENV", label: "Workplaces", value: String(distinct((r) => cell(r, "Workplace"))) },
+    { key: "TASK", label: "Distinct tasks", value: String(distinct((r) => cell(r, "Task id"))) },
+    {
+      key: "DEM",
+      // `Operator` reads "op-758d55bc / Cook, 20-25, Right-handed". Taking
+      // everything after the slash counts job+age+handedness triples and
+      // reported 57 where there are 32 jobs - an inflated diversity figure on a
+      // page a buyer procures from. Take the job only.
+      label: "Operator jobs",
+      value: String(
+        distinct((r) => {
+          const op = cell(r, "Operator");
+          return op ? (op.split(" / ")[1]?.split(",")[0]?.trim() ?? null) : null;
+        }),
+      ),
+    },
+    {
+      key: "DIFF",
+      label: "Graded hard",
+      value: graded.length ? `${Math.round((hard / graded.length) * 100)}%` : "-",
+    },
+  ];
+}
