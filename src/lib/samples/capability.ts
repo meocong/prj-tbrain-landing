@@ -40,41 +40,41 @@ export const CAPABILITY: Partial<Record<string, CapabilityTier[]>> = {
       name: "Egocentric",
       rig: "Head-mounted smartphone",
       sensors: null,
-      ramp: "5–10 business days",
+      ramp: "5-10 business days",
       ceiling: "20,000 h / month",
-      price: "$30–40 / h",
+      price: "$30-40 / h",
     },
     {
       name: "Egocentric (RGB-D / LiDAR)",
       rig: "Head-mounted phone or body-worn iPad Pro LiDAR",
       sensors: null,
-      ramp: "5–10 business days",
+      ramp: "5-10 business days",
       ceiling: "5,000 h / month",
-      price: "$40–60 / h + $0.1–2 / cuboid",
+      price: "$40-60 / h + $0.1-2 / cuboid",
     },
     {
       name: "Egocentric stereo",
       rig: "RealSense D455 or Pico 4 Ultra",
-      sensors: "6-DoF IMU, 200–400 Hz",
-      ramp: "14–21 business days",
+      sensors: "6-DoF IMU, 200-400 Hz",
+      ramp: "14-21 business days",
       ceiling: "2,000 h / month",
-      price: "$80–120 / h",
+      price: "$80-120 / h",
     },
     {
       name: "Egocentric + wrist",
       rig: "Head-mounted phone + wrist camera",
       sensors: "Optional 6-DoF IMU on head and wrist, time-synced",
-      ramp: "5–10 business days",
+      ramp: "5-10 business days",
       ceiling: "2,000 h / month",
-      price: "$120–180 / h",
+      price: "$120-180 / h",
     },
     {
       name: "Egocentric + gripper (UMI)",
       rig: "Head-mounted phone + UMI wrist cam",
       sensors: "UMI gripper kit, optional Xsens gloves",
-      ramp: "14–21 business days",
+      ramp: "14-21 business days",
       ceiling: "1,000 h / month",
-      price: "$100–150 / h",
+      price: "$100-150 / h",
     },
   ],
   exocentric: [
@@ -82,9 +82,9 @@ export const CAPABILITY: Partial<Record<string, CapabilityTier[]>> = {
       name: "Exocentric (basic)",
       rig: "Fixed or tripod camera, third-person",
       sensors: null,
-      ramp: "14–21 business days",
+      ramp: "14-21 business days",
       ceiling: "10,000 h / month",
-      price: "$36–56 / h",
+      price: "$36-56 / h",
     },
   ],
   mocap: [
@@ -92,9 +92,9 @@ export const CAPABILITY: Partial<Record<string, CapabilityTier[]>> = {
       name: "Egocentric + full mocap",
       rig: "Helmet GoPro, SuperView ~150°",
       sensors: "Xsens MVN HD, 17 IMUs at 240 Hz, + Metagloves per-finger pose",
-      ramp: "14–21 business days",
+      ramp: "14-21 business days",
       ceiling: "1,000 h / month",
-      price: "$720–1,200 / h",
+      price: "$720-1,200 / h",
     },
   ],
   teleoperation: [
@@ -102,9 +102,9 @@ export const CAPABILITY: Partial<Record<string, CapabilityTier[]>> = {
       name: "Egocentric + gripper (UMI)",
       rig: "Head-mounted phone + UMI wrist cam",
       sensors: "UMI gripper kit, optional Xsens gloves",
-      ramp: "14–21 business days",
+      ramp: "14-21 business days",
       ceiling: "1,000 h / month",
-      price: "$100–150 / h",
+      price: "$100-150 / h",
     },
   ],
 };
@@ -117,7 +117,7 @@ export const CAPABILITY: Partial<Record<string, CapabilityTier[]>> = {
  */
 export const IN_FLIGHT: Partial<Record<string, string>> = {
   exocentric:
-    "20 hours in collection since 5 September 2026 with 15 operators — " +
+    "20 hours in collection since 5 September 2026 with 15 operators: " +
     "10 h urban walking, 5 h vehicular navigation, 5 h structured indoor. " +
     "1080p30 MP4 with audio, clips 30 s to 15 min.",
   // Counted from the dataset itself, not from its own manifest, which is wrong:
@@ -125,8 +125,9 @@ export const IN_FLIGHT: Partial<Record<string, string>> = {
   // holds 11 / 14,076 / 33. See docs/samples-restructure-plan.md §5.4.
   teleoperation:
     "One bimanual pick-and-place set already collected: 11 episodes, " +
-    "14,076 frames at 30 fps (7 min 49 s), on an openarm_gripper_follower — " +
-    "7-DoF per arm plus a gripper each, 16-dimensional state and action. " +
+    "14,076 frames at 30 fps (7 min 49 s), on an openarm_gripper_follower. " +
+    "Seven degrees of freedom per arm plus a gripper each, 16-dimensional " +
+    "state and action. " +
     "Three synchronised 640×480 cameras (head, left, right), 1.2 GB of video. " +
     "Ships as LeRobotDataset v2.1 with a GR00T-compatible modality map.",
 };

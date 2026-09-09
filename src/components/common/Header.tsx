@@ -60,11 +60,33 @@ const Header = () => {
     return () => document.removeEventListener("mousedown", handleClick);
   }, []);
 
+  // A sentinel 60px tall at the top of the document, watched by an
+  // IntersectionObserver: `scrolled` is simply "the sentinel has left the
+  // viewport". The listener this replaces ran on every scroll frame and called
+  // `setState` from inside it, so the whole header re-rendered continuously
+  // through a scroll on every page of the site. The observer fires twice per
+  // crossing instead, and the browser does the measuring off the main thread.
+  //
+  // The element is created rather than rendered because it must sit at the top
+  // of the DOCUMENT, and this component is `position: fixed` — a child of the
+  // header would move with the header and never intersect anything.
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 60);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    const sentinel = document.createElement("div");
+    sentinel.setAttribute("aria-hidden", "true");
+    sentinel.style.cssText =
+      "position:absolute;top:0;left:0;height:60px;width:1px;pointer-events:none;";
+    document.body.prepend(sentinel);
+
+    const io = new IntersectionObserver(
+      ([entry]) => setScrolled(!entry.isIntersecting),
+      { threshold: 0 },
+    );
+    io.observe(sentinel);
+
+    return () => {
+      io.disconnect();
+      sentinel.remove();
+    };
   }, []);
 
   useEffect(() => {
