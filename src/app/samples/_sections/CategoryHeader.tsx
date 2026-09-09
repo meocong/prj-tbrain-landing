@@ -5,6 +5,7 @@ import { ArrowLeft } from "lucide-react";
 import samples from "@/lib/samples/samples.json";
 import { packStats, statsForCategory, type Category } from "@/lib/samples/categories";
 import { HeroReel } from "./HeroReel";
+import { CategoryDiagram } from "./CategoryDiagram";
 import { C } from "./tokens";
 
 /**
@@ -138,7 +139,17 @@ export function CategoryHeader({ category: c }: { category: Category }) {
         background: `${C.band} repeating-linear-gradient(-45deg, ${C.hairline} 0 1px, transparent 1px 11px)`,
       }}
     >
-      <div className="mx-auto w-full max-w-[1400px] px-5 pb-10 pt-28 sm:px-8 lg:px-10 xl:px-16">
+      {/* The drawing, large and to the right, where the reel's footage sits on
+          a category that has any. Drawn rather than borrowed: egocentric
+          footage on the mocap header would be a lie about what we can show, and
+          a hatch with a number on it was the thing this page was rebuilt to
+          stop doing. */}
+      <CategoryDiagram
+        slug={c.slug}
+        className="pointer-events-none absolute right-0 top-1/2 hidden h-[62%] w-[46%] -translate-y-1/2 opacity-[0.5] lg:block"
+      />
+
+      <div className="relative mx-auto w-full max-w-[1400px] px-5 pb-10 pt-28 sm:px-8 lg:px-10 xl:px-16">
         <Link
           href="/samples"
           className="inline-flex items-center gap-2 text-[13px]"

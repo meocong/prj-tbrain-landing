@@ -12,6 +12,7 @@ import {
   statsForCategory,
   type Category,
 } from "@/lib/samples/categories";
+import { CategoryDiagram } from "./CategoryDiagram";
 import { C, EASE, OVER_MEDIA } from "./tokens";
 
 /**
@@ -130,7 +131,7 @@ function CategoryCard({
         {faces.length > 0 ? (
           <FaceBand slugs={faces} reduce={reduce} />
         ) : (
-          <HeldBand held={c.held} />
+          <HeldBand held={c.held} slug={c.slug} />
         )}
 
         <div
@@ -242,26 +243,33 @@ function FaceBand({ slugs, reduce }: { slugs: string[]; reduce: boolean }) {
  * hours in collection, episodes held, or what the rig captures - at
  * display size, so the band carries weight rather than a caption.
  */
-function HeldBand({ held }: { held?: { figure: string; unit: string } }) {
+function HeldBand({ held, slug }: { held?: { figure: string; unit: string }; slug: string }) {
   return (
     <div
-      className="flex h-[132px] flex-col justify-end p-4 md:h-[150px]"
+      className="relative flex h-[132px] flex-col justify-end overflow-hidden p-4 md:h-[150px]"
       style={{
         // The hatch reads as texture at 4% and as a barcode at 40%. It exists to
         // say "not footage" without competing with the four cards that are.
         background: `repeating-linear-gradient(-45deg, ${C.hairlineSoft} 0 1px, transparent 1px 9px)`,
       }}
     >
+      {/* The drawing sits behind the figure rather than replacing it: the
+          number says how much, the drawing says of what. Neither alone was
+          enough — a hatch and a number was a rectangle with a caption. */}
+      <CategoryDiagram
+        slug={slug}
+        className="pointer-events-none absolute inset-0 h-full w-full opacity-[0.55]"
+      />
       {held && (
         <>
           <span
-            className="font-mono text-3xl tracking-tight md:text-4xl"
+            className="relative font-mono text-3xl tracking-tight md:text-4xl"
             style={{ color: C.value, lineHeight: 1 }}
           >
             {held.figure}
           </span>
           <span
-            className="mt-2 font-mono text-[10px] uppercase tracking-[0.16em]"
+            className="relative mt-2 font-mono text-[10px] uppercase tracking-[0.16em]"
             style={{ color: C.textDim }}
           >
             {held.unit}
