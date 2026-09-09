@@ -7,7 +7,6 @@ import Footer from "@/components/common/Footer";
 import {
   CATEGORIES,
   categoryBySlug,
-  packSummary,
   statsForCategory,
 } from "@/lib/samples/categories";
 import { INTEROP } from "@/lib/samples/capability";
@@ -15,7 +14,8 @@ import { axesFor } from "@/lib/samples/datasets";
 import { LICENSE, QUALIFIER } from "@/lib/samples/license";
 import { SampleCatalog } from "../_sections/SampleCatalog";
 import { TwoRoutes } from "../_sections/TwoRoutes";
-import { FacetIndex } from "../_sections/FacetIndex";
+import { CoverageChart } from "../_sections/CoverageChart";
+import { CategoryHeader } from "../_sections/CategoryHeader";
 import { CaptureSpec } from "../_sections/CaptureSpec";
 import { AccessPaths } from "../_sections/AccessPaths";
 import { C } from "../_sections/tokens";
@@ -60,77 +60,48 @@ export default async function CategoryPage({
   if (!c || c.externalHref || !c.modality) notFound();
 
   const s = statsForCategory(c);
-  const summary = packSummary(c);
 
   return (
     <div className="samples-scope" style={{ background: C.base }}>
       <Header />
       <main style={{ color: C.text }}>
+        <CategoryHeader category={c} />
+
+        {/* The caveat now sits against the clips it qualifies rather than under
+            the title, where it was the fifth paragraph before any footage — and
+            only where there ARE clips. /samples/mocap was telling a reader that
+            "these are web previews, not the data" on a page holding no preview
+            at all. */}
+        {s.episodes > 0 && (
         <section>
-          <div className="mx-auto max-w-[1400px] px-4 pb-2 pt-32 md:pt-40 lg:px-10 xl:px-16">
-            <Link
-              href="/samples"
-              className="inline-flex items-center gap-2 text-[13px]"
-              style={{ color: C.textMid }}
-            >
-              <ArrowLeft className="h-3.5 w-3.5" />
-              All categories
-            </Link>
-
-            <h1
-              className="mt-6 text-4xl font-medium tracking-tight md:text-6xl"
-              style={{ fontFamily: "var(--font-heading)", letterSpacing: "-0.03em", lineHeight: 1.02 }}
-            >
-              {c.name}
-            </h1>
-
-            {/* The sentence the chip could never carry. */}
-            <p className="mt-5 max-w-2xl text-[16px] leading-relaxed" style={{ color: C.textMid }}>
-              {c.whatItIs}
-            </p>
-
-            {c.shelf && (
-              <p className="mt-3 max-w-2xl text-[13.5px] leading-relaxed" style={{ color: C.textDim }}>
-                {c.shelf}
-              </p>
-            )}
-
-            {/* samples.tbrain.ai opens with exactly this: nine figures, one
-                line, before anything else. Derived, so it cannot drift. */}
-            {summary && (
-              <p
-                className="mt-8 max-w-4xl font-mono text-[12px] leading-relaxed"
-                style={{ color: C.value }}
-              >
-                In this category: {summary}.
-              </p>
-            )}
-
-            {/* And then what a preview is and is not, before the first clip.
-                That page says it because a downscaled browser preview beside a
-                full-resolution delivery is the one thing a buyer could
-                reasonably misread. */}
-            <p className="mt-4 max-w-3xl text-[13px] leading-relaxed" style={{ color: C.textDim }}>
+          <div className="mx-auto max-w-[1400px] px-4 pt-10 lg:px-10 xl:px-16">
+            <p className="max-w-3xl text-[13px] leading-relaxed" style={{ color: C.textDim }}>
               These are web previews, not the data. Each clip is downscaled to play in a browser.
               The delivery files are full resolution and carry every stream the rig recorded.
             </p>
           </div>
         </section>
+        )}
 
         {/* What records this category, before anything about what is in it.
             It is the first question a technical buyer asks, and it is the one
             block that makes this page not interchangeable with the next one. */}
         <CaptureSpec category={c} />
 
-        {/* The facet values as content, before the control that uses them. A
-            reader who never opens the rail never learns the catalogue has
-            sixteen skill groups; humanoidlayer.dev prints its facets on the
-            page for exactly that reason. */}
-        <FacetIndex modality={c.modality} />
-
         {/* Datasets, facets, grid and the record layer, unchanged. They were
             never wrong, they were on the wrong page. */}
         <SampleCatalog modality={c.modality} />
+
+        {/* The mix, AFTER the clips. humanoidlayer.dev prints its facet
+            values on the page and we copied that literally, which on 118
+            egocentric records meant 78 workplace strings in one alphabetical
+            paragraph — their catalogue has eight datasets, ours needed the
+            counts. Above the clips it also cost 750px: measured, the first
+            playable clip sat at 3,211px, worse than the 3,417px this page was
+            rebuilt to fix. It is shelf story, so it sits with the shelf story.
+            CaptureSpec stays above because it is short and it is what makes
+            this page not the next one. */}
+        <CoverageChart modality={c.modality} />
 
         {/* R2, per category: the same two routes as the front door, with this
             category's own published count on one side and its own cheapest tier
@@ -152,15 +123,6 @@ export default async function CategoryPage({
               >
                 What we run in this category
               </h2>
-
-              {s.inFlight && (
-                <p
-                  className="mt-4 max-w-3xl px-4 py-3 text-[13px] leading-relaxed"
-                  style={{ border: `1px solid ${C.hairline}`, background: C.band, color: C.textMid }}
-                >
-                  {s.inFlight}
-                </p>
-              )}
 
               {/* Diversity, moved down here with the rest of the shelf story.
                   Above the clips it was four numbers with nothing to anchor

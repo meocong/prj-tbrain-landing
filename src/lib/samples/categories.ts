@@ -233,24 +233,40 @@ export function categoryBySlug(slug: string) {
  * · 4 cities · 2 rig families". This is the same idea against whatever the
  * category actually holds.
  */
-export function packSummary(c: Category): string | null {
+export interface PackStat {
+  value: string;
+  label: string;
+}
+
+/**
+ * The same nine figures `samples.tbrain.ai` opens with, as data rather than a
+ * sentence.
+ *
+ * It used to return one joined string, which the page printed as a run-on mono
+ * line: "In this category: 118 episodes · 852.7 minutes · 16 skill groups · 106
+ * distinct tasks · ...". Nine numbers in body type, none of them findable,
+ * reading as a caption. As stats each figure gets its own numeral and its own
+ * label, which is what a number that size is for.
+ *
+ * Order is deliberate: scale first, then the two that answer "is it varied",
+ * then provenance. Zeroes drop out rather than printing "0 operators".
+ */
+export function packStats(c: Category): PackStat[] {
   const rows = c.modality ? ALL.filter((r) => r.modality === c.modality) : [];
-  if (rows.length === 0) return null;
+  if (rows.length === 0) return [];
 
   const cell = (r: Row, k: string) => r.spec?.find((p) => p[0] === k)?.[1] ?? null;
   const count = (k: string) => new Set(rows.map((r) => cell(r, k)).filter(Boolean)).size;
   const mins = rows.reduce((a, r) => a + r.durationSec, 0) / 60;
 
-  const parts = [
-    `${rows.length} episodes`,
-    `${mins.toFixed(1)} minutes`,
-    `${count("Skill group")} skill groups`,
-    `${count("Task id")} distinct tasks`,
-    `${count("Industry")} industries`,
-    `${count("Workplace")} workplaces`,
-    `${count("Operator")} operators`,
-    `${count("Device")} rigs`,
-  ].filter((p) => !p.startsWith("0 "));
-
-  return parts.join(" · ");
+  return [
+    { value: String(rows.length), label: "Episodes" },
+    { value: `${mins.toFixed(0)} min`, label: "Playable here" },
+    { value: String(count("Skill group")), label: "Skill groups" },
+    { value: String(count("Task id")), label: "Distinct tasks" },
+    { value: String(count("Industry")), label: "Industries" },
+    { value: String(count("Workplace")), label: "Workplaces" },
+    { value: String(count("Operator")), label: "Operators" },
+    { value: String(count("Device")), label: "Rigs" },
+  ].filter((s) => s.value !== "0" && s.value !== "0 min");
 }
