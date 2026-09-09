@@ -398,7 +398,7 @@ function CapabilityPanel({ modality, onClear }: { modality: string; onClear: () 
         {tiers.map((t) => (
           <div
             key={t.name}
-            className="grid gap-x-8 gap-y-2 py-4 md:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)_auto]"
+            className="grid gap-x-8 gap-y-2 py-4 md:grid-cols-[minmax(0,1.4fr)_auto]"
             style={{ borderTop: `1px solid ${C.hairline}` }}
           >
             <div className="min-w-0">
@@ -408,13 +408,16 @@ function CapabilityPanel({ modality, onClear }: { modality: string; onClear: () 
                 {t.sensors ? ` · ${t.sensors}` : ""}
               </p>
             </div>
-            <p className="font-mono text-[11.5px] leading-relaxed" style={{ color: C.textMid }}>
+            {/* Ramp and ceiling, never `t.price` — see the comment on that
+                field. A rate on a public page anchors a brief nobody has
+                written yet. These two are what a buyer schedules around. */}
+            <p
+              className="font-mono text-[11.5px] leading-relaxed md:text-right"
+              style={{ color: C.textMid }}
+            >
               Ready in {t.ramp}
               <br />
               Up to {t.ceiling}
-            </p>
-            <p className="font-mono text-[12.5px] md:text-right" style={{ color: C.value }}>
-              {t.price}
             </p>
           </div>
         ))}

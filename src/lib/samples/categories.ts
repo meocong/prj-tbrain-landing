@@ -92,8 +92,9 @@ export const CATEGORIES: Category[] = [
       "Full-body motion capture with per-finger hand pose, for work that hands alone do not describe.",
     shelf: null,
     // CAPABILITY.mocap, the only tier on it. Nothing is collected, so the true
-    // figure here is the price of collecting it.
-    held: { figure: "$720-1,200", unit: "per hour · collected to spec" },
+    // figure is what the rig captures: 17 IMUs at 240 Hz plus per-finger gloves.
+    // Not the rate — see the comment on `CapabilityTier.price`.
+    held: { figure: "240 Hz", unit: "17 IMUs + per-finger pose" },
   },
   {
     slug: "gaming",

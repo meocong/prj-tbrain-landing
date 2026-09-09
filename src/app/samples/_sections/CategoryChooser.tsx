@@ -59,13 +59,13 @@ export function CategoryChooser() {
               Arrived at independently, but Tam sent Claru as the reference, so
               somebody will have both tabs open and see a clone. */}
           Six catalogues, one delivery pipeline.{" "}
-          <span style={{ color: C.textDim }}>Open one to see what it holds and what it costs.</span>
+          <span style={{ color: C.textDim }}>Open one to see what it holds and how it is captured.</span>
         </h2>
 
         <p className="mt-5 max-w-2xl text-[15px] leading-relaxed" style={{ color: C.textMid }}>
           We collect human work and robot work, off the shelf or to your spec, and deliver it as
           MCAP or LeRobot with the calibration, telemetry and annotation in band. Open a category to
-          see what is in it, what it costs, and how long it takes.
+          see what is in it, what records it, and how long it takes.
         </p>
 
         {LINES.map((line, li) => {
@@ -114,7 +114,9 @@ function CategoryCard({
       : s.inFlight
         ? "Collected, not published yet"
         : s.tiers.length > 0
-          ? `Collected to spec · from ${s.tiers[0].price}`
+          ? // Never the price - see capability.ts. The ramp is the fact a buyer
+            // wants at this size anyway: whether it is weeks or months.
+            `Collected to spec · first delivery in ${s.tiers[0].ramp}`
           : "See the catalogue";
 
   return (
@@ -237,7 +239,7 @@ function FaceBand({ slugs, reduce }: { slugs: string[]; reduce: boolean }) {
  * showing egocentric footage on the mocap card would be a lie about what we can
  * show. The first version repeated the state line here, which printed the same
  * words twice a hundred pixels apart; this prints the one figure that IS true -
- * hours in collection, episodes held, or the price of collecting it - at
+ * hours in collection, episodes held, or what the rig captures - at
  * display size, so the band carries weight rather than a caption.
  */
 function HeldBand({ held }: { held?: { figure: string; unit: string } }) {
