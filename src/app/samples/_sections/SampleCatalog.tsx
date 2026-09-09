@@ -6,7 +6,7 @@ import { Check, ChevronDown, Copy, Search, SlidersHorizontal, X } from "lucide-r
 import samples from "@/lib/samples/samples.json";
 import { SKILL_GROUPS, JOBS, INDUSTRIES } from "@/lib/samples/taxonomy";
 import { FacetPicker, SortPicker } from "./Fields";
-import { publicSpec } from "@/lib/samples/redact.mjs";
+import { PILL_KINDS_DROPPED, publicSpec } from "@/lib/samples/redact.mjs";
 import { track } from "@/lib/samples/track";
 import { requestUrl } from "@/lib/samples/request-link";
 import { CAPABILITY, IN_FLIGHT, INTEROP } from "@/lib/samples/capability";
@@ -87,7 +87,6 @@ interface Filters {
   viewpoint: string[];
   skillGroup: string[];
   industry: string[];
-  rig: string[];
   /**
    * Site type — the business, not the corner of it.
    *
@@ -143,7 +142,6 @@ const EMPTY: Filters = {
   viewpoint: [],
   skillGroup: [],
   industry: [],
-  rig: [],
   site: [],
   job: "all",
   spec: {},
@@ -173,7 +171,6 @@ function matches(s: Sample, f: Filters, skip?: keyof Filters) {
     return false;
   if (on("industry") && f.industry.length && !(s.industry && f.industry.includes(s.industry)))
     return false;
-  if (on("rig") && f.rig.length && !f.rig.includes(s.rig)) return false;
   if (on("site") && f.site.length) {
     const site = (s.environment ?? "").split(",")[0]?.trim();
     if (!site || !f.site.includes(site)) return false;
@@ -188,7 +185,10 @@ function matches(s: Sample, f: Filters, skip?: keyof Filters) {
   }
   if (on("q") && f.q.trim()) {
     const q = f.q.trim().toLowerCase();
-    const hay = `${s.title} ${s.label} ${s.environment} ${s.rig} ${s.skillGroup ?? ""} ${s.job ?? ""}`;
+    // Not `s.rig`: the rig name is not printed anywhere on this page any more
+    // (see redact.mjs), and leaving it in the haystack means typing a rig name
+    // still returns its records — which is the same disclosure, one step later.
+    const hay = `${s.title} ${s.label} ${s.environment} ${s.skillGroup ?? ""} ${s.job ?? ""}`;
     if (!hay.toLowerCase().includes(q)) return false;
   }
   return true;
@@ -339,18 +339,23 @@ function Card({ sample, onOpen }: { sample: Sample; onOpen: () => void }) {
         </p>
 
         <ul className="mt-3 flex flex-wrap gap-1.5">
-          {sample.pills.map((pill) => {
-            const st = PILL[pill.k];
-            return (
-              <li
-                key={pill.t}
-                className="rounded-full px-2.5 py-1 text-[11px]"
-                style={{ background: st.bg, color: st.fg, border: `1px solid ${st.bd}` }}
-              >
-                {pill.t}
-              </li>
-            );
-          })}
+          {/* Filtered, not sliced: the `device` pill printed the rig name on
+              every card face. Inline rather than through a helper in the .mjs so
+              `pill.k` stays a `PillKind` and `PILL[pill.k]` stays checked. */}
+          {sample.pills
+            .filter((p) => !(PILL_KINDS_DROPPED as string[]).includes(p.k))
+            .map((pill) => {
+              const st = PILL[pill.k];
+              return (
+                <li
+                  key={pill.t}
+                  className="rounded-full px-2.5 py-1 text-[11px]"
+                  style={{ background: st.bg, color: st.fg, border: `1px solid ${st.bd}` }}
+                >
+                  {pill.t}
+                </li>
+              );
+            })}
         </ul>
 
         <div className="mt-4 flex flex-wrap items-center gap-3">
@@ -600,7 +605,7 @@ export function SampleCatalog({ modality }: { modality: string }) {
   const [railOpen, setRailOpen] = useState(false);
 
   const toggle = (
-    key: "modality" | "provenance" | "viewpoint" | "skillGroup" | "industry" | "rig" | "site",
+    key: "modality" | "provenance" | "viewpoint" | "skillGroup" | "industry" | "site",
     v: string,
   ) => {
     track("filter_rig", { facet: key, value: v });
@@ -643,7 +648,6 @@ export function SampleCatalog({ modality }: { modality: string }) {
     [scoped],
   );
 
-  const rigs = useMemo(() => valuesOf((s) => s.rig), [valuesOf]);
   const sites = useMemo(
     () => valuesOf((s) => (s.environment ?? "").split(",")[0]?.trim() || null),
     [valuesOf],
@@ -705,7 +709,7 @@ export function SampleCatalog({ modality }: { modality: string }) {
 
   const dirty =
     f.modality.length + f.provenance.length + f.viewpoint.length + f.skillGroup.length +
-      f.industry.length + f.rig.length + f.site.length >
+      f.industry.length + f.site.length >
       0 ||
     f.job !== "all" ||
     Object.values(f.spec).some((v) => v.length > 0) ||
@@ -776,7 +780,7 @@ export function SampleCatalog({ modality }: { modality: string }) {
                 <input
                   value={f.q}
                   onChange={(e) => setF((p) => ({ ...p, q: e.target.value }))}
-                  placeholder="Search tasks, rigs, sites"
+                  placeholder="Search tasks, workplaces, trades"
                   aria-label="Search samples"
                   className="w-full rounded-lg py-2 pl-9 pr-3 text-[13px] outline-none"
                   style={{ background: C.band, border: `1px solid ${C.hairline}`, color: C.text }}
@@ -856,19 +860,12 @@ export function SampleCatalog({ modality }: { modality: string }) {
                 </RailGroup>
               )}
 
-              {rigs.length > 1 && (
-                <RailGroup title="Rig">
-                  {rigs.map((r) => (
-                    <Chip
-                      key={r}
-                      label={r}
-                      active={f.rig.includes(r)}
-                      count={countFor("rig", (s) => s.rig, r)}
-                      onClick={() => toggle("rig", r)}
-                    />
-                  ))}
-                </RailGroup>
-              )}
+              {/* No Rig group. It listed `Robocap`, `DAS Ego V6`, `EgoSense E6`
+                  and `GameDataCollector` — our internal names, on a public page,
+                  against Tam's "Rig ko ghi tên" — and the three egocentric ones
+                  are one published configuration under three names, so the group
+                  narrowed nothing even before that. Relabelling the chips would
+                  have produced a facet with a single value; see redact.mjs. */}
 
               {/* This category's own axes. Gaming's are Game, Session and
                   Stress; egocentric has none here because its axes are typed
