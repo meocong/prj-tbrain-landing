@@ -10,6 +10,7 @@ import { groupSpec, LONG_VALUE } from "@/lib/samples/spec-sections";
 import { publicSpec } from "@/lib/samples/redact.mjs";
 import { track } from "@/lib/samples/track";
 import { requestUrl } from "@/lib/samples/request-link";
+import { CAPABILITY, IN_FLIGHT, INTEROP } from "@/lib/samples/capability";
 import { AccessStrip } from "./AccessActions";
 import { LiveTelemetry } from "./LiveTelemetry";
 import { C, OVER_MEDIA, PILL, type Sample } from "./tokens";
@@ -39,12 +40,17 @@ const PAGE = 24;
  * captured on the same rigs as the 79 filed under "robotics". Picking one
  * excluded the other for no reason a buyer would recognise.
  *
- * The four values are the ones the catalogue is being rebuilt around. Three of
- * them hold nothing yet — that is the point of listing them: an empty facet is a
- * statement about the shelf, and the chip disables itself at zero rather than
- * pretending the line does not exist. Teleoperation is deliberately absent until
- * someone confirms episodes exist; the capability catalogue names the UMI
- * gripper under teleoperation but lists no teleoperation row.
+ * The four values are the ones the catalogue is being rebuilt around. Two of
+ * them hold nothing yet, and are listed anyway and left PRESSABLE at zero —
+ * unlike every other facet, where zero means no such record. Here zero means
+ * unpublished, not unavailable: pressing it returns the price sheet
+ * (`CapabilityPanel`), which is what the spreadsheet this page replaces would
+ * have answered.
+ *
+ * Teleoperation is deliberately absent. The capability catalogue names the UMI
+ * gripper under teleoperation but lists no teleoperation row, so there is a
+ * priced rig and no evidenced episodes — nothing to publish and nothing to
+ * quote separately from the UMI tier.
  */
 const MODALITIES = [
   { key: "egocentric", label: "Egocentric" },
@@ -340,13 +346,21 @@ function Chip({
   count,
   active,
   onClick,
+  /**
+   * Keep the chip live at zero. Only the modality group sets this: a line with
+   * no published samples is still a line we sell, and disabling it puts the
+   * price sheet behind a control the reader cannot press. Every other facet
+   * stays disabled at zero, where the number really does mean "no such record".
+   */
+  quotable,
 }: {
   label: string;
   count: number;
   active: boolean;
   onClick: () => void;
+  quotable?: boolean;
 }) {
-  const dead = count === 0 && !active;
+  const dead = count === 0 && !active && !quotable;
   return (
     <button
       type="button"
@@ -359,6 +373,99 @@ function Chip({
       <span className="truncate">{label}</span>
       <span className="sm-chip-count shrink-0 font-mono text-[10px]">{count}</span>
     </button>
+  );
+}
+
+/**
+ * What we run on a line we have not published samples for.
+ *
+ * Every figure is quoted from `capability.ts`, which is a transcription of the
+ * spreadsheet sales attaches to emails — the attachment this page exists to
+ * replace. Nothing here is derived, averaged or reconciled against the deck,
+ * which counts a different corpus.
+ */
+function CapabilityPanel({ modality, onClear }: { modality: string; onClear: () => void }) {
+  const tiers = CAPABILITY[modality] ?? [];
+  const running = IN_FLIGHT[modality];
+  const name = MODALITIES.find((m) => m.key === modality)?.label ?? modality;
+
+  return (
+    <div className="py-10">
+      <p className="font-mono text-[10px] uppercase tracking-[0.16em]" style={{ color: C.accent }}>
+        No published samples yet
+      </p>
+      <h3
+        className="mt-2 text-2xl font-medium tracking-tight"
+        style={{ fontFamily: "var(--font-heading)", letterSpacing: "-0.02em" }}
+      >
+        {name} runs on the same pipeline.
+      </h3>
+      <p className="mt-2 max-w-xl text-[13.5px] leading-relaxed" style={{ color: C.textMid }}>
+        Nothing from this line is on the page yet. It is collected to spec, and these are the
+        terms — the same ones we would send in a quote.
+      </p>
+
+      {running && (
+        <p
+          className="mt-5 max-w-xl px-4 py-3 text-[12.5px] leading-relaxed"
+          style={{ border: `1px solid ${C.hairline}`, background: C.band, color: C.textMid }}
+        >
+          {running}
+        </p>
+      )}
+
+      <div className="mt-7">
+        {tiers.map((t) => (
+          <div
+            key={t.name}
+            className="grid gap-x-8 gap-y-2 py-4 md:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)_auto]"
+            style={{ borderTop: `1px solid ${C.hairline}` }}
+          >
+            <div className="min-w-0">
+              <p className="text-[13.5px] font-medium">{t.name}</p>
+              <p className="mt-1 text-[12px] leading-relaxed" style={{ color: C.textDim }}>
+                {t.rig}
+                {t.sensors ? ` · ${t.sensors}` : ""}
+              </p>
+            </div>
+            <p className="font-mono text-[11.5px] leading-relaxed" style={{ color: C.textMid }}>
+              Ready in {t.ramp}
+              <br />
+              Up to {t.ceiling}
+            </p>
+            <p className="font-mono text-[12.5px] md:text-right" style={{ color: C.value }}>
+              {t.price}
+            </p>
+          </div>
+        ))}
+      </div>
+
+      <p
+        className="mt-5 pt-4 font-mono text-[11px]"
+        style={{ borderTop: `1px solid ${C.hairline}`, color: C.textDim }}
+      >
+        Delivered as {INTEROP}
+      </p>
+
+      <div className="mt-7 flex flex-wrap items-center gap-5">
+        <Link
+          href={requestUrl({ from: `capability-${modality}` })}
+          onClick={() => track("open_request_access", { from: `capability-${modality}` })}
+          className="inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-[13px] font-semibold"
+          style={{ background: C.accent, color: "var(--sm-on-accent)" }}
+        >
+          Scope a collection
+        </Link>
+        <button
+          type="button"
+          onClick={onClear}
+          className="text-[13px] underline decoration-1 underline-offset-4"
+          style={{ color: C.textDim }}
+        >
+          Back to everything published
+        </button>
+      </div>
+    </div>
   );
 }
 
@@ -470,6 +577,13 @@ export function SampleCatalog() {
   const page = shown.slice(0, limit);
   const rest = shown.length - page.length;
 
+  /* The modality to pitch when the grid comes back empty: exactly one selected,
+     and it is one we can quote. Two selected is a combination the reader built,
+     not a line they asked about, and pitching one of the two would be picking
+     for them. */
+  const emptyLine =
+    f.modality.length === 1 && CAPABILITY[f.modality[0]] ? f.modality[0] : null;
+
   return (
     <>    <section id="deck" style={{ background: C.base, color: C.text }}>
       <div className="mx-auto max-w-[1400px] px-4 pt-24 md:pt-28 lg:px-10 xl:px-16">
@@ -549,6 +663,7 @@ export function SampleCatalog() {
                     active={f.modality.includes(m.key)}
                     count={countFor("modality", (s) => s.modality, m.key)}
                     onClick={() => toggle("modality", m.key)}
+                    quotable={Boolean(CAPABILITY[m.key])}
                   />
                 ))}
               </RailGroup>
@@ -676,23 +791,32 @@ export function SampleCatalog() {
             </div>
 
             {shown.length === 0 ? (
-              <div className="py-24 text-center">
-                <p className="text-sm" style={{ color: C.textMid }}>
-                  Nothing matches that combination.
-                </p>
-                <p className="mx-auto mt-2 max-w-md text-[13px]" style={{ color: C.textDim }}>
-                  Game sessions carry no skill group, industry or job, so those three narrow to the
-                  robotics and off-the-shelf lines.
-                </p>
-                <button
-                  type="button"
-                  onClick={() => setF(EMPTY)}
-                  className="mt-6 rounded-full px-5 py-2 text-[13px] font-semibold"
-                  style={{ background: C.text, color: C.base }}
-                >
-                  Clear filters
-                </button>
-              </div>
+              /* A reader who filters to Exocentric or Mocap has told us exactly
+                 what they came for. "Nothing matches" is true and throws that
+                 away; the line is unpublished, not unavailable, and the
+                 spreadsheet this page replaces answers it with a price and a
+                 lead time. So does this. */
+              emptyLine ? (
+                <CapabilityPanel modality={emptyLine} onClear={() => setF(EMPTY)} />
+              ) : (
+                <div className="py-24 text-center">
+                  <p className="text-sm" style={{ color: C.textMid }}>
+                    Nothing matches that combination.
+                  </p>
+                  <p className="mx-auto mt-2 max-w-md text-[13px]" style={{ color: C.textDim }}>
+                    Game sessions carry no skill group, industry or job, so those three narrow to the
+                    egocentric line.
+                  </p>
+                  <button
+                    type="button"
+                    onClick={() => setF(EMPTY)}
+                    className="mt-6 rounded-full px-5 py-2 text-[13px] font-semibold"
+                    style={{ background: C.text, color: C.base }}
+                  >
+                    Clear filters
+                  </button>
+                </div>
+              )
             ) : (
               <>
                 <div className="grid gap-x-8 gap-y-2 sm:grid-cols-2 2xl:grid-cols-3">
