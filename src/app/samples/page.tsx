@@ -15,7 +15,11 @@ import { AccessPaths } from "./_sections/AccessPaths";
 // subjects; it then named a single modality, Egocentric, on a page that also
 // sells gaming and Coding & STEM. This page is the front door for all three, so
 // it is titled at that level and the modalities are titled on their own routes.
-const TITLE = "Data Samples: Robotics, Gaming, Coding and STEM";
+// "Training data" first, for the same reason the h1 leads with it: "Data
+// Samples" alone does not say what the data is for. This is the shape our own
+// `samples.tbrain.ai` already uses — "Tbrain — Egocentric Stereo Data · Sample
+// Pack" — widened from one modality to the three lines this page covers.
+const TITLE = "Training Data Samples: Robotics, Gaming, Coding and STEM";
 const OG_ALT = "Frames from Tbrain sample deliveries: workshop egocentric capture, gripper footage and game sessions";
 const DESCRIPTION =
   "Play real delivery files from every set Tbrain sells, off the shelf or collected to spec. Frame-level telemetry, capture metadata and access to the full sets.";
