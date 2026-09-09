@@ -74,7 +74,22 @@ export const PILL: Record<PillKind, { bg: string; fg: string; bd: string }> = {
  */
 export interface Sample {
   slug: string;
+  /**
+   * The original field, kept because `/samples/s` groups downloads by it and
+   * every analytics event carries it. It conflates two axes — see `modality`
+   * and `provenance` below, which split it — and new code should read those.
+   */
   domain: "robotics" | "game" | "ots";
+  /** What the record is. Three of the four values hold nothing yet. */
+  modality: "egocentric" | "exocentric" | "mocap" | "gaming";
+  /**
+   * How it was captured. Deliberately unqualified for stereo: the six-camera
+   * rig demonstrated on tbrain-dashboard may be the same Robocap 84 of these
+   * records name, so a camera count here would be a guess with a number on it.
+   */
+  tier: "stereo" | "gameplay";
+  /** Where it came from. Null on game records, which do not say. */
+  provenance: "ots" | "custom" | null;
   title: string;
   label: string;
   environment: string;
