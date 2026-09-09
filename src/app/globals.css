@@ -1160,29 +1160,23 @@ html.dark body {
   background: color-mix(in srgb, var(--sm-accent-soft) 100%, var(--sm-text) 6%);
 }
 
-/* ── Rail and toolbar selects ──
-   A `<select>` cannot be a chip: Job has 32 values against Skill group's 15,
-   and 32 rows would be a longer list than the grid it filters. So it stays a
-   select and is made to answer the pointer the way the chips beside it do.
+/* ── Rail and toolbar dropdowns ──
+   These are Base UI Combobox/Select, not `<select>`, and the reason is the
+   popup: a native one is OS chrome that no stylesheet reaches, so the page's
+   whole vocabulary — hairlines, mono microtype, a count on every row, accent
+   soft for "this one is on" — stopped at the moment the control opened. See
+   the note at the top of `_sections/Fields.tsx`.
 
-   The focus rule has to live here, not in a class list. The site-wide ring is
+   The trigger keeps the treatment the `<select>` had earned, for the same
+   reasons it earned it. The site-wide ring is
    `*:focus-visible { outline: 2px; outline-offset: 2px }` near the top of this
-   file, and it is UNLAYERED while every Tailwind utility sits in
-   `@layer utilities` — unlayered CSS beats layered CSS outright, whatever the
-   specificity. `outline-none` on the element therefore does nothing on focus,
-   which is where the two stacked purple rings around a 33px control came from.
-   Answering it needs a rule at the same (unlayered) level.
-
-   What replaces it is not "no focus ring": it is the same accent, drawn as the
-   field's own border plus a soft halo, so the control reads as focused without
-   a second rounded rectangle floating 2px outside the first.
-
-   Colour lives here rather than in an inline `style` prop, which is how the
-   rest of this page paints. It has to: an inline declaration outranks every
-   rule below, so with `background` and `border` set on the element the hover,
-   focus and active states all resolved to the resting colours and nothing
-   moved. */
-.samples-scope .sm-select {
+   file; it is UNLAYERED while every Tailwind utility sits in
+   `@layer utilities`, and unlayered CSS beats layered CSS outright whatever the
+   specificity, so a utility on the element cannot opt out of it. At 2px offset
+   around a 33px control it reads as a second border outside the first. What
+   replaces it is the same accent drawn as the field's OWN border plus a soft
+   halo, so nothing floats outside the box. */
+.samples-scope .sm-field {
   background: var(--sm-band);
   border: 1px solid var(--sm-hairline);
   color: var(--sm-text);
@@ -1192,33 +1186,125 @@ html.dark body {
     box-shadow 0.15s ease;
 }
 
-/* `!important` on the three state rules below, and only on the two properties
-   that need it. `.dark select` up at line ~1001 paints background, border and
-   colour with `!important`, so in dark mode every state here resolved to the
-   resting colours: hover did nothing, focus drew no border, and a narrowed
-   filter looked identical to an open one. Beating an `!important` takes an
-   `!important`; nothing weaker exists.
-
-   The RESTING colours are deliberately left to that rule. The search field
-   directly above is an `input` and gets the same treatment, and the two boxed
-   controls in one rail have to match at rest — winning that fight would only
-   split them apart. `box-shadow` needs no `!important`: that rule sets none. */
-.samples-scope .sm-select:hover {
-  border-color: var(--sm-rule) !important;
+.samples-scope .sm-field .sm-field-count,
+.samples-scope .sm-field .sm-field-chevron {
+  color: var(--sm-text-dim);
+  transition: color 0.15s ease, transform 0.15s ease;
 }
 
-.samples-scope .sm-select:focus-visible {
+.samples-scope .sm-field:hover {
+  border-color: var(--sm-rule);
+}
+
+.samples-scope .sm-field:focus-visible,
+.samples-scope .sm-field[data-popup-open] {
   outline: none;
-  border-color: var(--sm-accent) !important;
+  border-color: var(--sm-accent);
   box-shadow: 0 0 0 3px var(--sm-accent-soft);
 }
 
-/* Narrowed, the select carries the same cue an active chip does — otherwise
+/* The chevron points at where the list actually is. It is the one piece of the
+   closed control that can report the open state, and without it the trigger is
+   unchanged while a panel is hanging off it. */
+.samples-scope .sm-field[data-popup-open] .sm-field-chevron {
+  transform: rotate(180deg);
+  color: var(--sm-accent);
+}
+
+/* Narrowed, the trigger carries the same cue an active chip does — otherwise
    the one facet that is a dropdown is also the one facet whose "on" state is
    invisible from the rail. */
-.samples-scope .sm-select[data-active="true"] {
-  border-color: color-mix(in srgb, var(--sm-accent) 45%, transparent) !important;
-  background-color: var(--sm-accent-soft) !important;
+.samples-scope .sm-field[data-active] {
+  border-color: color-mix(in srgb, var(--sm-accent) 45%, transparent);
+  background-color: var(--sm-accent-soft);
+}
+
+.samples-scope .sm-field[data-active] .sm-field-count {
+  color: var(--sm-accent);
+}
+
+/* ── The popup ──
+   Portalled to `<body>`, so it repeats `.samples-scope` to reach the `--sm-*`
+   variables. `color-scheme` is set because the list scrolls: without it a dark
+   popup gets a light scrollbar, the one piece of chrome still drawn by the
+   platform. */
+.samples-scope.sm-popup,
+.samples-scope .sm-popup {
+  background: var(--sm-base);
+  border: 1px solid var(--sm-hairline);
+  color: var(--sm-text);
+  box-shadow:
+    0 1px 2px rgba(var(--sm-base-rgb), 0),
+    0 12px 32px -8px rgba(2, 6, 23, 0.18),
+    0 4px 10px -4px rgba(2, 6, 23, 0.1);
+  transform-origin: var(--transform-origin);
+  transition:
+    opacity 0.14s ease,
+    transform 0.14s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.dark .samples-scope.sm-popup,
+.dark .samples-scope .sm-popup {
+  box-shadow:
+    0 12px 32px -8px rgba(0, 0, 0, 0.6),
+    0 4px 10px -4px rgba(0, 0, 0, 0.45);
+}
+
+/* Scaled from the trigger's edge rather than faded in place, so the panel reads
+   as belonging to the control that opened it. 140ms: long enough to show a
+   direction, short enough that a second filter does not wait on it. */
+.samples-scope.sm-popup[data-starting-style],
+.samples-scope.sm-popup[data-ending-style] {
+  opacity: 0;
+  transform: scale(0.97);
+}
+
+.samples-scope .sm-popup-search {
+  border-bottom: 1px solid var(--sm-hairline-soft);
+  color: var(--sm-text-dim);
+}
+
+.samples-scope .sm-popup-input {
+  color: var(--sm-text);
+}
+
+.samples-scope .sm-popup-input::placeholder {
+  color: var(--sm-text-dim);
+}
+
+.samples-scope .sm-popup-empty {
+  color: var(--sm-text-dim);
+}
+
+/* One row. `data-highlighted` is the keyboard cursor and hover both — Base UI
+   drives it from either, so a pointer and an arrow key cannot disagree about
+   which row is next, which is the classic way a hand-rolled listbox shows two
+   highlights at once. */
+.samples-scope .sm-option {
+  color: var(--sm-text-mid);
+  transition: background-color 0.12s ease, color 0.12s ease;
+}
+
+.samples-scope .sm-option .sm-option-count {
+  color: var(--sm-text-dim);
+}
+
+.samples-scope .sm-option[data-highlighted] {
+  background: var(--sm-wash);
+  color: var(--sm-text);
+}
+
+.samples-scope .sm-option[data-selected] {
+  color: var(--sm-text);
+}
+
+.samples-scope .sm-option[data-selected] .sm-option-count {
+  color: var(--sm-accent);
+}
+
+.samples-scope .sm-option[data-selected] [data-base-ui-item-indicator],
+.samples-scope .sm-option[data-selected] svg {
+  color: var(--sm-accent);
 }
 
 /* ── Reduced Motion ── */
