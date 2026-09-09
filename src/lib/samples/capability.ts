@@ -40,6 +40,26 @@ export interface CapabilityTier {
    * around and neither of which is a quote.
    */
   price: string;
+  /**
+   * The exact files a delivery of this tier lands, from the sheet's "Output
+   * data format" column.
+   *
+   * The first transcription took the name, rig, ramp, ceiling and rate and left
+   * this column behind, which is the column a technical buyer reads first —
+   * "Egocentric stereo" is a label, `left.mp4 + right.mp4 + imu.csv` is the
+   * thing they have to write a loader for.
+   */
+  outputs?: string;
+  /** Where this tier is shot. Mocap is studio-only; UMI is table-top. */
+  environment?: string;
+  /**
+   * What the first month sustains, which is always lower than the ceiling.
+   * "Up to 20,000 hours per month / 5000 hours for the first month" — quoting
+   * only the ceiling to somebody scheduling a pilot overstates month one by 4x.
+   */
+  firstMonth?: string;
+  /** A demo of this tier that a reader can open. Only mocap has one. */
+  demoHref?: string;
 }
 
 /**
@@ -57,6 +77,9 @@ export const CAPABILITY: Partial<Record<string, CapabilityTier[]>> = {
       ramp: "5-10 business days",
       ceiling: "20,000 h / month",
       price: "$30-40 / h",
+      outputs: "head.mp4 (RGB) + metadata.json",
+      environment: "Household, factory, daily",
+      firstMonth: "5,000 h in month one",
     },
     {
       name: "Egocentric (RGB-D / LiDAR)",
@@ -65,6 +88,9 @@ export const CAPABILITY: Partial<Record<string, CapabilityTier[]>> = {
       ramp: "5-10 business days",
       ceiling: "5,000 h / month",
       price: "$40-60 / h + $0.1-2 / cuboid",
+      outputs: "rgb.mp4 + depth .png 16-bit + point cloud .ply / .pcd + metadata.json",
+      environment: "Household, factory, daily",
+      firstMonth: "1,000 h in month one",
     },
     {
       name: "Egocentric stereo",
@@ -73,6 +99,9 @@ export const CAPABILITY: Partial<Record<string, CapabilityTier[]>> = {
       ramp: "14-21 business days",
       ceiling: "2,000 h / month",
       price: "$80-120 / h",
+      outputs: "left.mp4 + right.mp4 (+ depth .png 16-bit) + imu.csv, 200-400 Hz time-synced — enables VIO",
+      environment: "Household, factory, daily",
+      firstMonth: "500 h in month one",
     },
     {
       name: "Egocentric + wrist",
@@ -81,6 +110,9 @@ export const CAPABILITY: Partial<Record<string, CapabilityTier[]>> = {
       ramp: "5-10 business days",
       ceiling: "2,000 h / month",
       price: "$120-180 / h",
+      outputs: "head.mp4 + wrist_left.mp4 + wrist_right.mp4 + sync_offset.json + imu_head.csv + imu_wrist.csv",
+      environment: "Household, office, factory",
+      firstMonth: "500 h in month one",
     },
     {
       name: "Egocentric + gripper (UMI)",
@@ -89,6 +121,9 @@ export const CAPABILITY: Partial<Record<string, CapabilityTier[]>> = {
       ramp: "14-21 business days",
       ceiling: "1,000 h / month",
       price: "$100-150 / h",
+      outputs: "head.mp4 + wrist.mp4 + imu.csv (6-DoF, 200 Hz) + gripper_state.json + task_label.json",
+      environment: "Table-top manipulation, workshop or lab",
+      firstMonth: "200 h in month one",
     },
   ],
   exocentric: [
@@ -99,6 +134,9 @@ export const CAPABILITY: Partial<Record<string, CapabilityTier[]>> = {
       ramp: "14-21 business days",
       ceiling: "10,000 h / month",
       price: "$36-56 / h",
+      outputs: "exo.mp4 (RGB) + metadata.json",
+      environment: "Household, factory, daily",
+      firstMonth: "2,000 h in month one",
     },
   ],
   mocap: [
@@ -109,6 +147,10 @@ export const CAPABILITY: Partial<Record<string, CapabilityTier[]>> = {
       ramp: "14-21 business days",
       ceiling: "1,000 h / month",
       price: "$720-1,200 / h",
+      outputs: "video .mp4 + full-body IMU mocap streams + hand pose",
+      environment: "Studio, controlled",
+      firstMonth: "200 h in month one",
+      demoHref: "https://pose-demo-3d.surge.sh/",
     },
   ],
   teleoperation: [
@@ -119,6 +161,9 @@ export const CAPABILITY: Partial<Record<string, CapabilityTier[]>> = {
       ramp: "14-21 business days",
       ceiling: "1,000 h / month",
       price: "$100-150 / h",
+      outputs: "head.mp4 + wrist.mp4 + imu.csv (6-DoF, 200 Hz) + gripper_state.json + task_label.json",
+      environment: "Table-top manipulation, workshop or lab",
+      firstMonth: "200 h in month one",
     },
   ],
 };

@@ -95,13 +95,15 @@ export const CATEGORIES: Category[] = [
     shelf: null,
     // IN_FLIGHT.exocentric: "20 hours in collection since 5 September 2026".
     held: { figure: "20 h", unit: "in collection · 15 operators" },
-    // Every line from IN_FLIGHT.exocentric.
+    /* Rig and outputs from the capability sheet's row A4, "Exocentric
+       (basic)"; the collection figures from IN_FLIGHT. Two sources because they
+       answer two questions — what the tier IS, and what is on the floor now. */
     capture: [
-      { label: "Recorded on", value: "Fixed and handheld cameras, third-person" },
+      { label: "Recorded on", value: "External fixed or tripod camera, third-person" },
       { label: "Video", value: "1080p at 30 fps, with audio" },
       { label: "Clip length", value: "30 seconds to 15 minutes" },
       { label: "Mix in collection", value: "10 h urban walking · 5 h vehicular navigation · 5 h structured indoor" },
-      { label: "Ships as", value: ".mp4" },
+      { label: "Ships as", value: "exo.mp4 + metadata.json · LeRobot v3, convertible to HDF5 / RLDS / MCAP" },
     ],
   },
   {
@@ -138,12 +140,16 @@ export const CATEGORIES: Category[] = [
     // figure is what the rig captures: 17 IMUs at 240 Hz plus per-finger gloves.
     // Not the rate — see the comment on `CapabilityTier.price`.
     held: { figure: "240 Hz", unit: "17 IMUs + per-finger pose" },
-    // Every line from CAPABILITY.mocap, the only tier priced for it.
+    /* Row C of the capability sheet, "Egocentric + full mocap". The 240 Hz is
+       the suit's native rate; the sheet says it is downsampled to 30 Hz for
+       delivery, and stating only the native rate would let a buyer plan around
+       a resolution they do not receive. */
     capture: [
-      { label: "Recorded on", value: "Helmet GoPro, SuperView ~150 degrees" },
-      { label: "Body", value: "Xsens MVN HD, 17 IMUs at 240 Hz" },
-      { label: "Hands", value: "Metagloves, per-finger pose" },
-      { label: "Ships as", value: "FBX · BVH · SMPL, alongside the video" },
+      { label: "Recorded on", value: "Helmet-mounted GoPro, SuperView ~150 degrees" },
+      { label: "Body", value: "Xsens MVN HD, 17 IMUs · 240 Hz native, delivered at 30 Hz" },
+      { label: "Hands", value: "Xsens Metagloves, per-finger pose" },
+      { label: "Shot in", value: "Studio, controlled" },
+      { label: "Ships as", value: "video .mp4 + full-body IMU streams + hand pose · FBX / BVH / SMPL" },
     ],
   },
   {

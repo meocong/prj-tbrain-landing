@@ -126,7 +126,14 @@ export default async function CategoryPage({
 
               {/* Diversity, moved down here with the rest of the shelf story.
                   Above the clips it was four numbers with nothing to anchor
-                  them to. */}
+                  them to.
+
+                  Only where the category HAS records. `axesFor` counts a whole
+                  line, so /samples/mocap — which holds nothing — was printing
+                  "31 workplaces · 106 distinct tasks · 32 operator jobs · 27%
+                  graded hard", every figure of it egocentric's, directly under
+                  a heading saying "in this category". */}
+              {s.episodes > 0 && (
               <dl className="mt-6 grid grid-cols-2 gap-x-8 gap-y-5 sm:grid-cols-4">
                 {axesFor(c.line === "gaming" ? "gaming" : "robotics").map((a) => (
                   <div key={a.key}>
@@ -145,9 +152,12 @@ export default async function CategoryPage({
                   </div>
                 ))}
               </dl>
-              <p className="mt-3 text-[12px]" style={{ color: C.textDim }}>
-                Measured across the samples published here, not the full shelf.
-              </p>
+              )}
+              {s.episodes > 0 && (
+                <p className="mt-3 text-[12px]" style={{ color: C.textDim }}>
+                  Measured across the samples published here, not the full shelf.
+                </p>
+              )}
 
               <div className="mt-10">
                 {s.tiers.map((t) => (
@@ -161,9 +171,36 @@ export default async function CategoryPage({
                       <p className="mt-1 text-[12.5px] leading-relaxed" style={{ color: C.textDim }}>
                         {t.rig}
                         {t.sensors ? ` · ${t.sensors}` : ""}
+                        {t.environment ? ` · ${t.environment}` : ""}
                       </p>
+                      {/* The column the first transcription left behind, and
+                          the one a technical buyer reads first. "Egocentric
+                          stereo" is a label; `left.mp4 + right.mp4 + imu.csv`
+                          is the thing they have to write a loader for. */}
+                      {t.outputs && (
+                        <p
+                          className="mt-2 font-mono text-[11.5px] leading-relaxed"
+                          style={{ color: C.value }}
+                        >
+                          {t.outputs}
+                        </p>
+                      )}
+                      {t.demoHref && (
+                        <a
+                          href={t.demoHref}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="mt-2 inline-block font-mono text-[11px] underline decoration-1 underline-offset-4"
+                          style={{ color: C.accent }}
+                        >
+                          Open the live 3D demo
+                        </a>
+                      )}
                     </div>
-                    {/* No `t.price` column — see the comment on that field. */}
+                    {/* No `t.price` column — see the comment on that field.
+                        `firstMonth` sits under the ceiling because quoting only
+                        the ceiling to somebody scheduling a pilot overstates
+                        month one by up to four times. */}
                     <p
                       className="font-mono text-[11.5px] leading-relaxed md:text-right"
                       style={{ color: C.textMid }}
@@ -171,6 +208,12 @@ export default async function CategoryPage({
                       Ready in {t.ramp}
                       <br />
                       Up to {t.ceiling}
+                      {t.firstMonth && (
+                        <>
+                          <br />
+                          <span style={{ color: C.textDim }}>{t.firstMonth}</span>
+                        </>
+                      )}
                     </p>
                   </div>
                 ))}
