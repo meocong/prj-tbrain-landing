@@ -5,6 +5,7 @@ import { createPortal } from "react-dom";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { X } from "lucide-react";
 import { groupSpec } from "@/lib/samples/spec-sections";
+import { LICENSE, QUALIFIER } from "@/lib/samples/license";
 import { C, EASE, OVER_MEDIA, PILL, type Sample } from "./tokens";
 import { LiveTelemetry } from "./LiveTelemetry";
 import { AccessActions } from "./AccessActions";
@@ -424,6 +425,54 @@ export function SampleModal({
                       </dl>
                     </motion.section>
                   ))}
+
+                  {/* Licence last, because it is the question a buyer resolves
+                      after deciding they want the data. Both catalogues we read
+                      print it on every card; ours is provisional and says so
+                      through QUALIFIER rather than a badge - "indicative terms,
+                      the agreement governs" is a normal thing for a vendor to
+                      publish, a PROVISIONAL stamp is not. */}
+                  <motion.section
+                    className="mt-6"
+                    variants={band}
+                    transition={{ duration: 0.4, ease: EASE }}
+                  >
+                    <div className="flex items-center gap-2.5">
+                      <span
+                        aria-hidden
+                        className="h-[11px] w-[2px] rounded-full"
+                        style={{ background: C.accent }}
+                      />
+                      <h3
+                        className="font-mono text-[10px] uppercase tracking-[0.16em]"
+                        style={{ color: C.value }}
+                      >
+                        Licence
+                      </h3>
+                      <span aria-hidden className="h-px flex-1" style={{ background: C.hairline }} />
+                    </div>
+                    <dl className="mt-2">
+                      {LICENSE.map((t) => (
+                        <div
+                          key={t.label}
+                          className="grid grid-cols-[minmax(0,10.5rem)_1fr] items-baseline gap-x-5 py-[5px]"
+                        >
+                          <dt className="text-[11.5px] leading-relaxed" style={{ color: C.textDim }}>
+                            {t.label}
+                          </dt>
+                          <dd
+                            className="min-w-0 break-words font-mono text-[11.5px] leading-relaxed"
+                            style={{ color: C.value }}
+                          >
+                            {t.value}
+                          </dd>
+                        </div>
+                      ))}
+                    </dl>
+                    <p className="mt-3 text-[11.5px]" style={{ color: C.textDim }}>
+                      {QUALIFIER}
+                    </p>
+                  </motion.section>
                 </div>
               </motion.div>
             </div>

@@ -3,6 +3,7 @@
 import { motion, useReducedMotion } from "framer-motion";
 import { DATASETS, LINES, axesFor, statsFor, type LineKey } from "@/lib/samples/datasets";
 import { INTEROP } from "@/lib/samples/capability";
+import { LICENSE_SHORT, QUALIFIER } from "@/lib/samples/license";
 import { C, EASE, OVER_MEDIA } from "./tokens";
 
 /**
@@ -154,14 +155,33 @@ export function DatasetBand({
               <span className="mt-1 text-[12.5px] leading-relaxed" style={{ color: C.textMid }}>
                 {d.blurb}
               </span>
+
+              {/* The third field both catalogues print on every card, and the
+                  one we had nothing for. Provisional - see license.ts, half its
+                  terms are drafts - so the block below carries the sentence
+                  that makes an indicative term publishable. */}
+              <span
+                className="mt-2 font-mono text-[10.5px]"
+                style={{ color: C.textDim }}
+              >
+                {LICENSE_SHORT}
+              </span>
             </motion.button>
           );
         })}
       </div>
 
-      <p className="mt-6 font-mono text-[11px]" style={{ color: C.textDim }}>
-        Delivered as {INTEROP}
-      </p>
+      <div
+        className="mt-8 flex flex-wrap items-baseline gap-x-6 gap-y-2 pt-5"
+        style={{ borderTop: `1px solid ${C.hairline}` }}
+      >
+        <p className="font-mono text-[11px]" style={{ color: C.textDim }}>
+          Delivered as {INTEROP}
+        </p>
+        <p className="text-[11.5px]" style={{ color: C.textDim }}>
+          {QUALIFIER}
+        </p>
+      </div>
     </div>
   );
 }
