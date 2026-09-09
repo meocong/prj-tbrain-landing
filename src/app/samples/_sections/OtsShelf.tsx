@@ -1,0 +1,129 @@
+"use client";
+
+import { useCallback, useRef } from "react";
+import { clipSrc, posterSrc } from "@/lib/samples/categories";
+import { OTS_CORPUS, OTS_SKILLS, OTS_UNSAMPLED } from "@/lib/samples/ots";
+import { C, OVER_MEDIA } from "./tokens";
+
+/**
+ * The off-the-shelf shelf, playing.
+ *
+ * The page sells two routes and showed one. Everything in the grid above is a
+ * stereo rig delivery — the custom-collection side — while "Off the shelf" was
+ * a paragraph about 12,900 episodes a reader could not see a frame of. The
+ * capability sheet had a `Sample Link` per skill the whole time.
+ *
+ * Portrait tiles, because the footage is portrait: ten of ten clips pulled from
+ * those folders are shot on a phone held upright. Letterboxing them into the
+ * landscape grid above would hide the one thing that most distinguishes this
+ * corpus from the stereo deliveries, which is that it is phone video.
+ *
+ * Hover plays, the same affordance the main grid uses, so the two shelves
+ * behave alike even though they look nothing alike.
+ */
+export function OtsShelf() {
+  return (
+    <section style={{ background: C.base, color: C.text }}>
+      <div className="mx-auto max-w-[1400px] px-4 pb-16 pt-14 lg:px-10 xl:px-16">
+        <h2 className="font-mono text-[10px] uppercase tracking-[0.18em]" style={{ color: C.textDim }}>
+          Off the shelf · already collected
+        </h2>
+
+        <p className="mt-5 max-w-2xl text-[14px] leading-relaxed" style={{ color: C.textMid }}>
+          A separate corpus from the deliveries above: phone-mounted first-person capture of
+          everyday manipulation, licensed as a pack rather than collected to a brief. Two clips
+          from each sampled skill play here.
+        </p>
+
+        <dl className="mt-8 grid grid-cols-2 gap-x-8 gap-y-6 sm:grid-cols-3 xl:grid-cols-6">
+          {[
+            { v: OTS_CORPUS.episodes, l: "Episodes" },
+            { v: OTS_CORPUS.hours, l: "Total footage" },
+            { v: OTS_CORPUS.domains, l: "Skill domains" },
+            { v: OTS_CORPUS.clipLength, l: "Per clip" },
+            { v: OTS_CORPUS.fps, l: "Frame rate" },
+            { v: OTS_CORPUS.lead, l: "Lead time" },
+          ].map((s) => (
+            <div key={s.l} style={{ borderTop: `1px solid ${C.hairline}` }} className="pt-3">
+              <dd
+                className="font-mono text-xl tracking-tight md:text-2xl"
+                style={{ color: C.value, lineHeight: 1.1 }}
+              >
+                {s.v}
+              </dd>
+              <dt
+                className="mt-2 font-mono text-[10px] uppercase tracking-[0.16em]"
+                style={{ color: C.textDim }}
+              >
+                {s.l}
+              </dt>
+            </div>
+          ))}
+        </dl>
+
+        <p className="mt-4 text-[12px]" style={{ color: C.textDim }}>
+          {OTS_CORPUS.resolution}. {OTS_CORPUS.size}. Episode counts are the catalogue's own
+          estimates, from each skill&apos;s share of the corpus.
+        </p>
+
+        <div className="mt-10 flex gap-6 overflow-x-auto pb-4">
+          {OTS_SKILLS.map((s) => (
+            <div key={s.slug} className="shrink-0">
+              <div className="flex gap-2">
+                {s.clips.map((slug) => (
+                  <Tile key={slug} slug={slug} />
+                ))}
+              </div>
+              <p className="mt-3 text-[13.5px] font-medium">{s.name}</p>
+              <p className="mt-1 font-mono text-[11px]" style={{ color: C.textDim }}>
+                {s.share} of the corpus · {s.episodes} episodes
+              </p>
+            </div>
+          ))}
+        </div>
+
+        <p className="mt-6 max-w-2xl text-[12px] leading-relaxed" style={{ color: C.textDim }}>
+          Four more skills are in the pack with no sample folder published:{" "}
+          {OTS_UNSAMPLED.join(", ").toLowerCase()}. Ask and we will send clips from any of them.
+        </p>
+      </div>
+    </section>
+  );
+}
+
+function Tile({ slug }: { slug: string }) {
+  const video = useRef<HTMLVideoElement | null>(null);
+  const play = useCallback(() => video.current?.play().catch(() => {}), []);
+  const stop = useCallback(() => {
+    const v = video.current;
+    if (!v) return;
+    v.pause();
+    v.currentTime = 0;
+  }, []);
+
+  return (
+    <span
+      className="relative block w-[124px] overflow-hidden md:w-[142px]"
+      style={{ aspectRatio: "9 / 16", background: C.band }}
+      onMouseEnter={play}
+      onMouseLeave={stop}
+    >
+      <video
+        ref={video}
+        src={clipSrc(slug)}
+        poster={posterSrc(slug)}
+        muted
+        loop
+        playsInline
+        preload="none"
+        className="h-full w-full object-cover"
+      />
+      <span
+        className="pointer-events-none absolute bottom-1.5 left-1.5 px-1.5 py-0.5 font-mono text-[9px] uppercase tracking-[0.12em]"
+        style={{ background: OVER_MEDIA.scrim, color: OVER_MEDIA.textDim }}
+      >
+        .mp4
+      </span>
+    </span>
+  );
+}
