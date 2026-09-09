@@ -110,12 +110,19 @@ export function DatasetBand({
                 {d.blurb}
               </span>
 
-              {/* The third field both catalogues print on every card, and the
-                  one we had nothing for. Provisional - see license.ts, half its
-                  terms are drafts - so the block below carries the sentence
+              {/* Format and licence, the two fields humanoidlayer.dev prints
+                  on every card so a buyer can rule a set in or out without
+                  opening it. The licence is provisional - see license.ts, half
+                  its terms are drafts - so the block below carries the sentence
                   that makes an indicative term publishable. */}
               <span
                 className="mt-2 font-mono text-[10.5px]"
+                style={{ color: C.value }}
+              >
+                {s.formats.join(" + ")}
+              </span>
+              <span
+                className="mt-0.5 font-mono text-[10.5px]"
                 style={{ color: C.textDim }}
               >
                 {LICENSE_SHORT}
