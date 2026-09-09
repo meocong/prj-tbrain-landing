@@ -1,7 +1,12 @@
 # Samples page — restructure plan
 
-Status: **draft, blocked on two answers from Sơn** (§6). Teleoperation was the
-third and is now answered — there is a dataset (§5.4). Written 2026-09-09.
+Status: **live plan.** P1 and P2 are built; P3 and P4 are the next work and are
+not blocked. Two questions remain for Sơn (§6).
+
+Revised 2026-09-09 after reading two competitor catalogues first-hand rather
+than from search summaries (§9). That reading added a level to the structure:
+between a modality and a clip sits a **dataset**, which is the object a buyer
+shops for and the one this page does not have (§7). Written 2026-09-09.
 
 Companion to [`samples-runbook.md`](./samples-runbook.md), which covers how the
 current 126 records were built. This file covers what replaces them.
@@ -213,39 +218,84 @@ before anyone ingests the set.
 
 ## 7. Proposed structure
 
-### Level 1 — three lines, two buyers
+Four levels, not three. The plan originally stopped at "a tab per modality",
+which is the level the competitors treat as navigation, not as product. Between
+a modality and a clip they put a **dataset**, and that is the object a buyer
+actually shops for.
 
 ```
-Robotics & Physical AI   |   Gaming   |   Coding / STEM
+Level 1   Robotics & Physical AI   |   Gaming   |   Coding / STEM
+Level 2   Egocentric · Exocentric · Teleoperation · Mocap
+Level 3   DATASET  - named, described, counted, licensed        <- missing today
+Level 4   the individual clip, playable
 ```
 
-### Level 2 — inside Robotics
+### Level 1 - two buyers, kept apart
 
-| Tab | Samples today | Inventory behind it |
-|---|---|---|
-| **Egocentric** | 118 | 1,200 h + 72 h |
-| **Exocentric** | 0 | 20 h in collection; $36–56/h capability |
-| **Mocap** | 0 | $720–1,200/h capability |
-| **Teleoperation** | 0 published | 11 episodes / 7 m 49 s held, LeRobot v2.1 (§5.4) |
+Tam is explicit that gaming and robotics are *"2 đối tượng mua khác nhau"*.
+Claru gives Gaming its own browse entry. Today ours puts 8 game clips in the
+same 126-card grid as the robotics ones, behind a chip, which asks a robotics
+buyer to filter gaming out and a gaming buyer to filter 118 records out.
 
-### Level 3 — inside Egocentric
+### Level 2 - modality
 
-| Tier | Samples today | Price |
-|---|---|---|
-| Mono | 0 (12,900 episodes on the shelf) | $30–40/h |
-| Stereo (2 cam) | 118 | $80–120/h |
-| **Advanced Stereo (6 cam)** | ? — see §5.3 | — |
-| + Wrist camera | 0 | $120–180/h |
+Shipped. Five chips, counts 118 / 0 / 0 / 0 / 8, the three empty ones pressable
+and answering with a price sheet.
 
-`OTS` / `Custom` become a **badge on a record**, not a tab.
+### Level 3 - the dataset layer, and what it costs
 
-### A tab with no samples still sells
+This is the whole gap. Our 118 non-game records already carry `skillGroup`. It
+is the raw material for dataset cards, but the grouping needs a decision rather
+than a script, because the distribution is top-heavy:
 
-Show the capability, the price band, the ramp time and the monthly ceiling.
-That is more honest than hiding the tab, and it is exactly what the spreadsheet
-this page replaces already says out loud.
+```
+14  Pick and Place / Object Handling      7  Food Preparation & Cooking
+13  Tool Use & Technical Manipulation     7  Construction & Building
+13  Cleaning & Sanitation                 4  Repair & Maintenance
+10  Organization & Tidying                4  Retail & Service Operations
+ 9  Assembly & Installation               2  Dish Handling
+ 9  Packing & Bagging                     2  Human Interaction & Handoffs
+ 8  Clothing & Laundry                    1  Inventory & Stock Management
+ 8  Electronics & Diagnostics
+ 7  Mechanical / Automotive Work
+```
 
----
+Sixteen groups carry records; the taxonomy defines eighteen, so two are empty.
+**Twelve of the sixteen hold fewer than ten.** A card built on "Inventory &
+Stock Management, 1 episode" is not a dataset, it is a clip with a heading.
+
+- Candidate: merge to **6 to 8 datasets**, joining adjacent groups - Tool Use
+  with Mechanical/Automotive (13+7), Cleaning with Organization and Tidying
+  (13+10), the four smallest into one. Counts stay real; only the boundaries
+  move.
+- Each card states: name, one paragraph of what is in it, episode and hour
+  count, the environments it was shot in, the rig, the delivery format, and the
+  licence.
+
+**What must not be invented.** Claru's cards end in "Use cases: kitchen
+robotics, recipe-following agents". That is a claim about what the data suits,
+and writing one per card is the fastest way to put a sentence on a sales page
+that nobody at Tbrain has agreed to. Descriptions get written from the records:
+counts, skills, environments, rigs, formats. Use-case lines get drafted and left
+for someone to approve.
+
+### Level 4 - the clip
+
+Shipped, and it is the thing no competitor offers without a form. It stays free
+to play; that is the one place this page already beats them.
+
+### A line with no samples still sells
+
+Shipped. Filtering to Exocentric, Teleoperation or Mocap returns rig, sensors,
+lead time, monthly ceiling and price band, plus what is already collected.
+
+### Two Paths, promoted
+
+Off-the-shelf versus collected-to-spec is currently a chip in the rail. On
+Claru it is the second section on the page, because it is the first question a
+buyer resolves: can I have this next week, or am I commissioning it? It should
+be a section, not a facet. The facet can stay for people who want to narrow
+within it.
 
 ## 8. Filters
 
@@ -265,45 +315,108 @@ Ordered by how buyers actually weight them. A 2026 marketplace scorecard puts
 Five of seven are already in the records and merely unexposed. **License is the
 one real data gap, and it is the heaviest-weighted filter a buyer applies.**
 
+A filter is not the only place these belong. Both competitors print **licence,
+format and provenance on the card itself**, not only in the rail: HumanoidLayer
+gives every dataset a fixed Format / License / Enrichment triplet, and states
+"provenance before procurement" as a principle. A buyer scanning ten cards
+should not have to open each one to learn which are commercially usable. So each
+of those three is two jobs: a facet, and a line on every dataset card.
+
 ---
 
 ## 9. Competitive read
 
-Grouped, with the numbers that matter for positioning.
+Two of these were opened and read, not summarised from search results. That
+distinction matters: the search summaries described *what* competitors sell, and
+the pages themselves showed *how they present it*, which is the part this page
+gets wrong.
 
-**Direct capture.** Scale AI — 150,000+ hours, 100k production hours at its SF
-lab, customers include Physical Intelligence and Generalist AI; not beatable on
-volume. DexSet — publishes the same taxonomy Tam proposed (egocentric /
-exocentric / teleoperation / mono / stereo) and posts prices: raw $15–22/h,
-annotated $30–40/h, teleop $28–60/h. Unidata — 38,457 scenarios, 10,255 h, six
-synchronised streams per session. DreamVu — frame-synchronised ego + 360° exo.
+### 9.1 Claru — the reference Tam sent
 
-**Marketplaces.** Truelabel publishes the de facto facet set: 6 modality classes,
-22+ embodiments, 8 license categories, 5 delivery formats. HumanoidLayer filters
-on task, embodiment, modality, format, license. Robotics Center treats *preview*
-and *license-aware* as first-class UI concepts.
+Read 2026-09-09 at `claru.ai/data-catalog`. Its page order:
 
-**Gaming.** General Intuition raised at $2.3 B mid-2026 on native action labels
-out of Medal. Troveo aggregates 8 M licensed hours. NitroGen mines 71,000 h of
-public video with on-screen input overlays — free substitute supply, but
-gamepad-only.
+1. Hero.
+2. **"TWO PATHS"** - `01 Off-the-Shelf, Tailored` and `02 Bespoke Collection`.
+   The buy-it-now versus collect-it-for-me choice is the SECOND thing on the
+   page, given a full section. Ours is a chip in a filter rail.
+3. **"SAMPLE COVERAGE"** - a plain word list of activities (cooking, walking,
+   assembling, pouring, ironing, welding, sewing...) then one line of scale:
+   *"14+ countries, 20+ activity domains, thousands of hours"*.
+4. **"BROWSE THE CATALOG"** - four featured categories, each with its own
+   `Browse ->`: Egocentric, Dashcam & Traffic, Internet Videos, Gaming. Then a
+   14-item category filter row.
+5. **Dataset cards.** This is the structural difference. Every card is a
+   *dataset*, not a clip:
 
-**Free baseline.** Hugging Face hosts 1,200+ robotics datasets; Ego4D 3,670 h;
-Ego-Exo4D ~1,400 h; EgoDex 829 h.
+   > **EGOCENTRIC**
+   > **Egocentric - Cooking & Food Prep**
+   > First-person clips of food preparation and consumption: slicing, chopping,
+   > peeling, pouring, mixing, eating with utensils, drinking. Cross-source
+   > curation from EAC Food & Drink + cooking-tagged clips from Household Tasks
+   > (Asia + USA). **Use cases: kitchen robotics, recipe-following agents.**
+   > `Request Access ->`
+
+   Scale sits inside the prose where it is worth stating: *"Heavy emphasis on
+   door interactions (~40K clips) - gold for home-robotics manipulation
+   policies."*
+6. **"GLOBAL REACH"** - diversity as four named axes: GEO (14+ countries), DEM
+   (age, gender, ethnicity), ENV (indoor, outdoor, urban, rural, workplace,
+   domestic), DEV (GoPro, smartphone, cinema cameras, game capture).
+7. Case studies, then one CTA.
+
+### 9.2 HumanoidLayer - the robotics-specific one
+
+Read 2026-09-09 at `humanoidlayer.dev`. It prints its own **search facets on the
+marketing page as a selling point**: Modality, Robot type, Task, License,
+Environment.
+
+Every dataset card carries three fixed fields: **Format** (RLDS, LeRobot),
+**License** (Apache 2.0, CC-BY 4.0, Mixed) and **Enrichment** status. Its two
+stated principles are *"provenance before procurement"* and *"license clarity by
+default"*.
+
+### 9.3 The rest, from published summaries
+
+Scale AI runs 150,000+ hours of physical AI capture with a 100k-hour SF lab and
+is not beatable on volume. DexSet publishes the same modality taxonomy Tam
+proposed and posts prices. Unidata reports 38,457 scenarios across 10,255 hours
+with six synchronised streams per session. DreamVu captures frame-synchronised
+ego plus 360-degree exo. Truelabel publishes the de-facto facet set: 6 modality
+classes, 22+ embodiments, 8 license categories, 5 delivery formats. General
+Intuition raised at $2.3B on native gameplay action labels. Hugging Face hosts
+1,200+ open robotics datasets, which is the free floor under all of this.
+
+### 9.4 What ours does differently, and wrong
+
+| | Claru / HumanoidLayer | This page |
+|---|---|---|
+| What one card is | **a dataset**, named, with a paragraph and use cases | **one 8-second clip** with a title |
+| Gaming | its own browse entry | 8 clips inside the same 126-card grid, behind a chip |
+| "What is this line for" | a paragraph per dataset | nothing |
+| License | on every card | **absent from the data entirely** |
+| Delivery format | on every card | in the data, never shown |
+| Off-the-shelf vs bespoke | a top-of-page section | a filter chip |
+| Diversity | four named axes with figures | implied by the facet counts |
+
+The summary is that we sell **126 loose pieces** where they sell **nine named
+packages**. A lab does not go looking for one haircut clip. It looks for
+"egocentric tool use, thousands of hours, commercially licensable", and this page
+has no object that answers that sentence.
 
 ### Three openings
 
 1. **Mocap is nobody's tab.** Truelabel lists mocap shops as *suppliers*;
-   Humanoids Data says "motion". No competitor gives it a peer tab. Tam's
-   instinct is right and we already price the tier.
-2. **Nobody lets you browse.** Truelabel is request-driven — post a brief, wait
-   for a match, then see samples. A page that plays a real delivery file with no
-   signup is the differentiator, and it is precisely what Scale does not bother
-   to build.
-3. **Sync rigor is saleable.** Lumine documents 800 ms – 2 s video/input offsets
+   Humanoids Data says "motion". No competitor gives it a peer category, and we
+   already price the tier.
+2. **Nobody lets you play anything without asking.** Claru says "no form
+   required" but every card ends in `Request Access ->`. Truelabel is
+   request-driven: post a brief, wait for a match, then see samples. A page that
+   plays a real delivery file with no signup is the differentiator, and it is
+   what we already have.
+3. **Sync rigor is saleable.** Lumine documents 800ms-2s video/input offsets
    causing training leakage. Our records already carry `Clock drift 0 ppm`,
-   `Alignment error 0 ms`, `Sync check pass`, `Calibration pass` — buried at row
-   20 of a spec table. Move them up.
+   `Alignment error 0 ms`, `Sync check pass`, `Calibration pass`, buried at row
+   20 of a spec table.
 
 ### Where "teleop" came from — the exact provenance
 
@@ -330,22 +443,52 @@ tab on the strength of a spreadsheet subtitle.
 
 ## 10. Phases
 
-**P0 — answers.** §6. No work, three replies.
+Renumbered after reading the competitor pages, which moved the dataset layer
+from "nice later" to the centre.
 
-**P1 — re-axis.** Move `ots` out of `domain` into a badge. Build the four/five
-robotics tabs and the four egocentric tiers. Empty tabs show capability, price
-band, ramp, ceiling. *Needs no new data — it is the 126 existing records sorted
-onto the right axis.*
+**P0 - answers.** §6. Two questions for Sơn, no work.
 
-**P2 — hours and difficulty per group.** The figure customers asked for. Needs
-one source of truth in the repo for the xlsx + deck numbers.
+**P1 - re-axis.** *Done.* `domain` split into `modality`, `provenance` and
+`tier`; five modality chips; empty lines answer with a price sheet; the
+downloads page regrouped; hero, title and corpus lines all on the new axis.
 
-**P3 — license.** Cannot be invented; needs legal/BD to state what each corpus
-may be sold as. Highest-weighted filter, currently empty.
+**P2 - hours on the shelf.** *Done.* Five corpus lines, each with its figure and
+an honest state.
 
-**P4 — delivery format facet, hero rewrite, per-tab context copy.**
+**P3 - split the two buyers.** Gaming stops sharing a grid with robotics.
+Unblocked, and the smallest change with the largest effect on how the page
+reads.
 
-**P5 — one or two downloadable samples per action type.** Tam's literal request.
-Needs R2 wiring and a gate/no-gate decision.
+**P4 - the dataset layer.** The main build. Group the 126 records into 6 to 8
+named datasets per modality, write each description from the records, and give
+every card its counts, environments, rig and format. Use-case lines drafted, not
+shipped, until approved.
 
-P1 is unblocked today. P2–P5 each wait on someone.
+**P5 - licence.** Cannot be invented; needs legal or BD to state what each
+corpus may be sold as. It is the heaviest-weighted filter a buyer applies and
+the only one with no data behind it. Blocks the dataset cards from being
+complete, though not from shipping.
+
+**P6 - Two Paths as a section.** Off-the-shelf versus collected-to-spec,
+promoted out of the rail.
+
+**P7 - diversity as named axes.** Claru's GEO / DEM / ENV / DEV. We hold most of
+it: 70+ sites, 35 location types, 100+ operator professions, ~3,000 tasks,
+17 skill groups, five rig families. Currently spread across body copy.
+
+**P8 - a downloadable sample per dataset.** Tam's literal request. Needs R2
+wiring and a gate-or-not decision.
+
+### Sequencing
+
+| | Phases | Blocked by |
+|---|---|---|
+| Done | P1, P2 | - |
+| Now | P3, P4, P7 | nothing |
+| Waiting | P5, P8 | legal / BD, and an R2 decision |
+| Now, unranked | P6 | nothing |
+| Blocked | the six-camera relabel | Sơn, on what the delivered MCAP carries |
+
+P3 is hours. P4 is the week. Everything else is smaller than it looks once the
+dataset object exists, because licence, format, provenance and the download all
+hang off it.
