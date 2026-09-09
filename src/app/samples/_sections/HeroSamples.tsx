@@ -68,14 +68,21 @@ export function HeroSamples() {
               R19, and the reason it was on the list: "Human, robot and game
               capture" was a taxonomy, and the taxonomy is now the chooser's
               job. A headline that lists our own filing system asks the reader
-              to work out what it is for. R15 says robotics must LEAD the
-              customer rather than list at them, so the first line says what
-              the data is for and the second says what it is made of. */}
+              to work out what it is for.
+
+              It must also stay ABOVE the categories rather than inside one.
+              The first rewrite here read "Data for models that have to act /
+              Human hands, robot arms, live play", which is a robotics headline
+              on a page that also sells gaming and Coding & STEM - it quietly
+              narrowed the whole library to one line of business. This page is
+              the front door for all of them: it says we sell data and that the
+              samples are open, and every tier, hour count and price lives one
+              click down on the category it belongs to. */}
           <h1
             /* `text-balance` is inherited, so each `block` span balances its
                own wrap. Without it the hero column at tablet width broke both
-               lines one word early and left "act." and "play." alone on a
-               line of 60px type. */
+               lines one word early and stranded the last word alone on a line
+               of 60px type. */
             className="mt-5 text-balance text-5xl font-medium tracking-tight md:text-6xl xl:text-7xl"
             style={{
               fontFamily: "var(--font-heading)",
@@ -84,22 +91,27 @@ export function HeroSamples() {
               color: "#ffffff",
             }}
           >
-            <span className="block">Data for models that have to act.</span>
+            <span className="block">See the data before you buy it.</span>
             <span className="block" style={{ color: "rgba(255,255,255,0.48)" }}>
-              Human hands, robot arms, live play.
+              Robotics, gaming, coding and STEM.
             </span>
           </h1>
 
-          {/* The one thing no competitor's catalogue does, said plainly and
-              first. Claru, HumanoidLayer and Truelabel all put a form between a
-              reader and a frame; this page does not, and that was buried in a
-              grey line under the fold. */}
+          {/* Two claims and a hand-off, in that order.
+              First the one thing no competitor's catalogue does - Claru,
+              HumanoidLayer and Truelabel all put a form between a reader and a
+              frame, and that was buried in a grey line under the fold. Then
+              both purchase routes, because either could be the reason someone
+              is here. Then the hand-off: nothing in this paragraph is specific
+              to a category, and it should not be. Tiers, hours and pricing
+              differ per category and are stated on the category. */}
           <p
             className="mt-6 max-w-lg text-base leading-relaxed"
             style={{ color: "rgba(255,255,255,0.76)" }}
           >
-            Every sample on this page plays in full, with no form. Read the telemetry beside it,
-            then take the delivery file as MCAP or LeRobot with calibration and annotation in band.
+            Real delivery files from every set we sell, off the shelf or collected to your spec.
+            Every sample here plays in full with no form — open a category for its tiers, hours
+            and pricing.
           </p>
 
           <div className="mt-8 flex flex-wrap items-center gap-6">
