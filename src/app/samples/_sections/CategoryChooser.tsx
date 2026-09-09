@@ -14,6 +14,7 @@ import {
 } from "@/lib/samples/categories";
 import { CategoryDiagram } from "./CategoryDiagram";
 import { C, EASE, OVER_MEDIA } from "./tokens";
+import { Reveal } from "./Reveal";
 
 /**
  * The front door.
@@ -50,24 +51,27 @@ export function CategoryChooser() {
   return (
     <section id="deck" style={{ background: C.base, color: C.text }}>
       <div className="mx-auto max-w-[1400px] px-4 pb-24 pt-24 md:pt-28 lg:px-10 xl:px-16">
-        <h2
-          className="max-w-3xl text-3xl font-medium tracking-tight md:text-5xl"
-          style={{ fontFamily: "var(--font-heading)", letterSpacing: "-0.03em", lineHeight: 1.06 }}
-        >
-          {/* Not "Pick the kind of data you need", which this said until
-              2026-09-09 and which claru.ai/explore says as "Pick the kind of
-              footage you need, open a folder, and play the clips right here."
-              Arrived at independently, but Tam sent Claru as the reference, so
-              somebody will have both tabs open and see a clone. */}
-          Six catalogues, one delivery pipeline.{" "}
-          <span style={{ color: C.textDim }}>Open one to see what it holds and how it is captured.</span>
-        </h2>
+        {/* Heading and intro. The cards below carry their own stagger. */}
+        <Reveal variant="rise">
+          <h2
+            className="max-w-3xl text-3xl font-medium tracking-tight md:text-5xl"
+            style={{ fontFamily: "var(--font-heading)", letterSpacing: "-0.03em", lineHeight: 1.06 }}
+          >
+            {/* Not "Pick the kind of data you need", which this said until
+                2026-09-09 and which claru.ai/explore says as "Pick the kind of
+                footage you need, open a folder, and play the clips right here."
+                Arrived at independently, but Tam sent Claru as the reference, so
+                somebody will have both tabs open and see a clone. */}
+            Six catalogues, one delivery pipeline.{" "}
+            <span style={{ color: C.textDim }}>Open one to see what it holds and how it is captured.</span>
+          </h2>
 
-        <p className="mt-5 max-w-2xl text-[15px] leading-relaxed" style={{ color: C.textMid }}>
-          We collect human work and robot work, off the shelf or to your spec, and deliver it as
-          MCAP or LeRobot with the calibration, telemetry and annotation in band. Open a category to
-          see what is in it, what records it, and how long it takes.
-        </p>
+          <p className="mt-5 max-w-2xl text-[15px] leading-relaxed" style={{ color: C.textMid }}>
+            We collect human work and robot work, off the shelf or to your spec, and deliver it as
+            MCAP or LeRobot with the calibration, telemetry and annotation in band. Open a category to
+            see what is in it, what records it, and how long it takes.
+          </p>
+        </Reveal>
 
         {LINES.map((line, li) => {
           const cats = CATEGORIES.filter((c) => c.line === line.key);
