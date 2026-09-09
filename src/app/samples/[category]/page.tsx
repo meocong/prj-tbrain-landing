@@ -20,6 +20,9 @@ import { MocapDemo } from "../_sections/MocapDemo";
 import { OtsShelf } from "../_sections/OtsShelf";
 import { GamingSet } from "../_sections/GamingSet";
 import { TeleopSet } from "../_sections/TeleopSet";
+import { DeliveryLayers } from "../_sections/DeliveryLayers";
+import { TelemetryStrip } from "../_sections/TelemetryStrip";
+import { Evidence } from "../_sections/Evidence";
 import { TeleopAnatomy } from "../_sections/TeleopAnatomy";
 import { CaptureSpec } from "../_sections/CaptureSpec";
 import { AccessPaths } from "../_sections/AccessPaths";
@@ -100,6 +103,14 @@ export default async function CategoryPage({
             It is the first question a technical buyer asks, and it is the one
             block that makes this page not interchangeable with the next one. */}
         <CaptureSpec category={c} />
+
+        {/* What ships with the file, directly under what recorded it. Moved off
+            the front door (F1): "what travels with every file" is the second
+            question a technical buyer asks and the first one they cannot ask
+            before choosing a category, since the answer is the same everywhere
+            but only interesting once they know what the footage is. It was the
+            single largest block on the front door at 2,255px. */}
+        <DeliveryLayers />
 
         {/* The tiers, ABOVE the clips.
             They were below, moved there when the header was five paragraphs of
@@ -270,6 +281,15 @@ export default async function CategoryPage({
         {/* Gaming's product is the input stream and the camera pose, not the
             footage, and the page said that in a facet rail and nowhere else.
             R8 and R16. */}
+        {/* F2, Tam: "phần kia nếu nó dành cho Video games thì em để thêm ở
+            phần click vào video games." TelemetryStrip decimates Watch Dogs 2
+            input state and a two-player GTA V session — it is as game-specific
+            as anything on the site, and it was on the front door, where five of
+            six categories have no use for it.
+
+            Above GamingSet rather than below: it argues why the input stream
+            is the product, and GamingSet is the eight titles that carry one. */}
+        {c.slug === "gaming" && <TelemetryStrip />}
         {c.slug === "gaming" && <GamingSet />}
 
         {/* Datasets, facets, grid and the record layer, unchanged. They were
@@ -335,6 +355,11 @@ export default async function CategoryPage({
               </Reveal>
           </div>
         </section>
+
+        {/* Has it shipped before, and may I train on it. Moved off the front
+            door (F1) to sit against the licence table, which answers the second
+            half — the two were a page apart there and are one thought. */}
+        <Evidence />
 
         <AccessPaths />
       </main>
