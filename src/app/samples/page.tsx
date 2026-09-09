@@ -3,6 +3,8 @@ import Header from "@/components/common/Header";
 import Footer from "@/components/common/Footer";
 import { HeroSamples } from "./_sections/HeroSamples";
 import { CategoryChooser } from "./_sections/CategoryChooser";
+import { TwoRoutes } from "./_sections/TwoRoutes";
+import { Coverage } from "./_sections/Coverage";
 import { DeliveryLayers } from "./_sections/DeliveryLayers";
 import { TelemetryStrip } from "./_sections/TelemetryStrip";
 import { Evidence } from "./_sections/Evidence";
@@ -54,6 +56,12 @@ export default function SamplesPage() {
             same thing worse, per line rather than per category. */}
         <HeroSamples />
         <CategoryChooser />
+        {/* Both purchase routes, then what is actually in the catalogue. Order
+            matters: a buyer here for bespoke collection had no reason to keep
+            scrolling a page that only ever showed a shelf, and the trades in
+            Coverage are the argument for the shelf. */}
+        <TwoRoutes />
+        <Coverage />
         <DeliveryLayers />
         <TelemetryStrip />
         <Evidence />

@@ -52,8 +52,13 @@ export const CATEGORIES: Category[] = [
     modality: "egocentric",
     whatItIs:
       "Head-mounted capture of skilled manual work, filmed from the worker's own viewpoint while they do their job.",
+    // Hedged, but not in Claru's words. Theirs reads "approximately 118k hours
+    // ... Approximate, and the figure may overlap across sources" - they broker,
+    // so their hours can be counted twice. Ours cannot: we shot all of it, and
+    // the reason for the hedge is that the shelf is bigger than what is indexed
+    // here, which is a different admission and should not borrow their sentence.
     shelf:
-      "Around 1,200 hours across roughly 15,000 episodes on the shelf, collected in 70+ operating businesses. Figures are approximate.",
+      "The shelf behind these runs to roughly 15,000 episodes and 1,200 hours, shot across 70+ operating businesses. Counted off our own collection, rounded down.",
   },
   {
     slug: "exocentric",

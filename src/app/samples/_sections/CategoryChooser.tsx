@@ -53,11 +53,13 @@ export function CategoryChooser() {
           className="max-w-3xl text-3xl font-medium tracking-tight md:text-5xl"
           style={{ fontFamily: "var(--font-heading)", letterSpacing: "-0.03em", lineHeight: 1.06 }}
         >
-          Pick the kind of data you need.{" "}
-          {/* The hero already says "plays in full with no form" 600px above.
-              Saying it twice spends the headline on a claim the reader has
-              read; this one says what a category page actually gives them. */}
-          <span style={{ color: C.textDim }}>Each one prices and scopes itself.</span>
+          {/* Not "Pick the kind of data you need", which this said until
+              2026-09-09 and which claru.ai/explore says as "Pick the kind of
+              footage you need, open a folder, and play the clips right here."
+              Arrived at independently, but Tam sent Claru as the reference, so
+              somebody will have both tabs open and see a clone. */}
+          Six catalogues, one delivery pipeline.{" "}
+          <span style={{ color: C.textDim }}>Open one to see what it holds and what it costs.</span>
         </h2>
 
         <p className="mt-5 max-w-2xl text-[15px] leading-relaxed" style={{ color: C.textMid }}>
