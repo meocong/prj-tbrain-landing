@@ -24,6 +24,7 @@ import { TelemetryStrip } from "../_sections/TelemetryStrip";
 import { Evidence } from "../_sections/Evidence";
 import { TeleopAnatomy } from "../_sections/TeleopAnatomy";
 import { CaptureSpec } from "../_sections/CaptureSpec";
+import { RigViews } from "../_sections/RigViews";
 import { AccessPaths } from "../_sections/AccessPaths";
 import { Reveal } from "../_sections/Reveal";
 import { C } from "../_sections/tokens";
@@ -102,6 +103,13 @@ export default async function CategoryPage({
             It is the first question a technical buyer asks, and it is the one
             block that makes this page not interchangeable with the next one. */}
         <CaptureSpec category={c} />
+
+        {/* Directly under the block that CLAIMS six cameras in three stereo
+            pairs, because until now the page made that claim and then showed a
+            single 576x432 eye. Egocentric only: the clips are cut from an
+            egocentric delivery file and nothing else in the catalogue is a
+            six-camera capture. */}
+        {c.slug === "egocentric" && <RigViews />}
 
         {/* The tiers, ABOVE the clips.
             They were below, moved there when the header was five paragraphs of
