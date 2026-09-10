@@ -93,11 +93,20 @@ export interface Sample {
   /** What the record is. Three of the five values hold nothing yet. */
   modality: "egocentric" | "exocentric" | "teleoperation" | "mocap" | "gaming";
   /**
-   * How it was captured. Deliberately unqualified for stereo: the six-camera
-   * rig demonstrated on tbrain-dashboard may be the same one 84 of these records
-   * were shot on, so a camera count here would be a guess with a number on it.
+   * How it was captured. Joins to `CapabilityTier["key"]`, which is what lets
+   * the facet rail count a configuration and the capability panel answer for
+   * one that holds nothing yet.
+   *
+   * Deliberately unqualified for stereo: the six-camera rig demonstrated on
+   * tbrain-dashboard may be the same one 84 of these records were shot on, so a
+   * camera count here would be a guess with a number on it.
+   *
+   * Only `stereo` and `gameplay` occur in `samples.json` today — the staging
+   * script hardcodes them (`scripts/samples/add-modality-axis.mjs`). The rest
+   * are declared because the rail offers them as chips and the union is what
+   * stops a chip key and a record value from drifting apart.
    */
-  tier: "stereo" | "gameplay";
+  tier: "stereo" | "mono" | "rgbd" | "wrist" | "umi" | "exo" | "gameplay";
   /** Where it came from. Null on game records, which do not say. */
   provenance: "ots" | "custom" | null;
   title: string;

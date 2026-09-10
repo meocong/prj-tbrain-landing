@@ -19179,5 +19179,3054 @@
     "modality": "egocentric",
     "tier": "stereo",
     "provenance": "custom"
+  },
+  {
+    "slug": "office-environment-001",
+    "domain": "robotics",
+    "modality": "exocentric",
+    "tier": "exo",
+    "provenance": "custom",
+    "title": "Office and indoor",
+    "label": "Office and indoor",
+    "environment": "Office, indoor",
+    "locale": "Hanoi, Vietnam",
+    "rig": "iPhone 15 Pro",
+    "viewpoint": "third-person",
+    "skillGroup": "Office and indoor",
+    "industry": null,
+    "job": null,
+    "telemetry": true,
+    "durationSec": 1816,
+    "resolution": "1920x1080",
+    "fps": 30,
+    "streams": [
+      "rgb"
+    ],
+    "formats": [
+      "mp4"
+    ],
+    "size": "1.9 GB",
+    "spec": [
+      [
+        "Activity",
+        "Office and indoor"
+      ],
+      [
+        "Camera",
+        "iPhone 15 Pro"
+      ],
+      [
+        "Resolution",
+        "1920x1080"
+      ],
+      [
+        "Frame rate",
+        "29.97 fps"
+      ],
+      [
+        "Duration",
+        "1816 s"
+      ],
+      [
+        "Telemetry",
+        "Motion and location tracks in file"
+      ]
+    ],
+    "breadcrumb": [
+      "Samples",
+      "Exocentric",
+      "Office and indoor"
+    ],
+    "preview": "/samples/clips/office-environment-001.mp4",
+    "pills": [
+      {
+        "t": "Office and indoor",
+        "k": "skill"
+      },
+      {
+        "t": "1920x1080",
+        "k": "device"
+      },
+      {
+        "t": "Telemetry",
+        "k": "quality"
+      }
+    ],
+    "downloads": [
+      {
+        "t": "Preview pack",
+        "primary": true
+      }
+    ]
+  },
+  {
+    "slug": "exo-20260904-049",
+    "domain": "robotics",
+    "modality": "exocentric",
+    "tier": "exo",
+    "provenance": "custom",
+    "title": "Urban walking",
+    "label": "Urban walking",
+    "environment": "Street, outdoor",
+    "locale": "Hanoi, Vietnam",
+    "rig": "iPhone 13",
+    "viewpoint": "third-person",
+    "skillGroup": "Urban walking",
+    "industry": null,
+    "job": null,
+    "telemetry": true,
+    "durationSec": 31,
+    "resolution": "3840x2160",
+    "fps": 60,
+    "streams": [
+      "rgb"
+    ],
+    "formats": [
+      "mp4"
+    ],
+    "size": "203 MB",
+    "spec": [
+      [
+        "Activity",
+        "Urban walking"
+      ],
+      [
+        "Camera",
+        "iPhone 13"
+      ],
+      [
+        "Resolution",
+        "3840x2160"
+      ],
+      [
+        "Frame rate",
+        "60 fps"
+      ],
+      [
+        "Duration",
+        "31 s"
+      ],
+      [
+        "Telemetry",
+        "Motion and location tracks in file"
+      ],
+      [
+        "Activity derived from",
+        "GPS, 1.9 km/h between clips"
+      ]
+    ],
+    "breadcrumb": [
+      "Samples",
+      "Exocentric",
+      "Urban walking"
+    ],
+    "preview": "/samples/clips/exo-20260904-049.mp4",
+    "pills": [
+      {
+        "t": "Urban walking",
+        "k": "skill"
+      },
+      {
+        "t": "3840x2160",
+        "k": "device"
+      },
+      {
+        "t": "Telemetry",
+        "k": "quality"
+      }
+    ],
+    "downloads": [
+      {
+        "t": "Preview pack",
+        "primary": true
+      }
+    ]
+  },
+  {
+    "slug": "exo-20260904-050",
+    "domain": "robotics",
+    "modality": "exocentric",
+    "tier": "exo",
+    "provenance": "custom",
+    "title": "Urban walking",
+    "label": "Urban walking",
+    "environment": "Street, outdoor",
+    "locale": "Hanoi, Vietnam",
+    "rig": "iPhone 13",
+    "viewpoint": "third-person",
+    "skillGroup": "Urban walking",
+    "industry": null,
+    "job": null,
+    "telemetry": true,
+    "durationSec": 32,
+    "resolution": "1920x1080",
+    "fps": 30,
+    "streams": [
+      "rgb"
+    ],
+    "formats": [
+      "mp4"
+    ],
+    "size": "34 MB",
+    "spec": [
+      [
+        "Activity",
+        "Urban walking"
+      ],
+      [
+        "Camera",
+        "iPhone 13"
+      ],
+      [
+        "Resolution",
+        "1920x1080"
+      ],
+      [
+        "Frame rate",
+        "30 fps"
+      ],
+      [
+        "Duration",
+        "32 s"
+      ],
+      [
+        "Telemetry",
+        "Motion and location tracks in file"
+      ],
+      [
+        "Activity derived from",
+        "GPS, 2.1 km/h between clips"
+      ]
+    ],
+    "breadcrumb": [
+      "Samples",
+      "Exocentric",
+      "Urban walking"
+    ],
+    "preview": "/samples/clips/exo-20260904-050.mp4",
+    "pills": [
+      {
+        "t": "Urban walking",
+        "k": "skill"
+      },
+      {
+        "t": "1920x1080",
+        "k": "device"
+      },
+      {
+        "t": "Telemetry",
+        "k": "quality"
+      }
+    ],
+    "downloads": [
+      {
+        "t": "Preview pack",
+        "primary": true
+      }
+    ]
+  },
+  {
+    "slug": "exo-20260904-051",
+    "domain": "robotics",
+    "modality": "exocentric",
+    "tier": "exo",
+    "provenance": "custom",
+    "title": "Urban walking",
+    "label": "Urban walking",
+    "environment": "Street, outdoor",
+    "locale": "Hanoi, Vietnam",
+    "rig": "iPhone 13",
+    "viewpoint": "third-person",
+    "skillGroup": "Urban walking",
+    "industry": null,
+    "job": null,
+    "telemetry": true,
+    "durationSec": 32,
+    "resolution": "1920x1080",
+    "fps": 30,
+    "streams": [
+      "rgb"
+    ],
+    "formats": [
+      "mp4"
+    ],
+    "size": "34 MB",
+    "spec": [
+      [
+        "Activity",
+        "Urban walking"
+      ],
+      [
+        "Camera",
+        "iPhone 13"
+      ],
+      [
+        "Resolution",
+        "1920x1080"
+      ],
+      [
+        "Frame rate",
+        "30 fps"
+      ],
+      [
+        "Duration",
+        "32 s"
+      ],
+      [
+        "Telemetry",
+        "Motion and location tracks in file"
+      ],
+      [
+        "Activity derived from",
+        "GPS, 2.1 km/h between clips"
+      ]
+    ],
+    "breadcrumb": [
+      "Samples",
+      "Exocentric",
+      "Urban walking"
+    ],
+    "preview": "/samples/clips/exo-20260904-051.mp4",
+    "pills": [
+      {
+        "t": "Urban walking",
+        "k": "skill"
+      },
+      {
+        "t": "1920x1080",
+        "k": "device"
+      },
+      {
+        "t": "Telemetry",
+        "k": "quality"
+      }
+    ],
+    "downloads": [
+      {
+        "t": "Preview pack",
+        "primary": true
+      }
+    ]
+  },
+  {
+    "slug": "exo-20260904-052",
+    "domain": "robotics",
+    "modality": "exocentric",
+    "tier": "exo",
+    "provenance": "custom",
+    "title": "Urban walking",
+    "label": "Urban walking",
+    "environment": "Street, outdoor",
+    "locale": "Hanoi, Vietnam",
+    "rig": "iPhone 13",
+    "viewpoint": "third-person",
+    "skillGroup": "Urban walking",
+    "industry": null,
+    "job": null,
+    "telemetry": true,
+    "durationSec": 31,
+    "resolution": "1920x1080",
+    "fps": 30,
+    "streams": [
+      "rgb"
+    ],
+    "formats": [
+      "mp4"
+    ],
+    "size": "33 MB",
+    "spec": [
+      [
+        "Activity",
+        "Urban walking"
+      ],
+      [
+        "Camera",
+        "iPhone 13"
+      ],
+      [
+        "Resolution",
+        "1920x1080"
+      ],
+      [
+        "Frame rate",
+        "30 fps"
+      ],
+      [
+        "Duration",
+        "31 s"
+      ],
+      [
+        "Telemetry",
+        "Motion and location tracks in file"
+      ],
+      [
+        "Activity derived from",
+        "GPS, 3.1 km/h between clips"
+      ]
+    ],
+    "breadcrumb": [
+      "Samples",
+      "Exocentric",
+      "Urban walking"
+    ],
+    "preview": "/samples/clips/exo-20260904-052.mp4",
+    "pills": [
+      {
+        "t": "Urban walking",
+        "k": "skill"
+      },
+      {
+        "t": "1920x1080",
+        "k": "device"
+      },
+      {
+        "t": "Telemetry",
+        "k": "quality"
+      }
+    ],
+    "downloads": [
+      {
+        "t": "Preview pack",
+        "primary": true
+      }
+    ]
+  },
+  {
+    "slug": "exo-20260904-053",
+    "domain": "robotics",
+    "modality": "exocentric",
+    "tier": "exo",
+    "provenance": "custom",
+    "title": "Urban walking",
+    "label": "Urban walking",
+    "environment": "Street, outdoor",
+    "locale": "Hanoi, Vietnam",
+    "rig": "iPhone 13",
+    "viewpoint": "third-person",
+    "skillGroup": "Urban walking",
+    "industry": null,
+    "job": null,
+    "telemetry": true,
+    "durationSec": 61,
+    "resolution": "1920x1080",
+    "fps": 30,
+    "streams": [
+      "rgb"
+    ],
+    "formats": [
+      "mp4"
+    ],
+    "size": "64 MB",
+    "spec": [
+      [
+        "Activity",
+        "Urban walking"
+      ],
+      [
+        "Camera",
+        "iPhone 13"
+      ],
+      [
+        "Resolution",
+        "1920x1080"
+      ],
+      [
+        "Frame rate",
+        "30 fps"
+      ],
+      [
+        "Duration",
+        "61 s"
+      ],
+      [
+        "Telemetry",
+        "Motion and location tracks in file"
+      ],
+      [
+        "Activity derived from",
+        "GPS, 2.4 km/h between clips"
+      ]
+    ],
+    "breadcrumb": [
+      "Samples",
+      "Exocentric",
+      "Urban walking"
+    ],
+    "preview": "/samples/clips/exo-20260904-053.mp4",
+    "pills": [
+      {
+        "t": "Urban walking",
+        "k": "skill"
+      },
+      {
+        "t": "1920x1080",
+        "k": "device"
+      },
+      {
+        "t": "Telemetry",
+        "k": "quality"
+      }
+    ],
+    "downloads": [
+      {
+        "t": "Preview pack",
+        "primary": true
+      }
+    ]
+  },
+  {
+    "slug": "exo-20260904-054",
+    "domain": "robotics",
+    "modality": "exocentric",
+    "tier": "exo",
+    "provenance": "custom",
+    "title": "Urban walking",
+    "label": "Urban walking",
+    "environment": "Street, outdoor",
+    "locale": "Hanoi, Vietnam",
+    "rig": "iPhone 13",
+    "viewpoint": "third-person",
+    "skillGroup": "Urban walking",
+    "industry": null,
+    "job": null,
+    "telemetry": true,
+    "durationSec": 61,
+    "resolution": "1920x1080",
+    "fps": 30,
+    "streams": [
+      "rgb"
+    ],
+    "formats": [
+      "mp4"
+    ],
+    "size": "64 MB",
+    "spec": [
+      [
+        "Activity",
+        "Urban walking"
+      ],
+      [
+        "Camera",
+        "iPhone 13"
+      ],
+      [
+        "Resolution",
+        "1920x1080"
+      ],
+      [
+        "Frame rate",
+        "30 fps"
+      ],
+      [
+        "Duration",
+        "61 s"
+      ],
+      [
+        "Telemetry",
+        "Motion and location tracks in file"
+      ],
+      [
+        "Activity derived from",
+        "GPS, 2.8 km/h between clips"
+      ]
+    ],
+    "breadcrumb": [
+      "Samples",
+      "Exocentric",
+      "Urban walking"
+    ],
+    "preview": "/samples/clips/exo-20260904-054.mp4",
+    "pills": [
+      {
+        "t": "Urban walking",
+        "k": "skill"
+      },
+      {
+        "t": "1920x1080",
+        "k": "device"
+      },
+      {
+        "t": "Telemetry",
+        "k": "quality"
+      }
+    ],
+    "downloads": [
+      {
+        "t": "Preview pack",
+        "primary": true
+      }
+    ]
+  },
+  {
+    "slug": "exo-20260904-055",
+    "domain": "robotics",
+    "modality": "exocentric",
+    "tier": "exo",
+    "provenance": "custom",
+    "title": "Urban walking",
+    "label": "Urban walking",
+    "environment": "Street, outdoor",
+    "locale": "Hanoi, Vietnam",
+    "rig": "iPhone 13",
+    "viewpoint": "third-person",
+    "skillGroup": "Urban walking",
+    "industry": null,
+    "job": null,
+    "telemetry": true,
+    "durationSec": 241,
+    "resolution": "1920x1080",
+    "fps": 30,
+    "streams": [
+      "rgb"
+    ],
+    "formats": [
+      "mp4"
+    ],
+    "size": "290 MB",
+    "spec": [
+      [
+        "Activity",
+        "Urban walking"
+      ],
+      [
+        "Camera",
+        "iPhone 13"
+      ],
+      [
+        "Resolution",
+        "1920x1080"
+      ],
+      [
+        "Frame rate",
+        "30 fps"
+      ],
+      [
+        "Duration",
+        "241 s"
+      ],
+      [
+        "Telemetry",
+        "Motion and location tracks in file"
+      ],
+      [
+        "Activity derived from",
+        "GPS, 2.8 km/h between clips"
+      ]
+    ],
+    "breadcrumb": [
+      "Samples",
+      "Exocentric",
+      "Urban walking"
+    ],
+    "preview": "/samples/clips/exo-20260904-055.mp4",
+    "pills": [
+      {
+        "t": "Urban walking",
+        "k": "skill"
+      },
+      {
+        "t": "1920x1080",
+        "k": "device"
+      },
+      {
+        "t": "Telemetry",
+        "k": "quality"
+      }
+    ],
+    "downloads": [
+      {
+        "t": "Preview pack",
+        "primary": true
+      }
+    ]
+  },
+  {
+    "slug": "exo-20260904-056",
+    "domain": "robotics",
+    "modality": "exocentric",
+    "tier": "exo",
+    "provenance": "custom",
+    "title": "Urban walking",
+    "label": "Urban walking",
+    "environment": "Street, outdoor",
+    "locale": "Hanoi, Vietnam",
+    "rig": "iPhone 13",
+    "viewpoint": "third-person",
+    "skillGroup": "Urban walking",
+    "industry": null,
+    "job": null,
+    "telemetry": true,
+    "durationSec": 32,
+    "resolution": "3840x2160",
+    "fps": 30,
+    "streams": [
+      "rgb"
+    ],
+    "formats": [
+      "mp4"
+    ],
+    "size": "96 MB",
+    "spec": [
+      [
+        "Activity",
+        "Urban walking"
+      ],
+      [
+        "Camera",
+        "iPhone 13"
+      ],
+      [
+        "Resolution",
+        "3840x2160"
+      ],
+      [
+        "Frame rate",
+        "30 fps"
+      ],
+      [
+        "Duration",
+        "32 s"
+      ],
+      [
+        "Telemetry",
+        "Motion and location tracks in file"
+      ],
+      [
+        "Activity derived from",
+        "Same session as GPS-measured clips, one activity throughout"
+      ]
+    ],
+    "breadcrumb": [
+      "Samples",
+      "Exocentric",
+      "Urban walking"
+    ],
+    "preview": "/samples/clips/exo-20260904-056.mp4",
+    "pills": [
+      {
+        "t": "Urban walking",
+        "k": "skill"
+      },
+      {
+        "t": "3840x2160",
+        "k": "device"
+      },
+      {
+        "t": "Telemetry",
+        "k": "quality"
+      }
+    ],
+    "downloads": [
+      {
+        "t": "Preview pack",
+        "primary": true
+      }
+    ]
+  },
+  {
+    "slug": "exo-20260904-057",
+    "domain": "robotics",
+    "modality": "exocentric",
+    "tier": "exo",
+    "provenance": "custom",
+    "title": "Urban walking",
+    "label": "Urban walking",
+    "environment": "Street, outdoor",
+    "locale": "Hanoi, Vietnam",
+    "rig": "iPhone 13",
+    "viewpoint": "third-person",
+    "skillGroup": "Urban walking",
+    "industry": null,
+    "job": null,
+    "telemetry": true,
+    "durationSec": 61,
+    "resolution": "1920x1080",
+    "fps": 30,
+    "streams": [
+      "rgb"
+    ],
+    "formats": [
+      "mp4"
+    ],
+    "size": "65 MB",
+    "spec": [
+      [
+        "Activity",
+        "Urban walking"
+      ],
+      [
+        "Camera",
+        "iPhone 13"
+      ],
+      [
+        "Resolution",
+        "1920x1080"
+      ],
+      [
+        "Frame rate",
+        "30 fps"
+      ],
+      [
+        "Duration",
+        "61 s"
+      ],
+      [
+        "Telemetry",
+        "Motion and location tracks in file"
+      ],
+      [
+        "Activity derived from",
+        "Same session as GPS-measured clips, one activity throughout"
+      ]
+    ],
+    "breadcrumb": [
+      "Samples",
+      "Exocentric",
+      "Urban walking"
+    ],
+    "preview": "/samples/clips/exo-20260904-057.mp4",
+    "pills": [
+      {
+        "t": "Urban walking",
+        "k": "skill"
+      },
+      {
+        "t": "1920x1080",
+        "k": "device"
+      },
+      {
+        "t": "Telemetry",
+        "k": "quality"
+      }
+    ],
+    "downloads": [
+      {
+        "t": "Preview pack",
+        "primary": true
+      }
+    ]
+  },
+  {
+    "slug": "exo-20260904-058",
+    "domain": "robotics",
+    "modality": "exocentric",
+    "tier": "exo",
+    "provenance": "custom",
+    "title": "Urban walking",
+    "label": "Urban walking",
+    "environment": "Street, outdoor",
+    "locale": "Hanoi, Vietnam",
+    "rig": "iPhone 13",
+    "viewpoint": "third-person",
+    "skillGroup": "Urban walking",
+    "industry": null,
+    "job": null,
+    "telemetry": true,
+    "durationSec": 32,
+    "resolution": "1920x1080",
+    "fps": 30,
+    "streams": [
+      "rgb"
+    ],
+    "formats": [
+      "mp4"
+    ],
+    "size": "33 MB",
+    "spec": [
+      [
+        "Activity",
+        "Urban walking"
+      ],
+      [
+        "Camera",
+        "iPhone 13"
+      ],
+      [
+        "Resolution",
+        "1920x1080"
+      ],
+      [
+        "Frame rate",
+        "30 fps"
+      ],
+      [
+        "Duration",
+        "32 s"
+      ],
+      [
+        "Telemetry",
+        "Motion and location tracks in file"
+      ],
+      [
+        "Activity derived from",
+        "GPS, 1.4 km/h between clips"
+      ]
+    ],
+    "breadcrumb": [
+      "Samples",
+      "Exocentric",
+      "Urban walking"
+    ],
+    "preview": "/samples/clips/exo-20260904-058.mp4",
+    "pills": [
+      {
+        "t": "Urban walking",
+        "k": "skill"
+      },
+      {
+        "t": "1920x1080",
+        "k": "device"
+      },
+      {
+        "t": "Telemetry",
+        "k": "quality"
+      }
+    ],
+    "downloads": [
+      {
+        "t": "Preview pack",
+        "primary": true
+      }
+    ]
+  },
+  {
+    "slug": "exo-20260904-059",
+    "domain": "robotics",
+    "modality": "exocentric",
+    "tier": "exo",
+    "provenance": "custom",
+    "title": "Urban walking",
+    "label": "Urban walking",
+    "environment": "Street, outdoor",
+    "locale": "Hanoi, Vietnam",
+    "rig": "iPhone 13",
+    "viewpoint": "third-person",
+    "skillGroup": "Urban walking",
+    "industry": null,
+    "job": null,
+    "telemetry": true,
+    "durationSec": 121,
+    "resolution": "1920x1080",
+    "fps": 30,
+    "streams": [
+      "rgb"
+    ],
+    "formats": [
+      "mp4"
+    ],
+    "size": "131 MB",
+    "spec": [
+      [
+        "Activity",
+        "Urban walking"
+      ],
+      [
+        "Camera",
+        "iPhone 13"
+      ],
+      [
+        "Resolution",
+        "1920x1080"
+      ],
+      [
+        "Frame rate",
+        "30 fps"
+      ],
+      [
+        "Duration",
+        "121 s"
+      ],
+      [
+        "Telemetry",
+        "Motion and location tracks in file"
+      ],
+      [
+        "Activity derived from",
+        "GPS, 1.7 km/h between clips"
+      ]
+    ],
+    "breadcrumb": [
+      "Samples",
+      "Exocentric",
+      "Urban walking"
+    ],
+    "preview": "/samples/clips/exo-20260904-059.mp4",
+    "pills": [
+      {
+        "t": "Urban walking",
+        "k": "skill"
+      },
+      {
+        "t": "1920x1080",
+        "k": "device"
+      },
+      {
+        "t": "Telemetry",
+        "k": "quality"
+      }
+    ],
+    "downloads": [
+      {
+        "t": "Preview pack",
+        "primary": true
+      }
+    ]
+  },
+  {
+    "slug": "exo-20260904-060",
+    "domain": "robotics",
+    "modality": "exocentric",
+    "tier": "exo",
+    "provenance": "custom",
+    "title": "Urban walking",
+    "label": "Urban walking",
+    "environment": "Street, outdoor",
+    "locale": "Hanoi, Vietnam",
+    "rig": "iPhone 13",
+    "viewpoint": "third-person",
+    "skillGroup": "Urban walking",
+    "industry": null,
+    "job": null,
+    "telemetry": true,
+    "durationSec": 36,
+    "resolution": "1920x1080",
+    "fps": 30,
+    "streams": [
+      "rgb"
+    ],
+    "formats": [
+      "mp4"
+    ],
+    "size": "38 MB",
+    "spec": [
+      [
+        "Activity",
+        "Urban walking"
+      ],
+      [
+        "Camera",
+        "iPhone 13"
+      ],
+      [
+        "Resolution",
+        "1920x1080"
+      ],
+      [
+        "Frame rate",
+        "30 fps"
+      ],
+      [
+        "Duration",
+        "36 s"
+      ],
+      [
+        "Telemetry",
+        "Motion and location tracks in file"
+      ],
+      [
+        "Activity derived from",
+        "GPS, 1.7 km/h between clips"
+      ]
+    ],
+    "breadcrumb": [
+      "Samples",
+      "Exocentric",
+      "Urban walking"
+    ],
+    "preview": "/samples/clips/exo-20260904-060.mp4",
+    "pills": [
+      {
+        "t": "Urban walking",
+        "k": "skill"
+      },
+      {
+        "t": "1920x1080",
+        "k": "device"
+      },
+      {
+        "t": "Telemetry",
+        "k": "quality"
+      }
+    ],
+    "downloads": [
+      {
+        "t": "Preview pack",
+        "primary": true
+      }
+    ]
+  },
+  {
+    "slug": "exo-20260904-061",
+    "domain": "robotics",
+    "modality": "exocentric",
+    "tier": "exo",
+    "provenance": "custom",
+    "title": "Urban walking",
+    "label": "Urban walking",
+    "environment": "Street, outdoor",
+    "locale": "Hanoi, Vietnam",
+    "rig": "iPhone 13",
+    "viewpoint": "third-person",
+    "skillGroup": "Urban walking",
+    "industry": null,
+    "job": null,
+    "telemetry": true,
+    "durationSec": 30,
+    "resolution": "1920x1080",
+    "fps": 30,
+    "streams": [
+      "rgb"
+    ],
+    "formats": [
+      "mp4"
+    ],
+    "size": "32 MB",
+    "spec": [
+      [
+        "Activity",
+        "Urban walking"
+      ],
+      [
+        "Camera",
+        "iPhone 13"
+      ],
+      [
+        "Resolution",
+        "1920x1080"
+      ],
+      [
+        "Frame rate",
+        "30 fps"
+      ],
+      [
+        "Duration",
+        "30 s"
+      ],
+      [
+        "Telemetry",
+        "Motion and location tracks in file"
+      ],
+      [
+        "Activity derived from",
+        "GPS, 1.7 km/h between clips"
+      ]
+    ],
+    "breadcrumb": [
+      "Samples",
+      "Exocentric",
+      "Urban walking"
+    ],
+    "preview": "/samples/clips/exo-20260904-061.mp4",
+    "pills": [
+      {
+        "t": "Urban walking",
+        "k": "skill"
+      },
+      {
+        "t": "1920x1080",
+        "k": "device"
+      },
+      {
+        "t": "Telemetry",
+        "k": "quality"
+      }
+    ],
+    "downloads": [
+      {
+        "t": "Preview pack",
+        "primary": true
+      }
+    ]
+  },
+  {
+    "slug": "exo-20260904-062",
+    "domain": "robotics",
+    "modality": "exocentric",
+    "tier": "exo",
+    "provenance": "custom",
+    "title": "Urban walking",
+    "label": "Urban walking",
+    "environment": "Street, outdoor",
+    "locale": "Hanoi, Vietnam",
+    "rig": "iPhone 13",
+    "viewpoint": "third-person",
+    "skillGroup": "Urban walking",
+    "industry": null,
+    "job": null,
+    "telemetry": true,
+    "durationSec": 182,
+    "resolution": "1920x1080",
+    "fps": 30,
+    "streams": [
+      "rgb"
+    ],
+    "formats": [
+      "mp4"
+    ],
+    "size": "192 MB",
+    "spec": [
+      [
+        "Activity",
+        "Urban walking"
+      ],
+      [
+        "Camera",
+        "iPhone 13"
+      ],
+      [
+        "Resolution",
+        "1920x1080"
+      ],
+      [
+        "Frame rate",
+        "30 fps"
+      ],
+      [
+        "Duration",
+        "182 s"
+      ],
+      [
+        "Telemetry",
+        "Motion and location tracks in file"
+      ],
+      [
+        "Activity derived from",
+        "GPS, 1.7 km/h between clips"
+      ]
+    ],
+    "breadcrumb": [
+      "Samples",
+      "Exocentric",
+      "Urban walking"
+    ],
+    "preview": "/samples/clips/exo-20260904-062.mp4",
+    "pills": [
+      {
+        "t": "Urban walking",
+        "k": "skill"
+      },
+      {
+        "t": "1920x1080",
+        "k": "device"
+      },
+      {
+        "t": "Telemetry",
+        "k": "quality"
+      }
+    ],
+    "downloads": [
+      {
+        "t": "Preview pack",
+        "primary": true
+      }
+    ]
+  },
+  {
+    "slug": "exo-20260904-063",
+    "domain": "robotics",
+    "modality": "exocentric",
+    "tier": "exo",
+    "provenance": "custom",
+    "title": "Urban walking",
+    "label": "Urban walking",
+    "environment": "Street, outdoor",
+    "locale": "Hanoi, Vietnam",
+    "rig": "iPhone 13",
+    "viewpoint": "third-person",
+    "skillGroup": "Urban walking",
+    "industry": null,
+    "job": null,
+    "telemetry": true,
+    "durationSec": 301,
+    "resolution": "1920x1080",
+    "fps": 30,
+    "streams": [
+      "rgb"
+    ],
+    "formats": [
+      "mp4"
+    ],
+    "size": "363 MB",
+    "spec": [
+      [
+        "Activity",
+        "Urban walking"
+      ],
+      [
+        "Camera",
+        "iPhone 13"
+      ],
+      [
+        "Resolution",
+        "1920x1080"
+      ],
+      [
+        "Frame rate",
+        "30 fps"
+      ],
+      [
+        "Duration",
+        "301 s"
+      ],
+      [
+        "Telemetry",
+        "Motion and location tracks in file"
+      ],
+      [
+        "Activity derived from",
+        "Same session as GPS-measured clips, one activity throughout"
+      ]
+    ],
+    "breadcrumb": [
+      "Samples",
+      "Exocentric",
+      "Urban walking"
+    ],
+    "preview": "/samples/clips/exo-20260904-063.mp4",
+    "pills": [
+      {
+        "t": "Urban walking",
+        "k": "skill"
+      },
+      {
+        "t": "1920x1080",
+        "k": "device"
+      },
+      {
+        "t": "Telemetry",
+        "k": "quality"
+      }
+    ],
+    "downloads": [
+      {
+        "t": "Preview pack",
+        "primary": true
+      }
+    ]
+  },
+  {
+    "slug": "vehicular-navigation-002",
+    "domain": "robotics",
+    "modality": "exocentric",
+    "tier": "exo",
+    "provenance": "custom",
+    "title": "Vehicular navigation",
+    "label": "Vehicular navigation",
+    "environment": "Street, outdoor",
+    "locale": "Hanoi, Vietnam",
+    "rig": "Handheld camera",
+    "viewpoint": "third-person",
+    "skillGroup": "Vehicular navigation",
+    "industry": null,
+    "job": null,
+    "telemetry": false,
+    "durationSec": 27,
+    "resolution": "1920x1080",
+    "fps": 30,
+    "streams": [
+      "rgb"
+    ],
+    "formats": [
+      "mp4"
+    ],
+    "size": "65 MB",
+    "spec": [
+      [
+        "Activity",
+        "Vehicular navigation"
+      ],
+      [
+        "Camera",
+        "Handheld"
+      ],
+      [
+        "Resolution",
+        "1920x1080"
+      ],
+      [
+        "Frame rate",
+        "30 fps"
+      ],
+      [
+        "Duration",
+        "27 s"
+      ],
+      [
+        "Telemetry",
+        "None"
+      ]
+    ],
+    "breadcrumb": [
+      "Samples",
+      "Exocentric",
+      "Vehicular navigation"
+    ],
+    "preview": "/samples/clips/vehicular-navigation-002.mp4",
+    "pills": [
+      {
+        "t": "Vehicular navigation",
+        "k": "skill"
+      },
+      {
+        "t": "1920x1080",
+        "k": "device"
+      }
+    ],
+    "downloads": [
+      {
+        "t": "Preview pack",
+        "primary": true
+      }
+    ]
+  },
+  {
+    "slug": "vehicular-navigation-003",
+    "domain": "robotics",
+    "modality": "exocentric",
+    "tier": "exo",
+    "provenance": "custom",
+    "title": "Vehicular navigation",
+    "label": "Vehicular navigation",
+    "environment": "Street, outdoor",
+    "locale": "Hanoi, Vietnam",
+    "rig": "Handheld camera",
+    "viewpoint": "third-person",
+    "skillGroup": "Vehicular navigation",
+    "industry": null,
+    "job": null,
+    "telemetry": false,
+    "durationSec": 83,
+    "resolution": "1920x1080",
+    "fps": 30,
+    "streams": [
+      "rgb"
+    ],
+    "formats": [
+      "mp4"
+    ],
+    "size": "201 MB",
+    "spec": [
+      [
+        "Activity",
+        "Vehicular navigation"
+      ],
+      [
+        "Camera",
+        "Handheld"
+      ],
+      [
+        "Resolution",
+        "1920x1080"
+      ],
+      [
+        "Frame rate",
+        "30 fps"
+      ],
+      [
+        "Duration",
+        "83 s"
+      ],
+      [
+        "Telemetry",
+        "None"
+      ]
+    ],
+    "breadcrumb": [
+      "Samples",
+      "Exocentric",
+      "Vehicular navigation"
+    ],
+    "preview": "/samples/clips/vehicular-navigation-003.mp4",
+    "pills": [
+      {
+        "t": "Vehicular navigation",
+        "k": "skill"
+      },
+      {
+        "t": "1920x1080",
+        "k": "device"
+      }
+    ],
+    "downloads": [
+      {
+        "t": "Preview pack",
+        "primary": true
+      }
+    ]
+  },
+  {
+    "slug": "vehicular-navigation-004",
+    "domain": "robotics",
+    "modality": "exocentric",
+    "tier": "exo",
+    "provenance": "custom",
+    "title": "Vehicular navigation",
+    "label": "Vehicular navigation",
+    "environment": "Street, outdoor",
+    "locale": "Hanoi, Vietnam",
+    "rig": "Handheld camera",
+    "viewpoint": "third-person",
+    "skillGroup": "Vehicular navigation",
+    "industry": null,
+    "job": null,
+    "telemetry": false,
+    "durationSec": 6,
+    "resolution": "1920x1080",
+    "fps": 30,
+    "streams": [
+      "rgb"
+    ],
+    "formats": [
+      "mp4"
+    ],
+    "size": "15 MB",
+    "spec": [
+      [
+        "Activity",
+        "Vehicular navigation"
+      ],
+      [
+        "Camera",
+        "Handheld"
+      ],
+      [
+        "Resolution",
+        "1920x1080"
+      ],
+      [
+        "Frame rate",
+        "30 fps"
+      ],
+      [
+        "Duration",
+        "6 s"
+      ],
+      [
+        "Telemetry",
+        "None"
+      ]
+    ],
+    "breadcrumb": [
+      "Samples",
+      "Exocentric",
+      "Vehicular navigation"
+    ],
+    "preview": "/samples/clips/vehicular-navigation-004.mp4",
+    "pills": [
+      {
+        "t": "Vehicular navigation",
+        "k": "skill"
+      },
+      {
+        "t": "1920x1080",
+        "k": "device"
+      }
+    ],
+    "downloads": [
+      {
+        "t": "Preview pack",
+        "primary": true
+      }
+    ]
+  },
+  {
+    "slug": "vehicular-navigation-005",
+    "domain": "robotics",
+    "modality": "exocentric",
+    "tier": "exo",
+    "provenance": "custom",
+    "title": "Vehicular navigation",
+    "label": "Vehicular navigation",
+    "environment": "Street, outdoor",
+    "locale": "Hanoi, Vietnam",
+    "rig": "Handheld camera",
+    "viewpoint": "third-person",
+    "skillGroup": "Vehicular navigation",
+    "industry": null,
+    "job": null,
+    "telemetry": false,
+    "durationSec": 23,
+    "resolution": "1920x1080",
+    "fps": 30,
+    "streams": [
+      "rgb"
+    ],
+    "formats": [
+      "mp4"
+    ],
+    "size": "55 MB",
+    "spec": [
+      [
+        "Activity",
+        "Vehicular navigation"
+      ],
+      [
+        "Camera",
+        "Handheld"
+      ],
+      [
+        "Resolution",
+        "1920x1080"
+      ],
+      [
+        "Frame rate",
+        "30 fps"
+      ],
+      [
+        "Duration",
+        "23 s"
+      ],
+      [
+        "Telemetry",
+        "None"
+      ]
+    ],
+    "breadcrumb": [
+      "Samples",
+      "Exocentric",
+      "Vehicular navigation"
+    ],
+    "preview": "/samples/clips/vehicular-navigation-005.mp4",
+    "pills": [
+      {
+        "t": "Vehicular navigation",
+        "k": "skill"
+      },
+      {
+        "t": "1920x1080",
+        "k": "device"
+      }
+    ],
+    "downloads": [
+      {
+        "t": "Preview pack",
+        "primary": true
+      }
+    ]
+  },
+  {
+    "slug": "vehicular-navigation-006",
+    "domain": "robotics",
+    "modality": "exocentric",
+    "tier": "exo",
+    "provenance": "custom",
+    "title": "Vehicular navigation",
+    "label": "Vehicular navigation",
+    "environment": "Street, outdoor",
+    "locale": "Hanoi, Vietnam",
+    "rig": "Handheld camera",
+    "viewpoint": "third-person",
+    "skillGroup": "Vehicular navigation",
+    "industry": null,
+    "job": null,
+    "telemetry": false,
+    "durationSec": 67,
+    "resolution": "1920x1080",
+    "fps": 120,
+    "streams": [
+      "rgb"
+    ],
+    "formats": [
+      "mp4"
+    ],
+    "size": "163 MB",
+    "spec": [
+      [
+        "Activity",
+        "Vehicular navigation"
+      ],
+      [
+        "Camera",
+        "Handheld"
+      ],
+      [
+        "Resolution",
+        "1920x1080"
+      ],
+      [
+        "Frame rate",
+        "120 fps"
+      ],
+      [
+        "Duration",
+        "67 s"
+      ],
+      [
+        "Telemetry",
+        "None"
+      ]
+    ],
+    "breadcrumb": [
+      "Samples",
+      "Exocentric",
+      "Vehicular navigation"
+    ],
+    "preview": "/samples/clips/vehicular-navigation-006.mp4",
+    "pills": [
+      {
+        "t": "Vehicular navigation",
+        "k": "skill"
+      },
+      {
+        "t": "1920x1080",
+        "k": "device"
+      }
+    ],
+    "downloads": [
+      {
+        "t": "Preview pack",
+        "primary": true
+      }
+    ]
+  },
+  {
+    "slug": "vehicular-navigation-007",
+    "domain": "robotics",
+    "modality": "exocentric",
+    "tier": "exo",
+    "provenance": "custom",
+    "title": "Vehicular navigation",
+    "label": "Vehicular navigation",
+    "environment": "Street, outdoor",
+    "locale": "Hanoi, Vietnam",
+    "rig": "Handheld camera",
+    "viewpoint": "third-person",
+    "skillGroup": "Vehicular navigation",
+    "industry": null,
+    "job": null,
+    "telemetry": false,
+    "durationSec": 16,
+    "resolution": "1920x1080",
+    "fps": 30,
+    "streams": [
+      "rgb"
+    ],
+    "formats": [
+      "mp4"
+    ],
+    "size": "41 MB",
+    "spec": [
+      [
+        "Activity",
+        "Vehicular navigation"
+      ],
+      [
+        "Camera",
+        "Handheld"
+      ],
+      [
+        "Resolution",
+        "1920x1080"
+      ],
+      [
+        "Frame rate",
+        "30.01 fps"
+      ],
+      [
+        "Duration",
+        "16 s"
+      ],
+      [
+        "Telemetry",
+        "None"
+      ]
+    ],
+    "breadcrumb": [
+      "Samples",
+      "Exocentric",
+      "Vehicular navigation"
+    ],
+    "preview": "/samples/clips/vehicular-navigation-007.mp4",
+    "pills": [
+      {
+        "t": "Vehicular navigation",
+        "k": "skill"
+      },
+      {
+        "t": "1920x1080",
+        "k": "device"
+      }
+    ],
+    "downloads": [
+      {
+        "t": "Preview pack",
+        "primary": true
+      }
+    ]
+  },
+  {
+    "slug": "vehicular-navigation-008",
+    "domain": "robotics",
+    "modality": "exocentric",
+    "tier": "exo",
+    "provenance": "custom",
+    "title": "Vehicular navigation",
+    "label": "Vehicular navigation",
+    "environment": "Street, outdoor",
+    "locale": "Hanoi, Vietnam",
+    "rig": "Handheld camera",
+    "viewpoint": "third-person",
+    "skillGroup": "Vehicular navigation",
+    "industry": null,
+    "job": null,
+    "telemetry": false,
+    "durationSec": 151,
+    "resolution": "1920x1080",
+    "fps": 30,
+    "streams": [
+      "rgb"
+    ],
+    "formats": [
+      "mp4"
+    ],
+    "size": "367 MB",
+    "spec": [
+      [
+        "Activity",
+        "Vehicular navigation"
+      ],
+      [
+        "Camera",
+        "Handheld"
+      ],
+      [
+        "Resolution",
+        "1920x1080"
+      ],
+      [
+        "Frame rate",
+        "29.97 fps"
+      ],
+      [
+        "Duration",
+        "151 s"
+      ],
+      [
+        "Telemetry",
+        "None"
+      ]
+    ],
+    "breadcrumb": [
+      "Samples",
+      "Exocentric",
+      "Vehicular navigation"
+    ],
+    "preview": "/samples/clips/vehicular-navigation-008.mp4",
+    "pills": [
+      {
+        "t": "Vehicular navigation",
+        "k": "skill"
+      },
+      {
+        "t": "1920x1080",
+        "k": "device"
+      }
+    ],
+    "downloads": [
+      {
+        "t": "Preview pack",
+        "primary": true
+      }
+    ]
+  },
+  {
+    "slug": "vehicular-navigation-009",
+    "domain": "robotics",
+    "modality": "exocentric",
+    "tier": "exo",
+    "provenance": "custom",
+    "title": "Vehicular navigation",
+    "label": "Vehicular navigation",
+    "environment": "Street, outdoor",
+    "locale": "Hanoi, Vietnam",
+    "rig": "Handheld camera",
+    "viewpoint": "third-person",
+    "skillGroup": "Vehicular navigation",
+    "industry": null,
+    "job": null,
+    "telemetry": false,
+    "durationSec": 33,
+    "resolution": "1920x1080",
+    "fps": 30,
+    "streams": [
+      "rgb"
+    ],
+    "formats": [
+      "mp4"
+    ],
+    "size": "80 MB",
+    "spec": [
+      [
+        "Activity",
+        "Vehicular navigation"
+      ],
+      [
+        "Camera",
+        "Handheld"
+      ],
+      [
+        "Resolution",
+        "1920x1080"
+      ],
+      [
+        "Frame rate",
+        "30 fps"
+      ],
+      [
+        "Duration",
+        "33 s"
+      ],
+      [
+        "Telemetry",
+        "None"
+      ]
+    ],
+    "breadcrumb": [
+      "Samples",
+      "Exocentric",
+      "Vehicular navigation"
+    ],
+    "preview": "/samples/clips/vehicular-navigation-009.mp4",
+    "pills": [
+      {
+        "t": "Vehicular navigation",
+        "k": "skill"
+      },
+      {
+        "t": "1920x1080",
+        "k": "device"
+      }
+    ],
+    "downloads": [
+      {
+        "t": "Preview pack",
+        "primary": true
+      }
+    ]
+  },
+  {
+    "slug": "vehicular-navigation-010",
+    "domain": "robotics",
+    "modality": "exocentric",
+    "tier": "exo",
+    "provenance": "custom",
+    "title": "Vehicular navigation",
+    "label": "Vehicular navigation",
+    "environment": "Street, outdoor",
+    "locale": "Hanoi, Vietnam",
+    "rig": "Handheld camera",
+    "viewpoint": "third-person",
+    "skillGroup": "Vehicular navigation",
+    "industry": null,
+    "job": null,
+    "telemetry": false,
+    "durationSec": 192,
+    "resolution": "1920x1080",
+    "fps": 30,
+    "streams": [
+      "rgb"
+    ],
+    "formats": [
+      "mp4"
+    ],
+    "size": "467 MB",
+    "spec": [
+      [
+        "Activity",
+        "Vehicular navigation"
+      ],
+      [
+        "Camera",
+        "Handheld"
+      ],
+      [
+        "Resolution",
+        "1920x1080"
+      ],
+      [
+        "Frame rate",
+        "30 fps"
+      ],
+      [
+        "Duration",
+        "192 s"
+      ],
+      [
+        "Telemetry",
+        "None"
+      ]
+    ],
+    "breadcrumb": [
+      "Samples",
+      "Exocentric",
+      "Vehicular navigation"
+    ],
+    "preview": "/samples/clips/vehicular-navigation-010.mp4",
+    "pills": [
+      {
+        "t": "Vehicular navigation",
+        "k": "skill"
+      },
+      {
+        "t": "1920x1080",
+        "k": "device"
+      }
+    ],
+    "downloads": [
+      {
+        "t": "Preview pack",
+        "primary": true
+      }
+    ]
+  },
+  {
+    "slug": "vehicular-navigation-011",
+    "domain": "robotics",
+    "modality": "exocentric",
+    "tier": "exo",
+    "provenance": "custom",
+    "title": "Vehicular navigation",
+    "label": "Vehicular navigation",
+    "environment": "Street, outdoor",
+    "locale": "Hanoi, Vietnam",
+    "rig": "Handheld camera",
+    "viewpoint": "third-person",
+    "skillGroup": "Vehicular navigation",
+    "industry": null,
+    "job": null,
+    "telemetry": false,
+    "durationSec": 120,
+    "resolution": "1920x1080",
+    "fps": 30,
+    "streams": [
+      "rgb"
+    ],
+    "formats": [
+      "mp4"
+    ],
+    "size": "294 MB",
+    "spec": [
+      [
+        "Activity",
+        "Vehicular navigation"
+      ],
+      [
+        "Camera",
+        "Handheld"
+      ],
+      [
+        "Resolution",
+        "1920x1080"
+      ],
+      [
+        "Frame rate",
+        "30 fps"
+      ],
+      [
+        "Duration",
+        "120 s"
+      ],
+      [
+        "Telemetry",
+        "None"
+      ]
+    ],
+    "breadcrumb": [
+      "Samples",
+      "Exocentric",
+      "Vehicular navigation"
+    ],
+    "preview": "/samples/clips/vehicular-navigation-011.mp4",
+    "pills": [
+      {
+        "t": "Vehicular navigation",
+        "k": "skill"
+      },
+      {
+        "t": "1920x1080",
+        "k": "device"
+      }
+    ],
+    "downloads": [
+      {
+        "t": "Preview pack",
+        "primary": true
+      }
+    ]
+  },
+  {
+    "slug": "vehicular-navigation-012",
+    "domain": "robotics",
+    "modality": "exocentric",
+    "tier": "exo",
+    "provenance": "custom",
+    "title": "Vehicular navigation",
+    "label": "Vehicular navigation",
+    "environment": "Street, outdoor",
+    "locale": "Hanoi, Vietnam",
+    "rig": "Handheld camera",
+    "viewpoint": "third-person",
+    "skillGroup": "Vehicular navigation",
+    "industry": null,
+    "job": null,
+    "telemetry": false,
+    "durationSec": 1,
+    "resolution": "1920x1080",
+    "fps": 30,
+    "streams": [
+      "rgb"
+    ],
+    "formats": [
+      "mp4"
+    ],
+    "size": "4 MB",
+    "spec": [
+      [
+        "Activity",
+        "Vehicular navigation"
+      ],
+      [
+        "Camera",
+        "Handheld"
+      ],
+      [
+        "Resolution",
+        "1920x1080"
+      ],
+      [
+        "Frame rate",
+        "29.97 fps"
+      ],
+      [
+        "Duration",
+        "1 s"
+      ],
+      [
+        "Telemetry",
+        "None"
+      ]
+    ],
+    "breadcrumb": [
+      "Samples",
+      "Exocentric",
+      "Vehicular navigation"
+    ],
+    "preview": "/samples/clips/vehicular-navigation-012.mp4",
+    "pills": [
+      {
+        "t": "Vehicular navigation",
+        "k": "skill"
+      },
+      {
+        "t": "1920x1080",
+        "k": "device"
+      }
+    ],
+    "downloads": [
+      {
+        "t": "Preview pack",
+        "primary": true
+      }
+    ]
+  },
+  {
+    "slug": "vehicular-navigation-013",
+    "domain": "robotics",
+    "modality": "exocentric",
+    "tier": "exo",
+    "provenance": "custom",
+    "title": "Vehicular navigation",
+    "label": "Vehicular navigation",
+    "environment": "Street, outdoor",
+    "locale": "Hanoi, Vietnam",
+    "rig": "Handheld camera",
+    "viewpoint": "third-person",
+    "skillGroup": "Vehicular navigation",
+    "industry": null,
+    "job": null,
+    "telemetry": false,
+    "durationSec": 121,
+    "resolution": "1920x1080",
+    "fps": 30,
+    "streams": [
+      "rgb"
+    ],
+    "formats": [
+      "mp4"
+    ],
+    "size": "295 MB",
+    "spec": [
+      [
+        "Activity",
+        "Vehicular navigation"
+      ],
+      [
+        "Camera",
+        "Handheld"
+      ],
+      [
+        "Resolution",
+        "1920x1080"
+      ],
+      [
+        "Frame rate",
+        "29.97 fps"
+      ],
+      [
+        "Duration",
+        "121 s"
+      ],
+      [
+        "Telemetry",
+        "None"
+      ]
+    ],
+    "breadcrumb": [
+      "Samples",
+      "Exocentric",
+      "Vehicular navigation"
+    ],
+    "preview": "/samples/clips/vehicular-navigation-013.mp4",
+    "pills": [
+      {
+        "t": "Vehicular navigation",
+        "k": "skill"
+      },
+      {
+        "t": "1920x1080",
+        "k": "device"
+      }
+    ],
+    "downloads": [
+      {
+        "t": "Preview pack",
+        "primary": true
+      }
+    ]
+  },
+  {
+    "slug": "vehicular-navigation-014",
+    "domain": "robotics",
+    "modality": "exocentric",
+    "tier": "exo",
+    "provenance": "custom",
+    "title": "Vehicular navigation",
+    "label": "Vehicular navigation",
+    "environment": "Street, outdoor",
+    "locale": "Hanoi, Vietnam",
+    "rig": "Handheld camera",
+    "viewpoint": "third-person",
+    "skillGroup": "Vehicular navigation",
+    "industry": null,
+    "job": null,
+    "telemetry": false,
+    "durationSec": 10,
+    "resolution": "1920x1080",
+    "fps": 30,
+    "streams": [
+      "rgb"
+    ],
+    "formats": [
+      "mp4"
+    ],
+    "size": "25 MB",
+    "spec": [
+      [
+        "Activity",
+        "Vehicular navigation"
+      ],
+      [
+        "Camera",
+        "Handheld"
+      ],
+      [
+        "Resolution",
+        "1920x1080"
+      ],
+      [
+        "Frame rate",
+        "29.97 fps"
+      ],
+      [
+        "Duration",
+        "10 s"
+      ],
+      [
+        "Telemetry",
+        "None"
+      ]
+    ],
+    "breadcrumb": [
+      "Samples",
+      "Exocentric",
+      "Vehicular navigation"
+    ],
+    "preview": "/samples/clips/vehicular-navigation-014.mp4",
+    "pills": [
+      {
+        "t": "Vehicular navigation",
+        "k": "skill"
+      },
+      {
+        "t": "1920x1080",
+        "k": "device"
+      }
+    ],
+    "downloads": [
+      {
+        "t": "Preview pack",
+        "primary": true
+      }
+    ]
+  },
+  {
+    "slug": "vehicular-navigation-015",
+    "domain": "robotics",
+    "modality": "exocentric",
+    "tier": "exo",
+    "provenance": "custom",
+    "title": "Vehicular navigation",
+    "label": "Vehicular navigation",
+    "environment": "Street, outdoor",
+    "locale": "Hanoi, Vietnam",
+    "rig": "Handheld camera",
+    "viewpoint": "third-person",
+    "skillGroup": "Vehicular navigation",
+    "industry": null,
+    "job": null,
+    "telemetry": false,
+    "durationSec": 168,
+    "resolution": "1920x1080",
+    "fps": 30,
+    "streams": [
+      "rgb"
+    ],
+    "formats": [
+      "mp4"
+    ],
+    "size": "408 MB",
+    "spec": [
+      [
+        "Activity",
+        "Vehicular navigation"
+      ],
+      [
+        "Camera",
+        "Handheld"
+      ],
+      [
+        "Resolution",
+        "1920x1080"
+      ],
+      [
+        "Frame rate",
+        "30 fps"
+      ],
+      [
+        "Duration",
+        "168 s"
+      ],
+      [
+        "Telemetry",
+        "None"
+      ]
+    ],
+    "breadcrumb": [
+      "Samples",
+      "Exocentric",
+      "Vehicular navigation"
+    ],
+    "preview": "/samples/clips/vehicular-navigation-015.mp4",
+    "pills": [
+      {
+        "t": "Vehicular navigation",
+        "k": "skill"
+      },
+      {
+        "t": "1920x1080",
+        "k": "device"
+      }
+    ],
+    "downloads": [
+      {
+        "t": "Preview pack",
+        "primary": true
+      }
+    ]
+  },
+  {
+    "slug": "vehicular-navigation-016",
+    "domain": "robotics",
+    "modality": "exocentric",
+    "tier": "exo",
+    "provenance": "custom",
+    "title": "Vehicular navigation",
+    "label": "Vehicular navigation",
+    "environment": "Street, outdoor",
+    "locale": "Hanoi, Vietnam",
+    "rig": "Handheld camera",
+    "viewpoint": "third-person",
+    "skillGroup": "Vehicular navigation",
+    "industry": null,
+    "job": null,
+    "telemetry": false,
+    "durationSec": 25,
+    "resolution": "1920x1080",
+    "fps": 30,
+    "streams": [
+      "rgb"
+    ],
+    "formats": [
+      "mp4"
+    ],
+    "size": "62 MB",
+    "spec": [
+      [
+        "Activity",
+        "Vehicular navigation"
+      ],
+      [
+        "Camera",
+        "Handheld"
+      ],
+      [
+        "Resolution",
+        "1920x1080"
+      ],
+      [
+        "Frame rate",
+        "30 fps"
+      ],
+      [
+        "Duration",
+        "25 s"
+      ],
+      [
+        "Telemetry",
+        "None"
+      ]
+    ],
+    "breadcrumb": [
+      "Samples",
+      "Exocentric",
+      "Vehicular navigation"
+    ],
+    "preview": "/samples/clips/vehicular-navigation-016.mp4",
+    "pills": [
+      {
+        "t": "Vehicular navigation",
+        "k": "skill"
+      },
+      {
+        "t": "1920x1080",
+        "k": "device"
+      }
+    ],
+    "downloads": [
+      {
+        "t": "Preview pack",
+        "primary": true
+      }
+    ]
+  },
+  {
+    "slug": "vehicular-navigation-017",
+    "domain": "robotics",
+    "modality": "exocentric",
+    "tier": "exo",
+    "provenance": "custom",
+    "title": "Vehicular navigation",
+    "label": "Vehicular navigation",
+    "environment": "Street, outdoor",
+    "locale": "Hanoi, Vietnam",
+    "rig": "Handheld camera",
+    "viewpoint": "third-person",
+    "skillGroup": "Vehicular navigation",
+    "industry": null,
+    "job": null,
+    "telemetry": false,
+    "durationSec": 9,
+    "resolution": "1920x1080",
+    "fps": 30,
+    "streams": [
+      "rgb"
+    ],
+    "formats": [
+      "mp4"
+    ],
+    "size": "22 MB",
+    "spec": [
+      [
+        "Activity",
+        "Vehicular navigation"
+      ],
+      [
+        "Camera",
+        "Handheld"
+      ],
+      [
+        "Resolution",
+        "1920x1080"
+      ],
+      [
+        "Frame rate",
+        "29.917 fps"
+      ],
+      [
+        "Duration",
+        "9 s"
+      ],
+      [
+        "Telemetry",
+        "None"
+      ]
+    ],
+    "breadcrumb": [
+      "Samples",
+      "Exocentric",
+      "Vehicular navigation"
+    ],
+    "preview": "/samples/clips/vehicular-navigation-017.mp4",
+    "pills": [
+      {
+        "t": "Vehicular navigation",
+        "k": "skill"
+      },
+      {
+        "t": "1920x1080",
+        "k": "device"
+      }
+    ],
+    "downloads": [
+      {
+        "t": "Preview pack",
+        "primary": true
+      }
+    ]
+  },
+  {
+    "slug": "vehicular-navigation-018",
+    "domain": "robotics",
+    "modality": "exocentric",
+    "tier": "exo",
+    "provenance": "custom",
+    "title": "Vehicular navigation",
+    "label": "Vehicular navigation",
+    "environment": "Street, outdoor",
+    "locale": "Hanoi, Vietnam",
+    "rig": "Handheld camera",
+    "viewpoint": "third-person",
+    "skillGroup": "Vehicular navigation",
+    "industry": null,
+    "job": null,
+    "telemetry": false,
+    "durationSec": 182,
+    "resolution": "1920x1080",
+    "fps": 30,
+    "streams": [
+      "rgb"
+    ],
+    "formats": [
+      "mp4"
+    ],
+    "size": "442 MB",
+    "spec": [
+      [
+        "Activity",
+        "Vehicular navigation"
+      ],
+      [
+        "Camera",
+        "Handheld"
+      ],
+      [
+        "Resolution",
+        "1920x1080"
+      ],
+      [
+        "Frame rate",
+        "29.97 fps"
+      ],
+      [
+        "Duration",
+        "182 s"
+      ],
+      [
+        "Telemetry",
+        "None"
+      ]
+    ],
+    "breadcrumb": [
+      "Samples",
+      "Exocentric",
+      "Vehicular navigation"
+    ],
+    "preview": "/samples/clips/vehicular-navigation-018.mp4",
+    "pills": [
+      {
+        "t": "Vehicular navigation",
+        "k": "skill"
+      },
+      {
+        "t": "1920x1080",
+        "k": "device"
+      }
+    ],
+    "downloads": [
+      {
+        "t": "Preview pack",
+        "primary": true
+      }
+    ]
+  },
+  {
+    "slug": "vehicular-navigation-019",
+    "domain": "robotics",
+    "modality": "exocentric",
+    "tier": "exo",
+    "provenance": "custom",
+    "title": "Vehicular navigation",
+    "label": "Vehicular navigation",
+    "environment": "Street, outdoor",
+    "locale": "Hanoi, Vietnam",
+    "rig": "Handheld camera",
+    "viewpoint": "third-person",
+    "skillGroup": "Vehicular navigation",
+    "industry": null,
+    "job": null,
+    "telemetry": false,
+    "durationSec": 226,
+    "resolution": "1920x1080",
+    "fps": 30,
+    "streams": [
+      "rgb"
+    ],
+    "formats": [
+      "mp4"
+    ],
+    "size": "550 MB",
+    "spec": [
+      [
+        "Activity",
+        "Vehicular navigation"
+      ],
+      [
+        "Camera",
+        "Handheld"
+      ],
+      [
+        "Resolution",
+        "1920x1080"
+      ],
+      [
+        "Frame rate",
+        "30.01 fps"
+      ],
+      [
+        "Duration",
+        "226 s"
+      ],
+      [
+        "Telemetry",
+        "None"
+      ]
+    ],
+    "breadcrumb": [
+      "Samples",
+      "Exocentric",
+      "Vehicular navigation"
+    ],
+    "preview": "/samples/clips/vehicular-navigation-019.mp4",
+    "pills": [
+      {
+        "t": "Vehicular navigation",
+        "k": "skill"
+      },
+      {
+        "t": "1920x1080",
+        "k": "device"
+      }
+    ],
+    "downloads": [
+      {
+        "t": "Preview pack",
+        "primary": true
+      }
+    ]
+  },
+  {
+    "slug": "vehicular-navigation-020",
+    "domain": "robotics",
+    "modality": "exocentric",
+    "tier": "exo",
+    "provenance": "custom",
+    "title": "Vehicular navigation",
+    "label": "Vehicular navigation",
+    "environment": "Street, outdoor",
+    "locale": "Hanoi, Vietnam",
+    "rig": "Handheld camera",
+    "viewpoint": "third-person",
+    "skillGroup": "Vehicular navigation",
+    "industry": null,
+    "job": null,
+    "telemetry": false,
+    "durationSec": 6,
+    "resolution": "1920x1080",
+    "fps": 30,
+    "streams": [
+      "rgb"
+    ],
+    "formats": [
+      "mp4"
+    ],
+    "size": "15 MB",
+    "spec": [
+      [
+        "Activity",
+        "Vehicular navigation"
+      ],
+      [
+        "Camera",
+        "Handheld"
+      ],
+      [
+        "Resolution",
+        "1920x1080"
+      ],
+      [
+        "Frame rate",
+        "30 fps"
+      ],
+      [
+        "Duration",
+        "6 s"
+      ],
+      [
+        "Telemetry",
+        "None"
+      ]
+    ],
+    "breadcrumb": [
+      "Samples",
+      "Exocentric",
+      "Vehicular navigation"
+    ],
+    "preview": "/samples/clips/vehicular-navigation-020.mp4",
+    "pills": [
+      {
+        "t": "Vehicular navigation",
+        "k": "skill"
+      },
+      {
+        "t": "1920x1080",
+        "k": "device"
+      }
+    ],
+    "downloads": [
+      {
+        "t": "Preview pack",
+        "primary": true
+      }
+    ]
+  },
+  {
+    "slug": "vehicular-navigation-021",
+    "domain": "robotics",
+    "modality": "exocentric",
+    "tier": "exo",
+    "provenance": "custom",
+    "title": "Vehicular navigation",
+    "label": "Vehicular navigation",
+    "environment": "Street, outdoor",
+    "locale": "Hanoi, Vietnam",
+    "rig": "Handheld camera",
+    "viewpoint": "third-person",
+    "skillGroup": "Vehicular navigation",
+    "industry": null,
+    "job": null,
+    "telemetry": false,
+    "durationSec": 75,
+    "resolution": "1920x1080",
+    "fps": 30,
+    "streams": [
+      "rgb"
+    ],
+    "formats": [
+      "mp4"
+    ],
+    "size": "184 MB",
+    "spec": [
+      [
+        "Activity",
+        "Vehicular navigation"
+      ],
+      [
+        "Camera",
+        "Handheld"
+      ],
+      [
+        "Resolution",
+        "1920x1080"
+      ],
+      [
+        "Frame rate",
+        "30 fps"
+      ],
+      [
+        "Duration",
+        "75 s"
+      ],
+      [
+        "Telemetry",
+        "None"
+      ]
+    ],
+    "breadcrumb": [
+      "Samples",
+      "Exocentric",
+      "Vehicular navigation"
+    ],
+    "preview": "/samples/clips/vehicular-navigation-021.mp4",
+    "pills": [
+      {
+        "t": "Vehicular navigation",
+        "k": "skill"
+      },
+      {
+        "t": "1920x1080",
+        "k": "device"
+      }
+    ],
+    "downloads": [
+      {
+        "t": "Preview pack",
+        "primary": true
+      }
+    ]
+  },
+  {
+    "slug": "vehicular-navigation-022",
+    "domain": "robotics",
+    "modality": "exocentric",
+    "tier": "exo",
+    "provenance": "custom",
+    "title": "Vehicular navigation",
+    "label": "Vehicular navigation",
+    "environment": "Street, outdoor",
+    "locale": "Hanoi, Vietnam",
+    "rig": "Handheld camera",
+    "viewpoint": "third-person",
+    "skillGroup": "Vehicular navigation",
+    "industry": null,
+    "job": null,
+    "telemetry": false,
+    "durationSec": 126,
+    "resolution": "1920x1080",
+    "fps": 30,
+    "streams": [
+      "rgb"
+    ],
+    "formats": [
+      "mp4"
+    ],
+    "size": "308 MB",
+    "spec": [
+      [
+        "Activity",
+        "Vehicular navigation"
+      ],
+      [
+        "Camera",
+        "Handheld"
+      ],
+      [
+        "Resolution",
+        "1920x1080"
+      ],
+      [
+        "Frame rate",
+        "30 fps"
+      ],
+      [
+        "Duration",
+        "126 s"
+      ],
+      [
+        "Telemetry",
+        "None"
+      ]
+    ],
+    "breadcrumb": [
+      "Samples",
+      "Exocentric",
+      "Vehicular navigation"
+    ],
+    "preview": "/samples/clips/vehicular-navigation-022.mp4",
+    "pills": [
+      {
+        "t": "Vehicular navigation",
+        "k": "skill"
+      },
+      {
+        "t": "1920x1080",
+        "k": "device"
+      }
+    ],
+    "downloads": [
+      {
+        "t": "Preview pack",
+        "primary": true
+      }
+    ]
+  },
+  {
+    "slug": "vehicular-navigation-001",
+    "domain": "robotics",
+    "modality": "exocentric",
+    "tier": "exo",
+    "provenance": "custom",
+    "title": "Vehicular navigation",
+    "label": "Vehicular navigation",
+    "environment": "Street, outdoor",
+    "locale": "Hanoi, Vietnam",
+    "rig": "Handheld camera",
+    "viewpoint": "third-person",
+    "skillGroup": "Vehicular navigation",
+    "industry": null,
+    "job": null,
+    "telemetry": false,
+    "durationSec": 21,
+    "resolution": "1920x1080",
+    "fps": 30,
+    "streams": [
+      "rgb"
+    ],
+    "formats": [
+      "mp4"
+    ],
+    "size": "50 MB",
+    "spec": [
+      [
+        "Activity",
+        "Vehicular navigation"
+      ],
+      [
+        "Camera",
+        "Handheld"
+      ],
+      [
+        "Resolution",
+        "1920x1080"
+      ],
+      [
+        "Frame rate",
+        "30 fps"
+      ],
+      [
+        "Duration",
+        "21 s"
+      ],
+      [
+        "Telemetry",
+        "None"
+      ]
+    ],
+    "breadcrumb": [
+      "Samples",
+      "Exocentric",
+      "Vehicular navigation"
+    ],
+    "preview": "/samples/clips/vehicular-navigation-001.mp4",
+    "pills": [
+      {
+        "t": "Vehicular navigation",
+        "k": "skill"
+      },
+      {
+        "t": "1920x1080",
+        "k": "device"
+      }
+    ],
+    "downloads": [
+      {
+        "t": "Preview pack",
+        "primary": true
+      }
+    ]
+  },
+  {
+    "slug": "vehicular-navigation-023",
+    "domain": "robotics",
+    "modality": "exocentric",
+    "tier": "exo",
+    "provenance": "custom",
+    "title": "Vehicular navigation",
+    "label": "Vehicular navigation",
+    "environment": "Street, outdoor",
+    "locale": "Hanoi, Vietnam",
+    "rig": "Handheld camera",
+    "viewpoint": "third-person",
+    "skillGroup": "Vehicular navigation",
+    "industry": null,
+    "job": null,
+    "telemetry": false,
+    "durationSec": 182,
+    "resolution": "1920x1080",
+    "fps": 30,
+    "streams": [
+      "rgb"
+    ],
+    "formats": [
+      "mp4"
+    ],
+    "size": "443 MB",
+    "spec": [
+      [
+        "Activity",
+        "Vehicular navigation"
+      ],
+      [
+        "Camera",
+        "Handheld"
+      ],
+      [
+        "Resolution",
+        "1920x1080"
+      ],
+      [
+        "Frame rate",
+        "30 fps"
+      ],
+      [
+        "Duration",
+        "182 s"
+      ],
+      [
+        "Telemetry",
+        "None"
+      ]
+    ],
+    "breadcrumb": [
+      "Samples",
+      "Exocentric",
+      "Vehicular navigation"
+    ],
+    "preview": "/samples/clips/vehicular-navigation-023.mp4",
+    "pills": [
+      {
+        "t": "Vehicular navigation",
+        "k": "skill"
+      },
+      {
+        "t": "1920x1080",
+        "k": "device"
+      }
+    ],
+    "downloads": [
+      {
+        "t": "Preview pack",
+        "primary": true
+      }
+    ]
   }
 ]
