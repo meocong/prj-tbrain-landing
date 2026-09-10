@@ -57,3 +57,5 @@ __pycache__/
 # scripts/samples/ingest-drive.mjs. Never committed: it is keyed by Drive file
 # id and mirrors a private delivery folder.
 scripts/samples/drive-manifest.json
+scripts/samples/drive-6cam.json
+scripts/samples/drive-handpose.json
