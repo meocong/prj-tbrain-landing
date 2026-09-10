@@ -229,15 +229,25 @@ export function axesFor(line: LineKey) {
     { key: "TASK", label: "Distinct tasks", value: String(distinct((r) => cell(r, "Task id"))) },
     {
       key: "DEM",
-      // `Operator` reads "op-758d55bc / Cook, 20-25, Right-handed". Taking
-      // everything after the slash counts job+age+handedness triples and
-      // reported 57 where there are 32 jobs - an inflated diversity figure on a
-      // page a buyer procures from. Take the job only.
+      /* `Operator` reads "Cook, 20-25, Right-handed" — job, age band,
+         handedness. Counting the whole string counts triples and reported 57
+         where there are 32 jobs, an inflated diversity figure on a page a
+         buyer procures from. Take the job only.
+
+         Which is the part BEFORE the first comma, not the part after the first
+         " / ". That slash was the `op-758d55bc / ` handle, and `redactOperator`
+         strips it before the value ever reaches this file — so the split
+         landed on the only slashes left, the ones inside a job name, and the
+         figure read 2: "seamstress" out of "Tailor / seamstress" and "press
+         operator" out of "Machine operator / press operator", with all 116
+         other records contributing nothing at all. The prefix is still
+         tolerated here in case an unredacted row ever arrives. */
       label: "Operator jobs",
       value: String(
         distinct((r) => {
           const op = cell(r, "Operator");
-          return op ? (op.split(" / ")[1]?.split(",")[0]?.trim() ?? null) : null;
+          if (!op) return null;
+          return op.replace(/^op-[0-9a-f]+\s*\/\s*/i, "").split(",")[0].trim() || null;
         }),
       ),
     },
