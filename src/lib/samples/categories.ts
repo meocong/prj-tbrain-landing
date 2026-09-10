@@ -200,9 +200,22 @@ export const CATEGORIES: Category[] = [
        synchronised to it — which is a published mocap sample by any reading.
        The figure is what that bundle actually contains. */
     held: { figure: "4,801", unit: "wrist-pose frames · 21 joints per hand" },
-    // 80 keyframes lifted from the deployed pose bundle, played at 8 fps. A
-    // timelapse of a 160-second capture, and the caption says so.
-    reel: [{ slug: "mocap-keyframes", title: "80 keyframes from a 160 s mocap capture" }],
+    /* The recording itself, at the rate it was shot.
+       Tam, 2026-09-09: "Mocap em embed video thật nhé, hiện play nó bị giật
+       quá", then "ko chỉ cái mocap thôi, các video khác ok" — which was the
+       whole diagnosis. What sat here was 80 base64 JPEGs lifted out of the
+       deployed pose bundle and strung together at 8 fps: a 16x timelapse of a
+       160-second capture, a new frame every 125 ms. It was not stuttering under
+       load, it was playing exactly as encoded. Those frames exist to be
+       SCRUBBED against the pose stream, one per keyframe, and making a video of
+       them was the wrong instrument.
+       Now cut from `recording.mp4` in the source folder — 1920x1080, 30 fps,
+       4,804 frames, 160.13 s, which matches the 4,801 wrist frames the bundle
+       reports and the README's "Video output 1080p, 30 fps, duration 160s".
+       The window is 80-102 s because that is where the operator's hands and
+       the mocap gloves are in shot; at 40 s the frame is an empty green floor,
+       which is the "ko thấy tay đâu cả" complaint from the same thread. */
+    reel: [{ slug: "mocap-recording", title: "Egocentric video, synchronised to the hand pose · 1080p30" }],
     /* Row C of the capability sheet, "Egocentric + full mocap". The 240 Hz is
        the suit's native rate; the sheet says it is downsampled to 30 Hz for
        delivery, and stating only the native rate would let a buyer plan around
