@@ -229,7 +229,7 @@ export const CATEGORIES: Category[] = [
       // Two products, and the page used to name one. It said "robot episodes
       // rather than human ones" while the tier under it was "Egocentric +
       // gripper (UMI)" — a PERSON wearing a gripper, not a robot. The held set
-      // is an openarm_gripper_follower, a real bimanual arm. Both are
+      // is a real bimanual follower arm. Both are
       // teleoperation data and a buyer choosing between them needs to know
       // which one they are looking at.
       "Joint state and action beside the cameras, in the format policy training reads — from a bimanual robot arm, or from a person wearing a UMI gripper rig.",
@@ -258,7 +258,12 @@ export const CATEGORIES: Category[] = [
     // Every line from IN_FLIGHT.teleoperation, which is counted off the disk
     // rather than off the dataset's own manifest - the two disagree.
     capture: [
-      { label: "Recorded on", value: "openarm_gripper_follower, bimanual" },
+      /* Not the follower arm's model string. "Rig ko ghi tên" (redact.mjs)
+         applies to this block too — it renders straight onto the category
+         page, where `redact.mjs` never sees it, because that function filters
+         the record modal's spec and nothing else. What a buyer can act on is
+         the configuration, not the part number. */
+      { label: "Recorded on", value: "Bimanual follower arms, table-top" },
       { label: "Video", value: "Three synchronised 640x480 cameras (head, left, right) at 30 fps" },
       { label: "On every frame", value: "Joint state and action, 16-dimensional" },
       { label: "Arms", value: "Seven degrees of freedom per arm, plus a gripper each" },

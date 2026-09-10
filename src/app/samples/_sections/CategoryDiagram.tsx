@@ -17,7 +17,7 @@ import { C } from "./tokens";
  *
  * Every figure below is the spec for that category, not decoration: 17 IMU
  * nodes because Xsens MVN HD has 17, seven joints per arm because the
- * openarm_gripper_follower has seven, three cameras because the teleop set
+ * the follower arm has seven, three cameras because the teleop set
  * ships head, left and right.
  */
 

@@ -283,7 +283,7 @@ export const IN_FLIGHT: Partial<Record<string, string>> = {
   // holds 11 / 14,076 / 33. See docs/samples-restructure-plan.md §5.4.
   teleoperation:
     "One bimanual pick-and-place set already collected: 11 episodes, " +
-    "14,076 frames at 30 fps (7 min 49 s), on an openarm_gripper_follower. " +
+    "14,076 frames at 30 fps (7 min 49 s), on a bimanual follower arm. " +
     "Seven degrees of freedom per arm plus a gripper each, 16-dimensional " +
     "state and action. " +
     "Three synchronised 640×480 cameras (head, left, right), 1.2 GB of video. " +
