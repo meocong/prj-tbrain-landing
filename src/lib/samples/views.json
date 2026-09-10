@@ -2,12 +2,6 @@
   "appliance-repair": [
     "right"
   ],
-  "auto-electrical": [
-    "right"
-  ],
-  "bag-cutting": [
-    "right"
-  ],
   "bag-holding": [
     "right"
   ],
@@ -21,9 +15,6 @@
     "right"
   ],
   "bed-making-3": [
-    "right"
-  ],
-  "bed-making-4": [
     "right"
   ],
   "board-placing": [
@@ -44,9 +35,6 @@
   "client-posing": [
     "right"
   ],
-  "clothe-ironing": [
-    "right"
-  ],
   "component-assembly": [
     "right"
   ],
@@ -59,19 +47,10 @@
   "container-arranging": [
     "right"
   ],
-  "container-closing": [
-    "right"
-  ],
-  "cowl-installation": [
-    "right"
-  ],
   "cup-sealing": [
     "right"
   ],
   "device-connecting": [
-    "right"
-  ],
-  "device-inserting": [
     "right"
   ],
   "dish-clearing": [
@@ -128,9 +107,6 @@
   "food-serving-2": [
     "right"
   ],
-  "frame-assembly": [
-    "right"
-  ],
   "furniture-removal": [
     "right"
   ],
@@ -138,9 +114,6 @@
     "right"
   ],
   "grass-cutting": [
-    "right"
-  ],
-  "hair-cutting": [
     "right"
   ],
   "hair-cutting-2": [
@@ -176,9 +149,6 @@
   "handpose-zipper-sewing": [
     "right"
   ],
-  "harness-securing": [
-    "right"
-  ],
   "item-organizing": [
     "right"
   ],
@@ -188,16 +158,10 @@
   "jacket-folding": [
     "right"
   ],
-  "laptop-repair": [
-    "right"
-  ],
   "leaf-sweeping": [
     "right"
   ],
   "led-soldering": [
-    "right"
-  ],
-  "lighting-setup": [
     "right"
   ],
   "machine-cleaning": [
@@ -212,16 +176,10 @@
   "motor-measuring": [
     "right"
   ],
-  "motor-rewind": [
-    "right"
-  ],
   "motorcycle-washing": [
     "right"
   ],
   "noodle-prep": [
-    "right"
-  ],
-  "order-verifying": [
     "right"
   ],
   "outlet-installation": [
@@ -246,9 +204,6 @@
     "right"
   ],
   "pot-carrying": [
-    "right"
-  ],
-  "product-wrapping": [
     "right"
   ],
   "room-organizing": [
@@ -341,22 +296,13 @@
   "sole-stitching": [
     "right"
   ],
-  "stone-sanding": [
-    "right"
-  ],
   "table-cleaning": [
     "right"
   ],
   "table-clearing": [
     "right"
   ],
-  "tarpaulin-folding": [
-    "right"
-  ],
   "tea-pouring": [
-    "right"
-  ],
-  "tire-inflating": [
     "right"
   ],
   "tool-charging": [
@@ -375,9 +321,6 @@
     "right"
   ],
   "vegetable-picking": [
-    "right"
-  ],
-  "vegetable-serving": [
     "right"
   ],
   "vegetable-weeding": [
@@ -399,12 +342,6 @@
     "right"
   ],
   "wheel-balancing": [
-    "right"
-  ],
-  "wheel-reinstallation": [
-    "right"
-  ],
-  "wire-coiling": [
     "right"
   ],
   "wire-connecting": [
