@@ -1,9 +1,10 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import { Check, ChevronDown, Copy, Search, SlidersHorizontal, X } from "lucide-react";
 import samples from "@/lib/samples/samples.json";
+import stereoPairs from "@/lib/samples/stereo.json";
 import { SKILL_GROUPS, JOBS, INDUSTRIES } from "@/lib/samples/taxonomy";
 import { FacetPicker, SortPicker } from "./Fields";
 import { PILL_KINDS_DROPPED, publicSpec } from "@/lib/samples/redact.mjs";
@@ -31,8 +32,25 @@ import { Reveal } from "./Reveal";
 
 const ALL = samples as unknown as Sample[];
 
-/** Cards revealed per step. Eight rows at the widest three-column layout. */
-const PAGE = 24;
+/**
+ * Slugs with a right-eye clip staged beside the left one.
+ *
+ * Generated — `node scripts/samples/index-stereo.mjs`. A Set at module scope so
+ * a 118-card grid does an O(1) lookup per card rather than scanning an array on
+ * every render of every tile.
+ */
+const STEREO = new Set(stereoPairs as string[]);
+
+/**
+ * Cards revealed per step.
+ *
+ * Was 24, from when this grid WAS the category page and had to look like a
+ * catalogue on arrival. A folder level now sits above it, so the reader has
+ * already narrowed to one kind of work before they get here and twelve is a
+ * full screen with a "Show more" one press away. Each card mounts a `<video>`,
+ * so this number is the page's media budget more than it is a row count.
+ */
+const PAGE = 12;
 
 /**
  * What a record IS. The rail used to offer "Robotics", "Video game" and "Off the
@@ -83,6 +101,16 @@ interface Filters {
   /** The category. Fixed by the route; never a facet on this page. */
   scope: string;
   modality: string[];
+  /**
+   * The capture configuration, keyed by `CapabilityTier["key"]`.
+   *
+   * This is the sub-category the catalogue never had. `/samples/egocentric`
+   * sells five configurations and published records for exactly one of them, so
+   * a buyer who came for wrist-camera data saw 118 stereo records and no sign
+   * that the other four exist. The chips below stay pressable at zero for that
+   * reason — see `Chip.quotable` and `emptyTier`.
+   */
+  tier: string[];
   provenance: string[];
   viewpoint: string[];
   skillGroup: string[];
@@ -138,6 +166,7 @@ const specCell = (s: Sample, key: string) => s.spec?.find((p) => p[0] === key)?.
 const EMPTY: Filters = {
   scope: "egocentric",
   modality: [],
+  tier: [],
   provenance: [],
   viewpoint: [],
   skillGroup: [],
@@ -161,6 +190,7 @@ function matches(s: Sample, f: Filters, skip?: keyof Filters) {
   // is always computed WITHIN the category the reader opened.
   if (s.modality !== f.scope) return false;
   if (on("modality") && f.modality.length && !f.modality.includes(s.modality)) return false;
+  if (on("tier") && f.tier.length && !f.tier.includes(s.tier)) return false;
   // `provenance` is null on the game records: no game record states whether it
   // is off-the-shelf or custom, so narrowing to either has to exclude them
   // rather than quietly assign them a side.
@@ -239,30 +269,81 @@ function CopyRecord({ sample }: { sample: Sample }) {
 }
 
 function Card({ sample, onOpen }: { sample: Sample; onOpen: () => void }) {
-  const [video, setVideo] = useState<HTMLVideoElement | null>(null);
+  /**
+   * Both eyes when both are staged, one when only one is.
+   *
+   * See `scripts/samples/index-stereo.mjs` for why this is a generated list
+   * rather than something the card works out: it is a client component and
+   * cannot look at the filesystem, and 118 speculative HEAD requests is not a
+   * way to find out which files exist.
+   */
+  const pair = STEREO.has(sample.slug);
+
+  /* The elements this card drives — one or two, and never in state.
+     A ref, because the transport does not affect the render: nothing on this
+     card looks different for having a video attached, so putting the elements
+     in state buys a re-render per attach and no correctness.
+
+     It also has to be a ref. `ref={(el) => …}` allocates a new closure on every
+     render, so React detaches and reattaches on each pass; if that handler
+     calls setState, the render it schedules produces another new handler and
+     the card loops until React throws "Maximum update depth exceeded". Writing
+     to `.current` schedules nothing, so the same reattach costs nothing. */
+  const videos = useRef<(HTMLVideoElement | null)[]>([]);
 
   // Hover-to-play is a browsing affordance, and at tile size it is the only way
   // to tell two sewing lines apart. The record layer owns the transport once it
   // is open; nothing here competes with it.
   const play = useCallback(() => {
-    if (!video || !video.paused) return;
+    const live = videos.current.filter((v): v is HTMLVideoElement => !!v);
+    if (!live.length || live.every((v) => !v.paused)) return;
     track("play_preview", { slug: sample.slug, domain: sample.domain });
-    video.play().catch(() => undefined);
-  }, [video, sample.slug, sample.domain]);
+    /* Both eyes started from zero, not from wherever each happened to be. The
+       whole point of showing the pair is that a reader can see the offset
+       BETWEEN them; two clips a few frames out of step would fake a parallax
+       that is not in the delivery. */
+    for (const v of live) {
+      v.currentTime = 0;
+      v.play().catch(() => undefined);
+    }
+  }, [sample.slug, sample.domain]);
 
   const stop = useCallback(() => {
-    if (!video) return;
-    video.pause();
-    video.currentTime = 0;
-  }, [video]);
+    for (const v of videos.current) {
+      if (!v) continue;
+      v.pause();
+      v.currentTime = 0;
+    }
+  }, []);
 
   const open = () => {
     track("expand_record", { slug: sample.slug, domain: sample.domain });
     onOpen();
   };
 
+  /* The caption is generated into the record as "Preview · left eye of the
+     stereo pair · 576 x 432", which stops being true the moment the card shows
+     both. Overridden here rather than fixed in the data: which eyes are staged
+     is a property of this deployment's `public/`, not of the record. */
+  const caption = pair
+    ? sample.preview.replace(/left eye of the stereo pair/i, "left and right eye, one instant")
+    : sample.preview;
+
   return (
-    <article className="flex flex-col" style={{ borderTop: `1px solid ${C.hairline}` }}>
+    /* A pair takes two columns of the grid.
+       Tam, 2026-09-10: "để nguyên 3 cột như này nó làm cho 2 cam kết hợp nhau
+       bị nhỏ đi". Correct — a stereo card in a one-column slot gives each eye
+       half the width a single-view card gets, so the one card that has more to
+       show showed it smaller. Spanning two slots gives each eye roughly the
+       width a single view had, which is the point.
+
+       `sm:` scoped, because the base grid is ONE column: `span 2` there would
+       make the grid invent a second column for this card alone and every other
+       card would then sit in a half-width track. */
+    <article
+      className={`flex flex-col${pair ? " sm:[grid-column:span_2]" : ""}`}
+      style={{ borderTop: `1px solid ${C.hairline}` }}
+    >
       {/* The rule above is the card's top edge, and this label was sitting on it
           with no padding at all. It also wraps to two lines on the longer
           preview strings, so a row mixing one- and two-line labels started its
@@ -273,7 +354,7 @@ function Card({ sample, onOpen }: { sample: Sample; onOpen: () => void }) {
         className="bp-mono line-clamp-2 min-h-[30px] pb-2.5 pt-3 text-[10px] leading-[1.5]"
         style={{ color: C.textDim }}
       >
-        {sample.preview}
+        {caption}
       </p>
 
       {/* The whole tile opens the record. A tile that only responds on one small
@@ -288,18 +369,48 @@ function Card({ sample, onOpen }: { sample: Sample; onOpen: () => void }) {
         aria-haspopup="dialog"
         className="group relative block w-full overflow-hidden text-left"
       >
-        <video
-          ref={setVideo}
-          className="aspect-[4/3] w-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
-          style={{ background: "#000" }}
-          src={`/samples/clips/${sample.slug}.mp4`}
-          poster={`/samples/posters/${sample.slug}.jpg`}
-          muted
-          loop
-          playsInline
-          preload="metadata"
-          aria-label={sample.title}
-        />
+        {/* One row, one or two cells. The card's media band keeps its 4:3
+            footprint either way — a pair that made the tile twice as wide would
+            break the grid, and a pair that made it half as tall would put two
+            letterboxes where one frame used to be. Each eye takes half the
+            width and crops, which is what the single view already does. */}
+        {/* 4:3 per EYE, not per card. A pair in a 4:3 band would crop each eye
+            to 2:3 — a portrait slice of a landscape frame, which throws away
+            the sides of the very thing the second view exists to show. Two 4:3
+            frames side by side is 8:3, so that is what the band becomes. */}
+        <div
+          className="grid w-full gap-px transition-transform duration-500 group-hover:scale-[1.02]"
+          style={{
+            background: "#000",
+            aspectRatio: pair ? "8 / 3" : "4 / 3",
+            gridTemplateColumns: pair ? "1fr 1fr" : "1fr",
+          }}
+        >
+          {(pair ? ["", "-right"] : [""]).map((suffix, i) => (
+            <video
+              key={suffix}
+              ref={(el) => {
+                videos.current[i] = el;
+              }}
+              className="h-full w-full object-cover"
+              src={`/samples/clips/${sample.slug}${suffix}.mp4`}
+              poster={`/samples/posters/${sample.slug}${suffix}.jpg`}
+              muted
+              loop
+              playsInline
+              /* `none`, not `metadata`. A card shows its poster until the
+                 pointer arrives, and the only thing `metadata` bought was the
+                 clip's duration — which the record already carries as
+                 `durationSec` and prints beside the tile. So it was 24 extra
+                 connections and about a megabyte to learn something the page
+                 had already been told. */
+              preload="none"
+              aria-label={
+                pair ? `${sample.title} — ${suffix ? "right" : "left"} eye` : sample.title
+              }
+            />
+          ))}
+        </div>
         <span
           className="pointer-events-none absolute left-3 top-3 rounded-full px-2 py-0.5 font-mono text-[10px] backdrop-blur-sm"
           style={{ background: OVER_MEDIA.scrim, color: OVER_MEDIA.textDim }}
@@ -425,10 +536,33 @@ function Chip({
  * replace. Nothing here is derived, averaged or reconciled against the deck,
  * which counts a different corpus.
  */
-function CapabilityPanel({ modality, onClear }: { modality: string; onClear: () => void }) {
-  const tiers = CAPABILITY[modality] ?? [];
-  const running = IN_FLIGHT[modality];
-  const name = MODALITIES.find((m) => m.key === modality)?.label ?? modality;
+function CapabilityPanel({
+  modality,
+  /**
+   * One configuration rather than the whole line.
+   *
+   * Pressing "Egocentric + wrist" in the rail is a narrower question than
+   * filtering to a whole unpublished modality, and answering it with all five
+   * egocentric tiers makes the reader find their row again in a table they did
+   * not ask for. With a key set, the panel quotes that row and nothing else.
+   */
+  tierKey,
+  onClear,
+}: {
+  modality: string;
+  tierKey?: string;
+  onClear: () => void;
+}) {
+  const all = CAPABILITY[modality] ?? [];
+  const tiers = tierKey ? all.filter((t) => t.key === tierKey) : all;
+  // `IN_FLIGHT` is a fact about the whole line, not about one configuration, so
+  // it only belongs here when the whole line is what was asked about. Printing
+  // "20 hours in collection" under a single tier would attribute the collection
+  // to that tier, which nothing in the record supports.
+  const running = tierKey ? undefined : IN_FLIGHT[modality];
+  const name = tierKey
+    ? (tiers[0]?.name ?? tierKey)
+    : (MODALITIES.find((m) => m.key === modality)?.label ?? modality);
 
   return (
     <div className="py-10">
@@ -442,8 +576,9 @@ function CapabilityPanel({ modality, onClear }: { modality: string; onClear: () 
         {name} runs on the same pipeline.
       </h3>
       <p className="mt-2 max-w-xl text-[13px] leading-relaxed" style={{ color: C.textMid }}>
-        Nothing from this line is on the page yet. It is collected to spec. These are the same
-        terms we would send in a quote.
+        {tierKey
+          ? "No sample of this configuration is on the page yet. It is collected to spec, on the rig below. These are the same terms we would send in a quote."
+          : "Nothing from this line is on the page yet. It is collected to spec. These are the same terms we would send in a quote."}
       </p>
 
       {running && (
@@ -548,7 +683,21 @@ function RailGroup({
  * band and the record layer are unchanged - they were never the problem, they
  * were on the wrong page.
  */
-export function SampleCatalog({ modality }: { modality: string }) {
+export function SampleCatalog({
+  modality,
+  skillGroup,
+}: {
+  modality: string;
+  /**
+   * The folder the reader arrived through, seeded into the filters.
+   *
+   * Seeded rather than enforced: the rail stays live and the chip is
+   * deselectable, so someone who opened "Tool Use" and then wants the whole
+   * configuration does not have to go back up a level to get it. The folder is
+   * a starting point, not a cage.
+   */
+  skillGroup?: string;
+}) {
   const [active, setActive] = useState<Sample | null>(null);
   /* A record is addressable: `/samples?record=<slug>`.
    *
@@ -580,7 +729,11 @@ export function SampleCatalog({ modality }: { modality: string }) {
       window.history.replaceState(null, "", next);
     }
   }, [active]);
-  const [f, setF] = useState<Filters>({ ...EMPTY, scope: modality });
+  const [f, setF] = useState<Filters>({
+    ...EMPTY,
+    scope: modality,
+    skillGroup: skillGroup ? [skillGroup] : [],
+  });
 
   // The route is the source of truth for scope; a client nav between categories
   // remounts nothing, so the filter has to follow it.
@@ -605,7 +758,7 @@ export function SampleCatalog({ modality }: { modality: string }) {
   const [railOpen, setRailOpen] = useState(false);
 
   const toggle = (
-    key: "modality" | "provenance" | "viewpoint" | "skillGroup" | "industry" | "site",
+    key: "modality" | "tier" | "provenance" | "viewpoint" | "skillGroup" | "industry" | "site",
     v: string,
   ) => {
     track("filter_rig", { facet: key, value: v });
@@ -670,6 +823,23 @@ export function SampleCatalog({ modality }: { modality: string }) {
     [scoped],
   );
 
+  /**
+   * The configurations this category is sold in — from the capability sheet,
+   * NOT from the records.
+   *
+   * Every other group in this rail is built from `scoped`, because a chip that
+   * cannot narrow anything is a control that does nothing. This one inverts
+   * that on purpose: egocentric holds records for one of its five tiers, so
+   * building it from the records would produce a single chip reading 118 and
+   * the four configurations a buyer might actually be shopping for would stay
+   * invisible — which is the state this page was in.
+   *
+   * Zero here does not mean no such capture. It means we have not published one
+   * yet, and the sheet says what it costs and how long it takes. So the chips
+   * stay pressable at zero and press through to `CapabilityPanel`.
+   */
+  const tiers = useMemo(() => CAPABILITY[f.scope] ?? [], [f.scope]);
+
   /** This category's own spec facets, with their values, in config order. */
   const specFacets = useMemo(
     () =>
@@ -708,8 +878,8 @@ export function SampleCatalog({ modality }: { modality: string }) {
   );
 
   const dirty =
-    f.modality.length + f.provenance.length + f.viewpoint.length + f.skillGroup.length +
-      f.industry.length + f.site.length >
+    f.modality.length + f.tier.length + f.provenance.length + f.viewpoint.length +
+      f.skillGroup.length + f.industry.length + f.site.length >
       0 ||
     f.job !== "all" ||
     Object.values(f.spec).some((v) => v.length > 0) ||
@@ -736,6 +906,15 @@ export function SampleCatalog({ modality }: { modality: string }) {
      for them. */
   const emptyLine =
     f.modality.length === 1 && CAPABILITY[f.modality[0]] ? f.modality[0] : null;
+
+  /* Same rule one level down, and it takes precedence: a reader who pressed
+     "Egocentric + wrist" asked about a configuration, and answering with the
+     whole egocentric line would be answering a question they did not ask.
+     Only fires when the tier is the ONLY thing narrowing — with a skill group
+     or a search term also on, the empty grid is the combination's doing and a
+     price sheet is not the answer to it. */
+  const emptyTier =
+    f.tier.length === 1 && tiers.some((t) => t.key === f.tier[0]) ? f.tier[0] : null;
 
   return (
     <>    <section id="deck" className="bp-grid bp-frame relative" style={{ color: C.text }}>
@@ -787,11 +966,35 @@ export function SampleCatalog({ modality }: { modality: string }) {
                 />
               </label>
 
+              {/* First, and above Source, because it is the coarsest cut this
+                  page makes inside a category: what the rig was. Everything
+                  under it — trade, industry, site — describes work that was
+                  filmed, and this describes what filmed it.
+
+                  `quotable` on every chip, not just the empty ones: the rule is
+                  about the facet, not about today's counts. When wrist records
+                  land, that chip stops being quotable by having a number, and
+                  nothing here has to change. */}
+              {tiers.length > 1 && (
+                <RailGroup title="Configuration" first>
+                  {tiers.map((t) => (
+                    <Chip
+                      key={t.key}
+                      label={t.name}
+                      quotable
+                      active={f.tier.includes(t.key)}
+                      count={countFor("tier", (s) => s.tier, t.key)}
+                      onClick={() => toggle("tier", t.key)}
+                    />
+                  ))}
+                </RailGroup>
+              )}
+
               {/* Every group below renders only where this category has more
                   than one value for it. A facet with one value is not a facet,
                   and a facet with none is a row of zeroes. */}
               {sources.length > 1 && (
-                <RailGroup title="Source" first>
+                <RailGroup title="Source" first={tiers.length <= 1}>
                   {sources.map((p) => (
                     <Chip
                       key={p.key}
@@ -805,7 +1008,7 @@ export function SampleCatalog({ modality }: { modality: string }) {
               )}
 
               {viewpoints.length > 1 && (
-                <RailGroup title="Viewpoint" first={sources.length <= 1}>
+                <RailGroup title="Viewpoint" first={tiers.length <= 1 && sources.length <= 1}>
                   {viewpoints.map((v) => (
                     <Chip
                       key={v.key}
@@ -963,7 +1166,17 @@ export function SampleCatalog({ modality }: { modality: string }) {
                  away; the line is unpublished, not unavailable, and the
                  spreadsheet this page replaces answers it with a price and a
                  lead time. So does this. */
-              emptyLine ? (
+              emptyTier ? (
+                /* Narrower question first — see `emptyTier`. Clearing returns
+                   to this category rather than to `EMPTY`, whose scope is
+                   egocentric: a gaming reader who cleared here used to land in
+                   the robotics grid. */
+                <CapabilityPanel
+                  modality={f.scope}
+                  tierKey={emptyTier}
+                  onClear={() => setF({ ...EMPTY, scope: f.scope })}
+                />
+              ) : emptyLine ? (
                 <CapabilityPanel modality={emptyLine} onClear={() => setF(EMPTY)} />
               ) : (
                 <div className="py-24 text-center">

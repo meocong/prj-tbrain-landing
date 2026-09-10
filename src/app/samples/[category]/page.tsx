@@ -13,7 +13,7 @@ import {
 import { INTEROP } from "@/lib/samples/capability";
 import { axesFor } from "@/lib/samples/datasets";
 import { LICENSE, QUALIFIER } from "@/lib/samples/license";
-import { SampleCatalog } from "../_sections/SampleCatalog";
+import { SkillFolders } from "../_sections/SkillFolders";
 import { TwoRoutes } from "../_sections/TwoRoutes";
 import { CoverageChart } from "../_sections/CoverageChart";
 import { CategoryHeader } from "../_sections/CategoryHeader";
@@ -293,9 +293,14 @@ export default async function CategoryPage({
         {c.slug === "gaming" && <TelemetryStrip />}
         {c.slug === "gaming" && <GamingSet />}
 
-        {/* Datasets, facets, grid and the record layer, unchanged. They were
-            never wrong, they were on the wrong page. */}
-        <SampleCatalog modality={c.modality} />
+        {/* Folders, not the grid.
+
+            The grid opened with 24 mounted <video> elements on a modality
+            holding 118 records — every visit paid for two dozen media elements
+            before the reader knew whether any of them was the work they came
+            for. It still exists one level down, facet rail and all, at
+            /samples/<category>/<group>. */}
+        <SkillFolders category={c} />
 
         {/* The other purchase route, with footage. Everything in the grid
             above is a stereo rig delivery — the custom side — and "Off the

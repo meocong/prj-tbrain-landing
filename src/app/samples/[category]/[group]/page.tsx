@@ -1,0 +1,118 @@
+import type { Metadata } from "next";
+import Link from "next/link";
+import { notFound } from "next/navigation";
+import { ArrowLeft } from "lucide-react";
+import Header from "@/components/common/Header";
+import Footer from "@/components/common/Footer";
+import { ScrollProgress } from "@/components/marketing/fx/ScrollProgress";
+import {
+  CATEGORIES,
+  categoryBySlug,
+  skillFolders,
+  skillFolderBySlug,
+} from "@/lib/samples/categories";
+import { SampleCatalog } from "../../_sections/SampleCatalog";
+import { AccessPaths } from "../../_sections/AccessPaths";
+import { C } from "../../_sections/tokens";
+import { Reveal } from "../../_sections/Reveal";
+
+/**
+ * One folder, opened.
+ *
+ * The bottom of the tree Tam asked for: `/samples` names the capture
+ * configurations, `/samples/<category>` lists the groups inside one, and this
+ * page is where clips finally play. Everything above it ships stills only, so
+ * this is the first level that costs video — and it costs one clip per hover
+ * rather than a grid of them, because `SampleCatalog` mounts its cards with
+ * `preload="none"`.
+ *
+ * Deliberately thin. The category page above already says what the modality is,
+ * what records it, and how it is delivered; repeating any of that here would
+ * put a second page of preamble between a reader and the thing they clicked
+ * twice to reach.
+ */
+
+type Params = { params: Promise<{ category: string; group: string }> };
+
+export function generateStaticParams() {
+  return CATEGORIES.filter((c) => c.modality && !c.externalHref).flatMap((c) =>
+    skillFolders(c.modality!).map((f) => ({ category: c.slug, group: f.slug })),
+  );
+}
+
+export async function generateMetadata({ params }: Params): Promise<Metadata> {
+  const { category, group } = await params;
+  const c = categoryBySlug(category);
+  const f = c?.modality ? skillFolderBySlug(c.modality, group) : null;
+  if (!c || !f) return {};
+
+  const title = `${f.name} — ${c.name} samples`;
+  const description =
+    `${f.count} ${c.name.toLowerCase()} recordings of ${f.name.toLowerCase()}, ` +
+    `${f.minutes.toFixed(1)} minutes playable. Capture metadata and delivery formats on every record.`;
+
+  return {
+    title,
+    description,
+    alternates: { canonical: `/samples/${c.slug}/${f.slug}` },
+    openGraph: { title, description, url: `/samples/${c.slug}/${f.slug}`, type: "website" },
+  };
+}
+
+export default async function SkillGroupPage({ params }: Params) {
+  const { category, group } = await params;
+  const c = categoryBySlug(category);
+  if (!c || c.externalHref || !c.modality) notFound();
+
+  const folder = skillFolderBySlug(c.modality, group);
+  if (!folder) notFound();
+
+  return (
+    <div className="samples-scope bp-chrome" style={{ background: C.base }}>
+      <ScrollProgress />
+      <Header />
+      <main style={{ color: C.text }}>
+        <section className="bp-grid bp-frame relative">
+          <div className="mx-auto max-w-[1400px] px-4 pb-6 pt-28 md:pt-32 lg:px-10 xl:px-16">
+            <Reveal variant="rise">
+              {/* Back to the folders, not to /samples. The reader is two levels
+                  down and the level they came from is the one they want. */}
+              <Link
+                href={`/samples/${c.slug}`}
+                className="inline-flex items-center gap-2 text-[13px]"
+                style={{ color: C.textMid }}
+              >
+                <ArrowLeft className="h-3.5 w-3.5" />
+                All {c.name.toLowerCase()} groups
+              </Link>
+
+              <h1
+                className="mt-6 text-balance text-4xl font-medium tracking-tight md:text-5xl"
+                style={{
+                  fontFamily: "var(--font-heading)",
+                  letterSpacing: "-0.03em",
+                  lineHeight: 1.06,
+                }}
+              >
+                {folder.name}
+              </h1>
+
+              <p className="bp-mono mt-5 text-[11px]" style={{ color: C.accent }}>
+                {folder.count} {folder.count === 1 ? "record" : "records"} ·{" "}
+                {folder.minutes.toFixed(1)} min · {c.name}
+              </p>
+            </Reveal>
+          </div>
+        </section>
+
+        {/* The catalogue, seeded to this folder. The rail stays live: a reader
+            who wants the whole configuration can deselect the chip rather than
+            navigate back up. */}
+        <SampleCatalog modality={c.modality} skillGroup={folder.name} />
+
+        <AccessPaths />
+      </main>
+      <Footer />
+    </div>
+  );
+}

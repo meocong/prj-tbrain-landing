@@ -116,7 +116,9 @@ function CategoryCard({
   reduce: boolean;
 }) {
   const href = c.externalHref ?? `/samples/${c.slug}`;
-  const faces = facesFor(c, FACES);
+  // An explicit `face` wins: it exists for the cases where the automatic pick
+  // is unrepresentative. See the field's note in categories.ts.
+  const faces = c.face ? [c.face] : facesFor(c, FACES);
   // A category with no records may still carry its own footage.
   const own = c.reel?.map((x) => x.slug) ?? [];
   const band = faces.length > 0 ? faces : own;
