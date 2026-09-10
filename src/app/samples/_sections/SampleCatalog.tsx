@@ -860,12 +860,12 @@ export function SampleCatalog({ modality }: { modality: string }) {
                 </RailGroup>
               )}
 
-              {/* No Rig group. It listed `Robocap`, `DAS Ego V6`, `EgoSense E6`
-                  and `GameDataCollector` — our internal names, on a public page,
-                  against Tam's "Rig ko ghi tên" — and the three egocentric ones
-                  are one published configuration under three names, so the group
-                  narrowed nothing even before that. Relabelling the chips would
-                  have produced a facet with a single value; see redact.mjs. */}
+              {/* No Rig group. It listed our four internal rig names on a
+                  public page, against Tam's "Rig ko ghi tên" — and the three
+                  egocentric ones are one published configuration under three
+                  names, so the group narrowed nothing even before that.
+                  Relabelling the chips would have produced a facet with a single
+                  value; see redact.mjs. */}
 
               {/* This category's own axes. Gaming's are Game, Session and
                   Stress; egocentric has none here because its axes are typed

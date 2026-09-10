@@ -1,7 +1,7 @@
 /**
- * Build the live-record track for one Robocap sample.
+ * Build the live-record track for one egocentric sample.
  *
- * A Robocap segment ships `imu_left.db` and `imu_right.db`: two SQLite files,
+ * A egocentric segment ships `imu_left.db` and `imu_right.db`: two SQLite files,
  * each with `acc_data` and `gyro_data` in raw sensor counts against a
  * nanosecond clock. The two units share that clock but start about 120 ms
  * apart, so the zero for the whole segment is the earliest sample across all
@@ -15,8 +15,8 @@
  * the panel prints what was recorded and never interpolates.
  *
  * Usage:
- *   node scripts/samples/extract-robocap-telemetry.mjs \
- *     --slug robocap-street --dir /tmp/rc19 --prefix robocap_segment1 --offset 300
+ *   node scripts/samples/extract-ego-imu-telemetry.mjs \
+ *     --slug <record-slug> --dir /tmp/rc19 --prefix ego_segment1 --offset 300
  */
 import { execFileSync } from "node:child_process";
 import { writeFileSync } from "node:fs";
@@ -32,7 +32,7 @@ const arg = (name, fallback) => {
 
 const slug = arg("slug");
 const dir = arg("dir");
-const prefix = arg("prefix", "robocap_segment1");
+const prefix = arg("prefix", "ego_segment1");
 const offsetSec = Number(arg("offset"));
 const windowSec = Number(arg("window", "8"));
 const outHz = Number(arg("hz", "30"));

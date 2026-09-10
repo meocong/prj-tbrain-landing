@@ -41,7 +41,7 @@ interface GamePayload {
   rows: GameRow[];
 }
 interface ImuBucket { t: number; m: number; x: number; y: number; z: number }
-interface RobocapPayload {
+interface EgoImuPayload {
   slug: string;
   offsetSec: number;
   rateHz: number;
@@ -107,7 +107,7 @@ export function LiveTelemetry({
   video: HTMLVideoElement | null;
 }) {
   const hostRef = useRef<HTMLDivElement>(null);
-  const [payload, setPayload] = useState<GamePayload | RobocapPayload | null>(null);
+  const [payload, setPayload] = useState<GamePayload | EgoImuPayload | null>(null);
   const [state, setState] = useState<"loading" | "ready" | "error">("loading");
 
   useEffect(() => {
@@ -267,7 +267,7 @@ export function LiveTelemetry({
       )}
       {!isGame && (
         <p className="mt-3 text-[11px] leading-relaxed" style={{ color: C.textDim }}>
-          {(payload as RobocapPayload).device.imu} at {(payload as RobocapPayload).rateHz} Hz, two
+          {(payload as EgoImuPayload).device.imu} at {(payload as EgoImuPayload).rateHz} Hz, two
           units. Values are raw sensor counts, as recorded.
         </p>
       )}

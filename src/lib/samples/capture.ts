@@ -129,7 +129,7 @@ export function captureFor(c: Category): CaptureRow[] {
   );
   const sometimes = signals.filter((s) => !universal.includes(s));
 
-  /* No model names. "DAS Ego V6 · EgoSense E6 · Robocap" told a buyer nothing
+  /* No model names. The three egocentric rig strings told a buyer nothing
      they can act on and named our vendor stack on a public page; what they
      asked is the CONFIGURATION, which is Tam's R1 — how many cameras, what
      shutter, what rides with the frame. All of it was already in `spec` and

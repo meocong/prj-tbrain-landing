@@ -39,31 +39,31 @@ the regenerated manifest. `--dry` builds without uploading.
 ## Stage a full delivery file
 
 Preview packs are staged automatically. The real deliveries — a 486 MB MCAP, a
-1.8 GB Robocap segment, a game session — are not, because they should go through
+1.8 GB Ego Rig A segment, a game session — are not, because they should go through
 the face-blur pass first and because keeping 25 GB hot serves nobody. The vault
 prints these as *on request* until an object exists.
 
 To turn one on:
 
 1. Upload to the path the manifest names, e.g.
-   `gs://$GCS_BUCKET_NAME/samples/library/full/robocap-street-segment.zip`
+   `gs://$GCS_BUCKET_NAME/samples/library/full/<slug>-segment.zip`
 2. Set that path as `full.object` for the slug in `src/lib/samples/downloads.json`
 3. Deploy
 
 The download route signs a five-minute V4 URL per click and logs to
 `access_events`, so links cannot be forwarded and every fetch is attributable.
 
-## Add a telemetry track for a Robocap sample
+## Add a telemetry track for a Ego Rig A sample
 
 The `Shown` row of a record says which offset the preview was cut from. Pull the
 two IMU files for that segment and extract the same window:
 
 ```bash
-rclone copy "drive2nf:Tbrain - Robotics/Raw data/máy 19/20260817_021559_session1/robocap_segment1_imu_left.db"  /tmp/rc19/ --drive-shared-with-me
-rclone copy "drive2nf:Tbrain - Robotics/Raw data/máy 19/20260817_021559_session1/robocap_segment1_imu_right.db" /tmp/rc19/ --drive-shared-with-me
+rclone copy "drive2nf:Tbrain - Robotics/Raw data/máy 19/20260817_021559_session1/<segment-prefix>_imu_left.db"  /tmp/rc19/ --drive-shared-with-me
+rclone copy "drive2nf:Tbrain - Robotics/Raw data/máy 19/20260817_021559_session1/<segment-prefix>_imu_right.db" /tmp/rc19/ --drive-shared-with-me
 
-node scripts/samples/extract-robocap-telemetry.mjs \
-  --slug robocap-street --dir /tmp/rc19 --prefix robocap_segment1 --offset 300
+node scripts/samples/extract-ego-imu-telemetry.mjs \
+  --slug <record-slug> --dir /tmp/rc19 --prefix <segment-prefix> --offset 300
 ```
 
 Then set `"telemetry": true` for that slug in `samples.json` and re-run
@@ -89,14 +89,14 @@ is deliberately untagged.
 
 - **Off-the-shelf telemetry.** Ten OTS records show their stream list instead of
   a live readout. Their IMU is inside the 486 MB MCAP files, which are not in
-  Drive under `Tbrain - Robotics` — `das ego sample/` is empty. Point the
+  Drive under `Tbrain - Robotics` — `ego rig B sample/` is empty. Point the
   extractor at wherever those MCAPs live to close this.
 - **Mocap and phone video.** Neither line has a folder under
   `Tbrain - Robotics`. `Sample mangement/` holds GoPro, RealSense, Teleop and
   gripper sets, which are a different question.
 - **`.rrd` files.** 2.8 GB across seven games, no host decided, so there is no
   "open in Rerun" link yet.
-- **Face blur.** Raw Robocap footage has not been through a blur pass. Nothing
+- **Face blur.** Raw Ego Rig A footage has not been through a blur pass. Nothing
   raw should be staged as a `full.object` until it has.
 Fixed since the first draft of this runbook: migration 013 used
 `ALTER TABLE ... ADD CONSTRAINT IF NOT EXISTS`, which is not valid Postgres, so
