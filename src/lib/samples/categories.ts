@@ -441,6 +441,33 @@ export function skillFolderBySlug(modality: string, slug: string): SkillFolder |
   return skillFolders(modality).find((f) => f.slug === slug) ?? null;
 }
 
+/**
+ * Whether a category is worth a folder level at all.
+ *
+ * It is not always. Gaming carries `skillGroup: null` on all eight of its
+ * records — its axes are the game, the session type and the stress category,
+ * which live in `spec` — so a folder view derived from skill groups produced
+ * nothing, and swapping the grid for it removed the catalogue from
+ * `/samples/gaming` entirely: no clips, no way to open one.
+ *
+ * One condition: more than one folder. A single folder holding everything is a
+ * click that changes nothing.
+ *
+ * There was a second — a minimum record count, so a category that fits on one
+ * screen went straight to the grid. It is gone. Tam, 2026-09-10: "kể cả nó có 1
+ * item thì cũng nên cho vào các loại game gì như là các loại của egocentric",
+ * and the reference agrees: claru.ai does not consolidate small groups either.
+ * A folder holding one record still tells a reader that this kind of work
+ * exists and that we hold exactly one of it, which a grid of eight
+ * undifferentiated tiles does not.
+ *
+ * Everything else goes straight to the catalogue, which is what a category with
+ * no grouping axis at all should do.
+ */
+export function usesFolders(modality: string): boolean {
+  return skillFolders(modality).length > 1;
+}
+
 export function categoryBySlug(slug: string) {
   return CATEGORIES.find((c) => c.slug === slug) ?? null;
 }
