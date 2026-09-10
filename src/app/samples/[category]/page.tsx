@@ -17,6 +17,8 @@ import { axesFor } from "@/lib/samples/datasets";
 import { LICENSE, QUALIFIER } from "@/lib/samples/license";
 import { SkillFolders } from "../_sections/SkillFolders";
 import { ConfigFolders } from "../_sections/ConfigFolders";
+import { CapabilityTable } from "../_sections/CapabilityTable";
+import { AdvancedAnnotation } from "../_sections/AdvancedAnnotation";
 import { SampleCatalog } from "../_sections/SampleCatalog";
 import { TwoRoutes } from "../_sections/TwoRoutes";
 import { CoverageChart } from "../_sections/CoverageChart";
@@ -193,78 +195,15 @@ export default async function CategoryPage({
                   </p>
                 )}
 
-                <div className="mt-10">
-                  {s.tiers.map((t) => (
-                    <div
-                      key={t.name}
-                      className="grid gap-x-8 gap-y-2 py-5 md:grid-cols-[minmax(0,1.3fr)_auto]"
-                      style={{ borderTop: `1px solid ${C.hairline}` }}
-                    >
-                      <div className="min-w-0">
-                        <p className="text-[15px] font-medium">{t.name}</p>
-                        <p className="mt-1 text-[12px] leading-relaxed" style={{ color: C.textDim }}>
-                          {t.rig}
-                          {t.sensors ? ` · ${t.sensors}` : ""}
-                          {t.environment ? ` · ${t.environment}` : ""}
-                        </p>
-                        {/* The column the first transcription left behind, and
-                            the one a technical buyer reads first. "Egocentric
-                            stereo" is a label; `left.mp4 + right.mp4 + imu.csv`
-                            is the thing they have to write a loader for. */}
-                        {t.outputs && (
-                          <p
-                            className="mt-2 font-mono text-[11px] leading-relaxed"
-                            style={{ color: C.value }}
-                          >
-                            {t.outputs}
-                          </p>
-                        )}
-                        {/* When you would pick this one. The table listed five
-                            rigs and what each outputs and never said which to
-                            choose; a reader who does not already know what VIO
-                            needs cannot tell stereo from wrist by their file
-                            lists. R1 as an answer rather than as a table. */}
-                        {t.when && (
-                          <p
-                            className="mt-2 max-w-xl text-[12px] leading-relaxed"
-                            style={{ color: C.textMid }}
-                          >
-                            {t.when}
-                          </p>
-                        )}
-                        {t.demoHref && (
-                          <a
-                            href={t.demoHref}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="mt-2 inline-block font-mono text-[11px] underline decoration-1 underline-offset-4"
-                            style={{ color: C.accent }}
-                          >
-                            Open the live 3D demo
-                          </a>
-                        )}
-                      </div>
-                      {/* No `t.price` column — see the comment on that field.
-                          `firstMonth` sits under the ceiling because quoting only
-                          the ceiling to somebody scheduling a pilot overstates
-                          month one by up to four times. */}
-                      <p
-                        className="font-mono text-[11px] leading-relaxed md:text-right"
-                        style={{ color: C.textMid }}
-                      >
-                        Ready in {t.ramp}
-                        <br />
-                        Up to {t.ceiling}
-                        {t.firstMonth && (
-                          <>
-                            <br />
-                            <span style={{ color: C.textDim }}>{t.firstMonth}</span>
-                          </>
-                        )}
-                      </p>
-                    </div>
-                  ))}
-                </div>
+                {/* Was five stacked blocks of about eighty words each. Tam,
+                    2026-09-10: "em bảo Claude làm sao bố trí cho nó visual + đẹp
+                    dễ nhìn, ko quá nhiều chữ." Now a four-column matrix.
+
+                    `showWhen` only where there are no configuration cards above
+                    to carry the guidance — on egocentric that copy is the
+                    `pitch` on each ConfigFolders card. */}
+                <CapabilityTable tiers={s.tiers} showWhen={!usesConfigFolders(c.modality)} />
+
 
                 <p
                   className="mt-5 pt-4 font-mono text-[11px]"
@@ -328,6 +267,13 @@ export default async function CategoryPage({
         ) : (
           <SampleCatalog modality={c.modality} />
         )}
+
+        {/* Tam, 2026-09-10: "chị nghĩ cho Egocentric nó có đoạn trên nói về
+            phần video, các thể loại video khác nhau. Xong ở dưới còn thêm ý
+            Advanced annotation." So it sits under the configurations and their
+            samples — a reader has seen what the footage looks like by the time
+            this says what rides with it. */}
+        {c.slug === "egocentric" && <AdvancedAnnotation />}
 
         {/* The other purchase route, with footage. Everything in the grid
             above is a stereo rig delivery — the custom side — and "Off the

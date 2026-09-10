@@ -50,7 +50,12 @@
   --bp-focus-ring: color-mix(in srgb, var(--bp-cyan) 60%, transparent);
 
   --bp-forge: linear-gradient(135deg, #5A2CE0 0%, #067A6E 100%);
-  --bp-card-shadow: 0 1px 2px rgba(16,17,28,0.05), 0 10px 26px -18px rgba(16,17,28,0.18);
+  /* A card on paper has to lift off it. The old values — 0.05 on the contact
+     shadow and a 26px blur pulled back by an 18px negative spread — left almost
+     nothing visible, so a white card on a #F6F6F2 base was a rectangle you found
+     by its hairline. The dark half sits at 0.3 and 0.6 alpha and reads fine,
+     which is what the gap was. */
+  --bp-card-shadow: 0 1px 2px rgba(16,17,28,0.07), 0 12px 28px -14px rgba(16,17,28,0.30);
   --bp-card-shadow-hover: 0 2px 4px rgba(16,17,28,0.06), 0 18px 40px -22px rgba(6,122,110,0.35);
 }
 

@@ -1061,7 +1061,24 @@ html.dark body {
   /* Cannot be a var: this is consumed as bare `r,g,b` inside rgba() by the
      gradients that fade video into the page. Keep in step with --bp-bg. */
   --sm-base-rgb: 246, 246, 242;
-  --sm-band: var(--bp-surface-2);
+  /* Tam, 2026-09-10: "màu dark thì ok nhưng màu light trông nó chưa ổn em ơi."
+
+     Measured, and the two halves are not symmetrical. In dark the surfaces step
+     UP from the ground — #0E0C24 base, #14122E band, a lighter card — which is
+     the direction the eye expects and reads cleanly. In light they all stepped
+     up too: #F6F6F2 paper, #FBFBF8 band, #FFFFFF card, a total spread of 1.08
+     crammed against white where the eye is least sensitive to a difference. So
+     an alternating section did not alternate and the page read as one flat
+     sheet with hairlines drawn on it.
+
+     A band on paper is darker than the paper, not lighter. #EBEBE2 keeps the
+     warm hue and puts the band 1.11 below the base and 1.20 below a card, which
+     is a visible three-step stack in the direction print actually works. Ink
+     stays at 14.9:1 on it.
+
+     Light only — the dark half already steps the right way, so it keeps
+     aliasing `--bp-bg-2` below. */
+  --sm-band: #EBEBE2;
   --sm-hairline: var(--bp-line);
   --sm-hairline-soft: var(--bp-grid-strong);
   --sm-text: var(--bp-ink);
