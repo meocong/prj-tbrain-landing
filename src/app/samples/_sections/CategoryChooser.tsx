@@ -49,7 +49,7 @@ export function CategoryChooser() {
   const reduce = useReducedMotion();
 
   return (
-    <section id="deck" style={{ background: C.base, color: C.text }}>
+    <section id="deck" className="bp-grid bp-frame relative" style={{ color: C.text }}>
       <div className="mx-auto max-w-[1400px] px-4 pb-24 pt-24 md:pt-28 lg:px-10 xl:px-16">
         {/* Heading and intro. The cards below carry their own stagger. */}
         <Reveal variant="rise">
@@ -134,7 +134,12 @@ function CategoryCard({
       viewport={{ once: true, amount: 0.3 }}
       transition={{ duration: 0.55, delay: index * 0.05, ease: EASE }}
     >
-      <Link href={href} className="group block">
+      {/* A card, not a bare column. `.bp-grid` now runs behind this section and
+          blueprint's own rule is that text sits on a card and never on the bare
+          grid — six tiles of prose straight onto a drifting 28px lattice is the
+          thing that rule exists to stop. `overflow-hidden` clips the media band
+          to the card's 12px corner. */}
+      <Link href={href} className="bp-card bp-card-hover group block overflow-hidden">
         {band.length > 0 ? (
           <FaceBand slugs={band} reduce={reduce} />
         ) : (
@@ -142,7 +147,7 @@ function CategoryCard({
         )}
 
         <div
-          className="flex flex-col pt-5"
+          className="flex flex-col p-5"
           style={{ borderTop: `1px solid ${C.hairline}` }}
         >
           <span className="flex items-baseline justify-between gap-4">

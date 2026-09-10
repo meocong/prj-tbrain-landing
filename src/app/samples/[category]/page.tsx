@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft } from "lucide-react";
 import Header from "@/components/common/Header";
+import { ScrollProgress } from "@/components/marketing/fx/ScrollProgress";
 import Footer from "@/components/common/Footer";
 import {
   CATEGORIES,
@@ -72,6 +73,7 @@ export default async function CategoryPage({
 
   return (
     <div className="samples-scope" style={{ background: C.base }}>
+      <ScrollProgress />
       <Header />
       <main style={{ color: C.text }}>
         <CategoryHeader category={c} />
