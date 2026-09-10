@@ -80,7 +80,7 @@ export const PRODUCT_LINES: ProductLine[] = [
     name: "Teleoperation",
     positioning: "Bimanual robot, three synchronised cameras",
     headline: "Robot episodes with joint state and action, not a human wearing a rig",
-    body: "An openarm_gripper_follower running a table-clearing task: seven degrees of freedom per arm plus a gripper each, so state and action are both 16-dimensional. Delivered as a LeRobotDataset with a GR00T-compatible modality map, which is the format most policy training expects to read.",
+    body: "A bimanual follower arm running a table-clearing task: seven degrees of freedom per arm plus a gripper each, so state and action are both 16-dimensional. Delivered as a LeRobotDataset with a GR00T-compatible modality map, which is the format most policy training expects to read.",
     facts: [
       { label: "Episodes collected", value: "11" },
       { label: "Cameras", value: "3 at 640x480" },

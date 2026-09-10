@@ -22228,5 +22228,1021 @@
         "primary": true
       }
     ]
+  },
+  {
+    "slug": "teleop-ep00",
+    "domain": "robotics",
+    "modality": "teleoperation",
+    "tier": "umi",
+    "provenance": "custom",
+    "title": "Episode 0 · pick and place into the bin",
+    "label": "Pick and place into the bin",
+    "environment": "Lab, table-top",
+    "locale": "Hanoi, Vietnam",
+    "rig": "Bimanual teleoperation rig, three synced cameras",
+    "viewpoint": "third-person",
+    "skillGroup": "Pick and Place / Object Handling",
+    "industry": null,
+    "job": null,
+    "telemetry": true,
+    "durationSec": 20,
+    "resolution": "640x480",
+    "fps": 30,
+    "streams": [
+      "rgb head",
+      "rgb left",
+      "rgb right",
+      "joint state",
+      "joint action"
+    ],
+    "formats": [
+      "mp4",
+      "lerobot"
+    ],
+    "size": "1.2 GB across the set",
+    "spec": [
+      [
+        "Task",
+        "Pick and place into the bin"
+      ],
+      [
+        "Episode",
+        "0 of 11"
+      ],
+      [
+        "Cameras",
+        "Three synchronised 640x480 views — head, left, right"
+      ],
+      [
+        "Arms",
+        "Seven degrees of freedom per arm, plus a gripper each"
+      ],
+      [
+        "On every frame",
+        "Joint state and action, 16-dimensional"
+      ],
+      [
+        "Frame rate",
+        "30 fps"
+      ],
+      [
+        "Set totals",
+        "11 episodes · 14,076 frames · 7 min 49 s"
+      ],
+      [
+        "Ships as",
+        "LeRobotDataset v2.1 with a GR00T-compatible modality map"
+      ],
+      [
+        "Preview",
+        "Head view here; left and right wrist views ship with the episode"
+      ]
+    ],
+    "breadcrumb": [
+      "Samples",
+      "Teleoperation",
+      "Pick and place into the bin"
+    ],
+    "preview": "/samples/clips/teleop-ep00.mp4",
+    "pills": [
+      {
+        "t": "Pick and place into the bin",
+        "k": "skill"
+      },
+      {
+        "t": "640x480",
+        "k": "device"
+      },
+      {
+        "t": "Joint state",
+        "k": "quality"
+      }
+    ],
+    "downloads": [
+      {
+        "t": "Preview pack",
+        "primary": true
+      }
+    ]
+  },
+  {
+    "slug": "teleop-ep01",
+    "domain": "robotics",
+    "modality": "teleoperation",
+    "tier": "umi",
+    "provenance": "custom",
+    "title": "Episode 1 · pick and place into the bin",
+    "label": "Pick and place into the bin",
+    "environment": "Lab, table-top",
+    "locale": "Hanoi, Vietnam",
+    "rig": "Bimanual teleoperation rig, three synced cameras",
+    "viewpoint": "third-person",
+    "skillGroup": "Pick and Place / Object Handling",
+    "industry": null,
+    "job": null,
+    "telemetry": true,
+    "durationSec": 20,
+    "resolution": "640x480",
+    "fps": 30,
+    "streams": [
+      "rgb head",
+      "rgb left",
+      "rgb right",
+      "joint state",
+      "joint action"
+    ],
+    "formats": [
+      "mp4",
+      "lerobot"
+    ],
+    "size": "1.2 GB across the set",
+    "spec": [
+      [
+        "Task",
+        "Pick and place into the bin"
+      ],
+      [
+        "Episode",
+        "1 of 11"
+      ],
+      [
+        "Cameras",
+        "Three synchronised 640x480 views — head, left, right"
+      ],
+      [
+        "Arms",
+        "Seven degrees of freedom per arm, plus a gripper each"
+      ],
+      [
+        "On every frame",
+        "Joint state and action, 16-dimensional"
+      ],
+      [
+        "Frame rate",
+        "30 fps"
+      ],
+      [
+        "Set totals",
+        "11 episodes · 14,076 frames · 7 min 49 s"
+      ],
+      [
+        "Ships as",
+        "LeRobotDataset v2.1 with a GR00T-compatible modality map"
+      ]
+    ],
+    "breadcrumb": [
+      "Samples",
+      "Teleoperation",
+      "Pick and place into the bin"
+    ],
+    "preview": "/samples/clips/teleop-ep01.mp4",
+    "pills": [
+      {
+        "t": "Pick and place into the bin",
+        "k": "skill"
+      },
+      {
+        "t": "640x480",
+        "k": "device"
+      },
+      {
+        "t": "Joint state",
+        "k": "quality"
+      }
+    ],
+    "downloads": [
+      {
+        "t": "Preview pack",
+        "primary": true
+      }
+    ]
+  },
+  {
+    "slug": "teleop-ep02",
+    "domain": "robotics",
+    "modality": "teleoperation",
+    "tier": "umi",
+    "provenance": "custom",
+    "title": "Episode 2 · pick and place into the bin",
+    "label": "Pick and place into the bin",
+    "environment": "Lab, table-top",
+    "locale": "Hanoi, Vietnam",
+    "rig": "Bimanual teleoperation rig, three synced cameras",
+    "viewpoint": "third-person",
+    "skillGroup": "Pick and Place / Object Handling",
+    "industry": null,
+    "job": null,
+    "telemetry": true,
+    "durationSec": 20,
+    "resolution": "640x480",
+    "fps": 30,
+    "streams": [
+      "rgb head",
+      "rgb left",
+      "rgb right",
+      "joint state",
+      "joint action"
+    ],
+    "formats": [
+      "mp4",
+      "lerobot"
+    ],
+    "size": "1.2 GB across the set",
+    "spec": [
+      [
+        "Task",
+        "Pick and place into the bin"
+      ],
+      [
+        "Episode",
+        "2 of 11"
+      ],
+      [
+        "Cameras",
+        "Three synchronised 640x480 views — head, left, right"
+      ],
+      [
+        "Arms",
+        "Seven degrees of freedom per arm, plus a gripper each"
+      ],
+      [
+        "On every frame",
+        "Joint state and action, 16-dimensional"
+      ],
+      [
+        "Frame rate",
+        "30 fps"
+      ],
+      [
+        "Set totals",
+        "11 episodes · 14,076 frames · 7 min 49 s"
+      ],
+      [
+        "Ships as",
+        "LeRobotDataset v2.1 with a GR00T-compatible modality map"
+      ]
+    ],
+    "breadcrumb": [
+      "Samples",
+      "Teleoperation",
+      "Pick and place into the bin"
+    ],
+    "preview": "/samples/clips/teleop-ep02.mp4",
+    "pills": [
+      {
+        "t": "Pick and place into the bin",
+        "k": "skill"
+      },
+      {
+        "t": "640x480",
+        "k": "device"
+      },
+      {
+        "t": "Joint state",
+        "k": "quality"
+      }
+    ],
+    "downloads": [
+      {
+        "t": "Preview pack",
+        "primary": true
+      }
+    ]
+  },
+  {
+    "slug": "teleop-ep03",
+    "domain": "robotics",
+    "modality": "teleoperation",
+    "tier": "umi",
+    "provenance": "custom",
+    "title": "Episode 3 · pick and place into the bin",
+    "label": "Pick and place into the bin",
+    "environment": "Lab, table-top",
+    "locale": "Hanoi, Vietnam",
+    "rig": "Bimanual teleoperation rig, three synced cameras",
+    "viewpoint": "third-person",
+    "skillGroup": "Pick and Place / Object Handling",
+    "industry": null,
+    "job": null,
+    "telemetry": true,
+    "durationSec": 20,
+    "resolution": "640x480",
+    "fps": 30,
+    "streams": [
+      "rgb head",
+      "rgb left",
+      "rgb right",
+      "joint state",
+      "joint action"
+    ],
+    "formats": [
+      "mp4",
+      "lerobot"
+    ],
+    "size": "1.2 GB across the set",
+    "spec": [
+      [
+        "Task",
+        "Pick and place into the bin"
+      ],
+      [
+        "Episode",
+        "3 of 11"
+      ],
+      [
+        "Cameras",
+        "Three synchronised 640x480 views — head, left, right"
+      ],
+      [
+        "Arms",
+        "Seven degrees of freedom per arm, plus a gripper each"
+      ],
+      [
+        "On every frame",
+        "Joint state and action, 16-dimensional"
+      ],
+      [
+        "Frame rate",
+        "30 fps"
+      ],
+      [
+        "Set totals",
+        "11 episodes · 14,076 frames · 7 min 49 s"
+      ],
+      [
+        "Ships as",
+        "LeRobotDataset v2.1 with a GR00T-compatible modality map"
+      ]
+    ],
+    "breadcrumb": [
+      "Samples",
+      "Teleoperation",
+      "Pick and place into the bin"
+    ],
+    "preview": "/samples/clips/teleop-ep03.mp4",
+    "pills": [
+      {
+        "t": "Pick and place into the bin",
+        "k": "skill"
+      },
+      {
+        "t": "640x480",
+        "k": "device"
+      },
+      {
+        "t": "Joint state",
+        "k": "quality"
+      }
+    ],
+    "downloads": [
+      {
+        "t": "Preview pack",
+        "primary": true
+      }
+    ]
+  },
+  {
+    "slug": "teleop-ep04",
+    "domain": "robotics",
+    "modality": "teleoperation",
+    "tier": "umi",
+    "provenance": "custom",
+    "title": "Episode 4 · pick and place into the bin",
+    "label": "Pick and place into the bin",
+    "environment": "Lab, table-top",
+    "locale": "Hanoi, Vietnam",
+    "rig": "Bimanual teleoperation rig, three synced cameras",
+    "viewpoint": "third-person",
+    "skillGroup": "Pick and Place / Object Handling",
+    "industry": null,
+    "job": null,
+    "telemetry": true,
+    "durationSec": 20,
+    "resolution": "640x480",
+    "fps": 30,
+    "streams": [
+      "rgb head",
+      "rgb left",
+      "rgb right",
+      "joint state",
+      "joint action"
+    ],
+    "formats": [
+      "mp4",
+      "lerobot"
+    ],
+    "size": "1.2 GB across the set",
+    "spec": [
+      [
+        "Task",
+        "Pick and place into the bin"
+      ],
+      [
+        "Episode",
+        "4 of 11"
+      ],
+      [
+        "Cameras",
+        "Three synchronised 640x480 views — head, left, right"
+      ],
+      [
+        "Arms",
+        "Seven degrees of freedom per arm, plus a gripper each"
+      ],
+      [
+        "On every frame",
+        "Joint state and action, 16-dimensional"
+      ],
+      [
+        "Frame rate",
+        "30 fps"
+      ],
+      [
+        "Set totals",
+        "11 episodes · 14,076 frames · 7 min 49 s"
+      ],
+      [
+        "Ships as",
+        "LeRobotDataset v2.1 with a GR00T-compatible modality map"
+      ]
+    ],
+    "breadcrumb": [
+      "Samples",
+      "Teleoperation",
+      "Pick and place into the bin"
+    ],
+    "preview": "/samples/clips/teleop-ep04.mp4",
+    "pills": [
+      {
+        "t": "Pick and place into the bin",
+        "k": "skill"
+      },
+      {
+        "t": "640x480",
+        "k": "device"
+      },
+      {
+        "t": "Joint state",
+        "k": "quality"
+      }
+    ],
+    "downloads": [
+      {
+        "t": "Preview pack",
+        "primary": true
+      }
+    ]
+  },
+  {
+    "slug": "teleop-ep05",
+    "domain": "robotics",
+    "modality": "teleoperation",
+    "tier": "umi",
+    "provenance": "custom",
+    "title": "Episode 5 · pick and place into the bin",
+    "label": "Pick and place into the bin",
+    "environment": "Lab, table-top",
+    "locale": "Hanoi, Vietnam",
+    "rig": "Bimanual teleoperation rig, three synced cameras",
+    "viewpoint": "third-person",
+    "skillGroup": "Pick and Place / Object Handling",
+    "industry": null,
+    "job": null,
+    "telemetry": true,
+    "durationSec": 20,
+    "resolution": "640x480",
+    "fps": 30,
+    "streams": [
+      "rgb head",
+      "rgb left",
+      "rgb right",
+      "joint state",
+      "joint action"
+    ],
+    "formats": [
+      "mp4",
+      "lerobot"
+    ],
+    "size": "1.2 GB across the set",
+    "spec": [
+      [
+        "Task",
+        "Pick and place into the bin"
+      ],
+      [
+        "Episode",
+        "5 of 11"
+      ],
+      [
+        "Cameras",
+        "Three synchronised 640x480 views — head, left, right"
+      ],
+      [
+        "Arms",
+        "Seven degrees of freedom per arm, plus a gripper each"
+      ],
+      [
+        "On every frame",
+        "Joint state and action, 16-dimensional"
+      ],
+      [
+        "Frame rate",
+        "30 fps"
+      ],
+      [
+        "Set totals",
+        "11 episodes · 14,076 frames · 7 min 49 s"
+      ],
+      [
+        "Ships as",
+        "LeRobotDataset v2.1 with a GR00T-compatible modality map"
+      ]
+    ],
+    "breadcrumb": [
+      "Samples",
+      "Teleoperation",
+      "Pick and place into the bin"
+    ],
+    "preview": "/samples/clips/teleop-ep05.mp4",
+    "pills": [
+      {
+        "t": "Pick and place into the bin",
+        "k": "skill"
+      },
+      {
+        "t": "640x480",
+        "k": "device"
+      },
+      {
+        "t": "Joint state",
+        "k": "quality"
+      }
+    ],
+    "downloads": [
+      {
+        "t": "Preview pack",
+        "primary": true
+      }
+    ]
+  },
+  {
+    "slug": "teleop-ep06",
+    "domain": "robotics",
+    "modality": "teleoperation",
+    "tier": "umi",
+    "provenance": "custom",
+    "title": "Episode 6 · pick and place into the bin",
+    "label": "Pick and place into the bin",
+    "environment": "Lab, table-top",
+    "locale": "Hanoi, Vietnam",
+    "rig": "Bimanual teleoperation rig, three synced cameras",
+    "viewpoint": "third-person",
+    "skillGroup": "Pick and Place / Object Handling",
+    "industry": null,
+    "job": null,
+    "telemetry": true,
+    "durationSec": 20,
+    "resolution": "640x480",
+    "fps": 30,
+    "streams": [
+      "rgb head",
+      "rgb left",
+      "rgb right",
+      "joint state",
+      "joint action"
+    ],
+    "formats": [
+      "mp4",
+      "lerobot"
+    ],
+    "size": "1.2 GB across the set",
+    "spec": [
+      [
+        "Task",
+        "Pick and place into the bin"
+      ],
+      [
+        "Episode",
+        "6 of 11"
+      ],
+      [
+        "Cameras",
+        "Three synchronised 640x480 views — head, left, right"
+      ],
+      [
+        "Arms",
+        "Seven degrees of freedom per arm, plus a gripper each"
+      ],
+      [
+        "On every frame",
+        "Joint state and action, 16-dimensional"
+      ],
+      [
+        "Frame rate",
+        "30 fps"
+      ],
+      [
+        "Set totals",
+        "11 episodes · 14,076 frames · 7 min 49 s"
+      ],
+      [
+        "Ships as",
+        "LeRobotDataset v2.1 with a GR00T-compatible modality map"
+      ]
+    ],
+    "breadcrumb": [
+      "Samples",
+      "Teleoperation",
+      "Pick and place into the bin"
+    ],
+    "preview": "/samples/clips/teleop-ep06.mp4",
+    "pills": [
+      {
+        "t": "Pick and place into the bin",
+        "k": "skill"
+      },
+      {
+        "t": "640x480",
+        "k": "device"
+      },
+      {
+        "t": "Joint state",
+        "k": "quality"
+      }
+    ],
+    "downloads": [
+      {
+        "t": "Preview pack",
+        "primary": true
+      }
+    ]
+  },
+  {
+    "slug": "teleop-ep07",
+    "domain": "robotics",
+    "modality": "teleoperation",
+    "tier": "umi",
+    "provenance": "custom",
+    "title": "Episode 7 · pick and place into the bin",
+    "label": "Pick and place into the bin",
+    "environment": "Lab, table-top",
+    "locale": "Hanoi, Vietnam",
+    "rig": "Bimanual teleoperation rig, three synced cameras",
+    "viewpoint": "third-person",
+    "skillGroup": "Pick and Place / Object Handling",
+    "industry": null,
+    "job": null,
+    "telemetry": true,
+    "durationSec": 20,
+    "resolution": "640x480",
+    "fps": 30,
+    "streams": [
+      "rgb head",
+      "rgb left",
+      "rgb right",
+      "joint state",
+      "joint action"
+    ],
+    "formats": [
+      "mp4",
+      "lerobot"
+    ],
+    "size": "1.2 GB across the set",
+    "spec": [
+      [
+        "Task",
+        "Pick and place into the bin"
+      ],
+      [
+        "Episode",
+        "7 of 11"
+      ],
+      [
+        "Cameras",
+        "Three synchronised 640x480 views — head, left, right"
+      ],
+      [
+        "Arms",
+        "Seven degrees of freedom per arm, plus a gripper each"
+      ],
+      [
+        "On every frame",
+        "Joint state and action, 16-dimensional"
+      ],
+      [
+        "Frame rate",
+        "30 fps"
+      ],
+      [
+        "Set totals",
+        "11 episodes · 14,076 frames · 7 min 49 s"
+      ],
+      [
+        "Ships as",
+        "LeRobotDataset v2.1 with a GR00T-compatible modality map"
+      ]
+    ],
+    "breadcrumb": [
+      "Samples",
+      "Teleoperation",
+      "Pick and place into the bin"
+    ],
+    "preview": "/samples/clips/teleop-ep07.mp4",
+    "pills": [
+      {
+        "t": "Pick and place into the bin",
+        "k": "skill"
+      },
+      {
+        "t": "640x480",
+        "k": "device"
+      },
+      {
+        "t": "Joint state",
+        "k": "quality"
+      }
+    ],
+    "downloads": [
+      {
+        "t": "Preview pack",
+        "primary": true
+      }
+    ]
+  },
+  {
+    "slug": "teleop-ep08",
+    "domain": "robotics",
+    "modality": "teleoperation",
+    "tier": "umi",
+    "provenance": "custom",
+    "title": "Episode 8 · pick and place into the bin",
+    "label": "Pick and place into the bin",
+    "environment": "Lab, table-top",
+    "locale": "Hanoi, Vietnam",
+    "rig": "Bimanual teleoperation rig, three synced cameras",
+    "viewpoint": "third-person",
+    "skillGroup": "Pick and Place / Object Handling",
+    "industry": null,
+    "job": null,
+    "telemetry": true,
+    "durationSec": 20,
+    "resolution": "640x480",
+    "fps": 30,
+    "streams": [
+      "rgb head",
+      "rgb left",
+      "rgb right",
+      "joint state",
+      "joint action"
+    ],
+    "formats": [
+      "mp4",
+      "lerobot"
+    ],
+    "size": "1.2 GB across the set",
+    "spec": [
+      [
+        "Task",
+        "Pick and place into the bin"
+      ],
+      [
+        "Episode",
+        "8 of 11"
+      ],
+      [
+        "Cameras",
+        "Three synchronised 640x480 views — head, left, right"
+      ],
+      [
+        "Arms",
+        "Seven degrees of freedom per arm, plus a gripper each"
+      ],
+      [
+        "On every frame",
+        "Joint state and action, 16-dimensional"
+      ],
+      [
+        "Frame rate",
+        "30 fps"
+      ],
+      [
+        "Set totals",
+        "11 episodes · 14,076 frames · 7 min 49 s"
+      ],
+      [
+        "Ships as",
+        "LeRobotDataset v2.1 with a GR00T-compatible modality map"
+      ]
+    ],
+    "breadcrumb": [
+      "Samples",
+      "Teleoperation",
+      "Pick and place into the bin"
+    ],
+    "preview": "/samples/clips/teleop-ep08.mp4",
+    "pills": [
+      {
+        "t": "Pick and place into the bin",
+        "k": "skill"
+      },
+      {
+        "t": "640x480",
+        "k": "device"
+      },
+      {
+        "t": "Joint state",
+        "k": "quality"
+      }
+    ],
+    "downloads": [
+      {
+        "t": "Preview pack",
+        "primary": true
+      }
+    ]
+  },
+  {
+    "slug": "teleop-ep09",
+    "domain": "robotics",
+    "modality": "teleoperation",
+    "tier": "umi",
+    "provenance": "custom",
+    "title": "Episode 9 · pick and place into the bin",
+    "label": "Pick and place into the bin",
+    "environment": "Lab, table-top",
+    "locale": "Hanoi, Vietnam",
+    "rig": "Bimanual teleoperation rig, three synced cameras",
+    "viewpoint": "third-person",
+    "skillGroup": "Pick and Place / Object Handling",
+    "industry": null,
+    "job": null,
+    "telemetry": true,
+    "durationSec": 20,
+    "resolution": "640x480",
+    "fps": 30,
+    "streams": [
+      "rgb head",
+      "rgb left",
+      "rgb right",
+      "joint state",
+      "joint action"
+    ],
+    "formats": [
+      "mp4",
+      "lerobot"
+    ],
+    "size": "1.2 GB across the set",
+    "spec": [
+      [
+        "Task",
+        "Pick and place into the bin"
+      ],
+      [
+        "Episode",
+        "9 of 11"
+      ],
+      [
+        "Cameras",
+        "Three synchronised 640x480 views — head, left, right"
+      ],
+      [
+        "Arms",
+        "Seven degrees of freedom per arm, plus a gripper each"
+      ],
+      [
+        "On every frame",
+        "Joint state and action, 16-dimensional"
+      ],
+      [
+        "Frame rate",
+        "30 fps"
+      ],
+      [
+        "Set totals",
+        "11 episodes · 14,076 frames · 7 min 49 s"
+      ],
+      [
+        "Ships as",
+        "LeRobotDataset v2.1 with a GR00T-compatible modality map"
+      ]
+    ],
+    "breadcrumb": [
+      "Samples",
+      "Teleoperation",
+      "Pick and place into the bin"
+    ],
+    "preview": "/samples/clips/teleop-ep09.mp4",
+    "pills": [
+      {
+        "t": "Pick and place into the bin",
+        "k": "skill"
+      },
+      {
+        "t": "640x480",
+        "k": "device"
+      },
+      {
+        "t": "Joint state",
+        "k": "quality"
+      }
+    ],
+    "downloads": [
+      {
+        "t": "Preview pack",
+        "primary": true
+      }
+    ]
+  },
+  {
+    "slug": "teleop-ep10",
+    "domain": "robotics",
+    "modality": "teleoperation",
+    "tier": "umi",
+    "provenance": "custom",
+    "title": "Episode 10 · pick and place into the bin",
+    "label": "Pick and place into the bin",
+    "environment": "Lab, table-top",
+    "locale": "Hanoi, Vietnam",
+    "rig": "Bimanual teleoperation rig, three synced cameras",
+    "viewpoint": "third-person",
+    "skillGroup": "Pick and Place / Object Handling",
+    "industry": null,
+    "job": null,
+    "telemetry": true,
+    "durationSec": 20,
+    "resolution": "640x480",
+    "fps": 30,
+    "streams": [
+      "rgb head",
+      "rgb left",
+      "rgb right",
+      "joint state",
+      "joint action"
+    ],
+    "formats": [
+      "mp4",
+      "lerobot"
+    ],
+    "size": "1.2 GB across the set",
+    "spec": [
+      [
+        "Task",
+        "Pick and place into the bin"
+      ],
+      [
+        "Episode",
+        "10 of 11"
+      ],
+      [
+        "Cameras",
+        "Three synchronised 640x480 views — head, left, right"
+      ],
+      [
+        "Arms",
+        "Seven degrees of freedom per arm, plus a gripper each"
+      ],
+      [
+        "On every frame",
+        "Joint state and action, 16-dimensional"
+      ],
+      [
+        "Frame rate",
+        "30 fps"
+      ],
+      [
+        "Set totals",
+        "11 episodes · 14,076 frames · 7 min 49 s"
+      ],
+      [
+        "Ships as",
+        "LeRobotDataset v2.1 with a GR00T-compatible modality map"
+      ]
+    ],
+    "breadcrumb": [
+      "Samples",
+      "Teleoperation",
+      "Pick and place into the bin"
+    ],
+    "preview": "/samples/clips/teleop-ep10.mp4",
+    "pills": [
+      {
+        "t": "Pick and place into the bin",
+        "k": "skill"
+      },
+      {
+        "t": "640x480",
+        "k": "device"
+      },
+      {
+        "t": "Joint state",
+        "k": "quality"
+      }
+    ],
+    "downloads": [
+      {
+        "t": "Preview pack",
+        "primary": true
+      }
+    ]
   }
 ]

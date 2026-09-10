@@ -91,7 +91,10 @@ export function TeleopSet() {
             className="bp-card mt-4 max-w-2xl px-4 py-3 text-[13px] leading-relaxed"
             style={{ color: C.textMid }}
           >
-            This set is the robot side: an <span className="font-mono">openarm_gripper_follower</span>,
+            {/* The model string was here in mono, which is the most legible
+                place on the page to print a part number we are not allowed to
+                print. "Rig ko ghi tên" — redact.mjs. */}
+            This set is the robot side: a bimanual follower arm,
             two arms, seven joints each plus a gripper. The configuration priced above it — Egocentric
             + gripper (UMI) — is the human side, a person wearing a wrist rig, and it delivers{" "}
             <span className="font-mono">head.mp4 + wrist.mp4 + imu.csv + gripper_state.json</span>{" "}
