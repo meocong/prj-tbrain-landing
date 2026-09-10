@@ -69,15 +69,39 @@ against the clip already published for the same record.
 """
 import concurrent.futures as cf, datetime, hashlib, hmac, os, re, subprocess, sys, urllib.parse, urllib.request
 
-OUT = "/tmp/stereo-out"
+OUT = os.environ.get("OUT", "/tmp/stereo-out")
 W, H, SECONDS = 576, 432, 8
-# Left eye first: the pair is named for it, and a session that has no primary
-# pair falls back to the mid one rather than mixing a primary left with a mid
-# right, which would be two cameras at different baselines sold as a pair.
-PAIRS = [("primary_left_proxy", "primary_right_proxy"),
-         ("primary_left", "primary_right"),
-         ("mid_left_proxy", "mid_right_proxy"),
+# SCOUT: one long, small, cheap pass over the episode so the window can be
+# chosen by looking instead of guessed. Left eye only — both eyes see the same
+# hands, and scouting twice would double the bytes for the same answer.
+if os.environ.get("SCOUT") == "1":
+    W, H, SECONDS = 288, 216, int(os.environ.get("SCOUT_SECONDS", "120"))
+# The FRONT pair, and only the front pair.
+#
+# Thạch, 2026-09-11: "robocap có 6 cam, thì cái cam mà thường lấy sẽ là cam
+# left front và right front, 2 cam bên dưới dễ dính mặt và không có tay."
+#
+# `mid` is that front pair. `primary` is the lower one, and the first run of
+# this script took it: same second, same session, `primary_left` is the
+# wearer's own chin filling the frame upside down with no hands and no task in
+# it, while `mid_left` has both hands, the work and the whole bench. `outer` is
+# a third pair that points off across the yard and is not exported by default —
+# `full.json` lists it under `cams_on_request`.
+#
+# So the fallback chain is the front pair at either quality, and nothing else.
+# Falling back to `primary` would be falling back to the camera this comment
+# exists to avoid.
+# ALLOW_PRIMARY exists because the naming is not consistent across rig builds.
+# Ten of the 118 sessions export `primary` and nothing else — on those it is
+# the only pair there is, so it is the front pair by definition, and refusing
+# it would drop ten records to defend them from a camera they do not have.
+# Which pair actually shows hands is then settled by `check-cut-hands.py`, not
+# by the name.
+PAIRS = [("mid_left_proxy", "mid_right_proxy"),
          ("mid_left", "mid_right")]
+if os.environ.get("ALLOW_PRIMARY") == "1":
+    PAIRS += [("primary_left_proxy", "primary_right_proxy"),
+              ("primary_left", "primary_right")]
 
 def creds():
     out = subprocess.run(["docker", "exec", "oai-backend-worker-1", "printenv"],
@@ -152,7 +176,10 @@ def cut(key, seek, out):
 def job(line):
     slug, prefix, off, sdur, edur = line.split("|")
     off, edur = float(off), float(edur)
-    seek = off + seek_in_episode(edur)
+    # ABS_SEEK: the third column is already the second to cut at, chosen by
+    # `check-cut-hands.py` scouting the episode for a window that keeps every
+    # hand whole. Without it the seek is the blind "a little way in" rule.
+    seek = off if os.environ.get("ABS_SEEK") == "1" else off + seek_in_episode(edur)
     have = listing(f"{prefix}full/")
     for left, right in PAIRS:
         lk, rk = f"{prefix}full/{left}.mp4", f"{prefix}full/{right}.mp4"
@@ -160,7 +187,8 @@ def job(line):
             continue
         try:
             cut(lk, seek, f"{OUT}/{slug}.mp4")
-            cut(rk, seek, f"{OUT}/{slug}-right.mp4")
+            if os.environ.get("SCOUT") != "1":
+                cut(rk, seek, f"{OUT}/{slug}-right.mp4")
             return f"ok   {slug:<26} {left.split('_')[0]:<8} @{seek:8.2f}s"
         except subprocess.CalledProcessError as e:
             return f"FAIL {slug:<26} {e.stderr.decode().strip().splitlines()[-1][:70] if e.stderr else e}"
