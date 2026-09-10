@@ -1,4 +1,160 @@
 {
+  "appliance-repair": [
+    "right"
+  ],
+  "auto-electrical": [
+    "right"
+  ],
+  "bag-cutting": [
+    "right"
+  ],
+  "bag-holding": [
+    "right"
+  ],
+  "bathroom-scrubbing": [
+    "right"
+  ],
+  "bed-making": [
+    "right"
+  ],
+  "bed-making-2": [
+    "right"
+  ],
+  "bed-making-3": [
+    "right"
+  ],
+  "bed-making-4": [
+    "right"
+  ],
+  "board-placing": [
+    "right"
+  ],
+  "body-assembly": [
+    "right"
+  ],
+  "box-cleaning": [
+    "right"
+  ],
+  "cabinet-installation": [
+    "right"
+  ],
+  "ceiling-panels": [
+    "right"
+  ],
+  "client-posing": [
+    "right"
+  ],
+  "clothe-ironing": [
+    "right"
+  ],
+  "component-assembly": [
+    "right"
+  ],
+  "component-grinding": [
+    "right"
+  ],
+  "component-inspection": [
+    "right"
+  ],
+  "container-arranging": [
+    "right"
+  ],
+  "container-closing": [
+    "right"
+  ],
+  "cowl-installation": [
+    "right"
+  ],
+  "cup-sealing": [
+    "right"
+  ],
+  "device-connecting": [
+    "right"
+  ],
+  "device-inserting": [
+    "right"
+  ],
+  "dish-clearing": [
+    "right"
+  ],
+  "dish-preparation": [
+    "right"
+  ],
+  "dish-washing-2": [
+    "right"
+  ],
+  "door-cleaning": [
+    "right"
+  ],
+  "engine-repair": [
+    "right"
+  ],
+  "equipment-moving": [
+    "right"
+  ],
+  "fabric-inspection": [
+    "right"
+  ],
+  "fabric-sewing": [
+    "right"
+  ],
+  "floor-collecting": [
+    "right"
+  ],
+  "flower-arranging": [
+    "right"
+  ],
+  "flower-arranging-2": [
+    "right"
+  ],
+  "flower-cutting": [
+    "right"
+  ],
+  "flower-cutting-2": [
+    "right"
+  ],
+  "flower-cutting-3": [
+    "right"
+  ],
+  "flower-pruning": [
+    "right"
+  ],
+  "food-cleaning": [
+    "right"
+  ],
+  "food-preparation": [
+    "right"
+  ],
+  "food-serving-2": [
+    "right"
+  ],
+  "frame-assembly": [
+    "right"
+  ],
+  "furniture-removal": [
+    "right"
+  ],
+  "garment-sewing": [
+    "right"
+  ],
+  "grass-cutting": [
+    "right"
+  ],
+  "hair-cutting": [
+    "right"
+  ],
+  "hair-cutting-2": [
+    "right"
+  ],
+  "haircut-neckline": [
+    "right"
+  ],
+  "hand-washing": [
+    "right"
+  ],
+  "handle-tightening": [
+    "right"
+  ],
   "handpose-fabric-sewing": [
     "right"
   ],
@@ -18,6 +174,99 @@
     "right"
   ],
   "handpose-zipper-sewing": [
+    "right"
+  ],
+  "harness-securing": [
+    "right"
+  ],
+  "item-organizing": [
+    "right"
+  ],
+  "item-organizing-2": [
+    "right"
+  ],
+  "jacket-folding": [
+    "right"
+  ],
+  "laptop-repair": [
+    "right"
+  ],
+  "leaf-sweeping": [
+    "right"
+  ],
+  "led-soldering": [
+    "right"
+  ],
+  "lighting-setup": [
+    "right"
+  ],
+  "machine-cleaning": [
+    "right"
+  ],
+  "maintenance-repair": [
+    "right"
+  ],
+  "motor-disassembly": [
+    "right"
+  ],
+  "motor-measuring": [
+    "right"
+  ],
+  "motor-rewind": [
+    "right"
+  ],
+  "motorcycle-washing": [
+    "right"
+  ],
+  "noodle-prep": [
+    "right"
+  ],
+  "order-verifying": [
+    "right"
+  ],
+  "outlet-installation": [
+    "right"
+  ],
+  "outlet-wiring": [
+    "right"
+  ],
+  "paint-mixing": [
+    "right"
+  ],
+  "panel-attachment": [
+    "right"
+  ],
+  "part-sorting": [
+    "right"
+  ],
+  "pavement-sweeping": [
+    "right"
+  ],
+  "plant-watering": [
+    "right"
+  ],
+  "pot-carrying": [
+    "right"
+  ],
+  "product-wrapping": [
+    "right"
+  ],
+  "room-organizing": [
+    "right"
+  ],
+  "scooter-repair": [
+    "right"
+  ],
+  "screen-cleaning": [
+    "right"
+  ],
+  "sheet-folding": [
+    "right"
+  ],
+  "shoe-sorting-2": [
+    "right"
+  ],
+  "signboard-install": [
     "right"
   ],
   "sixcam-engine-working": [
@@ -88,5 +337,86 @@
     "mid-right",
     "outer-left",
     "outer-right"
+  ],
+  "sole-stitching": [
+    "right"
+  ],
+  "stone-sanding": [
+    "right"
+  ],
+  "table-cleaning": [
+    "right"
+  ],
+  "table-clearing": [
+    "right"
+  ],
+  "tarpaulin-folding": [
+    "right"
+  ],
+  "tea-pouring": [
+    "right"
+  ],
+  "tire-inflating": [
+    "right"
+  ],
+  "tool-charging": [
+    "right"
+  ],
+  "trash-clearing": [
+    "right"
+  ],
+  "trash-disposing": [
+    "right"
+  ],
+  "tray-arranging": [
+    "right"
+  ],
+  "vegetable-harvesting": [
+    "right"
+  ],
+  "vegetable-picking": [
+    "right"
+  ],
+  "vegetable-serving": [
+    "right"
+  ],
+  "vegetable-weeding": [
+    "right"
+  ],
+  "wall-cleaning": [
+    "right"
+  ],
+  "wall-demolition": [
+    "right"
+  ],
+  "wall-hanging": [
+    "right"
+  ],
+  "wall-plastering": [
+    "right"
+  ],
+  "weed-removal": [
+    "right"
+  ],
+  "wheel-balancing": [
+    "right"
+  ],
+  "wheel-reinstallation": [
+    "right"
+  ],
+  "wire-coiling": [
+    "right"
+  ],
+  "wire-connecting": [
+    "right"
+  ],
+  "wire-cutting": [
+    "right"
+  ],
+  "wood-sanding": [
+    "right"
+  ],
+  "wood-sanding-2": [
+    "right"
   ]
 }
