@@ -234,14 +234,27 @@ export default async function CategoryPage({
                   </p>
                 )}
 
-                {/* Was five stacked blocks of about eighty words each. Tam,
-                    2026-09-10: "em bảo Claude làm sao bố trí cho nó visual + đẹp
-                    dễ nhìn, ko quá nhiều chữ." Now a four-column matrix.
+                {/* The spec matrix, and only where the boxes above do not exist.
 
-                    `showWhen` only where there are no configuration cards above
-                    to carry the guidance — on egocentric that copy is the
-                    `pitch` on each ConfigFolders card. */}
-                <CapabilityTable tiers={s.tiers} showWhen={!usesConfigFolders(c.modality)} />
+                    Tam, 2026-09-10, on this table: "em bảo Claude làm sao bố trí
+                    cho nó visual + đẹp dễ nhìn, ko quá nhiều chữ." The first
+                    answer was to make it a tidier table, which missed the point
+                    — laid out visually, that table IS the configuration boxes.
+                    Keeping both printed the same four configurations twice on
+                    one page, which is why the page still read as heavy after the
+                    words came out of it.
+
+                    So on a category with boxes the spec goes with the box, onto
+                    the configuration's own page, where a reader who has already
+                    chosen wants outputs and ramp. That leaves the two blocks Tam
+                    described: "đoạn trên nói về phần video, các thể loại video
+                    khác nhau. Xong ở dưới còn thêm ý Advanced annotation."
+
+                    Categories with no boxes keep the table — for them it is the
+                    only place the configurations are named. */}
+                {!usesConfigFolders(c.modality) && (
+                  <CapabilityTable tiers={s.tiers} showWhen />
+                )}
 
 
                 <p

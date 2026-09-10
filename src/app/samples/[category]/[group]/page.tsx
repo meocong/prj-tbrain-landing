@@ -17,6 +17,7 @@ import samples from "@/lib/samples/samples.json";
 import { SampleCatalog } from "../../_sections/SampleCatalog";
 import { CaptureSpec } from "../../_sections/CaptureSpec";
 import { RigViews } from "../../_sections/RigViews";
+import { CapabilityTable } from "../../_sections/CapabilityTable";
 import { AccessPaths } from "../../_sections/AccessPaths";
 import { C } from "../../_sections/tokens";
 import { Reveal } from "../../_sections/Reveal";
@@ -48,6 +49,8 @@ function resolveGroup(modality: string, slug: string) {
   if (usesConfigFolders(modality)) {
     const tier = (CAPABILITY[modality] ?? []).find((t) => t.key === slug);
     if (!tier) return null;
+    // The spec travels with the configuration rather than sitting in a table on
+    // the category page beside the box that leads here.
     const rows = (samples as unknown as { modality: string; tier: string; durationSec: number }[])
       .filter((r) => r.modality === modality && r.tier === slug);
     return {
@@ -57,11 +60,20 @@ function resolveGroup(modality: string, slug: string) {
       lead: tier.pitch ?? tier.when ?? null,
       count: rows.length,
       minutes: rows.reduce((a, r) => a + r.durationSec, 0) / 60,
+      tier,
     };
   }
   const f = skillFolderBySlug(modality, slug);
   if (!f) return null;
-  return { kind: "skill" as const, slug, name: f.name, lead: null, count: f.count, minutes: f.minutes };
+  return {
+    kind: "skill" as const,
+    slug,
+    name: f.name,
+    lead: null,
+    count: f.count,
+    minutes: f.minutes,
+    tier: undefined,
+  };
 }
 
 export function generateStaticParams() {
@@ -149,6 +161,16 @@ export default async function SkillGroupPage({ params }: Params) {
             </Reveal>
           </div>
         </section>
+
+        {/* What this configuration delivers: outputs, ramp, ceiling. One row,
+            because the reader has already chosen. */}
+        {folder.tier && (
+          <section>
+            <div className="mx-auto max-w-[1400px] px-4 lg:px-10 xl:px-16">
+              <CapabilityTable tiers={[folder.tier]} />
+            </div>
+          </section>
+        )}
 
         {/* The rig, on the page that sells it.
 
