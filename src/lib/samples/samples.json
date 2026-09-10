@@ -6,7 +6,7 @@
     "task": "cowl-installation",
     "skill": "Repair & Maintenance",
     "environment": "Motorcycle Repair, Service Bay",
-    "locale": "Hanoi",
+    "locale": "Vietnam",
     "rig": "Egocentric stereo",
     "durationSec": 226.367,
     "resolution": "stereo pair",
@@ -54,42 +54,6 @@
         "Service Bay"
       ],
       [
-        "NAICS",
-        "811490"
-      ],
-      [
-        "Business",
-        "Motorcycle repair shop 3 (Vinh Quynh) — Vĩnh Quỳnh, Thanh Tri, Ha Noi"
-      ],
-      [
-        "Site",
-        "Hanoi"
-      ],
-      [
-        "Geohash",
-        "w7er06"
-      ],
-      [
-        "Environment id",
-        "env-76928969"
-      ],
-      [
-        "Business id",
-        "biz-0b9f25f6"
-      ],
-      [
-        "Device",
-        "Egocentric stereo / fw 2.1.18"
-      ],
-      [
-        "Device id",
-        "device-89b9c15e"
-      ],
-      [
-        "Kit",
-        "kit-7cb9f1ee"
-      ],
-      [
         "Shutter",
         "global"
       ],
@@ -123,23 +87,15 @@
       ],
       [
         "Operator",
-        "op-3fdc7901 / Motorcycle mechanic, 25–30, Right-handed"
+        "Motorcycle mechanic, 25–30, Right-handed"
       ],
       [
         "Consent",
         "recorded per session"
       ],
       [
-        "Session",
-        "capture__20260806_155725__785e938d"
-      ],
-      [
-        "Episode uuid",
-        "9c87a7e8-4871-5e64-b046-df343f3e0f2e"
-      ],
-      [
         "File",
-        "capture__20260806_155725__785e938d__seg_002.mcap"
+        "…__seg_002.mcap"
       ],
       [
         "SHA-256",
@@ -205,7 +161,7 @@
     "task": "hair-cutting",
     "skill": "Tool Use & Technical Manipulation",
     "environment": "Barber Shop, Makeup Area",
-    "locale": "Hanoi",
+    "locale": "Vietnam",
     "rig": "Egocentric stereo",
     "durationSec": 237,
     "resolution": "stereo pair",
@@ -253,42 +209,6 @@
         "Makeup Area"
       ],
       [
-        "NAICS",
-        "812111"
-      ],
-      [
-        "Business",
-        "Hair, lash and makeup salon — No 55 Vinh Quynh, Thanh Tri, Ha Noi, Vietnam"
-      ],
-      [
-        "Site",
-        "Hanoi"
-      ],
-      [
-        "Geohash",
-        "w7er06"
-      ],
-      [
-        "Environment id",
-        "env-0cb3ddff"
-      ],
-      [
-        "Business id",
-        "biz-12c36e49"
-      ],
-      [
-        "Device",
-        "Egocentric stereo / fw 2.1.18"
-      ],
-      [
-        "Device id",
-        "device-429c0060"
-      ],
-      [
-        "Kit",
-        "kit-71c69244"
-      ],
-      [
         "Shutter",
         "global"
       ],
@@ -322,23 +242,15 @@
       ],
       [
         "Operator",
-        "op-29b06ba6 / Barber, 25–30, Right-handed"
+        "Barber, 25–30, Right-handed"
       ],
       [
         "Consent",
         "recorded per session"
       ],
       [
-        "Session",
-        "capture__20260807_165628__e71e3f6e"
-      ],
-      [
-        "Episode uuid",
-        "612efe20-41d9-5b45-af8b-249388700578"
-      ],
-      [
         "File",
-        "capture__20260807_165628__e71e3f6e__seg_002.mcap"
+        "…__seg_002.mcap"
       ],
       [
         "SHA-256",
@@ -404,7 +316,7 @@
     "task": "motor-threading",
     "skill": "Pick and Place / Object Handling",
     "environment": "Appliance Repair, Work Bench",
-    "locale": "Hanoi",
+    "locale": "Vietnam",
     "rig": "Egocentric stereo",
     "durationSec": 241.483,
     "resolution": "stereo pair",
@@ -452,42 +364,6 @@
         "Work Bench"
       ],
       [
-        "NAICS",
-        "811412"
-      ],
-      [
-        "Business",
-        "Home appliance repair shop (Truong Dinh) — 806 Trương Định, Hoàng Mai, Hà Nội"
-      ],
-      [
-        "Site",
-        "Hanoi"
-      ],
-      [
-        "Geohash",
-        "w7er2e"
-      ],
-      [
-        "Environment id",
-        "env-6559e365"
-      ],
-      [
-        "Business id",
-        "biz-6fde99d9"
-      ],
-      [
-        "Device",
-        "Egocentric stereo / fw 2.1.7"
-      ],
-      [
-        "Device id",
-        "device-183561bf"
-      ],
-      [
-        "Kit",
-        "kit-026a5f1c"
-      ],
-      [
         "Shutter",
         "global"
       ],
@@ -521,23 +397,15 @@
       ],
       [
         "Operator",
-        "op-908e5ae9 / Appliance repair technician, 55–60, Right-handed"
+        "Appliance repair technician, 55–60, Right-handed"
       ],
       [
         "Consent",
         "recorded per session"
       ],
       [
-        "Session",
-        "capture__20260810_152716__f0e43750"
-      ],
-      [
-        "Episode uuid",
-        "9eb96a1f-1e82-5be6-9005-a1a6f39568c1"
-      ],
-      [
         "File",
-        "capture__20260810_152716__f0e43750__seg_041.mcap"
+        "…__seg_041.mcap"
       ],
       [
         "SHA-256",
@@ -603,7 +471,7 @@
     "task": "vehicle-maintaining",
     "skill": "Mechanical / Automotive Work",
     "environment": "Auto Repair, Repair Bench",
-    "locale": "Hanoi",
+    "locale": "Vietnam",
     "rig": "Egocentric stereo",
     "durationSec": 240,
     "resolution": "stereo pair",
@@ -651,42 +519,6 @@
         "Repair Bench"
       ],
       [
-        "NAICS",
-        "811111"
-      ],
-      [
-        "Business",
-        "Auto repair shop (TVB) — No. 68A Trinh Van Bo Street, Nam Tu Liem, Hanoi, Vietnam"
-      ],
-      [
-        "Site",
-        "Hanoi"
-      ],
-      [
-        "Geohash",
-        "w7epwm"
-      ],
-      [
-        "Environment id",
-        "env-9b4d69ea"
-      ],
-      [
-        "Business id",
-        "biz-380a99f1"
-      ],
-      [
-        "Device",
-        "Egocentric stereo / fw 1.2.13"
-      ],
-      [
-        "Device id",
-        "device-98eac838"
-      ],
-      [
-        "Kit",
-        "kit-4b98f3b8"
-      ],
-      [
         "Shutter",
         "rolling"
       ],
@@ -720,23 +552,15 @@
       ],
       [
         "Operator",
-        "op-23050cb7 / Mechanic, 20–25, Right-handed"
+        "Mechanic, 20–25, Right-handed"
       ],
       [
         "Consent",
         "recorded per session"
       ],
       [
-        "Session",
-        "capture__20260818_021107__db6ca3a3"
-      ],
-      [
-        "Episode uuid",
-        "4f10a7d7-5768-5e0c-aa50-c89281fb44e7"
-      ],
-      [
         "File",
-        "capture__20260818_021107__db6ca3a3__seg_004.mcap"
+        "…__seg_004.mcap"
       ],
       [
         "SHA-256",
@@ -802,7 +626,7 @@
     "task": "signboard-installation",
     "skill": "Assembly & Installation",
     "environment": "Sign Shop, Sports Field Sidelines",
-    "locale": "Xa Van Giang",
+    "locale": "Vietnam",
     "rig": "Egocentric stereo",
     "durationSec": 220,
     "resolution": "stereo pair",
@@ -850,42 +674,6 @@
         "Sports Field Sidelines"
       ],
       [
-        "NAICS",
-        "339950"
-      ],
-      [
-        "Business",
-        "Hung Yen signage workshop — 323 Van Giang, Hung Yen"
-      ],
-      [
-        "Site",
-        "Xa Van Giang, Hung Yen"
-      ],
-      [
-        "Geohash",
-        "w7er4d"
-      ],
-      [
-        "Environment id",
-        "env-184448a3"
-      ],
-      [
-        "Business id",
-        "biz-3faf7c2e"
-      ],
-      [
-        "Device",
-        "Egocentric stereo / fw 1.2.13"
-      ],
-      [
-        "Device id",
-        "device-66a2ca11"
-      ],
-      [
-        "Kit",
-        "kit-0d907884"
-      ],
-      [
         "Shutter",
         "rolling"
       ],
@@ -919,23 +707,15 @@
       ],
       [
         "Operator",
-        "op-49ebec86 / Sign maker, 35–40, Right-handed"
+        "Sign maker, 35–40, Right-handed"
       ],
       [
         "Consent",
         "recorded per session"
       ],
       [
-        "Session",
-        "capture__20260818_073221__753b10bb"
-      ],
-      [
-        "Episode uuid",
-        "8898dfa2-28ae-56ae-9bcf-06c0df59a765"
-      ],
-      [
         "File",
-        "capture__20260818_073221__753b10bb__seg_078.mcap"
+        "…__seg_078.mcap"
       ],
       [
         "SHA-256",
@@ -1001,7 +781,7 @@
     "task": "garment-sewing",
     "skill": "Clothing & Laundry",
     "environment": "Sewing Factory, Sewing Station",
-    "locale": "Hung Yen",
+    "locale": "Vietnam",
     "rig": "Egocentric stereo",
     "durationSec": 260.979,
     "resolution": "stereo pair",
@@ -1049,42 +829,6 @@
         "Sewing Station"
       ],
       [
-        "NAICS",
-        "315250"
-      ],
-      [
-        "Business",
-        "May Hưng Yên — No 18 Toan Tien Hamlet, Tien Lu Commune, Hung Yen Province, Vietnam"
-      ],
-      [
-        "Site",
-        "Hung Yen"
-      ],
-      [
-        "Geohash",
-        "w7emmq"
-      ],
-      [
-        "Environment id",
-        "env-ca723201"
-      ],
-      [
-        "Business id",
-        "biz-c1617b2d"
-      ],
-      [
-        "Device",
-        "Egocentric stereo / fw 1.2.13"
-      ],
-      [
-        "Device id",
-        "device-65555f2e"
-      ],
-      [
-        "Kit",
-        "kit-8c8c79d5"
-      ],
-      [
         "Shutter",
         "rolling"
       ],
@@ -1118,23 +862,15 @@
       ],
       [
         "Operator",
-        "op-c3665db3 / Tailor / seamstress, 40–45, Right-handed"
+        "Tailor / seamstress, 40–45, Right-handed"
       ],
       [
         "Consent",
         "recorded per session"
       ],
       [
-        "Session",
-        "capture__20260821_024229__8418598e"
-      ],
-      [
-        "Episode uuid",
-        "eda02439-22e2-5269-a02e-535fff12a60b"
-      ],
-      [
         "File",
-        "capture__20260821_024229__8418598e__seg_002.mcap"
+        "…__seg_002.mcap"
       ],
       [
         "SHA-256",
@@ -1200,7 +936,7 @@
     "task": "noodle-cooking",
     "skill": "Food Preparation & Cooking",
     "environment": "Restaurant, Kitchen",
-    "locale": "Hanoi",
+    "locale": "Vietnam",
     "rig": "Egocentric stereo",
     "durationSec": 205.767,
     "resolution": "stereo pair",
@@ -1248,42 +984,6 @@
         "Kitchen"
       ],
       [
-        "NAICS",
-        "722310"
-      ],
-      [
-        "Business",
-        "Lotteria Tân Mai — Hoa Phat Building, 99 Tan Mai Street, Tuong Mai Ward, Hanoi"
-      ],
-      [
-        "Site",
-        "Hanoi"
-      ],
-      [
-        "Geohash",
-        "w7er2s"
-      ],
-      [
-        "Environment id",
-        "env-2278e832"
-      ],
-      [
-        "Business id",
-        "biz-6574afdb"
-      ],
-      [
-        "Device",
-        "Egocentric stereo / fw 1.2.13"
-      ],
-      [
-        "Device id",
-        "device-ba50845d"
-      ],
-      [
-        "Kit",
-        "kit-4898412b"
-      ],
-      [
         "Shutter",
         "rolling"
       ],
@@ -1317,23 +1017,15 @@
       ],
       [
         "Operator",
-        "op-27bc07fc / Food prep worker, 20–25, Right-handed"
+        "Food prep worker, 20–25, Right-handed"
       ],
       [
         "Consent",
         "recorded per session"
       ],
       [
-        "Session",
-        "capture__20260822_061602__e25cef0b"
-      ],
-      [
-        "Episode uuid",
-        "e93ce3f2-cbe0-5e35-bfc1-6f4f436d4d07"
-      ],
-      [
         "File",
-        "capture__20260822_061602__e25cef0b__seg_007.mcap"
+        "…__seg_007.mcap"
       ],
       [
         "SHA-256",
@@ -1399,7 +1091,7 @@
     "task": "laptop-repair",
     "skill": "Electronics & Diagnostics",
     "environment": "Computer Repair, Workbench",
-    "locale": "Hanoi",
+    "locale": "Vietnam",
     "rig": "Egocentric stereo",
     "durationSec": 230.244,
     "resolution": "stereo pair",
@@ -1447,42 +1139,6 @@
         "Workbench"
       ],
       [
-        "NAICS",
-        "811212"
-      ],
-      [
-        "Business",
-        "Điện Tử TOMAN — 152 Lê Thanh Nghị, Bạch Mai, Hà Nội"
-      ],
-      [
-        "Site",
-        "Hanoi"
-      ],
-      [
-        "Geohash",
-        "w7er2x"
-      ],
-      [
-        "Environment id",
-        "env-0bad57c9"
-      ],
-      [
-        "Business id",
-        "biz-f3a8f404"
-      ],
-      [
-        "Device",
-        "Egocentric stereo / fw 2.1.7"
-      ],
-      [
-        "Device id",
-        "device-183561bf"
-      ],
-      [
-        "Kit",
-        "kit-026a5f1c"
-      ],
-      [
         "Shutter",
         "global"
       ],
@@ -1516,23 +1172,15 @@
       ],
       [
         "Operator",
-        "op-a4cd71e6 / Computer repair technician, 20–25, Right-handed"
+        "Computer repair technician, 20–25, Right-handed"
       ],
       [
         "Consent",
         "recorded per session"
       ],
       [
-        "Session",
-        "capture__20260825_104653__f0e43750"
-      ],
-      [
-        "Episode uuid",
-        "cae8479e-3d4c-59bc-bbf4-4a2a481daa7b"
-      ],
-      [
         "File",
-        "capture__20260825_104653__f0e43750__seg_002.mcap"
+        "…__seg_002.mcap"
       ],
       [
         "SHA-256",
@@ -1598,7 +1246,7 @@
     "task": "panel-installation",
     "skill": "Construction & Building",
     "environment": "Construction Company, Construction Site",
-    "locale": "Thai Nguyen",
+    "locale": "Vietnam",
     "rig": "Egocentric stereo",
     "durationSec": 236,
     "resolution": "stereo pair",
@@ -1646,42 +1294,6 @@
         "Construction Site"
       ],
       [
-        "NAICS",
-        "236220"
-      ],
-      [
-        "Business",
-        "Thi cong thach cao Thai Nguyen — No. 12 Luong The Vinh Street, Thai Nguyen City, Vietnam"
-      ],
-      [
-        "Site",
-        "Thai Nguyen"
-      ],
-      [
-        "Geohash",
-        "w7g6b5"
-      ],
-      [
-        "Environment id",
-        "env-491ee1d1"
-      ],
-      [
-        "Business id",
-        "biz-a6af51b1"
-      ],
-      [
-        "Device",
-        "Egocentric stereo / fw 1.2.13"
-      ],
-      [
-        "Device id",
-        "device-64df69e0"
-      ],
-      [
-        "Kit",
-        "kit-08d3199a"
-      ],
-      [
         "Shutter",
         "rolling"
       ],
@@ -1715,23 +1327,15 @@
       ],
       [
         "Operator",
-        "op-d001a772 / Construction laborer, 35–40, Right-handed"
+        "Construction laborer, 35–40, Right-handed"
       ],
       [
         "Consent",
         "recorded per session"
       ],
       [
-        "Session",
-        "capture__20260827_064355__eefcd112"
-      ],
-      [
-        "Episode uuid",
-        "62e35f88-53ff-5d24-9065-bec6bda5113d"
-      ],
-      [
         "File",
-        "capture__20260827_064355__eefcd112__seg_013.mcap"
+        "…__seg_013.mcap"
       ],
       [
         "SHA-256",
@@ -2700,7 +2304,7 @@
     "task": "table-cleaning",
     "skill": "Cleaning & Sanitation",
     "environment": "Office Workspace, Library",
-    "locale": "Hanoi",
+    "locale": "Vietnam",
     "rig": "Egocentric stereo",
     "durationSec": 567,
     "resolution": "stereo pair",
@@ -2792,42 +2396,6 @@
         "Library"
       ],
       [
-        "NAICS",
-        "561110"
-      ],
-      [
-        "Business",
-        "Hanoi University of Science and Technology — Ta Quang Buu Building, Hanoi University of Science and Technology, 1 Dai Co Viet Street, Hai Ba Trung, Hanoi, Vietnam"
-      ],
-      [
-        "Site",
-        "Hanoi"
-      ],
-      [
-        "Geohash",
-        "w7er2x"
-      ],
-      [
-        "Environment id",
-        "env-09b277e4"
-      ],
-      [
-        "Business id",
-        "biz-3060b324"
-      ],
-      [
-        "Device",
-        "Egocentric stereo / fw 2.1.18"
-      ],
-      [
-        "Device id",
-        "device-429c0060"
-      ],
-      [
-        "Kit",
-        "kit-71c69244"
-      ],
-      [
         "Shutter",
         "global shutter"
       ],
@@ -2861,23 +2429,15 @@
       ],
       [
         "Operator",
-        "op-4bf342c9 / Cleaner, 45-54, Right-handed"
+        "Cleaner, 45-54, Right-handed"
       ],
       [
         "Consent",
         "recorded per session"
       ],
       [
-        "Session",
-        "capture__20260727_183356__e71e3f6e"
-      ],
-      [
-        "Episode uuid",
-        "5aae4d2f-94ca-53a9-b668-340204c84ac0"
-      ],
-      [
         "File",
-        "capture__20260727_183356__e71e3f6e__seg_002.mcap"
+        "…__seg_002.mcap"
       ],
       [
         "SHA-256",
@@ -2899,7 +2459,7 @@
     "task": "jacket-folding",
     "skill": "Clothing & Laundry",
     "environment": "Office, Office Desk Area",
-    "locale": "Hanoi",
+    "locale": "Vietnam",
     "rig": "Egocentric stereo",
     "durationSec": 115.9,
     "resolution": "stereo pair",
@@ -2991,42 +2551,6 @@
         "Office Desk Area"
       ],
       [
-        "NAICS",
-        "561110"
-      ],
-      [
-        "Business",
-        "Tbrain — 35 Le Van Thiem Street, Thanh Xuan, Hanoi, Vietnam"
-      ],
-      [
-        "Site",
-        "Hanoi"
-      ],
-      [
-        "Geohash",
-        "w7eprx"
-      ],
-      [
-        "Environment id",
-        "env-b3c51362"
-      ],
-      [
-        "Business id",
-        "biz-cfc66a31"
-      ],
-      [
-        "Device",
-        "Egocentric stereo / fw 2.1.18"
-      ],
-      [
-        "Device id",
-        "device-429c0060"
-      ],
-      [
-        "Kit",
-        "kit-71c69244"
-      ],
-      [
         "Shutter",
         "global"
       ],
@@ -3060,23 +2584,15 @@
       ],
       [
         "Operator",
-        "op-06e7a807 / Office clerk, 25-34, Right-handed"
+        "Office clerk, 25-34, Right-handed"
       ],
       [
         "Consent",
         "recorded per session"
       ],
       [
-        "Session",
-        "capture__20260716_174608__e71e3f6e"
-      ],
-      [
-        "Episode uuid",
-        "2d8dedc6-ae4f-5600-ac98-9045f97cb0e5"
-      ],
-      [
         "File",
-        "capture__20260716_174608__e71e3f6e__seg_000.mcap"
+        "…__seg_000.mcap"
       ],
       [
         "SHA-256",
@@ -3098,7 +2614,7 @@
     "task": "trash-clearing",
     "skill": "Organization & Tidying",
     "environment": "Office Workspace, Library",
-    "locale": "Hanoi",
+    "locale": "Vietnam",
     "rig": "Egocentric stereo",
     "durationSec": 500.971,
     "resolution": "stereo pair",
@@ -3190,42 +2706,6 @@
         "Library"
       ],
       [
-        "NAICS",
-        "561110"
-      ],
-      [
-        "Business",
-        "Hanoi University of Science and Technology — Ta Quang Buu Building, Hanoi University of Science and Technology, 1 Dai Co Viet Street, Hai Ba Trung, Hanoi, Vietnam"
-      ],
-      [
-        "Site",
-        "Hanoi"
-      ],
-      [
-        "Geohash",
-        "w7er2x"
-      ],
-      [
-        "Environment id",
-        "env-09b277e4"
-      ],
-      [
-        "Business id",
-        "biz-3060b324"
-      ],
-      [
-        "Device",
-        "Egocentric stereo / fw 2.1.18"
-      ],
-      [
-        "Device id",
-        "device-429c0060"
-      ],
-      [
-        "Kit",
-        "kit-71c69244"
-      ],
-      [
         "Shutter",
         "global shutter"
       ],
@@ -3259,23 +2739,15 @@
       ],
       [
         "Operator",
-        "op-4bf342c9 / Cleaner, 45-54, Right-handed"
+        "Cleaner, 45-54, Right-handed"
       ],
       [
         "Consent",
         "recorded per session"
       ],
       [
-        "Session",
-        "capture__20260727_183356__e71e3f6e"
-      ],
-      [
-        "Episode uuid",
-        "19156c4f-972d-5264-ade0-12817383830e"
-      ],
-      [
         "File",
-        "capture__20260727_183356__e71e3f6e__seg_004.mcap"
+        "…__seg_004.mcap"
       ],
       [
         "SHA-256",
@@ -3297,7 +2769,7 @@
     "task": "plant-watering",
     "skill": "Pick and Place / Object Handling",
     "environment": "Office Workspace, Library",
-    "locale": "Hanoi",
+    "locale": "Vietnam",
     "rig": "Egocentric stereo",
     "durationSec": 245.443,
     "resolution": "stereo pair",
@@ -3389,42 +2861,6 @@
         "Library"
       ],
       [
-        "NAICS",
-        "561110"
-      ],
-      [
-        "Business",
-        "Hanoi University of Science and Technology — Ta Quang Buu Building, Hanoi University of Science and Technology, 1 Dai Co Viet Street, Hai Ba Trung, Hanoi, Vietnam"
-      ],
-      [
-        "Site",
-        "Hanoi"
-      ],
-      [
-        "Geohash",
-        "w7er2x"
-      ],
-      [
-        "Environment id",
-        "env-09b277e4"
-      ],
-      [
-        "Business id",
-        "biz-3060b324"
-      ],
-      [
-        "Device",
-        "Egocentric stereo / fw 2.1.18"
-      ],
-      [
-        "Device id",
-        "device-429c0060"
-      ],
-      [
-        "Kit",
-        "kit-71c69244"
-      ],
-      [
         "Shutter",
         "global"
       ],
@@ -3458,23 +2894,15 @@
       ],
       [
         "Operator",
-        "op-4bf342c9 / Cleaner, 45-54, Right-handed"
+        "Cleaner, 45-54, Right-handed"
       ],
       [
         "Consent",
         "recorded per session"
       ],
       [
-        "Session",
-        "capture__20260727_180420__e71e3f6e"
-      ],
-      [
-        "Episode uuid",
-        "9002ece7-d1e9-53a4-b0cd-f6868f5833b2"
-      ],
-      [
         "File",
-        "capture__20260727_180420__e71e3f6e__seg_012.mcap"
+        "…__seg_012.mcap"
       ],
       [
         "SHA-256",
@@ -3496,7 +2924,7 @@
     "task": "body-assembly",
     "skill": "Assembly & Installation",
     "environment": "Motorcycle Repair, Service Bay",
-    "locale": "Hanoi",
+    "locale": "Vietnam",
     "rig": "Egocentric stereo",
     "durationSec": 504.848,
     "resolution": "stereo pair",
@@ -3588,42 +3016,6 @@
         "Service Bay"
       ],
       [
-        "NAICS",
-        "811490"
-      ],
-      [
-        "Business",
-        "Motorcycle repair shop 2 (Vinh Quynh) — No 89/20 Vinh Quynh, Thanh Tri, Ha Noi, Vietnam"
-      ],
-      [
-        "Site",
-        "Hanoi"
-      ],
-      [
-        "Geohash",
-        "w7er06"
-      ],
-      [
-        "Environment id",
-        "env-ec34895e"
-      ],
-      [
-        "Business id",
-        "biz-a90ba8d9"
-      ],
-      [
-        "Device",
-        "Egocentric stereo / fw 2.1.7"
-      ],
-      [
-        "Device id",
-        "device-183561bf"
-      ],
-      [
-        "Kit",
-        "kit-026a5f1c"
-      ],
-      [
         "Shutter",
         "global"
       ],
@@ -3657,23 +3049,15 @@
       ],
       [
         "Operator",
-        "op-63e8f340 / Tire technician, 30-35, Right-handed"
+        "Tire technician, 30-35, Right-handed"
       ],
       [
         "Consent",
         "recorded per session"
       ],
       [
-        "Session",
-        "capture__20260806_171212__f0e43750"
-      ],
-      [
-        "Episode uuid",
-        "e0ba6e2a-1485-5ecd-bce8-d1ff8e0af833"
-      ],
-      [
         "File",
-        "capture__20260806_171212__f0e43750__seg_002.mcap"
+        "…__seg_002.mcap"
       ],
       [
         "SHA-256",
@@ -3695,7 +3079,7 @@
     "task": "motorcycle-washing",
     "skill": "Cleaning & Sanitation",
     "environment": "Motorcycle Repair, Service Bay",
-    "locale": "Hanoi",
+    "locale": "Vietnam",
     "rig": "Egocentric stereo",
     "durationSec": 635.186,
     "resolution": "stereo pair",
@@ -3787,42 +3171,6 @@
         "Service Bay"
       ],
       [
-        "NAICS",
-        "811490"
-      ],
-      [
-        "Business",
-        "Motorcycle repair shop 3 (Vinh Quynh) — No 250/18/4 Vinh Quynh, Thanh Tri, Ha Noi, Vietnam"
-      ],
-      [
-        "Site",
-        "Hanoi"
-      ],
-      [
-        "Geohash",
-        "w7er06"
-      ],
-      [
-        "Environment id",
-        "env-76928969"
-      ],
-      [
-        "Business id",
-        "biz-0b9f25f6"
-      ],
-      [
-        "Device",
-        "Egocentric stereo / fw 2.1.18"
-      ],
-      [
-        "Device id",
-        "device-89b9c15e"
-      ],
-      [
-        "Kit",
-        "kit-7cb9f1ee"
-      ],
-      [
         "Shutter",
         "global"
       ],
@@ -3856,23 +3204,15 @@
       ],
       [
         "Operator",
-        "op-5066cba7 / Motorcycle mechanic, 25-30, Right-handed"
+        "Motorcycle mechanic, 25-30, Right-handed"
       ],
       [
         "Consent",
         "recorded per session"
       ],
       [
-        "Session",
-        "capture__20260806_111636__785e938d"
-      ],
-      [
-        "Episode uuid",
-        "ac74443c-0776-5c2b-9b6c-e280c2570831"
-      ],
-      [
         "File",
-        "capture__20260806_111636__785e938d__seg_010.mcap"
+        "…__seg_010.mcap"
       ],
       [
         "SHA-256",
@@ -3894,7 +3234,7 @@
     "task": "scooter-repair",
     "skill": "Electronics & Diagnostics",
     "environment": "Motorcycle Repair, Service Bay",
-    "locale": "Hanoi",
+    "locale": "Vietnam",
     "rig": "Egocentric stereo",
     "durationSec": 281.595,
     "resolution": "stereo pair",
@@ -3986,42 +3326,6 @@
         "Service Bay"
       ],
       [
-        "NAICS",
-        "811490"
-      ],
-      [
-        "Business",
-        "Motorcycle repair shop 1 (Vinh Quynh) — No. 39, Vinh Quynh Street, Dai Thanh Commune, Hanoi, Vietnam"
-      ],
-      [
-        "Site",
-        "Hanoi"
-      ],
-      [
-        "Geohash",
-        "w7er06"
-      ],
-      [
-        "Environment id",
-        "env-d44ac8f0"
-      ],
-      [
-        "Business id",
-        "biz-5d6294b0"
-      ],
-      [
-        "Device",
-        "Egocentric stereo / fw 2.1.7"
-      ],
-      [
-        "Device id",
-        "device-183561bf"
-      ],
-      [
-        "Kit",
-        "kit-026a5f1c"
-      ],
-      [
         "Shutter",
         "global"
       ],
@@ -4055,23 +3359,15 @@
       ],
       [
         "Operator",
-        "op-63e8f340 / Tire technician, 30-35, Right-handed"
+        "Tire technician, 30-35, Right-handed"
       ],
       [
         "Consent",
         "recorded per session"
       ],
       [
-        "Session",
-        "capture__20260807_171104__f0e43750"
-      ],
-      [
-        "Episode uuid",
-        "9f7118ca-9af5-5897-b6bb-864763c456fc"
-      ],
-      [
         "File",
-        "capture__20260807_171104__f0e43750__seg_000.mcap"
+        "…__seg_000.mcap"
       ],
       [
         "SHA-256",
@@ -4093,7 +3389,7 @@
     "task": "engine-repair",
     "skill": "Mechanical / Automotive Work",
     "environment": "Auto Repair, Factory Floor",
-    "locale": "Hanoi",
+    "locale": "Vietnam",
     "rig": "Egocentric stereo",
     "durationSec": 474.145,
     "resolution": "stereo pair",
@@ -4185,42 +3481,6 @@
         "Factory Floor"
       ],
       [
-        "NAICS",
-        "811111"
-      ],
-      [
-        "Business",
-        "Meta Auto — 415 Nguyen Xien Street, Thanh Xuan, Hanoi, Vietnam"
-      ],
-      [
-        "Site",
-        "Hanoi"
-      ],
-      [
-        "Geohash",
-        "w7eprt"
-      ],
-      [
-        "Environment id",
-        "env-406bed33"
-      ],
-      [
-        "Business id",
-        "biz-4e55dabc"
-      ],
-      [
-        "Device",
-        "Egocentric stereo / fw 1.2.13"
-      ],
-      [
-        "Device id",
-        "device-65555f2e"
-      ],
-      [
-        "Kit",
-        "kit-8c8c79d5"
-      ],
-      [
         "Shutter",
         "rolling shutter"
       ],
@@ -4254,23 +3514,15 @@
       ],
       [
         "Operator",
-        "op-988436aa / Mechanic, 20-25, Right-handed"
+        "Mechanic, 20-25, Right-handed"
       ],
       [
         "Consent",
         "recorded per session"
       ],
       [
-        "Session",
-        "capture__20260816_041523__e083af6c"
-      ],
-      [
-        "Episode uuid",
-        "bf48af72-7e88-5a0b-9d8e-fde6b1df81fe"
-      ],
-      [
         "File",
-        "capture__20260816_041523__e083af6c__seg_000.mcap"
+        "…__seg_000.mcap"
       ],
       [
         "SHA-256",
@@ -4292,7 +3544,7 @@
     "task": "part-sorting",
     "skill": "Pick and Place / Object Handling",
     "environment": "Motorcycle Repair, Service Bay",
-    "locale": "Hanoi",
+    "locale": "Vietnam",
     "rig": "Egocentric stereo",
     "durationSec": 91.755,
     "resolution": "stereo pair",
@@ -4384,42 +3636,6 @@
         "Service Bay"
       ],
       [
-        "NAICS",
-        "811490"
-      ],
-      [
-        "Business",
-        "Motorcycle repair shop 3 (Vinh Quynh) — No 250/18/4 Vinh Quynh, Thanh Tri, Ha Noi, Vietnam"
-      ],
-      [
-        "Site",
-        "Hanoi"
-      ],
-      [
-        "Geohash",
-        "w7er06"
-      ],
-      [
-        "Environment id",
-        "env-76928969"
-      ],
-      [
-        "Business id",
-        "biz-0b9f25f6"
-      ],
-      [
-        "Device",
-        "Egocentric stereo / fw 2.1.18"
-      ],
-      [
-        "Device id",
-        "device-89b9c15e"
-      ],
-      [
-        "Kit",
-        "kit-7cb9f1ee"
-      ],
-      [
         "Shutter",
         "global shutter"
       ],
@@ -4453,23 +3669,15 @@
       ],
       [
         "Operator",
-        "op-5066cba7 / Motorcycle mechanic, 25-30, Right-handed"
+        "Motorcycle mechanic, 25-30, Right-handed"
       ],
       [
         "Consent",
         "recorded per session"
       ],
       [
-        "Session",
-        "capture__20260807_153501__785e938d"
-      ],
-      [
-        "Episode uuid",
-        "662967ea-c5c2-5e2e-bff0-8e188222c1e5"
-      ],
-      [
         "File",
-        "capture__20260807_153501__785e938d__seg_001.mcap"
+        "…__seg_001.mcap"
       ],
       [
         "SHA-256",
@@ -4491,7 +3699,7 @@
     "task": "wheel-balancing",
     "skill": "Repair & Maintenance",
     "environment": "Motorcycle Repair, Service Bay",
-    "locale": "Hanoi",
+    "locale": "Vietnam",
     "rig": "Egocentric stereo",
     "durationSec": 536.333,
     "resolution": "stereo pair",
@@ -4583,42 +3791,6 @@
         "Service Bay"
       ],
       [
-        "NAICS",
-        "811490"
-      ],
-      [
-        "Business",
-        "Motorcycle repair shop 3 (Vinh Quynh) — No 250/18/4 Vinh Quynh, Thanh Tri, Ha Noi, Vietnam"
-      ],
-      [
-        "Site",
-        "Hanoi"
-      ],
-      [
-        "Geohash",
-        "w7er06"
-      ],
-      [
-        "Environment id",
-        "env-76928969"
-      ],
-      [
-        "Business id",
-        "biz-0b9f25f6"
-      ],
-      [
-        "Device",
-        "Egocentric stereo / fw 2.1.7"
-      ],
-      [
-        "Device id",
-        "device-183561bf"
-      ],
-      [
-        "Kit",
-        "kit-026a5f1c"
-      ],
-      [
         "Shutter",
         "global"
       ],
@@ -4652,23 +3824,15 @@
       ],
       [
         "Operator",
-        "op-63e8f340 / Tire technician, 30-35, Right-handed"
+        "Tire technician, 30-35, Right-handed"
       ],
       [
         "Consent",
         "recorded per session"
       ],
       [
-        "Session",
-        "capture__20260807_180242__f0e43750"
-      ],
-      [
-        "Episode uuid",
-        "2fd7a641-74f8-5bd8-b761-a5b351c7e3b0"
-      ],
-      [
         "File",
-        "capture__20260807_180242__f0e43750__seg_002.mcap"
+        "…__seg_002.mcap"
       ],
       [
         "SHA-256",
@@ -4690,7 +3854,7 @@
     "task": "maintenance-repair",
     "skill": "Tool Use & Technical Manipulation",
     "environment": "Auto Repair, Service Bay",
-    "locale": "Hanoi",
+    "locale": "Vietnam",
     "rig": "Egocentric stereo",
     "durationSec": 587.392,
     "resolution": "stereo pair",
@@ -4782,42 +3946,6 @@
         "Service Bay"
       ],
       [
-        "NAICS",
-        "811111"
-      ],
-      [
-        "Business",
-        "Meta Auto — 415 Nguyen Xien Street, Thanh Xuan, Hanoi, Vietnam"
-      ],
-      [
-        "Site",
-        "Hanoi"
-      ],
-      [
-        "Geohash",
-        "w7eprt"
-      ],
-      [
-        "Environment id",
-        "env-406bed33"
-      ],
-      [
-        "Business id",
-        "biz-4e55dabc"
-      ],
-      [
-        "Device",
-        "Egocentric stereo / fw 2.1.18"
-      ],
-      [
-        "Device id",
-        "device-89b9c15e"
-      ],
-      [
-        "Kit",
-        "kit-7cb9f1ee"
-      ],
-      [
         "Shutter",
         "global"
       ],
@@ -4851,23 +3979,15 @@
       ],
       [
         "Operator",
-        "op-d69c43df / Auto technician, 30-35, Right-handed"
+        "Auto technician, 30-35, Right-handed"
       ],
       [
         "Consent",
         "recorded per session"
       ],
       [
-        "Session",
-        "capture__20260808_144637__785e938d"
-      ],
-      [
-        "Episode uuid",
-        "ad49b327-3875-540b-95ba-8da1580b49a1"
-      ],
-      [
         "File",
-        "capture__20260808_144637__785e938d__seg_028.mcap"
+        "…__seg_028.mcap"
       ],
       [
         "SHA-256",
@@ -4889,7 +4009,7 @@
     "task": "hair-cutting",
     "skill": "Tool Use & Technical Manipulation",
     "environment": "Barber Shop, Makeup Area",
-    "locale": "Hanoi",
+    "locale": "Vietnam",
     "rig": "Egocentric stereo",
     "durationSec": 714.236,
     "resolution": "stereo pair",
@@ -4981,42 +4101,6 @@
         "Makeup Area"
       ],
       [
-        "NAICS",
-        "812111"
-      ],
-      [
-        "Business",
-        "Barber shop (Vinh Quynh) — No 222/18/4 Vinh Quynh, Thanh Tri, Ha Noi, Vietnam"
-      ],
-      [
-        "Site",
-        "Hanoi"
-      ],
-      [
-        "Geohash",
-        "w7er06"
-      ],
-      [
-        "Environment id",
-        "env-eb490bc7"
-      ],
-      [
-        "Business id",
-        "biz-09ef2405"
-      ],
-      [
-        "Device",
-        "Egocentric stereo / fw 2.1.18"
-      ],
-      [
-        "Device id",
-        "device-429c0060"
-      ],
-      [
-        "Kit",
-        "kit-71c69244"
-      ],
-      [
         "Shutter",
         "global"
       ],
@@ -5050,23 +4134,15 @@
       ],
       [
         "Operator",
-        "op-0d6b3833 / Barber, 25-30, Right-handed"
+        "Barber, 25-30, Right-handed"
       ],
       [
         "Consent",
         "recorded per session"
       ],
       [
-        "Session",
-        "capture__20260804_183626__e71e3f6e"
-      ],
-      [
-        "Episode uuid",
-        "6154372b-4392-5027-a113-394af2d9c1a9"
-      ],
-      [
         "File",
-        "capture__20260804_183626__e71e3f6e__seg_003.mcap"
+        "…__seg_003.mcap"
       ],
       [
         "SHA-256",
@@ -5088,7 +4164,7 @@
     "task": "fabric-sewing",
     "skill": "Clothing & Laundry",
     "environment": "Sewing Factory, Sewing Area",
-    "locale": "Hanoi",
+    "locale": "Vietnam",
     "rig": "Egocentric stereo",
     "durationSec": 694.3,
     "resolution": "stereo pair",
@@ -5180,42 +4256,6 @@
         "Sewing Area"
       ],
       [
-        "NAICS",
-        "315250"
-      ],
-      [
-        "Business",
-        "Chi Phuong sewing workshop — U02-L28 Do Nghia urban area, Ha Dong, Ha Noi"
-      ],
-      [
-        "Site",
-        "Hanoi"
-      ],
-      [
-        "Geohash",
-        "w7epnp"
-      ],
-      [
-        "Environment id",
-        "env-1c269b8a"
-      ],
-      [
-        "Business id",
-        "biz-8a1e16ed"
-      ],
-      [
-        "Device",
-        "Egocentric stereo / fw 1.2.13"
-      ],
-      [
-        "Device id",
-        "device-2b877111"
-      ],
-      [
-        "Kit",
-        "kit-04842d1e"
-      ],
-      [
         "Shutter",
         "rolling"
       ],
@@ -5249,23 +4289,15 @@
       ],
       [
         "Operator",
-        "op-cf3126df / Tailor / seamstress, 45-50, Right-handed"
+        "Tailor / seamstress, 45-50, Right-handed"
       ],
       [
         "Consent",
         "recorded per session"
       ],
       [
-        "Session",
-        "capture__20260814_080958__8c8c1edf"
-      ],
-      [
-        "Episode uuid",
-        "44634a4a-82cd-5636-b2ef-984f294da800"
-      ],
-      [
         "File",
-        "capture__20260814_080958__8c8c1edf__seg_008.mcap"
+        "…__seg_008.mcap"
       ],
       [
         "SHA-256",
@@ -5287,7 +4319,7 @@
     "task": "item-organizing",
     "skill": "Organization & Tidying",
     "environment": "Sewing Factory, Sewing Station",
-    "locale": "Hanoi",
+    "locale": "Vietnam",
     "rig": "Egocentric stereo",
     "durationSec": 104.481,
     "resolution": "stereo pair",
@@ -5379,42 +4411,6 @@
         "Sewing Station"
       ],
       [
-        "NAICS",
-        "315250"
-      ],
-      [
-        "Business",
-        "Chi Phuong sewing workshop — U02-L28 Do Nghia urban area, Ha Dong, Ha Noi"
-      ],
-      [
-        "Site",
-        "Hanoi"
-      ],
-      [
-        "Geohash",
-        "w7epnp"
-      ],
-      [
-        "Environment id",
-        "env-1c269b8a"
-      ],
-      [
-        "Business id",
-        "biz-8a1e16ed"
-      ],
-      [
-        "Device",
-        "Egocentric stereo / fw 1.2.13"
-      ],
-      [
-        "Device id",
-        "device-5b98f0ea"
-      ],
-      [
-        "Kit",
-        "kit-abf58aa8"
-      ],
-      [
         "Shutter",
         "rolling shutter"
       ],
@@ -5448,23 +4444,15 @@
       ],
       [
         "Operator",
-        "op-3a3943ea / Tailor / seamstress, 45-50, Right-handed"
+        "Tailor / seamstress, 45-50, Right-handed"
       ],
       [
         "Consent",
         "recorded per session"
       ],
       [
-        "Session",
-        "capture__20260813_064704__a916f2ae"
-      ],
-      [
-        "Episode uuid",
-        "e2e302a2-5623-5ecc-bec5-81d362f07d16"
-      ],
-      [
         "File",
-        "capture__20260813_064704__a916f2ae__seg_031.mcap"
+        "…__seg_031.mcap"
       ],
       [
         "SHA-256",
@@ -5486,7 +4474,7 @@
     "task": "bag-holding",
     "skill": "Packing & Bagging",
     "environment": "Sewing Factory, Sewing Floor",
-    "locale": "Hanoi",
+    "locale": "Vietnam",
     "rig": "Egocentric stereo",
     "durationSec": 87.175,
     "resolution": "stereo pair",
@@ -5578,42 +4566,6 @@
         "Sewing Floor"
       ],
       [
-        "NAICS",
-        "315250"
-      ],
-      [
-        "Business",
-        "Chi Phuong sewing workshop — U02-L28 Do Nghia urban area, Ha Dong, Ha Noi"
-      ],
-      [
-        "Site",
-        "Hanoi"
-      ],
-      [
-        "Geohash",
-        "w7epnp"
-      ],
-      [
-        "Environment id",
-        "env-1c269b8a"
-      ],
-      [
-        "Business id",
-        "biz-8a1e16ed"
-      ],
-      [
-        "Device",
-        "Egocentric stereo / fw 1.2.13"
-      ],
-      [
-        "Device id",
-        "device-cb9e1b7e"
-      ],
-      [
-        "Kit",
-        "kit-b60acac3"
-      ],
-      [
         "Shutter",
         "rolling"
       ],
@@ -5647,23 +4599,15 @@
       ],
       [
         "Operator",
-        "op-cf3126df / Tailor / seamstress, 45-50, Right-handed"
+        "Tailor / seamstress, 45-50, Right-handed"
       ],
       [
         "Consent",
         "recorded per session"
       ],
       [
-        "Session",
-        "capture__20260815_064538__81954a13"
-      ],
-      [
-        "Episode uuid",
-        "435ad775-52c1-577b-8da7-378ae343226c"
-      ],
-      [
         "File",
-        "capture__20260815_064538__81954a13__seg_002.mcap"
+        "…__seg_002.mcap"
       ],
       [
         "SHA-256",
@@ -5685,7 +4629,7 @@
     "task": "clothe-ironing",
     "skill": "Tool Use & Technical Manipulation",
     "environment": "Sewing Factory, Sewing Room",
-    "locale": "Hanoi",
+    "locale": "Vietnam",
     "rig": "Egocentric stereo",
     "durationSec": 613.174,
     "resolution": "stereo pair",
@@ -5777,42 +4721,6 @@
         "Sewing Room"
       ],
       [
-        "NAICS",
-        "315250"
-      ],
-      [
-        "Business",
-        "Thach That home sewing workshop — Số 20/38 thôn Bình Phú xã Tây Phương, huyện Thạch Thất"
-      ],
-      [
-        "Site",
-        "Hanoi"
-      ],
-      [
-        "Geohash",
-        "w7ep9g"
-      ],
-      [
-        "Environment id",
-        "env-993ac072"
-      ],
-      [
-        "Business id",
-        "biz-993ac072"
-      ],
-      [
-        "Device",
-        "Egocentric stereo / fw 1.2.13"
-      ],
-      [
-        "Device id",
-        "device-65555f2e"
-      ],
-      [
-        "Kit",
-        "kit-8c8c79d5"
-      ],
-      [
         "Shutter",
         "rolling shutter"
       ],
@@ -5846,23 +4754,15 @@
       ],
       [
         "Operator",
-        "op-6ae7ecbd / Tailor / seamstress, 40-45, Right-handed"
+        "Tailor / seamstress, 40-45, Right-handed"
       ],
       [
         "Consent",
         "recorded per session"
       ],
       [
-        "Session",
-        "capture__20260802_071917__8418598e"
-      ],
-      [
-        "Episode uuid",
-        "38769f34-5b80-5568-a197-12b73ad04975"
-      ],
-      [
         "File",
-        "capture__20260802_071917__8418598e__seg_007.mcap"
+        "…__seg_007.mcap"
       ],
       [
         "SHA-256",
@@ -5884,7 +4784,7 @@
     "task": "cabinet-installation",
     "skill": "Assembly & Installation",
     "environment": "Construction Site, Residential Home",
-    "locale": "Hanoi",
+    "locale": "Vietnam",
     "rig": "Egocentric stereo",
     "durationSec": 568.188,
     "resolution": "stereo pair",
@@ -5976,42 +4876,6 @@
         "Residential Home"
       ],
       [
-        "NAICS",
-        "236220"
-      ],
-      [
-        "Business",
-        "Orange Garden Interior Finishing — BT01-28, Orange Garden villa area, Son Dong, Ha Noi"
-      ],
-      [
-        "Site",
-        "Hanoi"
-      ],
-      [
-        "Geohash",
-        "w7eptm"
-      ],
-      [
-        "Environment id",
-        "env-b56b5f05"
-      ],
-      [
-        "Business id",
-        "biz-e13ef6be"
-      ],
-      [
-        "Device",
-        "Egocentric stereo / fw 1.2.13"
-      ],
-      [
-        "Device id",
-        "device-0acb82db"
-      ],
-      [
-        "Kit",
-        "kit-4a0d1d14"
-      ],
-      [
         "Shutter",
         "rolling shutter"
       ],
@@ -6045,23 +4909,15 @@
       ],
       [
         "Operator",
-        "op-f86ec294 / Carpenter, 40-45, Left-handed"
+        "Carpenter, 40-45, Left-handed"
       ],
       [
         "Consent",
         "recorded per session"
       ],
       [
-        "Session",
-        "capture__20260824_000312__5444ef0a"
-      ],
-      [
-        "Episode uuid",
-        "22ab6e6f-c376-54c0-b4c4-607eaed9e922"
-      ],
-      [
         "File",
-        "capture__20260824_000312__5444ef0a__seg_010.mcap"
+        "…__seg_010.mcap"
       ],
       [
         "SHA-256",
@@ -6083,7 +4939,7 @@
     "task": "door-cleaning",
     "skill": "Cleaning & Sanitation",
     "environment": "Construction Site, Finishing Area",
-    "locale": "Hanoi",
+    "locale": "Vietnam",
     "rig": "Egocentric stereo",
     "durationSec": 715.655,
     "resolution": "stereo pair",
@@ -6175,42 +5031,6 @@
         "Finishing Area"
       ],
       [
-        "NAICS",
-        "236220"
-      ],
-      [
-        "Business",
-        "Orange Garden Interior Finishing — BT01-28, Orange Garden villa area, Son Dong, Ha Noi"
-      ],
-      [
-        "Site",
-        "Hanoi"
-      ],
-      [
-        "Geohash",
-        "w7eptm"
-      ],
-      [
-        "Environment id",
-        "env-b56b5f05"
-      ],
-      [
-        "Business id",
-        "biz-e13ef6be"
-      ],
-      [
-        "Device",
-        "Egocentric stereo / fw 2.1.18"
-      ],
-      [
-        "Device id",
-        "device-429c0060"
-      ],
-      [
-        "Kit",
-        "kit-71c69244"
-      ],
-      [
         "Shutter",
         "global"
       ],
@@ -6244,23 +5064,15 @@
       ],
       [
         "Operator",
-        "op-79b67e62 / Cleaner, 45-54, Right-handed"
+        "Cleaner, 45-54, Right-handed"
       ],
       [
         "Consent",
         "recorded per session"
       ],
       [
-        "Session",
-        "capture__20260728_105743__e71e3f6e"
-      ],
-      [
-        "Episode uuid",
-        "b5cbbea8-9ad0-5017-994a-85b258241eb9"
-      ],
-      [
         "File",
-        "capture__20260728_105743__e71e3f6e__seg_002.mcap"
+        "…__seg_002.mcap"
       ],
       [
         "SHA-256",
@@ -6282,7 +5094,7 @@
     "task": "furniture-removal",
     "skill": "Construction & Building",
     "environment": "Construction Site, Finishing Area",
-    "locale": "Hanoi",
+    "locale": "Vietnam",
     "rig": "Egocentric stereo",
     "durationSec": 653.501,
     "resolution": "stereo pair",
@@ -6374,42 +5186,6 @@
         "Finishing Area"
       ],
       [
-        "NAICS",
-        "236220"
-      ],
-      [
-        "Business",
-        "Orange Garden Interior Finishing — BT01-28, Orange Garden villa area, Son Dong, Ha Noi"
-      ],
-      [
-        "Site",
-        "Hanoi"
-      ],
-      [
-        "Geohash",
-        "w7eptm"
-      ],
-      [
-        "Environment id",
-        "env-b56b5f05"
-      ],
-      [
-        "Business id",
-        "biz-e13ef6be"
-      ],
-      [
-        "Device",
-        "Egocentric stereo / fw 2.1.18"
-      ],
-      [
-        "Device id",
-        "device-89b9c15e"
-      ],
-      [
-        "Kit",
-        "kit-7cb9f1ee"
-      ],
-      [
         "Shutter",
         "global"
       ],
@@ -6443,23 +5219,15 @@
       ],
       [
         "Operator",
-        "op-115cc17e / Cleaner, 35-44, Right-handed"
+        "Cleaner, 35-44, Right-handed"
       ],
       [
         "Consent",
         "recorded per session"
       ],
       [
-        "Session",
-        "capture__20260730_112709__785e938d"
-      ],
-      [
-        "Episode uuid",
-        "617a3807-d42f-554a-be3b-302837e17ef1"
-      ],
-      [
         "File",
-        "capture__20260730_112709__785e938d__seg_000.mcap"
+        "…__seg_000.mcap"
       ],
       [
         "SHA-256",
@@ -6481,7 +5249,7 @@
     "task": "sheet-folding",
     "skill": "Organization & Tidying",
     "environment": "Construction Site, Finishing Area",
-    "locale": "Hanoi",
+    "locale": "Vietnam",
     "rig": "Egocentric stereo",
     "durationSec": 154.223,
     "resolution": "stereo pair",
@@ -6573,42 +5341,6 @@
         "Finishing Area"
       ],
       [
-        "NAICS",
-        "236220"
-      ],
-      [
-        "Business",
-        "Orange Garden Interior Finishing — BT01-28, Orange Garden villa area, Son Dong, Ha Noi"
-      ],
-      [
-        "Site",
-        "Hanoi"
-      ],
-      [
-        "Geohash",
-        "w7eptm"
-      ],
-      [
-        "Environment id",
-        "env-b56b5f05"
-      ],
-      [
-        "Business id",
-        "biz-e13ef6be"
-      ],
-      [
-        "Device",
-        "Egocentric stereo / fw 2.1.18"
-      ],
-      [
-        "Device id",
-        "device-429c0060"
-      ],
-      [
-        "Kit",
-        "kit-71c69244"
-      ],
-      [
         "Shutter",
         "global shutter"
       ],
@@ -6642,23 +5374,15 @@
       ],
       [
         "Operator",
-        "op-79b67e62 / Cleaner, 45-54, Right-handed"
+        "Cleaner, 45-54, Right-handed"
       ],
       [
         "Consent",
         "recorded per session"
       ],
       [
-        "Session",
-        "capture__20260729_105641__e71e3f6e"
-      ],
-      [
-        "Episode uuid",
-        "d38b83e2-6a53-5b88-a214-9acd3d2885ac"
-      ],
-      [
         "File",
-        "capture__20260729_105641__e71e3f6e__seg_000.mcap"
+        "…__seg_000.mcap"
       ],
       [
         "SHA-256",
@@ -6680,7 +5404,7 @@
     "task": "tarpaulin-folding",
     "skill": "Packing & Bagging",
     "environment": "Construction Site, Finishing Area",
-    "locale": "Hanoi",
+    "locale": "Vietnam",
     "rig": "Egocentric stereo",
     "durationSec": 251.189,
     "resolution": "stereo pair",
@@ -6772,42 +5496,6 @@
         "Finishing Area"
       ],
       [
-        "NAICS",
-        "236220"
-      ],
-      [
-        "Business",
-        "Orange Garden Interior Finishing — BT01-28, Orange Garden villa area, Son Dong, Ha Noi"
-      ],
-      [
-        "Site",
-        "Hanoi"
-      ],
-      [
-        "Geohash",
-        "w7eptm"
-      ],
-      [
-        "Environment id",
-        "env-b56b5f05"
-      ],
-      [
-        "Business id",
-        "biz-e13ef6be"
-      ],
-      [
-        "Device",
-        "Egocentric stereo / fw 2.1.7"
-      ],
-      [
-        "Device id",
-        "device-183561bf"
-      ],
-      [
-        "Kit",
-        "kit-026a5f1c"
-      ],
-      [
         "Shutter",
         "global shutter"
       ],
@@ -6841,23 +5529,15 @@
       ],
       [
         "Operator",
-        "op-acf3316d / Cleaner, 45-54, Right-handed"
+        "Cleaner, 45-54, Right-handed"
       ],
       [
         "Consent",
         "recorded per session"
       ],
       [
-        "Session",
-        "capture__20260730_112137__f0e43750"
-      ],
-      [
-        "Episode uuid",
-        "e3516caf-75b0-5024-af03-99afbbc26df6"
-      ],
-      [
         "File",
-        "capture__20260730_112137__f0e43750__seg_004.mcap"
+        "…__seg_004.mcap"
       ],
       [
         "SHA-256",
@@ -6879,7 +5559,7 @@
     "task": "floor-collecting",
     "skill": "Pick and Place / Object Handling",
     "environment": "Construction Site, Guest Bedroom",
-    "locale": "Hanoi",
+    "locale": "Vietnam",
     "rig": "Egocentric stereo",
     "durationSec": 247.667,
     "resolution": "stereo pair",
@@ -6971,42 +5651,6 @@
         "Guest Bedroom"
       ],
       [
-        "NAICS",
-        "236220"
-      ],
-      [
-        "Business",
-        "Orange Garden Interior Finishing — BT01-28, Orange Garden villa area, Son Dong, Ha Noi"
-      ],
-      [
-        "Site",
-        "Hanoi"
-      ],
-      [
-        "Geohash",
-        "w7eptm"
-      ],
-      [
-        "Environment id",
-        "env-b56b5f05"
-      ],
-      [
-        "Business id",
-        "biz-e13ef6be"
-      ],
-      [
-        "Device",
-        "Egocentric stereo / fw 2.1.18"
-      ],
-      [
-        "Device id",
-        "device-429c0060"
-      ],
-      [
-        "Kit",
-        "kit-71c69244"
-      ],
-      [
         "Shutter",
         "global shutter"
       ],
@@ -7040,23 +5684,15 @@
       ],
       [
         "Operator",
-        "op-79b67e62 / Cleaner, 45-54, Right-handed"
+        "Cleaner, 45-54, Right-handed"
       ],
       [
         "Consent",
         "recorded per session"
       ],
       [
-        "Session",
-        "capture__20260729_141350__e71e3f6e"
-      ],
-      [
-        "Episode uuid",
-        "4c75ce6a-d192-568b-acee-1fcba75d7440"
-      ],
-      [
         "File",
-        "capture__20260729_141350__e71e3f6e__seg_003.mcap"
+        "…__seg_003.mcap"
       ],
       [
         "SHA-256",
@@ -7078,7 +5714,7 @@
     "task": "paint-mixing",
     "skill": "Tool Use & Technical Manipulation",
     "environment": "Construction Site, Finishing Area",
-    "locale": "Hanoi",
+    "locale": "Vietnam",
     "rig": "Egocentric stereo",
     "durationSec": 169.667,
     "resolution": "stereo pair",
@@ -7170,42 +5806,6 @@
         "Finishing Area"
       ],
       [
-        "NAICS",
-        "236220"
-      ],
-      [
-        "Business",
-        "Orange Garden Interior Finishing — BT01-28, Orange Garden villa area, Son Dong, Ha Noi"
-      ],
-      [
-        "Site",
-        "Hanoi"
-      ],
-      [
-        "Geohash",
-        "w7eptm"
-      ],
-      [
-        "Environment id",
-        "env-b56b5f05"
-      ],
-      [
-        "Business id",
-        "biz-e13ef6be"
-      ],
-      [
-        "Device",
-        "Egocentric stereo / fw 2.1.18"
-      ],
-      [
-        "Device id",
-        "device-429c0060"
-      ],
-      [
-        "Kit",
-        "kit-71c69244"
-      ],
-      [
         "Shutter",
         "global"
       ],
@@ -7239,23 +5839,15 @@
       ],
       [
         "Operator",
-        "op-ea979b53 / Painter, 40-45, Right-handed"
+        "Painter, 40-45, Right-handed"
       ],
       [
         "Consent",
         "recorded per session"
       ],
       [
-        "Session",
-        "capture__20260726_094009__e71e3f6e"
-      ],
-      [
-        "Episode uuid",
-        "328fde84-1104-56c9-8abd-c73e4f82a6c5"
-      ],
-      [
         "File",
-        "capture__20260726_094009__e71e3f6e__seg_000.mcap"
+        "…__seg_000.mcap"
       ],
       [
         "SHA-256",
@@ -7277,7 +5869,7 @@
     "task": "handle-tightening",
     "skill": "Assembly & Installation",
     "environment": "Handcraft Workshop, Home Workshop",
-    "locale": "Hanoi",
+    "locale": "Vietnam",
     "rig": "Egocentric stereo",
     "durationSec": 714.663,
     "resolution": "stereo pair",
@@ -7369,42 +5961,6 @@
         "Home Workshop"
       ],
       [
-        "NAICS",
-        "339999"
-      ],
-      [
-        "Business",
-        "Fan-weaving household 4 — Số 15/38 thôn Bình Phú xã Tây Phương, huyện Thạch Thất"
-      ],
-      [
-        "Site",
-        "Hanoi"
-      ],
-      [
-        "Geohash",
-        "w7ep9g"
-      ],
-      [
-        "Environment id",
-        "env-efba1c94"
-      ],
-      [
-        "Business id",
-        "biz-efba1c94"
-      ],
-      [
-        "Device",
-        "Egocentric stereo / fw 1.2.13"
-      ],
-      [
-        "Device id",
-        "device-f174c9f1"
-      ],
-      [
-        "Kit",
-        "kit-e319748e"
-      ],
-      [
         "Shutter",
         "rolling"
       ],
@@ -7438,23 +5994,15 @@
       ],
       [
         "Operator",
-        "op-a2e578a9 / Factory worker, 70-75, Right-handed"
+        "Factory worker, 70-75, Right-handed"
       ],
       [
         "Consent",
         "recorded per session"
       ],
       [
-        "Session",
-        "capture__20260803_005655__b9d28c8f"
-      ],
-      [
-        "Episode uuid",
-        "63993a12-83f7-5408-a080-af026cc0e29c"
-      ],
-      [
         "File",
-        "capture__20260803_005655__b9d28c8f__seg_014.mcap"
+        "…__seg_014.mcap"
       ],
       [
         "SHA-256",
@@ -7476,7 +6024,7 @@
     "task": "wall-cleaning",
     "skill": "Cleaning & Sanitation",
     "environment": "Handcraft Workshop, Workshop Area",
-    "locale": "Hanoi",
+    "locale": "Vietnam",
     "rig": "Egocentric stereo",
     "durationSec": 518.131,
     "resolution": "stereo pair",
@@ -7568,42 +6116,6 @@
         "Workshop Area"
       ],
       [
-        "NAICS",
-        "339999"
-      ],
-      [
-        "Business",
-        "Anh Long resin workshop — 499 Nguyen Khoai, Ha Noi"
-      ],
-      [
-        "Site",
-        "Hanoi"
-      ],
-      [
-        "Geohash",
-        "w7er3w"
-      ],
-      [
-        "Environment id",
-        "env-abab5491"
-      ],
-      [
-        "Business id",
-        "biz-03250200"
-      ],
-      [
-        "Device",
-        "Egocentric stereo / fw 1.2.13"
-      ],
-      [
-        "Device id",
-        "device-519e0639"
-      ],
-      [
-        "Kit",
-        "kit-b5b19029"
-      ],
-      [
         "Shutter",
         "rolling shutter"
       ],
@@ -7637,23 +6149,15 @@
       ],
       [
         "Operator",
-        "op-95870039 / Factory worker, 25-30, Right-handed"
+        "Factory worker, 25-30, Right-handed"
       ],
       [
         "Consent",
         "recorded per session"
       ],
       [
-        "Session",
-        "capture__20260815_021801__1c186e27"
-      ],
-      [
-        "Episode uuid",
-        "0b88fb7d-d045-57f0-bff4-dc2915811d35"
-      ],
-      [
         "File",
-        "capture__20260815_021801__1c186e27__seg_010.mcap"
+        "…__seg_010.mcap"
       ],
       [
         "SHA-256",
@@ -7675,7 +6179,7 @@
     "task": "wall-demolition",
     "skill": "Construction & Building",
     "environment": "Handcraft Workshop, Indoor Room",
-    "locale": "Hanoi",
+    "locale": "Vietnam",
     "rig": "Egocentric stereo",
     "durationSec": 379.872,
     "resolution": "stereo pair",
@@ -7767,42 +6271,6 @@
         "Indoor Room"
       ],
       [
-        "NAICS",
-        "339999"
-      ],
-      [
-        "Business",
-        "Anh Long resin workshop — 499 Nguyen Khoai, Ha Noi"
-      ],
-      [
-        "Site",
-        "Hanoi"
-      ],
-      [
-        "Geohash",
-        "w7er3w"
-      ],
-      [
-        "Environment id",
-        "env-abab5491"
-      ],
-      [
-        "Business id",
-        "biz-03250200"
-      ],
-      [
-        "Device",
-        "Egocentric stereo / fw 1.2.13"
-      ],
-      [
-        "Device id",
-        "device-b5b50e35"
-      ],
-      [
-        "Kit",
-        "kit-74d02c82"
-      ],
-      [
         "Shutter",
         "rolling shutter"
       ],
@@ -7836,23 +6304,15 @@
       ],
       [
         "Operator",
-        "op-c88b1900 / Factory worker, 50-55, Right-handed"
+        "Factory worker, 50-55, Right-handed"
       ],
       [
         "Consent",
         "recorded per session"
       ],
       [
-        "Session",
-        "capture__20260826_065856__4a440115"
-      ],
-      [
-        "Episode uuid",
-        "246300c2-8885-5c7f-99b1-c860a4a37521"
-      ],
-      [
         "File",
-        "capture__20260826_065856__4a440115__seg_018.mcap"
+        "…__seg_018.mcap"
       ],
       [
         "SHA-256",
@@ -7874,7 +6334,7 @@
     "task": "component-testing",
     "skill": "Electronics & Diagnostics",
     "environment": "Handcraft Workshop, Assembly Line",
-    "locale": "Hanoi",
+    "locale": "Vietnam",
     "rig": "Egocentric stereo",
     "durationSec": 558.805,
     "resolution": "stereo pair",
@@ -7966,42 +6426,6 @@
         "Assembly Line"
       ],
       [
-        "NAICS",
-        "339999"
-      ],
-      [
-        "Business",
-        "Assembly workshop (Khuyen Luong) — No 17/22 Nguyen Luong Street, Linh Nam, Ha Noi, Vietnam"
-      ],
-      [
-        "Site",
-        "Hanoi"
-      ],
-      [
-        "Geohash",
-        "w7er33"
-      ],
-      [
-        "Environment id",
-        "env-24d393d9"
-      ],
-      [
-        "Business id",
-        "biz-112a73f8"
-      ],
-      [
-        "Device",
-        "Egocentric stereo / fw 1.2.13"
-      ],
-      [
-        "Device id",
-        "device-2aaa18ea"
-      ],
-      [
-        "Kit",
-        "kit-4568a06a"
-      ],
-      [
         "Shutter",
         "rolling shutter"
       ],
@@ -8035,23 +6459,15 @@
       ],
       [
         "Operator",
-        "op-69961847 / Assembler, 20-25, Right-handed"
+        "Assembler, 20-25, Right-handed"
       ],
       [
         "Consent",
         "recorded per session"
       ],
       [
-        "Session",
-        "capture__20260811_072756__2b1af919"
-      ],
-      [
-        "Episode uuid",
-        "2726c3f5-02b4-522c-a3a1-460316410055"
-      ],
-      [
         "File",
-        "capture__20260811_072756__2b1af919__seg_017.mcap"
+        "…__seg_017.mcap"
       ],
       [
         "SHA-256",
@@ -8073,7 +6489,7 @@
     "task": "room-organizing",
     "skill": "Organization & Tidying",
     "environment": "Handcraft Workshop, Workshop",
-    "locale": "Hanoi",
+    "locale": "Vietnam",
     "rig": "Egocentric stereo",
     "durationSec": 153.23,
     "resolution": "stereo pair",
@@ -8165,42 +6581,6 @@
         "Workshop"
       ],
       [
-        "NAICS",
-        "339999"
-      ],
-      [
-        "Business",
-        "Anh Long resin workshop — 499 Nguyen Khoai, Ha Noi"
-      ],
-      [
-        "Site",
-        "Hanoi"
-      ],
-      [
-        "Geohash",
-        "w7er3w"
-      ],
-      [
-        "Environment id",
-        "env-abab5491"
-      ],
-      [
-        "Business id",
-        "biz-03250200"
-      ],
-      [
-        "Device",
-        "Egocentric stereo / fw 1.2.13"
-      ],
-      [
-        "Device id",
-        "device-519e0639"
-      ],
-      [
-        "Kit",
-        "kit-b5b19029"
-      ],
-      [
         "Shutter",
         "rolling"
       ],
@@ -8234,23 +6614,15 @@
       ],
       [
         "Operator",
-        "op-95870039 / Factory worker, 25-30, Right-handed"
+        "Factory worker, 25-30, Right-handed"
       ],
       [
         "Consent",
         "recorded per session"
       ],
       [
-        "Session",
-        "capture__20260813_082151__1c186e27"
-      ],
-      [
-        "Episode uuid",
-        "d72bce86-7fc6-5a90-98ee-4b2fa1a8b191"
-      ],
-      [
         "File",
-        "capture__20260813_082151__1c186e27__seg_015.mcap"
+        "…__seg_015.mcap"
       ],
       [
         "SHA-256",
@@ -8272,7 +6644,7 @@
     "task": "wall-hanging",
     "skill": "Packing & Bagging",
     "environment": "Handcraft Workshop, Indoor Room",
-    "locale": "Hanoi",
+    "locale": "Vietnam",
     "rig": "Egocentric stereo",
     "durationSec": 733.79,
     "resolution": "stereo pair",
@@ -8364,42 +6736,6 @@
         "Indoor Room"
       ],
       [
-        "NAICS",
-        "339999"
-      ],
-      [
-        "Business",
-        "Anh Long resin workshop — 499 Nguyen Khoai, Ha Noi"
-      ],
-      [
-        "Site",
-        "Hanoi"
-      ],
-      [
-        "Geohash",
-        "w7er3w"
-      ],
-      [
-        "Environment id",
-        "env-abab5491"
-      ],
-      [
-        "Business id",
-        "biz-03250200"
-      ],
-      [
-        "Device",
-        "Egocentric stereo / fw 1.2.13"
-      ],
-      [
-        "Device id",
-        "device-b5b50e35"
-      ],
-      [
-        "Kit",
-        "kit-74d02c82"
-      ],
-      [
         "Shutter",
         "rolling shutter"
       ],
@@ -8433,23 +6769,15 @@
       ],
       [
         "Operator",
-        "op-c88b1900 / Factory worker, 50-55, Right-handed"
+        "Factory worker, 50-55, Right-handed"
       ],
       [
         "Consent",
         "recorded per session"
       ],
       [
-        "Session",
-        "capture__20260827_023408__4a440115"
-      ],
-      [
-        "Episode uuid",
-        "4bcb120c-89d5-556b-86ba-1507accfe33f"
-      ],
-      [
         "File",
-        "capture__20260827_023408__4a440115__seg_000.mcap"
+        "…__seg_000.mcap"
       ],
       [
         "SHA-256",
@@ -8471,7 +6799,7 @@
     "task": "component-testing",
     "skill": "Pick and Place / Object Handling",
     "environment": "Handcraft Workshop, Assembly Line",
-    "locale": "Hanoi",
+    "locale": "Vietnam",
     "rig": "Egocentric stereo",
     "durationSec": 607.278,
     "resolution": "stereo pair",
@@ -8563,42 +6891,6 @@
         "Assembly Line"
       ],
       [
-        "NAICS",
-        "339999"
-      ],
-      [
-        "Business",
-        "Assembly workshop (Khuyen Luong) — No 17/22 Nguyen Luong Street, Linh Nam, Ha Noi, Vietnam"
-      ],
-      [
-        "Site",
-        "Hanoi"
-      ],
-      [
-        "Geohash",
-        "w7er33"
-      ],
-      [
-        "Environment id",
-        "env-24d393d9"
-      ],
-      [
-        "Business id",
-        "biz-112a73f8"
-      ],
-      [
-        "Device",
-        "Egocentric stereo / fw 1.2.13"
-      ],
-      [
-        "Device id",
-        "device-f9abf739"
-      ],
-      [
-        "Kit",
-        "kit-d9dfd2ad"
-      ],
-      [
         "Shutter",
         "rolling"
       ],
@@ -8632,23 +6924,15 @@
       ],
       [
         "Operator",
-        "op-5ba86ebf / Auto technician, 20-25, Right-handed"
+        "Auto technician, 20-25, Right-handed"
       ],
       [
         "Consent",
         "recorded per session"
       ],
       [
-        "Session",
-        "capture__20260811_072751__e0b732a5"
-      ],
-      [
-        "Episode uuid",
-        "1a089e31-29dd-52f3-ba28-6e8fc0760f16"
-      ],
-      [
         "File",
-        "capture__20260811_072751__e0b732a5__seg_011.mcap"
+        "…__seg_011.mcap"
       ],
       [
         "SHA-256",
@@ -8670,7 +6954,7 @@
     "task": "wood-sanding",
     "skill": "Tool Use & Technical Manipulation",
     "environment": "Woodworking Shop, Workshop",
-    "locale": "Hanoi",
+    "locale": "Vietnam",
     "rig": "Egocentric stereo",
     "durationSec": 720,
     "resolution": "stereo pair",
@@ -8762,42 +7046,6 @@
         "Workshop"
       ],
       [
-        "NAICS",
-        "321999"
-      ],
-      [
-        "Business",
-        "Son Dong wood-carving workshop 5 — Alley 73/2/22, Son Dong Street, Thuong Hamlet, Son Dong Commune, Hanoi, Vietnam"
-      ],
-      [
-        "Site",
-        "Hanoi"
-      ],
-      [
-        "Geohash",
-        "w7epv2"
-      ],
-      [
-        "Environment id",
-        "env-a80a2972"
-      ],
-      [
-        "Business id",
-        "biz-c09a4262"
-      ],
-      [
-        "Device",
-        "Egocentric stereo / fw 1.2.13"
-      ],
-      [
-        "Device id",
-        "device-65555f2e"
-      ],
-      [
-        "Kit",
-        "kit-8c8c79d5"
-      ],
-      [
         "Shutter",
         "rolling shutter"
       ],
@@ -8831,23 +7079,15 @@
       ],
       [
         "Operator",
-        "op-1d8ff606 / Woodworker, 30-35, Right-handed"
+        "Woodworker, 30-35, Right-handed"
       ],
       [
         "Consent",
         "recorded per session"
       ],
       [
-        "Session",
-        "capture__20260810_022241__8418598e"
-      ],
-      [
-        "Episode uuid",
-        "d3d1f68d-1e19-5c4f-b228-780bed41d9b0"
-      ],
-      [
         "File",
-        "capture__20260810_022241__8418598e__seg_010.mcap"
+        "…__seg_010.mcap"
       ],
       [
         "SHA-256",
@@ -8869,7 +7109,7 @@
     "task": "dish-washing",
     "skill": "Cleaning & Sanitation",
     "environment": "Restaurant, Kitchen",
-    "locale": "Hanoi",
+    "locale": "Vietnam",
     "rig": "Egocentric stereo",
     "durationSec": 681.27,
     "resolution": "stereo pair",
@@ -8961,42 +7201,6 @@
         "Kitchen"
       ],
       [
-        "NAICS",
-        "722511"
-      ],
-      [
-        "Business",
-        "Rice eatery (Nguyen Hoang) — No. 5, Lane 1 Nguyen Hoang Street, My Dinh 2, Hanoi, Vietnam"
-      ],
-      [
-        "Site",
-        "Hanoi"
-      ],
-      [
-        "Geohash",
-        "w7epwg"
-      ],
-      [
-        "Environment id",
-        "env-2c65964d"
-      ],
-      [
-        "Business id",
-        "biz-ef1852a7"
-      ],
-      [
-        "Device",
-        "Egocentric stereo / fw 1.2.13"
-      ],
-      [
-        "Device id",
-        "device-f9abf739"
-      ],
-      [
-        "Kit",
-        "kit-d9dfd2ad"
-      ],
-      [
         "Shutter",
         "rolling"
       ],
@@ -9030,23 +7234,15 @@
       ],
       [
         "Operator",
-        "op-dc0ab3e8 / Cook, 50-55, Right-handed"
+        "Cook, 50-55, Right-handed"
       ],
       [
         "Consent",
         "recorded per session"
       ],
       [
-        "Session",
-        "capture__20260813_032058__e0b732a5"
-      ],
-      [
-        "Episode uuid",
-        "5a39081a-db7f-5fef-8110-d6c787553832"
-      ],
-      [
         "File",
-        "capture__20260813_032058__e0b732a5__seg_041.mcap"
+        "…__seg_041.mcap"
       ],
       [
         "SHA-256",
@@ -9068,7 +7264,7 @@
     "task": "pot-carrying",
     "skill": "Dish Handling",
     "environment": "Restaurant, Wash Area",
-    "locale": "Hanoi",
+    "locale": "Vietnam",
     "rig": "Egocentric stereo",
     "durationSec": 626.267,
     "resolution": "stereo pair",
@@ -9160,42 +7356,6 @@
         "Wash Area"
       ],
       [
-        "NAICS",
-        "722511"
-      ],
-      [
-        "Business",
-        "Rice eatery (Nguyen Hoang) — No. 5, Lane 1 Nguyen Hoang Street, My Dinh 2, Hanoi, Vietnam"
-      ],
-      [
-        "Site",
-        "Hanoi"
-      ],
-      [
-        "Geohash",
-        "w7epwg"
-      ],
-      [
-        "Environment id",
-        "env-2c65964d"
-      ],
-      [
-        "Business id",
-        "biz-ef1852a7"
-      ],
-      [
-        "Device",
-        "Egocentric stereo / fw 1.2.13"
-      ],
-      [
-        "Device id",
-        "device-2aaa18ea"
-      ],
-      [
-        "Kit",
-        "kit-4568a06a"
-      ],
-      [
         "Shutter",
         "rolling"
       ],
@@ -9229,23 +7389,15 @@
       ],
       [
         "Operator",
-        "op-593d1ef3 / Cook, 55-60, Right-handed"
+        "Cook, 55-60, Right-handed"
       ],
       [
         "Consent",
         "recorded per session"
       ],
       [
-        "Session",
-        "capture__20260814_011427__2b1af919"
-      ],
-      [
-        "Episode uuid",
-        "2ec04d2f-a7ac-55c8-8d41-dbe2fb073925"
-      ],
-      [
         "File",
-        "capture__20260814_011427__2b1af919__seg_010.mcap"
+        "…__seg_010.mcap"
       ],
       [
         "SHA-256",
@@ -9267,7 +7419,7 @@
     "task": "food-cooking",
     "skill": "Food Preparation & Cooking",
     "environment": "Restaurant, Kitchen",
-    "locale": "Hanoi",
+    "locale": "Vietnam",
     "rig": "Egocentric stereo",
     "durationSec": 692.942,
     "resolution": "stereo pair",
@@ -9359,42 +7511,6 @@
         "Kitchen"
       ],
       [
-        "NAICS",
-        "722511"
-      ],
-      [
-        "Business",
-        "Rice eatery (Tu Hoang) — 45A Tu Hoang Street, Tu Hoang, Nam Tu Liem, Hanoi, Vietnam"
-      ],
-      [
-        "Site",
-        "Hanoi"
-      ],
-      [
-        "Geohash",
-        "w7er8u"
-      ],
-      [
-        "Environment id",
-        "env-93978953"
-      ],
-      [
-        "Business id",
-        "biz-498f4962"
-      ],
-      [
-        "Device",
-        "Egocentric stereo / fw 1.2.13"
-      ],
-      [
-        "Device id",
-        "device-f9abf739"
-      ],
-      [
-        "Kit",
-        "kit-d9dfd2ad"
-      ],
-      [
         "Shutter",
         "rolling"
       ],
@@ -9428,23 +7544,15 @@
       ],
       [
         "Operator",
-        "op-6a7c7de8 / Cook, 25-30, Right-handed"
+        "Cook, 25-30, Right-handed"
       ],
       [
         "Consent",
         "recorded per session"
       ],
       [
-        "Session",
-        "capture__20260813_100122__e0b732a5"
-      ],
-      [
-        "Episode uuid",
-        "b0d475c2-45d4-50ea-9a0e-5bfd1e0e5c83"
-      ],
-      [
         "File",
-        "capture__20260813_100122__e0b732a5__seg_038.mcap"
+        "…__seg_038.mcap"
       ],
       [
         "SHA-256",
@@ -9466,7 +7574,7 @@
     "task": "container-arranging",
     "skill": "Organization & Tidying",
     "environment": "Commercial Kitchen, Restaurant Kitchen",
-    "locale": "Hanoi",
+    "locale": "Vietnam",
     "rig": "Egocentric stereo",
     "durationSec": 543.301,
     "resolution": "stereo pair",
@@ -9558,42 +7666,6 @@
         "Restaurant Kitchen"
       ],
       [
-        "NAICS",
-        "722310"
-      ],
-      [
-        "Business",
-        "Fanghuan Restaurant — Son Dong, Hoai Duc, Ha Noi"
-      ],
-      [
-        "Site",
-        "Hanoi"
-      ],
-      [
-        "Geohash",
-        "w7epwv"
-      ],
-      [
-        "Environment id",
-        "env-1a54418f"
-      ],
-      [
-        "Business id",
-        "biz-1a54418f"
-      ],
-      [
-        "Device",
-        "Egocentric stereo / fw 1.2.13"
-      ],
-      [
-        "Device id",
-        "device-f9abf739"
-      ],
-      [
-        "Kit",
-        "kit-d9dfd2ad"
-      ],
-      [
         "Shutter",
         "rolling shutter"
       ],
@@ -9627,23 +7699,15 @@
       ],
       [
         "Operator",
-        "op-152f80bf / Chef, 25-30, Right-handed"
+        "Chef, 25-30, Right-handed"
       ],
       [
         "Consent",
         "recorded per session"
       ],
       [
-        "Session",
-        "capture__20260805_073314__e0b732a5"
-      ],
-      [
-        "Episode uuid",
-        "136ed62e-075c-5b60-9d06-801d7eb58190"
-      ],
-      [
         "File",
-        "capture__20260805_073314__e0b732a5__seg_004.mcap"
+        "…__seg_004.mcap"
       ],
       [
         "SHA-256",
@@ -9665,7 +7729,7 @@
     "task": "container-closing",
     "skill": "Packing & Bagging",
     "environment": "Restaurant, Kitchen",
-    "locale": "Hanoi",
+    "locale": "Vietnam",
     "rig": "Egocentric stereo",
     "durationSec": 569.843,
     "resolution": "stereo pair",
@@ -9757,42 +7821,6 @@
         "Kitchen"
       ],
       [
-        "NAICS",
-        "722511"
-      ],
-      [
-        "Business",
-        "Rice eatery (Nguyen Hoang) — No. 5, Lane 1 Nguyen Hoang Street, My Dinh 2, Hanoi, Vietnam"
-      ],
-      [
-        "Site",
-        "Hanoi"
-      ],
-      [
-        "Geohash",
-        "w7epwg"
-      ],
-      [
-        "Environment id",
-        "env-2c65964d"
-      ],
-      [
-        "Business id",
-        "biz-ef1852a7"
-      ],
-      [
-        "Device",
-        "Egocentric stereo / fw 1.2.13"
-      ],
-      [
-        "Device id",
-        "device-2aaa18ea"
-      ],
-      [
-        "Kit",
-        "kit-4568a06a"
-      ],
-      [
         "Shutter",
         "rolling shutter"
       ],
@@ -9826,23 +7854,15 @@
       ],
       [
         "Operator",
-        "op-593d1ef3 / Cook, 55-60, Right-handed"
+        "Cook, 55-60, Right-handed"
       ],
       [
         "Consent",
         "recorded per session"
       ],
       [
-        "Session",
-        "capture__20260814_011427__2b1af919"
-      ],
-      [
-        "Episode uuid",
-        "0b47b3c0-0250-54d3-80b0-acd234dca1e9"
-      ],
-      [
         "File",
-        "capture__20260814_011427__2b1af919__seg_019.mcap"
+        "…__seg_019.mcap"
       ],
       [
         "SHA-256",
@@ -9864,7 +7884,7 @@
     "task": "vegetable-picking",
     "skill": "Pick and Place / Object Handling",
     "environment": "Restaurant, Restaurant Kitchen",
-    "locale": "Hanoi",
+    "locale": "Vietnam",
     "rig": "Egocentric stereo",
     "durationSec": 599.037,
     "resolution": "stereo pair",
@@ -9956,42 +7976,6 @@
         "Restaurant Kitchen"
       ],
       [
-        "NAICS",
-        "722511"
-      ],
-      [
-        "Business",
-        "Rice eatery (Tu Hoang) — 45A Tu Hoang Street, Tu Hoang, Nam Tu Liem, Hanoi, Vietnam"
-      ],
-      [
-        "Site",
-        "Hanoi"
-      ],
-      [
-        "Geohash",
-        "w7er8u"
-      ],
-      [
-        "Environment id",
-        "env-93978953"
-      ],
-      [
-        "Business id",
-        "biz-498f4962"
-      ],
-      [
-        "Device",
-        "Egocentric stereo / fw 1.2.13"
-      ],
-      [
-        "Device id",
-        "device-f9abf739"
-      ],
-      [
-        "Kit",
-        "kit-d9dfd2ad"
-      ],
-      [
         "Shutter",
         "rolling shutter"
       ],
@@ -10025,23 +8009,15 @@
       ],
       [
         "Operator",
-        "op-e46f7fa5 / Cook, 50-55, Right-handed"
+        "Cook, 50-55, Right-handed"
       ],
       [
         "Consent",
         "recorded per session"
       ],
       [
-        "Session",
-        "capture__20260815_011036__bf1ccebc"
-      ],
-      [
-        "Episode uuid",
-        "662afbc0-5c7a-5e4f-abf8-c59ca2347599"
-      ],
-      [
         "File",
-        "capture__20260815_011036__bf1ccebc__seg_015.mcap"
+        "…__seg_015.mcap"
       ],
       [
         "SHA-256",
@@ -10063,7 +8039,7 @@
     "task": "bed-making",
     "skill": "Clothing & Laundry",
     "environment": "Home, Bedroom",
-    "locale": "Hanoi",
+    "locale": "Vietnam",
     "rig": "Egocentric stereo",
     "durationSec": 624.769,
     "resolution": "stereo pair",
@@ -10154,42 +8130,6 @@
         "Bedroom"
       ],
       [
-        "NAICS",
-        "814110"
-      ],
-      [
-        "Business",
-        "Quang Trung private residence — số 5 phố quang trung Hoàn Kiếm"
-      ],
-      [
-        "Site",
-        "Hanoi"
-      ],
-      [
-        "Geohash",
-        "w7epxm"
-      ],
-      [
-        "Environment id",
-        "env-517c82fd"
-      ],
-      [
-        "Business id",
-        "biz-517c82fd"
-      ],
-      [
-        "Device",
-        "Egocentric stereo / fw 1.0"
-      ],
-      [
-        "Device id",
-        "device-055fc2ef"
-      ],
-      [
-        "Kit",
-        "kit-c2227404"
-      ],
-      [
         "Shutter",
         "global"
       ],
@@ -10223,23 +8163,15 @@
       ],
       [
         "Operator",
-        "op-b7d9d93f / Housekeeper, 25-30, Right-handed"
+        "Housekeeper, 25-30, Right-handed"
       ],
       [
         "Consent",
         "recorded per session"
       ],
       [
-        "Session",
-        "capture__20260806_092942__ca5baef5"
-      ],
-      [
-        "Episode uuid",
-        "41c90bd8-ff79-5e29-b542-8ebe030b72e5"
-      ],
-      [
         "File",
-        "capture__20260806_092942__ca5baef5__seg_000.mcap"
+        "…__seg_000.mcap"
       ],
       [
         "SHA-256",
@@ -10261,7 +8193,7 @@
     "task": "dish-preparation",
     "skill": "Food Preparation & Cooking",
     "environment": "Home, Kitchen",
-    "locale": "Hanoi",
+    "locale": "Vietnam",
     "rig": "Egocentric stereo",
     "durationSec": 405.455,
     "resolution": "stereo pair",
@@ -10352,42 +8284,6 @@
         "Kitchen"
       ],
       [
-        "NAICS",
-        "814110"
-      ],
-      [
-        "Business",
-        "Quang Trung private residence — số 5 phố quang trung Hoàn Kiếm"
-      ],
-      [
-        "Site",
-        "Hanoi"
-      ],
-      [
-        "Geohash",
-        "w7epxm"
-      ],
-      [
-        "Environment id",
-        "env-517c82fd"
-      ],
-      [
-        "Business id",
-        "biz-517c82fd"
-      ],
-      [
-        "Device",
-        "Egocentric stereo / fw 1.2.13"
-      ],
-      [
-        "Device id",
-        "device-0d684745"
-      ],
-      [
-        "Kit",
-        "kit-f58b337d"
-      ],
-      [
         "Shutter",
         "rolling"
       ],
@@ -10421,23 +8317,15 @@
       ],
       [
         "Operator",
-        "op-4e699e56 / Cook, 40-45, Right-handed"
+        "Cook, 40-45, Right-handed"
       ],
       [
         "Consent",
         "recorded per session"
       ],
       [
-        "Session",
-        "capture__20260804_111425__09156dec"
-      ],
-      [
-        "Episode uuid",
-        "9b7f5256-0877-54db-99ea-71ab5a997f88"
-      ],
-      [
         "File",
-        "capture__20260804_111425__09156dec__seg_035.mcap"
+        "…__seg_035.mcap"
       ],
       [
         "SHA-256",
@@ -10459,7 +8347,7 @@
     "task": "component-assembly",
     "skill": "Assembly & Installation",
     "environment": "Manufacturing Factory, Assembly Area",
-    "locale": "Hanoi",
+    "locale": "Vietnam",
     "rig": "Egocentric stereo",
     "durationSec": 582.58,
     "resolution": "stereo pair",
@@ -10551,42 +8439,6 @@
         "Assembly Area"
       ],
       [
-        "NAICS",
-        "339999"
-      ],
-      [
-        "Business",
-        "Assembly workshop (Nguyen Hoang) — No. 2 Nguyen Hoang Street, Nam Tu Liem District, Hanoi, Vietnam"
-      ],
-      [
-        "Site",
-        "Hanoi"
-      ],
-      [
-        "Geohash",
-        "w7er8u"
-      ],
-      [
-        "Environment id",
-        "env-a9dbdf41"
-      ],
-      [
-        "Business id",
-        "biz-8e809eb1"
-      ],
-      [
-        "Device",
-        "Egocentric stereo / fw 1.2.13"
-      ],
-      [
-        "Device id",
-        "device-f174c9f1"
-      ],
-      [
-        "Kit",
-        "kit-e319748e"
-      ],
-      [
         "Shutter",
         "rolling shutter"
       ],
@@ -10620,23 +8472,15 @@
       ],
       [
         "Operator",
-        "op-19a3a105 / Assembler, 40-45, Right-handed"
+        "Assembler, 40-45, Right-handed"
       ],
       [
         "Consent",
         "recorded per session"
       ],
       [
-        "Session",
-        "capture__20260819_013603__aefbcd2f"
-      ],
-      [
-        "Episode uuid",
-        "48c6bbb8-c4a6-569b-aba6-5413ad6d148b"
-      ],
-      [
         "File",
-        "capture__20260819_013603__aefbcd2f__seg_021.mcap"
+        "…__seg_021.mcap"
       ],
       [
         "SHA-256",
@@ -10658,7 +8502,7 @@
     "task": "machine-cleaning",
     "skill": "Cleaning & Sanitation",
     "environment": "Manufacturing Factory, Assembly Area",
-    "locale": "Hanoi",
+    "locale": "Vietnam",
     "rig": "Egocentric stereo",
     "durationSec": 670.35,
     "resolution": "stereo pair",
@@ -10750,42 +8594,6 @@
         "Assembly Area"
       ],
       [
-        "NAICS",
-        "339999"
-      ],
-      [
-        "Business",
-        "Assembly workshop (Nguyen Hoang) — No. 2 Nguyen Hoang Street, Nam Tu Liem District, Hanoi, Vietnam"
-      ],
-      [
-        "Site",
-        "Hanoi"
-      ],
-      [
-        "Geohash",
-        "w7er8u"
-      ],
-      [
-        "Environment id",
-        "env-a9dbdf41"
-      ],
-      [
-        "Business id",
-        "biz-8e809eb1"
-      ],
-      [
-        "Device",
-        "Egocentric stereo / fw 2.1.18"
-      ],
-      [
-        "Device id",
-        "device-89b9c15e"
-      ],
-      [
-        "Kit",
-        "kit-7cb9f1ee"
-      ],
-      [
         "Shutter",
         "global"
       ],
@@ -10819,23 +8627,15 @@
       ],
       [
         "Operator",
-        "op-5b415011 / Assembler, 40-45, Right-handed"
+        "Assembler, 40-45, Right-handed"
       ],
       [
         "Consent",
         "recorded per session"
       ],
       [
-        "Session",
-        "capture__20260811_151408__785e938d"
-      ],
-      [
-        "Episode uuid",
-        "fea94b7c-4814-5ed2-9c26-27f3de49610b"
-      ],
-      [
         "File",
-        "capture__20260811_151408__785e938d__seg_003.mcap"
+        "…__seg_003.mcap"
       ],
       [
         "SHA-256",
@@ -10857,7 +8657,7 @@
     "task": "stone-sanding",
     "skill": "Construction & Building",
     "environment": "Hardware Manufacturing, Fabrication Floor",
-    "locale": "Hanoi",
+    "locale": "Vietnam",
     "rig": "Egocentric stereo",
     "durationSec": 293.901,
     "resolution": "stereo pair",
@@ -10949,42 +8749,6 @@
         "Fabrication Floor"
       ],
       [
-        "NAICS",
-        "332510"
-      ],
-      [
-        "Business",
-        "Stone & Marble Fabrication Workshop — 161 Road 422, Xom Dinh, Son Dong, Hanoi, Vietnam"
-      ],
-      [
-        "Site",
-        "Hanoi"
-      ],
-      [
-        "Geohash",
-        "w7er8u"
-      ],
-      [
-        "Environment id",
-        "env-8d071958"
-      ],
-      [
-        "Business id",
-        "biz-36205e6a"
-      ],
-      [
-        "Device",
-        "Egocentric stereo / fw 2.1.18"
-      ],
-      [
-        "Device id",
-        "device-429c0060"
-      ],
-      [
-        "Kit",
-        "kit-71c69244"
-      ],
-      [
         "Shutter",
         "global"
       ],
@@ -11018,23 +8782,15 @@
       ],
       [
         "Operator",
-        "op-fbfd4698 / Carpenter, 18-24, Right-handed"
+        "Carpenter, 18-24, Right-handed"
       ],
       [
         "Consent",
         "recorded per session"
       ],
       [
-        "Session",
-        "capture__20260723_111013__e71e3f6e"
-      ],
-      [
-        "Episode uuid",
-        "ef7599a3-4155-5b0b-bad8-c81202052a02"
-      ],
-      [
         "File",
-        "capture__20260723_111013__e71e3f6e__seg_001.mcap"
+        "…__seg_001.mcap"
       ],
       [
         "SHA-256",
@@ -11056,7 +8812,7 @@
     "task": "frame-assembly",
     "skill": "Mechanical / Automotive Work",
     "environment": "Metal Fabrication Workshop, Assembly Area",
-    "locale": "Hanoi",
+    "locale": "Vietnam",
     "rig": "Egocentric stereo",
     "durationSec": 79.039,
     "resolution": "stereo pair",
@@ -11148,42 +8904,6 @@
         "Assembly Area"
       ],
       [
-        "NAICS",
-        "332999"
-      ],
-      [
-        "Business",
-        "Công ty Backhouse Việt Nam — No 35 Kien Thanh Hamlet, Gia Lam District, Hanoi, Vietnam"
-      ],
-      [
-        "Site",
-        "Hanoi"
-      ],
-      [
-        "Geohash",
-        "w7er8u"
-      ],
-      [
-        "Environment id",
-        "env-612d6b5c"
-      ],
-      [
-        "Business id",
-        "biz-d1718b82"
-      ],
-      [
-        "Device",
-        "Egocentric stereo / fw 2.1.18"
-      ],
-      [
-        "Device id",
-        "device-429c0060"
-      ],
-      [
-        "Kit",
-        "kit-71c69244"
-      ],
-      [
         "Shutter",
         "global"
       ],
@@ -11217,23 +8937,15 @@
       ],
       [
         "Operator",
-        "op-8c968884 / Metal fabricator, 18-24, Right-handed"
+        "Metal fabricator, 18-24, Right-handed"
       ],
       [
         "Consent",
         "recorded per session"
       ],
       [
-        "Session",
-        "capture__20260717_112933__e71e3f6e"
-      ],
-      [
-        "Episode uuid",
-        "d3c5d3ad-0eb9-5d41-af73-9c5f09fea05b"
-      ],
-      [
         "File",
-        "capture__20260717_112933__e71e3f6e__seg_000.mcap"
+        "…__seg_000.mcap"
       ],
       [
         "SHA-256",
@@ -11255,7 +8967,7 @@
     "task": "product-wrapping",
     "skill": "Packing & Bagging",
     "environment": "Manufacturing Factory, Warehouse",
-    "locale": "Hanoi",
+    "locale": "Vietnam",
     "rig": "Egocentric stereo",
     "durationSec": 500.1,
     "resolution": "stereo pair",
@@ -11347,42 +9059,6 @@
         "Warehouse"
       ],
       [
-        "NAICS",
-        "339999"
-      ],
-      [
-        "Business",
-        "Assembly workshop (Nguyen Hoang) — No. 2 Nguyen Hoang Street, Nam Tu Liem District, Hanoi, Vietnam"
-      ],
-      [
-        "Site",
-        "Hanoi"
-      ],
-      [
-        "Geohash",
-        "w7er8u"
-      ],
-      [
-        "Environment id",
-        "env-a9dbdf41"
-      ],
-      [
-        "Business id",
-        "biz-8e809eb1"
-      ],
-      [
-        "Device",
-        "Egocentric stereo / fw 1.2.13"
-      ],
-      [
-        "Device id",
-        "device-0d684745"
-      ],
-      [
-        "Kit",
-        "kit-f58b337d"
-      ],
-      [
         "Shutter",
         "rolling"
       ],
@@ -11416,23 +9092,15 @@
       ],
       [
         "Operator",
-        "op-9e5f0a15 / Assembler, 45-50, Right-handed"
+        "Assembler, 45-50, Right-handed"
       ],
       [
         "Consent",
         "recorded per session"
       ],
       [
-        "Session",
-        "capture__20260811_063942__09156dec"
-      ],
-      [
-        "Episode uuid",
-        "80d799a8-e59b-59d3-8398-64925075b9d1"
-      ],
-      [
         "File",
-        "capture__20260811_063942__09156dec__seg_000.mcap"
+        "…__seg_000.mcap"
       ],
       [
         "SHA-256",
@@ -11454,7 +9122,7 @@
     "task": "board-placing",
     "skill": "Pick and Place / Object Handling",
     "environment": "Woodworking Shop, Home Workshop",
-    "locale": "Hanoi",
+    "locale": "Vietnam",
     "rig": "Egocentric stereo",
     "durationSec": 528.683,
     "resolution": "stereo pair",
@@ -11546,42 +9214,6 @@
         "Home Workshop"
       ],
       [
-        "NAICS",
-        "321999"
-      ],
-      [
-        "Business",
-        "Fan-weaving household 6 — Số 2/38 thôn Bình Phú xã Tây Phương, huyện Thạch Thất"
-      ],
-      [
-        "Site",
-        "Hanoi"
-      ],
-      [
-        "Geohash",
-        "w7ep9g"
-      ],
-      [
-        "Environment id",
-        "env-dab49c0d"
-      ],
-      [
-        "Business id",
-        "biz-dab49c0d"
-      ],
-      [
-        "Device",
-        "Egocentric stereo / fw 1.2.13"
-      ],
-      [
-        "Device id",
-        "device-2aaa18ea"
-      ],
-      [
-        "Kit",
-        "kit-4568a06a"
-      ],
-      [
         "Shutter",
         "rolling"
       ],
@@ -11615,23 +9247,15 @@
       ],
       [
         "Operator",
-        "op-2455b3cc / Woodworker, 25-30, Right-handed"
+        "Woodworker, 25-30, Right-handed"
       ],
       [
         "Consent",
         "recorded per session"
       ],
       [
-        "Session",
-        "capture__20260805_072330__2b1af919"
-      ],
-      [
-        "Episode uuid",
-        "858815b3-be3a-5228-8dcf-cccf2cdd436c"
-      ],
-      [
         "File",
-        "capture__20260805_072330__2b1af919__seg_002.mcap"
+        "…__seg_002.mcap"
       ],
       [
         "SHA-256",
@@ -11653,7 +9277,7 @@
     "task": "appliance-repair",
     "skill": "Repair & Maintenance",
     "environment": "Manufacturing Factory, Workshop",
-    "locale": "Hanoi",
+    "locale": "Vietnam",
     "rig": "Egocentric stereo",
     "durationSec": 348.158,
     "resolution": "stereo pair",
@@ -11745,42 +9369,6 @@
         "Workshop"
       ],
       [
-        "NAICS",
-        "339999"
-      ],
-      [
-        "Business",
-        "Assembly workshop (Nguyen Hoang) — No. 2 Nguyen Hoang Street, Nam Tu Liem District, Hanoi, Vietnam"
-      ],
-      [
-        "Site",
-        "Hanoi"
-      ],
-      [
-        "Geohash",
-        "w7er8u"
-      ],
-      [
-        "Environment id",
-        "env-a9dbdf41"
-      ],
-      [
-        "Business id",
-        "biz-8e809eb1"
-      ],
-      [
-        "Device",
-        "Egocentric stereo / fw 1.2.13"
-      ],
-      [
-        "Device id",
-        "device-0d684745"
-      ],
-      [
-        "Kit",
-        "kit-f58b337d"
-      ],
-      [
         "Shutter",
         "rolling"
       ],
@@ -11814,23 +9402,15 @@
       ],
       [
         "Operator",
-        "op-52a96846 / Assembler, 40-45, Right-handed"
+        "Assembler, 40-45, Right-handed"
       ],
       [
         "Consent",
         "recorded per session"
       ],
       [
-        "Session",
-        "capture__20260811_093940__09156dec"
-      ],
-      [
-        "Episode uuid",
-        "7e61ef1d-e077-534b-8858-cc250837e857"
-      ],
-      [
         "File",
-        "capture__20260811_093940__09156dec__seg_000.mcap"
+        "…__seg_000.mcap"
       ],
       [
         "SHA-256",
@@ -11852,7 +9432,7 @@
     "task": "wood-sanding",
     "skill": "Tool Use & Technical Manipulation",
     "environment": "Woodworking Shop, Home Workshop",
-    "locale": "Hanoi",
+    "locale": "Vietnam",
     "rig": "Egocentric stereo",
     "durationSec": 652.228,
     "resolution": "stereo pair",
@@ -11944,42 +9524,6 @@
         "Home Workshop"
       ],
       [
-        "NAICS",
-        "321999"
-      ],
-      [
-        "Business",
-        "Fan-weaving household 6 — Số 2/38 thôn Bình Phú xã Tây Phương, huyện Thạch Thất"
-      ],
-      [
-        "Site",
-        "Hanoi"
-      ],
-      [
-        "Geohash",
-        "w7ep9g"
-      ],
-      [
-        "Environment id",
-        "env-dab49c0d"
-      ],
-      [
-        "Business id",
-        "biz-dab49c0d"
-      ],
-      [
-        "Device",
-        "Egocentric stereo / fw 1.2.13"
-      ],
-      [
-        "Device id",
-        "device-2aaa18ea"
-      ],
-      [
-        "Kit",
-        "kit-4568a06a"
-      ],
-      [
         "Shutter",
         "rolling"
       ],
@@ -12013,23 +9557,15 @@
       ],
       [
         "Operator",
-        "op-2455b3cc / Woodworker, 25-30, Right-handed"
+        "Woodworker, 25-30, Right-handed"
       ],
       [
         "Consent",
         "recorded per session"
       ],
       [
-        "Session",
-        "capture__20260805_072330__2b1af919"
-      ],
-      [
-        "Episode uuid",
-        "8f9b0015-0364-515e-9af3-0b22ef78ebd3"
-      ],
-      [
         "File",
-        "capture__20260805_072330__2b1af919__seg_004.mcap"
+        "…__seg_004.mcap"
       ],
       [
         "SHA-256",
@@ -12051,7 +9587,7 @@
     "task": "box-cleaning",
     "skill": "Cleaning & Sanitation",
     "environment": "Sign Shop, Assembly Area",
-    "locale": "Hanoi",
+    "locale": "Vietnam",
     "rig": "Egocentric stereo",
     "durationSec": 264.885,
     "resolution": "stereo pair",
@@ -12143,42 +9679,6 @@
         "Assembly Area"
       ],
       [
-        "NAICS",
-        "339950"
-      ],
-      [
-        "Business",
-        "Dong Phuong signage workshop — No. 195, So Tuong Street, Hanoi, Vietnam"
-      ],
-      [
-        "Site",
-        "Hanoi"
-      ],
-      [
-        "Geohash",
-        "w7er2s"
-      ],
-      [
-        "Environment id",
-        "env-55db1cf4"
-      ],
-      [
-        "Business id",
-        "biz-877924a7"
-      ],
-      [
-        "Device",
-        "Egocentric stereo / fw 1.2.13"
-      ],
-      [
-        "Device id",
-        "device-2b877111"
-      ],
-      [
-        "Kit",
-        "kit-04842d1e"
-      ],
-      [
         "Shutter",
         "rolling"
       ],
@@ -12212,23 +9712,15 @@
       ],
       [
         "Operator",
-        "op-c16a8b85 / Electrician, 25-30, Right-handed"
+        "Electrician, 25-30, Right-handed"
       ],
       [
         "Consent",
         "recorded per session"
       ],
       [
-        "Session",
-        "capture__20260818_084714__f5669cef"
-      ],
-      [
-        "Episode uuid",
-        "156f2b37-c008-57d3-8ed2-a383b5663e0b"
-      ],
-      [
         "File",
-        "capture__20260818_084714__f5669cef__seg_010.mcap"
+        "…__seg_010.mcap"
       ],
       [
         "SHA-256",
@@ -12250,7 +9742,7 @@
     "task": "led-soldering",
     "skill": "Electronics & Diagnostics",
     "environment": "Sign Shop, Assembly Area",
-    "locale": "Hanoi",
+    "locale": "Vietnam",
     "rig": "Egocentric stereo",
     "durationSec": 520.658,
     "resolution": "stereo pair",
@@ -12342,42 +9834,6 @@
         "Assembly Area"
       ],
       [
-        "NAICS",
-        "339950"
-      ],
-      [
-        "Business",
-        "Dong Phuong signage workshop — No. 195, So Tuong Street, Hanoi, Vietnam"
-      ],
-      [
-        "Site",
-        "Hanoi"
-      ],
-      [
-        "Geohash",
-        "w7er2s"
-      ],
-      [
-        "Environment id",
-        "env-55db1cf4"
-      ],
-      [
-        "Business id",
-        "biz-877924a7"
-      ],
-      [
-        "Device",
-        "Egocentric stereo / fw 1.2.13"
-      ],
-      [
-        "Device id",
-        "device-cb9e1b7e"
-      ],
-      [
-        "Kit",
-        "kit-b60acac3"
-      ],
-      [
         "Shutter",
         "rolling"
       ],
@@ -12411,23 +9867,15 @@
       ],
       [
         "Operator",
-        "op-78e21716 / Electronics technician, 30-35, Right-handed"
+        "Electronics technician, 30-35, Right-handed"
       ],
       [
         "Consent",
         "recorded per session"
       ],
       [
-        "Session",
-        "capture__20260813_065442__81954a13"
-      ],
-      [
-        "Episode uuid",
-        "09a67c0a-8373-531c-b0f6-2383eb23b618"
-      ],
-      [
         "File",
-        "capture__20260813_065442__81954a13__seg_006.mcap"
+        "…__seg_006.mcap"
       ],
       [
         "SHA-256",
@@ -12449,7 +9897,7 @@
     "task": "paper-stripping",
     "skill": "Organization & Tidying",
     "environment": "Print Shop, Service Counter",
-    "locale": "Hanoi",
+    "locale": "Vietnam",
     "rig": "Egocentric stereo",
     "durationSec": 521,
     "resolution": "stereo pair",
@@ -12541,42 +9989,6 @@
         "Service Counter"
       ],
       [
-        "NAICS",
-        "323111"
-      ],
-      [
-        "Business",
-        "Print shop (Trieu Khuc) — Lot D5-12, Trieu Khuc Craft Village, Thanh Xuan, Hanoi, Vietnam"
-      ],
-      [
-        "Site",
-        "Hanoi"
-      ],
-      [
-        "Geohash",
-        "w7er8u"
-      ],
-      [
-        "Environment id",
-        "env-60921559"
-      ],
-      [
-        "Business id",
-        "biz-25464c21"
-      ],
-      [
-        "Device",
-        "Egocentric stereo / fw 1.2.13"
-      ],
-      [
-        "Device id",
-        "device-65555f2e"
-      ],
-      [
-        "Kit",
-        "kit-8c8c79d5"
-      ],
-      [
         "Shutter",
         "rolling"
       ],
@@ -12610,23 +10022,15 @@
       ],
       [
         "Operator",
-        "op-f1035b52 / Printer / press operator, 40-45, Right-handed"
+        "Printer / press operator, 40-45, Right-handed"
       ],
       [
         "Consent",
         "recorded per session"
       ],
       [
-        "Session",
-        "capture__20260814_015120__8418598e"
-      ],
-      [
-        "Episode uuid",
-        "7ed30e66-c533-5c36-bdc5-eecd8c471073"
-      ],
-      [
         "File",
-        "capture__20260814_015120__8418598e__seg_005.mcap"
+        "…__seg_005.mcap"
       ],
       [
         "SHA-256",
@@ -12648,7 +10052,7 @@
     "task": "sheet-organizing",
     "skill": "Packing & Bagging",
     "environment": "Print Shop, Production Floor",
-    "locale": "Hanoi",
+    "locale": "Vietnam",
     "rig": "Egocentric stereo",
     "durationSec": 59.508,
     "resolution": "stereo pair",
@@ -12740,42 +10144,6 @@
         "Production Floor"
       ],
       [
-        "NAICS",
-        "323111"
-      ],
-      [
-        "Business",
-        "Print shop (Trieu Khuc) — Lot D5-12, Trieu Khuc Craft Village, Thanh Xuan, Hanoi, Vietnam"
-      ],
-      [
-        "Site",
-        "Hanoi"
-      ],
-      [
-        "Geohash",
-        "w7er8u"
-      ],
-      [
-        "Environment id",
-        "env-60921559"
-      ],
-      [
-        "Business id",
-        "biz-25464c21"
-      ],
-      [
-        "Device",
-        "Egocentric stereo / fw 1.2.13"
-      ],
-      [
-        "Device id",
-        "device-65555f2e"
-      ],
-      [
-        "Kit",
-        "kit-8c8c79d5"
-      ],
-      [
         "Shutter",
         "rolling shutter"
       ],
@@ -12809,23 +10177,15 @@
       ],
       [
         "Operator",
-        "op-14e8efcc / Printer / press operator, 25-30, Right-handed"
+        "Printer / press operator, 25-30, Right-handed"
       ],
       [
         "Consent",
         "recorded per session"
       ],
       [
-        "Session",
-        "capture__20260814_031158__8418598e"
-      ],
-      [
-        "Episode uuid",
-        "737bf305-d844-59e3-9af5-9a5c8dbbac3e"
-      ],
-      [
         "File",
-        "capture__20260814_031158__8418598e__seg_006.mcap"
+        "…__seg_006.mcap"
       ],
       [
         "SHA-256",
@@ -12847,7 +10207,7 @@
     "task": "sheet-laminating",
     "skill": "Pick and Place / Object Handling",
     "environment": "Print Shop, Production Floor",
-    "locale": "Hanoi",
+    "locale": "Vietnam",
     "rig": "Egocentric stereo",
     "durationSec": 378.987,
     "resolution": "stereo pair",
@@ -12939,42 +10299,6 @@
         "Production Floor"
       ],
       [
-        "NAICS",
-        "323111"
-      ],
-      [
-        "Business",
-        "Print shop (Trieu Khuc) — Lot D5-12, Trieu Khuc Craft Village, Thanh Xuan, Hanoi, Vietnam"
-      ],
-      [
-        "Site",
-        "Hanoi"
-      ],
-      [
-        "Geohash",
-        "w7er8u"
-      ],
-      [
-        "Environment id",
-        "env-60921559"
-      ],
-      [
-        "Business id",
-        "biz-25464c21"
-      ],
-      [
-        "Device",
-        "Egocentric stereo / fw 1.2.13"
-      ],
-      [
-        "Device id",
-        "device-65555f2e"
-      ],
-      [
-        "Kit",
-        "kit-8c8c79d5"
-      ],
-      [
         "Shutter",
         "rolling"
       ],
@@ -13008,23 +10332,15 @@
       ],
       [
         "Operator",
-        "op-14e8efcc / Printer / press operator, 25-30, Right-handed"
+        "Printer / press operator, 25-30, Right-handed"
       ],
       [
         "Consent",
         "recorded per session"
       ],
       [
-        "Session",
-        "capture__20260814_031158__8418598e"
-      ],
-      [
-        "Episode uuid",
-        "d3519ede-5f71-5b87-9efd-2db208765dfb"
-      ],
-      [
         "File",
-        "capture__20260814_031158__8418598e__seg_000.mcap"
+        "…__seg_000.mcap"
       ],
       [
         "SHA-256",
@@ -13046,7 +10362,7 @@
     "task": "wire-cutting",
     "skill": "Tool Use & Technical Manipulation",
     "environment": "Sign Shop, Workshop",
-    "locale": "Hanoi",
+    "locale": "Vietnam",
     "rig": "Egocentric stereo",
     "durationSec": 662.225,
     "resolution": "stereo pair",
@@ -13138,42 +10454,6 @@
         "Workshop"
       ],
       [
-        "NAICS",
-        "339950"
-      ],
-      [
-        "Business",
-        "Dong Phuong signage workshop — No. 195, So Tuong Street, Hanoi, Vietnam"
-      ],
-      [
-        "Site",
-        "Hanoi"
-      ],
-      [
-        "Geohash",
-        "w7er2s"
-      ],
-      [
-        "Environment id",
-        "env-55db1cf4"
-      ],
-      [
-        "Business id",
-        "biz-877924a7"
-      ],
-      [
-        "Device",
-        "Egocentric stereo / fw 1.2.13"
-      ],
-      [
-        "Device id",
-        "device-66a2ca11"
-      ],
-      [
-        "Kit",
-        "kit-0d907884"
-      ],
-      [
         "Shutter",
         "rolling"
       ],
@@ -13207,23 +10487,15 @@
       ],
       [
         "Operator",
-        "op-f7fd6160 / Upholsterer, 20-25, Right-handed"
+        "Upholsterer, 20-25, Right-handed"
       ],
       [
         "Consent",
         "recorded per session"
       ],
       [
-        "Session",
-        "capture__20260815_031139__753b10bb"
-      ],
-      [
-        "Episode uuid",
-        "4b5c7954-a906-5120-a799-b7aa15cf376f"
-      ],
-      [
         "File",
-        "capture__20260815_031139__753b10bb__seg_004.mcap"
+        "…__seg_004.mcap"
       ],
       [
         "SHA-256",
@@ -13245,7 +10517,7 @@
     "task": "wire-connecting",
     "skill": "Assembly & Installation",
     "environment": "Appliance Repair, Home Workshop",
-    "locale": "Hanoi",
+    "locale": "Vietnam",
     "rig": "Egocentric stereo",
     "durationSec": 644.6,
     "resolution": "stereo pair",
@@ -13337,42 +10609,6 @@
         "Home Workshop"
       ],
       [
-        "NAICS",
-        "811412"
-      ],
-      [
-        "Business",
-        "Fan-weaving household 5 — Số 4/38 thôn Bình Phú xã Tây Phương, huyện Thạch Thất"
-      ],
-      [
-        "Site",
-        "Hanoi"
-      ],
-      [
-        "Geohash",
-        "w7ep9g"
-      ],
-      [
-        "Environment id",
-        "env-e00b10e8"
-      ],
-      [
-        "Business id",
-        "biz-e00b10e8"
-      ],
-      [
-        "Device",
-        "Egocentric stereo / fw 1.2.13"
-      ],
-      [
-        "Device id",
-        "device-2aaa18ea"
-      ],
-      [
-        "Kit",
-        "kit-4568a06a"
-      ],
-      [
         "Shutter",
         "rolling"
       ],
@@ -13406,23 +10642,15 @@
       ],
       [
         "Operator",
-        "op-d2d52a9d / Electrician, 25-30, Right-handed"
+        "Electrician, 25-30, Right-handed"
       ],
       [
         "Consent",
         "recorded per session"
       ],
       [
-        "Session",
-        "capture__20260804_085601__2b1af919"
-      ],
-      [
-        "Episode uuid",
-        "af54625b-fb82-5018-9528-ceaeb4084aa9"
-      ],
-      [
         "File",
-        "capture__20260804_085601__2b1af919__seg_002.mcap"
+        "…__seg_002.mcap"
       ],
       [
         "SHA-256",
@@ -13444,7 +10672,7 @@
     "task": "motor-measuring",
     "skill": "Electronics & Diagnostics",
     "environment": "Appliance Repair, Repair Bench",
-    "locale": "Hanoi",
+    "locale": "Vietnam",
     "rig": "Egocentric stereo",
     "durationSec": 519.469,
     "resolution": "stereo pair",
@@ -13536,42 +10764,6 @@
         "Repair Bench"
       ],
       [
-        "NAICS",
-        "811412"
-      ],
-      [
-        "Business",
-        "Home appliance repair shop (Truong Dinh) — 806 Truong Dinh Street, Hoang Mai, Hanoi, Vietnam"
-      ],
-      [
-        "Site",
-        "Hanoi"
-      ],
-      [
-        "Geohash",
-        "w7er2e"
-      ],
-      [
-        "Environment id",
-        "env-6559e365"
-      ],
-      [
-        "Business id",
-        "biz-6fde99d9"
-      ],
-      [
-        "Device",
-        "Egocentric stereo / fw 1.2.13"
-      ],
-      [
-        "Device id",
-        "device-0d684745"
-      ],
-      [
-        "Kit",
-        "kit-f58b337d"
-      ],
-      [
         "Shutter",
         "rolling"
       ],
@@ -13605,23 +10797,15 @@
       ],
       [
         "Operator",
-        "op-c9205915 / Appliance repair technician, 55-60, Right-handed"
+        "Appliance repair technician, 55-60, Right-handed"
       ],
       [
         "Consent",
         "recorded per session"
       ],
       [
-        "Session",
-        "capture__20260813_020615__09156dec"
-      ],
-      [
-        "Episode uuid",
-        "ce6179db-a236-5fd7-8661-3cbe773993ac"
-      ],
-      [
         "File",
-        "capture__20260813_020615__09156dec__seg_010.mcap"
+        "…__seg_010.mcap"
       ],
       [
         "SHA-256",
@@ -13643,7 +10827,7 @@
     "task": "motor-disassembly",
     "skill": "Mechanical / Automotive Work",
     "environment": "Appliance Repair, Repair Bench",
-    "locale": "Hanoi",
+    "locale": "Vietnam",
     "rig": "Egocentric stereo",
     "durationSec": 527.085,
     "resolution": "stereo pair",
@@ -13735,42 +10919,6 @@
         "Repair Bench"
       ],
       [
-        "NAICS",
-        "811412"
-      ],
-      [
-        "Business",
-        "Home appliance repair shop (Truong Dinh) — 806 Truong Dinh Street, Hoang Mai, Hanoi, Vietnam"
-      ],
-      [
-        "Site",
-        "Hanoi"
-      ],
-      [
-        "Geohash",
-        "w7er2e"
-      ],
-      [
-        "Environment id",
-        "env-6559e365"
-      ],
-      [
-        "Business id",
-        "biz-6fde99d9"
-      ],
-      [
-        "Device",
-        "Egocentric stereo / fw 2.1.18"
-      ],
-      [
-        "Device id",
-        "device-429c0060"
-      ],
-      [
-        "Kit",
-        "kit-71c69244"
-      ],
-      [
         "Shutter",
         "global"
       ],
@@ -13804,23 +10952,15 @@
       ],
       [
         "Operator",
-        "op-d84fc289 / Appliance repair technician, 15-20, Right-handed"
+        "Appliance repair technician, 15-20, Right-handed"
       ],
       [
         "Consent",
         "recorded per session"
       ],
       [
-        "Session",
-        "capture__20260810_182050__e71e3f6e"
-      ],
-      [
-        "Episode uuid",
-        "23de718d-3b89-5324-b61d-2a542b058ecb"
-      ],
-      [
         "File",
-        "capture__20260810_182050__e71e3f6e__seg_009.mcap"
+        "…__seg_009.mcap"
       ],
       [
         "SHA-256",
@@ -13842,7 +10982,7 @@
     "task": "harness-securing",
     "skill": "Pick and Place / Object Handling",
     "environment": "Appliance Repair, Work Bench",
-    "locale": "Hanoi",
+    "locale": "Vietnam",
     "rig": "Egocentric stereo",
     "durationSec": 589.342,
     "resolution": "stereo pair",
@@ -13934,42 +11074,6 @@
         "Work Bench"
       ],
       [
-        "NAICS",
-        "811412"
-      ],
-      [
-        "Business",
-        "Home appliance repair shop (Truong Dinh) — 806 Truong Dinh Street, Hoang Mai, Hanoi, Vietnam"
-      ],
-      [
-        "Site",
-        "Hanoi"
-      ],
-      [
-        "Geohash",
-        "w7er2e"
-      ],
-      [
-        "Environment id",
-        "env-6559e365"
-      ],
-      [
-        "Business id",
-        "biz-6fde99d9"
-      ],
-      [
-        "Device",
-        "Egocentric stereo / fw 2.1.7"
-      ],
-      [
-        "Device id",
-        "device-183561bf"
-      ],
-      [
-        "Kit",
-        "kit-026a5f1c"
-      ],
-      [
         "Shutter",
         "global"
       ],
@@ -14003,23 +11107,15 @@
       ],
       [
         "Operator",
-        "op-c9205915 / Appliance repair technician, 55-60, Right-handed"
+        "Appliance repair technician, 55-60, Right-handed"
       ],
       [
         "Consent",
         "recorded per session"
       ],
       [
-        "Session",
-        "capture__20260810_152716__f0e43750"
-      ],
-      [
-        "Episode uuid",
-        "9b16a55a-1d94-5dd5-bf66-213708b781a2"
-      ],
-      [
         "File",
-        "capture__20260810_152716__f0e43750__seg_043.mcap"
+        "…__seg_043.mcap"
       ],
       [
         "SHA-256",
@@ -14041,7 +11137,7 @@
     "task": "sole-stitching",
     "skill": "Repair & Maintenance",
     "environment": "Shoe Repair Store",
-    "locale": "Hanoi",
+    "locale": "Vietnam",
     "rig": "Egocentric stereo",
     "durationSec": 599.259,
     "resolution": "stereo pair",
@@ -14132,42 +11228,6 @@
         "Shoe Repair Store"
       ],
       [
-        "NAICS",
-        "811430"
-      ],
-      [
-        "Business",
-        "Shoe repair shop (Truong Dinh) — 141 Truong Dinh Street, Hoang Mai, Hanoi, Vietnam"
-      ],
-      [
-        "Site",
-        "Hanoi"
-      ],
-      [
-        "Geohash",
-        "w7er2t"
-      ],
-      [
-        "Environment id",
-        "env-c2cd2eb3"
-      ],
-      [
-        "Business id",
-        "biz-a98ef532"
-      ],
-      [
-        "Device",
-        "Egocentric stereo / fw 1.2.13"
-      ],
-      [
-        "Device id",
-        "device-2aaa18ea"
-      ],
-      [
-        "Kit",
-        "kit-4568a06a"
-      ],
-      [
         "Shutter",
         "rolling shutter"
       ],
@@ -14201,23 +11261,15 @@
       ],
       [
         "Operator",
-        "op-2017885a / Shoe repairer, 50-55, Right-handed"
+        "Shoe repairer, 50-55, Right-handed"
       ],
       [
         "Consent",
         "recorded per session"
       ],
       [
-        "Session",
-        "capture__20260825_074904__2b1af919"
-      ],
-      [
-        "Episode uuid",
-        "a4dd4c73-3479-5e44-b087-22aa051bbece"
-      ],
-      [
         "File",
-        "capture__20260825_074904__2b1af919__seg_003.mcap"
+        "…__seg_003.mcap"
       ],
       [
         "SHA-256",
@@ -14239,7 +11291,7 @@
     "task": "inventory-counting",
     "skill": "Inventory & Stock Management",
     "environment": "Restaurant, Restaurant Kitchen",
-    "locale": "Hanoi",
+    "locale": "Vietnam",
     "rig": "Egocentric stereo",
     "durationSec": 367.933,
     "resolution": "stereo pair",
@@ -14331,42 +11383,6 @@
         "Restaurant Kitchen"
       ],
       [
-        "NAICS",
-        "722511"
-      ],
-      [
-        "Business",
-        "Workers' rice canteen (Vinh Quynh) — WRJP+MPM, Thanh Tri, Hanoi, Vietnam"
-      ],
-      [
-        "Site",
-        "Hanoi"
-      ],
-      [
-        "Geohash",
-        "w7er06"
-      ],
-      [
-        "Environment id",
-        "env-75d82177"
-      ],
-      [
-        "Business id",
-        "biz-08baa2fc"
-      ],
-      [
-        "Device",
-        "Egocentric stereo / fw 2.1.18"
-      ],
-      [
-        "Device id",
-        "device-89b9c15e"
-      ],
-      [
-        "Kit",
-        "kit-7cb9f1ee"
-      ],
-      [
         "Shutter",
         "global shutter"
       ],
@@ -14400,23 +11416,15 @@
       ],
       [
         "Operator",
-        "op-cb340a2a / Cook, 50-55, Right-handed"
+        "Cook, 50-55, Right-handed"
       ],
       [
         "Consent",
         "recorded per session"
       ],
       [
-        "Session",
-        "capture__20260806_135826__785e938d"
-      ],
-      [
-        "Episode uuid",
-        "57ea36f3-f971-51fd-9158-2464006e72a4"
-      ],
-      [
         "File",
-        "capture__20260806_135826__785e938d__seg_003.mcap"
+        "…__seg_003.mcap"
       ],
       [
         "SHA-256",
@@ -14438,7 +11446,7 @@
     "task": "vegetable-weeding",
     "skill": "Cleaning & Sanitation",
     "environment": "Agriculture Farm, Garden Area",
-    "locale": "Hanoi",
+    "locale": "Vietnam",
     "rig": "Egocentric stereo",
     "durationSec": 489.904,
     "resolution": "stereo pair",
@@ -14530,34 +11538,6 @@
         "Garden Area"
       ],
       [
-        "NAICS",
-        "111998"
-      ],
-      [
-        "Site",
-        "Hanoi"
-      ],
-      [
-        "Geohash",
-        "w7er06"
-      ],
-      [
-        "Environment id",
-        "env-c3cf94c5"
-      ],
-      [
-        "Device",
-        "Egocentric stereo / fw 1.2.13"
-      ],
-      [
-        "Device id",
-        "device-65555f2e"
-      ],
-      [
-        "Kit",
-        "kit-8c8c79d5"
-      ],
-      [
         "Shutter",
         "rolling"
       ],
@@ -14591,23 +11571,15 @@
       ],
       [
         "Operator",
-        "op-3bded106 / Farmer, 45-50, Right-handed"
+        "Farmer, 45-50, Right-handed"
       ],
       [
         "Consent",
         "recorded per session"
       ],
       [
-        "Session",
-        "capture__20260825_071327__8418598e"
-      ],
-      [
-        "Episode uuid",
-        "2b135ff5-a5a7-5163-883c-e4f38d2911a5"
-      ],
-      [
         "File",
-        "capture__20260825_071327__8418598e__seg_006.mcap"
+        "…__seg_006.mcap"
       ],
       [
         "SHA-256",
@@ -14629,7 +11601,7 @@
     "task": "vegetable-harvesting",
     "skill": "Pick and Place / Object Handling",
     "environment": "Agriculture Farm, Farmhouse",
-    "locale": "Hanoi",
+    "locale": "Vietnam",
     "rig": "Egocentric stereo",
     "durationSec": 505.833,
     "resolution": "stereo pair",
@@ -14721,34 +11693,6 @@
         "Farmhouse"
       ],
       [
-        "NAICS",
-        "112210"
-      ],
-      [
-        "Site",
-        "Hanoi"
-      ],
-      [
-        "Geohash",
-        "w7er8u"
-      ],
-      [
-        "Environment id",
-        "env-919aa4cf"
-      ],
-      [
-        "Device",
-        "Egocentric stereo / fw 1.2.13"
-      ],
-      [
-        "Device id",
-        "device-f9abf739"
-      ],
-      [
-        "Kit",
-        "kit-d9dfd2ad"
-      ],
-      [
         "Shutter",
         "rolling"
       ],
@@ -14782,23 +11726,15 @@
       ],
       [
         "Operator",
-        "op-6b38f6bb / Farmer, 45-50, Right-handed"
+        "Farmer, 45-50, Right-handed"
       ],
       [
         "Consent",
         "recorded per session"
       ],
       [
-        "Session",
-        "capture__20260826_025558__e0b732a5"
-      ],
-      [
-        "Episode uuid",
-        "a17ad8df-4fd6-5371-a1d6-057e25442d8b"
-      ],
-      [
         "File",
-        "capture__20260826_025558__e0b732a5__seg_000.mcap"
+        "…__seg_000.mcap"
       ],
       [
         "SHA-256",
@@ -14820,7 +11756,7 @@
     "task": "weed-removal",
     "skill": "Tool Use & Technical Manipulation",
     "environment": "Agriculture Farm, Outdoor Area",
-    "locale": "Hanoi",
+    "locale": "Vietnam",
     "rig": "Egocentric stereo",
     "durationSec": 606.124,
     "resolution": "stereo pair",
@@ -14912,34 +11848,6 @@
         "Outdoor Area"
       ],
       [
-        "NAICS",
-        "111998"
-      ],
-      [
-        "Site",
-        "Hanoi"
-      ],
-      [
-        "Geohash",
-        "w7er06"
-      ],
-      [
-        "Environment id",
-        "env-c3cf94c5"
-      ],
-      [
-        "Device",
-        "Egocentric stereo / fw 1.2.13"
-      ],
-      [
-        "Device id",
-        "device-0d684745"
-      ],
-      [
-        "Kit",
-        "kit-f58b337d"
-      ],
-      [
         "Shutter",
         "rolling"
       ],
@@ -14973,23 +11881,15 @@
       ],
       [
         "Operator",
-        "op-45a9ff3b / Farmer, 45-50, Right-handed"
+        "Farmer, 45-50, Right-handed"
       ],
       [
         "Consent",
         "recorded per session"
       ],
       [
-        "Session",
-        "capture__20260825_071026__09156dec"
-      ],
-      [
-        "Episode uuid",
-        "dc45953f-e700-549f-aab3-c89b28ced8c2"
-      ],
-      [
         "File",
-        "capture__20260825_071026__09156dec__seg_007.mcap"
+        "…__seg_007.mcap"
       ],
       [
         "SHA-256",
@@ -15011,7 +11911,7 @@
     "task": "wall-plastering",
     "skill": "Construction & Building",
     "environment": "Auto Repair, Construction Site",
-    "locale": "Hanoi",
+    "locale": "Vietnam",
     "rig": "Egocentric stereo",
     "durationSec": 543.75,
     "resolution": "stereo pair",
@@ -15103,34 +12003,6 @@
         "Construction Site"
       ],
       [
-        "NAICS",
-        "811111"
-      ],
-      [
-        "Site",
-        "Hanoi"
-      ],
-      [
-        "Geohash",
-        "w7epwm"
-      ],
-      [
-        "Environment id",
-        "env-9b4d69ea"
-      ],
-      [
-        "Device",
-        "Egocentric stereo / fw 1.2.13"
-      ],
-      [
-        "Device id",
-        "device-456801b2"
-      ],
-      [
-        "Kit",
-        "kit-3b9f2412"
-      ],
-      [
         "Shutter",
         "rolling shutter"
       ],
@@ -15164,23 +12036,15 @@
       ],
       [
         "Operator",
-        "op-af5e898a / Mason, 35-40, Right-handed"
+        "Mason, 35-40, Right-handed"
       ],
       [
         "Consent",
         "recorded per session"
       ],
       [
-        "Session",
-        "capture__20260820_072742__07035984"
-      ],
-      [
-        "Episode uuid",
-        "12e4e416-1b44-5b58-bee9-3aec9b742dbc"
-      ],
-      [
         "File",
-        "capture__20260820_072742__07035984__seg_005.mcap"
+        "…__seg_005.mcap"
       ],
       [
         "SHA-256",
@@ -15202,7 +12066,7 @@
     "task": "tea-pouring",
     "skill": "Food Preparation & Cooking",
     "environment": "Auto Repair, Service Counter",
-    "locale": "Hanoi",
+    "locale": "Vietnam",
     "rig": "Egocentric stereo",
     "durationSec": 548.553,
     "resolution": "stereo pair",
@@ -15294,34 +12158,6 @@
         "Service Counter"
       ],
       [
-        "NAICS",
-        "811111"
-      ],
-      [
-        "Site",
-        "Hanoi"
-      ],
-      [
-        "Geohash",
-        "w7epwm"
-      ],
-      [
-        "Environment id",
-        "env-9b4d69ea"
-      ],
-      [
-        "Device",
-        "Egocentric stereo / fw 2.1.7"
-      ],
-      [
-        "Device id",
-        "device-183561bf"
-      ],
-      [
-        "Kit",
-        "kit-026a5f1c"
-      ],
-      [
         "Shutter",
         "global"
       ],
@@ -15355,23 +12191,15 @@
       ],
       [
         "Operator",
-        "op-04758f59 / Auto technician, 20-25, Right-handed"
+        "Auto technician, 20-25, Right-handed"
       ],
       [
         "Consent",
         "recorded per session"
       ],
       [
-        "Session",
-        "capture__20260819_164712__f0e43750"
-      ],
-      [
-        "Episode uuid",
-        "c7c6e875-ddbc-51b6-bca2-f0b23598fcb9"
-      ],
-      [
         "File",
-        "capture__20260819_164712__f0e43750__seg_001.mcap"
+        "…__seg_001.mcap"
       ],
       [
         "SHA-256",
@@ -15393,7 +12221,7 @@
     "task": "cup-sealing",
     "skill": "Packing & Bagging",
     "environment": "Auto Repair, Service Counter",
-    "locale": "Hanoi",
+    "locale": "Vietnam",
     "rig": "Egocentric stereo",
     "durationSec": 162.892,
     "resolution": "stereo pair",
@@ -15485,34 +12313,6 @@
         "Service Counter"
       ],
       [
-        "NAICS",
-        "811111"
-      ],
-      [
-        "Site",
-        "Hanoi"
-      ],
-      [
-        "Geohash",
-        "w7epwm"
-      ],
-      [
-        "Environment id",
-        "env-9b4d69ea"
-      ],
-      [
-        "Device",
-        "Egocentric stereo / fw 2.1.7"
-      ],
-      [
-        "Device id",
-        "device-183561bf"
-      ],
-      [
-        "Kit",
-        "kit-026a5f1c"
-      ],
-      [
         "Shutter",
         "global"
       ],
@@ -15546,23 +12346,15 @@
       ],
       [
         "Operator",
-        "op-04758f59 / Auto technician, 20-25, Right-handed"
+        "Auto technician, 20-25, Right-handed"
       ],
       [
         "Consent",
         "recorded per session"
       ],
       [
-        "Session",
-        "capture__20260819_164712__f0e43750"
-      ],
-      [
-        "Episode uuid",
-        "e95ac4be-4861-531e-8bd3-b21a6897c3b9"
-      ],
-      [
         "File",
-        "capture__20260819_164712__f0e43750__seg_004.mcap"
+        "…__seg_004.mcap"
       ],
       [
         "SHA-256",
@@ -15584,7 +12376,7 @@
     "task": "screen-cleaning",
     "skill": "Retail & Service Operations",
     "environment": "Auto Repair, Service Counter",
-    "locale": "Hanoi",
+    "locale": "Vietnam",
     "rig": "Egocentric stereo",
     "durationSec": 120.358,
     "resolution": "stereo pair",
@@ -15676,34 +12468,6 @@
         "Service Counter"
       ],
       [
-        "NAICS",
-        "811111"
-      ],
-      [
-        "Site",
-        "Hanoi"
-      ],
-      [
-        "Geohash",
-        "w7epwm"
-      ],
-      [
-        "Environment id",
-        "env-9b4d69ea"
-      ],
-      [
-        "Device",
-        "Egocentric stereo / fw 2.1.7"
-      ],
-      [
-        "Device id",
-        "device-183561bf"
-      ],
-      [
-        "Kit",
-        "kit-026a5f1c"
-      ],
-      [
         "Shutter",
         "global"
       ],
@@ -15737,23 +12501,15 @@
       ],
       [
         "Operator",
-        "op-04758f59 / Auto technician, 20-25, Right-handed"
+        "Auto technician, 20-25, Right-handed"
       ],
       [
         "Consent",
         "recorded per session"
       ],
       [
-        "Session",
-        "capture__20260819_164712__f0e43750"
-      ],
-      [
-        "Episode uuid",
-        "bd07bc1a-a09d-5646-b9b0-2e303f9b4cdb"
-      ],
-      [
         "File",
-        "capture__20260819_164712__f0e43750__seg_006.mcap"
+        "…__seg_006.mcap"
       ],
       [
         "SHA-256",
@@ -15775,7 +12531,7 @@
     "task": "flower-cutting",
     "skill": "Assembly & Installation",
     "environment": "Backyard, Workbench",
-    "locale": "Hanoi",
+    "locale": "Vietnam",
     "rig": "Egocentric stereo",
     "durationSec": 390.347,
     "resolution": "stereo pair",
@@ -15867,34 +12623,6 @@
         "Workbench"
       ],
       [
-        "NAICS",
-        "814110"
-      ],
-      [
-        "Site",
-        "Hanoi"
-      ],
-      [
-        "Geohash",
-        "w7eptu"
-      ],
-      [
-        "Environment id",
-        "env-9017dbfc"
-      ],
-      [
-        "Device",
-        "Egocentric stereo / fw 1.2.13"
-      ],
-      [
-        "Device id",
-        "device-0acb82db"
-      ],
-      [
-        "Kit",
-        "kit-4a0d1d14"
-      ],
-      [
         "Shutter",
         "rolling"
       ],
@@ -15928,23 +12656,15 @@
       ],
       [
         "Operator",
-        "op-e75b62df / Cook, 20-25, Right-handed"
+        "Cook, 20-25, Right-handed"
       ],
       [
         "Consent",
         "recorded per session"
       ],
       [
-        "Session",
-        "capture__20260822_000111__5444ef0a"
-      ],
-      [
-        "Episode uuid",
-        "27f3b5f7-50d1-51ee-8d69-a3274e4749b9"
-      ],
-      [
         "File",
-        "capture__20260822_000111__5444ef0a__seg_021.mcap"
+        "…__seg_021.mcap"
       ],
       [
         "SHA-256",
@@ -15966,7 +12686,7 @@
     "task": "leaf-sweeping",
     "skill": "Cleaning & Sanitation",
     "environment": "Backyard, Sidewalk",
-    "locale": "Hanoi",
+    "locale": "Vietnam",
     "rig": "Egocentric stereo",
     "durationSec": 705.332,
     "resolution": "stereo pair",
@@ -16058,34 +12778,6 @@
         "Sidewalk"
       ],
       [
-        "NAICS",
-        "814110"
-      ],
-      [
-        "Site",
-        "Hanoi"
-      ],
-      [
-        "Geohash",
-        "w7eptu"
-      ],
-      [
-        "Environment id",
-        "env-9017dbfc"
-      ],
-      [
-        "Device",
-        "Egocentric stereo / fw 1.2.13"
-      ],
-      [
-        "Device id",
-        "device-519e0639"
-      ],
-      [
-        "Kit",
-        "kit-b5b19029"
-      ],
-      [
         "Shutter",
         "rolling"
       ],
@@ -16119,23 +12811,15 @@
       ],
       [
         "Operator",
-        "op-8e215a5e / Cleaner, 45-50, Right-handed"
+        "Cleaner, 45-50, Right-handed"
       ],
       [
         "Consent",
         "recorded per session"
       ],
       [
-        "Session",
-        "capture__20260814_071519__1c186e27"
-      ],
-      [
-        "Episode uuid",
-        "369182dc-6287-502f-ab7b-2f7d01f566ba"
-      ],
-      [
         "File",
-        "capture__20260814_071519__1c186e27__seg_013.mcap"
+        "…__seg_013.mcap"
       ],
       [
         "SHA-256",
@@ -16157,7 +12841,7 @@
     "task": "pavement-sweeping",
     "skill": "Clothing & Laundry",
     "environment": "Backyard, Production Area",
-    "locale": "Hanoi",
+    "locale": "Vietnam",
     "rig": "Egocentric stereo",
     "durationSec": 444.681,
     "resolution": "stereo pair",
@@ -16249,34 +12933,6 @@
         "Production Area"
       ],
       [
-        "NAICS",
-        "814110"
-      ],
-      [
-        "Site",
-        "Hanoi"
-      ],
-      [
-        "Geohash",
-        "w7eptu"
-      ],
-      [
-        "Environment id",
-        "env-9017dbfc"
-      ],
-      [
-        "Device",
-        "Egocentric stereo / fw 1.2.13"
-      ],
-      [
-        "Device id",
-        "device-456801b2"
-      ],
-      [
-        "Kit",
-        "kit-3b9f2412"
-      ],
-      [
         "Shutter",
         "rolling"
       ],
@@ -16310,23 +12966,15 @@
       ],
       [
         "Operator",
-        "op-860e8c44 / Cleaner, 55-60, Right-handed"
+        "Cleaner, 55-60, Right-handed"
       ],
       [
         "Consent",
         "recorded per session"
       ],
       [
-        "Session",
-        "capture__20260814_073228__07035984"
-      ],
-      [
-        "Episode uuid",
-        "48aff598-78de-5cba-8619-cae93763dcc8"
-      ],
-      [
         "File",
-        "capture__20260814_073228__07035984__seg_013.mcap"
+        "…__seg_013.mcap"
       ],
       [
         "SHA-256",
@@ -16348,7 +12996,7 @@
     "task": "outlet-installation",
     "skill": "Construction & Building",
     "environment": "Backyard, Construction Site",
-    "locale": "Hanoi",
+    "locale": "Vietnam",
     "rig": "Egocentric stereo",
     "durationSec": 641.309,
     "resolution": "stereo pair",
@@ -16440,34 +13088,6 @@
         "Construction Site"
       ],
       [
-        "NAICS",
-        "814110"
-      ],
-      [
-        "Site",
-        "Hanoi"
-      ],
-      [
-        "Geohash",
-        "w7eptu"
-      ],
-      [
-        "Environment id",
-        "env-9017dbfc"
-      ],
-      [
-        "Device",
-        "Egocentric stereo / fw 1.2.13"
-      ],
-      [
-        "Device id",
-        "device-0acb82db"
-      ],
-      [
-        "Kit",
-        "kit-4a0d1d14"
-      ],
-      [
         "Shutter",
         "rolling"
       ],
@@ -16501,23 +13121,15 @@
       ],
       [
         "Operator",
-        "op-e75b62df / Cook, 20-25, Right-handed"
+        "Cook, 20-25, Right-handed"
       ],
       [
         "Consent",
         "recorded per session"
       ],
       [
-        "Session",
-        "capture__20260822_003114__5444ef0a"
-      ],
-      [
-        "Episode uuid",
-        "3b56784f-4d69-5a9b-8e27-d687f495ac23"
-      ],
-      [
         "File",
-        "capture__20260822_003114__5444ef0a__seg_000.mcap"
+        "…__seg_000.mcap"
       ],
       [
         "SHA-256",
@@ -16539,7 +13151,7 @@
     "task": "outlet-wiring",
     "skill": "Electronics & Diagnostics",
     "environment": "Backyard, Residential Home",
-    "locale": "Hanoi",
+    "locale": "Vietnam",
     "rig": "Egocentric stereo",
     "durationSec": 251.998,
     "resolution": "stereo pair",
@@ -16631,34 +13243,6 @@
         "Residential Home"
       ],
       [
-        "NAICS",
-        "814110"
-      ],
-      [
-        "Site",
-        "Hanoi"
-      ],
-      [
-        "Geohash",
-        "w7eptu"
-      ],
-      [
-        "Environment id",
-        "env-9017dbfc"
-      ],
-      [
-        "Device",
-        "Egocentric stereo / fw 1.2.13"
-      ],
-      [
-        "Device id",
-        "device-0acb82db"
-      ],
-      [
-        "Kit",
-        "kit-4a0d1d14"
-      ],
-      [
         "Shutter",
         "rolling shutter"
       ],
@@ -16692,23 +13276,15 @@
       ],
       [
         "Operator",
-        "op-e75b62df / Cook, 20-25, Right-handed"
+        "Cook, 20-25, Right-handed"
       ],
       [
         "Consent",
         "recorded per session"
       ],
       [
-        "Session",
-        "capture__20260822_001221__5444ef0a"
-      ],
-      [
-        "Episode uuid",
-        "83219921-a972-52fb-b341-7232f6b8aa3a"
-      ],
-      [
         "File",
-        "capture__20260822_001221__5444ef0a__seg_039.mcap"
+        "…__seg_039.mcap"
       ],
       [
         "SHA-256",
@@ -16730,7 +13306,7 @@
     "task": "bed-making",
     "skill": "Organization & Tidying",
     "environment": "Backyard, Bedroom",
-    "locale": "Hanoi",
+    "locale": "Vietnam",
     "rig": "Egocentric stereo",
     "durationSec": 466.233,
     "resolution": "stereo pair",
@@ -16822,34 +13398,6 @@
         "Bedroom"
       ],
       [
-        "NAICS",
-        "814110"
-      ],
-      [
-        "Site",
-        "Hanoi"
-      ],
-      [
-        "Geohash",
-        "w7eptu"
-      ],
-      [
-        "Environment id",
-        "env-9017dbfc"
-      ],
-      [
-        "Device",
-        "Egocentric stereo / fw 1.2.13"
-      ],
-      [
-        "Device id",
-        "device-a09af164"
-      ],
-      [
-        "Kit",
-        "kit-2c49a386"
-      ],
-      [
         "Shutter",
         "rolling shutter"
       ],
@@ -16883,23 +13431,15 @@
       ],
       [
         "Operator",
-        "op-e75b62df / Cook, 20-25, Right-handed"
+        "Cook, 20-25, Right-handed"
       ],
       [
         "Consent",
         "recorded per session"
       ],
       [
-        "Session",
-        "capture__20260820_024447__196b51ca"
-      ],
-      [
-        "Episode uuid",
-        "415cb242-edd8-5191-b253-83577a553641"
-      ],
-      [
         "File",
-        "capture__20260820_024447__196b51ca__seg_000.mcap"
+        "…__seg_000.mcap"
       ],
       [
         "SHA-256",
@@ -16921,7 +13461,7 @@
     "task": "flower-cutting",
     "skill": "Pick and Place / Object Handling",
     "environment": "Backyard, Workbench",
-    "locale": "Hanoi",
+    "locale": "Vietnam",
     "rig": "Egocentric stereo",
     "durationSec": 625.633,
     "resolution": "stereo pair",
@@ -17013,34 +13553,6 @@
         "Workbench"
       ],
       [
-        "NAICS",
-        "814110"
-      ],
-      [
-        "Site",
-        "Hanoi"
-      ],
-      [
-        "Geohash",
-        "w7eptu"
-      ],
-      [
-        "Environment id",
-        "env-9017dbfc"
-      ],
-      [
-        "Device",
-        "Egocentric stereo / fw 1.2.13"
-      ],
-      [
-        "Device id",
-        "device-0acb82db"
-      ],
-      [
-        "Kit",
-        "kit-4a0d1d14"
-      ],
-      [
         "Shutter",
         "rolling"
       ],
@@ -17074,23 +13586,15 @@
       ],
       [
         "Operator",
-        "op-e75b62df / Cook, 20-25, Right-handed"
+        "Cook, 20-25, Right-handed"
       ],
       [
         "Consent",
         "recorded per session"
       ],
       [
-        "Session",
-        "capture__20260822_000111__5444ef0a"
-      ],
-      [
-        "Episode uuid",
-        "35acd83a-70be-5926-8268-977fa2d34c0a"
-      ],
-      [
         "File",
-        "capture__20260822_000111__5444ef0a__seg_011.mcap"
+        "…__seg_011.mcap"
       ],
       [
         "SHA-256",
@@ -17112,7 +13616,7 @@
     "task": "grass-cutting",
     "skill": "Tool Use & Technical Manipulation",
     "environment": "Backyard, Outdoor Area",
-    "locale": "Hanoi",
+    "locale": "Vietnam",
     "rig": "Egocentric stereo",
     "durationSec": 685.472,
     "resolution": "stereo pair",
@@ -17204,34 +13708,6 @@
         "Outdoor Area"
       ],
       [
-        "NAICS",
-        "814110"
-      ],
-      [
-        "Site",
-        "Hanoi"
-      ],
-      [
-        "Geohash",
-        "w7eptu"
-      ],
-      [
-        "Environment id",
-        "env-9017dbfc"
-      ],
-      [
-        "Device",
-        "Egocentric stereo / fw 1.2.13"
-      ],
-      [
-        "Device id",
-        "device-5b98f0ea"
-      ],
-      [
-        "Kit",
-        "kit-abf58aa8"
-      ],
-      [
         "Shutter",
         "rolling"
       ],
@@ -17265,23 +13741,15 @@
       ],
       [
         "Operator",
-        "op-94390a53 / Cleaner, 55-60, Right-handed"
+        "Cleaner, 55-60, Right-handed"
       ],
       [
         "Consent",
         "recorded per session"
       ],
       [
-        "Session",
-        "capture__20260817_065151__a916f2ae"
-      ],
-      [
-        "Episode uuid",
-        "eb0fa8b5-6db4-5295-bab0-9b16d70a0177"
-      ],
-      [
         "File",
-        "capture__20260817_065151__a916f2ae__seg_006.mcap"
+        "…__seg_006.mcap"
       ],
       [
         "SHA-256",
@@ -17303,7 +13771,7 @@
     "task": "fabric-inspection",
     "skill": "Cleaning & Sanitation",
     "environment": "Sewing Factory, Sewing Station",
-    "locale": "Hung Yen",
+    "locale": "Vietnam",
     "rig": "Egocentric stereo",
     "durationSec": 508.625,
     "resolution": "stereo pair",
@@ -17395,34 +13863,6 @@
         "Sewing Station"
       ],
       [
-        "NAICS",
-        "315250"
-      ],
-      [
-        "Site",
-        "Hung Yen"
-      ],
-      [
-        "Geohash",
-        "w7emmq"
-      ],
-      [
-        "Environment id",
-        "env-ca723201"
-      ],
-      [
-        "Device",
-        "Egocentric stereo / fw 1.2.13"
-      ],
-      [
-        "Device id",
-        "device-65555f2e"
-      ],
-      [
-        "Kit",
-        "kit-8c8c79d5"
-      ],
-      [
         "Shutter",
         "rolling"
       ],
@@ -17456,23 +13896,15 @@
       ],
       [
         "Operator",
-        "op-27bc07fc / Food prep worker, 20-25, Right-handed"
+        "Food prep worker, 20-25, Right-handed"
       ],
       [
         "Consent",
         "recorded per session"
       ],
       [
-        "Session",
-        "capture__20260822_065039__8418598e"
-      ],
-      [
-        "Episode uuid",
-        "dbfdaf17-d1b3-5ab2-a75c-5e21e8b8b0e7"
-      ],
-      [
         "File",
-        "capture__20260822_065039__8418598e__seg_010.mcap"
+        "…__seg_010.mcap"
       ],
       [
         "SHA-256",
@@ -17494,7 +13926,7 @@
     "task": "dish-clearing",
     "skill": "Dish Handling",
     "environment": "Sewing Factory, Dining Area",
-    "locale": "Hung Yen",
+    "locale": "Vietnam",
     "rig": "Egocentric stereo",
     "durationSec": 194.588,
     "resolution": "stereo pair",
@@ -17586,34 +14018,6 @@
         "Dining Area"
       ],
       [
-        "NAICS",
-        "315250"
-      ],
-      [
-        "Site",
-        "Hung Yen"
-      ],
-      [
-        "Geohash",
-        "w7emmq"
-      ],
-      [
-        "Environment id",
-        "env-ca723201"
-      ],
-      [
-        "Device",
-        "Egocentric stereo / fw 1.2.13"
-      ],
-      [
-        "Device id",
-        "device-f174c9f1"
-      ],
-      [
-        "Kit",
-        "kit-e319748e"
-      ],
-      [
         "Shutter",
         "rolling"
       ],
@@ -17647,23 +14051,15 @@
       ],
       [
         "Operator",
-        "op-758d55bc / Cook, 20-25, Right-handed"
+        "Cook, 20-25, Right-handed"
       ],
       [
         "Consent",
         "recorded per session"
       ],
       [
-        "Session",
-        "capture__20260820_111414__aefbcd2f"
-      ],
-      [
-        "Episode uuid",
-        "453b401c-9267-5d9f-9a76-9f651d17831b"
-      ],
-      [
         "File",
-        "capture__20260820_111414__aefbcd2f__seg_000.mcap"
+        "…__seg_000.mcap"
       ],
       [
         "SHA-256",
@@ -17685,7 +14081,7 @@
     "task": "tray-arranging",
     "skill": "Food Preparation & Cooking",
     "environment": "Sewing Factory, Pickup Counter",
-    "locale": "Hung Yen",
+    "locale": "Vietnam",
     "rig": "Egocentric stereo",
     "durationSec": 653.019,
     "resolution": "stereo pair",
@@ -17777,34 +14173,6 @@
         "Pickup Counter"
       ],
       [
-        "NAICS",
-        "315250"
-      ],
-      [
-        "Site",
-        "Hung Yen"
-      ],
-      [
-        "Geohash",
-        "w7emmq"
-      ],
-      [
-        "Environment id",
-        "env-ca723201"
-      ],
-      [
-        "Device",
-        "Egocentric stereo / fw 1.2.13"
-      ],
-      [
-        "Device id",
-        "device-f174c9f1"
-      ],
-      [
-        "Kit",
-        "kit-e319748e"
-      ],
-      [
         "Shutter",
         "rolling"
       ],
@@ -17838,23 +14206,15 @@
       ],
       [
         "Operator",
-        "op-758d55bc / Cook, 20-25, Right-handed"
+        "Cook, 20-25, Right-handed"
       ],
       [
         "Consent",
         "recorded per session"
       ],
       [
-        "Session",
-        "capture__20260820_115055__aefbcd2f"
-      ],
-      [
-        "Episode uuid",
-        "3745f0c6-99b3-5690-be3d-05365245dd6c"
-      ],
-      [
         "File",
-        "capture__20260820_115055__aefbcd2f__seg_002.mcap"
+        "…__seg_002.mcap"
       ],
       [
         "SHA-256",
@@ -17876,7 +14236,7 @@
     "task": "wheel-reinstallation",
     "skill": "Mechanical / Automotive Work",
     "environment": "Sewing Factory, Service Bay",
-    "locale": "Hung Yen",
+    "locale": "Vietnam",
     "rig": "Egocentric stereo",
     "durationSec": 519.233,
     "resolution": "stereo pair",
@@ -17968,34 +14328,6 @@
         "Service Bay"
       ],
       [
-        "NAICS",
-        "315250"
-      ],
-      [
-        "Site",
-        "Hung Yen"
-      ],
-      [
-        "Geohash",
-        "w7emmq"
-      ],
-      [
-        "Environment id",
-        "env-ca723201"
-      ],
-      [
-        "Device",
-        "Egocentric stereo / fw 2.1.18"
-      ],
-      [
-        "Device id",
-        "device-429c0060"
-      ],
-      [
-        "Kit",
-        "kit-71c69244"
-      ],
-      [
         "Shutter",
         "global shutter"
       ],
@@ -18029,23 +14361,15 @@
       ],
       [
         "Operator",
-        "op-13355fa6 / Tailor / seamstress, 25-30, Right-handed"
+        "Tailor / seamstress, 25-30, Right-handed"
       ],
       [
         "Consent",
         "recorded per session"
       ],
       [
-        "Session",
-        "capture__20260822_145726__e71e3f6e"
-      ],
-      [
-        "Episode uuid",
-        "b5a92a97-9508-5af4-8c2f-70bb242a5a63"
-      ],
-      [
         "File",
-        "capture__20260822_145726__e71e3f6e__seg_003.mcap"
+        "…__seg_003.mcap"
       ],
       [
         "SHA-256",
@@ -18067,7 +14391,7 @@
     "task": "tool-charging",
     "skill": "Electronics & Diagnostics",
     "environment": "Construction Company, Construction Site",
-    "locale": "Thai Nguyen",
+    "locale": "Vietnam",
     "rig": "Egocentric stereo",
     "durationSec": 53.355,
     "resolution": "stereo pair",
@@ -18159,34 +14483,6 @@
         "Construction Site"
       ],
       [
-        "NAICS",
-        "236220"
-      ],
-      [
-        "Site",
-        "Thai Nguyen"
-      ],
-      [
-        "Geohash",
-        "w7g6b5"
-      ],
-      [
-        "Environment id",
-        "env-491ee1d1"
-      ],
-      [
-        "Device",
-        "Egocentric stereo / fw 1.2.13"
-      ],
-      [
-        "Device id",
-        "device-64df69e0"
-      ],
-      [
-        "Kit",
-        "kit-08d3199a"
-      ],
-      [
         "Shutter",
         "rolling"
       ],
@@ -18220,23 +14516,15 @@
       ],
       [
         "Operator",
-        "op-d001a772 / Construction laborer, 35-40, Right-handed"
+        "Construction laborer, 35-40, Right-handed"
       ],
       [
         "Consent",
         "recorded per session"
       ],
       [
-        "Session",
-        "capture__20260822_062627__eefcd112"
-      ],
-      [
-        "Episode uuid",
-        "02d8e842-9a30-5c92-9be5-ca8549a565d5"
-      ],
-      [
         "File",
-        "capture__20260822_062627__eefcd112__seg_002.mcap"
+        "…__seg_002.mcap"
       ],
       [
         "SHA-256",
@@ -18258,7 +14546,7 @@
     "task": "vegetable-serving",
     "skill": "Food Preparation & Cooking",
     "environment": "Construction Company, Restaurant Kitchen",
-    "locale": "Hanoi",
+    "locale": "Vietnam",
     "rig": "Egocentric stereo",
     "durationSec": 193.84,
     "resolution": "stereo pair",
@@ -18350,34 +14638,6 @@
         "Restaurant Kitchen"
       ],
       [
-        "NAICS",
-        "236220"
-      ],
-      [
-        "Site",
-        "Hanoi"
-      ],
-      [
-        "Geohash",
-        "w7er2g"
-      ],
-      [
-        "Environment id",
-        "env-bed4223c"
-      ],
-      [
-        "Device",
-        "Egocentric stereo / fw 1.2.13"
-      ],
-      [
-        "Device id",
-        "device-0acb82db"
-      ],
-      [
-        "Kit",
-        "kit-4a0d1d14"
-      ],
-      [
         "Shutter",
         "rolling"
       ],
@@ -18411,23 +14671,15 @@
       ],
       [
         "Operator",
-        "op-f86ec294 / Carpenter, 40-45, Left-handed"
+        "Carpenter, 40-45, Left-handed"
       ],
       [
         "Consent",
         "recorded per session"
       ],
       [
-        "Session",
-        "capture__20260824_000026__5444ef0a"
-      ],
-      [
-        "Episode uuid",
-        "a1e63704-dc92-58a7-be92-2f30ed8420ad"
-      ],
-      [
         "File",
-        "capture__20260824_000026__5444ef0a__seg_002.mcap"
+        "…__seg_002.mcap"
       ],
       [
         "SHA-256",
@@ -18449,7 +14701,7 @@
     "task": "table-clearing",
     "skill": "Retail & Service Operations",
     "environment": "Construction Company, Dining Area",
-    "locale": "Hanoi",
+    "locale": "Vietnam",
     "rig": "Egocentric stereo",
     "durationSec": 132.997,
     "resolution": "stereo pair",
@@ -18541,34 +14793,6 @@
         "Dining Area"
       ],
       [
-        "NAICS",
-        "236220"
-      ],
-      [
-        "Site",
-        "Hanoi"
-      ],
-      [
-        "Geohash",
-        "w7er2g"
-      ],
-      [
-        "Environment id",
-        "env-bed4223c"
-      ],
-      [
-        "Device",
-        "Egocentric stereo / fw 1.2.13"
-      ],
-      [
-        "Device id",
-        "device-0acb82db"
-      ],
-      [
-        "Kit",
-        "kit-4a0d1d14"
-      ],
-      [
         "Shutter",
         "rolling"
       ],
@@ -18602,23 +14826,15 @@
       ],
       [
         "Operator",
-        "op-f86ec294 / Carpenter, 40-45, Left-handed"
+        "Carpenter, 40-45, Left-handed"
       ],
       [
         "Consent",
         "recorded per session"
       ],
       [
-        "Session",
-        "capture__20260824_000026__5444ef0a"
-      ],
-      [
-        "Episode uuid",
-        "4ce9d921-1eff-561a-a856-dbc0984dd274"
-      ],
-      [
         "File",
-        "capture__20260824_000026__5444ef0a__seg_007.mcap"
+        "…__seg_007.mcap"
       ],
       [
         "SHA-256",
@@ -18640,7 +14856,7 @@
     "task": "device-connecting",
     "skill": "Assembly & Installation",
     "environment": "Electromechanical Workshop",
-    "locale": "Hanoi",
+    "locale": "Vietnam",
     "rig": "Egocentric stereo",
     "durationSec": 611.007,
     "resolution": "stereo pair",
@@ -18731,34 +14947,6 @@
         "Electromechanical Workshop"
       ],
       [
-        "NAICS",
-        "811310"
-      ],
-      [
-        "Site",
-        "Hanoi"
-      ],
-      [
-        "Geohash",
-        "w7er0s"
-      ],
-      [
-        "Environment id",
-        "env-fb00d14f"
-      ],
-      [
-        "Device",
-        "Egocentric stereo / fw 1.2.13"
-      ],
-      [
-        "Device id",
-        "device-3c7c7f9d"
-      ],
-      [
-        "Kit",
-        "kit-1f9e5f19"
-      ],
-      [
         "Shutter",
         "rolling"
       ],
@@ -18792,23 +14980,15 @@
       ],
       [
         "Operator",
-        "op-952ea84f / Mechanic, 20-25, Right-handed"
+        "Mechanic, 20-25, Right-handed"
       ],
       [
         "Consent",
         "recorded per session"
       ],
       [
-        "Session",
-        "capture__20260820_014202__3c7c7f9d"
-      ],
-      [
-        "Episode uuid",
-        "0517389b-b2cb-5c30-b283-3860eeb349da"
-      ],
-      [
         "File",
-        "capture__20260820_014202__3c7c7f9d__seg_002.mcap"
+        "…__seg_002.mcap"
       ],
       [
         "SHA-256",
@@ -18830,7 +15010,7 @@
     "task": "hand-washing",
     "skill": "Cleaning & Sanitation",
     "environment": "Electromechanical Workshop, Workshop",
-    "locale": "Hanoi",
+    "locale": "Vietnam",
     "rig": "Egocentric stereo",
     "durationSec": 89.039,
     "resolution": "stereo pair",
@@ -18922,34 +15102,6 @@
         "Workshop"
       ],
       [
-        "NAICS",
-        "811310"
-      ],
-      [
-        "Site",
-        "Hanoi"
-      ],
-      [
-        "Geohash",
-        "w7er0s"
-      ],
-      [
-        "Environment id",
-        "env-fb00d14f"
-      ],
-      [
-        "Device",
-        "Egocentric stereo / fw 1.2.13"
-      ],
-      [
-        "Device id",
-        "device-3c7c7f9d"
-      ],
-      [
-        "Kit",
-        "kit-1f9e5f19"
-      ],
-      [
         "Shutter",
         "rolling"
       ],
@@ -18983,23 +15135,15 @@
       ],
       [
         "Operator",
-        "op-952ea84f / Mechanic, 20-25, Right-handed"
+        "Mechanic, 20-25, Right-handed"
       ],
       [
         "Consent",
         "recorded per session"
       ],
       [
-        "Session",
-        "capture__20260815_021425__3c7c7f9d"
-      ],
-      [
-        "Episode uuid",
-        "57a96aac-2ccb-548a-a3ff-d6ed3b4aa3c4"
-      ],
-      [
         "File",
-        "capture__20260815_021425__3c7c7f9d__seg_026.mcap"
+        "…__seg_026.mcap"
       ],
       [
         "SHA-256",
@@ -19021,7 +15165,7 @@
     "task": "component-inspection",
     "skill": "Electronics & Diagnostics",
     "environment": "Electromechanical Workshop",
-    "locale": "Hanoi",
+    "locale": "Vietnam",
     "rig": "Egocentric stereo",
     "durationSec": 623.838,
     "resolution": "stereo pair",
@@ -19112,34 +15256,6 @@
         "Electromechanical Workshop"
       ],
       [
-        "NAICS",
-        "811310"
-      ],
-      [
-        "Site",
-        "Hanoi"
-      ],
-      [
-        "Geohash",
-        "w7er0s"
-      ],
-      [
-        "Environment id",
-        "env-fb00d14f"
-      ],
-      [
-        "Device",
-        "Egocentric stereo / fw 1.2.13"
-      ],
-      [
-        "Device id",
-        "device-3c7c7f9d"
-      ],
-      [
-        "Kit",
-        "kit-1f9e5f19"
-      ],
-      [
         "Shutter",
         "rolling"
       ],
@@ -19173,23 +15289,15 @@
       ],
       [
         "Operator",
-        "op-952ea84f / Mechanic, 20-25, Right-handed"
+        "Mechanic, 20-25, Right-handed"
       ],
       [
         "Consent",
         "recorded per session"
       ],
       [
-        "Session",
-        "capture__20260820_024011__3c7c7f9d"
-      ],
-      [
-        "Episode uuid",
-        "4d000330-0eac-5469-b77b-02ae1c091fcb"
-      ],
-      [
         "File",
-        "capture__20260820_024011__3c7c7f9d__seg_029.mcap"
+        "…__seg_029.mcap"
       ],
       [
         "SHA-256",
@@ -19211,7 +15319,7 @@
     "task": "component-grinding",
     "skill": "Mechanical / Automotive Work",
     "environment": "Electromechanical Workshop, Workshop Floor",
-    "locale": "Hanoi",
+    "locale": "Vietnam",
     "rig": "Egocentric stereo",
     "durationSec": 577.434,
     "resolution": "stereo pair",
@@ -19303,34 +15411,6 @@
         "Workshop Floor"
       ],
       [
-        "NAICS",
-        "811310"
-      ],
-      [
-        "Site",
-        "Hanoi"
-      ],
-      [
-        "Geohash",
-        "w7er0s"
-      ],
-      [
-        "Environment id",
-        "env-fb00d14f"
-      ],
-      [
-        "Device",
-        "Egocentric stereo / fw 1.2.13"
-      ],
-      [
-        "Device id",
-        "device-3c7c7f9d"
-      ],
-      [
-        "Kit",
-        "kit-1f9e5f19"
-      ],
-      [
         "Shutter",
         "rolling"
       ],
@@ -19364,23 +15444,15 @@
       ],
       [
         "Operator",
-        "op-952ea84f / Mechanic, 20-25, Right-handed"
+        "Mechanic, 20-25, Right-handed"
       ],
       [
         "Consent",
         "recorded per session"
       ],
       [
-        "Session",
-        "capture__20260819_075049__3c7c7f9d"
-      ],
-      [
-        "Episode uuid",
-        "a93b447e-5e79-52a7-a23d-41ff4722f956"
-      ],
-      [
         "File",
-        "capture__20260819_075049__3c7c7f9d__seg_007.mcap"
+        "…__seg_007.mcap"
       ],
       [
         "SHA-256",
@@ -19402,7 +15474,7 @@
     "task": "wire-coiling",
     "skill": "Organization & Tidying",
     "environment": "Electromechanical Workshop",
-    "locale": "Hanoi",
+    "locale": "Vietnam",
     "rig": "Egocentric stereo",
     "durationSec": 157.1,
     "resolution": "stereo pair",
@@ -19493,34 +15565,6 @@
         "Electromechanical Workshop"
       ],
       [
-        "NAICS",
-        "811310"
-      ],
-      [
-        "Site",
-        "Hanoi"
-      ],
-      [
-        "Geohash",
-        "w7er0s"
-      ],
-      [
-        "Environment id",
-        "env-fb00d14f"
-      ],
-      [
-        "Device",
-        "Egocentric stereo / fw 1.2.13"
-      ],
-      [
-        "Device id",
-        "device-3c7c7f9d"
-      ],
-      [
-        "Kit",
-        "kit-1f9e5f19"
-      ],
-      [
         "Shutter",
         "rolling"
       ],
@@ -19554,23 +15598,15 @@
       ],
       [
         "Operator",
-        "op-952ea84f / Mechanic, 20-25, Right-handed"
+        "Mechanic, 20-25, Right-handed"
       ],
       [
         "Consent",
         "recorded per session"
       ],
       [
-        "Session",
-        "capture__20260820_024011__3c7c7f9d"
-      ],
-      [
-        "Episode uuid",
-        "65a08907-d815-5f6c-bc60-ea410cd64633"
-      ],
-      [
         "File",
-        "capture__20260820_024011__3c7c7f9d__seg_025.mcap"
+        "…__seg_025.mcap"
       ],
       [
         "SHA-256",
@@ -19592,7 +15628,7 @@
     "task": "equipment-moving",
     "skill": "Pick and Place / Object Handling",
     "environment": "Electromechanical Workshop, Workshop",
-    "locale": "Hanoi",
+    "locale": "Vietnam",
     "rig": "Egocentric stereo",
     "durationSec": 215.305,
     "resolution": "stereo pair",
@@ -19684,34 +15720,6 @@
         "Workshop"
       ],
       [
-        "NAICS",
-        "811310"
-      ],
-      [
-        "Site",
-        "Hanoi"
-      ],
-      [
-        "Geohash",
-        "w7er0s"
-      ],
-      [
-        "Environment id",
-        "env-fb00d14f"
-      ],
-      [
-        "Device",
-        "Egocentric stereo / fw 1.2.13"
-      ],
-      [
-        "Device id",
-        "device-3c7c7f9d"
-      ],
-      [
-        "Kit",
-        "kit-1f9e5f19"
-      ],
-      [
         "Shutter",
         "rolling"
       ],
@@ -19745,23 +15753,15 @@
       ],
       [
         "Operator",
-        "op-952ea84f / Mechanic, 20-25, Right-handed"
+        "Mechanic, 20-25, Right-handed"
       ],
       [
         "Consent",
         "recorded per session"
       ],
       [
-        "Session",
-        "capture__20260815_021425__3c7c7f9d"
-      ],
-      [
-        "Episode uuid",
-        "d7772726-6459-5be6-87c2-2d4696bc8989"
-      ],
-      [
         "File",
-        "capture__20260815_021425__3c7c7f9d__seg_016.mcap"
+        "…__seg_016.mcap"
       ],
       [
         "SHA-256",
@@ -19783,7 +15783,7 @@
     "task": "device-inserting",
     "skill": "Tool Use & Technical Manipulation",
     "environment": "Electromechanical Workshop, Workshop",
-    "locale": "Hanoi",
+    "locale": "Vietnam",
     "rig": "Egocentric stereo",
     "durationSec": 313.167,
     "resolution": "stereo pair",
@@ -19875,34 +15875,6 @@
         "Workshop"
       ],
       [
-        "NAICS",
-        "811310"
-      ],
-      [
-        "Site",
-        "Hanoi"
-      ],
-      [
-        "Geohash",
-        "w7er0s"
-      ],
-      [
-        "Environment id",
-        "env-fb00d14f"
-      ],
-      [
-        "Device",
-        "Egocentric stereo / fw 1.2.13"
-      ],
-      [
-        "Device id",
-        "device-3c7c7f9d"
-      ],
-      [
-        "Kit",
-        "kit-1f9e5f19"
-      ],
-      [
         "Shutter",
         "rolling"
       ],
@@ -19936,23 +15908,15 @@
       ],
       [
         "Operator",
-        "op-952ea84f / Mechanic, 20-25, Right-handed"
+        "Mechanic, 20-25, Right-handed"
       ],
       [
         "Consent",
         "recorded per session"
       ],
       [
-        "Session",
-        "capture__20260820_063902__3c7c7f9d"
-      ],
-      [
-        "Episode uuid",
-        "a91e632b-ce52-5aef-8955-f85679f7f59f"
-      ],
-      [
         "File",
-        "capture__20260820_063902__3c7c7f9d__seg_006.mcap"
+        "…__seg_006.mcap"
       ],
       [
         "SHA-256",
@@ -19974,7 +15938,7 @@
     "task": "lighting-setup",
     "skill": "Pick and Place / Object Handling",
     "environment": "Bridal Atelier, Studio Area",
-    "locale": "Hanoi",
+    "locale": "Vietnam",
     "rig": "Egocentric stereo",
     "durationSec": 211.567,
     "resolution": "stereo pair",
@@ -20066,34 +16030,6 @@
         "Studio Area"
       ],
       [
-        "NAICS",
-        "315250"
-      ],
-      [
-        "Site",
-        "Hanoi"
-      ],
-      [
-        "Geohash",
-        "w7epr1"
-      ],
-      [
-        "Environment id",
-        "env-cf1ce30f"
-      ],
-      [
-        "Device",
-        "Egocentric stereo / fw 1.2.13"
-      ],
-      [
-        "Device id",
-        "device-66a2ca11"
-      ],
-      [
-        "Kit",
-        "kit-0d907884"
-      ],
-      [
         "Shutter",
         "rolling"
       ],
@@ -20127,23 +16063,15 @@
       ],
       [
         "Operator",
-        "op-27bc07fc / Food prep worker, 20-25, Right-handed"
+        "Food prep worker, 20-25, Right-handed"
       ],
       [
         "Consent",
         "recorded per session"
       ],
       [
-        "Session",
-        "capture__20260823_051145__158fc763"
-      ],
-      [
-        "Episode uuid",
-        "5d983433-7efa-5123-bae7-0748e9a7d616"
-      ],
-      [
         "File",
-        "capture__20260823_051145__158fc763__seg_028.mcap"
+        "…__seg_028.mcap"
       ],
       [
         "SHA-256",
@@ -20165,7 +16093,7 @@
     "task": "client-posing",
     "skill": "Retail & Service Operations",
     "environment": "Bridal Atelier, Studio Area",
-    "locale": "Hanoi",
+    "locale": "Vietnam",
     "rig": "Egocentric stereo",
     "durationSec": 608.6,
     "resolution": "stereo pair",
@@ -20257,34 +16185,6 @@
         "Studio Area"
       ],
       [
-        "NAICS",
-        "315250"
-      ],
-      [
-        "Site",
-        "Hanoi"
-      ],
-      [
-        "Geohash",
-        "w7epr1"
-      ],
-      [
-        "Environment id",
-        "env-cf1ce30f"
-      ],
-      [
-        "Device",
-        "Egocentric stereo / fw 1.2.13"
-      ],
-      [
-        "Device id",
-        "device-66a2ca11"
-      ],
-      [
-        "Kit",
-        "kit-0d907884"
-      ],
-      [
         "Shutter",
         "rolling"
       ],
@@ -20318,23 +16218,15 @@
       ],
       [
         "Operator",
-        "op-27bc07fc / Food prep worker, 20-25, Right-handed"
+        "Food prep worker, 20-25, Right-handed"
       ],
       [
         "Consent",
         "recorded per session"
       ],
       [
-        "Session",
-        "capture__20260823_051145__158fc763"
-      ],
-      [
-        "Episode uuid",
-        "47846a67-72a2-5a15-a751-62dab7b4006b"
-      ],
-      [
         "File",
-        "capture__20260823_051145__158fc763__seg_032.mcap"
+        "…__seg_032.mcap"
       ],
       [
         "SHA-256",
@@ -20356,7 +16248,7 @@
     "task": "dish-washing",
     "skill": "Clothing & Laundry",
     "environment": "Cafe Counter, Kitchen",
-    "locale": "Thành phố Hồ Chí Minh",
+    "locale": "Vietnam",
     "rig": "Egocentric stereo",
     "durationSec": 158.705,
     "resolution": "stereo pair",
@@ -20448,34 +16340,6 @@
         "Kitchen"
       ],
       [
-        "NAICS",
-        "722515"
-      ],
-      [
-        "Site",
-        "Thành phố Hồ Chí Minh"
-      ],
-      [
-        "Geohash",
-        "w3gvt8"
-      ],
-      [
-        "Environment id",
-        "env-978a5be9"
-      ],
-      [
-        "Device",
-        "Egocentric stereo / fw 1.2.13"
-      ],
-      [
-        "Device id",
-        "device-2681d652"
-      ],
-      [
-        "Kit",
-        "kit-b8498007"
-      ],
-      [
         "Shutter",
         "rolling shutter"
       ],
@@ -20509,23 +16373,15 @@
       ],
       [
         "Operator",
-        "op-571fda82 / Barista, 20-25, Right-handed"
+        "Barista, 20-25, Right-handed"
       ],
       [
         "Consent",
         "recorded per session"
       ],
       [
-        "Session",
-        "capture__20260821_080201__e09d2619"
-      ],
-      [
-        "Episode uuid",
-        "46dbce86-2956-5158-a857-cd129901714a"
-      ],
-      [
         "File",
-        "capture__20260821_080201__e09d2619__seg_006.mcap"
+        "…__seg_006.mcap"
       ],
       [
         "SHA-256",
@@ -20547,7 +16403,7 @@
     "task": "order-verifying",
     "skill": "Human Interaction & Handoffs",
     "environment": "Restaurant, Checkout Counter",
-    "locale": "Hanoi",
+    "locale": "Vietnam",
     "rig": "Egocentric stereo",
     "durationSec": 30.239,
     "resolution": "stereo pair",
@@ -20639,34 +16495,6 @@
         "Checkout Counter"
       ],
       [
-        "NAICS",
-        "722310"
-      ],
-      [
-        "Site",
-        "Hanoi"
-      ],
-      [
-        "Geohash",
-        "w7er2s"
-      ],
-      [
-        "Environment id",
-        "env-2278e832"
-      ],
-      [
-        "Device",
-        "Egocentric stereo / fw 1.2.13"
-      ],
-      [
-        "Device id",
-        "device-c1022c27"
-      ],
-      [
-        "Kit",
-        "kit-29f99d86"
-      ],
-      [
         "Shutter",
         "rolling"
       ],
@@ -20700,23 +16528,15 @@
       ],
       [
         "Operator",
-        "op-27bc07fc / Food prep worker, 20-25, Right-handed"
+        "Food prep worker, 20-25, Right-handed"
       ],
       [
         "Consent",
         "recorded per session"
       ],
       [
-        "Session",
-        "capture__20260822_115237__c36e5c63"
-      ],
-      [
-        "Episode uuid",
-        "d411dcf8-048d-523a-85aa-689deec57045"
-      ],
-      [
         "File",
-        "capture__20260822_115237__c36e5c63__seg_008.mcap"
+        "…__seg_008.mcap"
       ],
       [
         "SHA-256",
@@ -20738,7 +16558,7 @@
     "task": "tire-inflating",
     "skill": "Mechanical / Automotive Work",
     "environment": "Restaurant, Workshop",
-    "locale": "Hanoi",
+    "locale": "Vietnam",
     "rig": "Egocentric stereo",
     "durationSec": 34.533,
     "resolution": "stereo pair",
@@ -20830,34 +16650,6 @@
         "Workshop"
       ],
       [
-        "NAICS",
-        "722310"
-      ],
-      [
-        "Site",
-        "Hanoi"
-      ],
-      [
-        "Geohash",
-        "w7er2s"
-      ],
-      [
-        "Environment id",
-        "env-2278e832"
-      ],
-      [
-        "Device",
-        "Egocentric stereo / fw 2.1.18"
-      ],
-      [
-        "Device id",
-        "device-429c0060"
-      ],
-      [
-        "Kit",
-        "kit-71c69244"
-      ],
-      [
         "Shutter",
         "global shutter"
       ],
@@ -20891,23 +16683,15 @@
       ],
       [
         "Operator",
-        "op-13355fa6 / Tailor / seamstress, 25-30, Right-handed"
+        "Tailor / seamstress, 25-30, Right-handed"
       ],
       [
         "Consent",
         "recorded per session"
       ],
       [
-        "Session",
-        "capture__20260822_142825__e71e3f6e"
-      ],
-      [
-        "Episode uuid",
-        "841c13e3-a368-520e-adae-715a25702eee"
-      ],
-      [
         "File",
-        "capture__20260822_142825__e71e3f6e__seg_000.mcap"
+        "…__seg_000.mcap"
       ],
       [
         "SHA-256",
@@ -20929,7 +16713,7 @@
     "task": "bathroom-scrubbing",
     "skill": "Cleaning & Sanitation",
     "environment": "Hotel Room, Bathroom",
-    "locale": "Hanoi",
+    "locale": "Vietnam",
     "rig": "Egocentric stereo",
     "durationSec": 595.771,
     "resolution": "stereo pair",
@@ -21021,34 +16805,6 @@
         "Bathroom"
       ],
       [
-        "NAICS",
-        "721110"
-      ],
-      [
-        "Site",
-        "Hanoi"
-      ],
-      [
-        "Geohash",
-        "w7er8u"
-      ],
-      [
-        "Environment id",
-        "env-c445bcb4"
-      ],
-      [
-        "Device",
-        "Egocentric stereo / fw 1.2.13"
-      ],
-      [
-        "Device id",
-        "device-c1022c27"
-      ],
-      [
-        "Kit",
-        "kit-29f99d86"
-      ],
-      [
         "Shutter",
         "rolling"
       ],
@@ -21082,23 +16838,15 @@
       ],
       [
         "Operator",
-        "op-ada388c2 / Hotel housekeeper, 25-30, Right-handed"
+        "Hotel housekeeper, 25-30, Right-handed"
       ],
       [
         "Consent",
         "recorded per session"
       ],
       [
-        "Session",
-        "capture__20260823_041251__c36e5c63"
-      ],
-      [
-        "Episode uuid",
-        "19862526-e397-5a0d-a7c8-4c6d59283f38"
-      ],
-      [
         "File",
-        "capture__20260823_041251__c36e5c63__seg_000.mcap"
+        "…__seg_000.mcap"
       ],
       [
         "SHA-256",
@@ -21120,7 +16868,7 @@
     "task": "bed-making",
     "skill": "Clothing & Laundry",
     "environment": "Hotel Room, Indoor Room",
-    "locale": "Hanoi",
+    "locale": "Vietnam",
     "rig": "Egocentric stereo",
     "durationSec": 290.903,
     "resolution": "stereo pair",
@@ -21212,34 +16960,6 @@
         "Indoor Room"
       ],
       [
-        "NAICS",
-        "721110"
-      ],
-      [
-        "Site",
-        "Hanoi"
-      ],
-      [
-        "Geohash",
-        "w7er8u"
-      ],
-      [
-        "Environment id",
-        "env-c445bcb4"
-      ],
-      [
-        "Device",
-        "Egocentric stereo / fw 1.2.13"
-      ],
-      [
-        "Device id",
-        "device-64d6e9bc"
-      ],
-      [
-        "Kit",
-        "kit-9e83c42d"
-      ],
-      [
         "Shutter",
         "rolling"
       ],
@@ -21273,23 +16993,15 @@
       ],
       [
         "Operator",
-        "op-27bc07fc / Food prep worker, 20-25, Right-handed"
+        "Food prep worker, 20-25, Right-handed"
       ],
       [
         "Consent",
         "recorded per session"
       ],
       [
-        "Session",
-        "capture__20260823_051729__64d6e9bc"
-      ],
-      [
-        "Episode uuid",
-        "a081f0b7-27c1-511f-9f11-6e0df428c2b2"
-      ],
-      [
         "File",
-        "capture__20260823_051729__64d6e9bc__seg_001.mcap"
+        "…__seg_001.mcap"
       ],
       [
         "SHA-256",
@@ -21311,7 +17023,7 @@
     "task": "bed-making",
     "skill": "Organization & Tidying",
     "environment": "Hotel Room",
-    "locale": "Hanoi",
+    "locale": "Vietnam",
     "rig": "Egocentric stereo",
     "durationSec": 575,
     "resolution": "stereo pair",
@@ -21402,34 +17114,6 @@
         "Hotel Room"
       ],
       [
-        "NAICS",
-        "721110"
-      ],
-      [
-        "Site",
-        "Hanoi"
-      ],
-      [
-        "Geohash",
-        "w7epwr"
-      ],
-      [
-        "Environment id",
-        "env-967f7ff4"
-      ],
-      [
-        "Device",
-        "Egocentric stereo / fw 1.2.13"
-      ],
-      [
-        "Device id",
-        "device-66a2ca11"
-      ],
-      [
-        "Kit",
-        "kit-0d907884"
-      ],
-      [
         "Shutter",
         "rolling shutter"
       ],
@@ -21463,23 +17147,15 @@
       ],
       [
         "Operator",
-        "op-52ba6bf4 / Hotel housekeeper, 45-50, Right-handed"
+        "Hotel housekeeper, 45-50, Right-handed"
       ],
       [
         "Consent",
         "recorded per session"
       ],
       [
-        "Session",
-        "capture__20260826_061446__753b10bb"
-      ],
-      [
-        "Episode uuid",
-        "7f9929c6-4ecc-5bd3-9766-bffdd43df78e"
-      ],
-      [
         "File",
-        "capture__20260826_061446__753b10bb__seg_003.mcap"
+        "…__seg_003.mcap"
       ],
       [
         "SHA-256",
@@ -21501,7 +17177,7 @@
     "task": "hair-cutting",
     "skill": "Tool Use & Technical Manipulation",
     "environment": "Hotel Room, Sidewalk",
-    "locale": "Hanoi",
+    "locale": "Vietnam",
     "rig": "Egocentric stereo",
     "durationSec": 554.466,
     "resolution": "stereo pair",
@@ -21593,34 +17269,6 @@
         "Sidewalk"
       ],
       [
-        "NAICS",
-        "721110"
-      ],
-      [
-        "Site",
-        "Hanoi"
-      ],
-      [
-        "Geohash",
-        "w7epwr"
-      ],
-      [
-        "Environment id",
-        "env-967f7ff4"
-      ],
-      [
-        "Device",
-        "Egocentric stereo / fw 2.1.7"
-      ],
-      [
-        "Device id",
-        "device-183561bf"
-      ],
-      [
-        "Kit",
-        "kit-026a5f1c"
-      ],
-      [
         "Shutter",
         "global shutter"
       ],
@@ -21654,23 +17302,15 @@
       ],
       [
         "Operator",
-        "op-74470240 / Hotel housekeeper, 30-35, Right-handed"
+        "Hotel housekeeper, 30-35, Right-handed"
       ],
       [
         "Consent",
         "recorded per session"
       ],
       [
-        "Session",
-        "capture__20260827_163813__f0e43750"
-      ],
-      [
-        "Episode uuid",
-        "27107dbe-9ed7-5631-87e8-32844d0ec936"
-      ],
-      [
         "File",
-        "capture__20260827_163813__f0e43750__seg_000.mcap"
+        "…__seg_000.mcap"
       ],
       [
         "SHA-256",
@@ -21692,7 +17332,7 @@
     "task": "bag-cutting",
     "skill": "Clothing & Laundry",
     "environment": "Textile factory, Sewing Area",
-    "locale": "Hung Yen",
+    "locale": "Vietnam",
     "rig": "Egocentric stereo",
     "durationSec": 686.022,
     "resolution": "stereo pair",
@@ -21784,34 +17424,6 @@
         "Sewing Area"
       ],
       [
-        "NAICS",
-        "313210"
-      ],
-      [
-        "Site",
-        "Hung Yen"
-      ],
-      [
-        "Geohash",
-        "w7emmq"
-      ],
-      [
-        "Environment id",
-        "env-5456c0b9"
-      ],
-      [
-        "Device",
-        "Egocentric stereo / fw 1.2.13"
-      ],
-      [
-        "Device id",
-        "device-66a2ca11"
-      ],
-      [
-        "Kit",
-        "kit-0d907884"
-      ],
-      [
         "Shutter",
         "rolling"
       ],
@@ -21845,23 +17457,15 @@
       ],
       [
         "Operator",
-        "op-812c3bd7 / Tailor / seamstress, 25-30, Right-handed"
+        "Tailor / seamstress, 25-30, Right-handed"
       ],
       [
         "Consent",
         "recorded per session"
       ],
       [
-        "Session",
-        "capture__20260824_030751__753b10bb"
-      ],
-      [
-        "Episode uuid",
-        "24784d58-5a25-5560-b4d1-8076a9c3d027"
-      ],
-      [
         "File",
-        "capture__20260824_030751__753b10bb__seg_005.mcap"
+        "…__seg_005.mcap"
       ],
       [
         "SHA-256",
@@ -21883,7 +17487,7 @@
     "task": "food-cleaning",
     "skill": "Food Preparation & Cooking",
     "environment": "Metal Fabrication, Kitchen",
-    "locale": "Hanoi",
+    "locale": "Vietnam",
     "rig": "Egocentric stereo",
     "durationSec": 241.507,
     "resolution": "stereo pair",
@@ -21975,34 +17579,6 @@
         "Kitchen"
       ],
       [
-        "NAICS",
-        "332999"
-      ],
-      [
-        "Site",
-        "Hanoi"
-      ],
-      [
-        "Geohash",
-        "w7ep7v"
-      ],
-      [
-        "Environment id",
-        "env-24045f1a"
-      ],
-      [
-        "Device",
-        "Egocentric stereo / fw 1.2.13"
-      ],
-      [
-        "Device id",
-        "device-0d684745"
-      ],
-      [
-        "Kit",
-        "kit-f58b337d"
-      ],
-      [
         "Shutter",
         "rolling"
       ],
@@ -22036,23 +17612,15 @@
       ],
       [
         "Operator",
-        "op-82764712 / Cook, 55-60, Right-handed"
+        "Cook, 55-60, Right-handed"
       ],
       [
         "Consent",
         "recorded per session"
       ],
       [
-        "Session",
-        "capture__20260820_101736__52f6ba4b"
-      ],
-      [
-        "Episode uuid",
-        "e43e2ce0-ac4f-5c49-afbe-b0fe132cdeab"
-      ],
-      [
         "File",
-        "capture__20260820_101736__52f6ba4b__seg_006.mcap"
+        "…__seg_006.mcap"
       ],
       [
         "SHA-256",
@@ -22074,7 +17642,7 @@
     "task": "food-serving",
     "skill": "Human Interaction & Handoffs",
     "environment": "Metal Fabrication, Kitchen",
-    "locale": "Hanoi",
+    "locale": "Vietnam",
     "rig": "Egocentric stereo",
     "durationSec": 89.621,
     "resolution": "stereo pair",
@@ -22166,34 +17734,6 @@
         "Kitchen"
       ],
       [
-        "NAICS",
-        "332999"
-      ],
-      [
-        "Site",
-        "Hanoi"
-      ],
-      [
-        "Geohash",
-        "w7ep7v"
-      ],
-      [
-        "Environment id",
-        "env-24045f1a"
-      ],
-      [
-        "Device",
-        "Egocentric stereo / fw 1.2.13"
-      ],
-      [
-        "Device id",
-        "device-0d684745"
-      ],
-      [
-        "Kit",
-        "kit-f58b337d"
-      ],
-      [
         "Shutter",
         "rolling"
       ],
@@ -22227,23 +17767,15 @@
       ],
       [
         "Operator",
-        "op-cb340a2a / Cook, 50-55, Right-handed"
+        "Cook, 50-55, Right-handed"
       ],
       [
         "Consent",
         "recorded per session"
       ],
       [
-        "Session",
-        "capture__20260820_071100__52f6ba4b"
-      ],
-      [
-        "Episode uuid",
-        "dbc6b110-d9a0-5ca4-9421-6f0961cba77a"
-      ],
-      [
         "File",
-        "capture__20260820_071100__52f6ba4b__seg_012.mcap"
+        "…__seg_012.mcap"
       ],
       [
         "SHA-256",
@@ -22265,7 +17797,7 @@
     "task": "item-organizing",
     "skill": "Organization & Tidying",
     "environment": "Metal Fabrication, Fabrication Floor",
-    "locale": "Hanoi",
+    "locale": "Vietnam",
     "rig": "Egocentric stereo",
     "durationSec": 177.142,
     "resolution": "stereo pair",
@@ -22357,34 +17889,6 @@
         "Fabrication Floor"
       ],
       [
-        "NAICS",
-        "332999"
-      ],
-      [
-        "Site",
-        "Hanoi"
-      ],
-      [
-        "Geohash",
-        "w7ep7v"
-      ],
-      [
-        "Environment id",
-        "env-24045f1a"
-      ],
-      [
-        "Device",
-        "Egocentric stereo / fw 1.2.13"
-      ],
-      [
-        "Device id",
-        "device-f9abf739"
-      ],
-      [
-        "Kit",
-        "kit-d9dfd2ad"
-      ],
-      [
         "Shutter",
         "rolling"
       ],
@@ -22418,23 +17922,15 @@
       ],
       [
         "Operator",
-        "op-41a9b3d7 / Auto technician, 30-35, Right-handed"
+        "Auto technician, 30-35, Right-handed"
       ],
       [
         "Consent",
         "recorded per session"
       ],
       [
-        "Session",
-        "capture__20260818_013605__bf1ccebc"
-      ],
-      [
-        "Episode uuid",
-        "47642498-f7ce-5000-8081-c87e84ca90d2"
-      ],
-      [
         "File",
-        "capture__20260818_013605__bf1ccebc__seg_014.mcap"
+        "…__seg_014.mcap"
       ],
       [
         "SHA-256",
@@ -22456,7 +17952,7 @@
     "task": "food-preparation",
     "skill": "Retail & Service Operations",
     "environment": "Metal Fabrication, Commercial Kitchen",
-    "locale": "Hanoi",
+    "locale": "Vietnam",
     "rig": "Egocentric stereo",
     "durationSec": 598.639,
     "resolution": "stereo pair",
@@ -22548,34 +18044,6 @@
         "Commercial Kitchen"
       ],
       [
-        "NAICS",
-        "332999"
-      ],
-      [
-        "Site",
-        "Hanoi"
-      ],
-      [
-        "Geohash",
-        "w7ep7v"
-      ],
-      [
-        "Environment id",
-        "env-24045f1a"
-      ],
-      [
-        "Device",
-        "Egocentric stereo / fw 1.2.13"
-      ],
-      [
-        "Device id",
-        "device-f9abf739"
-      ],
-      [
-        "Kit",
-        "kit-d9dfd2ad"
-      ],
-      [
         "Shutter",
         "rolling"
       ],
@@ -22609,23 +18077,15 @@
       ],
       [
         "Operator",
-        "op-b4efe960 / Cook, 20-25, Right-handed"
+        "Cook, 20-25, Right-handed"
       ],
       [
         "Consent",
         "recorded per session"
       ],
       [
-        "Session",
-        "capture__20260820_101041__bf1ccebc"
-      ],
-      [
-        "Episode uuid",
-        "67296306-faee-54c6-890c-583576ef0b02"
-      ],
-      [
         "File",
-        "capture__20260820_101041__bf1ccebc__seg_015.mcap"
+        "…__seg_015.mcap"
       ],
       [
         "SHA-256",
@@ -22647,7 +18107,7 @@
     "task": "panel-attachment",
     "skill": "Construction & Building",
     "environment": "Sign Shop, Construction Site",
-    "locale": "Hung Yen",
+    "locale": "Vietnam",
     "rig": "Egocentric stereo",
     "durationSec": 508.221,
     "resolution": "stereo pair",
@@ -22739,34 +18199,6 @@
         "Construction Site"
       ],
       [
-        "NAICS",
-        "339950"
-      ],
-      [
-        "Site",
-        "Hung Yen"
-      ],
-      [
-        "Geohash",
-        "w7emmq"
-      ],
-      [
-        "Environment id",
-        "env-a6463a34"
-      ],
-      [
-        "Device",
-        "Egocentric stereo / fw 1.2.13"
-      ],
-      [
-        "Device id",
-        "device-64df69e0"
-      ],
-      [
-        "Kit",
-        "kit-08d3199a"
-      ],
-      [
         "Shutter",
         "rolling shutter"
       ],
@@ -22800,23 +18232,15 @@
       ],
       [
         "Operator",
-        "op-b475a48f / Sign maker, 30-35, Right-handed"
+        "Sign maker, 30-35, Right-handed"
       ],
       [
         "Consent",
         "recorded per session"
       ],
       [
-        "Session",
-        "capture__20260821_063534__eefcd112"
-      ],
-      [
-        "Episode uuid",
-        "6bd413ad-3a92-51cc-88b9-c4a28bab28c6"
-      ],
-      [
         "File",
-        "capture__20260821_063534__eefcd112__seg_007.mcap"
+        "…__seg_007.mcap"
       ],
       [
         "SHA-256",
@@ -22838,7 +18262,7 @@
     "task": "shoe-sorting",
     "skill": "Packing & Bagging",
     "environment": "Shoe Repair Store",
-    "locale": "Hanoi",
+    "locale": "Vietnam",
     "rig": "Egocentric stereo",
     "durationSec": 693.038,
     "resolution": "stereo pair",
@@ -22929,34 +18353,6 @@
         "Shoe Repair Store"
       ],
       [
-        "NAICS",
-        "811412"
-      ],
-      [
-        "Site",
-        "Hanoi"
-      ],
-      [
-        "Geohash",
-        "w7er8u"
-      ],
-      [
-        "Environment id",
-        "env-a73d47b0"
-      ],
-      [
-        "Device",
-        "Egocentric stereo / fw 1.2.13"
-      ],
-      [
-        "Device id",
-        "device-5b98f0ea"
-      ],
-      [
-        "Kit",
-        "kit-abf58aa8"
-      ],
-      [
         "Shutter",
         "rolling shutter"
       ],
@@ -22990,23 +18386,15 @@
       ],
       [
         "Operator",
-        "op-2017885a / Shoe repairer, 50-55, Right-handed"
+        "Shoe repairer, 50-55, Right-handed"
       ],
       [
         "Consent",
         "recorded per session"
       ],
       [
-        "Session",
-        "capture__20260824_073812__a916f2ae"
-      ],
-      [
-        "Episode uuid",
-        "af7a9850-953b-5df5-a9f0-a4850f7cac75"
-      ],
-      [
         "File",
-        "capture__20260824_073812__a916f2ae__seg_011.mcap"
+        "…__seg_011.mcap"
       ],
       [
         "SHA-256",
@@ -23028,7 +18416,7 @@
     "task": "flower-cutting",
     "skill": "Assembly & Installation",
     "environment": "Flower Shop",
-    "locale": "Hanoi",
+    "locale": "Vietnam",
     "rig": "Egocentric stereo",
     "durationSec": 592.897,
     "resolution": "stereo pair",
@@ -23119,34 +18507,6 @@
         "Flower Shop"
       ],
       [
-        "NAICS",
-        "459310"
-      ],
-      [
-        "Site",
-        "Hanoi"
-      ],
-      [
-        "Geohash",
-        "w7er8u"
-      ],
-      [
-        "Environment id",
-        "env-8b99a6a1"
-      ],
-      [
-        "Device",
-        "Egocentric stereo / fw 1.2.13"
-      ],
-      [
-        "Device id",
-        "device-519e0639"
-      ],
-      [
-        "Kit",
-        "kit-b5b19029"
-      ],
-      [
         "Shutter",
         "rolling"
       ],
@@ -23180,23 +18540,15 @@
       ],
       [
         "Operator",
-        "op-af74ea84 / Florist, 20-25, Right-handed"
+        "Florist, 20-25, Right-handed"
       ],
       [
         "Consent",
         "recorded per session"
       ],
       [
-        "Session",
-        "capture__20260824_071551__1c186e27"
-      ],
-      [
-        "Episode uuid",
-        "f48ca453-adbe-5577-a333-89a77dd409b2"
-      ],
-      [
         "File",
-        "capture__20260824_071551__1c186e27__seg_004.mcap"
+        "…__seg_004.mcap"
       ],
       [
         "SHA-256",
@@ -23218,7 +18570,7 @@
     "task": "flower-arranging",
     "skill": "Packing & Bagging",
     "environment": "Flower Shop",
-    "locale": "Hanoi",
+    "locale": "Vietnam",
     "rig": "Egocentric stereo",
     "durationSec": 656.347,
     "resolution": "stereo pair",
@@ -23309,34 +18661,6 @@
         "Flower Shop"
       ],
       [
-        "NAICS",
-        "459310"
-      ],
-      [
-        "Site",
-        "Hanoi"
-      ],
-      [
-        "Geohash",
-        "w7er8u"
-      ],
-      [
-        "Environment id",
-        "env-8b99a6a1"
-      ],
-      [
-        "Device",
-        "Egocentric stereo / fw 1.2.13"
-      ],
-      [
-        "Device id",
-        "device-c1022c27"
-      ],
-      [
-        "Kit",
-        "kit-29f99d86"
-      ],
-      [
         "Shutter",
         "rolling shutter"
       ],
@@ -23370,23 +18694,15 @@
       ],
       [
         "Operator",
-        "op-23e5d409 / Florist, 20-25, Right-handed"
+        "Florist, 20-25, Right-handed"
       ],
       [
         "Consent",
         "recorded per session"
       ],
       [
-        "Session",
-        "capture__20260825_071905__d0098931"
-      ],
-      [
-        "Episode uuid",
-        "0eb66c13-b72a-51ef-9be8-bc4d8ccc2917"
-      ],
-      [
         "File",
-        "capture__20260825_071905__d0098931__seg_004.mcap"
+        "…__seg_004.mcap"
       ],
       [
         "SHA-256",
@@ -23408,7 +18724,7 @@
     "task": "flower-pruning",
     "skill": "Pick and Place / Object Handling",
     "environment": "Flower Shop",
-    "locale": "Hanoi",
+    "locale": "Vietnam",
     "rig": "Egocentric stereo",
     "durationSec": 615.833,
     "resolution": "stereo pair",
@@ -23499,34 +18815,6 @@
         "Flower Shop"
       ],
       [
-        "NAICS",
-        "459310"
-      ],
-      [
-        "Site",
-        "Hanoi"
-      ],
-      [
-        "Geohash",
-        "w7er8u"
-      ],
-      [
-        "Environment id",
-        "env-8b99a6a1"
-      ],
-      [
-        "Device",
-        "Egocentric stereo / fw 1.2.13"
-      ],
-      [
-        "Device id",
-        "device-2aaa18ea"
-      ],
-      [
-        "Kit",
-        "kit-4568a06a"
-      ],
-      [
         "Shutter",
         "rolling shutter"
       ],
@@ -23560,23 +18848,15 @@
       ],
       [
         "Operator",
-        "op-a01b9e0d / Florist, 20-25, Right-handed"
+        "Florist, 20-25, Right-handed"
       ],
       [
         "Consent",
         "recorded per session"
       ],
       [
-        "Session",
-        "capture__20260823_030203__2b1af919"
-      ],
-      [
-        "Episode uuid",
-        "1047d66d-95cc-545f-8d9b-998816265d8b"
-      ],
-      [
         "File",
-        "capture__20260823_030203__2b1af919__seg_001.mcap"
+        "…__seg_001.mcap"
       ],
       [
         "SHA-256",
@@ -23598,7 +18878,7 @@
     "task": "flower-arranging",
     "skill": "Tool Use & Technical Manipulation",
     "environment": "Flower Shop",
-    "locale": "Hanoi",
+    "locale": "Vietnam",
     "rig": "Egocentric stereo",
     "durationSec": 575.833,
     "resolution": "stereo pair",
@@ -23689,34 +18969,6 @@
         "Flower Shop"
       ],
       [
-        "NAICS",
-        "459310"
-      ],
-      [
-        "Site",
-        "Hanoi"
-      ],
-      [
-        "Geohash",
-        "w7er8u"
-      ],
-      [
-        "Environment id",
-        "env-8b99a6a1"
-      ],
-      [
-        "Device",
-        "Egocentric stereo / fw 1.2.13"
-      ],
-      [
-        "Device id",
-        "device-2b877111"
-      ],
-      [
-        "Kit",
-        "kit-04842d1e"
-      ],
-      [
         "Shutter",
         "rolling"
       ],
@@ -23750,23 +19002,15 @@
       ],
       [
         "Operator",
-        "op-a01b9e0d / Florist, 20-25, Right-handed"
+        "Florist, 20-25, Right-handed"
       ],
       [
         "Consent",
         "recorded per session"
       ],
       [
-        "Session",
-        "capture__20260820_015536__8c8c1edf"
-      ],
-      [
-        "Episode uuid",
-        "9dd26ba8-689c-544a-9a1a-ed77a779d3fd"
-      ],
-      [
         "File",
-        "capture__20260820_015536__8c8c1edf__seg_002.mcap"
+        "…__seg_002.mcap"
       ],
       [
         "SHA-256",
@@ -23788,7 +19032,7 @@
     "task": "trash-disposing",
     "skill": "Cleaning & Sanitation",
     "environment": "Cleaning Service, Cleaning Service Area",
-    "locale": "Hanoi",
+    "locale": "Vietnam",
     "rig": "Egocentric stereo",
     "durationSec": 586.494,
     "resolution": "stereo pair",
@@ -23880,34 +19124,6 @@
         "Cleaning Service Area"
       ],
       [
-        "NAICS",
-        "561720"
-      ],
-      [
-        "Site",
-        "Hanoi"
-      ],
-      [
-        "Geohash",
-        "w7epxc"
-      ],
-      [
-        "Environment id",
-        "env-33c249bd"
-      ],
-      [
-        "Device",
-        "Egocentric stereo / fw 1.2.13"
-      ],
-      [
-        "Device id",
-        "device-b5b50e35"
-      ],
-      [
-        "Kit",
-        "kit-74d02c82"
-      ],
-      [
         "Shutter",
         "rolling"
       ],
@@ -23941,23 +19157,15 @@
       ],
       [
         "Operator",
-        "op-49dbf33c / Cleaner, 35-40, Right-handed"
+        "Cleaner, 35-40, Right-handed"
       ],
       [
         "Consent",
         "recorded per session"
       ],
       [
-        "Session",
-        "capture__20260817_051546__7befa1dc"
-      ],
-      [
-        "Episode uuid",
-        "6d482e7e-ac24-56ef-a445-930cbfeaf118"
-      ],
-      [
         "File",
-        "capture__20260817_051546__7befa1dc__seg_011.mcap"
+        "…__seg_011.mcap"
       ],
       [
         "SHA-256",
