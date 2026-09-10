@@ -1,0 +1,141 @@
+{
+  "caps": {
+    "pick_up_the_cup": {
+      "slug": "pick_up_the_cup",
+      "op": "op_unknown",
+      "ts": "20260617T01",
+      "sapiens": [],
+      "moge": {
+        "pair": "images/depth/pick_up_the_cup_rgb_depth.jpg"
+      },
+      "qwen": {
+        "path": "images/descriptions/pick_up_the_cup.jpg",
+        "verb": "pick",
+        "noun": "cup",
+        "conf": 0.9,
+        "activity": {
+          "taxonomy": "Object Handling",
+          "action_type": "picking up cup",
+          "environment": "kitchen",
+          "lighting": "normal",
+          "object_count_avg": 4.73,
+          "object_classes": [
+            "cup",
+            "person",
+            "table"
+          ],
+          "interaction_complexity": 0.672,
+          "micro_action_dist": {
+            "scrub": 2,
+            "grasp": 257,
+            "idle": 12
+          },
+          "hands_detected_frames": 255
+        },
+        "segs": 5
+      },
+      "sam3": [
+        {
+          "webm": "/videos/masks/pick_up_the_cup__tracked_cup_cup.webm",
+          "mp4": "/videos/masks/pick_up_the_cup__tracked_cup_cup.mp4",
+          "poster": "/videos/masks/pick_up_the_cup__tracked_cup_cup.jpg",
+          "label": "cup cup"
+        },
+        {
+          "webm": "/videos/masks/pick_up_the_cup__tracked_right_hand_right_hand.webm",
+          "mp4": "/videos/masks/pick_up_the_cup__tracked_right_hand_right_hand.mp4",
+          "poster": "/videos/masks/pick_up_the_cup__tracked_right_hand_right_hand.jpg",
+          "label": "right hand right hand"
+        }
+      ]
+    },
+    "iron_product": {
+      "slug": "iron_product",
+      "op": "op_mobile",
+      "ts": "20260626T01",
+      "sapiens": [],
+      "moge": {},
+      "qwen": {
+        "path": "images/descriptions/iron_product.jpg",
+        "verb": "iron",
+        "noun": "pants",
+        "conf": 0.98,
+        "activity": {},
+        "segs": 3
+      },
+      "sam3": [
+        {
+          "webm": "/videos/masks/iron_product__tracked_pants_pants.webm",
+          "mp4": "/videos/masks/iron_product__tracked_pants_pants.mp4",
+          "poster": "/videos/masks/iron_product__tracked_pants_pants.jpg",
+          "label": "pants pants"
+        },
+        {
+          "webm": "/videos/masks/iron_product__tracked_right_hand_right_hand.webm",
+          "mp4": "/videos/masks/iron_product__tracked_right_hand_right_hand.mp4",
+          "poster": "/videos/masks/iron_product__tracked_right_hand_right_hand.jpg",
+          "label": "right hand right hand"
+        }
+      ]
+    },
+    "sew_hem": {
+      "slug": "sew_hem",
+      "op": "op_mobile",
+      "ts": "20260626T01",
+      "sapiens": [],
+      "moge": {},
+      "qwen": {
+        "path": "images/descriptions/sew_hem.jpg",
+        "verb": "sew",
+        "noun": "hem",
+        "conf": 0.9,
+        "activity": {},
+        "segs": 1
+      },
+      "sam3": [
+        {
+          "webm": "/videos/masks/sew_hem__tracked_fabric_fabric.webm",
+          "mp4": "/videos/masks/sew_hem__tracked_fabric_fabric.mp4",
+          "poster": "/videos/masks/sew_hem__tracked_fabric_fabric.jpg",
+          "label": "fabric fabric"
+        },
+        {
+          "webm": "/videos/masks/sew_hem__tracked_right_hand_right_hand.webm",
+          "mp4": "/videos/masks/sew_hem__tracked_right_hand_right_hand.mp4",
+          "poster": "/videos/masks/sew_hem__tracked_right_hand_right_hand.jpg",
+          "label": "right hand right hand"
+        }
+      ]
+    },
+    "arrange_fabric": {
+      "slug": "arrange_fabric_feed_sewing",
+      "op": "op_mobile",
+      "ts": "20260626T01",
+      "sapiens": [],
+      "moge": {},
+      "qwen": {
+        "path": "images/descriptions/arrange_fabric.jpg",
+        "verb": "fold",
+        "noun": "cloth",
+        "conf": 0.95,
+        "activity": {},
+        "segs": 5
+      },
+      "sam3": [
+        {
+          "webm": "/videos/masks/arrange_fabric__tracked_fabric_fabric.webm",
+          "mp4": "/videos/masks/arrange_fabric__tracked_fabric_fabric.mp4",
+          "poster": "/videos/masks/arrange_fabric__tracked_fabric_fabric.jpg",
+          "label": "fabric fabric"
+        },
+        {
+          "webm": "/videos/masks/arrange_fabric__tracked_right_hand_right_hand.webm",
+          "mp4": "/videos/masks/arrange_fabric__tracked_right_hand_right_hand.mp4",
+          "poster": "/videos/masks/arrange_fabric__tracked_right_hand_right_hand.jpg",
+          "label": "right hand right hand"
+        }
+      ]
+    }
+  },
+  "hardrules_path": "images/human-qc/_hardrules.json"
+}

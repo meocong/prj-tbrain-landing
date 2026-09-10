@@ -1,0 +1,756 @@
+{
+  "per_cap": {
+    "pick_up_the_cup": {
+      "slug": "pick_up_the_cup",
+      "capture_id": "pick_up_the_cup__op_unknown__20260617T01",
+      "W": 640,
+      "H": 480,
+      "frames": 271,
+      "quality_score": 1.0,
+      "checks": [
+        {
+          "name": "K_consistency",
+          "ok": true,
+          "detail": "fx_hawor=594.3 fx_moge=642.0 err=8.0% (info: hand uses hawor, object uses moge)"
+        },
+        {
+          "name": "frame_alignment",
+          "ok": true,
+          "detail": "npz=271 video=271"
+        },
+        {
+          "name": "hand_detect_rate",
+          "ok": true,
+          "detail": "L=85% R=68% [detected] (warn<10%)"
+        },
+        {
+          "name": "filter_pass_rate",
+          "ok": true,
+          "detail": "labels=496 npz_detected=414 rate=120% (warn<40% over-filter)"
+        },
+        {
+          "name": "kpt_outlier_pct",
+          "ok": true,
+          "detail": "1/271 = 0.4% (warn>5%)"
+        },
+        {
+          "name": "camera_trajectory",
+          "ok": true,
+          "detail": "R_c2w max_dev_from_I=2.8284 (SLAM)"
+        },
+        {
+          "name": "kpts_3d_dual_frame",
+          "ok": true,
+          "detail": "world=True cam=True"
+        },
+        {
+          "name": "object_world_scale",
+          "ok": true,
+          "detail": "||t||_mean=1.45m (expect 0.1-5m)"
+        },
+        {
+          "name": "class_mapping_rate",
+          "ok": true,
+          "detail": "266/266 = 100% (warn<70%)"
+        },
+        {
+          "name": "action_seg_count",
+          "ok": true,
+          "detail": "5 segs (5 qwen_vl, source=qwen)"
+        },
+        {
+          "name": "object_track_continuity",
+          "ok": true,
+          "detail": "266/266 = 100% in 4 tracks (mean_len=66 frames)"
+        },
+        {
+          "name": "body_pose_rate",
+          "ok": true,
+          "detail": "191/271 = 70.5%"
+        },
+        {
+          "name": "body_dense_rate",
+          "ok": true,
+          "detail": "271/271 = 100.0% mean_conf=0.57 (sapiens 308-kpt)"
+        },
+        {
+          "name": "grasp_event_density",
+          "ok": true,
+          "detail": "110 events in 271 frames (40.6/frame) \u2014 derived from hand+obj overlap"
+        },
+        {
+          "name": "schema_v3_provenance",
+          "ok": true,
+          "detail": "schema_version=3.0_tbrain_ego git_sha=1b0cce1"
+        }
+      ],
+      "summary": {
+        "pass": 15,
+        "fail": 0,
+        "skip": 0
+      }
+    },
+    "iron_product": {
+      "slug": "iron_product",
+      "capture_id": "iron_product__op_mobile__20260626T01",
+      "W": 1920,
+      "H": 1080,
+      "frames": 450,
+      "quality_score": 1.0,
+      "checks": [
+        {
+          "name": "K_consistency",
+          "ok": true,
+          "detail": "fx_hawor=1420.9 fx_moge=1542.7 err=8.6% (info: hand uses hawor, object uses moge)"
+        },
+        {
+          "name": "frame_alignment",
+          "ok": true,
+          "detail": "npz=450 video=450"
+        },
+        {
+          "name": "hand_detect_rate",
+          "ok": true,
+          "detail": "L=100% R=100% [detected] (warn<10%)"
+        },
+        {
+          "name": "filter_pass_rate",
+          "ok": true,
+          "detail": "labels=897 npz_detected=900 rate=100% (warn<40% over-filter)"
+        },
+        {
+          "name": "kpt_outlier_pct",
+          "ok": true,
+          "detail": "0/450 = 0.0% (warn>5%)"
+        },
+        {
+          "name": "camera_trajectory",
+          "ok": true,
+          "detail": "R_c2w max_dev_from_I=2.8284 (SLAM)"
+        },
+        {
+          "name": "kpts_3d_dual_frame",
+          "ok": true,
+          "detail": "world=True cam=True"
+        },
+        {
+          "name": "object_world_scale",
+          "ok": null,
+          "detail": "no pose_6dof in labels"
+        },
+        {
+          "name": "class_mapping_rate",
+          "ok": true,
+          "detail": "449/449 = 100% (warn<70%)"
+        },
+        {
+          "name": "action_seg_count",
+          "ok": true,
+          "detail": "3 segs (3 qwen_vl, source=qwen)"
+        },
+        {
+          "name": "object_track_continuity",
+          "ok": true,
+          "detail": "449/449 = 100% in 1 tracks (mean_len=449 frames)"
+        },
+        {
+          "name": "body_pose_rate",
+          "ok": true,
+          "detail": "0/450 = 0.0% (egocentric \u2014 low rate expected)"
+        },
+        {
+          "name": "body_dense_rate",
+          "ok": true,
+          "detail": "450/450 = 100.0% mean_conf=0.21 (sapiens 308-kpt)"
+        },
+        {
+          "name": "grasp_event_density",
+          "ok": true,
+          "detail": "740 events in 450 frames (164.4/frame) \u2014 derived from hand+obj overlap"
+        },
+        {
+          "name": "schema_v3_provenance",
+          "ok": true,
+          "detail": "schema_version=3.0_tbrain_ego git_sha=1b0cce1"
+        }
+      ],
+      "summary": {
+        "pass": 14,
+        "fail": 0,
+        "skip": 1
+      }
+    },
+    "sew_hem": {
+      "slug": "sew_hem",
+      "capture_id": "sew_hem__op_mobile__20260626T01",
+      "W": 1920,
+      "H": 1080,
+      "frames": 450,
+      "quality_score": 1.0,
+      "checks": [
+        {
+          "name": "K_consistency",
+          "ok": true,
+          "detail": "fx_hawor=1439.0 fx_moge=1511.1 err=5.0% (info: hand uses hawor, object uses moge)"
+        },
+        {
+          "name": "frame_alignment",
+          "ok": true,
+          "detail": "npz=450 video=450"
+        },
+        {
+          "name": "hand_detect_rate",
+          "ok": true,
+          "detail": "L=80% R=96% [detected] (warn<10%)"
+        },
+        {
+          "name": "filter_pass_rate",
+          "ok": true,
+          "detail": "labels=748 npz_detected=792 rate=94% (warn<40% over-filter)"
+        },
+        {
+          "name": "kpt_outlier_pct",
+          "ok": true,
+          "detail": "19/450 = 4.2% (warn>5%)"
+        },
+        {
+          "name": "camera_trajectory",
+          "ok": true,
+          "detail": "R_c2w max_dev_from_I=2.8284 (SLAM)"
+        },
+        {
+          "name": "kpts_3d_dual_frame",
+          "ok": true,
+          "detail": "world=True cam=True"
+        },
+        {
+          "name": "object_world_scale",
+          "ok": null,
+          "detail": "no pose_6dof in labels"
+        },
+        {
+          "name": "class_mapping_rate",
+          "ok": true,
+          "detail": "847/847 = 100% (warn<70%)"
+        },
+        {
+          "name": "action_seg_count",
+          "ok": true,
+          "detail": "1 segs (1 qwen_vl, source=qwen)"
+        },
+        {
+          "name": "object_track_continuity",
+          "ok": true,
+          "detail": "847/847 = 100% in 2 tracks (mean_len=424 frames)"
+        },
+        {
+          "name": "body_pose_rate",
+          "ok": true,
+          "detail": "0/450 = 0.0% (egocentric \u2014 low rate expected)"
+        },
+        {
+          "name": "body_dense_rate",
+          "ok": true,
+          "detail": "446/450 = 99.1% mean_conf=0.28 (sapiens 308-kpt)"
+        },
+        {
+          "name": "grasp_event_density",
+          "ok": true,
+          "detail": "672 events in 450 frames (149.3/frame) \u2014 derived from hand+obj overlap"
+        },
+        {
+          "name": "schema_v3_provenance",
+          "ok": true,
+          "detail": "schema_version=3.0_tbrain_ego git_sha=1b0cce1"
+        }
+      ],
+      "summary": {
+        "pass": 14,
+        "fail": 0,
+        "skip": 1
+      }
+    },
+    "arrange_fabric": {
+      "slug": "arrange_fabric_feed_sewing",
+      "capture_id": "arrange_fabric_feed_sewing__op_mobile__20260626T01",
+      "W": 1920,
+      "H": 1080,
+      "frames": 450,
+      "quality_score": 1.0,
+      "checks": [
+        {
+          "name": "K_consistency",
+          "ok": true,
+          "detail": "fx_hawor=1448.9 fx_moge=1478.2 err=2.0% (info: hand uses hawor, object uses moge)"
+        },
+        {
+          "name": "frame_alignment",
+          "ok": true,
+          "detail": "npz=450 video=450"
+        },
+        {
+          "name": "hand_detect_rate",
+          "ok": true,
+          "detail": "L=96% R=100% [detected] (warn<10%)"
+        },
+        {
+          "name": "filter_pass_rate",
+          "ok": true,
+          "detail": "labels=900 npz_detected=883 rate=102% (warn<40% over-filter)"
+        },
+        {
+          "name": "kpt_outlier_pct",
+          "ok": true,
+          "detail": "2/450 = 0.4% (warn>5%)"
+        },
+        {
+          "name": "camera_trajectory",
+          "ok": true,
+          "detail": "R_c2w max_dev_from_I=2.8284 (SLAM)"
+        },
+        {
+          "name": "kpts_3d_dual_frame",
+          "ok": true,
+          "detail": "world=True cam=True"
+        },
+        {
+          "name": "object_world_scale",
+          "ok": null,
+          "detail": "no pose_6dof in labels"
+        },
+        {
+          "name": "class_mapping_rate",
+          "ok": true,
+          "detail": "449/449 = 100% (warn<70%)"
+        },
+        {
+          "name": "action_seg_count",
+          "ok": true,
+          "detail": "5 segs (5 qwen_vl, source=qwen)"
+        },
+        {
+          "name": "object_track_continuity",
+          "ok": true,
+          "detail": "449/449 = 100% in 1 tracks (mean_len=449 frames)"
+        },
+        {
+          "name": "body_pose_rate",
+          "ok": true,
+          "detail": "0/450 = 0.0% (egocentric \u2014 low rate expected)"
+        },
+        {
+          "name": "body_dense_rate",
+          "ok": true,
+          "detail": "450/450 = 100.0% mean_conf=0.21 (sapiens 308-kpt)"
+        },
+        {
+          "name": "grasp_event_density",
+          "ok": true,
+          "detail": "763 events in 450 frames (169.6/frame) \u2014 derived from hand+obj overlap"
+        },
+        {
+          "name": "schema_v3_provenance",
+          "ok": true,
+          "detail": "schema_version=3.0_tbrain_ego git_sha=1b0cce1"
+        }
+      ],
+      "summary": {
+        "pass": 14,
+        "fail": 0,
+        "skip": 1
+      }
+    }
+  },
+  "checks_agg": {
+    "K_consistency": {
+      "pass": 4,
+      "total": 4,
+      "samples": [
+        {
+          "cap": "pick_up_the_cup",
+          "ok": true,
+          "detail": "fx_hawor=594.3 fx_moge=642.0 err=8.0% (info: hand uses hawor, object uses moge)"
+        },
+        {
+          "cap": "iron_product",
+          "ok": true,
+          "detail": "fx_hawor=1420.9 fx_moge=1542.7 err=8.6% (info: hand uses hawor, object uses moge)"
+        },
+        {
+          "cap": "sew_hem",
+          "ok": true,
+          "detail": "fx_hawor=1439.0 fx_moge=1511.1 err=5.0% (info: hand uses hawor, object uses moge)"
+        },
+        {
+          "cap": "arrange_fabric",
+          "ok": true,
+          "detail": "fx_hawor=1448.9 fx_moge=1478.2 err=2.0% (info: hand uses hawor, object uses moge)"
+        }
+      ]
+    },
+    "frame_alignment": {
+      "pass": 4,
+      "total": 4,
+      "samples": [
+        {
+          "cap": "pick_up_the_cup",
+          "ok": true,
+          "detail": "npz=271 video=271"
+        },
+        {
+          "cap": "iron_product",
+          "ok": true,
+          "detail": "npz=450 video=450"
+        },
+        {
+          "cap": "sew_hem",
+          "ok": true,
+          "detail": "npz=450 video=450"
+        },
+        {
+          "cap": "arrange_fabric",
+          "ok": true,
+          "detail": "npz=450 video=450"
+        }
+      ]
+    },
+    "hand_detect_rate": {
+      "pass": 4,
+      "total": 4,
+      "samples": [
+        {
+          "cap": "pick_up_the_cup",
+          "ok": true,
+          "detail": "L=85% R=68% [detected] (warn<10%)"
+        },
+        {
+          "cap": "iron_product",
+          "ok": true,
+          "detail": "L=100% R=100% [detected] (warn<10%)"
+        },
+        {
+          "cap": "sew_hem",
+          "ok": true,
+          "detail": "L=80% R=96% [detected] (warn<10%)"
+        },
+        {
+          "cap": "arrange_fabric",
+          "ok": true,
+          "detail": "L=96% R=100% [detected] (warn<10%)"
+        }
+      ]
+    },
+    "filter_pass_rate": {
+      "pass": 4,
+      "total": 4,
+      "samples": [
+        {
+          "cap": "pick_up_the_cup",
+          "ok": true,
+          "detail": "labels=496 npz_detected=414 rate=120% (warn<40% over-filter)"
+        },
+        {
+          "cap": "iron_product",
+          "ok": true,
+          "detail": "labels=897 npz_detected=900 rate=100% (warn<40% over-filter)"
+        },
+        {
+          "cap": "sew_hem",
+          "ok": true,
+          "detail": "labels=748 npz_detected=792 rate=94% (warn<40% over-filter)"
+        },
+        {
+          "cap": "arrange_fabric",
+          "ok": true,
+          "detail": "labels=900 npz_detected=883 rate=102% (warn<40% over-filter)"
+        }
+      ]
+    },
+    "kpt_outlier_pct": {
+      "pass": 4,
+      "total": 4,
+      "samples": [
+        {
+          "cap": "pick_up_the_cup",
+          "ok": true,
+          "detail": "1/271 = 0.4% (warn>5%)"
+        },
+        {
+          "cap": "iron_product",
+          "ok": true,
+          "detail": "0/450 = 0.0% (warn>5%)"
+        },
+        {
+          "cap": "sew_hem",
+          "ok": true,
+          "detail": "19/450 = 4.2% (warn>5%)"
+        },
+        {
+          "cap": "arrange_fabric",
+          "ok": true,
+          "detail": "2/450 = 0.4% (warn>5%)"
+        }
+      ]
+    },
+    "camera_trajectory": {
+      "pass": 4,
+      "total": 4,
+      "samples": [
+        {
+          "cap": "pick_up_the_cup",
+          "ok": true,
+          "detail": "R_c2w max_dev_from_I=2.8284 (SLAM)"
+        },
+        {
+          "cap": "iron_product",
+          "ok": true,
+          "detail": "R_c2w max_dev_from_I=2.8284 (SLAM)"
+        },
+        {
+          "cap": "sew_hem",
+          "ok": true,
+          "detail": "R_c2w max_dev_from_I=2.8284 (SLAM)"
+        },
+        {
+          "cap": "arrange_fabric",
+          "ok": true,
+          "detail": "R_c2w max_dev_from_I=2.8284 (SLAM)"
+        }
+      ]
+    },
+    "kpts_3d_dual_frame": {
+      "pass": 4,
+      "total": 4,
+      "samples": [
+        {
+          "cap": "pick_up_the_cup",
+          "ok": true,
+          "detail": "world=True cam=True"
+        },
+        {
+          "cap": "iron_product",
+          "ok": true,
+          "detail": "world=True cam=True"
+        },
+        {
+          "cap": "sew_hem",
+          "ok": true,
+          "detail": "world=True cam=True"
+        },
+        {
+          "cap": "arrange_fabric",
+          "ok": true,
+          "detail": "world=True cam=True"
+        }
+      ]
+    },
+    "object_world_scale": {
+      "pass": 1,
+      "total": 4,
+      "samples": [
+        {
+          "cap": "pick_up_the_cup",
+          "ok": true,
+          "detail": "||t||_mean=1.45m (expect 0.1-5m)"
+        },
+        {
+          "cap": "iron_product",
+          "ok": null,
+          "detail": "no pose_6dof in labels"
+        },
+        {
+          "cap": "sew_hem",
+          "ok": null,
+          "detail": "no pose_6dof in labels"
+        },
+        {
+          "cap": "arrange_fabric",
+          "ok": null,
+          "detail": "no pose_6dof in labels"
+        }
+      ]
+    },
+    "class_mapping_rate": {
+      "pass": 4,
+      "total": 4,
+      "samples": [
+        {
+          "cap": "pick_up_the_cup",
+          "ok": true,
+          "detail": "266/266 = 100% (warn<70%)"
+        },
+        {
+          "cap": "iron_product",
+          "ok": true,
+          "detail": "449/449 = 100% (warn<70%)"
+        },
+        {
+          "cap": "sew_hem",
+          "ok": true,
+          "detail": "847/847 = 100% (warn<70%)"
+        },
+        {
+          "cap": "arrange_fabric",
+          "ok": true,
+          "detail": "449/449 = 100% (warn<70%)"
+        }
+      ]
+    },
+    "action_seg_count": {
+      "pass": 4,
+      "total": 4,
+      "samples": [
+        {
+          "cap": "pick_up_the_cup",
+          "ok": true,
+          "detail": "5 segs (5 qwen_vl, source=qwen)"
+        },
+        {
+          "cap": "iron_product",
+          "ok": true,
+          "detail": "3 segs (3 qwen_vl, source=qwen)"
+        },
+        {
+          "cap": "sew_hem",
+          "ok": true,
+          "detail": "1 segs (1 qwen_vl, source=qwen)"
+        },
+        {
+          "cap": "arrange_fabric",
+          "ok": true,
+          "detail": "5 segs (5 qwen_vl, source=qwen)"
+        }
+      ]
+    },
+    "object_track_continuity": {
+      "pass": 4,
+      "total": 4,
+      "samples": [
+        {
+          "cap": "pick_up_the_cup",
+          "ok": true,
+          "detail": "266/266 = 100% in 4 tracks (mean_len=66 frames)"
+        },
+        {
+          "cap": "iron_product",
+          "ok": true,
+          "detail": "449/449 = 100% in 1 tracks (mean_len=449 frames)"
+        },
+        {
+          "cap": "sew_hem",
+          "ok": true,
+          "detail": "847/847 = 100% in 2 tracks (mean_len=424 frames)"
+        },
+        {
+          "cap": "arrange_fabric",
+          "ok": true,
+          "detail": "449/449 = 100% in 1 tracks (mean_len=449 frames)"
+        }
+      ]
+    },
+    "body_pose_rate": {
+      "pass": 4,
+      "total": 4,
+      "samples": [
+        {
+          "cap": "pick_up_the_cup",
+          "ok": true,
+          "detail": "191/271 = 70.5%"
+        },
+        {
+          "cap": "iron_product",
+          "ok": true,
+          "detail": "0/450 = 0.0% (egocentric \u2014 low rate expected)"
+        },
+        {
+          "cap": "sew_hem",
+          "ok": true,
+          "detail": "0/450 = 0.0% (egocentric \u2014 low rate expected)"
+        },
+        {
+          "cap": "arrange_fabric",
+          "ok": true,
+          "detail": "0/450 = 0.0% (egocentric \u2014 low rate expected)"
+        }
+      ]
+    },
+    "body_dense_rate": {
+      "pass": 4,
+      "total": 4,
+      "samples": [
+        {
+          "cap": "pick_up_the_cup",
+          "ok": true,
+          "detail": "271/271 = 100.0% mean_conf=0.57 (sapiens 308-kpt)"
+        },
+        {
+          "cap": "iron_product",
+          "ok": true,
+          "detail": "450/450 = 100.0% mean_conf=0.21 (sapiens 308-kpt)"
+        },
+        {
+          "cap": "sew_hem",
+          "ok": true,
+          "detail": "446/450 = 99.1% mean_conf=0.28 (sapiens 308-kpt)"
+        },
+        {
+          "cap": "arrange_fabric",
+          "ok": true,
+          "detail": "450/450 = 100.0% mean_conf=0.21 (sapiens 308-kpt)"
+        }
+      ]
+    },
+    "grasp_event_density": {
+      "pass": 4,
+      "total": 4,
+      "samples": [
+        {
+          "cap": "pick_up_the_cup",
+          "ok": true,
+          "detail": "110 events in 271 frames (40.6/frame) \u2014 derived from hand+obj overlap"
+        },
+        {
+          "cap": "iron_product",
+          "ok": true,
+          "detail": "740 events in 450 frames (164.4/frame) \u2014 derived from hand+obj overlap"
+        },
+        {
+          "cap": "sew_hem",
+          "ok": true,
+          "detail": "672 events in 450 frames (149.3/frame) \u2014 derived from hand+obj overlap"
+        },
+        {
+          "cap": "arrange_fabric",
+          "ok": true,
+          "detail": "763 events in 450 frames (169.6/frame) \u2014 derived from hand+obj overlap"
+        }
+      ]
+    },
+    "schema_v3_provenance": {
+      "pass": 4,
+      "total": 4,
+      "samples": [
+        {
+          "cap": "pick_up_the_cup",
+          "ok": true,
+          "detail": "schema_version=3.0_tbrain_ego git_sha=1b0cce1"
+        },
+        {
+          "cap": "iron_product",
+          "ok": true,
+          "detail": "schema_version=3.0_tbrain_ego git_sha=1b0cce1"
+        },
+        {
+          "cap": "sew_hem",
+          "ok": true,
+          "detail": "schema_version=3.0_tbrain_ego git_sha=1b0cce1"
+        },
+        {
+          "cap": "arrange_fabric",
+          "ok": true,
+          "detail": "schema_version=3.0_tbrain_ego git_sha=1b0cce1"
+        }
+      ]
+    }
+  }
+}

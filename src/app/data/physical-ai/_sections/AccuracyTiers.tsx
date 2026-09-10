@@ -25,7 +25,7 @@ const TIERS = [
 
 export function AccuracyTiers() {
   return (
-    <section className="relative overflow-hidden py-24" style={{ background: "#020617", color: "white" }}>
+    <section className="relative overflow-hidden py-24" style={{ background: "var(--bp-bg)", color: "var(--bp-ink)" }}>
       <div className="container mx-auto px-4 relative z-10 max-w-5xl">
         <RevealOnScroll>
           <div className="text-center mb-12">
@@ -50,8 +50,8 @@ export function AccuracyTiers() {
               style={{
                 background: t.recommended
                   ? "linear-gradient(165deg, rgba(16,185,129,0.08) 0%, rgba(16,185,129,0.02) 100%)"
-                  : "linear-gradient(165deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.015) 100%)",
-                border: t.recommended ? "1px solid rgba(16,185,129,0.35)" : "1px solid rgba(255,255,255,0.08)",
+                  : "var(--bp-surface)",
+                border: t.recommended ? "1px solid rgba(16,185,129,0.35)" : "1px solid var(--bp-line)",
               }}
             >
               {t.recommended && (
@@ -74,21 +74,21 @@ export function AccuracyTiers() {
               >
                 <t.icon className="h-5 w-5" />
               </span>
-              <p className="mt-5 text-xs uppercase tracking-widest" style={{ color: "rgba(226,232,240,0.55)" }}>
+              <p className="mt-5 text-xs uppercase tracking-widest" style={{ color: "var(--bp-ink-dim)" }}>
                 {t.name}
               </p>
               <p
                 className="mt-1 text-4xl md:text-5xl font-bold tracking-tight"
                 style={{
                   fontFamily: "var(--font-heading)",
-                  background: `linear-gradient(135deg, ${t.accent}, white)`,
+                  background: `linear-gradient(135deg, ${t.accent}, var(--bp-ink))`,
                   WebkitBackgroundClip: "text",
                   WebkitTextFillColor: "transparent",
                 }}
               >
                 {t.accuracy}
               </p>
-              <p className="mt-3 text-sm leading-relaxed max-w-md" style={{ color: "rgba(226,232,240,0.68)" }}>
+              <p className="mt-3 text-sm leading-relaxed max-w-md" style={{ color: "var(--bp-ink-dim)" }}>
                 {t.description}
               </p>
             </motion.div>

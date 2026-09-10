@@ -75,7 +75,7 @@ export function HeroSection() {
           style={{
             background: "var(--hero-chip-bg)",
             border: "1px solid var(--hero-chip-border)",
-            backdropFilter: "blur(10px)",
+            WebkitBackdropFilter: "blur(10px)", backdropFilter: "blur(10px)",
           }}
         >
           <span className="relative flex h-2 w-2">
@@ -141,7 +141,7 @@ export function HeroSection() {
               background: "rgba(15,23,42,0.04)",
               border: "1px solid rgba(15,23,42,0.12)",
               color: "var(--text-primary)",
-              backdropFilter: "blur(10px)",
+              WebkitBackdropFilter: "blur(10px)", backdropFilter: "blur(10px)",
             }}
           >
             Explore our services

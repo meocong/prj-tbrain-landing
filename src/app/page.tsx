@@ -6,6 +6,7 @@ import { CapabilitiesMarquee } from "@/components/marketing/sections/Capabilitie
 import { ProductPillarsSection } from "@/components/marketing/sections/ProductPillarsSection";
 import { StatsSection } from "@/components/marketing/sections/StatsSection";
 import { PlatformSection } from "@/components/marketing/sections/PlatformSection";
+import { PhysicalAITeaser } from "@/components/marketing/sections/PhysicalAITeaser";
 import { ExpertsSection } from "@/components/marketing/sections/ExpertsSection";
 import { ContactCTA } from "@/components/marketing/sections/ContactCTA";
 
@@ -42,6 +43,7 @@ export default function Home() {
         <CapabilitiesMarquee />
         <ProductPillarsSection />
         <StatsSection />
+        <PhysicalAITeaser />
         <PlatformSection />
         <ExpertsSection />
         <ContactCTA />

@@ -8,31 +8,17 @@ import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
 import { ThemeToggle } from "@/components/theme/ThemeToggle";
 
-/**
- * Flat, no Data dropdown.
- *
- * Tam, 2026-09-09: "Top menu đang thiếu menu item, ví dụ link đến page physical
- * AI". It was not missing — it was the second child of a "Data" dropdown, one
- * hover deep, which is the same thing from where a reader stands.
- *
- * Two other reasons the dropdown was not earning itself. It held two items, and
- * its own `href` was `/data`, a route with no page.tsx behind it: harmless on
- * desktop where `isDropdown` renders a button, and a 404 waiting on any surface
- * that treated it as a link. Physical AI and Terminal Bench are offerings at the
- * same level as Platform and Samples, so they sit beside them.
- *
- * Measured before committing to it: the nav was 549px of a 1440 viewport and is
- * 754px flat, and at 1024 the header switches to the mobile sheet anyway. Adding
- * a ninth item is where this starts to need re-checking.
- */
 const NAV_ITEMS = [
   { label: "Home", href: "/" },
-  { label: "About", href: "/about" },
   { label: "Platform", href: "/platform" },
+  // The samples surface. Master's list does not carry it — this branch is where
+  // /samples was built, so the entry arrives with it rather than being an
+  // upstream omission to argue about.
   { label: "Samples", href: "/samples" },
+  { label: "Case Studies", href: "/casestudy" },
   { label: "Physical AI", href: "/data/physical-ai" },
   { label: "Terminal Bench", href: "/data/terminal-bench" },
-  { label: "Case Studies", href: "/casestudy" },
+  { label: "Blog", href: "/blog" },
   { label: "Contact", href: "/contact" },
 ];
 
@@ -42,15 +28,18 @@ const NAV_ITEMS = [
 // so they DON'T need dark tokens.
 const HERO_DARK_PAGES = new Set([
   "/data/terminal-bench",
-  // The samples hero is a full-bleed wall of footage under a dark scrim in both
-  // themes, so the light-theme nav would otherwise sit dark on dark over it.
+  // The samples hero is a full-bleed wall of footage under a dark scrim in BOTH
+  // themes, so without this the light-theme nav sits dark on dark over it.
   "/samples",
+  // physical-ai has a hardcoded-dark HERO but a theme-aware body — header must
+  // be white over the hero, then flip to light (coloured logo) on scroll in
+  // light mode. (Was in ALWAYS_DARK, which kept a dark bar + white logo over the
+  // light body when scrolled.)
+  "/data/physical-ai",
 ]);
 
 // Pages where the entire wrapper is hardcoded dark — header always white.
-const ALWAYS_DARK_PAGES = new Set([
-  "/data/physical-ai",
-]);
+const ALWAYS_DARK_PAGES = new Set<string>([]);
 
 const Header = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -61,33 +50,11 @@ const Header = () => {
   const alwaysDark = ALWAYS_DARK_PAGES.has(pathname);
   const useDarkTokens = isDarkTheme || alwaysDark || (heroIsDark && !scrolled);
 
-  // A sentinel 60px tall at the top of the document, watched by an
-  // IntersectionObserver: `scrolled` is simply "the sentinel has left the
-  // viewport". The listener this replaces ran on every scroll frame and called
-  // `setState` from inside it, so the whole header re-rendered continuously
-  // through a scroll on every page of the site. The observer fires twice per
-  // crossing instead, and the browser does the measuring off the main thread.
-  //
-  // The element is created rather than rendered because it must sit at the top
-  // of the DOCUMENT, and this component is `position: fixed` — a child of the
-  // header would move with the header and never intersect anything.
   useEffect(() => {
-    const sentinel = document.createElement("div");
-    sentinel.setAttribute("aria-hidden", "true");
-    sentinel.style.cssText =
-      "position:absolute;top:0;left:0;height:60px;width:1px;pointer-events:none;";
-    document.body.prepend(sentinel);
-
-    const io = new IntersectionObserver(
-      ([entry]) => setScrolled(!entry.isIntersecting),
-      { threshold: 0 },
-    );
-    io.observe(sentinel);
-
-    return () => {
-      io.disconnect();
-      sentinel.remove();
-    };
+    const onScroll = () => setScrolled(window.scrollY > 60);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   useEffect(() => {
@@ -119,6 +86,10 @@ const Header = () => {
         linkActive: "text-white",
         accent: "#A78BFA",
         icon: "text-white",
+        dropdown: "bg-[rgba(15,23,42,0.95)] border border-white/10 backdrop-blur-md",
+        dropdownText: "text-white",
+        dropdownSub: "text-white/55",
+        dropdownHover: "hover:bg-white/5",
         mobileMenu: "bg-[rgba(15,23,42,0.95)] border border-white/10 backdrop-blur-md",
         logoFilter: "brightness(0) invert(1)",
       }
@@ -128,9 +99,17 @@ const Header = () => {
         linkActive: "text-[#6C3CF4]",
         accent: "#6C3CF4",
         icon: "text-[#0e1b2e]",
+        dropdown: "bg-white border border-gray-200 shadow-lg",
+        dropdownText: "text-[#0e1b2e]",
+        dropdownSub: "text-[#78818f]",
+        dropdownHover: "hover:bg-gray-50",
         mobileMenu: "bg-white shadow-lg",
         logoFilter: "none",
       };
+
+  // Logo follows the THEME, not the hero/scroll state: coloured brand mark in
+  // light mode everywhere (incl. over dark heroes), white in dark mode.
+  const logoFilter = isDarkTheme ? "brightness(0) invert(1)" : "none";
 
   return (
     <header
@@ -145,8 +124,10 @@ const Header = () => {
               height={40}
               alt="Tbrain"
               priority
-              className="object-contain"
-              style={{ filter: tokens.logoFilter }}
+              loading="eager"
+              fetchPriority="high"
+              className="h-10 w-auto object-contain"
+              style={{ filter: logoFilter }}
             />
           </Link>
 
@@ -197,10 +178,6 @@ const Header = () => {
                 {item.label}
               </Link>
             ))}
-            {/* No "Data Products" group. It existed to surface the two items
-                the desktop dropdown hid, and they are in the list above now —
-                keeping it would print Physical AI and Terminal Bench twice in
-                one sheet. */}
           </nav>
         )}
       </div>
