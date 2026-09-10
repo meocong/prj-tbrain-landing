@@ -109,7 +109,12 @@ export const CAPABILITY: Partial<Record<string, CapabilityTier[]>> = {
   egocentric: [
     {
       key: "mono",
-      name: "Egocentric",
+      /* "Egocentric" beside "Egocentric stereo" does not say one camera — the
+         cards read as a category and a variant of it rather than as two rigs.
+         The doc's own list is Monoegocentric / Stereo egocentric (2 cam) /
+         Advanced Stereo Egocentric (6 cam) / With wrist camera, and each of
+         those names its own rig. Following it. */
+      name: "Mono egocentric (1 cam)",
       rig: "Head-mounted smartphone",
       sensors: null,
       ramp: "5-10 business days",
@@ -139,7 +144,7 @@ export const CAPABILITY: Partial<Record<string, CapabilityTier[]>> = {
     },
     {
       key: "stereo",
-      name: "Egocentric stereo",
+      name: "Stereo egocentric (2 cam)",
       rig: "RealSense D455 or Pico 4 Ultra",
       sensors: "6-DoF IMU, 200-400 Hz",
       ramp: "14-21 business days",
@@ -182,7 +187,7 @@ export const CAPABILITY: Partial<Record<string, CapabilityTier[]>> = {
     },
     {
       key: "wrist",
-      name: "Egocentric + wrist",
+      name: "Egocentric with wrist camera",
       rig: "Head-mounted phone + wrist camera",
       sensors: "Optional 6-DoF IMU on head and wrist, time-synced",
       ramp: "5-10 business days",

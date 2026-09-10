@@ -112,34 +112,12 @@ export default async function CategoryPage({
         )}
 
 
-        {/* The boxes first, and nothing between them and the header.
-
-            Tam, 2026-09-10: "em ko cần đoạn chữ ở dưới, em cho cái ô có những
-            loại nào, xong click nó xuống sample." It used to open on two blocks
-            of prose — how the rig is built, then what we run in the category —
-            and the reader met four hundred words before the first thing they
-            could click. */}
-        {/* Folders where they earn the click, the grid where they do not.
-
-            The grid opened with 24 mounted <video> elements on a modality
-            holding 118 records — every visit paid for two dozen media elements
-            before the reader knew whether any of them was the work they came
-            for. Folders fix that, and one level down at
-            /samples/<category>/<group> the catalogue is unchanged, facet rail
-            and all.
-
-            But gaming carries no skill groups — its axes are the game and the
-            session type, which live in `spec` — so the folder view came back
-            empty and took the catalogue with it: eight records and no way to
-            open one. `usesFolders` is that check. */}
-        {usesConfigFolders(c.modality) ? (
-          <ConfigFolders category={c} />
-        ) : usesFolders(c.modality) ? (
-          <SkillFolders category={c} />
-        ) : (
-          <SampleCatalog modality={c.modality} />
-        )}
-
+        {/* Egocentric puts its boxes first, before any prose. Tam,
+            2026-09-10: "em ko cần đoạn chữ ở dưới, em cho cái ô có những loại
+            nào, xong click nó xuống sample." The page used to open on two
+            blocks of text and the reader met four hundred words before the
+            first thing they could click. */}
+        {usesConfigFolders(c.modality) && <ConfigFolders category={c} />}
 
         {/* Mocap first: its product IS the explorer, and a pose stream behind
             a spec table is an instrument filed as a document. Every other
@@ -298,6 +276,26 @@ export default async function CategoryPage({
             is the product, and GamingSet is the eight titles that carry one. */}
         {c.slug === "gaming" && <TelemetryStrip />}
         {c.slug === "gaming" && <GamingSet />}
+
+        {/* Everywhere else the description comes first and the samples
+            follow it. Thạch, 2026-09-10: "nhớ là mô tả trước rồi mới đến phần
+            sample." Moving the boxes up for egocentric had moved them up for
+            exocentric and gaming too, so those pages listed their groups before
+            saying what records them. */}
+        {/* Folders where they earn the click, the grid where they do not.
+
+            The grid opened with 24 mounted <video> elements on a modality
+            holding 118 records. Folders fix that, and one level down at
+            /samples/<category>/<group> the catalogue is unchanged, facet rail
+            and all. Gaming carries no skill groups — its axes live in `spec` —
+            so `usesFolders` sends it straight to the grid rather than to an
+            empty folder view. */}
+        {!usesConfigFolders(c.modality) &&
+          (usesFolders(c.modality) ? (
+            <SkillFolders category={c} />
+          ) : (
+            <SampleCatalog modality={c.modality} />
+          ))}
 
         {/* Tam, 2026-09-10: "chị nghĩ cho Egocentric nó có đoạn trên nói về
             phần video, các thể loại video khác nhau. Xong ở dưới còn thêm ý
