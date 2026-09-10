@@ -43,7 +43,7 @@ export function MocapDemo() {
             Play the mocap sample
           </h2>
 
-          <p className="mt-5 max-w-2xl text-[14px] leading-relaxed" style={{ color: C.textMid }}>
+          <p className="mt-5 max-w-2xl text-[13px] leading-relaxed" style={{ color: C.textMid }}>
             A real bundle, not a rendering: video with the Xsens hand and wrist pose synchronised to
             it, frame for frame. Scrub the timeline and the pose follows.
           </p>
@@ -86,7 +86,7 @@ export function MocapDemo() {
               href={`${BASE}/pose-explorer.html`}
               target="_blank"
               rel="noopener noreferrer"
-              className="font-mono text-[11.5px] underline decoration-1 underline-offset-4"
+              className="font-mono text-[11px] underline decoration-1 underline-offset-4"
               style={{ color: C.accent }}
             >
               Open the pose explorer full screen
@@ -95,12 +95,12 @@ export function MocapDemo() {
               href={`${BASE}/wrist.html`}
               target="_blank"
               rel="noopener noreferrer"
-              className="font-mono text-[11.5px] underline decoration-1 underline-offset-4"
+              className="font-mono text-[11px] underline decoration-1 underline-offset-4"
               style={{ color: C.accent }}
             >
               Wrist charts — trajectory, speed, grip, XYZ
             </a>
-            <span className="font-mono text-[11.5px]" style={{ color: C.textDim }}>
+            <span className="font-mono text-[11px]" style={{ color: C.textDim }}>
               Raw sample: wrist_sample.json · 2.1 MB · 150 frames · position + quaternion
             </span>
           </div>

@@ -72,7 +72,7 @@ export default async function CategoryPage({
   const s = statsForCategory(c);
 
   return (
-    <div className="samples-scope" style={{ background: C.base }}>
+    <div className="samples-scope bp-chrome" style={{ background: C.base }}>
       <ScrollProgress />
       <Header />
       <main style={{ color: C.text }}>
@@ -187,7 +187,7 @@ export default async function CategoryPage({
                     >
                       <div className="min-w-0">
                         <p className="text-[15px] font-medium">{t.name}</p>
-                        <p className="mt-1 text-[12.5px] leading-relaxed" style={{ color: C.textDim }}>
+                        <p className="mt-1 text-[12px] leading-relaxed" style={{ color: C.textDim }}>
                           {t.rig}
                           {t.sensors ? ` · ${t.sensors}` : ""}
                           {t.environment ? ` · ${t.environment}` : ""}
@@ -198,7 +198,7 @@ export default async function CategoryPage({
                             is the thing they have to write a loader for. */}
                         {t.outputs && (
                           <p
-                            className="mt-2 font-mono text-[11.5px] leading-relaxed"
+                            className="mt-2 font-mono text-[11px] leading-relaxed"
                             style={{ color: C.value }}
                           >
                             {t.outputs}
@@ -211,7 +211,7 @@ export default async function CategoryPage({
                             lists. R1 as an answer rather than as a table. */}
                         {t.when && (
                           <p
-                            className="mt-2 max-w-xl text-[12.5px] leading-relaxed"
+                            className="mt-2 max-w-xl text-[12px] leading-relaxed"
                             style={{ color: C.textMid }}
                           >
                             {t.when}
@@ -234,7 +234,7 @@ export default async function CategoryPage({
                           the ceiling to somebody scheduling a pilot overstates
                           month one by up to four times. */}
                       <p
-                        className="font-mono text-[11.5px] leading-relaxed md:text-right"
+                        className="font-mono text-[11px] leading-relaxed md:text-right"
                         style={{ color: C.textMid }}
                       >
                         Ready in {t.ramp}

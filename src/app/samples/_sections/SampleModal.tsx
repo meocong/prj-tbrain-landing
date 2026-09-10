@@ -187,7 +187,7 @@ export function SampleModal({
                 >
                   {sample.title}
                 </h2>
-                <p className="mt-1.5 text-[12.5px]" style={{ color: C.textMid }}>
+                <p className="mt-1.5 text-[12px]" style={{ color: C.textMid }}>
                   {sample.breadcrumb.map((b, i) => (
                     <span key={`${b}-${i}`}>
                       {i > 0 && <span style={{ color: C.textDim }}> › </span>}
@@ -316,7 +316,7 @@ export function SampleModal({
                           </li>
                         ))}
                       </ul>
-                      <p className="mt-3 text-[11.5px] leading-relaxed" style={{ color: C.textDim }}>
+                      <p className="mt-3 text-[11px] leading-relaxed" style={{ color: C.textDim }}>
                         Ships as {sample.formats.join(", ")} · {sample.size}
                       </p>
                     </>
@@ -354,7 +354,7 @@ export function SampleModal({
                       className="px-5 py-3 lg:px-7"
                       style={{ borderLeft: i > 0 ? `1px solid ${C.hairlineSoft}` : undefined }}
                     >
-                      <dt className="text-[10.5px]" style={{ color: C.textDim }}>
+                      <dt className="text-[10px]" style={{ color: C.textDim }}>
                         {s.k}
                       </dt>
                       <dd
@@ -414,13 +414,13 @@ export function SampleModal({
                             className="grid grid-cols-[minmax(0,10.5rem)_1fr] items-baseline gap-x-5 py-[5px]"
                           >
                             <dt
-                              className="text-[11.5px] leading-relaxed"
+                              className="text-[11px] leading-relaxed"
                               style={{ color: C.textDim }}
                             >
                               {k}
                             </dt>
                             <dd
-                              className={`min-w-0 font-mono text-[11.5px] leading-relaxed ${
+                              className={`min-w-0 font-mono text-[11px] leading-relaxed ${
                                 /\s/.test(v) ? "break-words" : "break-all"
                               }`}
                               style={{ color: C.value }}
@@ -464,11 +464,11 @@ export function SampleModal({
                           key={t.label}
                           className="grid grid-cols-[minmax(0,10.5rem)_1fr] items-baseline gap-x-5 py-[5px]"
                         >
-                          <dt className="text-[11.5px] leading-relaxed" style={{ color: C.textDim }}>
+                          <dt className="text-[11px] leading-relaxed" style={{ color: C.textDim }}>
                             {t.label}
                           </dt>
                           <dd
-                            className="min-w-0 break-words font-mono text-[11.5px] leading-relaxed"
+                            className="min-w-0 break-words font-mono text-[11px] leading-relaxed"
                             style={{ color: C.value }}
                           >
                             {t.value}
@@ -476,7 +476,7 @@ export function SampleModal({
                         </div>
                       ))}
                     </dl>
-                    <p className="mt-3 text-[11.5px]" style={{ color: C.textDim }}>
+                    <p className="mt-3 text-[11px]" style={{ color: C.textDim }}>
                       {QUALIFIER}
                     </p>
                   </motion.section>

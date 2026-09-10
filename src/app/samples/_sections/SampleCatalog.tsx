@@ -329,7 +329,7 @@ function Card({ sample, onOpen }: { sample: Sample; onOpen: () => void }) {
         >
           {sample.title}
         </button>
-        <p className="mt-2 text-[12.5px]" style={{ color: C.textMid }}>
+        <p className="mt-2 text-[12px]" style={{ color: C.textMid }}>
           {sample.breadcrumb.map((b, i) => (
             <span key={`${b}-${i}`}>
               {i > 0 && <span style={{ color: C.textDim }}> › </span>}
@@ -409,7 +409,7 @@ function Chip({
       disabled={dead}
       aria-pressed={active}
       data-active={active}
-      className={`sm-chip flex w-full items-center justify-between gap-3 rounded-lg px-2.5 py-1.5 text-left text-[12.5px] disabled:opacity-30${caps ? " capitalize" : ""}`}
+      className={`sm-chip flex w-full items-center justify-between gap-3 rounded-lg px-2.5 py-1.5 text-left text-[12px] disabled:opacity-30${caps ? " capitalize" : ""}`}
     >
       <span className="truncate">{label}</span>
       <span className="sm-chip-count shrink-0 font-mono text-[10px]">{count}</span>
@@ -441,14 +441,14 @@ function CapabilityPanel({ modality, onClear }: { modality: string; onClear: () 
       >
         {name} runs on the same pipeline.
       </h3>
-      <p className="mt-2 max-w-xl text-[13.5px] leading-relaxed" style={{ color: C.textMid }}>
+      <p className="mt-2 max-w-xl text-[13px] leading-relaxed" style={{ color: C.textMid }}>
         Nothing from this line is on the page yet. It is collected to spec. These are the same
         terms we would send in a quote.
       </p>
 
       {running && (
         <p
-          className="bp-card mt-5 max-w-xl px-4 py-3 text-[12.5px] leading-relaxed"
+          className="bp-card mt-5 max-w-xl px-4 py-3 text-[12px] leading-relaxed"
           style={{ color: C.textMid }}
         >
           {running}
@@ -463,7 +463,7 @@ function CapabilityPanel({ modality, onClear }: { modality: string; onClear: () 
             style={{ borderTop: `1px solid ${C.hairline}` }}
           >
             <div className="min-w-0">
-              <p className="text-[13.5px] font-medium">{t.name}</p>
+              <p className="text-[13px] font-medium">{t.name}</p>
               <p className="mt-1 text-[12px] leading-relaxed" style={{ color: C.textDim }}>
                 {t.rig}
                 {t.sensors ? ` · ${t.sensors}` : ""}
@@ -473,7 +473,7 @@ function CapabilityPanel({ modality, onClear }: { modality: string; onClear: () 
                 field. A rate on a public page anchors a brief nobody has
                 written yet. These two are what a buyer schedules around. */}
             <p
-              className="font-mono text-[11.5px] leading-relaxed md:text-right"
+              className="font-mono text-[11px] leading-relaxed md:text-right"
               style={{ color: C.textMid }}
             >
               Ready in {t.ramp}
@@ -738,7 +738,7 @@ export function SampleCatalog({ modality }: { modality: string }) {
     f.modality.length === 1 && CAPABILITY[f.modality[0]] ? f.modality[0] : null;
 
   return (
-    <>    <section id="deck" style={{ background: C.base, color: C.text }}>
+    <>    <section id="deck" className="bp-grid bp-frame relative" style={{ color: C.text }}>
       {/* No heading, and no dataset strip. The heading went because the
           category page above already states the name, what the category is and
           the figures. The strip went because it was the third control for one
@@ -941,7 +941,7 @@ export function SampleCatalog({ modality }: { modality: string }) {
                     Clear
                   </button>
                 )}
-                <span className="flex items-center gap-2 text-[12.5px]" style={{ color: C.textDim }}>
+                <span className="flex items-center gap-2 text-[12px]" style={{ color: C.textDim }}>
                   Sort
                   {/* Same trigger class as the Job picker, from the same file.
                       Two dropdowns on one screen styled apart is the drift this

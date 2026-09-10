@@ -85,7 +85,7 @@ function Route({
         </h3>
       </div>
 
-      <p className="mt-3 max-w-md text-[13.5px] leading-relaxed" style={{ color: C.textMid }}>
+      <p className="mt-3 max-w-md text-[13px] leading-relaxed" style={{ color: C.textMid }}>
         {body}
       </p>
 
@@ -94,7 +94,7 @@ function Route({
           {figures.map((f) => (
             <li
               key={f}
-              className="py-1.5 font-mono text-[11.5px]"
+              className="py-1.5 font-mono text-[11px]"
               style={{ borderTop: `1px solid ${C.hairlineSoft}`, color: C.value }}
             >
               {f}

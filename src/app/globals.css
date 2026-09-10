@@ -349,6 +349,7 @@
   --footer-chip-bg: #F8FAFC;
   --footer-input-bg: #F8FAFC;
   --footer-accent: #5A2CE0;   /* AA-passing violet on light (was #6C3CF4 = borderline) */
+  --footer-on-accent: #FFFFFF;
   --footer-glow: radial-gradient(ellipse, rgba(108,60,244,0.07) 0%, transparent 60%);
   --marquee-border: rgba(15, 23, 42, 0.06);
   --marquee-chip-bg: rgba(15, 23, 42, 0.04);
@@ -412,6 +413,7 @@
   --footer-chip-bg: rgba(255, 255, 255, 0.04);
   --footer-input-bg: rgba(255, 255, 255, 0.06);
   --footer-accent: #A78BFA;
+  --footer-on-accent: #0F172A;
   --footer-glow: radial-gradient(ellipse, rgba(108,60,244,0.15) 0%, transparent 60%);
   --marquee-border: rgba(148, 163, 184, 0.18);
   --marquee-chip-bg: rgba(15, 23, 42, 0.72);
@@ -1076,20 +1078,35 @@ html.dark body {
   --sm-playhead: var(--bp-ink-dim);
 
   /* Pills. Colour is the signal on a card: what the task is, how hard it was,
-     what recorded it, what ships, and whether it passed its quality gate. */
-  --sm-on-accent: #FFFFFF;
-  --sm-pill-skill-bg: rgba(108, 60, 244, 0.10);
-  --sm-pill-skill-fg: #5B2FD0;
-  --sm-pill-skill-bd: rgba(108, 60, 244, 0.28);
-  --sm-pill-hard-bg: rgba(180, 83, 9, 0.10);
-  --sm-pill-hard-fg: #B45309;
-  --sm-pill-hard-bd: rgba(180, 83, 9, 0.28);
-  --sm-pill-device-bg: rgba(2, 132, 199, 0.10);
-  --sm-pill-device-fg: #0369A1;
-  --sm-pill-device-bd: rgba(2, 132, 199, 0.26);
-  --sm-pill-ok-bg: rgba(4, 120, 87, 0.10);
-  --sm-pill-ok-fg: #047857;
-  --sm-pill-ok-bd: rgba(4, 120, 87, 0.26);
+     what recorded it, what ships, and whether it passed its quality gate.
+
+     These used to be sixteen literals split across a light block and a dark
+     one — violet #5B2FD0, amber #B45309, sky #0369A1, emerald #047857 and
+     their dark twins — sitting directly beside a base palette that had just
+     been aliased onto blueprint. The result was a card whose accent was teal
+     and whose pills were the marketing violet.
+
+     Blueprint already carries the four hues theme-aware and already picked
+     them to clear AA as text (see the note above --bp-green in blueprint.css:
+     the literal neons fail on paper, so the light half is darkened). Deriving
+     the fill and the border from the same token means a pill cannot drift from
+     its own text colour, and it means one block rather than two.
+
+     10% / 28% rather than a second hand-picked colour: the fill has to read as
+     a tint OF the hue, and at those weights it does in both halves. */
+  --sm-on-accent: var(--bp-on-cyan);
+  --sm-pill-skill-bg: color-mix(in srgb, var(--bp-purple) 10%, transparent);
+  --sm-pill-skill-fg: var(--bp-purple);
+  --sm-pill-skill-bd: color-mix(in srgb, var(--bp-purple) 28%, transparent);
+  --sm-pill-hard-bg: color-mix(in srgb, var(--bp-amber) 10%, transparent);
+  --sm-pill-hard-fg: var(--bp-amber);
+  --sm-pill-hard-bd: color-mix(in srgb, var(--bp-amber) 28%, transparent);
+  --sm-pill-device-bg: color-mix(in srgb, var(--bp-blue) 10%, transparent);
+  --sm-pill-device-fg: var(--bp-blue);
+  --sm-pill-device-bd: color-mix(in srgb, var(--bp-blue) 28%, transparent);
+  --sm-pill-ok-bg: color-mix(in srgb, var(--bp-green) 10%, transparent);
+  --sm-pill-ok-fg: var(--bp-green);
+  --sm-pill-ok-bd: color-mix(in srgb, var(--bp-green) 28%, transparent);
 }
 
 .dark .samples-scope {
@@ -1115,19 +1132,23 @@ html.dark body {
   --sm-wash: var(--bp-surface-2);
   --sm-playhead: var(--bp-ink-dim);
 
-  --sm-on-accent: #0B0620;
-  --sm-pill-skill-bg: rgba(167, 139, 250, 0.12);
-  --sm-pill-skill-fg: #C4B5FD;
-  --sm-pill-skill-bd: rgba(167, 139, 250, 0.34);
-  --sm-pill-hard-bg: rgba(245, 158, 11, 0.12);
-  --sm-pill-hard-fg: #FCD34D;
-  --sm-pill-hard-bd: rgba(245, 158, 11, 0.34);
-  --sm-pill-device-bg: rgba(56, 189, 248, 0.10);
-  --sm-pill-device-fg: #7DD3FC;
-  --sm-pill-device-bd: rgba(56, 189, 248, 0.30);
-  --sm-pill-ok-bg: rgba(16, 185, 129, 0.10);
-  --sm-pill-ok-fg: #6EE7B7;
-  --sm-pill-ok-bd: rgba(16, 185, 129, 0.30);
+  /* The pills are NOT repeated here. Every one of them now derives from a
+     `--bp-*` hue, and those already swap under this same `.dark` selector, so
+     a dark override would only be a second chance to disagree with the light
+     one — which is exactly what the two literal blocks did.
+
+     One exception, measured rather than guessed. A pill's text sits on a 10%
+     tint of its OWN hue, which is the worst backdrop that hue has, and at the
+     10-11px these labels are set at that has to clear 4.5:1:
+
+       light   purple 5.74  amber 5.82  blue 5.72  green 6.06   (on paper)
+       dark    amber  7.65  blue  6.90  green 9.01              (on --bp-bg-2)
+       dark    purple 4.30  ← fails
+
+     #8B6CF6 is simply not bright enough against itself. Lifting it toward the
+     ink it shares the card with takes it to 6.35 without introducing a fifth
+     literal, and without touching the light half, which already passes. */
+  --sm-pill-skill-fg: color-mix(in srgb, var(--bp-purple) 70%, var(--bp-ink));
 }
 
 /* Native video chrome is drawn by the UA, so it needs the theme announced

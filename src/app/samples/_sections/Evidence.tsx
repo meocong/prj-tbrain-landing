@@ -26,7 +26,7 @@ export function Evidence({ line }: { line?: string }) {
   );
 
   return (
-    <section style={{ background: C.base, color: C.text }}>
+    <section className="bp-grid bp-frame relative" style={{ color: C.text }}>
       <div className="mx-auto max-w-[1400px] px-4 py-24 md:py-32 lg:px-10 xl:px-16">
         <Reveal variant="rise">
           <div className="grid gap-16 lg:grid-cols-12 lg:gap-10">
@@ -98,7 +98,7 @@ export function Evidence({ line }: { line?: string }) {
                 >
                   <h3
                     className="text-xl font-medium md:text-2xl"
-                    style={{ fontFamily: "var(--font-heading)", letterSpacing: "-0.015em" }}
+                    style={{ fontFamily: "var(--font-heading)", letterSpacing: "-0.02em" }}
                   >
                     {t.title}
                   </h3>

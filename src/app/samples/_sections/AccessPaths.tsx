@@ -48,7 +48,7 @@ export function AccessPaths() {
                   <div className="min-w-0 flex-1">
                     <h3
                       className="text-xl font-medium md:text-2xl"
-                      style={{ fontFamily: "var(--font-heading)", letterSpacing: "-0.015em" }}
+                      style={{ fontFamily: "var(--font-heading)", letterSpacing: "-0.02em" }}
                     >
                       {path.title}
                     </h3>

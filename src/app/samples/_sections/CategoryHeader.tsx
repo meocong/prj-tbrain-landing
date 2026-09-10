@@ -77,7 +77,7 @@ export function CategoryHeader({ category: c }: { category: Category }) {
         className="mt-6 text-balance pb-1 text-5xl font-medium tracking-tight md:text-7xl"
         style={{
           fontFamily: "var(--font-heading)",
-          letterSpacing: "-0.035em",
+          letterSpacing: "-0.03em",
           lineHeight: 0.98,
           ...GRADIENT_TEXT,
         }}
@@ -127,7 +127,7 @@ export function CategoryHeader({ category: c }: { category: Category }) {
             {c.held.figure}
           </dd>
           <dt
-            className="bp-mono mt-2 text-[9.5px]"
+            className="bp-mono mt-2 text-[9px]"
             style={{ color: "rgba(255,255,255,0.56)" }}
           >
             {c.held.unit}
@@ -152,7 +152,7 @@ export function CategoryHeader({ category: c }: { category: Category }) {
                 {st.value}
               </dd>
               <dt
-                className="bp-mono mt-2 text-[9.5px]"
+                className="bp-mono mt-2 text-[9px]"
                 style={{ color: "rgba(255,255,255,0.56)" }}
               >
                 {st.label}
@@ -209,7 +209,7 @@ export function CategoryHeader({ category: c }: { category: Category }) {
           className="mt-6 text-balance text-5xl font-medium tracking-tight md:text-7xl"
           style={{
             fontFamily: "var(--font-heading)",
-            letterSpacing: "-0.035em",
+            letterSpacing: "-0.03em",
             lineHeight: 0.98,
             color: C.text,
           }}

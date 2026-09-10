@@ -15,8 +15,12 @@ export function ScrollProgress() {
       className="fixed inset-x-0 top-0 z-[60] h-[2px] origin-left"
       style={{
         scaleX,
-        background: "linear-gradient(90deg, #4cb5ff 0%, #00e5c7 45%, #a78bfa 100%)",
-        boxShadow: "0 0 12px #4cb5ff",
+        /* The literals these replace — #4cb5ff, #00e5c7, #a78bfa — were the
+           blueprint DARK values, so the bar stayed neon on every light-theme
+           page that mounts it. The tokens carry both halves. */
+        background:
+          "linear-gradient(90deg, var(--bp-blue) 0%, var(--bp-cyan) 45%, var(--bp-purple) 100%)",
+        boxShadow: "0 0 12px color-mix(in srgb, var(--bp-blue) 70%, transparent)",
       }}
     />
   );

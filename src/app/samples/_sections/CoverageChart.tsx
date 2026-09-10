@@ -123,7 +123,7 @@ function Axis({ axis }: { axis: CoverageAxis }) {
       </ul>
 
       {axis.rest > 0 && (
-        <p className="mt-3 font-mono text-[10.5px]" style={{ color: C.textDim }}>
+        <p className="mt-3 font-mono text-[10px]" style={{ color: C.textDim }}>
           +{axis.rest} more
         </p>
       )}

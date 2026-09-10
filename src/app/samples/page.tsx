@@ -46,7 +46,7 @@ export const metadata: Metadata = {
 
 export default function SamplesPage() {
   return (
-    <div className="samples-scope" style={{ background: "var(--sm-base)" }}>
+    <div className="samples-scope bp-chrome" style={{ background: "var(--sm-base)" }}>
       {/* Same bar physical-ai and terminal-bench carry. One import; it reads
           window scroll itself and takes no props. */}
       <ScrollProgress />

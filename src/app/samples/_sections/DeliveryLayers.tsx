@@ -13,7 +13,7 @@ export function DeliveryLayers() {
   const reduce = useReducedMotion();
 
   return (
-    <section style={{ background: C.band, color: C.text }}>
+    <section className="bp-grid bp-frame relative" style={{ backgroundColor: C.band, color: C.text }}>
       <div className="mx-auto max-w-[1400px] px-4 py-16 md:py-20 lg:px-10 xl:px-16">
         <Reveal variant="rise">
           <div className="max-w-2xl">

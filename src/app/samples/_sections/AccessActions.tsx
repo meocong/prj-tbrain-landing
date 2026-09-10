@@ -31,7 +31,7 @@ export function AccessStrip() {
         <Link
           href="/samples/s"
           onClick={() => track("download_full_set", { from: "strip" })}
-          className="inline-flex shrink-0 items-center gap-2 rounded-full px-4 py-2 text-[12.5px] font-semibold"
+          className="inline-flex shrink-0 items-center gap-2 rounded-full px-4 py-2 text-[12px] font-semibold"
           style={{ background: C.accent, color: "var(--sm-on-accent)" }}
         >
           All downloads
@@ -53,7 +53,7 @@ export function AccessStrip() {
         <Link
           href={`/samples/enter?redirect=${encodeURIComponent("/samples/s")}`}
           onClick={() => track("open_passcode", { from: "strip" })}
-          className="inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-[12.5px] font-medium"
+          className="inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-[12px] font-medium"
           style={{ border: `1px solid ${C.rule}`, color: C.text }}
         >
           <KeyRound className="h-3.5 w-3.5" />
@@ -62,7 +62,7 @@ export function AccessStrip() {
         <Link
           href={requestUrl({ from: "strip" })}
           onClick={() => track("open_request_access", { from: "strip" })}
-          className="inline-flex items-center gap-2 rounded-full px-4 py-2 text-[12.5px] font-semibold"
+          className="inline-flex items-center gap-2 rounded-full px-4 py-2 text-[12px] font-semibold"
           style={{ background: C.accent, color: "var(--sm-on-accent)" }}
         >
           Request access
@@ -92,7 +92,7 @@ export function AccessActions({ sample, from }: { sample: Sample; from: string }
     return (
       <>
         <Check className="h-3.5 w-3.5 shrink-0" style={{ color: C.positive }} />
-        <span className="text-[11.5px]" style={{ color: C.textDim }}>
+        <span className="text-[11px]" style={{ color: C.textDim }}>
           Passcode active
         </span>
 
@@ -100,7 +100,7 @@ export function AccessActions({ sample, from }: { sample: Sample; from: string }
           <a
             href={downloadHref(sample.slug, "metadata")}
             onClick={() => track("download_asset", { slug: sample.slug, asset: "metadata", from })}
-            className="inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-[12.5px]"
+            className="inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-[12px]"
             style={{ border: `1px solid ${C.rule}`, color: C.textMid }}
           >
             .metadata.json
@@ -108,7 +108,7 @@ export function AccessActions({ sample, from }: { sample: Sample; from: string }
           <a
             href={downloadHref(sample.slug, "preview")}
             onClick={() => track("download_asset", { slug: sample.slug, asset: "preview", from })}
-            className="inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-[12.5px]"
+            className="inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-[12px]"
             style={{ border: `1px solid ${C.rule}`, color: C.text }}
           >
             <Download className="h-3.5 w-3.5" />
@@ -144,7 +144,7 @@ export function AccessActions({ sample, from }: { sample: Sample; from: string }
   return (
     <>
       <Lock className="h-3.5 w-3.5 shrink-0" style={{ color: C.textDim }} />
-      <span className="text-[11.5px]" style={{ color: C.textDim }}>
+      <span className="text-[11px]" style={{ color: C.textDim }}>
         {sample.downloads.map((d) => d.t).join("  ·  ")} behind access
       </span>
 
@@ -152,7 +152,7 @@ export function AccessActions({ sample, from }: { sample: Sample; from: string }
         <Link
           href={`/samples/enter?redirect=${encodeURIComponent("/samples/s")}`}
           onClick={() => track("open_passcode", { from, slug: sample.slug })}
-          className="inline-flex items-center gap-1.5 text-[12.5px] font-medium underline decoration-1 underline-offset-[5px]"
+          className="inline-flex items-center gap-1.5 text-[12px] font-medium underline decoration-1 underline-offset-[5px]"
           style={{ color: C.textMid, textDecorationColor: C.rule }}
         >
           <KeyRound className="h-3.5 w-3.5" />

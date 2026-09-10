@@ -42,18 +42,57 @@ import { Reveal } from "./Reveal";
  * does. So the pair plays, and the whole rig is one click away for the reader
  * who wants it.
  *
- * It also keeps 5.7 MB off the page for everyone who does not: the six-up
+ * It also keeps 7.6 MB off the page for everyone who does not: the six-up
  * mounts on expand rather than at page load, so it is fetched when asked for.
  * Same arm-on-demand shape as `FaceBand` in CategoryChooser.
+ *
+ * ## Why the six are six files and not one mosaic
+ *
+ * They were one baked 1320x716 grid, three across and two down, with the labels
+ * laid over it on a matching CSS grid. That works exactly as long as nobody
+ * wants a different arrangement: the layout lived in the pixels, so the only
+ * shape the page could show was the shape ffmpeg had already committed to, and
+ * the label grid had to be kept in step with it by hand.
+ *
+ * Cut into six now — `rig-cam0..5.mp4`, one 440x358 cell each, cropped from
+ * that same mosaic so they are still the same instant on each camera. The
+ * arrangement is CSS, each tile carries its own label, and it can reflow on a
+ * phone, none of which a baked grid can do.
  */
 
 const BASE = "/samples";
+
+/**
+ * The diamond: one, two, two, one.
+ *
+ * Tam, 2026-09-10: "vẽ 6 cam cho tôi, sắp xếp kiểu 1 2 2 1". Four columns with
+ * every tile spanning two of them, so the singles at top and bottom sit centred
+ * and every tile is the same width — a 3x2 contact sheet reads as a spreadsheet
+ * of thumbnails, and this reads as a head.
+ *
+ * Which camera goes where follows the pairing, not the numbering. Pairs are
+ * (0,1), (2,3), (4,5), read off each camera's own `camera_info` frame id rather
+ * than guessed. Two of them get a row each, side by side, because that is what
+ * a stereo pair looks like. The third closes the diamond top and bottom.
+ *
+ * `eye` is only set where the calibration record states it: camera0 and camera4
+ * report themselves left, camera1 and camera5 right. It says nothing about 2
+ * and 3, so neither does the label.
+ */
+const DIAMOND: { cam: number; eye?: "left" | "right"; col: number; row: number }[] = [
+  { cam: 2, col: 2, row: 1 },
+  { cam: 0, eye: "left", col: 1, row: 2 },
+  { cam: 1, eye: "right", col: 3, row: 2 },
+  { cam: 4, eye: "left", col: 1, row: 3 },
+  { cam: 5, eye: "right", col: 3, row: 3 },
+  { cam: 3, col: 2, row: 4 },
+];
 
 export function RigViews() {
   const [open, setOpen] = useState(false);
 
   return (
-    <section style={{ background: C.band, color: C.text }}>
+    <section className="bp-grid bp-frame relative" style={{ backgroundColor: C.band, color: C.text }}>
       <div className="mx-auto max-w-[1400px] px-4 py-16 md:py-20 lg:px-10 xl:px-16">
         <Reveal variant="rise">
           <div className="flex flex-wrap items-end justify-between gap-x-10 gap-y-4">
@@ -73,7 +112,7 @@ export function RigViews() {
                   {open ? "all six cameras" : "left and right eye"}
                 </span>
               </p>
-              <p className="mt-3 text-[13.5px] leading-relaxed" style={{ color: C.textMid }}>
+              <p className="mt-3 text-[13px] leading-relaxed" style={{ color: C.textMid }}>
                 {open
                   ? "Six cameras in three stereo pairs, every frame synchronised on one clock. Cut from a single delivery file; the pairing comes from each camera's own calibration record."
                   : "The two eyes of one stereo pair, the same instant on both. Depth in the delivery comes from the offset you can see between them."}
