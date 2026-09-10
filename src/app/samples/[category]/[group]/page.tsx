@@ -15,6 +15,8 @@ import {
 import { CAPABILITY } from "@/lib/samples/capability";
 import samples from "@/lib/samples/samples.json";
 import { SampleCatalog } from "../../_sections/SampleCatalog";
+import { CaptureSpec } from "../../_sections/CaptureSpec";
+import { RigViews } from "../../_sections/RigViews";
 import { AccessPaths } from "../../_sections/AccessPaths";
 import { C } from "../../_sections/tokens";
 import { Reveal } from "../../_sections/Reveal";
@@ -147,6 +149,21 @@ export default async function SkillGroupPage({ params }: Params) {
             </Reveal>
           </div>
         </section>
+
+        {/* The rig, on the page that sells it.
+
+            Both of these used to sit at the top of /samples/egocentric, which
+            sells four configurations — and they describe exactly one. Tam,
+            2026-09-10: "cái phần chữ của em chỉ apply cho Egocentric 6 cam."
+            CaptureSpec states the six cameras and three stereo pairs; RigViews
+            shows all six playing at the same instant. Both are the argument for
+            THIS configuration and neither is an argument for mono. */}
+        {group === "stereo6" && (
+          <>
+            <CaptureSpec category={c} />
+            <RigViews />
+          </>
+        )}
 
         {/* The catalogue, seeded to this folder. The rail stays live: a reader
             who wants the whole configuration can deselect the chip rather than

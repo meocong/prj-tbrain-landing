@@ -5,17 +5,34 @@ import Logo from "@/assets/images/logo.svg";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, X } from "lucide-react";
+import { ChevronDown, Menu, X } from "lucide-react";
 import { ThemeToggle } from "@/components/theme/ThemeToggle";
-import { categoryHeroIsDark } from "@/lib/samples/categories";
+import { CATEGORIES, categoryHeroIsDark } from "@/lib/samples/categories";
 
-const NAV_ITEMS = [
+/**
+ * The six sample categories, hung under the Samples entry.
+ *
+ * Tam, 2026-09-10: "xong dưới sample menu, em để 6 thể loại thành sub menu ko",
+ * and later "Top menu của em cũng đang thiếu menu item". The catalogue is six
+ * routes deep and the only way in was the front door — a reader who knew they
+ * wanted mocap still had to land on /samples and hunt for the card.
+ *
+ * Derived from CATEGORIES rather than typed out, so a category added there
+ * appears here, and one with an `externalHref` points wherever it actually
+ * lives instead of at a route that 404s.
+ */
+const SAMPLE_SUBMENU = CATEGORIES.map((c) => ({
+  label: c.name,
+  href: c.externalHref ?? `/samples/${c.slug}`,
+}));
+
+const NAV_ITEMS: { label: string; href: string; children?: { label: string; href: string }[] }[] = [
   { label: "Home", href: "/" },
   { label: "Platform", href: "/platform" },
   // The samples surface. Master's list does not carry it — this branch is where
   // /samples was built, so the entry arrives with it rather than being an
   // upstream omission to argue about.
-  { label: "Samples", href: "/samples" },
+  { label: "Samples", href: "/samples", children: SAMPLE_SUBMENU },
   { label: "Case Studies", href: "/casestudy" },
   { label: "Physical AI", href: "/data/physical-ai" },
   { label: "Terminal Bench", href: "/data/terminal-bench" },
@@ -84,6 +101,9 @@ interface ChromeTokens {
   accent: string;
   icon: string;
   mobileMenu: string;
+  /** Surface for the desktop submenu panel. Was dead config and was removed;
+      the Samples submenu is what brought it back. */
+  dropdown: string;
   mobileActive: string;
   mobileIdle: string;
 }
@@ -150,6 +170,7 @@ const Header = () => {
     accent: "#A78BFA",
     icon: "text-white",
     mobileMenu: "bg-[rgba(15,23,42,0.95)] border border-white/10 backdrop-blur-md",
+    dropdown: "bg-[rgba(15,23,42,0.97)] border border-white/10 backdrop-blur-md shadow-xl",
     mobileActive: "bg-white/10 text-white",
     mobileIdle: "text-white/80 hover:bg-white/5",
   };
@@ -167,6 +188,7 @@ const Header = () => {
     accent: "var(--bp-cyan)",
     icon: "text-(--bp-ink)",
     mobileMenu: "border border-(--bp-line) bg-(--bp-panel) backdrop-blur-md",
+    dropdown: "border border-(--bp-line) bg-(--bp-panel) shadow-xl",
     mobileActive: "bg-(--bp-surface-2) text-(--bp-cyan)",
     mobileIdle: "text-(--bp-ink-dim) hover:bg-(--bp-surface-2)",
   };
@@ -179,6 +201,7 @@ const Header = () => {
       borderColor: "var(--bp-line)",
     },
     mobileMenu: "border border-(--bp-line) bg-(--bp-panel) shadow-lg",
+    dropdown: "border border-(--bp-line) bg-(--bp-panel) shadow-xl",
   };
 
   const MARKETING_DARK: ChromeTokens = {
@@ -190,6 +213,7 @@ const Header = () => {
     accent: "#A78BFA",
     icon: "text-white",
     mobileMenu: "bg-[rgba(15,23,42,0.95)] border border-white/10 backdrop-blur-md",
+    dropdown: "bg-[rgba(15,23,42,0.97)] border border-white/10 backdrop-blur-md shadow-xl",
     mobileActive: "bg-white/10 text-white",
     mobileIdle: "text-white/80 hover:bg-white/5",
   };
@@ -201,6 +225,7 @@ const Header = () => {
     accent: "#6C3CF4",
     icon: "text-[#0e1b2e]",
     mobileMenu: "bg-white shadow-lg",
+    dropdown: "bg-white border border-gray-200 shadow-xl",
     mobileActive: "bg-[#6C3CF4]/5 text-[#6C3CF4]",
     mobileIdle: "text-[#0e1b2e] hover:bg-gray-50",
   };
@@ -241,18 +266,60 @@ const Header = () => {
           </Link>
 
           <nav className="hidden items-center gap-5 lg:flex xl:gap-7">
-            {NAV_ITEMS.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className={`text-sm font-medium transition-colors ${
-                  isActive(item.href) ? tokens.linkActive : tokens.link
-                }`}
-                style={isActive(item.href) ? { color: tokens.accent } : undefined}
-              >
-                {item.label}
-              </Link>
-            ))}
+            {NAV_ITEMS.map((item) =>
+              item.children ? (
+                /* Hover AND focus open it, and the wrapper carries both so the
+                   pointer can travel from the label into the panel without
+                   crossing a gap that closes it. `group-focus-within` is what
+                   makes it reachable by keyboard, which a hover-only dropdown
+                   never is. */
+                <div key={item.href} className="group relative">
+                  <Link
+                    href={item.href}
+                    className={`inline-flex items-center gap-1 text-sm font-medium transition-colors ${
+                      isActive(item.href) ? tokens.linkActive : tokens.link
+                    }`}
+                    style={isActive(item.href) ? { color: tokens.accent } : undefined}
+                  >
+                    {item.label}
+                    <ChevronDown
+                      aria-hidden
+                      className="h-3.5 w-3.5 transition-transform group-hover:rotate-180"
+                    />
+                  </Link>
+
+                  {/* `pt-3` on the panel rather than a margin: the padding is
+                      part of the hover target, so the pointer never leaves the
+                      group on its way down. */}
+                  <div className="invisible absolute left-0 top-full pt-3 opacity-0 transition-[opacity,visibility] duration-150 group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100">
+                    <div className={`min-w-[220px] rounded-xl p-1.5 ${tokens.dropdown}`}>
+                      {item.children.map((child) => (
+                        <Link
+                          key={child.href}
+                          href={child.href}
+                          className={`block rounded-lg px-3 py-2 text-sm transition-colors ${
+                            isActive(child.href) ? tokens.mobileActive : tokens.mobileIdle
+                          }`}
+                        >
+                          {child.label}
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              ) : (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className={`text-sm font-medium transition-colors ${
+                    isActive(item.href) ? tokens.linkActive : tokens.link
+                  }`}
+                  style={isActive(item.href) ? { color: tokens.accent } : undefined}
+                >
+                  {item.label}
+                </Link>
+              ),
+            )}
           </nav>
 
           <div className="flex items-center gap-2">
@@ -270,16 +337,32 @@ const Header = () => {
         {mobileOpen && (
           <nav className={`mt-4 rounded-2xl p-4 lg:hidden ${tokens.mobileMenu}`}>
             {NAV_ITEMS.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                onClick={() => setMobileOpen(false)}
-                className={`block rounded-lg px-4 py-3 text-sm font-medium transition-colors ${
-                  isActive(item.href) ? tokens.mobileActive : tokens.mobileIdle
-                }`}
-              >
-                {item.label}
-              </Link>
+              <div key={item.href}>
+                <Link
+                  href={item.href}
+                  onClick={() => setMobileOpen(false)}
+                  className={`block rounded-lg px-4 py-3 text-sm font-medium transition-colors ${
+                    isActive(item.href) ? tokens.mobileActive : tokens.mobileIdle
+                  }`}
+                >
+                  {item.label}
+                </Link>
+                {/* Always open on mobile. A tap-to-expand accordion hides six
+                    destinations behind a second tap on the one menu where taps
+                    are the expensive thing. */}
+                {item.children?.map((child) => (
+                  <Link
+                    key={child.href}
+                    href={child.href}
+                    onClick={() => setMobileOpen(false)}
+                    className={`block rounded-lg py-2 pl-8 pr-4 text-sm transition-colors ${
+                      isActive(child.href) ? tokens.mobileActive : tokens.mobileIdle
+                    }`}
+                  >
+                    {child.label}
+                  </Link>
+                ))}
+              </div>
             ))}
           </nav>
         )}
