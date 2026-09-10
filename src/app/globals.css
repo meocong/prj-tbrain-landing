@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @import "shadcn/tailwind.css";
+@import "./blueprint.css";
 @plugin "@tailwindcss/typography";
 
 @custom-variant dark (&:is(.dark *));
@@ -219,8 +220,9 @@
   --color-rose: #F43F5E;
 
   /* Fonts */
-  --font-heading: var(--font-heading, "Space Grotesk", sans-serif);
-  --font-body: var(--font-body, "DM Sans", sans-serif);
+  /* Single Inter instance — alias heading to body for one download */
+  --font-body: var(--font-body, "Inter", sans-serif);
+  --font-heading: var(--font-body, "Inter", sans-serif);
   --font-mono: var(--font-mono, "JetBrains Mono", monospace);
 
   /* Shadows */
@@ -341,13 +343,13 @@
   --footer-bg: #FFFFFF;
   --footer-text: #0F172A;
   --footer-link: #475569;
-  --footer-muted: #64748B;
-  --footer-subtle: #94A3B8;
+  --footer-muted: #505B6B;   /* AA on white incl. over the purple glow */
+  --footer-subtle: #5A6473;  /* was #94A3B8 = 2.5:1 for "Quick links"/"Stay updated" */
   --footer-border: rgba(226, 232, 240, 0.9);
   --footer-chip-bg: #F8FAFC;
   --footer-input-bg: #F8FAFC;
-  --footer-accent: #6C3CF4;
-  --footer-glow: radial-gradient(ellipse, rgba(108,60,244,0.1) 0%, transparent 60%);
+  --footer-accent: #5A2CE0;   /* AA-passing violet on light (was #6C3CF4 = borderline) */
+  --footer-glow: radial-gradient(ellipse, rgba(108,60,244,0.07) 0%, transparent 60%);
   --marquee-border: rgba(15, 23, 42, 0.06);
   --marquee-chip-bg: rgba(15, 23, 42, 0.04);
   --marquee-chip-border: rgba(15, 23, 42, 0.09);
@@ -404,8 +406,8 @@
   --footer-bg: #020617;
   --footer-text: #F8FAFC;
   --footer-link: rgba(226, 232, 240, 0.78);
-  --footer-muted: rgba(226, 232, 240, 0.58);
-  --footer-subtle: rgba(226, 232, 240, 0.45);
+  --footer-muted: rgba(226, 232, 240, 0.6);
+  --footer-subtle: rgba(226, 232, 240, 0.62);   /* was 0.45 = 3.8:1 on #020617 */
   --footer-border: rgba(255, 255, 255, 0.08);
   --footer-chip-bg: rgba(255, 255, 255, 0.04);
   --footer-input-bg: rgba(255, 255, 255, 0.06);
@@ -451,12 +453,12 @@
 }
 
 html {
-  overflow-x: hidden;
+  overflow-x: clip;
   scroll-behavior: smooth;
 }
 
 body {
-  overflow-x: hidden;
+  overflow-x: clip;
   background-color: var(--bg-page);
   color: var(--text-primary);
   font-family: var(--font-body);
@@ -578,6 +580,7 @@ h1, h2, h3, h4, h5, h6 {
   border-radius: 1rem;
   border: 1px solid var(--border-default);
   background: var(--bg-card);
+  -webkit-backdrop-filter: blur(16px);
   backdrop-filter: blur(16px);
   box-shadow: var(--shadow-card);
   transition: border-color 0.2s, box-shadow 0.2s;
@@ -587,6 +590,7 @@ h1, h2, h3, h4, h5, h6 {
   border-radius: 1rem;
   border: 1px solid var(--border-default);
   background: var(--bg-card);
+  -webkit-backdrop-filter: blur(16px);
   backdrop-filter: blur(16px);
   box-shadow: var(--shadow-card);
   transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
@@ -601,6 +605,7 @@ h1, h2, h3, h4, h5, h6 {
   border-radius: 1rem;
   border: 1px solid var(--border-default);
   background: var(--bg-card);
+  -webkit-backdrop-filter: blur(16px);
   backdrop-filter: blur(16px);
   box-shadow: var(--shadow-card);
   cursor: pointer;
@@ -1042,25 +1047,33 @@ html.dark body {
    so light mode drops to the site's brand primary at 5.7:1.
    ───────────────────────────────────────────────────────────────────── */
 .samples-scope {
-  --sm-base: #FBFBFD;
-  --sm-base-rgb: 251, 251, 253;
-  --sm-band: #F2F3F8;
-  --sm-hairline: rgba(15, 23, 42, 0.12);
-  --sm-hairline-soft: rgba(15, 23, 42, 0.07);
-  --sm-text: #0B0E17;
-  --sm-text-mid: rgba(15, 23, 42, 0.68);
-  --sm-text-dim: rgba(15, 23, 42, 0.62);
-  --sm-value: rgba(15, 23, 42, 0.86);
-  --sm-accent: #6C3CF4;
-  --sm-accent-soft: rgba(108, 60, 244, 0.1);
-  /* Light mode's gradient partner. Darker than the dark theme's #10B981, which
-     is 2.3:1 on a near-white base and unreadable as text. */
-  --sm-accent-alt: #047857;
-  --sm-positive: #047857;
-  --sm-danger: #B91C1C;
-  --sm-rule: rgba(15, 23, 42, 0.22);
-  --sm-wash: rgba(15, 23, 42, 0.05);
-  --sm-playhead: rgba(15, 23, 42, 0.75);
+  /* Aliases of the site's blueprint palette, not copies of it.
+     `blueprint.css` is what /data/physical-ai and the case studies paint with,
+     and Tam's "clone style y hệt em nhé" means these pages should match it. An
+     earlier pass matched a four-month-old copy of physical-ai instead — this
+     branch forked on 2026-05-15 and the page was redesigned since — so the
+     samples base was slate #020617 against a production base of #0E0C24.
+     Pointing at the variables rather than pasting their values is what stops
+     that happening again: when blueprint moves, these move with it. */
+  --sm-base: var(--bp-bg);
+  /* Cannot be a var: this is consumed as bare `r,g,b` inside rgba() by the
+     gradients that fade video into the page. Keep in step with --bp-bg. */
+  --sm-base-rgb: 246, 246, 242;
+  --sm-band: var(--bp-surface-2);
+  --sm-hairline: var(--bp-line);
+  --sm-hairline-soft: var(--bp-grid-strong);
+  --sm-text: var(--bp-ink);
+  --sm-text-mid: var(--bp-ink-dim);
+  --sm-text-dim: var(--bp-ink-faint);
+  --sm-value: var(--bp-ink);
+  --sm-accent: var(--bp-cyan);
+  --sm-accent-soft: color-mix(in srgb, var(--bp-cyan) 10%, transparent);
+  --sm-accent-alt: var(--bp-purple);
+  --sm-positive: var(--bp-green);
+  --sm-danger: var(--bp-red);
+  --sm-rule: var(--bp-line-strong);
+  --sm-wash: var(--bp-code-bg);
+  --sm-playhead: var(--bp-ink-dim);
 
   /* Pills. Colour is the signal on a card: what the task is, how hard it was,
      what recorded it, what ships, and whether it passed its quality gate. */
@@ -1080,33 +1093,27 @@ html.dark body {
 }
 
 .dark .samples-scope {
-  /* Slate-950, the same base /data/physical-ai paints on, not the near-neutral
-     #07090F these pages used to use. Tam, 2026-09-09: "màu nó đang hơi off" —
-     the accent already matched, so what read as off was two different blacks
-     sitting one nav click apart. Measured: every text tier gains a little
-     contrast on the bluer base rather than losing it (dim 5.76:1 either way,
-     body 8.52:1, accent 7.41:1), so the move is free. */
-  --sm-base: #020617;
-  --sm-base-rgb: 2, 6, 23;
-  --sm-band: #0B1220;
-  --sm-hairline: rgba(255, 255, 255, 0.09);
-  --sm-hairline-soft: rgba(255, 255, 255, 0.06);
-  --sm-text: rgba(245, 246, 248, 0.96);
-  --sm-text-mid: rgba(226, 232, 240, 0.72);
-  --sm-text-dim: rgba(226, 232, 240, 0.58);
-  --sm-value: rgba(226, 232, 240, 0.88);
-  --sm-accent: #A78BFA;
-  --sm-accent-soft: rgba(167, 139, 250, 0.14);
-  /* The second brand colour, for gradients only. It is the same emerald as
-     --sm-positive by value and deliberately a separate token: `positive` means
-     "this check passed" and is read as a status, so painting a hero gradient
-     with it would make every hero look like a pass badge. 7.95:1 on the base. */
-  --sm-accent-alt: #10B981;
-  --sm-positive: #10B981;
-  --sm-danger: #FCA5A5;
-  --sm-rule: rgba(255, 255, 255, 0.22);
-  --sm-wash: rgba(255, 255, 255, 0.05);
-  --sm-playhead: rgba(255, 255, 255, 0.75);
+  /* Same aliasing as above, dark half. Measured against --bp-bg #0E0C24 before
+     switching, because the dim tier carries 10-11px labels across the whole
+     metadata table: ink 16.78:1, ink-dim 7.61:1, ink-faint 6.45:1, cyan
+     11.88:1, purple 5.08:1. Every tier clears AA. */
+  --sm-base: var(--bp-bg);
+  --sm-base-rgb: 14, 12, 36;
+  --sm-band: var(--bp-bg-2);
+  --sm-hairline: var(--bp-line);
+  --sm-hairline-soft: var(--bp-grid-strong);
+  --sm-text: var(--bp-ink);
+  --sm-text-mid: var(--bp-ink-dim);
+  --sm-text-dim: var(--bp-ink-faint);
+  --sm-value: var(--bp-ink);
+  --sm-accent: var(--bp-cyan);
+  --sm-accent-soft: color-mix(in srgb, var(--bp-cyan) 14%, transparent);
+  --sm-accent-alt: var(--bp-purple);
+  --sm-positive: var(--bp-green);
+  --sm-danger: var(--bp-red);
+  --sm-rule: var(--bp-line-strong);
+  --sm-wash: var(--bp-surface-2);
+  --sm-playhead: var(--bp-ink-dim);
 
   --sm-on-accent: #0B0620;
   --sm-pill-skill-bg: rgba(167, 139, 250, 0.12);
@@ -1460,103 +1467,72 @@ html.dark body {
 .case-study-body {
   font-size: 17px;
   line-height: 1.75;
-  color: #222222;
+  color: var(--bp-ink-dim);
 }
 .case-study-body > * + * { margin-top: 1rem; }
 
-/* h2 sections — colored vertical bar prefix; cycles palette so consecutive
-   sections feel distinct without admin having to mark them. */
-.case-study-body h2 {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  font-size: 1.875rem;
-  font-weight: 700;
-  color: #222222;
-  letter-spacing: -0.01em;
-  margin: 3rem 0 1.25rem;
-  page-break-after: avoid;
-}
-.case-study-body h2::before {
-  content: "";
-  display: inline-block;
-  width: 0.5rem;
-  height: 2rem;
-  border-radius: 9999px;
-  background: #2563eb; /* default — blue */
-  flex-shrink: 0;
-}
-.case-study-body h2:nth-of-type(2)::before { background: #4f46e5; } /* indigo */
-.case-study-body h2:nth-of-type(3)::before { background: #dc2626; } /* red — Challenge */
-.case-study-body h2:nth-of-type(4)::before { background: #4f46e5; } /* indigo */
-.case-study-body h2:nth-of-type(5)::before { background: #2563eb; } /* blue */
-.case-study-body h2:nth-of-type(6)::before { background: #16a34a; } /* green — Outcome */
-.case-study-body h2:nth-of-type(7)::before { background: #9333ea; } /* purple */
-.case-study-body h2:nth-of-type(8)::before { background: #db2777; } /* pink */
-.case-study-body h2:nth-of-type(9)::before { background: #f59e0b; } /* amber */
-
 .case-study-body h3 {
-  font-size: 1.25rem;
+  font-family: var(--font-heading);
+  font-size: 1.2rem;
   font-weight: 600;
-  color: #222222;
-  margin: 1.75rem 0 0.5rem;
+  color: var(--bp-ink);
+  letter-spacing: -0.01em;
+  margin: 1.9rem 0 0.5rem;
   page-break-after: avoid;
 }
 
-.case-study-body p { margin: 0.75rem 0; color: #222222; }
-.case-study-body strong { color: #2563eb; font-weight: 700; }
-.case-study-body em { color: #6b7280; font-style: italic; }
-.case-study-body a { color: #6C3CF4; text-decoration: underline; }
+.case-study-body p { margin: 0.75rem 0; color: var(--bp-ink-dim); }
+.case-study-body strong { color: var(--bp-ink); font-weight: 700; }
+.case-study-body em { color: var(--bp-ink-faint); font-style: italic; }
+.case-study-body a { color: var(--bp-cyan); text-decoration: underline; }
 
-/* Lists rendered as colored cards — each li becomes a sub-card.
-   Cycles border colors so a Challenge list looks layered. */
+/* Lists — hairline sub-cards, token accent border. */
 .case-study-body ul, .case-study-body ol {
   list-style: none;
   padding: 0;
   margin: 1rem 0;
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
+  gap: 0.6rem;
 }
 .case-study-body ul > li, .case-study-body ol > li {
   position: relative;
-  background: rgba(255, 255, 255, 0.85);
-  backdrop-filter: blur(6px);
-  border-radius: 0.75rem;
-  border-left: 4px solid #2563eb;
-  padding: 0.85rem 1.25rem;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
-  color: #222222;
-}
-.case-study-body ul > li:nth-child(2n)   { border-left-color: #4f46e5; }
-.case-study-body ul > li:nth-child(3n)   { border-left-color: #dc2626; }
-.case-study-body ul > li:nth-child(4n)   { border-left-color: #16a34a; }
-.case-study-body ul > li:nth-child(5n)   { border-left-color: #9333ea; }
-.case-study-body ol > li:nth-child(2n)   { border-left-color: #4f46e5; }
-.case-study-body ol > li:nth-child(3n)   { border-left-color: #16a34a; }
-
-/* Treat consecutive paragraphs after an h2 as a soft "intro card" */
-.case-study-body h2 + p,
-.case-study-body h2 + p + p {
-  font-size: 1.0625rem;
-  color: #1f2937;
+  background: var(--bp-card-bg, transparent);
+  border: 1px solid var(--bp-line);
+  border-left: 3px solid var(--bp-cyan);
+  border-radius: 0.7rem;
+  padding: 0.8rem 1.1rem;
+  color: var(--bp-ink-dim);
 }
 
 .case-study-body blockquote {
-  background: linear-gradient(135deg, rgba(108,60,244,0.06) 0%, rgba(16,185,129,0.04) 100%);
-  border-left: 4px solid #6C3CF4;
-  border-radius: 0.75rem;
-  padding: 1rem 1.25rem;
+  border-left: 3px solid var(--bp-cyan);
+  border-radius: 0.5rem;
+  padding: 0.5rem 0 0.5rem 1.1rem;
   font-style: italic;
-  color: #4b5563;
+  color: var(--bp-ink);
   margin: 1.5rem 0;
 }
 
+/* Figures — captioned owned imagery, matches blog treatment. */
+.case-study-body figure { margin: 1.75rem 0; }
 .case-study-body img {
   border-radius: 0.75rem;
-  margin: 1.5rem 0;
+  margin: 0;
   max-width: 100%;
   height: auto;
+  border: 1px solid var(--bp-line);
+}
+.case-study-body figcaption {
+  margin-top: 0.6rem;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--bp-ink-faint);
+}
+.case-study-body code {
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+  color: var(--bp-cyan);
 }
 
 .case-study-body--legacy h2 {

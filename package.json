@@ -10,11 +10,21 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "db:migrate": "node scripts/db-migrate.mjs",
+    "supabase:login": "npx -y supabase@2.98.2 login",
+    "supabase:link": "npx -y supabase@2.98.2 link",
+    "supabase:db:push": "npx -y supabase@2.98.2 db push",
+    "supabase:status": "npx -y supabase@2.98.2 status",
+    "supabase:local:start": "npx -y supabase start",
+    "supabase:local:stop": "npx -y supabase stop --backup=false",
+    "blog:seed:drafts": "node scripts/seed-blog-drafts.mjs",
+    "blog:mirror:prod": "node scripts/mirror-prod-blog.mjs",
+    "env:use-supabase": "node scripts/use-supabase-env.mjs",
     "type-check": "tsc --noEmit",
     "ingest:tb": "tsx scripts/ingest-tb.ts",
     "issue:passcode": "tsx scripts/issue-passcode.ts",
     "email:preview": "email dev --dir ./src/emails",
-    "samples:stage": "node --env-file=.env.local scripts/samples/stage-packs.mjs"
+    "casestudy:seed": "node scripts/seed-case-studies.mjs"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.90.0",

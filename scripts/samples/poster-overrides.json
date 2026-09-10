@@ -1,0 +1,4 @@
+{
+  "_comment": "slug -> seconds into the clip. A timestamp here wins over the scorer in cut-posters.py, no questions asked. Add a line when somebody watches a clip and picks a better frame than the heuristic did; that is the intended way to answer Tam's 'bảo Trâm / team chọn'.",
+  "_example": "\"cowl-installation\": 84.5"
+}

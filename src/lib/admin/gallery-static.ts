@@ -220,6 +220,78 @@ export const STATIC_IMAGES: StaticImage[] = [
     "size_bytes": 33889
   },
   {
+    "path": "/images/body-kpts/arrange_fabric_t25.jpg",
+    "name": "arrange_fabric_t25",
+    "ext": "jpg",
+    "size_bytes": 237504
+  },
+  {
+    "path": "/images/body-kpts/arrange_fabric_t50.jpg",
+    "name": "arrange_fabric_t50",
+    "ext": "jpg",
+    "size_bytes": 229878
+  },
+  {
+    "path": "/images/body-kpts/arrange_fabric_t75.jpg",
+    "name": "arrange_fabric_t75",
+    "ext": "jpg",
+    "size_bytes": 231125
+  },
+  {
+    "path": "/images/body-kpts/iron_product_t25.jpg",
+    "name": "iron_product_t25",
+    "ext": "jpg",
+    "size_bytes": 221527
+  },
+  {
+    "path": "/images/body-kpts/iron_product_t50.jpg",
+    "name": "iron_product_t50",
+    "ext": "jpg",
+    "size_bytes": 253931
+  },
+  {
+    "path": "/images/body-kpts/iron_product_t75.jpg",
+    "name": "iron_product_t75",
+    "ext": "jpg",
+    "size_bytes": 246739
+  },
+  {
+    "path": "/images/body-kpts/pick_up_the_cup_t25.jpg",
+    "name": "pick_up_the_cup_t25",
+    "ext": "jpg",
+    "size_bytes": 59688
+  },
+  {
+    "path": "/images/body-kpts/pick_up_the_cup_t50.jpg",
+    "name": "pick_up_the_cup_t50",
+    "ext": "jpg",
+    "size_bytes": 68350
+  },
+  {
+    "path": "/images/body-kpts/pick_up_the_cup_t75.jpg",
+    "name": "pick_up_the_cup_t75",
+    "ext": "jpg",
+    "size_bytes": 65273
+  },
+  {
+    "path": "/images/body-kpts/sew_hem_t25.jpg",
+    "name": "sew_hem_t25",
+    "ext": "jpg",
+    "size_bytes": 260095
+  },
+  {
+    "path": "/images/body-kpts/sew_hem_t50.jpg",
+    "name": "sew_hem_t50",
+    "ext": "jpg",
+    "size_bytes": 254048
+  },
+  {
+    "path": "/images/body-kpts/sew_hem_t75.jpg",
+    "name": "sew_hem_t75",
+    "ext": "jpg",
+    "size_bytes": 238125
+  },
+  {
     "path": "/images/code-screen.jpg",
     "name": "code-screen",
     "ext": "jpg",
@@ -238,6 +310,168 @@ export const STATIC_IMAGES: StaticImage[] = [
     "size_bytes": 77862
   },
   {
+    "path": "/images/deliverables/all6-montage.png",
+    "name": "all6-montage",
+    "ext": "png",
+    "size_bytes": 388564
+  },
+  {
+    "path": "/images/depth/pick_up_the_cup_rgb_depth.jpg",
+    "name": "pick_up_the_cup_rgb_depth",
+    "ext": "jpg",
+    "size_bytes": 68957
+  },
+  {
+    "path": "/images/descriptions/arrange_fabric.jpg",
+    "name": "arrange_fabric",
+    "ext": "jpg",
+    "size_bytes": 78496
+  },
+  {
+    "path": "/images/descriptions/iron_product.jpg",
+    "name": "iron_product",
+    "ext": "jpg",
+    "size_bytes": 82666
+  },
+  {
+    "path": "/images/descriptions/pick_up_the_cup.jpg",
+    "name": "pick_up_the_cup",
+    "ext": "jpg",
+    "size_bytes": 81945
+  },
+  {
+    "path": "/images/descriptions/sew_hem.jpg",
+    "name": "sew_hem",
+    "ext": "jpg",
+    "size_bytes": 84518
+  },
+  {
+    "path": "/images/diagrams/diagram-ladder.svg",
+    "name": "diagram-ladder",
+    "ext": "svg",
+    "size_bytes": 3132
+  },
+  {
+    "path": "/images/diagrams/diagram-pipeline.svg",
+    "name": "diagram-pipeline",
+    "ext": "svg",
+    "size_bytes": 4787
+  },
+  {
+    "path": "/images/diagrams/diagram-pricing.svg",
+    "name": "diagram-pricing",
+    "ext": "svg",
+    "size_bytes": 3959
+  },
+  {
+    "path": "/images/diagrams/diagram-qc.svg",
+    "name": "diagram-qc",
+    "ext": "svg",
+    "size_bytes": 3004
+  },
+  {
+    "path": "/images/env/dexterous-poster.jpg",
+    "name": "dexterous-poster",
+    "ext": "jpg",
+    "size_bytes": 38107
+  },
+  {
+    "path": "/images/env/dong_goi-poster.jpg",
+    "name": "dong_goi-poster",
+    "ext": "jpg",
+    "size_bytes": 27013
+  },
+  {
+    "path": "/images/env/electronics.jpg",
+    "name": "electronics",
+    "ext": "jpg",
+    "size_bytes": 262439
+  },
+  {
+    "path": "/images/env/gan_tag-poster.jpg",
+    "name": "gan_tag-poster",
+    "ext": "jpg",
+    "size_bytes": 35316
+  },
+  {
+    "path": "/images/env/hand.jpg",
+    "name": "hand",
+    "ext": "jpg",
+    "size_bytes": 217092
+  },
+  {
+    "path": "/images/env/in_ma_so-poster.jpg",
+    "name": "in_ma_so-poster",
+    "ext": "jpg",
+    "size_bytes": 39797
+  },
+  {
+    "path": "/images/env/is_san_pham-poster.jpg",
+    "name": "is_san_pham-poster",
+    "ext": "jpg",
+    "size_bytes": 35010
+  },
+  {
+    "path": "/images/env/kiem_tra_qc-poster.jpg",
+    "name": "kiem_tra_qc-poster",
+    "ext": "jpg",
+    "size_bytes": 41086
+  },
+  {
+    "path": "/images/env/kitchen.jpg",
+    "name": "kitchen",
+    "ext": "jpg",
+    "size_bytes": 220615
+  },
+  {
+    "path": "/images/env/may_san_pham-poster.jpg",
+    "name": "may_san_pham-poster",
+    "ext": "jpg",
+    "size_bytes": 37674
+  },
+  {
+    "path": "/images/env/pov.jpg",
+    "name": "pov",
+    "ext": "jpg",
+    "size_bytes": 301656
+  },
+  {
+    "path": "/images/env/sap_xep_vai-poster.jpg",
+    "name": "sap_xep_vai-poster",
+    "ext": "jpg",
+    "size_bytes": 29179
+  },
+  {
+    "path": "/images/env/sorting-poster.jpg",
+    "name": "sorting-poster",
+    "ext": "jpg",
+    "size_bytes": 53743
+  },
+  {
+    "path": "/images/env/sorting.jpg",
+    "name": "sorting",
+    "ext": "jpg",
+    "size_bytes": 242948
+  },
+  {
+    "path": "/images/env/textile.jpg",
+    "name": "textile",
+    "ext": "jpg",
+    "size_bytes": 256461
+  },
+  {
+    "path": "/images/env/warehouse-poster.jpg",
+    "name": "warehouse-poster",
+    "ext": "jpg",
+    "size_bytes": 66712
+  },
+  {
+    "path": "/images/env/warehouse.jpg",
+    "name": "warehouse",
+    "ext": "jpg",
+    "size_bytes": 232580
+  },
+  {
     "path": "/images/facebook.png",
     "name": "facebook",
     "ext": "png",
@@ -254,6 +488,54 @@ export const STATIC_IMAGES: StaticImage[] = [
     "name": "hero-poster",
     "ext": "jpg",
     "size_bytes": 75432
+  },
+  {
+    "path": "/images/hitl/annotated_sample.jpg",
+    "name": "annotated_sample",
+    "ext": "jpg",
+    "size_bytes": 48902
+  },
+  {
+    "path": "/images/hitl/hitl_capture_thumb.jpg",
+    "name": "hitl_capture_thumb",
+    "ext": "jpg",
+    "size_bytes": 45856
+  },
+  {
+    "path": "/images/hitl/hitl_clean_thumb.jpg",
+    "name": "hitl_clean_thumb",
+    "ext": "jpg",
+    "size_bytes": 44284
+  },
+  {
+    "path": "/images/hitl/hitl_wiping_thumb.jpg",
+    "name": "hitl_wiping_thumb",
+    "ext": "jpg",
+    "size_bytes": 44139
+  },
+  {
+    "path": "/images/hitl/preview_first.jpg",
+    "name": "preview_first",
+    "ext": "jpg",
+    "size_bytes": 45856
+  },
+  {
+    "path": "/images/hitl/preview_last.jpg",
+    "name": "preview_last",
+    "ext": "jpg",
+    "size_bytes": 66620
+  },
+  {
+    "path": "/images/hitl/preview_mid.jpg",
+    "name": "preview_mid",
+    "ext": "jpg",
+    "size_bytes": 61491
+  },
+  {
+    "path": "/images/hitl/reel_frame.png",
+    "name": "reel_frame",
+    "ext": "png",
+    "size_bytes": 1680224
   },
   {
     "path": "/images/home-cinema-poster.jpg",
@@ -298,10 +580,64 @@ export const STATIC_IMAGES: StaticImage[] = [
     "size_bytes": 271106
   },
   {
+    "path": "/images/modalities/exo-mocap.jpg",
+    "name": "exo-mocap",
+    "ext": "jpg",
+    "size_bytes": 115529
+  },
+  {
+    "path": "/images/modalities/mocap.jpg",
+    "name": "mocap",
+    "ext": "jpg",
+    "size_bytes": 82961
+  },
+  {
+    "path": "/images/modalities/qa.jpg",
+    "name": "qa",
+    "ext": "jpg",
+    "size_bytes": 97203
+  },
+  {
+    "path": "/images/modalities/spatial.jpg",
+    "name": "spatial",
+    "ext": "jpg",
+    "size_bytes": 140534
+  },
+  {
+    "path": "/images/modalities/teleop.jpg",
+    "name": "teleop",
+    "ext": "jpg",
+    "size_bytes": 87969
+  },
+  {
+    "path": "/images/modalities/umi.jpg",
+    "name": "umi",
+    "ext": "jpg",
+    "size_bytes": 73281
+  },
+  {
     "path": "/images/office.png",
     "name": "office",
     "ext": "png",
     "size_bytes": 2439245
+  },
+  {
+    "path": "/images/pack/hardware-pack.png",
+    "name": "hardware-pack",
+    "ext": "png",
+    "size_bytes": 2234221
+  },
+  {
+    "path": "/images/pack/operator-app.png",
+    "name": "operator-app",
+    "ext": "png",
+    "size_bytes": 1694153
+  },
+  {
+    "path": "/images/parts/headrig.jpg",
+    "name": "headrig",
+    "ext": "jpg",
+    "size_bytes": 214962
   },
   {
     "path": "/images/physical-poster.jpg",
@@ -382,6 +718,198 @@ export const STATIC_IMAGES: StaticImage[] = [
     "size_bytes": 52839
   },
   {
+    "path": "/images/public-datasets/ego4d.jpg",
+    "name": "ego4d",
+    "ext": "jpg",
+    "size_bytes": 9379
+  },
+  {
+    "path": "/images/public-datasets/egtea.jpg",
+    "name": "egtea",
+    "ext": "jpg",
+    "size_bytes": 315
+  },
+  {
+    "path": "/images/public-datasets/epic-kitchens.jpg",
+    "name": "epic-kitchens",
+    "ext": "jpg",
+    "size_bytes": 9379
+  },
+  {
+    "path": "/images/real-captures/clean_workstation__op_unknown__20260617T01.jpg",
+    "name": "clean_workstation__op_unknown__20260617T01",
+    "ext": "jpg",
+    "size_bytes": 44284
+  },
+  {
+    "path": "/images/real-captures/clean_workstation_defect__op_unknown__20260617T01.jpg",
+    "name": "clean_workstation_defect__op_unknown__20260617T01",
+    "ext": "jpg",
+    "size_bytes": 49805
+  },
+  {
+    "path": "/images/real-captures/clean_workstation_defect-loop.jpg",
+    "name": "clean_workstation_defect-loop",
+    "ext": "jpg",
+    "size_bytes": 45511
+  },
+  {
+    "path": "/images/real-captures/clean_workstation-loop.jpg",
+    "name": "clean_workstation-loop",
+    "ext": "jpg",
+    "size_bytes": 43587
+  },
+  {
+    "path": "/images/real-captures/cleaning_pantry_surface_defect__op_unknown__20260617T01.jpg",
+    "name": "cleaning_pantry_surface_defect__op_unknown__20260617T01",
+    "ext": "jpg",
+    "size_bytes": 166346
+  },
+  {
+    "path": "/images/real-captures/cleaning_pantry_surface_defect-loop.jpg",
+    "name": "cleaning_pantry_surface_defect-loop",
+    "ext": "jpg",
+    "size_bytes": 127500
+  },
+  {
+    "path": "/images/real-captures/gan_tag_cho_san_pham__op_mobile__20260626T01.jpg",
+    "name": "gan_tag_cho_san_pham__op_mobile__20260626T01",
+    "ext": "jpg",
+    "size_bytes": 216902
+  },
+  {
+    "path": "/images/real-captures/gan_tag_cho_san_pham__op_mobile__20260626T02.jpg",
+    "name": "gan_tag_cho_san_pham__op_mobile__20260626T02",
+    "ext": "jpg",
+    "size_bytes": 182237
+  },
+  {
+    "path": "/images/real-captures/gan_tag_cho_san_pham__op_mobile__20260626T03.jpg",
+    "name": "gan_tag_cho_san_pham__op_mobile__20260626T03",
+    "ext": "jpg",
+    "size_bytes": 160275
+  },
+  {
+    "path": "/images/real-captures/gan_tag_cho_san_pham-loop.jpg",
+    "name": "gan_tag_cho_san_pham-loop",
+    "ext": "jpg",
+    "size_bytes": 221504
+  },
+  {
+    "path": "/images/real-captures/open_and_close_door__op_unknown__20260617T01.jpg",
+    "name": "open_and_close_door__op_unknown__20260617T01",
+    "ext": "jpg",
+    "size_bytes": 33242
+  },
+  {
+    "path": "/images/real-captures/open_and_close_door-loop.jpg",
+    "name": "open_and_close_door-loop",
+    "ext": "jpg",
+    "size_bytes": 34697
+  },
+  {
+    "path": "/images/real-captures/pick_up_cup_defect__op_unknown__20260617T01.jpg",
+    "name": "pick_up_cup_defect__op_unknown__20260617T01",
+    "ext": "jpg",
+    "size_bytes": 49421
+  },
+  {
+    "path": "/images/real-captures/pick_up_cup_defect-loop.jpg",
+    "name": "pick_up_cup_defect-loop",
+    "ext": "jpg",
+    "size_bytes": 33223
+  },
+  {
+    "path": "/images/real-captures/pick_up_item_from_fridge__op_unknown__20260617T01.jpg",
+    "name": "pick_up_item_from_fridge__op_unknown__20260617T01",
+    "ext": "jpg",
+    "size_bytes": 43801
+  },
+  {
+    "path": "/images/real-captures/pick_up_item_from_fridge-loop.jpg",
+    "name": "pick_up_item_from_fridge-loop",
+    "ext": "jpg",
+    "size_bytes": 42431
+  },
+  {
+    "path": "/images/real-captures/pick_up_the_cup__op_anna__20260701T01.jpg",
+    "name": "pick_up_the_cup__op_anna__20260701T01",
+    "ext": "jpg",
+    "size_bytes": 45856
+  },
+  {
+    "path": "/images/real-captures/pick_up_the_cup__op_unknown__20260617T01.jpg",
+    "name": "pick_up_the_cup__op_unknown__20260617T01",
+    "ext": "jpg",
+    "size_bytes": 45856
+  },
+  {
+    "path": "/images/real-captures/pick_up_the_cup-loop.jpg",
+    "name": "pick_up_the_cup-loop",
+    "ext": "jpg",
+    "size_bytes": 42771
+  },
+  {
+    "path": "/images/real-captures/smoke_test__op_smoke__20260701T01.jpg",
+    "name": "smoke_test__op_smoke__20260701T01",
+    "ext": "jpg",
+    "size_bytes": 28384
+  },
+  {
+    "path": "/images/real-captures/wiping_pantry_surface__op_unknown__20260617T01.jpg",
+    "name": "wiping_pantry_surface__op_unknown__20260617T01",
+    "ext": "jpg",
+    "size_bytes": 44139
+  },
+  {
+    "path": "/images/real-captures/wiping_pantry_surface-loop.jpg",
+    "name": "wiping_pantry_surface-loop",
+    "ext": "jpg",
+    "size_bytes": 38794
+  },
+  {
+    "path": "/images/real-samples/aloha.png",
+    "name": "aloha",
+    "ext": "png",
+    "size_bytes": 108911
+  },
+  {
+    "path": "/images/real-samples/mobile.png",
+    "name": "mobile",
+    "ext": "png",
+    "size_bytes": 82340
+  },
+  {
+    "path": "/images/real-samples/montage.png",
+    "name": "montage",
+    "ext": "png",
+    "size_bytes": 388564
+  },
+  {
+    "path": "/images/real-samples/openx.png",
+    "name": "openx",
+    "ext": "png",
+    "size_bytes": 158522
+  },
+  {
+    "path": "/images/real-samples/pusht.png",
+    "name": "pusht",
+    "ext": "png",
+    "size_bytes": 35942
+  },
+  {
+    "path": "/images/real-samples/sim.png",
+    "name": "sim",
+    "ext": "png",
+    "size_bytes": 19790
+  },
+  {
+    "path": "/images/real-samples/umi.png",
+    "name": "umi",
+    "ext": "png",
+    "size_bytes": 156553
+  },
+  {
     "path": "/images/robot-hand.jpg",
     "name": "robot-hand",
     "ext": "jpg",
@@ -398,6 +926,42 @@ export const STATIC_IMAGES: StaticImage[] = [
     "name": "robotics-hero",
     "ext": "jpg",
     "size_bytes": 50107
+  },
+  {
+    "path": "/images/samples/cup.jpg",
+    "name": "cup",
+    "ext": "jpg",
+    "size_bytes": 20569
+  },
+  {
+    "path": "/images/samples/defect.jpg",
+    "name": "defect",
+    "ext": "jpg",
+    "size_bytes": 19720
+  },
+  {
+    "path": "/images/samples/door.jpg",
+    "name": "door",
+    "ext": "jpg",
+    "size_bytes": 11105
+  },
+  {
+    "path": "/images/samples/fridge.jpg",
+    "name": "fridge",
+    "ext": "jpg",
+    "size_bytes": 18112
+  },
+  {
+    "path": "/images/samples/wipe.jpg",
+    "name": "wipe",
+    "ext": "jpg",
+    "size_bytes": 15435
+  },
+  {
+    "path": "/images/samples/workstation.jpg",
+    "name": "workstation",
+    "ext": "jpg",
+    "size_bytes": 17936
   },
   {
     "path": "/images/scientist-lab.jpg",
@@ -430,9 +994,147 @@ export const STATIC_IMAGES: StaticImage[] = [
     "size_bytes": 68901
   },
   {
+    "path": "/images/textile-annotated/arrange_01.jpg",
+    "name": "arrange_01",
+    "ext": "jpg",
+    "size_bytes": 200509
+  },
+  {
+    "path": "/images/textile-annotated/arrange_02.jpg",
+    "name": "arrange_02",
+    "ext": "jpg",
+    "size_bytes": 165879
+  },
+  {
+    "path": "/images/textile-annotated/iron_01.jpg",
+    "name": "iron_01",
+    "ext": "jpg",
+    "size_bytes": 216757
+  },
+  {
+    "path": "/images/textile-annotated/iron_02.jpg",
+    "name": "iron_02",
+    "ext": "jpg",
+    "size_bytes": 188729
+  },
+  {
+    "path": "/images/textile-annotated/package_01.jpg",
+    "name": "package_01",
+    "ext": "jpg",
+    "size_bytes": 119547
+  },
+  {
+    "path": "/images/textile-annotated/package_02.jpg",
+    "name": "package_02",
+    "ext": "jpg",
+    "size_bytes": 206144
+  },
+  {
+    "path": "/images/textile-annotated/pick_up_the_cup.jpg",
+    "name": "pick_up_the_cup",
+    "ext": "jpg",
+    "size_bytes": 45461
+  },
+  {
+    "path": "/images/textile-annotated/print_01.jpg",
+    "name": "print_01",
+    "ext": "jpg",
+    "size_bytes": 152134
+  },
+  {
+    "path": "/images/textile-annotated/print_02.jpg",
+    "name": "print_02",
+    "ext": "jpg",
+    "size_bytes": 189736
+  },
+  {
+    "path": "/images/textile-annotated/quality_01.jpg",
+    "name": "quality_01",
+    "ext": "jpg",
+    "size_bytes": 74282
+  },
+  {
+    "path": "/images/textile-annotated/quality_02.jpg",
+    "name": "quality_02",
+    "ext": "jpg",
+    "size_bytes": 161371
+  },
+  {
+    "path": "/images/textile-annotated/quality_check.jpg",
+    "name": "quality_check",
+    "ext": "jpg",
+    "size_bytes": 40569
+  },
+  {
+    "path": "/images/textile-annotated/sew_01.jpg",
+    "name": "sew_01",
+    "ext": "jpg",
+    "size_bytes": 238278
+  },
+  {
+    "path": "/images/textile-annotated/sew_02.jpg",
+    "name": "sew_02",
+    "ext": "jpg",
+    "size_bytes": 203484
+  },
+  {
+    "path": "/images/textile-raw/arrange_01.jpg",
+    "name": "arrange_01",
+    "ext": "jpg",
+    "size_bytes": 43028
+  },
+  {
+    "path": "/images/textile-raw/arrange_02.jpg",
+    "name": "arrange_02",
+    "ext": "jpg",
+    "size_bytes": 37924
+  },
+  {
+    "path": "/images/textile-raw/iron_01.jpg",
+    "name": "iron_01",
+    "ext": "jpg",
+    "size_bytes": 38874
+  },
+  {
+    "path": "/images/textile-raw/iron_02.jpg",
+    "name": "iron_02",
+    "ext": "jpg",
+    "size_bytes": 44589
+  },
+  {
+    "path": "/images/textile-raw/package_01.jpg",
+    "name": "package_01",
+    "ext": "jpg",
+    "size_bytes": 23639
+  },
+  {
+    "path": "/images/textile-raw/package_02.jpg",
+    "name": "package_02",
+    "ext": "jpg",
+    "size_bytes": 39714
+  },
+  {
+    "path": "/images/textile-raw/sew_01.jpg",
+    "name": "sew_01",
+    "ext": "jpg",
+    "size_bytes": 39973
+  },
+  {
+    "path": "/images/textile-raw/sew_02.jpg",
+    "name": "sew_02",
+    "ext": "jpg",
+    "size_bytes": 42317
+  },
+  {
     "path": "/images/twitter.png",
     "name": "twitter",
     "ext": "png",
     "size_bytes": 488
+  },
+  {
+    "path": "/images/worker-hero-poster.jpg",
+    "name": "worker-hero-poster",
+    "ext": "jpg",
+    "size_bytes": 115436
   }
 ];

@@ -22,14 +22,16 @@ import type { CSSProperties, ReactNode } from "react";
  * match a third.
  */
 
-/** Emerald first, violet second — the order the reference paints them. */
+/** Cyan first, purple second — the two accents blueprint.css actually carries. */
 const WASH =
-  "radial-gradient(ellipse 90% 70% at 20% 30%, rgba(16,185,129,0.26) 0%, transparent 55%)," +
-  "radial-gradient(ellipse 80% 60% at 80% 70%, rgba(108,60,244,0.22) 0%, transparent 55%)";
+  "radial-gradient(ellipse 90% 70% at 20% 30%, color-mix(in srgb, var(--bp-cyan) 26%, transparent) 0%, transparent 55%)," +
+  "radial-gradient(ellipse 80% 60% at 80% 70%, color-mix(in srgb, var(--bp-purple) 22%, transparent) 0%, transparent 55%)";
 
+/** `--bp-grid-line` rather than a white literal: it is teal-tinted in dark and
+    ink-tinted in light, which a hardcoded `rgba(255,255,255,0.04)` cannot be. */
 const GRID =
-  "linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px)," +
-  "linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px)";
+  "linear-gradient(var(--bp-grid-line) 1px, transparent 1px)," +
+  "linear-gradient(90deg, var(--bp-grid-line) 1px, transparent 1px)";
 
 /**
  * Both backdrop layers. Absolutely positioned, so the caller needs a
@@ -74,11 +76,12 @@ export function HeroWash({ className = "" }: { className?: string }) {
  * clipped text and is what gives the word its glow on the reference page.
  */
 export const GRADIENT_TEXT: CSSProperties = {
-  background: "linear-gradient(120deg, #A78BFA 0%, #6C3CF4 40%, #10B981 100%)",
+  background:
+    "linear-gradient(120deg, var(--bp-purple) 0%, var(--bp-cyan-strong) 55%, var(--bp-cyan) 100%)",
   WebkitBackgroundClip: "text",
   WebkitTextFillColor: "transparent",
   backgroundClip: "text",
-  textShadow: "0 0 42px rgba(108,60,244,0.55)",
+  textShadow: "0 0 42px color-mix(in srgb, var(--bp-purple) 55%, transparent)",
 };
 
 export function GradientWord({ children }: { children: ReactNode }) {

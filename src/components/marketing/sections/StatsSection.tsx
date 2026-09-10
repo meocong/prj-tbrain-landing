@@ -98,7 +98,7 @@ export function StatsSection() {
                 background: "var(--product-card-bg)",
                 border: "1px solid var(--product-card-border)",
                 boxShadow: "var(--product-card-shadow)",
-                backdropFilter: "blur(12px)",
+                WebkitBackdropFilter: "blur(12px)", backdropFilter: "blur(12px)",
                 minHeight: "220px",
               }}
             >
