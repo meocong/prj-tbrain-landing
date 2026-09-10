@@ -33,13 +33,16 @@ connected skin component:
 
   size      its area as a fraction of frame, clipped at a plateau. Bigger is
             better up to a point; past it the "hand" is a torso or a wall.
-  edges     a HARD REJECT if it touches the frame border, not a penalty. This is
-            the whole point of the pass — a blob running off the edge is a cut
-            hand, or an arm, which is the same failure — and it was a 0.35
-            multiplier first, which was too weak: a bright forearm leaving the
-            frame still outscored a small clean hand, and 4 of the first 12
-            shipped cut. `pick` now takes the best UNCUT candidate and falls
-            back to a cut one only when the whole clip is cut.
+  palm      a HARD REJECT unless a whole hand is in frame, measured as the peak
+            of the blob's distance transform — the centre of the largest circle
+            that fits inside it, which lands in the palm. It must have a real
+            radius (not a wrist) and sit at least its own radius from every
+            border. The forearm is allowed to leave the shot; the palm is not.
+            Two earlier rules failed here: a 0.35 penalty was a discount, not a
+            veto, and shipped 4 cut hands in the first 12; rejecting any blob
+            that touched a border over-corrected, because hand and forearm are
+            one skin component and the forearm always exits frame — that left 40
+            of 118 clips with no candidate at all.
   motion    its mean absolute difference against a frame 0.4 s earlier. Hands
             move and wood does not, and this is what keeps a cardboard box from
             outscoring a hand. Rewarded, but capped and square-rooted: the first
@@ -109,20 +112,32 @@ def score(bgr, prev_bgr):
     if frac > 0.34:
         size *= 0.25
 
-    # The point of the pass. A blob running off the frame is a cut hand — or an
-    # arm, which is the same failure wearing a different name.
+    # Is a whole HAND in frame — not "is the blob clear of the edges".
     #
-    # This was a 0.35 multiplier and that was too weak to do the job: a discount
-    # is not a veto, and a big bright forearm running off the edge still beat a
-    # small clean hand. Auditing the first full run, 4 of the first 12 shipped a
-    # hand cut at the frame border — `auto-electrical`, `signboard-install`,
-    # `noodle-prep`, `ceiling-panels` — which is exactly the complaint.
+    # Two wrong versions preceded this. First a 0.35 penalty for touching the
+    # border, which was a discount rather than a veto and shipped 4 cut hands in
+    # the first 12. Then a hard reject on any blob touching the border, which
+    # over-corrected for a reason the pictures made obvious: the largest skin
+    # component is usually hand PLUS forearm, and a forearm always runs off the
+    # frame in head-mounted capture. That rule threw away frames whose hand was
+    # perfectly framed because the arm attached to it left the shot, and it left
+    # 40 of 118 clips with no candidate at all.
     #
-    # It is now a hard flag, returned rather than folded into the number, and
-    # `pick` takes the best UNCUT candidate. A cut frame is used only when every
-    # candidate in the clip is cut, because a poster is better than no poster.
-    pad = 3
-    cut = bool(x <= pad or y <= pad or (x + bw) >= (w - pad) or (y + bh) >= (h - pad))
+    # What actually distinguishes a hand is thickness: a hand is wide, a wrist
+    # and forearm are narrow. So take the distance transform of the blob and
+    # look at its peak — the centre of the largest circle that fits inside it.
+    # That peak sits in the palm. The test is then the honest one:
+    #
+    #   * the palm circle must be a real size, not a wrist
+    #   * its centre must sit clear of the frame border by its own radius, which
+    #     is what "the whole hand is in shot" means
+    #
+    # The arm may leave the frame; the palm may not.
+    dist = cv2.distanceTransform((labels == idx).astype(np.uint8), cv2.DIST_L2, 5)
+    _, radius, _, peak = cv2.minMaxLoc(dist)
+    px, py = peak
+    margin = min(px, py, w - px, h - py)
+    cut = bool(radius < 9 or margin < radius * 0.9)
 
     # Hands move; wood does not.
     comp = (labels == idx).astype(np.uint8)
