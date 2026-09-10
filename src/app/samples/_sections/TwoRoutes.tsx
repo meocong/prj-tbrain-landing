@@ -128,7 +128,11 @@ function shelfFigures(c?: Category): string[] {
      and also true fact: it is what they can press play on without asking. */
   const quoted = c?.shelfFigures;
   return [
-    ...(quoted ? [quoted.hours, quoted.episodes] : []),
+    ...(quoted
+      ? [quoted.hours, quoted.episodes, quoted.reach, quoted.depth].filter(
+          (x): x is string => Boolean(x),
+        )
+      : []),
     `${episodes} sample${episodes === 1 ? "" : "s"} playable on this page${
       c ? "" : " across six catalogues"
     }`,
