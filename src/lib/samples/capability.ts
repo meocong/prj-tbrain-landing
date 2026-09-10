@@ -16,6 +16,20 @@
  */
 
 export interface CapabilityTier {
+  /**
+   * Join key against `Sample["tier"]`.
+   *
+   * The sheet identifies a tier by its prose name ("Egocentric + gripper
+   * (UMI)"), which is a label and not a key: it carries punctuation, it is the
+   * string we may want to rewrite for the page, and two modalities quote the
+   * same row. Records carry a slug instead, so the facet rail can count a tier
+   * and the panel can find the row behind a chip without matching on prose.
+   *
+   * Not every key appears on a record yet — four of the five egocentric tiers
+   * hold nothing on disk. That is the point of the key: a chip reading zero is
+   * still pressable, and pressing it has to reach THIS row.
+   */
+  key: string;
   /** Category, verbatim from the spreadsheet. */
   name: string;
   rig: string;
@@ -80,6 +94,7 @@ export interface CapabilityTier {
 export const CAPABILITY: Partial<Record<string, CapabilityTier[]>> = {
   egocentric: [
     {
+      key: "mono",
       name: "Egocentric",
       rig: "Head-mounted smartphone",
       sensors: null,
@@ -93,6 +108,7 @@ export const CAPABILITY: Partial<Record<string, CapabilityTier[]>> = {
         "Volume. The cheapest hour and the fastest ramp, where the model needs breadth rather than geometry.",
     },
     {
+      key: "rgbd",
       name: "Egocentric (RGB-D / LiDAR)",
       rig: "Head-mounted phone or body-worn iPad Pro LiDAR",
       sensors: null,
@@ -106,6 +122,7 @@ export const CAPABILITY: Partial<Record<string, CapabilityTier[]>> = {
         "Where distance matters — grasp planning, collision, anything that has to know how far away the object is.",
     },
     {
+      key: "stereo",
       name: "Egocentric stereo",
       rig: "RealSense D455 or Pico 4 Ultra",
       sensors: "6-DoF IMU, 200-400 Hz",
@@ -119,6 +136,7 @@ export const CAPABILITY: Partial<Record<string, CapabilityTier[]>> = {
         "Where the model needs to know where the camera was: the IMU and the pair make visual-inertial odometry possible, which mono cannot.",
     },
     {
+      key: "wrist",
       name: "Egocentric + wrist",
       rig: "Head-mounted phone + wrist camera",
       sensors: "Optional 6-DoF IMU on head and wrist, time-synced",
@@ -132,6 +150,7 @@ export const CAPABILITY: Partial<Record<string, CapabilityTier[]>> = {
         "Where the head view loses the hand. A wrist camera keeps the grasp in frame through the whole reach.",
     },
     {
+      key: "umi",
       name: "Egocentric + gripper (UMI)",
       rig: "Head-mounted phone + UMI wrist cam",
       sensors: "UMI gripper kit, optional Xsens gloves",
@@ -147,8 +166,9 @@ export const CAPABILITY: Partial<Record<string, CapabilityTier[]>> = {
   ],
   exocentric: [
     {
+      key: "exo",
       name: "Exocentric (basic)",
-      rig: "Fixed or tripod camera, third-person",
+      rig: "Fixed, tripod or following camera, third-person",
       sensors: null,
       ramp: "14-21 business days",
       ceiling: "10,000 h / month",
@@ -157,11 +177,12 @@ export const CAPABILITY: Partial<Record<string, CapabilityTier[]>> = {
       environment: "Household, factory, daily",
       firstMonth: "2,000 h in month one",
       when:
-        "Where the body matters more than the hands — whole-person pose, approach, and a second person in the scene.",
+        "Where the route and the room matter more than the hands — how a body moves through a space, what is around it, and who else is in frame.",
     },
   ],
   mocap: [
     {
+      key: "mocap-full",
       name: "Egocentric + full mocap",
       rig: "Helmet GoPro, SuperView ~150°",
       sensors: "Xsens MVN HD, 17 IMUs at 240 Hz, + Metagloves per-finger pose",
@@ -178,6 +199,7 @@ export const CAPABILITY: Partial<Record<string, CapabilityTier[]>> = {
   ],
   teleoperation: [
     {
+      key: "umi",
       name: "Egocentric + gripper (UMI)",
       rig: "Head-mounted phone + UMI wrist cam",
       sensors: "UMI gripper kit, optional Xsens gloves",

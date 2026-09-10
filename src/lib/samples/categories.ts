@@ -88,6 +88,19 @@ export interface Category {
    * hand as a box. Real frames beat a drawing of them.
    */
   reel?: { slug: string; title: string }[];
+
+  /**
+   * The clip the front-door card wears, when the automatic pick is wrong.
+   *
+   * `facesFor` round-robins over skill groups in record order, which is fine
+   * where every group is equally representative and wrong where one is not:
+   * exocentric drew its card face from the single office clip, so the card
+   * selling street navigation opened on a shot of our own desks.
+   *
+   * Only set it where the automatic answer is actually bad. A slug per category
+   * hand-maintained across a growing catalogue is a list that goes stale.
+   */
+  face?: string;
 }
 
 export const CATEGORIES: Category[] = [
@@ -119,17 +132,57 @@ export const CATEGORIES: Category[] = [
     name: "Exocentric",
     modality: "exocentric",
     whatItIs:
-      "The same work seen from outside the body: a fixed or handheld camera watching the whole person, not just their hands.",
+      "The same work seen from outside the body: a camera watching the whole person and the space around them, not just what their hands are doing.",
+    /* Rewritten 2026-09-10 to describe the shelf rather than the tier.
+
+       It read "Whole-body pose, scene context, and anything with a second
+       person in frame", which is what an exocentric rig CAN serve and not what
+       these twenty hours are: fifteen of them are urban walking and vehicular
+       navigation. Those two answer route and layout, not joint angles, and they
+       sell to a different buyer — VLN and world models rather than humanoid
+       retargeting. The tier still offers pose work on request; the shelf in
+       front of it does not hold any, so the line leads with what it does hold.
+
+       The distinction is load-bearing, not cosmetic: ExoActor (arXiv 2604.27711)
+       measures back-to-front exo views winning on navigation because they carry
+       heading and layout, and facing views winning on manipulation because they
+       carry the hands. A buyer who reads "whole-body pose" and receives follow
+       footage of someone walking has been mis-sold. */
     forWhat:
-      "Whole-body pose, scene context, and anything with a second person in frame — the half a head-mounted rig cannot see because it is on the head doing the work.",
+      "Navigation and scene understanding — the route taken, the layout around it, and how a body moves through a place. Vision-language navigation and world models, and whole-body pose where the frame holds the whole person.",
     shelf: null,
+    /* Urban walking, not the office. Fifteen of the twenty hours are street
+       capture and one clip is an interior; left to `facesFor` the card opened
+       on that interior, so the card selling outdoor navigation showed a desk. */
+    face: "exo-20260904-049",
     // IN_FLIGHT.exocentric: "20 hours in collection since 5 September 2026".
     held: { figure: "20 h", unit: "in collection · 15 operators" },
     /* Rig and outputs from the capability sheet's row A4, "Exocentric
        (basic)"; the collection figures from IN_FLIGHT. Two sources because they
        answer two questions — what the tier IS, and what is on the floor now. */
     capture: [
-      { label: "Recorded on", value: "External fixed or tripod camera, third-person" },
+      /* Not "fixed or tripod camera", which this said until the delivery folder
+         was read on 2026-09-10. Every file in it is from a moving body-worn or
+         handheld device — GoPro (GX0101xx.MP4), iPhone (IMG_xxxx.MOV) and an
+         Android phone (VID2026xxxx.mp4) — with the same activity shot on two
+         devices at once on 5 September. Nothing in the set is on a tripod. */
+      { label: "Recorded on", value: "GoPro and phone, third-person and following the operator" },
+      /* The one spec a buyer cannot infer and cannot work without. ExoActor
+         (arXiv 2604.27711) measures the two angles serving opposite tasks:
+         back-to-front carries heading and layout, so navigation policies train
+         on it; facing carries hands and objects, so manipulation does. Leaving
+         it off the sheet, as this did, is leaving off the field that decides
+         whether the footage is usable at all.
+
+         Stated as mixed because it IS mixed, per session. The split is not
+         written down yet — when it is counted off the files it belongs here as
+         a ratio, the way "Mix in collection" below carries its hours. */
+      { label: "Camera angle", value: "Mixed per session — following and facing both occur" },
+      /* Two devices on one activity, 5 September: "Urban Walking (GoPro)" and
+         "Urban Walking (Phone)" are the same walk. Worth stating because it is
+         a property a buyer can use — two viewpoints of one route — and not one
+         they would assume from an hours figure. */
+      { label: "Multi-device", value: "Some sessions shot on GoPro and phone at once" },
       { label: "Video", value: "1080p at 30 fps, with audio" },
       { label: "Clip length", value: "30 seconds to 15 minutes" },
       { label: "Mix in collection", value: "10 h urban walking · 5 h vehicular navigation · 5 h structured indoor" },
@@ -323,6 +376,70 @@ export function facesFor(c: Category, n: number): string[] {
 
 export const posterSrc = (slug: string) => `/samples/posters/${slug}.jpg`;
 export const clipSrc = (slug: string) => `/samples/clips/${slug}.mp4`;
+
+/**
+ * One folder inside a configuration: a skill group, and the records in it.
+ *
+ * The catalogue used to be a flat grid of 118 behind a facet rail, which meant
+ * the page's opening move was to render every clip it had. A folder level is
+ * what Tam's reference does instead — `claru.ai/explore/egocentric/processed`
+ * shows a few stills per group and an "Open folder", and no video at all until
+ * a group is chosen.
+ */
+export interface SkillFolder {
+  /** URL segment. Derived, so a renamed group renames its route with it. */
+  slug: string;
+  /** The group as written in the record. */
+  name: string;
+  count: number;
+  /** Stills for the card face. No clips: this level ships no video. */
+  faces: string[];
+  /** Total playable minutes in the folder. */
+  minutes: number;
+}
+
+/** Group names are prose — "Pick and Place / Object Handling" — so the URL is derived. */
+export const groupSlug = (name: string) =>
+  name
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-|-$/g, "");
+
+/**
+ * The folders a modality holds, largest first.
+ *
+ * Derived from the records rather than from `SKILL_GROUPS` in taxonomy.ts,
+ * which is the egocentric vocabulary. The exocentric delivery files itself by
+ * activity — "Urban walking", "Vehicular navigation" — and those are equally
+ * real folders. Reading the axis off the data covers both without a second
+ * list to keep in step.
+ */
+export function skillFolders(modality: string, facesPerFolder = 2): SkillFolder[] {
+  const rows = (samples as unknown as { modality: string; skillGroup: string | null; slug: string; durationSec: number }[])
+    .filter((r) => r.modality === modality && r.skillGroup);
+
+  const byGroup = new Map<string, typeof rows>();
+  for (const r of rows) {
+    const g = r.skillGroup as string;
+    if (!byGroup.has(g)) byGroup.set(g, []);
+    byGroup.get(g)!.push(r);
+  }
+
+  return [...byGroup.entries()]
+    .map(([name, list]) => ({
+      slug: groupSlug(name),
+      name,
+      count: list.length,
+      faces: list.slice(0, facesPerFolder).map((r) => r.slug),
+      minutes: list.reduce((a, r) => a + r.durationSec, 0) / 60,
+    }))
+    .sort((a, b) => b.count - a.count || a.name.localeCompare(b.name));
+}
+
+/** The folder a URL segment names, or null. */
+export function skillFolderBySlug(modality: string, slug: string): SkillFolder | null {
+  return skillFolders(modality).find((f) => f.slug === slug) ?? null;
+}
 
 export function categoryBySlug(slug: string) {
   return CATEGORIES.find((c) => c.slug === slug) ?? null;
