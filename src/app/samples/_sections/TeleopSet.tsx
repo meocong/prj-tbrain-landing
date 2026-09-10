@@ -78,7 +78,7 @@ export function TeleopSet() {
             Play the set
           </h2>
 
-          <p className="mt-5 max-w-2xl text-[14px] leading-relaxed" style={{ color: C.textMid }}>
+          <p className="mt-5 max-w-2xl text-[13px] leading-relaxed" style={{ color: C.textMid }}>
             Three cameras on one clock, which is what a policy reads. Below them, every episode in
             the set — one task, eleven attempts, and the variation between them is the data.
           </p>
@@ -116,7 +116,7 @@ export function TeleopSet() {
                   style={{ aspectRatio: "4 / 3", objectFit: "cover" }}
                 />
                 <span
-                  className="bp-mono pointer-events-none absolute left-2 top-2 px-1.5 py-0.5 text-[9.5px]"
+                  className="bp-mono pointer-events-none absolute left-2 top-2 px-1.5 py-0.5 text-[9px]"
                   style={{ background: OVER_MEDIA.scrim, color: OVER_MEDIA.text }}
                 >
                   {v.label}
@@ -134,7 +134,7 @@ export function TeleopSet() {
             >
               {playing ? "Pause all three" : "Play all three"}
             </button>
-            <span className="font-mono text-[11.5px]" style={{ color: C.textDim }}>
+            <span className="font-mono text-[11px]" style={{ color: C.textDim }}>
               Episode 0 · 640×480 · 30 fps · 16-dimensional state and action per frame
             </span>
           </div>
@@ -190,7 +190,7 @@ function Tile({ slug, index }: { slug: string; index: number }) {
         style={{ aspectRatio: "4 / 3", objectFit: "cover" }}
       />
       <span
-        className="pointer-events-none absolute bottom-1.5 left-1.5 px-1.5 py-0.5 font-mono text-[9px] uppercase tracking-[0.12em]"
+        className="pointer-events-none absolute bottom-1.5 left-1.5 px-1.5 py-0.5 bp-mono text-[9px]"
         style={{ background: OVER_MEDIA.scrim, color: OVER_MEDIA.textDim }}
       >
         ep {index}

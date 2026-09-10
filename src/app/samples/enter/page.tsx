@@ -16,7 +16,7 @@ export const metadata: Metadata = {
 
 export default function SamplesEnterPage() {
   return (
-    <div className="samples-scope" style={{ background: C.base }}>
+    <div className="samples-scope bp-chrome" style={{ background: C.base }}>
       <Header />
       <main className="relative overflow-hidden" style={{ color: C.text }}>
         <section className="mx-auto max-w-[1400px] px-4 pb-28 pt-24 md:pb-36 lg:px-10 xl:px-16">

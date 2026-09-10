@@ -99,7 +99,7 @@ export function FacetPicker({
       <Combobox.Trigger
         aria-label={ariaLabel}
         data-active={narrowed || undefined}
-        className="sm-field flex w-full items-center gap-2 rounded-lg py-[7px] pl-2.5 pr-2 text-left text-[12.5px]"
+        className="sm-field flex w-full items-center gap-2 rounded-lg py-[7px] pl-2.5 pr-2 text-left text-[12px]"
       >
         <span className="min-w-0 flex-1 truncate">{current?.label}</span>
         <span className="sm-field-count shrink-0 font-mono text-[10px]">{current?.count}</span>
@@ -119,7 +119,7 @@ export function FacetPicker({
               <Search className="h-3.5 w-3.5 shrink-0" />
               <Combobox.Input
                 placeholder={searchPlaceholder}
-                className="sm-popup-input w-full bg-transparent text-[12.5px] outline-none"
+                className="sm-popup-input w-full bg-transparent text-[12px] outline-none"
               />
             </div>
 
@@ -132,7 +132,7 @@ export function FacetPicker({
                 <Combobox.Item
                   key={o.value}
                   value={o.value}
-                  className="sm-option flex cursor-pointer items-center gap-2 rounded-lg px-2 py-1.5 text-[12.5px]"
+                  className="sm-option flex cursor-pointer items-center gap-2 rounded-lg px-2 py-1.5 text-[12px]"
                 >
                   <Combobox.ItemIndicator className="flex h-3.5 w-3.5 shrink-0 items-center justify-center">
                     <Check className="h-3 w-3" />
@@ -179,7 +179,7 @@ export function SortPicker<T extends string>({
     >
       <Select.Trigger
         aria-label={ariaLabel}
-        className="sm-field flex items-center gap-2 rounded-lg py-[7px] pl-2.5 pr-2 text-[12.5px]"
+        className="sm-field flex items-center gap-2 rounded-lg py-[7px] pl-2.5 pr-2 text-[12px]"
       >
         <span className="truncate">{current?.label}</span>
         <ChevronDown className="sm-field-chevron h-3.5 w-3.5 shrink-0" />
@@ -192,7 +192,7 @@ export function SortPicker<T extends string>({
               <Select.Item
                 key={o.key}
                 value={o.key}
-                className="sm-option flex cursor-pointer items-center gap-2 rounded-lg px-2 py-1.5 text-[12.5px]"
+                className="sm-option flex cursor-pointer items-center gap-2 rounded-lg px-2 py-1.5 text-[12px]"
               >
                 <Select.ItemIndicator className="flex h-3.5 w-3.5 shrink-0 items-center justify-center">
                   <Check className="h-3 w-3" />

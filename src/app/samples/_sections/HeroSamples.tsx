@@ -56,7 +56,7 @@ export function HeroSamples() {
           transition={{ duration: 0.8, ease: EASE }}
         >
           <span
-            className="font-mono text-[11px] uppercase tracking-[0.2em]"
+            className="bp-mono text-[11px]"
             style={{ color: "rgba(255,255,255,0.62)" }}
           >
             Sample library
@@ -126,7 +126,7 @@ export function HeroSamples() {
             className="mt-5 text-balance text-5xl font-medium tracking-tight md:text-6xl xl:text-7xl"
             style={{
               fontFamily: "var(--font-heading)",
-              letterSpacing: "-0.035em",
+              letterSpacing: "-0.03em",
               lineHeight: 0.98,
               color: "#ffffff",
             }}

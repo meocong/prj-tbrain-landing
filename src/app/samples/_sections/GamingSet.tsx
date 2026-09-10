@@ -49,7 +49,7 @@ export function GamingSet() {
             What a game session carries
           </h2>
 
-          <p className="mt-5 max-w-2xl text-[14px] leading-relaxed" style={{ color: C.textMid }}>
+          <p className="mt-5 max-w-2xl text-[13px] leading-relaxed" style={{ color: C.textMid }}>
             The footage is the smaller half. Every frame carries the keys held, the semantic action
             they map to, the mouse delta, and — where the title exposes it — the camera&apos;s
             position and orientation in the game world.
@@ -86,10 +86,10 @@ export function GamingSet() {
                   </svg>
                 </div>
                 <figcaption className="mt-2.5">
-                  <p className="truncate text-[12.5px] font-medium" title={t.title}>
+                  <p className="truncate text-[12px] font-medium" title={t.title}>
                     {t.title}
                   </p>
-                  <p className="mt-1 font-mono text-[10.5px]" style={{ color: C.textDim }}>
+                  <p className="mt-1 font-mono text-[10px]" style={{ color: C.textDim }}>
                     {t.axis} axes · {t.keys} keys · {t.actions} actions
                   </p>
                 </figcaption>
@@ -138,7 +138,7 @@ export function GamingSet() {
                   <div key={t.slug}>
                     <div className="flex items-baseline justify-between gap-4">
                       <p className="truncate text-[13px] font-medium">{t.title}</p>
-                      <p className="shrink-0 font-mono text-[10.5px]" style={{ color: C.textDim }}>
+                      <p className="shrink-0 font-mono text-[10px]" style={{ color: C.textDim }}>
                         {t.track.length} spans · {t.actions} distinct actions
                       </p>
                     </div>
@@ -163,7 +163,7 @@ export function GamingSet() {
                       ))}
                     </div>
                     <p
-                      className="mt-1.5 truncate font-mono text-[10.5px]"
+                      className="mt-1.5 truncate font-mono text-[10px]"
                       style={{ color: C.textDim }}
                       title={t.track.map((s) => s.action).join(" → ")}
                     >
@@ -192,16 +192,16 @@ export function GamingSet() {
                     className="h-full w-full object-cover"
                   />
                   <span
-                    className="pointer-events-none absolute bottom-1.5 left-1.5 px-1.5 py-0.5 font-mono text-[9px] uppercase tracking-[0.12em]"
+                    className="pointer-events-none absolute bottom-1.5 left-1.5 px-1.5 py-0.5 bp-mono text-[9px]"
                     style={{ background: OVER_MEDIA.scrim, color: OVER_MEDIA.textDim }}
                   >
                     {t.frames} frames
                   </span>
                 </span>
-                <p className="mt-2 truncate text-[12.5px] font-medium" title={t.title}>
+                <p className="mt-2 truncate text-[12px] font-medium" title={t.title}>
                   {t.title}
                 </p>
-                <p className="mt-0.5 truncate font-mono text-[10.5px]" style={{ color: C.textDim }}>
+                <p className="mt-0.5 truncate font-mono text-[10px]" style={{ color: C.textDim }}>
                   {t.sessionType} · {t.size}
                 </p>
                 <noscript>

@@ -60,7 +60,7 @@ export default async function SamplesVaultPage() {
   const expires = new Date(claims.exp * 1000);
 
   return (
-    <div className="samples-scope min-h-screen" style={{ background: C.base, color: C.text }}>
+    <div className="samples-scope bp-chrome min-h-screen" style={{ background: C.base, color: C.text }}>
       <Header />
 
       <main className="mx-auto w-full max-w-5xl px-6 pb-28 pt-32 md:pt-40">
@@ -123,7 +123,7 @@ export default async function SamplesVaultPage() {
           return (
             <Reveal key={group.key} variant="rise">
             <section className="mt-14">
-              <h2 className="text-[13px] font-medium uppercase tracking-[0.14em]" style={{ color: C.textDim }}>
+              <h2 className="bp-mono text-[13px] font-medium" style={{ color: C.textDim }}>
                 {group.title}
               </h2>
               <p className="mt-2 max-w-2xl text-[13px]" style={{ color: C.textMid }}>
@@ -141,10 +141,10 @@ export default async function SamplesVaultPage() {
                       style={{ borderBottom: `1px solid ${C.hairlineSoft}` }}
                     >
                       <div className="min-w-0">
-                        <p className="text-[14px]" style={{ color: C.value }}>
+                        <p className="text-[13px]" style={{ color: C.value }}>
                           {s.title}
                         </p>
-                        <p className="mt-1 font-mono text-[11.5px]" style={{ color: C.textDim }}>
+                        <p className="mt-1 font-mono text-[11px]" style={{ color: C.textDim }}>
                           {/* No `s.rig`. This page is behind a passcode, not off
                               the site: it is the first thing a customer sees
                               after we hand them a code, and "Rig ko ghi tên"

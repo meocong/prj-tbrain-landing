@@ -40,7 +40,7 @@ export function OtsShelf() {
             Off the shelf · household and daily activity
           </h2>
 
-          <p className="mt-5 max-w-2xl text-[14px] leading-relaxed" style={{ color: C.textMid }}>
+          <p className="mt-5 max-w-2xl text-[13px] leading-relaxed" style={{ color: C.textMid }}>
             A separate corpus from the deliveries above: phone-mounted first-person capture of
             everyday manipulation, licensed as a pack rather than collected to a brief. Every clip in the five
             sampled skills plays here — sixty-one of them.
@@ -86,7 +86,7 @@ export function OtsShelf() {
             {OTS_SKILLS.map((s) => (
               <div key={s.slug}>
                 <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1">
-                  <p className="text-[14px] font-medium">{s.name}</p>
+                  <p className="text-[13px] font-medium">{s.name}</p>
                   <p className="font-mono text-[11px]" style={{ color: C.textDim }}>
                     {s.clips.length} playable · {s.share} of the corpus · {s.episodes} episodes
                   </p>
@@ -138,7 +138,7 @@ function Tile({ slug }: { slug: string }) {
         className="h-full w-full object-cover"
       />
       <span
-        className="pointer-events-none absolute bottom-1.5 left-1.5 px-1.5 py-0.5 font-mono text-[9px] uppercase tracking-[0.12em]"
+        className="pointer-events-none absolute bottom-1.5 left-1.5 px-1.5 py-0.5 bp-mono text-[9px]"
         style={{ background: OVER_MEDIA.scrim, color: OVER_MEDIA.textDim }}
       >
         .mp4

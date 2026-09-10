@@ -349,7 +349,7 @@ function CoopPanel() {
 
 export function TelemetryStrip() {
   return (
-    <section style={{ background: C.base, color: C.text }}>
+    <section className="bp-grid bp-frame relative" style={{ color: C.text }}>
       <div className="mx-auto max-w-[1400px] px-4 py-24 md:py-32 lg:px-10 xl:px-16">
         <RevealOnScroll>
           <div className="mb-14 max-w-2xl">

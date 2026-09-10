@@ -25,7 +25,7 @@ export function CaptureSpec({ category }: { category: Category }) {
   if (rows.length === 0) return null;
 
   return (
-    <section style={{ background: C.base, color: C.text }}>
+    <section className="bp-grid bp-frame relative" style={{ color: C.text }}>
       <div className="mx-auto max-w-[1400px] px-4 pb-4 pt-14 lg:px-10 xl:px-16">
         <Reveal variant="rise">
           <h2 className="bp-mono text-[10px]" style={{ color: C.textDim }}>
@@ -39,10 +39,10 @@ export function CaptureSpec({ category }: { category: Category }) {
                 className="grid gap-x-8 gap-y-1 py-3 md:grid-cols-[minmax(0,11rem)_minmax(0,1fr)]"
                 style={{ borderTop: `1px solid ${C.hairline}` }}
               >
-                <dt className="text-[12.5px]" style={{ color: C.textDim }}>
+                <dt className="text-[12px]" style={{ color: C.textDim }}>
                   {r.label}
                 </dt>
-                <dd className="font-mono text-[12.5px] leading-relaxed" style={{ color: C.value }}>
+                <dd className="font-mono text-[12px] leading-relaxed" style={{ color: C.value }}>
                   {r.value}
                 </dd>
               </div>

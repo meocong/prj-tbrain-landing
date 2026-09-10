@@ -50,6 +50,14 @@ export const OVER_MEDIA = {
   scrim: "rgba(7,9,15,0.78)",
   text: "rgba(255,255,255,0.86)",
   textDim: "rgba(255,255,255,0.7)",
+  /** A heading printed on footage. The 0.86 above is right for a caption and
+      too soft for display type, which has to hold against a bright frame. */
+  title: "#FFFFFF",
+  /** Bottom-weighted wash under type that floats on a clip. Transparent at the
+      top so the frame is not dimmed for the sake of two lines at the foot of
+      it. Same 6,8,14 base the hero scrims use. */
+  wash:
+    "linear-gradient(180deg, rgba(6,8,14,0) 0%, rgba(6,8,14,0.10) 42%, rgba(6,8,14,0.62) 72%, rgba(6,8,14,0.88) 100%)",
 } as const;
 
 export const EASE = [0.16, 1, 0.3, 1] as const;

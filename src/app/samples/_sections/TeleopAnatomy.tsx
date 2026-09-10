@@ -43,7 +43,7 @@ export function TeleopAnatomy() {
             One episode, opened up
           </h2>
 
-          <p className="mt-5 max-w-2xl text-[14px] leading-relaxed" style={{ color: C.textMid }}>
+          <p className="mt-5 max-w-2xl text-[13px] leading-relaxed" style={{ color: C.textMid }}>
             The video is what a person watches. This is what a policy reads: sixteen numbers for the
             state the arms were in and sixteen for the action commanded, {ep.fps} times a second, for
             all {ep.frames.toLocaleString()} frames of episode {ep.episode}.
@@ -72,7 +72,7 @@ export function TeleopAnatomy() {
                 <div key={seg.name}>
                   <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1">
                     <p className="text-[13px] font-medium">{seg.name}</p>
-                    <p className="font-mono text-[10.5px]" style={{ color: C.textDim }}>
+                    <p className="font-mono text-[10px]" style={{ color: C.textDim }}>
                       state[{seg.start}:{seg.end}] · {chans.length}{" "}
                       {chans.length === 1 ? "channel" : "channels"}
                       {inert
@@ -86,7 +86,7 @@ export function TeleopAnatomy() {
                       buyer plans a bimanual policy on a single-arm recording. */}
                   {inert ? (
                     <p
-                      className="bp-card mt-3 max-w-2xl px-4 py-3 text-[12.5px] leading-relaxed"
+                      className="bp-card mt-3 max-w-2xl px-4 py-3 text-[12px] leading-relaxed"
                       style={{ color: C.textMid }}
                     >
                       Held at zero for the whole episode. The action column is exactly 0.0 on every
@@ -123,7 +123,7 @@ export function TeleopAnatomy() {
                           />
                         </svg>
                         <figcaption
-                          className="mt-1 font-mono text-[9.5px]"
+                          className="mt-1 font-mono text-[9px]"
                           style={{ color: C.textDim }}
                         >
                           [{ch.i}]

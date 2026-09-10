@@ -67,17 +67,17 @@ function Row({ label, id, hint }: { label: string; id: string; hint?: string }) 
       className="grid grid-cols-[minmax(7.5rem,auto)_1fr] items-baseline gap-x-4 py-[3px]"
       style={{ borderTop: `1px solid ${C.hairlineSoft}` }}
     >
-      <dt className="text-[11.5px] leading-tight" style={{ color: C.textDim }}>
+      <dt className="text-[11px] leading-tight" style={{ color: C.textDim }}>
         {label}
         {hint && (
-          <span className="ml-1.5 font-mono text-[9.5px]" style={{ color: C.textDim, opacity: 0.7 }}>
+          <span className="ml-1.5 font-mono text-[9px]" style={{ color: C.textDim, opacity: 0.7 }}>
             {hint}
           </span>
         )}
       </dt>
       <dd
         data-field={id}
-        className="truncate font-mono text-[11.5px] tabular-nums"
+        className="truncate font-mono text-[11px] tabular-nums"
         style={{ color: C.value }}
       >
         {NULL}

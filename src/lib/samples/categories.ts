@@ -329,6 +329,27 @@ export function categoryBySlug(slug: string) {
 }
 
 /**
+ * True when `/samples/<slug>` opens on footage rather than on paper.
+ *
+ * `CategoryHeader` has two branches — a full-bleed `HeroReel` where the
+ * category has clips, and a hatched drawing band where it does not — and the
+ * header bar needs opposite answers over each: white nav over the reel, ink nav
+ * over the band. It cannot ask the section, which renders below it, so the
+ * branch condition is derived here instead.
+ *
+ * Repeating the condition rather than exporting it from the section is
+ * deliberate: the section is a client component holding JSX, and what the
+ * header needs is the one boolean. Keep the two in step — `CategoryHeader`
+ * takes records first and falls back to `c.reel`, and so does this.
+ */
+export function categoryHeroIsDark(slug: string): boolean {
+  const c = categoryBySlug(slug);
+  if (!c) return false;
+  const fromRecords = c.modality ? ALL.some((r) => r.modality === c.modality) : false;
+  return fromRecords || (c.reel?.length ?? 0) > 0;
+}
+
+/**
  * The line above the clips on `samples.tbrain.ai`, generalised: a count of what
  * makes this set varied, derived rather than written down.
  *

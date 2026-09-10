@@ -61,10 +61,19 @@ function NewsletterForm() {
       <button
         type="submit"
         disabled={loading}
-        className="inline-flex items-center gap-1.5 rounded-lg px-4 py-2 text-sm font-medium text-white transition-opacity"
+        className="inline-flex items-center gap-1.5 rounded-lg px-4 py-2 text-sm font-medium transition-opacity"
+        /* The last colours in this file that did not read `--footer-*`. Every
+           other surface here already followed the token, so on a blueprint page
+           the footer went teal apart from one violet button.
+
+           `text-white` went with them: the accent is a dark violet on the
+           marketing palette but a bright #00E5C7 in blueprint dark, where white
+           on it is unreadable. `--footer-on-accent` is the pair. */
         style={{
-          background: "linear-gradient(135deg, #6C3CF4, #8B5CF6)",
-          boxShadow: "0 8px 24px -6px rgba(108,60,244,0.45)",
+          background:
+            "linear-gradient(135deg, var(--footer-accent), color-mix(in srgb, var(--footer-accent) 72%, white))",
+          boxShadow: "0 8px 24px -6px color-mix(in srgb, var(--footer-accent) 45%, transparent)",
+          color: "var(--footer-on-accent)",
           opacity: loading ? 0.7 : 1,
         }}
       >
@@ -130,7 +139,7 @@ const Footer = () => {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="text-sm transition-colors hover:text-[#6C3CF4]"
+                  className="text-sm transition-colors hover:text-(--footer-accent)"
                   style={{ color: "var(--footer-link)" }}
                 >
                   {link.label}
@@ -139,7 +148,7 @@ const Footer = () => {
               <button
                 type="button"
                 onClick={openConsentBanner}
-                className="text-left text-sm transition-colors hover:text-[#6C3CF4]"
+                className="text-left text-sm transition-colors hover:text-(--footer-accent)"
                 style={{ color: "var(--footer-link)" }}
               >
                 Cookie settings

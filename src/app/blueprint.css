@@ -92,6 +92,38 @@
   --bp-card-shadow-hover: 0 2px 4px rgba(0,0,0,0.35), 0 18px 40px -22px rgba(0,229,199,0.4);
 }
 
+/* ── Site chrome on a blueprint page ─────────────────────────────────
+   The header and the footer are shared components that paint from the
+   MARKETING tokens in globals.css — white/slate surfaces, #6C3CF4 violet. Put
+   either at the end of a blueprint page and you get a cool-white bar bolted to
+   a warm-paper body with a teal accent, which is the seam this class closes.
+
+   Footer needs no code change to follow: it already reads `--footer-*` in
+   twenty-odd places, so re-pointing those variables is enough. (Header cannot
+   be done this way — its surfaces are Tailwind literals, so it carries its own
+   blueprint token set. See BLUEPRINT_PREFIXES in Header.tsx.)
+
+   One block, not a light/dark pair: every `--bp-*` on the right is already
+   theme-aware, so this inherits both halves for free.
+   ───────────────────────────────────────────────────────────────────── */
+.bp-chrome {
+  --footer-bg: var(--bp-bg);
+  --footer-text: var(--bp-ink);
+  --footer-link: var(--bp-ink-dim);
+  --footer-muted: var(--bp-ink-faint);
+  --footer-subtle: var(--bp-ink-faint);
+  --footer-border: var(--bp-line);
+  --footer-chip-bg: var(--bp-surface-2);
+  --footer-input-bg: var(--bp-surface-2);
+  --footer-accent: var(--bp-cyan);
+  --footer-on-accent: var(--bp-on-cyan);
+  --footer-glow: radial-gradient(
+    ellipse,
+    color-mix(in srgb, var(--bp-cyan) 8%, transparent) 0%,
+    transparent 60%
+  );
+}
+
 /* ── Graph-paper background (faint, masked) ──────────────────────── */
 .bp-grid {
   background-color: var(--bp-bg);
