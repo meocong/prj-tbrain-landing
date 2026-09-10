@@ -177,6 +177,60 @@ const EMPTY: Filters = {
   q: "",
 };
 
+/**
+ * Which page numbers to print, with gaps.
+ *
+ * A hundred and eighteen records at twelve a page is ten buttons, which is a
+ * row of numbers rather than a control. This keeps the ends, the current page
+ * and its neighbours, and returns `null` where a run was elided.
+ */
+function pageNumbers(current: number, total: number): (number | null)[] {
+  if (total <= 7) return Array.from({ length: total }, (_, i) => i);
+
+  const keep = new Set([0, total - 1, current, current - 1, current + 1]);
+  const out: (number | null)[] = [];
+  let gap = false;
+  for (let i = 0; i < total; i++) {
+    if (keep.has(i)) {
+      out.push(i);
+      gap = false;
+    } else if (!gap) {
+      out.push(null);
+      gap = true;
+    }
+  }
+  return out;
+}
+
+function PageButton({
+  label,
+  onClick,
+  active = false,
+  disabled = false,
+}: {
+  label: string;
+  onClick: () => void;
+  active?: boolean;
+  disabled?: boolean;
+}) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      disabled={disabled}
+      aria-current={active ? "page" : undefined}
+      className="bp-mono min-w-9 rounded-lg px-3 py-2 text-[11px] transition-colors disabled:opacity-40"
+      style={{
+        border: `1px solid ${active ? C.accent : C.hairline}`,
+        background: active ? C.accentSoft : "transparent",
+        color: active ? C.text : C.textMid,
+      }}
+    >
+      {label}
+    </button>
+  );
+}
+
 function mmss(total: number) {
   const m = Math.floor(total / 60);
   const s = Math.round(total % 60);
@@ -907,15 +961,37 @@ export function SampleCatalog({
     return { minutes: minutes.toFixed(1), live: shown.filter((s) => s.telemetry).length };
   }, [shown]);
 
-  // The grid is capped and extended by a button rather than paged by number.
-  // What costs something here is mounted <video> elements — every card holds one
-  // and plays it on hover — not rows of markup, so the cap has to bound those.
-  // A numbered pager would also throw away scroll position on every step and put
-  // a second navigation model next to the facet rail, which already narrows.
-  const [limit, setLimit] = useState(PAGE);
-  useEffect(() => setLimit(PAGE), [f, sort]);
-  const page = shown.slice(0, limit);
-  const rest = shown.length - page.length;
+  /* Paged by number, not extended by a button.
+   *
+   * It was "Show more", on the argument that a numbered pager throws away scroll
+   * position and adds a second navigation model beside the facet rail. Both are
+   * true and both were outweighed: "Show more" only ever grows the page, so a
+   * reader twelve presses in is holding 144 mounted <video> elements and cannot
+   * get back to a smaller page without reloading. Tam, 2026-09-10: "chị nghĩ để
+   * nó render dần dần, hoặc render vài cái, xong để next page được ko".
+   *
+   * A page swaps rather than accumulates, so the ceiling on mounted media is
+   * PAGE and not PAGE × presses. The scroll-position objection is answered by
+   * scrolling back to the grid on every step, which is where the reader was
+   * looking anyway.
+   */
+  const [pageIndex, setPageIndex] = useState(0);
+  const gridTop = useRef<HTMLDivElement | null>(null);
+  useEffect(() => setPageIndex(0), [f, sort]);
+
+  const pageCount = Math.max(1, Math.ceil(shown.length / PAGE));
+  // A facet can shrink the result set under the current page while the reader is
+  // on it; clamping here keeps the grid from rendering an empty page.
+  const current = Math.min(pageIndex, pageCount - 1);
+  const page = shown.slice(current * PAGE, current * PAGE + PAGE);
+
+  const goToPage = useCallback((n: number) => {
+    setPageIndex(n);
+    // `auto`, not `smooth`: the grid under the pager has already swapped by the
+    // time a smooth scroll finishes, so the reader watches the new page slide
+    // past on the way to the top of it.
+    gridTop.current?.scrollIntoView({ behavior: "auto", block: "start" });
+  }, []);
 
   /* The modality to pitch when the grid comes back empty: exactly one selected,
      and it is one we can quote. Two selected is a combination the reader built,
@@ -1213,26 +1289,55 @@ export function SampleCatalog({
               )
             ) : (
               <>
-                <div className="grid gap-x-8 gap-y-2 sm:grid-cols-2 2xl:grid-cols-3">
+                <div
+                  ref={gridTop}
+                  className="grid gap-x-8 gap-y-2 sm:grid-cols-2 2xl:grid-cols-3"
+                  style={{ scrollMarginTop: "88px" }}
+                >
                   {page.map((s) => (
                     <Card key={s.slug} sample={s} onOpen={() => setActive(s)} />
                   ))}
                 </div>
 
-                {rest > 0 && (
-                  <div className="mt-10 flex flex-col items-center gap-2">
-                    <button
-                      type="button"
-                      onClick={() => setLimit((n) => n + PAGE)}
-                      className="rounded-full px-6 py-3 text-[13px] font-semibold transition-transform active:scale-[0.98]"
-                      style={{ border: `1px solid ${C.rule}`, color: C.text }}
-                    >
-                      Show {Math.min(rest, PAGE)} more
-                    </button>
+                {pageCount > 1 && (
+                  <nav
+                    aria-label="Sample pages"
+                    className="mt-10 flex flex-col items-center gap-3"
+                  >
+                    <div className="flex flex-wrap items-center justify-center gap-1.5">
+                      <PageButton
+                        label="Previous"
+                        disabled={current === 0}
+                        onClick={() => goToPage(current - 1)}
+                      />
+                      {pageNumbers(current, pageCount).map((n, i) =>
+                        n === null ? (
+                          <span
+                            key={`gap-${i}`}
+                            className="bp-mono px-1 text-[10px]"
+                            style={{ color: C.textDim }}
+                          >
+                            ···
+                          </span>
+                        ) : (
+                          <PageButton
+                            key={n}
+                            label={String(n + 1)}
+                            active={n === current}
+                            onClick={() => goToPage(n)}
+                          />
+                        ),
+                      )}
+                      <PageButton
+                        label="Next"
+                        disabled={current === pageCount - 1}
+                        onClick={() => goToPage(current + 1)}
+                      />
+                    </div>
                     <p className="font-mono text-[11px]" style={{ color: C.textDim }}>
-                      {page.length} of {shown.length} shown
+                      {current * PAGE + 1}–{current * PAGE + page.length} of {shown.length}
                     </p>
-                  </div>
+                  </nav>
                 )}
               </>
             )}
