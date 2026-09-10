@@ -126,7 +126,7 @@ export const CAPABILITY: Partial<Record<string, CapabilityTier[]>> = {
       when:
         "Volume. The cheapest hour and the fastest ramp, where the model needs breadth rather than geometry.",
       pitch:
-        "One camera on the head — smartphone or GoPro — with a scale reference in frame. The widest spread of trades and workplaces, and the fastest to put people in the field.",
+        "One camera on the head — smartphone or GoPro — with a scale reference in frame. No depth and no parallax, and in exchange the widest spread of trades and workplaces and the fastest ramp we run.",
     },
     {
       key: "rgbd",
@@ -156,7 +156,7 @@ export const CAPABILITY: Partial<Record<string, CapabilityTier[]>> = {
       when:
         "Where the model needs to know where the camera was: the IMU and the pair make visual-inertial odometry possible, which mono cannot.",
       pitch:
-        "Two synchronised eyes and a 200-400 Hz IMU on the same clock. Enough parallax for VIO and hand pose, and the configuration most of the published catalogue is shot on.",
+        "Two synchronised eyes and a 200-400 Hz IMU on one clock — true depth, not a single RGB feed. Enough parallax for VIO and hand pose, and the rig most of the published catalogue is shot on.",
     },
     {
       /* Added 2026-09-10. The doc lists four egocentric configurations and this
@@ -183,7 +183,7 @@ export const CAPABILITY: Partial<Record<string, CapabilityTier[]>> = {
       when:
         "Where one pair is not enough geometry: a second angle on an occluded grasp, wider coverage of the bench, and calibration across three baselines rather than one.",
       pitch:
-        "Six cameras in three stereo pairs, all on one clock. Sees the hands, the tool and the bench at once, so a grasp hidden from one pair is still in frame in another — with per-lens calibration and IMU on the same timeline.",
+        "Six cameras in three stereo pairs on a hardware-synced clock — frame-level, no post-hoc alignment. 100° of coverage keeps both hands in frame, so a grasp hidden from one pair is still visible in another, with per-lens calibration and a 200-400 Hz IMU on the same timeline.",
     },
     {
       key: "wrist",
