@@ -112,6 +112,35 @@ export default async function CategoryPage({
         )}
 
 
+        {/* The boxes first, and nothing between them and the header.
+
+            Tam, 2026-09-10: "em ko cần đoạn chữ ở dưới, em cho cái ô có những
+            loại nào, xong click nó xuống sample." It used to open on two blocks
+            of prose — how the rig is built, then what we run in the category —
+            and the reader met four hundred words before the first thing they
+            could click. */}
+        {/* Folders where they earn the click, the grid where they do not.
+
+            The grid opened with 24 mounted <video> elements on a modality
+            holding 118 records — every visit paid for two dozen media elements
+            before the reader knew whether any of them was the work they came
+            for. Folders fix that, and one level down at
+            /samples/<category>/<group> the catalogue is unchanged, facet rail
+            and all.
+
+            But gaming carries no skill groups — its axes are the game and the
+            session type, which live in `spec` — so the folder view came back
+            empty and took the catalogue with it: eight records and no way to
+            open one. `usesFolders` is that check. */}
+        {usesConfigFolders(c.modality) ? (
+          <ConfigFolders category={c} />
+        ) : usesFolders(c.modality) ? (
+          <SkillFolders category={c} />
+        ) : (
+          <SampleCatalog modality={c.modality} />
+        )}
+
+
         {/* Mocap first: its product IS the explorer, and a pose stream behind
             a spec table is an instrument filed as a document. Every other
             category's samples sit below their spec because their samples are
@@ -121,14 +150,24 @@ export default async function CategoryPage({
         {/* What records this category, before anything about what is in it.
             It is the first question a technical buyer asks, and it is the one
             block that makes this page not interchangeable with the next one. */}
-        <CaptureSpec category={c} />
+        {/* Tam, 2026-09-10: "cái phần chữ của em chỉ apply cho Egocentric 6
+            cam." Correct — "Head rig: 6 cameras, three stereo pairs" is one
+            configuration's spec, and it sat at the top of a page that sells
+            four. It moved to /samples/egocentric/stereo6, with RigViews, which
+            was making the same claim about the same rig.
+
+            Categories with no configuration level keep it here: for them the
+            page IS the configuration. */}
+        {!usesConfigFolders(c.modality) && <CaptureSpec category={c} />}
 
         {/* Directly under the block that CLAIMS six cameras in three stereo
             pairs, because until now the page made that claim and then showed a
             single 576x432 eye. Egocentric only: the clips are cut from an
             egocentric delivery file and nothing else in the catalogue is a
             six-camera capture. */}
-        {c.slug === "egocentric" && <RigViews />}
+        {/* Moved to /samples/egocentric/stereo6 — see the note on CaptureSpec
+            above. It is a demonstration of the six-camera rig and belongs on
+            the page selling it. */}
 
         {/* The tiers, ABOVE the clips.
             They were below, moved there when the header was five paragraphs of
@@ -246,27 +285,6 @@ export default async function CategoryPage({
             is the product, and GamingSet is the eight titles that carry one. */}
         {c.slug === "gaming" && <TelemetryStrip />}
         {c.slug === "gaming" && <GamingSet />}
-
-        {/* Folders where they earn the click, the grid where they do not.
-
-            The grid opened with 24 mounted <video> elements on a modality
-            holding 118 records — every visit paid for two dozen media elements
-            before the reader knew whether any of them was the work they came
-            for. Folders fix that, and one level down at
-            /samples/<category>/<group> the catalogue is unchanged, facet rail
-            and all.
-
-            But gaming carries no skill groups — its axes are the game and the
-            session type, which live in `spec` — so the folder view came back
-            empty and took the catalogue with it: eight records and no way to
-            open one. `usesFolders` is that check. */}
-        {usesConfigFolders(c.modality) ? (
-          <ConfigFolders category={c} />
-        ) : usesFolders(c.modality) ? (
-          <SkillFolders category={c} />
-        ) : (
-          <SampleCatalog modality={c.modality} />
-        )}
 
         {/* Tam, 2026-09-10: "chị nghĩ cho Egocentric nó có đoạn trên nói về
             phần video, các thể loại video khác nhau. Xong ở dưới còn thêm ý
