@@ -10,7 +10,10 @@ import {
   categoryBySlug,
   skillFolders,
   skillFolderBySlug,
+  usesConfigFolders,
 } from "@/lib/samples/categories";
+import { CAPABILITY } from "@/lib/samples/capability";
+import samples from "@/lib/samples/samples.json";
 import { SampleCatalog } from "../../_sections/SampleCatalog";
 import { AccessPaths } from "../../_sections/AccessPaths";
 import { C } from "../../_sections/tokens";
@@ -34,16 +37,45 @@ import { Reveal } from "../../_sections/Reveal";
 
 type Params = { params: Promise<{ category: string; group: string }> };
 
+/**
+ * A "group" is a camera configuration on egocentric and a skill group
+ * everywhere else — the two axes the folder level uses, resolved to the same
+ * route shape so there is one leaf page rather than two.
+ */
+function resolveGroup(modality: string, slug: string) {
+  if (usesConfigFolders(modality)) {
+    const tier = (CAPABILITY[modality] ?? []).find((t) => t.key === slug);
+    if (!tier) return null;
+    const rows = (samples as unknown as { modality: string; tier: string; durationSec: number }[])
+      .filter((r) => r.modality === modality && r.tier === slug);
+    return {
+      kind: "tier" as const,
+      slug,
+      name: tier.name,
+      lead: tier.pitch ?? tier.when ?? null,
+      count: rows.length,
+      minutes: rows.reduce((a, r) => a + r.durationSec, 0) / 60,
+    };
+  }
+  const f = skillFolderBySlug(modality, slug);
+  if (!f) return null;
+  return { kind: "skill" as const, slug, name: f.name, lead: null, count: f.count, minutes: f.minutes };
+}
+
 export function generateStaticParams() {
   return CATEGORIES.filter((c) => c.modality && !c.externalHref).flatMap((c) =>
-    skillFolders(c.modality!).map((f) => ({ category: c.slug, group: f.slug })),
+    usesConfigFolders(c.modality!)
+      ? (CAPABILITY[c.modality!] ?? [])
+          .filter((t) => ["mono", "stereo", "stereo6", "wrist"].includes(t.key))
+          .map((t) => ({ category: c.slug, group: t.key }))
+      : skillFolders(c.modality!).map((f) => ({ category: c.slug, group: f.slug })),
   );
 }
 
 export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const { category, group } = await params;
   const c = categoryBySlug(category);
-  const f = c?.modality ? skillFolderBySlug(c.modality, group) : null;
+  const f = c?.modality ? resolveGroup(c.modality, group) : null;
   if (!c || !f) return {};
 
   const title = `${f.name} — ${c.name} samples`;
@@ -64,7 +96,7 @@ export default async function SkillGroupPage({ params }: Params) {
   const c = categoryBySlug(category);
   if (!c || c.externalHref || !c.modality) notFound();
 
-  const folder = skillFolderBySlug(c.modality, group);
+  const folder = resolveGroup(c.modality, group);
   if (!folder) notFound();
 
   return (
@@ -83,7 +115,9 @@ export default async function SkillGroupPage({ params }: Params) {
                 style={{ color: C.textMid }}
               >
                 <ArrowLeft className="h-3.5 w-3.5" />
-                All {c.name.toLowerCase()} groups
+                {usesConfigFolders(c.modality)
+                  ? "All camera configurations"
+                  : `All ${c.name.toLowerCase()} groups`}
               </Link>
 
               <h1
@@ -97,6 +131,15 @@ export default async function SkillGroupPage({ params }: Params) {
                 {folder.name}
               </h1>
 
+              {folder.lead && (
+                <p
+                  className="mt-5 max-w-2xl text-[15px] leading-relaxed"
+                  style={{ color: C.textMid }}
+                >
+                  {folder.lead}
+                </p>
+              )}
+
               <p className="bp-mono mt-5 text-[11px]" style={{ color: C.accent }}>
                 {folder.count} {folder.count === 1 ? "record" : "records"} ·{" "}
                 {folder.minutes.toFixed(1)} min · {c.name}
@@ -108,7 +151,11 @@ export default async function SkillGroupPage({ params }: Params) {
         {/* The catalogue, seeded to this folder. The rail stays live: a reader
             who wants the whole configuration can deselect the chip rather than
             navigate back up. */}
-        <SampleCatalog modality={c.modality} skillGroup={folder.name} />
+        {folder.kind === "tier" ? (
+          <SampleCatalog modality={c.modality} tier={folder.slug} />
+        ) : (
+          <SampleCatalog modality={c.modality} skillGroup={folder.name} />
+        )}
 
         <AccessPaths />
       </main>

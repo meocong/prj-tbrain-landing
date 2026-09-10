@@ -117,9 +117,22 @@ function shelfFigures(c?: Category): string[] {
     // yet, and saying "0 samples" would read as "we have none".
     return ["Nothing published in this category yet", "Ask and we will send what we hold"];
   }
+  /* The shelf first, and quoted rather than counted.
+
+     This used to lead with `${episodes} samples published` — a count of the
+     previews staged in this repo — which told a customer the off-the-shelf
+     corpus was 118 files and 14.2 hours. It is 1,200 hours. The figures live on
+     the Category now (`shelfFigures`), copied from the deck.
+
+     What is playable here stays, below and labelled, because it is a different
+     and also true fact: it is what they can press play on without asking. */
+  const quoted = c?.shelfFigures;
   return [
-    `${episodes} samples published${c ? "" : " across six catalogues"}`,
-    `${hours.toFixed(1)} hours playable on this site`,
+    ...(quoted ? [quoted.hours, quoted.episodes] : []),
+    `${episodes} sample${episodes === 1 ? "" : "s"} playable on this page${
+      c ? "" : " across six catalogues"
+    }`,
+    ...(quoted ? [] : [`${hours.toFixed(1)} hours playable on this site`]),
   ];
 }
 

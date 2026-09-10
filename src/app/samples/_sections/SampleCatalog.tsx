@@ -686,6 +686,7 @@ function RailGroup({
 export function SampleCatalog({
   modality,
   skillGroup,
+  tier,
 }: {
   modality: string;
   /**
@@ -697,6 +698,9 @@ export function SampleCatalog({
    * a starting point, not a cage.
    */
   skillGroup?: string;
+  /** The camera configuration the reader arrived through. Seeded like
+      `skillGroup` and just as deselectable. */
+  tier?: string;
 }) {
   const [active, setActive] = useState<Sample | null>(null);
   /* A record is addressable: `/samples?record=<slug>`.
@@ -733,12 +737,25 @@ export function SampleCatalog({
     ...EMPTY,
     scope: modality,
     skillGroup: skillGroup ? [skillGroup] : [],
+    tier: tier ? [tier] : [],
   });
 
   // The route is the source of truth for scope; a client nav between categories
   // remounts nothing, so the filter has to follow it.
   useEffect(() => {
-    setF((p) => (p.scope === modality ? p : { ...EMPTY, scope: modality }));
+    setF((p) =>
+      p.scope === modality
+        ? p
+        : {
+            ...EMPTY,
+            scope: modality,
+            // The seed belongs to the route as much as the scope does. Dropping
+            // it on a client nav landed the reader on an unfiltered grid at a
+            // URL that names a folder.
+            skillGroup: skillGroup ? [skillGroup] : [],
+            tier: tier ? [tier] : [],
+          },
+    );
   }, [modality]);
 
   /* Clear empties the facets and leaves the reader where they were. Scope is
@@ -993,22 +1010,19 @@ export function SampleCatalog({
               {/* Every group below renders only where this category has more
                   than one value for it. A facet with one value is not a facet,
                   and a facet with none is a row of zeroes. */}
-              {sources.length > 1 && (
-                <RailGroup title="Source" first={tiers.length <= 1}>
-                  {sources.map((p) => (
-                    <Chip
-                      key={p.key}
-                      label={p.label}
-                      active={f.provenance.includes(p.key)}
-                      count={countFor("provenance", (s) => s.provenance, p.key)}
-                      onClick={() => toggle("provenance", p.key)}
-                    />
-                  ))}
-                </RailGroup>
-              )}
+              {/* The Source facet — "Off the shelf 39 / Custom collection 79" —
+                  is gone. Tam, 2026-09-10: "cái này ko cần". It split the grid
+                  on a purchase route rather than on anything about the footage,
+                  and both routes deliver the same files off the same rigs, so
+                  picking one hid half the catalogue for no reason a buyer would
+                  recognise. The distinction still lives where it belongs, in
+                  `TwoRoutes`, which explains it instead of filtering on it.
+
+                  `sources` and `SOURCES` stay: `provenance` is still a field on
+                  the record and still printed in the detail view. */}
 
               {viewpoints.length > 1 && (
-                <RailGroup title="Viewpoint" first={tiers.length <= 1 && sources.length <= 1}>
+                <RailGroup title="Viewpoint" first={tiers.length <= 1}>
                   {viewpoints.map((v) => (
                     <Chip
                       key={v.key}
