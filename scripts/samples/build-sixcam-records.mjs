@@ -37,8 +37,9 @@
  *   node scripts/samples/build-sixcam-records.mjs [--set sixcam|handpose] [--dry]
  */
 import { readFileSync, writeFileSync, existsSync } from "node:fs";
+import { execFileSync } from "node:child_process";
 import { join, resolve } from "node:path";
-import { sixcamTasks } from "./sixcam-slugs.mjs";
+import { overlayPair, sixcamTasks } from "./sixcam-slugs.mjs";
 
 const ROOT = resolve(import.meta.dirname, "../..");
 const SAMPLES = join(ROOT, "src/lib/samples/samples.json");
@@ -144,10 +145,14 @@ const TRADES = {
 /** The tier's line from `capability.ts`, not a guess at each trade's premises. */
 const ENVIRONMENT = "Workshop, workplace, on site";
 
-/** "primary" | "mid" | "outer" — which pair the overlay was rendered on. */
-function overlayPair(overlays) {
-  const m = /^hand-pose_(primary|mid|outer)_/.exec(overlays[0] ?? "");
-  return m?.[1] ?? null;
+/** `WxH` of a staged clip, read off the file rather than assumed. */
+function probe(file) {
+  const out = execFileSync(
+    "ffprobe",
+    ["-v", "error", "-select_streams", "v:0", "-show_entries", "stream=width,height", "-of", "csv=p=0:s=x", file],
+    { encoding: "utf8" },
+  ).trim();
+  return out.replace("x", " x ");
 }
 
 function mmss(sec) {
@@ -198,6 +203,16 @@ for (const t of tasks) {
 
   const hp = SET === "handpose";
   const pair = hp ? overlayPair(t.overlays) : null;
+  /* Which of the six the cutter actually staged, which is not always six —
+     `garment-sewing` has an `outer_left.mp4` that ffprobe cannot open. The
+     record says what is here, and `index-views.mjs` tells the card the same
+     thing off the same files. */
+  const staged = ["", "-primary-right", "-mid-left", "-mid-right", "-outer-left", "-outer-right"]
+    .filter((s) => existsSync(join(CLIPS, `${t.slug}${s}.mp4`)));
+  /* Measured off the file the page will actually serve, not off the delivery.
+     The caption is about the thing in the browser — the 118 stereo records say
+     "576 x 432" for the same reason — and the source frame has its own row. */
+  const cut = probe(join(CLIPS, `${t.slug}.mp4`));
   const mb = Math.round(t.bytes / 1e6);
   const title = hp ? `${trade.title} · hand pose` : trade.title;
 
@@ -243,12 +258,6 @@ for (const t of tasks) {
         ? [["Hand pose", `Rendered overlay on the ${pair} pair, left and right`]]
         : []),
       ["Delivered size", `${mb} MB across ${t.cams.length + t.overlays.length} files`],
-      [
-        "Preview",
-        hp
-          ? "8 s of the hand-pose render; the six raw views ship with the segment"
-          : "8 s, left eye of the primary pair; the other five views ship with the episode",
-      ],
       /* Say it rather than quietly correct it. The rig build that shot these
          mounts the camera block inverted, so the delivery is upside down and
          the preview is not. A buyer writing a loader has to know which one
@@ -258,7 +267,17 @@ for (const t of tasks) {
         : []),
     ],
     breadcrumb: ["Samples", "Egocentric", title],
-    preview: `/samples/clips/${t.slug}.mp4`,
+    /* Prose, not a path. `SampleCatalog` prints this as the card's caption and
+       `SampleModal` prints it again under the player, so a record whose
+       `preview` is "/samples/clips/sixcam-wood-grinding.mp4" puts its own file
+       path on the page where a sentence about what you are looking at belongs.
+       The 118 stereo records get this right; `build-teleop-records.mjs` does
+       not, and its 11 cards are still captioned with a URL. */
+    preview: hp
+      ? `Preview · 8 s of the hand-pose render, both eyes of the annotated pair · ${cut}`
+      : `Preview · 8 s on ${
+          staged.length === 6 ? "all six lenses" : `${staged.length} of the six lenses`
+        }, the same instant on each · ${cut} per view`,
     pills: [
       { t: trade.skillGroup, k: "skill" },
       { t: "6 cameras", k: "quality" },

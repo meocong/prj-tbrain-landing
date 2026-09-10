@@ -1,0 +1,48 @@
+{
+  "files": {
+    "1Kg8yj83THwm6098grDNtlTPSpuTbNbTX": {
+      "name": "gopro_1_original.mp4",
+      "path": [
+        "operator-cbab3b",
+        "operator-8b5873",
+        "operator-020035",
+        "operator-3237af"
+      ],
+      "sizeBytes": 197210072,
+      "durationSec": 80.96,
+      "bitRate": 19487161,
+      "codec": "hevc",
+      "width": 1920,
+      "height": 1080,
+      "fps": 59.94,
+      "audio": "aac",
+      "dataTracks": 2,
+      "device": null,
+      "shotAt": "2026-06-26T06:58:29.000000Z",
+      "gps": null,
+      "gpsAccuracyM": null
+    },
+    "1bWMBOO9JLl6nhxlXRlthIU29i1PT8D1i": {
+      "name": "gopro_2_original.mp4",
+      "path": [
+        "operator-cbab3b",
+        "operator-8b5873",
+        "operator-020035",
+        "operator-25e430"
+      ],
+      "sizeBytes": 282436554,
+      "durationSec": 123.5234,
+      "bitRate": 18292019,
+      "codec": "hevc",
+      "width": 1920,
+      "height": 1080,
+      "fps": 59.94,
+      "audio": "aac",
+      "dataTracks": 2,
+      "device": null,
+      "shotAt": "2026-06-26T06:58:34.000000Z",
+      "gps": null,
+      "gpsAccuracyM": null
+    }
+  }
+}

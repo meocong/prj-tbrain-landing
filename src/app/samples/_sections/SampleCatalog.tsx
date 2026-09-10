@@ -4,7 +4,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import { Check, ChevronDown, Copy, Search, SlidersHorizontal, X } from "lucide-react";
 import samples from "@/lib/samples/samples.json";
-import stereoPairs from "@/lib/samples/stereo.json";
+import stagedViews from "@/lib/samples/views.json";
 import { SKILL_GROUPS, JOBS, INDUSTRIES } from "@/lib/samples/taxonomy";
 import { FacetPicker, SortPicker } from "./Fields";
 import { PILL_KINDS_DROPPED, publicSpec } from "@/lib/samples/redact.mjs";
@@ -33,13 +33,52 @@ import { Reveal } from "./Reveal";
 const ALL = samples as unknown as Sample[];
 
 /**
- * Slugs with a right-eye clip staged beside the left one.
+ * Which extra views each record has staged beside its base clip.
  *
- * Generated — `node scripts/samples/index-stereo.mjs`. A Set at module scope so
- * a 118-card grid does an O(1) lookup per card rather than scanning an array on
- * every render of every tile.
+ * Generated — `node scripts/samples/index-views.mjs`. A plain object at module
+ * scope so a 135-card grid does one O(1) lookup per card rather than scanning
+ * an array on every render of every tile.
  */
-const STEREO = new Set(stereoPairs as string[]);
+const VIEWS = stagedViews as Record<string, string[] | undefined>;
+
+/**
+ * Where each lens of the six-camera rig sits on the card.
+ *
+ * The same front elevation `RigViews` draws, and for the same reason given at
+ * length there: one camera at the outer left, a pair, a pair, one at the outer
+ * right, read left to right as the rig is worn.
+ *
+ *     outer-left   primary-left  primary-right   outer-right
+ *                  mid-left      mid-right
+ *
+ * A reader who has met that diagram on the configuration page should be able
+ * to point at a tile here and know which lens took it, so the two layouts are
+ * the same layout rather than two arrangements of the same six files.
+ *
+ * The outer two span both rows and centre themselves, which keeps every tile
+ * showing a 4:3 frame at its own aspect — stretching one to fill two rows
+ * would make it the only cell in the picture that is not.
+ *
+ * Below `sm` the placements do not apply and the six fall into a two-column
+ * grid in DOM order, which is why that order is primary, mid, outer: on a
+ * phone each pair still lands beside its own partner.
+ */
+const LENS_PLACES: { view: string; label: string; place: string }[] = [
+  { view: "", label: "primary · left", place: "sm:[grid-column:2] sm:[grid-row:1]" },
+  { view: "primary-right", label: "primary · right", place: "sm:[grid-column:3] sm:[grid-row:1]" },
+  { view: "mid-left", label: "mid · left", place: "sm:[grid-column:2] sm:[grid-row:2]" },
+  { view: "mid-right", label: "mid · right", place: "sm:[grid-column:3] sm:[grid-row:2]" },
+  {
+    view: "outer-left",
+    label: "outer · left",
+    place: "sm:[grid-column:1] sm:[grid-row:1/span_2] sm:self-center",
+  },
+  {
+    view: "outer-right",
+    label: "outer · right",
+    place: "sm:[grid-column:4] sm:[grid-row:1/span_2] sm:self-center",
+  },
+];
 
 /**
  * Cards revealed per step.
@@ -324,14 +363,33 @@ function CopyRecord({ sample }: { sample: Sample }) {
 
 function Card({ sample, onOpen }: { sample: Sample; onOpen: () => void }) {
   /**
-   * Both eyes when both are staged, one when only one is.
+   * Every view that is actually on disk for this record.
    *
-   * See `scripts/samples/index-stereo.mjs` for why this is a generated list
+   * See `scripts/samples/index-views.mjs` for why this is a generated list
    * rather than something the card works out: it is a client component and
-   * cannot look at the filesystem, and 118 speculative HEAD requests is not a
+   * cannot look at the filesystem, and 800 speculative HEAD requests is not a
    * way to find out which files exist.
+   *
+   * A six-camera record that is missing a lens — `garment-sewing` has five,
+   * one file in the delivery will not decode — still lays out as the rig. The
+   * hole is where that camera is, which is the honest picture of what shipped;
+   * closing it up would draw a five-camera rig that does not exist.
    */
-  const pair = STEREO.has(sample.slug);
+  const extra = VIEWS[sample.slug] ?? [];
+  const lenses = LENS_PLACES.filter((l) => !l.view || extra.includes(l.view));
+  const sixUp = lenses.length > 2;
+  const pair = !sixUp && extra.includes("right");
+  /* Two grid slots either way. Tam, 2026-09-10: "để nguyên 3 cột như này nó
+     làm cho 2 cam kết hợp nhau bị nhỏ đi" — a multi-view card in a one-column
+     slot gives each view a fraction of the width a single-view card gets, so
+     the one card with more to show shows it smaller. */
+  const wide = sixUp || pair;
+
+  /* One row of two 4:3 eyes is 8:3. Four columns of 4:3 over two rows is the
+     same 8:3, so the six-up and the pair occupy an identical footprint and a
+     row mixing them stays level. Below `sm` the six reflow to two columns and
+     three rows, which is 8:9. */
+  const band = sixUp ? "aspect-[8/9] sm:aspect-[8/3]" : pair ? "aspect-[8/3]" : "aspect-[4/3]";
 
   /* The elements this card drives — one or two, and never in state.
      A ref, because the transport does not affect the render: nothing on this
@@ -383,6 +441,8 @@ function Card({ sample, onOpen }: { sample: Sample; onOpen: () => void }) {
     ? sample.preview.replace(/left eye of the stereo pair/i, "left and right eye, one instant")
     : sample.preview;
 
+  const viewLabel = (v: string) => `${sample.title} — ${v}`;
+
   return (
     /* A pair takes two columns of the grid.
        Tam, 2026-09-10: "để nguyên 3 cột như này nó làm cho 2 cam kết hợp nhau
@@ -395,7 +455,7 @@ function Card({ sample, onOpen }: { sample: Sample; onOpen: () => void }) {
        make the grid invent a second column for this card alone and every other
        card would then sit in a half-width track. */
     <article
-      className={`flex flex-col${pair ? " sm:[grid-column:span_2]" : ""}`}
+      className={`flex flex-col${wide ? " sm:[grid-column:span_2]" : ""}`}
       style={{ borderTop: `1px solid ${C.hairline}` }}
     >
       {/* The rule above is the card's top edge, and this label was sitting on it
@@ -423,47 +483,56 @@ function Card({ sample, onOpen }: { sample: Sample; onOpen: () => void }) {
         aria-haspopup="dialog"
         className="group relative block w-full overflow-hidden text-left"
       >
-        {/* One row, one or two cells. The card's media band keeps its 4:3
-            footprint either way — a pair that made the tile twice as wide would
-            break the grid, and a pair that made it half as tall would put two
-            letterboxes where one frame used to be. Each eye takes half the
-            width and crops, which is what the single view already does. */}
-        {/* 4:3 per EYE, not per card. A pair in a 4:3 band would crop each eye
-            to 2:3 — a portrait slice of a landscape frame, which throws away
-            the sides of the very thing the second view exists to show. Two 4:3
-            frames side by side is 8:3, so that is what the band becomes. */}
+        {/* 4:3 per VIEW, not per card. A pair squeezed into a 4:3 band would
+            crop each eye to 2:3 — a portrait slice of a landscape frame, which
+            throws away the sides of the very thing the second view exists to
+            show. So the band grows to hold whole frames instead: two side by
+            side is 8:3, and the six-camera elevation is four columns over two
+            rows, which is the same 8:3. */}
         <div
-          className="grid w-full gap-px transition-transform duration-500 group-hover:scale-[1.02]"
-          style={{
-            background: "#000",
-            aspectRatio: pair ? "8 / 3" : "4 / 3",
-            gridTemplateColumns: pair ? "1fr 1fr" : "1fr",
-          }}
+          className={`grid w-full gap-px transition-transform duration-500 group-hover:scale-[1.02] ${band} ${
+            sixUp ? "grid-cols-2 sm:grid-cols-4" : pair ? "grid-cols-2" : "grid-cols-1"
+          }`}
+          style={{ background: "#000" }}
         >
-          {(pair ? ["", "-right"] : [""]).map((suffix, i) => (
-            <video
-              key={suffix}
-              ref={(el) => {
-                videos.current[i] = el;
-              }}
-              className="h-full w-full object-cover"
-              src={`/samples/clips/${sample.slug}${suffix}.mp4`}
-              poster={`/samples/posters/${sample.slug}${suffix}.jpg`}
-              muted
-              loop
-              playsInline
-              /* `none`, not `metadata`. A card shows its poster until the
-                 pointer arrives, and the only thing `metadata` bought was the
-                 clip's duration — which the record already carries as
-                 `durationSec` and prints beside the tile. So it was 24 extra
-                 connections and about a megabyte to learn something the page
-                 had already been told. */
-              preload="none"
-              aria-label={
-                pair ? `${sample.title} — ${suffix ? "right" : "left"} eye` : sample.title
-              }
-            />
-          ))}
+          {(sixUp ? lenses : pair ? [{ view: "", label: "left eye", place: "" }, { view: "right", label: "right eye", place: "" }] : [{ view: "", label: "", place: "" }]).map(
+            ({ view, label, place }, i) => (
+              <figure key={view || "base"} className={`relative m-0 overflow-hidden ${place}`}>
+                <video
+                  ref={(el) => {
+                    videos.current[i] = el;
+                  }}
+                  className="h-full w-full object-cover"
+                  src={`/samples/clips/${sample.slug}${view ? `-${view}` : ""}.mp4`}
+                  poster={`/samples/posters/${sample.slug}${view ? `-${view}` : ""}.jpg`}
+                  muted
+                  loop
+                  playsInline
+                  /* `none`, not `metadata`. A card shows its poster until the
+                     pointer arrives, and the only thing `metadata` bought was
+                     the clip's duration — which the record already carries as
+                     `durationSec` and prints beside the tile. So it was 24
+                     extra connections and about a megabyte to learn something
+                     the page had already been told. */
+                  preload="none"
+                  aria-label={label ? viewLabel(label) : sample.title}
+                />
+                {/* Only on the six-up. Two eyes read as two eyes; six near
+                    identical frames of the same bench read as a repeat until
+                    each one says which lens it is. `truncate` because a cell
+                    is about 200px on a two-column card and narrower on a
+                    phone. */}
+                {sixUp && (
+                  <figcaption
+                    className="bp-mono pointer-events-none absolute left-1.5 top-1.5 max-w-[calc(100%-12px)] truncate px-1.5 py-0.5 text-[9px]"
+                    style={{ background: OVER_MEDIA.scrim, color: OVER_MEDIA.text }}
+                  >
+                    {label}
+                  </figcaption>
+                )}
+              </figure>
+            ),
+          )}
         </div>
         <span
           className="pointer-events-none absolute left-3 top-3 rounded-full px-2 py-0.5 font-mono text-[10px] backdrop-blur-sm"
