@@ -116,7 +116,7 @@ export interface Category {
    * Quoted from the deck, never derived. The playable count stays too, but
    * underneath and labelled as what it is.
    */
-  shelfFigures?: { episodes: string; hours: string };
+  shelfFigures?: { hours: string; episodes: string; reach?: string; depth?: string };
 }
 
 export const CATEGORIES: Category[] = [
@@ -140,12 +140,19 @@ export const CATEGORIES: Category[] = [
     shelf:
       "The shelf behind these runs to roughly 15,000 episodes and 1,200 hours, shot across 70+ operating businesses. Counted off our own collection, rounded down.",
     // From Tam's deck, not from samples.json. See `shelfFigures`.
-    /* The DECK's stereo shelf, and named as stereo because the page also
-       carries the xlsx's mono one further down at ~72 h. Two corpora, both
-       called "off the shelf" — see the note on OTS_CORPUS in ots.ts. */
+    /* The DECK's stereo shelf, verbatim — see OTS_STEREO in ots.ts, read off
+       `Tbrain OTS Stereo Data` on 2026-09-10. Named as stereo because the page
+       also carries the xlsx's mono corpus further down at ~72 h.
+
+       The episode length is here because it is what makes the hours land: 1,200
+       hours over 15,000 episodes is only impressive if an episode is real work,
+       and the deck says 4m 49s and adds "not five seconds". Without it a reader
+       can assume the total was reached by counting clips. */
     shelfFigures: {
-      episodes: "~15,000 episodes, 70+ commercial sites",
-      hours: "1,200 hours of stereo capture",
+      hours: "1,200 h of stereo capture, 100% human QC-ed",
+      episodes: "15,000 episodes averaging 4m 49s",
+      reach: "70+ operating businesses · 35 location types · 100 operator professions",
+      depth: "3,000 task types across 17 skill groups · 82% graded medium or hard",
     },
     rig: "6 cameras, three stereo pairs",
     imuHz: "200 Hz",

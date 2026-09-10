@@ -17,6 +17,60 @@
  * percentages × 12,900 total."
  */
 
+/**
+ * The OTHER off-the-shelf corpus: stereo, commercial, from the sales deck.
+ *
+ * Transcribed from `Tbrain OTS Stereo Data` (deck
+ * 11hyiv3jmdBWAYjSA8aNR2IJf_DoTgj3swOHBwYITIn8), read 2026-09-10. Everything
+ * below is the deck's own wording or its own arithmetic; nothing is derived
+ * from `samples.json`, which counts the previews staged in this repo and not
+ * the shelf.
+ *
+ * It settles the question the page could not answer from the xlsx alone. The
+ * two totals looked contradictory — 1,200 h here against ~72 h in
+ * `OTS_CORPUS` — and the deck closes it twice over: these are different
+ * corpora, and its own "episodes average 4m 49s" multiplies back out
+ * (15,000 x 289 s = 1,204 h). The mono corpus closes the same way at
+ * 12,900 x 20 s = ~72 h. Both are internally consistent; neither is stale.
+ */
+export const OTS_STEREO = {
+  hours: "1,200 h",
+  episodes: "15,000",
+  sites: "70+",
+  locationTypes: "35",
+  professions: "100",
+  taskTypes: "3,000",
+  skillGroups: "17",
+  /** The figure that makes the hours believable rather than padded. */
+  episodeLength: "4m 49s",
+  qc: "100% human labeled and QC-ed",
+  /** Deck's own headline for the hardware slide. */
+  rigLine: "Professional rigs, not a phone on a headband",
+  rigFamilies: "5",
+  fov: "100°",
+  calibration: "100% of the fleet in calibration",
+  footprint:
+    "Every one of the 70+ sites is an operating business — workshops, factories, restaurants, farms, repair shops, offices. Never a private residence, never a staged studio.",
+} as const;
+
+/**
+ * Difficulty, from the deck's own mix. Ordered easy to hard so the scale reads
+ * in one direction; the deck leads with hard because that is the claim.
+ */
+export const OTS_STEREO_DIFFICULTY = [
+  { label: "Easy", share: "18%", note: "Not padded with trivial clips to reach an hour count." },
+  {
+    label: "Medium",
+    share: "47%",
+    note: "Sustained bimanual manipulation on real objects, with real failure and recovery.",
+  },
+  {
+    label: "Hard",
+    share: "35%",
+    note: "Multi-step, tool-mediated work — engine repair, loom threading, welding, cabinet installation.",
+  },
+] as const;
+
 export interface OtsSkill {
   slug: string;
   /** The skill as the sheet names it. */
