@@ -47,6 +47,17 @@ export const DROPPED_LABELS = [
   "Geohash",
   "NAICS",
   "Session",
+  /* The co-op variant of the row above, which the exact-match filter let
+     straight through: `Session` is dropped, `Shared session` is not the same
+     string, and `gtav-coop-host` published `coop_20260616_171435_h12` — a
+     capture handle carrying a timestamp to the second, which is the precise
+     shape `redactFile` exists to strip out of `File`.
+
+     Nothing is lost by dropping it. What the row was there to say — that the
+     two viewports are one session — is said in prose by `TelemetryStrip` and in
+     the record by `Session type` ("two-player coop, agent 12 (host)") and
+     `Clock offset` (933.5 ms), neither of which names the capture. */
+  "Shared session",
   /* The city. Coarser than the rest, and still a locator: a named workplace
      type in a named city is a short list. The aggregate — "4 cities" as a
      diversity figure — is a different claim and stays. */
