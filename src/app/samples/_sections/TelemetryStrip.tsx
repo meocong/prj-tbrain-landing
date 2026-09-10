@@ -188,9 +188,20 @@ function LaneChart() {
 
       <dl className="mt-5 grid grid-cols-2 gap-4 sm:grid-cols-4">
         {[
-          { k: "Session", v: wd.sessionId },
+          /* Not `wd.sessionId`. It printed `WD2-B71-S03` — the capture handle,
+             which `redact.mjs` drops from every spec table on this site as a
+             locator ("cái gì có thể định vị nó là ai, người nào, ở đâu thì
+             cắt", Tam, 2026-09-09). Stripping a field from the record and then
+             printing it in a stat block a few hundred pixels away is not a
+             redaction. The length is what a reader wanted from that slot
+             anyway: it makes the frame count mean something. */
+          { k: "Duration", v: `${wd.durationSec.toFixed(1)} s` },
           { k: "Frames", v: wd.frames.toLocaleString("en-US") },
           { k: "Capture", v: `${wd.width} x ${wd.height}` },
+          /* Constant on purpose: the payload is decimated to 360 buckets and no
+             longer knows its own column count, and all eight published gaming
+             records carry 27. If a delivery ever ships a different schema this
+             is the line that has to change with it. */
           { k: "Telemetry columns", v: "27" },
         ].map((s) => (
           <div key={s.k}>
