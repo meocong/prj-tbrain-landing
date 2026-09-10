@@ -25,6 +25,7 @@ import { join, resolve } from "node:path";
 import { promisify } from "node:util";
 import { exoFiles } from "./exo-slugs.mjs";
 import { sixcamViews } from "./sixcam-slugs.mjs";
+import { kitViews } from "./kit-slugs.mjs";
 
 const run = promisify(execFile);
 
@@ -64,6 +65,20 @@ const SETS = {
   handpose: {
     manifest: "drive-handpose.json",
     jobs: (m) => sixcamViews(m, "handpose"),
+    w: 640,
+    h: 480,
+  },
+  /**
+   * The kit delivery: one head camera, three body-worn, or colour and depth.
+   *
+   * 4:3 like the other head-rig sets, because these cards sit in the same grid
+   * as the 118 stereo ones. 640x480 rather than the six-camera set's 480x360:
+   * this one lays out at most three cells across a card, so each gets roughly
+   * twice the width six do.
+   */
+  kit: {
+    manifest: "kit-sessions.json",
+    jobs: kitViews,
     w: 640,
     h: 480,
   },

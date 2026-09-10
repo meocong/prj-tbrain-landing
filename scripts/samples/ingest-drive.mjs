@@ -62,23 +62,60 @@ const run = promisify(execFile);
  */
 const EPISODE = /^\d+__([a-z0-9][a-z0-9-]*)__capture__/i;
 
-/** Folder names that describe the shoot or the package, never a person. */
-const STRUCTURAL =
-  /^(?:\w{3} \d{1,2} \d{4}|video|videos|clips|scripts|meta|metadata|raw|export|exports|.*(?:office|indoor|urban|walking|cycling|vehicular|navigation|environment|outdoor|studio|household|factory|sewing|grinding|cutting|cleaning|installation|selecting|working).*)$/i;
+/**
+ * Folder names that describe the shoot or the package, never a person.
+ *
+ * The second group is the per-rig layout a kit delivery lands: a session named
+ * by its wall clock (`13-58-30`) or by its run id (`20260802T001`), and under it
+ * one directory per device plus the export tree. Without these the wrist
+ * delivery pseudonymised its own directory structure — every path came back
+ * `operator-9987ec / operator-6585d4 / operator-6ed891`, which throws away the
+ * one thing the tree was carrying.
+ */
+const STRUCTURAL = new RegExp(
+  "^(?:" +
+    [
+      String.raw`\w{3} \d{1,2} \d{4}`,
+      "video|videos|clips|scripts|meta|metadata|raw|export|exports",
+      // Session directories: wall clock, or a run id like 20260802T001.
+      String.raw`\d{2}-\d{2}-\d{2}`,
+      String.raw`\d{8}T\d{3}`,
+      // Devices and export trees inside a session.
+      String.raw`gopro(?:_\d+)?|zed|d455|realsense|audio|derived|lerobot|data|chunk-\d+|sftp`,
+      String.raw`.*(?:office|indoor|urban|walking|cycling|vehicular|navigation|environment|outdoor|studio|household|factory|sewing|grinding|cutting|cleaning|installation|selecting|working).*`,
+    ].join("|") +
+    ")$",
+  "i",
+);
 
-function safeSegment(name) {
+function safeSegment(name, depth) {
   const t = name.trim();
   const ep = EPISODE.exec(t);
   // The task alone. The timestamp, the session hash and the segment index all
   // go, which is what `redactFile` does to the same string in the spec table.
   if (ep) return ep[1].toLowerCase();
+  if (TASK_DEPTH != null && depth === TASK_DEPTH) return t;
   if (STRUCTURAL.test(t)) return t;
   return `operator-${createHash("sha256").update(t.toLowerCase()).digest("hex").slice(0, 6)}`;
 }
 
-const safePath = (segments) => segments.map(safeSegment);
+const safePath = (segments) => segments.map((s, i) => safeSegment(s, i));
 
 const args = process.argv.slice(2);
+/**
+ * Folders at this depth are activity labels, kept verbatim.
+ *
+ * `STRUCTURAL` can only recognise a task folder by naming it, which works while
+ * deliveries are filed in English under a fixed vocabulary and fails the moment
+ * one arrives filed in the customer's own words — the wrist delivery's seven top
+ * folders are Vietnamese sentences ("Là sản phẩm"), so every one of them was
+ * treated as a person and hashed. Depth is the fact that actually holds: this
+ * delivery is one folder per task at the root, and the flag says so at the call
+ * site rather than guessing from the string.
+ */
+const TASK_DEPTH = args.includes("--task-depth")
+  ? Number(args[args.indexOf("--task-depth") + 1])
+  : null;
 const ROOT_ID = args.find((a) => !a.startsWith("--"));
 const OUT = resolve(
   args.includes("--out") ? args[args.indexOf("--out") + 1] : "scripts/samples/drive-manifest.json"
@@ -94,15 +131,27 @@ if (!ROOT_ID) {
 
 const VIDEO = /\.(mp4|mov|avi|mkv|m4v)$/i;
 
+const FOLDER_MIME = "application/vnd.google-apps.folder";
+
+/** The bootstrap payload is written as a hex-escaped JS string literal. */
+const unhex = (s) =>
+  s.replace(/\\x([0-9a-fA-F]{2})/g, (_, h) => String.fromCharCode(parseInt(h, 16)));
+
 /**
- * Drive renders a folder's contents into the page's bootstrap payload, so the
- * names and ids are in the HTML even though the visible list is drawn later by
- * script. Each entry appears as a quoted id followed within a few hundred bytes
- * by a quoted name; anchoring on the name and walking backwards to the nearest
- * id is what survives Drive's payload shape changing around it.
+ * Drive renders a folder's contents into `window['_DRIVE_ivd']`, one row per
+ * child: `[id, [parentIds], name, mimeType, …, sizeBytes, …]`. Parsing that is
+ * exact — id, name and type come from the same row.
  *
- * A folder announces itself by the literal "Shared folder" suffix Drive appends
- * for accessibility, which is what separates a subfolder from a file here.
+ * The first version scraped instead, anchoring on the accessibility suffix Drive
+ * appends to each name ("… Shared folder") and walking backwards through the
+ * HTML to the nearest id-shaped token. That reads as robust and is not: the id
+ * is not reliably within a few hundred bytes of its own name, and the miss is
+ * SILENT, because an entry with no id found is skipped. On the wrist delivery it
+ * resolved one root folder out of ten and crawled that one alone — the run
+ * looked like it was working and was measuring a thirteenth of the data.
+ *
+ * Names also arrive verbatim here rather than HTML-collapsed, which is how two
+ * folders differing only in a trailing space stopped reading as one.
  */
 async function listFolder(id) {
   const res = await fetch(`https://drive.google.com/drive/folders/${id}`, {
@@ -111,19 +160,14 @@ async function listFolder(id) {
   if (!res.ok) throw new Error(`folder ${id}: HTTP ${res.status}`);
   const html = await res.text();
 
-  const entries = [];
-  const seen = new Set();
-  const re = /"((?:[^"\\]|\\.){2,120}?)\s(Shared folder|Video|Image|PDF|File)"/g;
-  for (const m of html.matchAll(re)) {
-    const name = m[1];
-    if (seen.has(name)) continue;
-    const before = html.slice(Math.max(0, m.index - 600), m.index);
-    const ids = [...before.matchAll(/"([a-zA-Z0-9_-]{28,44})"/g)].map((x) => x[1]);
-    if (ids.length === 0) continue;
-    seen.add(name);
-    entries.push({ name, id: ids[ids.length - 1], kind: m[2] === "Shared folder" ? "folder" : "file" });
-  }
-  return entries;
+  const m = /window\['_DRIVE_ivd'\]\s*=\s*'([^']+)'/.exec(html);
+  if (!m) throw new Error(`folder ${id}: no _DRIVE_ivd payload (private, or Drive changed shape)`);
+  const rows = JSON.parse(unhex(m[1]))[0] ?? [];
+  return rows.map((r) => ({
+    id: r[0],
+    name: r[2],
+    kind: r[3] === FOLDER_MIME ? "folder" : "file",
+  }));
 }
 
 /**
