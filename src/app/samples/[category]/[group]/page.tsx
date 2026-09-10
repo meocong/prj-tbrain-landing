@@ -182,7 +182,7 @@ export default async function SkillGroupPage({ params }: Params) {
             THIS configuration and neither is an argument for mono. */}
         {group === "stereo6" && (
           <>
-            <CaptureSpec category={c} />
+            <CaptureSpec category={c} tier={group} />
             <RigViews />
           </>
         )}

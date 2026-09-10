@@ -32,6 +32,7 @@ export interface CaptureRow {
 
 type Row = {
   modality: string;
+  tier: string;
   rig: string;
   resolution: string;
   fps: number;
@@ -115,8 +116,20 @@ function tally(rows: Row[], key: string, normalise: (v: string) => string): stri
     .join(" · ");
 }
 
-export function captureFor(c: Category): CaptureRow[] {
-  const rows = c.modality ? ALL.filter((r) => r.modality === c.modality) : [];
+/**
+ * @param tier Narrow to one camera configuration.
+ *
+ * The block lives on `/samples/egocentric/stereo6` and nowhere else in this
+ * modality — Tam, 2026-09-10: "cái phần chữ của em chỉ apply cho Egocentric 6
+ * cam." It was still reading every egocentric record, which was invisible
+ * while the only records were the 118 2-cam ones and wrong the moment the
+ * six-camera delivery landed: `Video` printed four resolutions from two rigs,
+ * and `Calibration` answered "118 of 135 passed" on a page about the 17.
+ */
+export function captureFor(c: Category, tier?: string): CaptureRow[] {
+  const rows = c.modality
+    ? ALL.filter((r) => r.modality === c.modality && (!tier || r.tier === tier))
+    : [];
   if (rows.length === 0) return c.capture ?? fromCapability(c);
 
   const uniq = (xs: string[]) => [...new Set(xs.filter(Boolean))];
@@ -219,6 +232,16 @@ export function captureFor(c: Category): CaptureRow[] {
      line promises every buyer a file three fifths of the records do not carry.
      The singular/plural pair is almost certainly a typo in the source, but it
      is not this function's job to guess which spelling is the real one. */
+  /* Not when we are inside one configuration. `CapabilityTable` sits directly
+     above this block on a tier page and prints that tier's "What ships" from
+     the pricing sheet — for the six-camera rig, "camera0..5.mp4 + camera_info
+     per lens + imu.csv + VIO — one MCAP carrying every stream". Deriving a
+     second, narrower answer from the records underneath it would put "Ships
+     as: mp4" a few pixels below "one MCAP carrying every stream", and the
+     reader has no way to tell which one they are buying. The sheet answers
+     this question on that page; this block answers the ones it does not. */
+  if (tier) return out;
+
   const formats = uniq(rows.flatMap((r) => r.formats));
   const always = formats.filter((f) => rows.every((r) => r.formats.includes(f)));
   const varies = formats.filter((f) => !always.includes(f));
