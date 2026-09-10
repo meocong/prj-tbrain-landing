@@ -140,7 +140,13 @@ export const CATEGORIES: Category[] = [
     shelf:
       "The shelf behind these runs to roughly 15,000 episodes and 1,200 hours, shot across 70+ operating businesses. Counted off our own collection, rounded down.",
     // From Tam's deck, not from samples.json. See `shelfFigures`.
-    shelfFigures: { episodes: "~15,000 episodes recorded", hours: "1,200 hours on the shelf" },
+    /* The DECK's stereo shelf, and named as stereo because the page also
+       carries the xlsx's mono one further down at ~72 h. Two corpora, both
+       called "off the shelf" — see the note on OTS_CORPUS in ots.ts. */
+    shelfFigures: {
+      episodes: "~15,000 episodes, 70+ commercial sites",
+      hours: "1,200 hours of stereo capture",
+    },
     rig: "6 cameras, three stereo pairs",
     imuHz: "200 Hz",
   },

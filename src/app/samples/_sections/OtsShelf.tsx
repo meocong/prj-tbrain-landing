@@ -37,13 +37,15 @@ export function OtsShelf() {
       <div className="mx-auto max-w-[1400px] px-4 pb-16 pt-14 lg:px-10 xl:px-16">
         <Reveal variant="rise">
           <h2 className="bp-mono text-[10px]" style={{ color: C.textDim }}>
-            Off the shelf · household and daily activity
+            Off the shelf · mono phone · household and daily
           </h2>
 
           <p className="mt-5 max-w-2xl text-[13px] leading-relaxed" style={{ color: C.textMid }}>
-            A separate corpus from the deliveries above: phone-mounted first-person capture of
-            everyday manipulation, licensed as a pack rather than collected to a brief. Every clip in the five
-            sampled skills plays here — sixty-one of them.
+            A different shelf from the 1,200-hour stereo one above, not a subset of it: one
+            phone on the head, everyday manipulation at home, licensed as a pack rather than
+            collected to a brief. Both are called off the shelf and their totals are counted
+            separately — the figures below are this corpus only. Every clip in the five sampled
+            skills plays here, sixty-one of them.
           </p>
 
           <dl className="mt-8 grid grid-cols-2 gap-x-8 gap-y-6 sm:grid-cols-4 xl:grid-cols-7">
@@ -51,8 +53,7 @@ export function OtsShelf() {
               { v: OTS_CORPUS.episodes, l: "Episodes" },
               { v: OTS_CORPUS.hours, l: "Total footage" },
               { v: OTS_CORPUS.domains, l: "Skill domains" },
-              /* "Per clip" is gone: at 1,200 h over ~15,000 episodes a clip
-                 cannot also be 10-30 s. See the note on `clipLength`. */
+              { v: OTS_CORPUS.clipLength, l: "Per clip" },
               { v: OTS_CORPUS.fps, l: "Frame rate" },
               { v: "Household · daily", l: "Setting" },
             { v: OTS_CORPUS.lead, l: "Lead time" },
