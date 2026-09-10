@@ -99,7 +99,6 @@ export function ConfigFolders({ category }: { category: Category }) {
               key={c.tier.key}
               href={`/samples/${category.slug}/${c.tier.key}`}
               name={c.tier.name}
-              rig={c.tier.rig}
               pitch={c.tier.pitch ?? c.tier.when ?? ""}
               state={
                 c.count > 0
@@ -120,7 +119,6 @@ export function ConfigFolders({ category }: { category: Category }) {
 function ConfigCard({
   href,
   name,
-  rig,
   pitch,
   state,
   face,
@@ -129,7 +127,6 @@ function ConfigCard({
 }: {
   href: string;
   name: string;
-  rig: string;
   pitch: string;
   state: string;
   face: string | null;
@@ -225,13 +222,12 @@ function ConfigCard({
             />
           </span>
 
-          <span
-            className="bp-mono mt-2 block text-[10px]"
-            style={{ color: face ? OVER_MEDIA.textDim : C.textDim }}
-          >
-            {rig}
-          </span>
-
+          {/* The rig line is gone from the face. It said "Six-camera head rig,
+              three stereo pairs" directly above a sentence that says the same
+              thing in words a buyer uses, so the card carried the spec twice
+              and read as four lines where three do the work. The rig is on the
+              configuration's own page, in the spec table, where it belongs
+              beside outputs and ramp. */}
           <span
             className="mt-2 line-clamp-2 max-w-xl text-[13px] leading-relaxed"
             style={{ color: face ? OVER_MEDIA.text : C.textMid }}
