@@ -83,6 +83,20 @@ export interface CapabilityTier {
    * that is R1 stated as a table rather than as an answer.
    */
   when?: string;
+  /**
+   * One or two lines for the configuration card, written to sell rather than to
+   * specify.
+   *
+   * `when` answers "should I pick this over the row above", which is the right
+   * question once a reader is comparing a table. `pitch` is what a card has to
+   * say before they are comparing anything — Tam, 2026-09-10: "ví dụ con 6 cam
+   * thì em cần highlight là cam xịn, nhìn thấy các góc khác nhau… 2 cam thì mô
+   * tả là stereo đủ dùng… 1 cam mình bảo là dùng phone hoặc GoPro".
+   *
+   * Device classes only, never models: "GoPro + smartphone" is the level Tam
+   * asked for, and it is also what `redact.mjs` exists to enforce.
+   */
+  pitch?: string;
 }
 
 /**
@@ -106,6 +120,8 @@ export const CAPABILITY: Partial<Record<string, CapabilityTier[]>> = {
       firstMonth: "5,000 h in month one",
       when:
         "Volume. The cheapest hour and the fastest ramp, where the model needs breadth rather than geometry.",
+      pitch:
+        "One camera on the head — smartphone or GoPro — with a scale reference in frame. The widest spread of trades and workplaces, and the fastest to put people in the field.",
     },
     {
       key: "rgbd",
@@ -134,6 +150,35 @@ export const CAPABILITY: Partial<Record<string, CapabilityTier[]>> = {
       firstMonth: "500 h in month one",
       when:
         "Where the model needs to know where the camera was: the IMU and the pair make visual-inertial odometry possible, which mono cannot.",
+      pitch:
+        "Two synchronised eyes and a 200-400 Hz IMU on the same clock. Enough parallax for VIO and hand pose, and the configuration most of the published catalogue is shot on.",
+    },
+    {
+      /* Added 2026-09-10. The doc lists four egocentric configurations and this
+         was the one capability.ts had no row for, so the catalogue could
+         neither file a record under it nor offer it — while the page was
+         already SHOWING it, in RigViews, from a delivery carrying camera0..5 in
+         three stereo pairs.
+
+         Ramp and ceiling are the 2-cam figures until the pricing sheet states
+         its own, and `price` reads "On brief" rather than an invented range. An
+         invented number on a premium tier is worse than none; the field is
+         never rendered on this surface anyway — see the note on it. */
+      key: "stereo6",
+      name: "Advanced stereo egocentric (6 cam)",
+      rig: "Six-camera head rig, three stereo pairs",
+      sensors: "6-DoF IMU, 200-400 Hz, time-synced across all six",
+      ramp: "14-21 business days",
+      ceiling: "1,000 h / month",
+      price: "On brief",
+      outputs:
+        "camera0..5.mp4 + camera_info per lens + imu.csv + VIO — one MCAP carrying every stream",
+      environment: "Workshop, workplace, on site",
+      firstMonth: "200 h in month one",
+      when:
+        "Where one pair is not enough geometry: a second angle on an occluded grasp, wider coverage of the bench, and calibration across three baselines rather than one.",
+      pitch:
+        "Six cameras in three stereo pairs, all on one clock. Sees the hands, the tool and the bench at once, so a grasp hidden from one pair is still in frame in another — with per-lens calibration and IMU on the same timeline.",
     },
     {
       key: "wrist",
@@ -148,6 +193,8 @@ export const CAPABILITY: Partial<Record<string, CapabilityTier[]>> = {
       firstMonth: "500 h in month one",
       when:
         "Where the head view loses the hand. A wrist camera keeps the grasp in frame through the whole reach.",
+      pitch:
+        "The head view plus a camera on each wrist, time-synced to it. Keeps the grasp in frame at the moment the head camera loses it behind the object.",
     },
     {
       key: "umi",

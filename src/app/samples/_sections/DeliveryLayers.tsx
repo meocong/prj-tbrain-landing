@@ -89,6 +89,16 @@ export function DeliveryLayers() {
                 </div>
               ))}
             </dl>
+            {/* Tam, 2026-09-10: "đoạn này cho chị thêm 1 dòng là convert to any
+                format, LeRobot, RLDS". The rows above list what a delivery
+                opens in as it ships; this says the list is not a limit. */}
+            <p
+              className="lg:col-span-8 lg:col-start-5 mt-5 text-sm leading-relaxed"
+              style={{ color: C.textMid }}
+            >
+              And convertible to any format you work in — LeRobot, RLDS, HDF5, MCAP — on request,
+              at no extra cost.
+            </p>
           </div>
         </Reveal>
       </div>

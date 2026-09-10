@@ -101,6 +101,22 @@ export interface Category {
    * hand-maintained across a growing catalogue is a list that goes stale.
    */
   face?: string;
+
+  /**
+   * The shelf, as figures rather than as a sentence.
+   *
+   * `shelf` above says it in prose and `TwoRoutes` could not read a prose
+   * sentence, so the "Off the shelf" panel derived its numbers from
+   * `samples.json` instead — and printed "118 samples published · 14.2 hours
+   * playable on this site" to a customer. Those are counts of what we have
+   * DOWNLOADED for the previews, not of what we hold. Tam, 2026-09-10: "cái OTS
+   * là dùng slide của chị, có 1.2K giờ cơ em ơi… ý chị là sửa lại số cho nó
+   * đúng."
+   *
+   * Quoted from the deck, never derived. The playable count stays too, but
+   * underneath and labelled as what it is.
+   */
+  shelfFigures?: { episodes: string; hours: string };
 }
 
 export const CATEGORIES: Category[] = [
@@ -123,6 +139,8 @@ export const CATEGORIES: Category[] = [
     // here, which is a different admission and should not borrow their sentence.
     shelf:
       "The shelf behind these runs to roughly 15,000 episodes and 1,200 hours, shot across 70+ operating businesses. Counted off our own collection, rounded down.",
+    // From Tam's deck, not from samples.json. See `shelfFigures`.
+    shelfFigures: { episodes: "~15,000 episodes recorded", hours: "1,200 hours on the shelf" },
     rig: "6 cameras, three stereo pairs",
     imuHz: "200 Hz",
   },
@@ -467,6 +485,20 @@ export function skillFolderBySlug(modality: string, slug: string): SkillFolder |
 export function usesFolders(modality: string): boolean {
   return skillFolders(modality).length > 1;
 }
+
+/**
+ * Categories filed by camera configuration rather than by the work in front of
+ * the camera.
+ *
+ * Egocentric only, and from the doc: mono, stereo, advanced stereo, wrist. The
+ * axis is what a buyer of egocentric data decides first — how much geometry
+ * comes with the picture — and it is what the price sheet is built on. Every
+ * other category keeps the skill/activity folders, which is the axis that
+ * actually varies within it.
+ */
+export const CONFIG_FOLDER_MODALITIES = new Set(["egocentric"]);
+export const usesConfigFolders = (modality: string) =>
+  CONFIG_FOLDER_MODALITIES.has(modality);
 
 export function categoryBySlug(slug: string) {
   return CATEGORIES.find((c) => c.slug === slug) ?? null;

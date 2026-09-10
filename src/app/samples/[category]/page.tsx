@@ -10,11 +10,13 @@ import {
   categoryBySlug,
   statsForCategory,
   usesFolders,
+  usesConfigFolders,
 } from "@/lib/samples/categories";
 import { INTEROP } from "@/lib/samples/capability";
 import { axesFor } from "@/lib/samples/datasets";
 import { LICENSE, QUALIFIER } from "@/lib/samples/license";
 import { SkillFolders } from "../_sections/SkillFolders";
+import { ConfigFolders } from "../_sections/ConfigFolders";
 import { SampleCatalog } from "../_sections/SampleCatalog";
 import { TwoRoutes } from "../_sections/TwoRoutes";
 import { CoverageChart } from "../_sections/CoverageChart";
@@ -43,6 +45,17 @@ import { C } from "../_sections/tokens";
  * Static: five slugs, no data fetching, so this is prerendered like the rest of
  * the samples surface.
  */
+
+/**
+ * Categories that stop after the catalogue.
+ *
+ * The tail of this page — coverage chart, the two purchase routes, the licence
+ * table and the evidence strip — is the shelf story, and it is written for a
+ * corpus sold by the hour off a capability sheet. Gaming is not sold that way
+ * and mocap has no off-the-shelf shelf at all, so on both it was answering
+ * questions nobody had asked about stock we do not hold.
+ */
+const TAIL_CUT = new Set(["gaming", "mocap"]);
 
 export function generateStaticParams() {
   return CATEGORIES.filter((c) => !c.externalHref).map((c) => ({ category: c.slug }));
@@ -308,7 +321,9 @@ export default async function CategoryPage({
             session type, which live in `spec` — so the folder view came back
             empty and took the catalogue with it: eight records and no way to
             open one. `usesFolders` is that check. */}
-        {usesFolders(c.modality) ? (
+        {usesConfigFolders(c.modality) ? (
+          <ConfigFolders category={c} />
+        ) : usesFolders(c.modality) ? (
           <SkillFolders category={c} />
         ) : (
           <SampleCatalog modality={c.modality} />
@@ -330,6 +345,17 @@ export default async function CategoryPage({
             rebuilt to fix. It is shelf story, so it sits with the shelf story.
             CaptureSpec stays above because it is short and it is what makes
             this page not the next one. */}
+        {/* Tam, 2026-09-10: "Trang game, toàn bộ đoạn dưới của nó ko cần em
+            nhé. Trang Mocap đoạn dưới cũng cắt hết, từ Off The Shelf trở đi vì
+            mình ko có."
+
+            Gated rather than deleted — the other categories still want it. What
+            follows is the shelf story: coverage, the two purchase routes, the
+            licence and the evidence strip. On gaming it argued about a corpus
+            the page does not sell that way, and on mocap it described an
+            off-the-shelf shelf that does not exist. */}
+        {!TAIL_CUT.has(c.slug) && (
+          <>
         <CoverageChart modality={c.modality} />
 
         {/* R2, per category: the same two routes as the front door, with this
@@ -378,6 +404,8 @@ export default async function CategoryPage({
             door (F1) to sit against the licence table, which answers the second
             half — the two were a page apart there and are one thought. */}
         <Evidence line={c.line} />
+          </>
+        )}
 
         <AccessPaths />
       </main>
