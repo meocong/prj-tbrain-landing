@@ -9,11 +9,13 @@ import {
   CATEGORIES,
   categoryBySlug,
   statsForCategory,
+  usesFolders,
 } from "@/lib/samples/categories";
 import { INTEROP } from "@/lib/samples/capability";
 import { axesFor } from "@/lib/samples/datasets";
 import { LICENSE, QUALIFIER } from "@/lib/samples/license";
 import { SkillFolders } from "../_sections/SkillFolders";
+import { SampleCatalog } from "../_sections/SampleCatalog";
 import { TwoRoutes } from "../_sections/TwoRoutes";
 import { CoverageChart } from "../_sections/CoverageChart";
 import { CategoryHeader } from "../_sections/CategoryHeader";
@@ -293,14 +295,24 @@ export default async function CategoryPage({
         {c.slug === "gaming" && <TelemetryStrip />}
         {c.slug === "gaming" && <GamingSet />}
 
-        {/* Folders, not the grid.
+        {/* Folders where they earn the click, the grid where they do not.
 
             The grid opened with 24 mounted <video> elements on a modality
             holding 118 records — every visit paid for two dozen media elements
             before the reader knew whether any of them was the work they came
-            for. It still exists one level down, facet rail and all, at
-            /samples/<category>/<group>. */}
-        <SkillFolders category={c} />
+            for. Folders fix that, and one level down at
+            /samples/<category>/<group> the catalogue is unchanged, facet rail
+            and all.
+
+            But gaming carries no skill groups — its axes are the game and the
+            session type, which live in `spec` — so the folder view came back
+            empty and took the catalogue with it: eight records and no way to
+            open one. `usesFolders` is that check. */}
+        {usesFolders(c.modality) ? (
+          <SkillFolders category={c} />
+        ) : (
+          <SampleCatalog modality={c.modality} />
+        )}
 
         {/* The other purchase route, with footage. Everything in the grid
             above is a stereo rig delivery — the custom side — and "Off the

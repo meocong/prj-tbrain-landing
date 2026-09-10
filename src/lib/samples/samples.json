@@ -1478,7 +1478,7 @@
         "161 MB"
       ]
     ],
-    "skillGroup": null,
+    "skillGroup": "Multi-agent & Co-op",
     "industry": null,
     "job": null,
     "viewpoint": "third-person",
@@ -1587,7 +1587,7 @@
         "601 MB"
       ]
     ],
-    "skillGroup": null,
+    "skillGroup": "Combat & Engagement",
     "industry": null,
     "job": null,
     "viewpoint": "third-person",
@@ -1690,7 +1690,7 @@
         "153 MB"
       ]
     ],
-    "skillGroup": null,
+    "skillGroup": "Traversal & Open World",
     "industry": null,
     "job": null,
     "viewpoint": "third-person",
@@ -1793,7 +1793,7 @@
         "161 MB"
       ]
     ],
-    "skillGroup": null,
+    "skillGroup": "Vehicle Control & Driving",
     "industry": null,
     "job": null,
     "viewpoint": "third-person",
@@ -1896,7 +1896,7 @@
         "220 MB"
       ]
     ],
-    "skillGroup": null,
+    "skillGroup": "Exploration & Dialogue",
     "industry": null,
     "job": null,
     "viewpoint": "first-person",
@@ -1951,7 +1951,7 @@
     "locale": "PC",
     "rig": "Screen capture",
     "viewpoint": "first-person",
-    "skillGroup": null,
+    "skillGroup": "Combat & Engagement",
     "industry": null,
     "job": null,
     "telemetry": true,
@@ -2070,7 +2070,7 @@
     "locale": "PC",
     "rig": "Screen capture",
     "viewpoint": "third-person",
-    "skillGroup": null,
+    "skillGroup": "Vehicle Control & Driving",
     "industry": null,
     "job": null,
     "telemetry": true,
@@ -2189,7 +2189,7 @@
     "locale": "PC",
     "rig": "Screen capture",
     "viewpoint": "third-person",
-    "skillGroup": null,
+    "skillGroup": "Combat & Engagement",
     "industry": null,
     "job": null,
     "telemetry": true,
