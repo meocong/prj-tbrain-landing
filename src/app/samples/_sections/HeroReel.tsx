@@ -116,7 +116,15 @@ export function HeroReel({
             poster={posterSrc(slug)}
             muted
             playsInline
-            preload="auto"
+            /* `auto` on BOTH elements meant the hero eagerly downloaded the
+               clip playing and the one queued behind it — two full files before
+               a reader had scrolled a pixel, on a page that goes on to offer a
+               hundred more.
+               `metadata` for the one in front is enough for it to start, and
+               `autoPlay` pulls the rest as it plays; the queued element gets
+               `none` and only loads when the rotation hands it a turn. The fade
+               is 600 ms and a segment is several seconds, so there is time. */
+            preload={which === front ? "metadata" : "none"}
             autoPlay={which === 0 && !reduce}
             aria-hidden
             className="absolute inset-0 -z-10 h-full w-full object-cover"

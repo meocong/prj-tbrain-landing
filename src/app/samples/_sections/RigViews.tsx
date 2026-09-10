@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ChevronDown } from "lucide-react";
 import { C, EASE, OVER_MEDIA } from "./tokens";
 import { Reveal } from "./Reveal";
@@ -34,17 +34,19 @@ import { Reveal } from "./Reveal";
  * (4,5) — which is what "three stereo pairs" means, and why the default view is
  * 0 and 1 rather than any two of the six.
  *
- * ## Why two by default and six behind a control
+ * ## Why six by default and the pair behind the control
  *
- * Two is the claim a reader needs settled — "stereo" is a word until you see
- * parallax between two frames of one moment. Six at card size is six
- * thumbnails, which reads as a contact sheet and proves less than the pair
- * does. So the pair plays, and the whole rig is one click away for the reader
- * who wants it.
+ * It opened on the pair, on the argument that "stereo" is a word until you see
+ * parallax and that six tiles read as a contact sheet. Tam, 2026-09-10: "auto
+ * để 6 đi". The contact-sheet worry was answered by the layout rather than by
+ * hiding them — laid out as the cameras are mounted, six tiles are a diagram of
+ * the rig, and a diagram is worth opening on. The pair is still one press away
+ * for the reader who wants the parallax full size.
  *
- * It also keeps 7.6 MB off the page for everyone who does not: the six-up
- * mounts on expand rather than at page load, so it is fetched when asked for.
- * Same arm-on-demand shape as `FaceBand` in CategoryChooser.
+ * It costs nothing to do it this way round. The six are encoded at CRF 29 and
+ * come to 4.74 MB, against 4.62 MB for the single `rig-stereo.mp4` they now
+ * replace at page load — so the default view weighs what it always weighed, and
+ * whichever view is second is the one fetched on demand.
  *
  * ## Why the six are six files and not one mosaic
  *
@@ -63,36 +65,89 @@ import { Reveal } from "./Reveal";
 const BASE = "/samples";
 
 /**
- * The diamond: one, two, two, one.
+ * One, two, two, one — ACROSS, because that is how the cameras sit.
  *
- * Tam, 2026-09-10: "vẽ 6 cam cho tôi, sắp xếp kiểu 1 2 2 1". Four columns with
- * every tile spanning two of them, so the singles at top and bottom sit centred
- * and every tile is the same width — a 3x2 contact sheet reads as a spreadsheet
- * of thumbnails, and this reads as a head.
+ * Tam, 2026-09-10: "vẽ 6 cam cho tôi, sắp xếp kiểu 1 2 2 1", then, on seeing
+ * the first attempt stacked into a vertical diamond: "1 2 2 1 xếp đúng cấu
+ * trúc cam bên ngoài chứ, cái này sao xếp từ trên xuống vậy". The arrangement
+ * is not a shape chosen to look tidy — it is a front elevation of the rig, and
+ * a reader should be able to point at a tile and know which lens took it.
  *
- * Which camera goes where follows the pairing, not the numbering. Pairs are
- * (0,1), (2,3), (4,5), read off each camera's own `camera_info` frame id rather
- * than guessed. Two of them get a row each, side by side, because that is what
- * a stereo pair looks like. The third closes the diamond top and bottom.
+ * Four columns, read left to right as the rig is worn: one camera at the outer
+ * left, a pair, a pair, one camera at the outer right.
+ *
+ *     cam2   cam0 cam1   cam3
+ *            cam4 cam5
+ *
+ * The middle four are two stereo pairs, each pair side by side on its own row,
+ * which is the one thing a pair has to look like. The outer two span both rows
+ * and centre themselves, so every tile is the same size — a tile stretched to
+ * fill two rows would be the only one in the picture not showing a 440x358
+ * frame at its own aspect.
  *
  * `eye` is only set where the calibration record states it: camera0 and camera4
  * report themselves left, camera1 and camera5 right. It says nothing about 2
  * and 3, so neither does the label.
+ *
+ * Placement is Tailwind rather than inline style because it has to be
+ * responsive and an inline `style` cannot carry a breakpoint. Below `sm` the
+ * classes do not apply and the tiles fall into a plain two-column grid in DOM
+ * order — which is why that order is 0, 1, 4, 5, 2, 3: on a phone the pairs
+ * still land beside their own partner.
  */
-const DIAMOND: { cam: number; eye?: "left" | "right"; col: number; row: number }[] = [
-  { cam: 2, col: 2, row: 1 },
-  { cam: 0, eye: "left", col: 1, row: 2 },
-  { cam: 1, eye: "right", col: 3, row: 2 },
-  { cam: 4, eye: "left", col: 1, row: 3 },
-  { cam: 5, eye: "right", col: 3, row: 3 },
-  { cam: 3, col: 2, row: 4 },
+const MOUNTS: { cam: number; eye?: "left" | "right"; place: string }[] = [
+  { cam: 0, eye: "left", place: "sm:[grid-column:2] sm:[grid-row:1]" },
+  { cam: 1, eye: "right", place: "sm:[grid-column:3] sm:[grid-row:1]" },
+  { cam: 4, eye: "left", place: "sm:[grid-column:2] sm:[grid-row:2]" },
+  { cam: 5, eye: "right", place: "sm:[grid-column:3] sm:[grid-row:2]" },
+  { cam: 2, place: "sm:[grid-column:1] sm:[grid-row:1/span_2] sm:self-center" },
+  { cam: 3, place: "sm:[grid-column:4] sm:[grid-row:1/span_2] sm:self-center" },
 ];
 
 export function RigViews() {
-  const [open, setOpen] = useState(false);
+  /* Opens on all six — see "Why six by default" above. `open` still means "the
+     six-up is showing", so the button, the heading and the caption all read the
+     same way round they did; only the initial value moved. */
+  const [open, setOpen] = useState(true);
+
+  /* Six autoplaying cameras, and this section sits several screens down.
+     `autoPlay` fetches whatever `preload` says, so mounting the videos with the
+     page meant six simultaneous downloads for a section most readers had not
+     reached — measured at roughly 4 MB on arrival at /samples/egocentric.
+
+     The elements are held back until the section is near the viewport. The
+     posters are not: they render immediately, so the layout is the same size
+     and the same picture before and after, and nothing moves when the videos
+     arrive. `rootMargin` starts the fetch a screen early so the six are running
+     by the time the section is actually read. */
+  const host = useRef<HTMLElement | null>(null);
+  const [near, setNear] = useState(false);
+  useEffect(() => {
+    const el = host.current;
+    if (!el || near) return;
+    if (typeof IntersectionObserver === "undefined") {
+      setNear(true);
+      return;
+    }
+    const io = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((e) => e.isIntersecting)) {
+          setNear(true);
+          io.disconnect();
+        }
+      },
+      { rootMargin: "600px 0px" },
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, [near]);
 
   return (
-    <section className="bp-grid bp-frame relative" style={{ backgroundColor: C.band, color: C.text }}>
+    <section
+      ref={host}
+      className="bp-grid bp-frame relative"
+      style={{ backgroundColor: C.band, color: C.text }}
+    >
       <div className="mx-auto max-w-[1400px] px-4 py-16 md:py-20 lg:px-10 xl:px-16">
         <Reveal variant="rise">
           <div className="flex flex-wrap items-end justify-between gap-x-10 gap-y-4">
@@ -137,73 +192,111 @@ export function RigViews() {
             </button>
           </div>
 
-          {/* One frame, two states. The aspect ratio changes with the layout —
-              1280x520 for the pair, 1320x716 for the mosaic — so the box is
-              sized per state rather than fixed, which stops the swap from
-              letterboxing one of them. */}
-          <div
-            className="relative mt-8 w-full overflow-hidden"
-            style={{
-              border: `1px solid ${C.hairline}`,
-              background: C.wash,
-              aspectRatio: open ? "1320 / 716" : "1280 / 520",
-              transition: `aspect-ratio 0.45s cubic-bezier(${EASE.join(",")})`,
-            }}
-          >
-            {/* Keyed so React swaps the element rather than re-pointing one
-                video's src, which on Safari keeps the previous frame on screen
-                until the new file has buffered. */}
-            <video
-              key={open ? "six" : "stereo"}
-              src={open ? `${BASE}/clips/rig-six.mp4` : `${BASE}/clips/rig-stereo.mp4`}
-              poster={open ? `${BASE}/posters/rig-six.jpg` : `${BASE}/posters/rig-stereo.jpg`}
-              muted
-              loop
-              playsInline
-              autoPlay
-              preload="none"
-              className="h-full w-full object-cover"
-            />
-
-            {/* Which view is which.
-                A grid laid over the media with the SAME shape as the mosaic —
-                two columns for the pair, three by two for the six — so each
-                label sits in its own cell and cannot reach its neighbour. The
-                first version positioned them at hard-coded percentages, which
-                held at desktop and collapsed at 182px: the labels are wider
-                than a third of a narrow viewport, so they overlapped into
-                "CAM0 · CAM1 · CAM2 RIGHT".
-
-                `min-w-0` on the cell plus `truncate` on the label is what makes
-                that true rather than merely intended — without it a long label
-                widens its own track and pushes the grid out of step with the
-                video underneath. */}
-            <div
-              className="pointer-events-none absolute inset-0 grid gap-0 p-1.5"
-              style={{
-                gridTemplateColumns: open ? "repeat(3, 1fr)" : "repeat(2, 1fr)",
-                gridTemplateRows: open ? "repeat(2, 1fr)" : "1fr",
-              }}
-            >
-              {(open
-                ? ["cam0 · left", "cam1 · right", "cam2", "cam3", "cam4 · left", "cam5 · right"]
-                : ["cam0 · left eye", "cam1 · right eye"]
-              ).map((t) => (
-                <div key={t} className="min-w-0">
-                  <span
-                    className="bp-mono inline-block max-w-full truncate px-1.5 py-0.5 text-[9px]"
+          {open ? (
+            /* Two rows of four, capped so the tiles do not grow past the
+               resolution behind them: a cell of the six-up is 440px wide, and
+               at the full 1400px column each tile would be drawn at 350 and the
+               outer pair at nothing better. 1200 keeps the whole rig on one
+               line without upscaling anything past its own frame. */
+            <div className="mx-auto mt-8 grid w-full max-w-[1200px] grid-cols-2 gap-1.5 sm:grid-cols-4">
+              {MOUNTS.map(({ cam, eye, place }) => (
+                <figure
+                  key={cam}
+                  className={`relative m-0 overflow-hidden ${place}`}
+                  style={{
+                    border: `1px solid ${C.hairline}`,
+                    background: C.wash,
+                    aspectRatio: "440 / 358",
+                  }}
+                >
+                  {near ? (
+                    <video
+                      src={`${BASE}/clips/rig-cam${cam}.mp4`}
+                      poster={`${BASE}/posters/rig-cam${cam}.jpg`}
+                      muted
+                      loop
+                      playsInline
+                      autoPlay
+                      preload="none"
+                      className="h-full w-full object-cover"
+                    />
+                  ) : (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img
+                      src={`${BASE}/posters/rig-cam${cam}.jpg`}
+                      alt=""
+                      loading="lazy"
+                      decoding="async"
+                      className="h-full w-full object-cover"
+                    />
+                  )}
+                  {/* `max-w-full` + `truncate`: at 375px a tile is 92px wide and
+                      "cam0 · left eye" is not, so the label has to clip inside
+                      its own tile rather than widen it. */}
+                  <figcaption
+                    className="bp-mono pointer-events-none absolute left-1.5 top-1.5 max-w-[calc(100%-12px)] truncate px-1.5 py-0.5 text-[9px]"
                     style={{ background: OVER_MEDIA.scrim, color: OVER_MEDIA.text }}
                   >
-                    {t}
-                  </span>
-                </div>
+                    cam{cam}
+                    {eye ? ` · ${eye}` : ""}
+                  </figcaption>
+                </figure>
               ))}
             </div>
-          </div>
+          ) : (
+            /* The pair stays one baked 1280x520 file. Its eyes are 640x520
+               each, against 440x358 for a cell of the six-up, and this is the
+               view that has to carry the parallax — cropping it out of the
+               mosaic to match would cost the resolution the claim rests on. */
+            <div
+              className="relative mt-8 w-full overflow-hidden"
+              style={{
+                border: `1px solid ${C.hairline}`,
+                background: C.wash,
+                aspectRatio: "1280 / 520",
+                transition: `aspect-ratio 0.45s cubic-bezier(${EASE.join(",")})`,
+              }}
+            >
+              {near ? (
+                <video
+                  src={`${BASE}/clips/rig-stereo.mp4`}
+                  poster={`${BASE}/posters/rig-stereo.jpg`}
+                  muted
+                  loop
+                  playsInline
+                  autoPlay
+                  preload="none"
+                  className="h-full w-full object-cover"
+                />
+              ) : (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img
+                  src={`${BASE}/posters/rig-stereo.jpg`}
+                  alt=""
+                  loading="lazy"
+                  decoding="async"
+                  className="h-full w-full object-cover"
+                />
+              )}
+              <div className="pointer-events-none absolute inset-0 grid grid-cols-2 gap-0 p-1.5">
+                {["cam0 · left eye", "cam1 · right eye"].map((t) => (
+                  <div key={t} className="min-w-0">
+                    <span
+                      className="bp-mono inline-block max-w-full truncate px-1.5 py-0.5 text-[9px]"
+                      style={{ background: OVER_MEDIA.scrim, color: OVER_MEDIA.text }}
+                    >
+                      {t}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
 
           <p className="mt-4 text-[12px]" style={{ color: C.textDim }}>
-            Downscaled for the browser. Each camera records 1600 &times; 1300 and every stream
-            ships in the delivery file.
+            {open
+              ? "Laid out as the cameras are mounted, left to right across the rig. Each pair sits side by side, which is what the offset between two tiles in a row is showing you. Downscaled for the browser — each camera records 1600 × 1300 and every stream ships in the delivery file."
+              : "Downscaled for the browser. Each camera records 1600 × 1300 and every stream ships in the delivery file."}
           </p>
         </Reveal>
       </div>

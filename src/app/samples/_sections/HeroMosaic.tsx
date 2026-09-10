@@ -11,10 +11,30 @@ const ROWS = 5;
 
 /**
  * How many tiles hold a playing video at any moment, expressed as a modulus:
- * one tile in `LIVE_EVERY` is live. Thirty tiles at 4 gives seven or eight
- * concurrent decodes, which a laptop handles; thirty would not.
+ * one tile in `LIVE_EVERY` is live.
+ *
+ * Was 4, giving eight concurrent decodes. Eight decodes is survivable; eight
+ * SIMULTANEOUS downloads of a ~1 MB clip on first paint is not, and that is
+ * what it actually meant — the tiles all light up together.
  */
-const LIVE_EVERY = 4;
+const LIVE_EVERY = 8;
+
+/**
+ * How many DISTINCT clips the live layer is allowed to draw on.
+ *
+ * This is the number that was missing, and it is why the hero cost 30 MB. Every
+ * tile held its own slug, and the rotation walked the whole wall, so a visitor
+ * who watched the hero for twenty seconds downloaded all thirty clips — the
+ * entire preview library, to decorate one screen.
+ *
+ * The wall's claim is "we have a catalogue", and that claim is made by the
+ * THIRTY POSTERS, which are 55 KB each and all of them paint immediately. The
+ * video layer only has to prove the stills are frames of something moving, and
+ * six clips prove that as well as thirty do. Rotation now cycles within this
+ * pool, so the ceiling is six downloads however long the page is left open.
+ */
+const LIVE_POOL = 6;
+
 /** How long before the live tiles move on to the next set. */
 const ROTATE_MS = 5200;
 
@@ -87,6 +107,19 @@ export function HeroMosaic({
   // every tile that lights up together holds a different clip — a plain stride
   // put the same footage in three of the eight live tiles, because the stride
   // and the tile count shared a factor.
+  /* The six clips the live layer is allowed to use, spread across the library
+     rather than taken off the front of it: `slugs` arrives in catalogue order,
+     so the first six are six angles on the same trade. A stride gives six
+     different kinds of work for the same six downloads. */
+  const pool = useMemo(
+    () =>
+      Array.from(
+        { length: Math.min(LIVE_POOL, slugs.length) },
+        (_, k) => slugs[Math.floor((k * slugs.length) / LIVE_POOL)],
+      ),
+    [slugs],
+  );
+
   const grid = useMemo(
     () =>
       Array.from({ length: COLS }, (_, c) =>
@@ -95,10 +128,18 @@ export function HeroMosaic({
           const step = i % LIVE_EVERY;
           const seat = Math.floor(i / LIVE_EVERY);
           const seats = Math.ceil((COLS * ROWS) / LIVE_EVERY);
-          return slugs[(step * seats + seat) % slugs.length];
+          return {
+            // Still: every tile keeps its own frame. Thirty distinct posters is
+            // what makes the wall read as a catalogue, and they are 55 KB each.
+            poster: slugs[(step * seats + seat) % slugs.length],
+            // Motion: drawn from the pool, so the same clip may play in two
+            // tiles far apart on a rotated, drifting wall. That is a fair trade
+            // for not downloading the whole library to decorate a header.
+            video: pool.length > 0 ? pool[seat % pool.length] : undefined,
+          };
         }),
       ),
-    [slugs],
+    [slugs, pool],
   );
 
   if (slugs.length === 0) return null;
@@ -128,10 +169,11 @@ export function HeroMosaic({
                 ease: "easeInOut",
               }}
             >
-              {col.map((slug, r) => (
+              {col.map((cell, r) => (
                 <Tile
                   key={`${c}-${r}`}
-                  slug={slug}
+                  slug={cell.poster}
+                  videoSlug={cell.video}
                   live={!reduce && awake && (c * ROWS + r) % LIVE_EVERY === phase}
                 />
               ))}
@@ -203,7 +245,17 @@ function useVisibleCols() {
  * the tile is live and unmounts when it is not, so a tile never shows a black
  * box while a decode warms up.
  */
-function Tile({ slug, live }: { slug: string; live: boolean }) {
+function Tile({
+  slug,
+  videoSlug,
+  live,
+}: {
+  /** The still. One per tile, so the wall shows thirty different frames. */
+  slug: string;
+  /** The clip, from the shared pool. See `LIVE_POOL`. */
+  videoSlug?: string;
+  live: boolean;
+}) {
   return (
     <div className="relative aspect-[4/3] w-full shrink-0 overflow-hidden bg-[#0b0d13]">
       {/* Plain <img>: twenty fixed 640x480 posters already served from /public,
@@ -218,7 +270,7 @@ function Tile({ slug, live }: { slug: string; live: boolean }) {
         decoding="async"
       />
       <AnimatePresence>
-        {live && (
+        {live && videoSlug && (
           // The animated node wraps the <video> rather than being it: framer
           // drives a div reliably, and the media inside only has to fill it.
           <motion.div
@@ -232,7 +284,8 @@ function Tile({ slug, live }: { slug: string; live: boolean }) {
           >
             <video
               className="h-full w-full object-cover"
-              src={`/samples/clips/${slug}.mp4`}
+              src={`/samples/clips/${videoSlug}.mp4`}
+              poster={`/samples/posters/${videoSlug}.jpg`}
               autoPlay
               muted
               loop
