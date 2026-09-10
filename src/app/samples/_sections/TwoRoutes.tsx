@@ -26,7 +26,7 @@ export function TwoRoutes({ category }: { category?: Category }) {
   const spec = specFigures(category);
 
   return (
-    <section style={{ background: C.base, color: C.text }}>
+    <section className="bp-grid bp-frame relative" style={{ color: C.text }}>
       <div className="mx-auto max-w-[1400px] px-4 pb-20 pt-4 lg:px-10 xl:px-16">
         <Reveal variant="rise">
           <h2 className="font-mono text-[10px] uppercase tracking-[0.18em]" style={{ color: C.textDim }}>

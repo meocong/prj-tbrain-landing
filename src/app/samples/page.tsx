@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Header from "@/components/common/Header";
+import { ScrollProgress } from "@/components/marketing/fx/ScrollProgress";
 import Footer from "@/components/common/Footer";
 import { HeroSamples } from "./_sections/HeroSamples";
 import { CategoryChooser } from "./_sections/CategoryChooser";
@@ -46,6 +47,9 @@ export const metadata: Metadata = {
 export default function SamplesPage() {
   return (
     <div className="samples-scope" style={{ background: "var(--sm-base)" }}>
+      {/* Same bar physical-ai and terminal-bench carry. One import; it reads
+          window scroll itself and takes no props. */}
+      <ScrollProgress />
       <Header />
       <main style={{ color: "var(--sm-text)" }}>
         {/* The front door, not the catalogue. Browsing happens at

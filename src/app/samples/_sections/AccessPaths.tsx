@@ -16,7 +16,7 @@ export function AccessPaths() {
   const reduce = useReducedMotion();
 
   return (
-    <section id="access" style={{ background: C.band, color: C.text }}>
+    <section id="access" className="bp-grid bp-frame relative" style={{ backgroundColor: C.band, color: C.text }}>
       <div className="mx-auto max-w-[1400px] px-4 py-24 md:py-32 lg:px-10 xl:px-16">
         <Reveal variant="rise">
           <div className="grid gap-12 lg:grid-cols-12 lg:gap-10">
