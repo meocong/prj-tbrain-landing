@@ -67,7 +67,7 @@ rclone backend copyid drive7: <FILE_ID> /tmp/out.txt --drive-export-formats txt
   robotics 79 · ots 39 · game 8
   first-person 120 · third-person 6
   stereo pair 118 · 1920x1080 8
-  Robocap 84 · DAS Ego V6 33 · GameDataCollector 8 · EgoSense E6 1
+  Ego Rig A 84 · Ego Rig B 33 · Gaming capture 8 · Ego Rig C 1
 ```
 
 **Everything non-game is egocentric stereo.** Zero exocentric, zero mocap, zero
@@ -79,9 +79,9 @@ exist off-page (§5.4).
 The three domains are not one axis:
 
 ```
-ots      / DAS Ego V6   33   ← egocentric stereo
-ots      / Robocap       5   ← egocentric stereo
-robotics / Robocap      79   ← egocentric stereo, same rig
+ots      / Ego Rig B   33   ← egocentric stereo
+ots      / Ego Rig A       5   ← egocentric stereo
+robotics / Ego Rig A      79   ← egocentric stereo, same rig
 ```
 
 `ots` is a **provenance**, not a modality, and it is sitting where a modality
@@ -143,7 +143,7 @@ clips 30 s – 15 min. No annotation in scope for this batch.
 
 - deck: OTS = **stereo**, 1,200 h, *"never a private residence, never a staged studio"*
 - xlsx: OTS = **mono phone**, 12,900 episodes, *"household / factory / daily environment"*
-- site: 39 records tagged `ots` are in fact **stereo** (DAS Ego V6 33 + Robocap 5 + EgoSense E6 1)
+- site: 39 records tagged `ots` are in fact **stereo** (Ego Rig B 33 + Ego Rig A 5 + Ego Rig C 1)
 
 Three meanings for one word, on three surfaces a customer may see together.
 Proposal: name them **OTS-Stereo (Commercial)** and **OTS-Mono (Daily)** and
@@ -157,12 +157,12 @@ is the thing Tam was asked for by customers, and the page states it nowhere.
 ### 5.3 The top tier may be mislabelled
 
 `tbrain-dashboard.vercel.app` demonstrates a **six-camera** rig — outer ±199 mm,
-mid ±129 mm, primary ±60 mm (human interpupillary distance). Every Robocap
+mid ±129 mm, primary ±60 mm (human interpupillary distance). Every Ego Rig A
 record on the samples page says `stereo pair`, i.e. two.
 
-During the R2 extraction pass, Robocap deliveries carried streams named
+During the R2 extraction pass, Ego Rig A deliveries carried streams named
 `primary_left` and `mid_left`, which is consistent with three stereo pairs. If
-Robocap **is** the 6-cam rig, then 84 records are being described as the
+Ego Rig A **is** the 6-cam rig, then 84 records are being described as the
 $80–120/h tier's little sibling. Not confirmable from either repo — the stream
 names came from bucket paths, not committed code. **Needs Sơn.**
 
@@ -203,7 +203,7 @@ count in a manifest is the exact class of defect a data-quality review looks for
 
 ## 6. Blocking questions
 
-1. **Is Robocap the 6-camera rig?** Decides whether §5.3 is a relabel or a gap.
+1. **Is Ego Rig A the 6-camera rig?** Decides whether §5.3 is a relabel or a gap.
 2. **Which corpus is which OTS?** Decides §5.1.
 
 Neither requires work — only an answer.

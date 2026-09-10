@@ -21,7 +21,7 @@
  *
  *   - `tier` is "stereo" for all 118, because every one of them reports
  *     `resolution: "stereo pair"`. NOT "stereo-2cam" — the six-camera rig on
- *     tbrain-dashboard.vercel.app may be the same Robocap that 84 of these
+ *     tbrain-dashboard.vercel.app may be the same rig that 84 of these
  *     records name, and the camera count is an open question for Sơn. Writing a
  *     number down now is how the wrong one survives.
  *   - `provenance` is null on the 8 game records. The plan says gaming has both

@@ -131,7 +131,7 @@ The tier block cannot be written from `samples.json` as it stands.
 | Needed | Have it? |
 |---|---|
 | `tier` per record: mono / stereo-2cam / stereo-6cam / wrist | **No.** Every record says `"stereo"`, unqualified, pending the camera-count answer. |
-| Camera count per rig | Robocap is six, evidenced twice. DAS Ego V6 unknown. |
+| Camera count per rig | Ego Rig A is six, evidenced twice. Ego Rig B unknown. |
 | Tier description, price, lead time | In `capability.ts` already. |
 | Category description | **No.** Has to be written. |
 | Licence | **No.** No data anywhere. |

@@ -7,7 +7,7 @@
     "skill": "Repair & Maintenance",
     "environment": "Motorcycle Repair, Service Bay",
     "locale": "Hanoi",
-    "rig": "DAS Ego V6",
+    "rig": "Egocentric stereo",
     "durationSec": 226.367,
     "resolution": "stereo pair",
     "fps": 30,
@@ -79,7 +79,7 @@
       ],
       [
         "Device",
-        "DAS Ego V6 / fw 2.1.18"
+        "Egocentric stereo / fw 2.1.18"
       ],
       [
         "Device id",
@@ -172,7 +172,7 @@
         "k": "difficulty"
       },
       {
-        "t": "DAS Ego V6",
+        "t": "Egocentric stereo",
         "k": "device"
       },
       {
@@ -206,7 +206,7 @@
     "skill": "Tool Use & Technical Manipulation",
     "environment": "Barber Shop, Makeup Area",
     "locale": "Hanoi",
-    "rig": "DAS Ego V6",
+    "rig": "Egocentric stereo",
     "durationSec": 237,
     "resolution": "stereo pair",
     "fps": 30,
@@ -278,7 +278,7 @@
       ],
       [
         "Device",
-        "DAS Ego V6 / fw 2.1.18"
+        "Egocentric stereo / fw 2.1.18"
       ],
       [
         "Device id",
@@ -371,7 +371,7 @@
         "k": "difficulty"
       },
       {
-        "t": "DAS Ego V6",
+        "t": "Egocentric stereo",
         "k": "device"
       },
       {
@@ -405,7 +405,7 @@
     "skill": "Pick and Place / Object Handling",
     "environment": "Appliance Repair, Work Bench",
     "locale": "Hanoi",
-    "rig": "DAS Ego V6",
+    "rig": "Egocentric stereo",
     "durationSec": 241.483,
     "resolution": "stereo pair",
     "fps": 30,
@@ -477,7 +477,7 @@
       ],
       [
         "Device",
-        "DAS Ego V6 / fw 2.1.7"
+        "Egocentric stereo / fw 2.1.7"
       ],
       [
         "Device id",
@@ -570,7 +570,7 @@
         "k": "difficulty"
       },
       {
-        "t": "DAS Ego V6",
+        "t": "Egocentric stereo",
         "k": "device"
       },
       {
@@ -604,7 +604,7 @@
     "skill": "Mechanical / Automotive Work",
     "environment": "Auto Repair, Repair Bench",
     "locale": "Hanoi",
-    "rig": "Robocap",
+    "rig": "Egocentric stereo",
     "durationSec": 240,
     "resolution": "stereo pair",
     "fps": 30,
@@ -676,7 +676,7 @@
       ],
       [
         "Device",
-        "Robocap / fw 1.2.13"
+        "Egocentric stereo / fw 1.2.13"
       ],
       [
         "Device id",
@@ -769,7 +769,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Robocap",
+        "t": "Egocentric stereo",
         "k": "device"
       },
       {
@@ -803,7 +803,7 @@
     "skill": "Assembly & Installation",
     "environment": "Sign Shop, Sports Field Sidelines",
     "locale": "Xa Van Giang",
-    "rig": "Robocap",
+    "rig": "Egocentric stereo",
     "durationSec": 220,
     "resolution": "stereo pair",
     "fps": 30,
@@ -875,7 +875,7 @@
       ],
       [
         "Device",
-        "Robocap / fw 1.2.13"
+        "Egocentric stereo / fw 1.2.13"
       ],
       [
         "Device id",
@@ -968,7 +968,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Robocap",
+        "t": "Egocentric stereo",
         "k": "device"
       },
       {
@@ -1002,7 +1002,7 @@
     "skill": "Clothing & Laundry",
     "environment": "Sewing Factory, Sewing Station",
     "locale": "Hung Yen",
-    "rig": "Robocap",
+    "rig": "Egocentric stereo",
     "durationSec": 260.979,
     "resolution": "stereo pair",
     "fps": 30,
@@ -1074,7 +1074,7 @@
       ],
       [
         "Device",
-        "Robocap / fw 1.2.13"
+        "Egocentric stereo / fw 1.2.13"
       ],
       [
         "Device id",
@@ -1167,7 +1167,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Robocap",
+        "t": "Egocentric stereo",
         "k": "device"
       },
       {
@@ -1201,7 +1201,7 @@
     "skill": "Food Preparation & Cooking",
     "environment": "Restaurant, Kitchen",
     "locale": "Hanoi",
-    "rig": "Robocap",
+    "rig": "Egocentric stereo",
     "durationSec": 205.767,
     "resolution": "stereo pair",
     "fps": 30,
@@ -1273,7 +1273,7 @@
       ],
       [
         "Device",
-        "Robocap / fw 1.2.13"
+        "Egocentric stereo / fw 1.2.13"
       ],
       [
         "Device id",
@@ -1366,7 +1366,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Robocap",
+        "t": "Egocentric stereo",
         "k": "device"
       },
       {
@@ -1400,7 +1400,7 @@
     "skill": "Electronics & Diagnostics",
     "environment": "Computer Repair, Workbench",
     "locale": "Hanoi",
-    "rig": "DAS Ego V6",
+    "rig": "Egocentric stereo",
     "durationSec": 230.244,
     "resolution": "stereo pair",
     "fps": 30,
@@ -1472,7 +1472,7 @@
       ],
       [
         "Device",
-        "DAS Ego V6 / fw 2.1.7"
+        "Egocentric stereo / fw 2.1.7"
       ],
       [
         "Device id",
@@ -1565,7 +1565,7 @@
         "k": "difficulty"
       },
       {
-        "t": "DAS Ego V6",
+        "t": "Egocentric stereo",
         "k": "device"
       },
       {
@@ -1599,7 +1599,7 @@
     "skill": "Construction & Building",
     "environment": "Construction Company, Construction Site",
     "locale": "Thai Nguyen",
-    "rig": "Robocap",
+    "rig": "Egocentric stereo",
     "durationSec": 236,
     "resolution": "stereo pair",
     "fps": 30,
@@ -1671,7 +1671,7 @@
       ],
       [
         "Device",
-        "Robocap / fw 1.2.13"
+        "Egocentric stereo / fw 1.2.13"
       ],
       [
         "Device id",
@@ -1764,7 +1764,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Robocap",
+        "t": "Egocentric stereo",
         "k": "device"
       },
       {
@@ -1798,7 +1798,7 @@
     "skill": "Grand Theft Auto V",
     "environment": "two-player coop, host and member viewports",
     "locale": "PC",
-    "rig": "GameDataCollector",
+    "rig": "Screen capture",
     "durationSec": 163.9,
     "resolution": "1920 x 1080",
     "fps": 60,
@@ -1896,7 +1896,7 @@
         "k": "difficulty"
       },
       {
-        "t": "GameDataCollector",
+        "t": "Screen capture",
         "k": "device"
       },
       {
@@ -1930,7 +1930,7 @@
     "skill": "Monster Hunter World",
     "environment": "single agent, Ancient Forest",
     "locale": "PC",
-    "rig": "GameDataCollector",
+    "rig": "Screen capture",
     "durationSec": 62,
     "resolution": "1920 x 1080",
     "fps": 60,
@@ -2001,7 +2001,7 @@
         "k": "skill"
       },
       {
-        "t": "GameDataCollector",
+        "t": "Screen capture",
         "k": "device"
       },
       {
@@ -2035,7 +2035,7 @@
     "skill": "Just Cause 3",
     "environment": "single agent",
     "locale": "PC",
-    "rig": "GameDataCollector",
+    "rig": "Screen capture",
     "durationSec": 76.6,
     "resolution": "1920 x 1080",
     "fps": 60,
@@ -2104,7 +2104,7 @@
         "k": "skill"
       },
       {
-        "t": "GameDataCollector",
+        "t": "Screen capture",
         "k": "device"
       },
       {
@@ -2138,7 +2138,7 @@
     "skill": "SnowRunner",
     "environment": "single agent",
     "locale": "PC",
-    "rig": "GameDataCollector",
+    "rig": "Screen capture",
     "durationSec": 120.9,
     "resolution": "1920 x 1080",
     "fps": 60,
@@ -2207,7 +2207,7 @@
         "k": "skill"
       },
       {
-        "t": "GameDataCollector",
+        "t": "Screen capture",
         "k": "device"
       },
       {
@@ -2241,7 +2241,7 @@
     "skill": "The Outer Worlds",
     "environment": "single agent",
     "locale": "PC",
-    "rig": "GameDataCollector",
+    "rig": "Screen capture",
     "durationSec": 122,
     "resolution": "1920 x 1080",
     "fps": 60,
@@ -2310,7 +2310,7 @@
         "k": "skill"
       },
       {
-        "t": "GameDataCollector",
+        "t": "Screen capture",
         "k": "device"
       },
       {
@@ -2345,7 +2345,7 @@
     "label": "Borderlands 2",
     "environment": "single agent, PC",
     "locale": "PC",
-    "rig": "GameDataCollector",
+    "rig": "Screen capture",
     "viewpoint": "first-person",
     "skillGroup": null,
     "industry": null,
@@ -2425,7 +2425,7 @@
         "k": "skill"
       },
       {
-        "t": "GameDataCollector",
+        "t": "Screen capture",
         "k": "device"
       },
       {
@@ -2464,7 +2464,7 @@
     "label": "BeamNG.drive",
     "environment": "single agent, PC",
     "locale": "PC",
-    "rig": "GameDataCollector",
+    "rig": "Screen capture",
     "viewpoint": "third-person",
     "skillGroup": null,
     "industry": null,
@@ -2544,7 +2544,7 @@
         "k": "skill"
       },
       {
-        "t": "GameDataCollector",
+        "t": "Screen capture",
         "k": "device"
       },
       {
@@ -2583,7 +2583,7 @@
     "label": "Dragon's Dogma 2",
     "environment": "single agent, PC",
     "locale": "PC",
-    "rig": "GameDataCollector",
+    "rig": "Screen capture",
     "viewpoint": "third-person",
     "skillGroup": null,
     "industry": null,
@@ -2663,7 +2663,7 @@
         "k": "skill"
       },
       {
-        "t": "GameDataCollector",
+        "t": "Screen capture",
         "k": "device"
       },
       {
@@ -2701,7 +2701,7 @@
     "skill": "Cleaning & Sanitation",
     "environment": "Office Workspace, Library",
     "locale": "Hanoi",
-    "rig": "DAS Ego V6",
+    "rig": "Egocentric stereo",
     "durationSec": 567,
     "resolution": "stereo pair",
     "fps": 30,
@@ -2740,7 +2740,7 @@
         "k": "difficulty"
       },
       {
-        "t": "DAS Ego V6",
+        "t": "Egocentric stereo",
         "k": "device"
       },
       {
@@ -2817,7 +2817,7 @@
       ],
       [
         "Device",
-        "DAS Ego V6 / fw 2.1.18"
+        "Egocentric stereo / fw 2.1.18"
       ],
       [
         "Device id",
@@ -2900,7 +2900,7 @@
     "skill": "Clothing & Laundry",
     "environment": "Office, Office Desk Area",
     "locale": "Hanoi",
-    "rig": "DAS Ego V6",
+    "rig": "Egocentric stereo",
     "durationSec": 115.9,
     "resolution": "stereo pair",
     "fps": 30,
@@ -2939,7 +2939,7 @@
         "k": "difficulty"
       },
       {
-        "t": "DAS Ego V6",
+        "t": "Egocentric stereo",
         "k": "device"
       },
       {
@@ -3016,7 +3016,7 @@
       ],
       [
         "Device",
-        "DAS Ego V6 / fw 2.1.18"
+        "Egocentric stereo / fw 2.1.18"
       ],
       [
         "Device id",
@@ -3099,7 +3099,7 @@
     "skill": "Organization & Tidying",
     "environment": "Office Workspace, Library",
     "locale": "Hanoi",
-    "rig": "DAS Ego V6",
+    "rig": "Egocentric stereo",
     "durationSec": 500.971,
     "resolution": "stereo pair",
     "fps": 30,
@@ -3138,7 +3138,7 @@
         "k": "difficulty"
       },
       {
-        "t": "DAS Ego V6",
+        "t": "Egocentric stereo",
         "k": "device"
       },
       {
@@ -3215,7 +3215,7 @@
       ],
       [
         "Device",
-        "DAS Ego V6 / fw 2.1.18"
+        "Egocentric stereo / fw 2.1.18"
       ],
       [
         "Device id",
@@ -3298,7 +3298,7 @@
     "skill": "Pick and Place / Object Handling",
     "environment": "Office Workspace, Library",
     "locale": "Hanoi",
-    "rig": "DAS Ego V6",
+    "rig": "Egocentric stereo",
     "durationSec": 245.443,
     "resolution": "stereo pair",
     "fps": 30,
@@ -3337,7 +3337,7 @@
         "k": "difficulty"
       },
       {
-        "t": "DAS Ego V6",
+        "t": "Egocentric stereo",
         "k": "device"
       },
       {
@@ -3414,7 +3414,7 @@
       ],
       [
         "Device",
-        "DAS Ego V6 / fw 2.1.18"
+        "Egocentric stereo / fw 2.1.18"
       ],
       [
         "Device id",
@@ -3497,7 +3497,7 @@
     "skill": "Assembly & Installation",
     "environment": "Motorcycle Repair, Service Bay",
     "locale": "Hanoi",
-    "rig": "DAS Ego V6",
+    "rig": "Egocentric stereo",
     "durationSec": 504.848,
     "resolution": "stereo pair",
     "fps": 30,
@@ -3536,7 +3536,7 @@
         "k": "difficulty"
       },
       {
-        "t": "DAS Ego V6",
+        "t": "Egocentric stereo",
         "k": "device"
       },
       {
@@ -3613,7 +3613,7 @@
       ],
       [
         "Device",
-        "DAS Ego V6 / fw 2.1.7"
+        "Egocentric stereo / fw 2.1.7"
       ],
       [
         "Device id",
@@ -3696,7 +3696,7 @@
     "skill": "Cleaning & Sanitation",
     "environment": "Motorcycle Repair, Service Bay",
     "locale": "Hanoi",
-    "rig": "DAS Ego V6",
+    "rig": "Egocentric stereo",
     "durationSec": 635.186,
     "resolution": "stereo pair",
     "fps": 30,
@@ -3735,7 +3735,7 @@
         "k": "difficulty"
       },
       {
-        "t": "DAS Ego V6",
+        "t": "Egocentric stereo",
         "k": "device"
       },
       {
@@ -3812,7 +3812,7 @@
       ],
       [
         "Device",
-        "DAS Ego V6 / fw 2.1.18"
+        "Egocentric stereo / fw 2.1.18"
       ],
       [
         "Device id",
@@ -3895,7 +3895,7 @@
     "skill": "Electronics & Diagnostics",
     "environment": "Motorcycle Repair, Service Bay",
     "locale": "Hanoi",
-    "rig": "DAS Ego V6",
+    "rig": "Egocentric stereo",
     "durationSec": 281.595,
     "resolution": "stereo pair",
     "fps": 30,
@@ -3934,7 +3934,7 @@
         "k": "difficulty"
       },
       {
-        "t": "DAS Ego V6",
+        "t": "Egocentric stereo",
         "k": "device"
       },
       {
@@ -4011,7 +4011,7 @@
       ],
       [
         "Device",
-        "DAS Ego V6 / fw 2.1.7"
+        "Egocentric stereo / fw 2.1.7"
       ],
       [
         "Device id",
@@ -4094,7 +4094,7 @@
     "skill": "Mechanical / Automotive Work",
     "environment": "Auto Repair, Factory Floor",
     "locale": "Hanoi",
-    "rig": "Robocap",
+    "rig": "Egocentric stereo",
     "durationSec": 474.145,
     "resolution": "stereo pair",
     "fps": 30,
@@ -4133,7 +4133,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Robocap",
+        "t": "Egocentric stereo",
         "k": "device"
       },
       {
@@ -4210,7 +4210,7 @@
       ],
       [
         "Device",
-        "Robocap / fw 1.2.13"
+        "Egocentric stereo / fw 1.2.13"
       ],
       [
         "Device id",
@@ -4293,7 +4293,7 @@
     "skill": "Pick and Place / Object Handling",
     "environment": "Motorcycle Repair, Service Bay",
     "locale": "Hanoi",
-    "rig": "DAS Ego V6",
+    "rig": "Egocentric stereo",
     "durationSec": 91.755,
     "resolution": "stereo pair",
     "fps": 30,
@@ -4332,7 +4332,7 @@
         "k": "difficulty"
       },
       {
-        "t": "DAS Ego V6",
+        "t": "Egocentric stereo",
         "k": "device"
       },
       {
@@ -4409,7 +4409,7 @@
       ],
       [
         "Device",
-        "DAS Ego V6 / fw 2.1.18"
+        "Egocentric stereo / fw 2.1.18"
       ],
       [
         "Device id",
@@ -4492,7 +4492,7 @@
     "skill": "Repair & Maintenance",
     "environment": "Motorcycle Repair, Service Bay",
     "locale": "Hanoi",
-    "rig": "DAS Ego V6",
+    "rig": "Egocentric stereo",
     "durationSec": 536.333,
     "resolution": "stereo pair",
     "fps": 30,
@@ -4531,7 +4531,7 @@
         "k": "difficulty"
       },
       {
-        "t": "DAS Ego V6",
+        "t": "Egocentric stereo",
         "k": "device"
       },
       {
@@ -4608,7 +4608,7 @@
       ],
       [
         "Device",
-        "DAS Ego V6 / fw 2.1.7"
+        "Egocentric stereo / fw 2.1.7"
       ],
       [
         "Device id",
@@ -4691,7 +4691,7 @@
     "skill": "Tool Use & Technical Manipulation",
     "environment": "Auto Repair, Service Bay",
     "locale": "Hanoi",
-    "rig": "DAS Ego V6",
+    "rig": "Egocentric stereo",
     "durationSec": 587.392,
     "resolution": "stereo pair",
     "fps": 30,
@@ -4730,7 +4730,7 @@
         "k": "difficulty"
       },
       {
-        "t": "DAS Ego V6",
+        "t": "Egocentric stereo",
         "k": "device"
       },
       {
@@ -4807,7 +4807,7 @@
       ],
       [
         "Device",
-        "DAS Ego V6 / fw 2.1.18"
+        "Egocentric stereo / fw 2.1.18"
       ],
       [
         "Device id",
@@ -4890,7 +4890,7 @@
     "skill": "Tool Use & Technical Manipulation",
     "environment": "Barber Shop, Makeup Area",
     "locale": "Hanoi",
-    "rig": "DAS Ego V6",
+    "rig": "Egocentric stereo",
     "durationSec": 714.236,
     "resolution": "stereo pair",
     "fps": 30,
@@ -4929,7 +4929,7 @@
         "k": "difficulty"
       },
       {
-        "t": "DAS Ego V6",
+        "t": "Egocentric stereo",
         "k": "device"
       },
       {
@@ -5006,7 +5006,7 @@
       ],
       [
         "Device",
-        "DAS Ego V6 / fw 2.1.18"
+        "Egocentric stereo / fw 2.1.18"
       ],
       [
         "Device id",
@@ -5089,7 +5089,7 @@
     "skill": "Clothing & Laundry",
     "environment": "Sewing Factory, Sewing Area",
     "locale": "Hanoi",
-    "rig": "Robocap",
+    "rig": "Egocentric stereo",
     "durationSec": 694.3,
     "resolution": "stereo pair",
     "fps": 30,
@@ -5128,7 +5128,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Robocap",
+        "t": "Egocentric stereo",
         "k": "device"
       },
       {
@@ -5205,7 +5205,7 @@
       ],
       [
         "Device",
-        "Robocap / fw 1.2.13"
+        "Egocentric stereo / fw 1.2.13"
       ],
       [
         "Device id",
@@ -5288,7 +5288,7 @@
     "skill": "Organization & Tidying",
     "environment": "Sewing Factory, Sewing Station",
     "locale": "Hanoi",
-    "rig": "Robocap",
+    "rig": "Egocentric stereo",
     "durationSec": 104.481,
     "resolution": "stereo pair",
     "fps": 30,
@@ -5327,7 +5327,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Robocap",
+        "t": "Egocentric stereo",
         "k": "device"
       },
       {
@@ -5404,7 +5404,7 @@
       ],
       [
         "Device",
-        "Robocap / fw 1.2.13"
+        "Egocentric stereo / fw 1.2.13"
       ],
       [
         "Device id",
@@ -5487,7 +5487,7 @@
     "skill": "Packing & Bagging",
     "environment": "Sewing Factory, Sewing Floor",
     "locale": "Hanoi",
-    "rig": "Robocap",
+    "rig": "Egocentric stereo",
     "durationSec": 87.175,
     "resolution": "stereo pair",
     "fps": 30,
@@ -5526,7 +5526,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Robocap",
+        "t": "Egocentric stereo",
         "k": "device"
       },
       {
@@ -5603,7 +5603,7 @@
       ],
       [
         "Device",
-        "Robocap / fw 1.2.13"
+        "Egocentric stereo / fw 1.2.13"
       ],
       [
         "Device id",
@@ -5686,7 +5686,7 @@
     "skill": "Tool Use & Technical Manipulation",
     "environment": "Sewing Factory, Sewing Room",
     "locale": "Hanoi",
-    "rig": "Robocap",
+    "rig": "Egocentric stereo",
     "durationSec": 613.174,
     "resolution": "stereo pair",
     "fps": 30,
@@ -5725,7 +5725,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Robocap",
+        "t": "Egocentric stereo",
         "k": "device"
       },
       {
@@ -5802,7 +5802,7 @@
       ],
       [
         "Device",
-        "Robocap / fw 1.2.13"
+        "Egocentric stereo / fw 1.2.13"
       ],
       [
         "Device id",
@@ -5885,7 +5885,7 @@
     "skill": "Assembly & Installation",
     "environment": "Construction Site, Residential Home",
     "locale": "Hanoi",
-    "rig": "Robocap",
+    "rig": "Egocentric stereo",
     "durationSec": 568.188,
     "resolution": "stereo pair",
     "fps": 30,
@@ -5924,7 +5924,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Robocap",
+        "t": "Egocentric stereo",
         "k": "device"
       },
       {
@@ -6001,7 +6001,7 @@
       ],
       [
         "Device",
-        "Robocap / fw 1.2.13"
+        "Egocentric stereo / fw 1.2.13"
       ],
       [
         "Device id",
@@ -6084,7 +6084,7 @@
     "skill": "Cleaning & Sanitation",
     "environment": "Construction Site, Finishing Area",
     "locale": "Hanoi",
-    "rig": "DAS Ego V6",
+    "rig": "Egocentric stereo",
     "durationSec": 715.655,
     "resolution": "stereo pair",
     "fps": 30,
@@ -6123,7 +6123,7 @@
         "k": "difficulty"
       },
       {
-        "t": "DAS Ego V6",
+        "t": "Egocentric stereo",
         "k": "device"
       },
       {
@@ -6200,7 +6200,7 @@
       ],
       [
         "Device",
-        "DAS Ego V6 / fw 2.1.18"
+        "Egocentric stereo / fw 2.1.18"
       ],
       [
         "Device id",
@@ -6283,7 +6283,7 @@
     "skill": "Construction & Building",
     "environment": "Construction Site, Finishing Area",
     "locale": "Hanoi",
-    "rig": "DAS Ego V6",
+    "rig": "Egocentric stereo",
     "durationSec": 653.501,
     "resolution": "stereo pair",
     "fps": 30,
@@ -6322,7 +6322,7 @@
         "k": "difficulty"
       },
       {
-        "t": "DAS Ego V6",
+        "t": "Egocentric stereo",
         "k": "device"
       },
       {
@@ -6399,7 +6399,7 @@
       ],
       [
         "Device",
-        "DAS Ego V6 / fw 2.1.18"
+        "Egocentric stereo / fw 2.1.18"
       ],
       [
         "Device id",
@@ -6482,7 +6482,7 @@
     "skill": "Organization & Tidying",
     "environment": "Construction Site, Finishing Area",
     "locale": "Hanoi",
-    "rig": "DAS Ego V6",
+    "rig": "Egocentric stereo",
     "durationSec": 154.223,
     "resolution": "stereo pair",
     "fps": 30,
@@ -6521,7 +6521,7 @@
         "k": "difficulty"
       },
       {
-        "t": "DAS Ego V6",
+        "t": "Egocentric stereo",
         "k": "device"
       },
       {
@@ -6598,7 +6598,7 @@
       ],
       [
         "Device",
-        "DAS Ego V6 / fw 2.1.18"
+        "Egocentric stereo / fw 2.1.18"
       ],
       [
         "Device id",
@@ -6681,7 +6681,7 @@
     "skill": "Packing & Bagging",
     "environment": "Construction Site, Finishing Area",
     "locale": "Hanoi",
-    "rig": "DAS Ego V6",
+    "rig": "Egocentric stereo",
     "durationSec": 251.189,
     "resolution": "stereo pair",
     "fps": 30,
@@ -6720,7 +6720,7 @@
         "k": "difficulty"
       },
       {
-        "t": "DAS Ego V6",
+        "t": "Egocentric stereo",
         "k": "device"
       },
       {
@@ -6797,7 +6797,7 @@
       ],
       [
         "Device",
-        "DAS Ego V6 / fw 2.1.7"
+        "Egocentric stereo / fw 2.1.7"
       ],
       [
         "Device id",
@@ -6880,7 +6880,7 @@
     "skill": "Pick and Place / Object Handling",
     "environment": "Construction Site, Guest Bedroom",
     "locale": "Hanoi",
-    "rig": "DAS Ego V6",
+    "rig": "Egocentric stereo",
     "durationSec": 247.667,
     "resolution": "stereo pair",
     "fps": 30,
@@ -6919,7 +6919,7 @@
         "k": "difficulty"
       },
       {
-        "t": "DAS Ego V6",
+        "t": "Egocentric stereo",
         "k": "device"
       },
       {
@@ -6996,7 +6996,7 @@
       ],
       [
         "Device",
-        "DAS Ego V6 / fw 2.1.18"
+        "Egocentric stereo / fw 2.1.18"
       ],
       [
         "Device id",
@@ -7079,7 +7079,7 @@
     "skill": "Tool Use & Technical Manipulation",
     "environment": "Construction Site, Finishing Area",
     "locale": "Hanoi",
-    "rig": "DAS Ego V6",
+    "rig": "Egocentric stereo",
     "durationSec": 169.667,
     "resolution": "stereo pair",
     "fps": 30,
@@ -7118,7 +7118,7 @@
         "k": "difficulty"
       },
       {
-        "t": "DAS Ego V6",
+        "t": "Egocentric stereo",
         "k": "device"
       },
       {
@@ -7195,7 +7195,7 @@
       ],
       [
         "Device",
-        "DAS Ego V6 / fw 2.1.18"
+        "Egocentric stereo / fw 2.1.18"
       ],
       [
         "Device id",
@@ -7278,7 +7278,7 @@
     "skill": "Assembly & Installation",
     "environment": "Handcraft Workshop, Home Workshop",
     "locale": "Hanoi",
-    "rig": "Robocap",
+    "rig": "Egocentric stereo",
     "durationSec": 714.663,
     "resolution": "stereo pair",
     "fps": 30,
@@ -7317,7 +7317,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Robocap",
+        "t": "Egocentric stereo",
         "k": "device"
       },
       {
@@ -7394,7 +7394,7 @@
       ],
       [
         "Device",
-        "Robocap / fw 1.2.13"
+        "Egocentric stereo / fw 1.2.13"
       ],
       [
         "Device id",
@@ -7477,7 +7477,7 @@
     "skill": "Cleaning & Sanitation",
     "environment": "Handcraft Workshop, Workshop Area",
     "locale": "Hanoi",
-    "rig": "Robocap",
+    "rig": "Egocentric stereo",
     "durationSec": 518.131,
     "resolution": "stereo pair",
     "fps": 30,
@@ -7516,7 +7516,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Robocap",
+        "t": "Egocentric stereo",
         "k": "device"
       },
       {
@@ -7593,7 +7593,7 @@
       ],
       [
         "Device",
-        "Robocap / fw 1.2.13"
+        "Egocentric stereo / fw 1.2.13"
       ],
       [
         "Device id",
@@ -7676,7 +7676,7 @@
     "skill": "Construction & Building",
     "environment": "Handcraft Workshop, Indoor Room",
     "locale": "Hanoi",
-    "rig": "Robocap",
+    "rig": "Egocentric stereo",
     "durationSec": 379.872,
     "resolution": "stereo pair",
     "fps": 30,
@@ -7715,7 +7715,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Robocap",
+        "t": "Egocentric stereo",
         "k": "device"
       },
       {
@@ -7792,7 +7792,7 @@
       ],
       [
         "Device",
-        "Robocap / fw 1.2.13"
+        "Egocentric stereo / fw 1.2.13"
       ],
       [
         "Device id",
@@ -7875,7 +7875,7 @@
     "skill": "Electronics & Diagnostics",
     "environment": "Handcraft Workshop, Assembly Line",
     "locale": "Hanoi",
-    "rig": "Robocap",
+    "rig": "Egocentric stereo",
     "durationSec": 558.805,
     "resolution": "stereo pair",
     "fps": 30,
@@ -7914,7 +7914,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Robocap",
+        "t": "Egocentric stereo",
         "k": "device"
       },
       {
@@ -7991,7 +7991,7 @@
       ],
       [
         "Device",
-        "Robocap / fw 1.2.13"
+        "Egocentric stereo / fw 1.2.13"
       ],
       [
         "Device id",
@@ -8074,7 +8074,7 @@
     "skill": "Organization & Tidying",
     "environment": "Handcraft Workshop, Workshop",
     "locale": "Hanoi",
-    "rig": "Robocap",
+    "rig": "Egocentric stereo",
     "durationSec": 153.23,
     "resolution": "stereo pair",
     "fps": 30,
@@ -8113,7 +8113,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Robocap",
+        "t": "Egocentric stereo",
         "k": "device"
       },
       {
@@ -8190,7 +8190,7 @@
       ],
       [
         "Device",
-        "Robocap / fw 1.2.13"
+        "Egocentric stereo / fw 1.2.13"
       ],
       [
         "Device id",
@@ -8273,7 +8273,7 @@
     "skill": "Packing & Bagging",
     "environment": "Handcraft Workshop, Indoor Room",
     "locale": "Hanoi",
-    "rig": "Robocap",
+    "rig": "Egocentric stereo",
     "durationSec": 733.79,
     "resolution": "stereo pair",
     "fps": 30,
@@ -8312,7 +8312,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Robocap",
+        "t": "Egocentric stereo",
         "k": "device"
       },
       {
@@ -8389,7 +8389,7 @@
       ],
       [
         "Device",
-        "Robocap / fw 1.2.13"
+        "Egocentric stereo / fw 1.2.13"
       ],
       [
         "Device id",
@@ -8472,7 +8472,7 @@
     "skill": "Pick and Place / Object Handling",
     "environment": "Handcraft Workshop, Assembly Line",
     "locale": "Hanoi",
-    "rig": "Robocap",
+    "rig": "Egocentric stereo",
     "durationSec": 607.278,
     "resolution": "stereo pair",
     "fps": 30,
@@ -8511,7 +8511,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Robocap",
+        "t": "Egocentric stereo",
         "k": "device"
       },
       {
@@ -8588,7 +8588,7 @@
       ],
       [
         "Device",
-        "Robocap / fw 1.2.13"
+        "Egocentric stereo / fw 1.2.13"
       ],
       [
         "Device id",
@@ -8671,7 +8671,7 @@
     "skill": "Tool Use & Technical Manipulation",
     "environment": "Woodworking Shop, Workshop",
     "locale": "Hanoi",
-    "rig": "Robocap",
+    "rig": "Egocentric stereo",
     "durationSec": 720,
     "resolution": "stereo pair",
     "fps": 30,
@@ -8710,7 +8710,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Robocap",
+        "t": "Egocentric stereo",
         "k": "device"
       },
       {
@@ -8787,7 +8787,7 @@
       ],
       [
         "Device",
-        "Robocap / fw 1.2.13"
+        "Egocentric stereo / fw 1.2.13"
       ],
       [
         "Device id",
@@ -8870,7 +8870,7 @@
     "skill": "Cleaning & Sanitation",
     "environment": "Restaurant, Kitchen",
     "locale": "Hanoi",
-    "rig": "Robocap",
+    "rig": "Egocentric stereo",
     "durationSec": 681.27,
     "resolution": "stereo pair",
     "fps": 30,
@@ -8909,7 +8909,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Robocap",
+        "t": "Egocentric stereo",
         "k": "device"
       },
       {
@@ -8986,7 +8986,7 @@
       ],
       [
         "Device",
-        "Robocap / fw 1.2.13"
+        "Egocentric stereo / fw 1.2.13"
       ],
       [
         "Device id",
@@ -9069,7 +9069,7 @@
     "skill": "Dish Handling",
     "environment": "Restaurant, Wash Area",
     "locale": "Hanoi",
-    "rig": "Robocap",
+    "rig": "Egocentric stereo",
     "durationSec": 626.267,
     "resolution": "stereo pair",
     "fps": 30,
@@ -9108,7 +9108,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Robocap",
+        "t": "Egocentric stereo",
         "k": "device"
       },
       {
@@ -9185,7 +9185,7 @@
       ],
       [
         "Device",
-        "Robocap / fw 1.2.13"
+        "Egocentric stereo / fw 1.2.13"
       ],
       [
         "Device id",
@@ -9268,7 +9268,7 @@
     "skill": "Food Preparation & Cooking",
     "environment": "Restaurant, Kitchen",
     "locale": "Hanoi",
-    "rig": "Robocap",
+    "rig": "Egocentric stereo",
     "durationSec": 692.942,
     "resolution": "stereo pair",
     "fps": 30,
@@ -9307,7 +9307,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Robocap",
+        "t": "Egocentric stereo",
         "k": "device"
       },
       {
@@ -9384,7 +9384,7 @@
       ],
       [
         "Device",
-        "Robocap / fw 1.2.13"
+        "Egocentric stereo / fw 1.2.13"
       ],
       [
         "Device id",
@@ -9467,7 +9467,7 @@
     "skill": "Organization & Tidying",
     "environment": "Commercial Kitchen, Restaurant Kitchen",
     "locale": "Hanoi",
-    "rig": "Robocap",
+    "rig": "Egocentric stereo",
     "durationSec": 543.301,
     "resolution": "stereo pair",
     "fps": 30,
@@ -9506,7 +9506,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Robocap",
+        "t": "Egocentric stereo",
         "k": "device"
       },
       {
@@ -9583,7 +9583,7 @@
       ],
       [
         "Device",
-        "Robocap / fw 1.2.13"
+        "Egocentric stereo / fw 1.2.13"
       ],
       [
         "Device id",
@@ -9666,7 +9666,7 @@
     "skill": "Packing & Bagging",
     "environment": "Restaurant, Kitchen",
     "locale": "Hanoi",
-    "rig": "Robocap",
+    "rig": "Egocentric stereo",
     "durationSec": 569.843,
     "resolution": "stereo pair",
     "fps": 30,
@@ -9705,7 +9705,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Robocap",
+        "t": "Egocentric stereo",
         "k": "device"
       },
       {
@@ -9782,7 +9782,7 @@
       ],
       [
         "Device",
-        "Robocap / fw 1.2.13"
+        "Egocentric stereo / fw 1.2.13"
       ],
       [
         "Device id",
@@ -9865,7 +9865,7 @@
     "skill": "Pick and Place / Object Handling",
     "environment": "Restaurant, Restaurant Kitchen",
     "locale": "Hanoi",
-    "rig": "Robocap",
+    "rig": "Egocentric stereo",
     "durationSec": 599.037,
     "resolution": "stereo pair",
     "fps": 30,
@@ -9904,7 +9904,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Robocap",
+        "t": "Egocentric stereo",
         "k": "device"
       },
       {
@@ -9981,7 +9981,7 @@
       ],
       [
         "Device",
-        "Robocap / fw 1.2.13"
+        "Egocentric stereo / fw 1.2.13"
       ],
       [
         "Device id",
@@ -10064,7 +10064,7 @@
     "skill": "Clothing & Laundry",
     "environment": "Home, Bedroom",
     "locale": "Hanoi",
-    "rig": "EgoSense E6",
+    "rig": "Egocentric stereo",
     "durationSec": 624.769,
     "resolution": "stereo pair",
     "fps": 30,
@@ -10102,7 +10102,7 @@
         "k": "difficulty"
       },
       {
-        "t": "EgoSense E6",
+        "t": "Egocentric stereo",
         "k": "device"
       },
       {
@@ -10179,7 +10179,7 @@
       ],
       [
         "Device",
-        "EgoSense E6 / fw 1.0"
+        "Egocentric stereo / fw 1.0"
       ],
       [
         "Device id",
@@ -10262,7 +10262,7 @@
     "skill": "Food Preparation & Cooking",
     "environment": "Home, Kitchen",
     "locale": "Hanoi",
-    "rig": "Robocap",
+    "rig": "Egocentric stereo",
     "durationSec": 405.455,
     "resolution": "stereo pair",
     "fps": 30,
@@ -10300,7 +10300,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Robocap",
+        "t": "Egocentric stereo",
         "k": "device"
       },
       {
@@ -10377,7 +10377,7 @@
       ],
       [
         "Device",
-        "Robocap / fw 1.2.13"
+        "Egocentric stereo / fw 1.2.13"
       ],
       [
         "Device id",
@@ -10460,7 +10460,7 @@
     "skill": "Assembly & Installation",
     "environment": "Manufacturing Factory, Assembly Area",
     "locale": "Hanoi",
-    "rig": "Robocap",
+    "rig": "Egocentric stereo",
     "durationSec": 582.58,
     "resolution": "stereo pair",
     "fps": 30,
@@ -10499,7 +10499,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Robocap",
+        "t": "Egocentric stereo",
         "k": "device"
       },
       {
@@ -10576,7 +10576,7 @@
       ],
       [
         "Device",
-        "Robocap / fw 1.2.13"
+        "Egocentric stereo / fw 1.2.13"
       ],
       [
         "Device id",
@@ -10659,7 +10659,7 @@
     "skill": "Cleaning & Sanitation",
     "environment": "Manufacturing Factory, Assembly Area",
     "locale": "Hanoi",
-    "rig": "DAS Ego V6",
+    "rig": "Egocentric stereo",
     "durationSec": 670.35,
     "resolution": "stereo pair",
     "fps": 30,
@@ -10698,7 +10698,7 @@
         "k": "difficulty"
       },
       {
-        "t": "DAS Ego V6",
+        "t": "Egocentric stereo",
         "k": "device"
       },
       {
@@ -10775,7 +10775,7 @@
       ],
       [
         "Device",
-        "DAS Ego V6 / fw 2.1.18"
+        "Egocentric stereo / fw 2.1.18"
       ],
       [
         "Device id",
@@ -10858,7 +10858,7 @@
     "skill": "Construction & Building",
     "environment": "Hardware Manufacturing, Fabrication Floor",
     "locale": "Hanoi",
-    "rig": "DAS Ego V6",
+    "rig": "Egocentric stereo",
     "durationSec": 293.901,
     "resolution": "stereo pair",
     "fps": 30,
@@ -10897,7 +10897,7 @@
         "k": "difficulty"
       },
       {
-        "t": "DAS Ego V6",
+        "t": "Egocentric stereo",
         "k": "device"
       },
       {
@@ -10974,7 +10974,7 @@
       ],
       [
         "Device",
-        "DAS Ego V6 / fw 2.1.18"
+        "Egocentric stereo / fw 2.1.18"
       ],
       [
         "Device id",
@@ -11057,7 +11057,7 @@
     "skill": "Mechanical / Automotive Work",
     "environment": "Metal Fabrication Workshop, Assembly Area",
     "locale": "Hanoi",
-    "rig": "DAS Ego V6",
+    "rig": "Egocentric stereo",
     "durationSec": 79.039,
     "resolution": "stereo pair",
     "fps": 30,
@@ -11096,7 +11096,7 @@
         "k": "difficulty"
       },
       {
-        "t": "DAS Ego V6",
+        "t": "Egocentric stereo",
         "k": "device"
       },
       {
@@ -11173,7 +11173,7 @@
       ],
       [
         "Device",
-        "DAS Ego V6 / fw 2.1.18"
+        "Egocentric stereo / fw 2.1.18"
       ],
       [
         "Device id",
@@ -11256,7 +11256,7 @@
     "skill": "Packing & Bagging",
     "environment": "Manufacturing Factory, Warehouse",
     "locale": "Hanoi",
-    "rig": "Robocap",
+    "rig": "Egocentric stereo",
     "durationSec": 500.1,
     "resolution": "stereo pair",
     "fps": 30,
@@ -11295,7 +11295,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Robocap",
+        "t": "Egocentric stereo",
         "k": "device"
       },
       {
@@ -11372,7 +11372,7 @@
       ],
       [
         "Device",
-        "Robocap / fw 1.2.13"
+        "Egocentric stereo / fw 1.2.13"
       ],
       [
         "Device id",
@@ -11455,7 +11455,7 @@
     "skill": "Pick and Place / Object Handling",
     "environment": "Woodworking Shop, Home Workshop",
     "locale": "Hanoi",
-    "rig": "Robocap",
+    "rig": "Egocentric stereo",
     "durationSec": 528.683,
     "resolution": "stereo pair",
     "fps": 30,
@@ -11494,7 +11494,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Robocap",
+        "t": "Egocentric stereo",
         "k": "device"
       },
       {
@@ -11571,7 +11571,7 @@
       ],
       [
         "Device",
-        "Robocap / fw 1.2.13"
+        "Egocentric stereo / fw 1.2.13"
       ],
       [
         "Device id",
@@ -11654,7 +11654,7 @@
     "skill": "Repair & Maintenance",
     "environment": "Manufacturing Factory, Workshop",
     "locale": "Hanoi",
-    "rig": "Robocap",
+    "rig": "Egocentric stereo",
     "durationSec": 348.158,
     "resolution": "stereo pair",
     "fps": 30,
@@ -11693,7 +11693,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Robocap",
+        "t": "Egocentric stereo",
         "k": "device"
       },
       {
@@ -11770,7 +11770,7 @@
       ],
       [
         "Device",
-        "Robocap / fw 1.2.13"
+        "Egocentric stereo / fw 1.2.13"
       ],
       [
         "Device id",
@@ -11853,7 +11853,7 @@
     "skill": "Tool Use & Technical Manipulation",
     "environment": "Woodworking Shop, Home Workshop",
     "locale": "Hanoi",
-    "rig": "Robocap",
+    "rig": "Egocentric stereo",
     "durationSec": 652.228,
     "resolution": "stereo pair",
     "fps": 30,
@@ -11892,7 +11892,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Robocap",
+        "t": "Egocentric stereo",
         "k": "device"
       },
       {
@@ -11969,7 +11969,7 @@
       ],
       [
         "Device",
-        "Robocap / fw 1.2.13"
+        "Egocentric stereo / fw 1.2.13"
       ],
       [
         "Device id",
@@ -12052,7 +12052,7 @@
     "skill": "Cleaning & Sanitation",
     "environment": "Sign Shop, Assembly Area",
     "locale": "Hanoi",
-    "rig": "Robocap",
+    "rig": "Egocentric stereo",
     "durationSec": 264.885,
     "resolution": "stereo pair",
     "fps": 30,
@@ -12091,7 +12091,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Robocap",
+        "t": "Egocentric stereo",
         "k": "device"
       },
       {
@@ -12168,7 +12168,7 @@
       ],
       [
         "Device",
-        "Robocap / fw 1.2.13"
+        "Egocentric stereo / fw 1.2.13"
       ],
       [
         "Device id",
@@ -12251,7 +12251,7 @@
     "skill": "Electronics & Diagnostics",
     "environment": "Sign Shop, Assembly Area",
     "locale": "Hanoi",
-    "rig": "Robocap",
+    "rig": "Egocentric stereo",
     "durationSec": 520.658,
     "resolution": "stereo pair",
     "fps": 30,
@@ -12290,7 +12290,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Robocap",
+        "t": "Egocentric stereo",
         "k": "device"
       },
       {
@@ -12367,7 +12367,7 @@
       ],
       [
         "Device",
-        "Robocap / fw 1.2.13"
+        "Egocentric stereo / fw 1.2.13"
       ],
       [
         "Device id",
@@ -12450,7 +12450,7 @@
     "skill": "Organization & Tidying",
     "environment": "Print Shop, Service Counter",
     "locale": "Hanoi",
-    "rig": "Robocap",
+    "rig": "Egocentric stereo",
     "durationSec": 521,
     "resolution": "stereo pair",
     "fps": 30,
@@ -12489,7 +12489,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Robocap",
+        "t": "Egocentric stereo",
         "k": "device"
       },
       {
@@ -12566,7 +12566,7 @@
       ],
       [
         "Device",
-        "Robocap / fw 1.2.13"
+        "Egocentric stereo / fw 1.2.13"
       ],
       [
         "Device id",
@@ -12649,7 +12649,7 @@
     "skill": "Packing & Bagging",
     "environment": "Print Shop, Production Floor",
     "locale": "Hanoi",
-    "rig": "Robocap",
+    "rig": "Egocentric stereo",
     "durationSec": 59.508,
     "resolution": "stereo pair",
     "fps": 30,
@@ -12688,7 +12688,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Robocap",
+        "t": "Egocentric stereo",
         "k": "device"
       },
       {
@@ -12765,7 +12765,7 @@
       ],
       [
         "Device",
-        "Robocap / fw 1.2.13"
+        "Egocentric stereo / fw 1.2.13"
       ],
       [
         "Device id",
@@ -12848,7 +12848,7 @@
     "skill": "Pick and Place / Object Handling",
     "environment": "Print Shop, Production Floor",
     "locale": "Hanoi",
-    "rig": "Robocap",
+    "rig": "Egocentric stereo",
     "durationSec": 378.987,
     "resolution": "stereo pair",
     "fps": 30,
@@ -12887,7 +12887,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Robocap",
+        "t": "Egocentric stereo",
         "k": "device"
       },
       {
@@ -12964,7 +12964,7 @@
       ],
       [
         "Device",
-        "Robocap / fw 1.2.13"
+        "Egocentric stereo / fw 1.2.13"
       ],
       [
         "Device id",
@@ -13047,7 +13047,7 @@
     "skill": "Tool Use & Technical Manipulation",
     "environment": "Sign Shop, Workshop",
     "locale": "Hanoi",
-    "rig": "Robocap",
+    "rig": "Egocentric stereo",
     "durationSec": 662.225,
     "resolution": "stereo pair",
     "fps": 30,
@@ -13086,7 +13086,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Robocap",
+        "t": "Egocentric stereo",
         "k": "device"
       },
       {
@@ -13163,7 +13163,7 @@
       ],
       [
         "Device",
-        "Robocap / fw 1.2.13"
+        "Egocentric stereo / fw 1.2.13"
       ],
       [
         "Device id",
@@ -13246,7 +13246,7 @@
     "skill": "Assembly & Installation",
     "environment": "Appliance Repair, Home Workshop",
     "locale": "Hanoi",
-    "rig": "Robocap",
+    "rig": "Egocentric stereo",
     "durationSec": 644.6,
     "resolution": "stereo pair",
     "fps": 30,
@@ -13285,7 +13285,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Robocap",
+        "t": "Egocentric stereo",
         "k": "device"
       },
       {
@@ -13362,7 +13362,7 @@
       ],
       [
         "Device",
-        "Robocap / fw 1.2.13"
+        "Egocentric stereo / fw 1.2.13"
       ],
       [
         "Device id",
@@ -13445,7 +13445,7 @@
     "skill": "Electronics & Diagnostics",
     "environment": "Appliance Repair, Repair Bench",
     "locale": "Hanoi",
-    "rig": "Robocap",
+    "rig": "Egocentric stereo",
     "durationSec": 519.469,
     "resolution": "stereo pair",
     "fps": 30,
@@ -13484,7 +13484,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Robocap",
+        "t": "Egocentric stereo",
         "k": "device"
       },
       {
@@ -13561,7 +13561,7 @@
       ],
       [
         "Device",
-        "Robocap / fw 1.2.13"
+        "Egocentric stereo / fw 1.2.13"
       ],
       [
         "Device id",
@@ -13644,7 +13644,7 @@
     "skill": "Mechanical / Automotive Work",
     "environment": "Appliance Repair, Repair Bench",
     "locale": "Hanoi",
-    "rig": "DAS Ego V6",
+    "rig": "Egocentric stereo",
     "durationSec": 527.085,
     "resolution": "stereo pair",
     "fps": 30,
@@ -13683,7 +13683,7 @@
         "k": "difficulty"
       },
       {
-        "t": "DAS Ego V6",
+        "t": "Egocentric stereo",
         "k": "device"
       },
       {
@@ -13760,7 +13760,7 @@
       ],
       [
         "Device",
-        "DAS Ego V6 / fw 2.1.18"
+        "Egocentric stereo / fw 2.1.18"
       ],
       [
         "Device id",
@@ -13843,7 +13843,7 @@
     "skill": "Pick and Place / Object Handling",
     "environment": "Appliance Repair, Work Bench",
     "locale": "Hanoi",
-    "rig": "DAS Ego V6",
+    "rig": "Egocentric stereo",
     "durationSec": 589.342,
     "resolution": "stereo pair",
     "fps": 30,
@@ -13882,7 +13882,7 @@
         "k": "difficulty"
       },
       {
-        "t": "DAS Ego V6",
+        "t": "Egocentric stereo",
         "k": "device"
       },
       {
@@ -13959,7 +13959,7 @@
       ],
       [
         "Device",
-        "DAS Ego V6 / fw 2.1.7"
+        "Egocentric stereo / fw 2.1.7"
       ],
       [
         "Device id",
@@ -14042,7 +14042,7 @@
     "skill": "Repair & Maintenance",
     "environment": "Shoe Repair Store",
     "locale": "Hanoi",
-    "rig": "Robocap",
+    "rig": "Egocentric stereo",
     "durationSec": 599.259,
     "resolution": "stereo pair",
     "fps": 30,
@@ -14080,7 +14080,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Robocap",
+        "t": "Egocentric stereo",
         "k": "device"
       },
       {
@@ -14157,7 +14157,7 @@
       ],
       [
         "Device",
-        "Robocap / fw 1.2.13"
+        "Egocentric stereo / fw 1.2.13"
       ],
       [
         "Device id",
@@ -14240,7 +14240,7 @@
     "skill": "Inventory & Stock Management",
     "environment": "Restaurant, Restaurant Kitchen",
     "locale": "Hanoi",
-    "rig": "DAS Ego V6",
+    "rig": "Egocentric stereo",
     "durationSec": 367.933,
     "resolution": "stereo pair",
     "fps": 30,
@@ -14279,7 +14279,7 @@
         "k": "difficulty"
       },
       {
-        "t": "DAS Ego V6",
+        "t": "Egocentric stereo",
         "k": "device"
       },
       {
@@ -14356,7 +14356,7 @@
       ],
       [
         "Device",
-        "DAS Ego V6 / fw 2.1.18"
+        "Egocentric stereo / fw 2.1.18"
       ],
       [
         "Device id",
@@ -14439,7 +14439,7 @@
     "skill": "Cleaning & Sanitation",
     "environment": "Agriculture Farm, Garden Area",
     "locale": "Hanoi",
-    "rig": "Robocap",
+    "rig": "Egocentric stereo",
     "durationSec": 489.904,
     "resolution": "stereo pair",
     "fps": 30,
@@ -14478,7 +14478,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Robocap",
+        "t": "Egocentric stereo",
         "k": "device"
       },
       {
@@ -14547,7 +14547,7 @@
       ],
       [
         "Device",
-        "Robocap / fw 1.2.13"
+        "Egocentric stereo / fw 1.2.13"
       ],
       [
         "Device id",
@@ -14630,7 +14630,7 @@
     "skill": "Pick and Place / Object Handling",
     "environment": "Agriculture Farm, Farmhouse",
     "locale": "Hanoi",
-    "rig": "Robocap",
+    "rig": "Egocentric stereo",
     "durationSec": 505.833,
     "resolution": "stereo pair",
     "fps": 30,
@@ -14669,7 +14669,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Robocap",
+        "t": "Egocentric stereo",
         "k": "device"
       },
       {
@@ -14738,7 +14738,7 @@
       ],
       [
         "Device",
-        "Robocap / fw 1.2.13"
+        "Egocentric stereo / fw 1.2.13"
       ],
       [
         "Device id",
@@ -14821,7 +14821,7 @@
     "skill": "Tool Use & Technical Manipulation",
     "environment": "Agriculture Farm, Outdoor Area",
     "locale": "Hanoi",
-    "rig": "Robocap",
+    "rig": "Egocentric stereo",
     "durationSec": 606.124,
     "resolution": "stereo pair",
     "fps": 30,
@@ -14860,7 +14860,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Robocap",
+        "t": "Egocentric stereo",
         "k": "device"
       },
       {
@@ -14929,7 +14929,7 @@
       ],
       [
         "Device",
-        "Robocap / fw 1.2.13"
+        "Egocentric stereo / fw 1.2.13"
       ],
       [
         "Device id",
@@ -15012,7 +15012,7 @@
     "skill": "Construction & Building",
     "environment": "Auto Repair, Construction Site",
     "locale": "Hanoi",
-    "rig": "Robocap",
+    "rig": "Egocentric stereo",
     "durationSec": 543.75,
     "resolution": "stereo pair",
     "fps": 30,
@@ -15051,7 +15051,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Robocap",
+        "t": "Egocentric stereo",
         "k": "device"
       },
       {
@@ -15120,7 +15120,7 @@
       ],
       [
         "Device",
-        "Robocap / fw 1.2.13"
+        "Egocentric stereo / fw 1.2.13"
       ],
       [
         "Device id",
@@ -15203,7 +15203,7 @@
     "skill": "Food Preparation & Cooking",
     "environment": "Auto Repair, Service Counter",
     "locale": "Hanoi",
-    "rig": "DAS Ego V6",
+    "rig": "Egocentric stereo",
     "durationSec": 548.553,
     "resolution": "stereo pair",
     "fps": 30,
@@ -15242,7 +15242,7 @@
         "k": "difficulty"
       },
       {
-        "t": "DAS Ego V6",
+        "t": "Egocentric stereo",
         "k": "device"
       },
       {
@@ -15311,7 +15311,7 @@
       ],
       [
         "Device",
-        "DAS Ego V6 / fw 2.1.7"
+        "Egocentric stereo / fw 2.1.7"
       ],
       [
         "Device id",
@@ -15394,7 +15394,7 @@
     "skill": "Packing & Bagging",
     "environment": "Auto Repair, Service Counter",
     "locale": "Hanoi",
-    "rig": "DAS Ego V6",
+    "rig": "Egocentric stereo",
     "durationSec": 162.892,
     "resolution": "stereo pair",
     "fps": 30,
@@ -15433,7 +15433,7 @@
         "k": "difficulty"
       },
       {
-        "t": "DAS Ego V6",
+        "t": "Egocentric stereo",
         "k": "device"
       },
       {
@@ -15502,7 +15502,7 @@
       ],
       [
         "Device",
-        "DAS Ego V6 / fw 2.1.7"
+        "Egocentric stereo / fw 2.1.7"
       ],
       [
         "Device id",
@@ -15585,7 +15585,7 @@
     "skill": "Retail & Service Operations",
     "environment": "Auto Repair, Service Counter",
     "locale": "Hanoi",
-    "rig": "DAS Ego V6",
+    "rig": "Egocentric stereo",
     "durationSec": 120.358,
     "resolution": "stereo pair",
     "fps": 30,
@@ -15624,7 +15624,7 @@
         "k": "difficulty"
       },
       {
-        "t": "DAS Ego V6",
+        "t": "Egocentric stereo",
         "k": "device"
       },
       {
@@ -15693,7 +15693,7 @@
       ],
       [
         "Device",
-        "DAS Ego V6 / fw 2.1.7"
+        "Egocentric stereo / fw 2.1.7"
       ],
       [
         "Device id",
@@ -15776,7 +15776,7 @@
     "skill": "Assembly & Installation",
     "environment": "Backyard, Workbench",
     "locale": "Hanoi",
-    "rig": "Robocap",
+    "rig": "Egocentric stereo",
     "durationSec": 390.347,
     "resolution": "stereo pair",
     "fps": 30,
@@ -15815,7 +15815,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Robocap",
+        "t": "Egocentric stereo",
         "k": "device"
       },
       {
@@ -15884,7 +15884,7 @@
       ],
       [
         "Device",
-        "Robocap / fw 1.2.13"
+        "Egocentric stereo / fw 1.2.13"
       ],
       [
         "Device id",
@@ -15967,7 +15967,7 @@
     "skill": "Cleaning & Sanitation",
     "environment": "Backyard, Sidewalk",
     "locale": "Hanoi",
-    "rig": "Robocap",
+    "rig": "Egocentric stereo",
     "durationSec": 705.332,
     "resolution": "stereo pair",
     "fps": 30,
@@ -16006,7 +16006,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Robocap",
+        "t": "Egocentric stereo",
         "k": "device"
       },
       {
@@ -16075,7 +16075,7 @@
       ],
       [
         "Device",
-        "Robocap / fw 1.2.13"
+        "Egocentric stereo / fw 1.2.13"
       ],
       [
         "Device id",
@@ -16158,7 +16158,7 @@
     "skill": "Clothing & Laundry",
     "environment": "Backyard, Production Area",
     "locale": "Hanoi",
-    "rig": "Robocap",
+    "rig": "Egocentric stereo",
     "durationSec": 444.681,
     "resolution": "stereo pair",
     "fps": 30,
@@ -16197,7 +16197,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Robocap",
+        "t": "Egocentric stereo",
         "k": "device"
       },
       {
@@ -16266,7 +16266,7 @@
       ],
       [
         "Device",
-        "Robocap / fw 1.2.13"
+        "Egocentric stereo / fw 1.2.13"
       ],
       [
         "Device id",
@@ -16349,7 +16349,7 @@
     "skill": "Construction & Building",
     "environment": "Backyard, Construction Site",
     "locale": "Hanoi",
-    "rig": "Robocap",
+    "rig": "Egocentric stereo",
     "durationSec": 641.309,
     "resolution": "stereo pair",
     "fps": 30,
@@ -16388,7 +16388,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Robocap",
+        "t": "Egocentric stereo",
         "k": "device"
       },
       {
@@ -16457,7 +16457,7 @@
       ],
       [
         "Device",
-        "Robocap / fw 1.2.13"
+        "Egocentric stereo / fw 1.2.13"
       ],
       [
         "Device id",
@@ -16540,7 +16540,7 @@
     "skill": "Electronics & Diagnostics",
     "environment": "Backyard, Residential Home",
     "locale": "Hanoi",
-    "rig": "Robocap",
+    "rig": "Egocentric stereo",
     "durationSec": 251.998,
     "resolution": "stereo pair",
     "fps": 30,
@@ -16579,7 +16579,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Robocap",
+        "t": "Egocentric stereo",
         "k": "device"
       },
       {
@@ -16648,7 +16648,7 @@
       ],
       [
         "Device",
-        "Robocap / fw 1.2.13"
+        "Egocentric stereo / fw 1.2.13"
       ],
       [
         "Device id",
@@ -16731,7 +16731,7 @@
     "skill": "Organization & Tidying",
     "environment": "Backyard, Bedroom",
     "locale": "Hanoi",
-    "rig": "Robocap",
+    "rig": "Egocentric stereo",
     "durationSec": 466.233,
     "resolution": "stereo pair",
     "fps": 30,
@@ -16770,7 +16770,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Robocap",
+        "t": "Egocentric stereo",
         "k": "device"
       },
       {
@@ -16839,7 +16839,7 @@
       ],
       [
         "Device",
-        "Robocap / fw 1.2.13"
+        "Egocentric stereo / fw 1.2.13"
       ],
       [
         "Device id",
@@ -16922,7 +16922,7 @@
     "skill": "Pick and Place / Object Handling",
     "environment": "Backyard, Workbench",
     "locale": "Hanoi",
-    "rig": "Robocap",
+    "rig": "Egocentric stereo",
     "durationSec": 625.633,
     "resolution": "stereo pair",
     "fps": 30,
@@ -16961,7 +16961,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Robocap",
+        "t": "Egocentric stereo",
         "k": "device"
       },
       {
@@ -17030,7 +17030,7 @@
       ],
       [
         "Device",
-        "Robocap / fw 1.2.13"
+        "Egocentric stereo / fw 1.2.13"
       ],
       [
         "Device id",
@@ -17113,7 +17113,7 @@
     "skill": "Tool Use & Technical Manipulation",
     "environment": "Backyard, Outdoor Area",
     "locale": "Hanoi",
-    "rig": "Robocap",
+    "rig": "Egocentric stereo",
     "durationSec": 685.472,
     "resolution": "stereo pair",
     "fps": 30,
@@ -17152,7 +17152,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Robocap",
+        "t": "Egocentric stereo",
         "k": "device"
       },
       {
@@ -17221,7 +17221,7 @@
       ],
       [
         "Device",
-        "Robocap / fw 1.2.13"
+        "Egocentric stereo / fw 1.2.13"
       ],
       [
         "Device id",
@@ -17304,7 +17304,7 @@
     "skill": "Cleaning & Sanitation",
     "environment": "Sewing Factory, Sewing Station",
     "locale": "Hung Yen",
-    "rig": "Robocap",
+    "rig": "Egocentric stereo",
     "durationSec": 508.625,
     "resolution": "stereo pair",
     "fps": 30,
@@ -17343,7 +17343,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Robocap",
+        "t": "Egocentric stereo",
         "k": "device"
       },
       {
@@ -17412,7 +17412,7 @@
       ],
       [
         "Device",
-        "Robocap / fw 1.2.13"
+        "Egocentric stereo / fw 1.2.13"
       ],
       [
         "Device id",
@@ -17495,7 +17495,7 @@
     "skill": "Dish Handling",
     "environment": "Sewing Factory, Dining Area",
     "locale": "Hung Yen",
-    "rig": "Robocap",
+    "rig": "Egocentric stereo",
     "durationSec": 194.588,
     "resolution": "stereo pair",
     "fps": 30,
@@ -17534,7 +17534,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Robocap",
+        "t": "Egocentric stereo",
         "k": "device"
       },
       {
@@ -17603,7 +17603,7 @@
       ],
       [
         "Device",
-        "Robocap / fw 1.2.13"
+        "Egocentric stereo / fw 1.2.13"
       ],
       [
         "Device id",
@@ -17686,7 +17686,7 @@
     "skill": "Food Preparation & Cooking",
     "environment": "Sewing Factory, Pickup Counter",
     "locale": "Hung Yen",
-    "rig": "Robocap",
+    "rig": "Egocentric stereo",
     "durationSec": 653.019,
     "resolution": "stereo pair",
     "fps": 30,
@@ -17725,7 +17725,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Robocap",
+        "t": "Egocentric stereo",
         "k": "device"
       },
       {
@@ -17794,7 +17794,7 @@
       ],
       [
         "Device",
-        "Robocap / fw 1.2.13"
+        "Egocentric stereo / fw 1.2.13"
       ],
       [
         "Device id",
@@ -17877,7 +17877,7 @@
     "skill": "Mechanical / Automotive Work",
     "environment": "Sewing Factory, Service Bay",
     "locale": "Hung Yen",
-    "rig": "DAS Ego V6",
+    "rig": "Egocentric stereo",
     "durationSec": 519.233,
     "resolution": "stereo pair",
     "fps": 30,
@@ -17916,7 +17916,7 @@
         "k": "difficulty"
       },
       {
-        "t": "DAS Ego V6",
+        "t": "Egocentric stereo",
         "k": "device"
       },
       {
@@ -17985,7 +17985,7 @@
       ],
       [
         "Device",
-        "DAS Ego V6 / fw 2.1.18"
+        "Egocentric stereo / fw 2.1.18"
       ],
       [
         "Device id",
@@ -18068,7 +18068,7 @@
     "skill": "Electronics & Diagnostics",
     "environment": "Construction Company, Construction Site",
     "locale": "Thai Nguyen",
-    "rig": "Robocap",
+    "rig": "Egocentric stereo",
     "durationSec": 53.355,
     "resolution": "stereo pair",
     "fps": 30,
@@ -18107,7 +18107,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Robocap",
+        "t": "Egocentric stereo",
         "k": "device"
       },
       {
@@ -18176,7 +18176,7 @@
       ],
       [
         "Device",
-        "Robocap / fw 1.2.13"
+        "Egocentric stereo / fw 1.2.13"
       ],
       [
         "Device id",
@@ -18259,7 +18259,7 @@
     "skill": "Food Preparation & Cooking",
     "environment": "Construction Company, Restaurant Kitchen",
     "locale": "Hanoi",
-    "rig": "Robocap",
+    "rig": "Egocentric stereo",
     "durationSec": 193.84,
     "resolution": "stereo pair",
     "fps": 30,
@@ -18298,7 +18298,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Robocap",
+        "t": "Egocentric stereo",
         "k": "device"
       },
       {
@@ -18367,7 +18367,7 @@
       ],
       [
         "Device",
-        "Robocap / fw 1.2.13"
+        "Egocentric stereo / fw 1.2.13"
       ],
       [
         "Device id",
@@ -18450,7 +18450,7 @@
     "skill": "Retail & Service Operations",
     "environment": "Construction Company, Dining Area",
     "locale": "Hanoi",
-    "rig": "Robocap",
+    "rig": "Egocentric stereo",
     "durationSec": 132.997,
     "resolution": "stereo pair",
     "fps": 30,
@@ -18489,7 +18489,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Robocap",
+        "t": "Egocentric stereo",
         "k": "device"
       },
       {
@@ -18558,7 +18558,7 @@
       ],
       [
         "Device",
-        "Robocap / fw 1.2.13"
+        "Egocentric stereo / fw 1.2.13"
       ],
       [
         "Device id",
@@ -18641,7 +18641,7 @@
     "skill": "Assembly & Installation",
     "environment": "Electromechanical Workshop",
     "locale": "Hanoi",
-    "rig": "Robocap",
+    "rig": "Egocentric stereo",
     "durationSec": 611.007,
     "resolution": "stereo pair",
     "fps": 30,
@@ -18679,7 +18679,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Robocap",
+        "t": "Egocentric stereo",
         "k": "device"
       },
       {
@@ -18748,7 +18748,7 @@
       ],
       [
         "Device",
-        "Robocap / fw 1.2.13"
+        "Egocentric stereo / fw 1.2.13"
       ],
       [
         "Device id",
@@ -18831,7 +18831,7 @@
     "skill": "Cleaning & Sanitation",
     "environment": "Electromechanical Workshop, Workshop",
     "locale": "Hanoi",
-    "rig": "Robocap",
+    "rig": "Egocentric stereo",
     "durationSec": 89.039,
     "resolution": "stereo pair",
     "fps": 30,
@@ -18870,7 +18870,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Robocap",
+        "t": "Egocentric stereo",
         "k": "device"
       },
       {
@@ -18939,7 +18939,7 @@
       ],
       [
         "Device",
-        "Robocap / fw 1.2.13"
+        "Egocentric stereo / fw 1.2.13"
       ],
       [
         "Device id",
@@ -19022,7 +19022,7 @@
     "skill": "Electronics & Diagnostics",
     "environment": "Electromechanical Workshop",
     "locale": "Hanoi",
-    "rig": "Robocap",
+    "rig": "Egocentric stereo",
     "durationSec": 623.838,
     "resolution": "stereo pair",
     "fps": 30,
@@ -19060,7 +19060,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Robocap",
+        "t": "Egocentric stereo",
         "k": "device"
       },
       {
@@ -19129,7 +19129,7 @@
       ],
       [
         "Device",
-        "Robocap / fw 1.2.13"
+        "Egocentric stereo / fw 1.2.13"
       ],
       [
         "Device id",
@@ -19212,7 +19212,7 @@
     "skill": "Mechanical / Automotive Work",
     "environment": "Electromechanical Workshop, Workshop Floor",
     "locale": "Hanoi",
-    "rig": "Robocap",
+    "rig": "Egocentric stereo",
     "durationSec": 577.434,
     "resolution": "stereo pair",
     "fps": 30,
@@ -19251,7 +19251,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Robocap",
+        "t": "Egocentric stereo",
         "k": "device"
       },
       {
@@ -19320,7 +19320,7 @@
       ],
       [
         "Device",
-        "Robocap / fw 1.2.13"
+        "Egocentric stereo / fw 1.2.13"
       ],
       [
         "Device id",
@@ -19403,7 +19403,7 @@
     "skill": "Organization & Tidying",
     "environment": "Electromechanical Workshop",
     "locale": "Hanoi",
-    "rig": "Robocap",
+    "rig": "Egocentric stereo",
     "durationSec": 157.1,
     "resolution": "stereo pair",
     "fps": 30,
@@ -19441,7 +19441,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Robocap",
+        "t": "Egocentric stereo",
         "k": "device"
       },
       {
@@ -19510,7 +19510,7 @@
       ],
       [
         "Device",
-        "Robocap / fw 1.2.13"
+        "Egocentric stereo / fw 1.2.13"
       ],
       [
         "Device id",
@@ -19593,7 +19593,7 @@
     "skill": "Pick and Place / Object Handling",
     "environment": "Electromechanical Workshop, Workshop",
     "locale": "Hanoi",
-    "rig": "Robocap",
+    "rig": "Egocentric stereo",
     "durationSec": 215.305,
     "resolution": "stereo pair",
     "fps": 30,
@@ -19632,7 +19632,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Robocap",
+        "t": "Egocentric stereo",
         "k": "device"
       },
       {
@@ -19701,7 +19701,7 @@
       ],
       [
         "Device",
-        "Robocap / fw 1.2.13"
+        "Egocentric stereo / fw 1.2.13"
       ],
       [
         "Device id",
@@ -19784,7 +19784,7 @@
     "skill": "Tool Use & Technical Manipulation",
     "environment": "Electromechanical Workshop, Workshop",
     "locale": "Hanoi",
-    "rig": "Robocap",
+    "rig": "Egocentric stereo",
     "durationSec": 313.167,
     "resolution": "stereo pair",
     "fps": 30,
@@ -19823,7 +19823,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Robocap",
+        "t": "Egocentric stereo",
         "k": "device"
       },
       {
@@ -19892,7 +19892,7 @@
       ],
       [
         "Device",
-        "Robocap / fw 1.2.13"
+        "Egocentric stereo / fw 1.2.13"
       ],
       [
         "Device id",
@@ -19975,7 +19975,7 @@
     "skill": "Pick and Place / Object Handling",
     "environment": "Bridal Atelier, Studio Area",
     "locale": "Hanoi",
-    "rig": "Robocap",
+    "rig": "Egocentric stereo",
     "durationSec": 211.567,
     "resolution": "stereo pair",
     "fps": 30,
@@ -20014,7 +20014,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Robocap",
+        "t": "Egocentric stereo",
         "k": "device"
       },
       {
@@ -20083,7 +20083,7 @@
       ],
       [
         "Device",
-        "Robocap / fw 1.2.13"
+        "Egocentric stereo / fw 1.2.13"
       ],
       [
         "Device id",
@@ -20166,7 +20166,7 @@
     "skill": "Retail & Service Operations",
     "environment": "Bridal Atelier, Studio Area",
     "locale": "Hanoi",
-    "rig": "Robocap",
+    "rig": "Egocentric stereo",
     "durationSec": 608.6,
     "resolution": "stereo pair",
     "fps": 30,
@@ -20205,7 +20205,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Robocap",
+        "t": "Egocentric stereo",
         "k": "device"
       },
       {
@@ -20274,7 +20274,7 @@
       ],
       [
         "Device",
-        "Robocap / fw 1.2.13"
+        "Egocentric stereo / fw 1.2.13"
       ],
       [
         "Device id",
@@ -20357,7 +20357,7 @@
     "skill": "Clothing & Laundry",
     "environment": "Cafe Counter, Kitchen",
     "locale": "Thành phố Hồ Chí Minh",
-    "rig": "Robocap",
+    "rig": "Egocentric stereo",
     "durationSec": 158.705,
     "resolution": "stereo pair",
     "fps": 30,
@@ -20396,7 +20396,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Robocap",
+        "t": "Egocentric stereo",
         "k": "device"
       },
       {
@@ -20465,7 +20465,7 @@
       ],
       [
         "Device",
-        "Robocap / fw 1.2.13"
+        "Egocentric stereo / fw 1.2.13"
       ],
       [
         "Device id",
@@ -20548,7 +20548,7 @@
     "skill": "Human Interaction & Handoffs",
     "environment": "Restaurant, Checkout Counter",
     "locale": "Hanoi",
-    "rig": "Robocap",
+    "rig": "Egocentric stereo",
     "durationSec": 30.239,
     "resolution": "stereo pair",
     "fps": 30,
@@ -20587,7 +20587,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Robocap",
+        "t": "Egocentric stereo",
         "k": "device"
       },
       {
@@ -20656,7 +20656,7 @@
       ],
       [
         "Device",
-        "Robocap / fw 1.2.13"
+        "Egocentric stereo / fw 1.2.13"
       ],
       [
         "Device id",
@@ -20739,7 +20739,7 @@
     "skill": "Mechanical / Automotive Work",
     "environment": "Restaurant, Workshop",
     "locale": "Hanoi",
-    "rig": "DAS Ego V6",
+    "rig": "Egocentric stereo",
     "durationSec": 34.533,
     "resolution": "stereo pair",
     "fps": 30,
@@ -20778,7 +20778,7 @@
         "k": "difficulty"
       },
       {
-        "t": "DAS Ego V6",
+        "t": "Egocentric stereo",
         "k": "device"
       },
       {
@@ -20847,7 +20847,7 @@
       ],
       [
         "Device",
-        "DAS Ego V6 / fw 2.1.18"
+        "Egocentric stereo / fw 2.1.18"
       ],
       [
         "Device id",
@@ -20930,7 +20930,7 @@
     "skill": "Cleaning & Sanitation",
     "environment": "Hotel Room, Bathroom",
     "locale": "Hanoi",
-    "rig": "Robocap",
+    "rig": "Egocentric stereo",
     "durationSec": 595.771,
     "resolution": "stereo pair",
     "fps": 30,
@@ -20969,7 +20969,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Robocap",
+        "t": "Egocentric stereo",
         "k": "device"
       },
       {
@@ -21038,7 +21038,7 @@
       ],
       [
         "Device",
-        "Robocap / fw 1.2.13"
+        "Egocentric stereo / fw 1.2.13"
       ],
       [
         "Device id",
@@ -21121,7 +21121,7 @@
     "skill": "Clothing & Laundry",
     "environment": "Hotel Room, Indoor Room",
     "locale": "Hanoi",
-    "rig": "Robocap",
+    "rig": "Egocentric stereo",
     "durationSec": 290.903,
     "resolution": "stereo pair",
     "fps": 30,
@@ -21160,7 +21160,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Robocap",
+        "t": "Egocentric stereo",
         "k": "device"
       },
       {
@@ -21229,7 +21229,7 @@
       ],
       [
         "Device",
-        "Robocap / fw 1.2.13"
+        "Egocentric stereo / fw 1.2.13"
       ],
       [
         "Device id",
@@ -21312,7 +21312,7 @@
     "skill": "Organization & Tidying",
     "environment": "Hotel Room",
     "locale": "Hanoi",
-    "rig": "Robocap",
+    "rig": "Egocentric stereo",
     "durationSec": 575,
     "resolution": "stereo pair",
     "fps": 30,
@@ -21350,7 +21350,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Robocap",
+        "t": "Egocentric stereo",
         "k": "device"
       },
       {
@@ -21419,7 +21419,7 @@
       ],
       [
         "Device",
-        "Robocap / fw 1.2.13"
+        "Egocentric stereo / fw 1.2.13"
       ],
       [
         "Device id",
@@ -21502,7 +21502,7 @@
     "skill": "Tool Use & Technical Manipulation",
     "environment": "Hotel Room, Sidewalk",
     "locale": "Hanoi",
-    "rig": "DAS Ego V6",
+    "rig": "Egocentric stereo",
     "durationSec": 554.466,
     "resolution": "stereo pair",
     "fps": 30,
@@ -21541,7 +21541,7 @@
         "k": "difficulty"
       },
       {
-        "t": "DAS Ego V6",
+        "t": "Egocentric stereo",
         "k": "device"
       },
       {
@@ -21610,7 +21610,7 @@
       ],
       [
         "Device",
-        "DAS Ego V6 / fw 2.1.7"
+        "Egocentric stereo / fw 2.1.7"
       ],
       [
         "Device id",
@@ -21693,7 +21693,7 @@
     "skill": "Clothing & Laundry",
     "environment": "Textile factory, Sewing Area",
     "locale": "Hung Yen",
-    "rig": "Robocap",
+    "rig": "Egocentric stereo",
     "durationSec": 686.022,
     "resolution": "stereo pair",
     "fps": 30,
@@ -21732,7 +21732,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Robocap",
+        "t": "Egocentric stereo",
         "k": "device"
       },
       {
@@ -21801,7 +21801,7 @@
       ],
       [
         "Device",
-        "Robocap / fw 1.2.13"
+        "Egocentric stereo / fw 1.2.13"
       ],
       [
         "Device id",
@@ -21884,7 +21884,7 @@
     "skill": "Food Preparation & Cooking",
     "environment": "Metal Fabrication, Kitchen",
     "locale": "Hanoi",
-    "rig": "Robocap",
+    "rig": "Egocentric stereo",
     "durationSec": 241.507,
     "resolution": "stereo pair",
     "fps": 30,
@@ -21923,7 +21923,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Robocap",
+        "t": "Egocentric stereo",
         "k": "device"
       },
       {
@@ -21992,7 +21992,7 @@
       ],
       [
         "Device",
-        "Robocap / fw 1.2.13"
+        "Egocentric stereo / fw 1.2.13"
       ],
       [
         "Device id",
@@ -22075,7 +22075,7 @@
     "skill": "Human Interaction & Handoffs",
     "environment": "Metal Fabrication, Kitchen",
     "locale": "Hanoi",
-    "rig": "Robocap",
+    "rig": "Egocentric stereo",
     "durationSec": 89.621,
     "resolution": "stereo pair",
     "fps": 30,
@@ -22114,7 +22114,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Robocap",
+        "t": "Egocentric stereo",
         "k": "device"
       },
       {
@@ -22183,7 +22183,7 @@
       ],
       [
         "Device",
-        "Robocap / fw 1.2.13"
+        "Egocentric stereo / fw 1.2.13"
       ],
       [
         "Device id",
@@ -22266,7 +22266,7 @@
     "skill": "Organization & Tidying",
     "environment": "Metal Fabrication, Fabrication Floor",
     "locale": "Hanoi",
-    "rig": "Robocap",
+    "rig": "Egocentric stereo",
     "durationSec": 177.142,
     "resolution": "stereo pair",
     "fps": 30,
@@ -22305,7 +22305,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Robocap",
+        "t": "Egocentric stereo",
         "k": "device"
       },
       {
@@ -22374,7 +22374,7 @@
       ],
       [
         "Device",
-        "Robocap / fw 1.2.13"
+        "Egocentric stereo / fw 1.2.13"
       ],
       [
         "Device id",
@@ -22457,7 +22457,7 @@
     "skill": "Retail & Service Operations",
     "environment": "Metal Fabrication, Commercial Kitchen",
     "locale": "Hanoi",
-    "rig": "Robocap",
+    "rig": "Egocentric stereo",
     "durationSec": 598.639,
     "resolution": "stereo pair",
     "fps": 30,
@@ -22496,7 +22496,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Robocap",
+        "t": "Egocentric stereo",
         "k": "device"
       },
       {
@@ -22565,7 +22565,7 @@
       ],
       [
         "Device",
-        "Robocap / fw 1.2.13"
+        "Egocentric stereo / fw 1.2.13"
       ],
       [
         "Device id",
@@ -22648,7 +22648,7 @@
     "skill": "Construction & Building",
     "environment": "Sign Shop, Construction Site",
     "locale": "Hung Yen",
-    "rig": "Robocap",
+    "rig": "Egocentric stereo",
     "durationSec": 508.221,
     "resolution": "stereo pair",
     "fps": 30,
@@ -22687,7 +22687,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Robocap",
+        "t": "Egocentric stereo",
         "k": "device"
       },
       {
@@ -22756,7 +22756,7 @@
       ],
       [
         "Device",
-        "Robocap / fw 1.2.13"
+        "Egocentric stereo / fw 1.2.13"
       ],
       [
         "Device id",
@@ -22839,7 +22839,7 @@
     "skill": "Packing & Bagging",
     "environment": "Shoe Repair Store",
     "locale": "Hanoi",
-    "rig": "Robocap",
+    "rig": "Egocentric stereo",
     "durationSec": 693.038,
     "resolution": "stereo pair",
     "fps": 30,
@@ -22877,7 +22877,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Robocap",
+        "t": "Egocentric stereo",
         "k": "device"
       },
       {
@@ -22946,7 +22946,7 @@
       ],
       [
         "Device",
-        "Robocap / fw 1.2.13"
+        "Egocentric stereo / fw 1.2.13"
       ],
       [
         "Device id",
@@ -23029,7 +23029,7 @@
     "skill": "Assembly & Installation",
     "environment": "Flower Shop",
     "locale": "Hanoi",
-    "rig": "Robocap",
+    "rig": "Egocentric stereo",
     "durationSec": 592.897,
     "resolution": "stereo pair",
     "fps": 30,
@@ -23067,7 +23067,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Robocap",
+        "t": "Egocentric stereo",
         "k": "device"
       },
       {
@@ -23136,7 +23136,7 @@
       ],
       [
         "Device",
-        "Robocap / fw 1.2.13"
+        "Egocentric stereo / fw 1.2.13"
       ],
       [
         "Device id",
@@ -23219,7 +23219,7 @@
     "skill": "Packing & Bagging",
     "environment": "Flower Shop",
     "locale": "Hanoi",
-    "rig": "Robocap",
+    "rig": "Egocentric stereo",
     "durationSec": 656.347,
     "resolution": "stereo pair",
     "fps": 30,
@@ -23257,7 +23257,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Robocap",
+        "t": "Egocentric stereo",
         "k": "device"
       },
       {
@@ -23326,7 +23326,7 @@
       ],
       [
         "Device",
-        "Robocap / fw 1.2.13"
+        "Egocentric stereo / fw 1.2.13"
       ],
       [
         "Device id",
@@ -23409,7 +23409,7 @@
     "skill": "Pick and Place / Object Handling",
     "environment": "Flower Shop",
     "locale": "Hanoi",
-    "rig": "Robocap",
+    "rig": "Egocentric stereo",
     "durationSec": 615.833,
     "resolution": "stereo pair",
     "fps": 30,
@@ -23447,7 +23447,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Robocap",
+        "t": "Egocentric stereo",
         "k": "device"
       },
       {
@@ -23516,7 +23516,7 @@
       ],
       [
         "Device",
-        "Robocap / fw 1.2.13"
+        "Egocentric stereo / fw 1.2.13"
       ],
       [
         "Device id",
@@ -23599,7 +23599,7 @@
     "skill": "Tool Use & Technical Manipulation",
     "environment": "Flower Shop",
     "locale": "Hanoi",
-    "rig": "Robocap",
+    "rig": "Egocentric stereo",
     "durationSec": 575.833,
     "resolution": "stereo pair",
     "fps": 30,
@@ -23637,7 +23637,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Robocap",
+        "t": "Egocentric stereo",
         "k": "device"
       },
       {
@@ -23706,7 +23706,7 @@
       ],
       [
         "Device",
-        "Robocap / fw 1.2.13"
+        "Egocentric stereo / fw 1.2.13"
       ],
       [
         "Device id",
@@ -23789,7 +23789,7 @@
     "skill": "Cleaning & Sanitation",
     "environment": "Cleaning Service, Cleaning Service Area",
     "locale": "Hanoi",
-    "rig": "Robocap",
+    "rig": "Egocentric stereo",
     "durationSec": 586.494,
     "resolution": "stereo pair",
     "fps": 30,
@@ -23828,7 +23828,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Robocap",
+        "t": "Egocentric stereo",
         "k": "device"
       },
       {
@@ -23897,7 +23897,7 @@
       ],
       [
         "Device",
-        "Robocap / fw 1.2.13"
+        "Egocentric stereo / fw 1.2.13"
       ],
       [
         "Device id",

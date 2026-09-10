@@ -149,8 +149,9 @@ Two columns the page does not currently carry and should: **`n_cameras`**, which
 is the tier in one number, and **`city` / `country`**, which is the GEO axis
 Claru states and we approximate with a `Site` string.
 
-`device_type` reads `Ego Rig A` / `Ego Rig B` here where our records say
-`Robocap` / `DAS Ego V6`.
+`device_type` reads `Ego Rig A` / `Ego Rig B` here. Our records carry the
+internal model strings for the same two rigs; the mapping is not written down in
+this repo, per the rule that no rig name appears anywhere in it.
 
 ### 3.2b The camera question is answered
 
@@ -176,8 +177,8 @@ two stereo pairs. `Streams: 4` on those records is consistent with exactly that.
 
 Three more things that pack settles:
 
-- **The customer-facing rig names are `Ego Rig A` and `Ego Rig B`**, not Robocap
-  and DAS Ego V6. Both are six-camera head-mounted platforms differing in sensor
+- **The customer-facing rig names are `Ego Rig A` and `Ego Rig B`**, not the
+  internal model strings. Both are six-camera head-mounted platforms differing in sensor
   resolution, codec and lens model. Our page prints the internal names.
 - **Intrinsics and extrinsics ship in the mcap**: a `camera_info` per image
   topic (Kannala-Brandt on Rig B, double-sphere on Rig A) and `/tf_static` with

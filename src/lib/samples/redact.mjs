@@ -52,9 +52,9 @@ export const DROPPED_LABELS = [
      diversity figure — is a different claim and stays. */
   "Site",
 
-  /* Rig names, on Tam's instruction: "Rig ko ghi tên". `DAS Ego V6 / fw
-     2.1.18` and `kit-7cb9f1ee` tell a buyer nothing they can act on and tell a
-     competitor what we buy. The configuration is the useful half and
+  /* Rig names, on Tam's instruction: "Rig ko ghi tên". A model string plus a
+     firmware revision, and a kit handle, tell a buyer nothing they can act on
+     and tell a competitor what we buy. The configuration is the useful half and
      `CaptureSpec` already states it — six cameras in three stereo pairs, IMU at
      200 Hz — without naming the hardware. */
   "Device",
@@ -65,9 +65,9 @@ export const DROPPED_LABELS = [
  * Rig names outside the spec table.
  *
  * `DROPPED_LABELS` covers the `Device` and `Kit` rows of the record modal, and
- * that is not where most readers saw the name: every card face carries a pill
- * reading `DAS Ego V6`, and the facet rail offers `Robocap`, `DAS Ego V6`,
- * `EgoSense E6` and `GameDataCollector` as filter chips.
+ * that is not where most readers saw the name: every card face carried a pill
+ * printing the model, and the facet rail offered all four internal rig names as
+ * filter chips.
  *
  * Worth stating what that facet is actually filtering, because it is not the
  * rig: all 118 egocentric records are `tier: stereo`, `resolution: stereo
