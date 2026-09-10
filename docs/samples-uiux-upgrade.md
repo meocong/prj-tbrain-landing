@@ -79,7 +79,7 @@ h1: 72px, 3 authored lines
 | 6 | ~~19 eyebrows~~ **WITHDRAWN** | across sections | The mechanical count the checklist prescribes gives 19, but only ONE of them is a section eyebrow (the hero's). The other 18 are functional micro-labels: telemetry field keys, stat labels beside figures, status badges. Deleting them would break working UI to satisfy a grep. Budget 3, actual 1. |
 | 7 | **18 en/em dashes in visible copy** | `capability.ts`, `SampleCatalog.tsx` | All introduced today. `5–10 business days`, `$30–40 / h`, `200–400 Hz` should be hyphens; the two prose em-dashes should be full stops. |
 | 8 | **No hours, anywhere** | whole page | The literal thing customers asked for. Toolbar says "126 of 126 samples / 864.4 minutes", which is a filter readout, not a shelf statement. |
-| 9 | **`Streams: 4` / `stereo pair` on Robocap** | `samples.json` | Robocap is a six-camera rig. 84 records read a tier below what they are. Blocked on the delivery check, not on design. |
+| 9 | **`Streams: 4` / `stereo pair` on Ego Rig A** | `samples.json` | Ego Rig A is a six-camera rig. 84 records read a tier below what they are. Blocked on the delivery check, not on design. |
 | 10 | **Modal is the only way into a record** | `SampleModal.tsx` | No deep link, so a buyer cannot send a colleague one sample. For a page whose job is to replace an emailed spreadsheet, that is the wrong default. |
 
 ### 1.3 Explicitly checked and clean
@@ -176,7 +176,7 @@ page stops being one grid with filters and becomes the catalog Tam described.
 | Now | 1, 4, 5, 6 | nothing |
 | Next | 3, 7 | nothing, but larger |
 | After data | 2, 8 | shelf figures in the repo |
-| Blocked | defect 9 | the Robocap delivery check |
+| Blocked | defect 9 | the Ego Rig A delivery check |
 
 Steps 1, 4, 5 and 6 are one afternoon and remove six of the ten defects.
 
@@ -225,6 +225,6 @@ which is the useful part of running this audit now rather than at the end.
 | Records unaddressable | `/samples?record=<slug>` |
 | 19 eyebrows | withdrawn, the count was wrong |
 
-Still open: the Robocap six-camera relabel, which is blocked on the delivery
+Still open: the Ego Rig A six-camera relabel, which is blocked on the delivery
 check, and per-modality sections with downloadable samples, which are blocked on
 the restructure data.

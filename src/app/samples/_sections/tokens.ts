@@ -86,8 +86,8 @@ export interface Sample {
   modality: "egocentric" | "exocentric" | "teleoperation" | "mocap" | "gaming";
   /**
    * How it was captured. Deliberately unqualified for stereo: the six-camera
-   * rig demonstrated on tbrain-dashboard may be the same Robocap 84 of these
-   * records name, so a camera count here would be a guess with a number on it.
+   * rig demonstrated on tbrain-dashboard may be the same one 84 of these records
+   * were shot on, so a camera count here would be a guess with a number on it.
    */
   tier: "stereo" | "gameplay";
   /** Where it came from. Null on game records, which do not say. */

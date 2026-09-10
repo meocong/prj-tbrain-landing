@@ -316,10 +316,28 @@ export const STATIC_IMAGES: StaticImage[] = [
     "size_bytes": 388564
   },
   {
+    "path": "/images/depth/arrange_01_rgb_depth.jpg",
+    "name": "arrange_01_rgb_depth",
+    "ext": "jpg",
+    "size_bytes": 127974
+  },
+  {
+    "path": "/images/depth/iron_01_rgb_depth.jpg",
+    "name": "iron_01_rgb_depth",
+    "ext": "jpg",
+    "size_bytes": 134171
+  },
+  {
     "path": "/images/depth/pick_up_the_cup_rgb_depth.jpg",
     "name": "pick_up_the_cup_rgb_depth",
     "ext": "jpg",
     "size_bytes": 68957
+  },
+  {
+    "path": "/images/depth/sew_01_rgb_depth.jpg",
+    "name": "sew_01_rgb_depth",
+    "ext": "jpg",
+    "size_bytes": 135797
   },
   {
     "path": "/images/descriptions/arrange_fabric.jpg",
