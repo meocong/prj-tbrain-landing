@@ -34,7 +34,7 @@ export const OTS_SKILLS: OtsSkill[] = [
     slug: "cup",
     name: "Pick up a cup",
     share: "49%",
-    episodes: "~6,321",
+    episodes: "~7,350",
     clips: [
       "ots-cup-1",
       "ots-cup-2",
@@ -57,7 +57,7 @@ export const OTS_SKILLS: OtsSkill[] = [
     slug: "screwdriver",
     name: "Use a screwdriver",
     share: "13%",
-    episodes: "~1,677",
+    episodes: "~1,950",
     clips: [
       "ots-screwdriver-1",
       "ots-screwdriver-2",
@@ -80,7 +80,7 @@ export const OTS_SKILLS: OtsSkill[] = [
     slug: "fridge",
     name: "Pick up an item from a refrigerator",
     share: "8%",
-    episodes: "~1,032",
+    episodes: "~1,200",
     clips: [
       "ots-fridge-1",
       "ots-fridge-2",
@@ -98,7 +98,7 @@ export const OTS_SKILLS: OtsSkill[] = [
     slug: "wipe",
     name: "Wipe a surface",
     share: "5%",
-    episodes: "~645",
+    episodes: "~750",
     clips: [
       "ots-wipe-1",
       "ots-wipe-2",
@@ -114,7 +114,7 @@ export const OTS_SKILLS: OtsSkill[] = [
     // row is scissors, so it is named for what the clips show.
     name: "Cut with scissors",
     share: "1%",
-    episodes: "~129",
+    episodes: "~150",
     clips: [
       "ots-scissors-1",
       "ots-scissors-2",
@@ -144,9 +144,36 @@ export const OTS_UNSAMPLED = [
 ];
 
 export const OTS_CORPUS = {
-  episodes: "12,900+",
-  hours: "~72 h",
+  /* Tam, 2026-09-10: "cái OTS là dùng slide của chị, có 1.2K giờ cơ em ơi… ý
+     chị là sửa lại số cho nó đúng", and, asked directly which of the two
+     sources holds, that the capability sheet is out of date.
+
+     The sheet said 12,900+ episodes and ~72 h, internally consistent at about
+     twenty seconds a clip. The slide says 1,200 hours across roughly 15,000
+     episodes, which is what `Category.shelf` has said in prose all along — and
+     the page was printing both, seventeen times apart, a few sections from each
+     other.
+
+     Everything derived from the total moved with it: the per-skill episode
+     counts below are `share × 15,000`, the same arithmetic the sheet used
+     against its own total. */
+  episodes: "~15,000",
+  hours: "1,200 h",
   domains: "9",
+  /**
+   * NOT RENDERED, and left here rather than deleted so the contradiction is on
+   * the record.
+   *
+   * "10-30 s" came off the same sheet as the 12,900 / 72 h pair and is
+   * consistent with it: 15,000 clips at twenty seconds is 83 hours, not 1,200.
+   * At 1,200 hours across ~15,000 episodes an episode averages 4.8 minutes, so
+   * either this row is stale too or "episode" means something longer than
+   * "clip" on the slide.
+   *
+   * Printing a per-clip figure that cannot be multiplied back into the total
+   * beside it is the thing this whole pass is fixing, so the stat comes off the
+   * row until someone states the real one.
+   */
   clipLength: "10-30 s",
   fps: "30 fps",
   /**
