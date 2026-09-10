@@ -72,11 +72,22 @@ export function MocapDemo() {
           <div
             className="bp-card mt-10 w-full overflow-hidden"
           >
+            {/* Sized to the document inside it, so nothing scrolls twice.
+                At 620px the explorer — header, viewer, timeline, annotation,
+                two hand cards and the full-body canvas — was a 1,607px page in
+                a 620px box, so ~990px of it sat behind a nested scrollbar that
+                also swallows the wheel on the way past. Measured at the widths
+                this iframe actually gets: 1,607px at 1270 wide, 1,579px at
+                1150, 1,490px at 942.
+
+                Below lg the explorer reflows to a single column of ~2,500px,
+                which is not an embed at that point. It keeps a bounded box and
+                the full-screen link below carries it. */}
             <iframe
               src={`${BASE}/pose-explorer.html`}
               title="Egocentric video with synchronised Xsens hand pose"
               loading="lazy"
-              className="block h-[520px] w-full md:h-[620px]"
+              className="block h-[520px] w-full md:h-[620px] lg:h-[1500px] xl:h-[1610px]"
               style={{ border: "none" }}
             />
           </div>
