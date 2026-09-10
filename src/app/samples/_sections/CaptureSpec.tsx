@@ -20,8 +20,8 @@ import { Reveal } from "./Reveal";
  * (the rig split), R5 (annotation depth) and R8/R16 (gaming stating its
  * keystrokes and camera matrices) are all this block.
  */
-export function CaptureSpec({ category }: { category: Category }) {
-  const rows = captureFor(category);
+export function CaptureSpec({ category, tier }: { category: Category; tier?: string }) {
+  const rows = captureFor(category, tier);
   if (rows.length === 0) return null;
 
   return (

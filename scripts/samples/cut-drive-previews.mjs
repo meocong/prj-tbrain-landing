@@ -16,18 +16,19 @@
  * point of an exocentric frame.
  *
  * Usage:
- *   node scripts/samples/cut-drive-previews.mjs [--limit N] [--only <slug>] [--force]
+ *   node scripts/samples/cut-drive-previews.mjs [--set exo|sixcam|handpose]
+ *                                               [--limit N] [--only <slug>] [--force]
  */
 import { readFileSync, existsSync, mkdirSync, statSync } from "node:fs";
 import { execFile } from "node:child_process";
 import { join, resolve } from "node:path";
 import { promisify } from "node:util";
 import { exoFiles } from "./exo-slugs.mjs";
+import { sixcamFaces } from "./sixcam-slugs.mjs";
 
 const run = promisify(execFile);
 
 const ROOT = resolve(import.meta.dirname, "../..");
-const MANIFEST = join(ROOT, "scripts/samples/drive-manifest.json");
 const CLIPS = join(ROOT, "public/samples/clips");
 const POSTERS = join(ROOT, "public/samples/posters");
 
@@ -35,10 +36,43 @@ const args = process.argv.slice(2);
 const LIMIT = args.includes("--limit") ? Number(args[args.indexOf("--limit") + 1]) : Infinity;
 const ONLY = args.includes("--only") ? args[args.indexOf("--only") + 1] : null;
 const FORCE = args.includes("--force");
+const SET = args.includes("--set") ? args[args.indexOf("--set") + 1] : "exo";
 
-/** 16:9 at the same height class the 4:3 library already uses. */
-const W = 854;
-const H = 480;
+/**
+ * The three deliveries this cutter serves, and the frame each one gets.
+ *
+ * Exo is 854x480 because it is 16:9 phone and GoPro footage and letterboxing
+ * it into the library's 4:3 would throw away the width that is the whole point
+ * of an exocentric frame. The two head-rig deliveries go the other way: they
+ * sit in the SAME grid as the 118 stereo cards, which are 4:3, and they arrive
+ * at four different source shapes (1920x1080, 1600x1300, 1280x1040, 1280x720).
+ * One frame for the set beats four, and 4:3 is the one the neighbours use.
+ */
+const SETS = {
+  exo: { manifest: "drive-manifest.json", jobs: exoFiles, w: 854, h: 480 },
+  sixcam: {
+    manifest: "drive-6cam.json",
+    jobs: (m) => sixcamFaces(m, "sixcam"),
+    w: 640,
+    h: 480,
+  },
+  handpose: {
+    manifest: "drive-handpose.json",
+    jobs: (m) => sixcamFaces(m, "handpose"),
+    w: 640,
+    h: 480,
+  },
+};
+
+const set = SETS[SET];
+if (!set) {
+  console.error(`unknown --set ${SET}; expected one of ${Object.keys(SETS).join(", ")}`);
+  process.exit(1);
+}
+
+const MANIFEST = join(ROOT, "scripts/samples", set.manifest);
+const W = set.w;
+const H = set.h;
 const SECONDS = 8;
 
 async function directUrl(id) {
@@ -75,9 +109,9 @@ const manifest = JSON.parse(readFileSync(MANIFEST, "utf8"));
 mkdirSync(CLIPS, { recursive: true });
 mkdirSync(POSTERS, { recursive: true });
 
-/* Slugs come from `exo-slugs.mjs`, which `build-exo-records.mjs` also reads.
-   The two used to derive them separately and disagreed. */
-const jobs = exoFiles(manifest).filter((j) => !ONLY || j.slug === ONLY);
+/* Slugs come from the set's own slug module, which its record builder also
+   reads. Exo used to derive them in two places and the two disagreed. */
+const jobs = set.jobs(manifest).filter((j) => !ONLY || j.slug === ONLY);
 
 /* Four at a time. Nearly all of a job's wall clock is Drive answering range
    requests, so the machine is idle waiting; ffmpeg's own encode of eight
@@ -97,7 +131,7 @@ async function worker() {
   }
 }
 
-async function cut({ id, file, slug }) {
+async function cut({ id, file, slug, inverted }) {
   const clip = join(CLIPS, `${slug}.mp4`);
   const poster = join(POSTERS, `${slug}.jpg`);
   if (!FORCE && existsSync(clip) && existsSync(poster)) {
@@ -114,7 +148,11 @@ async function cut({ id, file, slug }) {
       "-ss", ss, "-i", url,
       "-t", String(SECONDS),
       "-an",
-      "-vf", `scale=${W}:${H}:force_original_aspect_ratio=increase,crop=${W}:${H}`,
+      /* 180° where the delivery was recorded upside down — see `INVERTED` in
+         sixcam-slugs.mjs. First in the chain because it is a correction to the
+         source rather than part of the framing; `crop` centres either way. */
+      "-vf",
+      `${inverted ? "hflip,vflip," : ""}scale=${W}:${H}:force_original_aspect_ratio=increase,crop=${W}:${H}`,
       "-c:v", "libx264", "-preset", "veryfast", "-crf", "28",
       "-movflags", "+faststart",
       clip,
