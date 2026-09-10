@@ -14,10 +14,11 @@ import { Reveal } from "./Reveal";
  * evidence it. Tam, 2026-09-09: "Stereo em phải show 2 cam ít nhất, xong 6 cam
  * stereo".
  *
- * Both clips are cut from one delivery file,
- * `DAS-Ego_20260730120505_master_center_28fa15_ca5a5245.mcap`, at the same
- * instant on each camera. What that file actually carries, read out of it
- * rather than off a spec sheet:
+ * Both clips are cut from ONE delivery file, at the same instant on each
+ * camera. The filename and the optical-frame ids are deliberately not quoted
+ * anywhere in this file: both carry the rig's name, and "Rig ko ghi tên" has no
+ * exception for a source comment. What the file carries, read out of it rather
+ * than off a spec sheet:
  *
  *     /robot0/sensor/camera0..5/compressed   ~4,540 messages each, h264 1600x1300
  *     /robot0/sensor/camera0..5/camera_info  foxglove.CameraCalibration
@@ -28,10 +29,10 @@ import { Reveal } from "./Reveal";
  * else — stream KINDS, on the evidence of the six it lists as one "RGB stereo".
  *
  * The pairing is read from each camera's `camera_info` frame id, not guessed
- * from the numbering: camera0 is `das_left_optical_frame` and camera1 is
- * `das_right_optical_frame`, and so are camera4/camera5. So the pairs are
- * (0,1), (2,3), (4,5), which is what "three stereo pairs" means and why the
- * default view is 0 and 1 rather than any two of the six.
+ * from the numbering: camera0 and camera4 report themselves as the left eye of
+ * a pair, camera1 and camera5 as the right. So the pairs are (0,1), (2,3),
+ * (4,5) — which is what "three stereo pairs" means, and why the default view is
+ * 0 and 1 rather than any two of the six.
  *
  * ## Why two by default and six behind a control
  *
