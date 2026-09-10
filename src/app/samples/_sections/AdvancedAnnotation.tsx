@@ -129,11 +129,26 @@ export function AdvancedAnnotation() {
           ))}
         </dl>
 
-        {/* The instrument itself. `aspect-16/9` rather than a fixed height so it
-            keeps its shape on a phone, and a minimum so the controls inside are
-            not crushed at narrow widths. */}
+        {/* The instrument itself, sized to the document inside it so nothing
+            scrolls twice. `aspect-16/9` gave the dashboard a ~716px box for a
+            1,551px page, so two thirds of it — the whole chain-of-thought
+            column — sat behind a nested scrollbar that also swallows the wheel
+            on the way past.
+
+            Heights are the dashboard's own document, measured at the widths this
+            iframe actually gets: 1,486px at 1152 and wider, 1,612px at 944,
+            1,582px at 736, 1,815px at phone widths — footer excluded. The
+            dashboard's `main` is `min-h-screen`, so it stretches to whatever
+            viewport the iframe gives it and its footer is always pushed one
+            screen down; `scrolling="no"` plus the wrapper's `overflow-hidden`
+            drops that dead strip instead of putting a scrollbar back. The
+            footer is a credit line, and the full explorer is one link up.
+
+            Below 1024px of iframe width the dashboard drops to one column and
+            caps its own chain-of-thought column at 455px with a scrollbar inside
+            it. That is its layout, not this box; no height here removes it. */}
         <div
-          className="mt-10 aspect-16/9 w-full min-h-[420px] overflow-hidden"
+          className="mt-10 h-[1830px] w-full overflow-hidden md:h-[1600px] lg:h-[1640px] xl:h-[1500px]"
           style={{ border: `1px solid ${C.hairline}`, background: C.wash }}
         >
           {near ? (
@@ -141,6 +156,7 @@ export function AdvancedAnnotation() {
               src={DASHBOARD}
               title="Tbrain annotation explorer — head pose, hand pose and episode structure on a real recording"
               loading="lazy"
+              scrolling="no"
               className="h-full w-full"
               style={{ border: 0 }}
               // The embed only has to render and be scrubbed. Nothing here needs
@@ -159,7 +175,8 @@ export function AdvancedAnnotation() {
 
         <p className="mt-4 text-[12px] leading-relaxed" style={{ color: C.textDim }}>
           A real recording with its tracks on it — scrub the timeline to see the pose follow the
-          footage. Every delivery in this category can ship the same tracks.
+          footage, or switch sample and segment at the top. Every delivery in this category can ship
+          the same tracks.
         </p>
       </div>
     </section>

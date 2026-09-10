@@ -17,7 +17,7 @@ import { Reveal } from "./Reveal";
  * is folders with a couple of stills each and an "Open folder", and nothing
  * plays until you have chosen. That is the shape here.
  *
- * The hard rule for this file: **no `<video>`**. Two posters per card at ~55 KB
+ * The hard rule for this file: **no `<video>`**. One poster per card at ~28 KB
  * is the entire media budget of the level, and it is what lets the page hold
  * sixteen folders for less than the old grid spent on four cards. The catalogue
  * still exists, one click down, with its facet rail intact.
@@ -55,24 +55,20 @@ export function SkillFolders({ category }: { category: Category }) {
                 href={`/samples/${category.slug}/${f.slug}`}
                 className="bp-card bp-card-hover group block overflow-hidden"
               >
-                {/* Two stills, side by side. Enough to say what the work looks
-                    like; few enough that sixteen cards stay affordable. */}
-                <div className="grid grid-cols-2 gap-px" style={{ background: C.hairline }}>
-                  {f.faces.map((slug) => (
+                {/* One still, full bleed. The pair read as a split screen — two
+                    unrelated scenes stitched down the middle — where a single
+                    face reads as the folder's cover. Also halves the media the
+                    level costs. */}
+                <div style={{ background: C.wash }}>
+                  {f.faces[0] && (
                     // eslint-disable-next-line @next/next/no-img-element
                     <img
-                      key={slug}
-                      src={posterSrc(slug)}
+                      src={posterSrc(f.faces[0])}
                       alt=""
                       loading="lazy"
                       decoding="async"
-                      className="aspect-4/3 h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                      className="aspect-16/9 h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
                     />
-                  ))}
-                  {/* A folder holding a single record still needs both cells
-                      filled, or the card goes ragged against its neighbours. */}
-                  {f.faces.length === 1 && (
-                    <div className="aspect-4/3 w-full" style={{ background: C.wash }} />
                   )}
                 </div>
 
