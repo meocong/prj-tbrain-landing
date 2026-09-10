@@ -56,7 +56,7 @@ export function AccessPaths() {
                       {path.body}
                     </p>
                     <p
-                      className="mt-4 font-mono text-[10px] uppercase tracking-[0.18em]"
+                      className="bp-mono mt-4 text-[10px]"
                       style={{ color: C.textDim }}
                     >
                       {path.detail}

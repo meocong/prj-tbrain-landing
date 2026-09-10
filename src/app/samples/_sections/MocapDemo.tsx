@@ -39,7 +39,7 @@ export function MocapDemo() {
     <section style={{ background: C.base, color: C.text }}>
       <div className="mx-auto max-w-[1400px] px-4 pb-16 pt-14 lg:px-10 xl:px-16">
         <Reveal variant="rise">
-          <h2 className="font-mono text-[10px] uppercase tracking-[0.18em]" style={{ color: C.textDim }}>
+          <h2 className="bp-mono text-[10px]" style={{ color: C.textDim }}>
             Play the mocap sample
           </h2>
 
@@ -58,7 +58,7 @@ export function MocapDemo() {
                   {f.value}
                 </dd>
                 <dt
-                  className="mt-2 font-mono text-[10px] uppercase tracking-[0.16em]"
+                  className="bp-mono mt-2 text-[10px]"
                   style={{ color: C.textDim }}
                 >
                   {f.label}
@@ -70,8 +70,7 @@ export function MocapDemo() {
           {/* Lazy, because it is a third-party document and this section is below
               the fold on every viewport. */}
           <div
-            className="mt-10 w-full overflow-hidden"
-            style={{ border: `1px solid ${C.hairline}`, background: C.band }}
+            className="bp-card mt-10 w-full overflow-hidden"
           >
             <iframe
               src={`${BASE}/pose-explorer.html`}

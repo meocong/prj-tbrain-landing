@@ -176,7 +176,7 @@ export function SampleModal({
             >
               <div className="min-w-0 flex-1">
                 <p
-                  className="font-mono text-[10px] uppercase tracking-[0.16em]"
+                  className="bp-mono text-[10px]"
                   style={{ color: C.accent }}
                 >
                   {sample.label}
@@ -284,7 +284,7 @@ export function SampleModal({
                   />
                 </div>
                 <p
-                  className="flex-none px-5 py-2 font-mono text-[10px] uppercase tracking-[0.14em]"
+                  className="bp-mono flex-none px-5 py-2 text-[10px]"
                   style={{ color: C.textDim, borderBottom: `1px solid ${C.hairlineSoft}` }}
                 >
                   {sample.preview}
@@ -300,7 +300,7 @@ export function SampleModal({
                   ) : (
                     <>
                       <p
-                        className="mt-4 font-mono text-[10px] uppercase tracking-[0.16em]"
+                        className="bp-mono mt-4 text-[10px]"
                         style={{ color: C.accent }}
                       >
                         In the delivery
@@ -388,7 +388,7 @@ export function SampleModal({
                           style={{ background: C.accent }}
                         />
                         <h3
-                          className="font-mono text-[10px] uppercase tracking-[0.16em]"
+                          className="bp-mono text-[10px]"
                           style={{ color: C.value }}
                         >
                           {section.title}
@@ -451,7 +451,7 @@ export function SampleModal({
                         style={{ background: C.accent }}
                       />
                       <h3
-                        className="font-mono text-[10px] uppercase tracking-[0.16em]"
+                        className="bp-mono text-[10px]"
                         style={{ color: C.value }}
                       >
                         Licence

@@ -22,8 +22,7 @@ export function AccessStrip() {
   if (unlocked) {
     return (
       <div
-        className="mt-10 flex flex-col gap-3 px-5 py-4 sm:flex-row sm:items-center sm:justify-between"
-        style={{ border: `1px solid ${C.hairline}`, background: C.band }}
+        className="bp-card mt-10 flex flex-col gap-3 px-5 py-4 sm:flex-row sm:items-center sm:justify-between"
       >
         <p className="flex items-center gap-2 text-[13px]" style={{ color: C.textMid }}>
           <Check className="h-4 w-4 shrink-0" style={{ color: C.positive }} />
@@ -44,8 +43,7 @@ export function AccessStrip() {
 
   return (
     <div
-      className="mt-10 flex flex-col gap-3 px-5 py-4 sm:flex-row sm:items-center sm:justify-between"
-      style={{ border: `1px solid ${C.hairline}`, background: C.band }}
+      className="bp-card mt-10 flex flex-col gap-3 px-5 py-4 sm:flex-row sm:items-center sm:justify-between"
     >
       <p className="flex items-center gap-2 text-[13px]" style={{ color: C.textMid }}>
         <Lock className="h-4 w-4 shrink-0" style={{ color: C.textDim }} />

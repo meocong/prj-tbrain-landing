@@ -137,7 +137,7 @@ export default async function CategoryPage({
             <div className="mx-auto max-w-[1400px] px-4 pb-4 pt-14 lg:px-10 xl:px-16">
               <Reveal variant="rise">
                 <h2
-                  className="font-mono text-[10px] uppercase tracking-[0.18em]"
+                  className="bp-mono text-[10px]"
                   style={{ color: C.textDim }}
                 >
                   What we run in this category
@@ -157,7 +157,7 @@ export default async function CategoryPage({
                   {axesFor(c.line === "gaming" ? "gaming" : "robotics").map((a) => (
                     <div key={a.key}>
                       <dt
-                        className="font-mono text-[10px] uppercase tracking-[0.18em]"
+                        className="bp-mono text-[10px]"
                         style={{ color: C.textDim }}
                       >
                         {a.label}
@@ -328,7 +328,7 @@ export default async function CategoryPage({
           <div className="mx-auto max-w-[1400px] px-4 pb-24 lg:px-10 xl:px-16">
               <Reveal variant="rise">
               <h2
-                className="font-mono text-[10px] uppercase tracking-[0.18em]"
+                className="bp-mono text-[10px]"
                 style={{ color: C.textDim }}
               >
                 Licence

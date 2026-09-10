@@ -127,7 +127,7 @@ export function CategoryHeader({ category: c }: { category: Category }) {
             {c.held.figure}
           </dd>
           <dt
-            className="mt-2 font-mono text-[9.5px] uppercase tracking-[0.16em]"
+            className="bp-mono mt-2 text-[9.5px]"
             style={{ color: "rgba(255,255,255,0.56)" }}
           >
             {c.held.unit}
@@ -152,7 +152,7 @@ export function CategoryHeader({ category: c }: { category: Category }) {
                 {st.value}
               </dd>
               <dt
-                className="mt-2 font-mono text-[9.5px] uppercase tracking-[0.16em]"
+                className="bp-mono mt-2 text-[9.5px]"
                 style={{ color: "rgba(255,255,255,0.56)" }}
               >
                 {st.label}
@@ -233,7 +233,7 @@ export function CategoryHeader({ category: c }: { category: Category }) {
               {c.held.figure}
             </p>
             <p
-              className="mt-3 font-mono text-[10px] uppercase tracking-[0.16em]"
+              className="bp-mono mt-3 text-[10px]"
               style={{ color: C.textDim }}
             >
               {c.held.unit}

@@ -37,7 +37,7 @@ export function TeleopAnatomy() {
       <div className="mx-auto max-w-[1400px] px-4 pb-16 pt-14 lg:px-10 xl:px-16">
         <Reveal variant="rise">
           <h2
-            className="font-mono text-[10px] uppercase tracking-[0.18em]"
+            className="bp-mono text-[10px]"
             style={{ color: C.textDim }}
           >
             One episode, opened up
@@ -86,8 +86,8 @@ export function TeleopAnatomy() {
                       buyer plans a bimanual policy on a single-arm recording. */}
                   {inert ? (
                     <p
-                      className="mt-3 max-w-2xl px-4 py-3 text-[12.5px] leading-relaxed"
-                      style={{ border: `1px solid ${C.hairline}`, background: C.band, color: C.textMid }}
+                      className="bp-card mt-3 max-w-2xl px-4 py-3 text-[12.5px] leading-relaxed"
+                      style={{ color: C.textMid }}
                     >
                       Held at zero for the whole episode. The action column is exactly 0.0 on every
                       frame and the state never leaves sensor noise, so this side of the robot was
