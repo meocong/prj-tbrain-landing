@@ -10,8 +10,8 @@ not waiting on someone.
 
 | | Item | State | Blocked by |
 |---|---|---|---|
-| A1 | Cut business address / geohash / locators | **done** | — |
-| A2 | Rig names off the page | **done** | — |
+| A1 | Cut business address / geohash / locators | **done at the render layer 2026-09-09, done in the data 2026-09-10** | — |
+| A2 | Rig names off the page | **done at the render layer 2026-09-09, done in the data 2026-09-10** | — |
 | A3 | Meta and MCAP stay behind a passcode | **already true** | — |
 | B1 | Match the Tbrain homepage theme | **done** | — |
 | B2 | Clone the `/data/physical-ai` gradient style | **done** | — |
@@ -47,6 +47,40 @@ Production build green: compiled in 13.4s, 65 static pages, all five category
 routes among them. Three CMS fetches fail during the build (`/services`,
 `/expert-os`, `/case-studies`) and fall back to cached content — unrelated pages,
 and a sandbox with no network rather than a regression.
+
+## The verification that was not enough — read this before signing off a privacy item
+
+A1 and A2 were verified by fetching every route and grepping the HTML. That
+check passes and always would have, because it never looks at the JavaScript.
+
+`samples.json` is imported by three CLIENT components — `HeroSamples`,
+`SampleCatalog`, `CategoryHeader` — so the file is bundled and served whole to
+every visitor. `redact.mjs` filters what is PRINTED; it cannot touch what is
+SHIPPED. Measured on a production build on 2026-09-10, in `.next/static`:
+
+    740  internal rig names, each beside the record it captured
+    472  raw `capture__<date>_<time>__<hash>` session handles
+    118  Site · Geohash · NAICS · Environment id · Device · Device id ·
+         Kit · Episode uuid — each
+     68  Business, carrying trading name and commune
+    118  locale, down to `Xa Van Giang` at commune level
+
+Every value both items existed to suppress, readable from DevTools.
+
+Two more were rendered outright, on `/samples/s`: a paragraph naming a rig in a
+file-size example, and the per-record line printing `s.rig`. Behind a passcode
+is still in front of a customer.
+
+**The check that works:**
+
+    npm run build
+    grep -rhoiE "robocap|das ego|egosense|gamedatacollector" .next/static | wc -l
+    grep -rhoE "capture__[0-9]{8}_[0-9]{6}" .next/static | wc -l
+
+Both must be 0. `scripts/samples/redact-data.mjs` applies `publicSpec()` to the
+data file so the two cannot drift, and `prebuild` runs it with `--check`, so a
+regenerated `samples.json` that reintroduces a locating row now fails the build
+rather than shipping.
 
 ## Three defects found by reading the rendered page, not the source
 

@@ -72,11 +72,15 @@ on buttons. Adopt it: **cards 12px (`.bp-card`), tiles `rounded-xl`, buttons
 `rounded-full`, media square.** The media-square rule survives, so the clip grid
 does not change.
 
-**A4. One section rhythm.**
-Four rhythms today. Standardise on the site's: `py-24` for a normal section,
-`py-32` for a major one. `RigViews` and `DeliveryLayers` were hand-tuned to
-`py-16 md:py-20` during the F1 trim and will get slightly taller; that is the
-cost of matching, and it is small.
+**A4. One section rhythm. Deferred, and it conflicts with F1.**
+Nine rhythms across sixteen section containers, measured 2026-09-10 — more than
+the four counted here. But standardising raises every one of them: `pb-16 pt-14`
+is 120px and `py-24` is 192px, so the five sections carrying it grow by 360px
+between them, and `py-16 md:py-20` nearly doubles.
+
+Tam's F1 ask was *"trang chủ ngắn gọn súc tích"* and `/samples/egocentric` is
+already 16,217px. Making every section taller is the wrong trade while shortening
+is the live instruction. Revisit once C1's large cards settle the page heights.
 
 **Done when:** `grep -c "bp-mono\|bp-card" src/app/samples` is not 1, and no
 samples file hand-rolls the mono-label utility triplet.
@@ -99,10 +103,16 @@ card and never on bare grid.
 Two 14px registration marks per section. Cheap, and it is half of why the
 physical-ai page reads as a technical drawing.
 
-**B3. `.bp-aurora` behind the front-door hero.**
-Already what `HeroWash` approximates by hand with two radial washes. Swap to the
-real class and delete the approximation — it drifts, it is reduced-motion aware,
-and it will follow if the site retunes it.
+**B3. ~~`.bp-aurora` behind the front-door hero.~~ Do not do this.**
+
+Checked 2026-09-10 and the premise is wrong. `HeroWash` does not approximate
+`.bp-aurora`; it is a copy of `HeroPhysical.tsx:46-48`, which paints its own
+inline radials at `rgba(16,185,129,0.26)` and `rgba(108,60,244,0.22)` under
+`mixBlendMode: screen`. The physical-ai hero does not use `.bp-aurora` at all.
+
+`.bp-aurora` is a different, subtler treatment — 14% and 13%, no blend mode —
+used in `kit.tsx`. Swapping would make the samples hero stop matching the hero
+it was written to match, which is the whole of *"clone style y hệt"*.
 
 **B4. `ScrollProgress`.** One import, top of both samples pages; physical-ai and
 terminal-bench both have it and `/samples` does not.
@@ -179,3 +189,25 @@ The record modal, the facet rail and the telemetry instrument have no
 counterpart anywhere on the site. They keep their own layout. Alignment here
 means they are painted in blueprint's colours, sit on `.bp-card`, and label with
 `.bp-mono` — not that they become sheets.
+
+---
+
+## Shipped 2026-09-10
+
+Wave B in full — `.bp-grid` and `.bp-frame` on `CategoryChooser`, `Coverage`,
+`TwoRoutes`, `AccessPaths`; `ScrollProgress` on both routes. B3 killed, above.
+
+One trap worth keeping: those sections carried `style={{ background: C.base }}`,
+and `background` is the SHORTHAND — it resets `background-image` to none, so a
+`.bp-grid` layered over it paints the colour and swallows the lattice. The
+inline declaration has to go; `--sm-base` is an alias of `--bp-bg` so the colour
+is unchanged. `AccessPaths` keeps its band step as longhand `backgroundColor`.
+
+Wave A partly. A1: 42 of 46 hand-rolled mono triplets folded into `.bp-mono`;
+the four left carry `0.12em` and `0.2em`, which are not that label wearing a
+different number. A2: `CategoryChooser` tiles plus six content boxes, which
+could not wait for their wave — the grid shipped in B, and blueprint's rule is
+that text sits on a card and never on the bare grid. `RigViews` is deliberately
+not a card: it frames media, and "media is square" survives A3.
+
+Still open: A3, C1, D1, D2.
