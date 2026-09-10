@@ -51,7 +51,8 @@ export function OtsShelf() {
               { v: OTS_CORPUS.episodes, l: "Episodes" },
               { v: OTS_CORPUS.hours, l: "Total footage" },
               { v: OTS_CORPUS.domains, l: "Skill domains" },
-              { v: OTS_CORPUS.clipLength, l: "Per clip" },
+              /* "Per clip" is gone: at 1,200 h over ~15,000 episodes a clip
+                 cannot also be 10-30 s. See the note on `clipLength`. */
               { v: OTS_CORPUS.fps, l: "Frame rate" },
               { v: "Household · daily", l: "Setting" },
             { v: OTS_CORPUS.lead, l: "Lead time" },
