@@ -156,6 +156,31 @@ export function captureFor(c: Category): CaptureRow[] {
   const shutter = tally(rows, "Shutter", (v) => v.replace(/\s*shutter$/i, ""));
   if (shutter) out.push({ label: "Shutter", value: shutter });
 
+  /* Gaming states its own two facts, which the doc asks for by name: "Samples
+     say how many games etc. / Include keyboard strokes / Camera matrices."
+     Keystrokes already ride in `universal`; the title count and the pose
+     coverage did not exist as rows at all.
+
+     Pose is counted rather than asserted because it is not uniform — some
+     titles export a camera matrix per frame and some do not, and a buyer
+     training anything spatial needs to know which before they licence. */
+  if (c.modality === "gaming") {
+    const titles = uniq(rows.map((r) => cell(r, "Title") ?? ""));
+    if (titles.length) {
+      out.push({ label: "Titles", value: `${titles.length} games, one session each` });
+    }
+    const posed = rows.filter((r) => /populated/i.test(cell(r, "Camera pose") ?? "")).length;
+    if (posed) {
+      out.push({
+        label: "Camera matrices",
+        value:
+          posed === rows.length
+            ? "Per-frame camera pose on every session"
+            : `Per-frame camera pose on ${posed} of ${rows.length} sessions`,
+      });
+    }
+  }
+
   out.push({ label: "On every frame", value: universal.join(" · ") });
 
   /* Nominal, not measured. The records carry a per-file reading — 197.3 to 203
