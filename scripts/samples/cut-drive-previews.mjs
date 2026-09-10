@@ -24,7 +24,7 @@ import { execFile } from "node:child_process";
 import { join, resolve } from "node:path";
 import { promisify } from "node:util";
 import { exoFiles } from "./exo-slugs.mjs";
-import { sixcamFaces } from "./sixcam-slugs.mjs";
+import { sixcamViews } from "./sixcam-slugs.mjs";
 
 const run = promisify(execFile);
 
@@ -47,18 +47,23 @@ const SET = args.includes("--set") ? args[args.indexOf("--set") + 1] : "exo";
  * sit in the SAME grid as the 118 stereo cards, which are 4:3, and they arrive
  * at four different source shapes (1920x1080, 1600x1300, 1280x1040, 1280x720).
  * One frame for the set beats four, and 4:3 is the one the neighbours use.
+ *
+ * The six-camera cells are cut smaller because six of them share the width two
+ * eyes get: a cell is drawn around 225 CSS px on a card spanning two columns
+ * of the catalogue grid, so 480 wide is already generous and 640 would be six
+ * files of wasted bytes per task.
  */
 const SETS = {
   exo: { manifest: "drive-manifest.json", jobs: exoFiles, w: 854, h: 480 },
   sixcam: {
     manifest: "drive-6cam.json",
-    jobs: (m) => sixcamFaces(m, "sixcam"),
-    w: 640,
-    h: 480,
+    jobs: (m) => sixcamViews(m, "sixcam"),
+    w: 480,
+    h: 360,
   },
   handpose: {
     manifest: "drive-handpose.json",
-    jobs: (m) => sixcamFaces(m, "handpose"),
+    jobs: (m) => sixcamViews(m, "handpose"),
     w: 640,
     h: 480,
   },

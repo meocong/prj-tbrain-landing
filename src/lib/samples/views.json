@@ -1,0 +1,92 @@
+{
+  "handpose-fabric-sewing": [
+    "right"
+  ],
+  "handpose-garment-sewing": [
+    "right"
+  ],
+  "handpose-pineapple-cutting": [
+    "right"
+  ],
+  "handpose-room-cleaning": [
+    "right"
+  ],
+  "handpose-shoe-sewing": [
+    "right"
+  ],
+  "handpose-wood-grinding": [
+    "right"
+  ],
+  "handpose-zipper-sewing": [
+    "right"
+  ],
+  "sixcam-engine-working": [
+    "primary-right",
+    "mid-left",
+    "mid-right",
+    "outer-left",
+    "outer-right"
+  ],
+  "sixcam-fabric-sewing": [
+    "primary-right",
+    "mid-left",
+    "mid-right",
+    "outer-left",
+    "outer-right"
+  ],
+  "sixcam-garment-sewing": [
+    "primary-right",
+    "mid-left",
+    "mid-right",
+    "outer-right"
+  ],
+  "sixcam-panel-installation": [
+    "primary-right",
+    "mid-left",
+    "mid-right",
+    "outer-left",
+    "outer-right"
+  ],
+  "sixcam-pineapple-cutting": [
+    "primary-right",
+    "mid-left",
+    "mid-right",
+    "outer-left",
+    "outer-right"
+  ],
+  "sixcam-room-cleaning": [
+    "primary-right",
+    "mid-left",
+    "mid-right",
+    "outer-left",
+    "outer-right"
+  ],
+  "sixcam-shoe-sewing": [
+    "primary-right",
+    "mid-left",
+    "mid-right",
+    "outer-left",
+    "outer-right"
+  ],
+  "sixcam-wood-grinding": [
+    "primary-right",
+    "mid-left",
+    "mid-right",
+    "outer-left",
+    "outer-right"
+  ],
+  "sixcam-wrapping-selecting": [
+    "primary-right",
+    "mid-left",
+    "mid-right",
+    "outer-left",
+    "outer-right"
+  ],
+  "sixcam-zipper-sewing": [
+    "primary-right",
+    "mid-left",
+    "mid-right",
+    "outer-left",
+    "outer-right"
+  ]
+}

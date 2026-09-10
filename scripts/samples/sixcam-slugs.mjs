@@ -128,9 +128,77 @@ export function sixcamTasks(manifest, kind = "sixcam") {
     });
 }
 
-/** One cut job per task: the face lens, keyed by the record's own slug. */
-export function sixcamFaces(manifest, kind = "sixcam") {
-  return sixcamTasks(manifest, kind)
-    .filter((t) => t.face)
-    .map((t) => ({ id: t.face.id, file: t.face.file, slug: t.slug, inverted: t.inverted }));
+/**
+ * Every view a card shows, as one cut job each.
+ *
+ * A card for a six-camera rig that plays ONE lens is an advertisement for a
+ * one-camera rig. Thạch, 2026-09-11: "6 cam thì phải show cả 6 cam chứ sao
+ * samples lại là 1 cam nhỉ" — and Tam said the same thing about the pair back
+ * on 2026-09-09, "Stereo em phải show 2 cam ít nhất, xong 6 cam stereo", which
+ * is what `RigViews` was built for. This puts the same argument on the tile,
+ * where a reader browsing the grid actually meets it.
+ *
+ * So the 6-cam delivery stages six clips per task and the card lays them out
+ * as the rig is worn. The hand-pose delivery stages the overlay pair: its six
+ * raw lenses are the same rig shown one card up, and what THIS set adds is the
+ * annotation, so the tile shows the annotation in stereo.
+ *
+ *     public/samples/clips/<slug>.mp4               the base view
+ *     public/samples/clips/<slug>-<lens>.mp4        every other view
+ *
+ * The base carries no suffix because `<slug>.mp4` is the file every other part
+ * of the catalogue already expects to exist — `preview`, the record modal, the
+ * `STANDIN` face on the configuration card. Six-up is a layout on top of that
+ * convention, not a replacement for it.
+ */
+const LENS_SUFFIX = {
+  primary_left: "",
+  primary_right: "-primary-right",
+  mid_left: "-mid-left",
+  mid_right: "-mid-right",
+  outer_left: "-outer-left",
+  outer_right: "-outer-right",
+};
+
+/** The overlay pair, on the `-right` convention `index-views.mjs` already reads. */
+const OVERLAY_SUFFIX = { left: "", right: "-right" };
+
+export function sixcamViews(manifest, kind = "sixcam") {
+  const jobs = [];
+
+  for (const t of sixcamTasks(manifest, kind)) {
+    const byName = new Map(
+      Object.entries(manifest.files)
+        .filter(([, f]) => f.path?.[0] === t.task && !f.error && f.durationSec)
+        .map(([id, file]) => [base(file.name), { id, file }]),
+    );
+
+    if (kind === "handpose") {
+      /* Whichever pair the renderer chose — `mid` on five tasks, `primary` on
+         two. It is the pair that could see the hands, which is why it is the
+         one with an overlay on it. */
+      const pair = overlayPair([...byName.keys()]);
+      for (const [eye, suffix] of Object.entries(OVERLAY_SUFFIX)) {
+        const f = pair && byName.get(`hand-pose_${pair}_${eye}`);
+        if (f) jobs.push({ id: f.id, file: f.file, slug: `${t.slug}${suffix}`, inverted: false });
+      }
+      continue;
+    }
+
+    for (const [lens, suffix] of Object.entries(LENS_SUFFIX)) {
+      const f = byName.get(lens);
+      if (f) jobs.push({ id: f.id, file: f.file, slug: `${t.slug}${suffix}`, inverted: t.inverted });
+    }
+  }
+
+  return jobs;
+}
+
+/** "primary" | "mid" | "outer" — which pair the hand-pose overlay was rendered on. */
+export function overlayPair(names) {
+  for (const n of names) {
+    const m = /^hand-pose_(primary|mid|outer)_/.exec(n);
+    if (m) return m[1];
+  }
+  return null;
 }
