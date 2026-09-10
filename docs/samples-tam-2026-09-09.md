@@ -138,7 +138,7 @@ from a future card. Strip it at the generator, not at the render layer.
 
 > "Rig ko ghi tên"
 
-**Done.** `Device` (`DAS Ego V6 / fw 2.1.18`) and `Kit` (`kit-7cb9f1ee`) dropped
+**Done.** `Device` (`Ego Rig B / fw 2.1.18`) and `Kit` (`kit-7cb9f1ee`) dropped
 from the spec table; the `device` pill dropped from the card face and the modal
 header; `s.rig` removed from the free-text search haystack, because a name
 nobody can see that still returns its records when typed is the same disclosure

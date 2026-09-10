@@ -145,7 +145,12 @@ export default async function SamplesVaultPage() {
                           {s.title}
                         </p>
                         <p className="mt-1 font-mono text-[11.5px]" style={{ color: C.textDim }}>
-                          {s.slug} · {s.rig} · {s.resolution} · {s.fps} fps
+                          {/* No `s.rig`. This page is behind a passcode, not off
+                              the site: it is the first thing a customer sees
+                              after we hand them a code, and "Rig ko ghi tên"
+                              has no gated exception. The configuration is what
+                              a buyer can act on and it is already here. */}
+                          {s.slug} · {s.resolution} · {s.fps} fps
                         </p>
                       </div>
 
@@ -196,9 +201,9 @@ export default async function SamplesVaultPage() {
 
         <p className="mt-14 max-w-2xl text-[13px] leading-relaxed" style={{ color: C.textDim }}>
           Full delivery files marked <span style={{ color: C.textMid }}>on request</span> are staged
-          per engagement rather than kept hot in the bucket — a single Robocap segment is 1.8 GB and
-          the raw footage goes through a face-blur pass before it leaves us. Reply to the thread you
-          got this passcode on and we will stage them against this same code.
+          per engagement rather than kept hot in the bucket — a single segment is 1.8 GB and the raw
+          footage goes through a face-blur pass before it leaves us. Reply to the thread you got this
+          passcode on and we will stage them against this same code.
         </p>
       </main>
 

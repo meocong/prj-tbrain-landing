@@ -13,7 +13,7 @@
  *             the gate has something to open on day one.
  *   metadata  the sidecar on its own, for people who want to read the record
  *             before committing to a transfer.
- *   full      the delivery file itself (.mcap, the Robocap segment, the game
+ *   full      the delivery file itself (.mcap, the egocentric segment, the game
  *             session). These are 180 MB to 1.8 GB and are not in this repo;
  *             the manifest carries a null object until someone uploads them,
  *             and the route answers `not_staged` rather than signing a URL for
