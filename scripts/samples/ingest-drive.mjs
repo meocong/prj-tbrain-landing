@@ -47,12 +47,33 @@ const run = promisify(execFile);
  * which is exactly what the catalogue needs to say. Anything not recognised as
  * one is treated as a person.
  */
+/**
+ * An episode folder in a delivery package, which carries two things at once:
+ *
+ *   02__fabric-sewing__capture__20260822_072004__8009793a__seg_001
+ *      ^^^^^^^^^^^^^^          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ *      the task — catalogue    the session handle — exactly what
+ *      data, keep it           `redactFile` in redact.mjs strips
+ *
+ * The first pass hashed the whole string, because it matched nothing in
+ * STRUCTURAL and so was treated as a person. That threw the task away with the
+ * handle and left every episode filed under `operator-<hash>` with no way to
+ * tell fabric-sewing from wood-grinding.
+ */
+const EPISODE = /^\d+__([a-z0-9][a-z0-9-]*)__capture__/i;
+
+/** Folder names that describe the shoot or the package, never a person. */
 const STRUCTURAL =
-  /^(?:\w{3} \d{1,2} \d{4}|.*(?:office|indoor|urban|walking|cycling|vehicular|navigation|environment|outdoor|studio|household|factory).*)$/i;
+  /^(?:\w{3} \d{1,2} \d{4}|video|videos|clips|scripts|meta|metadata|raw|export|exports|.*(?:office|indoor|urban|walking|cycling|vehicular|navigation|environment|outdoor|studio|household|factory|sewing|grinding|cutting|cleaning|installation|selecting|working).*)$/i;
 
 function safeSegment(name) {
-  if (STRUCTURAL.test(name.trim())) return name.trim();
-  return `operator-${createHash("sha256").update(name.trim().toLowerCase()).digest("hex").slice(0, 6)}`;
+  const t = name.trim();
+  const ep = EPISODE.exec(t);
+  // The task alone. The timestamp, the session hash and the segment index all
+  // go, which is what `redactFile` does to the same string in the spec table.
+  if (ep) return ep[1].toLowerCase();
+  if (STRUCTURAL.test(t)) return t;
+  return `operator-${createHash("sha256").update(t.toLowerCase()).digest("hex").slice(0, 6)}`;
 }
 
 const safePath = (segments) => segments.map(safeSegment);
