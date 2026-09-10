@@ -49,7 +49,7 @@ export function Coverage() {
     <section className="bp-grid bp-frame relative" style={{ color: C.text }}>
       <div className="mx-auto max-w-[1400px] px-4 pb-20 pt-20 lg:px-10 xl:px-16">
         <Reveal variant="rise">
-          <h2 className="font-mono text-[10px] uppercase tracking-[0.18em]" style={{ color: C.textDim }}>
+          <h2 className="bp-mono text-[10px]" style={{ color: C.textDim }}>
             Who is on the other side of the camera
           </h2>
 
@@ -70,7 +70,7 @@ export function Coverage() {
             {COUNTS.map((c) => (
               <div key={c.label} style={{ borderTop: `1px solid ${C.hairline}` }} className="pt-3">
                 <dt
-                  className="font-mono text-[10px] uppercase tracking-[0.18em]"
+                  className="bp-mono text-[10px]"
                   style={{ color: C.textDim }}
                 >
                   {c.label}

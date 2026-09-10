@@ -231,7 +231,7 @@ export function LiveTelemetry({
   return (
     <div ref={hostRef} className="mt-4">
       <div className="flex items-baseline justify-between gap-3">
-        <p className="font-mono text-[10px] uppercase tracking-[0.16em]" style={{ color: C.accent }}>
+        <p className="bp-mono text-[10px]" style={{ color: C.accent }}>
           Live record
         </p>
         <p className="font-mono text-[10px]" style={{ color: C.textDim }}>

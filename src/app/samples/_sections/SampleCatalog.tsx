@@ -229,7 +229,7 @@ function CopyRecord({ sample }: { sample: Sample }) {
     <button
       type="button"
       onClick={copy}
-      className="inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 font-mono text-[10px] uppercase tracking-[0.16em] transition-colors"
+      className="bp-mono inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-[10px] transition-colors"
       style={{ border: `1px solid ${C.hairline}`, color: done ? C.accent : C.textMid }}
     >
       {done ? <Check className="h-3 w-3" /> : <Copy className="h-3 w-3" />}
@@ -270,7 +270,7 @@ function Card({ sample, onOpen }: { sample: Sample; onOpen: () => void }) {
           clamp at two, so every card in a row opens its media on the same
           baseline. */}
       <p
-        className="line-clamp-2 min-h-[30px] pb-2.5 pt-3 font-mono text-[10px] uppercase leading-[1.5] tracking-[0.14em]"
+        className="bp-mono line-clamp-2 min-h-[30px] pb-2.5 pt-3 text-[10px] leading-[1.5]"
         style={{ color: C.textDim }}
       >
         {sample.preview}
@@ -317,7 +317,7 @@ function Card({ sample, onOpen }: { sample: Sample; onOpen: () => void }) {
       </button>
 
       <div className="flex flex-1 flex-col px-1 pb-6 pt-5">
-        <p className="font-mono text-[10px] uppercase tracking-[0.16em]" style={{ color: C.accent }}>
+        <p className="bp-mono text-[10px]" style={{ color: C.accent }}>
           {sample.label}
         </p>
         <button
@@ -363,7 +363,7 @@ function Card({ sample, onOpen }: { sample: Sample; onOpen: () => void }) {
             type="button"
             onClick={open}
             aria-haspopup="dialog"
-            className="inline-flex items-center gap-1.5 font-mono text-[10px] uppercase tracking-[0.16em] transition-colors"
+            className="bp-mono inline-flex items-center gap-1.5 text-[10px] transition-colors"
             style={{ color: C.textDim }}
           >
             {sample.telemetry ? "Full metadata and live record" : "Full metadata"}
@@ -432,7 +432,7 @@ function CapabilityPanel({ modality, onClear }: { modality: string; onClear: () 
 
   return (
     <div className="py-10">
-      <p className="font-mono text-[10px] uppercase tracking-[0.16em]" style={{ color: C.accent }}>
+      <p className="bp-mono text-[10px]" style={{ color: C.accent }}>
         No published samples yet
       </p>
       <h3
@@ -448,8 +448,8 @@ function CapabilityPanel({ modality, onClear }: { modality: string; onClear: () 
 
       {running && (
         <p
-          className="mt-5 max-w-xl px-4 py-3 text-[12.5px] leading-relaxed"
-          style={{ border: `1px solid ${C.hairline}`, background: C.band, color: C.textMid }}
+          className="bp-card mt-5 max-w-xl px-4 py-3 text-[12.5px] leading-relaxed"
+          style={{ color: C.textMid }}
         >
           {running}
         </p>
@@ -533,7 +533,7 @@ function RailGroup({
       className={first ? "pb-5 pt-6" : "py-5"}
       style={first ? undefined : { borderTop: `1px solid ${C.hairline}` }}
     >
-      <p className="mb-2 font-mono text-[10px] uppercase tracking-[0.16em]" style={{ color: C.textDim }}>
+      <p className="bp-mono mb-2 text-[10px]" style={{ color: C.textDim }}>
         {title}
       </p>
       <div className="-mx-2.5 space-y-0.5">{children}</div>
@@ -934,7 +934,7 @@ export function SampleCatalog({ modality }: { modality: string }) {
                   <button
                     type="button"
                     onClick={clear}
-                    className="inline-flex items-center gap-1 font-mono text-[10px] uppercase tracking-[0.16em]"
+                    className="bp-mono inline-flex items-center gap-1 text-[10px]"
                     style={{ color: C.textDim }}
                   >
                     <X className="h-3 w-3" />

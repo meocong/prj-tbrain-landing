@@ -43,7 +43,7 @@ export function CoverageChart({ modality }: { modality: string }) {
     <section style={{ background: C.base, color: C.text }}>
       <div className="mx-auto max-w-[1400px] px-4 pb-10 pt-14 lg:px-10 xl:px-16">
         <Reveal variant="rise">
-          <h2 className="font-mono text-[10px] uppercase tracking-[0.18em]" style={{ color: C.textDim }}>
+          <h2 className="bp-mono text-[10px]" style={{ color: C.textDim }}>
             What this category is made of
           </h2>
 
@@ -70,7 +70,7 @@ function Axis({ axis }: { axis: CoverageAxis }) {
     <div style={{ borderTop: `1px solid ${C.hairline}` }} className="pt-3">
       <div className="flex items-baseline justify-between gap-3">
         <span
-          className="font-mono text-[10px] uppercase tracking-[0.18em]"
+          className="bp-mono text-[10px]"
           style={{ color: C.textDim }}
         >
           {axis.label}

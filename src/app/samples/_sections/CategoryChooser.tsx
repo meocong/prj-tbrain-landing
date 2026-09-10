@@ -79,7 +79,7 @@ export function CategoryChooser() {
           return (
             <div key={line.key} className={li === 0 ? "mt-14" : "mt-16"}>
               <h3
-                className="font-mono text-[10px] uppercase tracking-[0.18em]"
+                className="bp-mono text-[10px]"
                 style={{ color: C.textDim }}
               >
                 {line.label}
@@ -239,7 +239,7 @@ function FaceBand({ slugs, reduce }: { slugs: string[]; reduce: boolean }) {
           )}
           {i === 0 && (
             <span
-              className="pointer-events-none absolute bottom-2 left-2 px-1.5 py-0.5 font-mono text-[9px] uppercase tracking-[0.14em] opacity-0 transition-opacity group-hover:opacity-100"
+              className="bp-mono pointer-events-none absolute bottom-2 left-2 px-1.5 py-0.5 text-[9px] opacity-0 transition-opacity group-hover:opacity-100"
               style={{ background: OVER_MEDIA.scrim, color: OVER_MEDIA.text }}
             >
               Preview
@@ -287,7 +287,7 @@ function HeldBand({ held, slug }: { held?: { figure: string; unit: string }; slu
             {held.figure}
           </span>
           <span
-            className="relative mt-2 font-mono text-[10px] uppercase tracking-[0.16em]"
+            className="bp-mono relative mt-2 text-[10px]"
             style={{ color: C.textDim }}
           >
             {held.unit}

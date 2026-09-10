@@ -59,7 +59,7 @@ export function RigViews() {
           <div className="flex flex-wrap items-end justify-between gap-x-10 gap-y-4">
             <div className="max-w-2xl">
               <h2
-                className="font-mono text-[10px] uppercase tracking-[0.18em]"
+                className="bp-mono text-[10px]"
                 style={{ color: C.textDim }}
               >
                 What the rig sees
@@ -152,7 +152,7 @@ export function RigViews() {
               ).map((t) => (
                 <div key={t} className="min-w-0">
                   <span
-                    className="inline-block max-w-full truncate px-1.5 py-0.5 font-mono text-[9px] uppercase tracking-[0.14em]"
+                    className="bp-mono inline-block max-w-full truncate px-1.5 py-0.5 text-[9px]"
                     style={{ background: OVER_MEDIA.scrim, color: OVER_MEDIA.text }}
                   >
                     {t}

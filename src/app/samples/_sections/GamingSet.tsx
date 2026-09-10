@@ -43,7 +43,7 @@ export function GamingSet() {
       <div className="mx-auto max-w-[1400px] px-4 pb-16 pt-14 lg:px-10 xl:px-16">
         <Reveal variant="rise">
           <h2
-            className="font-mono text-[10px] uppercase tracking-[0.18em]"
+            className="bp-mono text-[10px]"
             style={{ color: C.textDim }}
           >
             What a game session carries
@@ -119,7 +119,7 @@ export function GamingSet() {
               never showed one. */}
           <div className="mt-14">
             <h3
-              className="font-mono text-[10px] uppercase tracking-[0.18em]"
+              className="bp-mono text-[10px]"
               style={{ color: C.textDim }}
             >
               What the player did · {titles[0].span.toFixed(1)} s of one session

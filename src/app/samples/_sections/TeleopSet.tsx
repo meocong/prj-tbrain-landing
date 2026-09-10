@@ -74,7 +74,7 @@ export function TeleopSet() {
     <section style={{ background: C.base, color: C.text }}>
       <div className="mx-auto max-w-[1400px] px-4 pb-16 pt-14 lg:px-10 xl:px-16">
         <Reveal variant="rise">
-          <h2 className="font-mono text-[10px] uppercase tracking-[0.18em]" style={{ color: C.textDim }}>
+          <h2 className="bp-mono text-[10px]" style={{ color: C.textDim }}>
             Play the set
           </h2>
 
@@ -88,8 +88,8 @@ export function TeleopSet() {
               rig; the set below is a robot. Both are teleoperation and the page
               named only one of them for weeks. */}
           <p
-            className="mt-4 max-w-2xl px-4 py-3 text-[13px] leading-relaxed"
-            style={{ border: `1px solid ${C.hairline}`, background: C.band, color: C.textMid }}
+            className="bp-card mt-4 max-w-2xl px-4 py-3 text-[13px] leading-relaxed"
+            style={{ color: C.textMid }}
           >
             This set is the robot side: an <span className="font-mono">openarm_gripper_follower</span>,
             two arms, seven joints each plus a gripper. The configuration priced above it — Egocentric
@@ -116,7 +116,7 @@ export function TeleopSet() {
                   style={{ aspectRatio: "4 / 3", objectFit: "cover" }}
                 />
                 <span
-                  className="pointer-events-none absolute left-2 top-2 px-1.5 py-0.5 font-mono text-[9.5px] uppercase tracking-[0.14em]"
+                  className="bp-mono pointer-events-none absolute left-2 top-2 px-1.5 py-0.5 text-[9.5px]"
                   style={{ background: OVER_MEDIA.scrim, color: OVER_MEDIA.text }}
                 >
                   {v.label}
@@ -129,7 +129,7 @@ export function TeleopSet() {
             <button
               type="button"
               onClick={toggle}
-              className="rounded-full px-5 py-2 font-mono text-[11px] uppercase tracking-[0.16em] transition-transform active:scale-[0.98]"
+              className="bp-mono rounded-full px-5 py-2 text-[11px] transition-transform active:scale-[0.98]"
               style={{ border: `1px solid ${C.rule}`, color: C.text }}
             >
               {playing ? "Pause all three" : "Play all three"}
@@ -139,7 +139,7 @@ export function TeleopSet() {
             </span>
           </div>
 
-          <p className="mt-10 font-mono text-[10px] uppercase tracking-[0.18em]" style={{ color: C.textDim }}>
+          <p className="bp-mono mt-10 text-[10px]" style={{ color: C.textDim }}>
             All 11 episodes · head camera
           </p>
           <p className="mt-2 max-w-2xl text-[13px]" style={{ color: C.textMid }}>
