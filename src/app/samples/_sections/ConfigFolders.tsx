@@ -155,6 +155,16 @@ function ConfigCard({
         onMouseEnter={enter}
         onMouseLeave={() => video.current?.pause()}
       >
+        {/* One box, whatever is in it.
+
+            A card with no footage used to draw a 16:10 hatch and then put its
+            type in a white block UNDERNEATH, so it stood twice as tall as a
+            card with a clip and left a large empty rectangle above the words.
+            Four cards in a grid, two of them double height around a blank.
+
+            Now every card is the same 16:10 frame with the type laid on it. The
+            backdrop is footage where there is footage and a drawing hatch where
+            there is not, and the type sits at the foot of both. */}
         <div className="relative aspect-16/10 w-full overflow-hidden" style={{ background: C.wash }}>
           {face ? (
             <>
@@ -181,7 +191,10 @@ function ConfigCard({
               )}
             </>
           ) : (
-            /* Nothing shot on this rig yet, and no honest frame to borrow. */
+            /* Nothing shot on this rig yet, and no honest frame to borrow —
+               putting stereo footage on the wrist card would be a lie about
+               what we can show. A hatch says "not footage" and says it at the
+               same size as the cards that are. */
             <div
               className="h-full w-full"
               style={{
@@ -189,58 +202,53 @@ function ConfigCard({
               }}
             />
           )}
-        </div>
 
-        {face && (
+          {/* The wash under the type. Dark over footage so white reads; a pale
+              one over the hatch so ink does. Either way it is bottom-weighted,
+              so the top of the frame is never dimmed for two lines at its
+              foot. */}
           <div
             aria-hidden
             className="pointer-events-none absolute inset-0"
-            style={{ background: OVER_MEDIA.wash }}
+            style={{
+              background: face
+                ? OVER_MEDIA.wash
+                : `linear-gradient(180deg, transparent 0%, ${C.base} 62%, ${C.base} 100%)`,
+            }}
           />
-        )}
 
-        {/* Type sits on the footage where there is footage and on the card
-            surface where there is not — white on a light hatch is unreadable. */}
-        <div
-          className={`flex flex-col p-5 md:p-6 ${face ? "pointer-events-none absolute inset-0 justify-end" : ""}`}
-          style={face ? undefined : { borderTop: `1px solid ${C.hairline}` }}
-        >
-          <span className="flex items-baseline justify-between gap-4">
-            <span
-              className="text-xl font-medium tracking-tight md:text-2xl"
-              style={{
-                fontFamily: "var(--font-heading)",
-                letterSpacing: "-0.02em",
-                color: face ? OVER_MEDIA.title : C.text,
-              }}
-            >
-              {name}
+          <div className="pointer-events-none absolute inset-0 flex flex-col justify-end p-5 md:p-6">
+            <span className="flex items-baseline justify-between gap-4">
+              <span
+                className="text-xl font-medium tracking-tight md:text-2xl"
+                style={{
+                  fontFamily: "var(--font-heading)",
+                  letterSpacing: "-0.02em",
+                  color: face ? OVER_MEDIA.title : C.text,
+                }}
+              >
+                {name}
+              </span>
+              <ArrowRight
+                className="h-4 w-4 shrink-0 transition-transform group-hover:translate-x-1"
+                style={{ color: face ? OVER_MEDIA.text : C.textDim }}
+              />
             </span>
-            <ArrowRight
-              className="h-4 w-4 shrink-0 transition-transform group-hover:translate-x-1"
-              style={{ color: face ? OVER_MEDIA.text : C.textDim }}
-            />
-          </span>
 
-          {/* The rig line is gone from the face. It said "Six-camera head rig,
-              three stereo pairs" directly above a sentence that says the same
-              thing in words a buyer uses, so the card carried the spec twice
-              and read as four lines where three do the work. The rig is on the
-              configuration's own page, in the spec table, where it belongs
-              beside outputs and ramp. */}
-          <span
-            className="mt-2 line-clamp-2 max-w-xl text-[13px] leading-relaxed"
-            style={{ color: face ? OVER_MEDIA.text : C.textMid }}
-          >
-            {pitch}
-          </span>
+            <span
+              className="mt-2 line-clamp-2 max-w-xl text-[13px] leading-relaxed"
+              style={{ color: face ? OVER_MEDIA.text : C.textMid }}
+            >
+              {pitch}
+            </span>
 
-          <span
-            className="bp-mono mt-3 block text-[10px]"
-            style={{ color: face ? OVER_MEDIA.textDim : C.accent }}
-          >
-            {state}
-          </span>
+            <span
+              className="bp-mono mt-3 block text-[10px]"
+              style={{ color: face ? OVER_MEDIA.textDim : C.accent }}
+            >
+              {state}
+            </span>
+          </div>
         </div>
       </Link>
     </motion.div>
