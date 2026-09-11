@@ -38,6 +38,33 @@ const LIMIT = args.includes("--limit") ? Number(args[args.indexOf("--limit") + 1
 const ONLY = args.includes("--only") ? args[args.indexOf("--only") + 1] : null;
 const FORCE = args.includes("--force");
 const SET = args.includes("--set") ? args[args.indexOf("--set") + 1] : "exo";
+/**
+ * Cut from a local directory instead of from Drive.
+ *
+ * A share link is not the only way to hold a delivery, and for the kit set it
+ * stopped being a way at all — see the note on `SETS.kit`. With `--from`, a job
+ * looks for `<dir>/<slug>.mp4` first and only falls back to the network if it
+ * is not there, so a partial folder is useful: drop in the six files you have
+ * and the rest still try the link.
+ *
+ * `<slug>.mp4` rather than the delivery's own tree, because the tree is four
+ * levels of Vietnamese task names and the slug is the one string the cutter,
+ * the record builder and the page already agree on.
+ */
+const FROM = args.includes("--from") ? resolve(args[args.indexOf("--from") + 1]) : null;
+/**
+ * Cut from this second instead of from `seekPoint`.
+ *
+ * The heuristic picks 30% in, which is a good guess about footage and only a
+ * guess. Some episodes spend their first minute walking to the bench: the
+ * fabric-marking session shows the room until about 80 s and the hands after
+ * it, so 30% of 140 s lands on a wall. Rather than tune the formula until it
+ * fits one delivery, this says "I looked at the clip, cut here".
+ *
+ * Pair it with `--only` — it applies to every job in the run, and one timecode
+ * is rarely right for two different recordings.
+ */
+const AT = args.includes("--at") ? Number(args[args.indexOf("--at") + 1]) : null;
 
 /**
  * The three deliveries this cutter serves, and the frame each one gets.
@@ -75,12 +102,31 @@ const SETS = {
    * as the 118 stereo ones. 640x480 rather than the six-camera set's 480x360:
    * this one lays out at most three cells across a card, so each gets roughly
    * twice the width six do.
+   *
+   * KNOWN: this set cannot be cut off the share link as it stands.
+   *
+   * The folder's quota is spent, and Drive serves its "Quota exceeded" page
+   * with a 200 and `content-type: video/mp4` — so ffmpeg reads ~2 KB of markup
+   * and reports "Invalid data found when processing input", which looks like a
+   * corrupt delivery and is not. Verified against one file, all four ways in:
+   * no Range header, `bytes=0-`, and two bounded ranges. All blocked. There is
+   * no ranged-read loophole; an earlier pass that found nine of eighteen files
+   * readable was measuring a rolling limit that tightened as it was polled.
+   *
+   * Small files are unaffected — the JSON sidecars and the packaged
+   * `preview_*.jpg` stills still fetch, which is how eight of the eleven
+   * posters were produced without touching a video.
+   *
+   * Unblock by giving the crawl a source that is not the shared link: copy the
+   * folder into an account we own, or stage the files locally. Waiting also
+   * works; the cap is a daily one.
    */
   kit: {
     manifest: "kit-sessions.json",
     jobs: kitViews,
     w: 640,
     h: 480,
+    concurrency: 1,
   },
 };
 
@@ -100,6 +146,18 @@ async function directUrl(id) {
   const html = await (await fetch(base, { headers: { "user-agent": "Mozilla/5.0" } })).text();
   const uuid = /name="uuid" value="([^"]+)"/.exec(html)?.[1];
   return uuid ? `${base}&confirm=t&uuid=${uuid}` : base;
+}
+
+/** Seconds, off a file on disk. Local, so it costs nothing and cannot be stale. */
+async function probeDuration(path) {
+  const { stdout } = await run("ffprobe", [
+    "-v", "error",
+    "-show_entries", "format=duration",
+    "-of", "csv=p=0",
+    path,
+  ]);
+  const n = Number(stdout.trim());
+  return Number.isFinite(n) ? n : 0;
 }
 
 /**
@@ -138,7 +196,12 @@ const jobs = set.jobs(manifest).filter((j) => !ONLY || j.slug === ONLY);
    seconds at 854x480 is a rounding error beside it. Four rather than more
    because this is one shared account's quota, and a crawl that gets throttled
    halfway is slower than one that never does. */
-const CONCURRENCY = 4;
+/* Per set, because four is not always the right number. `kit` asks for one:
+   four workers against that folder tripped Drive's rate limiting on the first
+   pass and every job in the batch failed, where a sequential run of the same
+   jobs had been getting through. Reading from `--from` is local I/O and is not
+   rate limited by anybody, so it keeps the default. */
+const CONCURRENCY = FROM ? 4 : (set.concurrency ?? 4);
 let done = 0;
 let cursor = 0;
 
@@ -159,9 +222,24 @@ async function cut({ id, file, slug, inverted }) {
     return;
   }
 
-  const ss = seekPoint(file.durationSec).toFixed(2);
   try {
-    const url = await directUrl(id);
+    /* A staged copy wins over the link. Same bytes, no quota, no confirm-token
+       dance — and for a delivery whose share link is capped it is the only way
+       through. */
+    const local = FROM ? join(FROM, `${slug}.mp4`) : null;
+    const fromDisk = Boolean(local && existsSync(local));
+    const url = fromDisk ? local : await directUrl(id);
+
+    /* Measure a staged file rather than trusting the manifest.
+       `durationSec` on the job is the REPRESENTATIVE session's length — the
+       longest episode in the bucket — and a staged file is whichever episode
+       of that bucket someone happened to download. The two are not the same
+       recording: the three staged wrist views run 26.7 s where their bucket's
+       representative runs 125.6 s, so the seek landed at 37.7 s, past the end,
+       and all three cuts failed with nothing to decode. Probing the file on
+       disk is instant and free, so there is no reason to guess. */
+    const seconds = fromDisk ? await probeDuration(local) : file.durationSec;
+    const ss = (AT != null ? Math.min(AT, Math.max(0, seconds - SECONDS)) : seekPoint(seconds)).toFixed(2);
 
     await run("ffmpeg", [
       "-y", "-v", "error",

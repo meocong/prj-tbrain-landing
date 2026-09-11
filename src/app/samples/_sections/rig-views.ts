@@ -63,6 +63,26 @@ export const LENS_PLACES: ViewPlace[] = [
   },
 ];
 
+/**
+ * The kit delivery's three body-worn cameras: a head view and two wrists.
+ *
+ * Not a rig elevation like `LENS_PLACES`, because there is no geometry to draw
+ * — the cameras are on a person, not on a bar — so they sit in a plain row with
+ * the head first. The head leads because it is the view that shows the task;
+ * the wrists are what this configuration ADDS, and they read as additions.
+ *
+ * Both wrists are labelled "wrist" and neither says which arm. The delivery
+ * does not know: `role` on every `.calib.json` is the camera's own index, and
+ * `missing_streams` names `wrist_left.mp4` and `wrist_right.mp4` on all 85
+ * sessions including the three-camera ones, so it is a profile template and not
+ * a record of what was worn. Two tiles reading "wrist" is the true version.
+ */
+export const BODY_PLACES: ViewPlace[] = [
+  { view: "", label: "head", place: "" },
+  { view: "view-2", label: "wrist", place: "" },
+  { view: "view-3", label: "wrist", place: "" },
+];
+
 const PAIR_PLACES: ViewPlace[] = [
   { view: "", label: "left eye", place: "" },
   { view: "right", label: "right eye", place: "" },
@@ -73,7 +93,7 @@ const SINGLE_PLACES: ViewPlace[] = [{ view: "", label: "", place: "" }];
 export interface RigLayout {
   /** The cells to render, in DOM order. The first is always the base clip. */
   cells: ViewPlace[];
-  kind: "single" | "pair" | "six";
+  kind: "single" | "pair" | "body" | "six";
   /** Tailwind columns for the grid. */
   cols: string;
   /**
@@ -106,6 +126,23 @@ export function rigLayout(slug: string): RigLayout {
       kind: "six",
       cols: "grid-cols-2 sm:grid-cols-4",
       band: "aspect-[8/9] sm:aspect-[8/3]",
+    };
+  }
+  /* Three body-worn cameras, checked before the pair: a wrist record stages
+     `-view-2` and `-view-3` and no `-right`, so the pair test would miss it and
+     the card would play the head camera alone — an advertisement for the mono
+     configuration on the card selling the three-camera one.
+
+     Three 4:3 frames in a row is 4:1. Below `sm` they stack into one column,
+     which is 4:9 — the same shape the six-up takes on a phone, so a row mixing
+     the two still lines up. */
+  const body = BODY_PLACES.filter((l) => !l.view || extra.includes(l.view));
+  if (body.length > 1) {
+    return {
+      cells: body,
+      kind: "body",
+      cols: "grid-cols-1 sm:grid-cols-3",
+      band: "aspect-[4/9] sm:aspect-[4/1]",
     };
   }
   if (extra.includes("right")) {
