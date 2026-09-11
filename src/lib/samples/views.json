@@ -20,6 +20,10 @@
   "handpose-zipper-sewing": [
     "right"
   ],
+  "kit-fabric-marking-wrist": [
+    "view-2",
+    "view-3"
+  ],
   "sixcam-engine-working": [
     "primary-right",
     "mid-left",
