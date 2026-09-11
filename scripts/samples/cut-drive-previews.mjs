@@ -108,14 +108,26 @@ const SETS = {
    * The folder's quota is spent, and Drive serves its "Quota exceeded" page
    * with a 200 and `content-type: video/mp4` — so ffmpeg reads ~2 KB of markup
    * and reports "Invalid data found when processing input", which looks like a
-   * corrupt delivery and is not. Verified against one file, all four ways in:
-   * no Range header, `bytes=0-`, and two bounded ranges. All blocked. There is
-   * no ranged-read loophole; an earlier pass that found nine of eighteen files
-   * readable was measuring a rolling limit that tightened as it was polled.
+   * corrupt delivery and is not.
    *
-   * Small files are unaffected — the JSON sidecars and the packaged
-   * `preview_*.jpg` stills still fetch, which is how eight of the eleven
-   * posters were produced without touching a video.
+   * What the limit actually gates is BYTES, and it depletes as you draw on it.
+   * Measured against one file over about ten minutes:
+   *
+   *     Range: bytes=0-200        always answered
+   *     Range: bytes=0-1000000    answered
+   *     Range: bytes=0-5000000    answered, then refused ten minutes later
+   *     Range: bytes=0-           refused
+   *     (no Range header)         refused
+   *
+   * So a bounded read is not a loophole, it is the same budget measured in
+   * smaller pieces: the ceiling falls as the budget drains, and Google's own
+   * message says each attempt can push the reset further out. Chunking a 300 MB
+   * file through it does not work and makes recovery slower. Do not add a
+   * retry loop here; a run that fails has to stop.
+   *
+   * The sidecars and the packaged stills stay readable throughout, which is
+   * how the manifest and eight of the posters were produced without video.
+   *
    *
    * Unblock by giving the crawl a source that is not the shared link: copy the
    * folder into an account we own, or stage the files locally. Waiting also
