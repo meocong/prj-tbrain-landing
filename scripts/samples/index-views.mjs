@@ -57,7 +57,22 @@ const OUT = join(ROOT, "src", "lib", "samples", "views.json");
  * reads them. Anything staged under a name not on this list is ignored rather
  * than rendered somewhere arbitrary.
  */
-const VIEWS = ["right", "primary-right", "mid-left", "mid-right", "outer-left", "outer-right"];
+const VIEWS = [
+  "right",
+  "primary-right",
+  "mid-left",
+  "mid-right",
+  "outer-left",
+  "outer-right",
+  /* The kit delivery's three body-worn cameras. Numbered rather than named
+     left and right: the delivery states no role for any of them — every
+     `.calib.json` says `role: "gopro_N"` and stops — so the base view is the
+     head camera, read off the footage, and these two are the wrists in the
+     order they were recorded. Inventing "wrist-left" would be a claim about
+     which arm, which nothing in the delivery supports. */
+  "view-2",
+  "view-3",
+];
 
 const samples = JSON.parse(
   readFileSync(join(ROOT, "src", "lib", "samples", "samples.json"), "utf8"),
@@ -94,6 +109,8 @@ const multi = Object.values(ordered);
 console.log(`records            ${samples.length}`);
 console.log(`with extra views   ${multi.length}`);
 console.log(`  two-up           ${multi.filter((v) => v.length === 1).length}`);
+// Three body-worn cameras: a head view plus two wrists.
+console.log(`  three-up         ${multi.filter((v) => v.length === 2).length}`);
 // Four extras, not five, on a task the delivery is a lens short of. The card
 // draws the rig with a hole in it; this line has to count it as a rig.
 console.log(`  six-up           ${multi.filter((v) => v.length >= 4).length}`);

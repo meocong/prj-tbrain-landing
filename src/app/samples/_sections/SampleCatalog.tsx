@@ -35,6 +35,7 @@ const ALL = samples as unknown as Sample[];
 /* The staged views and the rig elevation moved to `rig-views.ts` when the
    record modal needed the same two things. One table, two surfaces. */
 
+
 /**
  * Cards revealed per step.
  *
@@ -330,8 +331,9 @@ function Card({ sample, onOpen }: { sample: Sample; onOpen: () => void }) {
    * hole is where that camera is, which is the honest picture of what shipped;
    * closing it up would draw a five-camera rig that does not exist.
    */
-  const { cells: lenses, kind, band } = rigLayout(sample.slug);
+  const { cells: lenses, kind, band, cols } = rigLayout(sample.slug);
   const sixUp = kind === "six";
+  const bodyUp = kind === "body";
   const pair = kind === "pair";
   /* Two grid slots either way. Tam, 2026-09-10: "để nguyên 3 cột như này nó
      làm cho 2 cam kết hợp nhau bị nhỏ đi" — a multi-view card in a one-column
@@ -438,12 +440,10 @@ function Card({ sample, onOpen }: { sample: Sample; onOpen: () => void }) {
             side is 8:3, and the six-camera elevation is four columns over two
             rows, which is the same 8:3. */}
         <div
-          className={`grid w-full gap-px transition-transform duration-500 group-hover:scale-[1.02] ${band} ${
-            sixUp ? "grid-cols-2 sm:grid-cols-4" : pair ? "grid-cols-2" : "grid-cols-1"
-          }`}
+          className={`grid w-full gap-px transition-transform duration-500 group-hover:scale-[1.02] ${band} ${cols}`}
           style={{ background: "#000" }}
         >
-          {(sixUp ? lenses : pair ? [{ view: "", label: "left eye", place: "" }, { view: "right", label: "right eye", place: "" }] : [{ view: "", label: "", place: "" }]).map(
+          {lenses.map(
             ({ view, label, place }, i) => (
               <figure key={view || "base"} className={`relative m-0 overflow-hidden ${place}`}>
                 <video
@@ -465,12 +465,13 @@ function Card({ sample, onOpen }: { sample: Sample; onOpen: () => void }) {
                   preload="none"
                   aria-label={label ? viewLabel(label) : sample.title}
                 />
-                {/* Only on the six-up. Two eyes read as two eyes; six near
-                    identical frames of the same bench read as a repeat until
-                    each one says which lens it is. `truncate` because a cell
-                    is about 200px on a two-column card and narrower on a
-                    phone. */}
-                {sixUp && (
+                {/* On the six-up and the three-up. Two eyes read as two eyes;
+                    six near identical frames of the same bench read as a repeat
+                    until each one says which lens it is, and the same is true
+                    of a head view beside two wrists — without the labels it is
+                    three shots of one workbench. `truncate` because a cell is
+                    about 200px on a two-column card and narrower on a phone. */}
+                {(sixUp || bodyUp) && (
                   <figcaption
                     className="bp-mono pointer-events-none absolute left-1.5 top-1.5 max-w-[calc(100%-12px)] truncate px-1.5 py-0.5 text-[9px]"
                     style={{ background: OVER_MEDIA.scrim, color: OVER_MEDIA.text }}
