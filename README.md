@@ -39,5 +39,23 @@ npm run build
 pm2 restart 1
 ```
 
+## Supabase official test setup
+
+The default local env may point to the self-hosted Supabase instance. To test
+against an official Supabase Cloud project:
+
+1. Copy `.env.supabase.example` to `.env.supabase.local`.
+2. Fill `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`,
+   `SUPABASE_SERVICE_ROLE_KEY`, and `DATABASE_URL` from the Supabase dashboard.
+3. Run `npm run env:use-supabase` to copy those values into `.env.local`.
+4. Apply schema changes:
+
+```bash
+npm run db:migrate
+# or, after linking the project:
+npm run supabase:login
+npm run supabase:link -- --project-ref <project-ref>
+npm run supabase:db:push
+```
 
 
