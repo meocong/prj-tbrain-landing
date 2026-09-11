@@ -4,7 +4,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import { Check, ChevronDown, Copy, Search, SlidersHorizontal, X } from "lucide-react";
 import samples from "@/lib/samples/samples.json";
-import stagedViews from "@/lib/samples/views.json";
+import { rigLayout } from "./rig-views";
 import { SKILL_GROUPS, JOBS, INDUSTRIES } from "@/lib/samples/taxonomy";
 import { FacetPicker, SortPicker } from "./Fields";
 import { PILL_KINDS_DROPPED, publicSpec } from "@/lib/samples/redact.mjs";
@@ -32,73 +32,9 @@ import { Reveal } from "./Reveal";
 
 const ALL = samples as unknown as Sample[];
 
-/**
- * Which extra views each record has staged beside its base clip.
- *
- * Generated — `node scripts/samples/index-views.mjs`. A plain object at module
- * scope so a 135-card grid does one O(1) lookup per card rather than scanning
- * an array on every render of every tile.
- */
-const VIEWS = stagedViews as Record<string, string[] | undefined>;
+/* The staged views and the rig elevation moved to `rig-views.ts` when the
+   record modal needed the same two things. One table, two surfaces. */
 
-/**
- * Where each lens of the six-camera rig sits on the card.
- *
- * The same front elevation `RigViews` draws, and for the same reason given at
- * length there: one camera at the outer left, a pair, a pair, one at the outer
- * right, read left to right as the rig is worn.
- *
- *     outer-left   primary-left  primary-right   outer-right
- *                  mid-left      mid-right
- *
- * A reader who has met that diagram on the configuration page should be able
- * to point at a tile here and know which lens took it, so the two layouts are
- * the same layout rather than two arrangements of the same six files.
- *
- * The outer two span both rows and centre themselves, which keeps every tile
- * showing a 4:3 frame at its own aspect — stretching one to fill two rows
- * would make it the only cell in the picture that is not.
- *
- * Below `sm` the placements do not apply and the six fall into a two-column
- * grid in DOM order, which is why that order is primary, mid, outer: on a
- * phone each pair still lands beside its own partner.
- */
-const LENS_PLACES: { view: string; label: string; place: string }[] = [
-  { view: "", label: "primary · left", place: "sm:[grid-column:2] sm:[grid-row:1]" },
-  { view: "primary-right", label: "primary · right", place: "sm:[grid-column:3] sm:[grid-row:1]" },
-  { view: "mid-left", label: "mid · left", place: "sm:[grid-column:2] sm:[grid-row:2]" },
-  { view: "mid-right", label: "mid · right", place: "sm:[grid-column:3] sm:[grid-row:2]" },
-  {
-    view: "outer-left",
-    label: "outer · left",
-    place: "sm:[grid-column:1] sm:[grid-row:1/span_2] sm:self-center",
-  },
-  {
-    view: "outer-right",
-    label: "outer · right",
-    place: "sm:[grid-column:4] sm:[grid-row:1/span_2] sm:self-center",
-  },
-];
-
-/**
- * The kit delivery's three body-worn cameras: a head view and two wrists.
- *
- * Not a rig elevation like `LENS_PLACES`, because there is no geometry to draw
- * — the cameras are on a person, not on a bar — so they sit in a plain row with
- * the head first. The head leads because it is the view that shows the task;
- * the wrists are what this configuration ADDS, and they read as additions.
- *
- * Both wrists are labelled "wrist" and neither says which arm. The delivery
- * does not know: `role` on every `.calib.json` is the camera's own index, and
- * `missing_streams` names `wrist_left.mp4` and `wrist_right.mp4` on all 85
- * sessions including the three-camera ones, so it is a profile template and not
- * a record of what was worn. Two tiles reading "wrist" is the true version.
- */
-const BODY_PLACES: { view: string; label: string; place: string }[] = [
-  { view: "", label: "head", place: "" },
-  { view: "view-2", label: "wrist", place: "" },
-  { view: "view-3", label: "wrist", place: "" },
-];
 
 /**
  * Cards revealed per step.
@@ -395,36 +331,15 @@ function Card({ sample, onOpen }: { sample: Sample; onOpen: () => void }) {
    * hole is where that camera is, which is the honest picture of what shipped;
    * closing it up would draw a five-camera rig that does not exist.
    */
-  const extra = VIEWS[sample.slug] ?? [];
-  const lenses = LENS_PLACES.filter((l) => !l.view || extra.includes(l.view));
-  const sixUp = lenses.length > 2;
-  /* Three body-worn cameras, checked before the pair: a wrist record stages
-     `-view-2` and `-view-3` and no `-right`, so the pair test would miss it and
-     the card would play the head camera alone — an advertisement for the mono
-     configuration on the card selling the three-camera one. */
-  const body = BODY_PLACES.filter((l) => !l.view || extra.includes(l.view));
-  const bodyUp = !sixUp && body.length > 1;
-  const pair = !sixUp && !bodyUp && extra.includes("right");
+  const { cells: lenses, kind, band, cols } = rigLayout(sample.slug);
+  const sixUp = kind === "six";
+  const bodyUp = kind === "body";
+  const pair = kind === "pair";
   /* Two grid slots either way. Tam, 2026-09-10: "để nguyên 3 cột như này nó
      làm cho 2 cam kết hợp nhau bị nhỏ đi" — a multi-view card in a one-column
      slot gives each view a fraction of the width a single-view card gets, so
      the one card with more to show shows it smaller. */
-  const wide = sixUp || pair || bodyUp;
-
-  /* One row of two 4:3 eyes is 8:3. Four columns of 4:3 over two rows is the
-     same 8:3, so the six-up and the pair occupy an identical footprint and a
-     row mixing them stays level. Below `sm` the six reflow to two columns and
-     three rows, which is 8:9. */
-  /* Three 4:3 frames in a row is 4:1. Below `sm` they stack into one column,
-     which is 4:9 — the same shape the six-up takes on a phone, so a row mixing
-     the two still lines up. */
-  const band = sixUp
-    ? "aspect-[8/9] sm:aspect-[8/3]"
-    : bodyUp
-      ? "aspect-[4/9] sm:aspect-[4/1]"
-      : pair
-        ? "aspect-[8/3]"
-        : "aspect-[4/3]";
+  const wide = kind !== "single";
 
   /* The elements this card drives — one or two, and never in state.
      A ref, because the transport does not affect the render: nothing on this
@@ -525,18 +440,10 @@ function Card({ sample, onOpen }: { sample: Sample; onOpen: () => void }) {
             side is 8:3, and the six-camera elevation is four columns over two
             rows, which is the same 8:3. */}
         <div
-          className={`grid w-full gap-px transition-transform duration-500 group-hover:scale-[1.02] ${band} ${
-            sixUp
-              ? "grid-cols-2 sm:grid-cols-4"
-              : bodyUp
-                ? "grid-cols-1 sm:grid-cols-3"
-                : pair
-                  ? "grid-cols-2"
-                  : "grid-cols-1"
-          }`}
+          className={`grid w-full gap-px transition-transform duration-500 group-hover:scale-[1.02] ${band} ${cols}`}
           style={{ background: "#000" }}
         >
-          {(sixUp ? lenses : bodyUp ? body : pair ? [{ view: "", label: "left eye", place: "" }, { view: "right", label: "right eye", place: "" }] : [{ view: "", label: "", place: "" }]).map(
+          {lenses.map(
             ({ view, label, place }, i) => (
               <figure key={view || "base"} className={`relative m-0 overflow-hidden ${place}`}>
                 <video
