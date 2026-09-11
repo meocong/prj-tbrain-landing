@@ -47,6 +47,24 @@ export function CoverageChart({ modality }: { modality: string }) {
             What this category is made of
           </h2>
 
+          {/* Say whose hours these are.
+
+              Every bar sums `durationSec` over the records in `samples.json` —
+              the set staged in this repo and playable on the page, 16.6 h across
+              135 egocentric records. Further down, `TwoRoutes` quotes the deck's
+              shelf at 1,200 h. Both are true and they measure different things,
+              but under a heading reading "what this category is made of" the
+              smaller figure reads as a correction of the larger one rather than
+              as an answer to a different question.
+
+              Thạch, 2026-09-11: "số giờ nó phải nhiều hơn chứ, hơn 1200h cơ mà."
+              The figures are not wrong; the chart never said which corpus it was
+              counting. That is a label, not a recount. */}
+          <p className="mt-2 max-w-2xl text-[12px] leading-relaxed" style={{ color: C.textMid }}>
+            Measured across the samples published on this page, not the shelf behind them — these
+            are the hours you can press play on.
+          </p>
+
           {/* Three across, not four. Five axes in a four-column grid leave one
             alone on a second row, and at four columns of a 1400px page the
             labels are 280px wide — "Tool Use & Technical Manipulation" truncates

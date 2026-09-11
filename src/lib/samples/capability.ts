@@ -114,7 +114,7 @@ export const CAPABILITY: Partial<Record<string, CapabilityTier[]>> = {
          The doc's own list is Monoegocentric / Stereo egocentric (2 cam) /
          Advanced Stereo Egocentric (6 cam) / With wrist camera, and each of
          those names its own rig. Following it. */
-      name: "Mono egocentric (1 cam)",
+      name: "Mono egocentric (1 camera)",
       rig: "Head-mounted smartphone",
       sensors: null,
       ramp: "5-10 business days",
@@ -144,7 +144,7 @@ export const CAPABILITY: Partial<Record<string, CapabilityTier[]>> = {
     },
     {
       key: "stereo",
-      name: "Stereo egocentric (2 cam)",
+      name: "Stereo egocentric (2 cameras)",
       rig: "RealSense D455 or Pico 4 Ultra",
       sensors: "6-DoF IMU, 200-400 Hz",
       ramp: "14-21 business days",
@@ -170,7 +170,7 @@ export const CAPABILITY: Partial<Record<string, CapabilityTier[]>> = {
          invented number on a premium tier is worse than none; the field is
          never rendered on this surface anyway — see the note on it. */
       key: "stereo6",
-      name: "Advanced stereo egocentric (6 cam)",
+      name: "Advanced stereo egocentric (6 cameras)",
       rig: "Six-camera head rig, three stereo pairs",
       sensors: "6-DoF IMU, 200-400 Hz, time-synced across all six",
       ramp: "14-21 business days",
