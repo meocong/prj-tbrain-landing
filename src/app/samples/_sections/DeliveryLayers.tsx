@@ -91,13 +91,22 @@ export function DeliveryLayers() {
             </dl>
             {/* Tam, 2026-09-10: "đoạn này cho chị thêm 1 dòng là convert to any
                 format, LeRobot, RLDS". The rows above list what a delivery
-                opens in as it ships; this says the list is not a limit. */}
+                opens in as it ships; this says the list is not a limit.
+
+                It said "on request, at no extra cost" until 2026-09-11. Nobody
+                asked for the second half. Tam's note is about FORMATS, and a
+                price is not a format — "at no extra cost" is a commercial
+                commitment, published, in a sentence authorised to make a
+                technical claim. Thạch caught it: "nếu mà chị tâm nói thì oke,
+                nhưng mà chị ấy không nói thì thêm cái này hơi căng."
+
+                "On request" stays. That is how the conversion is obtained, not
+                what it costs, and it is the honest half of the promise. */}
             <p
               className="lg:col-span-8 lg:col-start-5 mt-5 text-sm leading-relaxed"
               style={{ color: C.textMid }}
             >
-              And convertible to any format you work in — LeRobot, RLDS, HDF5, MCAP — on request,
-              at no extra cost.
+              And convertible to any format you work in — LeRobot, RLDS, HDF5, MCAP — on request.
             </p>
           </div>
         </Reveal>
