@@ -259,7 +259,28 @@ function FaceBand({ slug, reduce }: { slug: string; reduce: boolean }) {
  * became the clip: the name and one line are all that floats now, and a 36px
  * number under them would be the third thing.
  */
+/**
+ * Stills for categories that hold no footage of their own.
+ *
+ * Stock, and stock is a compromise this file argues against everywhere else —
+ * the drawing exists precisely so a card does not have to borrow a picture. It
+ * is here because Coding & STEM is the one card where the drawing alone read as
+ * an empty box, and Thạch asked for a picture rather than a diagram twice.
+ *
+ * Licensing is the reason it is Pexels and not a search result: the Pexels
+ * licence permits commercial use on a company site, needs no attribution and
+ * allows the crop. Anything grabbed off an image search does none of those
+ * things, which was Thạch's own worry — "lấy của người ta sợ dính bản quyền".
+ *
+ * Source: pexels.com/photo/programming-code-on-screen-6424584, cropped to the
+ * card's 16:10 and re-encoded at 1280x800.
+ */
+const STILLS: Record<string, string> = {
+  "coding-stem": "/images/samples-coding-stem.jpg",
+};
+
 function HeldBand({ slug }: { slug: string }) {
+  const still = STILLS[slug];
   return (
     <div
       className="relative aspect-16/10 w-full overflow-hidden"
@@ -269,10 +290,21 @@ function HeldBand({ slug }: { slug: string }) {
         background: `repeating-linear-gradient(-45deg, ${C.hairlineSoft} 0 1px, transparent 1px 9px)`,
       }}
     >
-      <CategoryDiagram
-        slug={slug}
-        className="pointer-events-none absolute inset-0 h-full w-full opacity-[0.55]"
-      />
+      {still ? (
+        /* eslint-disable-next-line @next/next/no-img-element */
+        <img
+          src={still}
+          alt=""
+          loading="lazy"
+          decoding="async"
+          className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+        />
+      ) : (
+        <CategoryDiagram
+          slug={slug}
+          className="pointer-events-none absolute inset-0 h-full w-full opacity-[0.55]"
+        />
+      )}
     </div>
   );
 }
