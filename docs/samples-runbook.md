@@ -5,7 +5,7 @@ vault and needs a passcode. This is how the gated half is operated.
 
 ## Issue a passcode
 
-Run migration `019_samples_batch.sql` once, then:
+Run migration `022_samples_batch.sql` once, then:
 
 ```bash
 # One customer, tied to their email, 30 days

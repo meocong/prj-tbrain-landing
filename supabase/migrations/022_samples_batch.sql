@@ -1,5 +1,5 @@
 -- ──────────────────────────────────────────────────────────────────────────
--- 019_samples_batch.sql
+-- 022_samples_batch.sql
 --
 -- Give the sample library its own batch so passcodes can be scoped to it.
 --
@@ -9,7 +9,7 @@
 -- namespace so `pnpm issue:passcode` and /admin/passcodes can target it, which
 -- is what lets a VIP customer be handed a working code before a call.
 --
--- Rollback: 019_rollback.sql
+-- Rollback: 022_rollback.sql
 -- ──────────────────────────────────────────────────────────────────────────
 
 BEGIN;
