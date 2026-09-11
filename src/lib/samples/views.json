@@ -193,6 +193,9 @@
     "view-2",
     "view-3"
   ],
+  "kit-hem-sewing-rgbd": [
+    "depth"
+  ],
   "kit-stitch-inspection-wrist": [
     "view-2",
     "view-3"

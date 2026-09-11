@@ -349,7 +349,13 @@ export function SampleModal({
                           preload="metadata"
                           aria-label={label ? `${sample.title} — ${label}` : sample.title}
                         />
-                        {rig.kind === "six" && (
+                        {/* Every multi-view layout, not just the six-camera
+                            one. Three body-worn frames of the same bench, or a
+                            workbench beside a colourised distance field, need
+                            saying apart exactly as much as six lenses do — and
+                            the modal is the surface a reader opens BECAUSE
+                            they want the closer look. */}
+                        {(rig.kind === "six" || rig.kind === "body" || rig.kind === "depth") && (
                           <figcaption
                             className="bp-mono pointer-events-none absolute left-1.5 top-1.5 max-w-[calc(100%-12px)] truncate px-1.5 py-0.5 text-[9px]"
                             style={{ background: OVER_MEDIA.scrim, color: OVER_MEDIA.text }}

@@ -88,12 +88,25 @@ const PAIR_PLACES: ViewPlace[] = [
   { view: "right", label: "right eye", place: "" },
 ];
 
+/**
+ * The depth camera's two streams: what it saw, and how far away it was.
+ *
+ * Labelled, unlike the stereo pair, because the two frames do not look like
+ * the same thing twice — one is a workbench and the other is a colourised
+ * distance field, and a reader meeting the second one unlabelled has to guess
+ * what they are looking at.
+ */
+const DEPTH_PLACES: ViewPlace[] = [
+  { view: "", label: "colour", place: "" },
+  { view: "depth", label: "depth", place: "" },
+];
+
 const SINGLE_PLACES: ViewPlace[] = [{ view: "", label: "", place: "" }];
 
 export interface RigLayout {
   /** The cells to render, in DOM order. The first is always the base clip. */
   cells: ViewPlace[];
-  kind: "single" | "pair" | "body" | "six";
+  kind: "single" | "pair" | "depth" | "body" | "six";
   /** Tailwind columns for the grid. */
   cols: string;
   /**
@@ -144,6 +157,10 @@ export function rigLayout(slug: string): RigLayout {
       cols: "grid-cols-1 sm:grid-cols-3",
       band: "aspect-[4/9] sm:aspect-[4/1]",
     };
+  }
+  /* Colour beside depth, on the same 8:3 band a stereo pair takes. */
+  if (extra.includes("depth")) {
+    return { cells: DEPTH_PLACES, kind: "depth", cols: "grid-cols-2", band: "aspect-[8/3]" };
   }
   if (extra.includes("right")) {
     return { cells: PAIR_PLACES, kind: "pair", cols: "grid-cols-2", band: "aspect-[8/3]" };

@@ -471,7 +471,7 @@ function Card({ sample, onOpen }: { sample: Sample; onOpen: () => void }) {
                     of a head view beside two wrists — without the labels it is
                     three shots of one workbench. `truncate` because a cell is
                     about 200px on a two-column card and narrower on a phone. */}
-                {(sixUp || bodyUp) && (
+                {(sixUp || bodyUp || kind === "depth") && (
                   <figcaption
                     className="bp-mono pointer-events-none absolute left-1.5 top-1.5 max-w-[calc(100%-12px)] truncate px-1.5 py-0.5 text-[9px]"
                     style={{ background: OVER_MEDIA.scrim, color: OVER_MEDIA.text }}
