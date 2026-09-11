@@ -28,6 +28,18 @@ import { requestUrl } from "@/lib/samples/request-link";
 const NO_HANDS = new Set<string>([]);
 
 /**
+ * How many records the catalogue actually holds.
+ *
+ * Counted, never typed. This sentence used to carry a hardcoded `126`, which
+ * was true when it was written and was 67 records short by the time the
+ * egocentric and teleoperation deliveries landed. The same page printed the
+ * real figure 900px lower, because `TwoRoutes` sums `statsForCategory` — so
+ * the hero undersold the shelf and contradicted the section below it in the
+ * same scroll. One source, one number, no drift on the next delivery.
+ */
+const SAMPLE_COUNT = (samples as Sample[]).length;
+
+/**
  * Every other published slug, in catalogue order. The wall wants the set, not a
  * curated few: it is a claim about range, and range is made by a robotics clip
  * sitting next to a workshop one next to a game capture.
@@ -165,9 +177,9 @@ export function HeroSamples() {
             style={{ color: "rgba(255,255,255,0.76)" }}
           >
             Video, motion, telemetry, gameplay — we record it ourselves, annotate it, and ship it
-            as MCAP or LeRobot. 126 samples play on this page with the telemetry running beside
-            them and the delivery file on the same card. Open a category for what is in it, what
-            records it, and how long it takes.
+            as MCAP or LeRobot. {SAMPLE_COUNT} samples play on this page with the telemetry running
+            beside them and the delivery file on the same card. Open a category for what is in it,
+            what records it, and how long it takes.
           </p>
 
           <div className="mt-8 flex flex-wrap items-center gap-6">
