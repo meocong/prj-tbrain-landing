@@ -1462,10 +1462,6 @@
         "action_following"
       ],
       [
-        "Shared session",
-        "coop_20260616_171435_h12"
-      ],
-      [
         "Clock offset",
         "933.5 ms host / 7.0 ms member"
       ],
@@ -24843,6 +24839,221 @@
       },
       {
         "t": "137 MB",
+        "k": "file"
+      }
+    ],
+    "downloads": [
+      {
+        "t": "Preview pack",
+        "primary": true
+      }
+    ]
+  },
+  {
+    "slug": "kit-fabric-marking-wrist",
+    "domain": "robotics",
+    "modality": "egocentric",
+    "tier": "wrist",
+    "provenance": "custom",
+    "title": "Marking fabric parts · three cameras",
+    "task": "fabric-marking",
+    "label": "Tool Use & Technical Manipulation",
+    "skill": "Tool Use & Technical Manipulation",
+    "skillGroup": "Tool Use & Technical Manipulation",
+    "industry": "Clothing and Fashion",
+    "job": "Printer / press operator",
+    "environment": "Household, factory, daily",
+    "locale": "Vietnam",
+    "rig": "Head camera + wrist cameras",
+    "viewpoint": "first-person",
+    "telemetry": false,
+    "durationSec": 506.197,
+    "resolution": "1920x1080",
+    "fps": 60,
+    "streams": [
+      "RGB x3 (head and both wrists)",
+      "IMU per camera",
+      "Camera intrinsics",
+      "Mic audio"
+    ],
+    "formats": [
+      "mp4",
+      "wav",
+      "csv",
+      "json",
+      "LeRobot"
+    ],
+    "size": "7.9 GB",
+    "spec": [
+      [
+        "Task id",
+        "fabric-marking"
+      ],
+      [
+        "Skill group",
+        "Tool Use & Technical Manipulation"
+      ],
+      [
+        "Industry",
+        "Clothing and Fashion"
+      ],
+      [
+        "Operator",
+        "Printer / press operator"
+      ],
+      [
+        "Cameras",
+        "Three body-worn — one head, two wrist"
+      ],
+      [
+        "Views measured",
+        "2-3 of 3 recorded, by session"
+      ],
+      [
+        "Frame",
+        "1920x1080 at 60 fps"
+      ],
+      [
+        "Episodes",
+        "5, totalling 8 min 26 s"
+      ],
+      [
+        "Longest episode",
+        "2 min 21 s"
+      ],
+      [
+        "Synchronisation",
+        "Independent start per camera, no hardware sync — each stream carries its own first-frame host timestamp"
+      ],
+      [
+        "LeRobot export",
+        "On 2 of 5 episodes"
+      ],
+      [
+        "Delivered size",
+        "7.9 GB across 5 episodes"
+      ]
+    ],
+    "breadcrumb": [
+      "Samples",
+      "Egocentric",
+      "Marking fabric parts · three cameras"
+    ],
+    "preview": "Preview · 8 s from one of 5 episodes · 1920x1080 source",
+    "pills": [
+      {
+        "t": "Tool Use & Technical Manipulation",
+        "k": "skill"
+      },
+      {
+        "t": "Three body-worn",
+        "k": "quality"
+      },
+      {
+        "t": "7.9 GB",
+        "k": "file"
+      }
+    ],
+    "downloads": [
+      {
+        "t": "Preview pack",
+        "primary": true
+      }
+    ]
+  },
+  {
+    "slug": "kit-garment-pressing-mono",
+    "domain": "robotics",
+    "modality": "egocentric",
+    "tier": "mono",
+    "provenance": "custom",
+    "title": "Pressing garments",
+    "task": "garment-pressing",
+    "label": "Clothing & Laundry",
+    "skill": "Clothing & Laundry",
+    "skillGroup": "Clothing & Laundry",
+    "industry": "Clothing and Fashion",
+    "job": "Laundry worker",
+    "environment": "Household, factory, daily",
+    "locale": "Vietnam",
+    "rig": "Head-mounted action camera",
+    "viewpoint": "first-person",
+    "telemetry": false,
+    "durationSec": 1166.1870000000001,
+    "resolution": "1920x1080",
+    "fps": 60,
+    "streams": [
+      "RGB",
+      "IMU",
+      "Camera intrinsics",
+      "Mic audio"
+    ],
+    "formats": [
+      "mp4",
+      "wav",
+      "csv",
+      "json"
+    ],
+    "size": "6.5 GB",
+    "spec": [
+      [
+        "Task id",
+        "garment-pressing"
+      ],
+      [
+        "Skill group",
+        "Clothing & Laundry"
+      ],
+      [
+        "Industry",
+        "Clothing and Fashion"
+      ],
+      [
+        "Operator",
+        "Laundry worker"
+      ],
+      [
+        "Cameras",
+        "One, head-mounted"
+      ],
+      [
+        "Frame",
+        "1920x1080 at 60 fps"
+      ],
+      [
+        "Episodes",
+        "10, of which 9 measured, totalling 19 min 26 s"
+      ],
+      [
+        "Longest episode",
+        "3 min 04 s"
+      ],
+      [
+        "Synchronisation",
+        "Independent start per camera, no hardware sync — each stream carries its own first-frame host timestamp"
+      ],
+      [
+        "Delivered size",
+        "6.5 GB across 10 episodes"
+      ]
+    ],
+    "breadcrumb": [
+      "Samples",
+      "Egocentric",
+      "Pressing garments"
+    ],
+    "preview": "Preview · 8 s from one of 10 episodes · 1920x1080 source",
+    "pills": [
+      {
+        "t": "Clothing & Laundry",
+        "k": "skill"
+      },
+      {
+        "t": "One, head-mounted",
+        "k": "quality"
+      },
+      {
+        "t": "6.5 GB",
         "k": "file"
       }
     ],

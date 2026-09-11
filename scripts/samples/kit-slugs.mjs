@@ -262,37 +262,58 @@ export function kitGroups(manifest) {
  */
 const VIEW_FILES = {
   mono: [["", (c) => c.gopro_1 && "gopro_1_original.mp4"]],
-  /* The HEAD camera is the face, and it is `gopro_3`.
-   *
-   * The delivery labels nothing — every `.calib.json` says `role: "gopro_1"`
-   * and stops — so this is read off the footage, twice:
-   *
-   *   gopro_3  a frame 40 s into `13-58-30` looks down over the bench with BOTH
-   *            hands and both wrist-strapped cameras in shot. Only a camera on
-   *            the head sees the wrists.
-   *   gopro_1  the packaged mid-session still, on two different sessions, is
-   *            tilted, low and pointing at the floor and other people's feet —
-   *            a wrist swinging at the operator's side.
-   *
-   * Ordering `gopro_1` first cost a real poster: three wrist cards came back
-   * showing the floor of the workshop and had to be thrown away. The head view
-   * is the one that shows the TASK, so it leads; the two wrist views are what
-   * the configuration adds, and they follow it. */
-  wrist: [
-    ["", () => "gopro_3_original.mp4"],
-    ["-view-2", () => "gopro_1_original.mp4"],
-    ["-view-3", () => "gopro_2_original.mp4"],
-  ],
+  /* Filled from `HEAD_CAMERA` per bucket — see the note there. */
+  wrist: null,
   rgbd: [
     ["", () => "color.mp4"],
     ["-depth", () => "depth.mp4"],
   ],
 };
 
+/**
+ * Which of the three GoPros was on the operator's head, per bucket.
+ *
+ * THE INDEX DOES NOT CARRY THE ROLE. That is the finding, and it cost two
+ * rounds of thrown-away posters to reach. The delivery states no role at all —
+ * every `.calib.json` says `role: "gopro_N"`, its own directory name, and
+ * `missing_streams` lists `wrist_left.mp4` and `wrist_right.mp4` on all 85
+ * sessions including the three-camera ones, so it is a profile template rather
+ * than a record of what was worn.
+ *
+ * So it is read off the footage, and the test is unambiguous: the head camera
+ * is the one that can see BOTH wrists. It is not the same index twice —
+ *
+ *   13-58-30  `gopro_3` looks down over the bench with both wrist-strapped
+ *             cameras and both hands in shot.
+ *   15-09-36  `gopro_2` does, and `gopro_3` is a wrist.
+ *
+ * — so a global rule is wrong, and the first version of this file shipped one.
+ * A bucket not listed here defaults to `gopro_3`; when its footage arrives,
+ * look at a frame and add a line. Guessing puts a wrist camera on the card
+ * face, which is how three posters of a workshop floor got made.
+ */
+export const HEAD_CAMERA = { "kit-fabric-marking-wrist": "gopro_2" };
+export const headCameraFor = (slug) => HEAD_CAMERA[slug] ?? "gopro_3";
+
+/**
+ * The three body-worn cameras in card order: head first, then the wrists by
+ * index. Derived rather than listed so the head override cannot drift out of
+ * step with the suffixes.
+ */
+export function wristOrder(slug) {
+  const head = headCameraFor(slug);
+  const rest = ["gopro_1", "gopro_2", "gopro_3"].filter((d) => d !== head);
+  return [
+    ["", head],
+    ["-view-2", rest[0]],
+    ["-view-3", rest[1]],
+  ];
+}
+
 /** Which camera directory a view's file lives in, per configuration. */
 const VIEW_DIR = {
   mono: () => "gopro_1",
-  wrist: (suffix) => ({ "": "gopro_3", "-view-2": "gopro_1", "-view-3": "gopro_2" })[suffix],
+  wrist: (suffix, slug) => Object.fromEntries(wristOrder(slug))[suffix],
   rgbd: () => "d455",
 };
 
@@ -313,8 +334,15 @@ export function kitViews(manifest) {
     )[0];
     if (!session) continue;
 
-    for (const [suffix, pick] of VIEW_FILES[g.config]) {
-      const dir = VIEW_DIR[g.config](suffix);
+    /* Wrist is derived per bucket because its head camera is; the other two
+       configurations are fixed lists. */
+    const views =
+      g.config === "wrist"
+        ? wristOrder(g.slug).map(([suffix, dir]) => [suffix, () => `${dir}_original.mp4`])
+        : VIEW_FILES[g.config];
+
+    for (const [suffix, pick] of views) {
+      const dir = VIEW_DIR[g.config](suffix, g.slug);
       const cam = session.cameras?.[dir];
       if (!cam) continue;
       const name = pick(session.cameras);
