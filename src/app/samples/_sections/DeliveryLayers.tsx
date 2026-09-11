@@ -88,10 +88,19 @@ export function DeliveryLayers() {
                   </dd>
                 </div>
               ))}
-            </dl>
             {/* Tam, 2026-09-10: "đoạn này cho chị thêm 1 dòng là convert to any
                 format, LeRobot, RLDS". The rows above list what a delivery
                 opens in as it ships; this says the list is not a limit.
+
+                A ROW, not a paragraph under the table. It sat below the `dl` as
+                plain dim prose with no rule and no mono marker, which made the
+                strongest line in the block the weakest thing in it — Thạch,
+                2026-09-11: "chỗ này nhỏ nhỉ, cho nó đậm lên gây chú ý có nên
+                không?" Bold was the other option and would have been the only
+                bold text in the section. The emphasis this design already uses
+                is accent mono in the left column, stated three times directly
+                above, so this borrows that rather than inventing a fourth
+                weight.
 
                 It said "on request, at no extra cost" until 2026-09-11. Nobody
                 asked for the second half. Tam's note is about FORMATS, and a
@@ -102,12 +111,19 @@ export function DeliveryLayers() {
 
                 "On request" stays. That is how the conversion is obtained, not
                 what it costs, and it is the honest half of the promise. */}
-            <p
-              className="lg:col-span-8 lg:col-start-5 mt-5 text-sm leading-relaxed"
-              style={{ color: C.textMid }}
+            <div
+              className="grid gap-2 py-5 sm:grid-cols-12 sm:gap-6"
+              style={{ borderTop: `1px solid ${C.hairline}` }}
             >
-              And convertible to any format you work in — LeRobot, RLDS, HDF5, MCAP — on request.
-            </p>
+              <dt className="font-mono text-sm sm:col-span-4" style={{ color: C.accent }}>
+                Any other format
+              </dt>
+              <dd className="text-sm leading-relaxed sm:col-span-8" style={{ color: C.textMid }}>
+                LeRobot, RLDS, HDF5, MCAP or the shape your own loader expects — converted on
+                request.
+              </dd>
+            </div>
+            </dl>
           </div>
         </Reveal>
       </div>
