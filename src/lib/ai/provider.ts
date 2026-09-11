@@ -190,12 +190,44 @@ export function noteWorkingProvider(p: AIProvider): void {
  * reader is waiting on a stream that will never produce a token.
  */
 export async function resolveAIProviderCandidates(): Promise<AIProvider[]> {
-  const primary = await resolveAIProvider();
-  const glm = glmKeys();
-  if (glm.length < 2 || primary.baseURL !== GLM_BASE_URL) return [primary];
+  const out: AIProvider[] = [];
+  const seen = new Set<string>();
+  const push = (p: AIProvider) => {
+    const id = `${p.baseURL}|${p.apiKey}`;
+    if (!seen.has(id)) { seen.add(id); out.push(p); }
+  };
 
-  const rest = glm
-    .filter((k) => k !== primary.apiKey)
-    .map((apiKey) => ({ ...primary, apiKey }));
-  return [primary, ...rest];
+  /* The preferred provider first, then EVERY other credential behind it.
+
+     An earlier version returned `[primary]` unless primary was already GLM,
+     which read fine and failed in production for the one case that matters:
+     from Vercel the SSO lookup succeeds — `supabase.tbrain.ai` is reachable —
+     and hands back a row whose `base_url` is the Bifrost gateway on agent_1's
+     Docker network, which Vercel cannot route to. So `primary` was a provider
+     that always fails, it was the only candidate, and the GLM keys sitting
+     right there were never tried. The whole point of a candidate list is that
+     a source being configured is not evidence it works. */
+  try {
+    push(await resolveAIProvider());
+  } catch {
+    // No provider resolved at all; the explicit sources below may still work.
+  }
+
+  for (const apiKey of glmKeys()) {
+    push({ apiKey, baseURL: GLM_BASE_URL, model: GLM_MODEL, disableThinking: true });
+  }
+
+  const anthropic = process.env.ANTHROPIC_API_KEY;
+  if (anthropic) {
+    push({
+      apiKey: anthropic,
+      baseURL: "https://api.anthropic.com",
+      model: process.env.ANTHROPIC_MODEL || "claude-sonnet-4-20250514",
+    });
+  }
+
+  if (out.length === 0) {
+    throw new Error("No AI provider configured (SSO, GLM_API_KEY or ANTHROPIC_API_KEY)");
+  }
+  return out;
 }
