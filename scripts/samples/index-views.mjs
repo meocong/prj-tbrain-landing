@@ -72,6 +72,11 @@ const VIEWS = [
      which arm, which nothing in the delivery supports. */
   "view-2",
   "view-3",
+  /* The depth camera's second stream. Staged and served since the RGB-D record
+     landed, and invisible until it was named here — the card played the colour
+     feed alone, which is a mono card on the configuration whose whole point is
+     the depth. */
+  "depth",
 ];
 
 const samples = JSON.parse(
