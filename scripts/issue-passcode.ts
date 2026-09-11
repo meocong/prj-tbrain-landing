@@ -6,6 +6,19 @@
  *
  * For a shared batch demo code (not tied to a client):
  *   yarn issue:passcode --batch april-2026 --batch-label demo-tam --days 30
+ *
+ * For the sample library, whose batches live under a different project:
+ *   yarn issue:passcode --project samples --batch library \
+ *     --batch-label centific --code CENTIFIC --days 14 --max-uses 50
+ *
+ * `--project` exists because the batch lookup was pinned to `terminal-bench`,
+ * so there was no way to issue a code for `/samples` at all — the route reads
+ * `project = 'samples'` and nothing could write a row it would match.
+ *
+ * `--code` sets the passcode instead of generating one. Sales hand out words
+ * customers can hear over a call. Read the warning it prints before using it:
+ * a chosen word is not a generated one, and the security argument in `auth.ts`
+ * is about generated ones.
  */
 import dotenv from "dotenv";
 dotenv.config({ path: ".env.local" });
@@ -13,6 +26,7 @@ dotenv.config();
 import {
   generatePasscode,
   hashPasscode,
+  normalizePasscode,
   passcodePrefix,
 } from "../src/lib/terminal-bench/auth";
 import { supabaseAdmin } from "../src/lib/terminal-bench/supabase/admin";
@@ -22,10 +36,13 @@ interface Args {
   batch: string;
   batchLabel?: string;
   days: number;
+  project: string;
+  code?: string;
+  maxUses?: number;
 }
 
 function parseArgs(): Args {
-  const out: Partial<Args> = { days: 30 };
+  const out: Partial<Args> = { days: 30, project: "terminal-bench" };
   const argv = process.argv.slice(2);
   for (let i = 0; i < argv.length; i++) {
     const a = argv[i];
@@ -33,9 +50,15 @@ function parseArgs(): Args {
     else if (a === "--batch") out.batch = argv[++i];
     else if (a === "--batch-label") out.batchLabel = argv[++i];
     else if (a === "--days") out.days = Number(argv[++i]);
+    else if (a === "--project") out.project = argv[++i];
+    else if (a === "--code") out.code = argv[++i];
+    else if (a === "--max-uses") out.maxUses = Number(argv[++i]);
   }
   if (!out.batch) {
-    console.error("Usage: --batch <slug> [--email <email> | --batch-label <label>] [--days N]");
+    console.error(
+      "Usage: --batch <slug> [--email <email> | --batch-label <label>] " +
+        "[--project <slug>] [--code <CODE>] [--days N] [--max-uses N]",
+    );
     process.exit(1);
   }
   if (!out.email && !out.batchLabel) {
@@ -52,12 +75,26 @@ async function main() {
   const { data: batch } = await db
     .from("batches")
     .select("id, slug, name, product_id")
-    .eq("project", "terminal-bench")
+    .eq("project", args.project)
     .eq("slug", args.batch)
     .single();
-  if (!batch) throw new Error(`Batch ${args.batch} not found`);
+  if (!batch) throw new Error(`Batch ${args.batch} not found in project ${args.project}`);
 
-  const passcode = generatePasscode();
+  /* A chosen code, or a generated one.
+     `auth.ts` justifies the scheme with "~40 bits of entropy; combined with
+     bcrypt(12) and Cloudflare rate-limit this is not brute-forceable." That
+     argument covers `generatePasscode()`. It does not cover a dictionary word:
+     a guesser does not enumerate the keyspace, they try the ten words anybody
+     would pick. So the warning is loud, and `--max-uses` and a short `--days`
+     are the controls that actually bound the damage. */
+  const passcode = args.code ? normalizePasscode(args.code) : generatePasscode();
+  if (args.code) {
+    console.warn(
+      `\n  WARNING  "${passcode}" is a chosen code, not a generated one.\n` +
+        `           It is guessable in a way TB-XXXX-XXXX is not.\n` +
+        `           Set --max-uses and a short --days, and revoke it after the deal.\n`,
+    );
+  }
   const prefix = passcodePrefix(passcode);
   const hash = await hashPasscode(passcode);
   const expiresAt = new Date(Date.now() + args.days * 24 * 60 * 60 * 1000).toISOString();
@@ -100,10 +137,12 @@ async function main() {
       passcode_hash: hash,
       passcode_prefix: prefix,
       expires_at: expiresAt,
+      ...(args.maxUses != null ? { max_uses: args.maxUses } : {}),
     });
     if (bpErr) throw bpErr;
 
     console.log(`\nShared batch passcode issued.`);
+    console.log(`  project: ${args.project}`);
     console.log(`  batch : ${batch.slug} (${batch.name})`);
     console.log(`  label : ${args.batchLabel}`);
     console.log(`  code  : ${passcode}`);
