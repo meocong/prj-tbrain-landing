@@ -10,6 +10,7 @@ import { LICENSE, QUALIFIER } from "@/lib/samples/license";
 import { C, EASE, OVER_MEDIA, PILL, type Sample } from "./tokens";
 import { LiveTelemetry } from "./LiveTelemetry";
 import { AccessActions } from "./AccessActions";
+import { clipSrc, posterSrc, rigLayout } from "./rig-views";
 
 /**
  * The full record, opened over the catalogue instead of pushed into the grid.
@@ -69,6 +70,54 @@ export function SampleModal({
 }) {
   const [mounted, setMounted] = useState(false);
   const [video, setVideo] = useState<HTMLVideoElement | null>(null);
+
+  /**
+   * The other lenses of the same rig, and the base clip's transport driving
+   * them.
+   *
+   * Only the base carries `controls`: six scrubbers on one capture is six ways
+   * to pull the views out of step, and the whole claim of a stereo pair — or of
+   * a six-camera rig — is that these frames are the SAME instant. So the
+   * reader gets one transport and the rest follow it.
+   *
+   * `LiveTelemetry` also reads `video.currentTime` off the base, which is the
+   * second reason there can only be one of them.
+   *
+   * Followers are re-synced on seek and on play rather than continuously: an
+   * assignment to `currentTime` every frame fights the decoder and shows as
+   * stutter, and 0.15 s is below what anyone reads as a mismatch between two
+   * tiles of the same bench.
+   */
+  const followers = useRef<(HTMLVideoElement | null)[]>([]);
+  useEffect(() => {
+    if (!video) return;
+    const live = () => followers.current.filter((v): v is HTMLVideoElement => !!v);
+    const sync = () => {
+      for (const v of live()) {
+        if (Math.abs(v.currentTime - video.currentTime) > 0.15) v.currentTime = video.currentTime;
+      }
+    };
+    const play = () => {
+      sync();
+      for (const v of live()) v.play().catch(() => undefined);
+    };
+    const pause = () => {
+      for (const v of live()) v.pause();
+      sync();
+    };
+    video.addEventListener("play", play);
+    video.addEventListener("pause", pause);
+    video.addEventListener("seeked", sync);
+    return () => {
+      video.removeEventListener("play", play);
+      video.removeEventListener("pause", pause);
+      video.removeEventListener("seeked", sync);
+    };
+  }, [video]);
+
+  /* Computed above the early return, because the hooks have to be. An absent
+     record lays out as a single view and renders nothing anyway. */
+  const rig = rigLayout(sample?.slug ?? "");
   const panel = useRef<HTMLDivElement>(null);
   const reduce = useReducedMotion();
 
@@ -269,19 +318,48 @@ export function SampleModal({
                       strip letterboxed into the 4:3 canvas at encode time. Those
                       stay: `object-cover` would crop real footage to hide them,
                       and the fix belongs in preview generation. */}
-                  <video
-                    ref={setVideo}
-                    className="aspect-[4/3] w-full object-contain lg:aspect-auto lg:h-full"
+                  <div
+                    className={`grid w-full gap-px ${rig.cols} ${
+                      rig.kind === "single" ? "aspect-[4/3]" : rig.band
+                    } lg:aspect-auto lg:h-full`}
                     style={{ background: C.base }}
-                    src={`/samples/clips/${sample.slug}.mp4`}
-                    poster={`/samples/posters/${sample.slug}.jpg`}
-                    muted
-                    loop
-                    playsInline
-                    controls
-                    preload="metadata"
-                    aria-label={sample.title}
-                  />
+                  >
+                    {rig.cells.map(({ view, label, place }, i) => (
+                      <figure
+                        key={view || "base"}
+                        className={`relative m-0 min-h-0 overflow-hidden ${place}`}
+                      >
+                        <video
+                          ref={
+                            i === 0
+                              ? setVideo
+                              : (el) => {
+                                  followers.current[i] = el;
+                                }
+                          }
+                          className="h-full w-full object-contain"
+                          style={{ background: C.base }}
+                          src={clipSrc(sample.slug, view)}
+                          poster={posterSrc(sample.slug, view)}
+                          muted
+                          loop
+                          playsInline
+                          /* See `followers` above: one transport for the rig. */
+                          controls={i === 0}
+                          preload="metadata"
+                          aria-label={label ? `${sample.title} — ${label}` : sample.title}
+                        />
+                        {rig.kind === "six" && (
+                          <figcaption
+                            className="bp-mono pointer-events-none absolute left-1.5 top-1.5 max-w-[calc(100%-12px)] truncate px-1.5 py-0.5 text-[9px]"
+                            style={{ background: OVER_MEDIA.scrim, color: OVER_MEDIA.text }}
+                          >
+                            {label}
+                          </figcaption>
+                        )}
+                      </figure>
+                    ))}
+                  </div>
                 </div>
                 <p
                   className="bp-mono flex-none px-5 py-2 text-[10px]"
