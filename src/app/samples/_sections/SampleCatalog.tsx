@@ -4,7 +4,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import { Check, ChevronDown, Copy, Search, SlidersHorizontal, X } from "lucide-react";
 import samples from "@/lib/samples/samples.json";
-import stagedViews from "@/lib/samples/views.json";
+import { rigLayout } from "./rig-views";
 import { SKILL_GROUPS, JOBS, INDUSTRIES } from "@/lib/samples/taxonomy";
 import { FacetPicker, SortPicker } from "./Fields";
 import { PILL_KINDS_DROPPED, publicSpec } from "@/lib/samples/redact.mjs";
@@ -32,53 +32,8 @@ import { Reveal } from "./Reveal";
 
 const ALL = samples as unknown as Sample[];
 
-/**
- * Which extra views each record has staged beside its base clip.
- *
- * Generated — `node scripts/samples/index-views.mjs`. A plain object at module
- * scope so a 135-card grid does one O(1) lookup per card rather than scanning
- * an array on every render of every tile.
- */
-const VIEWS = stagedViews as Record<string, string[] | undefined>;
-
-/**
- * Where each lens of the six-camera rig sits on the card.
- *
- * The same front elevation `RigViews` draws, and for the same reason given at
- * length there: one camera at the outer left, a pair, a pair, one at the outer
- * right, read left to right as the rig is worn.
- *
- *     outer-left   primary-left  primary-right   outer-right
- *                  mid-left      mid-right
- *
- * A reader who has met that diagram on the configuration page should be able
- * to point at a tile here and know which lens took it, so the two layouts are
- * the same layout rather than two arrangements of the same six files.
- *
- * The outer two span both rows and centre themselves, which keeps every tile
- * showing a 4:3 frame at its own aspect — stretching one to fill two rows
- * would make it the only cell in the picture that is not.
- *
- * Below `sm` the placements do not apply and the six fall into a two-column
- * grid in DOM order, which is why that order is primary, mid, outer: on a
- * phone each pair still lands beside its own partner.
- */
-const LENS_PLACES: { view: string; label: string; place: string }[] = [
-  { view: "", label: "primary · left", place: "sm:[grid-column:2] sm:[grid-row:1]" },
-  { view: "primary-right", label: "primary · right", place: "sm:[grid-column:3] sm:[grid-row:1]" },
-  { view: "mid-left", label: "mid · left", place: "sm:[grid-column:2] sm:[grid-row:2]" },
-  { view: "mid-right", label: "mid · right", place: "sm:[grid-column:3] sm:[grid-row:2]" },
-  {
-    view: "outer-left",
-    label: "outer · left",
-    place: "sm:[grid-column:1] sm:[grid-row:1/span_2] sm:self-center",
-  },
-  {
-    view: "outer-right",
-    label: "outer · right",
-    place: "sm:[grid-column:4] sm:[grid-row:1/span_2] sm:self-center",
-  },
-];
+/* The staged views and the rig elevation moved to `rig-views.ts` when the
+   record modal needed the same two things. One table, two surfaces. */
 
 /**
  * Cards revealed per step.
@@ -375,21 +330,14 @@ function Card({ sample, onOpen }: { sample: Sample; onOpen: () => void }) {
    * hole is where that camera is, which is the honest picture of what shipped;
    * closing it up would draw a five-camera rig that does not exist.
    */
-  const extra = VIEWS[sample.slug] ?? [];
-  const lenses = LENS_PLACES.filter((l) => !l.view || extra.includes(l.view));
-  const sixUp = lenses.length > 2;
-  const pair = !sixUp && extra.includes("right");
+  const { cells: lenses, kind, band } = rigLayout(sample.slug);
+  const sixUp = kind === "six";
+  const pair = kind === "pair";
   /* Two grid slots either way. Tam, 2026-09-10: "để nguyên 3 cột như này nó
      làm cho 2 cam kết hợp nhau bị nhỏ đi" — a multi-view card in a one-column
      slot gives each view a fraction of the width a single-view card gets, so
      the one card with more to show shows it smaller. */
-  const wide = sixUp || pair;
-
-  /* One row of two 4:3 eyes is 8:3. Four columns of 4:3 over two rows is the
-     same 8:3, so the six-up and the pair occupy an identical footprint and a
-     row mixing them stays level. Below `sm` the six reflow to two columns and
-     three rows, which is 8:9. */
-  const band = sixUp ? "aspect-[8/9] sm:aspect-[8/3]" : pair ? "aspect-[8/3]" : "aspect-[4/3]";
+  const wide = kind !== "single";
 
   /* The elements this card drives — one or two, and never in state.
      A ref, because the transport does not affect the render: nothing on this
