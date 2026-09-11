@@ -23147,6 +23147,222 @@
     ]
   },
   {
+    "slug": "kit-fabric-feeding-mono",
+    "domain": "robotics",
+    "modality": "egocentric",
+    "tier": "mono",
+    "provenance": "custom",
+    "title": "Sorting and feeding fabric",
+    "task": "fabric-feeding",
+    "label": "Clothing & Laundry",
+    "skill": "Clothing & Laundry",
+    "skillGroup": "Clothing & Laundry",
+    "industry": "Clothing and Fashion",
+    "job": "Tailor / seamstress",
+    "environment": "Household, factory, daily",
+    "locale": "Vietnam",
+    "rig": "Head-mounted action camera",
+    "viewpoint": "first-person",
+    "telemetry": false,
+    "durationSec": 614.314,
+    "resolution": "1920x1080",
+    "fps": 60,
+    "streams": [
+      "RGB",
+      "IMU",
+      "Camera intrinsics",
+      "Mic audio"
+    ],
+    "formats": [
+      "mp4",
+      "wav",
+      "csv",
+      "json",
+      "LeRobot"
+    ],
+    "size": "4.1 GB",
+    "spec": [
+      [
+        "Task id",
+        "fabric-feeding"
+      ],
+      [
+        "Skill group",
+        "Clothing & Laundry"
+      ],
+      [
+        "Industry",
+        "Clothing and Fashion"
+      ],
+      [
+        "Operator",
+        "Tailor / seamstress"
+      ],
+      [
+        "Cameras",
+        "One, head-mounted"
+      ],
+      [
+        "Frame",
+        "1920x1080 at 60 fps"
+      ],
+      [
+        "Episodes",
+        "10, of which 5 measured, totalling 10 min 14 s"
+      ],
+      [
+        "Longest episode",
+        "2 min 13 s"
+      ],
+      [
+        "Synchronisation",
+        "Independent start per camera, no hardware sync — each stream carries its own first-frame host timestamp"
+      ],
+      [
+        "LeRobot export",
+        "On 6 of 10 episodes"
+      ],
+      [
+        "Delivered size",
+        "4.1 GB across 10 episodes"
+      ]
+    ],
+    "breadcrumb": [
+      "Samples",
+      "Egocentric",
+      "Sorting and feeding fabric"
+    ],
+    "preview": "Preview · 8 s from one of 10 episodes · 1920x1080 source",
+    "pills": [
+      {
+        "t": "Clothing & Laundry",
+        "k": "skill"
+      },
+      {
+        "t": "One, head-mounted",
+        "k": "quality"
+      },
+      {
+        "t": "4.1 GB",
+        "k": "file"
+      }
+    ],
+    "downloads": [
+      {
+        "t": "Preview pack",
+        "primary": true
+      }
+    ]
+  },
+  {
+    "slug": "kit-fabric-marking-mono",
+    "domain": "robotics",
+    "modality": "egocentric",
+    "tier": "mono",
+    "provenance": "custom",
+    "title": "Marking fabric parts",
+    "task": "fabric-marking",
+    "label": "Tool Use & Technical Manipulation",
+    "skill": "Tool Use & Technical Manipulation",
+    "skillGroup": "Tool Use & Technical Manipulation",
+    "industry": "Clothing and Fashion",
+    "job": "Printer / press operator",
+    "environment": "Household, factory, daily",
+    "locale": "Vietnam",
+    "rig": "Head-mounted action camera",
+    "viewpoint": "first-person",
+    "telemetry": false,
+    "durationSec": 366.378,
+    "resolution": "1920x1080",
+    "fps": 60,
+    "streams": [
+      "RGB",
+      "IMU",
+      "Camera intrinsics",
+      "Mic audio"
+    ],
+    "formats": [
+      "mp4",
+      "wav",
+      "csv",
+      "json",
+      "LeRobot"
+    ],
+    "size": "1.8 GB",
+    "spec": [
+      [
+        "Task id",
+        "fabric-marking"
+      ],
+      [
+        "Skill group",
+        "Tool Use & Technical Manipulation"
+      ],
+      [
+        "Industry",
+        "Clothing and Fashion"
+      ],
+      [
+        "Operator",
+        "Printer / press operator"
+      ],
+      [
+        "Cameras",
+        "One, head-mounted"
+      ],
+      [
+        "Frame",
+        "1920x1080 at 60 fps"
+      ],
+      [
+        "Episodes",
+        "3, totalling 6 min 06 s"
+      ],
+      [
+        "Longest episode",
+        "2 min 08 s"
+      ],
+      [
+        "Synchronisation",
+        "Independent start per camera, no hardware sync — each stream carries its own first-frame host timestamp"
+      ],
+      [
+        "LeRobot export",
+        "On 1 of 3 episodes"
+      ],
+      [
+        "Delivered size",
+        "1.8 GB across 3 episodes"
+      ]
+    ],
+    "breadcrumb": [
+      "Samples",
+      "Egocentric",
+      "Marking fabric parts"
+    ],
+    "preview": "Preview · 8 s from one of 3 episodes · 1920x1080 source",
+    "pills": [
+      {
+        "t": "Tool Use & Technical Manipulation",
+        "k": "skill"
+      },
+      {
+        "t": "One, head-mounted",
+        "k": "quality"
+      },
+      {
+        "t": "1.8 GB",
+        "k": "file"
+      }
+    ],
+    "downloads": [
+      {
+        "t": "Preview pack",
+        "primary": true
+      }
+    ]
+  },
+  {
     "slug": "kit-fabric-marking-wrist",
     "domain": "robotics",
     "modality": "egocentric",
@@ -23259,6 +23475,226 @@
     ]
   },
   {
+    "slug": "kit-garment-bagging-mono",
+    "domain": "robotics",
+    "modality": "egocentric",
+    "tier": "mono",
+    "provenance": "custom",
+    "title": "Bagging finished garments",
+    "task": "garment-bagging",
+    "label": "Packing & Bagging",
+    "skill": "Packing & Bagging",
+    "skillGroup": "Packing & Bagging",
+    "industry": "Clothing and Fashion",
+    "job": "Packaging operator",
+    "environment": "Household, factory, daily",
+    "locale": "Vietnam",
+    "rig": "Head-mounted action camera",
+    "viewpoint": "first-person",
+    "telemetry": false,
+    "durationSec": 740.5649999999998,
+    "resolution": "1920x1080",
+    "fps": 60,
+    "streams": [
+      "RGB",
+      "IMU",
+      "Camera intrinsics",
+      "Mic audio"
+    ],
+    "formats": [
+      "mp4",
+      "wav",
+      "csv",
+      "json",
+      "LeRobot"
+    ],
+    "size": "3.1 GB",
+    "spec": [
+      [
+        "Task id",
+        "garment-bagging"
+      ],
+      [
+        "Skill group",
+        "Packing & Bagging"
+      ],
+      [
+        "Industry",
+        "Clothing and Fashion"
+      ],
+      [
+        "Operator",
+        "Packaging operator"
+      ],
+      [
+        "Cameras",
+        "One, head-mounted"
+      ],
+      [
+        "Frame",
+        "1920x1080 at 60 fps"
+      ],
+      [
+        "Episodes",
+        "9, of which 6 measured, totalling 12 min 21 s"
+      ],
+      [
+        "Longest episode",
+        "2 min 05 s"
+      ],
+      [
+        "Synchronisation",
+        "Independent start per camera, no hardware sync — each stream carries its own first-frame host timestamp"
+      ],
+      [
+        "LeRobot export",
+        "On 7 of 9 episodes"
+      ],
+      [
+        "Delivered size",
+        "3.1 GB across 9 episodes"
+      ]
+    ],
+    "breadcrumb": [
+      "Samples",
+      "Egocentric",
+      "Bagging finished garments"
+    ],
+    "preview": "Preview · 8 s from one of 9 episodes · 1920x1080 source",
+    "pills": [
+      {
+        "t": "Packing & Bagging",
+        "k": "skill"
+      },
+      {
+        "t": "One, head-mounted",
+        "k": "quality"
+      },
+      {
+        "t": "3.1 GB",
+        "k": "file"
+      }
+    ],
+    "downloads": [
+      {
+        "t": "Preview pack",
+        "primary": true
+      }
+    ]
+  },
+  {
+    "slug": "kit-garment-bagging-wrist",
+    "domain": "robotics",
+    "modality": "egocentric",
+    "tier": "wrist",
+    "provenance": "custom",
+    "title": "Bagging finished garments · three cameras",
+    "task": "garment-bagging",
+    "label": "Packing & Bagging",
+    "skill": "Packing & Bagging",
+    "skillGroup": "Packing & Bagging",
+    "industry": "Clothing and Fashion",
+    "job": "Packaging operator",
+    "environment": "Household, factory, daily",
+    "locale": "Vietnam",
+    "rig": "Head camera + wrist cameras",
+    "viewpoint": "first-person",
+    "telemetry": false,
+    "durationSec": 246.95499999999998,
+    "resolution": "1920x1080",
+    "fps": 60,
+    "streams": [
+      "RGB x3 (head and both wrists)",
+      "IMU per camera",
+      "Camera intrinsics",
+      "Mic audio"
+    ],
+    "formats": [
+      "mp4",
+      "wav",
+      "csv",
+      "json",
+      "LeRobot"
+    ],
+    "size": "1.8 GB",
+    "spec": [
+      [
+        "Task id",
+        "garment-bagging"
+      ],
+      [
+        "Skill group",
+        "Packing & Bagging"
+      ],
+      [
+        "Industry",
+        "Clothing and Fashion"
+      ],
+      [
+        "Operator",
+        "Packaging operator"
+      ],
+      [
+        "Cameras",
+        "Three body-worn — one head, two wrist"
+      ],
+      [
+        "Views measured",
+        "2-3 of 3 recorded, by session"
+      ],
+      [
+        "Frame",
+        "1920x1080 at 60 fps"
+      ],
+      [
+        "Episodes",
+        "2, totalling 4 min 07 s"
+      ],
+      [
+        "Longest episode",
+        "2 min 04 s"
+      ],
+      [
+        "Synchronisation",
+        "Independent start per camera, no hardware sync — each stream carries its own first-frame host timestamp"
+      ],
+      [
+        "LeRobot export",
+        "On 2 of 2 episodes"
+      ],
+      [
+        "Delivered size",
+        "1.8 GB across 2 episodes"
+      ]
+    ],
+    "breadcrumb": [
+      "Samples",
+      "Egocentric",
+      "Bagging finished garments · three cameras"
+    ],
+    "preview": "Preview · 8 s from one of 2 episodes · 1920x1080 source",
+    "pills": [
+      {
+        "t": "Packing & Bagging",
+        "k": "skill"
+      },
+      {
+        "t": "Three body-worn",
+        "k": "quality"
+      },
+      {
+        "t": "1.8 GB",
+        "k": "file"
+      }
+    ],
+    "downloads": [
+      {
+        "t": "Preview pack",
+        "primary": true
+      }
+    ]
+  },
+  {
     "slug": "kit-garment-pressing-mono",
     "domain": "robotics",
     "modality": "egocentric",
@@ -23351,6 +23787,536 @@
       },
       {
         "t": "6.5 GB",
+        "k": "file"
+      }
+    ],
+    "downloads": [
+      {
+        "t": "Preview pack",
+        "primary": true
+      }
+    ]
+  },
+  {
+    "slug": "kit-garment-tagging-mono",
+    "domain": "robotics",
+    "modality": "egocentric",
+    "tier": "mono",
+    "provenance": "custom",
+    "title": "Tagging garments",
+    "task": "garment-tagging",
+    "label": "Packing & Bagging",
+    "skill": "Packing & Bagging",
+    "skillGroup": "Packing & Bagging",
+    "industry": "Clothing and Fashion",
+    "job": "Packaging operator",
+    "environment": "Household, factory, daily",
+    "locale": "Vietnam",
+    "rig": "Head-mounted action camera",
+    "viewpoint": "first-person",
+    "telemetry": false,
+    "durationSec": 1117.397,
+    "resolution": "1920x1080",
+    "fps": 60,
+    "streams": [
+      "RGB",
+      "IMU",
+      "Camera intrinsics",
+      "Mic audio"
+    ],
+    "formats": [
+      "mp4",
+      "wav",
+      "csv",
+      "json",
+      "LeRobot"
+    ],
+    "size": "5.8 GB",
+    "spec": [
+      [
+        "Task id",
+        "garment-tagging"
+      ],
+      [
+        "Skill group",
+        "Packing & Bagging"
+      ],
+      [
+        "Industry",
+        "Clothing and Fashion"
+      ],
+      [
+        "Operator",
+        "Packaging operator"
+      ],
+      [
+        "Cameras",
+        "One, head-mounted"
+      ],
+      [
+        "Frame",
+        "1920x1080 at 60 fps"
+      ],
+      [
+        "Episodes",
+        "9, totalling 18 min 37 s"
+      ],
+      [
+        "Longest episode",
+        "2 min 09 s"
+      ],
+      [
+        "Synchronisation",
+        "Independent start per camera, no hardware sync — each stream carries its own first-frame host timestamp"
+      ],
+      [
+        "LeRobot export",
+        "On 1 of 9 episodes"
+      ],
+      [
+        "Delivered size",
+        "5.8 GB across 9 episodes"
+      ]
+    ],
+    "breadcrumb": [
+      "Samples",
+      "Egocentric",
+      "Tagging garments"
+    ],
+    "preview": "Preview · 8 s from one of 9 episodes · 1920x1080 source",
+    "pills": [
+      {
+        "t": "Packing & Bagging",
+        "k": "skill"
+      },
+      {
+        "t": "One, head-mounted",
+        "k": "quality"
+      },
+      {
+        "t": "5.8 GB",
+        "k": "file"
+      }
+    ],
+    "downloads": [
+      {
+        "t": "Preview pack",
+        "primary": true
+      }
+    ]
+  },
+  {
+    "slug": "kit-hem-sewing-mono",
+    "domain": "robotics",
+    "modality": "egocentric",
+    "tier": "mono",
+    "provenance": "custom",
+    "title": "Hem sewing",
+    "task": "hem-sewing",
+    "label": "Clothing & Laundry",
+    "skill": "Clothing & Laundry",
+    "skillGroup": "Clothing & Laundry",
+    "industry": "Clothing and Fashion",
+    "job": "Tailor / seamstress",
+    "environment": "Household, factory, daily",
+    "locale": "Vietnam",
+    "rig": "Head-mounted action camera",
+    "viewpoint": "first-person",
+    "telemetry": false,
+    "durationSec": 1465.087,
+    "resolution": "1920x1080",
+    "fps": 60,
+    "streams": [
+      "RGB",
+      "IMU",
+      "Camera intrinsics",
+      "Mic audio"
+    ],
+    "formats": [
+      "mp4",
+      "wav",
+      "csv",
+      "json",
+      "LeRobot"
+    ],
+    "size": "6.3 GB",
+    "spec": [
+      [
+        "Task id",
+        "hem-sewing"
+      ],
+      [
+        "Skill group",
+        "Clothing & Laundry"
+      ],
+      [
+        "Industry",
+        "Clothing and Fashion"
+      ],
+      [
+        "Operator",
+        "Tailor / seamstress"
+      ],
+      [
+        "Cameras",
+        "One, head-mounted"
+      ],
+      [
+        "Frame",
+        "1920x1080 at 60 fps"
+      ],
+      [
+        "Episodes",
+        "14, of which 11 measured, totalling 24 min 25 s"
+      ],
+      [
+        "Longest episode",
+        "2 min 53 s"
+      ],
+      [
+        "Synchronisation",
+        "Independent start per camera, no hardware sync — each stream carries its own first-frame host timestamp"
+      ],
+      [
+        "LeRobot export",
+        "On 3 of 14 episodes"
+      ],
+      [
+        "Delivered size",
+        "6.3 GB across 14 episodes"
+      ]
+    ],
+    "breadcrumb": [
+      "Samples",
+      "Egocentric",
+      "Hem sewing"
+    ],
+    "preview": "Preview · 8 s from one of 14 episodes · 1920x1080 source",
+    "pills": [
+      {
+        "t": "Clothing & Laundry",
+        "k": "skill"
+      },
+      {
+        "t": "One, head-mounted",
+        "k": "quality"
+      },
+      {
+        "t": "6.3 GB",
+        "k": "file"
+      }
+    ],
+    "downloads": [
+      {
+        "t": "Preview pack",
+        "primary": true
+      }
+    ]
+  },
+  {
+    "slug": "kit-hem-sewing-rgbd",
+    "domain": "robotics",
+    "modality": "egocentric",
+    "tier": "rgbd",
+    "provenance": "custom",
+    "title": "Hem sewing · depth",
+    "task": "hem-sewing",
+    "label": "Clothing & Laundry",
+    "skill": "Clothing & Laundry",
+    "skillGroup": "Clothing & Laundry",
+    "industry": "Clothing and Fashion",
+    "job": "Tailor / seamstress",
+    "environment": "Household, factory, daily",
+    "locale": "Vietnam",
+    "rig": "Head-mounted depth camera",
+    "viewpoint": "first-person",
+    "telemetry": false,
+    "durationSec": 2327.728,
+    "resolution": "848x480",
+    "fps": 30,
+    "streams": [
+      "RGB",
+      "Depth (16-bit)",
+      "IR stereo pair",
+      "IMU",
+      "Camera intrinsics"
+    ],
+    "formats": [
+      "mp4",
+      "png16",
+      "csv",
+      "json"
+    ],
+    "size": "9.7 GB",
+    "spec": [
+      [
+        "Task id",
+        "hem-sewing"
+      ],
+      [
+        "Skill group",
+        "Clothing & Laundry"
+      ],
+      [
+        "Industry",
+        "Clothing and Fashion"
+      ],
+      [
+        "Operator",
+        "Tailor / seamstress"
+      ],
+      [
+        "Cameras",
+        "One depth camera — colour, depth and an IR pair"
+      ],
+      [
+        "Frame",
+        "848x480 at 30 fps"
+      ],
+      [
+        "Episodes",
+        "11, totalling 38 min 48 s"
+      ],
+      [
+        "Longest episode",
+        "12 min 20 s"
+      ],
+      [
+        "Synchronisation",
+        "Independent start per camera, no hardware sync — each stream carries its own first-frame host timestamp"
+      ],
+      [
+        "Depth",
+        "16-bit PNG at 0.001 m per unit, with the colour and IR intrinsics and their extrinsics"
+      ],
+      [
+        "Delivered size",
+        "9.7 GB across 11 episodes"
+      ]
+    ],
+    "breadcrumb": [
+      "Samples",
+      "Egocentric",
+      "Hem sewing · depth"
+    ],
+    "preview": "Preview · 8 s from one of 11 episodes · 848x480 source",
+    "pills": [
+      {
+        "t": "Clothing & Laundry",
+        "k": "skill"
+      },
+      {
+        "t": "One depth camera",
+        "k": "quality"
+      },
+      {
+        "t": "9.7 GB",
+        "k": "file"
+      }
+    ],
+    "downloads": [
+      {
+        "t": "Preview pack",
+        "primary": true
+      }
+    ]
+  },
+  {
+    "slug": "kit-stitch-inspection-mono",
+    "domain": "robotics",
+    "modality": "egocentric",
+    "tier": "mono",
+    "provenance": "custom",
+    "title": "Stitch quality inspection",
+    "task": "stitch-inspection",
+    "label": "Clothing & Laundry",
+    "skill": "Clothing & Laundry",
+    "skillGroup": "Clothing & Laundry",
+    "industry": "Clothing and Fashion",
+    "job": "Quality inspector",
+    "environment": "Household, factory, daily",
+    "locale": "Vietnam",
+    "rig": "Head-mounted action camera",
+    "viewpoint": "first-person",
+    "telemetry": false,
+    "durationSec": 499.99,
+    "resolution": "1920x1080",
+    "fps": 60,
+    "streams": [
+      "RGB",
+      "IMU",
+      "Camera intrinsics",
+      "Mic audio"
+    ],
+    "formats": [
+      "mp4",
+      "wav",
+      "csv",
+      "json"
+    ],
+    "size": "2.1 GB",
+    "spec": [
+      [
+        "Task id",
+        "stitch-inspection"
+      ],
+      [
+        "Skill group",
+        "Clothing & Laundry"
+      ],
+      [
+        "Industry",
+        "Clothing and Fashion"
+      ],
+      [
+        "Operator",
+        "Quality inspector"
+      ],
+      [
+        "Cameras",
+        "One, head-mounted"
+      ],
+      [
+        "Frame",
+        "1920x1080 at 60 fps"
+      ],
+      [
+        "Episodes",
+        "4, totalling 8 min 20 s"
+      ],
+      [
+        "Longest episode",
+        "2 min 06 s"
+      ],
+      [
+        "Synchronisation",
+        "Independent start per camera, no hardware sync — each stream carries its own first-frame host timestamp"
+      ],
+      [
+        "Delivered size",
+        "2.1 GB across 4 episodes"
+      ]
+    ],
+    "breadcrumb": [
+      "Samples",
+      "Egocentric",
+      "Stitch quality inspection"
+    ],
+    "preview": "Preview · 8 s from one of 4 episodes · 1920x1080 source",
+    "pills": [
+      {
+        "t": "Clothing & Laundry",
+        "k": "skill"
+      },
+      {
+        "t": "One, head-mounted",
+        "k": "quality"
+      },
+      {
+        "t": "2.1 GB",
+        "k": "file"
+      }
+    ],
+    "downloads": [
+      {
+        "t": "Preview pack",
+        "primary": true
+      }
+    ]
+  },
+  {
+    "slug": "kit-stitch-inspection-wrist",
+    "domain": "robotics",
+    "modality": "egocentric",
+    "tier": "wrist",
+    "provenance": "custom",
+    "title": "Stitch quality inspection · three cameras",
+    "task": "stitch-inspection",
+    "label": "Clothing & Laundry",
+    "skill": "Clothing & Laundry",
+    "skillGroup": "Clothing & Laundry",
+    "industry": "Clothing and Fashion",
+    "job": "Quality inspector",
+    "environment": "Household, factory, daily",
+    "locale": "Vietnam",
+    "rig": "Head camera + wrist cameras",
+    "viewpoint": "first-person",
+    "telemetry": false,
+    "durationSec": 644.715,
+    "resolution": "1920x1080",
+    "fps": 60,
+    "streams": [
+      "RGB x3 (head and both wrists)",
+      "IMU per camera",
+      "Camera intrinsics",
+      "Mic audio"
+    ],
+    "formats": [
+      "mp4",
+      "wav",
+      "csv",
+      "json"
+    ],
+    "size": "8.8 GB",
+    "spec": [
+      [
+        "Task id",
+        "stitch-inspection"
+      ],
+      [
+        "Skill group",
+        "Clothing & Laundry"
+      ],
+      [
+        "Industry",
+        "Clothing and Fashion"
+      ],
+      [
+        "Operator",
+        "Quality inspector"
+      ],
+      [
+        "Cameras",
+        "Three body-worn — one head, two wrist"
+      ],
+      [
+        "Frame",
+        "1920x1080 at 60 fps"
+      ],
+      [
+        "Episodes",
+        "6, totalling 10 min 45 s"
+      ],
+      [
+        "Longest episode",
+        "2 min 06 s"
+      ],
+      [
+        "Synchronisation",
+        "Independent start per camera, no hardware sync — each stream carries its own first-frame host timestamp"
+      ],
+      [
+        "Delivered size",
+        "8.8 GB across 6 episodes"
+      ]
+    ],
+    "breadcrumb": [
+      "Samples",
+      "Egocentric",
+      "Stitch quality inspection · three cameras"
+    ],
+    "preview": "Preview · 8 s from one of 6 episodes · 1920x1080 source",
+    "pills": [
+      {
+        "t": "Clothing & Laundry",
+        "k": "skill"
+      },
+      {
+        "t": "Three body-worn",
+        "k": "quality"
+      },
+      {
+        "t": "8.8 GB",
         "k": "file"
       }
     ],

@@ -189,6 +189,14 @@
     "view-2",
     "view-3"
   ],
+  "kit-garment-bagging-wrist": [
+    "view-2",
+    "view-3"
+  ],
+  "kit-stitch-inspection-wrist": [
+    "view-2",
+    "view-3"
+  ],
   "leaf-sweeping": [
     "right"
   ],

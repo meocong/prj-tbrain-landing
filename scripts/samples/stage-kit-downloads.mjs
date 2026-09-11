@@ -62,8 +62,18 @@ const SUFFIX = {
      `HEAD_CAMERA` in kit-slugs.mjs. Staging has to agree with the cutter about
      this or the card faces come out on the wrong files. */
   wrist: (slug) => Object.fromEntries(wristOrder(slug).map(([suffix, dir]) => [dir, suffix])),
-  rgbd: () => ({ d455: "" }),
+  /* Keyed by FILE, not by directory. The GoPro configurations put one camera
+     per directory, so the directory names the view; the D455 puts all five of
+     its streams in one `d455/` folder, so it does not. Keying this on the
+     directory made `color.mp4` and `depth.mp4` resolve to the same target, and
+     the second one staged was reported as a duplicate of the first and
+     dropped — which is how the depth view went missing while the run said
+     "ok". */
+  rgbd: () => ({ "color.mp4": "", "depth.mp4": "-depth" }),
 };
+
+/** mono and wrist name their view by directory; rgbd names it by file. */
+const viewKeyFor = (config, dir, name) => (config === "rgbd" ? name : dir);
 
 /** Every mp4 in the delivery, keyed by its exact byte count. */
 const bySize = new Map();
@@ -107,10 +117,10 @@ for (const file of readdirSync(SRC).filter((f) => /\.mp4$/i.test(f))) {
     continue;
   }
 
-  const { session, dir } = hits[0];
+  const { session, dir, name } = hits[0];
   const config = configOf(session);
   const slug = slugFor.get(`${(session.task ?? "").trim()}::${config}`);
-  const suffix = slug ? SUFFIX[config]?.(slug)?.[dir] : undefined;
+  const suffix = slug ? SUFFIX[config]?.(slug)?.[viewKeyFor(config, dir, name)] : undefined;
 
   if (!slug || suffix === undefined) {
     skipped.push(`${file} — ${session.task} / ${dir} has no record to face (config ${config})`);
