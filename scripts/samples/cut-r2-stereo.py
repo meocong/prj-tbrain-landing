@@ -162,9 +162,9 @@ def seek_in_episode(dur):
 
 FLIP = os.environ.get("FLIP") == "1"
 
-def cut(key, seek, out):
+def cut(key, seek, out, seconds=None):
     subprocess.run(["ffmpeg", "-y", "-v", "error", "-ss", f"{seek:.2f}", "-i", presign(key),
-                    "-t", str(SECONDS), "-an",
+                    "-t", str(seconds or SECONDS), "-an",
                     "-vf", f"{'hflip,vflip,' if FLIP else ''}scale={W}:{H}:force_original_aspect_ratio=increase,crop={W}:{H}",
                     "-c:v", "libx264", "-preset", "veryfast", "-crf", "28",
                     "-movflags", "+faststart", out], check=True,
@@ -186,7 +186,11 @@ def job(line):
         if not (lk in have and rk in have):
             continue
         try:
-            cut(lk, seek, f"{OUT}/{slug}.mp4")
+            # In SCOUT mode never run past the end of the episode: the session
+            # video continues into the next task, and a window found out there
+            # belongs to a different record.
+            cut(lk, seek, f"{OUT}/{slug}.mp4",
+                min(SECONDS, edur) if os.environ.get("SCOUT") == "1" else None)
             if os.environ.get("SCOUT") != "1":
                 cut(rk, seek, f"{OUT}/{slug}-right.mp4")
             return f"ok   {slug:<26} {left.split('_')[0]:<8} @{seek:8.2f}s"
@@ -196,6 +200,11 @@ def job(line):
 
 os.makedirs(OUT, exist_ok=True)
 lines = [l.strip() for l in open(sys.argv[1]) if l.strip()]
-with cf.ThreadPoolExecutor(max_workers=4) as ex:
+# JOBS caps the parallel encodes. Four is right for the 8-second cuts, whose
+# wall clock is almost all Drive/R2 answering range requests. It is NOT right
+# for a SCOUT pass: those encode whole 4-12 minute episodes, which is real CPU,
+# and four of them took this 8-core production box from load 0.3 to 25 while it
+# was also serving the site, the database and the workers. Scout with JOBS=2.
+with cf.ThreadPoolExecutor(max_workers=int(os.environ.get("JOBS", "4"))) as ex:
     for r in ex.map(job, lines):
         print(r, flush=True)

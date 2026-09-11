@@ -2,6 +2,12 @@
   "appliance-repair": [
     "right"
   ],
+  "auto-electrical": [
+    "right"
+  ],
+  "bag-cutting": [
+    "right"
+  ],
   "bag-holding": [
     "right"
   ],
@@ -35,6 +41,9 @@
   "client-posing": [
     "right"
   ],
+  "clothe-ironing": [
+    "right"
+  ],
   "component-assembly": [
     "right"
   ],
@@ -42,6 +51,12 @@
     "right"
   ],
   "component-inspection": [
+    "right"
+  ],
+  "component-testing": [
+    "right"
+  ],
+  "component-testing-2": [
     "right"
   ],
   "container-arranging": [
@@ -53,10 +68,16 @@
   "device-connecting": [
     "right"
   ],
+  "device-inserting": [
+    "right"
+  ],
   "dish-clearing": [
     "right"
   ],
   "dish-preparation": [
+    "right"
+  ],
+  "dish-washing": [
     "right"
   ],
   "dish-washing-2": [
@@ -149,6 +170,12 @@
   "handpose-zipper-sewing": [
     "right"
   ],
+  "harness-securing": [
+    "right"
+  ],
+  "inventory-counting": [
+    "right"
+  ],
   "item-organizing": [
     "right"
   ],
@@ -162,6 +189,9 @@
     "right"
   ],
   "led-soldering": [
+    "right"
+  ],
+  "lighting-setup": [
     "right"
   ],
   "machine-cleaning": [
@@ -182,6 +212,9 @@
   "noodle-prep": [
     "right"
   ],
+  "order-verifying": [
+    "right"
+  ],
   "outlet-installation": [
     "right"
   ],
@@ -192,6 +225,9 @@
     "right"
   ],
   "panel-attachment": [
+    "right"
+  ],
+  "paper-stripping": [
     "right"
   ],
   "part-sorting": [
@@ -216,6 +252,12 @@
     "right"
   ],
   "sheet-folding": [
+    "right"
+  ],
+  "sheet-laminating": [
+    "right"
+  ],
+  "sheet-organizing": [
     "right"
   ],
   "shoe-sorting-2": [
@@ -296,10 +338,16 @@
   "sole-stitching": [
     "right"
   ],
+  "stone-sanding": [
+    "right"
+  ],
   "table-cleaning": [
     "right"
   ],
   "table-clearing": [
+    "right"
+  ],
+  "tarpaulin-folding": [
     "right"
   ],
   "tea-pouring": [
@@ -323,6 +371,9 @@
   "vegetable-picking": [
     "right"
   ],
+  "vegetable-serving": [
+    "right"
+  ],
   "vegetable-weeding": [
     "right"
   ],
@@ -342,6 +393,9 @@
     "right"
   ],
   "wheel-balancing": [
+    "right"
+  ],
+  "wheel-reinstallation": [
     "right"
   ],
   "wire-connecting": [
