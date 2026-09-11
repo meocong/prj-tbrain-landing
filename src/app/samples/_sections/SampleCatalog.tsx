@@ -81,6 +81,26 @@ const LENS_PLACES: { view: string; label: string; place: string }[] = [
 ];
 
 /**
+ * The kit delivery's three body-worn cameras: a head view and two wrists.
+ *
+ * Not a rig elevation like `LENS_PLACES`, because there is no geometry to draw
+ * — the cameras are on a person, not on a bar — so they sit in a plain row with
+ * the head first. The head leads because it is the view that shows the task;
+ * the wrists are what this configuration ADDS, and they read as additions.
+ *
+ * Both wrists are labelled "wrist" and neither says which arm. The delivery
+ * does not know: `role` on every `.calib.json` is the camera's own index, and
+ * `missing_streams` names `wrist_left.mp4` and `wrist_right.mp4` on all 85
+ * sessions including the three-camera ones, so it is a profile template and not
+ * a record of what was worn. Two tiles reading "wrist" is the true version.
+ */
+const BODY_PLACES: { view: string; label: string; place: string }[] = [
+  { view: "", label: "head", place: "" },
+  { view: "view-2", label: "wrist", place: "" },
+  { view: "view-3", label: "wrist", place: "" },
+];
+
+/**
  * Cards revealed per step.
  *
  * Was 24, from when this grid WAS the category page and had to look like a
@@ -378,18 +398,33 @@ function Card({ sample, onOpen }: { sample: Sample; onOpen: () => void }) {
   const extra = VIEWS[sample.slug] ?? [];
   const lenses = LENS_PLACES.filter((l) => !l.view || extra.includes(l.view));
   const sixUp = lenses.length > 2;
-  const pair = !sixUp && extra.includes("right");
+  /* Three body-worn cameras, checked before the pair: a wrist record stages
+     `-view-2` and `-view-3` and no `-right`, so the pair test would miss it and
+     the card would play the head camera alone — an advertisement for the mono
+     configuration on the card selling the three-camera one. */
+  const body = BODY_PLACES.filter((l) => !l.view || extra.includes(l.view));
+  const bodyUp = !sixUp && body.length > 1;
+  const pair = !sixUp && !bodyUp && extra.includes("right");
   /* Two grid slots either way. Tam, 2026-09-10: "để nguyên 3 cột như này nó
      làm cho 2 cam kết hợp nhau bị nhỏ đi" — a multi-view card in a one-column
      slot gives each view a fraction of the width a single-view card gets, so
      the one card with more to show shows it smaller. */
-  const wide = sixUp || pair;
+  const wide = sixUp || pair || bodyUp;
 
   /* One row of two 4:3 eyes is 8:3. Four columns of 4:3 over two rows is the
      same 8:3, so the six-up and the pair occupy an identical footprint and a
      row mixing them stays level. Below `sm` the six reflow to two columns and
      three rows, which is 8:9. */
-  const band = sixUp ? "aspect-[8/9] sm:aspect-[8/3]" : pair ? "aspect-[8/3]" : "aspect-[4/3]";
+  /* Three 4:3 frames in a row is 4:1. Below `sm` they stack into one column,
+     which is 4:9 — the same shape the six-up takes on a phone, so a row mixing
+     the two still lines up. */
+  const band = sixUp
+    ? "aspect-[8/9] sm:aspect-[8/3]"
+    : bodyUp
+      ? "aspect-[4/9] sm:aspect-[4/1]"
+      : pair
+        ? "aspect-[8/3]"
+        : "aspect-[4/3]";
 
   /* The elements this card drives — one or two, and never in state.
      A ref, because the transport does not affect the render: nothing on this
@@ -491,11 +526,17 @@ function Card({ sample, onOpen }: { sample: Sample; onOpen: () => void }) {
             rows, which is the same 8:3. */}
         <div
           className={`grid w-full gap-px transition-transform duration-500 group-hover:scale-[1.02] ${band} ${
-            sixUp ? "grid-cols-2 sm:grid-cols-4" : pair ? "grid-cols-2" : "grid-cols-1"
+            sixUp
+              ? "grid-cols-2 sm:grid-cols-4"
+              : bodyUp
+                ? "grid-cols-1 sm:grid-cols-3"
+                : pair
+                  ? "grid-cols-2"
+                  : "grid-cols-1"
           }`}
           style={{ background: "#000" }}
         >
-          {(sixUp ? lenses : pair ? [{ view: "", label: "left eye", place: "" }, { view: "right", label: "right eye", place: "" }] : [{ view: "", label: "", place: "" }]).map(
+          {(sixUp ? lenses : bodyUp ? body : pair ? [{ view: "", label: "left eye", place: "" }, { view: "right", label: "right eye", place: "" }] : [{ view: "", label: "", place: "" }]).map(
             ({ view, label, place }, i) => (
               <figure key={view || "base"} className={`relative m-0 overflow-hidden ${place}`}>
                 <video
@@ -517,12 +558,13 @@ function Card({ sample, onOpen }: { sample: Sample; onOpen: () => void }) {
                   preload="none"
                   aria-label={label ? viewLabel(label) : sample.title}
                 />
-                {/* Only on the six-up. Two eyes read as two eyes; six near
-                    identical frames of the same bench read as a repeat until
-                    each one says which lens it is. `truncate` because a cell
-                    is about 200px on a two-column card and narrower on a
-                    phone. */}
-                {sixUp && (
+                {/* On the six-up and the three-up. Two eyes read as two eyes;
+                    six near identical frames of the same bench read as a repeat
+                    until each one says which lens it is, and the same is true
+                    of a head view beside two wrists — without the labels it is
+                    three shots of one workbench. `truncate` because a cell is
+                    about 200px on a two-column card and narrower on a phone. */}
+                {(sixUp || bodyUp) && (
                   <figcaption
                     className="bp-mono pointer-events-none absolute left-1.5 top-1.5 max-w-[calc(100%-12px)] truncate px-1.5 py-0.5 text-[9px]"
                     style={{ background: OVER_MEDIA.scrim, color: OVER_MEDIA.text }}
