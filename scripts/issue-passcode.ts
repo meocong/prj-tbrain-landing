@@ -23,6 +23,7 @@ dotenv.config();
 import {
   generatePasscode,
   hashPasscode,
+  normalizePasscode,
   passcodePrefix,
 } from "../src/lib/terminal-bench/auth";
 import { supabaseAdmin } from "../src/lib/terminal-bench/supabase/admin";
@@ -37,6 +38,8 @@ interface Args {
   days: number;
   /** Redemption cap for a shared code. `null` means unlimited. */
   uses: number | null;
+  /** An explicit passcode instead of a generated one. */
+  code?: string;
 }
 
 function parseArgs(): Args {
@@ -52,6 +55,7 @@ function parseArgs(): Args {
     else if (a === "--batch-label" || a === "--label") out.batchLabel = argv[++i];
     else if (a === "--days") out.days = Number(argv[++i]);
     else if (a === "--uses") out.uses = Number(argv[++i]);
+    else if (a === "--code") out.code = argv[++i];
   }
   if (out.project !== "terminal-bench" && out.project !== "samples") {
     console.error(`Unknown --project ${out.project}. Use terminal-bench or samples.`);
@@ -70,6 +74,26 @@ function parseArgs(): Args {
   if (out.uses != null && (!Number.isInteger(out.uses) || out.uses < 1)) {
     console.error("--uses must be a whole number of redemptions, 1 or more.");
     process.exit(1);
+  }
+  if (out.code != null) {
+    /* Normalised before it is judged, because that is what the server will
+       compare against: `normalizePasscode` upper-cases and folds I/L to 1 and
+       O to 0. So `figure` and `FIGURE` are the same credential, and warning
+       about the fold here beats a puzzled customer later. */
+    const norm = normalizePasscode(out.code);
+    if (norm.length < 3) {
+      console.error("--code needs at least 3 characters.");
+      process.exit(1);
+    }
+    if (!/^[A-Z0-9][A-Z0-9-]*$/.test(norm)) {
+      console.error(`--code ${out.code} normalises to ${norm}, which the entry form will reject.`);
+      console.error("Use letters, digits and dashes only.");
+      process.exit(1);
+    }
+    if (norm !== out.code.trim().toUpperCase()) {
+      console.warn(`Note: ${out.code.trim().toUpperCase()} is stored and typed as ${norm} (I/L->1, O->0).`);
+    }
+    out.code = norm;
   }
   if (out.uses != null && out.email) {
     // A per-client row is already one-per-(client,batch) and is reissued rather
@@ -92,7 +116,7 @@ async function main() {
     .single();
   if (!batch) throw new Error(`Batch ${args.batch} not found in project ${args.project}`);
 
-  const passcode = generatePasscode();
+  const passcode = args.code ?? generatePasscode();
   const prefix = passcodePrefix(passcode);
   const hash = await hashPasscode(passcode);
   const expiresAt = new Date(Date.now() + args.days * 24 * 60 * 60 * 1000).toISOString();
