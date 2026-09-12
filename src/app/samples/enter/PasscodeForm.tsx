@@ -12,7 +12,25 @@ import { C } from "../_sections/tokens";
 
 type State = { kind: "idle" } | { kind: "checking" } | { kind: "error"; message: string };
 
-const PATTERN = /^TB-[0-9A-HJKMNP-TV-Z]{4}-[0-9A-HJKMNP-TV-Z]{4}$/;
+/**
+ * What the box will send to the server, not what a generated code looks like.
+ *
+ * This used to be `/^TB-[0-9A-HJKMNP-TV-Z]{4}-[0-9A-HJKMNP-TV-Z]{4}$/`, which
+ * described exactly the output of `generatePasscode()` and nothing else. That
+ * was true until sales started handing out codes named after the account —
+ * DYNA, CENTIFIC, FIGURE — and the form refused them before a request was ever
+ * made. The customer saw "Passcodes look like TB-XXXX-XXXX" while holding the
+ * code we had just emailed them.
+ *
+ * The server never had this restriction: it looks up by `passcodePrefix` and
+ * bcrypt-compares, both of which take any string. So this check was never a
+ * security boundary, only a typo guard, and it is kept as one — reject the
+ * empty and the absurd, let the server judge the rest.
+ *
+ * Note `U` is deliberately absent from the GENERATED alphabet (Crockford drops
+ * I, L, O and U) but must be accepted on INPUT, because FIGURE contains one.
+ */
+const PATTERN = /^[A-Z0-9][A-Z0-9-]{2,31}$/;
 
 /** Same normalisation the server applies, so the client check cannot disagree. */
 function normalize(raw: string) {
@@ -56,7 +74,7 @@ export function PasscodeForm() {
     if (!PATTERN.test(code)) {
       setState({
         kind: "error",
-        message: "Passcodes look like TB-XXXX-XXXX. Check the email we sent you.",
+        message: "That does not look like a passcode. Check the email we sent you.",
       });
       return;
     }
@@ -131,7 +149,10 @@ export function PasscodeForm() {
           </p>
         ) : (
           <p id="passcode-help" className="text-sm" style={{ color: C.textDim }}>
-            Format TB-XXXX-XXXX. The session stays open for seven days on this browser.
+            {/* No longer "Format TB-XXXX-XXXX": account codes like DYNA are
+                handed out too, and a reader holding one should not be told
+                their own code is the wrong shape. */}
+            Enter it exactly as we sent it. The session stays open for seven days on this browser.
           </p>
         )}
       </div>
