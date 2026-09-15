@@ -2,7 +2,7 @@ import { type NextRequest } from "next/server";
 import { cookies } from "next/headers";
 import Anthropic from "@anthropic-ai/sdk";
 import { checkRateLimit, getClientIp, RATE_LIMITS } from "@/lib/rate-limit";
-import { resolveAIProvider } from "@/lib/ai/provider";
+import { noteWorkingProvider, resolveAIProviderCandidates } from "@/lib/ai/provider";
 import { supabaseAdmin } from "@/lib/terminal-bench/supabase/admin";
 
 export const runtime = "nodejs";
@@ -227,27 +227,53 @@ export async function POST(req: NextRequest) {
     });
   }
 
-  let provider;
+  let candidates;
   try {
-    provider = await resolveAIProvider();
+    candidates = await resolveAIProviderCandidates();
   } catch {
     return Response.json({ error: "Chat not configured" }, { status: 503 });
   }
 
-  const client = new Anthropic({
-    apiKey: provider.apiKey,
-    baseURL: provider.baseURL,
-  });
+  const outgoing = messages.map((m) => ({ role: m.role, content: m.content }));
 
-  const stream = await client.messages.stream({
-    model: provider.model,
-    max_tokens: 1024,
-    system: SYSTEM_PROMPT,
-    messages: messages.map((m) => ({
-      role: m.role,
-      content: m.content,
-    })),
-  });
+  /* Open the stream before returning a Response, and walk the candidates.
+
+     A metered key answers `1113 Insufficient balance` at request time, not at
+     config time, so the only way to know a key is spent is to ask it. Doing
+     that here rather than inside the ReadableStream matters: once the Response
+     is handed back the status line is already sent, and a dead key would show
+     the reader an empty bubble instead of falling through to a key with
+     credit. `await stream.done()` is deliberately NOT used — that would buffer
+     the whole answer and lose the streaming. Receiving the first event is
+     enough to prove the credential works. */
+  let stream: ReturnType<Anthropic["messages"]["stream"]> | null = null;
+  let lastErr: unknown = null;
+
+  for (const provider of candidates) {
+    const client = new Anthropic({ apiKey: provider.apiKey, baseURL: provider.baseURL });
+    try {
+      const s = client.messages.stream({
+        model: provider.model,
+        max_tokens: 1024,
+        system: SYSTEM_PROMPT,
+        messages: outgoing,
+        ...(provider.disableThinking ? { thinking: { type: "disabled" as const } } : {}),
+      });
+      // Surfaces an auth/balance rejection here rather than mid-render.
+      await s.withResponse();
+      stream = s;
+      noteWorkingProvider(provider);
+      break;
+    } catch (err) {
+      lastErr = err;
+      console.warn("[chat] provider candidate failed, trying next:", String(err).slice(0, 200));
+    }
+  }
+
+  if (!stream) {
+    console.error("[chat] every provider candidate failed:", lastErr);
+    return Response.json({ error: "Chat unavailable" }, { status: 503 });
+  }
 
   const encoder = new TextEncoder();
   let assistantBuffer = "";
