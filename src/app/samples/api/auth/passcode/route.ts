@@ -17,9 +17,13 @@ import { logAuthAttempt, logEvent } from "@/lib/terminal-bench/events";
  * Reuses the auth primitives, tables and audit trail already proven by the
  * terminal-bench showcase. The only difference is the project scope: sample
  * passcodes hang off a batch row with project = 'samples', so issuing one is
- * `pnpm issue:passcode` against that batch and revoking is the same admin
- * screen. Per-client grants and shared VIP codes both live in `passcodes`,
- * which is what lets Tam hand a code to a customer ahead of a call.
+ * `pnpm issue:passcode --project samples --batch library` and revoking is the
+ * same admin screen. The `--project` flag is load-bearing: batches are
+ * namespaced by project, and the script defaulted to terminal-bench, so
+ * without it the lookup misses and no samples code can be minted at all.
+ *
+ * Per-client grants and shared VIP codes both live in `passcodes`, which is
+ * what lets Tam hand a code to a customer ahead of a call.
  */
 
 export const runtime = "nodejs";
