@@ -112,7 +112,7 @@ export const CAPABILITY: Partial<Record<string, CapabilityTier[]>> = {
       /* "Egocentric" beside "Egocentric stereo" does not say one camera — the
          cards read as a category and a variant of it rather than as two rigs.
          The doc's own list is Monoegocentric / Stereo egocentric (2 cam) /
-         Advanced Stereo Egocentric (6 cam) / With wrist camera, and each of
+         Advanced Stereo Egocentric (4-6 cam) / With wrist camera, and each of
          those names its own rig. Following it. */
       name: "Mono egocentric (1 camera)",
       rig: "Head-mounted smartphone",
@@ -170,20 +170,30 @@ export const CAPABILITY: Partial<Record<string, CapabilityTier[]>> = {
          invented number on a premium tier is worse than none; the field is
          never rendered on this surface anyway — see the note on it. */
       key: "stereo6",
-      name: "Advanced stereo egocentric (6 cameras)",
-      rig: "Six-camera head rig, three stereo pairs",
-      sensors: "6-DoF IMU, 200-400 Hz, time-synced across all six",
+      /* "4-6 cameras", not "6".
+         Tam, 2026-09-12: "phần Advanced là 4-6 cam nhé vì sample của mình 4-6
+         ko phải đều là 6". This tier was named, specced and pitched as six
+         throughout — rig, sensors, outputs and the pitch line all said six or
+         three pairs — and the delivered captures are not all six. A spec sheet
+         that overstates the hardware on every record that ships with four is
+         the kind of error a buyer finds after signing.
+         `key` stays `stereo6`: it is the join used by `Category.tiers` and by
+         the record data, and renaming it would be a data migration for a
+         display string. */
+      name: "Advanced stereo egocentric (4-6 cameras)",
+      rig: "Multi-camera head rig, two or three stereo pairs",
+      sensors: "6-DoF IMU, 200-400 Hz, time-synced across every lens",
       ramp: "14-21 business days",
       ceiling: "1,000 h / month",
       price: "On brief",
       outputs:
-        "camera0..5.mp4 + camera_info per lens + imu.csv + VIO — one MCAP carrying every stream",
+        "camera0..N.mp4 + camera_info per lens + imu.csv + VIO — one MCAP carrying every stream",
       environment: "Workshop, workplace, on site",
       firstMonth: "200 h in month one",
       when:
-        "Where one pair is not enough geometry: a second angle on an occluded grasp, wider coverage of the bench, and calibration across three baselines rather than one.",
+        "Where one pair is not enough geometry: a second angle on an occluded grasp, wider coverage of the bench, and calibration across several baselines rather than one.",
       pitch:
-        "Six cameras in three stereo pairs on a hardware-synced clock — frame-level, no post-hoc alignment. 100° of coverage keeps both hands in frame, so a grasp hidden from one pair is still visible in another, with per-lens calibration and a 200-400 Hz IMU on the same timeline.",
+        "Four to six cameras in two or three stereo pairs on a hardware-synced clock — frame-level, no post-hoc alignment. The wide coverage keeps both hands in frame, so a grasp hidden from one pair is still visible in another, with per-lens calibration and a 200-400 Hz IMU on the same timeline.",
     },
     {
       key: "wrist",
