@@ -97,7 +97,15 @@ const THEME_INIT = `
 (function(){try{
   var key='tbrain-theme';
   var t=localStorage.getItem(key);
-  var dark = t==='dark' || (t==null && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
+  /* /samples defaults to dark, the rest of the site to the OS preference.
+     Tam, 2026-09-12: "để default page màu đen nhé". Only the DEFAULT — an
+     explicit choice in the toggle is stored under this key and still wins,
+     which is what "default" means and why the light half of .samples-scope
+     stays. Runs here rather than in the samples layout so the first paint is
+     already dark; a client effect alone flashes white. */
+  var p=location.pathname;
+  var samples = p==='/samples' || p.indexOf('/samples/')===0;
+  var dark = t==='dark' || (t==null && (samples || (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches)));
   document.documentElement.classList.toggle('dark', dark);
   document.documentElement.style.colorScheme = dark ? 'dark' : 'light';
 }catch(e){}})();

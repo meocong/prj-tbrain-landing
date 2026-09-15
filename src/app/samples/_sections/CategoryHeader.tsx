@@ -19,7 +19,7 @@ import { C } from "./tokens";
  * four posters beside the title was better and still read as a document.
  *
  * It is now a reel of this category's own records — one clip full frame,
- * running into the next — with the name and the nine figures printed on it.
+ * running into the next — with the name and what the category is printed on it.
  *
  * Not the mosaic `/samples` opens with, which was the version before this. A
  * drifting wall of thirty tiles is the right argument for a front door, where
@@ -37,8 +37,8 @@ import { C } from "./tokens";
  *
  * Shorter than the front door's, deliberately: `/samples` is allowed a full
  * viewport because the hero IS its opening claim, but this page has to reach
- * its clips. The nine figures come with it rather than sitting below, so the
- * scale claim lands on the footage that backs it.
+ * its clips. It used to carry a strip of eight figures too; Tam had that removed
+ * on 2026-09-12, and the note at the call site says why.
  */
 
 type Row = { slug: string; modality: string; title: string };
@@ -135,32 +135,24 @@ export function CategoryHeader({ category: c }: { category: Category }) {
         </dl>
       )}
 
-      {stats.length > 0 && (
-        /* On the footage rather than under it: the figures are a claim about
-           the records playing behind them, and separating the two put a rule
-           between a number and its evidence. */
-        <dl
-          className="mt-10 grid grid-cols-2 gap-x-6 gap-y-6 sm:grid-cols-4 xl:grid-cols-8"
-          style={{ borderTop: "1px solid rgba(255,255,255,0.16)", paddingTop: "1.25rem" }}
-        >
-          {stats.map((st) => (
-            <div key={st.label}>
-              <dd
-                className="font-mono text-[24px] tracking-tight md:text-[30px]"
-                style={{ color: "#ffffff", lineHeight: 1 }}
-              >
-                {st.value}
-              </dd>
-              <dt
-                className="bp-mono mt-2 text-[9px]"
-                style={{ color: "rgba(255,255,255,0.56)" }}
-              >
-                {st.label}
-              </dt>
-            </div>
-          ))}
-        </dl>
-      )}
+      {/* No eight-figure strip.
+          Tam, 2026-09-12: "bỏ hộ chị dòng này trong Egocentric", against a
+          screenshot of it — 997 min / 16 / 111 / 18 / 29 / 65, delivery files,
+          skill groups, distinct tasks, industries, workplaces, operators. Eight
+          small numbers under a hero, none of which a reader has a question about
+          yet, and several of which are counts of what we downloaded for the
+          previews rather than of what we hold.
+
+          Removed for every category with records, not only egocentric. It is one
+          component and the same complaint applies to each of them; leaving it on
+          gaming and teleoperation would give those heroes a strip that egocentric
+          lacks for no reason a reader could see. The figures are not lost —
+          CoverageChart and the "what we run in this category" block carry the
+          ones that answer something.
+
+          The `held` branch above stays. That is a different thing: a single
+          figure for a category with NO records, where it is the only number the
+          hero has. */}
     </>
   );
 

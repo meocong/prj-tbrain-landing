@@ -70,9 +70,13 @@ export interface Category {
    * It was derived from the `Streams` spec field and rendered as "4 cameras
    * 116 · 2 cameras 1", which is wrong twice over: `Streams` counts the video
    * streams DELIVERED, not the lenses on the head, and a distribution is not a
-   * configuration. The rig is six cameras in three stereo pairs; four of them
-   * ship as standard, per the "data 6 cam" pack README. Both facts are true and
-   * they are two different rows.
+   * configuration.
+   *
+   * It then said "6 cameras, three stereo pairs" for the whole category, which
+   * was the opposite error: a single configuration asserted over records that do
+   * not all share it. Tam, 2026-09-12: "sample của mình 4-6 ko phải đều là 6".
+   * The range is the honest generalisation; a capture that really is six says so
+   * about itself, in RigViews and on the six-camera group page.
    */
   rig?: string;
   /** Nominal IMU rate. Not the per-file measured reading — see capture.ts. */
@@ -154,7 +158,13 @@ export const CATEGORIES: Category[] = [
       reach: "70+ operating businesses · 35 location types · 100 operator professions",
       depth: "3,000 task types across 17 skill groups · 82% graded medium or hard",
     },
-    rig: "6 cameras, three stereo pairs",
+    /* "4-6", not "6". Tam, 2026-09-12: "sample của mình 4-6 ko phải đều là 6".
+       This is the `Head rig` row `CaptureSpec` prints for the WHOLE egocentric
+       category, so "6 cameras" asserted six on every record on the page —
+       including the ones delivered with four. The six-camera captures still say
+       six where they say it about themselves, in `RigViews` and on the
+       six-camera group page; this is the line that was generalising. */
+    rig: "4-6 cameras, two or three stereo pairs",
     imuHz: "200 Hz",
   },
   {
