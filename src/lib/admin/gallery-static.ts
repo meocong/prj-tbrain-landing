@@ -946,6 +946,12 @@ export const STATIC_IMAGES: StaticImage[] = [
     "size_bytes": 50107
   },
   {
+    "path": "/images/samples-coding-stem.jpg",
+    "name": "samples-coding-stem",
+    "ext": "jpg",
+    "size_bytes": 57962
+  },
+  {
     "path": "/images/samples/cup.jpg",
     "name": "cup",
     "ext": "jpg",
