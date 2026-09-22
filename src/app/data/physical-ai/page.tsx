@@ -96,7 +96,7 @@ function FoundryCTA() {
         <h2 className="font-semibold" style={{ fontFamily: "var(--font-heading)", fontSize: "clamp(32px,5.2vw,56px)", lineHeight: 1.04, letterSpacing: "-0.025em", color: "var(--bp-ink)" }}>Forge your next dataset with us</h2>
         <p className="mx-auto mt-5 max-w-xl" style={{ fontSize: 17, color: "var(--bp-ink-dim)" }}>Tell us the task, the embodiment, and the format. We&apos;ll scope a sample batch — captured, QC&apos;d, and delivered RLDS-ready.</p>
         <div className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
-          <Link href="/contact" className="inline-flex items-center gap-2 rounded-lg px-6 py-3 text-sm font-bold" style={{ fontFamily: "var(--font-heading)", background: "var(--bp-cyan)", color: "var(--bp-on-cyan)", boxShadow: "0 8px 22px -12px var(--bp-cyan)" }}>See a sample dataset <ArrowRight className="h-4 w-4" /></Link>
+          <Link href="/samples" className="inline-flex items-center gap-2 rounded-lg px-6 py-3 text-sm font-bold" style={{ fontFamily: "var(--font-heading)", background: "var(--bp-cyan)", color: "var(--bp-on-cyan)", boxShadow: "0 8px 22px -12px var(--bp-cyan)" }}>See a sample dataset <ArrowRight className="h-4 w-4" /></Link>
           <Link href="/contact" className="inline-flex items-center gap-2 rounded-lg px-6 py-3 text-sm font-bold" style={{ fontFamily: "var(--font-heading)", color: "var(--bp-ink)", border: "1px solid var(--bp-line-strong)" }}>Talk to us</Link>
         </div>
       </div>

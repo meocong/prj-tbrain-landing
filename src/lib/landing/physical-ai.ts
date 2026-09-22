@@ -19,7 +19,10 @@ export const FOUNDRY_HERO = {
   eyebrow: "Industrial data · real production environments · not scraped, not simulated.",
   title: "The Robotics Data Foundry for Physical AI",
   sub: "Real capture packs, worn by operators on the factory floor — egocentric, action-paired, deeply annotated. Sourced through an industrial partner network across Asia, QC'd, and delivered RLDS-ready.",
-  ctaPrimary: { label: "See a sample dataset", href: "/contact" },
+  // Points at /samples, not /contact: the samples surface now shows real
+  // footage + fields per category, so "see a sample" is something we can
+  // answer immediately rather than routing through a sales conversation.
+  ctaPrimary: { label: "See a sample dataset", href: "/samples" },
   ctaSecondary: { label: "How the foundry works", href: "/data/physical-ai#pipeline" },
   trust: "Industrial network · real production · LeRobot / RLDS · ≤48h delivery",
 } as const;
