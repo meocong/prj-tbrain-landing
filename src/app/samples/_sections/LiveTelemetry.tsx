@@ -52,6 +52,38 @@ interface EgoImuPayload {
   gyroRight: ImuBucket[];
 }
 
+/**
+ * The approved egocentric set: one IMU in physical units, and the head pose.
+ *
+ * Unlike the two-unit raw-count payload above, this one is in m/s² and rad/s
+ * as `imu.csv` records them. Pose is printed relative to the first measured
+ * frame of the preview — distance moved and angle turned — because the axes of
+ * the delivery's world frame are defined in a manifest the set does not ship,
+ * and a yaw or pitch against an unstated convention would be a guess. Frames
+ * where the odometry did not measure a pose carry `p` and `r` as null.
+ */
+interface ImuPoseRow {
+  t: number;
+  a: [number, number, number];
+  am: number;
+  g: [number, number, number];
+  gm: number;
+  p: [number, number, number] | null;
+  r: number | null;
+}
+interface ImuPosePayload {
+  slug: string;
+  kind: "imu-pose";
+  offsetSec: number;
+  rateHz: number;
+  rows: ImuPoseRow[];
+}
+
+type Payload = GamePayload | EgoImuPayload | ImuPosePayload;
+
+// Checked before the game branch: both payloads carry `rows`.
+const isImuPose = (p: Payload): p is ImuPosePayload => (p as ImuPosePayload).kind === "imu-pose";
+
 const NULL = "null";
 
 /**
@@ -107,7 +139,7 @@ export function LiveTelemetry({
   video: HTMLVideoElement | null;
 }) {
   const hostRef = useRef<HTMLDivElement>(null);
-  const [payload, setPayload] = useState<GamePayload | EgoImuPayload | null>(null);
+  const [payload, setPayload] = useState<Payload | null>(null);
   const [state, setState] = useState<"loading" | "ready" | "error">("loading");
 
   useEffect(() => {
@@ -143,7 +175,16 @@ export function LiveTelemetry({
     let raf = 0;
     const render = () => {
       const t = video.currentTime;
-      if ("rows" in payload) {
+      if (isImuPose(payload)) {
+        const r = seek(payload.rows, t);
+        if (r) {
+          put("time", `${Math.round(t * 1000)} ms`);
+          put("acc", `${r.am.toFixed(2)}  ·  ${r.a.map((v) => v.toFixed(2)).join(", ")}`);
+          put("gyro", `${r.gm.toFixed(3)}  ·  ${r.g.map((v) => v.toFixed(3)).join(", ")}`);
+          put("moved", r.p ? `${Math.hypot(...r.p).toFixed(3)}  ·  ${r.p.map((v) => v.toFixed(3)).join(", ")}` : NULL);
+          put("turned", r.r == null ? NULL : `${r.r.toFixed(1)}°`);
+        }
+      } else if ("rows" in payload) {
         const r = seek(payload.rows, t);
         if (r) {
           put("time", `${Math.round(t * 1000)} ms`);
@@ -225,8 +266,10 @@ export function LiveTelemetry({
     );
   }
 
-  const isGame = "rows" in payload;
+  const imuPose = isImuPose(payload);
+  const isGame = !imuPose && "rows" in payload;
   const posed = isGame && (payload as GamePayload).rows.some((r) => r.p);
+  const posedShare = imuPose ? payload.rows.filter((r) => r.p).length / Math.max(1, payload.rows.length) : 0;
 
   return (
     <div ref={hostRef} className="mt-4">
@@ -241,7 +284,14 @@ export function LiveTelemetry({
 
       <dl className="mt-2">
         <Row label="Time" id="time" />
-        {isGame ? (
+        {imuPose ? (
+          <>
+            <Row label="Accel" id="acc" hint="m/s² · |a| · x, y, z" />
+            <Row label="Gyro" id="gyro" hint="rad/s · |ω| · x, y, z" />
+            <Row label="Head moved" id="moved" hint="m · dist · dx, dy, dz" />
+            <Row label="Head turned" id="turned" hint="since first pose" />
+          </>
+        ) : isGame ? (
           <>
             <Row label="Keys" id="keys" />
             <Row label="Actions" id="actions" />
@@ -265,7 +315,15 @@ export function LiveTelemetry({
           they read null rather than being filled in.
         </p>
       )}
-      {!isGame && (
+      {imuPose && (
+        <p className="mt-3 text-[11px] leading-relaxed" style={{ color: C.textDim }}>
+          IMU at {payload.rateHz} Hz on the camera clock, as recorded.{" "}
+          {posedShare >= 0.995
+            ? "Head pose is measured on every frame of this preview."
+            : `Head pose is measured on ${Math.round(posedShare * 100)}% of this preview's frames; the rest read null rather than being filled in.`}
+        </p>
+      )}
+      {!isGame && !imuPose && (
         <p className="mt-3 text-[11px] leading-relaxed" style={{ color: C.textDim }}>
           {(payload as EgoImuPayload).device.imu} at {(payload as EgoImuPayload).rateHz} Hz, two
           units. Values are raw sensor counts, as recorded.

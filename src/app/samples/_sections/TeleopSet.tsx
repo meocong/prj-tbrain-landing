@@ -2,15 +2,12 @@
 
 import { useCallback, useRef, useState } from "react";
 import { clipSrc, posterSrc } from "@/lib/samples/categories";
+import set from "@/lib/samples/teleop-set.json";
 import { C, OVER_MEDIA } from "./tokens";
 import { Reveal } from "./Reveal";
 
 /**
  * The teleoperation set, playing.
- *
- * This category showed a line drawing and a count while the dataset sat in
- * Drive: 11 episodes, three synchronised 640x480 cameras each, 33 files. The
- * count was true and it was not the product.
  *
  * The three cameras are the point, so they play together rather than as three
  * separate cards. A robot policy trained on this reads head, left and right on
@@ -19,25 +16,40 @@ import { Reveal } from "./Reveal";
  * are seeked to the leader on every scrub, so a frame in one is the same
  * instant in the others.
  *
- * Below it, all 11 head-camera episodes. Same task in every one — "Pick up all
- * the items on the table and put them into the bin on the right" — which is
- * what makes it a training set rather than a showreel, and the reason the strip
- * is worth showing at all: the variation between episodes IS the data.
+ * Below it, one head-camera episode from every session. Same task in all of
+ * them, which is what makes it a training set rather than a showreel: the
+ * variation between attempts is the data.
  *
- * Every figure here is counted off the files, not read from `meta/info.json`,
- * which disagrees with its own disk — it declares 10 episodes, 13,465 frames
- * and 30 videos where the directory holds 11, 14,076 and 33.
+ * Every figure comes from `teleop-set.json`, which `ingest-approved.py` writes
+ * from the approved delivery's own LeRobot metadata. Nothing on this component
+ * is typed in: the previous version hard-coded a different robot's set — eleven
+ * episodes, a gripper, sixteen dimensions — and outlived it.
  */
 
-const EPISODES = Array.from({ length: 11 }, (_, i) => `teleop-ep${String(i).padStart(2, "0")}`);
+interface Strip {
+  slug: string;
+  episodes: number;
+  frames: number;
+  shown: number;
+  seconds: number;
+}
+const SET = set as {
+  task: string;
+  fps: number;
+  sessions: number;
+  episodes: number;
+  frames: number;
+  seconds: number;
+  strip: Strip[];
+  lead: string;
+};
 
+const LEAD = SET.strip[0];
 const VIEWS = [
-  { slug: "teleop-ep00", label: "Head" },
-  { slug: "teleop-ep00-left", label: "Left" },
-  { slug: "teleop-ep00-right", label: "Right" },
+  { slug: SET.lead, label: "Head" },
+  { slug: `${SET.lead}-left`, label: "Left" },
+  { slug: `${SET.lead}-right`, label: "Right" },
 ];
-
-const TASK = "Pick up all the items on the table and put them into the bin on the right.";
 
 export function TeleopSet() {
   const refs = useRef<(HTMLVideoElement | null)[]>([]);
@@ -70,6 +82,8 @@ export function TeleopSet() {
     });
   }, []);
 
+  if (!LEAD) return null;
+
   return (
     <section style={{ background: C.base, color: C.text }}>
       <div className="mx-auto max-w-[1400px] px-4 pb-16 pt-14 lg:px-10 xl:px-16">
@@ -79,26 +93,23 @@ export function TeleopSet() {
           </h2>
 
           <p className="mt-5 max-w-2xl text-[13px] leading-relaxed" style={{ color: C.textMid }}>
-            Three cameras on one clock, which is what a policy reads. Below them, every episode in
-            the set — one task, eleven attempts, and the variation between them is the data.
+            Three cameras on one clock, which is what a policy reads. Below them, one episode from
+            each of the {SET.sessions} sessions — one task, {SET.episodes.toLocaleString()} attempts,
+            and the variation between them is the data.
           </p>
 
           {/* Which of the two products this is. The tier table on this page
               prices "Egocentric + gripper (UMI)", a person wearing a gripper
-              rig; the set below is a robot. Both are teleoperation and the page
-              named only one of them for weeks. */}
+              rig; the set below is a robot. "Rig ko ghi tên" — the
+              configuration is described, the model is not named. */}
           <p
             className="bp-card mt-4 max-w-2xl px-4 py-3 text-[13px] leading-relaxed"
             style={{ color: C.textMid }}
           >
-            {/* The model string was here in mono, which is the most legible
-                place on the page to print a part number we are not allowed to
-                print. "Rig ko ghi tên" — redact.mjs. */}
-            This set is the robot side: a bimanual follower arm,
-            two arms, seven joints each plus a gripper. The configuration priced above it — Egocentric
-            + gripper (UMI) — is the human side, a person wearing a wrist rig, and it delivers{" "}
-            <span className="font-mono">head.mp4 + wrist.mp4 + imu.csv + gripper_state.json</span>{" "}
-            instead. Both are teleoperation; they are not the same recording.
+            This set is the robot side: bimanual follower arms, seven joints each, with a
+            five-fingered hand on each arm. The configuration priced above it — Egocentric + gripper
+            (UMI) — is the human side, a person wearing a wrist rig. Both are teleoperation; they are
+            not the same recording.
           </p>
 
           <div className="mt-8 grid gap-2 sm:grid-cols-3">
@@ -138,28 +149,28 @@ export function TeleopSet() {
               {playing ? "Pause all three" : "Play all three"}
             </button>
             <span className="font-mono text-[11px]" style={{ color: C.textDim }}>
-              Episode 0 · 640×480 · 30 fps · 16-dimensional state and action per frame
+              Session 1 · episode {LEAD.shown} · 640×480 · {SET.fps} fps · 40-dimensional state and
+              action per frame
             </span>
           </div>
 
           <p className="bp-mono mt-10 text-[10px]" style={{ color: C.textDim }}>
-            All 11 episodes · head camera
+            All {SET.sessions} sessions · head camera
           </p>
           <p className="mt-2 max-w-2xl text-[13px]" style={{ color: C.textMid }}>
-            {TASK}
+            {SET.task}
           </p>
 
           <div className="mt-5 flex gap-2 overflow-x-auto pb-4">
-            {EPISODES.map((slug, i) => (
-              <Tile key={slug} slug={slug} index={i} />
+            {SET.strip.map((s, i) => (
+              <Tile key={s.slug} slug={s.slug} label={`s${i + 1} · ep ${s.shown}`} />
             ))}
           </div>
 
           <p className="mt-4 max-w-2xl text-[12px] leading-relaxed" style={{ color: C.textDim }}>
-            Counted off the files: 11 episodes, 14,076 frames, 33 videos. The set&apos;s own
-            <code className="mx-1 font-mono">meta/info.json</code> declares 10, 13,465 and 30, and a
-            LeRobot loader reading its <code className="mx-1 font-mono">splits</code> would drop the
-            last episode without saying so.
+            Counted off the files: {SET.sessions} sessions, {SET.episodes.toLocaleString()} episodes,{" "}
+            {SET.frames.toLocaleString()} frames, {(SET.sessions * 3).toLocaleString()} videos —{" "}
+            {Math.round(SET.seconds / 60)} minutes of robot time at {SET.fps} fps.
           </p>
         </Reveal>
       </div>
@@ -167,7 +178,7 @@ export function TeleopSet() {
   );
 }
 
-function Tile({ slug, index }: { slug: string; index: number }) {
+function Tile({ slug, label }: { slug: string; label: string }) {
   const video = useRef<HTMLVideoElement | null>(null);
   return (
     <span
@@ -196,7 +207,7 @@ function Tile({ slug, index }: { slug: string; index: number }) {
         className="pointer-events-none absolute bottom-1.5 left-1.5 px-1.5 py-0.5 bp-mono text-[9px]"
         style={{ background: OVER_MEDIA.scrim, color: OVER_MEDIA.textDim }}
       >
-        ep {index}
+        {label}
       </span>
     </span>
   );

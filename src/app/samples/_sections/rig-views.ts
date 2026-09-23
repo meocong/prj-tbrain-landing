@@ -132,7 +132,23 @@ export interface RigLayout {
  */
 export function rigLayout(slug: string): RigLayout {
   const extra = VIEWS[slug] ?? [];
-  const lenses = LENS_PLACES.filter((l) => !l.view || extra.includes(l.view));
+  /* A record may make the mid-left lens its base file instead of primary-left.
+     The approved set does: on both of its rigs the primary pair is aimed so
+     steeply that it frames the wearer's chest and chin, and the mid pair is the
+     one that sees the hands on the work — so the mid view is the right face
+     for a card. Such a record stages `primary-left` as a view, and the base
+     cell takes mid-left's label and grid place instead of primary's, so every
+     tile still names the lens that shot it. The base stays first in DOM order:
+     the modal binds the first cell to the transport and the telemetry panel. */
+  const midBase = extra.includes("primary-left");
+  const places = midBase
+    ? [
+        { ...LENS_PLACES.find((l) => l.view === "mid-left")!, view: "" },
+        { ...LENS_PLACES.find((l) => l.view === "")!, view: "primary-left" },
+        ...LENS_PLACES.filter((l) => l.view !== "" && l.view !== "mid-left"),
+      ]
+    : LENS_PLACES;
+  const lenses = places.filter((l) => !l.view || extra.includes(l.view));
   if (lenses.length > 2) {
     return {
       cells: lenses,

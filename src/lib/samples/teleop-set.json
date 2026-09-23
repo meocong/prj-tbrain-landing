@@ -1,0 +1,88 @@
+{
+  "task": "Pick brown box and place it into blue bin.",
+  "fps": 20,
+  "sessions": 11,
+  "episodes": 134,
+  "frames": 20790,
+  "seconds": 1039.5,
+  "strip": [
+    {
+      "slug": "teleop-s000",
+      "episodes": 7,
+      "frames": 1244,
+      "shown": 1,
+      "seconds": 8.7
+    },
+    {
+      "slug": "teleop-s001",
+      "episodes": 13,
+      "frames": 2279,
+      "shown": 3,
+      "seconds": 8.7
+    },
+    {
+      "slug": "teleop-s002",
+      "episodes": 8,
+      "frames": 1285,
+      "shown": 2,
+      "seconds": 8.1
+    },
+    {
+      "slug": "teleop-s003",
+      "episodes": 14,
+      "frames": 2743,
+      "shown": 6,
+      "seconds": 9.8
+    },
+    {
+      "slug": "teleop-s004",
+      "episodes": 17,
+      "frames": 2874,
+      "shown": 13,
+      "seconds": 8.5
+    },
+    {
+      "slug": "teleop-s005",
+      "episodes": 12,
+      "frames": 1709,
+      "shown": 11,
+      "seconds": 7
+    },
+    {
+      "slug": "teleop-s006",
+      "episodes": 7,
+      "frames": 1069,
+      "shown": 5,
+      "seconds": 7.5
+    },
+    {
+      "slug": "teleop-s007",
+      "episodes": 18,
+      "frames": 2475,
+      "shown": 0,
+      "seconds": 6.9
+    },
+    {
+      "slug": "teleop-s008",
+      "episodes": 14,
+      "frames": 1910,
+      "shown": 6,
+      "seconds": 6.8
+    },
+    {
+      "slug": "teleop-s009",
+      "episodes": 14,
+      "frames": 1936,
+      "shown": 12,
+      "seconds": 6.9
+    },
+    {
+      "slug": "teleop-s010",
+      "episodes": 10,
+      "frames": 1266,
+      "shown": 4,
+      "seconds": 6
+    }
+  ],
+  "lead": "teleop-s000"
+}

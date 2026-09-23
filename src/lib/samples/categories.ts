@@ -1,5 +1,16 @@
 import samples from "./samples.json";
+import teleopSet from "./teleop-set.json";
 import { CAPABILITY, IN_FLIGHT, type CapabilityTier } from "./capability";
+
+const TELEOP = teleopSet as {
+  task: string;
+  fps: number;
+  sessions: number;
+  episodes: number;
+  frames: number;
+  seconds: number;
+  strip: { slug: string; shown: number }[];
+};
 
 /**
  * The six things a buyer can be here for.
@@ -246,39 +257,29 @@ export const CATEGORIES: Category[] = [
     forWhat:
       "Action-conditioned policy training. Every frame carries the state the arms were in and the action taken, which is the pair a policy learns from.",
     shelf: null,
-    // IN_FLIGHT.teleoperation, counted off the disk rather than off the
-    // dataset's own manifest, which disagrees with it.
-    held: { figure: "11", unit: "episodes · 3 synced cameras each" },
-    // The head camera of all eleven episodes. They are real footage and are not
-    // in `samples.json`, so without this the header fell back to a drawing on a
-    // category that has thirty-three video files.
-    reel: [
-      { slug: "teleop-ep00", title: "Episode 0 · pick and place into the bin" },
-      { slug: "teleop-ep01", title: "Episode 1 · pick and place into the bin" },
-      { slug: "teleop-ep02", title: "Episode 2 · pick and place into the bin" },
-      { slug: "teleop-ep03", title: "Episode 3 · pick and place into the bin" },
-      { slug: "teleop-ep04", title: "Episode 4 · pick and place into the bin" },
-      { slug: "teleop-ep05", title: "Episode 5 · pick and place into the bin" },
-      { slug: "teleop-ep06", title: "Episode 6 · pick and place into the bin" },
-      { slug: "teleop-ep07", title: "Episode 7 · pick and place into the bin" },
-      { slug: "teleop-ep08", title: "Episode 8 · pick and place into the bin" },
-      { slug: "teleop-ep09", title: "Episode 9 · pick and place into the bin" },
-      { slug: "teleop-ep10", title: "Episode 10 · pick and place into the bin" },
-    ],
-    // Every line from IN_FLIGHT.teleoperation, which is counted off the disk
-    // rather than off the dataset's own manifest - the two disagree.
+    // Counted by `ingest-approved.py` off the approved LeRobot delivery.
+    held: { figure: TELEOP.episodes.toLocaleString("en-US"), unit: `episodes · ${TELEOP.sessions} sessions · 3 synced cameras` },
+    // One head-camera episode per session.
+    reel: TELEOP.strip.map((s, i) => ({
+      slug: s.slug,
+      title: `Session ${i + 1} · episode ${s.shown} · ${TELEOP.task.replace(/\.$/, "").toLowerCase()}`,
+    })),
     capture: [
       /* Not the follower arm's model string. "Rig ko ghi tên" (redact.mjs)
          applies to this block too — it renders straight onto the category
          page, where `redact.mjs` never sees it, because that function filters
          the record modal's spec and nothing else. What a buyer can act on is
          the configuration, not the part number. */
-      { label: "Recorded on", value: "Bimanual follower arms, table-top" },
-      { label: "Video", value: "Three synchronised 640x480 cameras (head, left, right) at 30 fps" },
-      { label: "On every frame", value: "Joint state and action, 16-dimensional" },
-      { label: "Arms", value: "Seven degrees of freedom per arm, plus a gripper each" },
-      { label: "Held now", value: "11 episodes · 14,076 frames · 7 min 49 s · 1.2 GB of video" },
-      { label: "Ships as", value: "LeRobotDataset v2.1 with a GR00T-compatible modality map" },
+      { label: "Recorded on", value: "Bimanual follower arms with five-fingered hands, table-top" },
+      { label: "Video", value: `Three synchronised 640x480 cameras (head, left, right) at ${TELEOP.fps} fps` },
+      { label: "On every frame", value: "Joint state and action, 40-dimensional" },
+      { label: "Arms", value: "Seven degrees of freedom per arm" },
+      { label: "Hands", value: "Five fingers, six actuated joints per hand" },
+      {
+        label: "Held now",
+        value: `${TELEOP.sessions} sessions · ${TELEOP.episodes.toLocaleString("en-US")} episodes · ${TELEOP.frames.toLocaleString("en-US")} frames · ${Math.round(TELEOP.seconds / 60)} min`,
+      },
+      { label: "Ships as", value: "LeRobotDataset v3.0" },
     ],
   },
   {

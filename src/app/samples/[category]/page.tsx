@@ -24,7 +24,6 @@ import { TwoRoutes } from "../_sections/TwoRoutes";
 import { CoverageChart } from "../_sections/CoverageChart";
 import { CategoryHeader } from "../_sections/CategoryHeader";
 import { MocapDemo } from "../_sections/MocapDemo";
-import { OtsShelf } from "../_sections/OtsShelf";
 import { GamingSet } from "../_sections/GamingSet";
 import { TeleopSet } from "../_sections/TeleopSet";
 import { TelemetryStrip } from "../_sections/TelemetryStrip";
@@ -304,12 +303,11 @@ export default async function CategoryPage({
             this says what rides with it. */}
         {c.slug === "egocentric" && <AdvancedAnnotation />}
 
-        {/* The other purchase route, with footage. Everything in the grid
-            above is a stereo rig delivery — the custom side — and "Off the
-            shelf" was a paragraph about 12,900 episodes nobody could see a
-            frame of. The capability sheet had a Sample Link per skill all
-            along. */}
-        {c.slug === "egocentric" && <OtsShelf />}
+        {/* The off-the-shelf clip shelf that sat here (`OtsShelf`, cups and
+            screwdrivers from the mono corpus) was removed on 2026-09-23 with the
+            rest of the pre-approval samples: Thạch, "clear tất cả cái cũ và đẩy
+            data chuẩn". The approved set is itself shelf data — delivered and
+            accepted — so the configuration folders above now carry it. */}
 
         {/* The mix, AFTER the clips. humanoidlayer.dev prints its facet
             values on the page and we copied that literally, which on 118

@@ -15,6 +15,11 @@
  * ready in this many days" is the same truth and is what the spreadsheet says.
  */
 
+import teleopSet from "./teleop-set.json";
+
+const TELEOP = teleopSet as { sessions: number; episodes: number; frames: number; fps: number; seconds: number };
+
+
 export interface CapabilityTier {
   /**
    * Join key against `Sample["tier"]`.
@@ -156,7 +161,10 @@ export const CAPABILITY: Partial<Record<string, CapabilityTier[]>> = {
       when:
         "Where the model needs to know where the camera was: the IMU and the pair make visual-inertial odometry possible, which mono cannot.",
       pitch:
-        "Two synchronised eyes and a 200-400 Hz IMU on one clock — true depth, not a single RGB feed. Enough parallax for VIO and hand pose, and the rig most of the published catalogue is shot on.",
+        // The last clause, "and the rig most of the published catalogue is shot
+        // on", went on 2026-09-23: the approved set that replaced the catalogue
+        // is all six-camera captures, so it now describes nothing on the page.
+        "Two synchronised eyes and a 200-400 Hz IMU on one clock — true depth, not a single RGB feed. Enough parallax for VIO and hand pose.",
     },
     {
       /* Added 2026-09-10. The doc lists four egocentric configurations and this
@@ -288,16 +296,14 @@ export const IN_FLIGHT: Partial<Record<string, string>> = {
     "20 hours in collection since 5 September 2026 with 15 operators: " +
     "10 h urban walking, 5 h vehicular navigation, 5 h structured indoor. " +
     "1080p30 MP4 with audio, clips 30 s to 15 min.",
-  // Counted from the dataset itself, not from its own manifest, which is wrong:
-  // `info.json` declares 10 episodes / 13,465 frames / 30 videos where the disk
-  // holds 11 / 14,076 / 33. See docs/samples-restructure-plan.md §5.4.
+  // The approved delivery, counted by `ingest-approved.py` into teleop-set.json.
   teleoperation:
-    "One bimanual pick-and-place set already collected: 11 episodes, " +
-    "14,076 frames at 30 fps (7 min 49 s), on a bimanual follower arm. " +
-    "Seven degrees of freedom per arm plus a gripper each, 16-dimensional " +
-    "state and action. " +
-    "Three synchronised 640×480 cameras (head, left, right), 1.2 GB of video. " +
-    "Ships as LeRobotDataset v2.1 with a GR00T-compatible modality map.",
+    `${TELEOP.sessions} sessions of one pick-and-place task already collected: ` +
+    `${TELEOP.episodes.toLocaleString("en-US")} episodes, ${TELEOP.frames.toLocaleString("en-US")} frames ` +
+    `at ${TELEOP.fps} fps (${Math.round(TELEOP.seconds / 60)} min), on bimanual follower arms with ` +
+    "five-fingered hands. Seven degrees of freedom per arm and six actuated joints per hand; " +
+    "state and action are 40-dimensional, with a wrist pose per side. " +
+    "Three synchronised 640×480 cameras (head, left, right). Ships as LeRobotDataset v3.0.",
 };
 
 /** Formats every tier can be delivered in, from the same sheet's summary row. */
