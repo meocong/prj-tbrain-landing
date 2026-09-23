@@ -62,3 +62,4 @@ scripts/samples/drive-handpose.json
 
 # Staged kit-delivery videos: symlinks into a local download folder.
 .samples-stage/
+.samples-approved/

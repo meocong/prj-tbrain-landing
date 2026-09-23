@@ -1,428 +1,546 @@
 {
-  "appliance-repair": [
-    "right"
+  "bag-replacement": [
+    "primary-left",
+    "primary-right",
+    "mid-right"
   ],
-  "auto-electrical": [
-    "right"
+  "bar-cutting": [
+    "primary-left",
+    "primary-right",
+    "mid-right"
   ],
-  "bag-cutting": [
-    "right"
+  "bar-cutting-2": [
+    "primary-left",
+    "primary-right",
+    "mid-right"
   ],
-  "bag-holding": [
-    "right"
+  "bar-drilling": [
+    "primary-left",
+    "primary-right",
+    "mid-right"
   ],
-  "bathroom-scrubbing": [
-    "right"
+  "bar-welding": [
+    "primary-left",
+    "primary-right",
+    "mid-right"
   ],
-  "bed-making": [
-    "right"
+  "bathroom-cleaning": [
+    "primary-left",
+    "primary-right",
+    "mid-right"
   ],
-  "bed-making-2": [
-    "right"
+  "bathroom-cleaning-2": [
+    "primary-left",
+    "primary-right",
+    "mid-right"
   ],
-  "bed-making-3": [
-    "right"
+  "beard-shaving": [
+    "primary-left",
+    "primary-right",
+    "mid-right"
   ],
-  "board-placing": [
-    "right"
+  "board-writing": [
+    "primary-left",
+    "primary-right",
+    "mid-right"
   ],
-  "body-assembly": [
-    "right"
+  "bodywork-polishing": [
+    "primary-left",
+    "primary-right",
+    "mid-right"
   ],
-  "box-cleaning": [
-    "right"
+  "button-attaching": [
+    "primary-left",
+    "primary-right",
+    "mid-right"
   ],
-  "cabinet-installation": [
-    "right"
+  "cable-assembly": [
+    "primary-left",
+    "primary-right",
+    "mid-right"
   ],
-  "ceiling-panels": [
-    "right"
+  "car-driving": [
+    "primary-left",
+    "primary-right",
+    "mid-right"
   ],
-  "client-posing": [
-    "right"
+  "car-polishing": [
+    "primary-left",
+    "primary-right",
+    "mid-right"
   ],
-  "clothe-ironing": [
-    "right"
+  "card-cutting": [
+    "primary-left",
+    "primary-right",
+    "mid-right"
+  ],
+  "cartridge-assembly": [
+    "primary-left",
+    "primary-right",
+    "mid-right"
+  ],
+  "chalk-sharpening": [
+    "primary-left",
+    "primary-right",
+    "mid-right"
+  ],
+  "character-attaching": [
+    "primary-left",
+    "primary-right",
+    "mid-right"
+  ],
+  "chicken-coating": [
+    "primary-left",
+    "primary-right",
+    "mid-right"
+  ],
+  "chisel-sharpening": [
+    "primary-left",
+    "primary-right",
+    "mid-right"
+  ],
+  "chisel-sharpening-2": [
+    "primary-left",
+    "primary-right",
+    "mid-right"
+  ],
+  "cloth-washing": [
+    "primary-left",
+    "primary-right",
+    "mid-right"
   ],
   "component-assembly": [
-    "right"
+    "primary-left",
+    "primary-right",
+    "mid-right"
   ],
-  "component-grinding": [
-    "right"
+  "component-placing": [
+    "primary-left",
+    "primary-right",
+    "mid-right"
   ],
-  "component-inspection": [
-    "right"
-  ],
-  "component-testing": [
-    "right"
-  ],
-  "component-testing-2": [
-    "right"
-  ],
-  "container-arranging": [
-    "right"
-  ],
-  "cup-sealing": [
-    "right"
-  ],
-  "device-connecting": [
-    "right"
-  ],
-  "device-inserting": [
-    "right"
-  ],
-  "dish-clearing": [
-    "right"
+  "component-repair": [
+    "primary-left",
+    "primary-right",
+    "mid-right"
   ],
   "dish-preparation": [
-    "right"
-  ],
-  "dish-washing": [
-    "right"
-  ],
-  "dish-washing-2": [
-    "right"
+    "primary-left",
+    "primary-right",
+    "mid-right"
   ],
   "door-cleaning": [
-    "right"
+    "primary-left",
+    "primary-right",
+    "mid-right"
   ],
   "engine-repair": [
-    "right"
+    "primary-left",
+    "primary-right",
+    "mid-right"
   ],
-  "equipment-moving": [
-    "right"
+  "fabric-flattening": [
+    "primary-left",
+    "primary-right",
+    "mid-right"
   ],
-  "fabric-inspection": [
-    "right"
+  "fabric-ironing": [
+    "primary-left",
+    "primary-right",
+    "mid-right"
+  ],
+  "fabric-ironing-2": [
+    "primary-left",
+    "primary-right",
+    "mid-right"
+  ],
+  "fabric-removal": [
+    "primary-left",
+    "primary-right",
+    "mid-right"
   ],
   "fabric-sewing": [
-    "right"
+    "primary-left",
+    "primary-right",
+    "mid-right"
   ],
-  "floor-collecting": [
-    "right"
+  "fabric-testing": [
+    "primary-left",
+    "primary-right",
+    "mid-right"
+  ],
+  "face-applying": [
+    "primary-left",
+    "primary-right",
+    "mid-right"
+  ],
+  "floor-clearing": [
+    "primary-left",
+    "primary-right",
+    "mid-right"
   ],
   "flower-arranging": [
-    "right"
+    "primary-left",
+    "primary-right",
+    "mid-right"
   ],
   "flower-arranging-2": [
-    "right"
+    "primary-left",
+    "primary-right",
+    "mid-right"
   ],
-  "flower-cutting": [
-    "right"
-  ],
-  "flower-cutting-2": [
-    "right"
-  ],
-  "flower-cutting-3": [
-    "right"
+  "flower-picking": [
+    "primary-left",
+    "primary-right",
+    "mid-right"
   ],
   "flower-pruning": [
-    "right"
+    "primary-left",
+    "primary-right",
+    "mid-right"
   ],
-  "food-cleaning": [
-    "right"
+  "food-clearing": [
+    "primary-left",
+    "primary-right",
+    "mid-right"
   ],
-  "food-preparation": [
-    "right"
+  "food-clearing-2": [
+    "primary-left",
+    "primary-right",
+    "mid-right"
   ],
-  "food-serving-2": [
-    "right"
+  "food-serving": [
+    "primary-left",
+    "primary-right",
+    "mid-right"
   ],
-  "furniture-removal": [
-    "right"
+  "food-shaping": [
+    "primary-left",
+    "primary-right",
+    "mid-right"
+  ],
+  "fork-cleaning": [
+    "primary-left",
+    "primary-right",
+    "mid-right"
+  ],
+  "frame-crimping": [
+    "primary-left",
+    "primary-right",
+    "mid-right"
+  ],
+  "frame-securing": [
+    "primary-left",
+    "primary-right",
+    "mid-right"
+  ],
+  "frame-wrapping": [
+    "primary-left",
+    "primary-right",
+    "mid-right"
+  ],
+  "furniture-cleaning": [
+    "primary-left",
+    "primary-right",
+    "mid-right"
+  ],
+  "gap-injecting": [
+    "primary-left",
+    "primary-right",
+    "mid-right"
   ],
   "garment-sewing": [
-    "right"
+    "primary-left",
+    "primary-right",
+    "mid-right"
+  ],
+  "gasket-taking": [
+    "primary-left",
+    "primary-right",
+    "mid-right"
+  ],
+  "good-cleaning": [
+    "primary-left",
+    "primary-right",
+    "mid-right"
   ],
   "grass-cutting": [
-    "right"
+    "primary-left",
+    "primary-right",
+    "mid-right"
   ],
-  "hair-cutting-2": [
-    "right"
+  "hair-blowdrying": [
+    "primary-left",
+    "primary-right",
+    "mid-right"
   ],
-  "haircut-neckline": [
-    "right"
+  "hair-combing": [
+    "primary-left",
+    "primary-right",
+    "mid-right"
   ],
-  "hand-washing": [
-    "right"
+  "key-grinding": [
+    "primary-left",
+    "primary-right",
+    "mid-right"
   ],
-  "handle-tightening": [
-    "right"
+  "letter-gluing": [
+    "primary-left",
+    "primary-right",
+    "mid-right"
   ],
-  "handpose-fabric-sewing": [
-    "right"
+  "letter-organizing": [
+    "primary-left",
+    "primary-right",
+    "mid-right"
   ],
-  "handpose-garment-sewing": [
-    "right"
+  "matt-cutting": [
+    "primary-left",
+    "primary-right",
+    "mid-right"
   ],
-  "handpose-pineapple-cutting": [
-    "right"
+  "metal-grinding": [
+    "primary-left",
+    "primary-right",
+    "mid-right"
   ],
-  "handpose-room-cleaning": [
-    "right"
+  "metal-grinding-2": [
+    "primary-left",
+    "primary-right",
+    "mid-right"
   ],
-  "handpose-shoe-sewing": [
-    "right"
+  "metal-grouping": [
+    "primary-left",
+    "primary-right",
+    "mid-right"
   ],
-  "handpose-wood-grinding": [
-    "right"
+  "model-spraying": [
+    "primary-left",
+    "primary-right",
+    "mid-right"
   ],
-  "handpose-zipper-sewing": [
-    "right"
+  "motor-assembly": [
+    "primary-left",
+    "primary-right",
+    "mid-right"
   ],
-  "harness-securing": [
-    "right"
+  "motor-opening": [
+    "primary-left",
+    "primary-right",
+    "mid-right"
   ],
-  "inventory-counting": [
-    "right"
+  "motorcycle-lifting": [
+    "primary-left",
+    "primary-right",
+    "mid-right"
   ],
-  "item-organizing": [
-    "right"
+  "nail-driving": [
+    "primary-left",
+    "primary-right",
+    "mid-right"
   ],
-  "item-organizing-2": [
-    "right"
+  "object-removal": [
+    "primary-left",
+    "primary-right",
+    "mid-right"
   ],
-  "jacket-folding": [
-    "right"
+  "object-securing": [
+    "primary-left",
+    "primary-right",
+    "mid-right"
   ],
-  "kit-fabric-marking-wrist": [
-    "view-2",
-    "view-3"
+  "panel-cutting": [
+    "primary-left",
+    "primary-right",
+    "mid-right"
   ],
-  "kit-garment-bagging-wrist": [
-    "view-2",
-    "view-3"
+  "part-cutting": [
+    "primary-left",
+    "primary-right",
+    "mid-right"
   ],
-  "kit-hem-sewing-rgbd": [
-    "depth"
-  ],
-  "kit-stitch-inspection-wrist": [
-    "view-2",
-    "view-3"
-  ],
-  "leaf-sweeping": [
-    "right"
-  ],
-  "led-soldering": [
-    "right"
-  ],
-  "lighting-setup": [
-    "right"
-  ],
-  "machine-cleaning": [
-    "right"
-  ],
-  "maintenance-repair": [
-    "right"
-  ],
-  "motor-disassembly": [
-    "right"
-  ],
-  "motor-measuring": [
-    "right"
-  ],
-  "motorcycle-washing": [
-    "right"
-  ],
-  "noodle-prep": [
-    "right"
-  ],
-  "order-verifying": [
-    "right"
-  ],
-  "outlet-installation": [
-    "right"
-  ],
-  "outlet-wiring": [
-    "right"
-  ],
-  "paint-mixing": [
-    "right"
-  ],
-  "panel-attachment": [
-    "right"
-  ],
-  "paper-stripping": [
-    "right"
-  ],
-  "part-sorting": [
-    "right"
-  ],
-  "pavement-sweeping": [
-    "right"
-  ],
-  "plant-watering": [
-    "right"
-  ],
-  "pot-carrying": [
-    "right"
-  ],
-  "room-organizing": [
-    "right"
-  ],
-  "scooter-repair": [
-    "right"
-  ],
-  "screen-cleaning": [
-    "right"
-  ],
-  "sheet-folding": [
-    "right"
-  ],
-  "sheet-laminating": [
-    "right"
+  "seal-removal": [
+    "primary-left",
+    "primary-right",
+    "mid-right"
   ],
   "sheet-organizing": [
+    "primary-left",
+    "primary-right",
+    "mid-right"
+  ],
+  "sheet-securing": [
+    "primary-left",
+    "primary-right",
+    "mid-right"
+  ],
+  "shoe-lacing": [
+    "primary-left",
+    "primary-right",
+    "mid-right"
+  ],
+  "shovel-cleaning": [
+    "primary-left",
+    "primary-right",
+    "mid-right"
+  ],
+  "sidewalk-sweeping": [
+    "primary-left",
+    "primary-right",
+    "mid-right"
+  ],
+  "sign-grinding": [
+    "primary-left",
+    "primary-right",
+    "mid-right"
+  ],
+  "socket-marking": [
+    "primary-left",
+    "primary-right",
+    "mid-right"
+  ],
+  "soil-loosening": [
+    "primary-left",
+    "primary-right",
+    "mid-right"
+  ],
+  "sole-attaching": [
+    "primary-left",
+    "primary-right",
+    "mid-right"
+  ],
+  "stick-cutting": [
+    "primary-left",
+    "primary-right",
+    "mid-right"
+  ],
+  "strap-applying": [
+    "primary-left",
+    "primary-right",
+    "mid-right"
+  ],
+  "strip-thinning": [
+    "primary-left",
+    "primary-right",
+    "mid-right"
+  ],
+  "structure-aligning": [
+    "primary-left",
+    "primary-right",
+    "mid-right"
+  ],
+  "supply-preparation": [
+    "primary-left",
+    "primary-right",
+    "mid-right"
+  ],
+  "surface-removal": [
+    "primary-left",
+    "primary-right",
+    "mid-right"
+  ],
+  "teleop-s000": [
+    "left",
     "right"
   ],
-  "shoe-sorting-2": [
+  "teleop-s001": [
+    "left",
     "right"
   ],
-  "signboard-install": [
+  "teleop-s002": [
+    "left",
     "right"
   ],
-  "sixcam-engine-working": [
-    "primary-right",
-    "mid-left",
-    "mid-right",
-    "outer-left",
-    "outer-right"
-  ],
-  "sixcam-fabric-sewing": [
-    "primary-right",
-    "mid-left",
-    "mid-right",
-    "outer-left",
-    "outer-right"
-  ],
-  "sixcam-garment-sewing": [
-    "primary-right",
-    "mid-left",
-    "mid-right",
-    "outer-right"
-  ],
-  "sixcam-panel-installation": [
-    "primary-right",
-    "mid-left",
-    "mid-right",
-    "outer-left",
-    "outer-right"
-  ],
-  "sixcam-pineapple-cutting": [
-    "primary-right",
-    "mid-left",
-    "mid-right",
-    "outer-left",
-    "outer-right"
-  ],
-  "sixcam-room-cleaning": [
-    "primary-right",
-    "mid-left",
-    "mid-right",
-    "outer-left",
-    "outer-right"
-  ],
-  "sixcam-shoe-sewing": [
-    "primary-right",
-    "mid-left",
-    "mid-right",
-    "outer-left",
-    "outer-right"
-  ],
-  "sixcam-wood-grinding": [
-    "primary-right",
-    "mid-left",
-    "mid-right",
-    "outer-left",
-    "outer-right"
-  ],
-  "sixcam-wrapping-selecting": [
-    "primary-right",
-    "mid-left",
-    "mid-right",
-    "outer-left",
-    "outer-right"
-  ],
-  "sixcam-zipper-sewing": [
-    "primary-right",
-    "mid-left",
-    "mid-right",
-    "outer-left",
-    "outer-right"
-  ],
-  "sole-stitching": [
+  "teleop-s003": [
+    "left",
     "right"
   ],
-  "stone-sanding": [
+  "teleop-s004": [
+    "left",
     "right"
   ],
-  "table-cleaning": [
+  "teleop-s005": [
+    "left",
     "right"
   ],
-  "table-clearing": [
+  "teleop-s006": [
+    "left",
     "right"
   ],
-  "tarpaulin-folding": [
+  "teleop-s007": [
+    "left",
     "right"
   ],
-  "tea-pouring": [
+  "teleop-s008": [
+    "left",
+    "right"
+  ],
+  "teleop-s009": [
+    "left",
+    "right"
+  ],
+  "teleop-s010": [
+    "left",
     "right"
   ],
   "tool-charging": [
-    "right"
+    "primary-left",
+    "primary-right",
+    "mid-right"
   ],
-  "trash-clearing": [
-    "right"
+  "tube-submerging": [
+    "primary-left",
+    "primary-right",
+    "mid-right"
   ],
-  "trash-disposing": [
-    "right"
-  ],
-  "tray-arranging": [
-    "right"
-  ],
-  "vegetable-harvesting": [
-    "right"
-  ],
-  "vegetable-picking": [
-    "right"
+  "vegetable-preparation": [
+    "primary-left",
+    "primary-right",
+    "mid-right"
   ],
   "vegetable-serving": [
-    "right"
+    "primary-left",
+    "primary-right",
+    "mid-right"
   ],
-  "vegetable-weeding": [
-    "right"
+  "wall-painting": [
+    "primary-left",
+    "primary-right",
+    "mid-right"
   ],
-  "wall-cleaning": [
-    "right"
-  ],
-  "wall-demolition": [
-    "right"
-  ],
-  "wall-hanging": [
-    "right"
-  ],
-  "wall-plastering": [
-    "right"
-  ],
-  "weed-removal": [
-    "right"
-  ],
-  "wheel-balancing": [
-    "right"
-  ],
-  "wheel-reinstallation": [
-    "right"
-  ],
-  "wire-connecting": [
-    "right"
+  "weed-pulling": [
+    "primary-left",
+    "primary-right",
+    "mid-right"
   ],
   "wire-cutting": [
-    "right"
+    "primary-left",
+    "primary-right",
+    "mid-right"
+  ],
+  "wood-carving": [
+    "primary-left",
+    "primary-right",
+    "mid-right"
+  ],
+  "wood-carving-2": [
+    "primary-left",
+    "primary-right",
+    "mid-right"
   ],
   "wood-sanding": [
-    "right"
+    "primary-left",
+    "primary-right",
+    "mid-right"
   ],
-  "wood-sanding-2": [
-    "right"
+  "woven-cutting": [
+    "primary-left",
+    "primary-right",
+    "mid-right"
+  ],
+  "zipper-cutting": [
+    "primary-left",
+    "primary-right",
+    "mid-right"
   ]
 }

@@ -8,8 +8,8 @@
  *
  * Identifiers are removed, and so is anything that LOCATES the capture. Those
  * are two different jobs and this file only did the first: it stripped
- * `env-4370ad87` and published `Motorcycle repair shop 3 (Vinh Quynh) — Vĩnh
- * Quỳnh, Thanh Trì` beside `Geohash: w7er06` on a public page. A named business
+ * `env-4370ad87` and published a shop's trading name and
+ * commune beside its geohash on a public page. A named business
  * with a district, and a geohash that resolves to about a kilometre, identify
  * the shop precisely — an opaque handle never could.
  *

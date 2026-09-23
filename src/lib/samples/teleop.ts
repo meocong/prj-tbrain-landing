@@ -38,7 +38,10 @@ export interface TeleopEpisode {
 
 export function teleopEpisode(): TeleopEpisode | null {
   try {
-    const p = path.join(process.cwd(), "public", "samples", "telemetry", "teleop-ep00.json");
+    // Written by `ingest-approved.py` from the approved LeRobot set: the
+    // episode the page plays, every frame, with the segment map derived from
+    // the feature names in `meta/info.json`.
+    const p = path.join(process.cwd(), "public", "samples", "telemetry", "teleop-anatomy.json");
     return JSON.parse(fs.readFileSync(p, "utf8")) as TeleopEpisode;
   } catch {
     return null;
@@ -72,15 +75,39 @@ export interface Channel {
  * on a single-arm recording.
  */
 export function isInert(ep: TeleopEpisode, seg: TeleopSegment): boolean {
-  let lo = Infinity;
-  let hi = -Infinity;
-  for (const row of [...ep.state, ...ep.action]) {
-    for (let c = seg.start; c < seg.end; c++) {
+  // Per channel, not pooled across the segment. A parked arm holds each joint
+  // at its own constant angle, so the pooled range is the spread BETWEEN seven
+  // still joints — 0.19 rad on the approved set's right arm — and a pooled test
+  // called it moving and drew seven flat lines.
+  return maxSpan(ep.state, seg) < INERT_EPS && maxSpan(ep.action, seg) < INERT_EPS;
+}
+
+/** Largest single-channel range inside a segment. */
+function maxSpan(rows: number[][], seg: TeleopSegment): number {
+  let widest = 0;
+  for (let c = seg.start; c < seg.end; c++) {
+    let lo = Infinity;
+    let hi = -Infinity;
+    for (const row of rows) {
       if (row[c] < lo) lo = row[c];
       if (row[c] > hi) hi = row[c];
     }
+    if (hi - lo > widest) widest = hi - lo;
   }
-  return hi - lo < INERT_EPS;
+  return widest;
+}
+
+/**
+ * The state half of a segment carries no reading while the action half moves.
+ *
+ * The approved set's wrist-pose columns: action holds the commanded wrist
+ * position and orientation, state holds (0, 0, 0) and the identity quaternion on
+ * every frame. Drawn as two series that reads as an arm failing to follow its
+ * command; the truth is that the dataset does not record the measured wrist pose
+ * at all, and a buyer planning to train on it needs to know that.
+ */
+export function stateUnrecorded(ep: TeleopEpisode, seg: TeleopSegment): boolean {
+  return maxSpan(ep.state, seg) < INERT_EPS && maxSpan(ep.action, seg) >= INERT_EPS;
 }
 
 /**

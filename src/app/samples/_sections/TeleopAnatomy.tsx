@@ -1,4 +1,4 @@
-import { channelsFor, isInert, teleopEpisode } from "@/lib/samples/teleop";
+import { channelsFor, isInert, stateUnrecorded, teleopEpisode } from "@/lib/samples/teleop";
 import { C } from "./tokens";
 import { Reveal } from "./Reveal";
 
@@ -44,9 +44,10 @@ export function TeleopAnatomy() {
           </h2>
 
           <p className="mt-5 max-w-2xl text-[13px] leading-relaxed" style={{ color: C.textMid }}>
-            The video is what a person watches. This is what a policy reads: sixteen numbers for the
-            state the arms were in and sixteen for the action commanded, {ep.fps} times a second, for
-            all {ep.frames.toLocaleString()} frames of episode {ep.episode}.
+            The video is what a person watches. This is what a policy reads: {ep.state[0]?.length ?? 0}{" "}
+            numbers for the state the robot was in and {ep.action[0]?.length ?? 0} for the action
+            commanded, {ep.fps} times a second, for all {ep.frames.toLocaleString()} frames of episode{" "}
+            {ep.episode}.
           </p>
 
           {/* Legend. Two series, so it is not optional. */}
@@ -60,7 +61,7 @@ export function TeleopAnatomy() {
               <span style={{ color: C.textMid }}>State — what the arm did</span>
             </span>
             <span className="font-mono text-[11px]" style={{ color: C.textDim }}>
-              {ep.durationSec}s · every 6th frame
+              {ep.durationSec}s · {ep.frames.toLocaleString()} frames
             </span>
           </div>
 
@@ -68,6 +69,7 @@ export function TeleopAnatomy() {
             {ep.segments.map((seg) => {
               const chans = channelsFor(ep, seg);
               const inert = isInert(ep, seg);
+              const unrecorded = !inert && stateUnrecorded(ep, seg);
               return (
                 <div key={seg.name}>
                   <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1">
@@ -77,6 +79,8 @@ export function TeleopAnatomy() {
                       {chans.length === 1 ? "channel" : "channels"}
                       {inert
                         ? " · not commanded in this episode"
+                        : unrecorded
+                        ? ` · action only, drawn on ${chans[0].min.toFixed(2)} to ${chans[0].max.toFixed(2)}`
                         : ` · drawn on ${chans[0].min.toFixed(2)} to ${chans[0].max.toFixed(2)}`}
                     </p>
                   </div>
@@ -89,11 +93,12 @@ export function TeleopAnatomy() {
                       className="bp-card mt-3 max-w-2xl px-4 py-3 text-[12px] leading-relaxed"
                       style={{ color: C.textMid }}
                     >
-                      Held at zero for the whole episode. The action column is exactly 0.0 on every
-                      frame and the state never leaves sensor noise, so this side of the robot was
-                      not driven — the rig is bimanual, this recording is not.
+                      Did not move for the whole episode: state and action both stay inside sensor
+                      noise, so this side of the robot was not driven — the rig is bimanual, this
+                      recording is not.
                     </p>
                   ) : (
+                  <>
                   <div
                     className={`mt-3 grid gap-2 ${
                       chans.length > 1 ? "grid-cols-2 sm:grid-cols-4 xl:grid-cols-7" : "grid-cols-2"
@@ -107,13 +112,15 @@ export function TeleopAnatomy() {
                           className="block h-[54px] w-full"
                           style={{ background: C.wash }}
                         >
-                          <polyline
-                            points={ch.state}
-                            fill="none"
-                            stroke={C.textDim}
-                            strokeWidth={1.6}
-                            vectorEffect="non-scaling-stroke"
-                          />
+                          {!unrecorded && (
+                            <polyline
+                              points={ch.state}
+                              fill="none"
+                              stroke={C.textDim}
+                              strokeWidth={1.6}
+                              vectorEffect="non-scaling-stroke"
+                            />
+                          )}
                           <polyline
                             points={ch.action}
                             fill="none"
@@ -131,6 +138,14 @@ export function TeleopAnatomy() {
                       </figure>
                     ))}
                   </div>
+                  {unrecorded && (
+                    <p className="mt-2 max-w-2xl text-[12px] leading-relaxed" style={{ color: C.textDim }}>
+                      Only the command is recorded here. The state columns hold zero and the identity
+                      rotation on every frame, so the dataset carries the wrist pose that was asked
+                      for, not the one the arm reached.
+                    </p>
+                  )}
+                  </>
                   )}
                 </div>
               );
@@ -138,11 +153,12 @@ export function TeleopAnatomy() {
           </div>
 
           <p className="mt-6 max-w-3xl text-[12px] leading-relaxed" style={{ color: C.textDim }}>
-            Column indices are the dataset&apos;s own, from{" "}
-            <code className="font-mono">meta/modality.json</code>: seven joints an arm, one gripper a
-            side, and action laid out identically to state. Each segment is drawn on its own scale —
-            arm joints are radians and comparable with each other, a gripper is not, and one scale
-            across both would flatten every joint to fit it.
+            Column order is the dataset&apos;s own, from the feature names in{" "}
+            <code className="font-mono">meta/info.json</code>: seven joints an arm, six per hand, then a
+            wrist position and orientation for each side, with action laid out identically to state.
+            Each segment is drawn on its own scale — joint angles are radians, a wrist position is
+            metres and an orientation is a quaternion, and one scale across them would flatten every
+            joint to fit the widest.
           </p>
         </Reveal>
       </div>

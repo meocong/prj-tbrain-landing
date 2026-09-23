@@ -31,7 +31,12 @@ import { publicSpec } from "../../src/lib/samples/redact.mjs";
 const ROOT = resolve(import.meta.dirname, "../..");
 const PUBLIC = join(ROOT, "public/samples");
 const STAGE = join(ROOT, ".samples-stage");
-const PREFIX = "samples/library";
+/* Overridable because the bucket is shared with production. A branch that
+   changes the records must not overwrite the full-set archive, or any pack
+   whose slug it reuses, that the live site's manifest still points at — so a
+   test deploy stages under its own prefix and the route signs whatever path the
+   branch's `downloads.json` names. */
+const PREFIX = process.env.SAMPLES_GCS_PREFIX || "samples/library";
 
 const args = process.argv.slice(2);
 const DRY = args.includes("--dry");
