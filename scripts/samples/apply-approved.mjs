@@ -47,8 +47,15 @@ const KEEP_TIERS = new Set(
   (args.includes("--keep-tiers") ? args[args.indexOf("--keep-tiers") + 1] : "mono,wrist,stereo6").split(","),
 );
 
-const incoming = [...staged.ego, ...staged.teleop].map(({ _src, ...r }) => r);
-const kept = samples.filter((r) => !REPLACE.has(r.modality) || KEEP_TIERS.has(r.tier));
+/* Captures taken off the page after review, with the reason. Thạch,
+   2026-09-24, on the clips no window could save: "nếu mà có vấn đề thì vứt
+   luôn". Applied to the approved set and to the kept tiers alike, and their
+   media goes with them. */
+const WITHDRAWN = JSON.parse(readFileSync(join(ROOT, "scripts/samples/withdrawn.json"), "utf8"));
+const live_ = (r) => !(r.slug in WITHDRAWN);
+
+const incoming = [...staged.ego, ...staged.teleop].map(({ _src, ...r }) => r).filter(live_);
+const kept = samples.filter((r) => (!REPLACE.has(r.modality) || KEEP_TIERS.has(r.tier)) && live_(r));
 const dropped = samples.filter((r) => REPLACE.has(r.modality));
 
 const clash = incoming.filter((r) => kept.some((k) => k.slug === r.slug));
@@ -62,7 +69,7 @@ const next = [...incoming, ...kept];
 // ── views ────────────────────────────────────────────────────────────────
 const nextViews = {};
 for (const r of kept) if (views[r.slug]) nextViews[r.slug] = views[r.slug];
-for (const [slug, v] of Object.entries(staged.views)) if (v.length) nextViews[slug] = v;
+for (const [slug, v] of Object.entries(staged.views)) if (v.length && !(slug in WITHDRAWN)) nextViews[slug] = v;
 const sortedViews = Object.fromEntries(Object.entries(nextViews).sort(([a], [b]) => a.localeCompare(b)));
 
 // ── orphaned media ──────────────────────────────────────────────────────

@@ -43,11 +43,6 @@
     "start": 50,
     "why": "hands sorting pieces into groups; old window was walking"
   },
-  "motor-opening": {
-    "start": 0,
-    "why": "longest stretch with the wearer's own hands on the motor (0-6 s)",
-    "limit": "the wearer looks up at the coworker every few seconds throughout"
-  },
   "motorcycle-lifting": {
     "start": 24.5,
     "why": "hand turning the winch lever; old window was standing by the stand"
@@ -55,11 +50,6 @@
   "panel-cutting": {
     "start": 24,
     "why": "the saw cut itself (~22-34 s); old window was placing the panel"
-  },
-  "sixcam-garment-sewing": {
-    "start": 160,
-    "why": "hands marking and cutting the fabric; old window saw hands a quarter of the time",
-    "limit": "this lens mostly sees the wearer's body; the garment work is only in view in a few stretches"
   },
   "sixcam-panel-installation": {
     "start": 254,
@@ -73,16 +63,6 @@
     "start": 8,
     "why": "fitting the piece into place (~8-15 s); old window only held it"
   },
-  "supply-preparation": {
-    "start": 37,
-    "why": "steadiest and sharpest stretch of the clip (shake 0.24 vs 0.60, sharpness +15%); the white table under sunlight glares everywhere, so glare only drops slightly",
-    "limit": "glare is in the whole clip"
-  },
-  "surface-removal": {
-    "start": 6,
-    "why": "least-shaking stretch with the scraper on the surface",
-    "limit": "the head shakes with every scrape across the whole clip (lowest window 1.74 rad/s vs 0.71 corpus bar) - a window change cannot fix it"
-  },
   "vegetable-preparation": {
     "start": 1,
     "why": "hands in the basin of vegetables; old window looked at the till and the customers"
@@ -94,10 +74,5 @@
   "wood-carving": {
     "start": 8.5,
     "why": "chisel and mallet on the piece, shake 0.99 vs 2.61; old window turned to a coworker"
-  },
-  "wood-sanding": {
-    "start": 30,
-    "why": "both hands rubbing the piece on the sandpaper, steadiest part of the clip; old window was mostly the shin",
-    "limit": "the shin comes into frame whenever the piece is braced on it"
   }
 }
