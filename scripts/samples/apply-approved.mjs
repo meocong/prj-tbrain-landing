@@ -40,9 +40,11 @@ const views = JSON.parse(readFileSync(join(LIB, "views.json"), "utf8"));
 /* Tiers inside a replaced modality that the approved set does not cover and
    that keep their earlier samples. Thạch, 2026-09-24: "mono wrist lấy lại sample
    cũ đi" — the approved drop is all stereo captures, so the one-camera and
-   wrist-camera configurations still show what they showed before. */
+   wrist-camera configurations still show what they showed before. The
+   six-camera captures from the Drive "6 cam" delivery stay for the same reason:
+   the approved set delivers four lenses and cannot show six. */
 const KEEP_TIERS = new Set(
-  (args.includes("--keep-tiers") ? args[args.indexOf("--keep-tiers") + 1] : "mono,wrist").split(","),
+  (args.includes("--keep-tiers") ? args[args.indexOf("--keep-tiers") + 1] : "mono,wrist,stereo6").split(","),
 );
 
 const incoming = [...staged.ego, ...staged.teleop].map(({ _src, ...r }) => r);

@@ -70,7 +70,7 @@
       ],
       [
         "Cameras",
-        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
+        "Stereo pair · shot on a multi-camera head rig"
       ],
       [
         "Frame",
@@ -129,7 +129,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Stereo · 4-6 cam option",
+        "t": "Stereo pair",
         "k": "quality"
       },
       {
@@ -150,9 +150,6 @@
         "t": "Full delivery",
         "primary": false
       }
-    ],
-    "alsoTiers": [
-      "stereo6"
     ]
   },
   {
@@ -226,7 +223,7 @@
       ],
       [
         "Cameras",
-        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
+        "Stereo pair · shot on a multi-camera head rig"
       ],
       [
         "Frame",
@@ -285,7 +282,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Stereo · 4-6 cam option",
+        "t": "Stereo pair",
         "k": "quality"
       },
       {
@@ -306,9 +303,6 @@
         "t": "Full delivery",
         "primary": false
       }
-    ],
-    "alsoTiers": [
-      "stereo6"
     ]
   },
   {
@@ -382,7 +376,7 @@
       ],
       [
         "Cameras",
-        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
+        "Stereo pair · shot on a multi-camera head rig"
       ],
       [
         "Frame",
@@ -441,7 +435,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Stereo · 4-6 cam option",
+        "t": "Stereo pair",
         "k": "quality"
       },
       {
@@ -462,9 +456,6 @@
         "t": "Full delivery",
         "primary": false
       }
-    ],
-    "alsoTiers": [
-      "stereo6"
     ]
   },
   {
@@ -538,7 +529,7 @@
       ],
       [
         "Cameras",
-        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
+        "Stereo pair · shot on a multi-camera head rig"
       ],
       [
         "Frame",
@@ -597,7 +588,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Stereo · 4-6 cam option",
+        "t": "Stereo pair",
         "k": "quality"
       },
       {
@@ -618,9 +609,6 @@
         "t": "Full delivery",
         "primary": false
       }
-    ],
-    "alsoTiers": [
-      "stereo6"
     ]
   },
   {
@@ -694,7 +682,7 @@
       ],
       [
         "Cameras",
-        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
+        "Stereo pair · shot on a multi-camera head rig"
       ],
       [
         "Frame",
@@ -753,7 +741,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Stereo · 4-6 cam option",
+        "t": "Stereo pair",
         "k": "quality"
       },
       {
@@ -774,9 +762,6 @@
         "t": "Full delivery",
         "primary": false
       }
-    ],
-    "alsoTiers": [
-      "stereo6"
     ]
   },
   {
@@ -850,7 +835,7 @@
       ],
       [
         "Cameras",
-        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
+        "Stereo pair · shot on a multi-camera head rig"
       ],
       [
         "Frame",
@@ -909,7 +894,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Stereo · 4-6 cam option",
+        "t": "Stereo pair",
         "k": "quality"
       },
       {
@@ -930,9 +915,6 @@
         "t": "Full delivery",
         "primary": false
       }
-    ],
-    "alsoTiers": [
-      "stereo6"
     ]
   },
   {
@@ -1006,7 +988,7 @@
       ],
       [
         "Cameras",
-        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
+        "Stereo pair · shot on a multi-camera head rig"
       ],
       [
         "Frame",
@@ -1065,7 +1047,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Stereo · 4-6 cam option",
+        "t": "Stereo pair",
         "k": "quality"
       },
       {
@@ -1086,9 +1068,6 @@
         "t": "Full delivery",
         "primary": false
       }
-    ],
-    "alsoTiers": [
-      "stereo6"
     ]
   },
   {
@@ -1162,7 +1141,7 @@
       ],
       [
         "Cameras",
-        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
+        "Stereo pair · shot on a multi-camera head rig"
       ],
       [
         "Frame",
@@ -1221,7 +1200,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Stereo · 4-6 cam option",
+        "t": "Stereo pair",
         "k": "quality"
       },
       {
@@ -1242,9 +1221,6 @@
         "t": "Full delivery",
         "primary": false
       }
-    ],
-    "alsoTiers": [
-      "stereo6"
     ]
   },
   {
@@ -1318,7 +1294,7 @@
       ],
       [
         "Cameras",
-        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
+        "Stereo pair · shot on a multi-camera head rig"
       ],
       [
         "Frame",
@@ -1377,7 +1353,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Stereo · 4-6 cam option",
+        "t": "Stereo pair",
         "k": "quality"
       },
       {
@@ -1398,9 +1374,6 @@
         "t": "Full delivery",
         "primary": false
       }
-    ],
-    "alsoTiers": [
-      "stereo6"
     ]
   },
   {
@@ -1474,7 +1447,7 @@
       ],
       [
         "Cameras",
-        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
+        "Stereo pair · shot on a multi-camera head rig"
       ],
       [
         "Frame",
@@ -1533,7 +1506,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Stereo · 4-6 cam option",
+        "t": "Stereo pair",
         "k": "quality"
       },
       {
@@ -1554,9 +1527,6 @@
         "t": "Full delivery",
         "primary": false
       }
-    ],
-    "alsoTiers": [
-      "stereo6"
     ]
   },
   {
@@ -1630,7 +1600,7 @@
       ],
       [
         "Cameras",
-        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
+        "Stereo pair · shot on a multi-camera head rig"
       ],
       [
         "Frame",
@@ -1689,7 +1659,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Stereo · 4-6 cam option",
+        "t": "Stereo pair",
         "k": "quality"
       },
       {
@@ -1710,9 +1680,6 @@
         "t": "Full delivery",
         "primary": false
       }
-    ],
-    "alsoTiers": [
-      "stereo6"
     ]
   },
   {
@@ -1786,7 +1753,7 @@
       ],
       [
         "Cameras",
-        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
+        "Stereo pair · shot on a multi-camera head rig"
       ],
       [
         "Frame",
@@ -1845,7 +1812,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Stereo · 4-6 cam option",
+        "t": "Stereo pair",
         "k": "quality"
       },
       {
@@ -1866,9 +1833,6 @@
         "t": "Full delivery",
         "primary": false
       }
-    ],
-    "alsoTiers": [
-      "stereo6"
     ]
   },
   {
@@ -1942,7 +1906,7 @@
       ],
       [
         "Cameras",
-        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
+        "Stereo pair · shot on a multi-camera head rig"
       ],
       [
         "Frame",
@@ -2001,7 +1965,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Stereo · 4-6 cam option",
+        "t": "Stereo pair",
         "k": "quality"
       },
       {
@@ -2022,9 +1986,6 @@
         "t": "Full delivery",
         "primary": false
       }
-    ],
-    "alsoTiers": [
-      "stereo6"
     ]
   },
   {
@@ -2098,7 +2059,7 @@
       ],
       [
         "Cameras",
-        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
+        "Stereo pair · shot on a multi-camera head rig"
       ],
       [
         "Frame",
@@ -2157,7 +2118,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Stereo · 4-6 cam option",
+        "t": "Stereo pair",
         "k": "quality"
       },
       {
@@ -2178,9 +2139,6 @@
         "t": "Full delivery",
         "primary": false
       }
-    ],
-    "alsoTiers": [
-      "stereo6"
     ]
   },
   {
@@ -2254,7 +2212,7 @@
       ],
       [
         "Cameras",
-        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
+        "Stereo pair · shot on a multi-camera head rig"
       ],
       [
         "Frame",
@@ -2313,7 +2271,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Stereo · 4-6 cam option",
+        "t": "Stereo pair",
         "k": "quality"
       },
       {
@@ -2334,9 +2292,6 @@
         "t": "Full delivery",
         "primary": false
       }
-    ],
-    "alsoTiers": [
-      "stereo6"
     ]
   },
   {
@@ -2410,7 +2365,7 @@
       ],
       [
         "Cameras",
-        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
+        "Stereo pair · shot on a multi-camera head rig"
       ],
       [
         "Frame",
@@ -2469,7 +2424,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Stereo · 4-6 cam option",
+        "t": "Stereo pair",
         "k": "quality"
       },
       {
@@ -2490,9 +2445,6 @@
         "t": "Full delivery",
         "primary": false
       }
-    ],
-    "alsoTiers": [
-      "stereo6"
     ]
   },
   {
@@ -2566,7 +2518,7 @@
       ],
       [
         "Cameras",
-        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
+        "Stereo pair · shot on a multi-camera head rig"
       ],
       [
         "Frame",
@@ -2625,7 +2577,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Stereo · 4-6 cam option",
+        "t": "Stereo pair",
         "k": "quality"
       },
       {
@@ -2646,9 +2598,6 @@
         "t": "Full delivery",
         "primary": false
       }
-    ],
-    "alsoTiers": [
-      "stereo6"
     ]
   },
   {
@@ -2722,7 +2671,7 @@
       ],
       [
         "Cameras",
-        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
+        "Stereo pair · shot on a multi-camera head rig"
       ],
       [
         "Frame",
@@ -2781,7 +2730,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Stereo · 4-6 cam option",
+        "t": "Stereo pair",
         "k": "quality"
       },
       {
@@ -2802,9 +2751,6 @@
         "t": "Full delivery",
         "primary": false
       }
-    ],
-    "alsoTiers": [
-      "stereo6"
     ]
   },
   {
@@ -2878,7 +2824,7 @@
       ],
       [
         "Cameras",
-        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
+        "Stereo pair · shot on a multi-camera head rig"
       ],
       [
         "Frame",
@@ -2937,7 +2883,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Stereo · 4-6 cam option",
+        "t": "Stereo pair",
         "k": "quality"
       },
       {
@@ -2958,9 +2904,6 @@
         "t": "Full delivery",
         "primary": false
       }
-    ],
-    "alsoTiers": [
-      "stereo6"
     ]
   },
   {
@@ -3034,7 +2977,7 @@
       ],
       [
         "Cameras",
-        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
+        "Stereo pair · shot on a multi-camera head rig"
       ],
       [
         "Frame",
@@ -3093,7 +3036,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Stereo · 4-6 cam option",
+        "t": "Stereo pair",
         "k": "quality"
       },
       {
@@ -3114,9 +3057,6 @@
         "t": "Full delivery",
         "primary": false
       }
-    ],
-    "alsoTiers": [
-      "stereo6"
     ]
   },
   {
@@ -3190,7 +3130,7 @@
       ],
       [
         "Cameras",
-        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
+        "Stereo pair · shot on a multi-camera head rig"
       ],
       [
         "Frame",
@@ -3249,7 +3189,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Stereo · 4-6 cam option",
+        "t": "Stereo pair",
         "k": "quality"
       },
       {
@@ -3270,9 +3210,6 @@
         "t": "Full delivery",
         "primary": false
       }
-    ],
-    "alsoTiers": [
-      "stereo6"
     ]
   },
   {
@@ -3346,7 +3283,7 @@
       ],
       [
         "Cameras",
-        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
+        "Stereo pair · shot on a multi-camera head rig"
       ],
       [
         "Frame",
@@ -3405,7 +3342,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Stereo · 4-6 cam option",
+        "t": "Stereo pair",
         "k": "quality"
       },
       {
@@ -3426,9 +3363,6 @@
         "t": "Full delivery",
         "primary": false
       }
-    ],
-    "alsoTiers": [
-      "stereo6"
     ]
   },
   {
@@ -3502,7 +3436,7 @@
       ],
       [
         "Cameras",
-        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
+        "Stereo pair · shot on a multi-camera head rig"
       ],
       [
         "Frame",
@@ -3561,7 +3495,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Stereo · 4-6 cam option",
+        "t": "Stereo pair",
         "k": "quality"
       },
       {
@@ -3582,9 +3516,6 @@
         "t": "Full delivery",
         "primary": false
       }
-    ],
-    "alsoTiers": [
-      "stereo6"
     ]
   },
   {
@@ -3658,7 +3589,7 @@
       ],
       [
         "Cameras",
-        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
+        "Stereo pair · shot on a multi-camera head rig"
       ],
       [
         "Frame",
@@ -3717,7 +3648,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Stereo · 4-6 cam option",
+        "t": "Stereo pair",
         "k": "quality"
       },
       {
@@ -3738,9 +3669,6 @@
         "t": "Full delivery",
         "primary": false
       }
-    ],
-    "alsoTiers": [
-      "stereo6"
     ]
   },
   {
@@ -3814,7 +3742,7 @@
       ],
       [
         "Cameras",
-        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
+        "Stereo pair · shot on a multi-camera head rig"
       ],
       [
         "Frame",
@@ -3873,7 +3801,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Stereo · 4-6 cam option",
+        "t": "Stereo pair",
         "k": "quality"
       },
       {
@@ -3894,9 +3822,6 @@
         "t": "Full delivery",
         "primary": false
       }
-    ],
-    "alsoTiers": [
-      "stereo6"
     ]
   },
   {
@@ -3970,7 +3895,7 @@
       ],
       [
         "Cameras",
-        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
+        "Stereo pair · shot on a multi-camera head rig"
       ],
       [
         "Frame",
@@ -4029,7 +3954,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Stereo · 4-6 cam option",
+        "t": "Stereo pair",
         "k": "quality"
       },
       {
@@ -4050,9 +3975,6 @@
         "t": "Full delivery",
         "primary": false
       }
-    ],
-    "alsoTiers": [
-      "stereo6"
     ]
   },
   {
@@ -4126,7 +4048,7 @@
       ],
       [
         "Cameras",
-        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
+        "Stereo pair · shot on a multi-camera head rig"
       ],
       [
         "Frame",
@@ -4185,7 +4107,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Stereo · 4-6 cam option",
+        "t": "Stereo pair",
         "k": "quality"
       },
       {
@@ -4206,9 +4128,6 @@
         "t": "Full delivery",
         "primary": false
       }
-    ],
-    "alsoTiers": [
-      "stereo6"
     ]
   },
   {
@@ -4282,7 +4201,7 @@
       ],
       [
         "Cameras",
-        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
+        "Stereo pair · shot on a multi-camera head rig"
       ],
       [
         "Frame",
@@ -4341,7 +4260,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Stereo · 4-6 cam option",
+        "t": "Stereo pair",
         "k": "quality"
       },
       {
@@ -4362,9 +4281,6 @@
         "t": "Full delivery",
         "primary": false
       }
-    ],
-    "alsoTiers": [
-      "stereo6"
     ]
   },
   {
@@ -4438,7 +4354,7 @@
       ],
       [
         "Cameras",
-        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
+        "Stereo pair · shot on a multi-camera head rig"
       ],
       [
         "Frame",
@@ -4497,7 +4413,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Stereo · 4-6 cam option",
+        "t": "Stereo pair",
         "k": "quality"
       },
       {
@@ -4518,9 +4434,6 @@
         "t": "Full delivery",
         "primary": false
       }
-    ],
-    "alsoTiers": [
-      "stereo6"
     ]
   },
   {
@@ -4594,7 +4507,7 @@
       ],
       [
         "Cameras",
-        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
+        "Stereo pair · shot on a multi-camera head rig"
       ],
       [
         "Frame",
@@ -4653,7 +4566,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Stereo · 4-6 cam option",
+        "t": "Stereo pair",
         "k": "quality"
       },
       {
@@ -4674,9 +4587,6 @@
         "t": "Full delivery",
         "primary": false
       }
-    ],
-    "alsoTiers": [
-      "stereo6"
     ]
   },
   {
@@ -4750,7 +4660,7 @@
       ],
       [
         "Cameras",
-        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
+        "Stereo pair · shot on a multi-camera head rig"
       ],
       [
         "Frame",
@@ -4809,7 +4719,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Stereo · 4-6 cam option",
+        "t": "Stereo pair",
         "k": "quality"
       },
       {
@@ -4830,9 +4740,6 @@
         "t": "Full delivery",
         "primary": false
       }
-    ],
-    "alsoTiers": [
-      "stereo6"
     ]
   },
   {
@@ -4906,7 +4813,7 @@
       ],
       [
         "Cameras",
-        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
+        "Stereo pair · shot on a multi-camera head rig"
       ],
       [
         "Frame",
@@ -4965,7 +4872,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Stereo · 4-6 cam option",
+        "t": "Stereo pair",
         "k": "quality"
       },
       {
@@ -4986,9 +4893,6 @@
         "t": "Full delivery",
         "primary": false
       }
-    ],
-    "alsoTiers": [
-      "stereo6"
     ]
   },
   {
@@ -5062,7 +4966,7 @@
       ],
       [
         "Cameras",
-        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
+        "Stereo pair · shot on a multi-camera head rig"
       ],
       [
         "Frame",
@@ -5121,7 +5025,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Stereo · 4-6 cam option",
+        "t": "Stereo pair",
         "k": "quality"
       },
       {
@@ -5142,9 +5046,6 @@
         "t": "Full delivery",
         "primary": false
       }
-    ],
-    "alsoTiers": [
-      "stereo6"
     ]
   },
   {
@@ -5218,7 +5119,7 @@
       ],
       [
         "Cameras",
-        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
+        "Stereo pair · shot on a multi-camera head rig"
       ],
       [
         "Frame",
@@ -5277,7 +5178,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Stereo · 4-6 cam option",
+        "t": "Stereo pair",
         "k": "quality"
       },
       {
@@ -5298,9 +5199,6 @@
         "t": "Full delivery",
         "primary": false
       }
-    ],
-    "alsoTiers": [
-      "stereo6"
     ]
   },
   {
@@ -5374,7 +5272,7 @@
       ],
       [
         "Cameras",
-        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
+        "Stereo pair · shot on a multi-camera head rig"
       ],
       [
         "Frame",
@@ -5433,7 +5331,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Stereo · 4-6 cam option",
+        "t": "Stereo pair",
         "k": "quality"
       },
       {
@@ -5454,9 +5352,6 @@
         "t": "Full delivery",
         "primary": false
       }
-    ],
-    "alsoTiers": [
-      "stereo6"
     ]
   },
   {
@@ -5530,7 +5425,7 @@
       ],
       [
         "Cameras",
-        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
+        "Stereo pair · shot on a multi-camera head rig"
       ],
       [
         "Frame",
@@ -5589,7 +5484,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Stereo · 4-6 cam option",
+        "t": "Stereo pair",
         "k": "quality"
       },
       {
@@ -5610,9 +5505,6 @@
         "t": "Full delivery",
         "primary": false
       }
-    ],
-    "alsoTiers": [
-      "stereo6"
     ]
   },
   {
@@ -5686,7 +5578,7 @@
       ],
       [
         "Cameras",
-        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
+        "Stereo pair · shot on a multi-camera head rig"
       ],
       [
         "Frame",
@@ -5745,7 +5637,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Stereo · 4-6 cam option",
+        "t": "Stereo pair",
         "k": "quality"
       },
       {
@@ -5766,9 +5658,6 @@
         "t": "Full delivery",
         "primary": false
       }
-    ],
-    "alsoTiers": [
-      "stereo6"
     ]
   },
   {
@@ -5842,7 +5731,7 @@
       ],
       [
         "Cameras",
-        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
+        "Stereo pair · shot on a multi-camera head rig"
       ],
       [
         "Frame",
@@ -5901,7 +5790,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Stereo · 4-6 cam option",
+        "t": "Stereo pair",
         "k": "quality"
       },
       {
@@ -5922,9 +5811,6 @@
         "t": "Full delivery",
         "primary": false
       }
-    ],
-    "alsoTiers": [
-      "stereo6"
     ]
   },
   {
@@ -5998,7 +5884,7 @@
       ],
       [
         "Cameras",
-        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
+        "Stereo pair · shot on a multi-camera head rig"
       ],
       [
         "Frame",
@@ -6057,7 +5943,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Stereo · 4-6 cam option",
+        "t": "Stereo pair",
         "k": "quality"
       },
       {
@@ -6078,9 +5964,6 @@
         "t": "Full delivery",
         "primary": false
       }
-    ],
-    "alsoTiers": [
-      "stereo6"
     ]
   },
   {
@@ -6154,7 +6037,7 @@
       ],
       [
         "Cameras",
-        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
+        "Stereo pair · shot on a multi-camera head rig"
       ],
       [
         "Frame",
@@ -6213,7 +6096,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Stereo · 4-6 cam option",
+        "t": "Stereo pair",
         "k": "quality"
       },
       {
@@ -6234,9 +6117,6 @@
         "t": "Full delivery",
         "primary": false
       }
-    ],
-    "alsoTiers": [
-      "stereo6"
     ]
   },
   {
@@ -6310,7 +6190,7 @@
       ],
       [
         "Cameras",
-        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
+        "Stereo pair · shot on a multi-camera head rig"
       ],
       [
         "Frame",
@@ -6369,7 +6249,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Stereo · 4-6 cam option",
+        "t": "Stereo pair",
         "k": "quality"
       },
       {
@@ -6390,9 +6270,6 @@
         "t": "Full delivery",
         "primary": false
       }
-    ],
-    "alsoTiers": [
-      "stereo6"
     ]
   },
   {
@@ -6466,7 +6343,7 @@
       ],
       [
         "Cameras",
-        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
+        "Stereo pair · shot on a multi-camera head rig"
       ],
       [
         "Frame",
@@ -6525,7 +6402,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Stereo · 4-6 cam option",
+        "t": "Stereo pair",
         "k": "quality"
       },
       {
@@ -6546,9 +6423,6 @@
         "t": "Full delivery",
         "primary": false
       }
-    ],
-    "alsoTiers": [
-      "stereo6"
     ]
   },
   {
@@ -6622,7 +6496,7 @@
       ],
       [
         "Cameras",
-        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
+        "Stereo pair · shot on a multi-camera head rig"
       ],
       [
         "Frame",
@@ -6681,7 +6555,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Stereo · 4-6 cam option",
+        "t": "Stereo pair",
         "k": "quality"
       },
       {
@@ -6702,9 +6576,6 @@
         "t": "Full delivery",
         "primary": false
       }
-    ],
-    "alsoTiers": [
-      "stereo6"
     ]
   },
   {
@@ -6778,7 +6649,7 @@
       ],
       [
         "Cameras",
-        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
+        "Stereo pair · shot on a multi-camera head rig"
       ],
       [
         "Frame",
@@ -6837,7 +6708,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Stereo · 4-6 cam option",
+        "t": "Stereo pair",
         "k": "quality"
       },
       {
@@ -6858,9 +6729,6 @@
         "t": "Full delivery",
         "primary": false
       }
-    ],
-    "alsoTiers": [
-      "stereo6"
     ]
   },
   {
@@ -6934,7 +6802,7 @@
       ],
       [
         "Cameras",
-        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
+        "Stereo pair · shot on a multi-camera head rig"
       ],
       [
         "Frame",
@@ -6993,7 +6861,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Stereo · 4-6 cam option",
+        "t": "Stereo pair",
         "k": "quality"
       },
       {
@@ -7014,9 +6882,6 @@
         "t": "Full delivery",
         "primary": false
       }
-    ],
-    "alsoTiers": [
-      "stereo6"
     ]
   },
   {
@@ -7090,7 +6955,7 @@
       ],
       [
         "Cameras",
-        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
+        "Stereo pair · shot on a multi-camera head rig"
       ],
       [
         "Frame",
@@ -7149,7 +7014,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Stereo · 4-6 cam option",
+        "t": "Stereo pair",
         "k": "quality"
       },
       {
@@ -7170,9 +7035,6 @@
         "t": "Full delivery",
         "primary": false
       }
-    ],
-    "alsoTiers": [
-      "stereo6"
     ]
   },
   {
@@ -7246,7 +7108,7 @@
       ],
       [
         "Cameras",
-        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
+        "Stereo pair · shot on a multi-camera head rig"
       ],
       [
         "Frame",
@@ -7305,7 +7167,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Stereo · 4-6 cam option",
+        "t": "Stereo pair",
         "k": "quality"
       },
       {
@@ -7326,9 +7188,6 @@
         "t": "Full delivery",
         "primary": false
       }
-    ],
-    "alsoTiers": [
-      "stereo6"
     ]
   },
   {
@@ -7402,7 +7261,7 @@
       ],
       [
         "Cameras",
-        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
+        "Stereo pair · shot on a multi-camera head rig"
       ],
       [
         "Frame",
@@ -7461,7 +7320,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Stereo · 4-6 cam option",
+        "t": "Stereo pair",
         "k": "quality"
       },
       {
@@ -7482,9 +7341,6 @@
         "t": "Full delivery",
         "primary": false
       }
-    ],
-    "alsoTiers": [
-      "stereo6"
     ]
   },
   {
@@ -7558,7 +7414,7 @@
       ],
       [
         "Cameras",
-        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
+        "Stereo pair · shot on a multi-camera head rig"
       ],
       [
         "Frame",
@@ -7617,7 +7473,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Stereo · 4-6 cam option",
+        "t": "Stereo pair",
         "k": "quality"
       },
       {
@@ -7638,9 +7494,6 @@
         "t": "Full delivery",
         "primary": false
       }
-    ],
-    "alsoTiers": [
-      "stereo6"
     ]
   },
   {
@@ -7714,7 +7567,7 @@
       ],
       [
         "Cameras",
-        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
+        "Stereo pair · shot on a multi-camera head rig"
       ],
       [
         "Frame",
@@ -7773,7 +7626,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Stereo · 4-6 cam option",
+        "t": "Stereo pair",
         "k": "quality"
       },
       {
@@ -7794,9 +7647,6 @@
         "t": "Full delivery",
         "primary": false
       }
-    ],
-    "alsoTiers": [
-      "stereo6"
     ]
   },
   {
@@ -7870,7 +7720,7 @@
       ],
       [
         "Cameras",
-        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
+        "Stereo pair · shot on a multi-camera head rig"
       ],
       [
         "Frame",
@@ -7929,7 +7779,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Stereo · 4-6 cam option",
+        "t": "Stereo pair",
         "k": "quality"
       },
       {
@@ -7950,9 +7800,6 @@
         "t": "Full delivery",
         "primary": false
       }
-    ],
-    "alsoTiers": [
-      "stereo6"
     ]
   },
   {
@@ -8026,7 +7873,7 @@
       ],
       [
         "Cameras",
-        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
+        "Stereo pair · shot on a multi-camera head rig"
       ],
       [
         "Frame",
@@ -8085,7 +7932,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Stereo · 4-6 cam option",
+        "t": "Stereo pair",
         "k": "quality"
       },
       {
@@ -8106,9 +7953,6 @@
         "t": "Full delivery",
         "primary": false
       }
-    ],
-    "alsoTiers": [
-      "stereo6"
     ]
   },
   {
@@ -8182,7 +8026,7 @@
       ],
       [
         "Cameras",
-        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
+        "Stereo pair · shot on a multi-camera head rig"
       ],
       [
         "Frame",
@@ -8241,7 +8085,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Stereo · 4-6 cam option",
+        "t": "Stereo pair",
         "k": "quality"
       },
       {
@@ -8262,9 +8106,6 @@
         "t": "Full delivery",
         "primary": false
       }
-    ],
-    "alsoTiers": [
-      "stereo6"
     ]
   },
   {
@@ -8338,7 +8179,7 @@
       ],
       [
         "Cameras",
-        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
+        "Stereo pair · shot on a multi-camera head rig"
       ],
       [
         "Frame",
@@ -8397,7 +8238,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Stereo · 4-6 cam option",
+        "t": "Stereo pair",
         "k": "quality"
       },
       {
@@ -8418,9 +8259,6 @@
         "t": "Full delivery",
         "primary": false
       }
-    ],
-    "alsoTiers": [
-      "stereo6"
     ]
   },
   {
@@ -8494,7 +8332,7 @@
       ],
       [
         "Cameras",
-        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
+        "Stereo pair · shot on a multi-camera head rig"
       ],
       [
         "Frame",
@@ -8553,7 +8391,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Stereo · 4-6 cam option",
+        "t": "Stereo pair",
         "k": "quality"
       },
       {
@@ -8574,9 +8412,6 @@
         "t": "Full delivery",
         "primary": false
       }
-    ],
-    "alsoTiers": [
-      "stereo6"
     ]
   },
   {
@@ -8650,7 +8485,7 @@
       ],
       [
         "Cameras",
-        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
+        "Stereo pair · shot on a multi-camera head rig"
       ],
       [
         "Frame",
@@ -8709,7 +8544,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Stereo · 4-6 cam option",
+        "t": "Stereo pair",
         "k": "quality"
       },
       {
@@ -8730,9 +8565,6 @@
         "t": "Full delivery",
         "primary": false
       }
-    ],
-    "alsoTiers": [
-      "stereo6"
     ]
   },
   {
@@ -8806,7 +8638,7 @@
       ],
       [
         "Cameras",
-        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
+        "Stereo pair · shot on a multi-camera head rig"
       ],
       [
         "Frame",
@@ -8865,7 +8697,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Stereo · 4-6 cam option",
+        "t": "Stereo pair",
         "k": "quality"
       },
       {
@@ -8886,9 +8718,6 @@
         "t": "Full delivery",
         "primary": false
       }
-    ],
-    "alsoTiers": [
-      "stereo6"
     ]
   },
   {
@@ -8962,7 +8791,7 @@
       ],
       [
         "Cameras",
-        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
+        "Stereo pair · shot on a multi-camera head rig"
       ],
       [
         "Frame",
@@ -9021,7 +8850,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Stereo · 4-6 cam option",
+        "t": "Stereo pair",
         "k": "quality"
       },
       {
@@ -9042,9 +8871,6 @@
         "t": "Full delivery",
         "primary": false
       }
-    ],
-    "alsoTiers": [
-      "stereo6"
     ]
   },
   {
@@ -9118,7 +8944,7 @@
       ],
       [
         "Cameras",
-        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
+        "Stereo pair · shot on a multi-camera head rig"
       ],
       [
         "Frame",
@@ -9177,7 +9003,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Stereo · 4-6 cam option",
+        "t": "Stereo pair",
         "k": "quality"
       },
       {
@@ -9198,9 +9024,6 @@
         "t": "Full delivery",
         "primary": false
       }
-    ],
-    "alsoTiers": [
-      "stereo6"
     ]
   },
   {
@@ -9274,7 +9097,7 @@
       ],
       [
         "Cameras",
-        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
+        "Stereo pair · shot on a multi-camera head rig"
       ],
       [
         "Frame",
@@ -9333,7 +9156,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Stereo · 4-6 cam option",
+        "t": "Stereo pair",
         "k": "quality"
       },
       {
@@ -9354,9 +9177,6 @@
         "t": "Full delivery",
         "primary": false
       }
-    ],
-    "alsoTiers": [
-      "stereo6"
     ]
   },
   {
@@ -9430,7 +9250,7 @@
       ],
       [
         "Cameras",
-        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
+        "Stereo pair · shot on a multi-camera head rig"
       ],
       [
         "Frame",
@@ -9489,7 +9309,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Stereo · 4-6 cam option",
+        "t": "Stereo pair",
         "k": "quality"
       },
       {
@@ -9510,9 +9330,6 @@
         "t": "Full delivery",
         "primary": false
       }
-    ],
-    "alsoTiers": [
-      "stereo6"
     ]
   },
   {
@@ -9586,7 +9403,7 @@
       ],
       [
         "Cameras",
-        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
+        "Stereo pair · shot on a multi-camera head rig"
       ],
       [
         "Frame",
@@ -9645,7 +9462,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Stereo · 4-6 cam option",
+        "t": "Stereo pair",
         "k": "quality"
       },
       {
@@ -9666,9 +9483,6 @@
         "t": "Full delivery",
         "primary": false
       }
-    ],
-    "alsoTiers": [
-      "stereo6"
     ]
   },
   {
@@ -9742,7 +9556,7 @@
       ],
       [
         "Cameras",
-        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
+        "Stereo pair · shot on a multi-camera head rig"
       ],
       [
         "Frame",
@@ -9801,7 +9615,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Stereo · 4-6 cam option",
+        "t": "Stereo pair",
         "k": "quality"
       },
       {
@@ -9822,9 +9636,6 @@
         "t": "Full delivery",
         "primary": false
       }
-    ],
-    "alsoTiers": [
-      "stereo6"
     ]
   },
   {
@@ -9898,7 +9709,7 @@
       ],
       [
         "Cameras",
-        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
+        "Stereo pair · shot on a multi-camera head rig"
       ],
       [
         "Frame",
@@ -9957,7 +9768,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Stereo · 4-6 cam option",
+        "t": "Stereo pair",
         "k": "quality"
       },
       {
@@ -9978,9 +9789,6 @@
         "t": "Full delivery",
         "primary": false
       }
-    ],
-    "alsoTiers": [
-      "stereo6"
     ]
   },
   {
@@ -10054,7 +9862,7 @@
       ],
       [
         "Cameras",
-        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
+        "Stereo pair · shot on a multi-camera head rig"
       ],
       [
         "Frame",
@@ -10113,7 +9921,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Stereo · 4-6 cam option",
+        "t": "Stereo pair",
         "k": "quality"
       },
       {
@@ -10134,9 +9942,6 @@
         "t": "Full delivery",
         "primary": false
       }
-    ],
-    "alsoTiers": [
-      "stereo6"
     ]
   },
   {
@@ -10210,7 +10015,7 @@
       ],
       [
         "Cameras",
-        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
+        "Stereo pair · shot on a multi-camera head rig"
       ],
       [
         "Frame",
@@ -10269,7 +10074,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Stereo · 4-6 cam option",
+        "t": "Stereo pair",
         "k": "quality"
       },
       {
@@ -10290,9 +10095,6 @@
         "t": "Full delivery",
         "primary": false
       }
-    ],
-    "alsoTiers": [
-      "stereo6"
     ]
   },
   {
@@ -10366,7 +10168,7 @@
       ],
       [
         "Cameras",
-        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
+        "Stereo pair · shot on a multi-camera head rig"
       ],
       [
         "Frame",
@@ -10425,7 +10227,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Stereo · 4-6 cam option",
+        "t": "Stereo pair",
         "k": "quality"
       },
       {
@@ -10446,9 +10248,6 @@
         "t": "Full delivery",
         "primary": false
       }
-    ],
-    "alsoTiers": [
-      "stereo6"
     ]
   },
   {
@@ -10522,7 +10321,7 @@
       ],
       [
         "Cameras",
-        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
+        "Stereo pair · shot on a multi-camera head rig"
       ],
       [
         "Frame",
@@ -10581,7 +10380,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Stereo · 4-6 cam option",
+        "t": "Stereo pair",
         "k": "quality"
       },
       {
@@ -10602,9 +10401,6 @@
         "t": "Full delivery",
         "primary": false
       }
-    ],
-    "alsoTiers": [
-      "stereo6"
     ]
   },
   {
@@ -10678,7 +10474,7 @@
       ],
       [
         "Cameras",
-        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
+        "Stereo pair · shot on a multi-camera head rig"
       ],
       [
         "Frame",
@@ -10737,7 +10533,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Stereo · 4-6 cam option",
+        "t": "Stereo pair",
         "k": "quality"
       },
       {
@@ -10758,9 +10554,6 @@
         "t": "Full delivery",
         "primary": false
       }
-    ],
-    "alsoTiers": [
-      "stereo6"
     ]
   },
   {
@@ -10834,7 +10627,7 @@
       ],
       [
         "Cameras",
-        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
+        "Stereo pair · shot on a multi-camera head rig"
       ],
       [
         "Frame",
@@ -10893,7 +10686,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Stereo · 4-6 cam option",
+        "t": "Stereo pair",
         "k": "quality"
       },
       {
@@ -10914,9 +10707,6 @@
         "t": "Full delivery",
         "primary": false
       }
-    ],
-    "alsoTiers": [
-      "stereo6"
     ]
   },
   {
@@ -10990,7 +10780,7 @@
       ],
       [
         "Cameras",
-        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
+        "Stereo pair · shot on a multi-camera head rig"
       ],
       [
         "Frame",
@@ -11049,7 +10839,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Stereo · 4-6 cam option",
+        "t": "Stereo pair",
         "k": "quality"
       },
       {
@@ -11070,9 +10860,6 @@
         "t": "Full delivery",
         "primary": false
       }
-    ],
-    "alsoTiers": [
-      "stereo6"
     ]
   },
   {
@@ -11146,7 +10933,7 @@
       ],
       [
         "Cameras",
-        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
+        "Stereo pair · shot on a multi-camera head rig"
       ],
       [
         "Frame",
@@ -11205,7 +10992,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Stereo · 4-6 cam option",
+        "t": "Stereo pair",
         "k": "quality"
       },
       {
@@ -11226,9 +11013,6 @@
         "t": "Full delivery",
         "primary": false
       }
-    ],
-    "alsoTiers": [
-      "stereo6"
     ]
   },
   {
@@ -11302,7 +11086,7 @@
       ],
       [
         "Cameras",
-        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
+        "Stereo pair · shot on a multi-camera head rig"
       ],
       [
         "Frame",
@@ -11361,7 +11145,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Stereo · 4-6 cam option",
+        "t": "Stereo pair",
         "k": "quality"
       },
       {
@@ -11382,9 +11166,6 @@
         "t": "Full delivery",
         "primary": false
       }
-    ],
-    "alsoTiers": [
-      "stereo6"
     ]
   },
   {
@@ -11458,7 +11239,7 @@
       ],
       [
         "Cameras",
-        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
+        "Stereo pair · shot on a multi-camera head rig"
       ],
       [
         "Frame",
@@ -11517,7 +11298,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Stereo · 4-6 cam option",
+        "t": "Stereo pair",
         "k": "quality"
       },
       {
@@ -11538,9 +11319,6 @@
         "t": "Full delivery",
         "primary": false
       }
-    ],
-    "alsoTiers": [
-      "stereo6"
     ]
   },
   {
@@ -11614,7 +11392,7 @@
       ],
       [
         "Cameras",
-        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
+        "Stereo pair · shot on a multi-camera head rig"
       ],
       [
         "Frame",
@@ -11673,7 +11451,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Stereo · 4-6 cam option",
+        "t": "Stereo pair",
         "k": "quality"
       },
       {
@@ -11694,9 +11472,6 @@
         "t": "Full delivery",
         "primary": false
       }
-    ],
-    "alsoTiers": [
-      "stereo6"
     ]
   },
   {
@@ -11770,7 +11545,7 @@
       ],
       [
         "Cameras",
-        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
+        "Stereo pair · shot on a multi-camera head rig"
       ],
       [
         "Frame",
@@ -11829,7 +11604,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Stereo · 4-6 cam option",
+        "t": "Stereo pair",
         "k": "quality"
       },
       {
@@ -11850,9 +11625,6 @@
         "t": "Full delivery",
         "primary": false
       }
-    ],
-    "alsoTiers": [
-      "stereo6"
     ]
   },
   {
@@ -11926,7 +11698,7 @@
       ],
       [
         "Cameras",
-        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
+        "Stereo pair · shot on a multi-camera head rig"
       ],
       [
         "Frame",
@@ -11985,7 +11757,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Stereo · 4-6 cam option",
+        "t": "Stereo pair",
         "k": "quality"
       },
       {
@@ -12006,9 +11778,6 @@
         "t": "Full delivery",
         "primary": false
       }
-    ],
-    "alsoTiers": [
-      "stereo6"
     ]
   },
   {
@@ -12082,7 +11851,7 @@
       ],
       [
         "Cameras",
-        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
+        "Stereo pair · shot on a multi-camera head rig"
       ],
       [
         "Frame",
@@ -12141,7 +11910,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Stereo · 4-6 cam option",
+        "t": "Stereo pair",
         "k": "quality"
       },
       {
@@ -12162,9 +11931,6 @@
         "t": "Full delivery",
         "primary": false
       }
-    ],
-    "alsoTiers": [
-      "stereo6"
     ]
   },
   {
@@ -12238,7 +12004,7 @@
       ],
       [
         "Cameras",
-        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
+        "Stereo pair · shot on a multi-camera head rig"
       ],
       [
         "Frame",
@@ -12297,7 +12063,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Stereo · 4-6 cam option",
+        "t": "Stereo pair",
         "k": "quality"
       },
       {
@@ -12318,9 +12084,6 @@
         "t": "Full delivery",
         "primary": false
       }
-    ],
-    "alsoTiers": [
-      "stereo6"
     ]
   },
   {
@@ -12394,7 +12157,7 @@
       ],
       [
         "Cameras",
-        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
+        "Stereo pair · shot on a multi-camera head rig"
       ],
       [
         "Frame",
@@ -12453,7 +12216,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Stereo · 4-6 cam option",
+        "t": "Stereo pair",
         "k": "quality"
       },
       {
@@ -12474,9 +12237,6 @@
         "t": "Full delivery",
         "primary": false
       }
-    ],
-    "alsoTiers": [
-      "stereo6"
     ]
   },
   {
@@ -12550,7 +12310,7 @@
       ],
       [
         "Cameras",
-        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
+        "Stereo pair · shot on a multi-camera head rig"
       ],
       [
         "Frame",
@@ -12609,7 +12369,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Stereo · 4-6 cam option",
+        "t": "Stereo pair",
         "k": "quality"
       },
       {
@@ -12630,9 +12390,6 @@
         "t": "Full delivery",
         "primary": false
       }
-    ],
-    "alsoTiers": [
-      "stereo6"
     ]
   },
   {
@@ -12706,7 +12463,7 @@
       ],
       [
         "Cameras",
-        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
+        "Stereo pair · shot on a multi-camera head rig"
       ],
       [
         "Frame",
@@ -12765,7 +12522,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Stereo · 4-6 cam option",
+        "t": "Stereo pair",
         "k": "quality"
       },
       {
@@ -12786,9 +12543,6 @@
         "t": "Full delivery",
         "primary": false
       }
-    ],
-    "alsoTiers": [
-      "stereo6"
     ]
   },
   {
@@ -12862,7 +12616,7 @@
       ],
       [
         "Cameras",
-        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
+        "Stereo pair · shot on a multi-camera head rig"
       ],
       [
         "Frame",
@@ -12921,7 +12675,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Stereo · 4-6 cam option",
+        "t": "Stereo pair",
         "k": "quality"
       },
       {
@@ -12942,9 +12696,6 @@
         "t": "Full delivery",
         "primary": false
       }
-    ],
-    "alsoTiers": [
-      "stereo6"
     ]
   },
   {
@@ -13018,7 +12769,7 @@
       ],
       [
         "Cameras",
-        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
+        "Stereo pair · shot on a multi-camera head rig"
       ],
       [
         "Frame",
@@ -13077,7 +12828,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Stereo · 4-6 cam option",
+        "t": "Stereo pair",
         "k": "quality"
       },
       {
@@ -13098,9 +12849,6 @@
         "t": "Full delivery",
         "primary": false
       }
-    ],
-    "alsoTiers": [
-      "stereo6"
     ]
   },
   {
@@ -13174,7 +12922,7 @@
       ],
       [
         "Cameras",
-        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
+        "Stereo pair · shot on a multi-camera head rig"
       ],
       [
         "Frame",
@@ -13233,7 +12981,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Stereo · 4-6 cam option",
+        "t": "Stereo pair",
         "k": "quality"
       },
       {
@@ -13254,9 +13002,6 @@
         "t": "Full delivery",
         "primary": false
       }
-    ],
-    "alsoTiers": [
-      "stereo6"
     ]
   },
   {
@@ -13330,7 +13075,7 @@
       ],
       [
         "Cameras",
-        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
+        "Stereo pair · shot on a multi-camera head rig"
       ],
       [
         "Frame",
@@ -13389,7 +13134,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Stereo · 4-6 cam option",
+        "t": "Stereo pair",
         "k": "quality"
       },
       {
@@ -13410,9 +13155,6 @@
         "t": "Full delivery",
         "primary": false
       }
-    ],
-    "alsoTiers": [
-      "stereo6"
     ]
   },
   {
@@ -13486,7 +13228,7 @@
       ],
       [
         "Cameras",
-        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
+        "Stereo pair · shot on a multi-camera head rig"
       ],
       [
         "Frame",
@@ -13545,7 +13287,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Stereo · 4-6 cam option",
+        "t": "Stereo pair",
         "k": "quality"
       },
       {
@@ -13566,9 +13308,6 @@
         "t": "Full delivery",
         "primary": false
       }
-    ],
-    "alsoTiers": [
-      "stereo6"
     ]
   },
   {
@@ -13642,7 +13381,7 @@
       ],
       [
         "Cameras",
-        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
+        "Stereo pair · shot on a multi-camera head rig"
       ],
       [
         "Frame",
@@ -13701,7 +13440,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Stereo · 4-6 cam option",
+        "t": "Stereo pair",
         "k": "quality"
       },
       {
@@ -13722,9 +13461,6 @@
         "t": "Full delivery",
         "primary": false
       }
-    ],
-    "alsoTiers": [
-      "stereo6"
     ]
   },
   {
@@ -13798,7 +13534,7 @@
       ],
       [
         "Cameras",
-        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
+        "Stereo pair · shot on a multi-camera head rig"
       ],
       [
         "Frame",
@@ -13857,7 +13593,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Stereo · 4-6 cam option",
+        "t": "Stereo pair",
         "k": "quality"
       },
       {
@@ -13878,9 +13614,6 @@
         "t": "Full delivery",
         "primary": false
       }
-    ],
-    "alsoTiers": [
-      "stereo6"
     ]
   },
   {
@@ -13954,7 +13687,7 @@
       ],
       [
         "Cameras",
-        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
+        "Stereo pair · shot on a multi-camera head rig"
       ],
       [
         "Frame",
@@ -14013,7 +13746,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Stereo · 4-6 cam option",
+        "t": "Stereo pair",
         "k": "quality"
       },
       {
@@ -14034,9 +13767,6 @@
         "t": "Full delivery",
         "primary": false
       }
-    ],
-    "alsoTiers": [
-      "stereo6"
     ]
   },
   {
@@ -14110,7 +13840,7 @@
       ],
       [
         "Cameras",
-        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
+        "Stereo pair · shot on a multi-camera head rig"
       ],
       [
         "Frame",
@@ -14169,7 +13899,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Stereo · 4-6 cam option",
+        "t": "Stereo pair",
         "k": "quality"
       },
       {
@@ -14190,9 +13920,6 @@
         "t": "Full delivery",
         "primary": false
       }
-    ],
-    "alsoTiers": [
-      "stereo6"
     ]
   },
   {
@@ -14266,7 +13993,7 @@
       ],
       [
         "Cameras",
-        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
+        "Stereo pair · shot on a multi-camera head rig"
       ],
       [
         "Frame",
@@ -14325,7 +14052,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Stereo · 4-6 cam option",
+        "t": "Stereo pair",
         "k": "quality"
       },
       {
@@ -14346,9 +14073,6 @@
         "t": "Full delivery",
         "primary": false
       }
-    ],
-    "alsoTiers": [
-      "stereo6"
     ]
   },
   {
@@ -14422,7 +14146,7 @@
       ],
       [
         "Cameras",
-        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
+        "Stereo pair · shot on a multi-camera head rig"
       ],
       [
         "Frame",
@@ -14481,7 +14205,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Stereo · 4-6 cam option",
+        "t": "Stereo pair",
         "k": "quality"
       },
       {
@@ -14502,9 +14226,6 @@
         "t": "Full delivery",
         "primary": false
       }
-    ],
-    "alsoTiers": [
-      "stereo6"
     ]
   },
   {
@@ -14578,7 +14299,7 @@
       ],
       [
         "Cameras",
-        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
+        "Stereo pair · shot on a multi-camera head rig"
       ],
       [
         "Frame",
@@ -14637,7 +14358,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Stereo · 4-6 cam option",
+        "t": "Stereo pair",
         "k": "quality"
       },
       {
@@ -14658,9 +14379,6 @@
         "t": "Full delivery",
         "primary": false
       }
-    ],
-    "alsoTiers": [
-      "stereo6"
     ]
   },
   {
@@ -14734,7 +14452,7 @@
       ],
       [
         "Cameras",
-        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
+        "Stereo pair · shot on a multi-camera head rig"
       ],
       [
         "Frame",
@@ -14793,7 +14511,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Stereo · 4-6 cam option",
+        "t": "Stereo pair",
         "k": "quality"
       },
       {
@@ -14814,9 +14532,6 @@
         "t": "Full delivery",
         "primary": false
       }
-    ],
-    "alsoTiers": [
-      "stereo6"
     ]
   },
   {
@@ -14890,7 +14605,7 @@
       ],
       [
         "Cameras",
-        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
+        "Stereo pair · shot on a multi-camera head rig"
       ],
       [
         "Frame",
@@ -14949,7 +14664,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Stereo · 4-6 cam option",
+        "t": "Stereo pair",
         "k": "quality"
       },
       {
@@ -14970,9 +14685,6 @@
         "t": "Full delivery",
         "primary": false
       }
-    ],
-    "alsoTiers": [
-      "stereo6"
     ]
   },
   {
@@ -15046,7 +14758,7 @@
       ],
       [
         "Cameras",
-        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
+        "Stereo pair · shot on a multi-camera head rig"
       ],
       [
         "Frame",
@@ -15105,7 +14817,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Stereo · 4-6 cam option",
+        "t": "Stereo pair",
         "k": "quality"
       },
       {
@@ -15126,9 +14838,6 @@
         "t": "Full delivery",
         "primary": false
       }
-    ],
-    "alsoTiers": [
-      "stereo6"
     ]
   },
   {
@@ -15202,7 +14911,7 @@
       ],
       [
         "Cameras",
-        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
+        "Stereo pair · shot on a multi-camera head rig"
       ],
       [
         "Frame",
@@ -15261,7 +14970,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Stereo · 4-6 cam option",
+        "t": "Stereo pair",
         "k": "quality"
       },
       {
@@ -15282,9 +14991,6 @@
         "t": "Full delivery",
         "primary": false
       }
-    ],
-    "alsoTiers": [
-      "stereo6"
     ]
   },
   {
@@ -15358,7 +15064,7 @@
       ],
       [
         "Cameras",
-        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
+        "Stereo pair · shot on a multi-camera head rig"
       ],
       [
         "Frame",
@@ -15417,7 +15123,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Stereo · 4-6 cam option",
+        "t": "Stereo pair",
         "k": "quality"
       },
       {
@@ -15438,9 +15144,6 @@
         "t": "Full delivery",
         "primary": false
       }
-    ],
-    "alsoTiers": [
-      "stereo6"
     ]
   },
   {
@@ -15514,7 +15217,7 @@
       ],
       [
         "Cameras",
-        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
+        "Stereo pair · shot on a multi-camera head rig"
       ],
       [
         "Frame",
@@ -15573,7 +15276,7 @@
         "k": "difficulty"
       },
       {
-        "t": "Stereo · 4-6 cam option",
+        "t": "Stereo pair",
         "k": "quality"
       },
       {
@@ -15594,9 +15297,6 @@
         "t": "Full delivery",
         "primary": false
       }
-    ],
-    "alsoTiers": [
-      "stereo6"
     ]
   },
   {
@@ -16662,6 +16362,1614 @@
       },
       {
         "t": "8.8 GB",
+        "k": "file"
+      }
+    ],
+    "downloads": [
+      {
+        "t": "Preview pack",
+        "primary": true
+      }
+    ]
+  },
+  {
+    "slug": "sixcam-engine-working",
+    "domain": "robotics",
+    "modality": "egocentric",
+    "tier": "stereo6",
+    "provenance": "custom",
+    "title": "Engine working",
+    "task": "engine-working",
+    "label": "Mechanical / Automotive Work",
+    "skill": "Mechanical / Automotive Work",
+    "skillGroup": "Mechanical / Automotive Work",
+    "industry": "Automotive and Transport",
+    "job": "Mechanic",
+    "environment": "Workshop, workplace, on site",
+    "locale": "Vietnam",
+    "rig": "Six-camera head rig, three stereo pairs",
+    "viewpoint": "first-person",
+    "telemetry": false,
+    "durationSec": 278.266704,
+    "resolution": "1600x1300",
+    "fps": 30,
+    "streams": [
+      "RGB x6 (three stereo pairs)"
+    ],
+    "formats": [
+      "mp4"
+    ],
+    "size": "856 MB",
+    "spec": [
+      [
+        "Task id",
+        "engine-working"
+      ],
+      [
+        "Skill group",
+        "Mechanical / Automotive Work"
+      ],
+      [
+        "Industry",
+        "Automotive and Transport"
+      ],
+      [
+        "Operator",
+        "Mechanic"
+      ],
+      [
+        "Cameras",
+        "Six, in three stereo pairs — primary, mid and outer"
+      ],
+      [
+        "Frame",
+        "1600x1300 at 30 fps"
+      ],
+      [
+        "Episode",
+        "4 min 38 s"
+      ],
+      [
+        "Delivered size",
+        "856 MB across 6 files"
+      ]
+    ],
+    "breadcrumb": [
+      "Samples",
+      "Egocentric",
+      "Engine working"
+    ],
+    "preview": "Preview · 8 s on all six lenses, the same instant on each · 480 x 360 per view",
+    "pills": [
+      {
+        "t": "Mechanical / Automotive Work",
+        "k": "skill"
+      },
+      {
+        "t": "6 cameras",
+        "k": "quality"
+      },
+      {
+        "t": "856 MB",
+        "k": "file"
+      }
+    ],
+    "downloads": [
+      {
+        "t": "Preview pack",
+        "primary": true
+      }
+    ]
+  },
+  {
+    "slug": "sixcam-fabric-sewing",
+    "domain": "robotics",
+    "modality": "egocentric",
+    "tier": "stereo6",
+    "provenance": "custom",
+    "title": "Fabric sewing",
+    "task": "fabric-sewing",
+    "label": "Clothing & Laundry",
+    "skill": "Clothing & Laundry",
+    "skillGroup": "Clothing & Laundry",
+    "industry": "Clothing and Fashion",
+    "job": "Tailor / seamstress",
+    "environment": "Workshop, workplace, on site",
+    "locale": "Vietnam",
+    "rig": "Six-camera head rig, three stereo pairs",
+    "viewpoint": "first-person",
+    "telemetry": false,
+    "durationSec": 277.603717,
+    "resolution": "1920x1080",
+    "fps": 30,
+    "streams": [
+      "RGB x6 (three stereo pairs)"
+    ],
+    "formats": [
+      "mp4"
+    ],
+    "size": "836 MB",
+    "spec": [
+      [
+        "Task id",
+        "fabric-sewing"
+      ],
+      [
+        "Skill group",
+        "Clothing & Laundry"
+      ],
+      [
+        "Industry",
+        "Clothing and Fashion"
+      ],
+      [
+        "Operator",
+        "Tailor / seamstress"
+      ],
+      [
+        "Cameras",
+        "Six, in three stereo pairs — primary, mid and outer"
+      ],
+      [
+        "Frame",
+        "1920x1080 at 30 fps"
+      ],
+      [
+        "Episode",
+        "4 min 38 s"
+      ],
+      [
+        "Delivered size",
+        "836 MB across 6 files"
+      ],
+      [
+        "Orientation",
+        "Recorded inverted; the preview is rotated 180°, the delivery is not"
+      ]
+    ],
+    "breadcrumb": [
+      "Samples",
+      "Egocentric",
+      "Fabric sewing"
+    ],
+    "preview": "Preview · 8 s on all six lenses, the same instant on each · 480 x 360 per view",
+    "pills": [
+      {
+        "t": "Clothing & Laundry",
+        "k": "skill"
+      },
+      {
+        "t": "6 cameras",
+        "k": "quality"
+      },
+      {
+        "t": "836 MB",
+        "k": "file"
+      }
+    ],
+    "downloads": [
+      {
+        "t": "Preview pack",
+        "primary": true
+      }
+    ]
+  },
+  {
+    "slug": "sixcam-garment-sewing",
+    "domain": "robotics",
+    "modality": "egocentric",
+    "tier": "stereo6",
+    "provenance": "custom",
+    "title": "Garment sewing",
+    "task": "garment-sewing",
+    "label": "Clothing & Laundry",
+    "skill": "Clothing & Laundry",
+    "skillGroup": "Clothing & Laundry",
+    "industry": "Clothing and Fashion",
+    "job": "Tailor / seamstress",
+    "environment": "Workshop, workplace, on site",
+    "locale": "Vietnam",
+    "rig": "Six-camera head rig, three stereo pairs",
+    "viewpoint": "first-person",
+    "telemetry": false,
+    "durationSec": 276.666704,
+    "resolution": "1920x1080",
+    "fps": 30,
+    "streams": [
+      "RGB x6 (three stereo pairs)"
+    ],
+    "formats": [
+      "mp4"
+    ],
+    "size": "694 MB",
+    "spec": [
+      [
+        "Task id",
+        "garment-sewing"
+      ],
+      [
+        "Skill group",
+        "Clothing & Laundry"
+      ],
+      [
+        "Industry",
+        "Clothing and Fashion"
+      ],
+      [
+        "Operator",
+        "Tailor / seamstress"
+      ],
+      [
+        "Cameras",
+        "Six, in three stereo pairs — primary, mid and outer"
+      ],
+      [
+        "Views measured",
+        "5 of 6"
+      ],
+      [
+        "Frame",
+        "1920x1080 at 30 fps"
+      ],
+      [
+        "Episode",
+        "4 min 37 s"
+      ],
+      [
+        "Delivered size",
+        "694 MB across 5 files"
+      ],
+      [
+        "Orientation",
+        "Recorded inverted; the preview is rotated 180°, the delivery is not"
+      ]
+    ],
+    "breadcrumb": [
+      "Samples",
+      "Egocentric",
+      "Garment sewing"
+    ],
+    "preview": "Preview · 8 s on 5 of the six lenses, the same instant on each · 480 x 360 per view",
+    "pills": [
+      {
+        "t": "Clothing & Laundry",
+        "k": "skill"
+      },
+      {
+        "t": "6 cameras",
+        "k": "quality"
+      },
+      {
+        "t": "694 MB",
+        "k": "file"
+      }
+    ],
+    "downloads": [
+      {
+        "t": "Preview pack",
+        "primary": true
+      }
+    ]
+  },
+  {
+    "slug": "sixcam-panel-installation",
+    "domain": "robotics",
+    "modality": "egocentric",
+    "tier": "stereo6",
+    "provenance": "custom",
+    "title": "Panel installation",
+    "task": "panel-installation",
+    "label": "Construction & Building",
+    "skill": "Construction & Building",
+    "skillGroup": "Construction & Building",
+    "industry": "Construction and Hardware",
+    "job": "Construction laborer",
+    "environment": "Workshop, workplace, on site",
+    "locale": "Vietnam",
+    "rig": "Six-camera head rig, three stereo pairs",
+    "viewpoint": "first-person",
+    "telemetry": false,
+    "durationSec": 278.800037,
+    "resolution": "1920x1080",
+    "fps": 30,
+    "streams": [
+      "RGB x6 (three stereo pairs)"
+    ],
+    "formats": [
+      "mp4"
+    ],
+    "size": "838 MB",
+    "spec": [
+      [
+        "Task id",
+        "panel-installation"
+      ],
+      [
+        "Skill group",
+        "Construction & Building"
+      ],
+      [
+        "Industry",
+        "Construction and Hardware"
+      ],
+      [
+        "Operator",
+        "Construction laborer"
+      ],
+      [
+        "Cameras",
+        "Six, in three stereo pairs — primary, mid and outer"
+      ],
+      [
+        "Frame",
+        "1920x1080 at 30 fps"
+      ],
+      [
+        "Episode",
+        "4 min 39 s"
+      ],
+      [
+        "Delivered size",
+        "838 MB across 6 files"
+      ],
+      [
+        "Orientation",
+        "Recorded inverted; the preview is rotated 180°, the delivery is not"
+      ]
+    ],
+    "breadcrumb": [
+      "Samples",
+      "Egocentric",
+      "Panel installation"
+    ],
+    "preview": "Preview · 8 s on all six lenses, the same instant on each · 480 x 360 per view",
+    "pills": [
+      {
+        "t": "Construction & Building",
+        "k": "skill"
+      },
+      {
+        "t": "6 cameras",
+        "k": "quality"
+      },
+      {
+        "t": "838 MB",
+        "k": "file"
+      }
+    ],
+    "downloads": [
+      {
+        "t": "Preview pack",
+        "primary": true
+      }
+    ]
+  },
+  {
+    "slug": "sixcam-pineapple-cutting",
+    "domain": "robotics",
+    "modality": "egocentric",
+    "tier": "stereo6",
+    "provenance": "custom",
+    "title": "Pineapple cutting",
+    "task": "pineapple-cutting",
+    "label": "Food Preparation & Cooking",
+    "skill": "Food Preparation & Cooking",
+    "skillGroup": "Food Preparation & Cooking",
+    "industry": "Food and Beverage",
+    "job": "Food prep worker",
+    "environment": "Workshop, workplace, on site",
+    "locale": "Vietnam",
+    "rig": "Six-camera head rig, three stereo pairs",
+    "viewpoint": "first-person",
+    "telemetry": false,
+    "durationSec": 279.466704,
+    "resolution": "1600x1300",
+    "fps": 30,
+    "streams": [
+      "RGB x6 (three stereo pairs)"
+    ],
+    "formats": [
+      "mp4"
+    ],
+    "size": "861 MB",
+    "spec": [
+      [
+        "Task id",
+        "pineapple-cutting"
+      ],
+      [
+        "Skill group",
+        "Food Preparation & Cooking"
+      ],
+      [
+        "Industry",
+        "Food and Beverage"
+      ],
+      [
+        "Operator",
+        "Food prep worker"
+      ],
+      [
+        "Cameras",
+        "Six, in three stereo pairs — primary, mid and outer"
+      ],
+      [
+        "Frame",
+        "1600x1300 at 30 fps"
+      ],
+      [
+        "Episode",
+        "4 min 39 s"
+      ],
+      [
+        "Delivered size",
+        "861 MB across 6 files"
+      ]
+    ],
+    "breadcrumb": [
+      "Samples",
+      "Egocentric",
+      "Pineapple cutting"
+    ],
+    "preview": "Preview · 8 s on all six lenses, the same instant on each · 480 x 360 per view",
+    "pills": [
+      {
+        "t": "Food Preparation & Cooking",
+        "k": "skill"
+      },
+      {
+        "t": "6 cameras",
+        "k": "quality"
+      },
+      {
+        "t": "861 MB",
+        "k": "file"
+      }
+    ],
+    "downloads": [
+      {
+        "t": "Preview pack",
+        "primary": true
+      }
+    ]
+  },
+  {
+    "slug": "sixcam-room-cleaning",
+    "domain": "robotics",
+    "modality": "egocentric",
+    "tier": "stereo6",
+    "provenance": "custom",
+    "title": "Room cleaning",
+    "task": "room-cleaning",
+    "label": "Cleaning & Sanitation",
+    "skill": "Cleaning & Sanitation",
+    "skillGroup": "Cleaning & Sanitation",
+    "industry": "Hospitality",
+    "job": "Cleaner",
+    "environment": "Workshop, workplace, on site",
+    "locale": "Vietnam",
+    "rig": "Six-camera head rig, three stereo pairs",
+    "viewpoint": "first-person",
+    "telemetry": false,
+    "durationSec": 276.548268,
+    "resolution": "1920x1080",
+    "fps": 30,
+    "streams": [
+      "RGB x6 (three stereo pairs)"
+    ],
+    "formats": [
+      "mp4"
+    ],
+    "size": "832 MB",
+    "spec": [
+      [
+        "Task id",
+        "room-cleaning"
+      ],
+      [
+        "Skill group",
+        "Cleaning & Sanitation"
+      ],
+      [
+        "Industry",
+        "Hospitality"
+      ],
+      [
+        "Operator",
+        "Cleaner"
+      ],
+      [
+        "Cameras",
+        "Six, in three stereo pairs — primary, mid and outer"
+      ],
+      [
+        "Frame",
+        "1920x1080 at 30 fps"
+      ],
+      [
+        "Episode",
+        "4 min 37 s"
+      ],
+      [
+        "Delivered size",
+        "832 MB across 6 files"
+      ],
+      [
+        "Orientation",
+        "Recorded inverted; the preview is rotated 180°, the delivery is not"
+      ]
+    ],
+    "breadcrumb": [
+      "Samples",
+      "Egocentric",
+      "Room cleaning"
+    ],
+    "preview": "Preview · 8 s on all six lenses, the same instant on each · 480 x 360 per view",
+    "pills": [
+      {
+        "t": "Cleaning & Sanitation",
+        "k": "skill"
+      },
+      {
+        "t": "6 cameras",
+        "k": "quality"
+      },
+      {
+        "t": "832 MB",
+        "k": "file"
+      }
+    ],
+    "downloads": [
+      {
+        "t": "Preview pack",
+        "primary": true
+      }
+    ]
+  },
+  {
+    "slug": "sixcam-shoe-sewing",
+    "domain": "robotics",
+    "modality": "egocentric",
+    "tier": "stereo6",
+    "provenance": "custom",
+    "title": "Shoe sewing",
+    "task": "shoe-sewing",
+    "label": "Clothing & Laundry",
+    "skill": "Clothing & Laundry",
+    "skillGroup": "Clothing & Laundry",
+    "industry": "Repair Services",
+    "job": "Shoe repairer",
+    "environment": "Workshop, workplace, on site",
+    "locale": "Vietnam",
+    "rig": "Six-camera head rig, three stereo pairs",
+    "viewpoint": "first-person",
+    "telemetry": false,
+    "durationSec": 278.233371,
+    "resolution": "1600x1300",
+    "fps": 30,
+    "streams": [
+      "RGB x6 (three stereo pairs)"
+    ],
+    "formats": [
+      "mp4"
+    ],
+    "size": "857 MB",
+    "spec": [
+      [
+        "Task id",
+        "shoe-sewing"
+      ],
+      [
+        "Skill group",
+        "Clothing & Laundry"
+      ],
+      [
+        "Industry",
+        "Repair Services"
+      ],
+      [
+        "Operator",
+        "Shoe repairer"
+      ],
+      [
+        "Cameras",
+        "Six, in three stereo pairs — primary, mid and outer"
+      ],
+      [
+        "Frame",
+        "1600x1300 at 30 fps"
+      ],
+      [
+        "Episode",
+        "4 min 38 s"
+      ],
+      [
+        "Delivered size",
+        "857 MB across 6 files"
+      ]
+    ],
+    "breadcrumb": [
+      "Samples",
+      "Egocentric",
+      "Shoe sewing"
+    ],
+    "preview": "Preview · 8 s on all six lenses, the same instant on each · 480 x 360 per view",
+    "pills": [
+      {
+        "t": "Clothing & Laundry",
+        "k": "skill"
+      },
+      {
+        "t": "6 cameras",
+        "k": "quality"
+      },
+      {
+        "t": "857 MB",
+        "k": "file"
+      }
+    ],
+    "downloads": [
+      {
+        "t": "Preview pack",
+        "primary": true
+      }
+    ]
+  },
+  {
+    "slug": "sixcam-wood-grinding",
+    "domain": "robotics",
+    "modality": "egocentric",
+    "tier": "stereo6",
+    "provenance": "custom",
+    "title": "Wood grinding",
+    "task": "wood-grinding",
+    "label": "Tool Use & Technical Manipulation",
+    "skill": "Tool Use & Technical Manipulation",
+    "skillGroup": "Tool Use & Technical Manipulation",
+    "industry": "Industrial Manufacturing",
+    "job": "Woodworker",
+    "environment": "Workshop, workplace, on site",
+    "locale": "Vietnam",
+    "rig": "Six-camera head rig, three stereo pairs",
+    "viewpoint": "first-person",
+    "telemetry": false,
+    "durationSec": 279.500037,
+    "resolution": "1920x1080",
+    "fps": 30,
+    "streams": [
+      "RGB x6 (three stereo pairs)"
+    ],
+    "formats": [
+      "mp4"
+    ],
+    "size": "844 MB",
+    "spec": [
+      [
+        "Task id",
+        "wood-grinding"
+      ],
+      [
+        "Skill group",
+        "Tool Use & Technical Manipulation"
+      ],
+      [
+        "Industry",
+        "Industrial Manufacturing"
+      ],
+      [
+        "Operator",
+        "Woodworker"
+      ],
+      [
+        "Cameras",
+        "Six, in three stereo pairs — primary, mid and outer"
+      ],
+      [
+        "Frame",
+        "1920x1080 at 30 fps"
+      ],
+      [
+        "Episode",
+        "4 min 40 s"
+      ],
+      [
+        "Delivered size",
+        "844 MB across 6 files"
+      ],
+      [
+        "Orientation",
+        "Recorded inverted; the preview is rotated 180°, the delivery is not"
+      ]
+    ],
+    "breadcrumb": [
+      "Samples",
+      "Egocentric",
+      "Wood grinding"
+    ],
+    "preview": "Preview · 8 s on all six lenses, the same instant on each · 480 x 360 per view",
+    "pills": [
+      {
+        "t": "Tool Use & Technical Manipulation",
+        "k": "skill"
+      },
+      {
+        "t": "6 cameras",
+        "k": "quality"
+      },
+      {
+        "t": "844 MB",
+        "k": "file"
+      }
+    ],
+    "downloads": [
+      {
+        "t": "Preview pack",
+        "primary": true
+      }
+    ]
+  },
+  {
+    "slug": "sixcam-wrapping-selecting",
+    "domain": "robotics",
+    "modality": "egocentric",
+    "tier": "stereo6",
+    "provenance": "custom",
+    "title": "Wrapping and selecting",
+    "task": "wrapping-selecting",
+    "label": "Packing & Bagging",
+    "skill": "Packing & Bagging",
+    "skillGroup": "Packing & Bagging",
+    "industry": "Industrial Manufacturing",
+    "job": "Assembler",
+    "environment": "Workshop, workplace, on site",
+    "locale": "Vietnam",
+    "rig": "Six-camera head rig, three stereo pairs",
+    "viewpoint": "first-person",
+    "telemetry": false,
+    "durationSec": 274.466704,
+    "resolution": "1920x1080",
+    "fps": 30,
+    "streams": [
+      "RGB x6 (three stereo pairs)"
+    ],
+    "formats": [
+      "mp4"
+    ],
+    "size": "826 MB",
+    "spec": [
+      [
+        "Task id",
+        "wrapping-selecting"
+      ],
+      [
+        "Skill group",
+        "Packing & Bagging"
+      ],
+      [
+        "Industry",
+        "Industrial Manufacturing"
+      ],
+      [
+        "Operator",
+        "Assembler"
+      ],
+      [
+        "Cameras",
+        "Six, in three stereo pairs — primary, mid and outer"
+      ],
+      [
+        "Frame",
+        "1920x1080 at 30 fps"
+      ],
+      [
+        "Episode",
+        "4 min 34 s"
+      ],
+      [
+        "Delivered size",
+        "826 MB across 6 files"
+      ],
+      [
+        "Orientation",
+        "Recorded inverted; the preview is rotated 180°, the delivery is not"
+      ]
+    ],
+    "breadcrumb": [
+      "Samples",
+      "Egocentric",
+      "Wrapping and selecting"
+    ],
+    "preview": "Preview · 8 s on all six lenses, the same instant on each · 480 x 360 per view",
+    "pills": [
+      {
+        "t": "Packing & Bagging",
+        "k": "skill"
+      },
+      {
+        "t": "6 cameras",
+        "k": "quality"
+      },
+      {
+        "t": "826 MB",
+        "k": "file"
+      }
+    ],
+    "downloads": [
+      {
+        "t": "Preview pack",
+        "primary": true
+      }
+    ]
+  },
+  {
+    "slug": "sixcam-zipper-sewing",
+    "domain": "robotics",
+    "modality": "egocentric",
+    "tier": "stereo6",
+    "provenance": "custom",
+    "title": "Zipper sewing",
+    "task": "zipper-sewing",
+    "label": "Clothing & Laundry",
+    "skill": "Clothing & Laundry",
+    "skillGroup": "Clothing & Laundry",
+    "industry": "Clothing and Fashion",
+    "job": "Tailor / seamstress",
+    "environment": "Workshop, workplace, on site",
+    "locale": "Vietnam",
+    "rig": "Six-camera head rig, three stereo pairs",
+    "viewpoint": "first-person",
+    "telemetry": false,
+    "durationSec": 278.285261,
+    "resolution": "1920x1080",
+    "fps": 30,
+    "streams": [
+      "RGB x6 (three stereo pairs)"
+    ],
+    "formats": [
+      "mp4"
+    ],
+    "size": "838 MB",
+    "spec": [
+      [
+        "Task id",
+        "zipper-sewing"
+      ],
+      [
+        "Skill group",
+        "Clothing & Laundry"
+      ],
+      [
+        "Industry",
+        "Clothing and Fashion"
+      ],
+      [
+        "Operator",
+        "Tailor / seamstress"
+      ],
+      [
+        "Cameras",
+        "Six, in three stereo pairs — primary, mid and outer"
+      ],
+      [
+        "Frame",
+        "1920x1080 at 30 fps"
+      ],
+      [
+        "Episode",
+        "4 min 38 s"
+      ],
+      [
+        "Delivered size",
+        "838 MB across 6 files"
+      ],
+      [
+        "Orientation",
+        "Recorded inverted; the preview is rotated 180°, the delivery is not"
+      ]
+    ],
+    "breadcrumb": [
+      "Samples",
+      "Egocentric",
+      "Zipper sewing"
+    ],
+    "preview": "Preview · 8 s on all six lenses, the same instant on each · 480 x 360 per view",
+    "pills": [
+      {
+        "t": "Clothing & Laundry",
+        "k": "skill"
+      },
+      {
+        "t": "6 cameras",
+        "k": "quality"
+      },
+      {
+        "t": "838 MB",
+        "k": "file"
+      }
+    ],
+    "downloads": [
+      {
+        "t": "Preview pack",
+        "primary": true
+      }
+    ]
+  },
+  {
+    "slug": "handpose-fabric-sewing",
+    "domain": "robotics",
+    "modality": "egocentric",
+    "tier": "stereo6",
+    "provenance": "custom",
+    "title": "Fabric sewing · hand pose",
+    "task": "fabric-sewing",
+    "label": "Clothing & Laundry",
+    "skill": "Clothing & Laundry",
+    "skillGroup": "Clothing & Laundry",
+    "industry": "Clothing and Fashion",
+    "job": "Tailor / seamstress",
+    "environment": "Workshop, workplace, on site",
+    "locale": "Vietnam",
+    "rig": "Six-camera head rig, three stereo pairs",
+    "viewpoint": "first-person",
+    "telemetry": false,
+    "durationSec": 30,
+    "resolution": "1280x720",
+    "fps": 30,
+    "streams": [
+      "RGB x6 (three stereo pairs)",
+      "Hand-pose overlay render"
+    ],
+    "formats": [
+      "mp4"
+    ],
+    "size": "104 MB",
+    "spec": [
+      [
+        "Task id",
+        "fabric-sewing"
+      ],
+      [
+        "Skill group",
+        "Clothing & Laundry"
+      ],
+      [
+        "Industry",
+        "Clothing and Fashion"
+      ],
+      [
+        "Operator",
+        "Tailor / seamstress"
+      ],
+      [
+        "Cameras",
+        "Six, in three stereo pairs — primary, mid and outer"
+      ],
+      [
+        "Frame",
+        "1280x720 at 30 fps"
+      ],
+      [
+        "Segment",
+        "30 s"
+      ],
+      [
+        "Hand pose",
+        "Rendered overlay on the mid pair, left and right"
+      ],
+      [
+        "Delivered size",
+        "104 MB across 8 files"
+      ]
+    ],
+    "breadcrumb": [
+      "Samples",
+      "Egocentric",
+      "Fabric sewing · hand pose"
+    ],
+    "preview": "Preview · 8 s of the hand-pose render, both eyes of the annotated pair · 640 x 480",
+    "pills": [
+      {
+        "t": "Clothing & Laundry",
+        "k": "skill"
+      },
+      {
+        "t": "6 cameras",
+        "k": "quality"
+      },
+      {
+        "t": "Hand pose",
+        "k": "quality"
+      },
+      {
+        "t": "104 MB",
+        "k": "file"
+      }
+    ],
+    "downloads": [
+      {
+        "t": "Preview pack",
+        "primary": true
+      }
+    ]
+  },
+  {
+    "slug": "handpose-garment-sewing",
+    "domain": "robotics",
+    "modality": "egocentric",
+    "tier": "stereo6",
+    "provenance": "custom",
+    "title": "Garment sewing · hand pose",
+    "task": "garment-sewing",
+    "label": "Clothing & Laundry",
+    "skill": "Clothing & Laundry",
+    "skillGroup": "Clothing & Laundry",
+    "industry": "Clothing and Fashion",
+    "job": "Tailor / seamstress",
+    "environment": "Workshop, workplace, on site",
+    "locale": "Vietnam",
+    "rig": "Six-camera head rig, three stereo pairs",
+    "viewpoint": "first-person",
+    "telemetry": false,
+    "durationSec": 30,
+    "resolution": "1280x720",
+    "fps": 30,
+    "streams": [
+      "RGB x6 (three stereo pairs)",
+      "Hand-pose overlay render"
+    ],
+    "formats": [
+      "mp4"
+    ],
+    "size": "111 MB",
+    "spec": [
+      [
+        "Task id",
+        "garment-sewing"
+      ],
+      [
+        "Skill group",
+        "Clothing & Laundry"
+      ],
+      [
+        "Industry",
+        "Clothing and Fashion"
+      ],
+      [
+        "Operator",
+        "Tailor / seamstress"
+      ],
+      [
+        "Cameras",
+        "Six, in three stereo pairs — primary, mid and outer"
+      ],
+      [
+        "Frame",
+        "1280x720 at 30 fps"
+      ],
+      [
+        "Segment",
+        "30 s"
+      ],
+      [
+        "Hand pose",
+        "Rendered overlay on the mid pair, left and right"
+      ],
+      [
+        "Delivered size",
+        "111 MB across 8 files"
+      ]
+    ],
+    "breadcrumb": [
+      "Samples",
+      "Egocentric",
+      "Garment sewing · hand pose"
+    ],
+    "preview": "Preview · 8 s of the hand-pose render, both eyes of the annotated pair · 640 x 480",
+    "pills": [
+      {
+        "t": "Clothing & Laundry",
+        "k": "skill"
+      },
+      {
+        "t": "6 cameras",
+        "k": "quality"
+      },
+      {
+        "t": "Hand pose",
+        "k": "quality"
+      },
+      {
+        "t": "111 MB",
+        "k": "file"
+      }
+    ],
+    "downloads": [
+      {
+        "t": "Preview pack",
+        "primary": true
+      }
+    ]
+  },
+  {
+    "slug": "handpose-pineapple-cutting",
+    "domain": "robotics",
+    "modality": "egocentric",
+    "tier": "stereo6",
+    "provenance": "custom",
+    "title": "Pineapple cutting · hand pose",
+    "task": "pineapple-cutting",
+    "label": "Food Preparation & Cooking",
+    "skill": "Food Preparation & Cooking",
+    "skillGroup": "Food Preparation & Cooking",
+    "industry": "Food and Beverage",
+    "job": "Food prep worker",
+    "environment": "Workshop, workplace, on site",
+    "locale": "Vietnam",
+    "rig": "Six-camera head rig, three stereo pairs",
+    "viewpoint": "first-person",
+    "telemetry": false,
+    "durationSec": 30,
+    "resolution": "1280x1040",
+    "fps": 30,
+    "streams": [
+      "RGB x6 (three stereo pairs)",
+      "Hand-pose overlay render"
+    ],
+    "formats": [
+      "mp4"
+    ],
+    "size": "190 MB",
+    "spec": [
+      [
+        "Task id",
+        "pineapple-cutting"
+      ],
+      [
+        "Skill group",
+        "Food Preparation & Cooking"
+      ],
+      [
+        "Industry",
+        "Food and Beverage"
+      ],
+      [
+        "Operator",
+        "Food prep worker"
+      ],
+      [
+        "Cameras",
+        "Six, in three stereo pairs — primary, mid and outer"
+      ],
+      [
+        "Frame",
+        "1280x1040 at 30 fps"
+      ],
+      [
+        "Segment",
+        "30 s"
+      ],
+      [
+        "Hand pose",
+        "Rendered overlay on the primary pair, left and right"
+      ],
+      [
+        "Delivered size",
+        "190 MB across 8 files"
+      ]
+    ],
+    "breadcrumb": [
+      "Samples",
+      "Egocentric",
+      "Pineapple cutting · hand pose"
+    ],
+    "preview": "Preview · 8 s of the hand-pose render, both eyes of the annotated pair · 640 x 480",
+    "pills": [
+      {
+        "t": "Food Preparation & Cooking",
+        "k": "skill"
+      },
+      {
+        "t": "6 cameras",
+        "k": "quality"
+      },
+      {
+        "t": "Hand pose",
+        "k": "quality"
+      },
+      {
+        "t": "190 MB",
+        "k": "file"
+      }
+    ],
+    "downloads": [
+      {
+        "t": "Preview pack",
+        "primary": true
+      }
+    ]
+  },
+  {
+    "slug": "handpose-room-cleaning",
+    "domain": "robotics",
+    "modality": "egocentric",
+    "tier": "stereo6",
+    "provenance": "custom",
+    "title": "Room cleaning · hand pose",
+    "task": "room-cleaning",
+    "label": "Cleaning & Sanitation",
+    "skill": "Cleaning & Sanitation",
+    "skillGroup": "Cleaning & Sanitation",
+    "industry": "Hospitality",
+    "job": "Cleaner",
+    "environment": "Workshop, workplace, on site",
+    "locale": "Vietnam",
+    "rig": "Six-camera head rig, three stereo pairs",
+    "viewpoint": "first-person",
+    "telemetry": false,
+    "durationSec": 30,
+    "resolution": "1280x720",
+    "fps": 30,
+    "streams": [
+      "RGB x6 (three stereo pairs)",
+      "Hand-pose overlay render"
+    ],
+    "formats": [
+      "mp4"
+    ],
+    "size": "101 MB",
+    "spec": [
+      [
+        "Task id",
+        "room-cleaning"
+      ],
+      [
+        "Skill group",
+        "Cleaning & Sanitation"
+      ],
+      [
+        "Industry",
+        "Hospitality"
+      ],
+      [
+        "Operator",
+        "Cleaner"
+      ],
+      [
+        "Cameras",
+        "Six, in three stereo pairs — primary, mid and outer"
+      ],
+      [
+        "Frame",
+        "1280x720 at 30 fps"
+      ],
+      [
+        "Segment",
+        "30 s"
+      ],
+      [
+        "Hand pose",
+        "Rendered overlay on the mid pair, left and right"
+      ],
+      [
+        "Delivered size",
+        "101 MB across 8 files"
+      ]
+    ],
+    "breadcrumb": [
+      "Samples",
+      "Egocentric",
+      "Room cleaning · hand pose"
+    ],
+    "preview": "Preview · 8 s of the hand-pose render, both eyes of the annotated pair · 640 x 480",
+    "pills": [
+      {
+        "t": "Cleaning & Sanitation",
+        "k": "skill"
+      },
+      {
+        "t": "6 cameras",
+        "k": "quality"
+      },
+      {
+        "t": "Hand pose",
+        "k": "quality"
+      },
+      {
+        "t": "101 MB",
+        "k": "file"
+      }
+    ],
+    "downloads": [
+      {
+        "t": "Preview pack",
+        "primary": true
+      }
+    ]
+  },
+  {
+    "slug": "handpose-shoe-sewing",
+    "domain": "robotics",
+    "modality": "egocentric",
+    "tier": "stereo6",
+    "provenance": "custom",
+    "title": "Shoe sewing · hand pose",
+    "task": "shoe-sewing",
+    "label": "Clothing & Laundry",
+    "skill": "Clothing & Laundry",
+    "skillGroup": "Clothing & Laundry",
+    "industry": "Repair Services",
+    "job": "Shoe repairer",
+    "environment": "Workshop, workplace, on site",
+    "locale": "Vietnam",
+    "rig": "Six-camera head rig, three stereo pairs",
+    "viewpoint": "first-person",
+    "telemetry": false,
+    "durationSec": 30,
+    "resolution": "1280x1040",
+    "fps": 30,
+    "streams": [
+      "RGB x6 (three stereo pairs)",
+      "Hand-pose overlay render"
+    ],
+    "formats": [
+      "mp4"
+    ],
+    "size": "159 MB",
+    "spec": [
+      [
+        "Task id",
+        "shoe-sewing"
+      ],
+      [
+        "Skill group",
+        "Clothing & Laundry"
+      ],
+      [
+        "Industry",
+        "Repair Services"
+      ],
+      [
+        "Operator",
+        "Shoe repairer"
+      ],
+      [
+        "Cameras",
+        "Six, in three stereo pairs — primary, mid and outer"
+      ],
+      [
+        "Frame",
+        "1280x1040 at 30 fps"
+      ],
+      [
+        "Segment",
+        "30 s"
+      ],
+      [
+        "Hand pose",
+        "Rendered overlay on the primary pair, left and right"
+      ],
+      [
+        "Delivered size",
+        "159 MB across 8 files"
+      ]
+    ],
+    "breadcrumb": [
+      "Samples",
+      "Egocentric",
+      "Shoe sewing · hand pose"
+    ],
+    "preview": "Preview · 8 s of the hand-pose render, both eyes of the annotated pair · 640 x 480",
+    "pills": [
+      {
+        "t": "Clothing & Laundry",
+        "k": "skill"
+      },
+      {
+        "t": "6 cameras",
+        "k": "quality"
+      },
+      {
+        "t": "Hand pose",
+        "k": "quality"
+      },
+      {
+        "t": "159 MB",
+        "k": "file"
+      }
+    ],
+    "downloads": [
+      {
+        "t": "Preview pack",
+        "primary": true
+      }
+    ]
+  },
+  {
+    "slug": "handpose-wood-grinding",
+    "domain": "robotics",
+    "modality": "egocentric",
+    "tier": "stereo6",
+    "provenance": "custom",
+    "title": "Wood grinding · hand pose",
+    "task": "wood-grinding",
+    "label": "Tool Use & Technical Manipulation",
+    "skill": "Tool Use & Technical Manipulation",
+    "skillGroup": "Tool Use & Technical Manipulation",
+    "industry": "Industrial Manufacturing",
+    "job": "Woodworker",
+    "environment": "Workshop, workplace, on site",
+    "locale": "Vietnam",
+    "rig": "Six-camera head rig, three stereo pairs",
+    "viewpoint": "first-person",
+    "telemetry": false,
+    "durationSec": 30,
+    "resolution": "1280x720",
+    "fps": 30,
+    "streams": [
+      "RGB x6 (three stereo pairs)",
+      "Hand-pose overlay render"
+    ],
+    "formats": [
+      "mp4"
+    ],
+    "size": "172 MB",
+    "spec": [
+      [
+        "Task id",
+        "wood-grinding"
+      ],
+      [
+        "Skill group",
+        "Tool Use & Technical Manipulation"
+      ],
+      [
+        "Industry",
+        "Industrial Manufacturing"
+      ],
+      [
+        "Operator",
+        "Woodworker"
+      ],
+      [
+        "Cameras",
+        "Six, in three stereo pairs — primary, mid and outer"
+      ],
+      [
+        "Frame",
+        "1280x720 at 30 fps"
+      ],
+      [
+        "Segment",
+        "30 s"
+      ],
+      [
+        "Hand pose",
+        "Rendered overlay on the mid pair, left and right"
+      ],
+      [
+        "Delivered size",
+        "172 MB across 8 files"
+      ]
+    ],
+    "breadcrumb": [
+      "Samples",
+      "Egocentric",
+      "Wood grinding · hand pose"
+    ],
+    "preview": "Preview · 8 s of the hand-pose render, both eyes of the annotated pair · 640 x 480",
+    "pills": [
+      {
+        "t": "Tool Use & Technical Manipulation",
+        "k": "skill"
+      },
+      {
+        "t": "6 cameras",
+        "k": "quality"
+      },
+      {
+        "t": "Hand pose",
+        "k": "quality"
+      },
+      {
+        "t": "172 MB",
+        "k": "file"
+      }
+    ],
+    "downloads": [
+      {
+        "t": "Preview pack",
+        "primary": true
+      }
+    ]
+  },
+  {
+    "slug": "handpose-zipper-sewing",
+    "domain": "robotics",
+    "modality": "egocentric",
+    "tier": "stereo6",
+    "provenance": "custom",
+    "title": "Zipper sewing · hand pose",
+    "task": "zipper-sewing",
+    "label": "Clothing & Laundry",
+    "skill": "Clothing & Laundry",
+    "skillGroup": "Clothing & Laundry",
+    "industry": "Clothing and Fashion",
+    "job": "Tailor / seamstress",
+    "environment": "Workshop, workplace, on site",
+    "locale": "Vietnam",
+    "rig": "Six-camera head rig, three stereo pairs",
+    "viewpoint": "first-person",
+    "telemetry": false,
+    "durationSec": 30,
+    "resolution": "1280x720",
+    "fps": 30,
+    "streams": [
+      "RGB x6 (three stereo pairs)",
+      "Hand-pose overlay render"
+    ],
+    "formats": [
+      "mp4"
+    ],
+    "size": "137 MB",
+    "spec": [
+      [
+        "Task id",
+        "zipper-sewing"
+      ],
+      [
+        "Skill group",
+        "Clothing & Laundry"
+      ],
+      [
+        "Industry",
+        "Clothing and Fashion"
+      ],
+      [
+        "Operator",
+        "Tailor / seamstress"
+      ],
+      [
+        "Cameras",
+        "Six, in three stereo pairs — primary, mid and outer"
+      ],
+      [
+        "Frame",
+        "1280x720 at 30 fps"
+      ],
+      [
+        "Segment",
+        "30 s"
+      ],
+      [
+        "Hand pose",
+        "Rendered overlay on the mid pair, left and right"
+      ],
+      [
+        "Delivered size",
+        "137 MB across 8 files"
+      ]
+    ],
+    "breadcrumb": [
+      "Samples",
+      "Egocentric",
+      "Zipper sewing · hand pose"
+    ],
+    "preview": "Preview · 8 s of the hand-pose render, both eyes of the annotated pair · 640 x 480",
+    "pills": [
+      {
+        "t": "Clothing & Laundry",
+        "k": "skill"
+      },
+      {
+        "t": "6 cameras",
+        "k": "quality"
+      },
+      {
+        "t": "Hand pose",
+        "k": "quality"
+      },
+      {
+        "t": "137 MB",
         "k": "file"
       }
     ],
