@@ -1,9 +1,9 @@
 {
   "bucket": "tbrain-landing",
-  "generatedAt": "2026-09-24T01:48:11.051Z",
+  "generatedAt": "2026-09-24T08:40:09.779Z",
   "fullSet": {
     "object": "samples/library-approved/tbrain-sample-library.zip",
-    "bytes": 123336415,
+    "bytes": 122436201,
     "filename": "tbrain-sample-library.zip",
     "contentType": "application/zip",
     "count": 185
@@ -12,7 +12,7 @@
     "bag-replacement": {
       "preview": {
         "object": "samples/library-approved/packs/bag-replacement-preview.zip",
-        "bytes": 558666,
+        "bytes": 409477,
         "filename": "bag-replacement-preview.zip",
         "contentType": "application/zip"
       },
@@ -33,7 +33,7 @@
     "bar-cutting": {
       "preview": {
         "object": "samples/library-approved/packs/bar-cutting-preview.zip",
-        "bytes": 388566,
+        "bytes": 429699,
         "filename": "bar-cutting-preview.zip",
         "contentType": "application/zip"
       },
@@ -222,7 +222,7 @@
     "button-attaching": {
       "preview": {
         "object": "samples/library-approved/packs/button-attaching-preview.zip",
-        "bytes": 813207,
+        "bytes": 692125,
         "filename": "button-attaching-preview.zip",
         "contentType": "application/zip"
       },
@@ -516,7 +516,7 @@
     "component-repair": {
       "preview": {
         "object": "samples/library-approved/packs/component-repair-preview.zip",
-        "bytes": 221521,
+        "bytes": 368673,
         "filename": "component-repair-preview.zip",
         "contentType": "application/zip"
       },
@@ -705,7 +705,7 @@
     "fabric-testing": {
       "preview": {
         "object": "samples/library-approved/packs/fabric-testing-preview.zip",
-        "bytes": 623183,
+        "bytes": 506419,
         "filename": "fabric-testing-preview.zip",
         "contentType": "application/zip"
       },
@@ -768,7 +768,7 @@
     "flower-arranging": {
       "preview": {
         "object": "samples/library-approved/packs/flower-arranging-preview.zip",
-        "bytes": 911914,
+        "bytes": 695295,
         "filename": "flower-arranging-preview.zip",
         "contentType": "application/zip"
       },
@@ -894,7 +894,7 @@
     "food-serving": {
       "preview": {
         "object": "samples/library-approved/packs/food-serving-preview.zip",
-        "bytes": 1173455,
+        "bytes": 1220818,
         "filename": "food-serving-preview.zip",
         "contentType": "application/zip"
       },
@@ -1020,7 +1020,7 @@
     "furniture-cleaning": {
       "preview": {
         "object": "samples/library-approved/packs/furniture-cleaning-preview.zip",
-        "bytes": 411603,
+        "bytes": 510185,
         "filename": "furniture-cleaning-preview.zip",
         "contentType": "application/zip"
       },
@@ -1314,7 +1314,7 @@
     "metal-grouping": {
       "preview": {
         "object": "samples/library-approved/packs/metal-grouping-preview.zip",
-        "bytes": 628469,
+        "bytes": 557212,
         "filename": "metal-grouping-preview.zip",
         "contentType": "application/zip"
       },
@@ -1377,7 +1377,7 @@
     "motor-opening": {
       "preview": {
         "object": "samples/library-approved/packs/motor-opening-preview.zip",
-        "bytes": 770904,
+        "bytes": 678805,
         "filename": "motor-opening-preview.zip",
         "contentType": "application/zip"
       },
@@ -1398,7 +1398,7 @@
     "motorcycle-lifting": {
       "preview": {
         "object": "samples/library-approved/packs/motorcycle-lifting-preview.zip",
-        "bytes": 647627,
+        "bytes": 781312,
         "filename": "motorcycle-lifting-preview.zip",
         "contentType": "application/zip"
       },
@@ -1482,7 +1482,7 @@
     "panel-cutting": {
       "preview": {
         "object": "samples/library-approved/packs/panel-cutting-preview.zip",
-        "bytes": 594441,
+        "bytes": 287613,
         "filename": "panel-cutting-preview.zip",
         "contentType": "application/zip"
       },
@@ -1797,7 +1797,7 @@
     "structure-aligning": {
       "preview": {
         "object": "samples/library-approved/packs/structure-aligning-preview.zip",
-        "bytes": 342375,
+        "bytes": 475206,
         "filename": "structure-aligning-preview.zip",
         "contentType": "application/zip"
       },
@@ -1818,7 +1818,7 @@
     "supply-preparation": {
       "preview": {
         "object": "samples/library-approved/packs/supply-preparation-preview.zip",
-        "bytes": 776503,
+        "bytes": 656150,
         "filename": "supply-preparation-preview.zip",
         "contentType": "application/zip"
       },
@@ -1839,7 +1839,7 @@
     "surface-removal": {
       "preview": {
         "object": "samples/library-approved/packs/surface-removal-preview.zip",
-        "bytes": 683255,
+        "bytes": 748208,
         "filename": "surface-removal-preview.zip",
         "contentType": "application/zip"
       },
@@ -1902,7 +1902,7 @@
     "vegetable-preparation": {
       "preview": {
         "object": "samples/library-approved/packs/vegetable-preparation-preview.zip",
-        "bytes": 449629,
+        "bytes": 447408,
         "filename": "vegetable-preparation-preview.zip",
         "contentType": "application/zip"
       },
@@ -1944,7 +1944,7 @@
     "wall-painting": {
       "preview": {
         "object": "samples/library-approved/packs/wall-painting-preview.zip",
-        "bytes": 350992,
+        "bytes": 220047,
         "filename": "wall-painting-preview.zip",
         "contentType": "application/zip"
       },
@@ -2007,7 +2007,7 @@
     "wood-carving": {
       "preview": {
         "object": "samples/library-approved/packs/wood-carving-preview.zip",
-        "bytes": 673443,
+        "bytes": 596902,
         "filename": "wood-carving-preview.zip",
         "contentType": "application/zip"
       },
@@ -2049,7 +2049,7 @@
     "wood-sanding": {
       "preview": {
         "object": "samples/library-approved/packs/wood-sanding-preview.zip",
-        "bytes": 563731,
+        "bytes": 474693,
         "filename": "wood-sanding-preview.zip",
         "contentType": "application/zip"
       },
@@ -2364,7 +2364,7 @@
     "sixcam-garment-sewing": {
       "preview": {
         "object": "samples/library-approved/packs/sixcam-garment-sewing-preview.zip",
-        "bytes": 455558,
+        "bytes": 355962,
         "filename": "sixcam-garment-sewing-preview.zip",
         "contentType": "application/zip"
       },
@@ -2385,7 +2385,7 @@
     "sixcam-panel-installation": {
       "preview": {
         "object": "samples/library-approved/packs/sixcam-panel-installation-preview.zip",
-        "bytes": 303472,
+        "bytes": 287412,
         "filename": "sixcam-panel-installation-preview.zip",
         "contentType": "application/zip"
       },
@@ -2490,7 +2490,7 @@
     "sixcam-wrapping-selecting": {
       "preview": {
         "object": "samples/library-approved/packs/sixcam-wrapping-selecting-preview.zip",
-        "bytes": 500600,
+        "bytes": 818303,
         "filename": "sixcam-wrapping-selecting-preview.zip",
         "contentType": "application/zip"
       },
@@ -2574,7 +2574,7 @@
     "handpose-pineapple-cutting": {
       "preview": {
         "object": "samples/library-approved/packs/handpose-pineapple-cutting-preview.zip",
-        "bytes": 908493,
+        "bytes": 655604,
         "filename": "handpose-pineapple-cutting-preview.zip",
         "contentType": "application/zip"
       },
@@ -2595,7 +2595,7 @@
     "handpose-room-cleaning": {
       "preview": {
         "object": "samples/library-approved/packs/handpose-room-cleaning-preview.zip",
-        "bytes": 726080,
+        "bytes": 703945,
         "filename": "handpose-room-cleaning-preview.zip",
         "contentType": "application/zip"
       },

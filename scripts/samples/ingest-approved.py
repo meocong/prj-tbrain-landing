@@ -53,8 +53,16 @@ because that checker measures palms in absolute pixels. Among windows with no
 cut hand, the one with the most frames showing a whole hand wins; a clip with
 no clean window takes the least-bad one and is reported.
 
+That criterion is blind to what the hands are doing, and a review on
+2026-09-24 sent back 16 of the previews for it — hands resting at the side of
+a bench pass as well as hands driving a saw. `preview-windows.json` holds the
+windows chosen by eye after that review (with `score-windows.py` and
+`window-sheet.py` doing the legwork); a slug listed there is cut from its
+`start` and the scan only places the poster inside it.
+
 Usage:
     python3 scripts/samples/ingest-approved.py [--src DIR] [--only SLUG] [--dry]
+    python3 scripts/samples/ingest-approved.py --media SLUG[,SLUG…]   # re-cut clips, posters, telemetry only
 """
 
 import argparse
@@ -102,6 +110,7 @@ EGO_VIEWS = [
     ("mid-right", "source_mid_right.mp4"),
 ]
 BASE_SOURCE = EGO_VIEWS[0][1]
+WINDOWS = json.load(open(os.path.join(HERE, "preview-windows.json")))
 TELE_VIEWS = [("", "cam_head"), ("left", "cam_left"), ("right", "cam_right")]
 
 
@@ -180,6 +189,48 @@ def pick_window(path, total):
     mid = start + span / 2
     pt = min(clean, key=lambda r: abs(r[0] - mid))[0] if clean else mid
     return round(start, 3), round(pt - start, 3), {"cut": bad, "whole": -neg_good, "frames": len(inside)}
+
+
+def fixed_window(path, start, total):
+    """`pick_window`'s return for a window chosen by hand: same poster rule."""
+    span = min(SECONDS, total)
+    start = max(0.0, min(start, total - span))
+    inside = [(t, *checker.hands(f)) for t, f in scout(path, start, span)]
+    clean = [r for r in inside if r[1] and not r[2]]
+    mid = start + span / 2
+    pt = min(clean, key=lambda r: abs(r[0] - mid))[0] if clean else mid
+    return round(start, 3), round(pt - start, 3), {
+        "cut": sum(1 for r in inside if r[2]), "whole": len(clean), "frames": len(inside), "fixed": True}
+
+
+def choose_window(slug, path, total):
+    w = WINDOWS.get(slug)
+    return fixed_window(path, w["start"], total) if w else pick_window(path, total)
+
+
+def assign_slug(folder, slugs):
+    """The record's slug. Order-dependent — a repeated task id takes `-2`, `-3` —
+    so every caller walks the folders in the same sorted order."""
+    task_id = json.load(open(os.path.join(folder, "metadata.json")))["task"]["task-id"]
+    slug = task_id
+    k = 2
+    while slug in slugs:
+        slug = f"{task_id}-{k}"
+        k += 1
+    slugs.add(slug)
+    return slug
+
+
+def ego_media(folder, slug, start, poster_at, span):
+    for view, name in EGO_VIEWS:
+        src = os.path.join(folder, name)
+        suffix = f"-{view}" if view else ""
+        cut(src, os.path.join(CLIPS, f"{slug}{suffix}.mp4"), start, span)
+        still(src, os.path.join(POSTERS, f"{slug}{suffix}.jpg"), start + poster_at)
+    telem, _, _ = ego_telemetry(folder, slug, start, span)
+    with open(os.path.join(TELEMETRY, f"{slug}.json"), "w") as fh:
+        json.dump(telem, fh, separators=(",", ":"))
+        fh.write("\n")
 
 
 def cut(src, out, start, dur):
@@ -299,33 +350,21 @@ def ego_record(folder, slugs, dry, report):
     relabel = m.get("_catalogue", {}).get("differs", {})
 
     task_id = task["task-id"]
-    slug = task_id
-    k = 2
-    while slug in slugs:
-        slug = f"{task_id}-{k}"
-        k += 1
-    slugs.add(slug)
+    slug = assign_slug(folder, slugs)
 
     job = relabel.get("operator_job", {}).get("catalogue_now") or op.get("operator_job") or task.get("job_family")
     base = os.path.join(folder, BASE_SOURCE)
     v = probe(base)
     total = v["dur"]
 
-    start, poster_at, hands = pick_window(base, total)
+    start, poster_at, hands = choose_window(slug, base, total)
     span = min(SECONDS, total)
     report.append((slug, hands))
 
-    telem, rate, measured = ego_telemetry(folder, slug, start, span)
+    _, rate, measured = ego_telemetry(folder, slug, start, span)
 
     if not dry:
-        for view, name in EGO_VIEWS:
-            src = os.path.join(folder, name)
-            suffix = f"-{view}" if view else ""
-            cut(src, os.path.join(CLIPS, f"{slug}{suffix}.mp4"), start, span)
-            still(src, os.path.join(POSTERS, f"{slug}{suffix}.jpg"), start + poster_at)
-        with open(os.path.join(TELEMETRY, f"{slug}.json"), "w") as fh:
-            json.dump(telem, fh, separators=(",", ":"))
-            fh.write("\n")
+        ego_media(folder, slug, start, poster_at, span)
 
     files = [f for f in os.listdir(folder) if not f.startswith(".")]
     size = sum(os.path.getsize(os.path.join(folder, f)) for f in files)
@@ -545,6 +584,7 @@ def main():
     ap.add_argument("--src", default=os.path.expanduser("~/.cache/tbrain-samples/approved"))
     ap.add_argument("--only")
     ap.add_argument("--dry", action="store_true")
+    ap.add_argument("--media", help="comma-separated slugs: re-cut their media and stop; records are untouched")
     args = ap.parse_args()
 
     for d in (CLIPS, POSTERS, TELEMETRY, STAGE):
@@ -554,6 +594,29 @@ def main():
         d for d in glob.glob(os.path.join(args.src, "Egocentric Human Data Samples", "*__*"))
         if os.path.exists(os.path.join(d, "metadata.json"))
     )
+    if args.media:
+        # Nothing in a record depends on the window, so a new window is a media
+        # job: clips, posters and the telemetry's offset. Slugs are assigned
+        # over the full sorted list so `-2` suffixes match the records.
+        want = set(args.media.split(","))
+        slugs = set()
+        for d in ego_dirs:
+            need = [f for _, f in EGO_VIEWS] + ["imu.csv", "camera_pose.csv"]
+            if not all(os.path.exists(os.path.join(d, f)) for f in need):
+                continue  # skipped by the full run too, so it takes no slug
+            slug = assign_slug(d, slugs)
+            if slug not in want:
+                continue
+            base = os.path.join(d, BASE_SOURCE)
+            total = probe(base)["dur"]
+            start, poster_at, h = choose_window(slug, base, total)
+            ego_media(d, slug, start, poster_at, min(SECONDS, total))
+            want.discard(slug)
+            print(f"{slug:32} @{start:6.2f}s  poster +{poster_at:.1f}s  whole-hand {h['whole']}/{h['frames']}  cut {h['cut']}")
+        if want:
+            print(f"not found: {', '.join(sorted(want))}")
+            sys.exit(1)
+        return
     if args.only:
         ego_dirs = [d for d in ego_dirs if os.path.basename(d).startswith(args.only)]
 
