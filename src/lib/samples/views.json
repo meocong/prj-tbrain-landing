@@ -291,9 +291,6 @@
   "handpose-room-cleaning": [
     "right"
   ],
-  "handpose-shoe-sewing": [
-    "right"
-  ],
   "handpose-wood-grinding": [
     "right"
   ],
@@ -422,28 +419,7 @@
     "primary-right",
     "mid-right"
   ],
-  "sixcam-engine-working": [
-    "primary-right",
-    "mid-left",
-    "mid-right",
-    "outer-left",
-    "outer-right"
-  ],
   "sixcam-fabric-sewing": [
-    "primary-right",
-    "mid-left",
-    "mid-right",
-    "outer-left",
-    "outer-right"
-  ],
-  "sixcam-panel-installation": [
-    "primary-right",
-    "mid-left",
-    "mid-right",
-    "outer-left",
-    "outer-right"
-  ],
-  "sixcam-pineapple-cutting": [
     "primary-right",
     "mid-left",
     "mid-right",
@@ -457,28 +433,7 @@
     "outer-left",
     "outer-right"
   ],
-  "sixcam-shoe-sewing": [
-    "primary-right",
-    "mid-left",
-    "mid-right",
-    "outer-left",
-    "outer-right"
-  ],
   "sixcam-wood-grinding": [
-    "primary-right",
-    "mid-left",
-    "mid-right",
-    "outer-left",
-    "outer-right"
-  ],
-  "sixcam-wrapping-selecting": [
-    "primary-right",
-    "mid-left",
-    "mid-right",
-    "outer-left",
-    "outer-right"
-  ],
-  "sixcam-zipper-sewing": [
     "primary-right",
     "mid-left",
     "mid-right",
