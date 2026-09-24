@@ -1,12 +1,12 @@
 {
   "bucket": "tbrain-landing",
-  "generatedAt": "2026-09-24T08:40:09.779Z",
+  "generatedAt": "2026-09-24T08:58:06.647Z",
   "fullSet": {
     "object": "samples/library-approved/tbrain-sample-library.zip",
-    "bytes": 122436201,
+    "bytes": 119521149,
     "filename": "tbrain-sample-library.zip",
     "contentType": "application/zip",
-    "count": 185
+    "count": 180
   },
   "samples": {
     "bag-replacement": {
@@ -1374,27 +1374,6 @@
         "note": "Six camera mp4s, imu_left.db, imu_right.db, mag_middle.db"
       }
     },
-    "motor-opening": {
-      "preview": {
-        "object": "samples/library-approved/packs/motor-opening-preview.zip",
-        "bytes": 678805,
-        "filename": "motor-opening-preview.zip",
-        "contentType": "application/zip"
-      },
-      "metadata": {
-        "object": "samples/library-approved/metadata/motor-opening.metadata.json",
-        "bytes": 2172,
-        "filename": "motor-opening.metadata.json",
-        "contentType": "application/json"
-      },
-      "full": {
-        "object": null,
-        "bytes": 44040192,
-        "filename": "motor-opening-segment.zip",
-        "contentType": "application/octet-stream",
-        "note": "Six camera mp4s, imu_left.db, imu_right.db, mag_middle.db"
-      }
-    },
     "motorcycle-lifting": {
       "preview": {
         "object": "samples/library-approved/packs/motorcycle-lifting-preview.zip",
@@ -1815,48 +1794,6 @@
         "note": "Six camera mp4s, imu_left.db, imu_right.db, mag_middle.db"
       }
     },
-    "supply-preparation": {
-      "preview": {
-        "object": "samples/library-approved/packs/supply-preparation-preview.zip",
-        "bytes": 656150,
-        "filename": "supply-preparation-preview.zip",
-        "contentType": "application/zip"
-      },
-      "metadata": {
-        "object": "samples/library-approved/metadata/supply-preparation.metadata.json",
-        "bytes": 2108,
-        "filename": "supply-preparation.metadata.json",
-        "contentType": "application/json"
-      },
-      "full": {
-        "object": null,
-        "bytes": 112197632,
-        "filename": "supply-preparation-segment.zip",
-        "contentType": "application/octet-stream",
-        "note": "Six camera mp4s, imu_left.db, imu_right.db, mag_middle.db"
-      }
-    },
-    "surface-removal": {
-      "preview": {
-        "object": "samples/library-approved/packs/surface-removal-preview.zip",
-        "bytes": 748208,
-        "filename": "surface-removal-preview.zip",
-        "contentType": "application/zip"
-      },
-      "metadata": {
-        "object": "samples/library-approved/metadata/surface-removal.metadata.json",
-        "bytes": 2076,
-        "filename": "surface-removal.metadata.json",
-        "contentType": "application/json"
-      },
-      "full": {
-        "object": null,
-        "bytes": 56623104,
-        "filename": "surface-removal-segment.zip",
-        "contentType": "application/octet-stream",
-        "note": "Six camera mp4s, imu_left.db, imu_right.db, mag_middle.db"
-      }
-    },
     "tool-charging": {
       "preview": {
         "object": "samples/library-approved/packs/tool-charging-preview.zip",
@@ -2042,27 +1979,6 @@
         "object": null,
         "bytes": 94371840,
         "filename": "wood-carving-2-segment.zip",
-        "contentType": "application/octet-stream",
-        "note": "Six camera mp4s, imu_left.db, imu_right.db, mag_middle.db"
-      }
-    },
-    "wood-sanding": {
-      "preview": {
-        "object": "samples/library-approved/packs/wood-sanding-preview.zip",
-        "bytes": 474693,
-        "filename": "wood-sanding-preview.zip",
-        "contentType": "application/zip"
-      },
-      "metadata": {
-        "object": "samples/library-approved/metadata/wood-sanding.metadata.json",
-        "bytes": 2064,
-        "filename": "wood-sanding.metadata.json",
-        "contentType": "application/json"
-      },
-      "full": {
-        "object": null,
-        "bytes": 88080384,
-        "filename": "wood-sanding-segment.zip",
         "contentType": "application/octet-stream",
         "note": "Six camera mp4s, imu_left.db, imu_right.db, mag_middle.db"
       }
@@ -2357,27 +2273,6 @@
         "object": null,
         "bytes": 876609536,
         "filename": "sixcam-fabric-sewing-segment.zip",
-        "contentType": "application/octet-stream",
-        "note": "Six camera mp4s, imu_left.db, imu_right.db, mag_middle.db"
-      }
-    },
-    "sixcam-garment-sewing": {
-      "preview": {
-        "object": "samples/library-approved/packs/sixcam-garment-sewing-preview.zip",
-        "bytes": 355962,
-        "filename": "sixcam-garment-sewing-preview.zip",
-        "contentType": "application/zip"
-      },
-      "metadata": {
-        "object": "samples/library-approved/metadata/sixcam-garment-sewing.metadata.json",
-        "bytes": 1502,
-        "filename": "sixcam-garment-sewing.metadata.json",
-        "contentType": "application/json"
-      },
-      "full": {
-        "object": null,
-        "bytes": 727711744,
-        "filename": "sixcam-garment-sewing-segment.zip",
         "contentType": "application/octet-stream",
         "note": "Six camera mp4s, imu_left.db, imu_right.db, mag_middle.db"
       }

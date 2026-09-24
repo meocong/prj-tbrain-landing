@@ -357,11 +357,6 @@
     "primary-right",
     "mid-right"
   ],
-  "motor-opening": [
-    "primary-left",
-    "primary-right",
-    "mid-right"
-  ],
   "motorcycle-lifting": [
     "primary-left",
     "primary-right",
@@ -439,12 +434,6 @@
     "mid-left",
     "mid-right",
     "outer-left",
-    "outer-right"
-  ],
-  "sixcam-garment-sewing": [
-    "primary-right",
-    "mid-left",
-    "mid-right",
     "outer-right"
   ],
   "sixcam-panel-installation": [
@@ -527,16 +516,6 @@
     "mid-right"
   ],
   "structure-aligning": [
-    "primary-left",
-    "primary-right",
-    "mid-right"
-  ],
-  "supply-preparation": [
-    "primary-left",
-    "primary-right",
-    "mid-right"
-  ],
-  "surface-removal": [
     "primary-left",
     "primary-right",
     "mid-right"
@@ -626,11 +605,6 @@
     "mid-right"
   ],
   "wood-carving-2": [
-    "primary-left",
-    "primary-right",
-    "mid-right"
-  ],
-  "wood-sanding": [
     "primary-left",
     "primary-right",
     "mid-right"
