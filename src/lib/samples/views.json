@@ -284,6 +284,18 @@
     "primary-right",
     "mid-right"
   ],
+  "kit-fabric-marking-wrist": [
+    "view-2",
+    "view-3"
+  ],
+  "kit-garment-bagging-wrist": [
+    "view-2",
+    "view-3"
+  ],
+  "kit-stitch-inspection-wrist": [
+    "view-2",
+    "view-3"
+  ],
   "letter-gluing": [
     "primary-left",
     "primary-right",

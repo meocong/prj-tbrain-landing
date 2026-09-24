@@ -130,8 +130,27 @@ export interface RigLayout {
  * that camera is, which is the honest picture of what shipped; closing it up
  * would draw a five-camera rig that does not exist.
  */
-export function rigLayout(slug: string): RigLayout {
+/**
+ * `mode` decides how much of a multi-lens capture to show.
+ *
+ * "pair" (the default) lays a capture that has a mid pair out as the stereo
+ * pair it is sold as — Thạch, 2026-09-24: stereo is the main product, and the
+ * four delivered lenses are the 4- and 6-camera option. "all" is for the page
+ * that sells that option, where showing only two would hide what it adds.
+ */
+export function rigLayout(slug: string, mode: "pair" | "all" = "pair"): RigLayout {
   const extra = VIEWS[slug] ?? [];
+  if (mode === "pair" && extra.includes("primary-left") && extra.includes("mid-right")) {
+    return {
+      cells: [
+        { view: "", label: "left eye", place: "" },
+        { view: "mid-right", label: "right eye", place: "" },
+      ],
+      kind: "pair",
+      cols: "grid-cols-2",
+      band: "aspect-[8/3]",
+    };
+  }
   /* A record may make the mid-left lens its base file instead of primary-left.
      The approved set does: on both of its rigs the primary pair is aimed so
      steeply that it frames the wearer's chest and chin, and the mid pair is the

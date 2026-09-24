@@ -5,6 +5,7 @@ import Link from "next/link";
 import { Check, ChevronDown, Copy, Search, SlidersHorizontal, X } from "lucide-react";
 import samples from "@/lib/samples/samples.json";
 import { rigLayout } from "./rig-views";
+import { inTier } from "@/lib/samples/tiers";
 import { SKILL_GROUPS, JOBS, INDUSTRIES } from "@/lib/samples/taxonomy";
 import { FacetPicker, SortPicker } from "./Fields";
 import { PILL_KINDS_DROPPED, publicSpec } from "@/lib/samples/redact.mjs";
@@ -239,7 +240,9 @@ function matches(s: Sample, f: Filters, skip?: keyof Filters) {
   // is always computed WITHIN the category the reader opened.
   if (s.modality !== f.scope) return false;
   if (on("modality") && f.modality.length && !f.modality.includes(s.modality)) return false;
-  if (on("tier") && f.tier.length && !f.tier.includes(s.tier)) return false;
+  // `inTier`, not `s.tier`: a stereo capture from the multi-camera rig also
+  // serves the 4-6 camera option, and must answer to either chip.
+  if (on("tier") && f.tier.length && !f.tier.some((t) => inTier(s, t))) return false;
   // `provenance` is null on the game records: no game record states whether it
   // is off-the-shelf or custom, so narrowing to either has to exclude them
   // rather than quietly assign them a side.
@@ -317,7 +320,16 @@ function CopyRecord({ sample }: { sample: Sample }) {
   );
 }
 
-function Card({ sample, onOpen }: { sample: Sample; onOpen: () => void }) {
+function Card({
+  sample,
+  onOpen,
+  lensMode = "pair",
+}: {
+  sample: Sample;
+  onOpen: () => void;
+  /** See `rigLayout`: "all" only on the page selling the multi-lens option. */
+  lensMode?: "pair" | "all";
+}) {
   /**
    * Every view that is actually on disk for this record.
    *
@@ -331,7 +343,7 @@ function Card({ sample, onOpen }: { sample: Sample; onOpen: () => void }) {
    * hole is where that camera is, which is the honest picture of what shipped;
    * closing it up would draw a five-camera rig that does not exist.
    */
-  const { cells: lenses, kind, band, cols } = rigLayout(sample.slug);
+  const { cells: lenses, kind, band, cols } = rigLayout(sample.slug, lensMode);
   const sixUp = kind === "six";
   const bodyUp = kind === "body";
   const pair = kind === "pair";
@@ -775,6 +787,8 @@ export function SampleCatalog({
   tier?: string;
 }) {
   const [active, setActive] = useState<Sample | null>(null);
+  // Every lens only where the reader came to buy the multi-lens option.
+  const lensMode: "pair" | "all" = tier === "stereo6" ? "all" : "pair";
   /* A record is addressable: `/samples?record=<slug>`.
    *
    * This page exists so a salesperson can send a link instead of an
@@ -861,6 +875,13 @@ export function SampleCatalog({
   const countFor = useCallback(
     (key: keyof Filters, pick: (s: Sample) => string | null, v: string) =>
       ALL.filter((s) => matches(s, f, key)).filter((s) => pick(s) === v).length,
+    [f],
+  );
+
+  /** The tier chip's count. A record can sit in two tiers, so `countFor`'s
+      single-valued pick would drop it from its second one. */
+  const countTier = useCallback(
+    (key: string) => ALL.filter((s) => matches(s, f, "tier") && inTier(s, key)).length,
     [f],
   );
 
@@ -1094,7 +1115,7 @@ export function SampleCatalog({
                       label={t.name}
                       quotable
                       active={f.tier.includes(t.key)}
-                      count={countFor("tier", (s) => s.tier, t.key)}
+                      count={countTier(t.key)}
                       onClick={() => toggle("tier", t.key)}
                     />
                   ))}
@@ -1313,7 +1334,7 @@ export function SampleCatalog({
                   style={{ scrollMarginTop: "88px" }}
                 >
                   {page.map((s) => (
-                    <Card key={s.slug} sample={s} onOpen={() => setActive(s)} />
+                    <Card key={s.slug} sample={s} onOpen={() => setActive(s)} lensMode={lensMode} />
                   ))}
                 </div>
 
@@ -1370,7 +1391,7 @@ export function SampleCatalog({
         </Reveal>
       </div>
     </section>
-      <SampleModal sample={active} onClose={() => setActive(null)} />
+      <SampleModal sample={active} onClose={() => setActive(null)} lensMode={lensMode} />
     </>
   );
 }

@@ -1,6 +1,7 @@
 import samples from "./samples.json";
 import { CAPABILITY } from "./capability";
 import type { Category } from "./categories";
+import { inTier } from "./tiers";
 
 /**
  * What actually records a category, and what rides with every frame.
@@ -33,6 +34,7 @@ export interface CaptureRow {
 type Row = {
   modality: string;
   tier: string;
+  alsoTiers?: string[];
   rig: string;
   resolution: string;
   fps: number;
@@ -128,7 +130,7 @@ function tally(rows: Row[], key: string, normalise: (v: string) => string): stri
  */
 export function captureFor(c: Category, tier?: string): CaptureRow[] {
   const rows = c.modality
-    ? ALL.filter((r) => r.modality === c.modality && (!tier || r.tier === tier))
+    ? ALL.filter((r) => r.modality === c.modality && (!tier || inTier(r, tier)))
     : [];
   if (rows.length === 0) return c.capture ?? fromCapability(c);
 
