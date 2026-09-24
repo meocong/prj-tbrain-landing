@@ -67,15 +67,19 @@ export function ConfigFolders({ category }: { category: Category }) {
 
   const cards = tiers.map((t) => {
     const rows = ALL.filter((r) => r.modality === category.modality && inTier(r, t.key));
+    const own = rows.filter((r) => !sharedInto(r, t.key));
     return {
       tier: t,
       count: rows.length,
-      // Every record here is borrowed from another tier (the stereo captures
-      // that also carry the extra lenses), so the card must not read as a
-      // second, separate hundred.
-      shared: rows.length > 0 && rows.every((r) => sharedInto(r, t.key)),
+      /* Records borrowed from another tier — the stereo captures that also
+         carry the extra lenses — are counted apart from the tier's own, so the
+         card never reads as one bigger pile than the catalogue holds. */
+      own: own.length,
+      ownHours: own.reduce((a, r) => a + r.durationSec, 0) / 3600,
+      borrowed: rows.length - own.length,
       hours: rows.reduce((a, r) => a + r.durationSec, 0) / 3600,
-      face: rows[0]?.slug ?? STANDIN[t.key] ?? null,
+      // A tier's own capture fronts its card; a borrowed one only if it has none.
+      face: own[0]?.slug ?? rows[0]?.slug ?? STANDIN[t.key] ?? null,
     };
   });
 
@@ -107,8 +111,10 @@ export function ConfigFolders({ category }: { category: Category }) {
               name={c.tier.name}
               pitch={c.tier.pitch ?? c.tier.when ?? ""}
               state={
-                c.count > 0 && c.shared
-                  ? `Option · the same ${c.count} captures, every lens`
+                c.own > 0 && c.borrowed > 0
+                  ? `${c.own} playable · ${c.ownHours.toFixed(1)} h · + the ${c.borrowed} stereo captures on every lens`
+                  : c.borrowed > 0
+                  ? `Option · the same ${c.borrowed} captures, every lens`
                   : c.count > 0
                   ? `${c.count} playable · ${c.hours.toFixed(1)} h`
                   : `Collected to spec · first delivery in ${c.tier.ramp}`

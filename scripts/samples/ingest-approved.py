@@ -354,7 +354,7 @@ def ego_record(folder, slugs, dry, report):
         ["Station", l3],
         ["Operator", operator],
         ["Consent", "recorded per session" if str(op.get("operator_consent")).lower() == "yes" else "not recorded"],
-        ["Cameras", "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"],
+        ["Cameras", "Stereo pair · shot on a multi-camera head rig"],
         ["Frame", f"{res} at {v['fps']} fps"],
         ["Shutter", dev.get("device_camera_shutter")],
         ["Codec", v["codec"]],
@@ -373,10 +373,10 @@ def ego_record(folder, slugs, dry, report):
         "slug": slug,
         "domain": "robotics",
         "modality": "egocentric",
-        # Stereo is the product (Thạch, 2026-09-24); the extra lenses make the
-        # same capture the 4-6 camera option too. See src/lib/samples/tiers.ts.
+        # Stereo is the product and this set fills that tier alone (Thạch,
+        # 2026-09-24). It delivers four lenses, never six, so the 6-camera tier
+        # keeps the earlier six-lens captures instead.
         "tier": "stereo",
-        "alsoTiers": ["stereo6"],
         "provenance": "ots",
         "title": desc or sentence(task_id.replace("-", " ")),
         "task": task_id,
@@ -402,7 +402,7 @@ def ego_record(folder, slugs, dry, report):
         "pills": [
             {"t": task.get("skill_group"), "k": "skill"},
             {"t": task.get("task_difficulty"), "k": "difficulty"},
-            {"t": "Stereo · 4-6 cam option", "k": "quality"},
+            {"t": "Stereo pair", "k": "quality"},
             {"t": f"{codec} · {human_bytes(size)}", "k": "file"},
             {"t": f"calibration {cal.get('camera_calibration_status')}", "k": "quality"},
         ],
