@@ -15,6 +15,7 @@ import {
 import { CAPABILITY } from "@/lib/samples/capability";
 import samples from "@/lib/samples/samples.json";
 import { SampleCatalog } from "../../_sections/SampleCatalog";
+import { inTier } from "@/lib/samples/tiers";
 import { CaptureSpec } from "../../_sections/CaptureSpec";
 import { RigViews } from "../../_sections/RigViews";
 import { CapabilityTable } from "../../_sections/CapabilityTable";
@@ -51,8 +52,8 @@ function resolveGroup(modality: string, slug: string) {
     if (!tier) return null;
     // The spec travels with the configuration rather than sitting in a table on
     // the category page beside the box that leads here.
-    const rows = (samples as unknown as { modality: string; tier: string; durationSec: number }[])
-      .filter((r) => r.modality === modality && r.tier === slug);
+    const rows = (samples as unknown as { modality: string; tier: string; alsoTiers?: string[]; durationSec: number }[])
+      .filter((r) => r.modality === modality && inTier(r, slug));
     return {
       kind: "tier" as const,
       slug,

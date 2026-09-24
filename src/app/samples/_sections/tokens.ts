@@ -106,7 +106,13 @@ export interface Sample {
    * are declared because the rail offers them as chips and the union is what
    * stops a chip key and a record value from drifting apart.
    */
-  tier: "stereo" | "mono" | "rgbd" | "wrist" | "umi" | "exo" | "gameplay";
+  tier: "stereo" | "stereo6" | "mono" | "rgbd" | "wrist" | "umi" | "exo" | "gameplay";
+  /**
+   * Further configurations the same capture serves — see `lib/samples/tiers`.
+   * The approved stereo captures carry `["stereo6"]`: they were shot on a
+   * multi-camera rig and are the 4- and 6-camera option's evidence too.
+   */
+  alsoTiers?: string[];
   /** Where it came from. Null on game records, which do not say. */
   provenance: "ots" | "custom" | null;
   title: string;

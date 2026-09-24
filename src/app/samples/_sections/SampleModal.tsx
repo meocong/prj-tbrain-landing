@@ -64,9 +64,12 @@ function sceneLine(environment: string, breadcrumb: string[]) {
 export function SampleModal({
   sample,
   onClose,
+  lensMode = "pair",
 }: {
   sample: Sample | null;
   onClose: () => void;
+  /** Same as the card's: every lens only on the multi-lens option's page. */
+  lensMode?: "pair" | "all";
 }) {
   const [mounted, setMounted] = useState(false);
   const [video, setVideo] = useState<HTMLVideoElement | null>(null);
@@ -117,7 +120,7 @@ export function SampleModal({
 
   /* Computed above the early return, because the hooks have to be. An absent
      record lays out as a single view and renders nothing anyway. */
-  const rig = rigLayout(sample?.slug ?? "");
+  const rig = rigLayout(sample?.slug ?? "", lensMode);
   const panel = useRef<HTMLDivElement>(null);
   const reduce = useReducedMotion();
 

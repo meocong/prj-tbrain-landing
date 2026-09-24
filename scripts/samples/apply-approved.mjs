@@ -18,7 +18,7 @@
  * Everything deleted is tracked in git.
  *
  * Usage:
- *   node scripts/samples/apply-approved.mjs [--replace egocentric,teleoperation] [--dry]
+ *   node scripts/samples/apply-approved.mjs [--replace egocentric,teleoperation] [--keep-tiers mono,wrist] [--dry]
  */
 import { readFileSync, writeFileSync, readdirSync, unlinkSync, statSync } from "node:fs";
 import { join, resolve, extname, basename } from "node:path";
@@ -37,8 +37,16 @@ const staged = JSON.parse(readFileSync(join(ROOT, ".samples-approved/approved-re
 const samples = JSON.parse(readFileSync(join(LIB, "samples.json"), "utf8"));
 const views = JSON.parse(readFileSync(join(LIB, "views.json"), "utf8"));
 
+/* Tiers inside a replaced modality that the approved set does not cover and
+   that keep their earlier samples. Thạch, 2026-09-24: "mono wrist lấy lại sample
+   cũ đi" — the approved drop is all stereo captures, so the one-camera and
+   wrist-camera configurations still show what they showed before. */
+const KEEP_TIERS = new Set(
+  (args.includes("--keep-tiers") ? args[args.indexOf("--keep-tiers") + 1] : "mono,wrist").split(","),
+);
+
 const incoming = [...staged.ego, ...staged.teleop].map(({ _src, ...r }) => r);
-const kept = samples.filter((r) => !REPLACE.has(r.modality));
+const kept = samples.filter((r) => !REPLACE.has(r.modality) || KEEP_TIERS.has(r.tier));
 const dropped = samples.filter((r) => REPLACE.has(r.modality));
 
 const clash = incoming.filter((r) => kept.some((k) => k.slug === r.slug));

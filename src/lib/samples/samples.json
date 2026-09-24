@@ -3,7 +3,7 @@
     "slug": "bag-replacement",
     "domain": "robotics",
     "modality": "egocentric",
-    "tier": "stereo6",
+    "tier": "stereo",
     "provenance": "ots",
     "title": "Changing trash bag",
     "task": "bag-replacement",
@@ -70,7 +70,7 @@
       ],
       [
         "Cameras",
-        "Six on the head in three stereo pairs · primary and mid pairs delivered"
+        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
       ],
       [
         "Frame",
@@ -118,7 +118,7 @@
       "Metal Fabrication",
       "Kitchen"
     ],
-    "preview": "Preview · 8 s on the four delivered lenses, the same instant on each · 480 x 360 per view",
+    "preview": "Preview · 8 s the same instant on every lens shown · 480 x 360 per view",
     "pills": [
       {
         "t": "Cleaning & Sanitation",
@@ -129,7 +129,7 @@
         "k": "difficulty"
       },
       {
-        "t": "6-camera rig",
+        "t": "Stereo · 4-6 cam option",
         "k": "quality"
       },
       {
@@ -150,13 +150,16 @@
         "t": "Full delivery",
         "primary": false
       }
+    ],
+    "alsoTiers": [
+      "stereo6"
     ]
   },
   {
     "slug": "bar-cutting",
     "domain": "robotics",
     "modality": "egocentric",
-    "tier": "stereo6",
+    "tier": "stereo",
     "provenance": "ots",
     "title": "Carrying a metal bar and cutting the binding wire of a metal bar bundle",
     "task": "bar-cutting",
@@ -223,7 +226,7 @@
       ],
       [
         "Cameras",
-        "Six on the head in three stereo pairs · primary and mid pairs delivered"
+        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
       ],
       [
         "Frame",
@@ -271,7 +274,7 @@
       "Sign Shop",
       "Construction Site"
     ],
-    "preview": "Preview · 8 s on the four delivered lenses, the same instant on each · 480 x 360 per view",
+    "preview": "Preview · 8 s the same instant on every lens shown · 480 x 360 per view",
     "pills": [
       {
         "t": "Pick and Place / Object Handling",
@@ -282,7 +285,7 @@
         "k": "difficulty"
       },
       {
-        "t": "6-camera rig",
+        "t": "Stereo · 4-6 cam option",
         "k": "quality"
       },
       {
@@ -303,13 +306,16 @@
         "t": "Full delivery",
         "primary": false
       }
+    ],
+    "alsoTiers": [
+      "stereo6"
     ]
   },
   {
     "slug": "bar-cutting-2",
     "domain": "robotics",
     "modality": "egocentric",
-    "tier": "stereo6",
+    "tier": "stereo",
     "provenance": "ots",
     "title": "Measure and cut the metal bar",
     "task": "bar-cutting",
@@ -376,7 +382,7 @@
       ],
       [
         "Cameras",
-        "Six on the head in three stereo pairs · primary and mid pairs delivered"
+        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
       ],
       [
         "Frame",
@@ -424,7 +430,7 @@
       "Construction Company",
       "Construction Site"
     ],
-    "preview": "Preview · 8 s on the four delivered lenses, the same instant on each · 480 x 360 per view",
+    "preview": "Preview · 8 s the same instant on every lens shown · 480 x 360 per view",
     "pills": [
       {
         "t": "Construction & Building",
@@ -435,7 +441,7 @@
         "k": "difficulty"
       },
       {
-        "t": "6-camera rig",
+        "t": "Stereo · 4-6 cam option",
         "k": "quality"
       },
       {
@@ -456,13 +462,16 @@
         "t": "Full delivery",
         "primary": false
       }
+    ],
+    "alsoTiers": [
+      "stereo6"
     ]
   },
   {
     "slug": "bar-drilling",
     "domain": "robotics",
     "modality": "egocentric",
-    "tier": "stereo6",
+    "tier": "stereo",
     "provenance": "ots",
     "title": "Drill holes in the metal bar",
     "task": "bar-drilling",
@@ -529,7 +538,7 @@
       ],
       [
         "Cameras",
-        "Six on the head in three stereo pairs · primary and mid pairs delivered"
+        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
       ],
       [
         "Frame",
@@ -577,7 +586,7 @@
       "Manufacturing Factory",
       "Factory Floor"
     ],
-    "preview": "Preview · 8 s on the four delivered lenses, the same instant on each · 480 x 360 per view",
+    "preview": "Preview · 8 s the same instant on every lens shown · 480 x 360 per view",
     "pills": [
       {
         "t": "Assembly & Installation",
@@ -588,7 +597,7 @@
         "k": "difficulty"
       },
       {
-        "t": "6-camera rig",
+        "t": "Stereo · 4-6 cam option",
         "k": "quality"
       },
       {
@@ -609,13 +618,16 @@
         "t": "Full delivery",
         "primary": false
       }
+    ],
+    "alsoTiers": [
+      "stereo6"
     ]
   },
   {
     "slug": "bar-welding",
     "domain": "robotics",
     "modality": "egocentric",
-    "tier": "stereo6",
+    "tier": "stereo",
     "provenance": "ots",
     "title": "Adjust and weld a metal bar with a laser welding gun",
     "task": "bar-welding",
@@ -682,7 +694,7 @@
       ],
       [
         "Cameras",
-        "Six on the head in three stereo pairs · primary and mid pairs delivered"
+        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
       ],
       [
         "Frame",
@@ -730,7 +742,7 @@
       "Sign Shop",
       "Factory Floor"
     ],
-    "preview": "Preview · 8 s on the four delivered lenses, the same instant on each · 480 x 360 per view",
+    "preview": "Preview · 8 s the same instant on every lens shown · 480 x 360 per view",
     "pills": [
       {
         "t": "Tool Use & Technical Manipulation",
@@ -741,7 +753,7 @@
         "k": "difficulty"
       },
       {
-        "t": "6-camera rig",
+        "t": "Stereo · 4-6 cam option",
         "k": "quality"
       },
       {
@@ -762,13 +774,16 @@
         "t": "Full delivery",
         "primary": false
       }
+    ],
+    "alsoTiers": [
+      "stereo6"
     ]
   },
   {
     "slug": "bathroom-cleaning",
     "domain": "robotics",
     "modality": "egocentric",
-    "tier": "stereo6",
+    "tier": "stereo",
     "provenance": "ots",
     "title": "Cleaning the bathroom",
     "task": "bathroom-cleaning",
@@ -835,7 +850,7 @@
       ],
       [
         "Cameras",
-        "Six on the head in three stereo pairs · primary and mid pairs delivered"
+        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
       ],
       [
         "Frame",
@@ -883,7 +898,7 @@
       "Hotel Room",
       "Bathroom"
     ],
-    "preview": "Preview · 8 s on the four delivered lenses, the same instant on each · 480 x 360 per view",
+    "preview": "Preview · 8 s the same instant on every lens shown · 480 x 360 per view",
     "pills": [
       {
         "t": "Cleaning & Sanitation",
@@ -894,7 +909,7 @@
         "k": "difficulty"
       },
       {
-        "t": "6-camera rig",
+        "t": "Stereo · 4-6 cam option",
         "k": "quality"
       },
       {
@@ -915,13 +930,16 @@
         "t": "Full delivery",
         "primary": false
       }
+    ],
+    "alsoTiers": [
+      "stereo6"
     ]
   },
   {
     "slug": "bathroom-cleaning-2",
     "domain": "robotics",
     "modality": "egocentric",
-    "tier": "stereo6",
+    "tier": "stereo",
     "provenance": "ots",
     "title": "Cleaning the bathroom",
     "task": "bathroom-cleaning",
@@ -988,7 +1006,7 @@
       ],
       [
         "Cameras",
-        "Six on the head in three stereo pairs · primary and mid pairs delivered"
+        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
       ],
       [
         "Frame",
@@ -1036,7 +1054,7 @@
       "Backyard",
       "Bathroom"
     ],
-    "preview": "Preview · 8 s on the four delivered lenses, the same instant on each · 480 x 360 per view",
+    "preview": "Preview · 8 s the same instant on every lens shown · 480 x 360 per view",
     "pills": [
       {
         "t": "Cleaning & Sanitation",
@@ -1047,7 +1065,7 @@
         "k": "difficulty"
       },
       {
-        "t": "6-camera rig",
+        "t": "Stereo · 4-6 cam option",
         "k": "quality"
       },
       {
@@ -1068,13 +1086,16 @@
         "t": "Full delivery",
         "primary": false
       }
+    ],
+    "alsoTiers": [
+      "stereo6"
     ]
   },
   {
     "slug": "beard-shaving",
     "domain": "robotics",
     "modality": "egocentric",
-    "tier": "stereo6",
+    "tier": "stereo",
     "provenance": "ots",
     "title": "Adjust the chair and apply shaving cream for the customer",
     "task": "beard-shaving",
@@ -1141,7 +1162,7 @@
       ],
       [
         "Cameras",
-        "Six on the head in three stereo pairs · primary and mid pairs delivered"
+        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
       ],
       [
         "Frame",
@@ -1189,7 +1210,7 @@
       "Barber Shop",
       "Barber Shop"
     ],
-    "preview": "Preview · 8 s on the four delivered lenses, the same instant on each · 480 x 360 per view",
+    "preview": "Preview · 8 s the same instant on every lens shown · 480 x 360 per view",
     "pills": [
       {
         "t": "Human Interaction & Handoffs",
@@ -1200,7 +1221,7 @@
         "k": "difficulty"
       },
       {
-        "t": "6-camera rig",
+        "t": "Stereo · 4-6 cam option",
         "k": "quality"
       },
       {
@@ -1221,13 +1242,16 @@
         "t": "Full delivery",
         "primary": false
       }
+    ],
+    "alsoTiers": [
+      "stereo6"
     ]
   },
   {
     "slug": "board-writing",
     "domain": "robotics",
     "modality": "egocentric",
-    "tier": "stereo6",
+    "tier": "stereo",
     "provenance": "ots",
     "title": "Write the tasks to be done on the task assignment board",
     "task": "board-writing",
@@ -1294,7 +1318,7 @@
       ],
       [
         "Cameras",
-        "Six on the head in three stereo pairs · primary and mid pairs delivered"
+        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
       ],
       [
         "Frame",
@@ -1342,7 +1366,7 @@
       "Manufacturing Factory",
       "Assembly Area"
     ],
-    "preview": "Preview · 8 s on the four delivered lenses, the same instant on each · 480 x 360 per view",
+    "preview": "Preview · 8 s the same instant on every lens shown · 480 x 360 per view",
     "pills": [
       {
         "t": "Tool Use & Technical Manipulation",
@@ -1353,7 +1377,7 @@
         "k": "difficulty"
       },
       {
-        "t": "6-camera rig",
+        "t": "Stereo · 4-6 cam option",
         "k": "quality"
       },
       {
@@ -1374,13 +1398,16 @@
         "t": "Full delivery",
         "primary": false
       }
+    ],
+    "alsoTiers": [
+      "stereo6"
     ]
   },
   {
     "slug": "bodywork-polishing",
     "domain": "robotics",
     "modality": "egocentric",
-    "tier": "stereo6",
+    "tier": "stereo",
     "provenance": "ots",
     "title": "Use a polisher to polish the car's bodywork",
     "task": "bodywork-polishing",
@@ -1447,7 +1474,7 @@
       ],
       [
         "Cameras",
-        "Six on the head in three stereo pairs · primary and mid pairs delivered"
+        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
       ],
       [
         "Frame",
@@ -1495,7 +1522,7 @@
       "Auto Repair",
       "Service Bay"
     ],
-    "preview": "Preview · 8 s on the four delivered lenses, the same instant on each · 480 x 360 per view",
+    "preview": "Preview · 8 s the same instant on every lens shown · 480 x 360 per view",
     "pills": [
       {
         "t": "Mechanical / Automotive Work",
@@ -1506,7 +1533,7 @@
         "k": "difficulty"
       },
       {
-        "t": "6-camera rig",
+        "t": "Stereo · 4-6 cam option",
         "k": "quality"
       },
       {
@@ -1527,13 +1554,16 @@
         "t": "Full delivery",
         "primary": false
       }
+    ],
+    "alsoTiers": [
+      "stereo6"
     ]
   },
   {
     "slug": "button-attaching",
     "domain": "robotics",
     "modality": "egocentric",
-    "tier": "stereo6",
+    "tier": "stereo",
     "provenance": "ots",
     "title": "Attaching buttons to fabric with a machine",
     "task": "button-attaching",
@@ -1600,7 +1630,7 @@
       ],
       [
         "Cameras",
-        "Six on the head in three stereo pairs · primary and mid pairs delivered"
+        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
       ],
       [
         "Frame",
@@ -1648,7 +1678,7 @@
       "Sewing Factory",
       "Sewing Area"
     ],
-    "preview": "Preview · 8 s on the four delivered lenses, the same instant on each · 480 x 360 per view",
+    "preview": "Preview · 8 s the same instant on every lens shown · 480 x 360 per view",
     "pills": [
       {
         "t": "Clothing & Laundry",
@@ -1659,7 +1689,7 @@
         "k": "difficulty"
       },
       {
-        "t": "6-camera rig",
+        "t": "Stereo · 4-6 cam option",
         "k": "quality"
       },
       {
@@ -1680,13 +1710,16 @@
         "t": "Full delivery",
         "primary": false
       }
+    ],
+    "alsoTiers": [
+      "stereo6"
     ]
   },
   {
     "slug": "cable-assembly",
     "domain": "robotics",
     "modality": "egocentric",
-    "tier": "stereo6",
+    "tier": "stereo",
     "provenance": "ots",
     "title": "Measuring and assembling cables components using black tape",
     "task": "cable-assembly",
@@ -1753,7 +1786,7 @@
       ],
       [
         "Cameras",
-        "Six on the head in three stereo pairs · primary and mid pairs delivered"
+        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
       ],
       [
         "Frame",
@@ -1801,7 +1834,7 @@
       "Construction Company",
       "Assembly Area"
     ],
-    "preview": "Preview · 8 s on the four delivered lenses, the same instant on each · 480 x 360 per view",
+    "preview": "Preview · 8 s the same instant on every lens shown · 480 x 360 per view",
     "pills": [
       {
         "t": "Assembly & Installation",
@@ -1812,7 +1845,7 @@
         "k": "difficulty"
       },
       {
-        "t": "6-camera rig",
+        "t": "Stereo · 4-6 cam option",
         "k": "quality"
       },
       {
@@ -1833,13 +1866,16 @@
         "t": "Full delivery",
         "primary": false
       }
+    ],
+    "alsoTiers": [
+      "stereo6"
     ]
   },
   {
     "slug": "car-driving",
     "domain": "robotics",
     "modality": "egocentric",
-    "tier": "stereo6",
+    "tier": "stereo",
     "provenance": "ots",
     "title": "Driving a car",
     "task": "car-driving",
@@ -1906,7 +1942,7 @@
       ],
       [
         "Cameras",
-        "Six on the head in three stereo pairs · primary and mid pairs delivered"
+        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
       ],
       [
         "Frame",
@@ -1954,7 +1990,7 @@
       "Auto Repair",
       "Engine Repair Station"
     ],
-    "preview": "Preview · 8 s on the four delivered lenses, the same instant on each · 480 x 360 per view",
+    "preview": "Preview · 8 s the same instant on every lens shown · 480 x 360 per view",
     "pills": [
       {
         "t": "Mechanical / Automotive Work",
@@ -1965,7 +2001,7 @@
         "k": "difficulty"
       },
       {
-        "t": "6-camera rig",
+        "t": "Stereo · 4-6 cam option",
         "k": "quality"
       },
       {
@@ -1986,13 +2022,16 @@
         "t": "Full delivery",
         "primary": false
       }
+    ],
+    "alsoTiers": [
+      "stereo6"
     ]
   },
   {
     "slug": "car-polishing",
     "domain": "robotics",
     "modality": "egocentric",
-    "tier": "stereo6",
+    "tier": "stereo",
     "provenance": "ots",
     "title": "Polishing the car's surface",
     "task": "car-polishing",
@@ -2059,7 +2098,7 @@
       ],
       [
         "Cameras",
-        "Six on the head in three stereo pairs · primary and mid pairs delivered"
+        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
       ],
       [
         "Frame",
@@ -2107,7 +2146,7 @@
       "Auto Repair",
       "Service Bay"
     ],
-    "preview": "Preview · 8 s on the four delivered lenses, the same instant on each · 480 x 360 per view",
+    "preview": "Preview · 8 s the same instant on every lens shown · 480 x 360 per view",
     "pills": [
       {
         "t": "Mechanical / Automotive Work",
@@ -2118,7 +2157,7 @@
         "k": "difficulty"
       },
       {
-        "t": "6-camera rig",
+        "t": "Stereo · 4-6 cam option",
         "k": "quality"
       },
       {
@@ -2139,13 +2178,16 @@
         "t": "Full delivery",
         "primary": false
       }
+    ],
+    "alsoTiers": [
+      "stereo6"
     ]
   },
   {
     "slug": "card-cutting",
     "domain": "robotics",
     "modality": "egocentric",
-    "tier": "stereo6",
+    "tier": "stereo",
     "provenance": "ots",
     "title": "Preparing and cutting paper card",
     "task": "card-cutting",
@@ -2212,7 +2254,7 @@
       ],
       [
         "Cameras",
-        "Six on the head in three stereo pairs · primary and mid pairs delivered"
+        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
       ],
       [
         "Frame",
@@ -2260,7 +2302,7 @@
       "Flower Shop",
       "Flower Shop"
     ],
-    "preview": "Preview · 8 s on the four delivered lenses, the same instant on each · 480 x 360 per view",
+    "preview": "Preview · 8 s the same instant on every lens shown · 480 x 360 per view",
     "pills": [
       {
         "t": "Tool Use & Technical Manipulation",
@@ -2271,7 +2313,7 @@
         "k": "difficulty"
       },
       {
-        "t": "6-camera rig",
+        "t": "Stereo · 4-6 cam option",
         "k": "quality"
       },
       {
@@ -2292,13 +2334,16 @@
         "t": "Full delivery",
         "primary": false
       }
+    ],
+    "alsoTiers": [
+      "stereo6"
     ]
   },
   {
     "slug": "cartridge-assembly",
     "domain": "robotics",
     "modality": "egocentric",
-    "tier": "stereo6",
+    "tier": "stereo",
     "provenance": "ots",
     "title": "Assemble the water filter cartridge",
     "task": "cartridge-assembly",
@@ -2365,7 +2410,7 @@
       ],
       [
         "Cameras",
-        "Six on the head in three stereo pairs · primary and mid pairs delivered"
+        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
       ],
       [
         "Frame",
@@ -2413,7 +2458,7 @@
       "Manufacturing Factory",
       "Assembly Area"
     ],
-    "preview": "Preview · 8 s on the four delivered lenses, the same instant on each · 480 x 360 per view",
+    "preview": "Preview · 8 s the same instant on every lens shown · 480 x 360 per view",
     "pills": [
       {
         "t": "Assembly & Installation",
@@ -2424,7 +2469,7 @@
         "k": "difficulty"
       },
       {
-        "t": "6-camera rig",
+        "t": "Stereo · 4-6 cam option",
         "k": "quality"
       },
       {
@@ -2445,13 +2490,16 @@
         "t": "Full delivery",
         "primary": false
       }
+    ],
+    "alsoTiers": [
+      "stereo6"
     ]
   },
   {
     "slug": "chalk-sharpening",
     "domain": "robotics",
     "modality": "egocentric",
-    "tier": "stereo6",
+    "tier": "stereo",
     "provenance": "ots",
     "title": "Sharpening a piece of chalk",
     "task": "chalk-sharpening",
@@ -2518,7 +2566,7 @@
       ],
       [
         "Cameras",
-        "Six on the head in three stereo pairs · primary and mid pairs delivered"
+        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
       ],
       [
         "Frame",
@@ -2566,7 +2614,7 @@
       "Sewing Factory",
       "Sewing Area"
     ],
-    "preview": "Preview · 8 s on the four delivered lenses, the same instant on each · 480 x 360 per view",
+    "preview": "Preview · 8 s the same instant on every lens shown · 480 x 360 per view",
     "pills": [
       {
         "t": "Clothing & Laundry",
@@ -2577,7 +2625,7 @@
         "k": "difficulty"
       },
       {
-        "t": "6-camera rig",
+        "t": "Stereo · 4-6 cam option",
         "k": "quality"
       },
       {
@@ -2598,13 +2646,16 @@
         "t": "Full delivery",
         "primary": false
       }
+    ],
+    "alsoTiers": [
+      "stereo6"
     ]
   },
   {
     "slug": "character-attaching",
     "domain": "robotics",
     "modality": "egocentric",
-    "tier": "stereo6",
+    "tier": "stereo",
     "provenance": "ots",
     "title": "Attaching LED modules onto a character",
     "task": "character-attaching",
@@ -2671,7 +2722,7 @@
       ],
       [
         "Cameras",
-        "Six on the head in three stereo pairs · primary and mid pairs delivered"
+        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
       ],
       [
         "Frame",
@@ -2719,7 +2770,7 @@
       "Sign Shop",
       "Workshop"
     ],
-    "preview": "Preview · 8 s on the four delivered lenses, the same instant on each · 480 x 360 per view",
+    "preview": "Preview · 8 s the same instant on every lens shown · 480 x 360 per view",
     "pills": [
       {
         "t": "Assembly & Installation",
@@ -2730,7 +2781,7 @@
         "k": "difficulty"
       },
       {
-        "t": "6-camera rig",
+        "t": "Stereo · 4-6 cam option",
         "k": "quality"
       },
       {
@@ -2751,13 +2802,16 @@
         "t": "Full delivery",
         "primary": false
       }
+    ],
+    "alsoTiers": [
+      "stereo6"
     ]
   },
   {
     "slug": "chicken-coating",
     "domain": "robotics",
     "modality": "egocentric",
-    "tier": "stereo6",
+    "tier": "stereo",
     "provenance": "ots",
     "title": "Coating chicken breasts in breadcrumbs",
     "task": "chicken-coating",
@@ -2824,7 +2878,7 @@
       ],
       [
         "Cameras",
-        "Six on the head in three stereo pairs · primary and mid pairs delivered"
+        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
       ],
       [
         "Frame",
@@ -2872,7 +2926,7 @@
       "Restaurant",
       "Kitchen"
     ],
-    "preview": "Preview · 8 s on the four delivered lenses, the same instant on each · 480 x 360 per view",
+    "preview": "Preview · 8 s the same instant on every lens shown · 480 x 360 per view",
     "pills": [
       {
         "t": "Food Preparation & Cooking",
@@ -2883,7 +2937,7 @@
         "k": "difficulty"
       },
       {
-        "t": "6-camera rig",
+        "t": "Stereo · 4-6 cam option",
         "k": "quality"
       },
       {
@@ -2904,13 +2958,16 @@
         "t": "Full delivery",
         "primary": false
       }
+    ],
+    "alsoTiers": [
+      "stereo6"
     ]
   },
   {
     "slug": "chisel-sharpening",
     "domain": "robotics",
     "modality": "egocentric",
-    "tier": "stereo6",
+    "tier": "stereo",
     "provenance": "ots",
     "title": "Sharpening chisel for wood carving",
     "task": "chisel-sharpening",
@@ -2977,7 +3034,7 @@
       ],
       [
         "Cameras",
-        "Six on the head in three stereo pairs · primary and mid pairs delivered"
+        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
       ],
       [
         "Frame",
@@ -3025,7 +3082,7 @@
       "Woodworking Shop",
       "Wood Carving Shop"
     ],
-    "preview": "Preview · 8 s on the four delivered lenses, the same instant on each · 480 x 360 per view",
+    "preview": "Preview · 8 s the same instant on every lens shown · 480 x 360 per view",
     "pills": [
       {
         "t": "Tool Use & Technical Manipulation",
@@ -3036,7 +3093,7 @@
         "k": "difficulty"
       },
       {
-        "t": "6-camera rig",
+        "t": "Stereo · 4-6 cam option",
         "k": "quality"
       },
       {
@@ -3057,13 +3114,16 @@
         "t": "Full delivery",
         "primary": false
       }
+    ],
+    "alsoTiers": [
+      "stereo6"
     ]
   },
   {
     "slug": "chisel-sharpening-2",
     "domain": "robotics",
     "modality": "egocentric",
-    "tier": "stereo6",
+    "tier": "stereo",
     "provenance": "ots",
     "title": "Sharpening a chisel for carving wood",
     "task": "chisel-sharpening",
@@ -3130,7 +3190,7 @@
       ],
       [
         "Cameras",
-        "Six on the head in three stereo pairs · primary and mid pairs delivered"
+        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
       ],
       [
         "Frame",
@@ -3178,7 +3238,7 @@
       "Woodworking Shop",
       "Workshop"
     ],
-    "preview": "Preview · 8 s on the four delivered lenses, the same instant on each · 480 x 360 per view",
+    "preview": "Preview · 8 s the same instant on every lens shown · 480 x 360 per view",
     "pills": [
       {
         "t": "Tool Use & Technical Manipulation",
@@ -3189,7 +3249,7 @@
         "k": "difficulty"
       },
       {
-        "t": "6-camera rig",
+        "t": "Stereo · 4-6 cam option",
         "k": "quality"
       },
       {
@@ -3210,13 +3270,16 @@
         "t": "Full delivery",
         "primary": false
       }
+    ],
+    "alsoTiers": [
+      "stereo6"
     ]
   },
   {
     "slug": "cloth-washing",
     "domain": "robotics",
     "modality": "egocentric",
-    "tier": "stereo6",
+    "tier": "stereo",
     "provenance": "ots",
     "title": "Washing a cloth in the restroom sink",
     "task": "cloth-washing",
@@ -3283,7 +3346,7 @@
       ],
       [
         "Cameras",
-        "Six on the head in three stereo pairs · primary and mid pairs delivered"
+        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
       ],
       [
         "Frame",
@@ -3331,7 +3394,7 @@
       "Construction Company",
       "Restroom"
     ],
-    "preview": "Preview · 8 s on the four delivered lenses, the same instant on each · 480 x 360 per view",
+    "preview": "Preview · 8 s the same instant on every lens shown · 480 x 360 per view",
     "pills": [
       {
         "t": "Cleaning & Sanitation",
@@ -3342,7 +3405,7 @@
         "k": "difficulty"
       },
       {
-        "t": "6-camera rig",
+        "t": "Stereo · 4-6 cam option",
         "k": "quality"
       },
       {
@@ -3363,13 +3426,16 @@
         "t": "Full delivery",
         "primary": false
       }
+    ],
+    "alsoTiers": [
+      "stereo6"
     ]
   },
   {
     "slug": "component-assembly",
     "domain": "robotics",
     "modality": "egocentric",
-    "tier": "stereo6",
+    "tier": "stereo",
     "provenance": "ots",
     "title": "Assemble the component and drive screws using an electric screwdriver",
     "task": "component-assembly",
@@ -3436,7 +3502,7 @@
       ],
       [
         "Cameras",
-        "Six on the head in three stereo pairs · primary and mid pairs delivered"
+        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
       ],
       [
         "Frame",
@@ -3484,7 +3550,7 @@
       "Handcraft Workshop",
       "Workstation"
     ],
-    "preview": "Preview · 8 s on the four delivered lenses, the same instant on each · 480 x 360 per view",
+    "preview": "Preview · 8 s the same instant on every lens shown · 480 x 360 per view",
     "pills": [
       {
         "t": "Assembly & Installation",
@@ -3495,7 +3561,7 @@
         "k": "difficulty"
       },
       {
-        "t": "6-camera rig",
+        "t": "Stereo · 4-6 cam option",
         "k": "quality"
       },
       {
@@ -3516,13 +3582,16 @@
         "t": "Full delivery",
         "primary": false
       }
+    ],
+    "alsoTiers": [
+      "stereo6"
     ]
   },
   {
     "slug": "component-placing",
     "domain": "robotics",
     "modality": "egocentric",
-    "tier": "stereo6",
+    "tier": "stereo",
     "provenance": "ots",
     "title": "Placing small materials into the motorcycle components",
     "task": "component-placing",
@@ -3589,7 +3658,7 @@
       ],
       [
         "Cameras",
-        "Six on the head in three stereo pairs · primary and mid pairs delivered"
+        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
       ],
       [
         "Frame",
@@ -3637,7 +3706,7 @@
       "Motorcycle Repair",
       "Service Bay"
     ],
-    "preview": "Preview · 8 s on the four delivered lenses, the same instant on each · 480 x 360 per view",
+    "preview": "Preview · 8 s the same instant on every lens shown · 480 x 360 per view",
     "pills": [
       {
         "t": "Mechanical / Automotive Work",
@@ -3648,7 +3717,7 @@
         "k": "difficulty"
       },
       {
-        "t": "6-camera rig",
+        "t": "Stereo · 4-6 cam option",
         "k": "quality"
       },
       {
@@ -3669,13 +3738,16 @@
         "t": "Full delivery",
         "primary": false
       }
+    ],
+    "alsoTiers": [
+      "stereo6"
     ]
   },
   {
     "slug": "component-repair",
     "domain": "robotics",
     "modality": "egocentric",
-    "tier": "stereo6",
+    "tier": "stereo",
     "provenance": "ots",
     "title": "Repair of computer electronic components",
     "task": "component-repair",
@@ -3742,7 +3814,7 @@
       ],
       [
         "Cameras",
-        "Six on the head in three stereo pairs · primary and mid pairs delivered"
+        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
       ],
       [
         "Frame",
@@ -3790,7 +3862,7 @@
       "Computer Repair",
       "Workbench"
     ],
-    "preview": "Preview · 8 s on the four delivered lenses, the same instant on each · 480 x 360 per view",
+    "preview": "Preview · 8 s the same instant on every lens shown · 480 x 360 per view",
     "pills": [
       {
         "t": "Electronics & Diagnostics",
@@ -3801,7 +3873,7 @@
         "k": "difficulty"
       },
       {
-        "t": "6-camera rig",
+        "t": "Stereo · 4-6 cam option",
         "k": "quality"
       },
       {
@@ -3822,13 +3894,16 @@
         "t": "Full delivery",
         "primary": false
       }
+    ],
+    "alsoTiers": [
+      "stereo6"
     ]
   },
   {
     "slug": "dish-preparation",
     "domain": "robotics",
     "modality": "egocentric",
-    "tier": "stereo6",
+    "tier": "stereo",
     "provenance": "ots",
     "title": "Preparing ingredients for cooking",
     "task": "dish-preparation",
@@ -3895,7 +3970,7 @@
       ],
       [
         "Cameras",
-        "Six on the head in three stereo pairs · primary and mid pairs delivered"
+        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
       ],
       [
         "Frame",
@@ -3943,7 +4018,7 @@
       "Restaurant",
       "Restaurant Kitchen"
     ],
-    "preview": "Preview · 8 s on the four delivered lenses, the same instant on each · 480 x 360 per view",
+    "preview": "Preview · 8 s the same instant on every lens shown · 480 x 360 per view",
     "pills": [
       {
         "t": "Food Preparation & Cooking",
@@ -3954,7 +4029,7 @@
         "k": "difficulty"
       },
       {
-        "t": "6-camera rig",
+        "t": "Stereo · 4-6 cam option",
         "k": "quality"
       },
       {
@@ -3975,13 +4050,16 @@
         "t": "Full delivery",
         "primary": false
       }
+    ],
+    "alsoTiers": [
+      "stereo6"
     ]
   },
   {
     "slug": "door-cleaning",
     "domain": "robotics",
     "modality": "egocentric",
-    "tier": "stereo6",
+    "tier": "stereo",
     "provenance": "ots",
     "title": "Wiping down a carved wooden door with a cloth",
     "task": "door-cleaning",
@@ -4048,7 +4126,7 @@
       ],
       [
         "Cameras",
-        "Six on the head in three stereo pairs · primary and mid pairs delivered"
+        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
       ],
       [
         "Frame",
@@ -4096,7 +4174,7 @@
       "Construction Site",
       "Finishing Area"
     ],
-    "preview": "Preview · 8 s on the four delivered lenses, the same instant on each · 480 x 360 per view",
+    "preview": "Preview · 8 s the same instant on every lens shown · 480 x 360 per view",
     "pills": [
       {
         "t": "Cleaning & Sanitation",
@@ -4107,7 +4185,7 @@
         "k": "difficulty"
       },
       {
-        "t": "6-camera rig",
+        "t": "Stereo · 4-6 cam option",
         "k": "quality"
       },
       {
@@ -4128,13 +4206,16 @@
         "t": "Full delivery",
         "primary": false
       }
+    ],
+    "alsoTiers": [
+      "stereo6"
     ]
   },
   {
     "slug": "engine-repair",
     "domain": "robotics",
     "modality": "egocentric",
-    "tier": "stereo6",
+    "tier": "stereo",
     "provenance": "ots",
     "title": "Repairing a car engine",
     "task": "engine-repair",
@@ -4201,7 +4282,7 @@
       ],
       [
         "Cameras",
-        "Six on the head in three stereo pairs · primary and mid pairs delivered"
+        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
       ],
       [
         "Frame",
@@ -4249,7 +4330,7 @@
       "Auto Repair",
       "Service Bay"
     ],
-    "preview": "Preview · 8 s on the four delivered lenses, the same instant on each · 480 x 360 per view",
+    "preview": "Preview · 8 s the same instant on every lens shown · 480 x 360 per view",
     "pills": [
       {
         "t": "Mechanical / Automotive Work",
@@ -4260,7 +4341,7 @@
         "k": "difficulty"
       },
       {
-        "t": "6-camera rig",
+        "t": "Stereo · 4-6 cam option",
         "k": "quality"
       },
       {
@@ -4281,13 +4362,16 @@
         "t": "Full delivery",
         "primary": false
       }
+    ],
+    "alsoTiers": [
+      "stereo6"
     ]
   },
   {
     "slug": "fabric-flattening",
     "domain": "robotics",
     "modality": "egocentric",
-    "tier": "stereo6",
+    "tier": "stereo",
     "provenance": "ots",
     "title": "Flattening fabric pieces on a table",
     "task": "fabric-flattening",
@@ -4354,7 +4438,7 @@
       ],
       [
         "Cameras",
-        "Six on the head in three stereo pairs · primary and mid pairs delivered"
+        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
       ],
       [
         "Frame",
@@ -4402,7 +4486,7 @@
       "Sewing Factory",
       "Sewing Station"
     ],
-    "preview": "Preview · 8 s on the four delivered lenses, the same instant on each · 480 x 360 per view",
+    "preview": "Preview · 8 s the same instant on every lens shown · 480 x 360 per view",
     "pills": [
       {
         "t": "Clothing & Laundry",
@@ -4413,7 +4497,7 @@
         "k": "difficulty"
       },
       {
-        "t": "6-camera rig",
+        "t": "Stereo · 4-6 cam option",
         "k": "quality"
       },
       {
@@ -4434,13 +4518,16 @@
         "t": "Full delivery",
         "primary": false
       }
+    ],
+    "alsoTiers": [
+      "stereo6"
     ]
   },
   {
     "slug": "fabric-ironing",
     "domain": "robotics",
     "modality": "egocentric",
-    "tier": "stereo6",
+    "tier": "stereo",
     "provenance": "ots",
     "title": "Ironing the fabric using a steam iron",
     "task": "fabric-ironing",
@@ -4507,7 +4594,7 @@
       ],
       [
         "Cameras",
-        "Six on the head in three stereo pairs · primary and mid pairs delivered"
+        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
       ],
       [
         "Frame",
@@ -4555,7 +4642,7 @@
       "Alterations Studio",
       "Sewing Station"
     ],
-    "preview": "Preview · 8 s on the four delivered lenses, the same instant on each · 480 x 360 per view",
+    "preview": "Preview · 8 s the same instant on every lens shown · 480 x 360 per view",
     "pills": [
       {
         "t": "Clothing & Laundry",
@@ -4566,7 +4653,7 @@
         "k": "difficulty"
       },
       {
-        "t": "6-camera rig",
+        "t": "Stereo · 4-6 cam option",
         "k": "quality"
       },
       {
@@ -4587,13 +4674,16 @@
         "t": "Full delivery",
         "primary": false
       }
+    ],
+    "alsoTiers": [
+      "stereo6"
     ]
   },
   {
     "slug": "fabric-ironing-2",
     "domain": "robotics",
     "modality": "egocentric",
-    "tier": "stereo6",
+    "tier": "stereo",
     "provenance": "ots",
     "title": "Ironing fabric",
     "task": "fabric-ironing",
@@ -4660,7 +4750,7 @@
       ],
       [
         "Cameras",
-        "Six on the head in three stereo pairs · primary and mid pairs delivered"
+        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
       ],
       [
         "Frame",
@@ -4708,7 +4798,7 @@
       "Sewing Factory",
       "Sewing Workshop"
     ],
-    "preview": "Preview · 8 s on the four delivered lenses, the same instant on each · 480 x 360 per view",
+    "preview": "Preview · 8 s the same instant on every lens shown · 480 x 360 per view",
     "pills": [
       {
         "t": "Clothing & Laundry",
@@ -4719,7 +4809,7 @@
         "k": "difficulty"
       },
       {
-        "t": "6-camera rig",
+        "t": "Stereo · 4-6 cam option",
         "k": "quality"
       },
       {
@@ -4740,13 +4830,16 @@
         "t": "Full delivery",
         "primary": false
       }
+    ],
+    "alsoTiers": [
+      "stereo6"
     ]
   },
   {
     "slug": "fabric-removal",
     "domain": "robotics",
     "modality": "egocentric",
-    "tier": "stereo6",
+    "tier": "stereo",
     "provenance": "ots",
     "title": "Removing loose threads from fabric",
     "task": "fabric-removal",
@@ -4813,7 +4906,7 @@
       ],
       [
         "Cameras",
-        "Six on the head in three stereo pairs · primary and mid pairs delivered"
+        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
       ],
       [
         "Frame",
@@ -4861,7 +4954,7 @@
       "Sewing Factory",
       "Sewing Station"
     ],
-    "preview": "Preview · 8 s on the four delivered lenses, the same instant on each · 480 x 360 per view",
+    "preview": "Preview · 8 s the same instant on every lens shown · 480 x 360 per view",
     "pills": [
       {
         "t": "Clothing & Laundry",
@@ -4872,7 +4965,7 @@
         "k": "difficulty"
       },
       {
-        "t": "6-camera rig",
+        "t": "Stereo · 4-6 cam option",
         "k": "quality"
       },
       {
@@ -4893,13 +4986,16 @@
         "t": "Full delivery",
         "primary": false
       }
+    ],
+    "alsoTiers": [
+      "stereo6"
     ]
   },
   {
     "slug": "fabric-sewing",
     "domain": "robotics",
     "modality": "egocentric",
-    "tier": "stereo6",
+    "tier": "stereo",
     "provenance": "ots",
     "title": "Sew pieces of fabric together",
     "task": "fabric-sewing",
@@ -4966,7 +5062,7 @@
       ],
       [
         "Cameras",
-        "Six on the head in three stereo pairs · primary and mid pairs delivered"
+        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
       ],
       [
         "Frame",
@@ -5014,7 +5110,7 @@
       "Alterations Studio",
       "Sewing Area"
     ],
-    "preview": "Preview · 8 s on the four delivered lenses, the same instant on each · 480 x 360 per view",
+    "preview": "Preview · 8 s the same instant on every lens shown · 480 x 360 per view",
     "pills": [
       {
         "t": "Clothing & Laundry",
@@ -5025,7 +5121,7 @@
         "k": "difficulty"
       },
       {
-        "t": "6-camera rig",
+        "t": "Stereo · 4-6 cam option",
         "k": "quality"
       },
       {
@@ -5046,13 +5142,16 @@
         "t": "Full delivery",
         "primary": false
       }
+    ],
+    "alsoTiers": [
+      "stereo6"
     ]
   },
   {
     "slug": "fabric-testing",
     "domain": "robotics",
     "modality": "egocentric",
-    "tier": "stereo6",
+    "tier": "stereo",
     "provenance": "ots",
     "title": "Selecting and testing the fabric",
     "task": "fabric-testing",
@@ -5119,7 +5218,7 @@
       ],
       [
         "Cameras",
-        "Six on the head in three stereo pairs · primary and mid pairs delivered"
+        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
       ],
       [
         "Frame",
@@ -5167,7 +5266,7 @@
       "Sewing Factory",
       "Sewing Station"
     ],
-    "preview": "Preview · 8 s on the four delivered lenses, the same instant on each · 480 x 360 per view",
+    "preview": "Preview · 8 s the same instant on every lens shown · 480 x 360 per view",
     "pills": [
       {
         "t": "Clothing & Laundry",
@@ -5178,7 +5277,7 @@
         "k": "difficulty"
       },
       {
-        "t": "6-camera rig",
+        "t": "Stereo · 4-6 cam option",
         "k": "quality"
       },
       {
@@ -5199,13 +5298,16 @@
         "t": "Full delivery",
         "primary": false
       }
+    ],
+    "alsoTiers": [
+      "stereo6"
     ]
   },
   {
     "slug": "face-applying",
     "domain": "robotics",
     "modality": "egocentric",
-    "tier": "stereo6",
+    "tier": "stereo",
     "provenance": "ots",
     "title": "Applying shaving cream to a customer's face",
     "task": "face-applying",
@@ -5272,7 +5374,7 @@
       ],
       [
         "Cameras",
-        "Six on the head in three stereo pairs · primary and mid pairs delivered"
+        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
       ],
       [
         "Frame",
@@ -5320,7 +5422,7 @@
       "Barber Shop",
       "Makeup Area"
     ],
-    "preview": "Preview · 8 s on the four delivered lenses, the same instant on each · 480 x 360 per view",
+    "preview": "Preview · 8 s the same instant on every lens shown · 480 x 360 per view",
     "pills": [
       {
         "t": "Tool Use & Technical Manipulation",
@@ -5331,7 +5433,7 @@
         "k": "difficulty"
       },
       {
-        "t": "6-camera rig",
+        "t": "Stereo · 4-6 cam option",
         "k": "quality"
       },
       {
@@ -5352,13 +5454,16 @@
         "t": "Full delivery",
         "primary": false
       }
+    ],
+    "alsoTiers": [
+      "stereo6"
     ]
   },
   {
     "slug": "floor-clearing",
     "domain": "robotics",
     "modality": "egocentric",
-    "tier": "stereo6",
+    "tier": "stereo",
     "provenance": "ots",
     "title": "Use hands to clear debris from the floor",
     "task": "floor-clearing",
@@ -5425,7 +5530,7 @@
       ],
       [
         "Cameras",
-        "Six on the head in three stereo pairs · primary and mid pairs delivered"
+        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
       ],
       [
         "Frame",
@@ -5473,7 +5578,7 @@
       "Construction Company",
       "Unfinished Room"
     ],
-    "preview": "Preview · 8 s on the four delivered lenses, the same instant on each · 480 x 360 per view",
+    "preview": "Preview · 8 s the same instant on every lens shown · 480 x 360 per view",
     "pills": [
       {
         "t": "Cleaning & Sanitation",
@@ -5484,7 +5589,7 @@
         "k": "difficulty"
       },
       {
-        "t": "6-camera rig",
+        "t": "Stereo · 4-6 cam option",
         "k": "quality"
       },
       {
@@ -5505,13 +5610,16 @@
         "t": "Full delivery",
         "primary": false
       }
+    ],
+    "alsoTiers": [
+      "stereo6"
     ]
   },
   {
     "slug": "flower-arranging",
     "domain": "robotics",
     "modality": "egocentric",
-    "tier": "stereo6",
+    "tier": "stereo",
     "provenance": "ots",
     "title": "Selecting flowers, arranging, tying and trimming flower bouquets",
     "task": "flower-arranging",
@@ -5578,7 +5686,7 @@
       ],
       [
         "Cameras",
-        "Six on the head in three stereo pairs · primary and mid pairs delivered"
+        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
       ],
       [
         "Frame",
@@ -5626,7 +5734,7 @@
       "Flower Shop",
       "Flower Shop"
     ],
-    "preview": "Preview · 8 s on the four delivered lenses, the same instant on each · 480 x 360 per view",
+    "preview": "Preview · 8 s the same instant on every lens shown · 480 x 360 per view",
     "pills": [
       {
         "t": "Packing & Bagging",
@@ -5637,7 +5745,7 @@
         "k": "difficulty"
       },
       {
-        "t": "6-camera rig",
+        "t": "Stereo · 4-6 cam option",
         "k": "quality"
       },
       {
@@ -5658,13 +5766,16 @@
         "t": "Full delivery",
         "primary": false
       }
+    ],
+    "alsoTiers": [
+      "stereo6"
     ]
   },
   {
     "slug": "flower-arranging-2",
     "domain": "robotics",
     "modality": "egocentric",
-    "tier": "stereo6",
+    "tier": "stereo",
     "provenance": "ots",
     "title": "Arranging fresh flowers into a flower basket",
     "task": "flower-arranging",
@@ -5731,7 +5842,7 @@
       ],
       [
         "Cameras",
-        "Six on the head in three stereo pairs · primary and mid pairs delivered"
+        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
       ],
       [
         "Frame",
@@ -5779,7 +5890,7 @@
       "Flower Shop",
       "Flower Shop"
     ],
-    "preview": "Preview · 8 s on the four delivered lenses, the same instant on each · 480 x 360 per view",
+    "preview": "Preview · 8 s the same instant on every lens shown · 480 x 360 per view",
     "pills": [
       {
         "t": "Packing & Bagging",
@@ -5790,7 +5901,7 @@
         "k": "difficulty"
       },
       {
-        "t": "6-camera rig",
+        "t": "Stereo · 4-6 cam option",
         "k": "quality"
       },
       {
@@ -5811,13 +5922,16 @@
         "t": "Full delivery",
         "primary": false
       }
+    ],
+    "alsoTiers": [
+      "stereo6"
     ]
   },
   {
     "slug": "flower-picking",
     "domain": "robotics",
     "modality": "egocentric",
-    "tier": "stereo6",
+    "tier": "stereo",
     "provenance": "ots",
     "title": "Picking flower petals",
     "task": "flower-picking",
@@ -5884,7 +5998,7 @@
       ],
       [
         "Cameras",
-        "Six on the head in three stereo pairs · primary and mid pairs delivered"
+        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
       ],
       [
         "Frame",
@@ -5932,7 +6046,7 @@
       "Flower Shop",
       "Florist Workspace"
     ],
-    "preview": "Preview · 8 s on the four delivered lenses, the same instant on each · 480 x 360 per view",
+    "preview": "Preview · 8 s the same instant on every lens shown · 480 x 360 per view",
     "pills": [
       {
         "t": "Organization & Tidying",
@@ -5943,7 +6057,7 @@
         "k": "difficulty"
       },
       {
-        "t": "6-camera rig",
+        "t": "Stereo · 4-6 cam option",
         "k": "quality"
       },
       {
@@ -5964,13 +6078,16 @@
         "t": "Full delivery",
         "primary": false
       }
+    ],
+    "alsoTiers": [
+      "stereo6"
     ]
   },
   {
     "slug": "flower-pruning",
     "domain": "robotics",
     "modality": "egocentric",
-    "tier": "stereo6",
+    "tier": "stereo",
     "provenance": "ots",
     "title": "Flower pruning",
     "task": "flower-pruning",
@@ -6037,7 +6154,7 @@
       ],
       [
         "Cameras",
-        "Six on the head in three stereo pairs · primary and mid pairs delivered"
+        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
       ],
       [
         "Frame",
@@ -6085,7 +6202,7 @@
       "Flower Shop",
       "Flower Shop"
     ],
-    "preview": "Preview · 8 s on the four delivered lenses, the same instant on each · 480 x 360 per view",
+    "preview": "Preview · 8 s the same instant on every lens shown · 480 x 360 per view",
     "pills": [
       {
         "t": "Pick and Place / Object Handling",
@@ -6096,7 +6213,7 @@
         "k": "difficulty"
       },
       {
-        "t": "6-camera rig",
+        "t": "Stereo · 4-6 cam option",
         "k": "quality"
       },
       {
@@ -6117,13 +6234,16 @@
         "t": "Full delivery",
         "primary": false
       }
+    ],
+    "alsoTiers": [
+      "stereo6"
     ]
   },
   {
     "slug": "food-clearing",
     "domain": "robotics",
     "modality": "egocentric",
-    "tier": "stereo6",
+    "tier": "stereo",
     "provenance": "ots",
     "title": "Clearing food waste",
     "task": "food-clearing",
@@ -6190,7 +6310,7 @@
       ],
       [
         "Cameras",
-        "Six on the head in three stereo pairs · primary and mid pairs delivered"
+        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
       ],
       [
         "Frame",
@@ -6238,7 +6358,7 @@
       "Restaurant",
       "Kitchen"
     ],
-    "preview": "Preview · 8 s on the four delivered lenses, the same instant on each · 480 x 360 per view",
+    "preview": "Preview · 8 s the same instant on every lens shown · 480 x 360 per view",
     "pills": [
       {
         "t": "Cleaning & Sanitation",
@@ -6249,7 +6369,7 @@
         "k": "difficulty"
       },
       {
-        "t": "6-camera rig",
+        "t": "Stereo · 4-6 cam option",
         "k": "quality"
       },
       {
@@ -6270,13 +6390,16 @@
         "t": "Full delivery",
         "primary": false
       }
+    ],
+    "alsoTiers": [
+      "stereo6"
     ]
   },
   {
     "slug": "food-clearing-2",
     "domain": "robotics",
     "modality": "egocentric",
-    "tier": "stereo6",
+    "tier": "stereo",
     "provenance": "ots",
     "title": "Serving food, clearing leftover food from the customer's table, and bringing it to the sink",
     "task": "food-clearing",
@@ -6343,7 +6466,7 @@
       ],
       [
         "Cameras",
-        "Six on the head in three stereo pairs · primary and mid pairs delivered"
+        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
       ],
       [
         "Frame",
@@ -6391,7 +6514,7 @@
       "Restaurant",
       "Kitchen and Dining Area"
     ],
-    "preview": "Preview · 8 s on the four delivered lenses, the same instant on each · 480 x 360 per view",
+    "preview": "Preview · 8 s the same instant on every lens shown · 480 x 360 per view",
     "pills": [
       {
         "t": "Pick and Place / Object Handling",
@@ -6402,7 +6525,7 @@
         "k": "difficulty"
       },
       {
-        "t": "6-camera rig",
+        "t": "Stereo · 4-6 cam option",
         "k": "quality"
       },
       {
@@ -6423,13 +6546,16 @@
         "t": "Full delivery",
         "primary": false
       }
+    ],
+    "alsoTiers": [
+      "stereo6"
     ]
   },
   {
     "slug": "food-serving",
     "domain": "robotics",
     "modality": "egocentric",
-    "tier": "stereo6",
+    "tier": "stereo",
     "provenance": "ots",
     "title": "Serving food to customers",
     "task": "food-serving",
@@ -6496,7 +6622,7 @@
       ],
       [
         "Cameras",
-        "Six on the head in three stereo pairs · primary and mid pairs delivered"
+        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
       ],
       [
         "Frame",
@@ -6544,7 +6670,7 @@
       "Restaurant",
       "Kitchen"
     ],
-    "preview": "Preview · 8 s on the four delivered lenses, the same instant on each · 480 x 360 per view",
+    "preview": "Preview · 8 s the same instant on every lens shown · 480 x 360 per view",
     "pills": [
       {
         "t": "Food Preparation & Cooking",
@@ -6555,7 +6681,7 @@
         "k": "difficulty"
       },
       {
-        "t": "6-camera rig",
+        "t": "Stereo · 4-6 cam option",
         "k": "quality"
       },
       {
@@ -6576,13 +6702,16 @@
         "t": "Full delivery",
         "primary": false
       }
+    ],
+    "alsoTiers": [
+      "stereo6"
     ]
   },
   {
     "slug": "food-shaping",
     "domain": "robotics",
     "modality": "egocentric",
-    "tier": "stereo6",
+    "tier": "stereo",
     "provenance": "ots",
     "title": "Filling and shaping food",
     "task": "food-shaping",
@@ -6649,7 +6778,7 @@
       ],
       [
         "Cameras",
-        "Six on the head in three stereo pairs · primary and mid pairs delivered"
+        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
       ],
       [
         "Frame",
@@ -6697,7 +6826,7 @@
       "Commercial Kitchen",
       "Restaurant Kitchen"
     ],
-    "preview": "Preview · 8 s on the four delivered lenses, the same instant on each · 480 x 360 per view",
+    "preview": "Preview · 8 s the same instant on every lens shown · 480 x 360 per view",
     "pills": [
       {
         "t": "Food Preparation & Cooking",
@@ -6708,7 +6837,7 @@
         "k": "difficulty"
       },
       {
-        "t": "6-camera rig",
+        "t": "Stereo · 4-6 cam option",
         "k": "quality"
       },
       {
@@ -6729,13 +6858,16 @@
         "t": "Full delivery",
         "primary": false
       }
+    ],
+    "alsoTiers": [
+      "stereo6"
     ]
   },
   {
     "slug": "fork-cleaning",
     "domain": "robotics",
     "modality": "egocentric",
-    "tier": "stereo6",
+    "tier": "stereo",
     "provenance": "ots",
     "title": "Clean the front fork assembly of the scooter",
     "task": "fork-cleaning",
@@ -6802,7 +6934,7 @@
       ],
       [
         "Cameras",
-        "Six on the head in three stereo pairs · primary and mid pairs delivered"
+        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
       ],
       [
         "Frame",
@@ -6850,7 +6982,7 @@
       "Motorcycle Repair",
       "Service Bay"
     ],
-    "preview": "Preview · 8 s on the four delivered lenses, the same instant on each · 480 x 360 per view",
+    "preview": "Preview · 8 s the same instant on every lens shown · 480 x 360 per view",
     "pills": [
       {
         "t": "Assembly & Installation",
@@ -6861,7 +6993,7 @@
         "k": "difficulty"
       },
       {
-        "t": "6-camera rig",
+        "t": "Stereo · 4-6 cam option",
         "k": "quality"
       },
       {
@@ -6882,13 +7014,16 @@
         "t": "Full delivery",
         "primary": false
       }
+    ],
+    "alsoTiers": [
+      "stereo6"
     ]
   },
   {
     "slug": "frame-crimping",
     "domain": "robotics",
     "modality": "egocentric",
-    "tier": "stereo6",
+    "tier": "stereo",
     "provenance": "ots",
     "title": "Crimping corners of a window frame",
     "task": "frame-crimping",
@@ -6955,7 +7090,7 @@
       ],
       [
         "Cameras",
-        "Six on the head in three stereo pairs · primary and mid pairs delivered"
+        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
       ],
       [
         "Frame",
@@ -7003,7 +7138,7 @@
       "Manufacturing Factory",
       "Factory"
     ],
-    "preview": "Preview · 8 s on the four delivered lenses, the same instant on each · 480 x 360 per view",
+    "preview": "Preview · 8 s the same instant on every lens shown · 480 x 360 per view",
     "pills": [
       {
         "t": "Assembly & Installation",
@@ -7014,7 +7149,7 @@
         "k": "difficulty"
       },
       {
-        "t": "6-camera rig",
+        "t": "Stereo · 4-6 cam option",
         "k": "quality"
       },
       {
@@ -7035,13 +7170,16 @@
         "t": "Full delivery",
         "primary": false
       }
+    ],
+    "alsoTiers": [
+      "stereo6"
     ]
   },
   {
     "slug": "frame-securing",
     "domain": "robotics",
     "modality": "egocentric",
-    "tier": "stereo6",
+    "tier": "stereo",
     "provenance": "ots",
     "title": "Checking condition and securing frames with a hammer",
     "task": "frame-securing",
@@ -7108,7 +7246,7 @@
       ],
       [
         "Cameras",
-        "Six on the head in three stereo pairs · primary and mid pairs delivered"
+        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
       ],
       [
         "Frame",
@@ -7156,7 +7294,7 @@
       "Handcraft Workshop",
       "Workshop"
     ],
-    "preview": "Preview · 8 s on the four delivered lenses, the same instant on each · 480 x 360 per view",
+    "preview": "Preview · 8 s the same instant on every lens shown · 480 x 360 per view",
     "pills": [
       {
         "t": "Tool Use & Technical Manipulation",
@@ -7167,7 +7305,7 @@
         "k": "difficulty"
       },
       {
-        "t": "6-camera rig",
+        "t": "Stereo · 4-6 cam option",
         "k": "quality"
       },
       {
@@ -7188,13 +7326,16 @@
         "t": "Full delivery",
         "primary": false
       }
+    ],
+    "alsoTiers": [
+      "stereo6"
     ]
   },
   {
     "slug": "frame-wrapping",
     "domain": "robotics",
     "modality": "egocentric",
-    "tier": "stereo6",
+    "tier": "stereo",
     "provenance": "ots",
     "title": "Wrapping a metal frame",
     "task": "frame-wrapping",
@@ -7261,7 +7402,7 @@
       ],
       [
         "Cameras",
-        "Six on the head in three stereo pairs · primary and mid pairs delivered"
+        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
       ],
       [
         "Frame",
@@ -7309,7 +7450,7 @@
       "Metal Fabrication Workshop",
       "Packaging Area"
     ],
-    "preview": "Preview · 8 s on the four delivered lenses, the same instant on each · 480 x 360 per view",
+    "preview": "Preview · 8 s the same instant on every lens shown · 480 x 360 per view",
     "pills": [
       {
         "t": "Packing & Bagging",
@@ -7320,7 +7461,7 @@
         "k": "difficulty"
       },
       {
-        "t": "6-camera rig",
+        "t": "Stereo · 4-6 cam option",
         "k": "quality"
       },
       {
@@ -7341,13 +7482,16 @@
         "t": "Full delivery",
         "primary": false
       }
+    ],
+    "alsoTiers": [
+      "stereo6"
     ]
   },
   {
     "slug": "furniture-cleaning",
     "domain": "robotics",
     "modality": "egocentric",
-    "tier": "stereo6",
+    "tier": "stereo",
     "provenance": "ots",
     "title": "Wiping down the wooden furniture surface with a cloth",
     "task": "furniture-cleaning",
@@ -7414,7 +7558,7 @@
       ],
       [
         "Cameras",
-        "Six on the head in three stereo pairs · primary and mid pairs delivered"
+        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
       ],
       [
         "Frame",
@@ -7462,7 +7606,7 @@
       "Construction Site",
       "Guest Bedroom"
     ],
-    "preview": "Preview · 8 s on the four delivered lenses, the same instant on each · 480 x 360 per view",
+    "preview": "Preview · 8 s the same instant on every lens shown · 480 x 360 per view",
     "pills": [
       {
         "t": "Cleaning & Sanitation",
@@ -7473,7 +7617,7 @@
         "k": "difficulty"
       },
       {
-        "t": "6-camera rig",
+        "t": "Stereo · 4-6 cam option",
         "k": "quality"
       },
       {
@@ -7494,13 +7638,16 @@
         "t": "Full delivery",
         "primary": false
       }
+    ],
+    "alsoTiers": [
+      "stereo6"
     ]
   },
   {
     "slug": "gap-injecting",
     "domain": "robotics",
     "modality": "egocentric",
-    "tier": "stereo6",
+    "tier": "stereo",
     "provenance": "ots",
     "title": "Use a glue gun to inject glue into the gap",
     "task": "gap-injecting",
@@ -7567,7 +7714,7 @@
       ],
       [
         "Cameras",
-        "Six on the head in three stereo pairs · primary and mid pairs delivered"
+        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
       ],
       [
         "Frame",
@@ -7615,7 +7762,7 @@
       "Metal Fabrication Workshop",
       "Workshop"
     ],
-    "preview": "Preview · 8 s on the four delivered lenses, the same instant on each · 480 x 360 per view",
+    "preview": "Preview · 8 s the same instant on every lens shown · 480 x 360 per view",
     "pills": [
       {
         "t": "Assembly & Installation",
@@ -7626,7 +7773,7 @@
         "k": "difficulty"
       },
       {
-        "t": "6-camera rig",
+        "t": "Stereo · 4-6 cam option",
         "k": "quality"
       },
       {
@@ -7647,13 +7794,16 @@
         "t": "Full delivery",
         "primary": false
       }
+    ],
+    "alsoTiers": [
+      "stereo6"
     ]
   },
   {
     "slug": "garment-sewing",
     "domain": "robotics",
     "modality": "egocentric",
-    "tier": "stereo6",
+    "tier": "stereo",
     "provenance": "ots",
     "title": "Sewing a garment by hand",
     "task": "garment-sewing",
@@ -7720,7 +7870,7 @@
       ],
       [
         "Cameras",
-        "Six on the head in three stereo pairs · primary and mid pairs delivered"
+        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
       ],
       [
         "Frame",
@@ -7768,7 +7918,7 @@
       "Alterations Studio",
       "Sewing Area"
     ],
-    "preview": "Preview · 8 s on the four delivered lenses, the same instant on each · 480 x 360 per view",
+    "preview": "Preview · 8 s the same instant on every lens shown · 480 x 360 per view",
     "pills": [
       {
         "t": "Clothing & Laundry",
@@ -7779,7 +7929,7 @@
         "k": "difficulty"
       },
       {
-        "t": "6-camera rig",
+        "t": "Stereo · 4-6 cam option",
         "k": "quality"
       },
       {
@@ -7800,13 +7950,16 @@
         "t": "Full delivery",
         "primary": false
       }
+    ],
+    "alsoTiers": [
+      "stereo6"
     ]
   },
   {
     "slug": "gasket-taking",
     "domain": "robotics",
     "modality": "egocentric",
-    "tier": "stereo6",
+    "tier": "stereo",
     "provenance": "ots",
     "title": "Take the end of the rubber gasket",
     "task": "gasket-taking",
@@ -7873,7 +8026,7 @@
       ],
       [
         "Cameras",
-        "Six on the head in three stereo pairs · primary and mid pairs delivered"
+        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
       ],
       [
         "Frame",
@@ -7921,7 +8074,7 @@
       "Manufacturing Factory",
       "Repair Workbench"
     ],
-    "preview": "Preview · 8 s on the four delivered lenses, the same instant on each · 480 x 360 per view",
+    "preview": "Preview · 8 s the same instant on every lens shown · 480 x 360 per view",
     "pills": [
       {
         "t": "Pick and Place / Object Handling",
@@ -7932,7 +8085,7 @@
         "k": "difficulty"
       },
       {
-        "t": "6-camera rig",
+        "t": "Stereo · 4-6 cam option",
         "k": "quality"
       },
       {
@@ -7953,13 +8106,16 @@
         "t": "Full delivery",
         "primary": false
       }
+    ],
+    "alsoTiers": [
+      "stereo6"
     ]
   },
   {
     "slug": "good-cleaning",
     "domain": "robotics",
     "modality": "egocentric",
-    "tier": "stereo6",
+    "tier": "stereo",
     "provenance": "ots",
     "title": "Cleaning household goods",
     "task": "good-cleaning",
@@ -8026,7 +8182,7 @@
       ],
       [
         "Cameras",
-        "Six on the head in three stereo pairs · primary and mid pairs delivered"
+        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
       ],
       [
         "Frame",
@@ -8074,7 +8230,7 @@
       "Hotel Room",
       "Indoor Room"
     ],
-    "preview": "Preview · 8 s on the four delivered lenses, the same instant on each · 480 x 360 per view",
+    "preview": "Preview · 8 s the same instant on every lens shown · 480 x 360 per view",
     "pills": [
       {
         "t": "Cleaning & Sanitation",
@@ -8085,7 +8241,7 @@
         "k": "difficulty"
       },
       {
-        "t": "6-camera rig",
+        "t": "Stereo · 4-6 cam option",
         "k": "quality"
       },
       {
@@ -8106,13 +8262,16 @@
         "t": "Full delivery",
         "primary": false
       }
+    ],
+    "alsoTiers": [
+      "stereo6"
     ]
   },
   {
     "slug": "grass-cutting",
     "domain": "robotics",
     "modality": "egocentric",
-    "tier": "stereo6",
+    "tier": "stereo",
     "provenance": "ots",
     "title": "Cutting grass with a sickle",
     "task": "grass-cutting",
@@ -8179,7 +8338,7 @@
       ],
       [
         "Cameras",
-        "Six on the head in three stereo pairs · primary and mid pairs delivered"
+        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
       ],
       [
         "Frame",
@@ -8227,7 +8386,7 @@
       "Agriculture Farm",
       "Outdoor Area"
     ],
-    "preview": "Preview · 8 s on the four delivered lenses, the same instant on each · 480 x 360 per view",
+    "preview": "Preview · 8 s the same instant on every lens shown · 480 x 360 per view",
     "pills": [
       {
         "t": "Tool Use & Technical Manipulation",
@@ -8238,7 +8397,7 @@
         "k": "difficulty"
       },
       {
-        "t": "6-camera rig",
+        "t": "Stereo · 4-6 cam option",
         "k": "quality"
       },
       {
@@ -8259,13 +8418,16 @@
         "t": "Full delivery",
         "primary": false
       }
+    ],
+    "alsoTiers": [
+      "stereo6"
     ]
   },
   {
     "slug": "hair-blowdrying",
     "domain": "robotics",
     "modality": "egocentric",
-    "tier": "stereo6",
+    "tier": "stereo",
     "provenance": "ots",
     "title": "Preparing and drying a customer's hair for a haircut",
     "task": "hair-blowdrying",
@@ -8332,7 +8494,7 @@
       ],
       [
         "Cameras",
-        "Six on the head in three stereo pairs · primary and mid pairs delivered"
+        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
       ],
       [
         "Frame",
@@ -8380,7 +8542,7 @@
       "Barber Shop",
       "Barber Shop"
     ],
-    "preview": "Preview · 8 s on the four delivered lenses, the same instant on each · 480 x 360 per view",
+    "preview": "Preview · 8 s the same instant on every lens shown · 480 x 360 per view",
     "pills": [
       {
         "t": "Tool Use & Technical Manipulation",
@@ -8391,7 +8553,7 @@
         "k": "difficulty"
       },
       {
-        "t": "6-camera rig",
+        "t": "Stereo · 4-6 cam option",
         "k": "quality"
       },
       {
@@ -8412,13 +8574,16 @@
         "t": "Full delivery",
         "primary": false
       }
+    ],
+    "alsoTiers": [
+      "stereo6"
     ]
   },
   {
     "slug": "hair-combing",
     "domain": "robotics",
     "modality": "egocentric",
-    "tier": "stereo6",
+    "tier": "stereo",
     "provenance": "ots",
     "title": "Combing and sectioning the customer's hair before the haircut",
     "task": "hair-combing",
@@ -8485,7 +8650,7 @@
       ],
       [
         "Cameras",
-        "Six on the head in three stereo pairs · primary and mid pairs delivered"
+        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
       ],
       [
         "Frame",
@@ -8533,7 +8698,7 @@
       "Barber Shop",
       "Barber Shop"
     ],
-    "preview": "Preview · 8 s on the four delivered lenses, the same instant on each · 480 x 360 per view",
+    "preview": "Preview · 8 s the same instant on every lens shown · 480 x 360 per view",
     "pills": [
       {
         "t": "Tool Use & Technical Manipulation",
@@ -8544,7 +8709,7 @@
         "k": "difficulty"
       },
       {
-        "t": "6-camera rig",
+        "t": "Stereo · 4-6 cam option",
         "k": "quality"
       },
       {
@@ -8565,13 +8730,16 @@
         "t": "Full delivery",
         "primary": false
       }
+    ],
+    "alsoTiers": [
+      "stereo6"
     ]
   },
   {
     "slug": "key-grinding",
     "domain": "robotics",
     "modality": "egocentric",
-    "tier": "stereo6",
+    "tier": "stereo",
     "provenance": "ots",
     "title": "Use a grinder to grind the key",
     "task": "key-grinding",
@@ -8638,7 +8806,7 @@
       ],
       [
         "Cameras",
-        "Six on the head in three stereo pairs · primary and mid pairs delivered"
+        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
       ],
       [
         "Frame",
@@ -8686,7 +8854,7 @@
       "Shoe Repair Store",
       "Shoe Repair Store"
     ],
-    "preview": "Preview · 8 s on the four delivered lenses, the same instant on each · 480 x 360 per view",
+    "preview": "Preview · 8 s the same instant on every lens shown · 480 x 360 per view",
     "pills": [
       {
         "t": "Repair & Maintenance",
@@ -8697,7 +8865,7 @@
         "k": "difficulty"
       },
       {
-        "t": "6-camera rig",
+        "t": "Stereo · 4-6 cam option",
         "k": "quality"
       },
       {
@@ -8718,13 +8886,16 @@
         "t": "Full delivery",
         "primary": false
       }
+    ],
+    "alsoTiers": [
+      "stereo6"
     ]
   },
   {
     "slug": "letter-gluing",
     "domain": "robotics",
     "modality": "egocentric",
-    "tier": "stereo6",
+    "tier": "stereo",
     "provenance": "ots",
     "title": "Gluing materials to form letters",
     "task": "letter-gluing",
@@ -8791,7 +8962,7 @@
       ],
       [
         "Cameras",
-        "Six on the head in three stereo pairs · primary and mid pairs delivered"
+        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
       ],
       [
         "Frame",
@@ -8839,7 +9010,7 @@
       "Sign Shop",
       "Workshop"
     ],
-    "preview": "Preview · 8 s on the four delivered lenses, the same instant on each · 480 x 360 per view",
+    "preview": "Preview · 8 s the same instant on every lens shown · 480 x 360 per view",
     "pills": [
       {
         "t": "Assembly & Installation",
@@ -8850,7 +9021,7 @@
         "k": "difficulty"
       },
       {
-        "t": "6-camera rig",
+        "t": "Stereo · 4-6 cam option",
         "k": "quality"
       },
       {
@@ -8871,13 +9042,16 @@
         "t": "Full delivery",
         "primary": false
       }
+    ],
+    "alsoTiers": [
+      "stereo6"
     ]
   },
   {
     "slug": "letter-organizing",
     "domain": "robotics",
     "modality": "egocentric",
-    "tier": "stereo6",
+    "tier": "stereo",
     "provenance": "ots",
     "title": "Tidying up and organizing cut letter pieces",
     "task": "letter-organizing",
@@ -8944,7 +9118,7 @@
       ],
       [
         "Cameras",
-        "Six on the head in three stereo pairs · primary and mid pairs delivered"
+        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
       ],
       [
         "Frame",
@@ -8992,7 +9166,7 @@
       "Sign Shop",
       "Workstation"
     ],
-    "preview": "Preview · 8 s on the four delivered lenses, the same instant on each · 480 x 360 per view",
+    "preview": "Preview · 8 s the same instant on every lens shown · 480 x 360 per view",
     "pills": [
       {
         "t": "Cleaning & Sanitation",
@@ -9003,7 +9177,7 @@
         "k": "difficulty"
       },
       {
-        "t": "6-camera rig",
+        "t": "Stereo · 4-6 cam option",
         "k": "quality"
       },
       {
@@ -9024,13 +9198,16 @@
         "t": "Full delivery",
         "primary": false
       }
+    ],
+    "alsoTiers": [
+      "stereo6"
     ]
   },
   {
     "slug": "matt-cutting",
     "domain": "robotics",
     "modality": "egocentric",
-    "tier": "stereo6",
+    "tier": "stereo",
     "provenance": "ots",
     "title": "Cutting the edge of a woven rattan matt",
     "task": "matt-cutting",
@@ -9097,7 +9274,7 @@
       ],
       [
         "Cameras",
-        "Six on the head in three stereo pairs · primary and mid pairs delivered"
+        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
       ],
       [
         "Frame",
@@ -9145,7 +9322,7 @@
       "Handcraft Workshop",
       "Workshop Floor"
     ],
-    "preview": "Preview · 8 s on the four delivered lenses, the same instant on each · 480 x 360 per view",
+    "preview": "Preview · 8 s the same instant on every lens shown · 480 x 360 per view",
     "pills": [
       {
         "t": "Tool Use & Technical Manipulation",
@@ -9156,7 +9333,7 @@
         "k": "difficulty"
       },
       {
-        "t": "6-camera rig",
+        "t": "Stereo · 4-6 cam option",
         "k": "quality"
       },
       {
@@ -9177,13 +9354,16 @@
         "t": "Full delivery",
         "primary": false
       }
+    ],
+    "alsoTiers": [
+      "stereo6"
     ]
   },
   {
     "slug": "metal-grinding",
     "domain": "robotics",
     "modality": "egocentric",
-    "tier": "stereo6",
+    "tier": "stereo",
     "provenance": "ots",
     "title": "Holding the metal while grinding",
     "task": "metal-grinding",
@@ -9250,7 +9430,7 @@
       ],
       [
         "Cameras",
-        "Six on the head in three stereo pairs · primary and mid pairs delivered"
+        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
       ],
       [
         "Frame",
@@ -9298,7 +9478,7 @@
       "Metal Fabrication",
       "Fabrication Floor"
     ],
-    "preview": "Preview · 8 s on the four delivered lenses, the same instant on each · 480 x 360 per view",
+    "preview": "Preview · 8 s the same instant on every lens shown · 480 x 360 per view",
     "pills": [
       {
         "t": "Pick and Place / Object Handling",
@@ -9309,7 +9489,7 @@
         "k": "difficulty"
       },
       {
-        "t": "6-camera rig",
+        "t": "Stereo · 4-6 cam option",
         "k": "quality"
       },
       {
@@ -9330,13 +9510,16 @@
         "t": "Full delivery",
         "primary": false
       }
+    ],
+    "alsoTiers": [
+      "stereo6"
     ]
   },
   {
     "slug": "metal-grinding-2",
     "domain": "robotics",
     "modality": "egocentric",
-    "tier": "stereo6",
+    "tier": "stereo",
     "provenance": "ots",
     "title": "Grinding the metal with a grinder",
     "task": "metal-grinding",
@@ -9403,7 +9586,7 @@
       ],
       [
         "Cameras",
-        "Six on the head in three stereo pairs · primary and mid pairs delivered"
+        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
       ],
       [
         "Frame",
@@ -9451,7 +9634,7 @@
       "Woodworking Shop",
       "Workshop Floor"
     ],
-    "preview": "Preview · 8 s on the four delivered lenses, the same instant on each · 480 x 360 per view",
+    "preview": "Preview · 8 s the same instant on every lens shown · 480 x 360 per view",
     "pills": [
       {
         "t": "Tool Use & Technical Manipulation",
@@ -9462,7 +9645,7 @@
         "k": "difficulty"
       },
       {
-        "t": "6-camera rig",
+        "t": "Stereo · 4-6 cam option",
         "k": "quality"
       },
       {
@@ -9483,13 +9666,16 @@
         "t": "Full delivery",
         "primary": false
       }
+    ],
+    "alsoTiers": [
+      "stereo6"
     ]
   },
   {
     "slug": "metal-grouping",
     "domain": "robotics",
     "modality": "egocentric",
-    "tier": "stereo6",
+    "tier": "stereo",
     "provenance": "ots",
     "title": "Group the metal pieces together",
     "task": "metal-grouping",
@@ -9556,7 +9742,7 @@
       ],
       [
         "Cameras",
-        "Six on the head in three stereo pairs · primary and mid pairs delivered"
+        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
       ],
       [
         "Frame",
@@ -9604,7 +9790,7 @@
       "Sign Shop",
       "Workshop Area"
     ],
-    "preview": "Preview · 8 s on the four delivered lenses, the same instant on each · 480 x 360 per view",
+    "preview": "Preview · 8 s the same instant on every lens shown · 480 x 360 per view",
     "pills": [
       {
         "t": "Tool Use & Technical Manipulation",
@@ -9615,7 +9801,7 @@
         "k": "difficulty"
       },
       {
-        "t": "6-camera rig",
+        "t": "Stereo · 4-6 cam option",
         "k": "quality"
       },
       {
@@ -9636,13 +9822,16 @@
         "t": "Full delivery",
         "primary": false
       }
+    ],
+    "alsoTiers": [
+      "stereo6"
     ]
   },
   {
     "slug": "model-spraying",
     "domain": "robotics",
     "modality": "egocentric",
-    "tier": "stereo6",
+    "tier": "stereo",
     "provenance": "ots",
     "title": "Spraying paint on models",
     "task": "model-spraying",
@@ -9709,7 +9898,7 @@
       ],
       [
         "Cameras",
-        "Six on the head in three stereo pairs · primary and mid pairs delivered"
+        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
       ],
       [
         "Frame",
@@ -9757,7 +9946,7 @@
       "Handcraft Workshop",
       "Workshop"
     ],
-    "preview": "Preview · 8 s on the four delivered lenses, the same instant on each · 480 x 360 per view",
+    "preview": "Preview · 8 s the same instant on every lens shown · 480 x 360 per view",
     "pills": [
       {
         "t": "Tool Use & Technical Manipulation",
@@ -9768,7 +9957,7 @@
         "k": "difficulty"
       },
       {
-        "t": "6-camera rig",
+        "t": "Stereo · 4-6 cam option",
         "k": "quality"
       },
       {
@@ -9789,13 +9978,16 @@
         "t": "Full delivery",
         "primary": false
       }
+    ],
+    "alsoTiers": [
+      "stereo6"
     ]
   },
   {
     "slug": "motor-assembly",
     "domain": "robotics",
     "modality": "egocentric",
-    "tier": "stereo6",
+    "tier": "stereo",
     "provenance": "ots",
     "title": "Assembling hand fans by attaching stickers",
     "task": "motor-assembly",
@@ -9862,7 +10054,7 @@
       ],
       [
         "Cameras",
-        "Six on the head in three stereo pairs · primary and mid pairs delivered"
+        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
       ],
       [
         "Frame",
@@ -9910,7 +10102,7 @@
       "Print Shop",
       "Production Area"
     ],
-    "preview": "Preview · 8 s on the four delivered lenses, the same instant on each · 480 x 360 per view",
+    "preview": "Preview · 8 s the same instant on every lens shown · 480 x 360 per view",
     "pills": [
       {
         "t": "Assembly & Installation",
@@ -9921,7 +10113,7 @@
         "k": "difficulty"
       },
       {
-        "t": "6-camera rig",
+        "t": "Stereo · 4-6 cam option",
         "k": "quality"
       },
       {
@@ -9942,13 +10134,16 @@
         "t": "Full delivery",
         "primary": false
       }
+    ],
+    "alsoTiers": [
+      "stereo6"
     ]
   },
   {
     "slug": "motor-opening",
     "domain": "robotics",
     "modality": "egocentric",
-    "tier": "stereo6",
+    "tier": "stereo",
     "provenance": "ots",
     "title": "Opening the electric motor cover using a hand tool",
     "task": "motor-opening",
@@ -10015,7 +10210,7 @@
       ],
       [
         "Cameras",
-        "Six on the head in three stereo pairs · primary and mid pairs delivered"
+        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
       ],
       [
         "Frame",
@@ -10063,7 +10258,7 @@
       "Electromechanical Workshop",
       "Electromechanical Workshop"
     ],
-    "preview": "Preview · 8 s on the four delivered lenses, the same instant on each · 480 x 360 per view",
+    "preview": "Preview · 8 s the same instant on every lens shown · 480 x 360 per view",
     "pills": [
       {
         "t": "Tool Use & Technical Manipulation",
@@ -10074,7 +10269,7 @@
         "k": "difficulty"
       },
       {
-        "t": "6-camera rig",
+        "t": "Stereo · 4-6 cam option",
         "k": "quality"
       },
       {
@@ -10095,13 +10290,16 @@
         "t": "Full delivery",
         "primary": false
       }
+    ],
+    "alsoTiers": [
+      "stereo6"
     ]
   },
   {
     "slug": "motorcycle-lifting",
     "domain": "robotics",
     "modality": "egocentric",
-    "tier": "stereo6",
+    "tier": "stereo",
     "provenance": "ots",
     "title": "Turning the wired lever to lift and lower the motorcycle",
     "task": "motorcycle-lifting",
@@ -10168,7 +10366,7 @@
       ],
       [
         "Cameras",
-        "Six on the head in three stereo pairs · primary and mid pairs delivered"
+        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
       ],
       [
         "Frame",
@@ -10216,7 +10414,7 @@
       "Motorcycle Repair",
       "Service Bay"
     ],
-    "preview": "Preview · 8 s on the four delivered lenses, the same instant on each · 480 x 360 per view",
+    "preview": "Preview · 8 s the same instant on every lens shown · 480 x 360 per view",
     "pills": [
       {
         "t": "Mechanical / Automotive Work",
@@ -10227,7 +10425,7 @@
         "k": "difficulty"
       },
       {
-        "t": "6-camera rig",
+        "t": "Stereo · 4-6 cam option",
         "k": "quality"
       },
       {
@@ -10248,13 +10446,16 @@
         "t": "Full delivery",
         "primary": false
       }
+    ],
+    "alsoTiers": [
+      "stereo6"
     ]
   },
   {
     "slug": "nail-driving",
     "domain": "robotics",
     "modality": "egocentric",
-    "tier": "stereo6",
+    "tier": "stereo",
     "provenance": "ots",
     "title": "Driving nails into a wooden object",
     "task": "nail-driving",
@@ -10321,7 +10522,7 @@
       ],
       [
         "Cameras",
-        "Six on the head in three stereo pairs · primary and mid pairs delivered"
+        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
       ],
       [
         "Frame",
@@ -10369,7 +10570,7 @@
       "Construction Company",
       "Construction Site"
     ],
-    "preview": "Preview · 8 s on the four delivered lenses, the same instant on each · 480 x 360 per view",
+    "preview": "Preview · 8 s the same instant on every lens shown · 480 x 360 per view",
     "pills": [
       {
         "t": "Tool Use & Technical Manipulation",
@@ -10380,7 +10581,7 @@
         "k": "difficulty"
       },
       {
-        "t": "6-camera rig",
+        "t": "Stereo · 4-6 cam option",
         "k": "quality"
       },
       {
@@ -10401,13 +10602,16 @@
         "t": "Full delivery",
         "primary": false
       }
+    ],
+    "alsoTiers": [
+      "stereo6"
     ]
   },
   {
     "slug": "object-removal",
     "domain": "robotics",
     "modality": "egocentric",
-    "tier": "stereo6",
+    "tier": "stereo",
     "provenance": "ots",
     "title": "Removing protective wrapping from object",
     "task": "object-removal",
@@ -10474,7 +10678,7 @@
       ],
       [
         "Cameras",
-        "Six on the head in three stereo pairs · primary and mid pairs delivered"
+        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
       ],
       [
         "Frame",
@@ -10522,7 +10726,7 @@
       "Construction Company",
       "Assembly Area"
     ],
-    "preview": "Preview · 8 s on the four delivered lenses, the same instant on each · 480 x 360 per view",
+    "preview": "Preview · 8 s the same instant on every lens shown · 480 x 360 per view",
     "pills": [
       {
         "t": "Pick and Place / Object Handling",
@@ -10533,7 +10737,7 @@
         "k": "difficulty"
       },
       {
-        "t": "6-camera rig",
+        "t": "Stereo · 4-6 cam option",
         "k": "quality"
       },
       {
@@ -10554,13 +10758,16 @@
         "t": "Full delivery",
         "primary": false
       }
+    ],
+    "alsoTiers": [
+      "stereo6"
     ]
   },
   {
     "slug": "object-securing",
     "domain": "robotics",
     "modality": "egocentric",
-    "tier": "stereo6",
+    "tier": "stereo",
     "provenance": "ots",
     "title": "Securing a wooden object with adhesive",
     "task": "object-securing",
@@ -10627,7 +10834,7 @@
       ],
       [
         "Cameras",
-        "Six on the head in three stereo pairs · primary and mid pairs delivered"
+        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
       ],
       [
         "Frame",
@@ -10675,7 +10882,7 @@
       "Woodworking Shop",
       "Wood Carving Shop"
     ],
-    "preview": "Preview · 8 s on the four delivered lenses, the same instant on each · 480 x 360 per view",
+    "preview": "Preview · 8 s the same instant on every lens shown · 480 x 360 per view",
     "pills": [
       {
         "t": "Tool Use & Technical Manipulation",
@@ -10686,7 +10893,7 @@
         "k": "difficulty"
       },
       {
-        "t": "6-camera rig",
+        "t": "Stereo · 4-6 cam option",
         "k": "quality"
       },
       {
@@ -10707,13 +10914,16 @@
         "t": "Full delivery",
         "primary": false
       }
+    ],
+    "alsoTiers": [
+      "stereo6"
     ]
   },
   {
     "slug": "panel-cutting",
     "domain": "robotics",
     "modality": "egocentric",
-    "tier": "stereo6",
+    "tier": "stereo",
     "provenance": "ots",
     "title": "Cutting a wall panel with a circular saw and placing it leaning against the wall",
     "task": "panel-cutting",
@@ -10780,7 +10990,7 @@
       ],
       [
         "Cameras",
-        "Six on the head in three stereo pairs · primary and mid pairs delivered"
+        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
       ],
       [
         "Frame",
@@ -10828,7 +11038,7 @@
       "Backyard",
       "Residential Home"
     ],
-    "preview": "Preview · 8 s on the four delivered lenses, the same instant on each · 480 x 360 per view",
+    "preview": "Preview · 8 s the same instant on every lens shown · 480 x 360 per view",
     "pills": [
       {
         "t": "Construction & Building",
@@ -10839,7 +11049,7 @@
         "k": "difficulty"
       },
       {
-        "t": "6-camera rig",
+        "t": "Stereo · 4-6 cam option",
         "k": "quality"
       },
       {
@@ -10860,13 +11070,16 @@
         "t": "Full delivery",
         "primary": false
       }
+    ],
+    "alsoTiers": [
+      "stereo6"
     ]
   },
   {
     "slug": "part-cutting",
     "domain": "robotics",
     "modality": "egocentric",
-    "tier": "stereo6",
+    "tier": "stereo",
     "provenance": "ots",
     "title": "Use a cutting machine to cut the parts",
     "task": "part-cutting",
@@ -10933,7 +11146,7 @@
       ],
       [
         "Cameras",
-        "Six on the head in three stereo pairs · primary and mid pairs delivered"
+        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
       ],
       [
         "Frame",
@@ -10981,7 +11194,7 @@
       "Manufacturing Factory",
       "Assembly Station"
     ],
-    "preview": "Preview · 8 s on the four delivered lenses, the same instant on each · 480 x 360 per view",
+    "preview": "Preview · 8 s the same instant on every lens shown · 480 x 360 per view",
     "pills": [
       {
         "t": "Tool Use & Technical Manipulation",
@@ -10992,7 +11205,7 @@
         "k": "difficulty"
       },
       {
-        "t": "6-camera rig",
+        "t": "Stereo · 4-6 cam option",
         "k": "quality"
       },
       {
@@ -11013,13 +11226,16 @@
         "t": "Full delivery",
         "primary": false
       }
+    ],
+    "alsoTiers": [
+      "stereo6"
     ]
   },
   {
     "slug": "seal-removal",
     "domain": "robotics",
     "modality": "egocentric",
-    "tier": "stereo6",
+    "tier": "stereo",
     "provenance": "ots",
     "title": "Remove the rubber seal wire",
     "task": "seal-removal",
@@ -11086,7 +11302,7 @@
       ],
       [
         "Cameras",
-        "Six on the head in three stereo pairs · primary and mid pairs delivered"
+        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
       ],
       [
         "Frame",
@@ -11134,7 +11350,7 @@
       "Manufacturing Factory",
       "Repair Workbench"
     ],
-    "preview": "Preview · 8 s on the four delivered lenses, the same instant on each · 480 x 360 per view",
+    "preview": "Preview · 8 s the same instant on every lens shown · 480 x 360 per view",
     "pills": [
       {
         "t": "Pick and Place / Object Handling",
@@ -11145,7 +11361,7 @@
         "k": "difficulty"
       },
       {
-        "t": "6-camera rig",
+        "t": "Stereo · 4-6 cam option",
         "k": "quality"
       },
       {
@@ -11166,13 +11382,16 @@
         "t": "Full delivery",
         "primary": false
       }
+    ],
+    "alsoTiers": [
+      "stereo6"
     ]
   },
   {
     "slug": "sheet-organizing",
     "domain": "robotics",
     "modality": "egocentric",
-    "tier": "stereo6",
+    "tier": "stereo",
     "provenance": "ots",
     "title": "Organizing the printed sheets after lamination",
     "task": "sheet-organizing",
@@ -11239,7 +11458,7 @@
       ],
       [
         "Cameras",
-        "Six on the head in three stereo pairs · primary and mid pairs delivered"
+        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
       ],
       [
         "Frame",
@@ -11287,7 +11506,7 @@
       "Print Shop",
       "Production Floor"
     ],
-    "preview": "Preview · 8 s on the four delivered lenses, the same instant on each · 480 x 360 per view",
+    "preview": "Preview · 8 s the same instant on every lens shown · 480 x 360 per view",
     "pills": [
       {
         "t": "Packing & Bagging",
@@ -11298,7 +11517,7 @@
         "k": "difficulty"
       },
       {
-        "t": "6-camera rig",
+        "t": "Stereo · 4-6 cam option",
         "k": "quality"
       },
       {
@@ -11319,13 +11538,16 @@
         "t": "Full delivery",
         "primary": false
       }
+    ],
+    "alsoTiers": [
+      "stereo6"
     ]
   },
   {
     "slug": "sheet-securing",
     "domain": "robotics",
     "modality": "egocentric",
-    "tier": "stereo6",
+    "tier": "stereo",
     "provenance": "ots",
     "title": "Unfolding and adjusting the black plastic sheet on the ground, and driving stakes to secure its corners",
     "task": "sheet-securing",
@@ -11392,7 +11614,7 @@
       ],
       [
         "Cameras",
-        "Six on the head in three stereo pairs · primary and mid pairs delivered"
+        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
       ],
       [
         "Frame",
@@ -11440,7 +11662,7 @@
       "Backyard",
       "Outdoor Area"
     ],
-    "preview": "Preview · 8 s on the four delivered lenses, the same instant on each · 480 x 360 per view",
+    "preview": "Preview · 8 s the same instant on every lens shown · 480 x 360 per view",
     "pills": [
       {
         "t": "Construction & Building",
@@ -11451,7 +11673,7 @@
         "k": "difficulty"
       },
       {
-        "t": "6-camera rig",
+        "t": "Stereo · 4-6 cam option",
         "k": "quality"
       },
       {
@@ -11472,13 +11694,16 @@
         "t": "Full delivery",
         "primary": false
       }
+    ],
+    "alsoTiers": [
+      "stereo6"
     ]
   },
   {
     "slug": "shoe-lacing",
     "domain": "robotics",
     "modality": "egocentric",
-    "tier": "stereo6",
+    "tier": "stereo",
     "provenance": "ots",
     "title": "Lace up a shoe",
     "task": "shoe-lacing",
@@ -11545,7 +11770,7 @@
       ],
       [
         "Cameras",
-        "Six on the head in three stereo pairs · primary and mid pairs delivered"
+        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
       ],
       [
         "Frame",
@@ -11593,7 +11818,7 @@
       "Shoe Repair Store",
       "Cobbler Workbench"
     ],
-    "preview": "Preview · 8 s on the four delivered lenses, the same instant on each · 480 x 360 per view",
+    "preview": "Preview · 8 s the same instant on every lens shown · 480 x 360 per view",
     "pills": [
       {
         "t": "Assembly & Installation",
@@ -11604,7 +11829,7 @@
         "k": "difficulty"
       },
       {
-        "t": "6-camera rig",
+        "t": "Stereo · 4-6 cam option",
         "k": "quality"
       },
       {
@@ -11625,13 +11850,16 @@
         "t": "Full delivery",
         "primary": false
       }
+    ],
+    "alsoTiers": [
+      "stereo6"
     ]
   },
   {
     "slug": "shovel-cleaning",
     "domain": "robotics",
     "modality": "egocentric",
-    "tier": "stereo6",
+    "tier": "stereo",
     "provenance": "ots",
     "title": "Cleaning a shovel using a trowel",
     "task": "shovel-cleaning",
@@ -11698,7 +11926,7 @@
       ],
       [
         "Cameras",
-        "Six on the head in three stereo pairs · primary and mid pairs delivered"
+        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
       ],
       [
         "Frame",
@@ -11746,7 +11974,7 @@
       "Construction Company",
       "Construction Site"
     ],
-    "preview": "Preview · 8 s on the four delivered lenses, the same instant on each · 480 x 360 per view",
+    "preview": "Preview · 8 s the same instant on every lens shown · 480 x 360 per view",
     "pills": [
       {
         "t": "Cleaning & Sanitation",
@@ -11757,7 +11985,7 @@
         "k": "difficulty"
       },
       {
-        "t": "6-camera rig",
+        "t": "Stereo · 4-6 cam option",
         "k": "quality"
       },
       {
@@ -11778,13 +12006,16 @@
         "t": "Full delivery",
         "primary": false
       }
+    ],
+    "alsoTiers": [
+      "stereo6"
     ]
   },
   {
     "slug": "sidewalk-sweeping",
     "domain": "robotics",
     "modality": "egocentric",
-    "tier": "stereo6",
+    "tier": "stereo",
     "provenance": "ots",
     "title": "Sweeping leaves and debris on the sidewalk",
     "task": "sidewalk-sweeping",
@@ -11851,7 +12082,7 @@
       ],
       [
         "Cameras",
-        "Six on the head in three stereo pairs · primary and mid pairs delivered"
+        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
       ],
       [
         "Frame",
@@ -11899,7 +12130,7 @@
       "Backyard",
       "Sidewalk"
     ],
-    "preview": "Preview · 8 s on the four delivered lenses, the same instant on each · 480 x 360 per view",
+    "preview": "Preview · 8 s the same instant on every lens shown · 480 x 360 per view",
     "pills": [
       {
         "t": "Cleaning & Sanitation",
@@ -11910,7 +12141,7 @@
         "k": "difficulty"
       },
       {
-        "t": "6-camera rig",
+        "t": "Stereo · 4-6 cam option",
         "k": "quality"
       },
       {
@@ -11931,13 +12162,16 @@
         "t": "Full delivery",
         "primary": false
       }
+    ],
+    "alsoTiers": [
+      "stereo6"
     ]
   },
   {
     "slug": "sign-grinding",
     "domain": "robotics",
     "modality": "egocentric",
-    "tier": "stereo6",
+    "tier": "stereo",
     "provenance": "ots",
     "title": "Grinding the sign's components",
     "task": "sign-grinding",
@@ -12004,7 +12238,7 @@
       ],
       [
         "Cameras",
-        "Six on the head in three stereo pairs · primary and mid pairs delivered"
+        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
       ],
       [
         "Frame",
@@ -12052,7 +12286,7 @@
       "Sign Shop",
       "Workshop Area"
     ],
-    "preview": "Preview · 8 s on the four delivered lenses, the same instant on each · 480 x 360 per view",
+    "preview": "Preview · 8 s the same instant on every lens shown · 480 x 360 per view",
     "pills": [
       {
         "t": "Tool Use & Technical Manipulation",
@@ -12063,7 +12297,7 @@
         "k": "difficulty"
       },
       {
-        "t": "6-camera rig",
+        "t": "Stereo · 4-6 cam option",
         "k": "quality"
       },
       {
@@ -12084,13 +12318,16 @@
         "t": "Full delivery",
         "primary": false
       }
+    ],
+    "alsoTiers": [
+      "stereo6"
     ]
   },
   {
     "slug": "socket-marking",
     "domain": "robotics",
     "modality": "egocentric",
-    "tier": "stereo6",
+    "tier": "stereo",
     "provenance": "ots",
     "title": "Measuring and marking position for installing a socket",
     "task": "socket-marking",
@@ -12157,7 +12394,7 @@
       ],
       [
         "Cameras",
-        "Six on the head in three stereo pairs · primary and mid pairs delivered"
+        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
       ],
       [
         "Frame",
@@ -12205,7 +12442,7 @@
       "Construction Company",
       "Construction Site"
     ],
-    "preview": "Preview · 8 s on the four delivered lenses, the same instant on each · 480 x 360 per view",
+    "preview": "Preview · 8 s the same instant on every lens shown · 480 x 360 per view",
     "pills": [
       {
         "t": "Tool Use & Technical Manipulation",
@@ -12216,7 +12453,7 @@
         "k": "difficulty"
       },
       {
-        "t": "6-camera rig",
+        "t": "Stereo · 4-6 cam option",
         "k": "quality"
       },
       {
@@ -12237,13 +12474,16 @@
         "t": "Full delivery",
         "primary": false
       }
+    ],
+    "alsoTiers": [
+      "stereo6"
     ]
   },
   {
     "slug": "soil-loosening",
     "domain": "robotics",
     "modality": "egocentric",
-    "tier": "stereo6",
+    "tier": "stereo",
     "provenance": "ots",
     "title": "Remove weeds and loosen the soil",
     "task": "soil-loosening",
@@ -12310,7 +12550,7 @@
       ],
       [
         "Cameras",
-        "Six on the head in three stereo pairs · primary and mid pairs delivered"
+        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
       ],
       [
         "Frame",
@@ -12358,7 +12598,7 @@
       "Backyard",
       "Weeding Area"
     ],
-    "preview": "Preview · 8 s on the four delivered lenses, the same instant on each · 480 x 360 per view",
+    "preview": "Preview · 8 s the same instant on every lens shown · 480 x 360 per view",
     "pills": [
       {
         "t": "Cleaning & Sanitation",
@@ -12369,7 +12609,7 @@
         "k": "difficulty"
       },
       {
-        "t": "6-camera rig",
+        "t": "Stereo · 4-6 cam option",
         "k": "quality"
       },
       {
@@ -12390,13 +12630,16 @@
         "t": "Full delivery",
         "primary": false
       }
+    ],
+    "alsoTiers": [
+      "stereo6"
     ]
   },
   {
     "slug": "sole-attaching",
     "domain": "robotics",
     "modality": "egocentric",
-    "tier": "stereo6",
+    "tier": "stereo",
     "provenance": "ots",
     "title": "Reattach the shoe sole",
     "task": "sole-attaching",
@@ -12463,7 +12706,7 @@
       ],
       [
         "Cameras",
-        "Six on the head in three stereo pairs · primary and mid pairs delivered"
+        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
       ],
       [
         "Frame",
@@ -12511,7 +12754,7 @@
       "Shoe Repair Store",
       "Cobbler Workbench"
     ],
-    "preview": "Preview · 8 s on the four delivered lenses, the same instant on each · 480 x 360 per view",
+    "preview": "Preview · 8 s the same instant on every lens shown · 480 x 360 per view",
     "pills": [
       {
         "t": "Repair & Maintenance",
@@ -12522,7 +12765,7 @@
         "k": "difficulty"
       },
       {
-        "t": "6-camera rig",
+        "t": "Stereo · 4-6 cam option",
         "k": "quality"
       },
       {
@@ -12543,13 +12786,16 @@
         "t": "Full delivery",
         "primary": false
       }
+    ],
+    "alsoTiers": [
+      "stereo6"
     ]
   },
   {
     "slug": "stick-cutting",
     "domain": "robotics",
     "modality": "egocentric",
-    "tier": "stereo6",
+    "tier": "stereo",
     "provenance": "ots",
     "title": "Cut the stick with scissors and insert it into the foam in the flower wrapping paper",
     "task": "stick-cutting",
@@ -12616,7 +12862,7 @@
       ],
       [
         "Cameras",
-        "Six on the head in three stereo pairs · primary and mid pairs delivered"
+        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
       ],
       [
         "Frame",
@@ -12664,7 +12910,7 @@
       "Flower Shop",
       "Flower Shop"
     ],
-    "preview": "Preview · 8 s on the four delivered lenses, the same instant on each · 480 x 360 per view",
+    "preview": "Preview · 8 s the same instant on every lens shown · 480 x 360 per view",
     "pills": [
       {
         "t": "Assembly & Installation",
@@ -12675,7 +12921,7 @@
         "k": "difficulty"
       },
       {
-        "t": "6-camera rig",
+        "t": "Stereo · 4-6 cam option",
         "k": "quality"
       },
       {
@@ -12696,13 +12942,16 @@
         "t": "Full delivery",
         "primary": false
       }
+    ],
+    "alsoTiers": [
+      "stereo6"
     ]
   },
   {
     "slug": "strap-applying",
     "domain": "robotics",
     "modality": "egocentric",
-    "tier": "stereo6",
+    "tier": "stereo",
     "provenance": "ots",
     "title": "Apply glue to the sandal strap",
     "task": "strap-applying",
@@ -12769,7 +13018,7 @@
       ],
       [
         "Cameras",
-        "Six on the head in three stereo pairs · primary and mid pairs delivered"
+        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
       ],
       [
         "Frame",
@@ -12817,7 +13066,7 @@
       "Shoe Repair Store",
       "Outdoor Area"
     ],
-    "preview": "Preview · 8 s on the four delivered lenses, the same instant on each · 480 x 360 per view",
+    "preview": "Preview · 8 s the same instant on every lens shown · 480 x 360 per view",
     "pills": [
       {
         "t": "Repair & Maintenance",
@@ -12828,7 +13077,7 @@
         "k": "difficulty"
       },
       {
-        "t": "6-camera rig",
+        "t": "Stereo · 4-6 cam option",
         "k": "quality"
       },
       {
@@ -12849,13 +13098,16 @@
         "t": "Full delivery",
         "primary": false
       }
+    ],
+    "alsoTiers": [
+      "stereo6"
     ]
   },
   {
     "slug": "strip-thinning",
     "domain": "robotics",
     "modality": "egocentric",
-    "tier": "stereo6",
+    "tier": "stereo",
     "provenance": "ots",
     "title": "Use a knife to thin a strip for weaving",
     "task": "strip-thinning",
@@ -12922,7 +13174,7 @@
       ],
       [
         "Cameras",
-        "Six on the head in three stereo pairs · primary and mid pairs delivered"
+        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
       ],
       [
         "Frame",
@@ -12970,7 +13222,7 @@
       "Handcraft Workshop",
       "Home Workshop"
     ],
-    "preview": "Preview · 8 s on the four delivered lenses, the same instant on each · 480 x 360 per view",
+    "preview": "Preview · 8 s the same instant on every lens shown · 480 x 360 per view",
     "pills": [
       {
         "t": "Tool Use & Technical Manipulation",
@@ -12981,7 +13233,7 @@
         "k": "difficulty"
       },
       {
-        "t": "6-camera rig",
+        "t": "Stereo · 4-6 cam option",
         "k": "quality"
       },
       {
@@ -13002,13 +13254,16 @@
         "t": "Full delivery",
         "primary": false
       }
+    ],
+    "alsoTiers": [
+      "stereo6"
     ]
   },
   {
     "slug": "structure-aligning",
     "domain": "robotics",
     "modality": "egocentric",
-    "tier": "stereo6",
+    "tier": "stereo",
     "provenance": "ots",
     "title": "Aligning a wooden piece with a wooden structure",
     "task": "structure-aligning",
@@ -13075,7 +13330,7 @@
       ],
       [
         "Cameras",
-        "Six on the head in three stereo pairs · primary and mid pairs delivered"
+        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
       ],
       [
         "Frame",
@@ -13123,7 +13378,7 @@
       "Woodworking Shop",
       "Wood Carving Shop"
     ],
-    "preview": "Preview · 8 s on the four delivered lenses, the same instant on each · 480 x 360 per view",
+    "preview": "Preview · 8 s the same instant on every lens shown · 480 x 360 per view",
     "pills": [
       {
         "t": "Assembly & Installation",
@@ -13134,7 +13389,7 @@
         "k": "difficulty"
       },
       {
-        "t": "6-camera rig",
+        "t": "Stereo · 4-6 cam option",
         "k": "quality"
       },
       {
@@ -13155,13 +13410,16 @@
         "t": "Full delivery",
         "primary": false
       }
+    ],
+    "alsoTiers": [
+      "stereo6"
     ]
   },
   {
     "slug": "supply-preparation",
     "domain": "robotics",
     "modality": "egocentric",
-    "tier": "stereo6",
+    "tier": "stereo",
     "provenance": "ots",
     "title": "Preparing supplies and tools before machine sewing",
     "task": "supply-preparation",
@@ -13228,7 +13486,7 @@
       ],
       [
         "Cameras",
-        "Six on the head in three stereo pairs · primary and mid pairs delivered"
+        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
       ],
       [
         "Frame",
@@ -13276,7 +13534,7 @@
       "Alterations Studio",
       "Sewing Room"
     ],
-    "preview": "Preview · 8 s on the four delivered lenses, the same instant on each · 480 x 360 per view",
+    "preview": "Preview · 8 s the same instant on every lens shown · 480 x 360 per view",
     "pills": [
       {
         "t": "Clothing & Laundry",
@@ -13287,7 +13545,7 @@
         "k": "difficulty"
       },
       {
-        "t": "6-camera rig",
+        "t": "Stereo · 4-6 cam option",
         "k": "quality"
       },
       {
@@ -13308,13 +13566,16 @@
         "t": "Full delivery",
         "primary": false
       }
+    ],
+    "alsoTiers": [
+      "stereo6"
     ]
   },
   {
     "slug": "surface-removal",
     "domain": "robotics",
     "modality": "egocentric",
-    "tier": "stereo6",
+    "tier": "stereo",
     "provenance": "ots",
     "title": "Remove the old adhesive from the work surface",
     "task": "surface-removal",
@@ -13381,7 +13642,7 @@
       ],
       [
         "Cameras",
-        "Six on the head in three stereo pairs · primary and mid pairs delivered"
+        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
       ],
       [
         "Frame",
@@ -13429,7 +13690,7 @@
       "Woodworking Shop",
       "Workshop"
     ],
-    "preview": "Preview · 8 s on the four delivered lenses, the same instant on each · 480 x 360 per view",
+    "preview": "Preview · 8 s the same instant on every lens shown · 480 x 360 per view",
     "pills": [
       {
         "t": "Tool Use & Technical Manipulation",
@@ -13440,7 +13701,7 @@
         "k": "difficulty"
       },
       {
-        "t": "6-camera rig",
+        "t": "Stereo · 4-6 cam option",
         "k": "quality"
       },
       {
@@ -13461,13 +13722,16 @@
         "t": "Full delivery",
         "primary": false
       }
+    ],
+    "alsoTiers": [
+      "stereo6"
     ]
   },
   {
     "slug": "tool-charging",
     "domain": "robotics",
     "modality": "egocentric",
-    "tier": "stereo6",
+    "tier": "stereo",
     "provenance": "ots",
     "title": "Connect the tool to the charging cable",
     "task": "tool-charging",
@@ -13534,7 +13798,7 @@
       ],
       [
         "Cameras",
-        "Six on the head in three stereo pairs · primary and mid pairs delivered"
+        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
       ],
       [
         "Frame",
@@ -13582,7 +13846,7 @@
       "Construction Company",
       "Construction Site"
     ],
-    "preview": "Preview · 8 s on the four delivered lenses, the same instant on each · 480 x 360 per view",
+    "preview": "Preview · 8 s the same instant on every lens shown · 480 x 360 per view",
     "pills": [
       {
         "t": "Electronics & Diagnostics",
@@ -13593,7 +13857,7 @@
         "k": "difficulty"
       },
       {
-        "t": "6-camera rig",
+        "t": "Stereo · 4-6 cam option",
         "k": "quality"
       },
       {
@@ -13614,13 +13878,16 @@
         "t": "Full delivery",
         "primary": false
       }
+    ],
+    "alsoTiers": [
+      "stereo6"
     ]
   },
   {
     "slug": "tube-submerging",
     "domain": "robotics",
     "modality": "egocentric",
-    "tier": "stereo6",
+    "tier": "stereo",
     "provenance": "ots",
     "title": "Submerge the inner tube in water to locate the puncture and mark it",
     "task": "tube-submerging",
@@ -13687,7 +13954,7 @@
       ],
       [
         "Cameras",
-        "Six on the head in three stereo pairs · primary and mid pairs delivered"
+        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
       ],
       [
         "Frame",
@@ -13735,7 +14002,7 @@
       "Auto Repair",
       "Repair Station"
     ],
-    "preview": "Preview · 8 s on the four delivered lenses, the same instant on each · 480 x 360 per view",
+    "preview": "Preview · 8 s the same instant on every lens shown · 480 x 360 per view",
     "pills": [
       {
         "t": "Mechanical / Automotive Work",
@@ -13746,7 +14013,7 @@
         "k": "difficulty"
       },
       {
-        "t": "6-camera rig",
+        "t": "Stereo · 4-6 cam option",
         "k": "quality"
       },
       {
@@ -13767,13 +14034,16 @@
         "t": "Full delivery",
         "primary": false
       }
+    ],
+    "alsoTiers": [
+      "stereo6"
     ]
   },
   {
     "slug": "vegetable-preparation",
     "domain": "robotics",
     "modality": "egocentric",
-    "tier": "stereo6",
+    "tier": "stereo",
     "provenance": "ots",
     "title": "Preparing vegetables in the kitchen",
     "task": "vegetable-preparation",
@@ -13840,7 +14110,7 @@
       ],
       [
         "Cameras",
-        "Six on the head in three stereo pairs · primary and mid pairs delivered"
+        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
       ],
       [
         "Frame",
@@ -13888,7 +14158,7 @@
       "Restaurant",
       "Restaurant Kitchen"
     ],
-    "preview": "Preview · 8 s on the four delivered lenses, the same instant on each · 480 x 360 per view",
+    "preview": "Preview · 8 s the same instant on every lens shown · 480 x 360 per view",
     "pills": [
       {
         "t": "Packing & Bagging",
@@ -13899,7 +14169,7 @@
         "k": "difficulty"
       },
       {
-        "t": "6-camera rig",
+        "t": "Stereo · 4-6 cam option",
         "k": "quality"
       },
       {
@@ -13920,13 +14190,16 @@
         "t": "Full delivery",
         "primary": false
       }
+    ],
+    "alsoTiers": [
+      "stereo6"
     ]
   },
   {
     "slug": "vegetable-serving",
     "domain": "robotics",
     "modality": "egocentric",
-    "tier": "stereo6",
+    "tier": "stereo",
     "provenance": "ots",
     "title": "Serving water and vegetables to customers",
     "task": "vegetable-serving",
@@ -13993,7 +14266,7 @@
       ],
       [
         "Cameras",
-        "Six on the head in three stereo pairs · primary and mid pairs delivered"
+        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
       ],
       [
         "Frame",
@@ -14041,7 +14314,7 @@
       "Restaurant",
       "Kitchen"
     ],
-    "preview": "Preview · 8 s on the four delivered lenses, the same instant on each · 480 x 360 per view",
+    "preview": "Preview · 8 s the same instant on every lens shown · 480 x 360 per view",
     "pills": [
       {
         "t": "Food Preparation & Cooking",
@@ -14052,7 +14325,7 @@
         "k": "difficulty"
       },
       {
-        "t": "6-camera rig",
+        "t": "Stereo · 4-6 cam option",
         "k": "quality"
       },
       {
@@ -14073,13 +14346,16 @@
         "t": "Full delivery",
         "primary": false
       }
+    ],
+    "alsoTiers": [
+      "stereo6"
     ]
   },
   {
     "slug": "wall-painting",
     "domain": "robotics",
     "modality": "egocentric",
-    "tier": "stereo6",
+    "tier": "stereo",
     "provenance": "ots",
     "title": "Painting decorative on the wall",
     "task": "wall-painting",
@@ -14146,7 +14422,7 @@
       ],
       [
         "Cameras",
-        "Six on the head in three stereo pairs · primary and mid pairs delivered"
+        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
       ],
       [
         "Frame",
@@ -14194,7 +14470,7 @@
       "Construction Site",
       "Finishing Area"
     ],
-    "preview": "Preview · 8 s on the four delivered lenses, the same instant on each · 480 x 360 per view",
+    "preview": "Preview · 8 s the same instant on every lens shown · 480 x 360 per view",
     "pills": [
       {
         "t": "Tool Use & Technical Manipulation",
@@ -14205,7 +14481,7 @@
         "k": "difficulty"
       },
       {
-        "t": "6-camera rig",
+        "t": "Stereo · 4-6 cam option",
         "k": "quality"
       },
       {
@@ -14226,13 +14502,16 @@
         "t": "Full delivery",
         "primary": false
       }
+    ],
+    "alsoTiers": [
+      "stereo6"
     ]
   },
   {
     "slug": "weed-pulling",
     "domain": "robotics",
     "modality": "egocentric",
-    "tier": "stereo6",
+    "tier": "stereo",
     "provenance": "ots",
     "title": "Pull out weeds and collect grass clippings",
     "task": "weed-pulling",
@@ -14299,7 +14578,7 @@
       ],
       [
         "Cameras",
-        "Six on the head in three stereo pairs · primary and mid pairs delivered"
+        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
       ],
       [
         "Frame",
@@ -14347,7 +14626,7 @@
       "Backyard",
       "Outdoor Area"
     ],
-    "preview": "Preview · 8 s on the four delivered lenses, the same instant on each · 480 x 360 per view",
+    "preview": "Preview · 8 s the same instant on every lens shown · 480 x 360 per view",
     "pills": [
       {
         "t": "Tool Use & Technical Manipulation",
@@ -14358,7 +14637,7 @@
         "k": "difficulty"
       },
       {
-        "t": "6-camera rig",
+        "t": "Stereo · 4-6 cam option",
         "k": "quality"
       },
       {
@@ -14379,13 +14658,16 @@
         "t": "Full delivery",
         "primary": false
       }
+    ],
+    "alsoTiers": [
+      "stereo6"
     ]
   },
   {
     "slug": "wire-cutting",
     "domain": "robotics",
     "modality": "egocentric",
-    "tier": "stereo6",
+    "tier": "stereo",
     "provenance": "ots",
     "title": "Using pliers to cut the wires, connecting them to the LED light strips",
     "task": "wire-cutting",
@@ -14452,7 +14734,7 @@
       ],
       [
         "Cameras",
-        "Six on the head in three stereo pairs · primary and mid pairs delivered"
+        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
       ],
       [
         "Frame",
@@ -14500,7 +14782,7 @@
       "Sign Shop",
       "Workbench"
     ],
-    "preview": "Preview · 8 s on the four delivered lenses, the same instant on each · 480 x 360 per view",
+    "preview": "Preview · 8 s the same instant on every lens shown · 480 x 360 per view",
     "pills": [
       {
         "t": "Assembly & Installation",
@@ -14511,7 +14793,7 @@
         "k": "difficulty"
       },
       {
-        "t": "6-camera rig",
+        "t": "Stereo · 4-6 cam option",
         "k": "quality"
       },
       {
@@ -14532,13 +14814,16 @@
         "t": "Full delivery",
         "primary": false
       }
+    ],
+    "alsoTiers": [
+      "stereo6"
     ]
   },
   {
     "slug": "wood-carving",
     "domain": "robotics",
     "modality": "egocentric",
-    "tier": "stereo6",
+    "tier": "stereo",
     "provenance": "ots",
     "title": "Carving wood with a chisel and mallet",
     "task": "wood-carving",
@@ -14605,7 +14890,7 @@
       ],
       [
         "Cameras",
-        "Six on the head in three stereo pairs · primary and mid pairs delivered"
+        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
       ],
       [
         "Frame",
@@ -14653,7 +14938,7 @@
       "Woodworking Shop",
       "Wood Carving Shop"
     ],
-    "preview": "Preview · 8 s on the four delivered lenses, the same instant on each · 480 x 360 per view",
+    "preview": "Preview · 8 s the same instant on every lens shown · 480 x 360 per view",
     "pills": [
       {
         "t": "Tool Use & Technical Manipulation",
@@ -14664,7 +14949,7 @@
         "k": "difficulty"
       },
       {
-        "t": "6-camera rig",
+        "t": "Stereo · 4-6 cam option",
         "k": "quality"
       },
       {
@@ -14685,13 +14970,16 @@
         "t": "Full delivery",
         "primary": false
       }
+    ],
+    "alsoTiers": [
+      "stereo6"
     ]
   },
   {
     "slug": "wood-carving-2",
     "domain": "robotics",
     "modality": "egocentric",
-    "tier": "stereo6",
+    "tier": "stereo",
     "provenance": "ots",
     "title": "Carving a wooden object",
     "task": "wood-carving",
@@ -14758,7 +15046,7 @@
       ],
       [
         "Cameras",
-        "Six on the head in three stereo pairs · primary and mid pairs delivered"
+        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
       ],
       [
         "Frame",
@@ -14806,7 +15094,7 @@
       "Woodworking Shop",
       "Workshop"
     ],
-    "preview": "Preview · 8 s on the four delivered lenses, the same instant on each · 480 x 360 per view",
+    "preview": "Preview · 8 s the same instant on every lens shown · 480 x 360 per view",
     "pills": [
       {
         "t": "Tool Use & Technical Manipulation",
@@ -14817,7 +15105,7 @@
         "k": "difficulty"
       },
       {
-        "t": "6-camera rig",
+        "t": "Stereo · 4-6 cam option",
         "k": "quality"
       },
       {
@@ -14838,13 +15126,16 @@
         "t": "Full delivery",
         "primary": false
       }
+    ],
+    "alsoTiers": [
+      "stereo6"
     ]
   },
   {
     "slug": "wood-sanding",
     "domain": "robotics",
     "modality": "egocentric",
-    "tier": "stereo6",
+    "tier": "stereo",
     "provenance": "ots",
     "title": "Sanding a wooden object",
     "task": "wood-sanding",
@@ -14911,7 +15202,7 @@
       ],
       [
         "Cameras",
-        "Six on the head in three stereo pairs · primary and mid pairs delivered"
+        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
       ],
       [
         "Frame",
@@ -14959,7 +15250,7 @@
       "Woodworking Shop",
       "Wood Carving Shop"
     ],
-    "preview": "Preview · 8 s on the four delivered lenses, the same instant on each · 480 x 360 per view",
+    "preview": "Preview · 8 s the same instant on every lens shown · 480 x 360 per view",
     "pills": [
       {
         "t": "Tool Use & Technical Manipulation",
@@ -14970,7 +15261,7 @@
         "k": "difficulty"
       },
       {
-        "t": "6-camera rig",
+        "t": "Stereo · 4-6 cam option",
         "k": "quality"
       },
       {
@@ -14991,13 +15282,16 @@
         "t": "Full delivery",
         "primary": false
       }
+    ],
+    "alsoTiers": [
+      "stereo6"
     ]
   },
   {
     "slug": "woven-cutting",
     "domain": "robotics",
     "modality": "egocentric",
-    "tier": "stereo6",
+    "tier": "stereo",
     "provenance": "ots",
     "title": "Trim the edges of the woven piece and release the woven yarn",
     "task": "woven-cutting",
@@ -15064,7 +15358,7 @@
       ],
       [
         "Cameras",
-        "Six on the head in three stereo pairs · primary and mid pairs delivered"
+        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
       ],
       [
         "Frame",
@@ -15112,7 +15406,7 @@
       "Handcraft Workshop",
       "Workstation"
     ],
-    "preview": "Preview · 8 s on the four delivered lenses, the same instant on each · 480 x 360 per view",
+    "preview": "Preview · 8 s the same instant on every lens shown · 480 x 360 per view",
     "pills": [
       {
         "t": "Tool Use & Technical Manipulation",
@@ -15123,7 +15417,7 @@
         "k": "difficulty"
       },
       {
-        "t": "6-camera rig",
+        "t": "Stereo · 4-6 cam option",
         "k": "quality"
       },
       {
@@ -15144,13 +15438,16 @@
         "t": "Full delivery",
         "primary": false
       }
+    ],
+    "alsoTiers": [
+      "stereo6"
     ]
   },
   {
     "slug": "zipper-cutting",
     "domain": "robotics",
     "modality": "egocentric",
-    "tier": "stereo6",
+    "tier": "stereo",
     "provenance": "ots",
     "title": "Measuring and cutting a zipper to fit the pants",
     "task": "zipper-cutting",
@@ -15217,7 +15514,7 @@
       ],
       [
         "Cameras",
-        "Six on the head in three stereo pairs · primary and mid pairs delivered"
+        "Stereo pair · shot on a six-camera head rig, four lenses delivered (4-6 camera option)"
       ],
       [
         "Frame",
@@ -15265,7 +15562,7 @@
       "Alterations Studio",
       "Sewing Area"
     ],
-    "preview": "Preview · 8 s on the four delivered lenses, the same instant on each · 480 x 360 per view",
+    "preview": "Preview · 8 s the same instant on every lens shown · 480 x 360 per view",
     "pills": [
       {
         "t": "Clothing & Laundry",
@@ -15276,7 +15573,7 @@
         "k": "difficulty"
       },
       {
-        "t": "6-camera rig",
+        "t": "Stereo · 4-6 cam option",
         "k": "quality"
       },
       {
@@ -15296,6 +15593,1082 @@
       {
         "t": "Full delivery",
         "primary": false
+      }
+    ],
+    "alsoTiers": [
+      "stereo6"
+    ]
+  },
+  {
+    "slug": "kit-fabric-feeding-mono",
+    "domain": "robotics",
+    "modality": "egocentric",
+    "tier": "mono",
+    "provenance": "custom",
+    "title": "Sorting and feeding fabric",
+    "task": "fabric-feeding",
+    "label": "Clothing & Laundry",
+    "skill": "Clothing & Laundry",
+    "skillGroup": "Clothing & Laundry",
+    "industry": "Clothing and Fashion",
+    "job": "Tailor / seamstress",
+    "environment": "Household, factory, daily",
+    "locale": "Vietnam",
+    "rig": "Head-mounted action camera",
+    "viewpoint": "first-person",
+    "telemetry": false,
+    "durationSec": 614.314,
+    "resolution": "1920x1080",
+    "fps": 60,
+    "streams": [
+      "RGB",
+      "IMU",
+      "Camera intrinsics",
+      "Mic audio"
+    ],
+    "formats": [
+      "mp4",
+      "wav",
+      "csv",
+      "json",
+      "LeRobot"
+    ],
+    "size": "4.1 GB",
+    "spec": [
+      [
+        "Task id",
+        "fabric-feeding"
+      ],
+      [
+        "Skill group",
+        "Clothing & Laundry"
+      ],
+      [
+        "Industry",
+        "Clothing and Fashion"
+      ],
+      [
+        "Operator",
+        "Tailor / seamstress"
+      ],
+      [
+        "Cameras",
+        "One, head-mounted"
+      ],
+      [
+        "Frame",
+        "1920x1080 at 60 fps"
+      ],
+      [
+        "Episodes",
+        "10, of which 5 measured, totalling 10 min 14 s"
+      ],
+      [
+        "Longest episode",
+        "2 min 13 s"
+      ],
+      [
+        "Synchronisation",
+        "Independent start per camera, no hardware sync — each stream carries its own first-frame host timestamp"
+      ],
+      [
+        "LeRobot export",
+        "On 6 of 10 episodes"
+      ],
+      [
+        "Delivered size",
+        "4.1 GB across 10 episodes"
+      ]
+    ],
+    "breadcrumb": [
+      "Samples",
+      "Egocentric",
+      "Sorting and feeding fabric"
+    ],
+    "preview": "Preview · 8 s from one of 10 episodes · 1920x1080 source",
+    "pills": [
+      {
+        "t": "Clothing & Laundry",
+        "k": "skill"
+      },
+      {
+        "t": "One, head-mounted",
+        "k": "quality"
+      },
+      {
+        "t": "4.1 GB",
+        "k": "file"
+      }
+    ],
+    "downloads": [
+      {
+        "t": "Preview pack",
+        "primary": true
+      }
+    ]
+  },
+  {
+    "slug": "kit-fabric-marking-mono",
+    "domain": "robotics",
+    "modality": "egocentric",
+    "tier": "mono",
+    "provenance": "custom",
+    "title": "Marking fabric parts",
+    "task": "fabric-marking",
+    "label": "Tool Use & Technical Manipulation",
+    "skill": "Tool Use & Technical Manipulation",
+    "skillGroup": "Tool Use & Technical Manipulation",
+    "industry": "Clothing and Fashion",
+    "job": "Printer / press operator",
+    "environment": "Household, factory, daily",
+    "locale": "Vietnam",
+    "rig": "Head-mounted action camera",
+    "viewpoint": "first-person",
+    "telemetry": false,
+    "durationSec": 366.378,
+    "resolution": "1920x1080",
+    "fps": 60,
+    "streams": [
+      "RGB",
+      "IMU",
+      "Camera intrinsics",
+      "Mic audio"
+    ],
+    "formats": [
+      "mp4",
+      "wav",
+      "csv",
+      "json",
+      "LeRobot"
+    ],
+    "size": "1.8 GB",
+    "spec": [
+      [
+        "Task id",
+        "fabric-marking"
+      ],
+      [
+        "Skill group",
+        "Tool Use & Technical Manipulation"
+      ],
+      [
+        "Industry",
+        "Clothing and Fashion"
+      ],
+      [
+        "Operator",
+        "Printer / press operator"
+      ],
+      [
+        "Cameras",
+        "One, head-mounted"
+      ],
+      [
+        "Frame",
+        "1920x1080 at 60 fps"
+      ],
+      [
+        "Episodes",
+        "3, totalling 6 min 06 s"
+      ],
+      [
+        "Longest episode",
+        "2 min 08 s"
+      ],
+      [
+        "Synchronisation",
+        "Independent start per camera, no hardware sync — each stream carries its own first-frame host timestamp"
+      ],
+      [
+        "LeRobot export",
+        "On 1 of 3 episodes"
+      ],
+      [
+        "Delivered size",
+        "1.8 GB across 3 episodes"
+      ]
+    ],
+    "breadcrumb": [
+      "Samples",
+      "Egocentric",
+      "Marking fabric parts"
+    ],
+    "preview": "Preview · 8 s from one of 3 episodes · 1920x1080 source",
+    "pills": [
+      {
+        "t": "Tool Use & Technical Manipulation",
+        "k": "skill"
+      },
+      {
+        "t": "One, head-mounted",
+        "k": "quality"
+      },
+      {
+        "t": "1.8 GB",
+        "k": "file"
+      }
+    ],
+    "downloads": [
+      {
+        "t": "Preview pack",
+        "primary": true
+      }
+    ]
+  },
+  {
+    "slug": "kit-fabric-marking-wrist",
+    "domain": "robotics",
+    "modality": "egocentric",
+    "tier": "wrist",
+    "provenance": "custom",
+    "title": "Marking fabric parts · three cameras",
+    "task": "fabric-marking",
+    "label": "Tool Use & Technical Manipulation",
+    "skill": "Tool Use & Technical Manipulation",
+    "skillGroup": "Tool Use & Technical Manipulation",
+    "industry": "Clothing and Fashion",
+    "job": "Printer / press operator",
+    "environment": "Household, factory, daily",
+    "locale": "Vietnam",
+    "rig": "Head camera + wrist cameras",
+    "viewpoint": "first-person",
+    "telemetry": false,
+    "durationSec": 506.197,
+    "resolution": "1920x1080",
+    "fps": 60,
+    "streams": [
+      "RGB x3 (head and both wrists)",
+      "IMU per camera",
+      "Camera intrinsics",
+      "Mic audio"
+    ],
+    "formats": [
+      "mp4",
+      "wav",
+      "csv",
+      "json",
+      "LeRobot"
+    ],
+    "size": "7.9 GB",
+    "spec": [
+      [
+        "Task id",
+        "fabric-marking"
+      ],
+      [
+        "Skill group",
+        "Tool Use & Technical Manipulation"
+      ],
+      [
+        "Industry",
+        "Clothing and Fashion"
+      ],
+      [
+        "Operator",
+        "Printer / press operator"
+      ],
+      [
+        "Cameras",
+        "Three body-worn — one head, two wrist"
+      ],
+      [
+        "Views measured",
+        "2-3 of 3 recorded, by session"
+      ],
+      [
+        "Frame",
+        "1920x1080 at 60 fps"
+      ],
+      [
+        "Episodes",
+        "5, totalling 8 min 26 s"
+      ],
+      [
+        "Longest episode",
+        "2 min 21 s"
+      ],
+      [
+        "Synchronisation",
+        "Independent start per camera, no hardware sync — each stream carries its own first-frame host timestamp"
+      ],
+      [
+        "LeRobot export",
+        "On 2 of 5 episodes"
+      ],
+      [
+        "Delivered size",
+        "7.9 GB across 5 episodes"
+      ]
+    ],
+    "breadcrumb": [
+      "Samples",
+      "Egocentric",
+      "Marking fabric parts · three cameras"
+    ],
+    "preview": "Preview · 8 s from one of 5 episodes · 1920x1080 source",
+    "pills": [
+      {
+        "t": "Tool Use & Technical Manipulation",
+        "k": "skill"
+      },
+      {
+        "t": "Three body-worn",
+        "k": "quality"
+      },
+      {
+        "t": "7.9 GB",
+        "k": "file"
+      }
+    ],
+    "downloads": [
+      {
+        "t": "Preview pack",
+        "primary": true
+      }
+    ]
+  },
+  {
+    "slug": "kit-garment-bagging-mono",
+    "domain": "robotics",
+    "modality": "egocentric",
+    "tier": "mono",
+    "provenance": "custom",
+    "title": "Bagging finished garments",
+    "task": "garment-bagging",
+    "label": "Packing & Bagging",
+    "skill": "Packing & Bagging",
+    "skillGroup": "Packing & Bagging",
+    "industry": "Clothing and Fashion",
+    "job": "Packaging operator",
+    "environment": "Household, factory, daily",
+    "locale": "Vietnam",
+    "rig": "Head-mounted action camera",
+    "viewpoint": "first-person",
+    "telemetry": false,
+    "durationSec": 740.5649999999998,
+    "resolution": "1920x1080",
+    "fps": 60,
+    "streams": [
+      "RGB",
+      "IMU",
+      "Camera intrinsics",
+      "Mic audio"
+    ],
+    "formats": [
+      "mp4",
+      "wav",
+      "csv",
+      "json",
+      "LeRobot"
+    ],
+    "size": "3.1 GB",
+    "spec": [
+      [
+        "Task id",
+        "garment-bagging"
+      ],
+      [
+        "Skill group",
+        "Packing & Bagging"
+      ],
+      [
+        "Industry",
+        "Clothing and Fashion"
+      ],
+      [
+        "Operator",
+        "Packaging operator"
+      ],
+      [
+        "Cameras",
+        "One, head-mounted"
+      ],
+      [
+        "Frame",
+        "1920x1080 at 60 fps"
+      ],
+      [
+        "Episodes",
+        "9, of which 6 measured, totalling 12 min 21 s"
+      ],
+      [
+        "Longest episode",
+        "2 min 05 s"
+      ],
+      [
+        "Synchronisation",
+        "Independent start per camera, no hardware sync — each stream carries its own first-frame host timestamp"
+      ],
+      [
+        "LeRobot export",
+        "On 7 of 9 episodes"
+      ],
+      [
+        "Delivered size",
+        "3.1 GB across 9 episodes"
+      ]
+    ],
+    "breadcrumb": [
+      "Samples",
+      "Egocentric",
+      "Bagging finished garments"
+    ],
+    "preview": "Preview · 8 s from one of 9 episodes · 1920x1080 source",
+    "pills": [
+      {
+        "t": "Packing & Bagging",
+        "k": "skill"
+      },
+      {
+        "t": "One, head-mounted",
+        "k": "quality"
+      },
+      {
+        "t": "3.1 GB",
+        "k": "file"
+      }
+    ],
+    "downloads": [
+      {
+        "t": "Preview pack",
+        "primary": true
+      }
+    ]
+  },
+  {
+    "slug": "kit-garment-bagging-wrist",
+    "domain": "robotics",
+    "modality": "egocentric",
+    "tier": "wrist",
+    "provenance": "custom",
+    "title": "Bagging finished garments · three cameras",
+    "task": "garment-bagging",
+    "label": "Packing & Bagging",
+    "skill": "Packing & Bagging",
+    "skillGroup": "Packing & Bagging",
+    "industry": "Clothing and Fashion",
+    "job": "Packaging operator",
+    "environment": "Household, factory, daily",
+    "locale": "Vietnam",
+    "rig": "Head camera + wrist cameras",
+    "viewpoint": "first-person",
+    "telemetry": false,
+    "durationSec": 246.95499999999998,
+    "resolution": "1920x1080",
+    "fps": 60,
+    "streams": [
+      "RGB x3 (head and both wrists)",
+      "IMU per camera",
+      "Camera intrinsics",
+      "Mic audio"
+    ],
+    "formats": [
+      "mp4",
+      "wav",
+      "csv",
+      "json",
+      "LeRobot"
+    ],
+    "size": "1.8 GB",
+    "spec": [
+      [
+        "Task id",
+        "garment-bagging"
+      ],
+      [
+        "Skill group",
+        "Packing & Bagging"
+      ],
+      [
+        "Industry",
+        "Clothing and Fashion"
+      ],
+      [
+        "Operator",
+        "Packaging operator"
+      ],
+      [
+        "Cameras",
+        "Three body-worn — one head, two wrist"
+      ],
+      [
+        "Views measured",
+        "2-3 of 3 recorded, by session"
+      ],
+      [
+        "Frame",
+        "1920x1080 at 60 fps"
+      ],
+      [
+        "Episodes",
+        "2, totalling 4 min 07 s"
+      ],
+      [
+        "Longest episode",
+        "2 min 04 s"
+      ],
+      [
+        "Synchronisation",
+        "Independent start per camera, no hardware sync — each stream carries its own first-frame host timestamp"
+      ],
+      [
+        "LeRobot export",
+        "On 2 of 2 episodes"
+      ],
+      [
+        "Delivered size",
+        "1.8 GB across 2 episodes"
+      ]
+    ],
+    "breadcrumb": [
+      "Samples",
+      "Egocentric",
+      "Bagging finished garments · three cameras"
+    ],
+    "preview": "Preview · 8 s from one of 2 episodes · 1920x1080 source",
+    "pills": [
+      {
+        "t": "Packing & Bagging",
+        "k": "skill"
+      },
+      {
+        "t": "Three body-worn",
+        "k": "quality"
+      },
+      {
+        "t": "1.8 GB",
+        "k": "file"
+      }
+    ],
+    "downloads": [
+      {
+        "t": "Preview pack",
+        "primary": true
+      }
+    ]
+  },
+  {
+    "slug": "kit-garment-pressing-mono",
+    "domain": "robotics",
+    "modality": "egocentric",
+    "tier": "mono",
+    "provenance": "custom",
+    "title": "Pressing garments",
+    "task": "garment-pressing",
+    "label": "Clothing & Laundry",
+    "skill": "Clothing & Laundry",
+    "skillGroup": "Clothing & Laundry",
+    "industry": "Clothing and Fashion",
+    "job": "Laundry worker",
+    "environment": "Household, factory, daily",
+    "locale": "Vietnam",
+    "rig": "Head-mounted action camera",
+    "viewpoint": "first-person",
+    "telemetry": false,
+    "durationSec": 1166.1870000000001,
+    "resolution": "1920x1080",
+    "fps": 60,
+    "streams": [
+      "RGB",
+      "IMU",
+      "Camera intrinsics",
+      "Mic audio"
+    ],
+    "formats": [
+      "mp4",
+      "wav",
+      "csv",
+      "json"
+    ],
+    "size": "6.5 GB",
+    "spec": [
+      [
+        "Task id",
+        "garment-pressing"
+      ],
+      [
+        "Skill group",
+        "Clothing & Laundry"
+      ],
+      [
+        "Industry",
+        "Clothing and Fashion"
+      ],
+      [
+        "Operator",
+        "Laundry worker"
+      ],
+      [
+        "Cameras",
+        "One, head-mounted"
+      ],
+      [
+        "Frame",
+        "1920x1080 at 60 fps"
+      ],
+      [
+        "Episodes",
+        "10, of which 9 measured, totalling 19 min 26 s"
+      ],
+      [
+        "Longest episode",
+        "3 min 04 s"
+      ],
+      [
+        "Synchronisation",
+        "Independent start per camera, no hardware sync — each stream carries its own first-frame host timestamp"
+      ],
+      [
+        "Delivered size",
+        "6.5 GB across 10 episodes"
+      ]
+    ],
+    "breadcrumb": [
+      "Samples",
+      "Egocentric",
+      "Pressing garments"
+    ],
+    "preview": "Preview · 8 s from one of 10 episodes · 1920x1080 source",
+    "pills": [
+      {
+        "t": "Clothing & Laundry",
+        "k": "skill"
+      },
+      {
+        "t": "One, head-mounted",
+        "k": "quality"
+      },
+      {
+        "t": "6.5 GB",
+        "k": "file"
+      }
+    ],
+    "downloads": [
+      {
+        "t": "Preview pack",
+        "primary": true
+      }
+    ]
+  },
+  {
+    "slug": "kit-garment-tagging-mono",
+    "domain": "robotics",
+    "modality": "egocentric",
+    "tier": "mono",
+    "provenance": "custom",
+    "title": "Tagging garments",
+    "task": "garment-tagging",
+    "label": "Packing & Bagging",
+    "skill": "Packing & Bagging",
+    "skillGroup": "Packing & Bagging",
+    "industry": "Clothing and Fashion",
+    "job": "Packaging operator",
+    "environment": "Household, factory, daily",
+    "locale": "Vietnam",
+    "rig": "Head-mounted action camera",
+    "viewpoint": "first-person",
+    "telemetry": false,
+    "durationSec": 1117.397,
+    "resolution": "1920x1080",
+    "fps": 60,
+    "streams": [
+      "RGB",
+      "IMU",
+      "Camera intrinsics",
+      "Mic audio"
+    ],
+    "formats": [
+      "mp4",
+      "wav",
+      "csv",
+      "json",
+      "LeRobot"
+    ],
+    "size": "5.8 GB",
+    "spec": [
+      [
+        "Task id",
+        "garment-tagging"
+      ],
+      [
+        "Skill group",
+        "Packing & Bagging"
+      ],
+      [
+        "Industry",
+        "Clothing and Fashion"
+      ],
+      [
+        "Operator",
+        "Packaging operator"
+      ],
+      [
+        "Cameras",
+        "One, head-mounted"
+      ],
+      [
+        "Frame",
+        "1920x1080 at 60 fps"
+      ],
+      [
+        "Episodes",
+        "9, totalling 18 min 37 s"
+      ],
+      [
+        "Longest episode",
+        "2 min 09 s"
+      ],
+      [
+        "Synchronisation",
+        "Independent start per camera, no hardware sync — each stream carries its own first-frame host timestamp"
+      ],
+      [
+        "LeRobot export",
+        "On 1 of 9 episodes"
+      ],
+      [
+        "Delivered size",
+        "5.8 GB across 9 episodes"
+      ]
+    ],
+    "breadcrumb": [
+      "Samples",
+      "Egocentric",
+      "Tagging garments"
+    ],
+    "preview": "Preview · 8 s from one of 9 episodes · 1920x1080 source",
+    "pills": [
+      {
+        "t": "Packing & Bagging",
+        "k": "skill"
+      },
+      {
+        "t": "One, head-mounted",
+        "k": "quality"
+      },
+      {
+        "t": "5.8 GB",
+        "k": "file"
+      }
+    ],
+    "downloads": [
+      {
+        "t": "Preview pack",
+        "primary": true
+      }
+    ]
+  },
+  {
+    "slug": "kit-hem-sewing-mono",
+    "domain": "robotics",
+    "modality": "egocentric",
+    "tier": "mono",
+    "provenance": "custom",
+    "title": "Hem sewing",
+    "task": "hem-sewing",
+    "label": "Clothing & Laundry",
+    "skill": "Clothing & Laundry",
+    "skillGroup": "Clothing & Laundry",
+    "industry": "Clothing and Fashion",
+    "job": "Tailor / seamstress",
+    "environment": "Household, factory, daily",
+    "locale": "Vietnam",
+    "rig": "Head-mounted action camera",
+    "viewpoint": "first-person",
+    "telemetry": false,
+    "durationSec": 1465.087,
+    "resolution": "1920x1080",
+    "fps": 60,
+    "streams": [
+      "RGB",
+      "IMU",
+      "Camera intrinsics",
+      "Mic audio"
+    ],
+    "formats": [
+      "mp4",
+      "wav",
+      "csv",
+      "json",
+      "LeRobot"
+    ],
+    "size": "6.3 GB",
+    "spec": [
+      [
+        "Task id",
+        "hem-sewing"
+      ],
+      [
+        "Skill group",
+        "Clothing & Laundry"
+      ],
+      [
+        "Industry",
+        "Clothing and Fashion"
+      ],
+      [
+        "Operator",
+        "Tailor / seamstress"
+      ],
+      [
+        "Cameras",
+        "One, head-mounted"
+      ],
+      [
+        "Frame",
+        "1920x1080 at 60 fps"
+      ],
+      [
+        "Episodes",
+        "14, of which 11 measured, totalling 24 min 25 s"
+      ],
+      [
+        "Longest episode",
+        "2 min 53 s"
+      ],
+      [
+        "Synchronisation",
+        "Independent start per camera, no hardware sync — each stream carries its own first-frame host timestamp"
+      ],
+      [
+        "LeRobot export",
+        "On 3 of 14 episodes"
+      ],
+      [
+        "Delivered size",
+        "6.3 GB across 14 episodes"
+      ]
+    ],
+    "breadcrumb": [
+      "Samples",
+      "Egocentric",
+      "Hem sewing"
+    ],
+    "preview": "Preview · 8 s from one of 14 episodes · 1920x1080 source",
+    "pills": [
+      {
+        "t": "Clothing & Laundry",
+        "k": "skill"
+      },
+      {
+        "t": "One, head-mounted",
+        "k": "quality"
+      },
+      {
+        "t": "6.3 GB",
+        "k": "file"
+      }
+    ],
+    "downloads": [
+      {
+        "t": "Preview pack",
+        "primary": true
+      }
+    ]
+  },
+  {
+    "slug": "kit-stitch-inspection-mono",
+    "domain": "robotics",
+    "modality": "egocentric",
+    "tier": "mono",
+    "provenance": "custom",
+    "title": "Stitch quality inspection",
+    "task": "stitch-inspection",
+    "label": "Clothing & Laundry",
+    "skill": "Clothing & Laundry",
+    "skillGroup": "Clothing & Laundry",
+    "industry": "Clothing and Fashion",
+    "job": "Quality inspector",
+    "environment": "Household, factory, daily",
+    "locale": "Vietnam",
+    "rig": "Head-mounted action camera",
+    "viewpoint": "first-person",
+    "telemetry": false,
+    "durationSec": 499.99,
+    "resolution": "1920x1080",
+    "fps": 60,
+    "streams": [
+      "RGB",
+      "IMU",
+      "Camera intrinsics",
+      "Mic audio"
+    ],
+    "formats": [
+      "mp4",
+      "wav",
+      "csv",
+      "json"
+    ],
+    "size": "2.1 GB",
+    "spec": [
+      [
+        "Task id",
+        "stitch-inspection"
+      ],
+      [
+        "Skill group",
+        "Clothing & Laundry"
+      ],
+      [
+        "Industry",
+        "Clothing and Fashion"
+      ],
+      [
+        "Operator",
+        "Quality inspector"
+      ],
+      [
+        "Cameras",
+        "One, head-mounted"
+      ],
+      [
+        "Frame",
+        "1920x1080 at 60 fps"
+      ],
+      [
+        "Episodes",
+        "4, totalling 8 min 20 s"
+      ],
+      [
+        "Longest episode",
+        "2 min 06 s"
+      ],
+      [
+        "Synchronisation",
+        "Independent start per camera, no hardware sync — each stream carries its own first-frame host timestamp"
+      ],
+      [
+        "Delivered size",
+        "2.1 GB across 4 episodes"
+      ]
+    ],
+    "breadcrumb": [
+      "Samples",
+      "Egocentric",
+      "Stitch quality inspection"
+    ],
+    "preview": "Preview · 8 s from one of 4 episodes · 1920x1080 source",
+    "pills": [
+      {
+        "t": "Clothing & Laundry",
+        "k": "skill"
+      },
+      {
+        "t": "One, head-mounted",
+        "k": "quality"
+      },
+      {
+        "t": "2.1 GB",
+        "k": "file"
+      }
+    ],
+    "downloads": [
+      {
+        "t": "Preview pack",
+        "primary": true
+      }
+    ]
+  },
+  {
+    "slug": "kit-stitch-inspection-wrist",
+    "domain": "robotics",
+    "modality": "egocentric",
+    "tier": "wrist",
+    "provenance": "custom",
+    "title": "Stitch quality inspection · three cameras",
+    "task": "stitch-inspection",
+    "label": "Clothing & Laundry",
+    "skill": "Clothing & Laundry",
+    "skillGroup": "Clothing & Laundry",
+    "industry": "Clothing and Fashion",
+    "job": "Quality inspector",
+    "environment": "Household, factory, daily",
+    "locale": "Vietnam",
+    "rig": "Head camera + wrist cameras",
+    "viewpoint": "first-person",
+    "telemetry": false,
+    "durationSec": 644.715,
+    "resolution": "1920x1080",
+    "fps": 60,
+    "streams": [
+      "RGB x3 (head and both wrists)",
+      "IMU per camera",
+      "Camera intrinsics",
+      "Mic audio"
+    ],
+    "formats": [
+      "mp4",
+      "wav",
+      "csv",
+      "json"
+    ],
+    "size": "8.8 GB",
+    "spec": [
+      [
+        "Task id",
+        "stitch-inspection"
+      ],
+      [
+        "Skill group",
+        "Clothing & Laundry"
+      ],
+      [
+        "Industry",
+        "Clothing and Fashion"
+      ],
+      [
+        "Operator",
+        "Quality inspector"
+      ],
+      [
+        "Cameras",
+        "Three body-worn — one head, two wrist"
+      ],
+      [
+        "Frame",
+        "1920x1080 at 60 fps"
+      ],
+      [
+        "Episodes",
+        "6, totalling 10 min 45 s"
+      ],
+      [
+        "Longest episode",
+        "2 min 06 s"
+      ],
+      [
+        "Synchronisation",
+        "Independent start per camera, no hardware sync — each stream carries its own first-frame host timestamp"
+      ],
+      [
+        "Delivered size",
+        "8.8 GB across 6 episodes"
+      ]
+    ],
+    "breadcrumb": [
+      "Samples",
+      "Egocentric",
+      "Stitch quality inspection · three cameras"
+    ],
+    "preview": "Preview · 8 s from one of 6 episodes · 1920x1080 source",
+    "pills": [
+      {
+        "t": "Clothing & Laundry",
+        "k": "skill"
+      },
+      {
+        "t": "Three body-worn",
+        "k": "quality"
+      },
+      {
+        "t": "8.8 GB",
+        "k": "file"
+      }
+    ],
+    "downloads": [
+      {
+        "t": "Preview pack",
+        "primary": true
       }
     ]
   },

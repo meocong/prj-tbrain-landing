@@ -1,24 +1,24 @@
 {
   "bucket": "tbrain-landing",
-  "generatedAt": "2026-09-23T10:49:08.945Z",
+  "generatedAt": "2026-09-24T01:17:12.823Z",
   "fullSet": {
     "object": "samples/library-approved/tbrain-sample-library.zip",
-    "bytes": 105837319,
+    "bytes": 114179816,
     "filename": "tbrain-sample-library.zip",
     "contentType": "application/zip",
-    "count": 158
+    "count": 168
   },
   "samples": {
     "bag-replacement": {
       "preview": {
         "object": "samples/library-approved/packs/bag-replacement-preview.zip",
-        "bytes": 558665,
+        "bytes": 558683,
         "filename": "bag-replacement-preview.zip",
         "contentType": "application/zip"
       },
       "metadata": {
         "object": "samples/library-approved/metadata/bag-replacement.metadata.json",
-        "bytes": 2058,
+        "bytes": 2073,
         "filename": "bag-replacement.metadata.json",
         "contentType": "application/json"
       },
@@ -33,13 +33,13 @@
     "bar-cutting": {
       "preview": {
         "object": "samples/library-approved/packs/bar-cutting-preview.zip",
-        "bytes": 388566,
+        "bytes": 388582,
         "filename": "bar-cutting-preview.zip",
         "contentType": "application/zip"
       },
       "metadata": {
         "object": "samples/library-approved/metadata/bar-cutting.metadata.json",
-        "bytes": 2179,
+        "bytes": 2194,
         "filename": "bar-cutting.metadata.json",
         "contentType": "application/json"
       },
@@ -54,13 +54,13 @@
     "bar-cutting-2": {
       "preview": {
         "object": "samples/library-approved/packs/bar-cutting-2-preview.zip",
-        "bytes": 377931,
+        "bytes": 377948,
         "filename": "bar-cutting-2-preview.zip",
         "contentType": "application/zip"
       },
       "metadata": {
         "object": "samples/library-approved/metadata/bar-cutting-2.metadata.json",
-        "bytes": 2132,
+        "bytes": 2147,
         "filename": "bar-cutting-2.metadata.json",
         "contentType": "application/json"
       },
@@ -75,13 +75,13 @@
     "bar-drilling": {
       "preview": {
         "object": "samples/library-approved/packs/bar-drilling-preview.zip",
-        "bytes": 245006,
+        "bytes": 245022,
         "filename": "bar-drilling-preview.zip",
         "contentType": "application/zip"
       },
       "metadata": {
         "object": "samples/library-approved/metadata/bar-drilling.metadata.json",
-        "bytes": 2101,
+        "bytes": 2116,
         "filename": "bar-drilling.metadata.json",
         "contentType": "application/json"
       },
@@ -96,13 +96,13 @@
     "bar-welding": {
       "preview": {
         "object": "samples/library-approved/packs/bar-welding-preview.zip",
-        "bytes": 488996,
+        "bytes": 489013,
         "filename": "bar-welding-preview.zip",
         "contentType": "application/zip"
       },
       "metadata": {
         "object": "samples/library-approved/metadata/bar-welding.metadata.json",
-        "bytes": 2131,
+        "bytes": 2146,
         "filename": "bar-welding.metadata.json",
         "contentType": "application/json"
       },
@@ -117,13 +117,13 @@
     "bathroom-cleaning": {
       "preview": {
         "object": "samples/library-approved/packs/bathroom-cleaning-preview.zip",
-        "bytes": 690545,
+        "bytes": 690563,
         "filename": "bathroom-cleaning-preview.zip",
         "contentType": "application/zip"
       },
       "metadata": {
         "object": "samples/library-approved/metadata/bathroom-cleaning.metadata.json",
-        "bytes": 2027,
+        "bytes": 2042,
         "filename": "bathroom-cleaning.metadata.json",
         "contentType": "application/json"
       },
@@ -138,13 +138,13 @@
     "bathroom-cleaning-2": {
       "preview": {
         "object": "samples/library-approved/packs/bathroom-cleaning-2-preview.zip",
-        "bytes": 417028,
+        "bytes": 417045,
         "filename": "bathroom-cleaning-2-preview.zip",
         "contentType": "application/zip"
       },
       "metadata": {
         "object": "samples/library-approved/metadata/bathroom-cleaning-2.metadata.json",
-        "bytes": 2015,
+        "bytes": 2030,
         "filename": "bathroom-cleaning-2.metadata.json",
         "contentType": "application/json"
       },
@@ -159,13 +159,13 @@
     "beard-shaving": {
       "preview": {
         "object": "samples/library-approved/packs/beard-shaving-preview.zip",
-        "bytes": 503312,
+        "bytes": 503327,
         "filename": "beard-shaving-preview.zip",
         "contentType": "application/zip"
       },
       "metadata": {
         "object": "samples/library-approved/metadata/beard-shaving.metadata.json",
-        "bytes": 2117,
+        "bytes": 2132,
         "filename": "beard-shaving.metadata.json",
         "contentType": "application/json"
       },
@@ -180,13 +180,13 @@
     "board-writing": {
       "preview": {
         "object": "samples/library-approved/packs/board-writing-preview.zip",
-        "bytes": 212714,
+        "bytes": 212731,
         "filename": "board-writing-preview.zip",
         "contentType": "application/zip"
       },
       "metadata": {
         "object": "samples/library-approved/metadata/board-writing.metadata.json",
-        "bytes": 2174,
+        "bytes": 2189,
         "filename": "board-writing.metadata.json",
         "contentType": "application/json"
       },
@@ -201,13 +201,13 @@
     "bodywork-polishing": {
       "preview": {
         "object": "samples/library-approved/packs/bodywork-polishing-preview.zip",
-        "bytes": 695513,
+        "bytes": 695533,
         "filename": "bodywork-polishing-preview.zip",
         "contentType": "application/zip"
       },
       "metadata": {
         "object": "samples/library-approved/metadata/bodywork-polishing.metadata.json",
-        "bytes": 2111,
+        "bytes": 2126,
         "filename": "bodywork-polishing.metadata.json",
         "contentType": "application/json"
       },
@@ -222,13 +222,13 @@
     "button-attaching": {
       "preview": {
         "object": "samples/library-approved/packs/button-attaching-preview.zip",
-        "bytes": 813207,
+        "bytes": 813223,
         "filename": "button-attaching-preview.zip",
         "contentType": "application/zip"
       },
       "metadata": {
         "object": "samples/library-approved/metadata/button-attaching.metadata.json",
-        "bytes": 2101,
+        "bytes": 2116,
         "filename": "button-attaching.metadata.json",
         "contentType": "application/json"
       },
@@ -243,13 +243,13 @@
     "cable-assembly": {
       "preview": {
         "object": "samples/library-approved/packs/cable-assembly-preview.zip",
-        "bytes": 511990,
+        "bytes": 512005,
         "filename": "cable-assembly-preview.zip",
         "contentType": "application/zip"
       },
       "metadata": {
         "object": "samples/library-approved/metadata/cable-assembly.metadata.json",
-        "bytes": 2167,
+        "bytes": 2182,
         "filename": "cable-assembly.metadata.json",
         "contentType": "application/json"
       },
@@ -264,13 +264,13 @@
     "car-driving": {
       "preview": {
         "object": "samples/library-approved/packs/car-driving-preview.zip",
-        "bytes": 587381,
+        "bytes": 587398,
         "filename": "car-driving-preview.zip",
         "contentType": "application/zip"
       },
       "metadata": {
         "object": "samples/library-approved/metadata/car-driving.metadata.json",
-        "bytes": 2085,
+        "bytes": 2100,
         "filename": "car-driving.metadata.json",
         "contentType": "application/json"
       },
@@ -285,13 +285,13 @@
     "car-polishing": {
       "preview": {
         "object": "samples/library-approved/packs/car-polishing-preview.zip",
-        "bytes": 474943,
+        "bytes": 474961,
         "filename": "car-polishing-preview.zip",
         "contentType": "application/zip"
       },
       "metadata": {
         "object": "samples/library-approved/metadata/car-polishing.metadata.json",
-        "bytes": 2071,
+        "bytes": 2086,
         "filename": "car-polishing.metadata.json",
         "contentType": "application/json"
       },
@@ -306,13 +306,13 @@
     "card-cutting": {
       "preview": {
         "object": "samples/library-approved/packs/card-cutting-preview.zip",
-        "bytes": 458204,
+        "bytes": 458221,
         "filename": "card-cutting-preview.zip",
         "contentType": "application/zip"
       },
       "metadata": {
         "object": "samples/library-approved/metadata/card-cutting.metadata.json",
-        "bytes": 2092,
+        "bytes": 2107,
         "filename": "card-cutting.metadata.json",
         "contentType": "application/json"
       },
@@ -327,13 +327,13 @@
     "cartridge-assembly": {
       "preview": {
         "object": "samples/library-approved/packs/cartridge-assembly-preview.zip",
-        "bytes": 561583,
+        "bytes": 561600,
         "filename": "cartridge-assembly-preview.zip",
         "contentType": "application/zip"
       },
       "metadata": {
         "object": "samples/library-approved/metadata/cartridge-assembly.metadata.json",
-        "bytes": 2125,
+        "bytes": 2140,
         "filename": "cartridge-assembly.metadata.json",
         "contentType": "application/json"
       },
@@ -348,13 +348,13 @@
     "chalk-sharpening": {
       "preview": {
         "object": "samples/library-approved/packs/chalk-sharpening-preview.zip",
-        "bytes": 324875,
+        "bytes": 324892,
         "filename": "chalk-sharpening-preview.zip",
         "contentType": "application/zip"
       },
       "metadata": {
         "object": "samples/library-approved/metadata/chalk-sharpening.metadata.json",
-        "bytes": 2066,
+        "bytes": 2081,
         "filename": "chalk-sharpening.metadata.json",
         "contentType": "application/json"
       },
@@ -369,13 +369,13 @@
     "character-attaching": {
       "preview": {
         "object": "samples/library-approved/packs/character-attaching-preview.zip",
-        "bytes": 544239,
+        "bytes": 544255,
         "filename": "character-attaching-preview.zip",
         "contentType": "application/zip"
       },
       "metadata": {
         "object": "samples/library-approved/metadata/character-attaching.metadata.json",
-        "bytes": 2059,
+        "bytes": 2074,
         "filename": "character-attaching.metadata.json",
         "contentType": "application/json"
       },
@@ -390,13 +390,13 @@
     "chicken-coating": {
       "preview": {
         "object": "samples/library-approved/packs/chicken-coating-preview.zip",
-        "bytes": 476164,
+        "bytes": 476181,
         "filename": "chicken-coating-preview.zip",
         "contentType": "application/zip"
       },
       "metadata": {
         "object": "samples/library-approved/metadata/chicken-coating.metadata.json",
-        "bytes": 2074,
+        "bytes": 2089,
         "filename": "chicken-coating.metadata.json",
         "contentType": "application/json"
       },
@@ -411,13 +411,13 @@
     "chisel-sharpening": {
       "preview": {
         "object": "samples/library-approved/packs/chisel-sharpening-preview.zip",
-        "bytes": 586904,
+        "bytes": 586920,
         "filename": "chisel-sharpening-preview.zip",
         "contentType": "application/zip"
       },
       "metadata": {
         "object": "samples/library-approved/metadata/chisel-sharpening.metadata.json",
-        "bytes": 2120,
+        "bytes": 2135,
         "filename": "chisel-sharpening.metadata.json",
         "contentType": "application/json"
       },
@@ -432,13 +432,13 @@
     "chisel-sharpening-2": {
       "preview": {
         "object": "samples/library-approved/packs/chisel-sharpening-2-preview.zip",
-        "bytes": 239933,
+        "bytes": 239950,
         "filename": "chisel-sharpening-2-preview.zip",
         "contentType": "application/zip"
       },
       "metadata": {
         "object": "samples/library-approved/metadata/chisel-sharpening-2.metadata.json",
-        "bytes": 2101,
+        "bytes": 2116,
         "filename": "chisel-sharpening-2.metadata.json",
         "contentType": "application/json"
       },
@@ -453,13 +453,13 @@
     "cloth-washing": {
       "preview": {
         "object": "samples/library-approved/packs/cloth-washing-preview.zip",
-        "bytes": 369814,
+        "bytes": 369831,
         "filename": "cloth-washing-preview.zip",
         "contentType": "application/zip"
       },
       "metadata": {
         "object": "samples/library-approved/metadata/cloth-washing.metadata.json",
-        "bytes": 2088,
+        "bytes": 2103,
         "filename": "cloth-washing.metadata.json",
         "contentType": "application/json"
       },
@@ -474,13 +474,13 @@
     "component-assembly": {
       "preview": {
         "object": "samples/library-approved/packs/component-assembly-preview.zip",
-        "bytes": 645090,
+        "bytes": 645106,
         "filename": "component-assembly-preview.zip",
         "contentType": "application/zip"
       },
       "metadata": {
         "object": "samples/library-approved/metadata/component-assembly.metadata.json",
-        "bytes": 2163,
+        "bytes": 2178,
         "filename": "component-assembly.metadata.json",
         "contentType": "application/json"
       },
@@ -495,13 +495,13 @@
     "component-placing": {
       "preview": {
         "object": "samples/library-approved/packs/component-placing-preview.zip",
-        "bytes": 421058,
+        "bytes": 421075,
         "filename": "component-placing-preview.zip",
         "contentType": "application/zip"
       },
       "metadata": {
         "object": "samples/library-approved/metadata/component-placing.metadata.json",
-        "bytes": 2170,
+        "bytes": 2185,
         "filename": "component-placing.metadata.json",
         "contentType": "application/json"
       },
@@ -516,13 +516,13 @@
     "component-repair": {
       "preview": {
         "object": "samples/library-approved/packs/component-repair-preview.zip",
-        "bytes": 221520,
+        "bytes": 221539,
         "filename": "component-repair-preview.zip",
         "contentType": "application/zip"
       },
       "metadata": {
         "object": "samples/library-approved/metadata/component-repair.metadata.json",
-        "bytes": 2119,
+        "bytes": 2134,
         "filename": "component-repair.metadata.json",
         "contentType": "application/json"
       },
@@ -537,13 +537,13 @@
     "dish-preparation": {
       "preview": {
         "object": "samples/library-approved/packs/dish-preparation-preview.zip",
-        "bytes": 826806,
+        "bytes": 826824,
         "filename": "dish-preparation-preview.zip",
         "contentType": "application/zip"
       },
       "metadata": {
         "object": "samples/library-approved/metadata/dish-preparation.metadata.json",
-        "bytes": 2105,
+        "bytes": 2120,
         "filename": "dish-preparation.metadata.json",
         "contentType": "application/json"
       },
@@ -558,13 +558,13 @@
     "door-cleaning": {
       "preview": {
         "object": "samples/library-approved/packs/door-cleaning-preview.zip",
-        "bytes": 598493,
+        "bytes": 598510,
         "filename": "door-cleaning-preview.zip",
         "contentType": "application/zip"
       },
       "metadata": {
         "object": "samples/library-approved/metadata/door-cleaning.metadata.json",
-        "bytes": 2127,
+        "bytes": 2142,
         "filename": "door-cleaning.metadata.json",
         "contentType": "application/json"
       },
@@ -579,13 +579,13 @@
     "engine-repair": {
       "preview": {
         "object": "samples/library-approved/packs/engine-repair-preview.zip",
-        "bytes": 805779,
+        "bytes": 805797,
         "filename": "engine-repair-preview.zip",
         "contentType": "application/zip"
       },
       "metadata": {
         "object": "samples/library-approved/metadata/engine-repair.metadata.json",
-        "bytes": 2069,
+        "bytes": 2084,
         "filename": "engine-repair.metadata.json",
         "contentType": "application/json"
       },
@@ -600,13 +600,13 @@
     "fabric-flattening": {
       "preview": {
         "object": "samples/library-approved/packs/fabric-flattening-preview.zip",
-        "bytes": 280704,
+        "bytes": 280720,
         "filename": "fabric-flattening-preview.zip",
         "contentType": "application/zip"
       },
       "metadata": {
         "object": "samples/library-approved/metadata/fabric-flattening.metadata.json",
-        "bytes": 2087,
+        "bytes": 2102,
         "filename": "fabric-flattening.metadata.json",
         "contentType": "application/json"
       },
@@ -621,13 +621,13 @@
     "fabric-ironing": {
       "preview": {
         "object": "samples/library-approved/packs/fabric-ironing-preview.zip",
-        "bytes": 394342,
+        "bytes": 394359,
         "filename": "fabric-ironing-preview.zip",
         "contentType": "application/zip"
       },
       "metadata": {
         "object": "samples/library-approved/metadata/fabric-ironing.metadata.json",
-        "bytes": 2104,
+        "bytes": 2119,
         "filename": "fabric-ironing.metadata.json",
         "contentType": "application/json"
       },
@@ -642,13 +642,13 @@
     "fabric-ironing-2": {
       "preview": {
         "object": "samples/library-approved/packs/fabric-ironing-2-preview.zip",
-        "bytes": 566959,
+        "bytes": 566976,
         "filename": "fabric-ironing-2-preview.zip",
         "contentType": "application/zip"
       },
       "metadata": {
         "object": "samples/library-approved/metadata/fabric-ironing-2.metadata.json",
-        "bytes": 2050,
+        "bytes": 2065,
         "filename": "fabric-ironing-2.metadata.json",
         "contentType": "application/json"
       },
@@ -663,13 +663,13 @@
     "fabric-removal": {
       "preview": {
         "object": "samples/library-approved/packs/fabric-removal-preview.zip",
-        "bytes": 521706,
+        "bytes": 521724,
         "filename": "fabric-removal-preview.zip",
         "contentType": "application/zip"
       },
       "metadata": {
         "object": "samples/library-approved/metadata/fabric-removal.metadata.json",
-        "bytes": 2080,
+        "bytes": 2095,
         "filename": "fabric-removal.metadata.json",
         "contentType": "application/json"
       },
@@ -684,13 +684,13 @@
     "fabric-sewing": {
       "preview": {
         "object": "samples/library-approved/packs/fabric-sewing-preview.zip",
-        "bytes": 607026,
+        "bytes": 607042,
         "filename": "fabric-sewing-preview.zip",
         "contentType": "application/zip"
       },
       "metadata": {
         "object": "samples/library-approved/metadata/fabric-sewing.metadata.json",
-        "bytes": 2079,
+        "bytes": 2094,
         "filename": "fabric-sewing.metadata.json",
         "contentType": "application/json"
       },
@@ -705,13 +705,13 @@
     "fabric-testing": {
       "preview": {
         "object": "samples/library-approved/packs/fabric-testing-preview.zip",
-        "bytes": 623183,
+        "bytes": 623199,
         "filename": "fabric-testing-preview.zip",
         "contentType": "application/zip"
       },
       "metadata": {
         "object": "samples/library-approved/metadata/fabric-testing.metadata.json",
-        "bytes": 2099,
+        "bytes": 2114,
         "filename": "fabric-testing.metadata.json",
         "contentType": "application/json"
       },
@@ -726,13 +726,13 @@
     "face-applying": {
       "preview": {
         "object": "samples/library-approved/packs/face-applying-preview.zip",
-        "bytes": 462006,
+        "bytes": 462023,
         "filename": "face-applying-preview.zip",
         "contentType": "application/zip"
       },
       "metadata": {
         "object": "samples/library-approved/metadata/face-applying.metadata.json",
-        "bytes": 2107,
+        "bytes": 2122,
         "filename": "face-applying.metadata.json",
         "contentType": "application/json"
       },
@@ -747,13 +747,13 @@
     "floor-clearing": {
       "preview": {
         "object": "samples/library-approved/packs/floor-clearing-preview.zip",
-        "bytes": 613014,
+        "bytes": 613031,
         "filename": "floor-clearing-preview.zip",
         "contentType": "application/zip"
       },
       "metadata": {
         "object": "samples/library-approved/metadata/floor-clearing.metadata.json",
-        "bytes": 2142,
+        "bytes": 2157,
         "filename": "floor-clearing.metadata.json",
         "contentType": "application/json"
       },
@@ -768,13 +768,13 @@
     "flower-arranging": {
       "preview": {
         "object": "samples/library-approved/packs/flower-arranging-preview.zip",
-        "bytes": 911914,
+        "bytes": 911931,
         "filename": "flower-arranging-preview.zip",
         "contentType": "application/zip"
       },
       "metadata": {
         "object": "samples/library-approved/metadata/flower-arranging.metadata.json",
-        "bytes": 2132,
+        "bytes": 2147,
         "filename": "flower-arranging.metadata.json",
         "contentType": "application/json"
       },
@@ -789,13 +789,13 @@
     "flower-arranging-2": {
       "preview": {
         "object": "samples/library-approved/packs/flower-arranging-2-preview.zip",
-        "bytes": 916413,
+        "bytes": 916432,
         "filename": "flower-arranging-2-preview.zip",
         "contentType": "application/zip"
       },
       "metadata": {
         "object": "samples/library-approved/metadata/flower-arranging-2.metadata.json",
-        "bytes": 2092,
+        "bytes": 2107,
         "filename": "flower-arranging-2.metadata.json",
         "contentType": "application/json"
       },
@@ -810,13 +810,13 @@
     "flower-picking": {
       "preview": {
         "object": "samples/library-approved/packs/flower-picking-preview.zip",
-        "bytes": 621906,
+        "bytes": 621922,
         "filename": "flower-picking-preview.zip",
         "contentType": "application/zip"
       },
       "metadata": {
         "object": "samples/library-approved/metadata/flower-picking.metadata.json",
-        "bytes": 2061,
+        "bytes": 2076,
         "filename": "flower-picking.metadata.json",
         "contentType": "application/json"
       },
@@ -831,13 +831,13 @@
     "flower-pruning": {
       "preview": {
         "object": "samples/library-approved/packs/flower-pruning-preview.zip",
-        "bytes": 640932,
+        "bytes": 640951,
         "filename": "flower-pruning-preview.zip",
         "contentType": "application/zip"
       },
       "metadata": {
         "object": "samples/library-approved/metadata/flower-pruning.metadata.json",
-        "bytes": 2056,
+        "bytes": 2071,
         "filename": "flower-pruning.metadata.json",
         "contentType": "application/json"
       },
@@ -852,13 +852,13 @@
     "food-clearing": {
       "preview": {
         "object": "samples/library-approved/packs/food-clearing-preview.zip",
-        "bytes": 439789,
+        "bytes": 439806,
         "filename": "food-clearing-preview.zip",
         "contentType": "application/zip"
       },
       "metadata": {
         "object": "samples/library-approved/metadata/food-clearing.metadata.json",
-        "bytes": 1994,
+        "bytes": 2009,
         "filename": "food-clearing.metadata.json",
         "contentType": "application/json"
       },
@@ -873,13 +873,13 @@
     "food-clearing-2": {
       "preview": {
         "object": "samples/library-approved/packs/food-clearing-2-preview.zip",
-        "bytes": 776681,
+        "bytes": 776700,
         "filename": "food-clearing-2-preview.zip",
         "contentType": "application/zip"
       },
       "metadata": {
         "object": "samples/library-approved/metadata/food-clearing-2.metadata.json",
-        "bytes": 2219,
+        "bytes": 2234,
         "filename": "food-clearing-2.metadata.json",
         "contentType": "application/json"
       },
@@ -894,13 +894,13 @@
     "food-serving": {
       "preview": {
         "object": "samples/library-approved/packs/food-serving-preview.zip",
-        "bytes": 1173455,
+        "bytes": 1173471,
         "filename": "food-serving-preview.zip",
         "contentType": "application/zip"
       },
       "metadata": {
         "object": "samples/library-approved/metadata/food-serving.metadata.json",
-        "bytes": 2040,
+        "bytes": 2055,
         "filename": "food-serving.metadata.json",
         "contentType": "application/json"
       },
@@ -915,13 +915,13 @@
     "food-shaping": {
       "preview": {
         "object": "samples/library-approved/packs/food-shaping-preview.zip",
-        "bytes": 380911,
+        "bytes": 380926,
         "filename": "food-shaping-preview.zip",
         "contentType": "application/zip"
       },
       "metadata": {
         "object": "samples/library-approved/metadata/food-shaping.metadata.json",
-        "bytes": 2071,
+        "bytes": 2086,
         "filename": "food-shaping.metadata.json",
         "contentType": "application/json"
       },
@@ -936,13 +936,13 @@
     "fork-cleaning": {
       "preview": {
         "object": "samples/library-approved/packs/fork-cleaning-preview.zip",
-        "bytes": 425983,
+        "bytes": 425999,
         "filename": "fork-cleaning-preview.zip",
         "contentType": "application/zip"
       },
       "metadata": {
         "object": "samples/library-approved/metadata/fork-cleaning.metadata.json",
-        "bytes": 2131,
+        "bytes": 2146,
         "filename": "fork-cleaning.metadata.json",
         "contentType": "application/json"
       },
@@ -957,13 +957,13 @@
     "frame-crimping": {
       "preview": {
         "object": "samples/library-approved/packs/frame-crimping-preview.zip",
-        "bytes": 756558,
+        "bytes": 756576,
         "filename": "frame-crimping-preview.zip",
         "contentType": "application/zip"
       },
       "metadata": {
         "object": "samples/library-approved/metadata/frame-crimping.metadata.json",
-        "bytes": 2119,
+        "bytes": 2134,
         "filename": "frame-crimping.metadata.json",
         "contentType": "application/json"
       },
@@ -978,13 +978,13 @@
     "frame-securing": {
       "preview": {
         "object": "samples/library-approved/packs/frame-securing-preview.zip",
-        "bytes": 331021,
+        "bytes": 331037,
         "filename": "frame-securing-preview.zip",
         "contentType": "application/zip"
       },
       "metadata": {
         "object": "samples/library-approved/metadata/frame-securing.metadata.json",
-        "bytes": 2132,
+        "bytes": 2147,
         "filename": "frame-securing.metadata.json",
         "contentType": "application/json"
       },
@@ -999,13 +999,13 @@
     "frame-wrapping": {
       "preview": {
         "object": "samples/library-approved/packs/frame-wrapping-preview.zip",
-        "bytes": 449745,
+        "bytes": 449761,
         "filename": "frame-wrapping-preview.zip",
         "contentType": "application/zip"
       },
       "metadata": {
         "object": "samples/library-approved/metadata/frame-wrapping.metadata.json",
-        "bytes": 2109,
+        "bytes": 2124,
         "filename": "frame-wrapping.metadata.json",
         "contentType": "application/json"
       },
@@ -1020,13 +1020,13 @@
     "furniture-cleaning": {
       "preview": {
         "object": "samples/library-approved/packs/furniture-cleaning-preview.zip",
-        "bytes": 411601,
+        "bytes": 411620,
         "filename": "furniture-cleaning-preview.zip",
         "contentType": "application/zip"
       },
       "metadata": {
         "object": "samples/library-approved/metadata/furniture-cleaning.metadata.json",
-        "bytes": 2142,
+        "bytes": 2157,
         "filename": "furniture-cleaning.metadata.json",
         "contentType": "application/json"
       },
@@ -1041,13 +1041,13 @@
     "gap-injecting": {
       "preview": {
         "object": "samples/library-approved/packs/gap-injecting-preview.zip",
-        "bytes": 811351,
+        "bytes": 811369,
         "filename": "gap-injecting-preview.zip",
         "contentType": "application/zip"
       },
       "metadata": {
         "object": "samples/library-approved/metadata/gap-injecting.metadata.json",
-        "bytes": 2141,
+        "bytes": 2156,
         "filename": "gap-injecting.metadata.json",
         "contentType": "application/json"
       },
@@ -1062,13 +1062,13 @@
     "garment-sewing": {
       "preview": {
         "object": "samples/library-approved/packs/garment-sewing-preview.zip",
-        "bytes": 201926,
+        "bytes": 201942,
         "filename": "garment-sewing-preview.zip",
         "contentType": "application/zip"
       },
       "metadata": {
         "object": "samples/library-approved/metadata/garment-sewing.metadata.json",
-        "bytes": 2080,
+        "bytes": 2095,
         "filename": "garment-sewing.metadata.json",
         "contentType": "application/json"
       },
@@ -1083,13 +1083,13 @@
     "gasket-taking": {
       "preview": {
         "object": "samples/library-approved/packs/gasket-taking-preview.zip",
-        "bytes": 583984,
+        "bytes": 584001,
         "filename": "gasket-taking-preview.zip",
         "contentType": "application/zip"
       },
       "metadata": {
         "object": "samples/library-approved/metadata/gasket-taking.metadata.json",
-        "bytes": 2151,
+        "bytes": 2166,
         "filename": "gasket-taking.metadata.json",
         "contentType": "application/json"
       },
@@ -1104,13 +1104,13 @@
     "good-cleaning": {
       "preview": {
         "object": "samples/library-approved/packs/good-cleaning-preview.zip",
-        "bytes": 658049,
+        "bytes": 658065,
         "filename": "good-cleaning-preview.zip",
         "contentType": "application/zip"
       },
       "metadata": {
         "object": "samples/library-approved/metadata/good-cleaning.metadata.json",
-        "bytes": 1996,
+        "bytes": 2011,
         "filename": "good-cleaning.metadata.json",
         "contentType": "application/json"
       },
@@ -1125,13 +1125,13 @@
     "grass-cutting": {
       "preview": {
         "object": "samples/library-approved/packs/grass-cutting-preview.zip",
-        "bytes": 3164856,
+        "bytes": 3164870,
         "filename": "grass-cutting-preview.zip",
         "contentType": "application/zip"
       },
       "metadata": {
         "object": "samples/library-approved/metadata/grass-cutting.metadata.json",
-        "bytes": 2058,
+        "bytes": 2073,
         "filename": "grass-cutting.metadata.json",
         "contentType": "application/json"
       },
@@ -1146,13 +1146,13 @@
     "hair-blowdrying": {
       "preview": {
         "object": "samples/library-approved/packs/hair-blowdrying-preview.zip",
-        "bytes": 703225,
+        "bytes": 703242,
         "filename": "hair-blowdrying-preview.zip",
         "contentType": "application/zip"
       },
       "metadata": {
         "object": "samples/library-approved/metadata/hair-blowdrying.metadata.json",
-        "bytes": 2129,
+        "bytes": 2144,
         "filename": "hair-blowdrying.metadata.json",
         "contentType": "application/json"
       },
@@ -1167,13 +1167,13 @@
     "hair-combing": {
       "preview": {
         "object": "samples/library-approved/packs/hair-combing-preview.zip",
-        "bytes": 362225,
+        "bytes": 362243,
         "filename": "hair-combing-preview.zip",
         "contentType": "application/zip"
       },
       "metadata": {
         "object": "samples/library-approved/metadata/hair-combing.metadata.json",
-        "bytes": 2138,
+        "bytes": 2153,
         "filename": "hair-combing.metadata.json",
         "contentType": "application/json"
       },
@@ -1188,13 +1188,13 @@
     "key-grinding": {
       "preview": {
         "object": "samples/library-approved/packs/key-grinding-preview.zip",
-        "bytes": 401190,
+        "bytes": 401209,
         "filename": "key-grinding-preview.zip",
         "contentType": "application/zip"
       },
       "metadata": {
         "object": "samples/library-approved/metadata/key-grinding.metadata.json",
-        "bytes": 2070,
+        "bytes": 2085,
         "filename": "key-grinding.metadata.json",
         "contentType": "application/json"
       },
@@ -1209,13 +1209,13 @@
     "letter-gluing": {
       "preview": {
         "object": "samples/library-approved/packs/letter-gluing-preview.zip",
-        "bytes": 486863,
+        "bytes": 486879,
         "filename": "letter-gluing-preview.zip",
         "contentType": "application/zip"
       },
       "metadata": {
         "object": "samples/library-approved/metadata/letter-gluing.metadata.json",
-        "bytes": 2045,
+        "bytes": 2060,
         "filename": "letter-gluing.metadata.json",
         "contentType": "application/json"
       },
@@ -1230,13 +1230,13 @@
     "letter-organizing": {
       "preview": {
         "object": "samples/library-approved/packs/letter-organizing-preview.zip",
-        "bytes": 521192,
+        "bytes": 521208,
         "filename": "letter-organizing-preview.zip",
         "contentType": "application/zip"
       },
       "metadata": {
         "object": "samples/library-approved/metadata/letter-organizing.metadata.json",
-        "bytes": 2060,
+        "bytes": 2075,
         "filename": "letter-organizing.metadata.json",
         "contentType": "application/json"
       },
@@ -1251,13 +1251,13 @@
     "matt-cutting": {
       "preview": {
         "object": "samples/library-approved/packs/matt-cutting-preview.zip",
-        "bytes": 678985,
+        "bytes": 679001,
         "filename": "matt-cutting-preview.zip",
         "contentType": "application/zip"
       },
       "metadata": {
         "object": "samples/library-approved/metadata/matt-cutting.metadata.json",
-        "bytes": 2119,
+        "bytes": 2134,
         "filename": "matt-cutting.metadata.json",
         "contentType": "application/json"
       },
@@ -1272,13 +1272,13 @@
     "metal-grinding": {
       "preview": {
         "object": "samples/library-approved/packs/metal-grinding-preview.zip",
-        "bytes": 528233,
+        "bytes": 528249,
         "filename": "metal-grinding-preview.zip",
         "contentType": "application/zip"
       },
       "metadata": {
         "object": "samples/library-approved/metadata/metal-grinding.metadata.json",
-        "bytes": 2135,
+        "bytes": 2150,
         "filename": "metal-grinding.metadata.json",
         "contentType": "application/json"
       },
@@ -1293,13 +1293,13 @@
     "metal-grinding-2": {
       "preview": {
         "object": "samples/library-approved/packs/metal-grinding-2-preview.zip",
-        "bytes": 340570,
+        "bytes": 340587,
         "filename": "metal-grinding-2-preview.zip",
         "contentType": "application/zip"
       },
       "metadata": {
         "object": "samples/library-approved/metadata/metal-grinding-2.metadata.json",
-        "bytes": 2103,
+        "bytes": 2118,
         "filename": "metal-grinding-2.metadata.json",
         "contentType": "application/json"
       },
@@ -1314,13 +1314,13 @@
     "metal-grouping": {
       "preview": {
         "object": "samples/library-approved/packs/metal-grouping-preview.zip",
-        "bytes": 628468,
+        "bytes": 628485,
         "filename": "metal-grouping-preview.zip",
         "contentType": "application/zip"
       },
       "metadata": {
         "object": "samples/library-approved/metadata/metal-grouping.metadata.json",
-        "bytes": 2068,
+        "bytes": 2083,
         "filename": "metal-grouping.metadata.json",
         "contentType": "application/json"
       },
@@ -1335,13 +1335,13 @@
     "model-spraying": {
       "preview": {
         "object": "samples/library-approved/packs/model-spraying-preview.zip",
-        "bytes": 431846,
+        "bytes": 431862,
         "filename": "model-spraying-preview.zip",
         "contentType": "application/zip"
       },
       "metadata": {
         "object": "samples/library-approved/metadata/model-spraying.metadata.json",
-        "bytes": 2083,
+        "bytes": 2098,
         "filename": "model-spraying.metadata.json",
         "contentType": "application/json"
       },
@@ -1356,13 +1356,13 @@
     "motor-assembly": {
       "preview": {
         "object": "samples/library-approved/packs/motor-assembly-preview.zip",
-        "bytes": 487132,
+        "bytes": 487148,
         "filename": "motor-assembly-preview.zip",
         "contentType": "application/zip"
       },
       "metadata": {
         "object": "samples/library-approved/metadata/motor-assembly.metadata.json",
-        "bytes": 2086,
+        "bytes": 2101,
         "filename": "motor-assembly.metadata.json",
         "contentType": "application/json"
       },
@@ -1377,13 +1377,13 @@
     "motor-opening": {
       "preview": {
         "object": "samples/library-approved/packs/motor-opening-preview.zip",
-        "bytes": 770903,
+        "bytes": 770920,
         "filename": "motor-opening-preview.zip",
         "contentType": "application/zip"
       },
       "metadata": {
         "object": "samples/library-approved/metadata/motor-opening.metadata.json",
-        "bytes": 2198,
+        "bytes": 2213,
         "filename": "motor-opening.metadata.json",
         "contentType": "application/json"
       },
@@ -1398,13 +1398,13 @@
     "motorcycle-lifting": {
       "preview": {
         "object": "samples/library-approved/packs/motorcycle-lifting-preview.zip",
-        "bytes": 647626,
+        "bytes": 647643,
         "filename": "motorcycle-lifting-preview.zip",
         "contentType": "application/zip"
       },
       "metadata": {
         "object": "samples/library-approved/metadata/motorcycle-lifting.metadata.json",
-        "bytes": 2165,
+        "bytes": 2180,
         "filename": "motorcycle-lifting.metadata.json",
         "contentType": "application/json"
       },
@@ -1419,13 +1419,13 @@
     "nail-driving": {
       "preview": {
         "object": "samples/library-approved/packs/nail-driving-preview.zip",
-        "bytes": 339619,
+        "bytes": 339639,
         "filename": "nail-driving-preview.zip",
         "contentType": "application/zip"
       },
       "metadata": {
         "object": "samples/library-approved/metadata/nail-driving.metadata.json",
-        "bytes": 2161,
+        "bytes": 2176,
         "filename": "nail-driving.metadata.json",
         "contentType": "application/json"
       },
@@ -1440,13 +1440,13 @@
     "object-removal": {
       "preview": {
         "object": "samples/library-approved/packs/object-removal-preview.zip",
-        "bytes": 438459,
+        "bytes": 438476,
         "filename": "object-removal-preview.zip",
         "contentType": "application/zip"
       },
       "metadata": {
         "object": "samples/library-approved/metadata/object-removal.metadata.json",
-        "bytes": 2136,
+        "bytes": 2151,
         "filename": "object-removal.metadata.json",
         "contentType": "application/json"
       },
@@ -1461,13 +1461,13 @@
     "object-securing": {
       "preview": {
         "object": "samples/library-approved/packs/object-securing-preview.zip",
-        "bytes": 229714,
+        "bytes": 229731,
         "filename": "object-securing-preview.zip",
         "contentType": "application/zip"
       },
       "metadata": {
         "object": "samples/library-approved/metadata/object-securing.metadata.json",
-        "bytes": 2126,
+        "bytes": 2141,
         "filename": "object-securing.metadata.json",
         "contentType": "application/json"
       },
@@ -1482,13 +1482,13 @@
     "panel-cutting": {
       "preview": {
         "object": "samples/library-approved/packs/panel-cutting-preview.zip",
-        "bytes": 594441,
+        "bytes": 594459,
         "filename": "panel-cutting-preview.zip",
         "contentType": "application/zip"
       },
       "metadata": {
         "object": "samples/library-approved/metadata/panel-cutting.metadata.json",
-        "bytes": 2158,
+        "bytes": 2173,
         "filename": "panel-cutting.metadata.json",
         "contentType": "application/json"
       },
@@ -1503,13 +1503,13 @@
     "part-cutting": {
       "preview": {
         "object": "samples/library-approved/packs/part-cutting-preview.zip",
-        "bytes": 197477,
+        "bytes": 197494,
         "filename": "part-cutting-preview.zip",
         "contentType": "application/zip"
       },
       "metadata": {
         "object": "samples/library-approved/metadata/part-cutting.metadata.json",
-        "bytes": 2147,
+        "bytes": 2162,
         "filename": "part-cutting.metadata.json",
         "contentType": "application/json"
       },
@@ -1524,13 +1524,13 @@
     "seal-removal": {
       "preview": {
         "object": "samples/library-approved/packs/seal-removal-preview.zip",
-        "bytes": 383031,
+        "bytes": 383049,
         "filename": "seal-removal-preview.zip",
         "contentType": "application/zip"
       },
       "metadata": {
         "object": "samples/library-approved/metadata/seal-removal.metadata.json",
-        "bytes": 2137,
+        "bytes": 2152,
         "filename": "seal-removal.metadata.json",
         "contentType": "application/json"
       },
@@ -1545,13 +1545,13 @@
     "sheet-organizing": {
       "preview": {
         "object": "samples/library-approved/packs/sheet-organizing-preview.zip",
-        "bytes": 776722,
+        "bytes": 776737,
         "filename": "sheet-organizing-preview.zip",
         "contentType": "application/zip"
       },
       "metadata": {
         "object": "samples/library-approved/metadata/sheet-organizing.metadata.json",
-        "bytes": 2110,
+        "bytes": 2125,
         "filename": "sheet-organizing.metadata.json",
         "contentType": "application/json"
       },
@@ -1566,13 +1566,13 @@
     "sheet-securing": {
       "preview": {
         "object": "samples/library-approved/packs/sheet-securing-preview.zip",
-        "bytes": 1451331,
+        "bytes": 1451350,
         "filename": "sheet-securing-preview.zip",
         "contentType": "application/zip"
       },
       "metadata": {
         "object": "samples/library-approved/metadata/sheet-securing.metadata.json",
-        "bytes": 2181,
+        "bytes": 2196,
         "filename": "sheet-securing.metadata.json",
         "contentType": "application/json"
       },
@@ -1587,13 +1587,13 @@
     "shoe-lacing": {
       "preview": {
         "object": "samples/library-approved/packs/shoe-lacing-preview.zip",
-        "bytes": 392589,
+        "bytes": 392605,
         "filename": "shoe-lacing-preview.zip",
         "contentType": "application/zip"
       },
       "metadata": {
         "object": "samples/library-approved/metadata/shoe-lacing.metadata.json",
-        "bytes": 2038,
+        "bytes": 2053,
         "filename": "shoe-lacing.metadata.json",
         "contentType": "application/json"
       },
@@ -1608,13 +1608,13 @@
     "shovel-cleaning": {
       "preview": {
         "object": "samples/library-approved/packs/shovel-cleaning-preview.zip",
-        "bytes": 459086,
+        "bytes": 459102,
         "filename": "shovel-cleaning-preview.zip",
         "contentType": "application/zip"
       },
       "metadata": {
         "object": "samples/library-approved/metadata/shovel-cleaning.metadata.json",
-        "bytes": 2134,
+        "bytes": 2149,
         "filename": "shovel-cleaning.metadata.json",
         "contentType": "application/json"
       },
@@ -1629,13 +1629,13 @@
     "sidewalk-sweeping": {
       "preview": {
         "object": "samples/library-approved/packs/sidewalk-sweeping-preview.zip",
-        "bytes": 1527374,
+        "bytes": 1527393,
         "filename": "sidewalk-sweeping-preview.zip",
         "contentType": "application/zip"
       },
       "metadata": {
         "object": "samples/library-approved/metadata/sidewalk-sweeping.metadata.json",
-        "bytes": 2040,
+        "bytes": 2055,
         "filename": "sidewalk-sweeping.metadata.json",
         "contentType": "application/json"
       },
@@ -1650,13 +1650,13 @@
     "sign-grinding": {
       "preview": {
         "object": "samples/library-approved/packs/sign-grinding-preview.zip",
-        "bytes": 375370,
+        "bytes": 375389,
         "filename": "sign-grinding-preview.zip",
         "contentType": "application/zip"
       },
       "metadata": {
         "object": "samples/library-approved/metadata/sign-grinding.metadata.json",
-        "bytes": 2064,
+        "bytes": 2079,
         "filename": "sign-grinding.metadata.json",
         "contentType": "application/json"
       },
@@ -1671,13 +1671,13 @@
     "socket-marking": {
       "preview": {
         "object": "samples/library-approved/packs/socket-marking-preview.zip",
-        "bytes": 141165,
+        "bytes": 141182,
         "filename": "socket-marking-preview.zip",
         "contentType": "application/zip"
       },
       "metadata": {
         "object": "samples/library-approved/metadata/socket-marking.metadata.json",
-        "bytes": 2202,
+        "bytes": 2217,
         "filename": "socket-marking.metadata.json",
         "contentType": "application/json"
       },
@@ -1692,13 +1692,13 @@
     "soil-loosening": {
       "preview": {
         "object": "samples/library-approved/packs/soil-loosening-preview.zip",
-        "bytes": 1319948,
+        "bytes": 1319966,
         "filename": "soil-loosening-preview.zip",
         "contentType": "application/zip"
       },
       "metadata": {
         "object": "samples/library-approved/metadata/soil-loosening.metadata.json",
-        "bytes": 2028,
+        "bytes": 2043,
         "filename": "soil-loosening.metadata.json",
         "contentType": "application/json"
       },
@@ -1713,13 +1713,13 @@
     "sole-attaching": {
       "preview": {
         "object": "samples/library-approved/packs/sole-attaching-preview.zip",
-        "bytes": 280176,
+        "bytes": 280195,
         "filename": "sole-attaching-preview.zip",
         "contentType": "application/zip"
       },
       "metadata": {
         "object": "samples/library-approved/metadata/sole-attaching.metadata.json",
-        "bytes": 2057,
+        "bytes": 2072,
         "filename": "sole-attaching.metadata.json",
         "contentType": "application/json"
       },
@@ -1734,13 +1734,13 @@
     "stick-cutting": {
       "preview": {
         "object": "samples/library-approved/packs/stick-cutting-preview.zip",
-        "bytes": 466560,
+        "bytes": 466576,
         "filename": "stick-cutting-preview.zip",
         "contentType": "application/zip"
       },
       "metadata": {
         "object": "samples/library-approved/metadata/stick-cutting.metadata.json",
-        "bytes": 2167,
+        "bytes": 2182,
         "filename": "stick-cutting.metadata.json",
         "contentType": "application/json"
       },
@@ -1755,13 +1755,13 @@
     "strap-applying": {
       "preview": {
         "object": "samples/library-approved/packs/strap-applying-preview.zip",
-        "bytes": 685362,
+        "bytes": 685378,
         "filename": "strap-applying-preview.zip",
         "contentType": "application/zip"
       },
       "metadata": {
         "object": "samples/library-approved/metadata/strap-applying.metadata.json",
-        "bytes": 2068,
+        "bytes": 2083,
         "filename": "strap-applying.metadata.json",
         "contentType": "application/json"
       },
@@ -1776,13 +1776,13 @@
     "strip-thinning": {
       "preview": {
         "object": "samples/library-approved/packs/strip-thinning-preview.zip",
-        "bytes": 329473,
+        "bytes": 329489,
         "filename": "strip-thinning-preview.zip",
         "contentType": "application/zip"
       },
       "metadata": {
         "object": "samples/library-approved/metadata/strip-thinning.metadata.json",
-        "bytes": 2121,
+        "bytes": 2136,
         "filename": "strip-thinning.metadata.json",
         "contentType": "application/json"
       },
@@ -1797,13 +1797,13 @@
     "structure-aligning": {
       "preview": {
         "object": "samples/library-approved/packs/structure-aligning-preview.zip",
-        "bytes": 342375,
+        "bytes": 342392,
         "filename": "structure-aligning-preview.zip",
         "contentType": "application/zip"
       },
       "metadata": {
         "object": "samples/library-approved/metadata/structure-aligning.metadata.json",
-        "bytes": 2132,
+        "bytes": 2147,
         "filename": "structure-aligning.metadata.json",
         "contentType": "application/json"
       },
@@ -1818,13 +1818,13 @@
     "supply-preparation": {
       "preview": {
         "object": "samples/library-approved/packs/supply-preparation-preview.zip",
-        "bytes": 776504,
+        "bytes": 776519,
         "filename": "supply-preparation-preview.zip",
         "contentType": "application/zip"
       },
       "metadata": {
         "object": "samples/library-approved/metadata/supply-preparation.metadata.json",
-        "bytes": 2134,
+        "bytes": 2149,
         "filename": "supply-preparation.metadata.json",
         "contentType": "application/json"
       },
@@ -1839,13 +1839,13 @@
     "surface-removal": {
       "preview": {
         "object": "samples/library-approved/packs/surface-removal-preview.zip",
-        "bytes": 683256,
+        "bytes": 683273,
         "filename": "surface-removal-preview.zip",
         "contentType": "application/zip"
       },
       "metadata": {
         "object": "samples/library-approved/metadata/surface-removal.metadata.json",
-        "bytes": 2102,
+        "bytes": 2117,
         "filename": "surface-removal.metadata.json",
         "contentType": "application/json"
       },
@@ -1860,13 +1860,13 @@
     "tool-charging": {
       "preview": {
         "object": "samples/library-approved/packs/tool-charging-preview.zip",
-        "bytes": 337339,
+        "bytes": 337355,
         "filename": "tool-charging-preview.zip",
         "contentType": "application/zip"
       },
       "metadata": {
         "object": "samples/library-approved/metadata/tool-charging.metadata.json",
-        "bytes": 2146,
+        "bytes": 2161,
         "filename": "tool-charging.metadata.json",
         "contentType": "application/json"
       },
@@ -1881,13 +1881,13 @@
     "tube-submerging": {
       "preview": {
         "object": "samples/library-approved/packs/tube-submerging-preview.zip",
-        "bytes": 562577,
+        "bytes": 562595,
         "filename": "tube-submerging-preview.zip",
         "contentType": "application/zip"
       },
       "metadata": {
         "object": "samples/library-approved/metadata/tube-submerging.metadata.json",
-        "bytes": 2182,
+        "bytes": 2197,
         "filename": "tube-submerging.metadata.json",
         "contentType": "application/json"
       },
@@ -1902,13 +1902,13 @@
     "vegetable-preparation": {
       "preview": {
         "object": "samples/library-approved/packs/vegetable-preparation-preview.zip",
-        "bytes": 449631,
+        "bytes": 449647,
         "filename": "vegetable-preparation-preview.zip",
         "contentType": "application/zip"
       },
       "metadata": {
         "object": "samples/library-approved/metadata/vegetable-preparation.metadata.json",
-        "bytes": 2078,
+        "bytes": 2093,
         "filename": "vegetable-preparation.metadata.json",
         "contentType": "application/json"
       },
@@ -1923,13 +1923,13 @@
     "vegetable-serving": {
       "preview": {
         "object": "samples/library-approved/packs/vegetable-serving-preview.zip",
-        "bytes": 843918,
+        "bytes": 843934,
         "filename": "vegetable-serving-preview.zip",
         "contentType": "application/zip"
       },
       "metadata": {
         "object": "samples/library-approved/metadata/vegetable-serving.metadata.json",
-        "bytes": 2086,
+        "bytes": 2101,
         "filename": "vegetable-serving.metadata.json",
         "contentType": "application/json"
       },
@@ -1944,13 +1944,13 @@
     "wall-painting": {
       "preview": {
         "object": "samples/library-approved/packs/wall-painting-preview.zip",
-        "bytes": 350990,
+        "bytes": 351009,
         "filename": "wall-painting-preview.zip",
         "contentType": "application/zip"
       },
       "metadata": {
         "object": "samples/library-approved/metadata/wall-painting.metadata.json",
-        "bytes": 2113,
+        "bytes": 2128,
         "filename": "wall-painting.metadata.json",
         "contentType": "application/json"
       },
@@ -1965,13 +1965,13 @@
     "weed-pulling": {
       "preview": {
         "object": "samples/library-approved/packs/weed-pulling-preview.zip",
-        "bytes": 1137479,
+        "bytes": 1137494,
         "filename": "weed-pulling-preview.zip",
         "contentType": "application/zip"
       },
       "metadata": {
         "object": "samples/library-approved/metadata/weed-pulling.metadata.json",
-        "bytes": 2089,
+        "bytes": 2104,
         "filename": "weed-pulling.metadata.json",
         "contentType": "application/json"
       },
@@ -1986,13 +1986,13 @@
     "wire-cutting": {
       "preview": {
         "object": "samples/library-approved/packs/wire-cutting-preview.zip",
-        "bytes": 389102,
+        "bytes": 389120,
         "filename": "wire-cutting-preview.zip",
         "contentType": "application/zip"
       },
       "metadata": {
         "object": "samples/library-approved/metadata/wire-cutting.metadata.json",
-        "bytes": 2132,
+        "bytes": 2147,
         "filename": "wire-cutting.metadata.json",
         "contentType": "application/json"
       },
@@ -2007,13 +2007,13 @@
     "wood-carving": {
       "preview": {
         "object": "samples/library-approved/packs/wood-carving-preview.zip",
-        "bytes": 673444,
+        "bytes": 673461,
         "filename": "wood-carving-preview.zip",
         "contentType": "application/zip"
       },
       "metadata": {
         "object": "samples/library-approved/metadata/wood-carving.metadata.json",
-        "bytes": 2115,
+        "bytes": 2130,
         "filename": "wood-carving.metadata.json",
         "contentType": "application/json"
       },
@@ -2028,13 +2028,13 @@
     "wood-carving-2": {
       "preview": {
         "object": "samples/library-approved/packs/wood-carving-2-preview.zip",
-        "bytes": 647013,
+        "bytes": 647031,
         "filename": "wood-carving-2-preview.zip",
         "contentType": "application/zip"
       },
       "metadata": {
         "object": "samples/library-approved/metadata/wood-carving-2.metadata.json",
-        "bytes": 2054,
+        "bytes": 2069,
         "filename": "wood-carving-2.metadata.json",
         "contentType": "application/json"
       },
@@ -2049,13 +2049,13 @@
     "wood-sanding": {
       "preview": {
         "object": "samples/library-approved/packs/wood-sanding-preview.zip",
-        "bytes": 563731,
+        "bytes": 563749,
         "filename": "wood-sanding-preview.zip",
         "contentType": "application/zip"
       },
       "metadata": {
         "object": "samples/library-approved/metadata/wood-sanding.metadata.json",
-        "bytes": 2090,
+        "bytes": 2105,
         "filename": "wood-sanding.metadata.json",
         "contentType": "application/json"
       },
@@ -2070,13 +2070,13 @@
     "woven-cutting": {
       "preview": {
         "object": "samples/library-approved/packs/woven-cutting-preview.zip",
-        "bytes": 856104,
+        "bytes": 856121,
         "filename": "woven-cutting-preview.zip",
         "contentType": "application/zip"
       },
       "metadata": {
         "object": "samples/library-approved/metadata/woven-cutting.metadata.json",
-        "bytes": 2155,
+        "bytes": 2170,
         "filename": "woven-cutting.metadata.json",
         "contentType": "application/json"
       },
@@ -2091,13 +2091,13 @@
     "zipper-cutting": {
       "preview": {
         "object": "samples/library-approved/packs/zipper-cutting-preview.zip",
-        "bytes": 559240,
+        "bytes": 559257,
         "filename": "zipper-cutting-preview.zip",
         "contentType": "application/zip"
       },
       "metadata": {
         "object": "samples/library-approved/metadata/zipper-cutting.metadata.json",
-        "bytes": 2122,
+        "bytes": 2137,
         "filename": "zipper-cutting.metadata.json",
         "contentType": "application/json"
       },
@@ -2109,16 +2109,226 @@
         "note": "Six camera mp4s, imu_left.db, imu_right.db, mag_middle.db"
       }
     },
+    "kit-fabric-feeding-mono": {
+      "preview": {
+        "object": "samples/library-approved/packs/kit-fabric-feeding-mono-preview.zip",
+        "bytes": 563990,
+        "filename": "kit-fabric-feeding-mono-preview.zip",
+        "contentType": "application/zip"
+      },
+      "metadata": {
+        "object": "samples/library-approved/metadata/kit-fabric-feeding-mono.metadata.json",
+        "bytes": 1697,
+        "filename": "kit-fabric-feeding-mono.metadata.json",
+        "contentType": "application/json"
+      },
+      "full": {
+        "object": null,
+        "bytes": 4402341478,
+        "filename": "kit-fabric-feeding-mono-segment.zip",
+        "contentType": "application/octet-stream",
+        "note": "Six camera mp4s, imu_left.db, imu_right.db, mag_middle.db"
+      }
+    },
+    "kit-fabric-marking-mono": {
+      "preview": {
+        "object": "samples/library-approved/packs/kit-fabric-marking-mono-preview.zip",
+        "bytes": 573735,
+        "filename": "kit-fabric-marking-mono-preview.zip",
+        "contentType": "application/zip"
+      },
+      "metadata": {
+        "object": "samples/library-approved/metadata/kit-fabric-marking-mono.metadata.json",
+        "bytes": 1700,
+        "filename": "kit-fabric-marking-mono.metadata.json",
+        "contentType": "application/json"
+      },
+      "full": {
+        "object": null,
+        "bytes": 1932735283,
+        "filename": "kit-fabric-marking-mono-segment.zip",
+        "contentType": "application/octet-stream",
+        "note": "Six camera mp4s, imu_left.db, imu_right.db, mag_middle.db"
+      }
+    },
+    "kit-fabric-marking-wrist": {
+      "preview": {
+        "object": "samples/library-approved/packs/kit-fabric-marking-wrist-preview.zip",
+        "bytes": 1135804,
+        "filename": "kit-fabric-marking-wrist-preview.zip",
+        "contentType": "application/zip"
+      },
+      "metadata": {
+        "object": "samples/library-approved/metadata/kit-fabric-marking-wrist.metadata.json",
+        "bytes": 1850,
+        "filename": "kit-fabric-marking-wrist.metadata.json",
+        "contentType": "application/json"
+      },
+      "full": {
+        "object": null,
+        "bytes": 8482560410,
+        "filename": "kit-fabric-marking-wrist-segment.zip",
+        "contentType": "application/octet-stream",
+        "note": "Six camera mp4s, imu_left.db, imu_right.db, mag_middle.db"
+      }
+    },
+    "kit-garment-bagging-mono": {
+      "preview": {
+        "object": "samples/library-approved/packs/kit-garment-bagging-mono-preview.zip",
+        "bytes": 594802,
+        "filename": "kit-garment-bagging-mono-preview.zip",
+        "contentType": "application/zip"
+      },
+      "metadata": {
+        "object": "samples/library-approved/metadata/kit-garment-bagging-mono.metadata.json",
+        "bytes": 1700,
+        "filename": "kit-garment-bagging-mono.metadata.json",
+        "contentType": "application/json"
+      },
+      "full": {
+        "object": null,
+        "bytes": 3328599654,
+        "filename": "kit-garment-bagging-mono-segment.zip",
+        "contentType": "application/octet-stream",
+        "note": "Six camera mp4s, imu_left.db, imu_right.db, mag_middle.db"
+      }
+    },
+    "kit-garment-bagging-wrist": {
+      "preview": {
+        "object": "samples/library-approved/packs/kit-garment-bagging-wrist-preview.zip",
+        "bytes": 625433,
+        "filename": "kit-garment-bagging-wrist-preview.zip",
+        "contentType": "application/zip"
+      },
+      "metadata": {
+        "object": "samples/library-approved/metadata/kit-garment-bagging-wrist.metadata.json",
+        "bytes": 1829,
+        "filename": "kit-garment-bagging-wrist.metadata.json",
+        "contentType": "application/json"
+      },
+      "full": {
+        "object": null,
+        "bytes": 1932735283,
+        "filename": "kit-garment-bagging-wrist-segment.zip",
+        "contentType": "application/octet-stream",
+        "note": "Six camera mp4s, imu_left.db, imu_right.db, mag_middle.db"
+      }
+    },
+    "kit-garment-pressing-mono": {
+      "preview": {
+        "object": "samples/library-approved/packs/kit-garment-pressing-mono-preview.zip",
+        "bytes": 1274566,
+        "filename": "kit-garment-pressing-mono-preview.zip",
+        "contentType": "application/zip"
+      },
+      "metadata": {
+        "object": "samples/library-approved/metadata/kit-garment-pressing-mono.metadata.json",
+        "bytes": 1622,
+        "filename": "kit-garment-pressing-mono.metadata.json",
+        "contentType": "application/json"
+      },
+      "full": {
+        "object": null,
+        "bytes": 6979321856,
+        "filename": "kit-garment-pressing-mono-segment.zip",
+        "contentType": "application/octet-stream",
+        "note": "Six camera mp4s, imu_left.db, imu_right.db, mag_middle.db"
+      }
+    },
+    "kit-garment-tagging-mono": {
+      "preview": {
+        "object": "samples/library-approved/packs/kit-garment-tagging-mono-preview.zip",
+        "bytes": 708015,
+        "filename": "kit-garment-tagging-mono-preview.zip",
+        "contentType": "application/zip"
+      },
+      "metadata": {
+        "object": "samples/library-approved/metadata/kit-garment-tagging-mono.metadata.json",
+        "bytes": 1652,
+        "filename": "kit-garment-tagging-mono.metadata.json",
+        "contentType": "application/json"
+      },
+      "full": {
+        "object": null,
+        "bytes": 6227702579,
+        "filename": "kit-garment-tagging-mono-segment.zip",
+        "contentType": "application/octet-stream",
+        "note": "Six camera mp4s, imu_left.db, imu_right.db, mag_middle.db"
+      }
+    },
+    "kit-hem-sewing-mono": {
+      "preview": {
+        "object": "samples/library-approved/packs/kit-hem-sewing-mono-preview.zip",
+        "bytes": 944623,
+        "filename": "kit-hem-sewing-mono-preview.zip",
+        "contentType": "application/zip"
+      },
+      "metadata": {
+        "object": "samples/library-approved/metadata/kit-hem-sewing-mono.metadata.json",
+        "bytes": 1659,
+        "filename": "kit-hem-sewing-mono.metadata.json",
+        "contentType": "application/json"
+      },
+      "full": {
+        "object": null,
+        "bytes": 6764573491,
+        "filename": "kit-hem-sewing-mono-segment.zip",
+        "contentType": "application/octet-stream",
+        "note": "Six camera mp4s, imu_left.db, imu_right.db, mag_middle.db"
+      }
+    },
+    "kit-stitch-inspection-mono": {
+      "preview": {
+        "object": "samples/library-approved/packs/kit-stitch-inspection-mono-preview.zip",
+        "bytes": 968198,
+        "filename": "kit-stitch-inspection-mono-preview.zip",
+        "contentType": "application/zip"
+      },
+      "metadata": {
+        "object": "samples/library-approved/metadata/kit-stitch-inspection-mono.metadata.json",
+        "bytes": 1610,
+        "filename": "kit-stitch-inspection-mono.metadata.json",
+        "contentType": "application/json"
+      },
+      "full": {
+        "object": null,
+        "bytes": 2254857830,
+        "filename": "kit-stitch-inspection-mono-segment.zip",
+        "contentType": "application/octet-stream",
+        "note": "Six camera mp4s, imu_left.db, imu_right.db, mag_middle.db"
+      }
+    },
+    "kit-stitch-inspection-wrist": {
+      "preview": {
+        "object": "samples/library-approved/packs/kit-stitch-inspection-wrist-preview.zip",
+        "bytes": 948423,
+        "filename": "kit-stitch-inspection-wrist-preview.zip",
+        "contentType": "application/zip"
+      },
+      "metadata": {
+        "object": "samples/library-approved/metadata/kit-stitch-inspection-wrist.metadata.json",
+        "bytes": 1707,
+        "filename": "kit-stitch-inspection-wrist.metadata.json",
+        "contentType": "application/json"
+      },
+      "full": {
+        "object": null,
+        "bytes": 9448928051,
+        "filename": "kit-stitch-inspection-wrist-segment.zip",
+        "contentType": "application/octet-stream",
+        "note": "Six camera mp4s, imu_left.db, imu_right.db, mag_middle.db"
+      }
+    },
     "teleop-s000": {
       "preview": {
         "object": "samples/library-approved/packs/teleop-s000-preview.zip",
-        "bytes": 203691,
+        "bytes": 203706,
         "filename": "teleop-s000-preview.zip",
         "contentType": "application/zip"
       },
       "metadata": {
         "object": "samples/library-approved/metadata/teleop-s000.metadata.json",
-        "bytes": 1698,
+        "bytes": 1734,
         "filename": "teleop-s000.metadata.json",
         "contentType": "application/json"
       },
@@ -2133,13 +2343,13 @@
     "teleop-s001": {
       "preview": {
         "object": "samples/library-approved/packs/teleop-s001-preview.zip",
-        "bytes": 179235,
+        "bytes": 179250,
         "filename": "teleop-s001-preview.zip",
         "contentType": "application/zip"
       },
       "metadata": {
         "object": "samples/library-approved/metadata/teleop-s001.metadata.json",
-        "bytes": 1701,
+        "bytes": 1737,
         "filename": "teleop-s001.metadata.json",
         "contentType": "application/json"
       },
@@ -2154,13 +2364,13 @@
     "teleop-s002": {
       "preview": {
         "object": "samples/library-approved/packs/teleop-s002-preview.zip",
-        "bytes": 204007,
+        "bytes": 204023,
         "filename": "teleop-s002-preview.zip",
         "contentType": "application/zip"
       },
       "metadata": {
         "object": "samples/library-approved/metadata/teleop-s002.metadata.json",
-        "bytes": 1699,
+        "bytes": 1735,
         "filename": "teleop-s002.metadata.json",
         "contentType": "application/json"
       },
@@ -2175,13 +2385,13 @@
     "teleop-s003": {
       "preview": {
         "object": "samples/library-approved/packs/teleop-s003-preview.zip",
-        "bytes": 217751,
+        "bytes": 217767,
         "filename": "teleop-s003-preview.zip",
         "contentType": "application/zip"
       },
       "metadata": {
         "object": "samples/library-approved/metadata/teleop-s003.metadata.json",
-        "bytes": 1703,
+        "bytes": 1739,
         "filename": "teleop-s003.metadata.json",
         "contentType": "application/json"
       },
@@ -2196,13 +2406,13 @@
     "teleop-s004": {
       "preview": {
         "object": "samples/library-approved/packs/teleop-s004-preview.zip",
-        "bytes": 194809,
+        "bytes": 194824,
         "filename": "teleop-s004-preview.zip",
         "contentType": "application/zip"
       },
       "metadata": {
         "object": "samples/library-approved/metadata/teleop-s004.metadata.json",
-        "bytes": 1703,
+        "bytes": 1739,
         "filename": "teleop-s004.metadata.json",
         "contentType": "application/json"
       },
@@ -2217,13 +2427,13 @@
     "teleop-s005": {
       "preview": {
         "object": "samples/library-approved/packs/teleop-s005-preview.zip",
-        "bytes": 160717,
+        "bytes": 160732,
         "filename": "teleop-s005-preview.zip",
         "contentType": "application/zip"
       },
       "metadata": {
         "object": "samples/library-approved/metadata/teleop-s005.metadata.json",
-        "bytes": 1701,
+        "bytes": 1737,
         "filename": "teleop-s005.metadata.json",
         "contentType": "application/json"
       },
@@ -2238,13 +2448,13 @@
     "teleop-s006": {
       "preview": {
         "object": "samples/library-approved/packs/teleop-s006-preview.zip",
-        "bytes": 152029,
+        "bytes": 152045,
         "filename": "teleop-s006-preview.zip",
         "contentType": "application/zip"
       },
       "metadata": {
         "object": "samples/library-approved/metadata/teleop-s006.metadata.json",
-        "bytes": 1699,
+        "bytes": 1735,
         "filename": "teleop-s006.metadata.json",
         "contentType": "application/json"
       },
@@ -2259,13 +2469,13 @@
     "teleop-s007": {
       "preview": {
         "object": "samples/library-approved/packs/teleop-s007-preview.zip",
-        "bytes": 136568,
+        "bytes": 136584,
         "filename": "teleop-s007-preview.zip",
         "contentType": "application/zip"
       },
       "metadata": {
         "object": "samples/library-approved/metadata/teleop-s007.metadata.json",
-        "bytes": 1701,
+        "bytes": 1737,
         "filename": "teleop-s007.metadata.json",
         "contentType": "application/json"
       },
@@ -2280,13 +2490,13 @@
     "teleop-s008": {
       "preview": {
         "object": "samples/library-approved/packs/teleop-s008-preview.zip",
-        "bytes": 176386,
+        "bytes": 176401,
         "filename": "teleop-s008-preview.zip",
         "contentType": "application/zip"
       },
       "metadata": {
         "object": "samples/library-approved/metadata/teleop-s008.metadata.json",
-        "bytes": 1699,
+        "bytes": 1735,
         "filename": "teleop-s008.metadata.json",
         "contentType": "application/json"
       },
@@ -2301,13 +2511,13 @@
     "teleop-s009": {
       "preview": {
         "object": "samples/library-approved/packs/teleop-s009-preview.zip",
-        "bytes": 148929,
+        "bytes": 148944,
         "filename": "teleop-s009-preview.zip",
         "contentType": "application/zip"
       },
       "metadata": {
         "object": "samples/library-approved/metadata/teleop-s009.metadata.json",
-        "bytes": 1701,
+        "bytes": 1738,
         "filename": "teleop-s009.metadata.json",
         "contentType": "application/json"
       },
@@ -2322,13 +2532,13 @@
     "teleop-s010": {
       "preview": {
         "object": "samples/library-approved/packs/teleop-s010-preview.zip",
-        "bytes": 135388,
+        "bytes": 135403,
         "filename": "teleop-s010-preview.zip",
         "contentType": "application/zip"
       },
       "metadata": {
         "object": "samples/library-approved/metadata/teleop-s010.metadata.json",
-        "bytes": 1700,
+        "bytes": 1737,
         "filename": "teleop-s010.metadata.json",
         "contentType": "application/json"
       },

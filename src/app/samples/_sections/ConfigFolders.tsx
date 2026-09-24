@@ -9,6 +9,7 @@ import { CAPABILITY } from "@/lib/samples/capability";
 import { clipSrc, posterSrc, type Category } from "@/lib/samples/categories";
 import { C, EASE, OVER_MEDIA } from "./tokens";
 import { Reveal } from "./Reveal";
+import { inTier, sharedInto } from "@/lib/samples/tiers";
 
 /**
  * Egocentric, filed by camera configuration.
@@ -36,6 +37,7 @@ import { Reveal } from "./Reveal";
 interface Row {
   modality: string;
   tier: string;
+  alsoTiers?: string[];
   slug: string;
   durationSec: number;
 }
@@ -64,10 +66,14 @@ export function ConfigFolders({ category }: { category: Category }) {
   if (tiers.length === 0) return null;
 
   const cards = tiers.map((t) => {
-    const rows = ALL.filter((r) => r.modality === category.modality && r.tier === t.key);
+    const rows = ALL.filter((r) => r.modality === category.modality && inTier(r, t.key));
     return {
       tier: t,
       count: rows.length,
+      // Every record here is borrowed from another tier (the stereo captures
+      // that also carry the extra lenses), so the card must not read as a
+      // second, separate hundred.
+      shared: rows.length > 0 && rows.every((r) => sharedInto(r, t.key)),
       hours: rows.reduce((a, r) => a + r.durationSec, 0) / 3600,
       face: rows[0]?.slug ?? STANDIN[t.key] ?? null,
     };
@@ -101,7 +107,9 @@ export function ConfigFolders({ category }: { category: Category }) {
               name={c.tier.name}
               pitch={c.tier.pitch ?? c.tier.when ?? ""}
               state={
-                c.count > 0
+                c.count > 0 && c.shared
+                  ? `Option · the same ${c.count} captures, every lens`
+                  : c.count > 0
                   ? `${c.count} playable · ${c.hours.toFixed(1)} h`
                   : `Collected to spec · first delivery in ${c.tier.ramp}`
               }
