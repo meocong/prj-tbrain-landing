@@ -1,12 +1,12 @@
 {
   "bucket": "tbrain-landing",
-  "generatedAt": "2026-09-24T08:58:06.647Z",
+  "generatedAt": "2026-09-24T09:38:09.602Z",
   "fullSet": {
     "object": "samples/library-approved/tbrain-sample-library.zip",
-    "bytes": 119521149,
+    "bytes": 116193266,
     "filename": "tbrain-sample-library.zip",
     "contentType": "application/zip",
-    "count": 180
+    "count": 173
   },
   "samples": {
     "bag-replacement": {
@@ -2235,27 +2235,6 @@
         "note": "Six camera mp4s, imu_left.db, imu_right.db, mag_middle.db"
       }
     },
-    "sixcam-engine-working": {
-      "preview": {
-        "object": "samples/library-approved/packs/sixcam-engine-working-preview.zip",
-        "bytes": 285685,
-        "filename": "sixcam-engine-working-preview.zip",
-        "contentType": "application/zip"
-      },
-      "metadata": {
-        "object": "samples/library-approved/metadata/sixcam-engine-working.metadata.json",
-        "bytes": 1385,
-        "filename": "sixcam-engine-working.metadata.json",
-        "contentType": "application/json"
-      },
-      "full": {
-        "object": null,
-        "bytes": 897581056,
-        "filename": "sixcam-engine-working-segment.zip",
-        "contentType": "application/octet-stream",
-        "note": "Six camera mp4s, imu_left.db, imu_right.db, mag_middle.db"
-      }
-    },
     "sixcam-fabric-sewing": {
       "preview": {
         "object": "samples/library-approved/packs/sixcam-fabric-sewing-preview.zip",
@@ -2273,48 +2252,6 @@
         "object": null,
         "bytes": 876609536,
         "filename": "sixcam-fabric-sewing-segment.zip",
-        "contentType": "application/octet-stream",
-        "note": "Six camera mp4s, imu_left.db, imu_right.db, mag_middle.db"
-      }
-    },
-    "sixcam-panel-installation": {
-      "preview": {
-        "object": "samples/library-approved/packs/sixcam-panel-installation-preview.zip",
-        "bytes": 287412,
-        "filename": "sixcam-panel-installation-preview.zip",
-        "contentType": "application/zip"
-      },
-      "metadata": {
-        "object": "samples/library-approved/metadata/sixcam-panel-installation.metadata.json",
-        "bytes": 1508,
-        "filename": "sixcam-panel-installation.metadata.json",
-        "contentType": "application/json"
-      },
-      "full": {
-        "object": null,
-        "bytes": 878706688,
-        "filename": "sixcam-panel-installation-segment.zip",
-        "contentType": "application/octet-stream",
-        "note": "Six camera mp4s, imu_left.db, imu_right.db, mag_middle.db"
-      }
-    },
-    "sixcam-pineapple-cutting": {
-      "preview": {
-        "object": "samples/library-approved/packs/sixcam-pineapple-cutting-preview.zip",
-        "bytes": 378854,
-        "filename": "sixcam-pineapple-cutting-preview.zip",
-        "contentType": "application/zip"
-      },
-      "metadata": {
-        "object": "samples/library-approved/metadata/sixcam-pineapple-cutting.metadata.json",
-        "bytes": 1395,
-        "filename": "sixcam-pineapple-cutting.metadata.json",
-        "contentType": "application/json"
-      },
-      "full": {
-        "object": null,
-        "bytes": 902823936,
-        "filename": "sixcam-pineapple-cutting-segment.zip",
         "contentType": "application/octet-stream",
         "note": "Six camera mp4s, imu_left.db, imu_right.db, mag_middle.db"
       }
@@ -2340,27 +2277,6 @@
         "note": "Six camera mp4s, imu_left.db, imu_right.db, mag_middle.db"
       }
     },
-    "sixcam-shoe-sewing": {
-      "preview": {
-        "object": "samples/library-approved/packs/sixcam-shoe-sewing-preview.zip",
-        "bytes": 312690,
-        "filename": "sixcam-shoe-sewing-preview.zip",
-        "contentType": "application/zip"
-      },
-      "metadata": {
-        "object": "samples/library-approved/metadata/sixcam-shoe-sewing.metadata.json",
-        "bytes": 1345,
-        "filename": "sixcam-shoe-sewing.metadata.json",
-        "contentType": "application/json"
-      },
-      "full": {
-        "object": null,
-        "bytes": 898629632,
-        "filename": "sixcam-shoe-sewing-segment.zip",
-        "contentType": "application/octet-stream",
-        "note": "Six camera mp4s, imu_left.db, imu_right.db, mag_middle.db"
-      }
-    },
     "sixcam-wood-grinding": {
       "preview": {
         "object": "samples/library-approved/packs/sixcam-wood-grinding-preview.zip",
@@ -2378,48 +2294,6 @@
         "object": null,
         "bytes": 884998144,
         "filename": "sixcam-wood-grinding-segment.zip",
-        "contentType": "application/octet-stream",
-        "note": "Six camera mp4s, imu_left.db, imu_right.db, mag_middle.db"
-      }
-    },
-    "sixcam-wrapping-selecting": {
-      "preview": {
-        "object": "samples/library-approved/packs/sixcam-wrapping-selecting-preview.zip",
-        "bytes": 818303,
-        "filename": "sixcam-wrapping-selecting-preview.zip",
-        "contentType": "application/zip"
-      },
-      "metadata": {
-        "object": "samples/library-approved/metadata/sixcam-wrapping-selecting.metadata.json",
-        "bytes": 1480,
-        "filename": "sixcam-wrapping-selecting.metadata.json",
-        "contentType": "application/json"
-      },
-      "full": {
-        "object": null,
-        "bytes": 866123776,
-        "filename": "sixcam-wrapping-selecting-segment.zip",
-        "contentType": "application/octet-stream",
-        "note": "Six camera mp4s, imu_left.db, imu_right.db, mag_middle.db"
-      }
-    },
-    "sixcam-zipper-sewing": {
-      "preview": {
-        "object": "samples/library-approved/packs/sixcam-zipper-sewing-preview.zip",
-        "bytes": 760203,
-        "filename": "sixcam-zipper-sewing-preview.zip",
-        "contentType": "application/zip"
-      },
-      "metadata": {
-        "object": "samples/library-approved/metadata/sixcam-zipper-sewing.metadata.json",
-        "bytes": 1466,
-        "filename": "sixcam-zipper-sewing.metadata.json",
-        "contentType": "application/json"
-      },
-      "full": {
-        "object": null,
-        "bytes": 878706688,
-        "filename": "sixcam-zipper-sewing-segment.zip",
         "contentType": "application/octet-stream",
         "note": "Six camera mp4s, imu_left.db, imu_right.db, mag_middle.db"
       }
@@ -2504,27 +2378,6 @@
         "object": null,
         "bytes": 105906176,
         "filename": "handpose-room-cleaning-segment.zip",
-        "contentType": "application/octet-stream",
-        "note": "Six camera mp4s, imu_left.db, imu_right.db, mag_middle.db"
-      }
-    },
-    "handpose-shoe-sewing": {
-      "preview": {
-        "object": "samples/library-approved/packs/handpose-shoe-sewing-preview.zip",
-        "bytes": 482758,
-        "filename": "handpose-shoe-sewing-preview.zip",
-        "contentType": "application/zip"
-      },
-      "metadata": {
-        "object": "samples/library-approved/metadata/handpose-shoe-sewing.metadata.json",
-        "bytes": 1466,
-        "filename": "handpose-shoe-sewing.metadata.json",
-        "contentType": "application/json"
-      },
-      "full": {
-        "object": null,
-        "bytes": 166723584,
-        "filename": "handpose-shoe-sewing-segment.zip",
         "contentType": "application/octet-stream",
         "note": "Six camera mp4s, imu_left.db, imu_right.db, mag_middle.db"
       }
