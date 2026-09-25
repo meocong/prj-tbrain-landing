@@ -35,6 +35,9 @@ importers:
       '@react-three/fiber':
         specifier: ^9.6.0
         version: 9.6.0(@types/react@19.2.14)(react-dom@19.2.5(react@19.2.5))(react@19.2.5)(three@0.184.0)
+      '@rerun-io/web-viewer':
+        specifier: 0.38.1
+        version: 0.38.1
       '@shikijs/rehype':
         specifier: ^4.0.2
         version: 4.0.2
@@ -1785,6 +1788,9 @@ packages:
         optional: true
       react-native:
         optional: true
+
+  '@rerun-io/web-viewer@0.38.1':
+    resolution: {integrity: sha512-+COoGNxvpf9gawMdM/G2nCnaPwXTYelp41CYwtq8BRQmoJgNkcX1PjFxwq3ka0qjB0MxnbVf2H2LiYnbfSwDbQ==}
 
   '@rtsao/scc@1.1.0':
     resolution: {integrity: sha512-zt6OdqaDoOnJ1ZYsCYGt9YmWzDXl4vQdKTyJev62gFhRGKdx7mcT54V9KIjg+d2wi9EXsPvAPKe7i7WjfVWB8g==}
@@ -7304,6 +7310,8 @@ snapshots:
     transitivePeerDependencies:
       - '@types/react'
       - immer
+
+  '@rerun-io/web-viewer@0.38.1': {}
 
   '@rtsao/scc@1.1.0': {}
 

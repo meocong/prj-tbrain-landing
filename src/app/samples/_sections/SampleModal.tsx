@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
-import { X } from "lucide-react";
+import { Box, X } from "lucide-react";
 import { groupSpec } from "@/lib/samples/spec-sections";
 import { PILL_KINDS_DROPPED } from "@/lib/samples/redact.mjs";
 import { LICENSE, QUALIFIER } from "@/lib/samples/license";
@@ -11,6 +11,7 @@ import { C, EASE, OVER_MEDIA, PILL, type Sample } from "./tokens";
 import { LiveTelemetry } from "./LiveTelemetry";
 import { AccessActions } from "./AccessActions";
 import { clipSrc, posterSrc, rigLayout } from "./rig-views";
+import { RigExplorer, hasRecording } from "./RigExplorer";
 
 /**
  * The full record, opened over the catalogue instead of pushed into the grid.
@@ -73,6 +74,8 @@ export function SampleModal({
 }) {
   const [mounted, setMounted] = useState(false);
   const [video, setVideo] = useState<HTMLVideoElement | null>(null);
+  const [exploring, setExploring] = useState(false);
+  useEffect(() => setExploring(false), [sample?.slug]);
 
   /**
    * The other lenses of the same rig, and the base clip's transport driving
@@ -370,12 +373,29 @@ export function SampleModal({
                     ))}
                   </div>
                 </div>
-                <p
-                  className="bp-mono flex-none px-5 py-2 text-[10px]"
-                  style={{ color: C.textDim, borderBottom: `1px solid ${C.hairlineSoft}` }}
+                <div
+                  className="flex flex-none items-center gap-3 px-5 py-2"
+                  style={{ borderBottom: `1px solid ${C.hairlineSoft}` }}
                 >
-                  {sample.preview}
-                </p>
+                  <p className="bp-mono min-w-0 flex-1 text-[10px]" style={{ color: C.textDim }}>
+                    {sample.preview}
+                  </p>
+                  {/* The same window in 3D, where a recording was built for it. */}
+                  {hasRecording(sample.slug) && (
+                    <button
+                      type="button"
+                      onClick={() => {
+                        video?.pause();
+                        setExploring(true);
+                      }}
+                      className="bp-mono inline-flex flex-none items-center gap-1.5 rounded-full px-3 py-1.5 text-[10px] transition-colors"
+                      style={{ border: `1px solid ${C.accent}`, color: C.accent }}
+                    >
+                      <Box className="h-3.5 w-3.5" />
+                      Explore in 3D
+                    </button>
+                  )}
+                </div>
                 {/* One or the other, never both: together they overran the pane
                     and brought the scrollbar back. A record with per-frame data
                     shows the readout, because that is what the scrubber is for.
@@ -582,6 +602,9 @@ export function SampleModal({
             >
               <AccessActions sample={sample} from="modal" />
             </motion.footer>
+            {exploring && (
+              <RigExplorer slug={sample.slug} title={sample.title} onClose={() => setExploring(false)} />
+            )}
           </motion.div>
         </motion.div>
       )}

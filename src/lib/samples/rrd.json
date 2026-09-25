@@ -1,0 +1,572 @@
+{
+  "bag-replacement": {
+    "bytes": 1205971,
+    "poseMeasured": 0.054,
+    "handFrames": 0.842,
+    "rig": "A"
+  },
+  "bar-cutting": {
+    "bytes": 1229682,
+    "poseMeasured": 0.992,
+    "handFrames": 0.787,
+    "rig": "A"
+  },
+  "bar-cutting-2": {
+    "bytes": 1258603,
+    "poseMeasured": 1.0,
+    "handFrames": 0.988,
+    "rig": "A"
+  },
+  "bar-drilling": {
+    "bytes": 1069477,
+    "poseMeasured": 1.0,
+    "handFrames": 0.942,
+    "rig": "A"
+  },
+  "bar-welding": {
+    "bytes": 1288985,
+    "poseMeasured": 0.996,
+    "handFrames": 0.479,
+    "rig": "A"
+  },
+  "bathroom-cleaning": {
+    "bytes": 1407851,
+    "poseMeasured": 0.817,
+    "handFrames": 0.221,
+    "rig": "A"
+  },
+  "bathroom-cleaning-2": {
+    "bytes": 1135233,
+    "poseMeasured": 0.979,
+    "handFrames": 0.521,
+    "rig": "A"
+  },
+  "beard-shaving": {
+    "bytes": 1330270,
+    "poseMeasured": 0.992,
+    "handFrames": 0.083,
+    "rig": "B"
+  },
+  "board-writing": {
+    "bytes": 1161374,
+    "poseMeasured": 1.0,
+    "handFrames": 1.0,
+    "rig": "B"
+  },
+  "bodywork-polishing": {
+    "bytes": 1598290,
+    "poseMeasured": 1.0,
+    "handFrames": 0.9,
+    "rig": "A"
+  },
+  "button-attaching": {
+    "bytes": 1679095,
+    "poseMeasured": 0.883,
+    "handFrames": 0.988,
+    "rig": "A"
+  },
+  "cable-assembly": {
+    "bytes": 1407166,
+    "poseMeasured": 0.996,
+    "handFrames": 0.787,
+    "rig": "A"
+  },
+  "car-driving": {
+    "bytes": 1378941,
+    "poseMeasured": 1.0,
+    "handFrames": 0.517,
+    "rig": "A"
+  },
+  "car-polishing": {
+    "bytes": 1439971,
+    "poseMeasured": 1.0,
+    "handFrames": 0.996,
+    "rig": "A"
+  },
+  "card-cutting": {
+    "bytes": 1326264,
+    "poseMeasured": 0.996,
+    "handFrames": 0.696,
+    "rig": "A"
+  },
+  "cartridge-assembly": {
+    "bytes": 1476124,
+    "poseMeasured": 0.992,
+    "handFrames": 0.871,
+    "rig": "B"
+  },
+  "chalk-sharpening": {
+    "bytes": 1166486,
+    "poseMeasured": 0.996,
+    "handFrames": 0.771,
+    "rig": "A"
+  },
+  "character-attaching": {
+    "bytes": 1528904,
+    "poseMeasured": 1.0,
+    "handFrames": 0.929,
+    "rig": "A"
+  },
+  "chicken-coating": {
+    "bytes": 1214999,
+    "poseMeasured": 0.996,
+    "handFrames": 0.104,
+    "rig": "A"
+  },
+  "chisel-sharpening": {
+    "bytes": 1591604,
+    "poseMeasured": 1.0,
+    "handFrames": 0.904,
+    "rig": "A"
+  },
+  "chisel-sharpening-2": {
+    "bytes": 1155017,
+    "poseMeasured": 1.0,
+    "handFrames": 1.0,
+    "rig": "A"
+  },
+  "cloth-washing": {
+    "bytes": 1060841,
+    "poseMeasured": 0.908,
+    "handFrames": 0.446,
+    "rig": "A"
+  },
+  "component-assembly": {
+    "bytes": 1707329,
+    "poseMeasured": 0.996,
+    "handFrames": 0.9,
+    "rig": "A"
+  },
+  "component-placing": {
+    "bytes": 1210032,
+    "poseMeasured": 1.0,
+    "handFrames": 0.65,
+    "rig": "B"
+  },
+  "component-repair": {
+    "bytes": 1361930,
+    "poseMeasured": 1.0,
+    "handFrames": 0.979,
+    "rig": "A"
+  },
+  "dish-preparation": {
+    "bytes": 1911058,
+    "poseMeasured": 0.946,
+    "handFrames": 0.904,
+    "rig": "A"
+  },
+  "door-cleaning": {
+    "bytes": 1467903,
+    "poseMeasured": 0.988,
+    "handFrames": 0.838,
+    "rig": "B"
+  },
+  "engine-repair": {
+    "bytes": 1683434,
+    "poseMeasured": 1.0,
+    "handFrames": 0.588,
+    "rig": "A"
+  },
+  "fabric-flattening": {
+    "bytes": 1201509,
+    "poseMeasured": 1.0,
+    "handFrames": 1.0,
+    "rig": "A"
+  },
+  "fabric-ironing": {
+    "bytes": 1396879,
+    "poseMeasured": 0.746,
+    "handFrames": 1.0,
+    "rig": "A"
+  },
+  "fabric-ironing-2": {
+    "bytes": 1551084,
+    "poseMeasured": 0.996,
+    "handFrames": 0.992,
+    "rig": "A"
+  },
+  "fabric-removal": {
+    "bytes": 1318857,
+    "poseMeasured": 0.958,
+    "handFrames": 0.471,
+    "rig": "A"
+  },
+  "fabric-sewing": {
+    "bytes": 1742926,
+    "poseMeasured": 0.867,
+    "handFrames": 0.996,
+    "rig": "A"
+  },
+  "fabric-testing": {
+    "bytes": 1349176,
+    "poseMeasured": 1.0,
+    "handFrames": 0.783,
+    "rig": "A"
+  },
+  "face-applying": {
+    "bytes": 1259534,
+    "poseMeasured": 0.971,
+    "handFrames": 0.55,
+    "rig": "B"
+  },
+  "floor-clearing": {
+    "bytes": 1301884,
+    "poseMeasured": 0.954,
+    "handFrames": 0.221,
+    "rig": "A"
+  },
+  "flower-arranging": {
+    "bytes": 1529771,
+    "poseMeasured": 1.0,
+    "handFrames": 0.338,
+    "rig": "A"
+  },
+  "flower-arranging-2": {
+    "bytes": 1968047,
+    "poseMeasured": 1.0,
+    "handFrames": 0.662,
+    "rig": "A"
+  },
+  "flower-picking": {
+    "bytes": 1606929,
+    "poseMeasured": 0.904,
+    "handFrames": 0.512,
+    "rig": "A"
+  },
+  "flower-pruning": {
+    "bytes": 1683220,
+    "poseMeasured": 1.0,
+    "handFrames": 0.942,
+    "rig": "A"
+  },
+  "food-clearing": {
+    "bytes": 1264299,
+    "poseMeasured": 0.896,
+    "handFrames": 0.667,
+    "rig": "A"
+  },
+  "food-clearing-2": {
+    "bytes": 1619983,
+    "poseMeasured": 0.963,
+    "handFrames": 0.617,
+    "rig": "B"
+  },
+  "food-shaping": {
+    "bytes": 1245030,
+    "poseMeasured": 0.971,
+    "handFrames": 0.958,
+    "rig": "A"
+  },
+  "fork-cleaning": {
+    "bytes": 1283932,
+    "poseMeasured": 0.988,
+    "handFrames": 0.854,
+    "rig": "B"
+  },
+  "frame-crimping": {
+    "bytes": 1912356,
+    "poseMeasured": 1.0,
+    "handFrames": 0.921,
+    "rig": "A"
+  },
+  "frame-securing": {
+    "bytes": 1072075,
+    "poseMeasured": 0.975,
+    "handFrames": 0.771,
+    "rig": "A"
+  },
+  "frame-wrapping": {
+    "bytes": 1390997,
+    "poseMeasured": 1.0,
+    "handFrames": 1.0,
+    "rig": "A"
+  },
+  "furniture-cleaning": {
+    "bytes": 1271254,
+    "poseMeasured": 0.062,
+    "handFrames": 0.654,
+    "rig": "B"
+  },
+  "gap-injecting": {
+    "bytes": 1740902,
+    "poseMeasured": 1.0,
+    "handFrames": 0.7,
+    "rig": "A"
+  },
+  "garment-sewing": {
+    "bytes": 1094082,
+    "poseMeasured": 1.0,
+    "handFrames": 1.0,
+    "rig": "A"
+  },
+  "gasket-taking": {
+    "bytes": 1420920,
+    "poseMeasured": 0.817,
+    "handFrames": 0.408,
+    "rig": "A"
+  },
+  "good-cleaning": {
+    "bytes": 1364328,
+    "poseMeasured": 0.904,
+    "handFrames": 0.633,
+    "rig": "B"
+  },
+  "grass-cutting": {
+    "bytes": 4666378,
+    "poseMeasured": 0.812,
+    "handFrames": 0.0,
+    "rig": "A"
+  },
+  "hair-blowdrying": {
+    "bytes": 1537810,
+    "poseMeasured": 0.8,
+    "handFrames": 0.75,
+    "rig": "B"
+  },
+  "hair-combing": {
+    "bytes": 1344757,
+    "poseMeasured": 1.0,
+    "handFrames": 0.887,
+    "rig": "B"
+  },
+  "key-grinding": {
+    "bytes": 1385786,
+    "poseMeasured": 1.0,
+    "handFrames": 0.854,
+    "rig": "A"
+  },
+  "letter-gluing": {
+    "bytes": 1557430,
+    "poseMeasured": 1.0,
+    "handFrames": 0.992,
+    "rig": "A"
+  },
+  "letter-organizing": {
+    "bytes": 1459806,
+    "poseMeasured": 1.0,
+    "handFrames": 0.996,
+    "rig": "A"
+  },
+  "matt-cutting": {
+    "bytes": 1579694,
+    "poseMeasured": 1.0,
+    "handFrames": 0.875,
+    "rig": "A"
+  },
+  "metal-grinding": {
+    "bytes": 1546991,
+    "poseMeasured": 1.0,
+    "handFrames": 0.992,
+    "rig": "A"
+  },
+  "metal-grinding-2": {
+    "bytes": 1295190,
+    "poseMeasured": 1.0,
+    "handFrames": 1.0,
+    "rig": "A"
+  },
+  "metal-grouping": {
+    "bytes": 1497782,
+    "poseMeasured": 0.996,
+    "handFrames": 0.975,
+    "rig": "A"
+  },
+  "model-spraying": {
+    "bytes": 1473672,
+    "poseMeasured": 1.0,
+    "handFrames": 0.996,
+    "rig": "A"
+  },
+  "motor-assembly": {
+    "bytes": 1462320,
+    "poseMeasured": 1.0,
+    "handFrames": 0.904,
+    "rig": "B"
+  },
+  "motorcycle-lifting": {
+    "bytes": 1738333,
+    "poseMeasured": 0.929,
+    "handFrames": 0.746,
+    "rig": "B"
+  },
+  "nail-driving": {
+    "bytes": 961860,
+    "poseMeasured": 0.996,
+    "handFrames": 0.163,
+    "rig": "A"
+  },
+  "object-removal": {
+    "bytes": 1277781,
+    "poseMeasured": 0.971,
+    "handFrames": 0.908,
+    "rig": "A"
+  },
+  "object-securing": {
+    "bytes": 979250,
+    "poseMeasured": 1.0,
+    "handFrames": 0.85,
+    "rig": "A"
+  },
+  "panel-cutting": {
+    "bytes": 1149390,
+    "poseMeasured": 1.0,
+    "handFrames": 1.0,
+    "rig": "A"
+  },
+  "part-cutting": {
+    "bytes": 1104090,
+    "poseMeasured": 0.992,
+    "handFrames": 0.988,
+    "rig": "A"
+  },
+  "seal-removal": {
+    "bytes": 1344437,
+    "poseMeasured": 0.721,
+    "handFrames": 0.975,
+    "rig": "A"
+  },
+  "sheet-organizing": {
+    "bytes": 1624635,
+    "poseMeasured": 1.0,
+    "handFrames": 0.621,
+    "rig": "A"
+  },
+  "sheet-securing": {
+    "bytes": 2485706,
+    "poseMeasured": 0.671,
+    "handFrames": 0.883,
+    "rig": "A"
+  },
+  "shoe-lacing": {
+    "bytes": 1236293,
+    "poseMeasured": 0.988,
+    "handFrames": 0.729,
+    "rig": "B"
+  },
+  "shovel-cleaning": {
+    "bytes": 1283366,
+    "poseMeasured": 0.938,
+    "handFrames": 0.842,
+    "rig": "A"
+  },
+  "sidewalk-sweeping": {
+    "bytes": 2398845,
+    "poseMeasured": 1.0,
+    "handFrames": 0.0,
+    "rig": "A"
+  },
+  "sign-grinding": {
+    "bytes": 1267267,
+    "poseMeasured": 1.0,
+    "handFrames": 0.921,
+    "rig": "A"
+  },
+  "socket-marking": {
+    "bytes": 897219,
+    "poseMeasured": 0.996,
+    "handFrames": 0.971,
+    "rig": "A"
+  },
+  "soil-loosening": {
+    "bytes": 2285765,
+    "poseMeasured": 0.996,
+    "handFrames": 0.0,
+    "rig": "A"
+  },
+  "sole-attaching": {
+    "bytes": 1290128,
+    "poseMeasured": 1.0,
+    "handFrames": 1.0,
+    "rig": "B"
+  },
+  "stick-cutting": {
+    "bytes": 1432610,
+    "poseMeasured": 1.0,
+    "handFrames": 0.975,
+    "rig": "A"
+  },
+  "strap-applying": {
+    "bytes": 1714229,
+    "poseMeasured": 1.0,
+    "handFrames": 0.963,
+    "rig": "A"
+  },
+  "strip-thinning": {
+    "bytes": 1300954,
+    "poseMeasured": 1.0,
+    "handFrames": 0.971,
+    "rig": "A"
+  },
+  "structure-aligning": {
+    "bytes": 1465831,
+    "poseMeasured": 1.0,
+    "handFrames": 0.992,
+    "rig": "A"
+  },
+  "tool-charging": {
+    "bytes": 1197218,
+    "poseMeasured": 1.0,
+    "handFrames": 1.0,
+    "rig": "A"
+  },
+  "tube-submerging": {
+    "bytes": 1373066,
+    "poseMeasured": 1.0,
+    "handFrames": 0.675,
+    "rig": "A"
+  },
+  "vegetable-preparation": {
+    "bytes": 1344327,
+    "poseMeasured": 1.0,
+    "handFrames": 0.887,
+    "rig": "B"
+  },
+  "vegetable-serving": {
+    "bytes": 1594249,
+    "poseMeasured": 0.812,
+    "handFrames": 0.358,
+    "rig": "A"
+  },
+  "wall-painting": {
+    "bytes": 951344,
+    "poseMeasured": 0.996,
+    "handFrames": 0.717,
+    "rig": "B"
+  },
+  "weed-pulling": {
+    "bytes": 1929470,
+    "poseMeasured": 0.942,
+    "handFrames": 0.0,
+    "rig": "A"
+  },
+  "wire-cutting": {
+    "bytes": 1340507,
+    "poseMeasured": 1.0,
+    "handFrames": 0.988,
+    "rig": "A"
+  },
+  "wood-carving": {
+    "bytes": 1464638,
+    "poseMeasured": 1.0,
+    "handFrames": 0.575,
+    "rig": "A"
+  },
+  "wood-carving-2": {
+    "bytes": 1543988,
+    "poseMeasured": 1.0,
+    "handFrames": 0.175,
+    "rig": "A"
+  },
+  "woven-cutting": {
+    "bytes": 1778040,
+    "poseMeasured": 0.929,
+    "handFrames": 0.95,
+    "rig": "A"
+  },
+  "zipper-cutting": {
+    "bytes": 1686245,
+    "poseMeasured": 1.0,
+    "handFrames": 1.0,
+    "rig": "A"
+  }
+}
