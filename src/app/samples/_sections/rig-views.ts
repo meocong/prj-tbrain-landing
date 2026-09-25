@@ -138,7 +138,43 @@ export interface RigLayout {
  * four delivered lenses are the 4- and 6-camera option. "all" is for the page
  * that sells that option, where showing only two would hide what it adds.
  */
+/**
+ * Six-camera captures from a rig that was worn upside down.
+ *
+ * `cut-drive-previews.mjs` turns their frames the right way up (`INVERTED` in
+ * sixcam-slugs.mjs), but a rig turned 180° also swaps its sides: the lens the
+ * delivery calls `mid_right` sat on the wearer's LEFT. Measured on the cut
+ * previews, 2026-09-25 — across each pair, scene points sit further right in
+ * the `-right` file than in the `-left` one, the reverse of a stereo pair seen
+ * the right way round, and `outer-left` overlaps the RIGHT edge of `mid-left`.
+ * So on these records every cell keeps its place and label (where the lens
+ * physically was) and plays the file from the other side.
+ */
+const MIRRORED = new Set([
+  "sixcam-fabric-sewing",
+  "sixcam-garment-sewing",
+  "sixcam-panel-installation",
+  "sixcam-room-cleaning",
+  "sixcam-wood-grinding",
+  "sixcam-wrapping-selecting",
+  "sixcam-zipper-sewing",
+]);
+const OTHER_SIDE: Record<string, string> = {
+  "": "primary-right",
+  "primary-right": "",
+  "mid-left": "mid-right",
+  "mid-right": "mid-left",
+  "outer-left": "outer-right",
+  "outer-right": "outer-left",
+};
+
 export function rigLayout(slug: string, mode: "pair" | "all" = "pair"): RigLayout {
+  const layout = layoutFor(slug, mode);
+  if (!MIRRORED.has(slug) || layout.kind !== "six") return layout;
+  return { ...layout, cells: layout.cells.map((c) => ({ ...c, view: OTHER_SIDE[c.view] ?? c.view })) };
+}
+
+function layoutFor(slug: string, mode: "pair" | "all"): RigLayout {
   const extra = VIEWS[slug] ?? [];
   if (mode === "pair" && extra.includes("primary-left") && extra.includes("mid-right")) {
     return {

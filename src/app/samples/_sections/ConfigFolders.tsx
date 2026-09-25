@@ -83,28 +83,25 @@ function pickFace(rows: Row[], tier: string) {
   return best;
 }
 
-/** Card-sized placement: [column, row, row span] on a 4x2, 3x2 or 2x1 grid. */
+/** Card-sized placement: [column, row, row span], keyed by the lens's place on
+    the rig (its label), not by its file — a mirrored capture plays the other
+    side's file in each place. See MIRRORED in rig-views.ts. */
 const SIX_AT: Record<string, [number, number, number]> = {
-  "outer-left": [1, 1, 2],
-  "": [2, 1, 1],
-  "primary-left": [2, 1, 1],
-  "primary-right": [3, 1, 1],
-  "mid-left": [2, 2, 1],
-  "mid-right": [3, 2, 1],
-  "outer-right": [4, 1, 2],
+  "outer · left": [1, 1, 2],
+  "primary · left": [2, 1, 1],
+  "primary · right": [3, 1, 1],
+  "mid · left": [2, 2, 1],
+  "mid · right": [3, 2, 1],
+  "outer · right": [4, 1, 2],
 };
 
 function faceGrid(slug: string, tier: string) {
   const rig = rigLayout(slug, lensMode(tier));
   const cells = rig.cells;
   if (rig.kind === "six") {
-    const hasOuter = cells.some((c) => c.view.startsWith("outer"));
-    // A record with a mid-left base stages primary-left as a view and puts
-    // its base in mid-left's place.
-    const midBase = cells.some((c) => c.view === "primary-left");
+    const hasOuter = cells.some((c) => c.label.startsWith("outer"));
     const at = (c: ViewPlace): [number, number, number] => {
-      const key = c.view === "" && midBase ? "mid-left" : c.view;
-      const [col, row, span] = SIX_AT[key] ?? [2, 1, 1];
+      const [col, row, span] = SIX_AT[c.label] ?? [2, 1, 1];
       return [hasOuter ? col : col - 1, row, span];
     };
     return { cells, cols: hasOuter ? 4 : 2, rows: 2, at };
