@@ -6,7 +6,8 @@ import { motion, useReducedMotion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import samples from "@/lib/samples/samples.json";
 import { CAPABILITY } from "@/lib/samples/capability";
-import { clipSrc, posterSrc, type Category } from "@/lib/samples/categories";
+import { type Category } from "@/lib/samples/categories";
+import { clipSrc, posterSrc, rigLayout, type ViewPlace } from "./rig-views";
 import { C, EASE, OVER_MEDIA } from "./tokens";
 import { Reveal } from "./Reveal";
 import { inTier, sharedInto } from "@/lib/samples/tiers";
@@ -58,6 +59,64 @@ const SHOWN = ["mono", "stereo", "stereo6", "wrist"];
  */
 const STANDIN: Record<string, string> = { stereo6: "rig-six" };
 
+/**
+ * The card face shows as many lenses as the configuration is named for.
+ *
+ * Thạch, 2026-09-25: "nếu mà ghi stereo thì phải hiện 2, 4-6 phải hiện 4 hoặc 6,
+ * còn wrist cam thì phải hiện 3". A single frame on the stereo card sold it as
+ * the mono configuration. The lenses come from the same `rigLayout` the
+ * catalogue and the record modal use — the pair on the stereo card, every
+ * staged lens on the multi-camera one — laid out as the rig is worn.
+ */
+const lensMode = (tier: string) => (tier === "stereo6" ? "all" : "pair");
+
+function pickFace(rows: Row[], tier: string) {
+  let best: string | null = null;
+  let most = 0;
+  for (const r of rows) {
+    const n = rigLayout(r.slug, lensMode(tier)).cells.length;
+    if (n > most) {
+      best = r.slug;
+      most = n;
+    }
+  }
+  return best;
+}
+
+/** Card-sized placement: [column, row, row span] on a 4x2, 3x2 or 2x1 grid. */
+const SIX_AT: Record<string, [number, number, number]> = {
+  "outer-left": [1, 1, 2],
+  "": [2, 1, 1],
+  "primary-left": [2, 1, 1],
+  "primary-right": [3, 1, 1],
+  "mid-left": [2, 2, 1],
+  "mid-right": [3, 2, 1],
+  "outer-right": [4, 1, 2],
+};
+
+function faceGrid(slug: string, tier: string) {
+  const rig = rigLayout(slug, lensMode(tier));
+  const cells = rig.cells;
+  if (rig.kind === "six") {
+    const hasOuter = cells.some((c) => c.view.startsWith("outer"));
+    // A record with a mid-left base stages primary-left as a view and puts
+    // its base in mid-left's place.
+    const midBase = cells.some((c) => c.view === "primary-left");
+    const at = (c: ViewPlace): [number, number, number] => {
+      const key = c.view === "" && midBase ? "mid-left" : c.view;
+      const [col, row, span] = SIX_AT[key] ?? [2, 1, 1];
+      return [hasOuter ? col : col - 1, row, span];
+    };
+    return { cells, cols: hasOuter ? 4 : 2, rows: 2, at };
+  }
+  if (rig.kind === "body") {
+    // The head camera large, the two wrists stacked beside it.
+    return { cells, cols: 3, rows: 2, colSpan0: 2, at: (_c: ViewPlace, i: number): [number, number, number] =>
+      i === 0 ? [1, 1, 2] : [3, i, 1] };
+  }
+  return { cells, cols: cells.length, rows: 1, at: (_c: ViewPlace, i: number): [number, number, number] => [i + 1, 1, 1] };
+}
+
 export function ConfigFolders({ category }: { category: Category }) {
   const reduce = useReducedMotion();
   if (!category.modality) return null;
@@ -79,7 +138,9 @@ export function ConfigFolders({ category }: { category: Category }) {
       borrowed: rows.length - own.length,
       hours: rows.reduce((a, r) => a + r.durationSec, 0) / 3600,
       // A tier's own capture fronts its card; a borrowed one only if it has none.
-      face: own[0]?.slug ?? rows[0]?.slug ?? STANDIN[t.key] ?? null,
+      // Among its own, the one that shows the most lenses: the 4-6 camera card
+      // must not be fronted by a hand-pose capture that stages two.
+      face: pickFace(own.length ? own : rows, t.key) ?? STANDIN[t.key] ?? null,
     };
   });
 
@@ -120,6 +181,7 @@ export function ConfigFolders({ category }: { category: Category }) {
                   : `Collected to spec · first delivery in ${c.tier.ramp}`
               }
               face={c.face}
+              tier={c.tier.key}
               index={i}
               reduce={Boolean(reduce)}
             />
@@ -136,6 +198,7 @@ function ConfigCard({
   pitch,
   state,
   face,
+  tier,
   index,
   reduce,
 }: {
@@ -144,16 +207,21 @@ function ConfigCard({
   pitch: string;
   state: string;
   face: string | null;
+  tier: string;
   index: number;
   reduce: boolean;
 }) {
   const [armed, setArmed] = useState(false);
-  const video = useRef<HTMLVideoElement | null>(null);
+  const videos = useRef<(HTMLVideoElement | null)[]>([]);
+  const grid = face ? faceGrid(face, tier) : null;
 
   const enter = () => {
     if (reduce || !face) return;
     setArmed(true);
-    video.current?.play().catch(() => {});
+    for (const v of videos.current) v?.play().catch(() => {});
+  };
+  const leave = () => {
+    for (const v of videos.current) v?.pause();
   };
 
   return (
@@ -167,7 +235,7 @@ function ConfigCard({
         href={href}
         className="bp-card bp-card-hover group relative block overflow-hidden"
         onMouseEnter={enter}
-        onMouseLeave={() => video.current?.pause()}
+        onMouseLeave={leave}
       >
         {/* One box, whatever is in it.
 
@@ -180,30 +248,53 @@ function ConfigCard({
             backdrop is footage where there is footage and a drawing hatch where
             there is not, and the type sits at the foot of both. */}
         <div className="relative aspect-16/10 w-full overflow-hidden" style={{ background: C.wash }}>
-          {face ? (
-            <>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={posterSrc(face)}
-                alt=""
-                loading="lazy"
-                decoding="async"
-                className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
-              />
-              {armed && (
-                <video
-                  ref={video}
-                  src={clipSrc(face)}
-                  poster={posterSrc(face)}
-                  muted
-                  loop
-                  playsInline
-                  autoPlay
-                  preload="none"
-                  className="absolute inset-0 h-full w-full object-cover"
-                />
-              )}
-            </>
+          {face && grid ? (
+            <div
+              className="grid h-full w-full gap-px transition-transform duration-500 group-hover:scale-[1.03]"
+              style={{
+                gridTemplateColumns: `repeat(${grid.cols}, minmax(0, 1fr))`,
+                gridTemplateRows: `repeat(${grid.rows}, minmax(0, 1fr))`,
+                background: C.base,
+              }}
+            >
+              {grid.cells.map((cell, i) => {
+                const [col, row, span] = grid.at(cell, i);
+                return (
+                  <div
+                    key={cell.view || "base"}
+                    className="relative min-h-0 overflow-hidden"
+                    style={{
+                      gridColumn: i === 0 && "colSpan0" in grid ? `${col} / span ${grid.colSpan0}` : col,
+                      gridRow: `${row} / span ${span}`,
+                    }}
+                  >
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={posterSrc(face, cell.view)}
+                      alt=""
+                      loading="lazy"
+                      decoding="async"
+                      className="h-full w-full object-cover"
+                    />
+                    {armed && (
+                      <video
+                        ref={(el) => {
+                          videos.current[i] = el;
+                        }}
+                        src={clipSrc(face, cell.view)}
+                        poster={posterSrc(face, cell.view)}
+                        muted
+                        loop
+                        playsInline
+                        autoPlay
+                        preload="none"
+                        className="absolute inset-0 h-full w-full object-cover"
+                      />
+                    )}
+                  </div>
+                );
+              })}
+            </div>
           ) : (
             /* Nothing shot on this rig yet, and no honest frame to borrow —
                putting stereo footage on the wrist card would be a lie about
