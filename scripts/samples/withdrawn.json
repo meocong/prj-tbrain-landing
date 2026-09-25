@@ -10,5 +10,6 @@
   "sixcam-pineapple-cutting": "a coworker's face is clear on the mid-left and outer-left lenses for the whole window",
   "sixcam-zipper-sewing": "heavy shake (1.94 rad/s); the hands shuffle garments and no zipper is sewn in the window",
   "sixcam-shoe-sewing": "the hands are small at the bottom edge against an overexposed floor; the stitching cannot be read",
-  "handpose-shoe-sewing": "same recording as sixcam-shoe-sewing; the hands and their overlay are too small to read"
+  "handpose-shoe-sewing": "same recording as sixcam-shoe-sewing; the hands and their overlay are too small to read",
+  "food-serving": "the hands show only as fingertips at the tray corners for the whole 27 s; the dining-room half shows diners' faces"
 }

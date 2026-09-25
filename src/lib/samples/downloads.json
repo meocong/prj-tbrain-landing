@@ -1,12 +1,12 @@
 {
   "bucket": "tbrain-landing",
-  "generatedAt": "2026-09-24T09:38:09.602Z",
+  "generatedAt": "2026-09-25T01:29:11.793Z",
   "fullSet": {
     "object": "samples/library-approved/tbrain-sample-library.zip",
-    "bytes": 116193266,
+    "bytes": 114972238,
     "filename": "tbrain-sample-library.zip",
     "contentType": "application/zip",
-    "count": 173
+    "count": 172
   },
   "samples": {
     "bag-replacement": {
@@ -887,27 +887,6 @@
         "object": null,
         "bytes": 124780544,
         "filename": "food-clearing-2-segment.zip",
-        "contentType": "application/octet-stream",
-        "note": "Six camera mp4s, imu_left.db, imu_right.db, mag_middle.db"
-      }
-    },
-    "food-serving": {
-      "preview": {
-        "object": "samples/library-approved/packs/food-serving-preview.zip",
-        "bytes": 1220818,
-        "filename": "food-serving-preview.zip",
-        "contentType": "application/zip"
-      },
-      "metadata": {
-        "object": "samples/library-approved/metadata/food-serving.metadata.json",
-        "bytes": 2014,
-        "filename": "food-serving.metadata.json",
-        "contentType": "application/json"
-      },
-      "full": {
-        "object": null,
-        "bytes": 54525952,
-        "filename": "food-serving-segment.zip",
         "contentType": "application/octet-stream",
         "note": "Six camera mp4s, imu_left.db, imu_right.db, mag_middle.db"
       }
