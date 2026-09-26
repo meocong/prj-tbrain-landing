@@ -17,13 +17,25 @@ import { C } from "./tokens";
  * The viewer is ~50 MB of wasm, so nothing about it loads until the reader asks:
  * the package is imported on open, and torn down on close.
  *
- * Hands are ESTIMATED — the approved delivery does not include a hand track, so
- * they are MediaPipe landmarks triangulated through the delivered calibration.
- * The strip under the title says which layers are delivered and which are ours,
- * because a buyer who mistook the estimate for the product would be misled.
+ * Hands appear only where the hand-pose pipeline measured them: the six
+ * hand-pose captures carry that team's own recordings, repacked by
+ * `pack-lead-handpose.py`. The stereo captures show what their delivery carries
+ * and nothing inferred on top — a MediaPipe estimate was tried and removed,
+ * because the pipeline's technical brief uses MediaPipe as the ruler, never as
+ * the method, and a page showing both would contradict it.
  */
 
-type Entry = { bytes: number; poseMeasured: number; handFrames: number | null; rig: string };
+type Entry = {
+  bytes: number;
+  poseMeasured: number | null;
+  handFrames: number | null;
+  rig: string;
+  /** "handpose-pipeline": the hand-pose team's own recording, repacked. */
+  source?: string;
+  handsLeft?: number;
+  handsRight?: number;
+  seconds?: number;
+};
 const INDEX = rrdIndex as Record<string, Entry>;
 
 export function hasRecording(slug: string) {
@@ -96,22 +108,36 @@ export function RigExplorer({ slug, title, onClose }: { slug: string; title: str
       >
         <div className="min-w-0 flex-1">
           <p className="bp-mono text-[10px]" style={{ color: C.accent }}>
-            Explore · preview window
+            Explore · {entry?.source === "handpose-pipeline" ? "whole capture" : "preview window"}
           </p>
           <h2 className="mt-1 truncate text-base font-medium md:text-lg" style={{ fontFamily: "var(--font-heading)" }}>
             {title}
           </h2>
           <p className="mt-1 text-[11px] leading-relaxed" style={{ color: "rgba(232,232,234,0.62)" }}>
-            From the delivery: the stereo pair, all four lenses placed on the rig, head path
-            {entry ? ` (${Math.round(entry.poseMeasured * 100)}% of frames measured` : ""}
-            {entry && entry.poseMeasured < 0.5 ? ", held still between measurements" : ""}
-            {entry ? ")" : ""}, accelerometer and gyro.{" "}
-            {entry?.handFrames ? (
+            {entry?.source === "handpose-pipeline" ? (
+              /* The hand-pose team's recording of this capture, repacked: hands
+                 fitted by the production pipeline (MINT boxes, HaWoR/MANO, RTMPose
+                 fingers, one hand fitted to both cameras at once). Nothing in it
+                 is recomputed here. */
               <>
-                <span style={{ color: "#e8e8ea" }}>Hands are estimated</span> — MediaPipe on the mid pair, triangulated
-                through the delivered calibration; not part of the delivery.
+                The whole {entry.seconds ?? 30} s capture with its <span style={{ color: "#e8e8ea" }}>3D hand pose</span>:
+                21 joints per hand in metres, in the rig frame, fitted to both cameras of the pair
+                {entry.handsLeft != null && entry.handsRight != null
+                  ? ` — left hand on ${Math.round(entry.handsLeft * 100)}% of frames, right on ${Math.round(entry.handsRight * 100)}%`
+                  : ""}
+                . Green and orange are measured frames, blue are short gaps bridged.
               </>
-            ) : null}
+            ) : (
+              /* Stereo captures: only what the delivery carries. An estimated hand
+                 layer was tried here and taken off — it used MediaPipe as the
+                 method, where the hand-pose pipeline uses it only as the ruler. */
+              <>
+                From the delivery: the stereo pair, all four lenses placed on the rig, head path
+                {entry?.poseMeasured != null ? ` (${Math.round(entry.poseMeasured * 100)}% of frames measured` : ""}
+                {entry?.poseMeasured != null && entry.poseMeasured < 0.5 ? ", held still between measurements" : ""}
+                {entry?.poseMeasured != null ? ")" : ""}, accelerometer and gyro.
+              </>
+            )}
           </p>
         </div>
         <a

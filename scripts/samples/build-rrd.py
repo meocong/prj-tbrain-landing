@@ -29,7 +29,7 @@ window of every approved stereo capture, from the delivery itself:
               view is never promoted to 3D.
 
 Usage:
-  python3 scripts/samples/build-rrd.py [--only SLUG[,SLUG]] [--procs N] [--no-hands]
+  python3 scripts/samples/build-rrd.py [--only SLUG[,SLUG]] [--procs N] [--with-hands]
 
 Writes public/samples/rrd/<slug>.rrd and src/lib/samples/rrd.json.
 """
@@ -492,7 +492,9 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--only")
     ap.add_argument("--procs", type=int, default=6)
-    ap.add_argument("--no-hands", action="store_true")
+    # Off by default: the estimate is MediaPipe as the method, which the hand-pose
+    # brief reserves as the ruler. Kept for comparison runs, not for the page.
+    ap.add_argument("--with-hands", action="store_true")
     ap.add_argument("--job", help=argparse.SUPPRESS)
     a = ap.parse_args()
     if a.job:
@@ -509,7 +511,7 @@ def main():
     for s in live:
         tel = json.load(open(os.path.join(PUB, "telemetry", f"{s}.json")))
         span = len(tel["rows"]) / 30.0
-        jobs.append((s, where[s], float(tel["offsetSec"]), span, not a.no_hands))
+        jobs.append((s, where[s], float(tel["offsetSec"]), span, a.with_hands))
     idx_path = os.path.join(LIB, "rrd.json")
     index = json.load(open(idx_path)) if os.path.exists(idx_path) and a.only else {}
     # One child process per recording: rerun's recording stream and a
