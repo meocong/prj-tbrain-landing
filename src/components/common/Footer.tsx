@@ -153,6 +153,17 @@ const Footer = () => {
               >
                 Cookie settings
               </button>
+              {/* The CCPA opt-out link. Analytics is the only data that leaves
+                  the site, and rejecting it here stops it; the policy's
+                  California section says the same. */}
+              <button
+                type="button"
+                onClick={openConsentBanner}
+                className="col-span-2 text-left text-sm transition-colors hover:text-(--footer-accent)"
+                style={{ color: "var(--footer-link)" }}
+              >
+                Do Not Sell or Share My Personal Information
+              </button>
             </div>
           </div>
 

@@ -6,10 +6,83 @@ import Header from "@/components/common/Header";
 export const metadata: Metadata = {
   title: "Privacy Policy",
   description:
-    "How Tbrain collects, uses, and protects personal information for our AI training data services. Last updated June 2026.",
+    "How Tbrain collects, uses, and protects personal information for our AI training data services. Last updated September 2026.",
   alternates: { canonical: "/policy" },
   robots: { index: true, follow: false },
 };
+
+/**
+ * Every cookie and storage item the site sets, audited 2026-09-28 against the
+ * code and the live site. A Cookiebot scan lists what it finds; this list is
+ * what lets a reader, and a reviewer, match each name to a purpose. Keep it in
+ * step with the code — a new key in `localStorage` or a new cookie belongs here
+ * in the same change.
+ */
+const COOKIES: { name: string; type: string; purpose: string; duration: string; category: string }[] = [
+  {
+    name: "tbrain-cookie-consent",
+    type: "Local storage",
+    purpose: "Remembers whether you accepted or rejected analytics, so the banner is not shown again.",
+    duration: "Until you clear site data",
+    category: "Strictly necessary",
+  },
+  {
+    name: "tbrain-theme",
+    type: "Local storage",
+    purpose: "Remembers light or dark mode, only after you use the theme switch. Stays in your browser; never sent to us.",
+    duration: "Until you clear site data",
+    category: "Functional (your choice)",
+  },
+  {
+    name: "cf.turnstile.u",
+    type: "Local storage",
+    purpose: "Cloudflare Turnstile bot protection on the contact and access forms.",
+    duration: "Set by Cloudflare",
+    category: "Strictly necessary",
+  },
+  {
+    name: "tb_session",
+    type: "Cookie (first-party, HttpOnly)",
+    purpose: "Keeps you signed in after you enter an access passcode for samples or benchmarks.",
+    duration: "7 days",
+    category: "Strictly necessary",
+  },
+  {
+    name: "tb_chat_session",
+    type: "Cookie (first-party, HttpOnly)",
+    purpose: "Links your messages to one conversation, only once you use the chat assistant.",
+    duration: "30 days",
+    category: "Functional (your choice)",
+  },
+  {
+    name: "tb_utm_v1",
+    type: "Session storage",
+    purpose: "Records which campaign link brought you here, attached to a form you send. Only with analytics consent.",
+    duration: "Until the tab is closed",
+    category: "Analytics (consent)",
+  },
+  {
+    name: "_ga, _ga_<ID>",
+    type: "Cookie (Google Analytics)",
+    purpose: "Counts visits and pages viewed. Only set after you accept analytics; advertising features are off.",
+    duration: "Up to 2 years",
+    category: "Analytics (consent)",
+  },
+  {
+    name: "sb-*",
+    type: "Cookie (first-party)",
+    purpose: "Staff sign-in to the internal admin area. Not set for site visitors.",
+    duration: "Session",
+    category: "Strictly necessary",
+  },
+  {
+    name: "app, egui_memory_ron, rerun.version, rerun.redap_token",
+    type: "Local storage",
+    purpose: "Layout of the 3D sample viewer, only while you have it open; removed when you close it.",
+    duration: "While the viewer is open",
+    category: "Functional (your choice)",
+  },
+];
 
 export default async function Page() {
   return (
@@ -32,7 +105,7 @@ export default async function Page() {
           >
             Privacy Policy for Tbrain LLC
           </h1>
-          <p className="italic mt-4 mb-8" style={{ color: "var(--text-muted)" }}>Last Updated: Jun 5, 2026</p>
+          <p className="italic mt-4 mb-8" style={{ color: "var(--text-muted)" }}>Last Updated: Sep 28, 2026</p>
           <div className="mb-5">
             Tbrain LLC (&quot;Tbrain,&quot; &quot;we,&quot; &quot;our,&quot; or
             &quot;us&quot;) is committed to safeguarding your privacy. This
@@ -72,9 +145,19 @@ export default async function Page() {
               <span className="font-semibold">
                 Information Collected Automatically
               </span>
-              : We use cookies and similar technologies to collect information
-              about your interactions with our Services, such as IP address,
-              browser type, operating system, and pages visited.
+              : When you visit our website, our servers receive your IP address
+              and browser information as part of every request. With your
+              consent only, analytics cookies also record pages visited and how
+              you arrived (see Section 9).
+            </li>
+            <li>
+              <span className="font-semibold">Website Chat Assistant</span>: If
+              you use the chat assistant on our website, we store the messages
+              you send and receive, together with your IP address and browser
+              user agent, so that we can answer you and follow up on your
+              enquiry. Your messages are processed by a third-party AI model
+              provider acting as our service provider. Please do not enter
+              sensitive personal information in the chat.
             </li>
             <li>
               <span className="font-semibold">
@@ -111,7 +194,11 @@ export default async function Page() {
             <li>
               <span className="font-semibold">Service Providers</span>: With
               third-party vendors who assist in providing our Services, under
-              strict confidentiality agreements.
+              strict confidentiality agreements — for example website hosting,
+              database and file storage, email delivery, bot protection
+              (Cloudflare Turnstile), website analytics (Google Analytics, only
+              with your consent), and AI model providers for our chat
+              assistant.
             </li>
             <li>
               <span className="font-semibold">Legal Obligations</span>: To
@@ -124,6 +211,12 @@ export default async function Page() {
               information may be transferred to the successor entity.
             </li>
           </ul>
+          <div className="mb-5">
+            We do not sell your personal information, and we do not share it
+            for cross-context behavioral advertising. Our analytics is
+            configured with Google advertising features and ad personalization
+            turned off.
+          </div>
           <div className="mb-5 font-semibold">6. Data Security</div>
           <div className="mb-5">
             We implement industry-standard security measures to protect your
@@ -153,34 +246,109 @@ export default async function Page() {
             no longer needed, we will securely delete or anonymize your data.
           </div>
           <div className="mb-5 font-semibold">
-            9. Cookies and Tracking Technologies
+            9. Cookies and Similar Technologies
           </div>
           <div className="mb-5">
-            We use two categories of cookies and similar technologies:
+            We use a small number of cookies and browser storage items. Only the
+            analytics items require your consent; the rest are needed for the
+            site or for a feature you choose to use, and never identify you to a
+            third party for advertising.
+          </div>
+          <div className="mb-5 overflow-x-auto">
+            <table className="w-full text-left text-sm">
+              <thead>
+                <tr>
+                  <th className="py-2 pr-4 font-semibold">Name</th>
+                  <th className="py-2 pr-4 font-semibold">Type</th>
+                  <th className="py-2 pr-4 font-semibold">Purpose</th>
+                  <th className="py-2 pr-4 font-semibold">Duration</th>
+                  <th className="py-2 font-semibold">Category</th>
+                </tr>
+              </thead>
+              <tbody>
+                {COOKIES.map((c) => (
+                  <tr key={c.name} className="align-top" style={{ borderTop: "1px solid var(--border-default)" }}>
+                    <td className="py-2 pr-4 font-mono text-xs">{c.name}</td>
+                    <td className="py-2 pr-4">{c.type}</td>
+                    <td className="py-2 pr-4">{c.purpose}</td>
+                    <td className="py-2 pr-4">{c.duration}</td>
+                    <td className="py-2">{c.category}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <div className="mb-5">
+            When you first visit, a banner lets you accept or reject analytics.
+            Analytics does not run, and sets nothing, until you accept. If your
+            browser sends a Global Privacy Control (GPC) signal, we treat it as a
+            rejection and do not show the banner unless you open it. You can
+            change your choice at any time with &quot;Cookie settings&quot; or
+            &quot;Do Not Sell or Share My Personal Information&quot; in the site
+            footer; withdrawing consent stops analytics immediately and deletes
+            its cookies. You can also clear cookies and site data in your
+            browser.
+          </div>
+          <div className="mb-5 font-semibold">
+            10. Your California Privacy Rights
+          </div>
+          <div className="mb-5">
+            If you are a California resident, the California Consumer Privacy
+            Act, as amended by the California Privacy Rights Act (together,
+            &quot;CCPA&quot;), gives you the rights below. In the past 12
+            months we have collected the categories of personal information
+            described in Section 3 — identifiers (such as name, email address
+            and IP address), professional information (such as job title and
+            company), internet activity (such as pages visited, with consent),
+            and the content of messages you send us — for the purposes in
+            Section 4, from the sources in Section 3, and disclosed them only to
+            the service providers in Section 5.
           </div>
           <ul className="mb-5 list-disc pl-10">
             <li>
-              <span className="font-semibold">Strictly necessary</span>: required
-              to operate the site, such as authentication/session cookies for
-              logged-in areas and anti-bot protection (Cloudflare Turnstile).
-              These are always active and do not require consent.
+              <span className="font-semibold">Right to know and access</span>{" "}
+              the personal information we have collected about you.
             </li>
             <li>
-              <span className="font-semibold">Analytics (optional)</span>: with
-              your consent, we use Google Analytics for Firebase to understand
-              how the site is used (for example, pages viewed). These cookies are
-              only set after you click &quot;Accept&quot; on our cookie banner.
+              <span className="font-semibold">Right to delete</span> personal
+              information we collected from you, subject to legal exceptions.
+            </li>
+            <li>
+              <span className="font-semibold">Right to correct</span>{" "}
+              inaccurate personal information.
+            </li>
+            <li>
+              <span className="font-semibold">
+                Right to opt out of sale or sharing
+              </span>
+              . We do not sell personal information or share it for
+              cross-context behavioral advertising, and we have not done so in
+              the past 12 months. You can still turn off analytics at any time
+              with &quot;Do Not Sell or Share My Personal Information&quot; in
+              the footer, and we honor Global Privacy Control signals.
+            </li>
+            <li>
+              <span className="font-semibold">
+                Right to limit use of sensitive personal information
+              </span>
+              . We do not collect sensitive personal information through our
+              website.
+            </li>
+            <li>
+              <span className="font-semibold">Right to non-discrimination</span>{" "}
+              for exercising any of these rights.
             </li>
           </ul>
           <div className="mb-5">
-            When you first visit, a banner lets you accept or reject non-essential
-            cookies. If you reject, no analytics cookies are set. You can also
-            clear cookies and site data through your browser settings at any time,
-            which will cause the banner to appear again so you can change your
-            choice.
+            To make a request, email info@tbrain.ai with the subject
+            &quot;California Privacy Request&quot;. We will verify your
+            request by matching information you provide with information we
+            hold, and respond within 45 days. You may use an authorized agent,
+            who must provide proof of your permission. We do not knowingly
+            collect personal information from anyone under 16.
           </div>
-          <div className="mb-5 font-semibold">
-            10. International Data Transfers
+<div className="mb-5 font-semibold">
+            11. International Data Transfers
           </div>
           <div className="mb-5">
             Your information may be transferred to and processed in countries
@@ -189,14 +357,14 @@ export default async function Page() {
             protected.
           </div>
           <div className="mb-5 font-semibold">
-            11. Changes to This Privacy Policy
+            12. Changes to This Privacy Policy
           </div>
           <div className="mb-5">
             We may update this Privacy Policy periodically. Changes will be
             posted on this page with an updated &quot;Last Updated&quot; date.
             We encourage you to review this policy regularly.
           </div>
-          <div className="mb-5 font-semibold">12. Contact Us</div>
+          <div className="mb-5 font-semibold">13. Contact Us</div>
           <div className="mb-5">
             If you have questions or concerns about this Privacy Policy or our
             data practices, please contact us at:

@@ -42,6 +42,27 @@ export function hasRecording(slug: string) {
   return slug in INDEX;
 }
 
+/**
+ * The Rerun viewer saves its own UI state to localStorage — window layout,
+ * theme, a version stamp and an empty token list; no identifier. It is written
+ * only because the visitor opened the viewer, but a cookie scan lists every key
+ * a site leaves behind, and none of these is needed once the viewer is closed.
+ * Cleared on close, and again a moment later because the viewer's last save
+ * can land after `stop()`.
+ */
+const VIEWER_KEYS = ["app", "egui_memory_ron", "rerun.version", "rerun.redap_token"];
+function forgetViewerState() {
+  const wipe = () => {
+    try {
+      for (const k of VIEWER_KEYS) window.localStorage.removeItem(k);
+    } catch {
+      /* storage blocked: nothing was saved either */
+    }
+  };
+  wipe();
+  window.setTimeout(wipe, 1500);
+}
+
 const rrdSrc = (slug: string) => `/samples/rrd/${slug}.rrd`;
 
 export function RigExplorer({ slug, title, onClose }: { slug: string; title: string; onClose: () => void }) {
@@ -75,6 +96,7 @@ export function RigExplorer({ slug, title, onClose }: { slug: string; title: str
     return () => {
       dead = true;
       viewer?.stop();
+      forgetViewerState();
     };
   }, [slug]);
 

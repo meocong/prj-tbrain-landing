@@ -6,6 +6,8 @@ import { Button } from "@/components/ui/button";
 import {
   getConsent,
   setConsent,
+  hasGpcSignal,
+  getStoredConsent,
   onOpenConsentBanner,
   type ConsentValue,
 } from "@/lib/consent";
@@ -13,14 +15,19 @@ import {
 /**
  * Cookie consent banner. Shown only until the visitor makes a choice.
  *
- * "Accept" enables non-essential tracking (Firebase Analytics, UTM
- * attribution); "Reject" keeps it disabled. Strictly-necessary cookies
+ * "Accept" enables non-essential tracking (Google Analytics 4, Firebase
+ * Analytics, UTM attribution); "Reject" keeps it disabled, and withdraws it if
+ * it was on. Strictly-necessary cookies
  * (auth/session, anti-bot) are unaffected either way.
  */
 export default function CookieConsent() {
   const [visible, setVisible] = useState(false);
+  const [gpc, setGpc] = useState(false);
 
   useEffect(() => {
+    // A browser sending Global Privacy Control has already said no: analytics
+    // stay off and the banner is not pushed at them. They can still open it.
+    setGpc(hasGpcSignal() && getStoredConsent() === null);
     if (getConsent() === null) setVisible(true);
     return onOpenConsentBanner(() => setVisible(true));
   }, []);
@@ -55,9 +62,19 @@ export default function CookieConsent() {
             Privacy &amp; Cookie Policy
           </Link>
           .
+          {gpc && (
+            <>
+              {" "}
+              Your browser&apos;s Global Privacy Control signal is on, so analytics stay off unless you
+              accept here.
+            </>
+          )}
         </p>
         <div className="flex shrink-0 gap-2">
-          <Button variant="outline" size="lg" onClick={() => choose("rejected")}>
+          {/* Same weight as Accept. California's regulations ask for
+              "symmetry in choice" (CCPA regs §7004): declining may not be the
+              quieter, harder-to-see option. */}
+          <Button size="lg" onClick={() => choose("rejected")}>
             Reject
           </Button>
           <Button size="lg" onClick={() => choose("accepted")}>
