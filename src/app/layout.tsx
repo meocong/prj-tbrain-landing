@@ -111,6 +111,34 @@ const THEME_INIT = `
 }catch(e){}})();
 `;
 
+/**
+ * IAB US Privacy API (`__uspapi`), answered from the site's own consent state.
+ *
+ * Scanners and ad-tech read a site's CCPA opt-out through this standard call
+ * rather than by reading its banner, so a site with a working opt-out but no
+ * API reads as "no consent management platform" — which is what Cookiebot's
+ * scan reported (2026-09-28). The string is "1" (spec version), notice given,
+ * opted out of sale/sharing, LSPA not signed: opted out when the visitor
+ * rejected analytics or their browser sends Global Privacy Control, the same
+ * rule `getConsent` in `lib/consent.ts` applies. Defined inline so it answers
+ * before any script loads.
+ */
+const USP_API = `
+(function(){
+  function usp(){
+    var v=null; try{v=localStorage.getItem('tbrain-cookie-consent');}catch(e){}
+    var gpc=navigator.globalPrivacyControl===true;
+    var out = v==='rejected' || (v==null && gpc);
+    return '1Y' + (out?'Y':'N') + 'N';
+  }
+  window.__uspapi=function(cmd,ver,cb){
+    if(typeof cb!=='function')return;
+    if(cmd==='getUSPData'&&ver===1){cb({version:1,uspString:usp()},true);}
+    else{cb(null,false);}
+  };
+})();
+`;
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -125,6 +153,7 @@ export default function RootLayout({
     >
       <body>
         <script dangerouslySetInnerHTML={{ __html: THEME_INIT }} />
+        <script dangerouslySetInnerHTML={{ __html: USP_API }} />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(ORGANIZATION_JSONLD) }}
