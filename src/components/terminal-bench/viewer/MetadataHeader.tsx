@@ -14,7 +14,7 @@ export function MetadataHeader({
       <div className="container mx-auto max-w-6xl px-6 py-10">
         <div className="flex flex-wrap items-start justify-between gap-6">
           <div className="min-w-0 flex-1">
-            <p className="font-family_avt text-xs uppercase tracking-[0.2em] text-[#78818f]">
+            <p className="font-family_avt text-xs uppercase tracking-[0.2em] text-[#5f6875]">
               <Link href={`/data/terminal-bench/s/${batchSlug}`} className="hover:text-[#6C3CF4]">
                 / {batchSlug}
               </Link>{" "}
@@ -26,14 +26,14 @@ export function MetadataHeader({
             <div className="mt-4 flex flex-wrap items-center gap-2">
               <DifficultyBadge value={sample.difficulty} />
               {sample.category ? (
-                <span className="rounded-full border border-[#E5E7EB] bg-[#FAFAF7] px-3 py-1 text-xs text-[#78818f]">
+                <span className="rounded-full border border-[#E5E7EB] bg-[#FAFAF7] px-3 py-1 text-xs text-[#5f6875]">
                   {sample.category}
                 </span>
               ) : null}
               {(sample.tags ?? []).map((t) => (
                 <span
                   key={t}
-                  className="rounded-full border border-[#E5E7EB] bg-[#FAFAF7] px-3 py-1 text-xs text-[#78818f]"
+                  className="rounded-full border border-[#E5E7EB] bg-[#FAFAF7] px-3 py-1 text-xs text-[#5f6875]"
                 >
                   {t}
                 </span>

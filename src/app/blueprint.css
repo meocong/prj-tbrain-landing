@@ -30,6 +30,7 @@
   --bp-cyan-strong: #04574F;   /* for tight small-caps mono captions */
   --bp-purple: #5A2CE0;
   --bp-amber: #7E4A0D;         /* AA on paper + faint amber tints */
+  --bp-orange: #9A4A12;        /* "flagged" labels; #FF9A4D reads 2.0:1 on paper */
   --bp-red: #B93A50;
   /* Theme-aware accents: dark-enough for AA text on paper (light), bright on
      dark. Used where a neon category/status colour is drawn AS TEXT on a light
@@ -81,6 +82,7 @@
   --bp-cyan-strong: #22E3C8;
   --bp-purple: #8B6CF6;
   --bp-amber: #F5A623;
+  --bp-orange: #FF9A4D;
   --bp-red: #FF5C7A;
   --bp-green: #5EE08A;
   --bp-blue:  #4CB5FF;

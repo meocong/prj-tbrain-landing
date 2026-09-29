@@ -396,7 +396,7 @@
   --border-hover: rgba(108, 60, 244, 0.3);
   --text-primary: #F1F5F9;
   --text-secondary: #CBD5E1;
-  --text-muted: #64748B;
+  --text-muted: #94A3B8;   /* AA on the dark surfaces (was #64748B, 3.97:1 on #0a1022) */
   --text-inverse: #0F172A;
   --sidebar-item-hover: rgba(30, 41, 59, 0.8);
   --sidebar-active-bg: rgba(108, 60, 244, 0.1);
@@ -801,8 +801,8 @@ h1, h2, h3, h4, h5, h6 {
   color: #F8FAFC !important;
 }
 
-.dark .terminal-bench-themeable .text-\[\#78818f\],
-.dark .terminal-bench-themeable [class*="text-[#78818f]"] {
+.dark .terminal-bench-themeable .text-\[\#5f6875\],
+.dark .terminal-bench-themeable [class*="text-[#5f6875]"] {
   color: #CBD5E1 !important;
 }
 
@@ -966,7 +966,7 @@ html.dark body {
   color: #f8fafc !important;
 }
 
-.dark .text-\[\#78818f\],
+.dark .text-\[\#5f6875\],
 .dark .text-\[\#79828f\],
 .dark .text-\[\#8b90a7\],
 .dark .text-\[\#5a5d71\],
@@ -990,6 +990,23 @@ html.dark body {
 .dark [style*="color:"][style*="rgb(107, 114, 128)"],
 .dark [style*="color:"][style*="rgb(156, 163, 175)"] {
   color: #cbd5e1 !important;
+}
+
+/* An accent as text, AA on either theme — see src/lib/ink.ts. */
+.ink { color: var(--ink) !important; }
+.dark .ink { color: var(--ink-dark) !important; }
+
+/* Brand violet as TEXT on the dark surfaces: #6C3CF4 reads 3.0-3.4:1 there,
+   under the 4.5:1 WCAG AA asks of body-size text. Lifted to violet-400
+   (6.6-7.4:1). Backgrounds and borders in #6C3CF4 are left alone — the
+   `style` selectors match only a leading `color:`, not `background-color:`. */
+.dark .text-\[\#6C3CF4\],
+.dark .text-\[\#6c3cf4\],
+.dark [style^="color:#6C3CF4"],
+.dark [style*=";color:#6C3CF4"],
+.dark [style^="color:#6c3cf4"],
+.dark [style*=";color:#6c3cf4"] {
+  color: #a78bfa !important;
 }
 
 .dark .border-\[\#E5E7EB\],
@@ -1645,4 +1662,61 @@ html.dark body {
 :root.dark .case-study-body ol > li {
   background: rgba(30, 41, 59, 0.6);
   color: #e5e7eb;
+}
+
+/* ── Accessibility: skip link + "Pause animations" ─────────────────────────
+   .skip-link: WCAG 2.4.1, see src/components/common/SkipLink.tsx.
+   html.motion-paused: WCAG 2.2.2, the header's pause switch
+   (src/lib/motion-pref.ts). It mirrors every prefers-reduced-motion block
+   above, so pausing looks exactly like the OS "reduce motion" setting. */
+.skip-link {
+  position: fixed;
+  left: 1rem;
+  top: 0.75rem;
+  z-index: 1000;
+  transform: translateY(-200%);
+  padding: 0.625rem 1rem;
+  border-radius: 0.5rem;
+  background: #6C3CF4;
+  color: #fff;
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-decoration: none;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.25);
+}
+.skip-link:focus,
+.skip-link:focus-visible {
+  transform: none;
+  outline: 2px solid #fff;
+  outline-offset: 2px;
+}
+main[tabindex="-1"]:focus,
+h1[tabindex="-1"]:focus {
+  outline: none;
+}
+
+html.motion-paused *,
+html.motion-paused *::before,
+html.motion-paused *::after {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.01ms !important;
+  scroll-behavior: auto !important;
+}
+html.motion-paused :is(.stagger-1, .stagger-2, .stagger-3, .stagger-4, .stagger-5, .stagger-6, .hero-reveal) {
+  animation: none !important;
+  opacity: 1 !important;
+  transform: none !important;
+}
+html.motion-paused :is(.skeleton, .pillar-joint, .pillar-bar, .pillar-pixel, .pillar-trail,
+  .pillar-typewriter, .pillar-caret, .pillar-text-bar, .pillar-chart-line, .pillar-chart-dot,
+  .mesh-blob, .bp-grid, .bp-aurora, .bp-axis, .bp-blink) {
+  animation: none !important;
+}
+html.motion-paused :is(.hover-lift, .bp-card-hover):hover {
+  transform: none !important;
+}
+html.motion-paused .bp-draw :is(path, line, rect, circle, polyline) {
+  stroke-dashoffset: 0 !important;
+  animation: none !important;
 }

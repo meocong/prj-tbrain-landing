@@ -1,7 +1,8 @@
 "use client";
 
 import { useRef } from "react";
-import { motion, useScroll, useTransform, useReducedMotion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { useReducedMotion } from "@/lib/motion-pref";
 import { SectionHeading } from "@/components/terminal-bench/shared/SectionHeading";
 
 const STEPS = [
@@ -100,10 +101,10 @@ export function TaskLifecycle() {
                   step {s.n}
                 </p>
                 <h3 className="mt-3 text-lg font-semibold text-[#0e1b2e]">{s.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-[#78818f] md:flex-1">
+                <p className="mt-2 text-sm leading-relaxed text-[#5f6875] md:flex-1">
                   {s.body}
                 </p>
-                <pre className="mt-5 flex w-full items-start whitespace-pre-wrap break-words rounded-lg bg-[#0D1117] px-3 py-3 font-mono text-[11px] leading-relaxed text-[#c9d1d9] md:h-[88px] md:overflow-hidden">
+                <pre tabIndex={0} className="mt-5 flex w-full items-start whitespace-pre-wrap break-words rounded-lg bg-[#0D1117] px-3 py-3 font-mono text-[11px] leading-relaxed text-[#c9d1d9] md:h-[88px] md:overflow-hidden">
                   {s.snippet}
                 </pre>
               </motion.div>

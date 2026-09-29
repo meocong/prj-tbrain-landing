@@ -14,7 +14,8 @@
  * which breaks position:sticky).
  */
 import { useRef, useState } from "react";
-import { motion, useScroll, useTransform, useMotionValueEvent, useReducedMotion, type MotionValue } from "framer-motion";
+import { motion, useScroll, useTransform, useMotionValueEvent, type MotionValue } from "framer-motion";
+import { useReducedMotion } from "@/lib/motion-pref";
 import { FigLabel, IsoAxis, TitleBlock } from "@/components/marketing/blueprint/kit";
 
 /* ── Shared gradient defs (metal / dark / pcb / gold) ─────────────── */

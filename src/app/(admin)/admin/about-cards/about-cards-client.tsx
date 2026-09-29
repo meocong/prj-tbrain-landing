@@ -735,7 +735,7 @@ function HeroPreview({ hero }: { hero: EditableHero }) {
               {stat.value}
               {stat.suffix}
             </div>
-            <div className="mt-1 text-sm text-[#78818f]">{stat.label}</div>
+            <div className="mt-1 text-sm text-[#5f6875]">{stat.label}</div>
           </div>
         ))}
       </div>

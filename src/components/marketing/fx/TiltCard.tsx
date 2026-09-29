@@ -1,7 +1,8 @@
 "use client";
 
 import { useRef, type ReactNode, type MouseEvent } from "react";
-import { motion, useMotionValue, useSpring, useTransform, useReducedMotion } from "framer-motion";
+import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
+import { useReducedMotion } from "@/lib/motion-pref";
 
 /** 3D-tilt card that follows cursor position (bento-style). */
 export function TiltCard({

@@ -2,7 +2,8 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
-import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
+import { useReducedMotion } from "@/lib/motion-pref";
 import { X } from "lucide-react";
 import { groupSpec } from "@/lib/samples/spec-sections";
 import { PILL_KINDS_DROPPED } from "@/lib/samples/redact.mjs";

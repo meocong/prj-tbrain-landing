@@ -13,6 +13,7 @@ import { ArrowRight, ChevronDown } from "lucide-react";
 import { Sheet, SheetHeading, FigLabel } from "@/components/marketing/blueprint/kit";
 import { RevealOnScroll } from "@/components/marketing/fx/RevealOnScroll";
 import { motion } from "framer-motion";
+import { useReducedMotion } from "@/lib/motion-pref";
 import { DIRECTIONS, DIRECTIONS_SYNTH, FOUNDRY_LINE, type Direction } from "@/lib/landing/physical-ai";
 
 const panel: React.CSSProperties = {
@@ -132,13 +133,14 @@ const LAYERS = [
 
 /* Theme-aware capture-fleet diagram: field packs (50→500) → factory cluster → RLDS cloud */
 function FlowPacket({ x1, x2, delay }: { x1: number; x2: number; delay: number }) {
+  const reduce = useReducedMotion();
   return (
     <>
       <line x1={x1} y1={120} x2={x2} y2={120} stroke="var(--bp-line-strong)" strokeWidth="1.5" strokeDasharray="4 5" />
-      <motion.circle r={3.5} cy={120} fill="var(--bp-cyan)"
+      {!reduce && <motion.circle r={3.5} cy={120} fill="var(--bp-cyan)"
         initial={{ cx: x1, opacity: 0 }}
         animate={{ cx: [x1, x2], opacity: [0, 1, 1, 0] }}
-        transition={{ repeat: Infinity, duration: 1.8, delay, ease: "easeInOut" }} />
+        transition={{ repeat: Infinity, duration: 1.8, delay, ease: "easeInOut" }} />}
     </>
   );
 }

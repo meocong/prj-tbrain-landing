@@ -241,7 +241,7 @@ export function StagePanel({
         <div className="mt-6">{children}</div>
         {honestNote && (
           <div className="mt-6 bp-mono" style={{ padding: "12px 14px", fontSize: 12, lineHeight: 1.55, color: "var(--bp-ink-dim)", borderLeft: "2px solid #ff9a4d", background: "rgba(255,154,77,0.06)" }}>
-            <span style={{ color: "#ff9a4d", fontWeight: 700 }}>honest note · </span>{honestNote}
+            <span style={{ color: "var(--bp-orange)", fontWeight: 700 }}>honest note · </span>{honestNote}
           </div>
         )}
       </div>

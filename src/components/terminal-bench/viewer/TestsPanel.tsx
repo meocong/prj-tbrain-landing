@@ -78,7 +78,7 @@ export function TestsPanel({
             harness · {harness.kind.replace("-", " ")}
           </p>
           <h2 className="mt-3 text-xl font-semibold text-[#0e1b2e]">{copy.title}</h2>
-          <p className="mt-3 text-sm leading-relaxed text-[#78818f]">{copy.body}</p>
+          <p className="mt-3 text-sm leading-relaxed text-[#5f6875]">{copy.body}</p>
           {harness.entries.length > 0 ? (
             <ul className="mt-6 flex flex-wrap justify-center gap-2">
               {harness.entries.slice(0, 8).map((p) => (
@@ -90,7 +90,7 @@ export function TestsPanel({
                 </li>
               ))}
               {harness.entries.length > 8 ? (
-                <li className="rounded-full border border-[#E5E7EB] bg-[#FAFAF7] px-3 py-1 text-xs text-[#78818f]">
+                <li className="rounded-full border border-[#E5E7EB] bg-[#FAFAF7] px-3 py-1 text-xs text-[#5f6875]">
                   +{harness.entries.length - 8} more
                 </li>
               ) : null}
@@ -103,7 +103,7 @@ export function TestsPanel({
 
   return (
     <div className="container mx-auto max-w-3xl px-6 py-12">
-      <p className="font-family_avt text-xs uppercase tracking-widest text-[#78818f]">
+      <p className="font-family_avt text-xs uppercase tracking-widest text-[#5f6875]">
         {tests.length} test{tests.length === 1 ? "" : "s"}
       </p>
       <ul className="mt-6 space-y-4">
@@ -115,7 +115,7 @@ export function TestsPanel({
             <p className="text-base font-semibold text-[#0e1b2e]">
               {humanise(t.name)}
             </p>
-            <p className="mt-1 font-mono text-xs text-[#78818f]">{t.name}</p>
+            <p className="mt-1 font-mono text-xs text-[#5f6875]">{t.name}</p>
             {t.docstring ? (
               <p className="mt-3 whitespace-pre-wrap text-sm leading-relaxed text-[#0e1b2e]">
                 {t.docstring}

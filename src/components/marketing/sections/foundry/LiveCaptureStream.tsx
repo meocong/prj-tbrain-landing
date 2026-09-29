@@ -4,7 +4,8 @@
  * LiveCaptureStream — horizontally scrolling ticker of "recent captures"
  * with pass/fail indicators. Real capture names + honest QC states.
  */
-import { motion, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
+import { useReducedMotion } from "@/lib/motion-pref";
 
 const CAPS = [
   { name: "pick_up_the_cup__20260617T01",   task: "pick",    op: "op mobile",   qc: "PASS",   color: "var(--bp-green)" },

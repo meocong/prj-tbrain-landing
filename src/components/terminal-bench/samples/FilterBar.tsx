@@ -50,7 +50,7 @@ export function FilterableSampleGrid({
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Search samples by title, tag, or slug"
-            className="w-full rounded-xl border border-[#E5E7EB] bg-white px-4 py-3 text-sm text-[#0e1b2e] placeholder:text-[#78818f] focus:border-[#6C3CF4] focus:outline-none"
+            className="w-full rounded-xl border border-[#E5E7EB] bg-white px-4 py-3 text-sm text-[#0e1b2e] placeholder:text-[#5f6875] focus:border-[#6C3CF4] focus:outline-none"
           />
         </div>
         <div className="flex flex-wrap items-center gap-2">
@@ -72,7 +72,7 @@ export function FilterableSampleGrid({
 
       {categories.length > 0 ? (
         <div className="mt-3 flex flex-wrap items-center gap-2">
-          <span className="mr-1 text-xs uppercase tracking-wider text-[#78818f]">
+          <span className="mr-1 text-xs uppercase tracking-wider text-[#5f6875]">
             category
           </span>
           <Chip
@@ -91,12 +91,12 @@ export function FilterableSampleGrid({
         </div>
       ) : null}
 
-      <div className="mt-5 text-sm text-[#78818f]">
+      <div className="mt-5 text-sm text-[#5f6875]">
         {filtered.length} sample{filtered.length === 1 ? "" : "s"}
       </div>
 
       {filtered.length === 0 ? (
-        <div className="mt-10 rounded-2xl border border-dashed border-[#E5E7EB] p-16 text-center text-[#78818f]">
+        <div className="mt-10 rounded-2xl border border-dashed border-[#E5E7EB] p-16 text-center text-[#5f6875]">
           No samples match these filters.
         </div>
       ) : (

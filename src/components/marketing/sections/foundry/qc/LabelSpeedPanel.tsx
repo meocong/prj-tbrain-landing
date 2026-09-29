@@ -20,6 +20,17 @@ const BREAKDOWN = [
   { k: "QC + sign-off", h: 4, color: "#ff9a4d", detail: "Reviewer + escalation dashboard" },
   { k: "Buffer",      h: 22, color: "#5ee08a", detail: "Reshoot / escalation slack · rarely used" },
 ];
+
+/* The neon accents fill the bars; as TEXT they fall to 1.6-2.7:1 on the
+   light theme's paper. Text takes the theme-aware token of the same hue. */
+const INK: Record<string, string> = {
+  "#8fa0c8": "var(--bp-ink-dim)",
+  "#00e5c7": "var(--bp-cyan)",
+  "#4cb5ff": "var(--bp-blue)",
+  "#a78bfa": "var(--bp-purple)",
+  "#ff9a4d": "var(--bp-orange)",
+  "#5ee08a": "var(--bp-green)",
+};
 const TOTAL = BREAKDOWN.reduce((s, b) => s + b.h, 0);
 
 export function LabelSpeedPanel() {
@@ -47,7 +58,7 @@ export function LabelSpeedPanel() {
               <div key={b.k}>
                 <div className="flex items-baseline justify-between">
                   <span style={{ fontSize: 13, color: "var(--bp-ink)", fontWeight: 600 }}>{b.k}</span>
-                  <span style={{ fontFamily: "var(--font-heading)", fontSize: 20, color: b.color, fontWeight: 700 }}>
+                  <span style={{ fontFamily: "var(--font-heading)", fontSize: 20, color: INK[b.color] ?? b.color, fontWeight: 700 }}>
                     <CountUp value={b.v} duration={1.4} />
                   </span>
                 </div>
@@ -70,7 +81,7 @@ export function LabelSpeedPanel() {
 
         {/* Right · breakdown */}
         <div>
-          <div className="bp-mono" style={{ fontSize: 10, color: "#a78bfa", letterSpacing: "0.14em", textTransform: "uppercase" }}>
+          <div className="bp-mono" style={{ fontSize: 10, color: "var(--bp-purple)", letterSpacing: "0.14em", textTransform: "uppercase" }}>
             · ≤48h delivery · shipped capture breakdown
           </div>
           <div className="mt-4 flex h-6 overflow-hidden" style={{ borderRadius: 6, border: "1px solid var(--bp-line)" }}>
@@ -93,7 +104,7 @@ export function LabelSpeedPanel() {
                 <div style={{ minWidth: 0 }}>
                   <div className="flex items-baseline gap-2">
                     <span style={{ fontSize: 12.5, color: "var(--bp-ink)", fontWeight: 600 }}>{b.k}</span>
-                    <span className="bp-mono" style={{ fontSize: 10.5, color: b.color, fontWeight: 700 }}>{b.h}h</span>
+                    <span className="bp-mono" style={{ fontSize: 10.5, color: INK[b.color] ?? b.color, fontWeight: 700 }}>{b.h}h</span>
                   </div>
                   <div className="bp-mono" style={{ fontSize: 10.5, color: "var(--bp-ink-faint)", lineHeight: 1.4 }}>{b.detail}</div>
                 </div>

@@ -59,5 +59,7 @@ export function langForPath(path: string): string {
 export async function highlightToHtml(code: string, lang: string): Promise<string> {
   const hl = await getServerHighlighter();
   const safeLang = hl.getLoadedLanguages().includes(lang as never) ? lang : "bash";
-  return hl.codeToHtml(code, { lang: safeLang, theme: "github-dark" });
+  // github-dark draws comments in #6A737D, 3.9:1 on its #0d1117 background;
+  // WCAG AA asks 4.5:1. #8B949E is GitHub's own later comment grey (6.2:1).
+  return hl.codeToHtml(code, { lang: safeLang, theme: "github-dark" }).replaceAll("#6A737D", "#8B949E");
 }

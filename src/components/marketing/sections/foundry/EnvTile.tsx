@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import { useReducedMotion } from "framer-motion";
+import { useReducedMotion } from "@/lib/motion-pref";
 import type { EnvSlot } from "@/lib/landing/physical-ai";
 
 export function EnvTile({ slot }: { slot: EnvSlot }) {

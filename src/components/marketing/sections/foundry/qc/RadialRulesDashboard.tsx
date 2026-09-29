@@ -5,6 +5,7 @@
  * circular gauge + category breakdown + animated pass counters.
  */
 import { motion } from "framer-motion";
+import { useReducedMotion } from "@/lib/motion-pref";
 import { HARD_RULES } from "@/lib/landing/physical-ai-qc";
 import { CountUp } from "@/components/marketing/fx/CountUp";
 
@@ -18,6 +19,7 @@ const CATEGORY_COLOR: Record<string, string> = {
 };
 
 export function RadialRulesDashboard() {
+  const reduce = useReducedMotion();
   const total = HARD_RULES.length;
   const passing = total; // sample capture is 15/15 PASS
   const ratio = passing / total;
@@ -83,7 +85,7 @@ export function RadialRulesDashboard() {
             {/* center core */}
             <circle cx={CX} cy={CY} r={R - 22} fill="var(--bp-surface)" stroke="var(--bp-line)" strokeWidth="1" />
             {/* pulse ring */}
-            <motion.circle
+            {!reduce && <motion.circle
               cx={CX}
               cy={CY}
               r={R - 22}
@@ -94,7 +96,7 @@ export function RadialRulesDashboard() {
               initial={{ opacity: 0.7 }}
               animate={{ opacity: [0.7, 0, 0.7], r: [R - 22, R - 8, R - 22] }}
               transition={{ duration: 2.6, repeat: Infinity, ease: "easeOut" }}
-            />
+            />}
             {/* center numbers */}
             <text x={CX} y={CY - 4} textAnchor="middle" fontFamily="var(--font-heading)" fontSize="40" fontWeight="700" fill="var(--bp-cyan)">{passing}/{total}</text>
             <text x={CX} y={CY + 20} textAnchor="middle" fontFamily="var(--font-mono)" fontSize="10" fill="var(--bp-ink-faint)" letterSpacing="0.14em">PASS · {(ratio * 100).toFixed(0)}%</text>

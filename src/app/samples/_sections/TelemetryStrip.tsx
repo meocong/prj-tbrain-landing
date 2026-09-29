@@ -1,7 +1,8 @@
 "use client";
 
 import { useMemo, useRef } from "react";
-import { motion, useMotionValue, useTransform, useReducedMotion } from "framer-motion";
+import { motion, useMotionValue, useTransform } from "framer-motion";
+import { useReducedMotion } from "@/lib/motion-pref";
 import { RevealOnScroll } from "@/components/marketing/fx/RevealOnScroll";
 import { C, OVER_MEDIA } from "./tokens";
 import wd from "@/lib/samples/telemetry-watchdogs.json";

@@ -17,7 +17,7 @@ interface Props {
 
 const COLORS = {
   text: "#0e1b2e",
-  muted: "#78818f",
+  muted: "#5f6875",
   border: "#E5E7EB",
 };
 

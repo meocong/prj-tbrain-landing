@@ -9,7 +9,7 @@
  * Reduced-motion: never mounts the video, keeps the static poster.
  */
 import { useEffect, useRef, useState, type CSSProperties } from "react";
-import { useReducedMotion } from "framer-motion";
+import { useReducedMotion } from "@/lib/motion-pref";
 
 export function LazyVideo({
   src,

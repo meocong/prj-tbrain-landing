@@ -8,6 +8,7 @@
  */
 import { useState } from "react";
 import { motion } from "framer-motion";
+import { useReducedMotion } from "@/lib/motion-pref";
 import Link from "next/link";
 import { ArrowRight, Video, Boxes, Grip, Cpu, Activity, ShieldCheck } from "lucide-react";
 import { Sheet, SheetHeading } from "@/components/marketing/blueprint/kit";
@@ -89,6 +90,7 @@ function ModuleCard({ m }: { m: (typeof MODULES)[number] }) {
 }
 
 export function Catalog() {
+  const reduce = useReducedMotion();
   return (
     <Sheet fig="FIG.13 — TEN MODALITIES · ONE EXPORT">
       <RevealOnScroll>
@@ -96,7 +98,7 @@ export function Catalog() {
       </RevealOnScroll>
       <div className="relative mt-12">
         <motion.div aria-hidden className="pointer-events-none absolute -inset-x-8 -top-8 bottom-0"
-          animate={{ opacity: [0.3, 0.6, 0.3] }} transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
+          animate={reduce ? { opacity: 0.45 } : { opacity: [0.3, 0.6, 0.3] }} transition={reduce ? { duration: 0 } : { duration: 7, repeat: Infinity, ease: "easeInOut" }}
           style={{ background: "radial-gradient(ellipse 55% 45% at 50% 22%, color-mix(in srgb, var(--bp-cyan) 9%, transparent), transparent 70%)" }} />
         <StaggerContainer className="relative grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {MODULES.map((m) => <ModuleCard key={m.id} m={m} />)}

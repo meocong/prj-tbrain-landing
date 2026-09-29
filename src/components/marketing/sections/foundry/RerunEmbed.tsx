@@ -3,7 +3,8 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { RERUN_EMBED } from "@/lib/landing/physical-ai";
 import { Sheet, SheetHeading } from "@/components/marketing/blueprint/kit";
-import { motion, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
+import { useReducedMotion } from "@/lib/motion-pref";
 
 export function RerunEmbed({ variant = "full" }: { variant?: "full" | "teaser" } = {}) {
   const [origin, setOrigin] = useState<string>("");
@@ -39,7 +40,7 @@ export function RerunEmbed({ variant = "full" }: { variant?: "full" | "teaser" }
               target="_blank"
               rel="noreferrer"
               className="absolute bottom-4 right-4 bp-mono"
-              style={{ zIndex: 3, fontSize: 12, padding: "10px 14px", borderRadius: 8, background: "var(--bp-cyan)", color: "#0b1220", fontWeight: 700, textDecoration: "none", boxShadow: "0 8px 22px -12px var(--bp-cyan)" }}
+              style={{ zIndex: 3, fontSize: 12, padding: "10px 14px", borderRadius: 8, background: "var(--bp-cyan)", color: "var(--bp-on-cyan)", fontWeight: 700, textDecoration: "none", boxShadow: "0 8px 22px -12px var(--bp-cyan)" }}
             >
               ↗ Open sample scene in Rerun
             </a>
@@ -93,7 +94,7 @@ export function RerunEmbed({ variant = "full" }: { variant?: "full" | "teaser" }
                 padding: "10px 14px",
                 borderRadius: 8,
                 background: "var(--bp-cyan)",
-                color: "#0b1220",
+                color: "var(--bp-on-cyan)",
                 fontWeight: 700,
                 textDecoration: "none",
                 boxShadow: "0 8px 22px -12px var(--bp-cyan)",

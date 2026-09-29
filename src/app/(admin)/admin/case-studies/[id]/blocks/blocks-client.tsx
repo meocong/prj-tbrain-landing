@@ -286,7 +286,7 @@ export function CaseStudyBlocksClient({
                   value={caseInfo.description}
                   onFocus={() => setCaseInfoFocused(true)}
                   onChange={(event) => setCaseInfo((current) => ({ ...current, description: event.target.value }))}
-                  className="mt-4 min-h-[64px] w-full resize-none rounded-xl border border-transparent bg-transparent px-2 py-1 text-lg italic text-[#78818f] outline-none transition focus:border-[#6C3CF4]/40 focus:bg-white/70"
+                  className="mt-4 min-h-[64px] w-full resize-none rounded-xl border border-transparent bg-transparent px-2 py-1 text-lg italic text-[#5f6875] outline-none transition focus:border-[#6C3CF4]/40 focus:bg-white/70"
                   placeholder="Short description shown under the title"
                 />
               </div>

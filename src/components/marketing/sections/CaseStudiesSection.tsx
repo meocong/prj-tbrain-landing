@@ -54,14 +54,14 @@ export function CaseStudiesSection() {
               <p className="mb-3 text-base font-medium text-[#6C3CF4]">
                 {cs.shortDescription}
               </p>
-              <p className="mb-5 text-sm font-normal leading-relaxed text-[#78818f]">
+              <p className="mb-5 text-sm font-normal leading-relaxed text-[#5f6875]">
                 {cs.description}
               </p>
               <div className="mb-5 grid grid-cols-2 gap-2">
                 {cs.metrics.map((m, idx) => (
                   <div key={idx} className="rounded-lg bg-gradient-to-br from-blue-50 to-indigo-50 p-2.5">
                     <div className="text-xl font-bold text-[#6C3CF4]">{m.value}</div>
-                    <div className="text-xs text-[#78818f]">{m.label}</div>
+                    <div className="text-xs text-[#5f6875]">{m.label}</div>
                   </div>
                 ))}
               </div>

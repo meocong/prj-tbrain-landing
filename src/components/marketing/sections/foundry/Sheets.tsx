@@ -6,7 +6,8 @@ import { Sheet, SheetHeading, FigLabel, Annotation } from "@/components/marketin
 import { RevealOnScroll, StaggerContainer, STAGGER_ITEM } from "@/components/marketing/fx/RevealOnScroll";
 import { CountUp } from "@/components/marketing/fx/CountUp";
 import { PackDiagram } from "./PackDiagram";
-import { motion, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
+import { useReducedMotion } from "@/lib/motion-pref";
 import {
   PROBLEM, COLLECTION_PACK, WORLD_MODEL_INPUTS, REAL_SAMPLES, DATA_LADDER,
   DIRECTIONS, DIRECTIONS_SYNTH, USE_CASES, VIETNAM_EDGE, AVAILABILITY,

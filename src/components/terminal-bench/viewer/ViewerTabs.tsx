@@ -34,7 +34,7 @@ export function ViewerTabs({
                 className={`relative px-4 py-4 text-sm font-semibold transition-colors ${
                   active === k
                     ? "text-[#6C3CF4]"
-                    : "text-[#78818f] hover:text-[#0e1b2e]"
+                    : "text-[#5f6875] hover:text-[#0e1b2e]"
                 }`}
               >
                 {LABELS[k]}

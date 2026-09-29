@@ -1,6 +1,7 @@
 "use client";
 
-import { motion, useReducedMotion, type Variants } from "framer-motion";
+import { motion, type Variants } from "framer-motion";
+import { useReducedMotion } from "@/lib/motion-pref";
 import { type ReactNode } from "react";
 
 const DEFAULT_VARIANTS: Variants = {

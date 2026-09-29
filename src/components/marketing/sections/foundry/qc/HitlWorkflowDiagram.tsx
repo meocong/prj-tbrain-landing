@@ -7,6 +7,7 @@
  */
 import { Fragment } from "react";
 import { motion } from "framer-motion";
+import { useReducedMotion } from "@/lib/motion-pref";
 import { Crop, Zap, Hand, PackageCheck } from "lucide-react";
 import { CountUp } from "@/components/marketing/fx/CountUp";
 
@@ -46,10 +47,11 @@ const STAGES = [
 ];
 
 function ParticleArrow({ color }: { color: string }) {
+  const reduce = useReducedMotion();
   return (
     <div className="relative hidden lg:flex items-center justify-center" style={{ width: 56, height: 4 }}>
       <div style={{ position: "absolute", inset: 0, top: "50%", height: 2, background: `linear-gradient(90deg, ${color}, transparent)`, borderRadius: 2 }} />
-      {[0, 0.3, 0.6].map((delay) => (
+      {!reduce && [0, 0.3, 0.6].map((delay) => (
         <motion.div
           key={delay}
           initial={{ x: -6, opacity: 0 }}

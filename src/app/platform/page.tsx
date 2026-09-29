@@ -174,7 +174,7 @@ export default async function PlatformPage() {
                 { n: "03", title: "Iteration", body: "Agentic workflow loops route feedback back into the system for measurable improvement." },
               ].map((step) => (
                 <div key={step.n} className="text-center">
-                  <span className="text-3xl font-bold" style={{ fontFamily: "var(--font-heading)", color: "rgba(108,60,244,0.4)" }}>
+                  <span className="text-3xl font-bold text-[#9277f7] dark:text-[#6d4fd0]" style={{ fontFamily: "var(--font-heading)" }} aria-hidden="true">
                     {step.n}
                   </span>
                   <h3 className="mt-2 text-lg font-semibold" style={{ fontFamily: "var(--font-heading)" }}>

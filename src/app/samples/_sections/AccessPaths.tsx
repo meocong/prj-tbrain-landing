@@ -1,7 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { motion, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
+import { useReducedMotion } from "@/lib/motion-pref";
 import { ArrowRight } from "lucide-react";
 import { ACCESS_PATHS } from "@/lib/samples/catalog";
 import { C, EASE } from "./tokens";

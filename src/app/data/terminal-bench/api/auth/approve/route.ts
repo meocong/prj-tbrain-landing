@@ -20,7 +20,7 @@ function htmlPage(title: string, body: string): NextResponse {
       body { font-family: Inter, Helvetica, Arial, sans-serif; background:#FAFAF7; color:#0e1b2e; padding: 80px 24px; }
       .card { max-width: 520px; margin: 0 auto; background:#fff; border:1px solid #E5E7EB; border-radius:16px; padding:32px; box-shadow:0 10px 30px rgba(16,16,56,0.05); }
       h1 { font-size: 22px; margin: 0 0 12px; }
-      p { color:#78818f; font-size:15px; line-height:1.6; }
+      p { color:#5f6875; font-size:15px; line-height:1.6; }
       .accent { height:4px; border-radius: 2px; background: linear-gradient(90deg,#d865ff,#0151ff); margin-bottom: 24px; }
     </style></head><body>
     <div class="card"><div class="accent"></div>${body}</div>

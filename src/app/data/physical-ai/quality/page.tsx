@@ -102,7 +102,7 @@ function Layer1HardRules() {
                 <div style={{ minWidth: 0, flex: 1 }}>
                   <div className="bp-mono flex items-center justify-between" style={{ fontSize: 11, color: color, letterSpacing: "0.08em", textTransform: "uppercase", fontWeight: 700 }}>
                     <span>· {cat}</span>
-                    <span style={{ color: color, opacity: 0.7 }}>{rules.length} checks</span>
+                    <span style={{ color: color }}>{rules.length} checks</span>
                   </div>
                   <p style={{ fontSize: 12.5, color: "var(--bp-ink-dim)", lineHeight: 1.5, marginTop: 3 }}>{CATEGORY_LEAD[cat] ?? ""}</p>
                 </div>
@@ -193,7 +193,7 @@ function Layer2AIFilter() {
               </div>
               <div style={{ padding: 16, display: "flex", flexDirection: "column", gap: 10, flex: 1 }}>
                 <p style={{ fontSize: 13, color: "var(--bp-ink-dim)", lineHeight: 1.55 }}>{row.v}</p>
-                <div className="bp-mono" style={{ fontSize: 10.5, padding: "6px 8px", borderRadius: 6, background: "rgba(0,229,199,0.08)", border: "1px solid rgba(0,229,199,0.25)", color: "#00e5c7", letterSpacing: "0.04em" }}>
+                <div className="bp-mono" style={{ fontSize: 10.5, padding: "6px 8px", borderRadius: 6, background: "rgba(0,229,199,0.08)", border: "1px solid rgba(0,229,199,0.25)", color: "var(--bp-cyan)", letterSpacing: "0.04em" }}>
                   {row.signal}
                 </div>
                 <div style={{ fontSize: 12, color: "var(--bp-ink-faint)", lineHeight: 1.5, borderLeft: "2px solid var(--bp-line-strong)", paddingLeft: 8 }}>
@@ -268,14 +268,14 @@ function Layer3LabelStudio() {
               <div style={{ borderTop: "1px solid var(--bp-line)", paddingTop: 12 }}>
                 <div className="bp-mono flex items-center justify-between" style={{ fontSize: 10, color: "var(--bp-ink-faint)", letterSpacing: "0.06em", marginBottom: 6 }}>
                   <span>BATCH · doasido / v2</span>
-                  <span style={{ color: "#5ee08a" }}>184 / 500 · 37%</span>
+                  <span style={{ color: "var(--bp-green)" }}>184 / 500 · 37%</span>
                 </div>
                 <div style={{ height: 5, borderRadius: 3, background: "var(--bp-line)", overflow: "hidden" }}>
                   <div style={{ height: "100%", width: "37%", background: "linear-gradient(90deg, var(--bp-cyan), #5ee08a)" }} />
                 </div>
                 <div className="bp-mono grid grid-cols-3 gap-3 mt-2" style={{ fontSize: 10, color: "var(--bp-ink-faint)", letterSpacing: "0.04em" }}>
-                  <div><span style={{ color: "#5ee08a" }}>168</span> pass</div>
-                  <div><span style={{ color: "#ff9a4d" }}>13</span> flag</div>
+                  <div><span style={{ color: "var(--bp-green)" }}>168</span> pass</div>
+                  <div><span style={{ color: "var(--bp-orange)" }}>13</span> flag</div>
                   <div><span style={{ color: "#e26d5c" }}>3</span> reject</div>
                 </div>
               </div>

@@ -19,6 +19,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${baseUrl}/data/physical-ai`, lastModified: now, changeFrequency: "monthly", priority: 0.9 },
     { url: `${baseUrl}/samples`, lastModified: now, changeFrequency: "weekly", priority: 0.9 },
     { url: `${baseUrl}/policy`, lastModified: now, changeFrequency: "yearly", priority: 0.3 },
+    { url: `${baseUrl}/accessibility`, lastModified: now, changeFrequency: "yearly", priority: 0.3 },
   ];
 
   // Dynamic — best-effort. If DB unreachable just emit static routes.

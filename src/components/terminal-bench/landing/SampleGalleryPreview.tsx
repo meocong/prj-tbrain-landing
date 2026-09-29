@@ -90,7 +90,7 @@ export async function SampleGalleryPreview() {
               className="group relative flex w-full max-w-[360px] flex-col gap-5 rounded-2xl border border-[#E5E7EB] bg-white p-6 transition-all hover:-translate-y-0.5 hover:border-[#6C3CF4]/40 hover:shadow-[0_18px_40px_-24px_rgba(108,60,244,0.35)]"
             >
               <div className="flex items-start justify-between gap-3">
-                <p className="font-mono text-xs text-[#78818f]">tbrain-{t.slug}</p>
+                <p className="font-mono text-xs text-[#5f6875]">tbrain-{t.slug}</p>
                 {t.difficulty ? (
                   <span
                     className={`font-family_avt rounded-full px-2.5 py-0.5 text-[10px] uppercase tracking-widest ${
@@ -104,7 +104,7 @@ export async function SampleGalleryPreview() {
               <h3 className="text-xl font-medium leading-snug text-[#0e1b2e]">
                 {t.title}
               </h3>
-              <div className="mt-auto flex items-center gap-5 border-t border-[#E5E7EB] pt-4 text-xs text-[#78818f]">
+              <div className="mt-auto flex items-center gap-5 border-t border-[#E5E7EB] pt-4 text-xs text-[#5f6875]">
                 <Stat label="tests" value={t.testCount} />
                 {t.expertMin != null ? <Stat label="expert" value={`${t.expertMin}m`} /> : null}
                 {t.juniorMin != null ? <Stat label="junior" value={`${t.juniorMin}m`} /> : null}
@@ -114,7 +114,7 @@ export async function SampleGalleryPreview() {
                   </span>
                 ) : null}
               </div>
-              <span className="absolute right-5 top-5 inline-flex h-6 w-6 items-center justify-center rounded-full border border-[#E5E7EB] text-xs text-[#78818f] transition-all group-hover:border-[#6C3CF4] group-hover:bg-[#6C3CF4] group-hover:text-white">
+              <span className="absolute right-5 top-5 inline-flex h-6 w-6 items-center justify-center rounded-full border border-[#E5E7EB] text-xs text-[#5f6875] transition-all group-hover:border-[#6C3CF4] group-hover:bg-[#6C3CF4] group-hover:text-white">
                 →
               </span>
             </Link>
@@ -129,7 +129,7 @@ function Stat({ label, value }: { label: string; value: string | number }) {
   return (
     <span className="flex flex-col">
       <span className="text-sm font-medium text-[#0e1b2e]">{value}</span>
-      <span className="font-family_avt text-[10px] uppercase tracking-widest text-[#78818f]">
+      <span className="font-family_avt text-[10px] uppercase tracking-widest text-[#5f6875]">
         {label}
       </span>
     </span>

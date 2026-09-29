@@ -1,7 +1,8 @@
 "use client";
 
 import { useEffect, useMemo, useState, type ReactNode } from "react";
-import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
+import { useReducedMotion } from "@/lib/motion-pref";
 import { HeroWash } from "./HeroWash";
 
 /** Columns rendered. The last two are hidden below `lg`, the fourth below `sm`. */

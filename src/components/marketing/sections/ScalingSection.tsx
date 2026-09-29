@@ -16,7 +16,7 @@ export function ScalingSection() {
           Optimized for{" "}
           <span className="gradient-text">Scaling Complexity</span>
         </h3>
-        <p className="mx-auto mt-5 max-w-5xl text-lg font-normal text-[#78818f]">
+        <p className="mx-auto mt-5 max-w-5xl text-lg font-normal text-[#5f6875]">
           Legacy marketplaces break on high-stakes AI work. We provide the
           verifiable software systems and expert-led loops required for agents to
           self-improve.

@@ -5,7 +5,8 @@
  * Not mocap, not staged: actual textile-raw + real-capture footage.
  */
 import { useEffect, useRef } from "react";
-import { motion, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
+import { useReducedMotion } from "@/lib/motion-pref";
 
 const CELLS = [
   { src: "/videos/textile-raw/iron_01.webm",     poster: "/images/textile-raw/iron_01.jpg",     tag: "IRON · TEXTILE",       cap: "iron_product · op mobile · 450 f" },

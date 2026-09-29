@@ -13,7 +13,8 @@
  * Swap HERO_VIDEO for a custom Higgsfield clip (drop files in /public/videos).
  */
 import { useRef, useEffect } from "react";
-import { motion, useMotionValue, useTransform, useReducedMotion } from "framer-motion";
+import { motion, useMotionValue, useTransform } from "framer-motion";
+import { useReducedMotion } from "@/lib/motion-pref";
 import Link from "next/link";
 import { ArrowRight, ChevronDown } from "lucide-react";
 import { FOUNDRY_HERO } from "@/lib/landing/physical-ai";

@@ -55,14 +55,14 @@ export default async function BatchGridPage({
     <main className="container mx-auto max-w-6xl px-6 py-16 md:py-24">
       <div className="flex flex-wrap items-end justify-between gap-6">
         <div>
-          <p className="font-family_avt text-xs uppercase tracking-[0.2em] text-[#78818f]">
+          <p className="font-family_avt text-xs uppercase tracking-[0.2em] text-[#5f6875]">
             / terminal-bench / {batch.slug}
           </p>
           <h1 className="mt-3 text-4xl font-medium text-[#0e1b2e] md:text-5xl">
             {batch.name}
           </h1>
           {batch.description ? (
-            <p className="mt-3 max-w-2xl text-base text-[#78818f]">
+            <p className="mt-3 max-w-2xl text-base text-[#5f6875]">
               {batch.description}
             </p>
           ) : null}

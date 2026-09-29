@@ -89,7 +89,7 @@ export function PasscodeForm({ siteKey }: { siteKey: string | null }) {
         {submitting ? "Checking…" : "Enter showcase →"}
       </button>
 
-      <p className="text-center text-sm text-[#78818f]">
+      <p className="text-center text-sm text-[#5f6875]">
         Don&apos;t have a passcode?{" "}
         <a
           href="/data/terminal-bench/request-access"

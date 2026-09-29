@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState, type ReactNode } from "react";
-import { useReducedMotion } from "framer-motion";
+import { useReducedMotion } from "@/lib/motion-pref";
 import { clipSrc, posterSrc } from "@/lib/samples/categories";
 import { HeroWash } from "./HeroWash";
 

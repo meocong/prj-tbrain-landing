@@ -7,6 +7,7 @@ import Ga4 from "@/components/analytics/Ga4";
 import { UtmCapture } from "@/components/analytics/UtmCapture";
 import ChatWidget from "@/components/chat/ChatWidgetLoader";
 import CookieConsent from "@/components/common/CookieConsent";
+import SkipLink from "@/components/common/SkipLink";
 import "./globals.css";
 
 /* Inter — canonical tbrain brand face. One instance · aliased to
@@ -108,6 +109,9 @@ const THEME_INIT = `
   var dark = t==='dark' || (t==null && (samples || (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches)));
   document.documentElement.classList.toggle('dark', dark);
   document.documentElement.style.colorScheme = dark ? 'dark' : 'light';
+  /* The header's "Pause animations" switch (src/lib/motion-pref.ts), applied
+     before first paint so nothing starts moving and then stops. */
+  if(localStorage.getItem('tbrain-motion')==='paused') document.documentElement.classList.add('motion-paused');
 }catch(e){}})();
 `;
 
@@ -162,6 +166,7 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(WEBSITE_JSONLD) }}
         />
+        <SkipLink />
         <Providers>
           <Suspense fallback={null}>
             <Analytics />

@@ -6,7 +6,8 @@
  * cursor lands on each. Feels alive without pretending to be a real screencap.
  */
 import { useEffect, useRef, useState } from "react";
-import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
+import { useReducedMotion } from "@/lib/motion-pref";
 import { Check, X, ArrowLeft, ArrowRight, Circle, ChevronDown, Command } from "lucide-react";
 
 const TASK_QUEUE = [

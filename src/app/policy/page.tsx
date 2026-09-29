@@ -34,6 +34,13 @@ const COOKIES: { name: string; type: string; purpose: string; duration: string; 
     category: "Functional (your choice)",
   },
   {
+    name: "tbrain-motion",
+    type: "Local storage",
+    purpose: "Remembers that you paused the site's animations, only after you use the pause switch. Stays in your browser; never sent to us.",
+    duration: "Until you clear site data",
+    category: "Functional (your choice)",
+  },
+  {
     name: "cf.turnstile.u",
     type: "Local storage",
     purpose: "Cloudflare Turnstile bot protection on the contact and access forms.",
@@ -105,14 +112,14 @@ export default async function Page() {
             Privacy Policy outlines how we collect, use, disclose, and protect
             your personal information when you interact with our services.
           </div>
-          <div className="mb-5 font-semibold">1. Who We Are</div>
+          <h2 className="mb-5 font-semibold">1. Who We Are</h2>
           <div className="mb-5">
             Tbrain LLC is a full-service human resource agency specializing in
             providing high-quality AI trainers. Our team has expertise in
             various technical domains, and are dedicated to improving your AI
             models. We operate from the US and serve clients globally.
           </div>
-          <div className="mb-5 font-semibold">2. Scope and Applicability</div>
+          <h2 className="mb-5 font-semibold">2. Scope and Applicability</h2>
           <div className="mb-5">
             This Privacy Policy applies to personal information collected
             through our websites, products, services, applications
@@ -121,7 +128,7 @@ export default async function Page() {
             personal information on behalf of our clients; in such cases, our
             client&apos;s privacy policies will apply.
           </div>
-          <div className="mb-5 font-semibold">3. Information We Collect</div>
+          <h2 className="mb-5 font-semibold">3. Information We Collect</h2>
           <div className="mb-5">
             We may collect the following types of information:
           </div>
@@ -161,9 +168,9 @@ export default async function Page() {
               accounts.
             </li>
           </ul>
-          <div className="mb-5 font-semibold">
+          <h2 className="mb-5 font-semibold">
             4. How We Use Your Information
-          </div>
+          </h2>
           <div className="mb-5">
             We use your information for purposes including:
           </div>
@@ -177,9 +184,9 @@ export default async function Page() {
             <li>Ensuring security and preventing fraud</li>
             <li>Complying with legal obligations</li>
           </ul>
-          <div className="mb-5 font-semibold">
+          <h2 className="mb-5 font-semibold">
             5. Sharing and Disclosure of Information
-          </div>
+          </h2>
           <div className="mb-5">
             We may share your information in the following circumstances:
           </div>
@@ -210,14 +217,14 @@ export default async function Page() {
             configured with Google advertising features and ad personalization
             turned off.
           </div>
-          <div className="mb-5 font-semibold">6. Data Security</div>
+          <h2 className="mb-5 font-semibold">6. Data Security</h2>
           <div className="mb-5">
             We implement industry-standard security measures to protect your
             information. However, no method of transmission over the internet or
             electronic storage is completely secure, and we cannot guarantee
             absolute security.
           </div>
-          <div className="mb-5 font-semibold">7. Your Rights and Choices</div>
+          <h2 className="mb-5 font-semibold">7. Your Rights and Choices</h2>
           <div className="mb-5">
             Depending on your jurisdiction, you may have rights regarding your
             personal information, such as:
@@ -232,7 +239,7 @@ export default async function Page() {
           <div className="mb-5">
             To exercise these rights, please contact us at info@tbrain.ai
           </div>
-          <div className="mb-5 font-semibold">8. Data Retention</div>
+          <h2 className="mb-5 font-semibold">8. Data Retention</h2>
           <div className="mb-5">
             We retain your information only as long as necessary to fulfill the
             purposes outlined in this Privacy Policy or as required by law. Once
@@ -266,16 +273,16 @@ export default async function Page() {
               period the law or the contract requires.
             </li>
           </ul>
-          <div className="mb-5 font-semibold">
+          <h2 className="mb-5 font-semibold">
             9. Cookies and Similar Technologies
-          </div>
+          </h2>
           <div className="mb-5">
             We use a small number of cookies and browser storage items. Only the
             analytics items require your consent; the rest are needed for the
             site or for a feature you choose to use, and never identify you to a
             third party for advertising.
           </div>
-          <div className="mb-5 overflow-x-auto">
+          <div className="mb-5 overflow-x-auto" tabIndex={0} role="region" aria-label="Cookies and storage items">
             <table className="w-full text-left text-sm">
               <thead>
                 <tr>
@@ -310,9 +317,9 @@ export default async function Page() {
             its cookies. You can also clear cookies and site data in your
             browser.
           </div>
-          <div className="mb-5 font-semibold">
+          <h2 className="mb-5 font-semibold">
             10. Your California Privacy Rights
-          </div>
+          </h2>
           <div className="mb-5">
             If you are a California resident, the California Consumer Privacy
             Act, as amended by the California Privacy Rights Act (together,
@@ -389,24 +396,24 @@ export default async function Page() {
             60 days) and, if we deny the appeal, tell you how to contact your
             state Attorney General.
           </div>
-<div className="mb-5 font-semibold">
+<h2 className="mb-5 font-semibold">
             11. International Data Transfers
-          </div>
+          </h2>
           <div className="mb-5">
             Your information may be transferred to and processed in countries
             other than your own. We ensure that such transfers comply with
             applicable data protection laws and that your information remains
             protected.
           </div>
-          <div className="mb-5 font-semibold">
+          <h2 className="mb-5 font-semibold">
             12. Changes to This Privacy Policy
-          </div>
+          </h2>
           <div className="mb-5">
             We may update this Privacy Policy periodically. Changes will be
             posted on this page with an updated &quot;Last Updated&quot; date.
             We encourage you to review this policy regularly.
           </div>
-          <div className="mb-5 font-semibold">13. Contact Us</div>
+          <h2 className="mb-5 font-semibold">13. Contact Us</h2>
           <div className="mb-5">
             If you have questions or concerns about this Privacy Policy or our
             data practices, please contact us at:

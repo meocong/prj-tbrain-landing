@@ -1,5 +1,6 @@
 "use client";
 
+import { prefersReducedMotion } from "@/lib/motion-pref";
 /**
  * ScrubVideo — a cinematic background video that the viewer "scrubs" by moving
  * the mouse horizontally (desktop), giving a premium interactive feel. On
@@ -19,7 +20,7 @@ export function ScrubVideo({
   useEffect(() => {
     const v = ref.current;
     if (!v) return;
-    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const reduce = prefersReducedMotion();
     if (reduce) return; // poster only
 
     const desktop = window.matchMedia("(min-width: 1024px)").matches;

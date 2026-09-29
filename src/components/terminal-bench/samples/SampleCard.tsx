@@ -22,7 +22,7 @@ export function SampleCard({
           download
           aria-label={`Download ${sample.title} zip`}
           title="Download sample zip"
-          className="absolute right-4 top-4 z-10 flex h-9 w-9 items-center justify-center rounded-lg border border-[#E5E7EB] bg-white text-[#78818f] transition-colors hover:border-[#6C3CF4]/40 hover:text-[#6C3CF4]"
+          className="absolute right-4 top-4 z-10 flex h-9 w-9 items-center justify-center rounded-lg border border-[#E5E7EB] bg-white text-[#5f6875] transition-colors hover:border-[#6C3CF4]/40 hover:text-[#6C3CF4]"
           onClick={(e) => e.stopPropagation()}
         >
           <Download className="h-4 w-4" />
@@ -39,7 +39,7 @@ export function SampleCard({
         <div className="flex items-center gap-3">
           <DifficultyBadge value={sample.difficulty} />
           {sample.category ? (
-            <span className="text-xs font-medium uppercase tracking-wider text-[#78818f]">
+            <span className="text-xs font-medium uppercase tracking-wider text-[#5f6875]">
               {sample.category}
             </span>
           ) : null}
@@ -54,20 +54,20 @@ export function SampleCard({
             {sample.tags.slice(0, 5).map((t) => (
               <span
                 key={t}
-                className="rounded-full border border-[#E5E7EB] bg-[#FAFAF7] px-2.5 py-0.5 text-xs text-[#78818f]"
+                className="rounded-full border border-[#E5E7EB] bg-[#FAFAF7] px-2.5 py-0.5 text-xs text-[#5f6875]"
               >
                 {t}
               </span>
             ))}
             {sample.tags.length > 5 ? (
-              <span className="rounded-full px-2.5 py-0.5 text-xs text-[#78818f]">
+              <span className="rounded-full px-2.5 py-0.5 text-xs text-[#5f6875]">
                 +{sample.tags.length - 5}
               </span>
             ) : null}
           </div>
         ) : null}
 
-        <div className="mt-auto flex items-center justify-between pt-6 text-xs text-[#78818f]">
+        <div className="mt-auto flex items-center justify-between pt-6 text-xs text-[#5f6875]">
           <span>
             expert {expertMin ? `${expertMin}m` : "—"} · junior{" "}
             {juniorMin ? `${juniorMin}m` : "—"}

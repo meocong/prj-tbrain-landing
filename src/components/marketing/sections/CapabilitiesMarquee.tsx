@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useReducedMotion } from "@/lib/motion-pref";
 
 const CAPABILITIES = [
   "Motion capture",
@@ -48,17 +49,23 @@ export function CapabilitiesMarquee() {
 
 function MarqueeRow({ reverse, speed, className = "" }: { reverse: boolean; speed: number; className?: string }) {
   const list = [...CAPABILITIES, ...CAPABILITIES];
+  // Still under reduced motion or the header's pause switch (WCAG 2.2.2): the
+  // row rests where its loop starts.
+  const reduce = useReducedMotion();
+  const from = reverse ? "-50%" : "0%";
   return (
     <div className={`relative ${className}`}>
       <motion.div
         className="flex gap-3"
-        animate={{ x: reverse ? ["-50%", "0%"] : ["0%", "-50%"] }}
-        transition={{ duration: speed, repeat: Infinity, ease: "linear" }}
+        animate={reduce ? { x: from } : { x: reverse ? ["-50%", "0%"] : ["0%", "-50%"] }}
+        transition={reduce ? { duration: 0 } : { duration: speed, repeat: Infinity, ease: "linear" }}
         style={{ width: "max-content" }}
       >
         {list.map((c, i) => (
           <span
             key={i}
+            /* The second copy exists only to make the loop seamless. */
+            aria-hidden={i >= CAPABILITIES.length || undefined}
             className="inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-medium whitespace-nowrap"
             style={{
               background: "var(--marquee-chip-bg)",

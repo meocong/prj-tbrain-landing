@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { ink } from "@/lib/ink";
 import {
   getConsent,
   setConsent,
@@ -58,7 +59,7 @@ export default function CookieConsent() {
           We use strictly-necessary cookies to run this site. With your consent
           we also use analytics cookies to understand how the site is used. See
           our{" "}
-          <Link href="/policy" className="underline" style={{ color: "var(--primary)" }}>
+          <Link href="/policy" className="ink underline" style={ink("#6C3CF4")}>
             Privacy &amp; Cookie Policy
           </Link>
           .

@@ -129,7 +129,7 @@ export default async function SampleViewerPage({
               />
             </Suspense>
           ) : (
-            <div className="container mx-auto max-w-3xl px-6 py-20 text-center text-[#78818f]">
+            <div className="container mx-auto max-w-3xl px-6 py-20 text-center text-[#5f6875]">
               No reference solution published for this sample.
             </div>
           ),

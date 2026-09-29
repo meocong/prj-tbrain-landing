@@ -91,13 +91,13 @@ export default function TerminalBenchLanding() {
       <section className="relative bg-white dark:bg-[#020617]">
         <div className="container mx-auto max-w-7xl px-6 py-24 md:py-32">
           <div className="mx-auto max-w-5xl">
-            <p className="font-family_avt text-center text-xs uppercase tracking-[0.2em] text-[#78818f]">
+            <p className="font-family_avt text-center text-xs uppercase tracking-[0.2em] text-[#5f6875]">
               / what is terminal bench
             </p>
             <h2 className="mt-4 mx-auto max-w-4xl text-center text-4xl font-medium leading-tight text-[#0e1b2e] md:text-6xl">
               LLM evals miss the terminal. <span className="gradient-text">Agents live there.</span>
             </h2>
-            <div className="mt-10 grid gap-8 text-base leading-relaxed text-[#78818f] md:grid-cols-2 md:gap-12 md:text-lg">
+            <div className="mt-10 grid gap-8 text-base leading-relaxed text-[#5f6875] md:grid-cols-2 md:gap-12 md:text-lg">
               <p>
                 Benchmarks that score agents on static code snippets or single-turn
                 QA miss the actual job: executing commands, reading output, editing
@@ -134,7 +134,7 @@ export default function TerminalBenchLanding() {
                   file
                 </p>
                 <p className="mt-3 font-mono text-lg text-[#0e1b2e]">{it.name}</p>
-                <p className="mt-4 text-sm leading-relaxed text-[#78818f]">
+                <p className="mt-4 text-sm leading-relaxed text-[#5f6875]">
                   {it.desc}
                 </p>
               </div>
@@ -180,7 +180,7 @@ export default function TerminalBenchLanding() {
                 <h3 className="mt-3 text-2xl font-semibold text-[#0e1b2e]">
                   Have a passcode?
                 </h3>
-                <p className="mt-4 text-base leading-relaxed text-[#78818f]">
+                <p className="mt-4 text-base leading-relaxed text-[#5f6875]">
                   If our sales team has sent you a{" "}
                   <code className="font-mono">TB-XXXX-XXXX</code> passcode, enter
                   it to open the current batch.
@@ -201,7 +201,7 @@ export default function TerminalBenchLanding() {
                 <h3 className="mt-3 text-2xl font-semibold text-[#0e1b2e]">
                   Request access
                 </h3>
-                <p className="mt-4 text-base leading-relaxed text-[#78818f]">
+                <p className="mt-4 text-base leading-relaxed text-[#5f6875]">
                   Tell us about your team and intended use. Our sales team
                   reviews each request and usually responds within one business day.
                 </p>
