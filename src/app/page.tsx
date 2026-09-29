@@ -9,6 +9,7 @@ import { PlatformSection } from "@/components/marketing/sections/PlatformSection
 import { PhysicalAITeaser } from "@/components/marketing/sections/PhysicalAITeaser";
 import { ExpertsSection } from "@/components/marketing/sections/ExpertsSection";
 import { ContactCTA } from "@/components/marketing/sections/ContactCTA";
+import { ProgramMembership } from "@/components/marketing/sections/ProgramMembership";
 
 export const metadata: Metadata = {
   title: "Tbrain | Trusted Human Infrastructure for Agentic AI",
@@ -46,6 +47,7 @@ export default function Home() {
         <PhysicalAITeaser />
         <PlatformSection />
         <ExpertsSection />
+        <ProgramMembership />
         <ContactCTA />
       </main>
       <Footer />

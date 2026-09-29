@@ -10,6 +10,7 @@ import { Send } from "lucide-react";
 import { readUtm } from "@/lib/utm";
 import { openConsentBanner } from "@/lib/consent";
 import CollectionNotice from "@/components/common/CollectionNotice";
+import { InceptionBadge } from "@/components/marketing/InceptionBadge";
 
 function NewsletterForm() {
   const [email, setEmail] = useState("");
@@ -208,12 +209,17 @@ const Footer = () => {
             <span className="text-xs" style={{ color: "var(--footer-muted)" }}>
               Florida & Hanoi
             </span>
+            <InceptionBadge height={32} className="ml-1" />
           </div>
           <p className="text-xs" style={{ color: "var(--footer-muted)" }}>
             &copy; Tbrain {new Date().getFullYear()} &bull;{" "}
             <span style={{ color: "var(--footer-accent)" }}>Human-in-the-Loop AI Validation</span>
           </p>
         </div>
+        <p className="mt-4 text-[11px] leading-relaxed" style={{ color: "var(--footer-muted)" }}>
+          NVIDIA, the NVIDIA logo, and NVIDIA Inception are trademarks and/or registered trademarks of NVIDIA
+          Corporation in the U.S. and other countries.
+        </p>
       </div>
     </footer>
   );
