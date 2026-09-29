@@ -50,8 +50,8 @@ export function HeroSideRail() {
       >
         <span>Foundry status</span>
         <motion.span
-          animate={{ opacity: [1, 0.2, 1] }}
-          transition={{ duration: 1.1, repeat: Infinity }}
+          animate={reduce ? { opacity: 1 } : { opacity: [1, 0.2, 1] }}
+          transition={reduce ? { duration: 0 } : { duration: 1.1, repeat: Infinity }}
           style={{ width: 6, height: 6, borderRadius: 6, background: "var(--bp-cyan)", boxShadow: "0 0 6px var(--bp-cyan)" }}
         />
       </div>

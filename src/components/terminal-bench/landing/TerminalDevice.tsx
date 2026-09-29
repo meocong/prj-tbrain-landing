@@ -137,12 +137,13 @@ function Line({ beat, trailing }: { beat: Beat; trailing?: React.ReactNode }) {
 }
 
 function Caret() {
+  const reduce = useReducedMotion();
   return (
     <motion.span
       aria-hidden
       className="ml-[2px] inline-block h-[1em] w-[0.55ch] translate-y-[2px] bg-[#f0f6fc] align-middle"
-      animate={{ opacity: [1, 0, 1] }}
-      transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+      animate={reduce ? { opacity: 1 } : { opacity: [1, 0, 1] }}
+      transition={reduce ? { duration: 0 } : { duration: 1, repeat: Infinity, ease: "linear" }}
     />
   );
 }
