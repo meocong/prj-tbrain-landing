@@ -652,6 +652,18 @@ export const STATIC_IMAGES: StaticImage[] = [
     "size_bytes": 1694153
   },
   {
+    "path": "/images/partners/nvidia-inception-program-badge-rgb-for-screen-negative.svg",
+    "name": "nvidia-inception-program-badge-rgb-for-screen-negative",
+    "ext": "svg",
+    "size_bytes": 6625
+  },
+  {
+    "path": "/images/partners/nvidia-inception-program-badge-rgb-for-screen.svg",
+    "name": "nvidia-inception-program-badge-rgb-for-screen",
+    "ext": "svg",
+    "size_bytes": 13111
+  },
+  {
     "path": "/images/parts/headrig.jpg",
     "name": "headrig",
     "ext": "jpg",
