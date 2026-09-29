@@ -57,6 +57,28 @@ export function useReducedMotion(): boolean {
 /* Videos paused by the switch, so turning it off resumes only those. */
 const pausedByUs = new WeakSet<HTMLVideoElement>();
 
+/* Endless script-driven animations (framer-motion runs opacity/transform loops
+   on the Web Animations API). A component re-rendered for reduced motion
+   stops its own loops only when the animated VALUE changes; a loop whose end
+   value equals the still one keeps running. These are frozen where they are
+   and resumed with the switch. CSS animations are left to the stylesheet. */
+let frozen: Animation[] = [];
+function freezeLoops() {
+  if (typeof document.getAnimations !== "function") return;
+  for (const a of document.getAnimations()) {
+    if (typeof CSSAnimation !== "undefined" && a instanceof CSSAnimation) continue;
+    if (typeof CSSTransition !== "undefined" && a instanceof CSSTransition) continue;
+    if (a.playState === "running" && a.effect?.getTiming().iterations === Infinity) {
+      a.pause();
+      frozen.push(a);
+    }
+  }
+}
+function thawLoops() {
+  for (const a of frozen) if (a.playState === "paused") a.play();
+  frozen = [];
+}
+
 function stillVideo(v: HTMLVideoElement) {
   // Only ambient video: muted autoplay loops. A video the reader started,
   // with controls, is theirs.
@@ -89,6 +111,8 @@ export function setMotionPaused(paused: boolean) {
   const root = document.documentElement;
   root.classList.toggle(CLASS, paused);
   MotionGlobalConfig.skipAnimations = paused;
+  if (paused) freezeLoops();
+  else thawLoops();
   try {
     if (paused) localStorage.setItem(MOTION_KEY, "paused");
     else localStorage.removeItem(MOTION_KEY);
