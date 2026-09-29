@@ -1,6 +1,6 @@
-import { ArrowRight, Sparkles, ChevronDown } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Sparkles, ChevronDown } from "lucide-react";
 import Link from "next/link";
-import { InceptionBadge } from "@/components/marketing/InceptionBadge";
+import { INCEPTION_URL, InceptionArt } from "@/components/marketing/InceptionBadge";
 import { VideoBackground } from "@/components/marketing/fx/VideoBackground";
 
 export function HeroSection() {
@@ -149,19 +149,40 @@ export function HeroSection() {
           </Link>
         </div>
 
-        {/* NVIDIA Inception membership, as member startups show it: a small
-            trust mark under the calls to action (Gatsby, Trust3). The label
-            takes the keyword row's type so the pair reads as part of the hero;
-            the badge keeps its own frame, so it gets no chip around it. */}
-        <div className="hero-reveal hero-reveal-5 mt-10 flex items-center justify-center gap-3">
-          <span className="text-[11px] uppercase tracking-wider" style={{ color: "var(--hero-subtle)" }}>
-            Member of
+        {/* NVIDIA Inception membership: the badge in a small credential card
+            under the calls to action, as member startups show it (Gatsby's
+            hero badges, Trust3's row under the CTAs). The card borrows the
+            site's card surface and top accent line, in NVIDIA green; the
+            badge artwork itself is untouched (see InceptionBadge). */}
+        <a
+          href={INCEPTION_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Tbrain is a member of the NVIDIA Inception Program (opens nvidia.com)"
+          className="hero-reveal hero-reveal-5 group relative mt-10 inline-flex items-center gap-4 overflow-hidden rounded-2xl py-3 pl-3 pr-5 transition-transform duration-300 hover:-translate-y-0.5"
+          style={{
+            background: "var(--product-card-bg)",
+            border: "1px solid var(--product-card-border)",
+            boxShadow: "var(--product-card-shadow)",
+            WebkitBackdropFilter: "blur(12px)", backdropFilter: "blur(12px)",
+          }}
+        >
+          <span aria-hidden className="absolute inset-x-0 top-0 h-[2px]" style={{ background: "linear-gradient(90deg, #76B900, #76B90000 80%)" }} />
+          <InceptionArt height={40} />
+          <span aria-hidden className="h-8 w-px" style={{ background: "var(--border-default)" }} />
+          <span aria-hidden className="text-left">
+            <span className="block text-[10px] font-semibold uppercase tracking-[0.2em]" style={{ color: "var(--text-muted)" }}>
+              Program member
+            </span>
+            <span className="mt-0.5 flex items-center gap-1 text-sm font-semibold" style={{ color: "var(--text-primary)" }}>
+              NVIDIA Inception
+              <ArrowUpRight className="h-3.5 w-3.5 opacity-50 transition-opacity group-hover:opacity-100" />
+            </span>
           </span>
-          <InceptionBadge height={34} />
-        </div>
+        </a>
 
         <div
-          className="hero-reveal hero-reveal-5 absolute bottom-8 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-1 md:flex [@media(max-height:860px)]:hidden"
+          className="hero-reveal hero-reveal-5 absolute bottom-8 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-1 md:flex [@media(max-height:960px)]:hidden"
           style={{ color: "var(--hero-scroll)", animationIterationCount: 1 }}
         >
           <span className="text-[10px] uppercase tracking-widest">Scroll</span>
