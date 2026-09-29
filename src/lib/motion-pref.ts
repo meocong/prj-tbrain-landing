@@ -83,10 +83,10 @@ function stillVideo(v: HTMLVideoElement) {
   // Only ambient video: muted autoplay loops. A video the reader started,
   // with controls, is theirs.
   if (!v.muted || v.controls) return;
+  // Only a video that was playing is resumed later; one held back off-screen
+  // by its own lazy loader stays that loader's business.
   if (!v.paused) {
     v.pause();
-    pausedByUs.add(v);
-  } else if (v.autoplay) {
     pausedByUs.add(v);
   }
 }
