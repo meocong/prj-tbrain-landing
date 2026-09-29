@@ -18,6 +18,25 @@ const LIGHT = "/images/partners/nvidia-inception-program-badge-rgb-for-screen.sv
 const DARK = "/images/partners/nvidia-inception-program-badge-rgb-for-screen-negative.svg";
 const RATIO = 450 / 166; // the kit artwork's aspect ratio
 
+/** The artwork alone, no link: for a surface that is itself the link.
+    `tone="auto"` follows the theme; `"negative"` is for a dark surface in
+    either theme. */
+export function InceptionArt({ height = 56, tone = "auto" }: { height?: number; tone?: "auto" | "negative" }) {
+  const width = Math.round(height * RATIO);
+  if (tone === "negative") {
+    // eslint-disable-next-line @next/next/no-img-element
+    return <img src={DARK} width={width} height={height} alt="NVIDIA Inception Program" className="block shrink-0" />;
+  }
+  return (
+    <>
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img src={LIGHT} width={width} height={height} alt="NVIDIA Inception Program" className="block shrink-0 dark:hidden" />
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img src={DARK} width={width} height={height} alt="NVIDIA Inception Program" className="hidden shrink-0 dark:block" />
+    </>
+  );
+}
+
 export function InceptionBadge({ height = 56, className = "" }: { height?: number; className?: string }) {
   const width = Math.round(height * RATIO);
   return (
