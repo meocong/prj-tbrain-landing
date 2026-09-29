@@ -8,9 +8,8 @@
  * them — NVIDIA's brand rules. The CSS swaps the two with the theme, so there
  * is no flash of the wrong one.
  *
- * Placement follows what member startups most often do (research of
- * 2026-09-29): a small "program membership" line near the end of the home
- * page, and the badge in the footer — not in the hero.
+ * Shown under the home hero's calls to action, inside the hero's glass chip,
+ * and in the footer on every page (HeroSection, Footer).
  */
 
 export const INCEPTION_URL = "https://www.nvidia.com/en-us/startups/";

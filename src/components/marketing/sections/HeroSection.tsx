@@ -1,5 +1,6 @@
 import { ArrowRight, Sparkles, ChevronDown } from "lucide-react";
 import Link from "next/link";
+import { InceptionBadge } from "@/components/marketing/InceptionBadge";
 import { VideoBackground } from "@/components/marketing/fx/VideoBackground";
 
 export function HeroSection() {
@@ -148,8 +149,19 @@ export function HeroSection() {
           </Link>
         </div>
 
+        {/* NVIDIA Inception membership, as member startups show it: a small
+            trust mark under the calls to action (Gatsby, Trust3). The label
+            takes the keyword row's type so the pair reads as part of the hero;
+            the badge keeps its own frame, so it gets no chip around it. */}
+        <div className="hero-reveal hero-reveal-5 mt-10 flex items-center justify-center gap-3">
+          <span className="text-[11px] uppercase tracking-wider" style={{ color: "var(--hero-subtle)" }}>
+            Member of
+          </span>
+          <InceptionBadge height={34} />
+        </div>
+
         <div
-          className="hero-reveal hero-reveal-5 absolute bottom-8 left-1/2 flex -translate-x-1/2 flex-col items-center gap-1"
+          className="hero-reveal hero-reveal-5 absolute bottom-8 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-1 md:flex [@media(max-height:860px)]:hidden"
           style={{ color: "var(--hero-scroll)", animationIterationCount: 1 }}
         >
           <span className="text-[10px] uppercase tracking-widest">Scroll</span>
