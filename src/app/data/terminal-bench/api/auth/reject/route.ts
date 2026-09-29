@@ -13,7 +13,7 @@ function page(title: string, body: string): NextResponse {
     `<!doctype html><html><head><meta charset="utf-8"><title>${title}</title>
     <style>body{font-family:Inter,Helvetica,Arial,sans-serif;background:#FAFAF7;color:#0e1b2e;padding:80px 24px}
     .card{max-width:520px;margin:0 auto;background:#fff;border:1px solid #E5E7EB;border-radius:16px;padding:32px}
-    h1{font-size:22px;margin:0 0 12px}p{color:#78818f;font-size:15px}</style></head>
+    h1{font-size:22px;margin:0 0 12px}p{color:#5f6875;font-size:15px}</style></head>
     <body><div class="card">${body}</div></body></html>`,
     { status: 200, headers: { "content-type": "text/html; charset=utf-8" } }
   );

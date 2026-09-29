@@ -5,7 +5,8 @@
  * mobile/tablet where HeroSideRail is hidden. Same 5 phases, cycles same beat.
  */
 import { useEffect, useState } from "react";
-import { motion, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
+import { useReducedMotion } from "@/lib/motion-pref";
 
 const PHASES = [
   { k: "collect",    label: "COLLECT",    color: "#4cb5ff" },

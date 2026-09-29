@@ -67,6 +67,8 @@ const rrdSrc = (slug: string) => `/samples/rrd/${slug}.rrd`;
 
 export function RigExplorer({ slug, title, onClose }: { slug: string; title: string; onClose: () => void }) {
   const host = useRef<HTMLDivElement>(null);
+  const panel = useRef<HTMLDivElement>(null);
+  const closeBtn = useRef<HTMLButtonElement>(null);
   const [state, setState] = useState<"loading" | "ready" | "error">("loading");
   const entry = INDEX[slug];
 
@@ -100,6 +102,32 @@ export function RigExplorer({ slug, title, onClose }: { slug: string; title: str
     };
   }, [slug]);
 
+  /* Focus moves into the layer on open and back to what opened it on close;
+     Tab stays inside, as the record modal's does. */
+  useEffect(() => {
+    const opener = document.activeElement as HTMLElement | null;
+    closeBtn.current?.focus();
+    const onTab = (e: KeyboardEvent) => {
+      if (e.key !== "Tab" || !panel.current) return;
+      const f = panel.current.querySelectorAll<HTMLElement>('a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"]), canvas');
+      if (!f.length) return;
+      const first = f[0];
+      const last = f[f.length - 1];
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    };
+    window.addEventListener("keydown", onTab, true);
+    return () => {
+      window.removeEventListener("keydown", onTab, true);
+      opener?.focus?.();
+    };
+  }, []);
+
   /* Escape closes this layer only. The record modal listens on window in the
      bubble phase; this listens in the capture phase and stops the event, so one
      press does not close both. */
@@ -115,11 +143,13 @@ export function RigExplorer({ slug, title, onClose }: { slug: string; title: str
 
   return createPortal(
     <div
+      ref={panel}
       className="samples-scope fixed inset-0 z-[120] flex flex-col"
       style={{ background: "#16161a" }}
       role="dialog"
       aria-modal="true"
       aria-label={`${title} — 3D view`}
+      aria-describedby="rig-explorer-desc"
       /* Rendered through a portal but still a React child of the modal, whose
          backdrop closes on click. Clicks here must not reach it. */
       onClick={(e) => e.stopPropagation()}
@@ -135,7 +165,7 @@ export function RigExplorer({ slug, title, onClose }: { slug: string; title: str
           <h2 className="mt-1 truncate text-base font-medium md:text-lg" style={{ fontFamily: "var(--font-heading)" }}>
             {title}
           </h2>
-          <p className="mt-1 text-[11px] leading-relaxed" style={{ color: "rgba(232,232,234,0.62)" }}>
+          <p id="rig-explorer-desc" className="mt-1 text-[11px] leading-relaxed" style={{ color: "rgba(232,232,234,0.7)" }}>
             {entry?.source === "handpose-pipeline" ? (
               /* The hand-pose team's recording of this capture, repacked: hands
                  fitted by the production pipeline (MINT boxes, HaWoR/MANO, RTMPose
@@ -172,6 +202,7 @@ export function RigExplorer({ slug, title, onClose }: { slug: string; title: str
           .rrd{entry ? ` · ${(entry.bytes / 1e6).toFixed(1)} MB` : ""}
         </a>
         <button
+          ref={closeBtn}
           type="button"
           onClick={onClose}
           aria-label="Close 3D view"
@@ -182,7 +213,15 @@ export function RigExplorer({ slug, title, onClose }: { slug: string; title: str
         </button>
       </header>
       <div className="relative min-h-0 flex-1">
-        <div ref={host} className="absolute inset-0" />
+        {/* The viewer draws to a canvas a screen reader cannot read; the
+            description above (aria-describedby) says what it shows, and the
+            same capture plays as ordinary video in the record window. */}
+        <div
+          ref={host}
+          className="absolute inset-0"
+          role="application"
+          aria-label="Interactive 3D viewer. Drag to orbit, scroll to zoom. The same capture plays as video in the record window."
+        />
         {/* Rerun draws its own progress bar while the ~50 MB viewer loads,
             so only a failure needs saying here. */}
         {state === "error" && (

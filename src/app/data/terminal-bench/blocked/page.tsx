@@ -8,13 +8,13 @@ export const metadata = {
 export default function BlockedPage() {
   return (
     <main className="container mx-auto flex min-h-[60vh] max-w-xl flex-col justify-center px-6 py-20 text-center">
-      <p className="font-family_avt text-xs uppercase tracking-[0.2em] text-[#78818f]">
+      <p className="font-family_avt text-xs uppercase tracking-[0.2em] text-[#5f6875]">
         / rate limited
       </p>
       <h1 className="mt-3 text-4xl font-medium text-[#0e1b2e] md:text-5xl">
         Too many attempts
       </h1>
-      <p className="mt-5 text-base text-[#78818f]">
+      <p className="mt-5 text-base text-[#5f6875]">
         We&apos;ve temporarily paused requests from your IP to protect the
         showcase. Please wait a few minutes and try again. If you believe this
         is a mistake, reach out to{" "}

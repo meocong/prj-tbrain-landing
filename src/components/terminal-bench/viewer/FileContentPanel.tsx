@@ -123,7 +123,7 @@ export function FileContentPanel({
           {manifestLoading ? (
             <TreeSkeleton />
           ) : noFiles ? (
-            <p className="text-sm text-[#78818f]">No files indexed.</p>
+            <p className="text-sm text-[#5f6875]">No files indexed.</p>
           ) : (
             <FileExplorer entries={files!} activePath={active} onSelect={setActive} />
           )}
@@ -134,7 +134,7 @@ export function FileContentPanel({
             <p className="truncate font-mono text-xs text-[#0e1b2e]">
               {active ?? (manifestLoading ? "Loading files…" : "No files")}
             </p>
-            {loading ? <span className="text-xs text-[#78818f]">loading…</span> : null}
+            {loading ? <span className="text-xs text-[#5f6875]">loading…</span> : null}
           </div>
           <div className="max-h-[75vh] overflow-auto p-5 text-sm">
             {error ? (
@@ -147,11 +147,11 @@ export function FileContentPanel({
                 dangerouslySetInnerHTML={{ __html: html }}
               />
             ) : noFiles ? (
-              <p className="text-sm text-[#78818f]">
+              <p className="text-sm text-[#5f6875]">
                 This sample has no indexed files.
               </p>
             ) : html === "" ? (
-              <p className="text-sm text-[#78818f]">
+              <p className="text-sm text-[#5f6875]">
                 Empty file — nothing to preview.
               </p>
             ) : (

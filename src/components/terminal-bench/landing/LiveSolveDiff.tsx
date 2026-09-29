@@ -28,7 +28,7 @@ export async function LiveSolveDiff() {
             <SectionHeading label="real artifact" className="mb-0" centered>
               One expert solution. <span className="gradient-text">Readable preview.</span>
             </SectionHeading>
-            <p className="mt-5 mx-auto max-w-xl text-base leading-relaxed text-[#78818f]">
+            <p className="mt-5 mx-auto max-w-xl text-base leading-relaxed text-[#5f6875]">
               This compact <code className="font-mono text-[#0e1b2e]">solve.sh</code>{" "}
               preview shows how a Terminal Bench sample is patched and verified
               inside <code className="font-mono text-[#0e1b2e]">tbrain-{FEATURED_SLUG}</code>.
@@ -38,13 +38,13 @@ export async function LiveSolveDiff() {
           <div className="grid grid-cols-2 gap-8 text-center text-[#0e1b2e]">
             <div>
               <p className="text-3xl font-medium md:text-4xl">{lineCount}</p>
-              <p className="font-family_avt mt-1 text-[11px] uppercase tracking-widest text-[#78818f]">
+              <p className="font-family_avt mt-1 text-[11px] uppercase tracking-widest text-[#5f6875]">
                 lines of bash
               </p>
             </div>
             <div>
               <p className="text-3xl font-medium md:text-4xl">0</p>
-              <p className="font-family_avt mt-1 text-[11px] uppercase tracking-widest text-[#78818f]">
+              <p className="font-family_avt mt-1 text-[11px] uppercase tracking-widest text-[#5f6875]">
                 llm judges involved
               </p>
             </div>
@@ -61,7 +61,7 @@ export async function LiveSolveDiff() {
                 solution/solve.sh
               </span>
             </div>
-            <span className="font-family_avt text-[11px] uppercase tracking-widest text-[#6C3CF4]">
+            <span className="font-family_avt text-[11px] uppercase tracking-widest text-[#A78BFA]">
               bash · github-dark
             </span>
           </div>

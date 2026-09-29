@@ -5,7 +5,8 @@
  * Particle-flow connectors, active-phase pulse, phase-hover reveal.
  */
 import { useState } from "react";
-import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
+import { useReducedMotion } from "@/lib/motion-pref";
 import { PIPELINE_OVERVIEW } from "@/lib/landing/physical-ai-qc";
 
 const COLOR_MAP: Record<string, string> = {
@@ -61,7 +62,9 @@ export function PipelineDiagram({ highlight, compact = false }: { highlight?: st
       <svg
         viewBox={`0 0 ${W} ${H}`}
         xmlns="http://www.w3.org/2000/svg"
-        role="img"
+        /* A group, not an image: each phase is a link, and role="img" would
+           hide them from screen readers while leaving them in the tab order. */
+        role="group"
         aria-label="Tbrain data foundry pipeline"
         style={{ minWidth: 760, width: "100%", height: "auto", display: "block" }}
       >
@@ -117,6 +120,8 @@ export function PipelineDiagram({ highlight, compact = false }: { highlight?: st
               aria-label={`${p.label} — ${PHASE_HREF_LABEL[p.id] ?? ""}`}
               onMouseEnter={() => setHoverIdx(i)}
               onMouseLeave={() => setHoverIdx(null)}
+              onFocus={() => setHoverIdx(i)}
+              onBlur={() => setHoverIdx(null)}
               style={{ cursor: href ? "pointer" : "default" }}
             >
               {/* connector */}

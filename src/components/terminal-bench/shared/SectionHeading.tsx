@@ -13,7 +13,7 @@ export function SectionHeading({
 }) {
   return (
     <div className={`mb-14 ${centered ? "text-center" : ""} ${className}`}>
-      <p className="font-family_avt text-xs uppercase tracking-[0.2em] text-[#78818f]">
+      <p className="font-family_avt text-xs uppercase tracking-[0.2em] text-[#5f6875]">
         / {label}
       </p>
       <h2

@@ -10,7 +10,7 @@ export const metadata = {
 
 export default function TerminalBenchLayout({ children }: { children: ReactNode }) {
   return (
-    <div className="terminal-bench-themeable min-h-screen bg-[#020617]">
+    <div className="terminal-bench-themeable min-h-screen bg-[#FAFAF7] dark:bg-[#020617]">
       <Header />
       <div>{children}</div>
       <Footer />

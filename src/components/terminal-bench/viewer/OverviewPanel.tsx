@@ -158,20 +158,20 @@ export function OverviewPanel({
       {/* Task brief */}
       <section className="rounded-3xl border border-[#E5E7EB] bg-white p-8">
         <div className="flex flex-wrap items-center gap-2">
-          <p className="font-family_avt text-[10px] uppercase tracking-[0.2em] text-[#78818f]">
+          <p className="font-family_avt text-[10px] uppercase tracking-[0.2em] text-[#5f6875]">
             task brief
           </p>
           <span className="h-1 w-1 rounded-full bg-[#E5E7EB]" />
           <DifficultyBadge value={sample.difficulty} />
           {sample.category ? (
-            <span className="rounded-full border border-[#E5E7EB] bg-[#FAFAF7] px-3 py-1 text-xs text-[#78818f]">
+            <span className="rounded-full border border-[#E5E7EB] bg-[#FAFAF7] px-3 py-1 text-xs text-[#5f6875]">
               {sample.category}
             </span>
           ) : null}
           {(sample.tags ?? []).map((t) => (
             <span
               key={t}
-              className="rounded-full border border-[#E5E7EB] bg-[#FAFAF7] px-3 py-1 text-xs text-[#78818f]"
+              className="rounded-full border border-[#E5E7EB] bg-[#FAFAF7] px-3 py-1 text-xs text-[#5f6875]"
             >
               {t}
             </span>
@@ -185,12 +185,12 @@ export function OverviewPanel({
             ))}
           </div>
         ) : (
-          <p className="mt-6 text-sm italic text-[#78818f]">
+          <p className="mt-6 text-sm italic text-[#5f6875]">
             No task description captured.
           </p>
         )}
 
-        <div className="mt-7 flex flex-wrap items-center gap-3 border-t border-[#E5E7EB] pt-6 text-xs text-[#78818f]">
+        <div className="mt-7 flex flex-wrap items-center gap-3 border-t border-[#E5E7EB] pt-6 text-xs text-[#5f6875]">
           <span className="font-family_avt uppercase tracking-widest">
             ingested · <span className="text-[#0e1b2e]">{formatIngested(sample.created_at)}</span>
           </span>
@@ -206,7 +206,7 @@ export function OverviewPanel({
             key={s.label}
             className="rounded-2xl border border-[#E5E7EB] bg-white p-5"
           >
-            <p className="font-family_avt text-[10px] uppercase tracking-widest text-[#78818f]">
+            <p className="font-family_avt text-[10px] uppercase tracking-widest text-[#5f6875]">
               {s.label}
             </p>
             <p className="mt-2 text-2xl font-semibold text-[#0e1b2e]">{s.value}</p>
@@ -216,10 +216,10 @@ export function OverviewPanel({
 
       {/* Stack detection */}
       <section className="rounded-2xl border border-[#E5E7EB] bg-white p-6">
-        <p className="font-family_avt text-xs uppercase tracking-widest text-[#78818f]">
+        <p className="font-family_avt text-xs uppercase tracking-widest text-[#5f6875]">
           Stack detected
         </p>
-        <p className="mt-1 text-xs text-[#78818f]">
+        <p className="mt-1 text-xs text-[#5f6875]">
           Tooling inferred from the ingested file tree.
         </p>
         <div className="mt-5 flex flex-wrap gap-2">
@@ -231,11 +231,11 @@ export function OverviewPanel({
                 className="rounded-full border border-[#E5E7EB] bg-[#FAFAF7] px-3 py-1 text-xs text-[#0e1b2e]"
               >
                 <span className="font-semibold text-[#6C3CF4]">{t.name}</span>{" "}
-                <span className="text-[#78818f]">· {t.from}</span>
+                <span className="text-[#5f6875]">· {t.from}</span>
               </span>
             ))
           ) : (
-            <p className="text-sm italic text-[#78818f]">
+            <p className="text-sm italic text-[#5f6875]">
               No recognized tooling detected in the ingested file tree.
             </p>
           )}
@@ -245,10 +245,10 @@ export function OverviewPanel({
       {/* Directory map + Language mix */}
       <div className="grid gap-6 lg:grid-cols-2">
         <section className="rounded-2xl border border-[#E5E7EB] bg-white p-6">
-          <p className="font-family_avt text-xs uppercase tracking-widest text-[#78818f]">
+          <p className="font-family_avt text-xs uppercase tracking-widest text-[#5f6875]">
             Repository map
           </p>
-          <p className="mt-1 text-xs text-[#78818f]">
+          <p className="mt-1 text-xs text-[#5f6875]">
             Top-level directories by file count.
           </p>
           <div className="mt-5 space-y-3">
@@ -258,7 +258,7 @@ export function OverviewPanel({
                 <div key={d.dir}>
                   <div className="flex items-baseline justify-between text-sm">
                     <span className="font-mono text-[#0e1b2e]">{d.dir}/</span>
-                    <span className="text-xs text-[#78818f]">
+                    <span className="text-xs text-[#5f6875]">
                       {d.count} files · {formatBytes(d.bytes)}
                     </span>
                   </div>
@@ -275,10 +275,10 @@ export function OverviewPanel({
         </section>
 
         <section className="rounded-2xl border border-[#E5E7EB] bg-white p-6">
-          <p className="font-family_avt text-xs uppercase tracking-widest text-[#78818f]">
+          <p className="font-family_avt text-xs uppercase tracking-widest text-[#5f6875]">
             Language mix
           </p>
-          <p className="mt-1 text-xs text-[#78818f]">
+          <p className="mt-1 text-xs text-[#5f6875]">
             File extensions by count, top {topExts.length}.
           </p>
           <div className="mt-5 flex flex-wrap gap-2">
@@ -288,7 +288,7 @@ export function OverviewPanel({
                 className="rounded-full border border-[#E5E7EB] bg-[#FAFAF7] px-3 py-1 text-xs text-[#0e1b2e]"
               >
                 <span className="font-mono text-[#6C3CF4]">{ext}</span>{" "}
-                <span className="text-[#78818f]">× {count}</span>
+                <span className="text-[#5f6875]">× {count}</span>
               </span>
             ))}
           </div>
@@ -299,22 +299,22 @@ export function OverviewPanel({
       <section className="rounded-2xl border border-[#E5E7EB] bg-white p-6">
         <div className="flex items-baseline justify-between">
           <div>
-            <p className="font-family_avt text-xs uppercase tracking-widest text-[#78818f]">
+            <p className="font-family_avt text-xs uppercase tracking-widest text-[#5f6875]">
               Test harness preview
             </p>
-            <p className="mt-1 text-xs text-[#78818f]">
+            <p className="mt-1 text-xs text-[#5f6875]">
               First {testsPreview.length} of {tests.length} pytest cases parsed from{" "}
               <span className="font-mono">tests/test_outputs.py</span>.
             </p>
           </div>
           {testsMore > 0 ? (
-            <span className="rounded-full border border-[#E5E7EB] bg-[#FAFAF7] px-3 py-1 text-xs text-[#78818f]">
+            <span className="rounded-full border border-[#E5E7EB] bg-[#FAFAF7] px-3 py-1 text-xs text-[#5f6875]">
               +{testsMore} more in Tests tab
             </span>
           ) : null}
         </div>
         {tests.length === 0 ? (
-          <p className="mt-5 text-sm italic text-[#78818f]">
+          <p className="mt-5 text-sm italic text-[#5f6875]">
             No tests parsed — the sample may use a non-pytest harness.
           </p>
         ) : (
@@ -330,7 +330,7 @@ export function OverviewPanel({
                 <div className="min-w-0 flex-1">
                   <p className="truncate font-mono text-sm text-[#0e1b2e]">{t.name}</p>
                   {t.docstring ? (
-                    <p className="mt-1 text-xs leading-relaxed text-[#78818f]">
+                    <p className="mt-1 text-xs leading-relaxed text-[#5f6875]">
                       {firstSentence(t.docstring)}
                     </p>
                   ) : null}
@@ -342,7 +342,7 @@ export function OverviewPanel({
       </section>
 
       {/* Footer pill → next steps */}
-      <section className="flex flex-wrap items-center justify-between gap-4 rounded-2xl border border-dashed border-[#E5E7EB] bg-[#FAFAF7] px-6 py-5 text-xs text-[#78818f]">
+      <section className="flex flex-wrap items-center justify-between gap-4 rounded-2xl border border-dashed border-[#E5E7EB] bg-[#FAFAF7] px-6 py-5 text-xs text-[#5f6875]">
         <div className="flex flex-wrap items-center gap-2">
           <span>Jump to</span>
           {[

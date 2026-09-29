@@ -6,7 +6,8 @@
  * to simulate the foundry running.
  */
 import { useEffect, useState } from "react";
-import { motion, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
+import { useReducedMotion } from "@/lib/motion-pref";
 
 const PHASES = [
   { k: "collect",    label: "COLLECT",    detail: "50–500 packs",       color: "var(--bp-blue)" },

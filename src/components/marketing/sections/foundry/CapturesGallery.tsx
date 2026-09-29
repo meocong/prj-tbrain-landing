@@ -5,7 +5,8 @@ import Image from "next/image";
 import { REAL_SAMPLES, type QcState, type RealSample, type SampleGroup } from "@/lib/landing/physical-ai";
 import { Sheet, SheetHeading } from "@/components/marketing/blueprint/kit";
 import { StaggerContainer, STAGGER_ITEM } from "@/components/marketing/fx/RevealOnScroll";
-import { motion, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
+import { useReducedMotion } from "@/lib/motion-pref";
 import { QcChip } from "./QcChip";
 
 const BORDER_BY_STATE: Record<QcState, string | undefined> = {

@@ -1,5 +1,6 @@
 "use client";
 
+import { prefersReducedMotion } from "@/lib/motion-pref";
 /**
  * Lazy, capability-gated wrappers for the WebGL scenes.
  *
@@ -22,7 +23,7 @@ function useCanRender3D() {
   const [ok, setOk] = useState(false);
   useEffect(() => {
     try {
-      const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      const reduce = prefersReducedMotion();
       const small = window.matchMedia("(max-width: 820px)").matches;
       const c = document.createElement("canvas");
       const webgl = !!(c.getContext("webgl2") || c.getContext("webgl"));

@@ -63,7 +63,7 @@ const TableStart = () => {
           <div className="max-w-screen-sm mx-auto border-2 border-gray-300 py-16 px-3 md:px-14 rounded-3xl text-center">
             <CheckCircle className="mx-auto h-16 w-16 text-green-500" />
             <h3 className="mt-4 text-3xl font-medium">Thank you!</h3>
-            <p className="mt-2 text-lg text-[#78818f]">
+            <p className="mt-2 text-lg text-[#5f6875]">
               We&apos;ll get back to you as soon as possible.
             </p>
           </div>

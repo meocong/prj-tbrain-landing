@@ -1,6 +1,7 @@
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
+import { useReducedMotion } from "@/lib/motion-pref";
 import { Radio, Cpu, Video, Activity } from "lucide-react";
 
 const CHIPS = [

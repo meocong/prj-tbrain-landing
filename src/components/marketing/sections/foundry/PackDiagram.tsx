@@ -8,6 +8,7 @@
  * (uses currentColor + --bp tokens). No WebGL.
  */
 import { motion } from "framer-motion";
+import { useReducedMotion } from "@/lib/motion-pref";
 import { COLLECTION_PACK } from "@/lib/landing/physical-ai";
 
 /* numbered hotspot positions on the exploded SVG (right edge of each part) */
@@ -66,6 +67,7 @@ function ExplodedSVG() {
 }
 
 function FlowStrip() {
+  const reduce = useReducedMotion();
   const nodes = ["Capture", "Hardware-clock sync", "NVMe cache", "Sync → factory"];
   return (
     <div className="mt-6 flex items-center gap-2 overflow-hidden rounded-lg px-3 py-3 bp-card">
@@ -74,12 +76,12 @@ function FlowStrip() {
           <span className="bp-mono whitespace-nowrap" style={{ fontSize: 10, color: i === nodes.length - 1 ? "var(--bp-cyan)" : "var(--bp-ink-dim)" }}>{n}</span>
           {i < nodes.length - 1 && (
             <div className="relative h-px flex-1" style={{ background: "var(--bp-line)" }}>
-              <motion.span
+              {!reduce && <motion.span
                 initial={{ left: "0%", opacity: 0 }}
                 animate={{ left: ["0%", "100%"], opacity: [0, 1, 0] }}
                 transition={{ duration: 1.6, repeat: Infinity, delay: i * 0.3, ease: "easeInOut" }}
                 style={{ position: "absolute", top: -2.5, width: 6, height: 6, borderRadius: 99, background: "var(--bp-cyan)" }}
-              />
+              />}
             </div>
           )}
         </div>

@@ -3,7 +3,8 @@
 import { LEROBOT_EXPORT } from "@/lib/landing/physical-ai";
 import { Sheet, SheetHeading } from "@/components/marketing/blueprint/kit";
 import { CountUp } from "@/components/marketing/fx/CountUp";
-import { motion, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
+import { useReducedMotion } from "@/lib/motion-pref";
 
 const HERO_STATS: { k: string; v: number; sub?: string }[] = [
   { k: "Episodes",  v: LEROBOT_EXPORT.meta.total_episodes,  sub: "chunk-000" },
@@ -81,7 +82,7 @@ export function LerobotPreview() {
             <span>meta/info.json · chunk-000</span>
             <span style={{ color: "var(--bp-cyan)" }}>LeRobot v2.0</span>
           </div>
-          <pre
+          <pre tabIndex={0}
             className="bp-mono"
             style={{
               margin: 0,

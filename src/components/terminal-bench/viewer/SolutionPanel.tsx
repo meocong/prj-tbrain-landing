@@ -91,7 +91,7 @@ export function SolutionPanel({
                 dangerouslySetInnerHTML={{ __html: html }}
               />
             ) : (
-              <p className="text-sm text-[#78818f]">Loading…</p>
+              <p className="text-sm text-[#5f6875]">Loading…</p>
             )}
           </div>
 

@@ -61,7 +61,7 @@ export async function TrustStrip() {
               </p>
               <p className="mt-3 text-sm font-semibold text-[#0e1b2e]">{s.label}</p>
               {s.sub ? (
-                <p className="font-family_avt mt-1 text-xs uppercase tracking-widest text-[#78818f]">
+                <p className="font-family_avt mt-1 text-xs uppercase tracking-widest text-[#5f6875]">
                   {s.sub}
                 </p>
               ) : null}

@@ -16,7 +16,8 @@
  * turntable) at /public/videos/worker-hero.mp4 — 1-line swap.
  */
 import { useState, useEffect } from "react";
-import { motion, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
+import { useReducedMotion } from "@/lib/motion-pref";
 import Link from "next/link";
 import { ArrowRight, ArrowUpRight, Check, ChevronDown, RotateCw, Video, Clock, ShieldCheck, PackageCheck, Scan } from "lucide-react";
 import { FOUNDRY_HERO, PROBLEM, PROOF_POINTS, HERO_MIX } from "@/lib/landing/physical-ai";

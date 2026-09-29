@@ -7,6 +7,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ChevronDown, Menu, X } from "lucide-react";
 import { ThemeToggle } from "@/components/theme/ThemeToggle";
+import { MotionToggle } from "@/components/theme/MotionToggle";
 import { CATEGORIES, categoryHeroIsDark } from "@/lib/samples/categories";
 
 /**
@@ -323,11 +324,14 @@ const Header = () => {
           </nav>
 
           <div className="flex items-center gap-2">
+            <MotionToggle />
             <ThemeToggle />
             <button
+              type="button"
               onClick={() => setMobileOpen(!mobileOpen)}
               className="rounded-lg p-2 lg:hidden"
               aria-label="Toggle menu"
+              aria-expanded={mobileOpen}
             >
               {mobileOpen ? <X className={`h-6 w-6 ${tokens.icon}`} /> : <Menu className={`h-6 w-6 ${tokens.icon}`} />}
             </button>

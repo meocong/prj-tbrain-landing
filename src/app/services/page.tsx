@@ -17,6 +17,7 @@ import {
 } from "lucide-react";
 import Header from "@/components/common/Header";
 import Footer from "@/components/common/Footer";
+import { ink } from "@/lib/ink";
 
 export const metadata: Metadata = {
   title: "Services",
@@ -189,15 +190,15 @@ export default function ServicesPage() {
                 >
                   <div className="flex items-start justify-between gap-4">
                     <span
-                      className="inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-xl"
-                      style={{ background: `${service.accent}18`, color: service.accent, border: `1px solid ${service.accent}33` }}
+                      className="ink inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-xl"
+                      style={{ background: `${service.accent}18`, border: `1px solid ${service.accent}33`, ...ink(service.accent) }}
                     >
                       <Icon className="h-6 w-6" />
                     </span>
                     <Link
                       href={service.caseStudy.href}
-                      className="inline-flex items-center gap-1 text-xs font-semibold"
-                      style={{ color: service.accent }}
+                      className="ink inline-flex items-center gap-1 text-xs font-semibold"
+                      style={ink(service.accent)}
                     >
                       {service.caseStudy.label} <ArrowRight className="h-3.5 w-3.5" />
                     </Link>
@@ -235,7 +236,7 @@ export default function ServicesPage() {
                       <ul className="mt-2 space-y-1.5">
                         {service.operations.map((item) => (
                           <li key={item} className="flex items-center gap-2 text-xs" style={{ color: "var(--text-secondary)" }}>
-                            <CheckCircle2 className="h-3.5 w-3.5 shrink-0" style={{ color: service.accent }} />
+                            <CheckCircle2 className="ink h-3.5 w-3.5 shrink-0" style={ink(service.accent)} />
                             {item}
                           </li>
                         ))}
@@ -289,7 +290,7 @@ export default function ServicesPage() {
             className="mx-auto max-w-4xl rounded-3xl border px-6 py-10"
             style={{ background: "var(--bg-card)", borderColor: "var(--border-subtle)" }}
           >
-            <Cpu className="mx-auto h-10 w-10" style={{ color: "#10B981" }} />
+            <Cpu className="ink mx-auto h-10 w-10" style={ink("#10B981")} />
             <h2 className="mt-5 text-3xl font-semibold md:text-4xl" style={{ fontFamily: "var(--font-heading)", letterSpacing: "0" }}>
               Need a service line scoped to your model?
             </h2>

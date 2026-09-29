@@ -1,5 +1,6 @@
 "use client";
 
+import { prefersReducedMotion, useMotionPaused } from "@/lib/motion-pref";
 import { useRef, useState, useEffect } from "react";
 import { Canvas, useFrame, useThree, extend } from "@react-three/fiber";
 import { shaderMaterial } from "@react-three/drei";
@@ -136,10 +137,11 @@ export function PlasmaBackground({
   const hostRef = useRef<HTMLDivElement | null>(null);
   const [glReady, setGlReady] = useState(false);
   const [inView, setInView] = useState(true);
+  const paused = useMotionPaused();
 
   useEffect(() => {
     if (typeof window === "undefined") return;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    if (prefersReducedMotion()) return;
     if (window.innerWidth < 768) return;
     try {
       const c = document.createElement("canvas");
@@ -175,7 +177,7 @@ export function PlasmaBackground({
           camera={{ zoom: 1, position: [0, 0, 1] }}
           gl={{ antialias: false, alpha: false, powerPreference: "high-performance" }}
           dpr={1}
-          frameloop={inView ? "always" : "never"}
+          frameloop={inView && !paused ? "always" : "never"}
           style={{ position: "absolute", inset: 0 }}
         >
           <PlasmaPlane tint={tint} />

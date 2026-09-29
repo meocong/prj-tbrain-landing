@@ -10,14 +10,14 @@ export function NumberedBlock({
   return (
     <div className="group border-t border-[#E5E7EB] py-10">
       <div className="flex items-baseline gap-8">
-        <span className="font-family_avt text-sm tracking-widest text-[#78818f]">
+        <span className="font-family_avt text-sm tracking-widest text-[#5f6875]">
           {n}
         </span>
         <div className="flex-1">
           <h3 className="text-2xl font-semibold text-[#0e1b2e] md:text-3xl">
             {title}
           </h3>
-          <p className="mt-3 max-w-2xl text-base leading-relaxed text-[#78818f]">
+          <p className="mt-3 max-w-2xl text-base leading-relaxed text-[#5f6875]">
             {children}
           </p>
         </div>

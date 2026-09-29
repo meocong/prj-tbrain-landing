@@ -173,7 +173,7 @@ export function PasscodeForm() {
           type="submit"
           disabled={state.kind === "checking"}
           className="inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-semibold transition-transform active:scale-[0.98] disabled:opacity-70"
-          style={{ background: C.accent, color: "#FFFFFF" }}
+          style={{ background: C.accent, color: "var(--sm-on-accent)" }}
         >
           {state.kind === "checking" ? (
             <>

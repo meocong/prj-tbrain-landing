@@ -1,7 +1,8 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { animate, useInView, useMotionValue, useReducedMotion } from "framer-motion";
+import { animate, useInView, useMotionValue } from "framer-motion";
+import { useReducedMotion } from "@/lib/motion-pref";
 
 export function CountUp({
   value,

@@ -86,7 +86,7 @@ export default function ContactPage() {
             <h2 className="mt-4 text-3xl font-semibold" style={{ fontFamily: "var(--font-heading)" }}>
               Thank you!
             </h2>
-            <p className="mt-2 text-lg text-[#78818f]">
+            <p className="mt-2 text-lg text-[#5f6875]">
               We received your message and will get back to you within 1-2
               business days.
             </p>
@@ -106,7 +106,7 @@ export default function ContactPage() {
             <h1 className="text-4xl font-medium md:text-5xl" style={{ fontFamily: "var(--font-heading)" }}>
               Get in <span className="gradient-text">touch</span>
             </h1>
-            <p className="mx-auto mt-4 max-w-xl text-lg text-[#78818f]">
+            <p className="mx-auto mt-4 max-w-xl text-lg text-[#5f6875]">
               Tell us about your project and we&apos;ll get back to you with a
               tailored solution.
             </p>
@@ -115,59 +115,71 @@ export default function ContactPage() {
           <form onSubmit={handleSubmit} className="mt-12 space-y-6">
             <div className="grid gap-6 sm:grid-cols-2">
               <div>
-                <label className="mb-1.5 block text-sm font-medium" style={{ color: "var(--text-secondary)" }}>
+                <label htmlFor="contact-fullName" className="mb-1.5 block text-sm font-medium" style={{ color: "var(--text-secondary)" }}>
                   Full Name *
                 </label>
                 <input
+                  id="contact-fullName"
+                  name="fullName"
+                  autoComplete="name"
                   type="text"
                   required
                   value={form.fullName}
                   onChange={(e) => setForm((f) => ({ ...f, fullName: e.target.value }))}
-                  className="w-full rounded-xl border px-4 py-3 text-sm outline-none transition-colors focus:border-[#6C3CF4]"
+                  className="w-full rounded-xl border px-4 py-3 text-sm outline-none transition-colors focus:border-[#6C3CF4] focus-visible:ring-2 focus-visible:ring-[#6C3CF4]/40"
                   style={{ borderColor: "var(--border-default)", backgroundColor: "var(--bg-input)" }}
                 />
               </div>
               <div>
-                <label className="mb-1.5 block text-sm font-medium" style={{ color: "var(--text-secondary)" }}>
+                <label htmlFor="contact-email" className="mb-1.5 block text-sm font-medium" style={{ color: "var(--text-secondary)" }}>
                   Email *
                 </label>
                 <input
+                  id="contact-email"
+                  name="email"
+                  autoComplete="email"
                   type="email"
                   required
                   value={form.email}
                   onChange={(e) => setForm((f) => ({ ...f, email: e.target.value }))}
-                  className="w-full rounded-xl border px-4 py-3 text-sm outline-none transition-colors focus:border-[#6C3CF4]"
+                  className="w-full rounded-xl border px-4 py-3 text-sm outline-none transition-colors focus:border-[#6C3CF4] focus-visible:ring-2 focus-visible:ring-[#6C3CF4]/40"
                   style={{ borderColor: "var(--border-default)", backgroundColor: "var(--bg-input)" }}
                 />
               </div>
               <div>
-                <label className="mb-1.5 block text-sm font-medium" style={{ color: "var(--text-secondary)" }}>
+                <label htmlFor="contact-company" className="mb-1.5 block text-sm font-medium" style={{ color: "var(--text-secondary)" }}>
                   Company
                 </label>
                 <input
+                  id="contact-company"
+                  name="company"
+                  autoComplete="organization"
                   type="text"
                   value={form.company}
                   onChange={(e) => setForm((f) => ({ ...f, company: e.target.value }))}
-                  className="w-full rounded-xl border px-4 py-3 text-sm outline-none transition-colors focus:border-[#6C3CF4]"
+                  className="w-full rounded-xl border px-4 py-3 text-sm outline-none transition-colors focus:border-[#6C3CF4] focus-visible:ring-2 focus-visible:ring-[#6C3CF4]/40"
                   style={{ borderColor: "var(--border-default)", backgroundColor: "var(--bg-input)" }}
                 />
               </div>
               <div>
-                <label className="mb-1.5 block text-sm font-medium" style={{ color: "var(--text-secondary)" }}>
+                <label htmlFor="contact-role" className="mb-1.5 block text-sm font-medium" style={{ color: "var(--text-secondary)" }}>
                   Role
                 </label>
                 <input
+                  id="contact-role"
+                  name="role"
+                  autoComplete="organization-title"
                   type="text"
                   value={form.role}
                   onChange={(e) => setForm((f) => ({ ...f, role: e.target.value }))}
-                  className="w-full rounded-xl border px-4 py-3 text-sm outline-none transition-colors focus:border-[#6C3CF4]"
+                  className="w-full rounded-xl border px-4 py-3 text-sm outline-none transition-colors focus:border-[#6C3CF4] focus-visible:ring-2 focus-visible:ring-[#6C3CF4]/40"
                   style={{ borderColor: "var(--border-default)", backgroundColor: "var(--bg-input)" }}
                 />
               </div>
             </div>
 
             <div>
-              <label className="mb-1.5 block text-sm font-medium" style={{ color: "var(--text-secondary)" }}>
+              <label htmlFor="contact-message" className="mb-1.5 block text-sm font-medium" style={{ color: "var(--text-secondary)" }}>
                 Message *
               </label>
               {sampleContext && (
@@ -176,12 +188,14 @@ export default function ContactPage() {
                 </p>
               )}
               <textarea
+                  id="contact-message"
+                  name="message"
                 required
                 rows={5}
                 value={form.message}
                 onChange={(e) => setForm((f) => ({ ...f, message: e.target.value }))}
                 placeholder="Tell us about your project, timeline, and requirements..."
-                className="w-full resize-none rounded-xl border px-4 py-3 text-sm outline-none transition-colors focus:border-[#6C3CF4]"
+                className="w-full resize-none rounded-xl border px-4 py-3 text-sm outline-none transition-colors focus:border-[#6C3CF4] focus-visible:ring-2 focus-visible:ring-[#6C3CF4]/40"
                 style={{ borderColor: "var(--border-default)", backgroundColor: "var(--bg-input)" }}
               />
             </div>

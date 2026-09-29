@@ -63,7 +63,7 @@ function TerminalBenchRenderer({ row }: { row: SampleRow }) {
         </pre>
       </Section>
       <Section title="Tests">
-        <pre
+        <pre tabIndex={0}
           className="rounded-md p-3 text-[11px] overflow-x-auto"
           style={{ background: "var(--bg-input)", color: "var(--text-primary)" }}
         >
@@ -72,7 +72,7 @@ function TerminalBenchRenderer({ row }: { row: SampleRow }) {
       </Section>
       {spec && (
         <Section title="Spec">
-          <pre
+          <pre tabIndex={0}
             className="rounded-md p-3 text-[11px] overflow-x-auto"
             style={{ background: "var(--bg-input)", color: "var(--text-primary)" }}
           >

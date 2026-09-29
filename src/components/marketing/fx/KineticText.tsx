@@ -1,6 +1,7 @@
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
+import { useReducedMotion } from "@/lib/motion-pref";
 import { type ReactNode } from "react";
 
 type HeadlineTag = "h1" | "h2" | "h3" | "h4" | "p" | "span" | "div";

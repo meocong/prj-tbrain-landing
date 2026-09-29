@@ -1,7 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { motion, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
+import { useReducedMotion } from "@/lib/motion-pref";
 
 type Beat =
   | { kind: "cmd"; text: string; dwell?: number }
@@ -95,7 +96,7 @@ export function TerminalDevice() {
         <span className="h-3 w-3 rounded-full bg-[#ff5f57]" />
         <span className="h-3 w-3 rounded-full bg-[#febc2e]" />
         <span className="h-3 w-3 rounded-full bg-[#28c840]" />
-        <span className="font-family_avt ml-4 text-xs tracking-widest text-[#78818f]">
+        <span className="font-family_avt ml-4 text-xs tracking-widest text-[#5f6875]">
           tbrain — tb run
         </span>
       </div>

@@ -1,5 +1,6 @@
 "use client";
 
+import { prefersReducedMotion } from "@/lib/motion-pref";
 import { useEffect, useRef, useState } from "react";
 
 type Source = { src: string; srcMp4?: string; poster?: string };
@@ -47,7 +48,7 @@ export function VideoBackground({
 
   useEffect(() => {
     if (typeof window === "undefined") return;
-    setReducedMotion(window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+    setReducedMotion(prefersReducedMotion());
     const conn = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection;
     if (conn?.saveData) setSaveData(true);
   }, []);

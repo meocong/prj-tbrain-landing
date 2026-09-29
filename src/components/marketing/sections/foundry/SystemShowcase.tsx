@@ -8,6 +8,7 @@
  * Theme-aware (light/dark) via --bp tokens; framer-motion only (no WebGL).
  */
 import { motion } from "framer-motion";
+import { useReducedMotion } from "@/lib/motion-pref";
 import { Mic, Camera, Activity, Hand, Compass, Languages, Clock, Box, X, Check } from "lucide-react";
 import { Sheet, SheetHeading, FigLabel } from "@/components/marketing/blueprint/kit";
 import { RevealOnScroll, StaggerContainer, STAGGER_ITEM } from "@/components/marketing/fx/RevealOnScroll";
@@ -95,6 +96,7 @@ function FleetMonitor() {
 
 /* ── Local cluster sync (collection flow) ─────────────────────────── */
 function ClusterSync() {
+  const reduce = useReducedMotion();
   const groups = [
     { tag: "EDGE", color: "var(--bp-purple)", items: SYSTEM.cluster.filter((c) => c.layer === "edge") },
     { tag: "FACTORY", color: "var(--bp-cyan-soft)", items: SYSTEM.cluster.filter((c) => c.layer === "factory") },
@@ -117,7 +119,7 @@ function ClusterSync() {
             </div>
             {gi < groups.length - 1 && (
               <div className="absolute top-1/2 z-10 hidden md:block" style={{ right: -14, width: 28, height: 2, background: "var(--bp-line-strong)" }}>
-                <motion.span initial={{ left: 0, opacity: 0 }} animate={{ left: [0, 24], opacity: [0, 1, 0] }} transition={{ duration: 1.6, repeat: Infinity, delay: gi * 0.4 }} style={{ position: "absolute", top: -3, width: 8, height: 8, borderRadius: 99, background: "var(--bp-cyan)" }} />
+                {!reduce && <motion.span initial={{ left: 0, opacity: 0 }} animate={{ left: [0, 24], opacity: [0, 1, 0] }} transition={{ duration: 1.6, repeat: Infinity, delay: gi * 0.4 }} style={{ position: "absolute", top: -3, width: 8, height: 8, borderRadius: 99, background: "var(--bp-cyan)" }} />}
               </div>
             )}
           </div>

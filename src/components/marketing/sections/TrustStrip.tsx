@@ -20,7 +20,7 @@ export function TrustStrip() {
               <div className="text-2xl font-bold text-[#6C3CF4] md:text-3xl">
                 {m.value}
               </div>
-              <div className="mt-1 text-xs font-medium text-[#78818f] md:text-sm">
+              <div className="mt-1 text-xs font-medium text-[#5f6875] md:text-sm">
                 {m.label}
               </div>
             </motion.div>

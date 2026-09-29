@@ -18,6 +18,7 @@ import {
 } from "lucide-react";
 import Header from "@/components/common/Header";
 import Footer from "@/components/common/Footer";
+import { ink } from "@/lib/ink";
 import { getExpertOsFeatures } from "@/lib/landing/expert-os";
 
 export const metadata: Metadata = {
@@ -172,8 +173,8 @@ export default async function TechnologyPage() {
                   }}
                 >
                   <span
-                    className="inline-flex h-12 w-12 items-center justify-center rounded-xl"
-                    style={{ background: `${layer.accent}18`, border: `1px solid ${layer.accent}33`, color: layer.accent }}
+                    className="ink inline-flex h-12 w-12 items-center justify-center rounded-xl"
+                    style={{ background: `${layer.accent}18`, border: `1px solid ${layer.accent}33`, ...ink(layer.accent) }}
                   >
                     <Icon className="h-6 w-6" />
                   </span>
@@ -236,7 +237,7 @@ export default async function TechnologyPage() {
               className="rounded-2xl border p-6 md:p-8"
               style={{ background: "var(--bg-card)", borderColor: "var(--border-subtle)" }}
             >
-              <p className="text-xs font-semibold uppercase tracking-[0.22em]" style={{ color: "#10B981" }}>
+              <p className="ink text-xs font-semibold uppercase tracking-[0.22em]" style={ink("#10B981")}>
                 Labelbox parity
               </p>
               <h2 className="mt-4 text-3xl font-semibold" style={{ fontFamily: "var(--font-heading)", letterSpacing: "0" }}>
@@ -251,7 +252,7 @@ export default async function TechnologyPage() {
               <ul className="mt-6 space-y-3">
                 {PARITY_ITEMS.map((item) => (
                   <li key={item} className="flex gap-3 text-sm" style={{ color: "var(--text-secondary)" }}>
-                    <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-[#10B981]" />
+                    <CheckCircle2 className="ink mt-0.5 h-4 w-4 shrink-0" style={ink("#10B981")} />
                     <span>{item}</span>
                   </li>
                 ))}
@@ -320,12 +321,12 @@ export default async function TechnologyPage() {
                     )}
                     <article className="h-full rounded-xl border p-5 text-center" style={{ borderColor: "var(--border-subtle)" }}>
                       <span
-                        className="mx-auto inline-flex h-12 w-12 items-center justify-center rounded-xl"
-                        style={{ background: `${step.color}18`, border: `1px solid ${step.color}33`, color: step.color }}
+                        className="ink mx-auto inline-flex h-12 w-12 items-center justify-center rounded-xl"
+                        style={{ background: `${step.color}18`, border: `1px solid ${step.color}33`, ...ink(step.color) }}
                       >
                         <Icon className="h-6 w-6" />
                       </span>
-                      <div className="mt-3 text-[10px] font-bold uppercase tracking-[0.18em]" style={{ color: step.color }}>
+                      <div className="ink mt-3 text-[10px] font-bold uppercase tracking-[0.18em]" style={ink(step.color)}>
                         Step {index + 1}
                       </div>
                       <h3 className="mt-1 text-lg font-semibold" style={{ fontFamily: "var(--font-heading)", letterSpacing: "0" }}>

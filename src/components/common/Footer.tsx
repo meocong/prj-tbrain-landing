@@ -90,6 +90,7 @@ const FOOTER_LINKS = [
   { label: "Case Studies", href: "/casestudy" },
   { label: "Contact", href: "/contact" },
   { label: "Privacy Policy", href: "/policy" },
+  { label: "Accessibility", href: "/accessibility" },
 ];
 
 const Footer = () => {

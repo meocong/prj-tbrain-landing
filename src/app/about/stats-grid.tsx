@@ -18,7 +18,7 @@ export function StatsGrid({ stats = STATS }: { stats?: AboutHeroStat[] }) {
           <div className="text-3xl font-bold text-[#6C3CF4]">
             <AnimatedCounter value={s.value} suffix={s.suffix} duration={2} />
           </div>
-          <div className="mt-1 text-sm text-[#78818f]">{s.label}</div>
+          <div className="mt-1 text-sm text-[#5f6875]">{s.label}</div>
         </div>
       ))}
     </div>

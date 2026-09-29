@@ -10,7 +10,8 @@
  *
  * Theme-aware (var(--bp-*)). Respects prefers-reduced-motion (static fallback).
  */
-import { motion, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
+import { useReducedMotion } from "@/lib/motion-pref";
 import { Camera, Clock, ShieldCheck, Users, PackageCheck } from "lucide-react";
 import { CountUp } from "@/components/marketing/fx/CountUp";
 

@@ -96,7 +96,7 @@ function DirNodeView({
           className="flex w-full items-center gap-1 py-1 text-left text-[#0e1b2e] hover:text-[#6C3CF4]"
           style={{ paddingLeft: depth * 14 }}
         >
-          <span className="text-[#78818f]">{expanded ? "▾" : "▸"}</span>
+          <span className="text-[#5f6875]">{expanded ? "▾" : "▸"}</span>
           <span>{node.name}</span>
         </button>
       ) : null}

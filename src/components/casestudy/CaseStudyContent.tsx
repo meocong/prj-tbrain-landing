@@ -57,7 +57,7 @@ export function CaseStudyContent({ studies }: { studies: CaseStudy[] }) {
                   {featuredStudy.title}
                 </h2>
               </Link>
-              <p className="text-[#78818f] text-base font-normal leading-relaxed mb-6">
+              <p className="text-[#5f6875] text-base font-normal leading-relaxed mb-6">
                 {featuredStudy.description}
               </p>
             </div>
@@ -108,7 +108,7 @@ export function CaseStudyContent({ studies }: { studies: CaseStudy[] }) {
                     {study.title}
                   </h3>
                 </Link>
-                <p className="text-[#78818f] text-sm font-normal leading-relaxed mb-4 line-clamp-3 flex-grow">
+                <p className="text-[#5f6875] text-sm font-normal leading-relaxed mb-4 line-clamp-3 flex-grow">
                   {study.description}
                 </p>
                 <Link
@@ -125,7 +125,7 @@ export function CaseStudyContent({ studies }: { studies: CaseStudy[] }) {
 
         {filteredStudies.length === 0 && (
           <div className="text-center py-12">
-            <p className="text-[#78818f] text-lg">No case studies found. Try a different search term.</p>
+            <p className="text-[#5f6875] text-lg">No case studies found. Try a different search term.</p>
           </div>
         )}
       </div>

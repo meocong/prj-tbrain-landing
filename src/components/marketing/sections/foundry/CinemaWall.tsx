@@ -6,7 +6,8 @@
  * is a real capture. Claru-style density.
  */
 import { useEffect, useRef, useState } from "react";
-import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { useReducedMotion } from "@/lib/motion-pref";
 import { CountUp } from "@/components/marketing/fx/CountUp";
 
 const CELLS = [

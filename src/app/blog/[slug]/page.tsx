@@ -286,7 +286,7 @@ export default async function BlogPostPage({
                     )}
                   </div>
                   <div className="p-5">
-                    <div className="text-[11px] font-semibold uppercase tracking-wide text-[#78818f] mb-2">
+                    <div className="text-[11px] font-semibold uppercase tracking-wide text-[#5f6875] mb-2">
                       {new Date(r.published_at || r.created_at).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}
                     </div>
                     <h3 className="text-base md:text-lg font-semibold text-[#0e1b2e] leading-snug line-clamp-2 group-hover:text-[#6C3CF4] transition-colors">
