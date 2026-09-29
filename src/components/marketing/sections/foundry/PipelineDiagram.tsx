@@ -230,8 +230,8 @@ export function PipelineDiagram({ highlight, compact = false }: { highlight?: st
                       <motion.span
                         key={s}
                         initial={{ opacity: 0.75, y: 0 }}
-                        animate={emph ? { opacity: 1, y: [-0.5, 0.5, -0.5] } : { opacity: 0.75, y: 0 }}
-                        transition={{ duration: 2.2, delay: si * 0.08, repeat: emph ? Infinity : 0, ease: "easeInOut" }}
+                        animate={emph && !reduce ? { opacity: 1, y: [-0.5, 0.5, -0.5] } : { opacity: emph ? 1 : 0.75, y: 0 }}
+                        transition={{ duration: 2.2, delay: si * 0.08, repeat: emph && !reduce ? Infinity : 0, ease: "easeInOut" }}
                         style={{
                           fontFamily: "var(--font-mono)",
                           fontSize: 9.5,
