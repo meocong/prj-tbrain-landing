@@ -49,6 +49,7 @@ function LazyLoopVideo({ src, poster }: { src: string; poster: string }) {
 }
 
 export function RealVideoStrip() {
+  const reduce = useReducedMotion();
   return (
     <section className="relative w-full overflow-hidden" style={{ background: "var(--bp-panel)" }}>
       <div className="grid grid-cols-2 lg:grid-cols-4" style={{ gap: 1, background: "#4cb5ff" }}>
@@ -87,8 +88,8 @@ export function RealVideoStrip() {
               letterSpacing: "0.14em", fontWeight: 700,
             }}>
               <motion.span
-                animate={{ opacity: [1, 0.2, 1] }}
-                transition={{ duration: 1.1, repeat: Infinity }}
+                animate={reduce ? { opacity: 1 } : { opacity: [1, 0.2, 1] }}
+                transition={reduce ? { duration: 0 } : { duration: 1.1, repeat: Infinity }}
                 style={{ width: 6, height: 6, borderRadius: 6, background: "#ff5f57", boxShadow: "0 0 6px #ff5f57" }} />
               REAL
             </div>
