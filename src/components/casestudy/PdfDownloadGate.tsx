@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Download, FileText, Loader2, X } from "lucide-react";
 import { toast } from "sonner";
+import CollectionNotice from "@/components/common/CollectionNotice";
 
 type Props = {
   slug: string;
@@ -139,6 +140,11 @@ export function PdfDownloadGate({ slug, title }: Props) {
               <p className="text-[11px] leading-relaxed text-gray-500">
                 We&apos;ll email you future case studies and product updates. Unsubscribe any time.
               </p>
+              <CollectionNotice
+                purpose="to send you this case study and those updates"
+                className="text-[11px] leading-relaxed"
+                style={{ color: "#6b7280" }}
+              />
 
               <button
                 type="submit"

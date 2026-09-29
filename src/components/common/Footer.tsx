@@ -9,6 +9,7 @@ import { toast } from "sonner";
 import { Send } from "lucide-react";
 import { readUtm } from "@/lib/utm";
 import { openConsentBanner } from "@/lib/consent";
+import CollectionNotice from "@/components/common/CollectionNotice";
 
 function NewsletterForm() {
   const [email, setEmail] = useState("");
@@ -177,6 +178,11 @@ const Footer = () => {
             <div className="mt-3">
               <NewsletterForm />
             </div>
+            <CollectionNotice
+              purpose="to send you the newsletter; unsubscribe any time"
+              className="mt-2 max-w-xs text-xs leading-relaxed"
+              style={{ color: "var(--footer-muted)" }}
+            />
           </div>
         </div>
 

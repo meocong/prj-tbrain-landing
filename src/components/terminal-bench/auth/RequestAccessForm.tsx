@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Turnstile } from "@marsidev/react-turnstile";
 import { readUtm } from "@/lib/utm";
+import CollectionNotice from "@/components/common/CollectionNotice";
 
 const TEAM_SIZES = ["1-10", "11-50", "51-200", "200+"];
 const TARGET_USES = [
@@ -169,6 +170,8 @@ export function RequestAccessForm({ siteKey }: { siteKey: string | null }) {
           {error}
         </p>
       ) : null}
+
+      <CollectionNotice purpose="to review your access request and contact you about it" />
 
       <button
         type="submit"

@@ -7,6 +7,7 @@ import { Turnstile } from "@marsidev/react-turnstile";
 import { toast } from "sonner";
 import { Send, CheckCircle } from "lucide-react";
 import { readUtm } from "@/lib/utm";
+import CollectionNotice from "@/components/common/CollectionNotice";
 
 export default function ContactPage() {
   const [form, setForm] = useState({
@@ -194,6 +195,8 @@ export default function ContactPage() {
                 }}
               />
             )}
+
+            <CollectionNotice purpose="to reply to your message and follow up about your enquiry" />
 
             <button
               type="submit"

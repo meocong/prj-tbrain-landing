@@ -5,6 +5,7 @@ import React, { useState } from "react";
 import star from "@/assets/images/start3.png";
 import { toast } from "sonner";
 import { Send, CheckCircle } from "lucide-react";
+import CollectionNotice from "@/components/common/CollectionNotice";
 
 const TableStart = () => {
   const [form, setForm] = useState({
@@ -135,10 +136,15 @@ const TableStart = () => {
                 className="w-full border-2 border-gray-300 rounded-3xl px-6 py-3.5 text-lg outline-none focus:border-[#682EC3] caret-[#682EC3] resize-none"
               />
             </div>
+            <CollectionNotice
+              purpose="to reply to your message and follow up about your project"
+              className="mt-6 text-xs leading-relaxed"
+              style={{ color: "#6b7280" }}
+            />
             <button
               type="submit"
               disabled={submitting}
-              className="w-full bg-[#682EC3] py-3 mt-8 text-white text-base font-medium rounded-3xl transition-all duration-500 hover:bg-[#d25df9] flex items-center justify-center gap-2"
+              className="w-full bg-[#682EC3] py-3 mt-4 text-white text-base font-medium rounded-3xl transition-all duration-500 hover:bg-[#d25df9] flex items-center justify-center gap-2"
             >
               <Send className="h-4 w-4" />
               {submitting ? "Sending..." : "Send"}

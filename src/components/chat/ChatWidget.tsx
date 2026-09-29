@@ -219,10 +219,30 @@ export function ChatWidget() {
               <div ref={messagesEndRef} />
             </div>
 
+            {/* Shown before the first message is typed, not after. Messages here
+                are stored with the sender's IP and user agent and processed by a
+                third-party AI provider (see /api/chat and the privacy policy), and
+                California's wiretap statute (CIPA §631) is read as requiring that
+                a chat visitor be told a third party receives the conversation
+                before they take part in it. */}
+            <p
+              className="px-4 pt-2 text-[11px] leading-snug"
+              style={{
+                color: "var(--text-muted, #64748b)",
+                borderTop: "1px solid var(--border-default, #e2e8f0)",
+              }}
+            >
+              You&apos;re chatting with an AI assistant. Messages are recorded and processed by our AI
+              service provider to answer you. By chatting you agree to our{" "}
+              <a href="/policy" target="_blank" rel="noopener noreferrer" className="underline">
+                Privacy Policy
+              </a>
+              . Please don&apos;t share sensitive information.
+            </p>
+
             {/* Input */}
             <div
-              className="flex items-center gap-2 px-3 py-3"
-              style={{ borderTop: "1px solid var(--border-default, #e2e8f0)" }}
+              className="flex items-center gap-2 px-3 pb-3 pt-2"
             >
               <input
                 ref={inputRef}

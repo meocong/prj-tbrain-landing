@@ -98,7 +98,7 @@ export default async function Page() {
           >
             Privacy Policy for Tbrain LLC
           </h1>
-          <p className="italic mt-4 mb-8" style={{ color: "var(--text-muted)" }}>Last Updated: Sep 28, 2026</p>
+          <p className="italic mt-4 mb-8" style={{ color: "var(--text-muted)" }}>Last Updated: Sep 29, 2026</p>
           <div className="mb-5">
             Tbrain LLC (&quot;Tbrain,&quot; &quot;we,&quot; &quot;our,&quot; or
             &quot;us&quot;) is committed to safeguarding your privacy. This
@@ -238,6 +238,34 @@ export default async function Page() {
             purposes outlined in this Privacy Policy or as required by law. Once
             no longer needed, we will securely delete or anonymize your data.
           </div>
+          {/* CCPA §1798.100(a)(3): the retention period, or the criteria that set
+              it, for each category — "as long as necessary" alone does not meet
+              it. Criteria, not numbers: a period stated here that the systems do
+              not actually enforce would be a misstatement of its own. */}
+          <ul className="mb-5 list-disc pl-10">
+            <li>
+              Contact, access-request and case-study download details: while we
+              are in an active business conversation with you, and afterwards
+              only as long as needed to follow up or to keep a record of our
+              dealings, unless you ask us to delete them sooner.
+            </li>
+            <li>
+              Newsletter details: until you unsubscribe.
+            </li>
+            <li>
+              Chat assistant messages, with their IP address and browser user
+              agent: as long as needed to answer and follow up on your enquiry
+              and to keep the assistant secure.
+            </li>
+            <li>
+              Analytics data (only with your consent): for the retention period
+              set in our Google Analytics account, after which Google deletes it.
+            </li>
+            <li>
+              Records we must keep for legal, tax or contractual reasons: for the
+              period the law or the contract requires.
+            </li>
+          </ul>
           <div className="mb-5 font-semibold">
             9. Cookies and Similar Technologies
           </div>
@@ -338,7 +366,28 @@ export default async function Page() {
             request by matching information you provide with information we
             hold, and respond within 45 days. You may use an authorized agent,
             who must provide proof of your permission. We do not knowingly
-            collect personal information from anyone under 16.
+            collect personal information from anyone under 16. You can also
+            send a request through our{" "}
+            <a href="/contact" className="underline">
+              contact form
+            </a>
+            .
+          </div>
+          <div className="mb-5">
+            <span className="font-semibold">Residents of other U.S. states.</span>{" "}
+            If you live in a state with a consumer privacy law — including
+            Virginia, Colorado, Connecticut, Utah, Texas, Oregon, Montana, Iowa,
+            Delaware, New Hampshire, New Jersey, Nebraska, Tennessee, Minnesota,
+            Maryland, Indiana, Kentucky and Rhode Island — you have similar rights
+            to access, correct, delete and obtain a copy of your personal
+            information, and to opt out of its sale, targeted advertising and
+            profiling. We do none of those three, and we honor Global Privacy
+            Control signals as an opt-out. Make a request the same way as above.
+            If we decline your request, you may appeal by replying to our
+            decision with the subject &quot;Privacy Request Appeal&quot;; we will
+            respond within the time your state&apos;s law allows (usually 45 or
+            60 days) and, if we deny the appeal, tell you how to contact your
+            state Attorney General.
           </div>
 <div className="mb-5 font-semibold">
             11. International Data Transfers
