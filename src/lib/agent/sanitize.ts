@@ -80,13 +80,4 @@ export function countWords(text: string): number {
   return text ? text.split(/\s+/).filter(Boolean).length : 0;
 }
 
-export function slugify(input: string): string {
-  return input
-    .replace(/[đĐ]/g, "d")
-    .normalize("NFKD")
-    .replace(/[\u0300-\u036f]/g, "")
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/^-+|-+$/g, "")
-    .slice(0, 80);
-}
+export { slugify } from "@/lib/slugify";

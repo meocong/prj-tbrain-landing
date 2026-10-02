@@ -5,11 +5,14 @@ import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { supabaseAdmin } from "@/lib/admin/supabase-browser";
 import { useRouter, useParams } from "next/navigation";
 import { toast } from "sonner";
-import { ArrowLeft, Save, Trash2, ExternalLink, Globe, Clock, FileText, Archive, Eye, Bot, AlertTriangle } from "lucide-react";
+import { ArrowLeft, Save, Trash2, ExternalLink, Globe, Clock, FileText, Archive, Eye, Bot, AlertTriangle, SendHorizonal } from "lucide-react";
 import Link from "next/link";
 import { TipTapEditor } from "@/components/admin/editor/TipTapEditor";
 import { SharePanel } from "@/components/admin/content/SharePanel";
-import { useAdminAuth } from "@/lib/admin/auth-context";
+import { useAdminAuth, useHasPermission } from "@/lib/admin/auth-context";
+import { CoverImageField } from "@/components/admin/content/CoverImageField";
+import { AiPanel, type SeoSuggestion } from "@/components/admin/content/AiPanel";
+import type { Editor } from "@tiptap/react";
 import { revalidateBlogPost } from "@/lib/admin/revalidate-blog";
 import type { CmsAgentMeta } from "@/lib/admin/types";
 
@@ -18,6 +21,7 @@ export default function EditPostPage() {
   const { id } = useParams<{ id: string }>();
   const queryClient = useQueryClient();
   const { adminUser } = useAdminAuth();
+  const canPublish = useHasPermission("content.publish");
 
   const { data: post, isLoading } = useQuery({
     queryKey: ["admin-post", id],
@@ -30,6 +34,7 @@ export default function EditPostPage() {
   const [title, setTitle] = useState("");
   const [contentHtml, setContentHtml] = useState("");
   const [wordCount, setWordCount] = useState(0);
+  const [editor, setEditor] = useState<Editor | null>(null);
   const [form, setForm] = useState({
     slug: "",
     excerpt: "",
@@ -103,6 +108,26 @@ export default function EditPostPage() {
     onError: (err) => toast.error(`Failed: ${err.message}`),
   });
 
+  // Editors without publish rights send the draft to /admin/approvals instead.
+  const submitMutation = useMutation({
+    mutationFn: async () => {
+      const { data: pending } = await supabaseAdmin
+        .from("approval_requests")
+        .select("id")
+        .eq("resource_type", "post")
+        .eq("resource_id", id)
+        .eq("status", "pending")
+        .maybeSingle();
+      if (pending) return;
+      const { error } = await supabaseAdmin
+        .from("approval_requests")
+        .insert({ resource_type: "post", resource_id: id, submitted_by: adminUser?.id ?? null });
+      if (error) throw error;
+    },
+    onSuccess: () => toast.success("Submitted for review"),
+    onError: (err) => toast.error(`Failed: ${err.message}`),
+  });
+
   const deleteMutation = useMutation({
     mutationFn: async () => {
       const { error } = await supabaseAdmin.from("cms_posts").delete().eq("id", id);
@@ -158,6 +183,7 @@ export default function EditPostPage() {
             content={contentHtml}
             onChange={setContentHtml}
             onWordCount={setWordCount}
+            onReady={setEditor}
           />
 
           <div className="flex items-center gap-4 text-xs" style={{ color: "var(--text-muted)" }}>
@@ -181,40 +207,50 @@ export default function EditPostPage() {
               <button onClick={() => saveMutation.mutate(undefined)} disabled={saveMutation.isPending} className="btn-secondary flex-1 justify-center text-sm">
                 <Save className="h-3.5 w-3.5" /> Save
               </button>
-              {form.status === "draft" ? (
+              {form.status === "draft" && canPublish ? (
                 <button onClick={() => { setForm(f => ({ ...f, status: "published" })); saveMutation.mutate("published"); }} disabled={saveMutation.isPending} className="btn-primary flex-1 justify-center text-sm">
                   <Globe className="h-3.5 w-3.5" /> Publish
                 </button>
-              ) : form.status === "published" ? (
+              ) : form.status === "draft" ? (
+                <button onClick={() => saveMutation.mutate(undefined, { onSuccess: () => submitMutation.mutate() })} disabled={saveMutation.isPending || submitMutation.isPending} className="btn-primary flex-1 justify-center text-sm">
+                  <SendHorizonal className="h-3.5 w-3.5" /> Submit
+                </button>
+              ) : form.status === "published" && canPublish ? (
                 <button onClick={() => { setForm(f => ({ ...f, status: "draft" })); saveMutation.mutate("draft"); }} disabled={saveMutation.isPending} className="btn-ghost flex-1 justify-center text-sm">
                   Unpublish
                 </button>
-              ) : (
+              ) : form.status === "archived" ? (
                 <button onClick={() => { setForm(f => ({ ...f, status: "draft" })); saveMutation.mutate("draft"); }} disabled={saveMutation.isPending} className="btn-ghost flex-1 justify-center text-sm">
                   Restore
                 </button>
-              )}
+              ) : null}
             </div>
             <button onClick={() => { setForm(f => ({ ...f, status: "archived" })); saveMutation.mutate("archived"); }} className="btn-ghost w-full justify-center text-xs" style={{ color: "var(--text-muted)" }}>
               <Archive className="h-3 w-3" /> Archive
             </button>
           </div>
 
+          <AiPanel
+            editor={editor}
+            title={title}
+            postId={id}
+            postStatus={post.status}
+            onSeo={(seo: SeoSuggestion) =>
+              setForm((f) => ({
+                ...f,
+                seoTitle: seo.seo_title,
+                seoDescription: seo.seo_description,
+                excerpt: f.excerpt || seo.excerpt,
+                tags: f.tags || seo.tags.join(", "),
+              }))
+            }
+          />
+
           <SharePanel postId={id} slug={form.slug} published={post.status === "published"} />
 
           {post.source === "agent" && <AgentTrail meta={post.agent_meta as CmsAgentMeta | null} reviewedAt={post.reviewed_at} />}
 
-          {/* Cover */}
-          <div className="glass-card p-4 space-y-3">
-            <h3 className="text-sm font-semibold" style={{ color: "var(--text-primary)" }}>Cover Image</h3>
-            {form.coverImageUrl ? (
-              <div className="relative">
-                <img src={form.coverImageUrl} alt="Cover image preview" className="w-full rounded-lg object-cover h-32" />
-                <button onClick={() => setForm(f => ({ ...f, coverImageUrl: "" }))} className="absolute top-1 right-1 rounded-full bg-black/50 px-2 py-0.5 text-[10px] text-white">Remove</button>
-              </div>
-            ) : null}
-            <input type="text" value={form.coverImageUrl} onChange={(e) => setForm(f => ({ ...f, coverImageUrl: e.target.value }))} placeholder="Image URL" className="w-full rounded-lg px-3 py-2 text-sm" style={{ backgroundColor: "var(--bg-input)", border: "1px solid var(--border-default)", color: "var(--text-primary)" }} />
-          </div>
+          <CoverImageField value={form.coverImageUrl} onChange={(url) => setForm(f => ({ ...f, coverImageUrl: url }))} />
 
           {/* SEO */}
           <div className="glass-card p-4 space-y-3">

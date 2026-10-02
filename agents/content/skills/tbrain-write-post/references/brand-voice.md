@@ -10,14 +10,15 @@
 - **Short sentences, active voice.** Paragraphs of 2-4 sentences. Explain jargon on first use.
 
 ## Tbrain facts you can use (public-safe)
-- Robotics Data Foundry for physical AI: purpose-built capture packs (MK-001) worn by operators in real production environments, including textile and kitchen, with electronics on the roadmap. Sourced through an industrial partner network across Asia.
-- Egocentric, action-paired, deeply annotated data. An auto-label pipeline with multiple models (body keypoints, masks, descriptions, depth), a gate of 15 machine-readable hard QC rules, and human QC in Label Studio for the last mile.
+Full fact base — service lines, hardware, pipeline, QC, numbers (delivered vs. capacity), case studies, samples catalog, Terminal-Bench, internal links, naming fixes, and the DO-NOT-SAY list — is in **`references/tbrain-knowledge.md`**. Read it before drafting; it's the source of truth, this is just a quick-grab shortlist. The 6 facts you'll reach for most:
+- Robotics Data Foundry for physical AI: the Tbrain Capture Pack (MK-001) worn by operators in real production environments, including textile and kitchen, with electronics on the roadmap. Sourced through an industrial partner network across Asia.
+- Egocentric, action-paired, deeply annotated data. An 8-model auto-label pipeline (hand/body keypoints, masks, descriptions, depth), a 15-rule hard-QC gate plus an 8-check diagnostic pass, and 3-layer human QC in Label Studio for the last mile. QC pass-rate floor: 85%.
 - Delivered LeRobot / RLDS-ready, with Rerun-viewable proof. Raw to QC'd to delivered in ≤48h.
-- Sample datasets at /samples. The pipeline and QC playbook are at /data/physical-ai and /data/physical-ai/quality.
-- Also LLM training data: RLHF / preference data, evaluation, coding & STEM data, and agentic benchmarks (Terminal-Bench).
+- Also does LLM training data: RLHF / SFT preference data, benchmark creation, agent evaluation, and Terminal-Bench (500+ tasks, GPT-5 passes ≤20%) — plus an "Expert OS" platform layer (Agent Knowledge Base, LLM-as-a-Judge, Agentic Workflows, Agent Identity & Soul). These are real service lines with no blog coverage yet — look here first for a fresh angle.
+- Sample datasets at /samples (egocentric, exocentric, teleoperation, mocap, gaming). The pipeline and QC playbook are at /data/physical-ai and /data/physical-ai/quality.
 - Member of the NVIDIA Inception Program.
 
-If you need a Tbrain fact that isn't listed here or on tbrain.ai, **ask chị Tâm** rather than guessing.
+If you need a Tbrain fact that isn't in `tbrain-knowledge.md` or on tbrain.ai, **ask chị Tâm** rather than guessing.
 
 ## Banned or avoid
 - Hype words: revolutionary, game-changer, groundbreaking, cutting-edge, unleash, unlock the power, supercharge, next-level, paradigm shift, seamless, robust (as filler), leverage (as a verb), synergy.

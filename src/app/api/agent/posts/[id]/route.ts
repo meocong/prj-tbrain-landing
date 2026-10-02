@@ -1,6 +1,6 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { requireAgent } from "@/lib/agent/auth";
-import { AGENT_POST_COLUMNS, draftPatch, toRow, uniqueSlug, zodError } from "@/lib/agent/posts";
+import { AGENT_POST_COLUMNS, draftPatch, toRow, uniqueSlug, zodError, agentMayEdit } from "@/lib/agent/posts";
 import { supabaseAdmin } from "@/lib/terminal-bench/supabase/admin";
 
 export const runtime = "nodejs";
@@ -52,7 +52,7 @@ export async function PATCH(req: NextRequest, { params }: Ctx) {
     .eq("id", id)
     .maybeSingle();
   if (!current) return NextResponse.json({ error: "not_found" }, { status: 404 });
-  if (current.source !== "agent") return NextResponse.json({ error: "not_agent_post" }, { status: 403 });
+  if (!(await agentMayEdit(current))) return NextResponse.json({ error: "not_agent_post" }, { status: 403 });
   if (current.status !== "draft") return NextResponse.json({ error: "not_a_draft", status: current.status }, { status: 409 });
 
   const row = toRow(parsed.data);
@@ -64,9 +64,12 @@ export async function PATCH(req: NextRequest, { params }: Ctx) {
     .update(row)
     .eq("id", id)
     .eq("status", "draft")
+    // Optimistic lock: a concurrent run (or a human save) bumped the version.
+    .eq("version", current.version)
     .select(AGENT_POST_COLUMNS)
-    .single();
+    .maybeSingle();
   if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+  if (!data) return NextResponse.json({ error: "conflict", hint: "post changed meanwhile; get_post and retry" }, { status: 409 });
 
   return NextResponse.json({ post: data });
 }

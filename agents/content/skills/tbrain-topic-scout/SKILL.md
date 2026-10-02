@@ -23,10 +23,12 @@ Goal: propose blog topics that a robotics or ML lead would actually click on, wh
 
    Open the primary source, not just the news write-up. Note the URL, title, publisher and date.
 
-3. **Filter through Tbrain's standing.** A topic qualifies only if Tbrain can add something the news can't:
+3. **Filter through Tbrain's standing.** Read `tbrain-knowledge.md` from the `tbrain-write-post` skill (`skill_view tbrain-write-post references/tbrain-knowledge.md`) — specifically the service-line facts and the "open lanes" list (§12: LLM data/RLHF/SFT, Terminal-Bench & agent evaluation, coding/STEM data, multilingual data, Expert OS) — before judging fit. A topic qualifies only if Tbrain can add something the news can't:
    - hands-on experience: capture packs, factory capture, QC rules, auto-labeling, LeRobot/RLDS delivery, RLHF/eval work, Terminal-Bench;
    - a practical checklist or decision framework buyers can use;
    - a clear explainer of a fast-moving concept for a buyer audience.
+
+   Prefer an open-lane topic over another physical-AI post when the week's news supports one — the blog is nine-for-nine physical AI and hasn't touched LLM data, agent evaluation, or Expert OS yet, despite those being real, named service lines.
 
    Drop pure news recaps, hype, and anything requiring claims about named customers.
 

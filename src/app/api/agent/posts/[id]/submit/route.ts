@@ -1,5 +1,6 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { requireAgent } from "@/lib/agent/auth";
+import { agentMayEdit } from "@/lib/agent/posts";
 import { supabaseAdmin } from "@/lib/terminal-bench/supabase/admin";
 
 export const runtime = "nodejs";
@@ -26,7 +27,7 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ id:
     .eq("id", id)
     .maybeSingle();
   if (!post) return NextResponse.json({ error: "not_found" }, { status: 404 });
-  if (post.source !== "agent") return NextResponse.json({ error: "not_agent_post" }, { status: 403 });
+  if (!(await agentMayEdit(post))) return NextResponse.json({ error: "not_agent_post" }, { status: 403 });
   if (post.status !== "draft") return NextResponse.json({ error: "not_a_draft", status: post.status }, { status: 409 });
 
   const { data: pending } = await db

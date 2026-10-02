@@ -107,7 +107,13 @@ export default function ApprovalsPage() {
           reviewed_at: now,
           updated_at: now,
         }).eq("id", request.resource_id).select("slug").single();
-        if (publishError) throw publishError;
+        if (publishError) {
+          // Don't strand the request as approved with the post unpublished.
+          await supabaseAdmin.from("approval_requests")
+            .update({ status: "pending", reviewed_by: null, reviewed_at: null })
+            .eq("id", id);
+          throw publishError;
+        }
         await revalidateBlogPost(published?.slug);
       }
       if (request && status === "rejected" && request.resource_type === "post") {

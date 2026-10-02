@@ -100,6 +100,26 @@ const TOOLS = [
       required: ["id"],
     },
   },
+  {
+    name: "claim_request",
+    description:
+      "Take the next job an admin queued from the editor (types: draft = write a new post from brief; revise = revise post_id per brief.notes; scout = propose topics). Returns {request:null} when nothing is waiting. Always finish a claimed job with complete_request.",
+    inputSchema: { type: "object", properties: {} },
+  },
+  {
+    name: "complete_request",
+    description:
+      "Finish a claimed job. status done|failed. result: {post_id (draft/revise), message (1-2 sentences for the admin, English), topics:[{title,why_now,angle,keyword,sources:[url],score}] (scout)}.",
+    inputSchema: {
+      type: "object",
+      properties: {
+        id: { type: "string" },
+        status: { type: "string", enum: ["done", "failed"] },
+        result: { type: "object" },
+      },
+      required: ["id", "status"],
+    },
+  },
 ];
 
 async function api(method, path, body) {
@@ -157,6 +177,10 @@ async function callTool(name, args = {}) {
       const { id, ...messages } = args;
       return api("PUT", `/api/agent/posts/${enc(id)}/social`, messages);
     }
+    case "claim_request":
+      return api("POST", "/api/agent/requests/claim", {});
+    case "complete_request":
+      return api("PATCH", `/api/agent/requests/${enc(args.id)}`, { status: args.status, result: args.result || {} });
     default:
       throw new Error(`unknown tool: ${name}`);
   }

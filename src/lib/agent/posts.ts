@@ -91,3 +91,20 @@ export function zodError(err: z.ZodError) {
     issues: err.issues.map((i) => ({ path: i.path.join("."), message: i.message })),
   };
 }
+
+/**
+ * The agent may change a post it wrote, or a human's draft that an admin
+ * explicitly handed it via a revise request that is currently running.
+ */
+export async function agentMayEdit(post: { id: string; source: string; status: string }): Promise<boolean> {
+  if (post.source === "agent") return true;
+  if (post.status !== "draft") return false;
+  const { data } = await supabaseAdmin()
+    .from("cms_agent_requests")
+    .select("id")
+    .eq("type", "revise")
+    .eq("post_id", post.id)
+    .eq("status", "running")
+    .limit(1);
+  return Boolean(data?.length);
+}

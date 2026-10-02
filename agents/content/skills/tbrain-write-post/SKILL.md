@@ -11,6 +11,7 @@ metadata:
 # Tbrain: write a blog post
 
 Read these before you start, every time:
+- `references/tbrain-knowledge.md`: the Tbrain fact base — service lines, Physical AI hardware/pipeline/QC, delivered-vs-capacity numbers, case studies, samples catalog, Terminal-Bench, internal links, canonical naming, and what you must never say
 - `references/brand-voice.md`: how Tbrain sounds, plus banned phrases
 - `references/editorial-rules.md`: what we may and may not claim
 - `references/rubric.md`: how the critic scores the draft

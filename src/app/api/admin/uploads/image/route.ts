@@ -46,19 +46,21 @@ export async function POST(req: NextRequest) {
   const month = String(now.getMonth() + 1).padStart(2, "0");
   const uuid = crypto.randomUUID().replace(/-/g, "").slice(0, 12);
   const ext = detected.split("/")[1].replace("jpeg", "jpg");
-  const gcsObject = `cms/${year}/${month}/${uuid}_${safeName(file.name)}.${ext}`;
+  const gcsObject = `cms/${year}/${month}/${uuid}_${safeName(file.name.replace(/\.[a-z0-9]+$/i, ""))}.${ext}`;
 
   await uploadBuffer(gcsObject, buffer, detected);
 
-  // 7-day signed URL — Puppeteer fetches it at PDF-gen time; once embedded in
-  // the PDF the URL stops mattering. Web pages re-render via ISR (300s) and
-  // would need a fresh signature if the URL expires; for that case we should
-  // proxy through `/api/asset/<obj>` later. Good enough for v1.
-  const url = await signDownloadUrl(gcsObject, 7 * 24 * 3600);
+  // Permanent URL through the /api/asset proxy. The old 7-day signed URL got
+  // embedded in post/case-study HTML and broke once it expired. The PDF
+  // renderer loads the site page itself, so a site-relative URL works there
+  // too. signedUrl stays for callers that need a direct GCS link.
+  const url = `/api/asset/${gcsObject}`;
+  const signedUrl = await signDownloadUrl(gcsObject, 7 * 24 * 3600);
 
   return NextResponse.json({
     ok: true,
     url,
+    signedUrl,
     gcsObject,
     contentType: detected,
     sizeBytes: buffer.length,

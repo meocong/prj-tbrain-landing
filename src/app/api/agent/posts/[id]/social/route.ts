@@ -1,7 +1,7 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { z } from "zod";
 import { requireAgent } from "@/lib/agent/auth";
-import { zodError } from "@/lib/agent/posts";
+import { zodError, agentMayEdit } from "@/lib/agent/posts";
 import { supabaseAdmin } from "@/lib/terminal-bench/supabase/admin";
 
 export const runtime = "nodejs";
@@ -29,9 +29,9 @@ export async function PUT(req: NextRequest, { params }: { params: Promise<{ id: 
   if (!parsed.success) return NextResponse.json(zodError(parsed.error), { status: 400 });
 
   const db = supabaseAdmin();
-  const { data: post } = await db.from("cms_posts").select("id, source").eq("id", id).maybeSingle();
+  const { data: post } = await db.from("cms_posts").select("id, source, status").eq("id", id).maybeSingle();
   if (!post) return NextResponse.json({ error: "not_found" }, { status: 404 });
-  if (post.source !== "agent") return NextResponse.json({ error: "not_agent_post" }, { status: 403 });
+  if (!(await agentMayEdit(post))) return NextResponse.json({ error: "not_agent_post" }, { status: 403 });
 
   const { data: existing } = await db.from("cms_post_social").select("network, status").eq("post_id", id);
   const locked = new Set(

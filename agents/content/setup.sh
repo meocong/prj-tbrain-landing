@@ -14,7 +14,8 @@ for v in GLM_API_KEY CONTENT_AGENT_TOKEN TBRAIN_API_BASE; do
   grep -q "^$v=." .env || { echo "Missing $v in .env"; exit 1; }
 done
 
-mkdir -p "$DATA_DIR/uploads"
+mkdir -p "$DATA_DIR/uploads" "$DATA_DIR/scripts"
+cp scripts/poll_queue.py "$DATA_DIR/scripts/poll_queue.py"
 cp hermes/config.yaml "$DATA_DIR/config.yaml"
 cp hermes/SOUL.md "$DATA_DIR/SOUL.md"
 chown -R "$UID_:$GID_" "$DATA_DIR"
@@ -43,6 +44,13 @@ if ! grep -q "tbrain-review-nudge" <<<"$existing"; then
   hermes cron create "every thursday at 10am" \
     "Check Tbrain blog drafts awaiting review (mcp_tbrain_cms_list_posts status=draft, then get_post for reviews). For drafts rejected with a note, revise them with tbrain-revise-post and resubmit. For drafts pending more than 3 days, send chị Tâm a short Vietnamese reminder with the review links. If nothing is pending and no post went out this week, say so in one line. Never publish." \
     --skill tbrain-revise-post --name tbrain-review-nudge --deliver telegram
+fi
+
+if ! grep -q "tbrain-admin-queue" <<<"$existing"; then
+  # The script gates each tick: empty queue -> {"wakeAgent": false} -> no LLM call.
+  hermes cron create "every 2m" \
+    "Admin jobs are waiting in the tbrain.ai editor queue. Process them with the tbrain-admin-request skill." \
+    --script poll_queue.py --skill tbrain-admin-request --name tbrain-admin-queue --deliver telegram
 fi
 
 hermes cron list

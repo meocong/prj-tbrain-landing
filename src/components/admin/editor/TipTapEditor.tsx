@@ -1,6 +1,6 @@
 "use client";
 
-import { useEditor, EditorContent } from "@tiptap/react";
+import { useEditor, EditorContent, type Editor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import Image from "@tiptap/extension-image";
 import Link from "@tiptap/extension-link";
@@ -17,6 +17,8 @@ interface TipTapEditorProps {
   onChange: (html: string) => void;
   onWordCount?: (count: number) => void;
   placeholder?: string;
+  /** Hands the editor instance to the parent (AI assist reads/replaces the selection). */
+  onReady?: (editor: Editor) => void;
 }
 
 async function uploadInlineImage(file: File): Promise<string> {
@@ -35,6 +37,7 @@ export function TipTapEditor({
   onChange,
   onWordCount,
   placeholder = "Start writing your article...",
+  onReady,
 }: TipTapEditorProps) {
   const editor = useEditor({
     immediatelyRender: false,
@@ -93,6 +96,10 @@ export function TipTapEditor({
       }
     },
   });
+
+  useEffect(() => {
+    if (editor && onReady) onReady(editor);
+  }, [editor, onReady]);
 
   // Update content when prop changes (e.g., loading existing post)
   useEffect(() => {

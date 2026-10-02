@@ -9,6 +9,11 @@ import { ArrowLeft, Save, Globe, Clock, FileText, SendHorizonal } from "lucide-r
 import Link from "next/link";
 import { TipTapEditor } from "@/components/admin/editor/TipTapEditor";
 import { useAdminAuth, useHasPermission } from "@/lib/admin/auth-context";
+import { CoverImageField } from "@/components/admin/content/CoverImageField";
+import { AiPanel, type SeoSuggestion } from "@/components/admin/content/AiPanel";
+import type { Editor } from "@tiptap/react";
+import { revalidateBlogPost } from "@/lib/admin/revalidate-blog";
+import { slugify } from "@/lib/slugify";
 
 export default function NewPostPage() {
   const router = useRouter();
@@ -17,6 +22,7 @@ export default function NewPostPage() {
   const [title, setTitle] = useState("");
   const [contentHtml, setContentHtml] = useState("");
   const [wordCount, setWordCount] = useState(0);
+  const [editor, setEditor] = useState<Editor | null>(null);
   const [form, setForm] = useState({
     slug: "",
     excerpt: "",
@@ -28,8 +34,9 @@ export default function NewPostPage() {
     seoDescription: "",
   });
 
-  const autoSlug = (t: string) =>
-    t.toLowerCase().replace(/[^a-z0-9\s-]/g, "").replace(/\s+/g, "-").slice(0, 200);
+  const autoSlug = slugify;
+  // Keep deriving the slug from the title until the editor types one by hand.
+  const [slugTouched, setSlugTouched] = useState(false);
 
   const readTime = Math.max(1, Math.ceil(wordCount / 200));
 
@@ -58,15 +65,21 @@ export default function NewPostPage() {
 
       // If submitting for review, create approval request
       if (status === "pending_review" && inserted) {
-        await supabaseAdmin.from("approval_requests").insert({
+        const { error: reviewError } = await supabaseAdmin.from("approval_requests").insert({
           resource_type: "post",
           resource_id: inserted.id,
           submitted_by: adminUser?.id,
         });
+        if (reviewError) {
+          throw new Error(`Saved as draft, but submitting for review failed: ${reviewError.message}`);
+        }
       }
+      if (status === "published") await revalidateBlogPost(slug);
     },
     onSuccess: (_, status) => {
-      toast.success(status === "published" ? "Published!" : "Draft saved");
+      toast.success(
+        status === "published" ? "Published!" : status === "pending_review" ? "Submitted for review" : "Draft saved",
+      );
       router.push("/admin/content");
     },
     onError: (err) => toast.error(`Failed: ${err.message}`),
@@ -87,7 +100,7 @@ export default function NewPostPage() {
             value={title}
             onChange={(e) => {
               setTitle(e.target.value);
-              if (!form.slug) setForm((f) => ({ ...f, slug: autoSlug(e.target.value) }));
+              if (!slugTouched) setForm((f) => ({ ...f, slug: autoSlug(e.target.value) }));
             }}
             placeholder="Post title"
             className="w-full border-0 bg-transparent text-[32px] font-bold tracking-tight outline-none placeholder:text-[color:var(--text-muted)]"
@@ -99,6 +112,7 @@ export default function NewPostPage() {
             content=""
             onChange={setContentHtml}
             onWordCount={setWordCount}
+            onReady={setEditor}
           />
 
           {/* Editor footer */}
@@ -141,29 +155,23 @@ export default function NewPostPage() {
             </div>
           </div>
 
-          {/* Cover Image */}
-          <div className="glass-card p-4 space-y-3">
-            <h3 className="text-sm font-semibold" style={{ color: "var(--text-primary)" }}>Cover Image</h3>
-            {form.coverImageUrl ? (
-              <div className="relative">
-                <img src={form.coverImageUrl} alt="Cover image preview" className="w-full rounded-lg object-cover h-32" />
-                <button
-                  onClick={() => setForm((f) => ({ ...f, coverImageUrl: "" }))}
-                  className="absolute top-1 right-1 rounded-full bg-black/50 px-2 py-0.5 text-[10px] text-white"
-                >
-                  Remove
-                </button>
-              </div>
-            ) : null}
-            <input
-              type="text"
-              value={form.coverImageUrl}
-              onChange={(e) => setForm((f) => ({ ...f, coverImageUrl: e.target.value }))}
-              placeholder="Image URL or upload path"
-              className="w-full rounded-lg px-3 py-2 text-sm"
-              style={{ backgroundColor: "var(--bg-input)", border: "1px solid var(--border-default)", color: "var(--text-primary)" }}
-            />
-          </div>
+          <AiPanel
+            editor={editor}
+            title={title}
+            onSeo={(seo: SeoSuggestion) => {
+              setSlugTouched(true);
+              setForm((f) => ({
+                ...f,
+                seoTitle: seo.seo_title,
+                seoDescription: seo.seo_description,
+                excerpt: f.excerpt || seo.excerpt,
+                tags: f.tags || seo.tags.join(", "),
+                slug: f.slug || seo.slug,
+              }));
+            }}
+          />
+
+          <CoverImageField value={form.coverImageUrl} onChange={(url) => setForm((f) => ({ ...f, coverImageUrl: url }))} />
 
           {/* SEO */}
           <div className="glass-card p-4 space-y-3">
@@ -173,7 +181,7 @@ export default function NewPostPage() {
               <input
                 type="text"
                 value={form.slug}
-                onChange={(e) => setForm((f) => ({ ...f, slug: e.target.value }))}
+                onChange={(e) => { setSlugTouched(true); setForm((f) => ({ ...f, slug: e.target.value })); }}
                 placeholder="auto-generated"
                 className="w-full rounded-lg px-3 py-2 font-mono text-xs"
                 style={{ backgroundColor: "var(--bg-input)", border: "1px solid var(--border-default)", color: "var(--text-primary)" }}
