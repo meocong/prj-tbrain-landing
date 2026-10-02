@@ -5,14 +5,19 @@ import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { supabaseAdmin } from "@/lib/admin/supabase-browser";
 import { useRouter, useParams } from "next/navigation";
 import { toast } from "sonner";
-import { ArrowLeft, Save, Trash2, ExternalLink, Globe, Clock, FileText, Archive } from "lucide-react";
+import { ArrowLeft, Save, Trash2, ExternalLink, Globe, Clock, FileText, Archive, Eye, Bot, AlertTriangle } from "lucide-react";
 import Link from "next/link";
 import { TipTapEditor } from "@/components/admin/editor/TipTapEditor";
+import { SharePanel } from "@/components/admin/content/SharePanel";
+import { useAdminAuth } from "@/lib/admin/auth-context";
+import { revalidateBlogPost } from "@/lib/admin/revalidate-blog";
+import type { CmsAgentMeta } from "@/lib/admin/types";
 
 export default function EditPostPage() {
   const router = useRouter();
   const { id } = useParams<{ id: string }>();
   const queryClient = useQueryClient();
+  const { adminUser } = useAdminAuth();
 
   const { data: post, isLoading } = useQuery({
     queryKey: ["admin-post", id],
@@ -62,6 +67,7 @@ export default function EditPostPage() {
   const saveMutation = useMutation({
     mutationFn: async (newStatus: string | undefined) => {
       const status = newStatus || form.status;
+      const publishing = status === "published" && post?.status !== "published";
       const { error } = await supabaseAdmin
         .from("cms_posts")
         .update({
@@ -75,6 +81,8 @@ export default function EditPostPage() {
           author_name: form.authorName || null,
           status,
           published_at: status === "published" && !post?.published_at ? new Date().toISOString() : post?.published_at,
+          // Publishing from the editor counts as the human review of an AI draft.
+          ...(publishing ? { reviewed_by: adminUser?.id ?? null, reviewed_at: new Date().toISOString() } : {}),
           seo_title: form.seoTitle || null,
           seo_description: form.seoDescription || null,
           word_count: wordCount,
@@ -83,6 +91,10 @@ export default function EditPostPage() {
         })
         .eq("id", id);
       if (error) throw error;
+      if (status === "published" || post?.status === "published") {
+        await revalidateBlogPost(form.slug);
+        if (post?.slug && post.slug !== form.slug) await revalidateBlogPost(post.slug);
+      }
     },
     onSuccess: () => {
       toast.success("Saved");
@@ -118,11 +130,16 @@ export default function EditPostPage() {
         <Link href="/admin/content" className="inline-flex items-center gap-1 text-sm" style={{ color: "var(--text-muted)" }}>
           <ArrowLeft className="h-4 w-4" /> Back
         </Link>
-        {form.status === "published" && (
-          <a href={`/blog/${form.slug}`} target="_blank" rel="noopener noreferrer" className="btn-ghost text-xs">
-            <ExternalLink className="h-3.5 w-3.5" /> Preview
-          </a>
-        )}
+        <div className="flex gap-1">
+          <Link href={`/admin/content/${id}/preview`} className="btn-ghost text-xs">
+            <Eye className="h-3.5 w-3.5" /> Preview
+          </Link>
+          {form.status === "published" && (
+            <a href={`/blog/${form.slug}`} target="_blank" rel="noopener noreferrer" className="btn-ghost text-xs">
+              <ExternalLink className="h-3.5 w-3.5" /> View live
+            </a>
+          )}
+        </div>
       </div>
 
       <div className="mt-6 grid gap-6 lg:grid-cols-[1fr_320px]">
@@ -183,6 +200,10 @@ export default function EditPostPage() {
             </button>
           </div>
 
+          <SharePanel postId={id} slug={form.slug} published={post.status === "published"} />
+
+          {post.source === "agent" && <AgentTrail meta={post.agent_meta as CmsAgentMeta | null} reviewedAt={post.reviewed_at} />}
+
           {/* Cover */}
           <div className="glass-card p-4 space-y-3">
             <h3 className="text-sm font-semibold" style={{ color: "var(--text-primary)" }}>Cover Image</h3>
@@ -240,6 +261,49 @@ export default function EditPostPage() {
           </div>
         </div>
       </div>
+    </div>
+  );
+}
+
+/** What the content agent researched and flagged — shown to the human editor. */
+function AgentTrail({ meta, reviewedAt }: { meta: CmsAgentMeta | null; reviewedAt: string | null }) {
+  const m = meta ?? {};
+  return (
+    <div className="glass-card p-4 space-y-2 text-xs" style={{ color: "var(--text-secondary)" }}>
+      <div className="flex items-center gap-2">
+        <Bot className="h-4 w-4" style={{ color: "var(--color-brand-600)" }} />
+        <h3 className="text-sm font-semibold" style={{ color: "var(--text-primary)" }}>AI draft</h3>
+      </div>
+      <p style={{ color: "var(--text-muted)" }}>
+        {reviewedAt ? `Reviewed ${new Date(reviewedAt).toLocaleString()}` : "Not reviewed yet — check facts and sources before publishing."}
+      </p>
+      {m.angle && <p><span className="font-medium">Angle:</span> {m.angle}</p>}
+      {m.target_keyword && <p><span className="font-medium">Keyword:</span> {m.target_keyword}</p>}
+      {m.rubric && (
+        <p><span className="font-medium">Self-review:</span> {Object.entries(m.rubric).map(([k, v]) => `${k} ${v}/5`).join(" · ")}</p>
+      )}
+      {m.factcheck_flags && m.factcheck_flags.length > 0 && (
+        <ul className="space-y-1 rounded-lg px-2 py-1.5" style={{ background: "rgba(234,179,8,0.1)" }}>
+          {m.factcheck_flags.map((f, i) => (
+            <li key={i} className="flex gap-1"><AlertTriangle className="mt-0.5 h-3 w-3 shrink-0" style={{ color: "#eab308" }} />{f}</li>
+          ))}
+        </ul>
+      )}
+      {m.sources && m.sources.length > 0 && (
+        <details>
+          <summary className="cursor-pointer font-medium">Sources ({m.sources.length})</summary>
+          <ol className="mt-1 list-decimal space-y-1 pl-4">
+            {m.sources.map((src, i) => (
+              <li key={i} className="break-all">
+                <a href={src.url} target="_blank" rel="noopener noreferrer" className="underline underline-offset-2">
+                  {src.title || src.url}
+                </a>
+                {src.publisher ? ` — ${src.publisher}` : ""}
+              </li>
+            ))}
+          </ol>
+        </details>
+      )}
     </div>
   );
 }

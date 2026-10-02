@@ -1,0 +1,80 @@
+# Hermes config for the Tbrain content agent.
+# Seeded into $HERMES_HOME (/opt/data) by ../setup.sh. Edit here and re-run setup.
+
+model:
+  provider: zai            # Z.ai GLM Coding Plan; key(s) in .env: GLM_API_KEY, GLM_API_KEY_2
+  default: glm-5.1
+
+# Long-form drafting streams 10k+ tokens with reasoning; GLM can pause for
+# minutes mid-stream. Default stale cut-off (180s) kills those turns.
+providers:
+  zai:
+    request_timeout_seconds: 1200
+    stale_timeout_seconds: 600
+
+# GLM_API_KEY + GLM_API_KEY_2 form a pool: use the first until it's exhausted.
+credential_pool_strategies:
+  zai: fill_first
+
+# Side tasks (page extraction summaries, compression, titles) stay on GLM too.
+# Without this Hermes defaults to OpenRouter/Gemini, which we don't have a key for.
+auxiliary:
+  vision:           { provider: zai, model: glm-5.1 }
+  web_extract:      { provider: zai, model: glm-4.6 }
+  compression:      { provider: zai, model: glm-4.6 }
+  title_generation: { provider: zai, model: glm-4.6 }
+  session_search:   { provider: zai, model: glm-4.6 }
+
+# Critic + fact-check subagents (tbrain-write-post §3/§4).
+delegation:
+  max_concurrent_children: 2
+  max_spawn_depth: 1
+  # Cron / one-shot runs default to 2 subagents total, which the critic loop
+  # alone can use up and leave the fact-check undone. 2 critic rounds +
+  # re-review + fact-check + one retry.
+  oneshot_max_children: 6
+
+agent:
+  clarify_timeout: 86400   # chị Tâm may answer a brief/topic question hours later
+  # No shell / code / filesystem / desktop control for this agent. It works
+  # through web research + the tbrain_cms MCP tools only.
+  disabled_toolsets:
+    - terminal
+    - file
+    - code_execution
+    - computer_use
+    - connections
+    - kanban
+    - image_gen
+    - video_gen
+    - tts
+    - skills_hub
+
+approvals:
+  mode: manual
+
+memory:
+  memory_enabled: true
+  user_profile_enabled: true
+
+web:
+  keyless_fallback: true
+
+skills:
+  external_dirs:
+    - /opt/tbrain/skills
+  write_approval: true     # the agent may not rewrite its own skills unasked
+
+mcp_servers:
+  tbrain_cms:
+    command: node
+    args: ["/opt/tbrain/mcp/tbrain-cms.mjs"]
+    env:
+      TBRAIN_API_BASE: "${TBRAIN_API_BASE}"
+      CONTENT_AGENT_TOKEN: "${CONTENT_AGENT_TOKEN}"
+      TBRAIN_UPLOAD_ROOT: "/opt/data/uploads"
+    timeout: 120
+
+cron:
+  catch_up_missed: true
+  max_parallel_jobs: 1

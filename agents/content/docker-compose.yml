@@ -1,0 +1,31 @@
+# Tbrain content agent (Hermes). Temporary home: this server, under Docker.
+# Usage: see README.md. `./setup.sh` seeds config + cron jobs, then `docker compose up -d`.
+name: tbrain-content-agent
+
+services:
+  hermes:
+    image: nousresearch/hermes-agent:v2026.9.24   # pinned; bump deliberately (see README)
+    container_name: tbrain-content-agent
+    restart: unless-stopped
+    command: ["gateway", "run"]
+    env_file: .env
+    environment:
+      - TZ=Asia/Ho_Chi_Minh
+      - HERMES_UID=${HERMES_UID:-10000}
+      - HERMES_GID=${HERMES_GID:-10000}
+    volumes:
+      # State: config, memory, sessions, cron jobs, logs. Lives on /data (big disk).
+      - ${HERMES_DATA_DIR:-/data/tbrain-content-agent/hermes}:/opt/data
+      # Skills + MCP server from this repo, read-only.
+      - ./skills:/opt/tbrain/skills:ro
+      - ./mcp:/opt/tbrain/mcp:ro
+    extra_hosts:
+      - "host.docker.internal:host-gateway"   # lets TBRAIN_API_BASE point at a local `next dev`
+    deploy:
+      resources:
+        limits:
+          memory: 4G
+          cpus: "2.0"
+    logging:
+      driver: json-file
+      options: { max-size: "20m", max-file: "5" }

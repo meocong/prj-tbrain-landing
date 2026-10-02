@@ -98,6 +98,38 @@ export interface CmsPost {
   view_count: number;
   version: number;
   word_count: number;
+  source: "human" | "agent";
+  ai_assisted: boolean;
+  reviewed_by: string | null;
+  reviewed_at: string | null;
+  agent_meta: CmsAgentMeta | null;
+  created_at: string;
+  updated_at: string;
+}
+
+/** Research trail the content agent attaches to its drafts. */
+export interface CmsAgentMeta {
+  topic?: string;
+  angle?: string;
+  target_keyword?: string;
+  sources?: { url: string; title?: string; publisher?: string; accessed_at?: string }[];
+  rubric?: Record<string, number>;
+  factcheck_flags?: string[];
+  notes?: string;
+  model?: string;
+}
+
+export type SocialNetwork = "linkedin" | "facebook" | "x";
+
+export interface CmsPostSocial {
+  id: string;
+  post_id: string;
+  network: SocialNetwork;
+  message: string;
+  status: "draft" | "shared" | "scheduled" | "posted";
+  shared_by: string | null;
+  shared_at: string | null;
+  external_url: string | null;
   created_at: string;
   updated_at: string;
 }
