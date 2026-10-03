@@ -52,11 +52,11 @@ export function sanitizePostHtml(html: string): string {
     .trim();
 }
 
-/** Site-relative image paths (/images/..., /api/asset/cms/...) are allowed too. */
+/** Site-relative image paths (/images/..., /samples/posters/..., /api/asset/cms/...) are allowed too. */
 export function sanitizeImageUrl(url: string | null | undefined): string | null {
   if (!url) return null;
   const u = url.trim();
-  if (/^\/(images|api\/asset\/cms)\/[\w./-]+$/.test(u) && !u.includes("..")) return u;
+  if (/^\/(images|samples\/posters|api\/asset\/cms)\/[\w./-]+$/.test(u) && !u.includes("..")) return u;
   if (/^https:\/\/[\w.-]+\/\S+$/.test(u)) return u;
   return null;
 }

@@ -241,16 +241,23 @@ Do **not** link to anything under `(admin)`, `/admin`, or `/api/*` — those are
 8. "Humans on the last mile" (Label Studio) (`label-studio-humans-on-the-last-mile`)
 9. "Zero-trust delivery · LeRobot v2 + Rerun proof" (`zero-trust-delivery-lerobot-plus-rerun-proof`)
 
-All nine are physical-AI / robotics-data topics (capture hardware, auto-label, QC, delivery, VLA, world models). **Every one of these is physical AI — none is LLM data, agent evaluation, or Expert OS.**
+All nine cover the egocentric capture pipeline (capture hardware, auto-label, QC, delivery) plus VLA / world-model explainers.
 
-### Open lanes — no posts yet, prefer these when news supports them
-- **LLM training data: RLHF / SFT / preference data** (`SERVICES`, `PRODUCT_PILLARS` "Custom Data Programs") — nothing published yet despite being a named service line.
-- **Terminal-Bench & agent evaluation** (LLM-as-a-judge, benchmark design, anti-cheat verification) — nothing published yet; Terminal-Bench is a fully fleshed-out product with its own page and real stats (§7) and zero blog coverage.
-- **Coding / STEM data** (domain pods, benchmark creation for code) — open.
-- **Multilingual data** (the "Languages" domain pod: Asian languages, Spanish, Portuguese, Baltic languages, multilingual evaluation) — open, and distinctive since it's a less common vendor specialty.
-- **Expert OS** (the agent-facing platform: Agent Knowledge Base, LLM-as-a-Judge, Agentic Workflows, Agent Identity & Soul) — open, and timely (meta: an AI agent writing about the platform that manages AI agents).
+### Content priority (set by Viet / chị Tâm, Oct 2026)
+**Robotics data is the core business. Most posts should be about it.** Rough mix: ~80% robotics data, ~20% LLM data / evaluation.
 
-When `tbrain-topic-scout` filters candidate topics, weight these five lanes up when relevant news exists — they're real, under-told parts of the business.
+Robotics data lines, each a real sample line on Drive / `/samples` (details in `tbrain-samples.md`):
+- **Egocentric human data**: factory + household tasks, head-mounted, IMU + camera pose + calibration. Already covered as a concept; go deeper per task domain, sensor and QC detail.
+- **Game data**: gameplay video with frame-aligned inputs for world models / game agents. **Thin coverage, high interest.**
+- **Teleoperated robot data**: bimanual arms, UMI grippers, MCAP / LeRobot. **No dedicated post yet.**
+- **Motion capture**: humanoid retargeting (FBX / ABC). **No post yet.**
+- **Hand pose**: 3D hands, dexterous manipulation. **No post yet.**
+- **Exocentric / multi-view** and **GoPro single-camera** capture. **No post yet.**
+
+Robotics trend context, per data type, is in `tbrain-topic-scout/references/robotics-data-trends.md`.
+
+### Secondary lanes (about 1 post in 5, only with real news)
+- LLM training data (RLHF / SFT / preference), Terminal-Bench and agent evaluation, coding / STEM data, multilingual data, Expert OS.
 
 ## 13. DO-NOT-SAY — hard constraints (quoted from the code and editorial rules)
 

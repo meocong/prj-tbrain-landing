@@ -1,6 +1,6 @@
 ---
 name: tbrain-topic-scout
-description: Research what's moving in physical AI / robotics data / LLM training data this week and propose 3-5 blog topics for Tbrain, each with a defensible Tbrain angle and sources. Use for the weekly Monday run, for /topics, or when asked for blog ideas.
+description: Research what's moving in robotics training data (egocentric, game, teleop, mocap, hand pose, exocentric) and physical AI this week, plus LLM data when there is real news, and propose 3-5 blog topics for Tbrain, each with a defensible Tbrain angle and sources. Use for the weekly Monday run, for /topics, or when asked for blog ideas.
 version: 1.0.0
 metadata:
   hermes:
@@ -28,7 +28,7 @@ Goal: propose blog topics that a robotics or ML lead would actually click on, wh
    - a practical checklist or decision framework buyers can use;
    - a clear explainer of a fast-moving concept for a buyer audience.
 
-   Prefer an open-lane topic over another physical-AI post when the week's news supports one — the blog is nine-for-nine physical AI and hasn't touched LLM data, agent evaluation, or Expert OS yet, despite those being real, named service lines.
+   Follow the content priority in `tbrain-knowledge.md` §12: about 80% robotics data. Rotate across the data lines (egocentric, game, teleop, mocap, hand pose, exocentric) so the blog covers all of them, favoring lines with no post yet. Use `robotics-data-trends.md` (this skill's references) for the landscape and open questions, and `tbrain-samples.md` (`skill_view tbrain-write-post references/tbrain-samples.md`) for what Tbrain can show concretely. LLM-data topics only when the week has real news.
 
    Drop pure news recaps, hype, and anything requiring claims about named customers.
 
@@ -60,4 +60,4 @@ Chị chọn số nào để em viết (hoặc gửi ý tưởng khác nhé). Em
 - Write clean Vietnamese with normal spaces: no `snake_case` words, no stray words from other languages or scripts. Proofread the message once before sending.
 - Each topic needs at least 2 real, opened sources, and at least one should be primary (a paper, official blog or dataset card).
 - Titles must be specific. Prefer "How many teleop hours does a VLA actually need? What 2026 papers show" over "The Future of Robot Learning".
-- Mix it up: ideally at least one physical-AI/robotics-data topic and one practical/how-to topic, and an LLM-data (RLHF/eval/coding) topic when there is real news.
+- Mix it up: at least 3 of the topics should be robotics data, spanning at least 2 different data lines (e.g. one teleop, one game data). At most 1 LLM-data topic, and only with real news.

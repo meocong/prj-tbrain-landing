@@ -12,6 +12,7 @@ metadata:
 
 Read these before you start, every time:
 - `references/tbrain-knowledge.md`: the Tbrain fact base — service lines, Physical AI hardware/pipeline/QC, delivered-vs-capacity numbers, case studies, samples catalog, Terminal-Bench, internal links, canonical naming, and what you must never say
+- `references/tbrain-samples.md`: what is actually inside each Tbrain sample line (egocentric, game, teleop, mocap, hand pose, exocentric, GoPro), with formats, tasks and concrete angles. Use it to make robotics posts specific.
 - `references/brand-voice.md`: how Tbrain sounds, plus banned phrases
 - `references/editorial-rules.md`: what we may and may not claim
 - `references/rubric.md`: how the critic scores the draft

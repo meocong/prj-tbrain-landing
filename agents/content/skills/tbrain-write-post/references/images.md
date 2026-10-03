@@ -14,6 +14,13 @@ Use these exact paths for `cover_image_url` or inline `<img src>`. Prefer **Tbra
 - /images/depth/iron_01_rgb_depth.jpg, /images/depth/sew_01_rgb_depth.jpg: RGB + depth
 - /images/mocap-studio.jpg, /images/worker-hero-poster.jpg, /images/physical-poster.jpg, /images/robotics-hero.jpg, /images/robot-hand.jpg
 
+## Tbrain sample-line stills (best for posts about a specific data line)
+- Teleoperated robot data: /samples/posters/teleop-s002.jpg, /samples/posters/teleop-s005-right.jpg, /images/modalities/teleop.jpg, /images/modalities/umi.jpg
+- Hand pose: /samples/posters/handpose-fabric-sewing.jpg, /samples/posters/handpose-pineapple-cutting.jpg, /images/env/hand.jpg
+- Exocentric / multi-view rig: /samples/posters/exo-20260904-012.jpg, /samples/posters/rig-six.jpg, /samples/posters/rig-stereo.jpg
+- Game data (gameplay, urban walking / vehicular navigation): /samples/posters/vehicular-navigation-001.jpg, /samples/posters/vehicular-navigation-002.jpg
+- Motion capture: /images/modalities/mocap.jpg, /images/modalities/exo-mocap.jpg, /images/mocap-studio.jpg
+
 ## General blog covers
 - /images/blog-robotics-data.jpg, /images/blog-humanoid.jpg, /images/humanoid-ai.jpg, /images/blog-inline-robot-arm.jpg
 - /images/blog-quality.jpg, /images/blog-annotation.jpg, /images/blog-pipeline2.jpg, /images/blog-inline-pipeline.jpg, /images/blog-data-scale.jpg
