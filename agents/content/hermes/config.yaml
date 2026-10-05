@@ -76,6 +76,8 @@ mcp_servers:
     timeout: 120
 
 cron:
+  # No "Cronjob Response / To stop or manage this job" wrapper around reports.
+  wrap_response: false
   catch_up_missed: true
   max_parallel_jobs: 1
 
