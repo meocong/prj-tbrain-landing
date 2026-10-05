@@ -37,7 +37,7 @@ const draftProps = {
   agent_meta: {
     type: "object",
     description:
-      "Research trail for the reviewer: {topic, angle, target_keyword, sources:[{url,title,publisher,accessed_at}], rubric:{accuracy,insight,structure,voice,seo,cta} (0-5), factcheck_flags:[string], notes, model}.",
+      "Research trail for the reviewer: {topic, angle, target_keyword, sources:[{url,title,publisher,accessed_at}], rubric:{accuracy,framing,insight,structure,voice,visuals,seo,cta} (0-5), factcheck_flags:[string], notes, model}.",
   },
 };
 

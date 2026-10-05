@@ -209,7 +209,7 @@ Robotics-line datasets grouped by skill (`datasets.ts`): Tools/machines/repair �
 Use only these as CTA / internal-link targets (don't invent a path):
 - `/data/physical-ai` — Physical AI foundry page (has `#pipeline` anchor; also `/data/physical-ai/quality` and `/data/physical-ai/auto-label` subpages).
 - `/data/terminal-bench` — Terminal Bench landing (`/enter`, `/request-access`, `/request-sent`, `/s` subpaths are passcode/access flows, not for public linking).
-- `/samples` — samples hub/chooser; `/samples/[category]` (egocentric, exocentric, teleoperation, mocap, gaming) and `/samples/[category]/[group]` for skill-folder drill-down.
+- (Not `/samples` or anything under it: samples are shared privately with buyers. Never link them from a post.)
 - `/services` — services + domain pods page.
 - `/about` — company/mission/team/experts page.
 - `/casestudy` — case study index; `/casestudy/[slug]` for individual studies (slugs: `egocentric-foundation-model`, `world-model-ground-truth`, `teleop-cold-start`, `agent-evaluation`, `manufacturing`, `scalable-multimodal`).

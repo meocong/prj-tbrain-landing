@@ -8,6 +8,7 @@ import Placeholder from "@tiptap/extension-placeholder";
 import Underline from "@tiptap/extension-underline";
 import TextAlign from "@tiptap/extension-text-align";
 import Highlight from "@tiptap/extension-highlight";
+import { TableKit } from "@tiptap/extension-table";
 import { Toolbar } from "./Toolbar";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { toast } from "sonner";
@@ -68,9 +69,19 @@ export function TipTapEditor({
       Highlight.configure({
         HTMLAttributes: { class: "bg-yellow-100 px-1 rounded" },
       }),
+      // Agent drafts use comparison tables; without this they were dropped on save.
+      TableKit.configure({ table: { resizable: false } }),
     ],
     content,
     editorProps: {
+      // Links stay editable on a plain click; Ctrl/⌘-click opens them.
+      handleClick: (_view, _pos, event) => {
+        if (!(event.metaKey || event.ctrlKey)) return false;
+        const href = (event.target as HTMLElement | null)?.closest("a")?.getAttribute("href");
+        if (!href) return false;
+        window.open(href, "_blank", "noopener,noreferrer");
+        return true;
+      },
       attributes: {
         class:
           "prose prose-lg max-w-none min-h-[500px] px-8 py-6 focus:outline-none " +
@@ -84,7 +95,9 @@ export function TipTapEditor({
           "prose-img:rounded-xl prose-img:my-6 " +
           "prose-blockquote:border-l-[#6C3CF4] prose-blockquote:text-gray-600 prose-blockquote:italic " +
           "prose-code:bg-gray-100 prose-code:px-1 prose-code:rounded prose-code:text-sm " +
-          "prose-strong:font-semibold prose-strong:text-gray-900",
+          "prose-strong:font-semibold prose-strong:text-gray-900 " +
+          "prose-table:my-6 prose-th:border prose-th:border-gray-200 prose-th:bg-gray-50 prose-th:px-3 prose-th:py-2 " +
+          "prose-td:border prose-td:border-gray-200 prose-td:px-3 prose-td:py-2",
       },
     },
     onUpdate: ({ editor }) => {
@@ -186,6 +199,9 @@ export function TipTapEditor({
         </div>
       )}
       <EditorContent editor={editor} />
+      <div className="border-t border-gray-100 px-4 py-1.5 text-[11px] text-gray-400">
+        Ctrl/⌘ + click a link to open it
+      </div>
     </div>
   );
 }

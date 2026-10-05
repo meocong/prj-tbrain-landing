@@ -12,10 +12,10 @@
 ## Tbrain facts you can use (public-safe)
 Full fact base — service lines, hardware, pipeline, QC, numbers (delivered vs. capacity), case studies, samples catalog, Terminal-Bench, internal links, naming fixes, and the DO-NOT-SAY list — is in **`references/tbrain-knowledge.md`**. Read it before drafting; it's the source of truth, this is just a quick-grab shortlist. The 6 facts you'll reach for most:
 - Robotics Data Foundry for physical AI: the Tbrain Capture Pack (MK-001) worn by operators in real production environments, including textile and kitchen, with electronics on the roadmap. Sourced through an industrial partner network across Asia.
-- Egocentric, action-paired, deeply annotated data. An 8-model auto-label pipeline (hand/body keypoints, masks, descriptions, depth), a 15-rule hard-QC gate plus an 8-check diagnostic pass, and 3-layer human QC in Label Studio for the last mile. QC pass-rate floor: 85%.
+- Egocentric, action-paired, deeply annotated data. An auto-label pipeline (hand/body keypoints, masks, descriptions, depth), hard-rule QC gates and human review for the last mile. QC pass-rate floor: 85%. (In posts, keep it at this level: no tool names, model counts or internal traces.)
 - Delivered LeRobot / RLDS-ready, with Rerun-viewable proof. Raw to QC'd to delivered in ≤48h.
 - Robotics data lines beyond the capture pack: game data with frame-aligned inputs, teleoperated robot data (bimanual / UMI), motion capture for humanoids, hand pose, exocentric multi-view. See `tbrain-samples.md`. Also a secondary LLM-data business (RLHF/SFT, benchmarks, Terminal-Bench).
-- Sample datasets at /samples (egocentric, exocentric, teleoperation, mocap, gaming). The pipeline and QC playbook are at /data/physical-ai and /data/physical-ai/quality.
+- The pipeline and QC playbook are at /data/physical-ai and /data/physical-ai/quality. Sample datasets exist but are shared privately with buyers: never link /samples from a post.
 - Member of the NVIDIA Inception Program.
 
 If you need a Tbrain fact that isn't in `tbrain-knowledge.md` or on tbrain.ai, **ask chị Tâm** rather than guessing.

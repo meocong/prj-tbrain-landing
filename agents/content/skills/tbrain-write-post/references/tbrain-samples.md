@@ -9,6 +9,8 @@ used to confirm formats). Cross-checked against `tbrain-knowledge.md` (site fact
 
 ## How to use this file
 
+**Background only.** Read this to understand what the data really looks like, so you write accurately. Never quote its numbers, IDs, file names or folder details in a post, and never link `/samples` (editorial rule 13).
+
 - This file answers "what's really in a sample episode" so a post can describe a teleop
   episode, a hand-pose clip, or a game session concretely instead of generically.
 - `tbrain-knowledge.md` is still the fact base for positioning, pricing-adjacent numbers, and

@@ -32,16 +32,19 @@ Research the topic properly before outlining: open at least 4-6 sources, at leas
 **Outline gate (only when asked).** By default drafting runs as a background job (see the SOUL and `tbrain-admin-request`) and goes straight on to step 2: the brief the requester wrote is the approval. If someone asks in chat to see the outline first ("gửi dàn ý trước"), write the brief in the chat session, send it **in Vietnamese** (title and outline headings in English) and wait for "ok". Then queue the draft with `queue_request`, putting the approved outline in `brief.notes`.
 
 ## 2. Draft
-Write 1,200-2,000 words, in HTML per `references/html-format.md`.
-- Open with the reader's problem or a concrete, surprising fact (sourced). No throat-clearing.
+Write 1,200-1,700 words, in HTML per `references/html-format.md`. Write an argument for a buyer, not a summary of papers.
+- **Frame the problem first.** The first two paragraphs put the reader in a situation they recognize (a purchase, a failed training run, a budget, a vendor claim), name the tension, and state the thesis in one sentence. Don't open with a paper's statistic or a list of releases; bring the research in as evidence once the problem is clear. Test: could a VP of robotics read only the first two paragraphs and know what is at stake for them?
+- Papers are evidence, not structure. Don't walk through sources one by one or build the post around a comparison table of papers. At most one table, and only if it helps a decision.
+- Every section earns its place: a claim, then evidence, then a "so what" for the reader. Prefer one strong worked example over many facts.
 - Every section earns its place: a claim, then evidence, then a "so what" for the reader.
 - Include at least one concrete artifact: a checklist, decision table, worked example, or numbers from a cited source.
 - Cite inline with descriptive anchor links to primary sources (`<a href="…">the π0 paper</a>`). Don't use footnote numbers.
-- Add 2-4 internal links where they genuinely help: /data/physical-ai, /data/physical-ai/quality, /samples, /blog/<related-slug> (from `list_posts`), /contact.
-- End with a short, specific CTA tied to the post (e.g. "See a sample capture pack at /samples"), not a generic sales pitch.
+- Add 2-4 internal links where they genuinely help: /data/physical-ai, /data/physical-ai/quality, /casestudy/<slug>, /blog/<related-slug> (from `list_posts`), /contact. **Never link /samples** (editorial rule 13).
+- **Images:** a cover plus 2-3 inline images (`<img>` + an `<em>` caption paragraph, see html-format.md) from `references/images.md`, each with a caption saying what to notice, placed where it supports the text (e.g. a QC image next to the QC section). Don't reuse the cover inline.
+- End with a short, specific CTA tied to the post (e.g. "Walk through our QC rules with us at /contact", "See how capture works at /data/physical-ai"), not a generic sales pitch.
 
 ## 3. Independent critic pass
-Use `delegate_task` to have a subagent review the draft **cold**, giving it only the draft, `references/rubric.md`, `references/brand-voice.md` and `references/editorial-rules.md`. Ask for scores (0-5) on each rubric dimension, with the 3-5 most important fixes. If any dimension scores below 4, or the average is below 4.2, revise and re-review. Allow at most 2 revision rounds; after that, keep the best version and record the remaining issues as flags.
+Use `delegate_task` to have a subagent review the draft **cold**, giving it only the draft, `references/rubric.md`, `references/brand-voice.md` and `references/editorial-rules.md`. Ask for scores (0-5) on each rubric dimension, with the 3-5 most important fixes. If any dimension scores below 4, or the average is below 4.2, revise and **re-run the critic on the revised draft** (a fresh subagent). Allow at most 2 revision rounds; after that, keep the best version and record the remaining issues as flags. The score you save in `agent_meta.rubric` and report is the **latest critic's score**, never your own estimate.
 
 ## 4. Fact-check pass
 Use a second `delegate_task` subagent, **always as a separate subagent** (never inline): an independent check is the point. If delegation fails, say so in `factcheck_flags`. Give it the draft and ask it to open **every** linked URL and check:
@@ -62,7 +65,7 @@ Fix what you can. Anything unresolved becomes a short `factcheck_flags` entry, e
 - `author_name`: leave empty. The reviewer sets the byline.
 
 ## 6. Save and submit
-1. `mcp_tbrain_cms_create_draft` with all fields, plus `agent_meta`: `{topic, angle, target_keyword, sources:[{url,title,publisher,accessed_at}], rubric:{accuracy,insight,structure,voice,seo,cta}, factcheck_flags:[…], model}`. When revising after feedback, use `update_draft` instead.
+1. `mcp_tbrain_cms_create_draft` with all fields, plus `agent_meta`: `{topic, angle, target_keyword, sources:[{url,title,publisher,accessed_at}], rubric:{accuracy,framing,insight,structure,voice,visuals,seo,cta}, factcheck_flags:[…], model}`. When revising after feedback, use `update_draft` instead.
 2. `mcp_tbrain_cms_submit_for_review`, which returns `review_url` and `preview_url`.
 3. `mcp_tbrain_cms_save_social_messages`:
    - **linkedin**: 150-250 words in a professional, first-person-plural company voice. Open with a hook line, give 3 short insight bullets, end with a question or a "read more". 0-3 hashtags. Don't paste the link (the system appends it).
@@ -70,13 +73,14 @@ Fix what you can. Anything unresolved becomes a short `factcheck_flags` entry, e
    - **x**: at most 250 characters: one sharp insight. No link (it is appended), at most 1 hashtag.
 
 ## 7. Report (Vietnamese)
+Send it as **plain text**: no `**bold**`, no Markdown, no backslash escapes. Telegram shows them as raw characters. Put each URL on its own line.
 ```
 ✍️ Bài mới chờ duyệt: <Title>  (yêu cầu bởi <requested_by>)
 • Ý chính: <1 câu>
 • Độ dài: <n> từ · <k> nguồn · Tự chấm: <avg>/5
 • ⚠️ Cần chị kiểm tra: <flags or "không có">
-👉 Xem & duyệt: <review_url>
-✏️ Sửa trong editor: <edit_url> · Preview: <preview_url>
+👀 Xem trước: <preview_url>
+✅ Duyệt: <review_url>
 Muốn agent sửa: nhắn "sửa bài <tiêu đề/slug>: <ghi chú>" hoặc bấm "Request changes" ở /admin/content/agent.
 Sau khi duyệt, nút Share LinkedIn/Facebook/X trong trang bài viết đã có sẵn nội dung.
 ```
