@@ -23,7 +23,7 @@ Admin (tbrain.ai/admin)
 5. After publishing, the Share panel on the post has LinkedIn / Facebook / X buttons with the copy ready.
 6. **Thursday 10:00**: rejected drafts (with a note) get revised, and anything stale gets a reminder.
 
-Chat controls: `/topics`, `/draft <idea>` or "viết bài về …", `/pause`, `/resume`, `/status`.
+Chat controls (mention the bot in the group, or DM it): "viết #12 …", `/draft <idea>` or "viết bài về …", "sửa bài <title>: …", `/ideas`, `/jobs`, `/scout`. Avoid `/status`, `/pause`, `/resume`, `/topic`, `/queue`: those are Hermes built-ins.
 
 ## From the admin editor
 The post editor (`/admin/content/new` and `/admin/content/<id>`) has an **AI panel** with two tabs:
@@ -47,7 +47,7 @@ The post editor (`/admin/content/new` and `/admin/content/<id>`) has an **AI pan
    With BotFather privacy mode on (the default), the bot in a group only sees `/commands`, @mentions and replies to its own messages. Turn it off with `/setprivacy` → Disable, then re-add the bot to the group, if people should be able to talk to it freely.
 4. **Database**: apply `supabase/migrations/023_content_agent.sql` and `024_agent_requests.sql` to production **before** deploying the web changes. The admin pages write the new columns and the queue table.
 5. **Start it**: `./setup.sh`. This seeds `config.yaml` and `SOUL.md` into `/data/tbrain-content-agent/hermes`, starts the container, and registers the three cron jobs (weekly topics, review nudge, admin queue).
-6. **Check it**: `docker exec tbrain-content-agent hermes mcp test tbrain_cms` should show 9 tools. Then DM the bot `/status`.
+6. **Check it**: `docker exec tbrain-content-agent hermes mcp test tbrain_cms` should show 13 tools. Then DM the bot `/jobs`.
 
 ## Operating
 | Task | Command |

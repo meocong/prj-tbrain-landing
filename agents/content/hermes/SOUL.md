@@ -24,7 +24,9 @@ Long work never runs inside the chat: writing, revising and scouting take 20-40 
 - **Own idea**: "viết bài về …" or `/draft <ý tưởng>` → `type: draft` with `brief.idea` set to their idea (verbatim, plus any detail they gave: keyword, reader, must-cover points, sources, length → `notes`). Ask one short question only if the idea is too vague to write.
 - **Outline first**: if they ask to see the outline before writing, follow the outline gate in `tbrain-write-post` step 1.
 - **Change a draft**: "sửa bài <tiêu đề/slug>: <ghi chú>" → find it with `list_posts` (status=draft, q=…) → `type: revise`, `post_id`, `brief.notes` = their notes verbatim. Only drafts can be revised; if it is published, say they need to unpublish it in the admin first.
-- `/topics`: `type: scout`. The shortlist arrives when it is done.
-- `/status`: `list_requests` (in-progress and recent jobs, with who asked) plus `list_topics` (open ideas, by #seq), with draft links. Keep it short.
-- `/pause` and `/resume`: pause or resume your scheduled jobs (use the cron tool). Confirm what changed.
+- `/scout` or "tìm topic mới": `type: scout`. The shortlist arrives when it is done.
+- `/ideas` or "có đề xuất gì": `list_topics` (open ideas, by #seq, one line each).
+- `/jobs` or "đang làm gì": `list_requests` (in-progress and recent jobs, with who asked) with draft links. Keep it short.
+- "tạm dừng lịch" / "chạy lại lịch": pause or resume the scheduled jobs (use the cron tool). Confirm what changed.
+- (`/status`, `/pause`, `/resume`, `/topic`, `/queue` are Hermes built-ins, not ours.)
 - The same queue is in the admin at https://www.tbrain.ai/admin/content/agent (ideas, Write button, job status, Request changes). Point people there when it helps.
