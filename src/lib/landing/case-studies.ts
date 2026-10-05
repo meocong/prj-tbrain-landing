@@ -26,7 +26,7 @@ function fallbackCaseStudies(): CaseStudy[] {
       title: "Egocentric Data for a Robot Foundation Model",
       shortDescription: "Lab-grade first-person manipulation data, RLDS-ready",
       description:
-        "A frontier robotics team needed diverse egocentric manipulation data to pretrain a cross-embodiment VLA. Tbrain ran the EgoKit factory pack across home, market, and workshop environments, synchronized capture against a hardware clock, auto-filtered broken demonstrations with AI-native QC, and delivered everything in RLDS / LeRobot format.",
+        "A frontier robotics team needed diverse egocentric manipulation data to pretrain a cross-embodiment VLA. Tbrain ran the Tbrain Capture Pack (MK-001) across home, market, and workshop environments, synchronized capture against a hardware clock, auto-filtered broken demonstrations with AI-native QC, and delivered everything in RLDS / LeRobot format.",
       image: "/images/robotics-hero.jpg",
       industry: "Physical AI / VLA",
       metrics: [

@@ -293,9 +293,14 @@ export const CAPABILITY: Partial<Record<string, CapabilityTier[]>> = {
  */
 export const IN_FLIGHT: Partial<Record<string, string>> = {
   exocentric:
-    "20 hours in collection since 5 September 2026 with 15 operators: " +
-    "10 h urban walking, 5 h vehicular navigation, 5 h structured indoor. " +
-    "1080p30 MP4 with audio, clips 30 s to 15 min.",
+    // Updated 2026-10-05 against the Drive sample folder's own SUMMARY.xlsx
+    // (239 clips, 27.2 h, 14 scene groups) — the collection grew past the
+    // 20 h / 3-bucket figure recorded at the 5 September start date, and the
+    // folder now holds more scene variety than the three original buckets.
+    "27.2 hours in collection since 5 September 2026 with 15 operators, now spread across 14 " +
+    "scene groups (urban walking, vehicular navigation, structured indoor, and mixed capture " +
+    "sessions). Mostly 1080p with some 4K, mixed frame rates, MP4 with audio, clips under a " +
+    "minute to about 50 min.",
   // The approved delivery, counted by `ingest-approved.py` into teleop-set.json.
   teleoperation:
     `${TELEOP.sessions} sessions of one pick-and-place task already collected: ` +

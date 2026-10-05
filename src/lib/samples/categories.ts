@@ -207,8 +207,9 @@ export const CATEGORIES: Category[] = [
        capture and one clip is an interior; left to `facesFor` the card opened
        on that interior, so the card selling outdoor navigation showed a desk. */
     face: "exo-20260904-049",
-    // IN_FLIGHT.exocentric: "20 hours in collection since 5 September 2026".
-    held: { figure: "20 h", unit: "in collection · 15 operators" },
+    // IN_FLIGHT.exocentric, updated 2026-10-05 against the Drive sample
+    // folder's SUMMARY.xlsx (239 clips, 27.2 h, 14 scene groups).
+    held: { figure: "27.2 h", unit: "in collection · 15 operators" },
     /* Rig and outputs from the capability sheet's row A4, "Exocentric
        (basic)"; the collection figures from IN_FLIGHT. Two sources because they
        answer two questions — what the tier IS, and what is on the floor now. */
@@ -235,9 +236,9 @@ export const CATEGORIES: Category[] = [
          a property a buyer can use — two viewpoints of one route — and not one
          they would assume from an hours figure. */
       { label: "Multi-device", value: "Some sessions shot on GoPro and phone at once" },
-      { label: "Video", value: "1080p at 30 fps, with audio" },
-      { label: "Clip length", value: "30 seconds to 15 minutes" },
-      { label: "Mix in collection", value: "10 h urban walking · 5 h vehicular navigation · 5 h structured indoor" },
+      { label: "Video", value: "Mostly 1080p with some 4K, mixed frame rates, with audio" },
+      { label: "Clip length", value: "Under a minute to about 50 minutes" },
+      { label: "Mix in collection", value: "14 scene groups: urban walking, vehicular navigation, structured indoor, mixed capture" },
       { label: "Ships as", value: "exo.mp4 + metadata.json · LeRobot v3, convertible to HDF5 / RLDS / MCAP" },
     ],
   },

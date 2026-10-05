@@ -80,16 +80,16 @@ export const PRODUCT_LINES: ProductLine[] = [
     name: "Teleoperation",
     positioning: "Bimanual robot, three synchronised cameras",
     headline: "Robot episodes with joint state and action, not a human wearing a rig",
-    body: "A bimanual follower arm running a table-clearing task: seven degrees of freedom per arm plus a gripper each, so state and action are both 16-dimensional. Delivered as a LeRobotDataset with a GR00T-compatible modality map, which is the format most policy training expects to read.",
+    body: "A bimanual follower arm picking up a box and placing it into a bin: seven joints per arm, six actuated joints per five-fingered hand, and a wrist position and orientation per side, so state and action are both 40-dimensional. Delivered as a LeRobotDataset with a GR00T-compatible modality map, which is the format most policy training expects to read.",
     facts: [
-      { label: "Episodes collected", value: "11" },
+      { label: "Episodes collected", value: "134" },
       { label: "Cameras", value: "3 at 640x480" },
-      { label: "Format", value: "LeRobot v2.1" },
+      { label: "Format", value: "LeRobot v3.0" },
     ],
     modalities: [
       "Head, left and right camera",
-      "16-dimensional joint state",
-      "16-dimensional action",
+      "40-dimensional joint state",
+      "40-dimensional action",
       "Per-episode task annotation",
       "Parquet frames",
       "GR00T modality map",
@@ -101,9 +101,9 @@ export const PRODUCT_LINES: ProductLine[] = [
     name: "Exocentric",
     positioning: "Third-person, fixed and handheld",
     headline: "The same work seen from outside the body",
-    body: "Twenty hours across urban walking, vehicular navigation and structured indoor environments, collected in Hanoi by fifteen operators. Clips run from thirty seconds to fifteen minutes, at 1080p30 with audio embedded.",
+    body: "27.2 hours across 14 scene groups spanning urban walking, vehicular navigation, structured indoor and mixed-capture environments, collected in Hanoi by fifteen operators. Clips run from under a minute to about 50 minutes, mostly 1080p with some 4K, with audio embedded.",
     facts: [
-      { label: "Hours in collection", value: "20" },
+      { label: "Hours in collection", value: "27.2" },
       { label: "Operators", value: "15" },
       { label: "Started", value: "5 Sep 2026" },
     ],
@@ -225,7 +225,7 @@ export const ROBOTICS_COLLECTIONS = [
   {
     name: "Bimanual teleoperation",
     environment: "Simulation",
-    capture: "Three synchronized cameras, delivered in LeRobot v2 layout",
+    capture: "Three synchronized cameras, delivered in LeRobot v3 layout",
     status: "Available",
   },
 ] as const;
