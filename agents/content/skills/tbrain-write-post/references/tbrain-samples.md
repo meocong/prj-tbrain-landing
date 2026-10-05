@@ -18,7 +18,7 @@ used to confirm formats). Cross-checked against `tbrain-knowledge.md` (site fact
   Treat the Drive numbers as true about the *sample folder measured*, not as a verified
   company-wide total — several are from a vendor questionnaire answering one prospect's
   checklist, not from a public page.
-- Where Drive data and site copy disagree, the conflict is called out inline as **Conflict:**.
+- Where Drive data and site copy disagree, the conflict is called out inline as **Resolved 2026-10-05 (was a conflict):**.
 - See "DO NOT USE" at the end before quoting anything from the source PDFs directly — they are
   marked CONFIDENTIAL / prepared for a named prospect, and this file has already stripped what
   shouldn't travel further.
@@ -151,7 +151,7 @@ calibration/pose/metadata files alongside them yet (unlike Egocentric/Hand Pose/
 vehicle-mounted driving/navigation footage and a few mixed/office-environment clips.
 
 **Counts/hours/durations (sample-level; confirm before publishing as a company-wide claim):**
-this sample folder: **239 clips, 27.2 hours total, 14 scene groups.** **Conflict:** `/samples`
+this sample folder: **239 clips, 27.2 hours total, 14 scene groups.** **Resolved 2026-10-05 (was a conflict):** `/samples`
 currently describes Exocentric as "in-collection, not yet playable — 20 hours in collection since
 5 Sept 2026, 15 operators (10h urban walking, 5h vehicular navigation, 5h structured indoor),
 1080p30 with audio, GoPro + phone." The sample folder's actual pool (27.2 h, mixed frame rates
@@ -188,7 +188,7 @@ then index/middle/ring/little proximal). Three synchronized cameras — head, le
 **Modalities & streams:** joint-level state and action, both **40-dimensional per frame**: 14 arm
 joint angles (7 per arm) + 12 hand joint angles (6 per hand) + 14 end-effector TCP values (3D
 position + quaternion, 7 per hand) — confirmed directly from a sample `meta/info.json`'s
-`observation.state` feature list. **Conflict:** `tbrain-knowledge.md` §6 currently describes this
+`observation.state` feature list. **Resolved 2026-10-05 (was a conflict):** `tbrain-knowledge.md` §6 currently describes this
 product as "16-dim joint state + 16-dim action" — the actual sample schema is 40-dim state and
 40-dim action. Flag this for correction before the next time a post states the dimensionality.
 
@@ -203,7 +203,7 @@ task-variety one.
 
 **Counts/hours/durations:** this sample folder (sample-level; confirm before publishing as a
 company-wide claim): **11 dataset folders, 134 total episodes, 20,790 total frames, 17.3 minutes
-total, 20 fps.** Per-dataset episode counts range 7–18. **Conflict:** `tbrain-knowledge.md` §6
+total, 20 fps.** Per-dataset episode counts range 7–18. **Resolved 2026-10-05 (was a conflict):** `tbrain-knowledge.md` §6
 says "11 episodes, several thousand frames, held/available" — the "11" in the sample data is the
 number of *dataset folders*, not episodes; actual total episodes across those 11 folders is 134.
 Worth correcting the "11 episodes" framing the next time this is cited.
@@ -445,21 +445,16 @@ this file's public-safety brief:
 
 ---
 
-## Summary of conflicts with existing site facts (for the content lead to resolve)
+## Site-sync status (updated 2026-10-05)
 
-1. **Teleoperated state/action dimensionality:** site says 16-dim; sample schema is verifiably
-   40-dim (14 arm + 12 hand + 14 TCP). Needs correction in `tbrain-knowledge.md` §6.
-2. **Teleoperated "11 episodes":** site's "11" is actually the dataset/folder count; true episode
-   total in the sample set is 134 episodes / 20,790 frames.
-3. **Exocentric collection size:** site says "20 hours in collection since 5 Sept 2026, 15
-   operators, 3 fixed buckets"; the sample folder shows a larger, more varied pool (27.2 hours,
-   14 scene groups, mixed frame rates/resolutions) — likely a later snapshot, not a contradiction,
-   but the exact 27.2h figure isn't yet a verified site number.
-4. **Mocap glove data:** site's Mocap category describes Metagloves per-finger pose as part of the
-   offering; this sample batch (8 actions) is body+camera+prop only, no finger data — the
-   160s/4,801-frame/21-joints-per-hand proof point on site refers to a different capture, not any
-   of these 8 samples.
-5. **Egocentric scale numbers:** Drive vendor-questionnaire totals (12,754 clips / 1,022.9 hours /
-   2,517 tasks / 385 operators / 116 venues) are close to, but not identical to, the "~1,200
-   hours / ~15,000 episodes" shelf figure already in `tbrain-knowledge.md` §6 — likely the same
-   corpus at different snapshot dates; don't blend the two without confirming which is current.
+Resolved — the site and `tbrain-knowledge.md` §6 now match the Drive samples; do not flag these:
+1. Teleoperated: 40-dim state/action; 11 sessions · 134 episodes · 20,790 frames; LeRobot v3.0.
+2. Exocentric: 27.2 h, 239 clips, 14 scene groups, mixed resolution/frame rate.
+3. Mocap: site copy only describes the glove demo bundle (160 s / 4,801 frames / 21 joints per
+   hand); it never claims the 8-action body-only batch has finger data. When you write about the
+   batch, say it is body + camera + prop, no fingers.
+
+Still open (do not blend, ask the reviewer):
+4. Egocentric scale: the site's "~1,200 hours / ~15,000 episodes" shelf figure is the sales-deck
+   number chosen by the content lead; the vendor questionnaire (2026-09-17) counts 12,754 clips /
+   1,022.9 h. Use the site figure, labelled "the shelf", unless the reviewer says otherwise.
