@@ -1,7 +1,7 @@
 ---
 name: tbrain-write-post
-description: Write a high-quality Tbrain blog post end to end — brief and outline for approval, researched draft, independent critic and fact-check passes, then save as a draft, submit for human review, and prepare LinkedIn/Facebook/X copy. Use when chị Tâm picks a topic or asks for a post.
-version: 1.0.0
+description: Write a Tbrain blog post people want to read — pick the post type, build a brief with real information gain from the approved knowledge base, propose an outline for human approval, then write, run reader/critic/fact-check passes, save as a draft, submit for review and prepare LinkedIn/Facebook/X copy. Use for draft jobs and when someone asks for a post.
+version: 2.0.0
 metadata:
   hermes:
     tags: [content, writing, tbrain]
@@ -10,78 +10,105 @@ metadata:
 
 # Tbrain: write a blog post
 
+You are writing for a person: a robotics or ML lead, or the person who buys their data. They have ten minutes and no obligation to finish. Every choice below serves that reader, not a search engine.
+
 Read these before you start, every time:
-- `references/tbrain-knowledge.md`: the Tbrain fact base — service lines, Physical AI hardware/pipeline/QC, delivered-vs-capacity numbers, case studies, samples catalog, Terminal-Bench, internal links, canonical naming, and what you must never say
-- `references/tbrain-samples.md`: what is actually inside each Tbrain sample line (egocentric, game, teleop, mocap, hand pose, exocentric, GoPro), with formats, tasks and concrete angles. Use it to make robotics posts specific.
-- `references/brand-voice.md`: how Tbrain sounds, plus banned phrases
-- `references/editorial-rules.md`: what we may and may not claim
-- `references/rubric.md`: how the critic scores the draft
-- `references/html-format.md`: allowed HTML and the post structure
-- `references/images.md`: cover images you can use
+- `references/post-types.md`: the five post types, their skeletons, openings and endings. **The most important file.**
+- `references/rubric.md`: the critic scorecard your draft must pass
+- `references/brand-voice.md`: how Tbrain sounds, banned phrases and AI tells
+- `references/editorial-rules.md`: what we may and may not claim (rule 13: samples and internal detail stay private)
+- `references/html-format.md`: allowed HTML and the structure blocks
+- `references/tbrain-knowledge.md`: public-safe Tbrain facts and internal link targets
+- `references/tbrain-samples.md`: background only, never quoted
 
-Also check memory for chị Tâm's saved preferences and apply them.
+Also check memory for reviewer preferences ("Tâm prefers: …") and apply them.
 
-## 1. Brief and outline (approval gate)
-Research the topic properly before outlining: open at least 4-6 sources, at least 2 of them primary. Then write the brief:
-- **Working title** (English) and 1-sentence **thesis**: the one thing the reader should walk away believing.
-- **Reader**: persona, what they're trying to decide, search intent, and the target keyword plus 2-3 related terms.
-- **Tbrain angle**: what we can say from hands-on experience that others can't.
-- **Outline**: H2s with a one-line point each (5-7 sections), and where internal links and the CTA go.
-- **Key sources** (URLs).
+## 1. Research and the brief
 
-**Outline gate (only when asked).** By default drafting runs as a background job (see the SOUL and `tbrain-admin-request`) and goes straight on to step 2: the brief the requester wrote is the approval. If someone asks in chat to see the outline first ("gửi dàn ý trước"), write the brief in the chat session, send it **in Vietnamese** (title and outline headings in English) and wait for "ok". Then queue the draft with `queue_request`, putting the approved outline in `brief.notes`.
+Research first: open 4-6 sources, at least 2 primary (paper, official post, dataset card). Then gather Tbrain material:
+- `mcp_tbrain_cms_search_knowledge` for approved stories and facts on the topic (try the data line and 2-3 keywords; read promising items in full with `get_knowledge`);
+- the requester's `brief.experience` (what they've seen or done first-hand), if any;
+- `mcp_tbrain_cms_list_images` for the approved image library.
 
-## 2. Draft
-Write 1,200-1,700 words, in HTML per `references/html-format.md`. Write an argument for a buyer, not a summary of papers.
-- **Frame the problem first.** The first two paragraphs put the reader in a situation they recognize (a purchase, a failed training run, a budget, a vendor claim), name the tension, and state the thesis in one sentence. Don't open with a paper's statistic or a list of releases; bring the research in as evidence once the problem is clear. Test: could a VP of robotics read only the first two paragraphs and know what is at stake for them?
-- Papers are evidence, not structure. Don't walk through sources one by one or build the post around a comparison table of papers. At most one table, and only if it helps a decision.
-- Every section earns its place: a claim, then evidence, then a "so what" for the reader. Prefer one strong worked example over many facts.
-- Every section earns its place: a claim, then evidence, then a "so what" for the reader.
-- Include at least one concrete artifact: a checklist, decision table, worked example, or numbers from a cited source.
-- Cite inline with descriptive anchor links to primary sources (`<a href="…">the π0 paper</a>`). Don't use footnote numbers.
-- Add 2-4 internal links where they genuinely help: /data/physical-ai, /data/physical-ai/quality, /casestudy/<slug>, /blog/<related-slug> (from `list_posts`), /contact. **Never link /samples** (editorial rule 13).
-- **Images:** a cover plus 2-3 inline images (`<img>` + an `<em>` caption paragraph, see html-format.md) from `references/images.md`, each with a caption saying what to notice, placed where it supports the text (e.g. a QC image next to the QC section). Don't reuse the cover inline.
-- End with a short, specific CTA tied to the post (e.g. "Walk through our QC rules with us at /contact", "See how capture works at /data/physical-ai"), not a generic sales pitch.
+Write the brief (it goes into the outline):
+- **Post type** from `post-types.md`. Use `brief.post_type` if the requester set one. Otherwise pick from the reader's question, and prefer `field_story` when an approved story or the requester's experience fits.
+- **Reader, problem, takeaway**: one sentence each.
+- **Information gain**: what this post has that the sources don't. Name the knowledge ids or the experience note it comes from, or the original analysis you'll add. If there's none, say so plainly in the outline notes and propose what we'd need (e.g. "a story from the team about X"). Don't pad.
+- **The peak**: the most surprising point, and where it lands.
+- **CTA**: one, matched to the topic.
 
-## 3. Independent critic pass
-Use `delegate_task` to have a subagent review the draft **cold**, giving it only the draft, `references/rubric.md`, `references/brand-voice.md` and `references/editorial-rules.md`. Ask for scores (0-5) on each rubric dimension, with the 3-5 most important fixes. If any dimension scores below 4, or the average is below 4.2, revise and **re-run the critic on the revised draft** (a fresh subagent). Allow at most 2 revision rounds; after that, keep the best version and record the remaining issues as flags. The score you save in `agent_meta.rubric` and report is the **latest critic's score**, never your own estimate.
+## 2. Outline for approval (default)
 
-## 4. Fact-check pass
-Use a second `delegate_task` subagent, **always as a separate subagent** (never inline): an independent check is the point. If delegation fails, say so in `factcheck_flags`. Give it the draft and ask it to open **every** linked URL and check:
-- that each factual sentence (numbers, dates, names, capabilities) is supported by the linked source or one listed in the brief;
-- that no link is dead, paywalled-only or irrelevant;
-- that nothing violates `references/editorial-rules.md` (customer names, invented stats, competitor claims).
+Unless `brief.skip_outline` is true or `brief.outline_approved` is true, stop after the outline:
+1. Call `mcp_tbrain_cms_submit_outline` with the job id and
+   `{post_type, title, reader, problem, takeaway, opening, sections:[{h2, point}], closing, cta, images:[{url, why}], knowledge_ids, sources, notes}`.
+   - `opening` is the actual first two paragraphs as they will read: the reader judges the post by them.
+   - `h2`s are claims (see post-types.md). 4-6 sections.
+   - `images`: 3-4 picks from `list_images` with one line each on why that image belongs next to that section.
+2. Your final response is the outline report (plain text, Vietnamese, title and headings in English):
+```
+📝 Dàn ý chờ duyệt: <Title>  (<post type>, yêu cầu bởi <requested_by>)
+Người đọc: <1 câu> · Mang về: <1 câu>
+Mở bài:
+<the two opening paragraphs>
+Các phần:
+1. <H2>
+2. <H2>
+…
+Kết: <1 câu> · CTA: <…>
+Chất riêng: <knowledge used / experience / original analysis, or "chưa có — cần câu chuyện từ team về …">
+Trả lời "ok" để viết bài đầy đủ, hoặc "sửa: <ghi chú>". Hoặc duyệt ở:
+https://www.tbrain.ai/admin/content/agent?job=<job id>
+```
+Don't call `complete_request`. The job waits until someone reviews it.
 
-Fix what you can. Anything unresolved becomes a short `factcheck_flags` entry, e.g. "Para 3: '40% cheaper' — source only says 'significantly'; reworded, please confirm".
+When the job comes back:
+- `brief.outline_approved` true: write the full draft from the approved outline (`request.result.outline`), applying `brief.outline_feedback` if any.
+- `outline_approved` false but there's `outline_feedback`: produce a new outline with the feedback (back to the start of this step).
 
-## 5. SEO and metadata
-- `seo_title`: 50-60 chars, with the keyword near the front.
-- `seo_description`: 120-155 chars that promise a concrete takeaway.
-- `excerpt`: 1-2 sentences for the blog index.
-- `slug`: short, keyword-based, no dates.
-- `category`: one of Physical AI, Robotics Data, Data Quality, RLHF & Evaluation, Benchmarks, Engineering.
-- `tags`: 3-6, lowercase.
-- `cover_image_url`: pick from `references/images.md` (on-topic and Tbrain-owned first). Never use images from other sites.
-- `author_name`: leave empty. The reviewer sets the byline.
+## 3. Draft
+
+Follow the skeleton of the post type. 1,200-1,600 words, HTML per `html-format.md`.
+- **Opening**: the approved opening, polished. Answer-first or a scene; thesis in paragraph 1-2.
+- **Key takeaways box** right after the opening: `<blockquote><ul><li>…</li></ul></blockquote>` with 3 one-line takeaways (the site styles it as a box).
+- **H2s are claims.** Each section: the claim, the evidence (source link or approved Tbrain story/fact), and what it means for the reader.
+- **Write prose.** Lists only for real lists or steps. At most one table, and only for a decision.
+- **Tbrain material**: retell approved stories and facts accurately, at the level of detail the item gives, and never beyond it. Record their ids in `agent_meta.knowledge_ids`. Nothing about Tbrain that isn't in the knowledge base, `tbrain-knowledge.md` or the requester's note.
+- **Images**: 3-4 inline images from `list_images` only, each placed next to the paragraph its description matches, each followed by an `<em>` caption that says what to notice (see html-format.md). The cover is a different library image. If the library has nothing that fits a section, use fewer images and flag it for the reviewer. Never use an image whose description doesn't match.
+- **Links**: inline descriptive anchors to primary sources. 2-4 internal links: /data/physical-ai, /data/physical-ai/quality, /casestudy/<slug>, /blog/<related-slug> (from `list_posts`), /contact. Never /samples.
+- **CTA**: one soft in-text CTA right after the section that describes the reader's pain, if natural, and a specific one at the end. The site appends a standard contact block under every post, so don't write a generic "contact us" paragraph.
+- **Ending**: one memorable line plus a concrete next step. No recap.
+
+## 4. Reader pass, critic, fact-check
+
+Use three separate `delegate_task` subagents. Each reviews **cold**: give it only the draft and the files named below.
+1. **Reader pass**: "You are a head of robotics data at a VLA startup. Read this as you would a vendor blog. Mark every sentence that made you want to keep reading, name the longest dull stretch, say where you would have stopped, and say what you'd remember tomorrow." Rewrite the dull stretch and anything before the stop point.
+2. **Critic**: `rubric.md`, `brand-voice.md`, `editorial-rules.md`, `post-types.md`, plus the image library descriptions of the images used. Ship at ≥20/26 with no 0 on items 1, 4, 6 or 10. Otherwise fix and **re-run a fresh critic**. Two rounds at most, then keep the best version and flag the rest. The score you save and report is the latest critic's total, never your own estimate.
+3. **Fact-check**: open every linked URL; check each factual sentence against its source; check every Tbrain claim against the knowledge items cited; check rule 13. Unresolved issues go into `factcheck_flags` ("Para 3: 'half of frames' — IronMind says 51% effective; reworded, please confirm").
+
+## 5. Metadata
+- `seo_title` ≤ 60 chars, `seo_description` 120-155 chars promising a concrete takeaway, `excerpt` 1-2 sentences, short keyword `slug`.
+- `category`: one of Physical AI, Robotics Data, Data Quality, RLHF & Evaluation, Benchmarks, Engineering. `tags`: 3-6, lowercase.
+- `cover_image_url`: from `list_images`. `author_name`: leave empty (the site shows "Tbrain Team").
 
 ## 6. Save and submit
-1. `mcp_tbrain_cms_create_draft` with all fields, plus `agent_meta`: `{topic, angle, target_keyword, sources:[{url,title,publisher,accessed_at}], rubric:{accuracy,framing,insight,structure,voice,visuals,seo,cta}, factcheck_flags:[…], model}`. When revising after feedback, use `update_draft` instead.
-2. `mcp_tbrain_cms_submit_for_review`, which returns `review_url` and `preview_url`.
+1. `mcp_tbrain_cms_create_draft` (or `update_draft` for an existing draft) with all fields and `agent_meta`: `{post_type, topic, reader, takeaway, target_keyword, knowledge_ids:[…], images:[{url, why}], sources:[{url,title,publisher,accessed_at}], scorecard:{total, items:{1..13}}, reader_pass:"<one line>", factcheck_flags:[…], model}`.
+2. `mcp_tbrain_cms_submit_for_review` returns `review_url` and `preview_url`.
 3. `mcp_tbrain_cms_save_social_messages`:
-   - **linkedin**: 150-250 words in a professional, first-person-plural company voice. Open with a hook line, give 3 short insight bullets, end with a question or a "read more". 0-3 hashtags. Don't paste the link (the system appends it).
-   - **facebook**: 60-120 words, a little warmer, and a clear reason to click.
-   - **x**: at most 250 characters: one sharp insight. No link (it is appended), at most 1 hashtag.
+   - **linkedin**: 150-250 words, first-person plural. Open with the post's sharpest line, then 3 short insights and a question. 0-3 hashtags, no link (it's appended).
+   - **facebook**: 60-120 words, warmer, with a clear reason to click.
+   - **x**: ≤ 250 chars, one sharp insight, ≤ 1 hashtag, no link.
 
-## 7. Report (Vietnamese)
-Send it as **plain text**: no `**bold**`, no Markdown, no backslash escapes. Telegram shows them as raw characters. Put each URL on its own line.
+## 7. Report (Vietnamese, plain text)
+No Markdown, bold or backslash escapes. One URL per line.
 ```
-✍️ Bài mới chờ duyệt: <Title>  (yêu cầu bởi <requested_by>)
+✍️ Bài mới chờ duyệt: <Title>  (<post type>, yêu cầu bởi <requested_by>)
 • Ý chính: <1 câu>
-• Độ dài: <n> từ · <k> nguồn · Tự chấm: <avg>/5
-• ⚠️ Cần chị kiểm tra: <flags or "không có">
+• <n> từ · <k> nguồn · <m> ảnh · Critic: <total>/26
+• Chất riêng: <knowledge/experience used>
+• ⚠️ Cần kiểm tra: <flags or "không có">
 👀 Xem trước: <preview_url>
 ✅ Duyệt: <review_url>
-Muốn agent sửa: nhắn "sửa bài <tiêu đề/slug>: <ghi chú>" hoặc bấm "Request changes" ở /admin/content/agent.
-Sau khi duyệt, nút Share LinkedIn/Facebook/X trong trang bài viết đã có sẵn nội dung.
+Muốn sửa: nhắn "sửa bài <tiêu đề>: <ghi chú>" hoặc bấm "Request changes" ở /admin/content/agent.
 ```
-Never say the post is published. If she replies with edits, use `tbrain-revise-post`.
+Never say the post is published.

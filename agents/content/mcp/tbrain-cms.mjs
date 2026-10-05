@@ -123,7 +123,7 @@ const TOOLS = [
   {
     name: "queue_request",
     description:
-      "Queue a background job when someone asks in chat. type: draft (write a post: topic_seq for a saved idea \"#12\" and/or brief.idea), revise (post_id + brief.notes; drafts only), scout (find new topics). brief: {idea, keyword, audience, notes}. requested_by_label: the requester's name. Returns jobs_ahead. The queue poll runs it within ~2 minutes; you report the result when it finishes. Use this instead of doing long work inside the chat.",
+      "Queue a background job when someone asks in chat. type: draft (write a post: topic_seq for a saved idea \"#12\" and/or brief.idea), revise (post_id + brief.notes; drafts only), scout (find new topics). brief: {idea, keyword, audience, notes, experience (what the requester has seen/done first-hand), post_type (news_hook|field_story|trend_pov|buyer_guide|proof), skip_outline (true only if they say to write straight away)}. requested_by_label: the requester's name. Returns jobs_ahead. The queue poll runs it within ~2 minutes; you report the result when it finishes. Use this instead of doing long work inside the chat.",
     inputSchema: {
       type: "object",
       properties: {
@@ -137,6 +137,9 @@ const TOOLS = [
             keyword: { type: "string" },
             audience: { type: "string" },
             notes: { type: "string" },
+            experience: { type: "string" },
+            post_type: { type: "string", enum: ["news_hook", "field_story", "trend_pov", "buyer_guide", "proof"] },
+            skip_outline: { type: "boolean" },
           },
         },
         requested_by_label: { type: "string" },
@@ -152,7 +155,7 @@ const TOOLS = [
   {
     name: "save_topics",
     description:
-      "Save a topic shortlist so it shows in the admin and can be picked by number. topics: [{title, why_now, angle, keyword, audience, data_line, sources:[https urls], score (0-20)}] in the order you will present them; request_id when running a scout job. Returns [{seq, title}] — number topics in your message as #seq.",
+      "Save a topic shortlist so it shows in the admin and can be picked by number. topics: [{title, why_now, angle, keyword, audience, data_line, sources:[https urls], score (0-20), post_type (news_hook|field_story|trend_pov|buyer_guide|proof), funnel (top|middle|bottom)}] in the order you will present them; request_id when running a scout job. Returns [{seq, title}] — number topics in your message as #seq.",
     inputSchema: {
       type: "object",
       properties: {
@@ -168,6 +171,56 @@ const TOOLS = [
     inputSchema: {
       type: "object",
       properties: { status: { type: "string" }, limit: { type: "integer", minimum: 1, maximum: 100 } },
+    },
+  },
+  {
+    name: "search_knowledge",
+    description:
+      "Search Tbrain's APPROVED knowledge base: kind story (field stories you may retell), fact (approved Tbrain facts), doc (uploaded documents, text excerpt), image (approved images with a description of what they show). Filter by kind, data_line, q. Only approved items exist here; cite the ids you use in agent_meta.knowledge_ids.",
+    inputSchema: {
+      type: "object",
+      properties: {
+        kind: { type: "string", enum: ["story", "fact", "doc", "image"] },
+        q: { type: "string" },
+        data_line: { type: "string" },
+        limit: { type: "integer", minimum: 1, maximum: 100 },
+      },
+    },
+  },
+  {
+    name: "get_knowledge",
+    description: "Fetch one approved knowledge item in full (whole document text for docs).",
+    inputSchema: { type: "object", properties: { id: { type: "string" } }, required: ["id"] },
+  },
+  {
+    name: "list_images",
+    description:
+      "The approved image library: [{id, image_url, title, image_description, data_line, tags}]. Pick inline images and covers ONLY from here, by what the description says the image shows.",
+    inputSchema: { type: "object", properties: { data_line: { type: "string" }, q: { type: "string" } } },
+  },
+  {
+    name: "submit_outline",
+    description:
+      "Phase 1 of a draft job: save the proposed outline and park the job for human approval (it leaves the queue until someone approves). outline: {post_type, title, reader, problem, takeaway, opening (the first two paragraphs as they will read), sections:[{h2 (a claim), point}], closing, cta, images:[{url, why}], knowledge_ids, sources, notes}. Do NOT call complete_request after this.",
+    inputSchema: {
+      type: "object",
+      properties: { id: { type: "string", description: "Job id." }, outline: { type: "object" } },
+      required: ["id", "outline"],
+    },
+  },
+  {
+    name: "review_outline",
+    description:
+      "Record a chat reviewer's decision on an outline waiting for approval: action approve | revise (notes required: what to change) | cancel. by: the reviewer's name. The job returns to the queue (approve → full draft; revise → new outline).",
+    inputSchema: {
+      type: "object",
+      properties: {
+        id: { type: "string" },
+        action: { type: "string", enum: ["approve", "revise", "cancel"] },
+        notes: { type: "string" },
+        by: { type: "string" },
+      },
+      required: ["id", "action"],
     },
   },
 ];
@@ -242,6 +295,29 @@ async function callTool(name, args = {}) {
       for (const k of ["status", "limit"]) if (args[k] !== undefined) qs.set(k, String(args[k]));
       return api("GET", `/api/agent/topics?${qs}`);
     }
+    case "search_knowledge": {
+      const qs = new URLSearchParams();
+      for (const k of ["kind", "q", "data_line", "limit"]) if (args[k] !== undefined) qs.set(k, String(args[k]));
+      return api("GET", `/api/agent/knowledge?${qs}`);
+    }
+    case "get_knowledge":
+      return api("GET", `/api/agent/knowledge/${enc(args.id)}`);
+    case "list_images": {
+      const qs = new URLSearchParams({ kind: "image", limit: "100" });
+      for (const k of ["q", "data_line"]) if (args[k] !== undefined) qs.set(k, String(args[k]));
+      const out = await api("GET", `/api/agent/knowledge?${qs}`);
+      return {
+        images: (out.items || []).map(({ id, image_url, title, image_description, data_line, tags }) => ({
+          id, image_url, title, image_description, data_line, tags,
+        })),
+      };
+    }
+    case "submit_outline":
+      return api("POST", `/api/agent/requests/${enc(args.id)}/outline`, { outline: args.outline });
+    case "review_outline":
+      return api("POST", `/api/agent/requests/${enc(args.id)}/review`, {
+        action: args.action, notes: args.notes, by: args.by,
+      });
     default:
       throw new Error(`unknown tool: ${name}`);
   }
@@ -261,7 +337,7 @@ async function handle(msg) {
         result = {
           protocolVersion: params?.protocolVersion || PROTOCOL,
           capabilities: { tools: { listChanged: false } },
-          serverInfo: { name: "tbrain-cms", version: "1.1.0" },
+          serverInfo: { name: "tbrain-cms", version: "1.2.0" },
           instructions:
             "Blog CMS for tbrain.ai. Drafts only: you cannot publish. After create_draft + submit_for_review, send the review_url to the human reviewer.",
         };

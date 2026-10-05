@@ -3,11 +3,12 @@
 **One line:** engineers who capture and QC robot training data for a living, explaining what they've learned to other engineers and to the people who buy data.
 
 ## Sound like
-- **Specific and concrete.** Give numbers with sources, name formats and tools (LeRobot, RLDS, Rerun, Label Studio, SLAM), and say what actually goes wrong in the field.
+- **Specific and concrete.** Give numbers with sources, name open formats and standards (LeRobot, RLDS, Rerun, SLAM, MANO), and say what actually goes wrong in the field. Don't name our internal tools or vendors.
 - **Calm confidence.** State things plainly. Hedge only where evidence is genuinely mixed, and then say what it's mixed between.
 - **Practitioner-first.** "Here's what breaks when you capture in a real textile factory" beats "Data is the new oil."
 - **Useful.** Every post leaves the reader with something to do or decide: a checklist, a question to ask a vendor, a rule of thumb.
 - **Short sentences, active voice.** Paragraphs of 2-4 sentences. Explain jargon on first use.
+- **Written for a person.** Read it aloud: if a sentence sounds like a report or a press release, rewrite it the way you'd say it to an engineer over coffee. Take a position, say "we" when Tbrain did something, and admit what we don't know.
 
 ## Tbrain facts you can use (public-safe)
 Full fact base — service lines, hardware, pipeline, QC, numbers (delivered vs. capacity), case studies, samples catalog, Terminal-Bench, internal links, naming fixes, and the DO-NOT-SAY list — is in **`references/tbrain-knowledge.md`**. Read it before drafting; it's the source of truth, this is just a quick-grab shortlist. The 6 facts you'll reach for most:
@@ -28,6 +29,20 @@ If you need a Tbrain fact that isn't in `tbrain-knowledge.md` or on tbrain.ai, *
 - Bullet-point soup. Use bullets for genuine lists, prose for reasoning.
 - Emojis in blog posts. They're fine sparingly in social copy.
 
+## AI tells (the critic fails clusters of these)
+From Wikipedia's "Signs of AI writing" and editor experience. One is a slip; several mean rewrite.
+- Inflated significance: pivotal, crucial, vital, testament, landscape, realm, "broader implications", "underscores the importance".
+- Trailing "-ing" commentary: "…, highlighting the need for…", "…, underscoring…", "…, paving the way for…".
+- Vocabulary clusters: delve, intricate, enhance, showcase, foster, harness, bolster, nuanced, multifaceted, "Additionally,", "Moreover,", "Furthermore,".
+- "Serves as" / "stands as" / "functions as" where "is" works.
+- Negative parallelism: "It's not just X, it's Y", "not X, but Y" (once per post at most).
+- Reflexive triplets: three adjectives or three parallel clauses as rhythm.
+- Vague attribution: "experts say", "studies show", "industry reports suggest".
+- Formula endings: "challenges remain", "the future looks bright", "only time will tell", a closing paragraph that restates the headings.
+- Formatting tells: many bold phrases, bullets with bold lead-ins everywhere, title-case headings, em dashes in every paragraph.
+
+Fixes: replace the abstraction with the concrete thing; cut the trailing clause; use "is"; give the source or drop the claim; end on the decision rule.
+
 ## Example openers
-- Good: "A VLA trained on 10,000 hours of teleop still fails when the shirt is a different color. The fix the 2026 papers converge on isn't more teleop, it's diversity of scenes, and that's a data-collection problem."
+- Good (pattern only; the facts are illustrative): "Your VLA hits 90% in the lab and 40% on the customer's line, and the shirts are a different color. More teleop hours won't fix that. Scene diversity will, and that's a data-collection decision you make before the first capture."
 - Bad: "In today's rapidly evolving world of robotics, data plays a crucial role in unlocking the power of AI."

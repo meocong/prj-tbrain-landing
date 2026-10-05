@@ -20,6 +20,8 @@ const topic = z.object({
   data_line: z.string().max(60).optional(),
   sources: z.array(httpUrl).max(10).default([]),
   score: z.number().min(0).max(20).optional(),
+  post_type: z.enum(["news_hook", "field_story", "trend_pov", "buyer_guide", "proof"]).optional(),
+  funnel: z.enum(["top", "middle", "bottom"]).optional(),
 });
 
 const saveInput = z.object({
@@ -27,7 +29,7 @@ const saveInput = z.object({
   request_id: z.string().regex(UUID).optional(),
 });
 
-const COLUMNS = "id, seq, title, why_now, angle, keyword, audience, data_line, sources, score, status, post_id, created_at";
+const COLUMNS = "id, seq, title, why_now, angle, keyword, audience, data_line, post_type, funnel, sources, score, status, post_id, created_at";
 
 /** GET ?status=new|queued|drafted|dismissed|all&limit= — topic ideas, newest first. */
 export async function GET(req: NextRequest) {

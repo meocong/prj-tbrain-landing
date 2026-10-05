@@ -1,24 +1,38 @@
-# Critic rubric (score each 0-5)
+# Critic scorecard
 
-Score cold, as a skeptical robotics research lead with 10 minutes to spare. Ship only when every dimension is ≥4 and the average is ≥4.2. Also fail the draft (score accuracy ≤3) if it links /samples, quotes sample-level numbers, names internal tools or describes internal traces (editorial rule 13).
+Read the draft cold, as a skeptical head of robotics data at a VLA startup with ten minutes and no obligation to finish. Score each item 0, 1 or 2.
 
-| Dimension | 5 looks like | ≤3 looks like |
-|---|---|---|
-| **accuracy** | Every factual claim is linked to a primary source that says what the post says, with absolute dates and correct numbers. | Unsourced numbers, a claim stronger than its source, misread papers. |
-| **framing** | The first two paragraphs put a buyer in a recognizable situation, name the tension and state the thesis. You want to keep reading. | Opens with a paper statistic, a list of releases or background; the stakes for the reader are unclear until later. |
-| **visuals** | A relevant cover plus 2-3 inline figures from images.md with captions that add meaning. | No inline images, or decorative images with empty captions. |
-| **insight** | Says something non-obvious, takes a clear position, and has a real Tbrain field angle. A reader learns something they couldn't get from the abstract. | A news recap or generic explainer, or the "Tbrain angle" is a bolted-on sales line. |
-| **structure** | The thesis is clear in the first 2 paragraphs. Each H2 advances the argument, ending with a concrete takeaway or artifact (checklist, table, rule of thumb). | Meandering, repetitive sections, or a listicle without reasoning. |
-| **voice** | Matches brand-voice.md: specific, calm, practitioner, no banned phrases, varied sentences. | Hype, AI-tell phrases, filler, bullet soup. |
-| **seo** | Keyword in title, H2s and first 100 words naturally. seo_title 50-60 chars, description 120-155. 2-4 relevant internal links with descriptive anchors. | Keyword stuffing or missing keyword, missing metadata, "click here" anchors. |
-| **cta** | One specific next step tied to the topic (sample dataset, QC playbook, contact for a pilot). | No CTA, or a generic hard sell. |
+**Ship only at ≥ 20/26, with no 0 on items 1, 4, 6 or 10.** Otherwise list the fixes.
 
-Output format for the critic:
+| # | Item | 2 = | 0 = |
+|---|---|---|---|
+| 1 | **One reader, one problem, one takeaway** | You can state each in one sentence after reading. | Unclear who it's for or what to do with it. |
+| 2 | **Type fit** | Clearly one type from post-types.md and follows its skeleton. | A paper summary, a listicle, or two types mashed together. |
+| 3 | **Opening** | The first 2-3 sentences put the reader in a situation or answer the question, and the thesis is in paragraph 1-2. You want to keep reading. | Opens with background, a generic trend, a definition nobody asked for, or a paper's statistic with no stakes. |
+| 4 | **Information gain** | Contains something the cited sources don't: an approved Tbrain story/fact, the requester's first-hand note, or an original worked example/decision rule. | Everything could be rebuilt from the linked papers. |
+| 5 | **Claims backed** | Every number, date and capability links to a primary source; no "studies show" / "experts say". | Unlinked or vague claims. |
+| 6 | **Accurate and safe** | Claims match their sources. No `/samples` link, sample-level numbers, internal tools, model counts, traces, customer names or prices (editorial rule 13). | Any misread source, invented number or rule-13 violation. |
+| 7 | **Headings are claims** | Each H2 says something ("Raw hours are the cheap half of the price"). | "Background", "Key considerations", "Conclusion", "-ing" headings. |
+| 8 | **Prose over bullets** | Reasoning is in paragraphs; lists only for real lists or steps; bold used rarely. | Bullet soup, bold inline headers everywhere. |
+| 9 | **Sounds human** | None of the AI tells in brand-voice.md; varied sentence rhythm; a clear stance; admits a limit. | Several AI tells, symmetrical triplets, filler transitions. |
+| 10 | **Images that carry information** | 3+ inline images from the approved library, each next to the paragraph it supports, each caption saying what to notice. The library description matches what the caption claims. | Fewer than 2 images, decorative images, or an image whose description doesn't match the text. |
+| 11 | **A peak** | At least one genuinely surprising point around the middle. | Even-toned from start to end. |
+| 12 | **Ending** | A memorable one-line takeaway plus a concrete next step. | A recap of the headings, "challenges remain", or "the future is bright". |
+| 13 | **CTA** | One specific, low-pressure next step matched to the topic, placed after the section describing the pain and/or at the end. | None, generic hard sell, or several competing CTAs. |
+
+Also run a **reader pass**: mark every sentence that made you want to keep reading. Name the longest stretch with no marks; that stretch must be cut or rewritten.
+
+SEO is a light check, not a score: the keyword appears naturally in the title or an H2 and in the first 100 words; seo_title ≤ 60 chars and description ≤ 155; 2-4 internal links with descriptive anchors.
+
+Output format:
 ```
-scores: {accuracy: n, framing: n, insight: n, structure: n, voice: n, visuals: n, seo: n, cta: n}
-average: n.n
+scores: {1: n, 2: n, 3: n, 4: n, 5: n, 6: n, 7: n, 8: n, 9: n, 10: n, 11: n, 12: n, 13: n}
+total: n/26
+ship: yes|no
+dull stretch: "<first words …>" (section)
 top fixes:
-1. <specific, actionable — quote the sentence>
+1. <specific and actionable, quoting the sentence>
 2. …
-banned phrases found: [...]
+ai tells found: [...]
+seo: ok | <what's missing>
 ```

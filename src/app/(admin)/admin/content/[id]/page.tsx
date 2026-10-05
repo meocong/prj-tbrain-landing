@@ -302,8 +302,22 @@ export default function EditPostPage() {
 }
 
 /** What the content agent researched and flagged — shown to the human editor. */
+const isHttp = (u: string) => /^https?:\/\//i.test(u);
+
 function AgentTrail({ meta, reviewedAt }: { meta: CmsAgentMeta | null; reviewedAt: string | null }) {
   const m = meta ?? {};
+  const knowledgeIds = (m.knowledge_ids ?? []).filter((id) => /^[0-9a-f-]{36}$/i.test(id));
+  const { data: knowledge } = useQuery({
+    queryKey: ["agent-trail-knowledge", knowledgeIds.join(",")],
+    enabled: knowledgeIds.length > 0,
+    queryFn: async () => {
+      const { data } = await supabaseAdmin
+        .from("cms_agent_knowledge")
+        .select("id, kind, title, status")
+        .in("id", knowledgeIds);
+      return (data ?? []) as { id: string; kind: string; title: string; status: string }[];
+    },
+  });
   return (
     <div className="glass-card p-4 space-y-2 text-xs" style={{ color: "var(--text-secondary)" }}>
       <div className="flex items-center gap-2">
@@ -313,10 +327,36 @@ function AgentTrail({ meta, reviewedAt }: { meta: CmsAgentMeta | null; reviewedA
       <p style={{ color: "var(--text-muted)" }}>
         {reviewedAt ? `Reviewed ${new Date(reviewedAt).toLocaleString()}` : "Not reviewed yet — check facts and sources before publishing."}
       </p>
+      {m.post_type && <p><span className="font-medium">Post type:</span> {m.post_type.replace("_", " ")}</p>}
+      {m.takeaway && <p><span className="font-medium">Takeaway:</span> {m.takeaway}</p>}
       {m.angle && <p><span className="font-medium">Angle:</span> {m.angle}</p>}
       {m.target_keyword && <p><span className="font-medium">Keyword:</span> {m.target_keyword}</p>}
-      {m.rubric && (
-        <p><span className="font-medium">Self-review:</span> {Object.entries(m.rubric).map(([k, v]) => `${k} ${v}/5`).join(" · ")}</p>
+      {m.scorecard?.total != null ? (
+        <p><span className="font-medium">Critic:</span> {m.scorecard.total}/26</p>
+      ) : (
+        m.rubric && (
+          <p><span className="font-medium">Self-review:</span> {Object.entries(m.rubric).map(([k, v]) => `${k} ${v}/5`).join(" · ")}</p>
+        )
+      )}
+      {m.reader_pass && <p><span className="font-medium">Reader pass:</span> {m.reader_pass}</p>}
+      {knowledgeIds.length > 0 && (
+        <div>
+          <p className="font-medium">Knowledge used ({knowledgeIds.length})</p>
+          <ul className="mt-1 space-y-0.5 pl-1">
+            {knowledgeIds.map((id) => {
+              const k = knowledge?.find((x) => x.id === id);
+              return (
+                <li key={id}>
+                  {k ? `${k.kind}: ${k.title}` : id.slice(0, 8)}
+                  {k && k.status !== "approved" && (
+                    <span className="ml-1 font-medium" style={{ color: "#b45309" }}>({k.status} — not approved)</span>
+                  )}
+                </li>
+              );
+            })}
+          </ul>
+          <Link href="/admin/content/agent/knowledge" className="underline underline-offset-2">Open knowledge</Link>
+        </div>
       )}
       {m.factcheck_flags && m.factcheck_flags.length > 0 && (
         <ul className="space-y-1 rounded-lg px-2 py-1.5" style={{ background: "rgba(234,179,8,0.1)" }}>
@@ -331,9 +371,13 @@ function AgentTrail({ meta, reviewedAt }: { meta: CmsAgentMeta | null; reviewedA
           <ol className="mt-1 list-decimal space-y-1 pl-4">
             {m.sources.map((src, i) => (
               <li key={i} className="break-all">
-                <a href={src.url} target="_blank" rel="noopener noreferrer" className="underline underline-offset-2">
-                  {src.title || src.url}
-                </a>
+                {isHttp(src.url) ? (
+                  <a href={src.url} target="_blank" rel="noopener noreferrer" className="underline underline-offset-2">
+                    {src.title || src.url}
+                  </a>
+                ) : (
+                  <span>{src.title || src.url}</span>
+                )}
                 {src.publisher ? ` — ${src.publisher}` : ""}
               </li>
             ))}

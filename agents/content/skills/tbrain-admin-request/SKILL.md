@@ -15,15 +15,22 @@ Jobs reach you through one queue: admins queue them from tbrain.ai (the post edi
 ## Loop (one job per run)
 1. Call `mcp_tbrain_cms_claim_request`. If `request` is null, reply exactly `[SILENT]` and stop.
 2. Do the job by its `type`, following the steps below.
-3. **Always** close it with `mcp_tbrain_cms_complete_request`. Use `status: done` with a `result`, or `status: failed` with a `message` that says why in one sentence.
-4. Your **final response is the report**: the scheduler delivers it to the Telegram group, so don't call `send_message` for it. Write it in Vietnamese and name who asked (`requested_by`, and "qua Telegram" or "từ admin"). For a draft, use the report from `tbrain-write-post` step 7 with the review, edit and preview links. For a revise, give 1-2 lines on what changed, with the same links. For a scout, send the shortlist message. A failed job gets one line saying why.
+3. **Close it**: with `mcp_tbrain_cms_complete_request` (`status: done` with a `result`, or `status: failed` with a one-sentence `message`), **or**, for a draft in its outline phase, with `mcp_tbrain_cms_submit_outline`, which parks the job for approval. Every claimed job ends one of these two ways.
+4. Your **final response is the report**: the scheduler delivers it to the Telegram group, so don't call `send_message` for it. Write it in Vietnamese and name who asked (`requested_by`, and "qua Telegram" or "từ admin"). For a draft outline, use the outline report from `tbrain-write-post` step 2. For a finished draft, use the report from step 7. For a revise, give 1-2 lines on what changed, with the same links. For a scout, send the shortlist message. A failed job gets one line saying why.
 5. Don't claim a second job. The next one starts on the next poll, about 2 minutes later.
 
 ## type = draft (new post from a brief)
-`request.brief` has `idea`, and optionally `keyword`, `audience` (the reader) and `notes` (must-cover points, sources, samples, tone, length, things to avoid: follow them). If `topic` is set, it is the saved idea being written (`#seq`, title, why_now, angle, keyword, sources): use its sources as the starting research. The brief wins where the two differ.
-- Run `tbrain-write-post` **from step 2 (Draft)**. The admin already wrote the brief, so skip the outline approval gate. Still do the research first (step 1's research, without sending the brief).
-- Do everything else: critic, fact-check, SEO, `create_draft`, `submit_for_review`, social copy.
-- Complete with `result: {post_id, message: "<one-line English summary + any fact-check flags>"}`.
+`request.brief` holds:
+- `idea`, optionally `keyword`, `audience` (the reader) and `notes` (must-cover points, sources, tone, length, things to avoid: follow them);
+- `experience`: the requester's first-hand note, your best information gain; use it, at the detail they gave;
+- `post_type`, if they chose one;
+- `skip_outline`, `outline_approved`, `outline_feedback`, `outline_reviewed_by` (the outline gate).
+
+If `topic` is set, it's the saved idea being written (`#seq`, title, why_now, angle, keyword, post_type, sources): start your research from its sources. The brief wins where the two differ. `request.result.outline` holds the last proposed outline, if any.
+
+Run `tbrain-write-post`:
+- **No outline yet, or `outline_feedback` without approval** (and `skip_outline` not set): steps 1-2. Research, build the brief, call `submit_outline`, report the outline. Stop there: no `complete_request`.
+- **`outline_approved` true, or `skip_outline` true**: steps 3-7 from the approved outline (applying `outline_feedback`), then complete with `result: {post_id, message: "<one-line English summary, post type, critic total, any flags>"}`.
 
 ## type = revise (change an existing post)
 `post` holds the current post and `brief.notes` holds what the admin wants changed.

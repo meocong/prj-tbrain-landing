@@ -49,6 +49,9 @@ const createInput = z
         keyword: z.string().max(120).optional(),
         audience: z.string().max(500).optional(),
         notes: z.string().max(8000).optional(),
+        experience: z.string().max(4000).optional(),
+        post_type: z.enum(["news_hook", "field_story", "trend_pov", "buyer_guide", "proof"]).optional(),
+        skip_outline: z.boolean().optional(),
       })
       .default({}),
     requested_by_label: z.string().max(120).optional(),
@@ -114,7 +117,7 @@ export async function POST(req: NextRequest) {
   const { count } = await db
     .from("cms_agent_requests")
     .select("id", { count: "exact", head: true })
-    .in("status", ["queued", "running"])
+    .in("status", ["queued", "running", "awaiting_approval"])
     .lt("created_at", data.created_at);
   return NextResponse.json({ request: data, jobs_ahead: count ?? 0 }, { status: 201 });
 }

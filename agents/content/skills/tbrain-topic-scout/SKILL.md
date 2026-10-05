@@ -32,9 +32,11 @@ Goal: propose blog topics that a robotics or ML lead would actually click on, wh
 
    Drop pure news recaps, hype, and anything requiring claims about named customers.
 
-4. **Score each candidate** from 1 to 5 on four things: timeliness, buyer relevance (would a data buyer care?), Tbrain authority, and search/share potential. Keep the top 3-5.
+4. **Give each candidate a post type and funnel stage** from `post-types.md` (`skill_view tbrain-write-post references/post-types.md`): `news_hook`, `field_story`, `trend_pov`, `buyer_guide` or `proof`; funnel `top` (awareness), `middle` (evaluating approaches) or `bottom` (choosing a vendor/spec). Check `mcp_tbrain_cms_search_knowledge` (kind story/fact): an approved story that hasn't been used yet is the strongest candidate there is, so propose a `field_story` for it. Also think about the questions buyers ask on calls ("how many hours do we need", "LeRobot or RLDS", "how do you QC hand pose"): these make good `buyer_guide`s.
+   Keep the shortlist mixed: at most one `news_hook` unless the week really demands it, and at least one `field_story` or `buyer_guide`.
+   **Score** each from 1 to 5 on timeliness, buyer relevance, Tbrain authority (do we have information gain for it?), and search/share potential. Keep the top 3-5.
 
-5. **Save the shortlist** with `mcp_tbrain_cms_save_topics`: `topics: [{title, why_now, angle, keyword, audience, data_line, sources:[https urls], score}]` in final order (`data_line` is one of egocentric, game, teleop, mocap, hand pose, exocentric, LLM data). Pass `request_id` when this run is a queued scout job. It returns each topic's number `seq`. **Number the topics in your message with those `#seq` values**, never 1, 2, 3: "viết #12" in chat and the "Write" button in the admin both refer to them. The ideas show up in the admin at /admin/content/agent.
+5. **Save the shortlist** with `mcp_tbrain_cms_save_topics`: `topics: [{title, why_now, angle, keyword, audience, data_line, post_type, funnel, sources:[https urls], score}]` in final order (`data_line` is one of egocentric, game, teleop, mocap, hand pose, exocentric, LLM data). Pass `request_id` when this run is a queued scout job. It returns each topic's number `seq`. **Number the topics in your message with those `#seq` values**, never 1, 2, 3: "viết #12" in chat and the "Write" button in the admin both refer to them. The ideas show up in the admin at /admin/content/agent.
 
 6. **Report in Vietnamese**, using the format below. Keep it scannable. No walls of text.
 
@@ -42,8 +44,9 @@ Goal: propose blog topics that a robotics or ML lead would actually click on, wh
 📌 Đề xuất blog tuần <dd/mm>
 
 #<seq> <Working title in English>
+   • Kiểu bài: <Field story / News + góc nhìn / Trend / Buyer guide / Proof>
    • Vì sao bây giờ: <1 câu, có nguồn>
-   • Góc nhìn Tbrain: <1 câu — cái mình nói được mà báo chí không nói được>
+   • Chất riêng của Tbrain: <câu chuyện/knowledge sẽ dùng, hoặc "cần team kể về …">
    • Người đọc / từ khoá: <persona> · "<keyword>"
    • Nguồn: <url1>, <url2>
    • Điểm: <tổng>/20

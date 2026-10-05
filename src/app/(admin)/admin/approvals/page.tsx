@@ -7,6 +7,7 @@ import { useAdminAuth, useHasPermission } from "@/lib/admin/auth-context";
 import { revalidateBlogPost } from "@/lib/admin/revalidate-blog";
 import { Check, X as XIcon, Clock, Eye, ChevronLeft, ChevronRight, Bot, AlertTriangle } from "lucide-react";
 import { toast } from "sonner";
+import type { CmsAgentMeta } from "@/lib/admin/types";
 import Link from "next/link";
 
 const PAGE_SIZE = 20;
@@ -18,7 +19,7 @@ interface PostSummary {
   status: string;
   source: string;
   word_count: number | null;
-  agent_meta: { rubric?: Record<string, number>; factcheck_flags?: string[] } | null;
+  agent_meta: Pick<CmsAgentMeta, "rubric" | "factcheck_flags" | "scorecard" | "post_type" | "knowledge_ids"> | null;
 }
 
 const STATUS_COLORS: Record<string, string> = {
@@ -207,7 +208,13 @@ export default function ApprovalsPage() {
                       Submitted by {submitter?.full_name || submitter?.email || (post?.source === "agent" ? "Content agent" : "Unknown")} · {new Date(r.submitted_at as string).toLocaleString()}
                       {post?.word_count ? ` · ${post.word_count} words` : ""}
                     </p>
-                    {rubric.length > 0 && (
+                    {meta.scorecard?.total != null ? (
+                      <p className="mt-1 text-xs" style={{ color: "var(--text-secondary)" }}>
+                        Critic: {String(meta.scorecard.total)}/26
+                        {meta.post_type ? ` · ${String(meta.post_type).replace("_", " ")}` : ""}
+                        {Array.isArray(meta.knowledge_ids) && meta.knowledge_ids.length ? ` · ${meta.knowledge_ids.length} knowledge items` : ""}
+                      </p>
+                    ) : rubric.length > 0 && (
                       <p className="mt-1 text-xs" style={{ color: "var(--text-secondary)" }}>
                         Self-review: {rubric.map(([k, v]) => `${k} ${String(v)}/5`).join(" · ")}
                       </p>

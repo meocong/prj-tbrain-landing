@@ -5,7 +5,9 @@ import Link from "next/link";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 import {
+  BookOpen,
   Bot,
+  Check,
   Eye,
   FileEdit,
   Lightbulb,
@@ -21,7 +23,30 @@ import { supabaseAdmin } from "@/lib/admin/supabase-browser";
 import { useAdminAuth, useHasPermission } from "@/lib/admin/auth-context";
 
 type IdeaStatus = "new" | "queued" | "drafted" | "dismissed";
-type JobStatus = "queued" | "running" | "done" | "failed" | "cancelled";
+type JobStatus = "queued" | "running" | "awaiting_approval" | "done" | "failed" | "cancelled";
+type PostType = "news_hook" | "field_story" | "trend_pov" | "buyer_guide" | "proof";
+
+const POST_TYPES: { value: PostType; label: string; hint: string }[] = [
+  { value: "field_story", label: "Field story", hint: "A real problem we hit and how we solved it" },
+  { value: "news_hook", label: "News + our take", hint: "Something new came out; what it means and how we do it" },
+  { value: "trend_pov", label: "Trend / point of view", hint: "Where the field is going and our position" },
+  { value: "buyer_guide", label: "Buyer guide", hint: "Explain a topic and help a buyer decide (checklist, FAQ)" },
+  { value: "proof", label: "Proof / results", hint: "Numbers we are allowed to publish, and what they show" },
+];
+
+interface Outline {
+  post_type?: PostType;
+  title?: string;
+  reader?: string;
+  problem?: string;
+  takeaway?: string;
+  opening?: string;
+  sections?: { h2: string; point: string }[];
+  closing?: string;
+  cta?: string;
+  images?: { url: string; why: string }[];
+  notes?: string;
+}
 
 interface Idea {
   id: string;
@@ -32,6 +57,7 @@ interface Idea {
   keyword: string | null;
   audience: string | null;
   data_line: string | null;
+  post_type: PostType | null;
   sources: string[];
   score: number | null;
   status: IdeaStatus;
@@ -44,6 +70,10 @@ interface Brief {
   keyword?: string;
   audience?: string;
   notes?: string;
+  experience?: string;
+  post_type?: PostType;
+  skip_outline?: boolean;
+  outline_feedback?: string | null;
 }
 
 interface Job {
@@ -53,7 +83,7 @@ interface Job {
   topic_id: string | null;
   brief: Brief;
   status: JobStatus;
-  result: { post_id?: string; message?: string };
+  result: { post_id?: string; message?: string; outline?: Outline };
   via: "admin" | "telegram" | "schedule";
   requested_by: string | null;
   requested_by_label: string | null;
@@ -76,13 +106,15 @@ const inputStyle = {
 
 const JOB_STATUS: Record<JobStatus, { label: string; color: string; bg: string }> = {
   queued: { label: "Queued", color: "#92400e", bg: "#fef3c7" },
-  running: { label: "Writing", color: "#1d4ed8", bg: "#dbeafe" },
+  running: { label: "Working", color: "#1d4ed8", bg: "#dbeafe" },
+  awaiting_approval: { label: "Outline ready", color: "#6d28d9", bg: "#ede9fe" },
   done: { label: "Done", color: "#166534", bg: "#dcfce7" },
   failed: { label: "Failed", color: "#991b1b", bg: "#fee2e2" },
   cancelled: { label: "Cancelled", color: "#475569", bg: "#f1f5f9" },
 };
 
-const isActive = (s: JobStatus) => s === "queued" || s === "running";
+const isActive = (s: JobStatus) => s === "queued" || s === "running" || s === "awaiting_approval";
+const isBusy = (s: JobStatus) => s === "queued" || s === "running";
 
 function ago(iso: string | null) {
   if (!iso) return "";
@@ -126,7 +158,7 @@ export function AgentHubClient({ adminNames }: { adminNames: Record<string, stri
       if (error) throw error;
       return (data ?? []) as Job[];
     },
-    refetchInterval: (q) => ((q.state.data as Job[] | undefined)?.some((j) => isActive(j.status)) ? 10_000 : 60_000),
+    refetchInterval: (q) => ((q.state.data as Job[] | undefined)?.some((j) => isBusy(j.status)) ? 10_000 : 60_000),
   });
 
   const { data: ideas } = useQuery({
@@ -135,7 +167,7 @@ export function AgentHubClient({ adminNames }: { adminNames: Record<string, stri
       const statuses: IdeaStatus[] = ideaFilter === "open" ? ["new", "queued"] : [ideaFilter];
       const { data, error } = await supabaseAdmin
         .from("cms_topic_ideas")
-        .select("id, seq, title, why_now, angle, keyword, audience, data_line, sources, score, status, post_id, created_at")
+        .select("id, seq, title, why_now, angle, keyword, audience, data_line, post_type, sources, score, status, post_id, created_at")
         .in("status", statuses)
         .order("created_at", { ascending: false })
         .order("seq", { ascending: true })
@@ -143,7 +175,7 @@ export function AgentHubClient({ adminNames }: { adminNames: Record<string, stri
       if (error) throw error;
       return (data ?? []) as Idea[];
     },
-    refetchInterval: () => (jobs?.some((j) => isActive(j.status)) ? 10_000 : 60_000),
+    refetchInterval: () => (jobs?.some((j) => isBusy(j.status)) ? 10_000 : 60_000),
   });
 
   // Titles/statuses of every post a job touched, for links and revise gating.
@@ -180,7 +212,7 @@ export function AgentHubClient({ adminNames }: { adminNames: Record<string, stri
       toast.success(
         type === "scout"
           ? "Topic search queued — ideas appear here in ~15-30 min"
-          : "Queued — the agent picks it up within ~2 min and posts the review link when done",
+          : "Queued — the agent picks it up within ~2 min; new drafts come back as an outline to approve first",
       );
       refresh();
     },
@@ -205,6 +237,26 @@ export function AgentHubClient({ adminNames }: { adminNames: Record<string, stri
     onError: (e) => toast.error(e.message),
   });
 
+  const review = useMutation({
+    mutationFn: async ({ id, action, notes }: { id: string; action: "approve" | "revise" | "cancel"; notes?: string }) => {
+      const { error } = await supabaseAdmin.rpc("review_agent_outline", { p_id: id, p_action: action, p_notes: notes ?? null });
+      if (error) throw error;
+      return action;
+    },
+    onSuccess: (action) => {
+      toast.success(
+        action === "approve"
+          ? "Outline approved — the agent writes the full draft next (~20-40 min)"
+          : action === "revise"
+            ? "Sent back — the agent will propose a new outline"
+            : "Job cancelled",
+      );
+      refresh();
+    },
+    onError: (e) => toast.error(e.message),
+  });
+
+  const focusJob = typeof window !== "undefined" ? new URLSearchParams(window.location.search).get("job") : null;
   const scoutActive = jobs?.some((j) => j.type === "scout" && isActive(j.status));
   const activeCount = jobs?.filter((j) => isActive(j.status)).length ?? 0;
 
@@ -216,13 +268,16 @@ export function AgentHubClient({ adminNames }: { adminNames: Record<string, stri
             Content Agent
           </h1>
           <p className="mt-1 max-w-2xl text-sm" style={{ color: "var(--text-muted)" }}>
-            Pick a topic the agent proposed (or bring your own), add a brief, and it researches and writes a full
-            draft in the background. When it&apos;s done the draft appears here and in Approvals, and the review link
-            goes to the Telegram group. Nothing is published without a human.
+            Pick a topic the agent proposed (or bring your own) and add a brief. The agent researches and sends an
+            outline for approval here and in Telegram, then writes the full draft in the background. Drafts go to
+            Approvals; nothing is published without a human. It only uses approved items from Knowledge.
           </p>
         </div>
         {canEdit && (
           <div className="flex gap-2">
+            <Link href="/admin/content/agent/knowledge" className="btn-ghost text-sm">
+              <BookOpen className="h-4 w-4" /> Knowledge
+            </Link>
             <button
               onClick={() => queue.mutate({ type: "scout", brief: {} })}
               disabled={queue.isPending || scoutActive}
@@ -305,7 +360,7 @@ export function AgentHubClient({ adminNames }: { adminNames: Record<string, stri
             )}
           </h2>
           <p className="text-[11px]" style={{ color: "var(--text-muted)" }}>
-            Jobs run one at a time; a full draft takes about 20-40 minutes (research, critic, fact-check).
+            Jobs run one at a time: an outline takes ~5-10 minutes, the full draft ~20-40 minutes after approval.
           </p>
           {jobs?.length === 0 && (
             <div className="glass-card p-6 text-center text-sm" style={{ color: "var(--text-muted)" }}>
@@ -325,9 +380,11 @@ export function AgentHubClient({ adminNames }: { adminNames: Record<string, stri
               }
               mine={job.requested_by === adminUser?.id}
               canEdit={canEdit}
-              busy={queue.isPending}
+              busy={queue.isPending || review.isPending}
+              focused={focusJob === job.id}
               onCancel={() => cancel.mutate(job.id)}
               onRevise={(postId, notes) => queue.mutate({ type: "revise", post_id: postId, brief: { notes } })}
+              onReview={(action, notes) => review.mutate({ id: job.id, action, notes })}
             />
           ))}
         </section>
@@ -353,6 +410,9 @@ function BriefForm({
   const [keyword, setKeyword] = useState(initial?.keyword ?? "");
   const [audience, setAudience] = useState(initial?.audience ?? "");
   const [notes, setNotes] = useState("");
+  const [experience, setExperience] = useState("");
+  const [postType, setPostType] = useState<PostType | "">(initial?.post_type ?? "");
+  const [skipOutline, setSkipOutline] = useState(false);
 
   function submit() {
     if (!idea.trim()) {
@@ -360,7 +420,15 @@ function BriefForm({
       return;
     }
     const clean = (s: string) => s.trim() || undefined;
-    onSubmit({ idea: idea.trim(), keyword: clean(keyword), audience: clean(audience), notes: clean(notes) });
+    onSubmit({
+      idea: idea.trim(),
+      keyword: clean(keyword),
+      audience: clean(audience),
+      notes: clean(notes),
+      experience: clean(experience),
+      post_type: postType || undefined,
+      skip_outline: skipOutline || undefined,
+    });
   }
 
   return (
@@ -372,6 +440,33 @@ function BriefForm({
           value={idea}
           onChange={(e) => setIdea(e.target.value)}
           placeholder="What the post argues, and what Tbrain can say that others can't"
+          className="mt-1 w-full resize-y rounded-lg px-2.5 py-2 text-xs font-normal"
+          style={inputStyle}
+        />
+      </label>
+      <label className="block text-[11px] font-medium" style={{ color: "var(--text-secondary)" }}>
+        Kind of post
+        <select
+          value={postType}
+          onChange={(e) => setPostType(e.target.value as PostType | "")}
+          className="mt-1 w-full rounded-lg px-2.5 py-1.5 text-xs font-normal"
+          style={inputStyle}
+        >
+          <option value="">Let the agent choose</option>
+          {POST_TYPES.map((t) => (
+            <option key={t.value} value={t.value}>
+              {t.label} — {t.hint}
+            </option>
+          ))}
+        </select>
+      </label>
+      <label className="block text-[11px] font-medium" style={{ color: "var(--text-secondary)" }}>
+        What we have seen or done (first-hand, public-safe)
+        <textarea
+          rows={3}
+          value={experience}
+          onChange={(e) => setExperience(e.target.value)}
+          placeholder="A real situation from our capture or QC work this post can tell: what went wrong, what we changed, what happened. No customer names, prices or sample IDs."
           className="mt-1 w-full resize-y rounded-lg px-2.5 py-2 text-xs font-normal"
           style={inputStyle}
         />
@@ -408,6 +503,10 @@ function BriefForm({
           className="mt-1 w-full resize-y rounded-lg px-2.5 py-2 text-xs font-normal"
           style={inputStyle}
         />
+      </label>
+      <label className="flex items-center gap-2 text-[11px]" style={{ color: "var(--text-secondary)" }}>
+        <input type="checkbox" checked={skipOutline} onChange={(e) => setSkipOutline(e.target.checked)} />
+        Write straight away (skip outline approval)
       </label>
       <div className="flex gap-2">
         <button onClick={submit} disabled={busy} className="btn-primary text-xs">
@@ -446,6 +545,11 @@ function IdeaCard({
               #{idea.seq}
             </span>
             {idea.data_line && <span className="rounded px-1.5 py-0.5" style={{ background: "var(--bg-input)" }}>{idea.data_line}</span>}
+            {idea.post_type && (
+              <span className="rounded px-1.5 py-0.5" style={{ background: "var(--bg-input)" }}>
+                {POST_TYPES.find((t) => t.value === idea.post_type)?.label}
+              </span>
+            )}
             {idea.score != null && <span>score {idea.score}/20</span>}
             <span>· {ago(idea.created_at)}</span>
           </div>
@@ -514,6 +618,7 @@ function IdeaCard({
               idea: [idea.title, idea.angle && `Angle: ${idea.angle}`].filter(Boolean).join("\n\n"),
               keyword: idea.keyword ?? "",
               audience: idea.audience ?? "",
+              post_type: idea.post_type ?? undefined,
             }}
             submitLabel={`Write #${idea.seq}`}
             busy={busy}
@@ -537,8 +642,10 @@ function JobCard({
   mine,
   canEdit,
   busy,
+  focused,
   onCancel,
   onRevise,
+  onReview,
 }: {
   job: Job;
   ideaTitle?: string;
@@ -547,10 +654,14 @@ function JobCard({
   mine: boolean;
   canEdit: boolean;
   busy: boolean;
+  focused?: boolean;
   onCancel: () => void;
   onRevise: (postId: string, notes: string) => void;
+  onReview: (action: "approve" | "revise" | "cancel", notes?: string) => void;
 }) {
   const [revising, setRevising] = useState(false);
+  const [outlineNotes, setOutlineNotes] = useState("");
+  const outline = job.result?.outline;
   const [notes, setNotes] = useState("");
   const st = JOB_STATUS[job.status];
   const postId = job.result?.post_id || job.post_id || undefined;
@@ -560,11 +671,14 @@ function JobCard({
       ? "Find new topics"
       : job.type === "revise"
         ? `Revise: ${post?.title ?? "post"}`
-        : post?.title || ideaTitle || job.brief.idea?.split("\n")[0] || "New draft";
+        : post?.title || outline?.title || ideaTitle || job.brief.idea?.split("\n")[0] || "New draft";
   const detail = job.type === "revise" ? job.brief.notes : job.type === "draft" ? job.brief.notes : undefined;
 
   return (
-    <article className="glass-card space-y-1.5 p-3">
+    <article
+      className="glass-card space-y-1.5 p-3"
+      style={focused || job.status === "awaiting_approval" ? { boxShadow: "0 0 0 2px #c4b5fd" } : undefined}
+    >
       <div className="flex items-start justify-between gap-2">
         <p className="min-w-0 text-xs font-semibold leading-snug" style={{ color: "var(--text-primary)" }}>
           {label}
@@ -586,6 +700,21 @@ function JobCard({
       {detail && (
         <p className="line-clamp-2 text-[11px]" style={{ color: "var(--text-secondary)" }}>
           “{detail}”
+        </p>
+      )}
+      {job.status === "awaiting_approval" && outline && (
+        <OutlineView
+          outline={outline}
+          canEdit={canEdit}
+          busy={busy}
+          notes={outlineNotes}
+          setNotes={setOutlineNotes}
+          onReview={onReview}
+        />
+      )}
+      {job.brief.outline_feedback && job.status !== "awaiting_approval" && job.status !== "done" && (
+        <p className="text-[11px]" style={{ color: "var(--text-muted)" }}>
+          Outline feedback: “{job.brief.outline_feedback}”
         </p>
       )}
       {job.result?.message && (
@@ -645,5 +774,93 @@ function JobCard({
         </div>
       )}
     </article>
+  );
+}
+
+function OutlineView({
+  outline,
+  canEdit,
+  busy,
+  notes,
+  setNotes,
+  onReview,
+}: {
+  outline: Outline;
+  canEdit: boolean;
+  busy: boolean;
+  notes: string;
+  setNotes: (v: string) => void;
+  onReview: (action: "approve" | "revise" | "cancel", notes?: string) => void;
+}) {
+  const type = POST_TYPES.find((t) => t.value === outline.post_type)?.label;
+  return (
+    <div className="space-y-2 rounded-lg p-3 text-xs" style={{ background: "var(--bg-input)", color: "var(--text-secondary)" }}>
+      <p className="text-[11px] font-semibold uppercase tracking-wide" style={{ color: "#6d28d9" }}>
+        Proposed outline{type ? ` · ${type}` : ""}
+      </p>
+      <p className="text-sm font-semibold" style={{ color: "var(--text-primary)" }}>{outline.title}</p>
+      {outline.reader && <p><span className="font-medium">Reader: </span>{outline.reader}</p>}
+      {outline.problem && <p><span className="font-medium">Problem: </span>{outline.problem}</p>}
+      {outline.takeaway && <p><span className="font-medium">Takeaway: </span>{outline.takeaway}</p>}
+      {outline.opening && (
+        <div>
+          <p className="font-medium">Opening</p>
+          <p className="whitespace-pre-wrap italic">{outline.opening}</p>
+        </div>
+      )}
+      {outline.sections && outline.sections.length > 0 && (
+        <ol className="list-decimal space-y-1 pl-4">
+          {outline.sections.map((sec, i) => (
+            <li key={i}>
+              <span className="font-medium" style={{ color: "var(--text-primary)" }}>{sec.h2}</span>
+              {sec.point && <span> — {sec.point}</span>}
+            </li>
+          ))}
+        </ol>
+      )}
+      {outline.closing && <p><span className="font-medium">Ending: </span>{outline.closing}</p>}
+      {outline.cta && <p><span className="font-medium">CTA: </span>{outline.cta}</p>}
+      {outline.images && outline.images.length > 0 && (
+        <div className="flex flex-wrap gap-2">
+          {outline.images.map((im, i) => (
+            <figure key={i} className="w-28">
+              {/^\/(images|samples\/posters|api\/asset\/cms)\//.test(im.url) && (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img src={im.url} alt="" className="h-16 w-28 rounded object-cover" />
+              )}
+              <figcaption className="mt-0.5 text-[10px] leading-tight">{im.why}</figcaption>
+            </figure>
+          ))}
+        </div>
+      )}
+      {outline.notes && <p style={{ color: "var(--text-muted)" }}>{outline.notes}</p>}
+      {canEdit && (
+        <div className="space-y-1.5 border-t pt-2" style={{ borderColor: "var(--border-default)" }}>
+          <textarea
+            rows={2}
+            value={notes}
+            onChange={(e) => setNotes(e.target.value)}
+            placeholder="Optional for approve; required for changes (e.g. sharper opening, drop section 3, use the fisheye story)"
+            className="w-full resize-y rounded-lg px-2.5 py-1.5 text-xs"
+            style={inputStyle}
+          />
+          <div className="flex flex-wrap gap-2">
+            <button disabled={busy} onClick={() => onReview("approve", notes.trim() || undefined)} className="btn-primary text-xs">
+              <Check className="h-3.5 w-3.5" /> Approve outline
+            </button>
+            <button
+              disabled={busy}
+              onClick={() => (notes.trim() ? onReview("revise", notes.trim()) : toast.error("Say what to change"))}
+              className="btn-ghost text-xs"
+            >
+              <PenLine className="h-3.5 w-3.5" /> Request changes
+            </button>
+            <button disabled={busy} onClick={() => onReview("cancel")} className="btn-ghost text-xs">
+              <XIcon className="h-3.5 w-3.5" /> Cancel job
+            </button>
+          </div>
+        </div>
+      )}
+    </div>
   );
 }

@@ -1,0 +1,1175 @@
+[
+  {
+    "image_url": "/images/pack/hardware-pack.png",
+    "title": "MK-001 capture pack hardware diagram",
+    "image_description": "Third-person studio photo of a model wearing the full MK-001 capture rig (head unit, two forearm RGB cameras, waist processing pack), annotated with callout boxes listing specs like FOV, weight, battery, and Wi-Fi. Use next to a paragraph introducing or technically explaining the capture-pack hardware.",
+    "data_line": "general",
+    "tags": [
+      "hardware",
+      "capture-pack",
+      "infographic",
+      "wearable-camera",
+      "specs"
+    ],
+    "quality": "good",
+    "notes": "Model's face is visible but this is a staged professional product-demo photo, not candid; fine for this context."
+  },
+  {
+    "image_url": "/images/pack/operator-app.png",
+    "title": "Operator app screenshot grid",
+    "image_description": "A 2x6 grid of mobile-app screenshots (Vietnamese UI, Tbrain-branded) showing login, task selection, task detail, live recording with battery/storage stats, device pairing via QR, and a data/QC status list. Use next to a paragraph about the operator capture workflow or the app that guides data collectors.",
+    "data_line": "general",
+    "tags": [
+      "app-ui",
+      "screenshot",
+      "mobile-app",
+      "workflow",
+      "vietnamese"
+    ],
+    "quality": "good",
+    "notes": "Login screen shows a placeholder sample account email (nguyenvana@student.edu.vn), not a real user; no real PII visible."
+  },
+  {
+    "image_url": "/images/env/electronics.jpg",
+    "title": "Worker soldering while wearing capture rig",
+    "image_description": "Third-person moody studio shot of a man wearing a head-mounted camera bar and two wrist-mounted cameras, soldering a circuit board on a cluttered workbench. Camera viewpoint is exocentric (third person), showing the capture hardware in use rather than its own footage; use next to a paragraph about electronics/assembly work being captured for training data.",
+    "data_line": "egocentric",
+    "tags": [
+      "capture-pack",
+      "electronics",
+      "soldering",
+      "wrist-camera",
+      "head-camera"
+    ],
+    "quality": "good",
+    "notes": "Worker's face is visible but this is a posed professional demo shot, not candid."
+  },
+  {
+    "image_url": "/images/env/hand.jpg",
+    "title": "Close-up of wrist-mounted cameras",
+    "image_description": "Macro, third-person close-up of two forearms wearing wrist-mounted action cameras connected by coiled cables, hands manipulating a small metal part on a workbench. Clean, high-production product photo; use next to a paragraph explaining the forearm camera units.",
+    "data_line": "egocentric",
+    "tags": [
+      "wrist-camera",
+      "hardware",
+      "close-up",
+      "hands",
+      "capture-pack"
+    ],
+    "quality": "good",
+    "notes": ""
+  },
+  {
+    "image_url": "/images/env/dexterous-poster.jpg",
+    "title": "Unusable blurry dark frame",
+    "image_description": "Extremely dark, out-of-focus frame with heavy motion blur; only a sliver of skin (apparently a hand) and indistinct dark shapes are identifiable. Camera viewpoint and subject cannot be determined. Do not use next to any paragraph — the content is illegible.",
+    "data_line": "egocentric",
+    "tags": [
+      "blurry",
+      "low-quality",
+      "unusable",
+      "dark"
+    ],
+    "quality": "avoid",
+    "notes": "Essentially unusable: too dark and blurred to tell what is being shown, despite the 'dexterous' filename."
+  },
+  {
+    "image_url": "/images/env/kiem_tra_qc-poster.jpg",
+    "title": "Egocentric QC check of waistband",
+    "image_description": "First-person (head-camera) view looking down at two hands inspecting an elastic khaki waistband/garment on a cluttered workshop table (phone, pliers, tape visible). Matches its filename (kiểm tra QC = quality check); use next to a paragraph about manual QC/inspection tasks.",
+    "data_line": "egocentric",
+    "tags": [
+      "qc",
+      "egocentric",
+      "garment",
+      "inspection",
+      "factory"
+    ],
+    "quality": "good",
+    "notes": ""
+  },
+  {
+    "image_url": "/images/env/dong_goi-poster.jpg",
+    "title": "Egocentric packing of trousers",
+    "image_description": "First-person (head-camera) view of two hands packing folded cream/white trousers into a clear plastic bag at a packing table, with other poly bags and rolled fabric nearby. Matches its filename (đóng gói = packing); use next to a paragraph about packaging/fulfillment tasks.",
+    "data_line": "egocentric",
+    "tags": [
+      "packing",
+      "egocentric",
+      "garment",
+      "factory",
+      "logistics"
+    ],
+    "quality": "good",
+    "notes": ""
+  },
+  {
+    "image_url": "/images/env/gan_tag-poster.jpg",
+    "title": "Egocentric transition near tagging shelf",
+    "image_description": "First-person view looking down and forward at a worker's own foot/leg and cables running to a waist pack, boxes of folded garments below, and what may be a label/tag-printer unit on a shelf above. The actual tag-attaching motion isn't clearly visible in this frame — it reads more like a walking/transition moment than the task named in the filename. Use cautiously, only for general factory-movement context.",
+    "data_line": "egocentric",
+    "tags": [
+      "egocentric",
+      "transition",
+      "factory",
+      "mismatched-filename",
+      "cables"
+    ],
+    "quality": "ok",
+    "notes": "Content doesn't clearly depict tag attachment despite the filename; mostly shows the worker's own foot and cables."
+  },
+  {
+    "image_url": "/images/env/in_ma_so-poster.jpg",
+    "title": "Cluttered storage area, no clear task",
+    "image_description": "First-person view of coiled black straps/webbing material in a dim, slightly grungy loading-dock-like area with water bottles and an indistinct dark device. No printing, labeling, or code-marking activity is visible despite the filename (in mã số = print serial number). Low informational value.",
+    "data_line": "egocentric",
+    "tags": [
+      "egocentric",
+      "clutter",
+      "storage",
+      "mismatched-filename",
+      "low-value"
+    ],
+    "quality": "avoid",
+    "notes": "Does not depict the task implied by its filename; looks like incidental clutter/storage, not useful for illustrating any specific process."
+  },
+  {
+    "image_url": "/images/modalities/teleop.jpg",
+    "title": "Operator teleoperating dual robot arms",
+    "image_description": "Third-person (exocentric) studio photo of a man wearing a VR headset and holding two motion controllers, teleoperating two black robotic arms arranged on a tabletop with wooden blocks; a monitor behind shows stereo camera views and a 3D arm visualization. Clean, well-lit, and clearly illustrates teleoperation; use next to a paragraph about teleop data collection.",
+    "data_line": "teleop",
+    "tags": [
+      "teleoperation",
+      "vr",
+      "robot-arm",
+      "exocentric",
+      "studio"
+    ],
+    "quality": "good",
+    "notes": ""
+  },
+  {
+    "image_url": "/images/modalities/mocap.jpg",
+    "title": "Actor in motion-capture suit and gloves",
+    "image_description": "Third-person studio photo of a man wearing a marker-covered motion-capture suit and gloves, mid-gesture, surrounded by infrared mocap cameras on tripods with red status rings in a dark, blue-lit volume. Clearly illustrates mocap/hand-marker capture, but has a polished, generic 'stock photography' look rather than an obvious real Tbrain capture session; use next to a paragraph introducing motion capture.",
+    "data_line": "mocap",
+    "tags": [
+      "mocap",
+      "motion-capture",
+      "markers",
+      "studio",
+      "stock-style"
+    ],
+    "quality": "ok",
+    "notes": "Looks like generic stock photography of a mocap actor; cannot confirm it's an actual Tbrain session."
+  },
+  {
+    "image_url": "/images/modalities/exo-mocap.jpg",
+    "title": "Mocap studio 4-panel montage (third-party branding)",
+    "image_description": "Four-panel montage: a 3D animation viewport with a character rig, an overhead shot of a performer in a marker suit on a gridded studio floor, a marker-tracking software view, and a wide shot of an operator filming a performer in the same studio. Clearly shows exocentric multi-camera motion-capture production, but the studio wall signage visibly reads 'ANIMOST MOTION CAPTURE STUDIO,' a third-party company name.",
+    "data_line": "mocap",
+    "tags": [
+      "mocap",
+      "exocentric",
+      "studio",
+      "montage",
+      "third-party-brand"
+    ],
+    "quality": "avoid",
+    "notes": "Visible third-party studio branding ('ANIMOST') on the wall in one panel — should not be used without cropping or clearance."
+  },
+  {
+    "image_url": "/images/modalities/umi.jpg",
+    "title": "Handheld UMI gripper rig",
+    "image_description": "Clean third-person product photo of a handheld 3D-printed gripper (white body, orange jaws) with an action camera mounted on top, held by a hand (smartwatch visible) picking up a wood block; a robot arm and monitor are blurred in the background. Clearly illustrates the handheld universal manipulation interface (UMI) rig; use next to a paragraph about UMI-style handheld data collection.",
+    "data_line": "general",
+    "tags": [
+      "umi",
+      "handheld-rig",
+      "gripper",
+      "manipulation",
+      "product-shot"
+    ],
+    "quality": "good",
+    "notes": ""
+  },
+  {
+    "image_url": "/images/modalities/spatial.jpg",
+    "title": "Multi-camera 3D scan of mechanical part",
+    "image_description": "Dark studio shot of a small mechanical housing on a checkerboard calibration plate, surrounded by six depth/structured-light camera modules on tripods, with a glowing blue 3D grid/point-cloud rendered over the scene. Illustrates multi-camera spatial capture well, but the blue wireframe overlay looks digitally composited/CGI rather than a plain photo; use next to a paragraph about multi-camera spatial or 3D-scanning data.",
+    "data_line": "exocentric",
+    "tags": [
+      "spatial",
+      "multi-camera",
+      "3d-scan",
+      "cgi-overlay",
+      "studio"
+    ],
+    "quality": "ok",
+    "notes": "The blue grid/point-cloud effect appears to be a digital/CGI addition, not an unretouched photo — be aware it reads as a stylized render."
+  },
+  {
+    "image_url": "/images/modalities/qa.jpg",
+    "title": "Stylized sci-fi QA checklist overlay",
+    "image_description": "A monitor displaying a digitally stylized, holographic-looking rendering of hands soldering a PCB, overlaid with glowing checkmark icons and a progress-bar checklist. This looks like generic futuristic stock/AI-generated tech art rather than an actual QA tool interface, with little real informational content.",
+    "data_line": "general",
+    "tags": [
+      "qa",
+      "stock-art",
+      "sci-fi-overlay",
+      "generic",
+      "decorative"
+    ],
+    "quality": "avoid",
+    "notes": "Appears to be generic decorative sci-fi stock imagery, not a real product screenshot; avoid implying it represents an actual Tbrain QA tool."
+  },
+  {
+    "image_url": "/images/deliverables/all6-montage.png",
+    "title": "Six robot-data-type explainer grid (LeRobot frames)",
+    "image_description": "A labeled 2x3 grid titled 'Tbrain — 6 loại dữ liệu robot (frame thật từ LeRobot)' showing example frames for Egocentric/UMI (fisheye room view), ALOHA bimanual (overhead robot-arm view), Open-X UR5 (RGB-D arm on a board), Mobile manipulation (kitchen sink), Simulation (rendered robot arms), and PushT (simple 2D shapes). Useful as an explainer of robot-data taxonomy, but the caption itself states the frames are real samples from the third-party open LeRobot dataset, not Tbrain's own captures.",
+    "data_line": "general",
+    "tags": [
+      "explainer",
+      "montage",
+      "robot-data-types",
+      "lerobot",
+      "diagram"
+    ],
+    "quality": "ok",
+    "notes": "Caption explicitly credits LeRobot as the source of these example frames — do not present as Tbrain's own proprietary capture."
+  },
+  {
+    "image_url": "/images/hitl/annotated_sample.jpg",
+    "title": "Hand-pose keypoints reaching for a cup",
+    "image_description": "First-person (head-camera) overhead view of a round table/office seating area, with colored keypoint-and-skeleton annotation overlaid on a hand reaching toward a white cup (labeled 'cup_t2' bounding box) and a partial overlay on a foot at bottom. Good authentic example of hand-pose/object annotation; use next to a paragraph about hand-pose or object-interaction annotation.",
+    "data_line": "hand pose",
+    "tags": [
+      "hand-pose",
+      "annotation",
+      "keypoints",
+      "egocentric",
+      "hitl"
+    ],
+    "quality": "good",
+    "notes": ""
+  },
+  {
+    "image_url": "/images/hitl/hitl_capture_thumb.jpg",
+    "title": "Egocentric office capture, no annotation",
+    "image_description": "First-person overhead view of the same round-table office/break area, dim lighting, hands picking up a black bag near chairs with a phone on one seat. No annotation overlay is present despite living in the 'hitl' folder — it's a plain, somewhat dark capture frame.",
+    "data_line": "egocentric",
+    "tags": [
+      "egocentric",
+      "capture-thumbnail",
+      "office",
+      "dim-lighting",
+      "unannotated"
+    ],
+    "quality": "ok",
+    "notes": "No HITL annotation overlay actually visible; just a dim raw capture frame, despite the folder name."
+  },
+  {
+    "image_url": "/images/hitl/reel_frame.png",
+    "title": "Live annotation dashboard UI screenshot",
+    "image_description": "Clean screenshot of a 'Tbrain Egocentric Video Annotation' dashboard: the same round-table cup-pickup clip with hand keypoints on the left, and a right-hand panel listing environment, lighting, objects/hands tracked, a model pipeline stack (HaWoR, MANO, SAM3, SAM3D, FastSAM3D, MoGe, S3D), and a live JSON annotation output. Strong, polished image for a paragraph about the annotation pipeline or HITL/QC tooling.",
+    "data_line": "hand pose",
+    "tags": [
+      "dashboard",
+      "annotation-ui",
+      "pipeline",
+      "hand-pose",
+      "screenshot"
+    ],
+    "quality": "good",
+    "notes": "Footer shows a staff contact email (tam@tbrain.ai); consider cropping if used in external-facing content."
+  },
+  {
+    "image_url": "/images/body-kpts/iron_product_t50.jpg",
+    "title": "Debug frame: keypoints suppressed, ironing",
+    "image_description": "First-person overhead view of two hands folding/ironing khaki shorts on an ironing table, but the frame is overlaid with debug text reading 'SAPIENS | SUPPRESSED | topology invalid' and a footer noting torso keypoints were not detected. Despite living in 'body-kpts,' no skeleton overlay is actually shown — this is a failed/suppressed annotation artifact, not a usable illustration.",
+    "data_line": "egocentric",
+    "tags": [
+      "debug-artifact",
+      "keypoints-failed",
+      "egocentric",
+      "ironing",
+      "brand-visible"
+    ],
+    "quality": "avoid",
+    "notes": "No keypoint overlay is actually visible (detection was suppressed); also shows a 'MOVING FORWARD' brand/logo printed on the garment twice, and prominent on-screen debug text makes this unusable as-is."
+  },
+  {
+    "image_url": "/images/body-kpts/arrange_fabric_t50.jpg",
+    "title": "Debug frame: keypoints suppressed, fabric",
+    "image_description": "First-person overhead view of two hands arranging black fabric on a sewing table with a ruler and sewing machine, overlaid with the same debug banner 'SAPIENS | SUPPRESSED | topology invalid' and a footer noting torso keypoints were not detected. Like its sibling image, this is a failed-annotation debug frame rather than a usable keypoint-overlay illustration.",
+    "data_line": "egocentric",
+    "tags": [
+      "debug-artifact",
+      "keypoints-failed",
+      "egocentric",
+      "sewing",
+      "unusable"
+    ],
+    "quality": "avoid",
+    "notes": "No keypoint overlay actually visible (detection suppressed); a supplier/vendor box label is partially visible in the background, not a well-known customer brand."
+  },
+  {
+    "image_url": "/images/body-kpts/pick_up_the_cup_t50.jpg",
+    "title": "Overhead body-keypoint pose overlay",
+    "image_description": "A fixed overhead camera above a round cafe-style table shows an arm reaching for a cup, overlaid with a debug HUD reading 'SAPIENS | SUPPRESSED | topology invalid', a frame counter, and a keypoint gating message ('nose_Y=478 > hip_Y=443 | raw kpts retained in manifest'). This is a QA/debug frame showing a body-pose estimate that was flagged invalid, not a clean example of successful pose capture. Use next to a paragraph about pose-estimation QA, gating logic, or the auto-labeling pipeline's failure handling — not as a 'this is what good pose data looks like' image.",
+    "data_line": "exocentric",
+    "tags": [
+      "body-keypoints",
+      "pose-estimation",
+      "overhead-camera",
+      "qa-debug-overlay"
+    ],
+    "quality": "ok",
+    "notes": "Shows a REJECTED/suppressed pose estimate, not a success case — caption accordingly. No identifiable face, only an arm/hand visible."
+  },
+  {
+    "image_url": "/images/depth/iron_01_rgb_depth.jpg",
+    "title": "RGB and depth map of ironing shorts",
+    "image_description": "Split-screen still: left half is an overhead RGB shot of a worker's hands ironing khaki shorts on a padded table with other folded garments nearby and a pressing tool visible; right half is the same frame rendered as a colorized depth/point-map ('MoGe pointmap') in blue/green/orange/red. The camera is a fixed overhead third-person angle, not head-mounted. Use next to a paragraph about RGB-to-depth annotation or auto-labeling for folding/ironing manipulation tasks.",
+    "data_line": "exocentric",
+    "tags": [
+      "depth-map",
+      "rgb-depth-pair",
+      "garment-folding",
+      "auto-labeling"
+    ],
+    "quality": "good",
+    "notes": "A printed clothing tag reads 'MOVING FORWARD' — a garment brand tag, not a client/customer logo; low risk. Hands only, no face visible."
+  },
+  {
+    "image_url": "/images/depth/sew_01_rgb_depth.jpg",
+    "title": "RGB and depth map of hand-sewing fabric",
+    "image_description": "Split-screen still: left half is a close overhead RGB shot of two hands guiding white/grey fabric into an industrial sewing machine, with a ruler along the table edge; right half is the matching colorized depth/point-map ('MoGe pointmap') of the same hands and machine. Camera is a close, fixed overhead third-person shot, not head-mounted. Use next to a paragraph about RGB-to-depth annotation for sewing or fine manipulation tasks.",
+    "data_line": "exocentric",
+    "tags": [
+      "depth-map",
+      "rgb-depth-pair",
+      "sewing",
+      "fine-manipulation"
+    ],
+    "quality": "good",
+    "notes": "Hands only, no face visible. Clean, clearly real factory-floor footage."
+  },
+  {
+    "image_url": "/images/mocap-studio.jpg",
+    "title": "Person in dark projection-art installation",
+    "image_description": "A young woman stands alone in a dark room looking at her phone while a glowing blue striped light pattern with scattered flower/particle graphics is projected across the floor and a wall screen — this reads as an immersive digital-art or museum exhibit, not a motion-capture studio. There are no mocap suits, markers, or tripod-mounted mocap cameras anywhere in the frame. Despite the filename, this does not depict motion capture and looks like generic stock photography; it should not be used to illustrate Tbrain's mocap work.",
+    "data_line": "general",
+    "tags": [
+      "stock-photo",
+      "mislabeled",
+      "light-installation",
+      "not-mocap"
+    ],
+    "quality": "avoid",
+    "notes": "Filename says 'mocap-studio' but the image shows no markers, suits, or mocap camera rig — looks like unrelated stock/art-installation photography. Face is visible in profile but appears to be an anonymous stock-photo model, not a Tbrain staffer."
+  },
+  {
+    "image_url": "/images/worker-hero-poster.jpg",
+    "title": "Studio portrait of head-mounted capture rig",
+    "image_description": "Close studio portrait (dark background, blue rim light, light haze) of a bearded man wearing a head-mounted data-capture rig: a small action camera plus a multi-lens camera bar strapped across his forehead, cabled down to a small processing/battery pack on a chest harness. This is a polished marketing/hero-style shot, not candid field footage. Good match for a paragraph introducing the egocentric head-mounted capture pack itself.",
+    "data_line": "egocentric",
+    "tags": [
+      "capture-rig",
+      "head-mounted-camera",
+      "hero-shot",
+      "egocentric-hardware"
+    ],
+    "quality": "good",
+    "notes": "Face is clearly visible in a professional studio portrait — acceptable since it reads as a staged product/equipment shot, not a candid worker photo. Worth confirming the exact camera hardware shown matches Tbrain's current capture pack before captioning it as a literal product photo."
+  },
+  {
+    "image_url": "/images/physical-poster.jpg",
+    "title": "Color-graded stock video of wiping a table",
+    "image_description": "A heavily color-graded (teal/blue tint) still of a person in a white t-shirt and brown pants wiping a kitchen table with a blue cloth, next to a spray bottle and sponges; the face is mostly out of frame. This reads as a generic cleaning-product ad/stock video clip — there is no head cam, overlay, or annotation of any kind tying it to Tbrain capture. Only consider using it for a very generic 'everyday household manipulation' paragraph, and a real Tbrain capture frame would be preferable even then.",
+    "data_line": "general",
+    "tags": [
+      "stock-footage",
+      "cleaning",
+      "no-annotation",
+      "generic"
+    ],
+    "quality": "avoid",
+    "notes": "No visible Tbrain capture hardware, overlays, or annotations; strong stock/ad-footage look (heavy color grade). Likely not real Tbrain training data."
+  },
+  {
+    "image_url": "/images/robotics-hero.jpg",
+    "title": "Close-up of a SoftBank Pepper robot",
+    "image_description": "A tight close-up of a white humanoid robot head and torso with large round eyes and a chest nameplate that appears to read 'PEPPER', photographed indoors near a wood-paneled wall. This is SoftBank Robotics' commercial 'Pepper' robot — a recognizable third-party product, not Tbrain hardware — shot as generic decorative stock photography. Use only for a very generic 'robots in the world' opening image, if at all.",
+    "data_line": "general",
+    "tags": [
+      "third-party-robot",
+      "pepper-robot",
+      "stock-photo",
+      "decorative"
+    ],
+    "quality": "avoid",
+    "notes": "This is a known third-party commercial robot (SoftBank's Pepper) with a visible nameplate/badge on the chest — avoid implying it's Tbrain's own robot or hardware."
+  },
+  {
+    "image_url": "/images/robot-hand.jpg",
+    "title": "LEGO Mindstorms robot car kits on a shelf",
+    "image_description": "A row of small LEGO Mindstorms EV3-style robot-car kits with exposed wiring, motor bricks, and wheels sits on a white shelf, shot with shallow depth of field. Despite the filename, this is NOT a robot hand at all — it's a consumer/educational robotics toy kit, unrelated to Tbrain's egocentric, teleop, or mocap data collection. Decorative stock-style photo with no informational value for this blog.",
+    "data_line": "general",
+    "tags": [
+      "mislabeled",
+      "lego-mindstorms",
+      "toy-robots",
+      "stock-photo"
+    ],
+    "quality": "avoid",
+    "notes": "Filename 'robot-hand.jpg' is misleading — the image actually shows LEGO Mindstorms toy robot-car kits, not a robotic hand or manipulator. Recommend renaming or removing."
+  },
+  {
+    "image_url": "/samples/posters/teleop-s002.jpg",
+    "title": "Dim overhead shot of tool, bin, and box",
+    "image_description": "A dark, grainy, low-resolution angled overhead shot of a workspace showing a black pistol-grip tool or gripper mounted on a small stand, a blue plastic tote bin, and a cardboard box on a metal table, with a person barely visible (silhouette only, no face) seated at the left edge of frame. Image quality is poor (motion blur, low light, webcam-like compression) and it isn't fully clear whether the black device is a robot gripper or an unrelated handheld tool. Use cautiously next to a paragraph about teleoperated pick-and-place setups; a sharper frame would be preferable if available.",
+    "data_line": "teleop",
+    "tags": [
+      "teleop",
+      "low-quality",
+      "pick-and-place",
+      "unclear-subject"
+    ],
+    "quality": "ok",
+    "notes": "Low resolution and poorly lit; the main object's identity (gripper vs. generic tool) is ambiguous from the image alone. Person at left is an unidentifiable silhouette only, no face visible. Sample-line still."
+  },
+  {
+    "image_url": "/samples/posters/teleop-s005-right.jpg",
+    "title": "Soft robotic gripper fingers reaching toward panel",
+    "image_description": "A close shot looking down at soft, white accordion-style robotic gripper fingers extending from the right side of frame toward a curved white panel (possibly a sink, tub, or hull-like surface), with a red button and carpeted floor nearby. The viewpoint is close to the end effector, consistent with a rig-mounted camera used during teleoperated manipulation capture (paired with a '-left' counterpart view). Use next to a paragraph about teleoperated robot-arm manipulation or soft-gripper end effectors.",
+    "data_line": "teleop",
+    "tags": [
+      "teleop",
+      "soft-gripper",
+      "end-effector",
+      "robot-arm"
+    ],
+    "quality": "good",
+    "notes": "No faces or identifiable people visible. Clear, in-focus, genuinely shows a robot gripper in action. Sample-line still."
+  },
+  {
+    "image_url": "/samples/posters/handpose-fabric-sewing.jpg",
+    "title": "Hand-pose skeleton overlay on fabric handling",
+    "image_description": "A first-person, head-mounted overhead shot of two hands manipulating a white garment piece near a sewing machine, with colored hand-keypoint skeleton overlays (green dots/lines on the left hand labeled 'left [3v]', yellow on the right hand labeled 'right [2v]') and a status bar describing view-count quality gates. This is a clear, genuine hand-pose annotation example. Use next to a paragraph about hand-pose capture/annotation for fabric or sewing tasks.",
+    "data_line": "hand pose",
+    "tags": [
+      "hand-pose",
+      "keypoint-overlay",
+      "sewing",
+      "annotation"
+    ],
+    "quality": "good",
+    "notes": "Hands only, no face visible. Strong, legible example of the hand-pose keypoint overlay product. Sample-line still."
+  },
+  {
+    "image_url": "/samples/posters/handpose-pineapple-cutting.jpg",
+    "title": "Hand-pose skeleton overlay sorting cut produce",
+    "image_description": "A first-person, head-mounted overhead shot of a worker's hands sorting cut fruit/vegetable pieces into red and green woven baskets in a food-prep/market setting, with green and yellow hand-keypoint skeleton overlays labeled 'left' and 'right'. A second person is visible at upper right (torso/arm only, no face). Use next to a paragraph about hand-pose capture for food-handling or sorting tasks.",
+    "data_line": "hand pose",
+    "tags": [
+      "hand-pose",
+      "keypoint-overlay",
+      "food-handling",
+      "annotation"
+    ],
+    "quality": "good",
+    "notes": "No identifiable faces (only hands/arms/torsos visible). Despite the filename saying 'pineapple-cutting,' the visible action looks more like sorting/handling already-cut produce than active cutting — worth double-checking the exact task label before captioning. Sample-line still."
+  },
+  {
+    "image_url": "/samples/posters/exo-20260904-012.jpg",
+    "title": "Street-level video of motorbike traffic",
+    "image_description": "A real-world, third-person street-level video still of a narrow urban street (appears to be in Vietnam) with multiple motorbikes and riders, parked scooters, shopfronts, trees, and a legible shop sign with a phone number. No overlays, annotations, or capture-rig hardware are visible anywhere in the frame. This looks like generic, unannotated exocentric street footage with little demonstrated connection to a robotics data pipeline — use only for a very general 'real-world capture environments' paragraph, if at all.",
+    "data_line": "exocentric",
+    "tags": [
+      "street-scene",
+      "traffic",
+      "exocentric",
+      "unannotated"
+    ],
+    "quality": "avoid",
+    "notes": "No overlays/annotations confirming this is actually labeled training data. A shop sign with a business name and phone number is legible in-frame (third-party business, not a Tbrain customer). Several riders are visible but small/distant. Sample-line still."
+  },
+  {
+    "image_url": "/samples/posters/rig-six.jpg",
+    "title": "Six-panel fisheye composite of a worker unboxing",
+    "image_description": "A 2x3 grid composite of six fisheye camera views, apparently from the same head/chest-mounted multi-camera rig, showing a worker's own hands and feet while crouching over a cardboard box with coiled cable and small devices on a concrete floor near a storefront. This is an egocentric multi-camera capture composite (own hands/feet visible in every panel), not a photo of the worker from an external/exocentric viewpoint. Use next to a paragraph about synchronized multi-camera egocentric capture rigs.",
+    "data_line": "egocentric",
+    "tags": [
+      "multi-camera",
+      "fisheye",
+      "egocentric-rig",
+      "composite"
+    ],
+    "quality": "ok",
+    "notes": "Despite the filename suggesting this shows the physical rig hardware, it actually shows six synchronized camera FEEDS (own hands/feet in frame), not a photo of the rig itself. No face visible. Heavy fisheye distortion and repetitive panels make it read as a technical/debug composite rather than a polished hero image. Sample-line still."
+  },
+  {
+    "image_url": "/samples/posters/rig-stereo.jpg",
+    "title": "Two-panel fisheye stereo composite of a worker",
+    "image_description": "A side-by-side composite of two near-identical fisheye camera views (a stereo pair) from the same egocentric rig as rig-six.jpg, showing the worker's own hands and feet near a cardboard box with coiled cable on a concrete floor. Like rig-six, this shows the camera FEEDS rather than a photo of the physical stereo rig hardware. Use next to a paragraph about stereo/egocentric camera pairs for depth or multi-view capture.",
+    "data_line": "egocentric",
+    "tags": [
+      "stereo-camera",
+      "fisheye",
+      "egocentric-rig",
+      "composite"
+    ],
+    "quality": "ok",
+    "notes": "Filename suggests this is a photo of the physical stereo rig, but it's actually two synchronized camera feed views, not a hardware photo. No face visible. Sample-line still."
+  },
+  {
+    "image_url": "/samples/posters/vehicular-navigation-001.jpg",
+    "title": "Real-world video of a street intersection",
+    "image_description": "A forward-facing, vehicle-mounted (dashcam/handheld) video still of a busy street intersection with cars, several motorbikes and riders, and storefronts, in what looks like a Vietnamese city. The footage is clearly real-world photography, not a game-engine render — there is no CG, HUD, or simulation artifact visible anywhere. Despite the 'vehicular-navigation' filename implying simulation/game data, this should be treated as real-world driving footage, not the 'game data' line, unless the source pipeline confirms otherwise.",
+    "data_line": "egocentric",
+    "tags": [
+      "vehicle-mounted-camera",
+      "street-scene",
+      "real-world",
+      "mislabeled"
+    ],
+    "quality": "avoid",
+    "notes": "IMPORTANT: filename implies this is game/simulation data, but it is clearly real-world video (real people, real traffic, natural imperfections) — flag to engineering before captioning it as 'game data.' Riders' faces are small/distant; no customer logos visible. Sample-line still."
+  },
+  {
+    "image_url": "/samples/posters/vehicular-navigation-002.jpg",
+    "title": "Real-world video down a shop-lined street",
+    "image_description": "A forward-facing, vehicle-mounted video still following a motorbike rider down a tree-lined street with shopfronts (signage includes a legible shop name and other readable text), parked scooters, cars, and other riders. Like vehicular-navigation-001, this is clearly real-world footage, not a game/simulation render, despite the filename. Treat with the same caution as 001 — verify the actual data line with engineering before captioning it as 'game data.'",
+    "data_line": "egocentric",
+    "tags": [
+      "vehicle-mounted-camera",
+      "street-scene",
+      "real-world",
+      "mislabeled"
+    ],
+    "quality": "avoid",
+    "notes": "Same mislabeling concern as vehicular-navigation-001.jpg: filename suggests simulation/game data but content is real-world street video. Legible shop signage/business name in frame (third-party business, not Tbrain). Riders' faces visible at a distance. Sample-line still."
+  },
+  {
+    "image_url": "/images/blog-robotics-data.jpg",
+    "title": "Generic robot hand playing piano stock photo",
+    "image_description": "A close-up of a mechanical humanoid hand with exposed tendons/wires reaching toward a piano keyboard against a flat teal background. This is a widely recognizable, generic 'AI/robotics' stock-photo trope with no connection to Tbrain's actual capture hardware, workers, or data — it looks purely decorative/illustrative. Use only as a last-resort generic cover image, and prefer a real Tbrain photo wherever possible.",
+    "data_line": "general",
+    "tags": [
+      "stock-photo",
+      "generic-robot",
+      "decorative",
+      "not-tbrain"
+    ],
+    "quality": "avoid",
+    "notes": "Classic generic robotics/AI stock image (no identifiable people, no logos), but it conveys no real information about Tbrain's work and is over-used imagery in the industry."
+  },
+  {
+    "image_url": "/images/blog-humanoid.jpg",
+    "title": "Honda ASIMO robot waving",
+    "image_description": "A real photograph of Honda's ASIMO humanoid robot making a hand gesture at a trade-show/exhibit, with a presentation screen and partial text ('The Po...') visible behind it; the ASIMO brand name is legible on its chest. This is third-party stock/event photography, not Tbrain footage or data — use only as generic 'humanoid robot' cover art, e.g. next to a paragraph introducing humanoid robots in general, not as an illustration of Tbrain's own work.",
+    "data_line": "general",
+    "tags": [
+      "humanoid",
+      "robot",
+      "stock-photo",
+      "honda",
+      "asimo"
+    ],
+    "quality": "ok",
+    "notes": "Honda ASIMO brand name is visible on the robot's chest — third-party product branding, not Tbrain's robot. Real event photo, not AI art."
+  },
+  {
+    "image_url": "/images/humanoid-ai.jpg",
+    "title": "Small humanoid research robot on bench",
+    "image_description": "A small desktop-scale humanoid robot with an exposed mechanical skeleton and plain white head sits on a wooden bench near a window, apparently holding a tablet/book prop. This looks like generic stock photography of a research/hobby humanoid robot, not Tbrain hardware or capture data — fine as decorative cover art for a general 'humanoid robots' intro paragraph, not for anything about Tbrain's actual pipeline.",
+    "data_line": "general",
+    "tags": [
+      "humanoid",
+      "robot",
+      "stock-photo",
+      "research-robot"
+    ],
+    "quality": "ok",
+    "notes": "Generic stock/decorative photo of an unidentified humanoid robot kit; no Tbrain connection."
+  },
+  {
+    "image_url": "/images/blog-inline-robot-arm.jpg",
+    "title": "Pink wheeled educational robot kit",
+    "image_description": "A small pink four-wheeled educational robotics kit (branded 'EDUCROBOT' on the chassis) with an ultrasonic sensor, sitting on a table at what looks like a robotics-competition booth. Despite the filename, this is NOT a robot arm — it's a toy/educational rover — so it should not be used to illustrate articles about robotic arms or manipulation; it would actively mislead readers.",
+    "data_line": "general",
+    "tags": [
+      "toy-robot",
+      "educational-kit",
+      "mismatched",
+      "wheeled-robot"
+    ],
+    "quality": "avoid",
+    "notes": "Filename says 'robot-arm' but the image shows a wheeled educational robot kit, not an arm — misleading if used for arm/manipulation content. Third-party 'EDUCROBOT' brand name visible."
+  },
+  {
+    "image_url": "/images/blog-quality.jpg",
+    "title": "Photoshop screenshot of course webpage",
+    "image_description": "A screenshot of a desk monitor showing Adobe Photoshop open on a webpage mockup for 'Microsoft Official Courses' on-demand learning, with visible Microsoft/Google Cloud branding in the design. This has nothing to do with data quality, QC, or robotics — it's an unrelated web-design screenshot filed under 'quality' — do not use for QC/quality-themed paragraphs, it will confuse readers about what Tbrain does.",
+    "data_line": "general",
+    "tags": [
+      "screenshot",
+      "web-design",
+      "mismatched",
+      "unrelated"
+    ],
+    "quality": "avoid",
+    "notes": "Third-party Microsoft/Google Cloud branding and course content visible in the screenshot. Content is unrelated to QC/data-quality despite the filename."
+  },
+  {
+    "image_url": "/images/blog-annotation.jpg",
+    "title": "Woman with laptop in server hallway",
+    "image_description": "A woman in dark clothing walks through a glass-walled corridor beside a lit server rack, holding a laptop, with her reflection visible in the glass. This is a generic stock photo of 'tech professional in a datacenter' — it shows no annotation tools, labels, or bounding boxes, so despite the filename it does not actually depict data annotation; it also contains an identifiable face of a real (non-Tbrain) stock model.",
+    "data_line": "general",
+    "tags": [
+      "stock-photo",
+      "datacenter",
+      "person",
+      "mismatched"
+    ],
+    "quality": "avoid",
+    "notes": "Identifiable face of a real non-team stock-photo model. Content does not actually depict annotation work despite the filename."
+  },
+  {
+    "image_url": "/images/blog-pipeline2.jpg",
+    "title": "Web analytics dashboard on laptop",
+    "image_description": "A laptop screen displaying a dark-themed web-performance analytics dashboard (load time vs. bounce rate, sessions, page views charts). This is generic stock dashboard imagery with no connection to a data pipeline — it is pixel-identical to data-dashboard.jpg in this library — use only for generic 'metrics/dashboard' paragraphs, not for pipeline-architecture content.",
+    "data_line": "general",
+    "tags": [
+      "dashboard",
+      "analytics",
+      "stock-photo",
+      "duplicate"
+    ],
+    "quality": "ok",
+    "notes": "Duplicate of /images/data-dashboard.jpg (same photo). Does not depict a data pipeline despite the filename; it's a generic web-analytics dashboard."
+  },
+  {
+    "image_url": "/images/blog-inline-pipeline.jpg",
+    "title": "Macro photo of a circuit board",
+    "image_description": "An extreme close-up of a populated PCB with visible chips, capacitors, and solder points. This is generic stock hardware photography, not a diagram or visual of a data pipeline — better suited to a paragraph about compute hardware or embedded electronics than data-pipeline architecture.",
+    "data_line": "general",
+    "tags": [
+      "circuit-board",
+      "hardware",
+      "stock-photo",
+      "macro"
+    ],
+    "quality": "ok",
+    "notes": "Generic stock PCB macro shot; doesn't actually depict a pipeline despite the filename."
+  },
+  {
+    "image_url": "/images/blog-data-scale.jpg",
+    "title": "Earth city lights from orbit",
+    "image_description": "A night-side view of Earth from orbit showing city lights and a thin blue atmospheric glow against a starfield. This is classic stock/NASA-style space photography used as a visual metaphor for scale — works well next to a paragraph about the scale of global data or big-data infrastructure, though it is not literally related to Tbrain's robotics data.",
+    "data_line": "general",
+    "tags": [
+      "earth",
+      "space",
+      "scale",
+      "stock-photo",
+      "night-lights"
+    ],
+    "quality": "good",
+    "notes": "Generic stock space photography used as a scale metaphor; no Tbrain-specific content."
+  },
+  {
+    "image_url": "/images/blog-rlhf.jpg",
+    "title": "Museum android robot head display",
+    "image_description": "A photograph of an android-style robot head and torso (camera 'eyes', articulated neck) on display in front of screens showing Russian-language exhibit text and a glowing moon backdrop, likely a museum/space-exhibition robot (resembles Russia's FEDOR/Skybot android). It has no visual connection to RLHF (reinforcement learning from human feedback) — it is decorative robot stock photography, not an illustration of a training technique.",
+    "data_line": "LLM data",
+    "tags": [
+      "robot",
+      "android",
+      "museum",
+      "stock-photo",
+      "mismatched"
+    ],
+    "quality": "ok",
+    "notes": "Content has no real connection to RLHF despite the filename; Russian-language exhibit text visible in background. Purely decorative if used."
+  },
+  {
+    "image_url": "/images/blog-llm-training.jpg",
+    "title": "Abstract 3D wireframe node network",
+    "image_description": "A dark, rendered 3D graphic of translucent wireframe cubes connected by lines, with chromatic-aberration glow, evoking a generic 'neural network / data graph' visual. This is clearly abstract CG/stock motion-graphics art, not a real diagram of LLM training — fine as a generic abstract-AI header image, but honestly not tied to anything about LLM pretraining specifically.",
+    "data_line": "LLM data",
+    "tags": [
+      "abstract",
+      "3d-render",
+      "network",
+      "stock-art",
+      "ai-graphic"
+    ],
+    "quality": "ok",
+    "notes": "Generic abstract CG stock art; no literal connection to LLM training despite the filename."
+  },
+  {
+    "image_url": "/images/blog-benchmark.jpg",
+    "title": "Dual monitors with code and React app",
+    "image_description": "A desk photo of two monitors: one shows VS Code editing a JavaScript/Express function, the other shows a freshly scaffolded Create React App start page with the React logo and 'Edit src/App.js and save to reload / Learn React' text. This is a generic programmer-at-desk stock photo, not an actual benchmark visualization — better suited to a general 'coding' paragraph than a benchmarking-themed one.",
+    "data_line": "LLM data",
+    "tags": [
+      "code",
+      "react",
+      "screenshot",
+      "stock-photo",
+      "coding"
+    ],
+    "quality": "ok",
+    "notes": "Shows the open-source React logo/boilerplate, not a customer brand. Doesn't depict benchmarking despite the filename."
+  },
+  {
+    "image_url": "/images/blog-coding.jpg",
+    "title": "Eyeglasses reflecting code editor",
+    "image_description": "A close-up of a pair of glasses resting in front of a laptop screen, with blurred code-editor panels (syntax-highlighted text, a timeline-like UI) reflected and visible through the lenses. This is a classic stock-photography trope for 'programmer at work' and reads as generic decorative coding imagery rather than anything Tbrain-specific.",
+    "data_line": "LLM data",
+    "tags": [
+      "coding",
+      "glasses",
+      "stock-photo",
+      "code-editor",
+      "desk"
+    ],
+    "quality": "ok",
+    "notes": "Generic decorative stock photo; code on screen is illegible/irrelevant to actual content."
+  },
+  {
+    "image_url": "/images/terminal-bench-cinema-poster.jpg",
+    "title": "Server rack close-up, cinematic lighting",
+    "image_description": "A cinematic, blue-lit close-up of a data-center server rack with a small status display and cabling, shot at a wide 16:9 ratio consistent with a video thumbnail/frame grab. Despite the 'terminal-bench' filename implying a coding-agent terminal benchmark, this shows a server room, not any terminal/CLI — if used as a poster for a Terminal-Bench explainer video, it is visually mismatched and should be swapped for an actual terminal/CLI shot.",
+    "data_line": "LLM data",
+    "tags": [
+      "server-room",
+      "video-still",
+      "datacenter",
+      "mismatched",
+      "cinematic"
+    ],
+    "quality": "ok",
+    "notes": "Looks like a video frame grab (ffmpeg-encoded metadata), consistent with a 'cinema poster' thumbnail. Content shows a server rack, not a terminal — mismatched to the implied Terminal-Bench coding-benchmark topic."
+  },
+  {
+    "image_url": "/images/data-dashboard.jpg",
+    "title": "Web analytics dashboard on laptop",
+    "image_description": "A laptop displaying a dark-themed analytics dashboard with load-time/bounce-rate charts and session metrics, shot on a desk with a blurred plant in the background. Clean, legible generic stock dashboard imagery — good for a paragraph about metrics, dashboards, or monitoring; note it is pixel-identical to blog-pipeline2.jpg in this library.",
+    "data_line": "general",
+    "tags": [
+      "dashboard",
+      "analytics",
+      "stock-photo",
+      "metrics",
+      "laptop"
+    ],
+    "quality": "good",
+    "notes": "Duplicate of /images/blog-pipeline2.jpg (identical photo)."
+  },
+  {
+    "image_url": "/images/server-room.jpg",
+    "title": "Server rack cables, blue-lit",
+    "image_description": "A close, moody, blue-and-amber-lit shot of open server-rack doors with a tangle of network cables and blinking status LEDs, framed in a wide cinematic aspect ratio typical of stock b-roll. Generic but polished data-center imagery, good next to a paragraph about compute infrastructure or storage scale, not Tbrain-specific content.",
+    "data_line": "general",
+    "tags": [
+      "server-room",
+      "datacenter",
+      "cables",
+      "stock-photo",
+      "infrastructure"
+    ],
+    "quality": "good",
+    "notes": "Likely a video frame grab; purely generic datacenter stock imagery."
+  },
+  {
+    "image_url": "/images/scientist-lab.jpg",
+    "title": "Engineer at laptop amid wiring harness rig",
+    "image_description": "A woman with glasses sits at a laptop inside an industrial test rig surrounded by automotive-style wiring harnesses, connectors, and a speaker component, in what looks like a vehicle electronics validation lab. Real stock photography of a technician/engineer at work — reasonably on-topic for a 'lab/engineering' paragraph, but note the visible, identifiable face of a real non-Tbrain person.",
+    "data_line": "general",
+    "tags": [
+      "engineer",
+      "lab",
+      "stock-photo",
+      "wiring",
+      "testing"
+    ],
+    "quality": "ok",
+    "notes": "Identifiable face of a real non-team stock-photo model."
+  },
+  {
+    "image_url": "/images/team-collab.jpg",
+    "title": "Group around table with laptops",
+    "image_description": "Five people sit around a wooden table in a cabin-like room, each on a laptop (one showing a dark-themed code editor), with headphones, a water bottle, and flowers on the table. This is a generic stock 'team working together' photo, not an actual Tbrain team photo, and several faces are clearly identifiable.",
+    "data_line": "general",
+    "tags": [
+      "team",
+      "stock-photo",
+      "laptops",
+      "collaboration",
+      "people"
+    ],
+    "quality": "avoid",
+    "notes": "Identifiable faces of real non-team stock-photo models; not an actual Tbrain team photo despite the filename/usage implication."
+  },
+  {
+    "image_url": "/images/ai-brain.jpg",
+    "title": "Abstract blue 3D 'AI' letters",
+    "image_description": "A rendered 3D graphic of large reflective blue 'AI' letters standing on a hex-patterned digital floor with flowing wireframe lines, in a blue-toned sci-fi style. Clearly generic AI-themed stock/motion-graphics art, not a depiction of any real model or neural structure — fine as a generic header image for AI-themed articles, no informational content about Tbrain.",
+    "data_line": "general",
+    "tags": [
+      "abstract",
+      "3d-render",
+      "ai-graphic",
+      "stock-art",
+      "blue"
+    ],
+    "quality": "good",
+    "notes": "Generic abstract stock art; purely decorative."
+  },
+  {
+    "image_url": "/images/automation-cinema-poster.jpg",
+    "title": "Yellow industrial robot arm on factory line",
+    "image_description": "A bright, modern factory floor with a yellow six-axis industrial robot arm reaching over a conveyor/assembly line, with a linear gantry mechanism in the foreground; shot in a wide cinematic ratio consistent with a video still. This looks like real (though generic/stock, not Tbrain-captured) industrial-automation footage — a reasonably strong, on-topic visual for paragraphs about factory automation or robot arms, though it's stock b-roll rather than actual Tbrain customer footage.",
+    "data_line": "general",
+    "tags": [
+      "industrial-robot",
+      "factory",
+      "automation",
+      "robot-arm",
+      "video-still"
+    ],
+    "quality": "good",
+    "notes": "Yellow color/arm design resembles a FANUC-style industrial robot; no readable logo confirmed. Likely stock b-roll/video frame grab, not Tbrain's own factory footage."
+  },
+  {
+    "image_url": "/images/code-screen.jpg",
+    "title": "Blurred close-up of PHP/WordPress code",
+    "image_description": "An extreme macro, colorful, out-of-focus shot of a code editor showing a PHP WordPress function (query loops, widget classes) on screen. Purely decorative, illegible-at-a-glance stock 'code' photography — fine as generic texture/background for a coding-related section, not informative on its own.",
+    "data_line": "LLM data",
+    "tags": [
+      "code",
+      "php",
+      "stock-photo",
+      "blurred",
+      "wordpress"
+    ],
+    "quality": "ok",
+    "notes": "Generic decorative stock photo of unrelated WordPress/PHP code."
+  },
+  {
+    "image_url": "/images/depth/arrange_01_rgb_depth.jpg",
+    "title": "Egocentric sewing task with depth map",
+    "image_description": "A split-panel capture: left shows an RGB egocentric (head-mounted) view looking down at two hands arranging a piece of black fabric on a sewing-machine table with a ruler and supplies; right shows the corresponding MoGe depth/pointmap visualization in false color. This is real Tbrain-style first-person capture plus depth-estimation data, clear and well-labeled — good for a paragraph about egocentric capture or depth annotation pipelines.",
+    "data_line": "egocentric",
+    "tags": [
+      "egocentric",
+      "depth-map",
+      "hands",
+      "real-data",
+      "sewing"
+    ],
+    "quality": "good",
+    "notes": "Real labeled capture data (RGB + MoGe depth pointmap), not stock art. No identifiable face visible, only hands/forearms."
+  },
+  {
+    "image_url": "/images/depth/pick_up_the_cup_rgb_depth.jpg",
+    "title": "Egocentric cup pickup with depth map",
+    "image_description": "A split-panel capture: left shows an RGB egocentric (head-mounted) view looking down at a round table with a cup and chairs, with hands reaching for a dark object in the foreground; right shows the matching MoGe depth-map visualization with a labeled depth range (1.26-2.71m). Real Tbrain-style first-person capture plus depth data, task-labeled by filename ('pick up the cup') — good for a paragraph about egocentric manipulation data or depth pipelines.",
+    "data_line": "egocentric",
+    "tags": [
+      "egocentric",
+      "depth-map",
+      "hands",
+      "real-data",
+      "manipulation"
+    ],
+    "quality": "good",
+    "notes": "Real labeled capture data (RGB + MoGe depth pointmap) matching a 'pick up the cup' task; no identifiable face visible."
+  },
+  {
+    "image_url": "/images/descriptions/arrange_fabric.jpg",
+    "title": "Egocentric clip: folding cloth, auto-labeled",
+    "image_description": "First-person, head-mounted view of two hands folding/arranging a dark cloth panel at a workbench with a ruler and other fabric pieces nearby. The frame has a baked-in auto-labeling overlay reading 'FOLD · CLOTH', a confidence score ('conf 0.95 · qwen_vl'), and a model tag ('Qwen3-VL · 5 segs'), i.e. this is a labeling-pipeline demo frame, not clean raw footage. Use next to a paragraph about the auto-labeling pipeline or a specific labeled 'fold/arrange fabric' task example.",
+    "data_line": "egocentric",
+    "tags": [
+      "egocentric",
+      "headcam",
+      "auto-label",
+      "textile",
+      "fold"
+    ],
+    "quality": "good",
+    "notes": "Contains baked-in UI overlay text (confidence score, model name) — great for illustrating the auto-labeling pipeline specifically, not suitable where a clean unlabeled frame is needed."
+  },
+  {
+    "image_url": "/images/descriptions/iron_product.jpg",
+    "title": "Egocentric clip: ironing pants, auto-labeled",
+    "image_description": "First-person, head-mounted view looking down at hands ironing a pair of khaki pants/shorts on an ironing board, iron visible mid-stroke, other garments piled around. Overlay reads 'IRON · PANTS' with 'conf 0.98 · qwen_vl' and 'Qwen3-VL · 3 segs'. Use next to a paragraph about a labeled ironing/finishing task or the auto-labeling pipeline.",
+    "data_line": "egocentric",
+    "tags": [
+      "egocentric",
+      "headcam",
+      "auto-label",
+      "ironing",
+      "garment"
+    ],
+    "quality": "good",
+    "notes": "Baked-in overlay text (confidence score, model tag) — a labeling-demo frame, not a clean raw photo."
+  },
+  {
+    "image_url": "/images/descriptions/pick_up_the_cup.jpg",
+    "title": "Egocentric clip: picking up a cup, auto-labeled",
+    "image_description": "First-person, head/chest-mounted overhead-angle view of an arm reaching down to pick up a white paper cup off a round wooden table, stacked chairs around a break-room-like space. Overlay reads 'PICK · CUP' with 'conf 0.90 · qwen_vl' and 'Qwen3-VL · 5 segs'. Use next to a paragraph about a simple labeled pick/place task or the auto-labeling pipeline.",
+    "data_line": "egocentric",
+    "tags": [
+      "egocentric",
+      "headcam",
+      "auto-label",
+      "pick-and-place",
+      "overlay"
+    ],
+    "quality": "good",
+    "notes": "Baked-in overlay text — labeling-demo frame rather than a clean raw capture photo. A bare foot is visible at the bottom of frame (the wearer's own foot, not a bystander), not a concern."
+  },
+  {
+    "image_url": "/images/descriptions/sew_hem.jpg",
+    "title": "Egocentric clip: sewing a hem, auto-labeled",
+    "image_description": "First-person, head-mounted view (slightly motion-blurred) of two hands positioning white/gray fabric under a sewing machine needle, more garments piled to the side. Overlay reads 'SEW · HEM' with 'conf 0.90 · qwen_vl' and 'Qwen3-VL · 1 segs'. Use next to a paragraph about a labeled sewing task or the auto-labeling pipeline.",
+    "data_line": "egocentric",
+    "tags": [
+      "egocentric",
+      "headcam",
+      "auto-label",
+      "sewing",
+      "garment"
+    ],
+    "quality": "ok",
+    "notes": "Noticeably motion-blurred compared to the other description frames; still readable, but a softer choice if a sharp image is needed. Has baked-in overlay text."
+  },
+  {
+    "image_url": "/images/env/kitchen.jpg",
+    "title": "Stylized photo: chef wearing capture rig",
+    "image_description": "Third-person (exocentric), cinematically lit photo of a man in a dark professional restaurant kitchen wearing the head-mounted camera rig plus two wrist-mounted action cameras, plating food with a knife. Moody blue/orange lighting makes this read as produced marketing photography rather than a raw factory-floor data-capture shot. Use for a paragraph about the capture hardware itself, not as evidence of real factory/warehouse footage — the kitchen/chef subject doesn't match Tbrain's stated factory-worker domain.",
+    "data_line": "exocentric",
+    "tags": [
+      "exocentric",
+      "rig",
+      "stylized",
+      "kitchen",
+      "marketing-photo"
+    ],
+    "quality": "ok",
+    "notes": "Polished, stock-like marketing photography; subject is a chef in a restaurant kitchen, not a factory/warehouse worker, so it's a thematic mismatch unless the copy is specifically about the rig hardware or general brand imagery."
+  },
+  {
+    "image_url": "/images/env/pov.jpg",
+    "title": "Hands with hand-pose tracking overlay",
+    "image_description": "Close, symmetric view of two hands (wearing wrist-mounted cameras) manipulating a small metal clasp above a workbench with tools and machined parts in the background, overlaid with a teal skeletal dot-and-line graphic representing hand-pose/keypoint tracking. Despite the filename 'pov', the static, centered, symmetric framing looks like a staged/composited illustrative shot rather than genuine raw head-mounted POV video. Use next to a paragraph about hand-pose/keypoint annotation data, not as a literal 'worker's-eye-view' example.",
+    "data_line": "hand pose",
+    "tags": [
+      "hand-pose",
+      "overlay",
+      "workshop",
+      "wrist-camera",
+      "staged"
+    ],
+    "quality": "ok",
+    "notes": "Filename implies 'point of view' footage, but the framing/overlay reads as a produced graphic illustration of hand-pose tracking rather than raw headcam video — confirm intent before pairing with copy that claims it's real capture footage."
+  },
+  {
+    "image_url": "/images/env/sorting-poster.jpg",
+    "title": "Mismatched file: office desk, not sorting",
+    "image_description": "Raw, blurry, low-quality overhead/first-person shot of someone at a desk with a keyboard and mouse, handwritten notes, and a small boxed item — an office/desk scene, not a warehouse sorting task, despite the filename 'sorting-poster'. Camera distortion and blur suggest genuine raw capture, but the content does not depict sorting or warehouse work. Do not pair with sorting/warehouse copy.",
+    "data_line": "egocentric",
+    "tags": [
+      "egocentric",
+      "desk",
+      "low-quality",
+      "mismatch",
+      "office"
+    ],
+    "quality": "avoid",
+    "notes": "Filename/content mismatch: named 'sorting-poster' but shows an office desk/keyboard scene, not sorting or warehouse work. Also low resolution and blurry. Exactly the kind of mismatch this review is meant to catch — flag to whoever maintains the image pipeline."
+  },
+  {
+    "image_url": "/images/env/textile.jpg",
+    "title": "Stylized photo: textile worker wearing capture rig",
+    "image_description": "Third-person, cinematically lit photo of a man in dark coveralls wearing the head-mounted rig and two wrist cameras, rolling/handling a bolt of dark fabric in a dim textile workshop with thread spools on shelving behind him. Polished and staged like kitchen.jpg, but the textile-workshop setting and fabric-handling task are genuinely on-topic for Tbrain's domain. Use for a paragraph introducing the capture hardware in a textile/garment context.",
+    "data_line": "exocentric",
+    "tags": [
+      "exocentric",
+      "rig",
+      "textile",
+      "staged",
+      "worker"
+    ],
+    "quality": "good",
+    "notes": "Produced/stylized marketing photo rather than raw capture footage, but subject matter (textile handling with the rig) matches Tbrain's stated use case well."
+  },
+  {
+    "image_url": "/images/env/warehouse-poster.jpg",
+    "title": "Overhead shot: packing folded pants into bags",
+    "image_description": "Top-down, overhead view of two hands pressing a folded pair of pants into a clear plastic bag on a white table, surrounded by more poly bags, a water bottle, a phone, a tape measure, and a stack of garment labels/straps. No overlay text. Despite the filename 'warehouse', this is a packing/finishing table scene rather than warehouse shelving or pallet logistics. Use next to a paragraph about packaging/finishing-line labeled tasks, not generic 'warehouse' logistics copy.",
+    "data_line": "egocentric",
+    "tags": [
+      "egocentric",
+      "packing",
+      "textile",
+      "overhead",
+      "garment"
+    ],
+    "quality": "ok",
+    "notes": "Filename says 'warehouse' but content shows a garment packing/finishing table, not warehouse shelving, pallets, or forklifts — confirm before pairing with warehouse-specific copy."
+  },
+  {
+    "image_url": "/images/env/is_san_pham-poster.jpg",
+    "title": "Overhead shot: folding pants near an iron",
+    "image_description": "Top-down, overhead egocentric view of two hands folding a pair of khaki pants on a padded ironing table, with a steam iron and more garments visible in frame. No overlay text. Matches a garment finishing/inspection labeled-task scene ('is san pham' ~ product inspection/finishing in Vietnamese). Use next to a paragraph describing a garment finishing or quality-check labeled task.",
+    "data_line": "egocentric",
+    "tags": [
+      "egocentric",
+      "ironing",
+      "garment",
+      "overhead",
+      "finishing"
+    ],
+    "quality": "good",
+    "notes": ""
+  },
+  {
+    "image_url": "/images/env/may_san_pham-poster.jpg",
+    "title": "Overhead shot: hands at a sewing machine",
+    "image_description": "Top-down, overhead egocentric view of two hands positioning white/gray fabric under a sewing machine needle, with a ruler strip and folded garments around the workstation. No overlay text. Clearly matches a sewing-machine/production-line labeled task ('may san pham' ~ sewing product). Use next to a paragraph about sewing-line data collection.",
+    "data_line": "egocentric",
+    "tags": [
+      "egocentric",
+      "sewing",
+      "garment",
+      "overhead",
+      "production-line"
+    ],
+    "quality": "good",
+    "notes": ""
+  },
+  {
+    "image_url": "/images/hero-poster.jpg",
+    "title": "Unrelated 3D anatomy render (mismatched asset)",
+    "image_description": "A green-glowing, rendered 3D medical/anatomical animation still showing a human rib cage and spine viewed from behind, generic X-ray/skeleton visualization style. There is no visible connection to robotics, factories, or data capture; it appears to be a wrongly placed or leftover placeholder asset rather than real hero/cover footage. Do not use for Tbrain blog content as-is.",
+    "data_line": "general",
+    "tags": [
+      "mismatch",
+      "3d-render",
+      "anatomy",
+      "stock",
+      "unrelated"
+    ],
+    "quality": "avoid",
+    "notes": "Content is a medical/anatomical 3D animation still, completely unrelated to Tbrain's robotics/data-capture business, despite being named 'hero-poster.jpg'. Flag to engineering/design — likely a wrong file or stale placeholder that should be replaced with an actual brand hero image."
+  },
+  {
+    "image_url": "/images/hitl/hitl_clean_thumb.jpg",
+    "title": "Egocentric desk scene with cleaning product",
+    "image_description": "Low-quality, blurry overhead/first-person shot of someone at a desk with a keyboard, handwritten notes, and a boxed/bar cleaning product in front of them, hands raised near the keyboard. Framing and quality closely resemble the mismatched 'sorting-poster.jpg' desk scene. Only weakly illustrates an active cleaning action. Use with caution for a human-in-the-loop 'cleaning' context, or prefer hitl_wiping_thumb.jpg instead.",
+    "data_line": "egocentric",
+    "tags": [
+      "egocentric",
+      "hitl",
+      "desk",
+      "low-quality",
+      "cleaning"
+    ],
+    "quality": "ok",
+    "notes": "Blurry, low resolution; the cleaning-product subject is only weakly visible and no active cleaning motion is shown — a softer choice than hitl_wiping_thumb.jpg for the same HITL cleaning theme."
+  },
+  {
+    "image_url": "/images/hitl/hitl_wiping_thumb.jpg",
+    "title": "Overhead shot: hands wiping a round table",
+    "image_description": "Overhead, first-person view of two hands actively wiping a round wooden table with a cloth, office chairs and carpet visible around the table. Clear, legible action shot of a wiping/cleaning task with no overlay text. Use next to a paragraph about human-in-the-loop cleaning/wiping task capture or quality review.",
+    "data_line": "egocentric",
+    "tags": [
+      "egocentric",
+      "hitl",
+      "wiping",
+      "cleaning",
+      "overhead"
+    ],
+    "quality": "good",
+    "notes": ""
+  },
+  {
+    "image_url": "/images/parts/headrig.jpg",
+    "title": "Product shot: head-mounted capture rig",
+    "image_description": "Studio product photography of the head-mounted capture hardware alone — a strap/headband holding a GoPro-style action camera and a multi-lens camera bar (stereo/depth sensor array) — shot against a black background with dramatic rim lighting. The rig is mounted on a stand/pole, not worn by a person or mannequin. Use next to a paragraph describing what the capture hardware consists of, not as an 'in-use on a worker' shot.",
+    "data_line": "general",
+    "tags": [
+      "hardware",
+      "rig",
+      "product-shot",
+      "camera",
+      "studio"
+    ],
+    "quality": "good",
+    "notes": "Rig is shown mounted on a stand, not on a human head or mannequin — clean, unambiguous hardware product photography with no people in frame."
+  },
+  {
+    "image_url": "/images/platform-robotic-poster.jpg",
+    "title": "Close-up of a humanoid robot's neck mechanism",
+    "image_description": "Extreme close-up, third-person photo of a humanoid android robot's exposed neck/jaw actuator mechanism (synthetic face above, a mechanical frame with visible cables and a part labeled 'FL_03' below), shot against a purple/white backdrop that looks like a trade-show booth. This does not look like Tbrain's own hardware — it reads as a generic humanoid-robot photo rather than Tbrain-specific equipment. Use only for general 'robotics'/'embodied AI' framing, not as evidence of a Tbrain-built or Tbrain-owned robot.",
+    "data_line": "general",
+    "tags": [
+      "robot",
+      "humanoid",
+      "stock-photo",
+      "close-up",
+      "mechanism"
+    ],
+    "quality": "ok",
+    "notes": "Looks like a generic/stock humanoid-robot photo (possibly from a trade show or vendor demo), not clearly Tbrain-branded or owned. Verify image licensing/usage rights before publishing, and avoid captioning it as if it were Tbrain's own robot."
+  },
+  {
+    "image_url": "/images/platform/dashboard.png",
+    "title": "Screenshot: Tbrain internal operations dashboard",
+    "image_description": "Screenshot of Tbrain's own internal web platform: a dark-themed 'Dashboard - AI Project Management & Operations Hub' view showing stat tiles (Total Projects: 5, Active Members: 10, Failure Rate: 20.0%, AI Providers: 2), a 7-day audit-activity bar chart, and a 'Project Live Assessment' panel (Members: 39, Login Events: 285). Use next to a paragraph about Tbrain's own QC/ops tooling or data-pipeline management.",
+    "data_line": "general",
+    "tags": [
+      "dashboard",
+      "screenshot",
+      "platform-ui",
+      "internal-tool",
+      "metrics"
+    ],
+    "quality": "good",
+    "notes": "No customer names, usernames, or other PII visible in the screenshot. It does show real-looking internal business metrics (failure rate, member/login counts) - confirm with the team that these specific numbers are OK to publish externally before using in a public post."
+  },
+  {
+    "image_url": "/images/public-datasets/ego4d.jpg",
+    "title": "Broken file — not a valid image",
+    "image_description": "This file is not an image: it contains a GitHub Pages 'Page not found' HTML error page saved with a .jpg extension (confirmed via file inspection - the bytes start with '<!DOCTYPE html>...Page not found - GitHub Pages'). There is nothing visible to describe. Do not use until a real EGO4D sample frame is sourced and saved in its place.",
+    "data_line": "egocentric",
+    "tags": [
+      "broken",
+      "placeholder",
+      "404",
+      "public-dataset"
+    ],
+    "quality": "avoid",
+    "notes": "File is corrupt/invalid - it's an HTML 404 page, not image data. Needs to be re-downloaded from the actual EGO4D project. Once replaced with a real frame, remember it is third-party public-dataset imagery, not Tbrain's own capture, and must be labeled as such in any post."
+  },
+  {
+    "image_url": "/images/public-datasets/epic-kitchens.jpg",
+    "title": "Broken file — not a valid image",
+    "image_description": "This file is not an image: it contains the same GitHub Pages 'Page not found' HTML error page as ego4d.jpg, saved with a .jpg extension (identical file size, 9,379 bytes, confirming it's the same 404 page duplicated). There is nothing visible to describe. Do not use until a real EPIC-KITCHENS sample frame is sourced and saved in its place.",
+    "data_line": "egocentric",
+    "tags": [
+      "broken",
+      "placeholder",
+      "404",
+      "public-dataset"
+    ],
+    "quality": "avoid",
+    "notes": "File is corrupt/invalid - identical HTML 404 page as ego4d.jpg (same byte size), not image data. Needs to be re-downloaded from the actual EPIC-KITCHENS project. Once replaced, label clearly as third-party public-dataset imagery, not Tbrain's own data."
+  }
+]

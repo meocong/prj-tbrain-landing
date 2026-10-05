@@ -114,6 +114,13 @@ export interface CmsAgentMeta {
   target_keyword?: string;
   sources?: { url: string; title?: string; publisher?: string; accessed_at?: string }[];
   rubric?: Record<string, number>;
+  post_type?: string;
+  reader?: string;
+  takeaway?: string;
+  knowledge_ids?: string[];
+  images?: { url: string; why?: string }[];
+  scorecard?: { total?: number; items?: Record<string, number> };
+  reader_pass?: string;
   factcheck_flags?: string[];
   notes?: string;
   model?: string;
