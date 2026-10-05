@@ -103,13 +103,13 @@ const TOOLS = [
   {
     name: "claim_request",
     description:
-      "Take the next job an admin queued from the editor (types: draft = write a new post from brief; revise = revise post_id per brief.notes; scout = propose topics). Returns {request:null} when nothing is waiting. Always finish a claimed job with complete_request.",
+      "Take the next queued job (from the admin or from chat; types: draft = write a new post from brief/topic; revise = revise post_id per brief.notes; scout = propose topics). Returns {request, post, topic, requested_by}, or {request:null} when nothing is waiting. Always finish a claimed job with complete_request.",
     inputSchema: { type: "object", properties: {} },
   },
   {
     name: "complete_request",
     description:
-      "Finish a claimed job. status done|failed. result: {post_id (draft/revise), message (1-2 sentences for the admin, English), topics:[{title,why_now,angle,keyword,sources:[url],score}] (scout)}.",
+      "Finish a claimed job. status done|failed. result: {post_id (draft/revise), message (1-2 sentences for the admin, English)}. For scout, save topics with save_topics first.",
     inputSchema: {
       type: "object",
       properties: {
@@ -118,6 +118,56 @@ const TOOLS = [
         result: { type: "object" },
       },
       required: ["id", "status"],
+    },
+  },
+  {
+    name: "queue_request",
+    description:
+      "Queue a background job when someone asks in chat. type: draft (write a post: topic_seq for a saved idea \"#12\" and/or brief.idea), revise (post_id + brief.notes; drafts only), scout (find new topics). brief: {idea, keyword, audience, notes}. requested_by_label: the requester's name. Returns jobs_ahead. The queue poll runs it within ~2 minutes; you report the result when it finishes. Use this instead of doing long work inside the chat.",
+    inputSchema: {
+      type: "object",
+      properties: {
+        type: { type: "string", enum: ["draft", "revise", "scout"] },
+        topic_seq: { type: "integer", description: "Topic idea number (#12 -> 12)." },
+        post_id: { type: "string" },
+        brief: {
+          type: "object",
+          properties: {
+            idea: { type: "string" },
+            keyword: { type: "string" },
+            audience: { type: "string" },
+            notes: { type: "string" },
+          },
+        },
+        requested_by_label: { type: "string" },
+      },
+      required: ["type"],
+    },
+  },
+  {
+    name: "list_requests",
+    description: "The 20 most recent agent jobs (queued/running/done/failed/cancelled) with brief, via and result. For /status.",
+    inputSchema: { type: "object", properties: {} },
+  },
+  {
+    name: "save_topics",
+    description:
+      "Save a topic shortlist so it shows in the admin and can be picked by number. topics: [{title, why_now, angle, keyword, audience, data_line, sources:[https urls], score (0-20)}] in the order you will present them; request_id when running a scout job. Returns [{seq, title}] — number topics in your message as #seq.",
+    inputSchema: {
+      type: "object",
+      properties: {
+        topics: { type: "array", items: { type: "object" } },
+        request_id: { type: "string" },
+      },
+      required: ["topics"],
+    },
+  },
+  {
+    name: "list_topics",
+    description: "List saved topic ideas. status: new (default) | queued | drafted | dismissed | all. Use to resolve \"#12\" or to show open ideas.",
+    inputSchema: {
+      type: "object",
+      properties: { status: { type: "string" }, limit: { type: "integer", minimum: 1, maximum: 100 } },
     },
   },
 ];
@@ -181,6 +231,17 @@ async function callTool(name, args = {}) {
       return api("POST", "/api/agent/requests/claim", {});
     case "complete_request":
       return api("PATCH", `/api/agent/requests/${enc(args.id)}`, { status: args.status, result: args.result || {} });
+    case "queue_request":
+      return api("POST", "/api/agent/requests", args);
+    case "list_requests":
+      return api("GET", "/api/agent/requests");
+    case "save_topics":
+      return api("POST", "/api/agent/topics", args);
+    case "list_topics": {
+      const qs = new URLSearchParams();
+      for (const k of ["status", "limit"]) if (args[k] !== undefined) qs.set(k, String(args[k]));
+      return api("GET", `/api/agent/topics?${qs}`);
+    }
     default:
       throw new Error(`unknown tool: ${name}`);
   }
@@ -200,7 +261,7 @@ async function handle(msg) {
         result = {
           protocolVersion: params?.protocolVersion || PROTOCOL,
           capabilities: { tools: { listChanged: false } },
-          serverInfo: { name: "tbrain-cms", version: "1.0.0" },
+          serverInfo: { name: "tbrain-cms", version: "1.1.0" },
           instructions:
             "Blog CMS for tbrain.ai. Drafts only: you cannot publish. After create_draft + submit_for_review, send the review_url to the human reviewer.",
         };

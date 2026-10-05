@@ -49,7 +49,7 @@ fi
 if ! grep -q "tbrain-admin-queue" <<<"$existing"; then
   # The script gates each tick: empty queue -> {"wakeAgent": false} -> no LLM call.
   hermes cron create "every 2m" \
-    "Admin jobs are waiting in the tbrain.ai editor queue. Process them with the tbrain-admin-request skill." \
+    "Content jobs are waiting in the tbrain.ai queue. Process the next one with the tbrain-admin-request skill." \
     --script poll_queue.py --skill tbrain-admin-request --name tbrain-admin-queue --deliver telegram
 fi
 

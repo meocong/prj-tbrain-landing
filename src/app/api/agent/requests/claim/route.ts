@@ -32,15 +32,26 @@ export async function POST(req: NextRequest) {
     post = p;
   }
 
-  let requester = null;
+  let topic = null;
+  if (request.topic_id) {
+    const { data: t } = await db
+      .from("cms_topic_ideas")
+      .select("seq, title, why_now, angle, keyword, audience, data_line, sources")
+      .eq("id", request.topic_id)
+      .maybeSingle();
+    topic = t;
+  }
+
+  let requester = request.requested_by_label ?? null;
   if (request.requested_by) {
     const { data: u } = await db.from("admin_users").select("full_name, email").eq("id", request.requested_by).maybeSingle();
-    requester = u ? u.full_name || u.email : null;
+    requester = u ? u.full_name || u.email : requester;
   }
 
   return NextResponse.json({
     request,
     post,
+    topic,
     requested_by: requester,
     edit_url: request.post_id ? `${baseUrl()}/admin/content/${request.post_id}` : null,
   });

@@ -29,4 +29,4 @@ except Exception as exc:  # network blip: stay quiet, try next tick
 if pending <= 0:
     print(json.dumps({"wakeAgent": False}))
 else:
-    print(f"{pending} admin job(s) waiting in the tbrain.ai editor queue.")
+    print(f"{pending} content job(s) waiting in the tbrain.ai queue (from the admin or Telegram).")

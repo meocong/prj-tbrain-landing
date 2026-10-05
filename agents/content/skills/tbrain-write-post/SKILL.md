@@ -29,7 +29,7 @@ Research the topic properly before outlining: open at least 4-6 sources, at leas
 - **Outline**: H2s with a one-line point each (5-7 sections), and where internal links and the CTA go.
 - **Key sources** (URLs).
 
-Send the brief to chị Tâm **in Vietnamese** (keep the title and outline headings in English), and ask with clarify: "Duyệt dàn ý" / "Sửa" / "Đổi chủ đề". Wait. If she gives feedback, revise the brief. Skip this gate only if she explicitly says "viết luôn".
+**Outline gate (only when asked).** By default drafting runs as a background job (see the SOUL and `tbrain-admin-request`) and goes straight on to step 2: the brief the requester wrote is the approval. If someone asks in chat to see the outline first ("gửi dàn ý trước"), write the brief in the chat session, send it **in Vietnamese** (title and outline headings in English) and wait for "ok". Then queue the draft with `queue_request`, putting the approved outline in `brief.notes`.
 
 ## 2. Draft
 Write 1,200-2,000 words, in HTML per `references/html-format.md`.
@@ -69,14 +69,15 @@ Fix what you can. Anything unresolved becomes a short `factcheck_flags` entry, e
    - **facebook**: 60-120 words, a little warmer, and a clear reason to click.
    - **x**: at most 250 characters: one sharp insight. No link (it is appended), at most 1 hashtag.
 
-## 7. Report to chị Tâm (Vietnamese)
+## 7. Report (Vietnamese)
 ```
-✍️ Bài mới chờ duyệt: <Title>
+✍️ Bài mới chờ duyệt: <Title>  (yêu cầu bởi <requested_by>)
 • Ý chính: <1 câu>
 • Độ dài: <n> từ · <k> nguồn · Tự chấm: <avg>/5
 • ⚠️ Cần chị kiểm tra: <flags or "không có">
 👉 Xem & duyệt: <review_url>
-(Preview: <preview_url>)
+✏️ Sửa trong editor: <edit_url> · Preview: <preview_url>
+Muốn agent sửa: nhắn "sửa bài <tiêu đề/slug>: <ghi chú>" hoặc bấm "Request changes" ở /admin/content/agent.
 Sau khi duyệt, nút Share LinkedIn/Facebook/X trong trang bài viết đã có sẵn nội dung.
 ```
 Never say the post is published. If she replies with edits, use `tbrain-revise-post`.

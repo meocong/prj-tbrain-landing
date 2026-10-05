@@ -19,6 +19,7 @@ import {
   Globe,
   Layers,
   PanelsTopLeft,
+  Bot,
   type LucideIcon,
 } from "lucide-react";
 
@@ -39,6 +40,7 @@ export const ADMIN_NAV: NavItem[] = [
 
   // Content
   { label: "Posts", href: "/admin/content", icon: FileText, permission: "content.view", section: "Content" },
+  { label: "Content Agent", href: "/admin/content/agent", icon: Bot, permission: "content.view", section: "Content" },
   { label: "Case Studies", href: "/admin/case-studies", icon: Briefcase, permission: "content.view", section: "Content" },
   { label: "About Cards", href: "/admin/about-cards", icon: PanelsTopLeft, permission: "content.view", section: "Content" },
   { label: "Services", href: "/admin/services", icon: Wrench, permission: "content.view", section: "Content" },

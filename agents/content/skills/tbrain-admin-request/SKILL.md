@@ -1,6 +1,6 @@
 ---
 name: tbrain-admin-request
-description: Process jobs an admin queued from the tbrain.ai post editor (write a draft from a brief, revise a post from notes, scout topics). Use when the queue poll reports waiting jobs.
+description: Process queued content jobs (from the tbrain.ai admin or from Telegram) — write a draft from a brief or topic idea, revise a post from notes, scout topics. Use when the queue poll reports waiting jobs.
 version: 1.0.0
 metadata:
   hermes:
@@ -10,16 +10,17 @@ metadata:
 
 # Process admin editor jobs
 
-Admins can hand work to you from the post editor on tbrain.ai. Each job lives in a queue; you claim it, do it, and close it.
+Jobs reach you through one queue: admins queue them from tbrain.ai (the post editor or /admin/content/agent), and you queue them yourself when someone asks in Telegram. `request.via` says which (admin | telegram); `requested_by` is the person's name. You claim a job, do it, close it and report it.
 
-## Loop
-1. Call `mcp_tbrain_cms_claim_request`. If `request` is null, stop: nothing to do. Don't message anyone.
+## Loop (one job per run)
+1. Call `mcp_tbrain_cms_claim_request`. If `request` is null, reply exactly `[SILENT]` and stop.
 2. Do the job by its `type`, following the steps below.
 3. **Always** close it with `mcp_tbrain_cms_complete_request`. Use `status: done` with a `result`, or `status: failed` with a `message` that says why in one sentence.
-4. Claim again, handling at most 3 jobs per run. Then send one short Vietnamese summary to the home channel covering what you did, plus the review links.
+4. Your **final response is the report**: the scheduler delivers it to the Telegram group, so don't call `send_message` for it. Write it in Vietnamese and name who asked (`requested_by`, and "qua Telegram" or "từ admin"). For a draft, use the report from `tbrain-write-post` step 7 with the review, edit and preview links. For a revise, give 1-2 lines on what changed, with the same links. For a scout, send the shortlist message. A failed job gets one line saying why.
+5. Don't claim a second job. The next one starts on the next poll, about 2 minutes later.
 
 ## type = draft (new post from a brief)
-`request.brief` has `idea`, and optionally `keyword` / `notes`. `requested_by` is the admin who asked.
+`request.brief` has `idea`, and optionally `keyword`, `audience` (the reader) and `notes` (must-cover points, sources, samples, tone, length, things to avoid: follow them). If `topic` is set, it is the saved idea being written (`#seq`, title, why_now, angle, keyword, sources): use its sources as the starting research. The brief wins where the two differ.
 - Run `tbrain-write-post` **from step 2 (Draft)**. The admin already wrote the brief, so skip the outline approval gate. Still do the research first (step 1's research, without sending the brief).
 - Do everything else: critic, fact-check, SEO, `create_draft`, `submit_for_review`, social copy.
 - Complete with `result: {post_id, message: "<one-line English summary + any fact-check flags>"}`.
@@ -33,8 +34,9 @@ Admins can hand work to you from the post editor on tbrain.ai. Each job lives in
 
 ## type = scout (topic ideas)
 - Run `tbrain-topic-scout`.
-- Complete with `result: {topics:[{title, why_now, angle, keyword, sources:[urls], score}], message: "<n> topics"}`, using the same order and numbering as the message you send.
+- Save the shortlist with `save_topics` and `request_id` set to this job's id (the skill's step 5).
+- Complete with `result: {message: "<n> topics: #a–#b"}`.
 
 ## Rules
 - You still cannot publish. Everything goes through review.
-- Finish every claimed job within the run. Jobs left running are retried later, up to 3 attempts.
+- Finish the claimed job within the run. Jobs left running are retried after 90 minutes, up to 3 attempts.

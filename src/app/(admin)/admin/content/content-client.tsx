@@ -5,7 +5,7 @@ import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { supabaseAdmin } from "@/lib/admin/supabase-browser";
 import { POST_STATUS_BADGE } from "@/lib/admin/constants";
 import { useHasPermission } from "@/lib/admin/auth-context";
-import { Plus, Search, X, ChevronLeft, ChevronRight, ExternalLink, Tags } from "lucide-react";
+import { Plus, Search, X, ChevronLeft, ChevronRight, ExternalLink, Tags, Bot } from "lucide-react";
 import Link from "next/link";
 import { toast } from "sonner";
 
@@ -81,6 +81,10 @@ export function ContentClient() {
           </p>
         </div>
         <div className="flex items-center gap-2">
+          <Link href="/admin/content/agent" className="btn-ghost text-sm">
+            <Bot className="h-4 w-4" />
+            Content Agent
+          </Link>
           <Link href="/admin/content/tags" className="btn-ghost text-sm">
             <Tags className="h-4 w-4" />
             Tags

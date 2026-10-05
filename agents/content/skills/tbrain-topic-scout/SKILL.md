@@ -34,26 +34,26 @@ Goal: propose blog topics that a robotics or ML lead would actually click on, wh
 
 4. **Score each candidate** from 1 to 5 on four things: timeliness, buyer relevance (would a data buyer care?), Tbrain authority, and search/share potential. Keep the top 3-5.
 
-5. **Save the shortlist to memory** as one entry: `Topic shortlist <YYYY-MM-DD>: 1) … 2) …`, with short titles and their key source URLs. That lets chị Tâm reply "viết số 2" later in chat. **Use exactly the same numbering and order as the message you send.** Finalize the order first, then save, then send. Replace any older shortlist entry rather than piling them up.
+5. **Save the shortlist** with `mcp_tbrain_cms_save_topics`: `topics: [{title, why_now, angle, keyword, audience, data_line, sources:[https urls], score}]` in final order (`data_line` is one of egocentric, game, teleop, mocap, hand pose, exocentric, LLM data). Pass `request_id` when this run is a queued scout job. It returns each topic's number `seq`. **Number the topics in your message with those `#seq` values**, never 1, 2, 3: "viết #12" in chat and the "Write" button in the admin both refer to them. The ideas show up in the admin at /admin/content/agent.
 
 6. **Report in Vietnamese**, using the format below. Keep it scannable. No walls of text.
 
 ```
 📌 Đề xuất blog tuần <dd/mm>
 
-1) <Working title in English>
+#<seq> <Working title in English>
    • Vì sao bây giờ: <1 câu, có nguồn>
    • Góc nhìn Tbrain: <1 câu — cái mình nói được mà báo chí không nói được>
    • Người đọc / từ khoá: <persona> · "<keyword>"
    • Nguồn: <url1>, <url2>
    • Điểm: <tổng>/20
 
-2) …
+#<seq> …
 
-Chị chọn số nào để em viết (hoặc gửi ý tưởng khác nhé). Em sẽ gửi dàn ý trước khi viết bài đầy đủ.
+Chị chọn bài nào thì nhắn "viết #<seq>" (thêm ghi chú nếu muốn), hoặc bấm "Write this" ở https://www.tbrain.ai/admin/content/agent. Em viết ở chế độ nền và gửi link duyệt khi xong.
 ```
 
-**Stop here.** Don't use clarify, and don't start writing in this run: scheduled runs have nobody to answer, and the topic is chị Tâm's call. When she replies later ("viết số 2", or her own idea), look up the shortlist in memory and start `tbrain-write-post` at the brief step.
+**Stop here.** Don't use clarify, and don't start writing in this run: scheduled runs have nobody to answer, and the topic is chị Tâm's call. When she replies later ("viết #12", or her own idea), queue it with `mcp_tbrain_cms_queue_request` as the SOUL describes.
 
 ## Quality bar
 - "Vì sao bây giờ" must rest on a primary source (paper, official announcement, benchmark site). Aggregator or SEO blogs may supplement it but never carry it alone.
