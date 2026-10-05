@@ -78,3 +78,7 @@ mcp_servers:
 cron:
   catch_up_missed: true
   max_parallel_jobs: 1
+
+# Cron pre-run scripts get a sanitized env; poll_queue.py needs these two.
+terminal:
+  env_passthrough: [CONTENT_AGENT_TOKEN, TBRAIN_API_BASE]
