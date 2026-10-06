@@ -6,7 +6,7 @@
     "gallery:scan": "node scripts/gen-gallery-static.mjs",
     "samples:redact": "node scripts/samples/redact-data.mjs",
     "samples:redact:check": "node scripts/samples/redact-data.mjs --check",
-    "prebuild": "node scripts/gen-gallery-static.mjs && node scripts/samples/redact-data.mjs --check",
+    "prebuild": "node scripts/gen-gallery-static.mjs && node scripts/samples/redact-data.mjs --check && node scripts/samples/check-handpose-data.mjs && node scripts/samples/check-handpose-privacy.mjs",
     "predev": "node scripts/gen-gallery-static.mjs",
     "dev": "next dev -p 3001 --turbopack",
     "build": "next build",

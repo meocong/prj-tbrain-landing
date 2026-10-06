@@ -7,6 +7,15 @@ import manifest from "./downloads.json";
  * also what puts the objects in GCS — so the manifest cannot claim an asset the
  * bucket does not have. The exception is `full`, whose object stays null until
  * someone uploads the real delivery file; see the route for how that reads.
+ *
+ * Hand pose has a manifest of its own, `handpose-downloads.json`, written by
+ * `scripts/samples/handpose/stage-handpose-packs.mjs`, and it is merged in below
+ * only where hand pose is published. Two files because the two stagers must not
+ * share one: `stage-packs.mjs` rewrites its manifest wholesale from
+ * `samples.json` on every run and would drop the hand-pose entries, and the
+ * hand-pose stager must never touch the library's. The entries have the same
+ * shape and all three keys (`preview`, `metadata`, `full`), because the vault
+ * page and the record modal dereference each of them unconditionally.
  */
 export interface AssetEntry {
   object: string | null;
@@ -21,25 +30,43 @@ export type AssetKey = "preview" | "metadata" | "full";
 /** Slug that means "the whole library" rather than one sample. */
 export const FULL_SET_SLUG = "_set";
 
+type SampleAssets = Record<string, Record<AssetKey, AssetEntry>>;
+
 const M = manifest as unknown as {
   bucket: string | null;
   generatedAt: string;
   fullSet: (AssetEntry & { count: number }) | null;
-  samples: Record<string, Record<AssetKey, AssetEntry>>;
+  samples: SampleAssets;
 };
+
+/* The condition is written out against `process.env` instead of imported from
+   `flags.ts`, on purpose. Next replaces the env value in the module that reads
+   it, and the bundler then drops the dead branch before it resolves the
+   `require`; an imported constant is only known once the module graph is built,
+   so the JSON would be bundled either way. This module is imported by a client
+   component (`AccessActions`), so that would put the hand-pose object names in
+   production's JavaScript. Keep the literal in step with `HAND_POSE_ON`. */
+const HAND_POSE_ASSETS: SampleAssets =
+  process.env.HAND_POSE_ON === "1"
+    ? // eslint-disable-next-line @typescript-eslint/no-require-imports
+      (require("./handpose-downloads.json") as { samples: SampleAssets }).samples
+    : {};
+
+/** The library's entries, then hand pose's where it is published. */
+const SAMPLES: SampleAssets = { ...M.samples, ...HAND_POSE_ASSETS };
 
 export function assetFor(slug: string, asset: string): AssetEntry | null {
   if (slug === FULL_SET_SLUG) {
     return asset === "set" ? M.fullSet : null;
   }
-  const entry = M.samples[slug];
+  const entry = SAMPLES[slug];
   if (!entry) return null;
   if (asset !== "preview" && asset !== "metadata" && asset !== "full") return null;
   return entry[asset];
 }
 
 export function assetsFor(slug: string): Record<AssetKey, AssetEntry> | null {
-  return M.samples[slug] ?? null;
+  return SAMPLES[slug] ?? null;
 }
 
 export const fullSet = M.fullSet;

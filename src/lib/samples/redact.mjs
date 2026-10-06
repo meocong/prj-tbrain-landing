@@ -70,6 +70,43 @@ export const DROPPED_LABELS = [
      200 Hz — without naming the hardware. */
   "Device",
   "Kit",
+
+  /* Defence in depth, for the hand-pose set and for whatever is ingested next.
+     Nothing in `samples.json` or `handpose-records.json` carries these labels
+     today, and the filter matches whole labels, so listing them costs nothing.
+     They are the columns the capture pipeline's own metadata and summary sheet
+     are made of, and the first time a builder copies a row across without
+     reading it, this is the list that stops the row reaching a page.
+
+     The same rule as above: anything that can locate who, or where, is cut.
+     Place (city, commune, province, address, the business and its name),
+     person (operator id and name, age and its band, gender, handedness) and
+     the identifiers that join a record back to its capture (reference id, the
+     three-level environment taxonomy, the rig's firmware revision).
+
+     `Operator` is NOT here, on purpose. It is the one label above that is
+     redacted rather than dropped (`REDACTORS`): 114 records carry an `Operator`
+     row of the form `op-<id> / <trade>, <age band>, <hand>`, the id is stripped
+     and the trade is kept, and the category pages read those rows ("Operator
+     jobs"). Dropping the label would empty that figure site-wide and fail
+     `redact-data.mjs --check`, which runs in `prebuild`, on a 114-record diff.
+     The hand-pose records emit no `Operator` row at all. */
+  "City",
+  "Commune",
+  "Province",
+  "Address",
+  "Business name",
+  "Operator id",
+  "Operator name",
+  "Age",
+  "Age range",
+  "Gender",
+  "Handedness",
+  "Environment L1",
+  "Environment L2",
+  "Environment L3",
+  "Reference id",
+  "Firmware",
 ];
 
 /**

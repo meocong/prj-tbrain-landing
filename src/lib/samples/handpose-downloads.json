@@ -1,0 +1,47 @@
+{
+  "_note": "Downloads for the hand-pose samples whose sample pack is released under a passcode. Written by scripts/samples/handpose/stage-handpose-packs.mjs --upload, which also puts the objects in GCS, so an entry here is an object that exists. Merged into the download manifest only where hand pose is published (src/lib/samples/downloads.ts). Every entry has all three keys: preview (the pack zip), metadata (the sample metadata JSON) and full (delivered by signed link after the licence is agreed, so its object stays null).",
+  "samples": {
+    "hand-pose-13": {
+      "preview": {
+        "object": "samples/hand-pose/packs/hand-pose-13-pack.zip",
+        "bytes": 3005687,
+        "filename": "hand-pose-13-pack.zip",
+        "contentType": "application/zip"
+      },
+      "metadata": {
+        "object": "samples/hand-pose/metadata/hand-pose-13.metadata.json",
+        "bytes": 1913,
+        "filename": "hand-pose-13.metadata.json",
+        "contentType": "application/json"
+      },
+      "full": {
+        "object": null,
+        "bytes": null,
+        "filename": "hand-pose-13-full-delivery",
+        "contentType": "application/octet-stream",
+        "note": "Full delivery by signed link after the licence is agreed"
+      }
+    },
+    "hand-pose-14": {
+      "preview": {
+        "object": "samples/hand-pose/packs/hand-pose-14-pack.zip",
+        "bytes": 1689996,
+        "filename": "hand-pose-14-pack.zip",
+        "contentType": "application/zip"
+      },
+      "metadata": {
+        "object": "samples/hand-pose/metadata/hand-pose-14.metadata.json",
+        "bytes": 1916,
+        "filename": "hand-pose-14.metadata.json",
+        "contentType": "application/json"
+      },
+      "full": {
+        "object": null,
+        "bytes": null,
+        "filename": "hand-pose-14-full-delivery",
+        "contentType": "application/octet-stream",
+        "note": "Full delivery by signed link after the licence is agreed"
+      }
+    }
+  }
+}

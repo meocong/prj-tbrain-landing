@@ -22,7 +22,15 @@ export type SampleEvent =
   /** A signed download was started, by slug and asset. */
   | "download_asset"
   /** The whole-library archive, from the vault page. */
-  | "download_full_set";
+  | "download_full_set"
+  /* /samples/hand-pose. Separate names rather than params on the generic
+     ones, so the funnel for the new category reads on its own in GA. */
+  | "handpose_sample_open"
+  | "handpose_lane_seek"
+  | "handpose_table_sort"
+  | "handpose_csv"
+  | "handpose_pack_download"
+  | "handpose_request_click";
 
 export function track(event: SampleEvent, params: Record<string, unknown> = {}) {
   if (typeof window === "undefined") return;

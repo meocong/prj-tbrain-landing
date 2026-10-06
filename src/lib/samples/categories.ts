@@ -1,6 +1,7 @@
 import samples from "./samples.json";
 import teleopSet from "./teleop-set.json";
 import { CAPABILITY, IN_FLIGHT, type CapabilityTier } from "./capability";
+import { HAND_POSE_ON } from "./flags";
 
 const TELEOP = teleopSet as {
   task: string;
@@ -132,9 +133,76 @@ export interface Category {
    * underneath and labelled as what it is.
    */
   shelfFigures?: { hours: string; episodes: string; reach?: string; depth?: string };
+
+  /**
+   * A short tag printed beside the name in the Samples menu and on the
+   * chooser card — "New" for a category a returning reader has not met.
+   * Remove it once the category has been live for a release or two; a tag
+   * that never goes away stops meaning anything.
+   */
+  badge?: string;
+
+  /**
+   * Span the chooser's two columns. The robotics band is a 2x2; a fifth card
+   * alone in the left column reads as a leftover rather than as a category.
+   */
+  wide?: boolean;
+
+  /**
+   * The chooser face's files, where the sample-keyed poster and clip do not
+   * suit the band. A wide card is about 16:5, and a 4:3 sample poster cropped
+   * to that keeps only a strip of it; a render composed for a wide frame, with
+   * a focal point, keeps the subject.
+   */
+  faceMedia?: { poster: string; clip: string; position?: string };
 }
 
-export const CATEGORIES: Category[] = [
+/**
+ * Hand pose, written as its own list so the condition below can be inline.
+ * `process.env.HAND_POSE_ON` is replaced by a literal at build time; compared
+ * inline, a production build folds the condition to `false` and the minifier
+ * drops the entry, so none of its copy ships to tbrain.ai. Read through
+ * `flags.ts` it would still be gated, but the strings would ride along.
+ */
+const HAND_POSE_ENTRY: Category[] =
+  process.env.HAND_POSE_ON === "1"
+    ? [
+        {
+          /* A derived annotation product, not a camera configuration, so it is
+             its own category rather than a sixth egocentric tier: the joints
+             are triangulated from the stereo pair of the same six-camera head
+             rig the egocentric records come from. Placed after Mocap, the other
+             hand-pose claim on the site, so a reader comparing the two finds
+             them together. Its records live in `handpose-records.json`, not
+             `samples.json`. */
+          slug: "hand-pose",
+          line: "robotics",
+          name: "Hand pose",
+          modality: "handpose",
+          whatItIs:
+            "3D joints for both hands on every frame, from the stereo pair of a head-worn rig. Each frame is labelled measured, guessed, bridged or no 3D pose.",
+          forWhat:
+            "Hand tracking and dexterous manipulation from the wearer's view: 21 joints per hand, in metres, with how each pose was obtained stated per frame.",
+          shelf: null,
+          badge: "New",
+          wide: true,
+          /* The face and the header reel are skeleton renders of sample 13,
+             one of the two samples whose operator consented to a public
+             preview. Never a camera frame: the public layer of this category
+             has no footage. */
+          face: "hand-pose-13",
+          // The hero render: composed 16:9 with both hands in the right half.
+          faceMedia: {
+            poster: "/samples/hand-pose/hero-13.jpg",
+            clip: "/samples/hand-pose/hero-13.mp4",
+            position: "85% 48%",
+          },
+          reel: [{ slug: "hand-pose-13", title: "Fabric arranging · skeleton render" }],
+        },
+      ]
+    : [];
+
+const ALL_CATEGORIES: Category[] = [
   {
     slug: "egocentric",
     line: "robotics",
@@ -328,6 +396,7 @@ export const CATEGORIES: Category[] = [
       { label: "Ships as", value: "video .mp4 + full-body IMU streams + hand pose · FBX / BVH / SMPL" },
     ],
   },
+  ...HAND_POSE_ENTRY,
   {
     slug: "gaming",
     line: "gaming",
@@ -359,6 +428,18 @@ export const CATEGORIES: Category[] = [
     held: { figure: "Pass / fail", unit: "deterministic verification · no judge" },
   },
 ];
+
+/**
+ * The categories this build publishes. Hand pose is on staging for review and
+ * off on production (HAND_POSE_ON, decided in `next.config.ts`), and filtering
+ * it here is what gates every surface that lists categories: the Samples menu,
+ * the chooser, the front-door sums, static params, `categoryBySlug` and so the
+ * route itself, the sitemap, and every inbound link that checks
+ * `categoryBySlug("hand-pose")` before it renders.
+ */
+export const CATEGORIES: Category[] = ALL_CATEGORIES.filter(
+  (c) => c.slug !== "hand-pose" || HAND_POSE_ON,
+);
 
 type Row = {
   slug: string;

@@ -90,8 +90,11 @@ export interface Sample {
    * and `provenance` below, which split it — and new code should read those.
    */
   domain: "robotics" | "game" | "ots";
-  /** What the record is. Three of the five values hold nothing yet. */
-  modality: "egocentric" | "exocentric" | "teleoperation" | "mocap" | "gaming";
+  /**
+   * What the record is. `handpose` records live in `handpose-records.json`,
+   * not `samples.json` — see `scripts/samples/handpose/build-handpose-records.mjs`.
+   */
+  modality: "egocentric" | "exocentric" | "teleoperation" | "mocap" | "gaming" | "handpose";
   /**
    * How it was captured. Joins to `CapabilityTier["key"]`, which is what lets
    * the facet rail count a configuration and the capability panel answer for
@@ -106,7 +109,7 @@ export interface Sample {
    * are declared because the rail offers them as chips and the union is what
    * stops a chip key and a record value from drifting apart.
    */
-  tier: "stereo" | "stereo6" | "mono" | "rgbd" | "wrist" | "umi" | "exo" | "gameplay";
+  tier: "stereo" | "stereo6" | "mono" | "rgbd" | "wrist" | "umi" | "exo" | "gameplay" | "pair";
   /**
    * Further configurations the same capture serves — see `lib/samples/tiers`.
    * The approved stereo captures carry `["stereo6"]`: they were shot on a
