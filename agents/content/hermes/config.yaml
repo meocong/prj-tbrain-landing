@@ -19,7 +19,8 @@ credential_pool_strategies:
 # Side tasks (page extraction summaries, compression, titles) stay on GLM too.
 # Without this Hermes defaults to OpenRouter/Gemini, which we don't have a key for.
 auxiliary:
-  vision:           { provider: zai, model: glm-5.1 }
+  # GLM-5.1 is text-only; annotated figures need a vision model to place call-outs.
+  vision:           { provider: zai, model: glm-4.6v }
   web_extract:      { provider: zai, model: glm-4.6 }
   compression:      { provider: zai, model: glm-4.6 }
   title_generation: { provider: zai, model: glm-4.6 }

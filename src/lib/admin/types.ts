@@ -121,7 +121,9 @@ export interface CmsAgentMeta {
   images?: {
     url: string;
     why?: string;
-    kind?: "source_figure" | "chart" | "library";
+    kind?: "source_figure" | "annotated_figure" | "chart" | "video" | "library";
+    /** Chart form when kind is chart: bar, line, matrix, stat, … */
+    form?: string;
     credit?: string;
     license?: string;
     source_url?: string;

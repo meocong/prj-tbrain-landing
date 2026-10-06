@@ -27,9 +27,10 @@ Goal: propose blog topics that a robotics or ML lead would actually click on, wh
    Read `tbrain-knowledge.md` §12 (`skill_view tbrain-write-post references/tbrain-knowledge.md`) for priorities: about 80% robotics data, rotate across the data lines, favour lines with no post yet. Use `robotics-data-trends.md` (this skill's references) for the landscape and open questions.
    Drop pure news recaps, funding news, hype, and anything requiring claims about named customers.
 
-4. **Give each candidate a post type and funnel stage** from `post-types.md` (`skill_view tbrain-write-post references/post-types.md`): `deep_dive` (one source worth taking apart), `synthesis` (several sources, one question), `trend_pov` (where it's heading, with a prediction), `field_story`, `buyer_guide`, `proof` or `news_hook`; funnel `top` (awareness), `middle` (evaluating approaches) or `bottom` (choosing a vendor/spec). Check `mcp_tbrain_cms_search_knowledge` (kind story/fact): an approved story that hasn't been used yet is a strong `field_story`.
+4. **Give each candidate a post type and funnel stage** from `post-types.md` (`skill_view tbrain-write-post references/post-types.md`): `deep_dive` (one source worth taking apart), `synthesis` (several sources, one question), `by_the_numbers` (a question public data on the Hugging Face Hub or arXiv can answer: try a quick `mcp_tbrain_cms_hf_hub_query` to see the numbers are there), `trend_pov` (where it's heading, with a prediction), `field_story`, `buyer_guide`, `proof` or `news_hook`; funnel `top` (awareness), `middle` (evaluating approaches) or `bottom` (choosing a vendor/spec). Check `mcp_tbrain_cms_search_knowledge` (kind story/fact): an approved story that hasn't been used yet is a strong `field_story`.
    Keep the shortlist mixed: at least two source-driven topics (`deep_dive` / `synthesis`), at most one `news_hook`, and at most one topic centred on our own work. Check `list_posts`: don't propose the type and data line of the last two posts again.
-   For each topic note the 2-4 primary sources it would be built from and, for papers, whether their figures are reusable (`mcp_tbrain_cms_source_license`).
+   Each week include at least one `by_the_numbers` topic or a `deep_dive` with an official demo video or a reusable (CC BY) figure.
+   For each topic note the **wow asset** (the visual or number that will make people forward it: a demo video, a licensed figure, a count nobody has done) and the 2-4 primary sources it would be built from and, for papers, whether their figures are reusable (`mcp_tbrain_cms_source_license`).
    **Score** each from 1 to 5 on timeliness, reader value, depth available in the sources, and search/share potential. Keep the top 3-5.
 
 5. **Save the shortlist** with `mcp_tbrain_cms_save_topics`: `topics: [{title, why_now, angle, keyword, audience, data_line, post_type, funnel, sources:[https urls], score}]` in final order (`data_line` is one of egocentric, game, teleop, mocap, hand pose, exocentric, LLM data). Pass `request_id` when this run is a queued scout job. It returns each topic's number `seq`. **Number the topics in your message with those `#seq` values**, never 1, 2, 3: "viết #12" in chat and the "Write" button in the admin both refer to them. The ideas show up in the admin at /admin/content/agent.
@@ -40,9 +41,10 @@ Goal: propose blog topics that a robotics or ML lead would actually click on, wh
 📌 Đề xuất blog tuần <dd/mm>
 
 #<seq> <Working title in English>
-   • Kiểu bài: <Deep dive / Tổng hợp / Xu hướng / Field story / Buyer guide / Proof / News>
+   • Kiểu bài: <Deep dive / Tổng hợp / Số liệu tự phân tích / Xu hướng / Field story / Buyer guide / Proof / News>
    • Vì sao bây giờ: <1 câu, có nguồn>
    • Góc nhìn riêng: <so sánh/biểu đồ/hạn chế mà các nguồn chưa nói, hoặc câu chuyện của team>
+   • Điểm wow: <video demo / figure CC BY / con số tự đếm …>
    • Người đọc / từ khoá: <persona> · "<keyword>"
    • Nguồn: <url1>, <url2>
    • Điểm: <tổng>/20

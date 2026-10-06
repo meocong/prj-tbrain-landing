@@ -11,6 +11,7 @@ The site sanitizes the body and strips anything outside this list. Write clean, 
 - Tables: `<table><thead><tr><th>…</th></tr></thead><tbody><tr><td>…</td></tr></tbody></table>` for comparisons or decision tables.
 - Code: `<pre><code class="language-python">…</code></pre>`, or inline `<code>`.
 - Images: `<img src="…" alt="specific description">` followed by a caption paragraph `<p><em>What the reader should notice. Figure: Khazatsky et al., 2024 (DROID), CC BY 4.0.</em></p>`. Sources: URLs returned by `upload_image` (licensed source figures), `render_chart` (our charts) or `list_images` (library). Third-party figures always carry the credit; charts built from someone's numbers end with "Data: …" when the chart's own source line isn't enough. (No `<figure>`: the admin editor drops figcaptions.)
+- Video: `<iframe src="https://www.youtube.com/watch?v=VIDEO_ID&t=42" title="what it shows"></iframe>` on its own line, then a caption paragraph `<p><em>Watch … at 0:42. Video: <lab>, <project>.</em></p>`. YouTube only (converted to youtube-nocookie); other iframes are removed.
 - Not allowed (removed): scripts, iframes, embeds, inline `style`, classes (except `language-*` on code), forms.
 
 ## Structure

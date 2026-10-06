@@ -1,6 +1,11 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  // Native PNG rasterizer for agent charts; fonts are read from disk at runtime.
+  serverExternalPackages: ["@resvg/resvg-js"],
+  outputFileTracingIncludes: {
+    "/api/agent/charts": ["./src/assets/fonts/*.ttf"],
+  },
   images: {
     remotePatterns: [
       {

@@ -45,7 +45,7 @@ const TOOLS = [
   {
     name: "list_posts",
     description:
-      "List blog posts (no bodies). Use before proposing topics to avoid repeats and to find internal links. status: published (default) | draft | all.",
+      "List blog posts (no bodies), each with post_type and visuals (kinds/forms used). Use before proposing topics or writing, to avoid repeats and to rotate types and visual forms, and to find internal links. status: published (default) | draft | all (newest edits first).",
     inputSchema: {
       type: "object",
       properties: {
@@ -75,7 +75,15 @@ const TOOLS = [
     description: `Upload a local PNG/JPEG/WebP/GIF (<=8MB) from under ${UPLOAD_ROOT} and get a permanent URL for cover_image_url or <img src>.`,
     inputSchema: {
       type: "object",
-      properties: { path: { type: "string", description: "Absolute file path." }, filename: { type: "string" } },
+      properties: {
+        path: { type: "string", description: "Absolute file path." },
+        filename: { type: "string" },
+        crop: {
+          type: "object",
+          description: "Optional crop as fractions of the image: {x, y, w, h} (0-1). Use it to keep only the panel you discuss; figures list their panels left-to-right / top-to-bottom.",
+          properties: { x: { type: "number" }, y: { type: "number" }, w: { type: "number" }, h: { type: "number" } },
+        },
+      },
       required: ["path"],
     },
   },
@@ -87,7 +95,7 @@ const TOOLS = [
   },
   {
     name: "fetch_source_image",
-    description: `Download a figure/image from an https URL (<=8MB, PNG/JPEG/WebP/GIF) into ${UPLOAD_ROOT}/figures/ for cropping and upload_image. Only for sources whose licence allows reuse (source_license, a CC/Apache/MIT notice on the page, or a press kit). Returns {path, bytes, type}.`,
+    description: `Download a figure/image from an https URL (<=8MB, PNG/JPEG/WebP/GIF) into ${UPLOAD_ROOT}/figures/; then upload_image it (with crop to the panel you discuss). Only for sources whose licence allows reuse (source_license, a CC/Apache/MIT notice on the page, or a press kit). Returns {path, bytes, type}.`,
     inputSchema: {
       type: "object",
       properties: { url: { type: "string" }, filename: { type: "string", description: "Short name, e.g. 'egodex-fig2'." } },
@@ -97,17 +105,50 @@ const TOOLS = [
   {
     name: "render_chart",
     description:
-      "Draw an original chart or diagram in the Tbrain style and get a permanent SVG URL for <img src>. spec.type: " +
+      "Draw an original visual in the Tbrain style. Returns {url (SVG for inline <img>), png_url (for cover_image_url / social)}. spec.type: " +
       "bar {data:[{label,value,highlight?}] 2-12, unit?, sort?} · " +
       "line {x_labels:[..] 2-24, series:[{name, values:[number|null]}] 1-4, unit?, y_min?} · " +
+      "scatter {x_label, y_label, x_unit?, y_unit?, log_x?, points:[{label,x,y,highlight?}] 2-12} · " +
+      "share {categories:[..] 2-5, rows:[{label, values:[..]}] 1-6} (100% split, e.g. a data mix) · " +
+      "stat {stats:[{value:'829 h', label, highlight?}] 1-4} (hero numbers) · " +
+      "matrix {columns:[..] 2-6, rows:[{label, cells:['yes'|'no'|'partial'|short text], highlight?}] 2-10} (who has what) · " +
       "timeline {events:[{date,label,highlight?}] 2-8} · " +
       "flow {steps:[{label, note?, highlight?}] 2-6} · " +
-      "quadrant {x_axis:{low,high}, y_axis:{low,high}, quadrant_labels?:[tl,tr,bl,br], items:[{label,x:0-1,y:0-1,highlight?}] 1-10}. " +
-      "Every spec: title (the claim the chart proves, <=90 chars), subtitle? (what is measured, units), source? ('EgoDex, Hoque et al. 2025'). Highlight the one item the paragraph is about; the rest go grey.",
+      "quadrant {x_axis:{low,high}, y_axis:{low,high}, quadrant_labels?:[tl,tr,bl,br], items:[{label,x:0-1,y:0-1,highlight?}] 1-10} · " +
+      "cover {title, eyebrow? ('Deep dive · Teleop'), subtitle?, stat?:{value,label}} (1200x630 PNG cover card) · " +
+      "annotate {image_url (a /api/asset/cms/… PNG/JPEG you uploaded), source (credit + licence), title?, markers:[{kind: dot|box|arrow, x, y (0-1 of the image), w?, h? (box), label}] 1-6} (numbered call-outs on a licensed figure; only when you have verified positions with the vision tool). " +
+      "Charts: title = the claim the chart proves (<=90 chars), subtitle? = what is measured, source = where the numbers come from. Highlight the one item the paragraph is about.",
     inputSchema: {
       type: "object",
       properties: { spec: { type: "object" }, filename: { type: "string" } },
       required: ["spec"],
+    },
+  },
+  {
+    name: "hf_hub_query",
+    description:
+      "Original analysis on the public Hugging Face Hub (for by_the_numbers posts). Lists datasets matching {search?, filter? (a tag such as 'LeRobot' or 'task_categories:robotics'), author?, sort: downloads|likes|createdAt|lastModified, limit<=1000} and returns {query, accessed_at, n, top:[…30], aggregates:{license, author, created_month, …}}. With lerobot_info:true it also reads meta/info.json of the top <=80 (by sort) LeRobot datasets and adds robot_type, fps, episodes, frames, hours, cameras per dataset plus their totals, medians and distributions. Cite the query and access date in the post.",
+    inputSchema: {
+      type: "object",
+      properties: {
+        search: { type: "string" },
+        filter: { type: "string" },
+        author: { type: "string" },
+        sort: { type: "string", enum: ["downloads", "likes", "createdAt", "lastModified"] },
+        limit: { type: "number" },
+        lerobot_info: { type: "boolean" },
+        info_limit: { type: "number", description: "How many datasets to read meta/info.json for (<=80, default 40)." },
+      },
+    },
+  },
+  {
+    name: "arxiv_count",
+    description:
+      "Count arXiv papers per year for a search (arXiv API syntax, e.g. 'abs:\"egocentric\" AND abs:\"manipulation\" AND cat:cs.RO'). {query, from_year, to_year (<=8 years)} -> {counts:{year:n}, query, accessed_at}. Slow on purpose (arXiv asks for 3s between calls).",
+    inputSchema: {
+      type: "object",
+      properties: { query: { type: "string" }, from_year: { type: "number" }, to_year: { type: "number" } },
+      required: ["query", "from_year", "to_year"],
     },
   },
   {
@@ -169,7 +210,7 @@ const TOOLS = [
             audience: { type: "string" },
             notes: { type: "string" },
             experience: { type: "string" },
-            post_type: { type: "string", enum: ["news_hook", "field_story", "trend_pov", "buyer_guide", "proof", "deep_dive", "synthesis"] },
+            post_type: { type: "string", enum: ["news_hook", "field_story", "trend_pov", "buyer_guide", "proof", "deep_dive", "synthesis", "by_the_numbers"] },
             skip_outline: { type: "boolean" },
           },
         },
@@ -349,6 +390,141 @@ async function arxivFigures(id) {
   return out;
 }
 
+async function getJson(url, max = 20 * 1024 * 1024) {
+  const res = await fetchHttps(url, { headers: { "User-Agent": "TbrainContentAgent/1.0 (+https://www.tbrain.ai)" }, signal: AbortSignal.timeout(30_000) });
+  if (!res.ok) throw new Error(`${res.status} from ${new URL(url).host}`);
+  return JSON.parse((await readCapped(res, max)).toString("utf8"));
+}
+
+function countBy(items, key) {
+  const out = {};
+  for (const it of items) {
+    const k = key(it);
+    if (k === undefined || k === null || k === "") continue;
+    out[k] = (out[k] || 0) + 1;
+  }
+  return Object.fromEntries(Object.entries(out).sort((a, b) => b[1] - a[1]).slice(0, 25));
+}
+
+const median = (xs) => {
+  const v = xs.filter((x) => Number.isFinite(x)).sort((a, b) => a - b);
+  if (!v.length) return null;
+  const m = Math.floor(v.length / 2);
+  return v.length % 2 ? v[m] : (v[m - 1] + v[m]) / 2;
+};
+
+async function hfHubQuery(args) {
+  const qs = new URLSearchParams();
+  if (args.search) qs.set("search", String(args.search).slice(0, 100));
+  if (args.filter) qs.set("filter", String(args.filter).slice(0, 100));
+  if (args.author) qs.set("author", String(args.author).slice(0, 100));
+  qs.set("sort", ["downloads", "likes", "createdAt", "lastModified"].includes(args.sort) ? args.sort : "downloads");
+  qs.set("direction", "-1");
+  qs.set("limit", String(Math.min(1000, Math.max(1, Number(args.limit) || 200))));
+  qs.set("full", "true");
+  const url = `https://huggingface.co/api/datasets?${qs}`;
+  const raw = await getJson(url);
+  const items = raw.map((d) => ({
+    id: d.id,
+    author: d.author,
+    downloads: d.downloads,
+    likes: d.likes,
+    created: d.createdAt,
+    license: (d.tags || []).find((t) => t.startsWith("license:"))?.slice(8) || d.cardData?.license || null,
+    size: (d.tags || []).find((t) => t.startsWith("size_categories:"))?.slice(16) || null,
+    gated: Boolean(d.gated),
+  }));
+  const out = {
+    query: url,
+    accessed_at: new Date().toISOString(),
+    n: items.length,
+    total_downloads: items.reduce((a, b) => a + (b.downloads || 0), 0),
+    top: items.slice(0, 30),
+    aggregates: {
+      license: countBy(items, (i) => i.license || "none"),
+      author: countBy(items, (i) => i.author),
+      created_month: Object.fromEntries(Object.entries(countBy(items, (i) => (i.created || "").slice(0, 7))).sort()),
+      size: countBy(items, (i) => i.size),
+      gated: countBy(items, (i) => (i.gated ? "gated" : "open")),
+    },
+  };
+  if (args.lerobot_info) {
+    const take = items.slice(0, Math.min(80, Math.max(1, Number(args.info_limit) || 40)));
+    const infos = [];
+    for (let i = 0; i < take.length; i += 6) {
+      const batch = await Promise.all(
+        take.slice(i, i + 6).map(async (d) => {
+          try {
+            const info = await getJson(`https://huggingface.co/datasets/${d.id}/resolve/main/meta/info.json`, 2 * 1024 * 1024);
+            const feats = info.features || {};
+            const cameras = Object.entries(feats).filter(([, f]) => f && (f.dtype === "video" || f.dtype === "image")).length;
+            const hours = info.total_frames && info.fps ? info.total_frames / info.fps / 3600 : null;
+            return {
+              id: d.id,
+              robot_type: info.robot_type || null,
+              fps: info.fps || null,
+              episodes: info.total_episodes ?? null,
+              frames: info.total_frames ?? null,
+              hours: hours === null ? null : Math.round(hours * 10) / 10,
+              tasks: info.total_tasks ?? null,
+              cameras,
+              codebase_version: info.codebase_version || null,
+            };
+          } catch {
+            return { id: d.id, error: "no meta/info.json" };
+          }
+        }),
+      );
+      infos.push(...batch);
+    }
+    const ok = infos.filter((x) => !x.error);
+    out.lerobot = {
+      read: infos.length,
+      with_info: ok.length,
+      datasets: infos,
+      totals: {
+        episodes: ok.reduce((a, b) => a + (b.episodes || 0), 0),
+        hours: Math.round(ok.reduce((a, b) => a + (b.hours || 0), 0) * 10) / 10,
+      },
+      medians: {
+        episodes: median(ok.map((x) => x.episodes)),
+        hours: median(ok.map((x) => x.hours)),
+        fps: median(ok.map((x) => x.fps)),
+        cameras: median(ok.map((x) => x.cameras)),
+        episode_seconds: median(ok.map((x) => (x.frames && x.fps && x.episodes ? x.frames / x.fps / x.episodes : NaN))),
+      },
+      distributions: {
+        robot_type: countBy(ok, (x) => x.robot_type || "unknown"),
+        fps: countBy(ok, (x) => x.fps),
+        cameras: countBy(ok, (x) => x.cameras),
+        codebase_version: countBy(ok, (x) => x.codebase_version),
+      },
+    };
+  }
+  return out;
+}
+
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+
+async function arxivCount(args) {
+  const from = Math.floor(Number(args.from_year));
+  const to = Math.floor(Number(args.to_year));
+  if (!from || !to || to < from || to - from > 7) throw new Error("from_year..to_year, at most 8 years");
+  const q = String(args.query || "").slice(0, 300);
+  if (!q) throw new Error("query required");
+  const counts = {};
+  for (let y = from; y <= to; y++) {
+    const sq = `(${q}) AND submittedDate:[${y}01010000 TO ${y}12312359]`;
+    const url = `https://export.arxiv.org/api/query?search_query=${encodeURIComponent(sq)}&max_results=1`;
+    const res = await fetchHttps(url, { signal: AbortSignal.timeout(30_000) });
+    const xml = (await readCapped(res, 1024 * 1024)).toString("utf8");
+    const m = xml.match(/<opensearch:totalResults[^>]*>(\d+)</);
+    counts[y] = m ? Number(m[1]) : null;
+    if (y < to) await sleep(3100);
+  }
+  return { query: q, counts, accessed_at: new Date().toISOString(), note: "arXiv search counts by submission year; the current year is partial." };
+}
+
 function sniffImage(buf) {
   if (buf.length < 12) return null;
   if (buf[0] === 0x89 && buf[1] === 0x50 && buf[2] === 0x4e && buf[3] === 0x47) return "png";
@@ -441,12 +617,17 @@ async function callTool(name, args = {}) {
       return api("POST", "/api/agent/assets", {
         filename: String(args.filename || basename(full)),
         data_base64: data.toString("base64"),
+        crop: args.crop,
       });
     }
     case "source_license":
       return sourceLicense(String(args.arxiv || ""));
     case "fetch_source_image":
       return fetchSourceImage(String(args.url || ""), args.filename);
+    case "hf_hub_query":
+      return hfHubQuery(args);
+    case "arxiv_count":
+      return arxivCount(args);
     case "render_chart":
       return api("POST", "/api/agent/charts", { spec: args.spec, filename: args.filename });
     case "submit_for_review":
@@ -512,7 +693,7 @@ async function handle(msg) {
         result = {
           protocolVersion: params?.protocolVersion || PROTOCOL,
           capabilities: { tools: { listChanged: false } },
-          serverInfo: { name: "tbrain-cms", version: "1.3.0" },
+          serverInfo: { name: "tbrain-cms", version: "1.4.0" },
           instructions:
             "Blog CMS for tbrain.ai. Drafts only: you cannot publish. After create_draft + submit_for_review, send the review_url to the human reviewer.",
         };

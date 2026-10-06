@@ -2,7 +2,7 @@
 
 > The example openings below show the **pattern** only. Their facts are illustrative: never reuse them in a post.
 
-Every post is exactly one of these seven types. Pick it in the brief, from the question the reader is asking, and follow its skeleton. A post that tries to be two types reads like neither.
+Every post is exactly one of these eight types. Pick it in the brief, from the question the reader is asking, and follow its skeleton. A post that tries to be two types reads like neither.
 
 Common to all types:
 - **One reader, one problem, one takeaway.** Write each down in one sentence before outlining. If you can't, the topic isn't ready.
@@ -83,7 +83,26 @@ Never write one section per paper. Group by idea.
 
 Reference style: Lilian Weng's surveys, Chip Huyen's long posts, Nathan Lambert's state-of-the-field posts.
 
-## 5. `trend_pov`: where the field is going, and our position
+## 5. `by_the_numbers`: our own analysis of public data
+
+Use when a question can be answered by counting something public, and nobody has counted it: "What's actually on the Hugging Face Hub for robot learning?", "How long is a typical teleop episode?", "Which robots do open datasets use?", "Is egocentric robotics research growing?". This is the strongest information gain we can make without a customer: the numbers exist only because we computed them.
+
+Tools: `mcp_tbrain_cms_hf_hub_query` (datasets by tag/search with licence, author, month aggregates; `lerobot_info:true` adds robot type, fps, episodes, hours and cameras per dataset, with totals and medians) and `mcp_tbrain_cms_arxiv_count` (papers per year for a query). Run 2-4 queries; keep each result's `query` and `accessed_at`.
+
+Skeleton:
+1. **The headline number** in sentence one, then a `stat` card with 3-4 numbers right after the opening.
+2. **3-4 findings, each an H2 claim with its own chart** in different forms (share for licences, bar for robot types, scatter for size vs downloads, line for growth).
+3. **The surprise**: the number that contradicts what people assume.
+4. **What the numbers can't tell you**: sampling limits (top-N by downloads, only datasets with meta/info.json, tags are self-reported), what you'd need to know more.
+5. **What it means for someone buying or building a dataset.**
+6. **How we counted**: a short final section with each query, the date, n, and what was excluded. Readers trust numbers they could reproduce.
+7. CTA.
+
+Rules: never extrapolate beyond the sample ("of the 40 most-downloaded LeRobot datasets", not "most robot datasets"); round honestly; say when a field was missing. Record `agent_meta.analysis: {queries:[…], n, accessed_at, notes}`.
+
+Opening pattern: the number and why it's odd. "The 40 most-downloaded robot-learning datasets on Hugging Face add up to about 7,900 hours. Half of them are shorter than a working week."
+
+## 6. `trend_pov`: where the field is going, and our position
 
 Use when several signals point the same way (papers, releases, funding, buyer questions) and we have a clear, defensible opinion about the next 1-3 years. Take a side and make it checkable: a prediction someone could prove wrong by a date.
 
@@ -101,7 +120,7 @@ CTA: a related deeper post or /contact.
 
 Reference examples: Eric Jang's and Nathan Lambert's essays; Skild, "The Hidden Pillar of Robotics"; Scale, "In an agentic world where automation gets cheap, which work is worth routing to a human?"
 
-## 6. `buyer_guide`: explain a topic so a buyer can decide
+## 7. `buyer_guide`: explain a topic so a buyer can decide
 
 Use for evergreen questions buyers search for and ask us on calls: "what is teleoperation data", "how to evaluate a hand-pose dataset", "LeRobot vs RLDS". This is the search-traffic type. It must still have a point of view.
 
@@ -119,7 +138,7 @@ CTA: "Send us your spec and we'll mark what's missing" → /contact.
 
 Reference examples: Encord, "What Is Teleoperation Data Collection, and Why Do Robots Need It?"; Kognic's guides (Key Takeaways box, comparison table, "Choose X if…").
 
-## 7. `proof`: numbers we're allowed to publish, and what they show
+## 8. `proof`: numbers we're allowed to publish, and what they show
 
 Use only when an approved knowledge item (`kind: fact` or `doc`) gives publishable results (a pilot outcome, an error analysis, a QC study). Never invent or extrapolate numbers. Never use sample-level numbers (editorial rule 13).
 
@@ -135,6 +154,18 @@ Skeleton:
 Reference examples: Surge, "Hill-Climbing a SWE Agent: What 1,700 Coding Tasks Taught Kimi K2.7"; Toloka, "HomER v2".
 
 ---
+
+## Format devices (pick 1-2 per post)
+
+A post is more memorable when it has one structural device on top of its type. Pick one in the brief and plan it in the outline; don't stack more than two.
+- **Myth vs reality**: 3-5 beliefs the reader holds, each answered with evidence. Good for `synthesis` and `buyer_guide`.
+- **Annotated walkthrough**: go through one figure or video step by step ("At 0:12 the gripper…", "Panel b shows…"). Good for `deep_dive`.
+- **"What would change our mind"**: the specific results that would make us drop the position. Good for `trend_pov`.
+- **The decision table**: options as rows, the decision's criteria as columns, a verdict per row. Good for `synthesis`, `buyer_guide`.
+- **Three questions to ask your vendor / your team**, each with what a good and a bad answer sound like.
+- **Back-of-envelope**: one worked calculation with real inputs ("at 15 fps and 14 s per episode, 100 hours is ~25,000 episodes"), shown step by step.
+- **Before / after**: the same task, sample or number under two approaches, side by side.
+- **Glossary box**: 3-5 terms the reader may half-know, defined in one line each, in a blockquote. Only for `buyer_guide` and `deep_dive`.
 
 ## Openings that work
 
@@ -152,4 +183,4 @@ Don't open with: the history of the field, a generic trend sentence, a definitio
 
 ## Topic mix (scout and planning)
 
-Over a month, aim for roughly: 35% source-driven (`deep_dive`, `synthesis`), 20% `trend_pov`, 20% `field_story` / `proof`, 15% `buyer_guide`, 10% `news_hook`. If the knowledge base has an unused approved story, propose a `field_story` for it. Never run two posts in a row of the same type, and never let a week's posts all be about our own capture work.
+Over a month, aim for roughly: 30% source-driven (`deep_dive`, `synthesis`), 15% `by_the_numbers`, 20% `trend_pov`, 15% `field_story` / `proof`, 15% `buyer_guide`, 5% `news_hook`. Never two posts in a row of the same type or the same data line, never the same lead visual form twice in a row (check `list_posts status=all`: each post lists its `post_type` and `visuals`), and never a week where every post is about our own work.

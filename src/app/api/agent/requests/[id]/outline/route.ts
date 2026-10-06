@@ -11,7 +11,7 @@ const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 const baseUrl = () => process.env.PUBLIC_BASE_URL || "https://tbrain.ai";
 
 const outline = z.object({
-  post_type: z.enum(["news_hook", "field_story", "trend_pov", "buyer_guide", "proof", "deep_dive", "synthesis"]),
+  post_type: z.enum(["news_hook", "field_story", "trend_pov", "buyer_guide", "proof", "deep_dive", "synthesis", "by_the_numbers"]),
   title: z.string().trim().min(10).max(160),
   reader: z.string().max(400),
   problem: z.string().max(600),
@@ -28,7 +28,8 @@ const outline = z.object({
       z.object({
         url: z.string().max(300),
         why: z.string().max(400),
-        kind: z.enum(["source_figure", "chart", "library"]).optional(),
+        kind: z.enum(["source_figure", "annotated_figure", "chart", "video", "library", "cover"]).optional(),
+        form: z.string().max(20).optional(),
         credit: z.string().max(200).optional(),
         license: z.string().max(80).optional(),
       }),

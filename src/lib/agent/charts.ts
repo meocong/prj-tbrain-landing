@@ -92,7 +92,85 @@ const quadrantSpec = z.object({
     .max(10),
 });
 
-export const chartSpec = z.discriminatedUnion("type", [barSpec, lineSpec, timelineSpec, flowSpec, quadrantSpec]);
+const statSpec = z.object({
+  type: z.literal("stat"),
+  ...common,
+  stats: z
+    .array(z.object({ value: text(12), label: text(70), highlight: z.boolean().optional() }))
+    .min(1)
+    .max(4),
+});
+
+const cell = z.union([z.enum(["yes", "no", "partial"]), text(16)]);
+const matrixSpec = z.object({
+  type: z.literal("matrix"),
+  ...common,
+  columns: z.array(text(22)).min(2).max(6),
+  rows: z
+    .array(z.object({ label: text(36), cells: z.array(cell).max(6), highlight: z.boolean().optional() }))
+    .min(2)
+    .max(10),
+});
+
+const scatterSpec = z.object({
+  type: z.literal("scatter"),
+  ...common,
+  x_label: text(40),
+  y_label: text(40),
+  x_unit: z.string().trim().max(12).optional(),
+  y_unit: z.string().trim().max(12).optional(),
+  log_x: z.boolean().optional(),
+  points: z
+    .array(z.object({ label: text(28), x: num, y: num, highlight: z.boolean().optional() }))
+    .min(2)
+    .max(12),
+});
+
+const shareSpec = z.object({
+  type: z.literal("share"),
+  ...common,
+  categories: z.array(text(24)).min(2).max(5),
+  rows: z.array(z.object({ label: text(36), values: z.array(num.min(0)).max(5) })).min(1).max(6),
+});
+
+// Social/cover card, 1200x630. PNG only.
+const coverSpec = z.object({
+  type: z.literal("cover"),
+  title: text(110),
+  eyebrow: text(40).optional(),
+  subtitle: text(120).optional(),
+  stat: z.object({ value: text(10), label: text(70) }).optional(),
+});
+
+// A licensed source figure with numbered call-outs drawn on top.
+export const ANNOTATE_SRC = /^\/api\/asset\/cms\/[A-Za-z0-9_\/-]+\.(png|jpe?g|webp)$/;
+const annotateSpec = z.object({
+  type: z.literal("annotate"),
+  title: text(90).optional(),
+  subtitle: text(160).optional(),
+  source: text(160),
+  image_url: z.string().max(300).regex(ANNOTATE_SRC, "image_url must be a /api/asset/cms/… PNG/JPEG/WebP from upload_image"),
+  markers: z
+    .array(
+      z.object({
+        kind: z.enum(["dot", "box", "arrow"]),
+        x: z.number().min(0).max(1),
+        y: z.number().min(0).max(1),
+        w: z.number().min(0.01).max(1).optional(),
+        h: z.number().min(0.01).max(1).optional(),
+        label: text(90),
+      }),
+    )
+    .min(1)
+    .max(6),
+});
+
+export const chartSpec = z.discriminatedUnion("type", [
+  barSpec, lineSpec, timelineSpec, flowSpec, quadrantSpec,
+  statSpec, matrixSpec, scatterSpec, shareSpec, coverSpec, annotateSpec,
+]);
+export const PNG_ONLY = new Set(["cover", "annotate"]);
+export interface EmbeddedImage { dataUri: string; width: number; height: number }
 export type ChartSpec = z.infer<typeof chartSpec>;
 
 // ---------- helpers ----------
@@ -421,7 +499,231 @@ function renderQuadrant(s: z.infer<typeof quadrantSpec>): string {
   return wrapSvg(end + 56, body + footer(s, end), s.title);
 }
 
-export function renderChart(spec: ChartSpec): string {
+function renderStat(s: z.infer<typeof statSpec>): string {
+  const h = header(s);
+  const n = s.stats.length;
+  const gap = 24;
+  const tileW = (W - 2 * PAD - (n - 1) * gap) / n;
+  const valueSize = n > 3 ? 64 : 76;
+  const labels = s.stats.map((st) => wrap(st.label, tileW - 48, 22, false, 3));
+  const tileH = 72 + valueSize + Math.max(...labels.map((l) => l.length)) * 30;
+  const top = h.bottom + 4;
+  const anyHi = s.stats.some((st) => st.highlight);
+  let body = h.svg;
+  s.stats.forEach((st, i) => {
+    const x = PAD + i * (tileW + gap);
+    const hi = !anyHi || !!st.highlight;
+    body += `<rect x="${r(x)}" y="${top}" width="${r(tileW)}" height="${tileH}" rx="16" fill="${hi ? C.accentFill : C.boxFill}" stroke="${hi ? C.series[0] : C.boxStroke}" stroke-width="2"/>`;
+    body += t(x + 24, top + 32 + valueSize * 0.85, st.value, { size: valueSize, weight: 700, fill: hi ? C.series[0] : C.ink });
+    body += lines(x + 24, top + 48 + valueSize + 22, labels[i], 30, { size: 22, fill: C.ink2 });
+  });
+  const end = top + tileH + 32;
+  return wrapSvg(end + 56, body + footer(s, end), s.title);
+}
+
+function renderMatrix(s: z.infer<typeof matrixSpec>): string {
+  const h = header(s);
+  const labelW = Math.min(360, Math.max(...s.rows.map((r0) => measure(r0.label, 22, true))) + 24);
+  const colW = (W - 2 * PAD - labelW) / s.columns.length;
+  const colHead = s.columns.map((c) => wrap(c, colW - 16, 19, true, 2));
+  const headH = Math.max(...colHead.map((l) => l.length)) * 24 + 16;
+  const rowH = 58;
+  let y = h.bottom + 4;
+  let body = h.svg;
+  s.columns.forEach((_, ci) => {
+    const cx = PAD + labelW + ci * colW + colW / 2;
+    body += lines(cx, y + 20, colHead[ci], 24, { size: 19, weight: 700, fill: C.ink2, anchor: "middle" });
+  });
+  y += headH;
+  s.rows.forEach((row, ri) => {
+    const hi = !!row.highlight;
+    if (hi) body += `<rect x="${PAD}" y="${y}" width="${W - 2 * PAD}" height="${rowH}" rx="10" fill="${C.accentFill}"/>`;
+    else if (ri % 2 === 0) body += `<rect x="${PAD}" y="${y}" width="${W - 2 * PAD}" height="${rowH}" rx="10" fill="${C.boxFill}"/>`;
+    body += t(PAD + 16, y + rowH / 2 + 8, row.label, { size: 22, weight: hi ? 700 : 600 });
+    s.columns.forEach((_, ci) => {
+      const v = row.cells[ci] ?? "";
+      const cx = PAD + labelW + ci * colW + colW / 2;
+      const cy = y + rowH / 2;
+      if (v === "yes") {
+        body += `<circle cx="${r(cx)}" cy="${r(cy)}" r="14" fill="${C.series[0]}"/><path d="M${r(cx - 6)},${r(cy)} L${r(cx - 1.5)},${r(cy + 5)} L${r(cx + 7)},${r(cy - 5)}" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>`;
+      } else if (v === "partial") {
+        body += `<circle cx="${r(cx)}" cy="${r(cy)}" r="13" fill="none" stroke="${C.series[0]}" stroke-width="2.5"/><path d="M${r(cx)},${r(cy - 13)} A13,13 0 0 1 ${r(cx)},${r(cy + 13)} Z" fill="${C.series[0]}"/>`;
+      } else if (v === "no") {
+        body += `<line x1="${r(cx - 9)}" x2="${r(cx + 9)}" y1="${r(cy)}" y2="${r(cy)}" stroke="${C.axis}" stroke-width="3" stroke-linecap="round"/>`;
+      } else if (v) {
+        body += t(cx, cy + 7, v, { size: 19, fill: C.ink, anchor: "middle" });
+      }
+    });
+    y += rowH + 4;
+  });
+  const legendY = y + 30;
+  body += `<circle cx="${PAD + 10}" cy="${legendY - 6}" r="9" fill="${C.series[0]}"/>` + t(PAD + 26, legendY, "yes", { size: 17, fill: C.muted });
+  body += `<circle cx="${PAD + 90}" cy="${legendY - 6}" r="8" fill="none" stroke="${C.series[0]}" stroke-width="2"/><path d="M${PAD + 90},${legendY - 14} A8,8 0 0 1 ${PAD + 90},${legendY + 2} Z" fill="${C.series[0]}"/>` + t(PAD + 106, legendY, "partly", { size: 17, fill: C.muted });
+  body += `<line x1="${PAD + 182}" x2="${PAD + 198}" y1="${legendY - 6}" y2="${legendY - 6}" stroke="${C.axis}" stroke-width="3" stroke-linecap="round"/>` + t(PAD + 208, legendY, "no", { size: 17, fill: C.muted });
+  const end = legendY + 24;
+  return wrapSvg(end + 56, body + footer(s, end), s.title);
+}
+
+function renderScatter(s: z.infer<typeof scatterSpec>): string {
+  const h = header(s);
+  const xs = s.points.map((p) => (s.log_x ? Math.log10(Math.max(p.x, 1e-9)) : p.x));
+  const ys = s.points.map((p) => p.y);
+  const pad = (a: number, b: number) => (b - a || Math.abs(a) || 1) * 0.08;
+  const xMin = Math.min(...xs) - pad(Math.min(...xs), Math.max(...xs));
+  const xMax = Math.max(...xs) + pad(Math.min(...xs), Math.max(...xs));
+  const yLo = Math.min(0, ...ys);
+  const step = niceStep((Math.max(...ys) - yLo) / 4);
+  const ticks = Math.max(1, Math.ceil((Math.max(...ys) - yLo) / step));
+  const yMax = yLo + ticks * step;
+  const tickVals = Array.from({ length: ticks + 1 }, (_, i) => yLo + i * step);
+  const yTickW = Math.max(...tickVals.map((v) => measure(fmt(v, s.y_unit), 18))) + 16;
+  const x0 = PAD + 30 + yTickW;
+  const x1 = W - PAD - 20;
+  const top = h.bottom + 16;
+  const plotH = 440;
+  const xOf = (v: number) => x0 + ((v - xMin) / (xMax - xMin)) * (x1 - x0);
+  const yOf = (v: number) => top + plotH - ((v - yLo) / (yMax - yLo)) * plotH;
+  let body = h.svg;
+  for (const v of tickVals) {
+    const y = yOf(v);
+    body += `<line x1="${x0}" x2="${x1}" y1="${r(y)}" y2="${r(y)}" stroke="${v === yLo ? C.axis : C.grid}" stroke-width="${v === yLo ? 2 : 1.5}"/>`;
+    body += t(x0 - 12, y + 6, fmt(v, s.y_unit), { size: 18, fill: C.muted, anchor: "end" });
+  }
+  // x ticks: 5 evenly spaced (decades when log)
+  const xt: number[] = [];
+  if (s.log_x) for (let d = Math.ceil(xMin); d <= Math.floor(xMax); d++) xt.push(d);
+  else for (let i = 0; i <= 4; i++) xt.push(xMin + ((xMax - xMin) * i) / 4);
+  for (const v of xt) body += t(xOf(v), top + plotH + 30, fmt(s.log_x ? Math.pow(10, v) : v, s.x_unit), { size: 18, fill: C.muted, anchor: "middle" });
+  body += t((x0 + x1) / 2, top + plotH + 64, s.x_label + (s.log_x ? " (log scale)" : ""), { size: 19, fill: C.ink2, anchor: "middle" });
+  body += `<g transform="translate(${PAD + 14},${top + plotH / 2}) rotate(-90)">${t(0, 0, s.y_label, { size: 19, fill: C.ink2, anchor: "middle" })}</g>`;
+  const anyHi = s.points.some((p) => p.highlight);
+  s.points.forEach((p, i) => {
+    const cx = xOf(xs[i]);
+    const cy = yOf(p.y);
+    const hi = !anyHi || !!p.highlight;
+    body += `<circle cx="${r(cx)}" cy="${r(cy)}" r="${hi ? 10 : 8}" fill="${hi ? C.series[0] : C.ink2}" stroke="${C.surface}" stroke-width="3"/>`;
+    const right = cx < x1 - measure(p.label, 19) - 30;
+    body += t(right ? cx + 16 : cx - 16, cy + 6, p.label, { size: 19, weight: hi ? 700 : 500, anchor: right ? "start" : "end" });
+  });
+  const end = top + plotH + 92;
+  return wrapSvg(end + 56, body + footer(s, end), s.title);
+}
+
+function renderShare(s: z.infer<typeof shareSpec>): string {
+  const h = header(s);
+  let body = h.svg;
+  let lx = PAD;
+  const top0 = h.bottom;
+  s.categories.forEach((c, i) => {
+    body += `<rect x="${lx}" y="${top0 - 14}" width="18" height="18" rx="4" fill="${C.series[i % 4]}"/>`;
+    if (i === 4) body += `<rect x="${lx}" y="${top0 - 14}" width="18" height="18" rx="4" fill="${C.rest}"/>`;
+    body += t(lx + 26, top0 + 1, c, { size: 20, fill: C.ink2 });
+    lx += 26 + measure(c, 20) + 32;
+  });
+  const color = (i: number) => (i < 4 ? C.series[i] : C.rest);
+  const multi = s.rows.length > 1;
+  const labelW = multi ? Math.min(300, Math.max(...s.rows.map((r0) => measure(r0.label, 21))) + 20) : 0;
+  const x0 = PAD + labelW;
+  const barW = W - PAD - x0;
+  let y = top0 + 30;
+  const barH = 52;
+  for (const row of s.rows) {
+    const total = row.values.reduce((a, b) => a + b, 0) || 1;
+    if (multi) body += t(x0 - 16, y + barH / 2 + 7, row.label, { size: 21, anchor: "end" });
+    let x = x0;
+    row.values.slice(0, s.categories.length).forEach((v, i) => {
+      const w = (v / total) * barW;
+      if (w <= 0) return;
+      body += `<rect x="${r(x)}" y="${y}" width="${r(Math.max(0, w - 2))}" height="${barH}" rx="4" fill="${color(i)}"/>`;
+      const pct = `${Math.round((v / total) * 100)}%`;
+      if (w > measure(pct, 20, true) + 16) body += t(x + 10, y + barH / 2 + 7, pct, { size: 20, weight: 700, fill: i === 0 ? "#FFFFFF" : C.ink });
+      x += w;
+    });
+    y += barH + 18;
+  }
+  const end = y + 14;
+  return wrapSvg(end + 56, body + footer(s, end), s.title);
+}
+
+function renderCover(s: z.infer<typeof coverSpec>): string {
+  const H = 630;
+  const textW = s.stat ? 700 : W - 2 * 72;
+  const titleSize = s.title.length > 70 ? 52 : 60;
+  const tl = wrap(s.title, textW, titleSize, true, 4);
+  let body = `<defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1B0B47"/><stop offset="1" stop-color="#5B2EE0"/></linearGradient></defs>`;
+  body += `<rect width="${W}" height="${H}" fill="url(#g)"/>`;
+  // quiet grid texture
+  for (let gx = 0; gx <= W; gx += 60) body += `<line x1="${gx}" x2="${gx}" y1="0" y2="${H}" stroke="#FFFFFF" stroke-opacity="0.05" stroke-width="1"/>`;
+  for (let gy = 0; gy <= H; gy += 60) body += `<line x1="0" x2="${W}" y1="${gy}" y2="${gy}" stroke="#FFFFFF" stroke-opacity="0.05" stroke-width="1"/>`;
+  let y = 120;
+  if (s.eyebrow) {
+    body += t(72, y, s.eyebrow.toUpperCase(), { size: 22, weight: 700, fill: "#C4B5FD" });
+    y += 60;
+  }
+  const tTop = y + titleSize * 0.4;
+  body += lines(72, tTop, tl, titleSize * 1.15, { size: titleSize, weight: 700, fill: "#FFFFFF" });
+  if (s.subtitle) {
+    const sub = wrap(s.subtitle, textW, 26, false, 2);
+    body += lines(72, tTop + tl.length * titleSize * 1.15 + 16, sub, 34, { size: 26, fill: "#DDD6FE" });
+  }
+  if (s.stat) {
+    const sx = W - 72 - 330;
+    body += `<rect x="${sx}" y="150" width="330" height="300" rx="24" fill="#FFFFFF" fill-opacity="0.1" stroke="#FFFFFF" stroke-opacity="0.25" stroke-width="2"/>`;
+    const vs = s.stat.value.length > 6 ? 72 : 96;
+    body += t(sx + 165, 290, s.stat.value, { size: vs, weight: 700, fill: "#FFFFFF", anchor: "middle" });
+    body += lines(sx + 165, 345, wrap(s.stat.label, 280, 22, false, 3), 30, { size: 22, fill: "#DDD6FE", anchor: "middle" });
+  }
+  body += t(72, H - 56, "tbrain.ai", { size: 26, weight: 700, fill: "#FFFFFF" });
+  body += t(W - 72, H - 56, "Tbrain blog", { size: 22, weight: 600, fill: "#C4B5FD", anchor: "end" });
+  return `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(s.title)}" font-family="${FONT}">${body}</svg>`;
+}
+
+function renderAnnotate(s: z.infer<typeof annotateSpec>, img: EmbeddedImage): string {
+  const h = s.title ? header({ title: s.title, subtitle: s.subtitle }) : { svg: "", bottom: PAD };
+  const iw = W - 2 * PAD;
+  const ih = Math.round((img.height / img.width) * iw);
+  const top = h.bottom + 4;
+  const X = (v: number) => PAD + v * iw;
+  const Y = (v: number) => top + v * ih;
+  let body = h.svg;
+  body += `<image x="${PAD}" y="${top}" width="${iw}" height="${ih}" href="${img.dataUri}" preserveAspectRatio="xMidYMid meet"/>`;
+  const badge = (cx: number, cy: number, n: number) =>
+    `<circle cx="${r(cx)}" cy="${r(cy)}" r="20" fill="${C.series[0]}" stroke="#FFFFFF" stroke-width="4"/>` +
+    t(cx, cy + 8, String(n), { size: 22, weight: 700, fill: "#FFFFFF", anchor: "middle" });
+  s.markers.forEach((m, i) => {
+    const n = i + 1;
+    const cx = X(m.x);
+    const cy = Y(m.y);
+    if (m.kind === "box") {
+      const bw = (m.w ?? 0.2) * iw;
+      const bh = (m.h ?? 0.2) * ih;
+      body += `<rect x="${r(cx)}" y="${r(cy)}" width="${r(Math.min(bw, PAD + iw - cx))}" height="${r(Math.min(bh, top + ih - cy))}" rx="8" fill="none" stroke="#FFFFFF" stroke-width="7"/>`;
+      body += `<rect x="${r(cx)}" y="${r(cy)}" width="${r(Math.min(bw, PAD + iw - cx))}" height="${r(Math.min(bh, top + ih - cy))}" rx="8" fill="none" stroke="${C.series[0]}" stroke-width="4"/>`;
+      body += badge(Math.max(PAD + 20, cx), Math.max(top + 20, cy), n);
+    } else if (m.kind === "arrow") {
+      const bx = Math.min(Math.max(cx - 90, PAD + 24), PAD + iw - 24);
+      const by = Math.max(cy - 80, top + 24);
+      body += `<line x1="${r(bx)}" y1="${r(by)}" x2="${r(cx)}" y2="${r(cy)}" stroke="#FFFFFF" stroke-width="8" stroke-linecap="round"/>`;
+      body += `<line x1="${r(bx)}" y1="${r(by)}" x2="${r(cx)}" y2="${r(cy)}" stroke="${C.series[0]}" stroke-width="4" stroke-linecap="round"/>`;
+      body += `<circle cx="${r(cx)}" cy="${r(cy)}" r="7" fill="${C.series[0]}" stroke="#FFFFFF" stroke-width="3"/>`;
+      body += badge(bx, by, n);
+    } else {
+      body += badge(cx, cy, n);
+    }
+  });
+  // Legend under the figure, so labels never cover the data.
+  let y = top + ih + 44;
+  s.markers.forEach((m, i) => {
+    const ls = wrap(m.label, iw - 60, 21, false, 2);
+    body += `<circle cx="${PAD + 16}" cy="${y - 7}" r="15" fill="${C.series[0]}"/>` + t(PAD + 16, y, String(i + 1), { size: 17, weight: 700, fill: "#FFFFFF", anchor: "middle" });
+    body += lines(PAD + 44, y, ls, 28, { size: 21 });
+    y += ls.length * 28 + 14;
+  });
+  const end = y + 6;
+  return wrapSvg(end + 56, body + footer({ source: `${s.source} · annotated by Tbrain` }, end), s.title ?? "Annotated figure");
+}
+
+export function renderChart(spec: ChartSpec, img?: EmbeddedImage): string {
   switch (spec.type) {
     case "bar":
       return renderBar(spec);
@@ -433,5 +735,18 @@ export function renderChart(spec: ChartSpec): string {
       return renderFlow(spec);
     case "quadrant":
       return renderQuadrant(spec);
+    case "stat":
+      return renderStat(spec);
+    case "matrix":
+      return renderMatrix(spec);
+    case "scatter":
+      return renderScatter(spec);
+    case "share":
+      return renderShare(spec);
+    case "cover":
+      return renderCover(spec);
+    case "annotate":
+      if (!img) throw new Error("annotate needs the source image");
+      return renderAnnotate(spec, img);
   }
 }

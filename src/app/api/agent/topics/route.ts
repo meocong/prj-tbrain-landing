@@ -20,7 +20,7 @@ const topic = z.object({
   data_line: z.string().max(60).optional(),
   sources: z.array(httpUrl).max(10).default([]),
   score: z.number().min(0).max(20).optional(),
-  post_type: z.enum(["news_hook", "field_story", "trend_pov", "buyer_guide", "proof", "deep_dive", "synthesis"]).optional(),
+  post_type: z.enum(["news_hook", "field_story", "trend_pov", "buyer_guide", "proof", "deep_dive", "synthesis", "by_the_numbers"]).optional(),
   funnel: z.enum(["top", "middle", "bottom"]).optional(),
 });
 

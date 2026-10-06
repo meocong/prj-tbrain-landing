@@ -364,9 +364,19 @@ function AgentTrail({ meta, reviewedAt }: { meta: CmsAgentMeta | null; reviewedA
           <ul className="mt-1 space-y-1.5 pl-1">
             {m.images.map((img, i) => (
               <li key={i} className="break-all">
-                <span className="font-medium">{img.kind === "source_figure" ? "Source figure" : img.kind === "chart" ? "Our chart" : "Library"}</span>
+                <span className="font-medium">
+                  {img.kind === "source_figure"
+                    ? "Source figure"
+                    : img.kind === "annotated_figure"
+                      ? "Annotated figure"
+                      : img.kind === "video"
+                        ? "Video"
+                        : img.kind === "chart"
+                          ? `Our chart${img.form ? ` (${img.form})` : ""}`
+                          : "Library"}
+                </span>
                 {img.why ? ` — ${img.why}` : ""}
-                {img.kind === "source_figure" && (
+                {(img.kind === "source_figure" || img.kind === "annotated_figure" || img.kind === "video") && (
                   <span className="block" style={{ color: img.license ? undefined : "#b45309" }}>
                     {img.credit || "no credit recorded"} · {img.license || "licence not recorded: check before publishing"}
                     {img.source_url && isHttp(img.source_url) && (

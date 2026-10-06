@@ -7,5 +7,8 @@ export const BLOG_PROSE_CLASS =
   // Image captions: a paragraph that is only an <em>, right after an <img>, reads as
   // a small centered caption instead of body copy.
   "[&_img+p:has(>em:only-child)]:mt-3! [&_img+p:has(>em:only-child)]:text-center [&_img+p:has(>em:only-child)]:text-sm! [&_img+p:has(>em:only-child)]:text-[#6b7280]! [&_img+p:has(>em:only-child)]:leading-snug " +
+  // Embedded videos (YouTube, nocookie): full width 16:9; a caption after one is styled like an image caption.
+  "[&_[data-youtube-video]]:my-8 [&_iframe]:aspect-video [&_iframe]:w-full [&_iframe]:h-auto [&_iframe]:rounded-xl [&_iframe]:bg-black " +
+  "[&_[data-youtube-video]+p:has(>em:only-child)]:mt-3! [&_[data-youtube-video]+p:has(>em:only-child)]:text-center [&_[data-youtube-video]+p:has(>em:only-child)]:text-sm! [&_[data-youtube-video]+p:has(>em:only-child)]:text-[#6b7280]! " +
   // Tables: bordered cells, shaded header, horizontal scroll on narrow screens.
   "[&_table]:block [&_table]:w-max [&_table]:max-w-full [&_table]:overflow-x-auto [&_table]:border-collapse [&_th]:border [&_th]:border-[#e5e7eb] [&_th]:bg-[#F3EEFD] [&_th]:px-4 [&_th]:py-2 [&_th]:text-left [&_th]:font-semibold [&_th]:text-[#0e1b2e] [&_td]:border [&_td]:border-[#e5e7eb] [&_td]:px-4 [&_td]:py-2";

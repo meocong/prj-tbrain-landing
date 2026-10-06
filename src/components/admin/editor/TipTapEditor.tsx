@@ -9,6 +9,7 @@ import Underline from "@tiptap/extension-underline";
 import TextAlign from "@tiptap/extension-text-align";
 import Highlight from "@tiptap/extension-highlight";
 import { TableKit } from "@tiptap/extension-table";
+import Youtube from "@tiptap/extension-youtube";
 import { Toolbar } from "./Toolbar";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { toast } from "sonner";
@@ -71,6 +72,14 @@ export function TipTapEditor({
       }),
       // Agent drafts use comparison tables; without this they were dropped on save.
       TableKit.configure({ table: { resizable: false } }),
+      // Agent drafts can embed project demo videos; keep them on save.
+      Youtube.configure({
+        nocookie: true,
+        controls: true,
+        width: 640,
+        height: 360,
+        HTMLAttributes: { class: "my-6 aspect-video w-full rounded-xl" },
+      }),
     ],
     content,
     editorProps: {

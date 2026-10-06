@@ -24,8 +24,9 @@ export async function GET(req: NextRequest) {
 
   let query = supabaseAdmin()
     .from("cms_posts")
-    .select("id, slug, title, excerpt, category, tags, status, source, published_at, updated_at")
-    .order("published_at", { ascending: false, nullsFirst: false })
+    .select("id, slug, title, excerpt, category, tags, status, source, published_at, updated_at, post_type:agent_meta->>post_type, meta_images:agent_meta->images")
+    // "all" is used for rotation (what did we write last?), so newest edits first.
+    .order(status === "all" ? "updated_at" : "published_at", { ascending: false, nullsFirst: false })
     .limit(limit);
   if (status !== "all") query = query.eq("status", status);
   if (q) query = query.or(`title.ilike.%${q.replace(/[%,()]/g, " ")}%,excerpt.ilike.%${q.replace(/[%,()]/g, " ")}%`);
@@ -34,8 +35,12 @@ export async function GET(req: NextRequest) {
   if (error) return NextResponse.json({ error: error.message }, { status: 500 });
 
   return NextResponse.json({
-    posts: (data ?? []).map((p: { slug: string; status: string }) => ({
+    posts: (data ?? []).map(({ meta_images, ...p }: { slug: string; status: string; meta_images?: unknown }) => ({
       ...p,
+      // For rotation: which kinds of visual the post used (chart forms, source figures, video, library).
+      visuals: Array.isArray(meta_images)
+        ? (meta_images as { kind?: string; form?: string }[]).map((i) => i.form || i.kind || "image")
+        : [],
       url: p.status === "published" ? `${baseUrl()}/blog/${p.slug}` : null,
     })),
   });

@@ -24,13 +24,14 @@ import { useAdminAuth, useHasPermission } from "@/lib/admin/auth-context";
 
 type IdeaStatus = "new" | "queued" | "drafted" | "dismissed";
 type JobStatus = "queued" | "running" | "awaiting_approval" | "done" | "failed" | "cancelled";
-type PostType = "news_hook" | "field_story" | "trend_pov" | "buyer_guide" | "proof" | "deep_dive" | "synthesis";
+type PostType = "news_hook" | "field_story" | "trend_pov" | "buyer_guide" | "proof" | "deep_dive" | "synthesis" | "by_the_numbers";
 
 const POST_TYPES: { value: PostType; label: string; hint: string }[] = [
   { value: "field_story", label: "Field story", hint: "A real problem we hit and how we solved it" },
   { value: "news_hook", label: "News + our take", hint: "Something new came out; what it means and how we do it" },
   { value: "deep_dive", label: "Deep dive", hint: "Take one paper, dataset or release apart: method, figures, what it means" },
   { value: "synthesis", label: "Synthesis", hint: "Several sources on one question, compared side by side" },
+  { value: "by_the_numbers", label: "By the numbers", hint: "Our own analysis of public data (Hugging Face Hub, arXiv): counts, charts, what they show" },
   { value: "trend_pov", label: "Trend / where it's going", hint: "Where the field is heading, with evidence and a clear position" },
   { value: "buyer_guide", label: "Buyer guide", hint: "Explain a topic and help a buyer decide (checklist, FAQ)" },
   { value: "proof", label: "Proof / results", hint: "Numbers we are allowed to publish, and what they show" },
