@@ -1,9 +1,12 @@
-import fs from "node:fs";
-import path from "node:path";
 import { HAND_COLOR, fmtCount, stateAt, type Hand, type HandPoseLane, type Run } from "@/lib/samples/handpose";
 import { C } from "../tokens";
 import { Lane } from "./Lane";
 import { SAMPLES, pad2 } from "./page-data";
+/* Imported, not read with fs at request time. A `readFileSync` on a path
+   built at run time made Next's output tracing copy all of public/samples
+   (about 800 MB) into the category page's serverless function, past
+   Vercel's size limit; a static import is bundled as the one 2 KB file. */
+import lane13 from "../../../../../public/samples/hand-pose/lanes/hand-pose-13.json";
 
 /**
  * The stereo diagram, and under it a real slice of a real lane.
@@ -163,16 +166,6 @@ function Schematic({ ts }: { ts: number }) {
 
 /* ── The real lane slice ──────────────────────────────────────────────────── */
 
-function readLane(publicPath: string): HandPoseLane | null {
-  try {
-    return JSON.parse(fs.readFileSync(path.join(process.cwd(), "public", publicPath), "utf8")) as HandPoseLane;
-  } catch {
-    // The file is built by the data pipeline; a checkout without it still has
-    // to render the page, so the lane is left out rather than the build failing.
-    return null;
-  }
-}
-
 /** Runs clipped to a window and re-based to its start. */
 function clip(runs: Run[], a0: number, a1: number): Run[] {
   const out: Run[] = [];
@@ -206,7 +199,8 @@ function markFrame(runs: Run[], m: (typeof MARKS)[number]) {
 
 function LaneSlice() {
   const sample = SAMPLES.find((s) => s.n === SAMPLE_NO);
-  const lane = sample ? readLane(sample.lane) : null;
+  // The slice is sample 13 (SAMPLE_NO); its lane is the file imported above.
+  const lane = sample ? (lane13 as unknown as HandPoseLane) : null;
   if (!sample || !lane) return null;
 
   const runs = lane[HAND_SHOWN];

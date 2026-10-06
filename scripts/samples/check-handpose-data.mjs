@@ -202,6 +202,16 @@ for (const s of samples) {
   if (lane) lanes.set(s.slug, lane);
 }
 
+/* The page states the lane files' size bound as a constant (DeliverySection's
+   LANE_MAX_KB, "under 8 KB each") instead of measuring them, so it is held here. */
+const LANE_MAX_KB = 8;
+for (const s of samples) {
+  const text = s.lane ? read(`public${s.lane}`) : null;
+  if (text != null && Buffer.byteLength(text) >= LANE_MAX_KB * 1000) {
+    fail("lane size", `${s.slug}: ${Buffer.byteLength(text)} B, over the ${LANE_MAX_KB} KB the page states`);
+  }
+}
+
 /* ── 1. Shape ───────────────────────────────────────────────────────────── */
 
 if (metrics) {

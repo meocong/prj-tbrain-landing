@@ -1,5 +1,3 @@
-import fs from "node:fs";
-import path from "node:path";
 import { FINGERS, HP_AGG, HP_FPS, JOINTS, PACK_FIELDS, PACK_FILES } from "@/lib/samples/handpose";
 import { C, PILL } from "../tokens";
 import { Reveal } from "../Reveal";
@@ -40,17 +38,14 @@ function TierPill({ tier }: { tier: Tier }) {
 }
 
 /**
- * "under 8 KB", from the lane files themselves, or nothing a reader could
- * check. They are written compact and the largest sets the bound.
+ * The lane files' size bound, stated rather than measured here: a `statSync`
+ * on run-time paths made Next's output tracing copy all of public/samples into
+ * the page's serverless function, past Vercel's size limit. The bound is
+ * asserted against the files by scripts/samples/check-handpose-data.mjs in
+ * prebuild, so it cannot drift.
  */
-function laneSizeLabel(): string {
-  try {
-    const sizes = SAMPLES.map((s) => fs.statSync(path.join(process.cwd(), "public", s.lane)).size);
-    return `.json, under ${Math.ceil(Math.max(...sizes) / 1000)} KB each`;
-  } catch {
-    return ".json, one per sample";
-  }
-}
+export const LANE_MAX_KB = 8;
+const laneSizeLabel = () => `.json, under ${LANE_MAX_KB} KB each`;
 
 interface Row {
   what: string;
