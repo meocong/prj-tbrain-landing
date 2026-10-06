@@ -8,9 +8,11 @@ import Footer from "@/components/common/Footer";
 import { SESSION_COOKIE, verifySessionJwt } from "@/lib/terminal-bench/auth";
 import { assetsFor, fullSet, humanBytes, downloadHref, FULL_SET_SLUG } from "@/lib/samples/downloads";
 import samples from "@/lib/samples/samples.json";
+import { HAND_POSE_ON } from "@/lib/samples/flags";
 import type { Sample } from "../_sections/tokens";
 import { C } from "../_sections/tokens";
 import { Reveal } from "../_sections/Reveal";
+import { HP_RECORDS } from "../_sections/handpose/records";
 
 export const metadata: Metadata = {
   title: "Sample downloads · Tbrain",
@@ -19,7 +21,22 @@ export const metadata: Metadata = {
 
 export const dynamic = "force-dynamic";
 
-const ALL = samples as unknown as Sample[];
+/* Hand pose lives in its own records file and joins the vault only where the
+   category is published. A group with no rows renders nothing (below), so this
+   is the whole of "off on production". */
+const ALL = [...(samples as unknown as Sample[]), ...(HAND_POSE_ON ? HP_RECORDS : [])];
+
+/** "hand-pose-13" -> 13. The number a buyer quotes back to us. */
+const handPoseNo = (s: Sample) => Number(s.slug.replace(/^hand-pose-/, ""));
+
+/** [13, 14] -> "samples 13 and 14", [13] -> "sample 13". */
+function sampleNumbers(nos: number[]): string {
+  if (nos.length === 1) return `sample ${nos[0]}`;
+  return `samples ${nos.slice(0, -1).join(", ")} and ${nos[nos.length - 1]}`;
+}
+
+/** What the two downloadable assets are called on a row. */
+const DEFAULT_LABELS = { preview: "Preview pack", metadata: ".metadata.json" };
 
 /**
  * Grouped by modality, matching the rail on `/samples`.
@@ -32,7 +49,14 @@ const ALL = samples as unknown as Sample[];
  * Modalities with no published records render nothing, so the three unpublished
  * lines cost an entry here and nothing on the page.
  */
-const GROUPS: { key: Sample["modality"]; title: string; blurb: string }[] = [
+const GROUPS: {
+  key: Sample["modality"];
+  title: string;
+  /** A function where the sentence names the rows it is about. */
+  blurb: string | ((rows: Sample[]) => string);
+  /** The asset slots are the same three everywhere; what is in them is not. */
+  labels?: { preview: string; metadata: string };
+}[] = [
   {
     key: "egocentric",
     title: "Egocentric",
@@ -47,6 +71,18 @@ const GROUPS: { key: Sample["modality"]; title: string; blurb: string }[] = [
   { key: "teleoperation", title: "Teleoperation", blurb: "Bimanual robot episodes with joint state and action, as a LeRobot dataset." },
   { key: "exocentric", title: "Exocentric", blurb: "Third-person capture of the same work, seen from outside the body." },
   { key: "mocap", title: "Mocap", blurb: "Full-body inertial capture with per-finger hand pose." },
+  {
+    key: "handpose",
+    title: "Hand pose",
+    /* The slots are filled differently here: `preview` is the sample pack (a
+       zip of joints, a 3D-only recording, metadata, README and checksums, not
+       a clip) and `metadata` is the sample's metrics as JSON, so the
+       buttons say so rather than carrying the footage samples' names. What is
+       in the pack is `PACK_FILES` / `PACK_FIELDS` in handpose.ts. */
+    blurb: (rows) =>
+      `Sample packs for hand-pose ${sampleNumbers(rows.map(handPoseNo))}: 21 joints per hand in metres, one state per frame, the 2D-only flag, the view count and a confidence score, a 3D-only recording for Rerun, a README and checksums.`,
+    labels: { preview: "Sample pack (zip)", metadata: "Metadata (JSON)" },
+  },
 ];
 
 export default async function SamplesVaultPage() {
@@ -118,8 +154,13 @@ export default async function SamplesVaultPage() {
         )}
 
         {GROUPS.map((group) => {
-          const rows = ALL.filter((s) => s.modality === group.key);
+          // Rows with something to download, not rows that exist: a group whose
+          // records have no staged assets would otherwise print a heading and a
+          // blurb over an empty list.
+          const rows = ALL.filter((s) => s.modality === group.key && assetsFor(s.slug));
           if (rows.length === 0) return null;
+          const labels = group.labels ?? DEFAULT_LABELS;
+          const blurb = typeof group.blurb === "function" ? group.blurb(rows) : group.blurb;
           return (
             <Reveal key={group.key} variant="rise">
             <section className="mt-14">
@@ -127,7 +168,7 @@ export default async function SamplesVaultPage() {
                 {group.title}
               </h2>
               <p className="mt-2 max-w-2xl text-[13px]" style={{ color: C.textMid }}>
-                {group.blurb}
+                {blurb}
               </p>
 
               <ul className="mt-6" style={{ borderTop: `1px solid ${C.hairlineSoft}` }}>
@@ -150,7 +191,9 @@ export default async function SamplesVaultPage() {
                               after we hand them a code, and "Rig ko ghi tên"
                               has no gated exception. The configuration is what
                               a buyer can act on and it is already here. */}
-                          {s.slug} · {s.resolution} · {s.fps} fps
+                          {s.modality === "handpose"
+                            ? `${s.slug} · 21 joints per hand · ${s.fps} fps`
+                            : `${s.slug} · ${s.resolution} · ${s.fps} fps`}
                         </p>
                       </div>
 
@@ -161,14 +204,14 @@ export default async function SamplesVaultPage() {
                           style={{ border: `1px solid ${C.rule}`, color: C.text }}
                         >
                           <Download className="h-3.5 w-3.5" />
-                          Preview pack · {humanBytes(a.preview.bytes)}
+                          {labels.preview} · {humanBytes(a.preview.bytes)}
                         </a>
                         <a
                           href={downloadHref(s.slug, "metadata")}
                           className="inline-flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-[12px]"
                           style={{ border: `1px solid ${C.rule}`, color: C.textMid }}
                         >
-                          .metadata.json
+                          {labels.metadata}
                         </a>
                         {a.full.object ? (
                           <a
@@ -186,7 +229,8 @@ export default async function SamplesVaultPage() {
                             title={a.full.note}
                           >
                             <Lock className="h-3.5 w-3.5" />
-                            {a.full.filename} · {humanBytes(a.full.bytes)} on request
+                            {a.full.filename} ·{" "}
+                            {a.full.bytes == null ? "on request" : `${humanBytes(a.full.bytes)} on request`}
                           </span>
                         )}
                       </div>
@@ -201,9 +245,10 @@ export default async function SamplesVaultPage() {
 
         <p className="mt-14 max-w-2xl text-[13px] leading-relaxed" style={{ color: C.textDim }}>
           Full delivery files marked <span style={{ color: C.textMid }}>on request</span> are staged
-          per engagement rather than kept hot in the bucket — a single segment is 1.8 GB and the raw
-          footage goes through a face-blur pass before it leaves us. Reply to the thread you got this
-          passcode on and we will stage them against this same code.
+          per engagement rather than kept hot in the bucket. For the footage samples a single
+          segment is 1.8 GB, and the raw footage goes through a face-blur pass before it leaves us.
+          Reply to the thread you got this passcode on and we will stage them against this same
+          code.
         </p>
       </main>
 

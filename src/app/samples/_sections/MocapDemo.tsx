@@ -1,3 +1,5 @@
+import Link from "next/link";
+import { categoryBySlug } from "@/lib/samples/categories";
 import { C } from "./tokens";
 import { Reveal } from "./Reveal";
 
@@ -111,6 +113,22 @@ export function MocapDemo() {
             >
               Wrist charts — trajectory, speed, grip, XYZ
             </a>
+            {/* The other hand-pose claim on the site, from the other side: a
+                glove-and-suit capture in a studio, and hands triangulated from
+                a head-worn stereo pair at work. A reader who wanted the second
+                is on the page for the first, and this is where they will stop.
+                Only where the category exists — see `CATEGORIES`. Placed ahead of
+                the dim note on the raw file so the three links sit together and
+                the note, which is not a link, closes the row. */}
+            {categoryBySlug("hand-pose") && (
+              <Link
+                href="/samples/hand-pose"
+                className="font-mono text-[11px] underline decoration-1 underline-offset-4"
+                style={{ color: C.accent }}
+              >
+                Hands without gloves, outside a studio? See Hand pose.
+              </Link>
+            )}
             <span className="font-mono text-[11px]" style={{ color: C.textDim }}>
               Raw sample: wrist_sample.json · 2.1 MB · 150 frames · position + quaternion
             </span>

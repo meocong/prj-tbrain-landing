@@ -11,7 +11,7 @@ import { MotionToggle } from "@/components/theme/MotionToggle";
 import { CATEGORIES, categoryHeroIsDark } from "@/lib/samples/categories";
 
 /**
- * The six sample categories, hung under the Samples entry.
+ * The sample categories, hung under the Samples entry.
  *
  * Tam, 2026-09-10: "xong dưới sample menu, em để 6 thể loại thành sub menu ko",
  * and later "Top menu của em cũng đang thiếu menu item". The catalogue is six
@@ -20,14 +20,18 @@ import { CATEGORIES, categoryHeroIsDark } from "@/lib/samples/categories";
  *
  * Derived from CATEGORIES rather than typed out, so a category added there
  * appears here, and one with an `externalHref` points wherever it actually
- * lives instead of at a route that 404s.
+ * lives instead of at a route that 404s. `badge` rides along for the same
+ * reason: "New" is a property of the category, not of the menu.
  */
 const SAMPLE_SUBMENU = CATEGORIES.map((c) => ({
   label: c.name,
   href: c.externalHref ?? `/samples/${c.slug}`,
+  badge: c.badge,
 }));
 
-const NAV_ITEMS: { label: string; href: string; children?: { label: string; href: string }[] }[] = [
+type NavChild = { label: string; href: string; badge?: string };
+
+const NAV_ITEMS: { label: string; href: string; children?: NavChild[] }[] = [
   { label: "Home", href: "/" },
   { label: "Platform", href: "/platform" },
   // The samples surface. Master's list does not carry it — this branch is where
@@ -107,6 +111,39 @@ interface ChromeTokens {
   dropdown: string;
   mobileActive: string;
   mobileIdle: string;
+}
+
+/**
+ * The tag beside a menu entry — "New".
+ *
+ * The visible pill is `aria-hidden` and the link carries the same word in a
+ * `sr-only` span, comma first, so the accessible name reads "Hand pose, new".
+ * Left to itself the pill would be announced as "Hand pose NEW", and it is
+ * decoration for the eye in any case: what a screen-reader user needs is the
+ * fact, once, in the name.
+ *
+ * Outlined rather than filled: the row it sits in is already the loudest thing
+ * in the panel when it is the active page, and a filled pill beside an active
+ * accent label is two highlights fighting for one row. The tint is the row's
+ * own accent, so it follows whichever of the chrome token sets is on.
+ */
+function NavBadge({ label, accent }: { label: string; accent: string }) {
+  return (
+    <>
+      <span
+        aria-hidden
+        className="bp-mono ml-auto shrink-0 rounded-full px-1.5 py-[3px] text-[9px] font-semibold leading-none tracking-[0.08em]"
+        style={{
+          color: accent,
+          background: `color-mix(in srgb, ${accent} 12%, transparent)`,
+          border: `1px solid color-mix(in srgb, ${accent} 40%, transparent)`,
+        }}
+      >
+        {label}
+      </span>
+      <span className="sr-only">, {label.toLowerCase()}</span>
+    </>
+  );
 }
 
 const Header = () => {
@@ -298,11 +335,12 @@ const Header = () => {
                         <Link
                           key={child.href}
                           href={child.href}
-                          className={`block rounded-lg px-3 py-2 text-sm transition-colors ${
+                          className={`flex items-center gap-3 rounded-lg px-3 py-2 text-sm transition-colors ${
                             isActive(child.href) ? tokens.mobileActive : tokens.mobileIdle
                           }`}
                         >
                           {child.label}
+                          {child.badge && <NavBadge label={child.badge} accent={tokens.accent} />}
                         </Link>
                       ))}
                     </div>
@@ -351,7 +389,7 @@ const Header = () => {
                 >
                   {item.label}
                 </Link>
-                {/* Always open on mobile. A tap-to-expand accordion hides six
+                {/* Always open on mobile. A tap-to-expand accordion hides the
                     destinations behind a second tap on the one menu where taps
                     are the expensive thing. */}
                 {item.children?.map((child) => (
@@ -359,11 +397,12 @@ const Header = () => {
                     key={child.href}
                     href={child.href}
                     onClick={() => setMobileOpen(false)}
-                    className={`block rounded-lg py-2 pl-8 pr-4 text-sm transition-colors ${
+                    className={`flex items-center gap-3 rounded-lg py-2 pl-8 pr-4 text-sm transition-colors ${
                       isActive(child.href) ? tokens.mobileActive : tokens.mobileIdle
                     }`}
                   >
                     {child.label}
+                    {child.badge && <NavBadge label={child.badge} accent={tokens.accent} />}
                   </Link>
                 ))}
               </div>

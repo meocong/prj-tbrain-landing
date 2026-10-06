@@ -15,6 +15,7 @@ import {
 import { CategoryDiagram } from "./CategoryDiagram";
 import { C, EASE, OVER_MEDIA } from "./tokens";
 import { Reveal } from "./Reveal";
+import { countWord } from "./TwoRoutes";
 
 /**
  * The front door.
@@ -55,6 +56,22 @@ const LINES = [
  */
 const FACES = 1;
 
+/**
+ * The media band's aspect, by whether the card spans both columns.
+ *
+ * A wide card at the usual 16:10 would be as tall as two rows put together: at
+ * xl a normal card is 620 x 387 and a full-width one at 16:10 would be
+ * 1272 x 795. 16:5 is the ratio that keeps the row the height of its
+ * neighbours — within 2.5 to 4.5% of them at md, lg and xl — and below `md`,
+ * where the grid is one column and nothing spans, it falls back to 16:10.
+ *
+ * `object-cover` crops whatever poster it is given to that strip: a 4:3 sample
+ * poster keeps about 42% of its height, a square one 31%. So a wide card wants
+ * footage composed for it, a dedicated face such as `hand-pose-card`, and works
+ * with a sample poster only as a stand-in.
+ */
+const BAND_ASPECT = (wide?: boolean) => (wide ? "aspect-16/10 md:aspect-16/5" : "aspect-16/10");
+
 export function CategoryChooser() {
   const reduce = useReducedMotion();
 
@@ -72,7 +89,11 @@ export function CategoryChooser() {
                 footage you need, open a folder, and play the clips right here."
                 Arrived at independently, but Tam sent Claru as the reference, so
                 somebody will have both tabs open and see a clone. */}
-            Six catalogues, one delivery pipeline.{" "}
+            {/* The count follows the category list. Which categories exist is a
+                build-time decision (hand pose is on staging, off on
+                production), so a typed "Six" is right on one and wrong on the
+                other. */}
+            {countWord(CATEGORIES.length, true)} catalogues, one delivery pipeline.{" "}
             <span style={{ color: C.textDim }}>Open one to see what it holds and how it is captured.</span>
           </h2>
 
@@ -126,6 +147,10 @@ function CategoryCard({
 
   return (
     <motion.div
+      // The span goes on the grid item, which is this element and not the
+      // `<Link>` inside it: a grid places its children, and the link is a
+      // grandchild.
+      className={c.wide ? "md:col-span-2" : undefined}
       initial={reduce ? false : { opacity: 0, y: 16 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.3 }}
@@ -136,9 +161,9 @@ function CategoryCard({
           grid. `overflow-hidden` clips the footage to the card's 12px corner. */}
       <Link href={href} className="bp-card bp-card-hover group relative block overflow-hidden">
         {band.length > 0 ? (
-          <FaceBand slug={band[0]} reduce={reduce} />
+          <FaceBand slug={band[0]} reduce={reduce} wide={c.wide} media={c.faceMedia} />
         ) : (
-          <HeldBand slug={c.slug} />
+          <HeldBand slug={c.slug} wide={c.wide} />
         )}
 
         {/* The wash, then the type. Both are `pointer-events-none` so the hover
@@ -155,15 +180,37 @@ function CategoryCard({
 
         <div className="pointer-events-none absolute inset-0 flex flex-col justify-end p-5 md:p-6">
           <span className="flex items-baseline justify-between gap-4">
-            <span
-              className="text-2xl font-medium tracking-tight md:text-3xl"
-              style={{
-                fontFamily: "var(--font-heading)",
-                letterSpacing: "-0.02em",
-                color: OVER_MEDIA.title,
-              }}
-            >
-              {c.name}
+            <span className="flex min-w-0 items-baseline gap-3">
+              <span
+                className="text-2xl font-medium tracking-tight md:text-3xl"
+                style={{
+                  fontFamily: "var(--font-heading)",
+                  letterSpacing: "-0.02em",
+                  color: OVER_MEDIA.title,
+                }}
+              >
+                {c.name}
+              </span>
+              {c.badge && (
+                <>
+                  {/* On footage, so it takes the media scrim and not a theme
+                      token: the frame behind it is whatever the clip is. The
+                      pill is for the eye; the word, once, is for the link's
+                      name ("Hand pose, new"). */}
+                  <span
+                    aria-hidden
+                    className="bp-mono shrink-0 self-center rounded-full px-2 py-[3px] text-[9px] font-semibold leading-none tracking-[0.08em]"
+                    style={{
+                      background: OVER_MEDIA.scrim,
+                      color: OVER_MEDIA.title,
+                      border: "1px solid rgba(255,255,255,0.4)",
+                    }}
+                  >
+                    {c.badge}
+                  </span>
+                  <span className="sr-only">, {c.badge.toLowerCase()}</span>
+                </>
+              )}
             </span>
             {/* Kept while the prose went: with every other cue gone the card has
                 to say it is a door, and an arrow is the one that costs no line
@@ -198,8 +245,21 @@ function CategoryCard({
  * has pointed at anything. The poster carries the card until then, which is why
  * the still and the clip are the same slug.
  */
-function FaceBand({ slug, reduce }: { slug: string; reduce: boolean }) {
+function FaceBand({
+  slug,
+  reduce,
+  wide,
+  media,
+}: {
+  slug: string;
+  reduce: boolean;
+  wide?: boolean;
+  media?: Category["faceMedia"];
+}) {
   const [armed, setArmed] = useState(false);
+  const poster = media?.poster ?? posterSrc(slug);
+  const clip = media?.clip ?? clipSrc(slug);
+  const fit = media?.position ? { objectPosition: media.position } : undefined;
   const video = useRef<HTMLVideoElement | null>(null);
 
   const enter = () => {
@@ -212,30 +272,32 @@ function FaceBand({ slug, reduce }: { slug: string; reduce: boolean }) {
 
   return (
     <div
-      className="relative aspect-16/10 w-full overflow-hidden"
+      className={`relative w-full overflow-hidden ${BAND_ASPECT(wide)}`}
       onMouseEnter={enter}
       onMouseLeave={() => video.current?.pause()}
       style={{ background: C.wash }}
     >
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
-        src={posterSrc(slug)}
+        src={poster}
         alt=""
         loading="lazy"
         decoding="async"
         className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+        style={fit}
       />
       {armed && (
         <video
           ref={video}
-          src={clipSrc(slug)}
-          poster={posterSrc(slug)}
+          src={clip}
+          poster={poster}
           muted
           loop
           playsInline
           autoPlay
           preload="none"
           className="absolute inset-0 h-full w-full object-cover"
+          style={fit}
         />
       )}
       <span
@@ -280,11 +342,11 @@ const STILLS: Record<string, string> = {
   "coding-stem": "/images/samples-coding-stem.jpg",
 };
 
-function HeldBand({ slug }: { slug: string }) {
+function HeldBand({ slug, wide }: { slug: string; wide?: boolean }) {
   const still = STILLS[slug];
   return (
     <div
-      className="relative aspect-16/10 w-full overflow-hidden"
+      className={`relative w-full overflow-hidden ${BAND_ASPECT(wide)}`}
       style={{
         // The hatch reads as texture at 4% and as a barcode at 40%. It exists to
         // say "not footage" without competing with the cards that are.

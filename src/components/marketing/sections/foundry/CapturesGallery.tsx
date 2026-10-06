@@ -2,11 +2,13 @@
 
 import { useEffect, useMemo, useRef } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { REAL_SAMPLES, type QcState, type RealSample, type SampleGroup } from "@/lib/landing/physical-ai";
 import { Sheet, SheetHeading } from "@/components/marketing/blueprint/kit";
 import { StaggerContainer, STAGGER_ITEM } from "@/components/marketing/fx/RevealOnScroll";
 import { motion } from "framer-motion";
 import { useReducedMotion } from "@/lib/motion-pref";
+import { categoryBySlug } from "@/lib/samples/categories";
 import { QcChip } from "./QcChip";
 
 const BORDER_BY_STATE: Record<QcState, string | undefined> = {
@@ -119,6 +121,22 @@ function CaptureCard({ c }: { c: RealSample }) {
         </div>
         {c.note && (
           <div style={{ fontSize: 11, color: "var(--bp-ink-dim)", marginTop: 6, lineHeight: 1.4 }}>{c.note}</div>
+        )}
+        {/* Only where the category it points into is published. Evaluated the
+            same on the server and in the browser — the flag is a build-time
+            constant — so it cannot hydrate differently. */}
+        {c.link && categoryBySlug(c.link.category) && (
+          <div style={{ fontSize: 11, color: "var(--bp-ink-dim)", marginTop: 6, lineHeight: 1.4 }}>
+            {c.link.lead}{" "}
+            <Link
+              href={c.link.href}
+              className="underline underline-offset-2"
+              style={{ color: "var(--bp-cyan)" }}
+            >
+              {c.link.label}
+            </Link>
+            .
+          </div>
         )}
       </div>
     </motion.article>

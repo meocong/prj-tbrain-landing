@@ -36,11 +36,14 @@ export default function ContactPage() {
     }
     const label = title ?? slug!;
     setSampleContext(label);
-    setForm((f) =>
-      f.message
-        ? f
-        : { ...f, message: `I would like the full set for "${label}" (${slug ?? "sample"}).\n\n` },
-    );
+    // A hand-pose request names the sample and ends on the intended use, the
+    // one question sales would otherwise have to ask in the first reply. It
+    // stops after the colon and a space, so the visitor's answer is the next
+    // thing typed.
+    const message = slug?.startsWith("hand-pose-")
+      ? `Hand pose full delivery for ${slug}${title ? ` (${title})` : ""}. Intended use: `
+      : `I would like the full set for "${label}" (${slug ?? "sample"}).\n\n`;
+    setForm((f) => (f.message ? f : { ...f, message }));
   }, []);
   const isLocalDev = process.env.NODE_ENV !== "production";
 

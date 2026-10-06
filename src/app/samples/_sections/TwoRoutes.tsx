@@ -3,6 +3,31 @@ import { INTEROP } from "@/lib/samples/capability";
 import { C } from "./tokens";
 import { Reveal } from "./Reveal";
 
+const COUNT_WORDS = [
+  "zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten",
+  "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen",
+  "nineteen", "twenty",
+];
+
+/**
+ * A count, as a word: 7 -> "seven", "Seven" at the head of a sentence.
+ *
+ * The front door says how many catalogues there are, in words, in two places —
+ * the chooser's heading and the line under "Off the shelf". Both were typed as
+ * "six" and went stale the day a seventh category appeared, and which
+ * categories appear is now a build-time decision (hand pose is on staging and
+ * off on production), so the word has to follow `CATEGORIES.length`.
+ *
+ * Exported for the chooser, which is a client component and so cannot call a
+ * function defined in a server one; this file holds no server-only import, so
+ * the client can take it from here. Past twenty the numeral reads better than
+ * the word anyway.
+ */
+export function countWord(n: number, capitalise = false): string {
+  const word = COUNT_WORDS[n] ?? String(n);
+  return capitalise ? word.charAt(0).toUpperCase() + word.slice(1) : word;
+}
+
 /**
  * The two ways to buy, given a section instead of a clause.
  *
@@ -134,7 +159,7 @@ function shelfFigures(c?: Category): string[] {
         )
       : []),
     `${episodes} sample${episodes === 1 ? "" : "s"} playable on this page${
-      c ? "" : " across six catalogues"
+      c ? "" : ` across ${countWord(CATEGORIES.length)} catalogues`
     }`,
     ...(quoted ? [] : [`${hours.toFixed(1)} hours playable on this site`]),
   ];

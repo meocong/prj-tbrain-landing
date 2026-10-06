@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { supabaseAdmin } from "@/lib/terminal-bench/supabase/admin";
+import { CATEGORIES } from "@/lib/samples/categories";
 
 export const revalidate = 3600; // Refresh hourly so new blog posts/case studies surface
 
@@ -18,6 +19,21 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${baseUrl}/data/terminal-bench`, lastModified: now, changeFrequency: "monthly", priority: 0.9 },
     { url: `${baseUrl}/data/physical-ai`, lastModified: now, changeFrequency: "monthly", priority: 0.9 },
     { url: `${baseUrl}/samples`, lastModified: now, changeFrequency: "weekly", priority: 0.9 },
+    /* One page per samples category. They were missing: only the `/samples`
+       front door was listed, so a search engine could reach egocentric,
+       mocap or hand pose only by crawling the chooser's links.
+
+       Derived from CATEGORIES rather than typed, so the list follows the build:
+       hand pose is on staging and off on production, and a slug typed here
+       would put a 404 in production's sitemap. Categories that live elsewhere
+       (`externalHref` — Coding & STEM points at /data/terminal-bench, already
+       listed above) have no /samples/<slug> page to list. */
+    ...CATEGORIES.filter((c) => !c.externalHref).map((c) => ({
+      url: `${baseUrl}/samples/${c.slug}`,
+      lastModified: now,
+      changeFrequency: "monthly" as const,
+      priority: 0.8,
+    })),
     { url: `${baseUrl}/policy`, lastModified: now, changeFrequency: "yearly", priority: 0.3 },
     { url: `${baseUrl}/accessibility`, lastModified: now, changeFrequency: "yearly", priority: 0.3 },
   ];

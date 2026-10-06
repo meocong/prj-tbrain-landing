@@ -15,6 +15,7 @@ import { SapiensDiagnosticPanel } from "@/components/marketing/sections/foundry/
 import { RerunIframeLoader } from "@/components/marketing/sections/foundry/qc/RerunIframeLoader";
 import { PalettePanel } from "@/components/marketing/sections/foundry/PalettePanel";
 import { AUTO_LABEL_STAGES } from "@/lib/landing/physical-ai-qc";
+import { categoryBySlug } from "@/lib/samples/categories";
 
 export const metadata: Metadata = {
   title: "Auto-Label · 8 Models · Physical AI Data Foundry",
@@ -97,6 +98,21 @@ function StageHand() {
           </div>
         ))}
       </div>
+      {/* `honestNote` is typed as a string and cannot hold a link, so the
+          pointer sits in the panel's children. It says what this stage is (one
+          RGB camera, a model estimate) before saying where the other kind of
+          hand pose is, because the second claim only makes sense against the
+          first. Only where the category is published. */}
+      {categoryBySlug("hand-pose") && (
+        <p className="mt-4 max-w-2xl text-[13px] leading-relaxed" style={{ color: "var(--bp-ink-dim)" }}>
+          This stage works from one RGB camera. For hands triangulated from two calibrated cameras, with a state on every
+          frame, see the{" "}
+          <Link href="/samples/hand-pose" className="underline underline-offset-4" style={{ color: "var(--bp-cyan)" }}>
+            Hand pose samples
+          </Link>
+          .
+        </p>
+      )}
     </StagePanel>
   );
 }

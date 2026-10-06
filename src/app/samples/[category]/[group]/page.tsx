@@ -77,8 +77,17 @@ function resolveGroup(modality: string, slug: string) {
   };
 }
 
+/**
+ * Categories with no folder level. Hand pose is one page, `/samples/hand-pose`,
+ * built by its own component; its records are not in `samples.json`, so
+ * `skillFolders` finds nothing for it today. The guard is for the day someone
+ * merges them in: the generic path would then mint a thin duplicate page per
+ * skill group, each with its own canonical and the generic access block.
+ */
+const NO_FOLDERS = new Set(["hand-pose"]);
+
 export function generateStaticParams() {
-  return CATEGORIES.filter((c) => c.modality && !c.externalHref).flatMap((c) =>
+  return CATEGORIES.filter((c) => c.modality && !c.externalHref && !NO_FOLDERS.has(c.slug)).flatMap((c) =>
     usesConfigFolders(c.modality!)
       ? (CAPABILITY[c.modality!] ?? [])
           .filter((t) => ["mono", "stereo", "stereo6", "wrist"].includes(t.key))
@@ -90,6 +99,7 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const { category, group } = await params;
   const c = categoryBySlug(category);
+  if (c && NO_FOLDERS.has(c.slug)) return {};
   const f = c?.modality ? resolveGroup(c.modality, group) : null;
   if (!c || !f) return {};
 
@@ -109,7 +119,7 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
 export default async function SkillGroupPage({ params }: Params) {
   const { category, group } = await params;
   const c = categoryBySlug(category);
-  if (!c || c.externalHref || !c.modality) notFound();
+  if (!c || c.externalHref || !c.modality || NO_FOLDERS.has(c.slug)) notFound();
 
   const folder = resolveGroup(c.modality, group);
   if (!folder) notFound();
@@ -186,6 +196,35 @@ export default async function SkillGroupPage({ params }: Params) {
             <CaptureSpec category={c} tier={group} />
             <RigViews />
           </>
+        )}
+
+        {/* The six "· hand pose" records below are 30-second overlay previews
+            from this rig, and the Hand pose catalogue is the same rig's stereo
+            pair measured frame by frame. Said once, above the grid, with the
+            link — a reader who came for hands should not have to guess that
+            there is a page that answers them better than these six.
+
+            Behind `categoryBySlug` rather than just printed: the page exists
+            only where hand pose is on, and a link to a 404 on production is
+            worse than no link. Not "the records below" in general — the grid
+            holds nine and only six of them are hand pose. */}
+        {group === "stereo6" && categoryBySlug("hand-pose") && (
+          <section>
+            <div className="mx-auto max-w-[1400px] px-4 pt-10 lg:px-10 xl:px-16">
+              <p className="max-w-3xl text-[13px] leading-relaxed" style={{ color: C.textMid }}>
+                Hand pose from this rig has its own page with per-frame metrics:{" "}
+                <Link
+                  href="/samples/hand-pose"
+                  className="underline decoration-1 underline-offset-4"
+                  style={{ color: C.accent }}
+                >
+                  Hand pose samples
+                </Link>
+                . The six &quot;&middot; hand pose&quot; records below are the earlier 30-second overlay
+                previews.
+              </p>
+            </div>
+          </section>
         )}
 
         {/* The catalogue, seeded to this folder. The rail stays live: a reader

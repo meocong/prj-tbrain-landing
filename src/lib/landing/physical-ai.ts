@@ -674,7 +674,37 @@ export interface RealSample {
   takes?: number;      // >1 = grouped card
   group: SampleGroup;
   qc: QcMeta;
+  /**
+   * A pointer from the card into the samples catalogue, printed under the note.
+   * `category` is the `/samples` category it lands in, and the card renders it
+   * only where that category is published: hand pose is on staging and off on
+   * production, and a link to a 404 is worse than none. `lead` is the sentence
+   * the link ends, `label` the words that are the link.
+   */
+  link?: { href: string; category: string; lead: string; label: string };
 }
+
+/**
+ * The auto-label hand stage reads one RGB camera; the hand-pose samples are
+ * triangulated from two calibrated ones and say how each frame was obtained.
+ * A reader who meets "MANO 21-kpt hand" on the capture ledger should be able to
+ * tell which of the two they are looking at, and where the other one is.
+ *
+ * The card checks `categoryBySlug` before it prints the link, which is the gate.
+ * The condition here is the same flag written out against `process.env` so the
+ * sentence is not in production's JavaScript either: this file is imported by a
+ * client component, and an imported constant would be bundled whether or not
+ * anything renders it. Keep the literal in step with `HAND_POSE_ON`.
+ */
+const HAND_POSE_LINK =
+  process.env.HAND_POSE_ON === "1"
+    ? {
+        href: "/samples/hand-pose",
+        category: "hand-pose",
+        lead: "For hands triangulated from two calibrated cameras, with a state on every frame, see the",
+        label: "Hand pose samples",
+      }
+    : undefined;
 
 export const REAL_SAMPLES = {
   fig: "FIG.10 — CAPTURE LEDGER",
@@ -687,7 +717,7 @@ export const REAL_SAMPLES = {
   },
   items: [
     // Kitchen · PASS (5)
-    { group: "KITCHEN", name: "Pick up the cup",         skill: "pick_up_the_cup",         video: "/videos/real-captures/pick_up_the_cup.webm",              poster: "/images/real-captures/pick_up_the_cup-loop.jpg",              note: "Reference episode · MANO 21-kpt hand + verb-noun label", frames: 271, seconds: 18, sensor: "Stereo depth cam",    qc: { state: "PASS", passCount: 14, total: 14 } },
+    { group: "KITCHEN", name: "Pick up the cup",         skill: "pick_up_the_cup",         video: "/videos/real-captures/pick_up_the_cup.webm",              poster: "/images/real-captures/pick_up_the_cup-loop.jpg",              note: "Reference episode · MANO 21-kpt hand + verb-noun label", frames: 271, seconds: 18, sensor: "Stereo depth cam",    qc: { state: "PASS", passCount: 14, total: 14 }, link: HAND_POSE_LINK },
     { group: "KITCHEN", name: "Open & close door",       skill: "open_and_close_door",     video: "/videos/real-captures/open_and_close_door.webm",          poster: "/images/real-captures/open_and_close_door-loop.jpg",          note: "Two-phase task · sub-action segments",                    frames: 234, seconds: 16, sensor: "Stereo depth cam",    qc: { state: "PASS", passCount: 14, total: 14 } },
     { group: "KITCHEN", name: "Pick from fridge",        skill: "pick_up_item_from_fridge", video: "/videos/real-captures/pick_up_item_from_fridge.webm",     poster: "/images/real-captures/pick_up_item_from_fridge-loop.jpg",     note: "Reach + grasp under occlusion",                          frames: 339, seconds: 23, sensor: "Stereo depth cam",    qc: { state: "PASS", passCount: 13, total: 14, note: "1 optional check skipped" } },
     { group: "KITCHEN", name: "Wiping pantry surface",   skill: "wiping_pantry_surface",   video: "/videos/real-captures/wiping_pantry_surface.webm",        poster: "/images/real-captures/wiping_pantry_surface-loop.jpg",        note: "Long-horizon · continuous contact",                       frames: 680, seconds: 59, sensor: "Stereo depth cam",    qc: { state: "PASS", passCount: 14, total: 14 } },

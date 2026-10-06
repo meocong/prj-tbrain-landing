@@ -33,7 +33,14 @@ export function CapabilityTable({
   if (tiers.length === 0) return null;
 
   return (
-    <div className="mt-8 overflow-x-auto">
+    <div
+      className="mt-8 overflow-x-auto"
+      /* Scrolls sideways on a phone, so it has to be reachable without a
+         pointer (WCAG 2.1.1; axe scrollable-region-focusable). */
+      tabIndex={0}
+      role="region"
+      aria-label="Capture configurations"
+    >
       <table className="w-full min-w-[680px] border-collapse text-left">
         <thead>
           <tr>

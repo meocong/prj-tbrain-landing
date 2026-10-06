@@ -24,6 +24,7 @@ import { RealVideoStrip } from "@/components/marketing/sections/foundry/RealVide
 import { CinemaWall } from "@/components/marketing/sections/foundry/CinemaWall";
 import { LiveCaptureStream } from "@/components/marketing/sections/foundry/LiveCaptureStream";
 import { ANCHOR_TRUST } from "@/lib/landing/physical-ai";
+import { categoryBySlug } from "@/lib/samples/categories";
 
 export const metadata: Metadata = {
   title: "The Robotics Data Foundry for Physical AI",
@@ -99,6 +100,17 @@ function FoundryCTA() {
           <Link href="/samples" className="inline-flex items-center gap-2 rounded-lg px-6 py-3 text-sm font-bold" style={{ fontFamily: "var(--font-heading)", background: "var(--bp-cyan)", color: "var(--bp-on-cyan)", boxShadow: "0 8px 22px -12px var(--bp-cyan)" }}>See a sample dataset <ArrowRight className="h-4 w-4" /></Link>
           <Link href="/contact" className="inline-flex items-center gap-2 rounded-lg px-6 py-3 text-sm font-bold" style={{ fontFamily: "var(--font-heading)", color: "var(--bp-ink)", border: "1px solid var(--bp-line-strong)" }}>Talk to us</Link>
         </div>
+        {/* Hand pose is a sample set, not a service tier, so it gets a line
+            under the buttons rather than a third button: a reader who is here
+            for hands has just read about an RGB-video stage and should know
+            the stereo-triangulated version exists and can be opened. Only
+            where the category is published. */}
+        {categoryBySlug("hand-pose") && (
+          <p className="mx-auto mt-6 max-w-2xl text-balance text-[13px] leading-relaxed" style={{ color: "var(--bp-ink-faint)" }}>
+            For hands triangulated from two calibrated cameras, with a state on every frame, see the{" "}
+            <Link href="/samples/hand-pose" className="underline underline-offset-4" style={{ color: "var(--bp-cyan)" }}>Hand pose samples</Link>.
+          </p>
+        )}
       </div>
     </section>
   );
