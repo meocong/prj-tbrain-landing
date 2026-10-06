@@ -1,7 +1,7 @@
 ---
 name: tbrain-write-post
 description: Write a Tbrain blog post people want to read — pick the post type, build a brief with real information gain from the approved knowledge base, propose an outline for human approval, then write, run reader/critic/fact-check passes, save as a draft, submit for review and prepare LinkedIn/Facebook/X copy. Use for draft jobs and when someone asks for a post.
-version: 2.2.0
+version: 2.3.0
 metadata:
   hermes:
     tags: [content, writing, tbrain]
@@ -12,23 +12,19 @@ metadata:
 
 You are writing for a person: a robotics or ML lead, or the person who buys their data. They have ten minutes and no obligation to finish. Every choice below serves that reader, not a search engine.
 
-Read these before you start, every time:
-- `references/post-types.md`: the seven post types, their skeletons, openings and endings. **The most important file.**
-- `references/exemplars.md`: how the best technical writers build posts from sources, use figures, open and end
-- `references/images.md`: visuals: source figures (licence check), our own charts, the library (one at most)
-- `references/rubric.md`: the critic scorecard your draft must pass
-- `references/brand-voice.md`: how Tbrain sounds, banned phrases and AI tells
-- `references/editorial-rules.md`: what we may and may not claim (rule 13: samples and internal detail stay private)
-- `references/html-format.md`: allowed HTML and the structure blocks
-- `references/tbrain-knowledge.md`: public-safe Tbrain facts and internal link targets
-- `references/tbrain-samples.md`: background only, never quoted
+Read only what each step needs (every file you open is re-sent on every later call, so extra reading is expensive):
+- **Before the brief**: `references/post-types.md` (common rules, the type table, format devices) and, once you've picked the type, `references/types/<type>.md` (its skeleton). Also `references/images.md` (visuals).
+- **Before drafting**: `references/brand-voice.md`, `references/editorial-rules.md` (rule 13: samples and internal detail stay private), `references/html-format.md`.
+- **Only if the post says something about Tbrain**: `references/tbrain-knowledge.md` (public-safe facts, internal link targets). `references/tbrain-samples.md` is background you rarely need; never quote it.
+- **Optional, when stuck on structure or an opening**: `references/exemplars.md`.
+- `references/rubric.md` is for the critic subagent; you don't need to read it yourself.
 
 Also check memory for reviewer preferences ("Tâm prefers: …") and apply them.
 
 ## 1. Research and the brief
 
 Research first, and go deep. The post is built from what the original references actually contain, not from our landing pages.
-- Open 4-8 sources, at least 3 primary (paper, official post, dataset card, release notes). For papers read the body (`https://arxiv.org/html/<id>`), not just the abstract: method, dataset composition, the result tables, the limitations section.
+- Open 4-8 sources, at least 3 primary (paper, official post, dataset card, release notes). For papers read the body (`https://arxiv.org/html/<id>`), not just the abstract: method, dataset composition, the result tables, the limitations section. Prefer `web_extract` (it returns a summary) over pulling whole raw pages, and don't re-open a page you've already read: keep notes instead. Stop researching at 8 sources.
 - Web-search for 1-3 thoughtful takes on the same topic (researchers' blogs, lab posts, substacks). Use them for angles, disagreements and counterarguments; cite them; never copy their images.
 - Write down as you go: the 5-10 numbers that matter (with their source), the figures worth showing (`source_license` tells you which you may reuse), and what the sources disagree on or leave out.
 
@@ -93,10 +89,9 @@ Follow the skeleton of the post type. 1,200-1,600 words (`deep_dive` and `synthe
 
 ## 4. Reader pass, critic, fact-check
 
-Use three separate `delegate_task` subagents. Each reviews **cold**: give it only the draft and the files named below.
-1. **Reader pass**: "You are a head of robotics data at a VLA startup. Read this as you would a vendor blog. Mark every sentence that made you want to keep reading, name the longest dull stretch, say where you would have stopped, say what you'd remember tomorrow, and name the one sentence or visual you'd forward to a colleague (or say there is none)." Rewrite the dull stretch and anything before the stop point. If nothing is forward-worthy, the post has no peak yet: fix that before the critic.
-2. **Critic**: `rubric.md`, `brand-voice.md`, `editorial-rules.md`, `post-types.md`, `images.md`, plus the visuals list (kind, credit, licence, library description) of the images used. Ship at ≥20/26 with no 0 on items 1, 4, 6 or 10. Otherwise fix and **re-run a fresh critic**. Two rounds at most, then keep the best version and flag the rest. The score you save and report is the latest critic's total, never your own estimate.
-3. **Fact-check**: open every linked URL; check each factual sentence and every number in each chart spec against its source; check each source figure's licence and credit; check every Tbrain claim against the knowledge items cited; check rule 13. Unresolved issues go into `factcheck_flags` ("Para 3: 'half of frames' — IronMind says 51% effective; reworded, please confirm").
+Use two `delegate_task` subagents (run them together in one batch). Each reviews **cold**: give it the draft and the files named below, nothing else.
+1. **Reader + critic**: `rubric.md`, `brand-voice.md`, `editorial-rules.md`, `post-types.md`, `types/<type>.md`, `images.md`, plus the visuals list (kind, form, credit, licence, library description). First the reader pass: "You are a head of robotics data at a VLA startup. Read this as you would a vendor blog. Mark every sentence that made you want to keep reading, name the longest dull stretch, say where you would have stopped, say what you'd remember tomorrow, and name the one sentence or visual you'd forward to a colleague (or say there is none)." Then the scorecard. Ship at ≥20/26 with no 0 on items 1, 4, 6 or 10. Otherwise fix (dull stretch and everything before the stop point first) and run **one** fresh reader + critic. Two rounds at most, then keep the best version and flag the rest. The score you save and report is the latest critic's total, never your own estimate.
+2. **Fact-check**: open every linked URL; check each factual sentence and every number in each chart spec against its source; check each source figure's licence and credit; check every Tbrain claim against the knowledge items cited; check rule 13. Unresolved issues go into `factcheck_flags` ("Para 3: 'half of frames' — IronMind says 51% effective; reworded, please confirm").
 
 ## 5. Metadata
 - `seo_title` ≤ 60 chars, `seo_description` 120-155 chars promising a concrete takeaway, `excerpt` 1-2 sentences, short keyword `slug`.

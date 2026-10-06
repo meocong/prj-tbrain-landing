@@ -34,6 +34,12 @@ delegation:
   # alone can use up and leave the fact-check undone. 2 critic rounds +
   # re-review + fact-check + one retry.
   oneshot_max_children: 6
+  # Reviewer/fact-check children run on the lighter model to save quota; the
+  # writer stays on glm-5.1. A child with no progress for 15 min is stopped
+  # (one once hung for 90 min).
+  model: glm-4.6
+  provider: zai
+  child_timeout_seconds: 900
 
 agent:
   clarify_timeout: 86400   # chị Tâm may answer a brief/topic question hours later
