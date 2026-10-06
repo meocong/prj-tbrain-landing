@@ -93,7 +93,7 @@ const CSV_COLUMNS = [
   ["right_missed_reported_pct", ["right_missed_reported_pct"]],
   ["left_longest_no_pose_frames", ["left_longest_no_pose_frames"]],
   ["right_longest_no_pose_frames", ["right_longest_no_pose_frames"]],
-  ["skeleton_preview", ["skeleton_preview", "public_skeleton_preview", "public_skeleton_video"]],
+  ["skeleton_preview", ["skeleton_preview", "public_skeleton_preview", "public_skeleton_video", "public_video_preview"]],
 ];
 /** Columns the builder may omit without it being an error. */
 const CSV_OPTIONAL = new Set(["measured_of_delivered_pct"]);

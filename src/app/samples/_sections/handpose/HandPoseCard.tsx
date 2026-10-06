@@ -213,7 +213,7 @@ export function HandPoseCard({ sample, onOpen }: { sample: Sample; onOpen: () =>
   };
 
   const hasVideo = hp?.preview === "video";
-  const previewLabel = hasVideo ? "Skeleton preview" : "Preview on request";
+  const previewLabel = hasVideo ? "Video preview" : "Preview on request";
 
   return (
     <article className="flex flex-col" style={{ borderTop: `1px solid ${C.hairline}` }}>
@@ -268,7 +268,7 @@ export function HandPoseCard({ sample, onOpen }: { sample: Sample; onOpen: () =>
               loop
               playsInline
               preload="none"
-              aria-label={`${sample.title}, skeleton render of both hands`}
+              aria-label={`${sample.title}, camera video with the hand pose drawn over it`}
             />
           )}
 

@@ -660,8 +660,8 @@
         "videoSeconds": 74.6
       },
       "loop": {
-        "start": 1768,
-        "frames": 87,
+        "start": 1713,
+        "frames": 165,
         "crossfadeFrames": 15
       },
       "posterFrame": 1836,
@@ -710,9 +710,9 @@
         "videoSeconds": 75.2
       },
       "loop": {
-        "start": 1612,
-        "frames": 60,
-        "crossfadeFrames": 12
+        "start": 1552,
+        "frames": 165,
+        "crossfadeFrames": 15
       },
       "posterFrame": 1648,
       "lane": "/samples/hand-pose/lanes/hand-pose-14.json",

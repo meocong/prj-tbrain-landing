@@ -32,7 +32,7 @@ export function AccessSection() {
   const packSamples = joinAnd(SAMPLES.filter((s) => s.pack).map((s) => s.n));
 
   const licence = [
-    { label: "Preview", value: "Free to view, no login. Skeleton renders only." },
+    { label: "Preview", value: "Free to view, no login. Faces blurred in the preview video." },
     { label: "Evaluation", value: `Passcode sample pack for samples ${packSamples}, 7-day session.` },
     { label: "Full delivery", value: "Signed links after the licence is agreed." },
     { label: "Commercial use", value: "On request." },

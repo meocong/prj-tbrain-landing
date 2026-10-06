@@ -93,8 +93,8 @@
     "hand-pose-13": {
       "posterFrame": 1836,
       "loop": {
-        "start": 1768,
-        "frames": 87,
+        "start": 1713,
+        "frames": 165,
         "crossfadeFrames": 15
       },
       "framing": {
@@ -103,14 +103,14 @@
         "poster": 100.0,
         "still": 100.0
       },
-      "note": "loop on the longest run with both measured"
+      "note": "camera video with the 2D hand pose drawn over it; faces and bystanders blurred"
     },
     "hand-pose-14": {
       "posterFrame": 1648,
       "loop": {
-        "start": 1612,
-        "frames": 60,
-        "crossfadeFrames": 12
+        "start": 1552,
+        "frames": 165,
+        "crossfadeFrames": 15
       },
       "framing": {
         "video": 96.7,
@@ -118,7 +118,7 @@
         "poster": 100.0,
         "still": 100.0
       },
-      "note": "loop on the longest run with both measured"
+      "note": "camera video with the 2D hand pose drawn over it; faces and bystanders blurred"
     },
     "hand-pose-16": {
       "posterFrame": 651,

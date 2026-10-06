@@ -78,7 +78,7 @@ export function longestRun(h: HandStats): number | null {
 
 /** What the card, the table and the viewer call a sample's public media. */
 export const previewLabel = (s: HandPoseSample) =>
-  s.preview === "video" ? "Skeleton preview" : "Preview on request";
+  s.preview === "video" ? "Video preview" : "Preview on request";
 
 /* ── Per-hand points ──────────────────────────────────────────────────────── */
 
@@ -130,7 +130,7 @@ export function startHere(): StartChip[] {
     SAMPLES.reduce((a, s) => (score(s) * dir > score(a) * dir ? s : a), SAMPLES[0]);
 
   const rules: { label: string; pick: () => HandPoseSample | undefined; sub: (s: HandPoseSample) => string }[] = [
-    { label: "Skeleton preview", pick: () => SAMPLES.find((s) => s.preview === "video"), sub: poseSub },
+    { label: "Video preview", pick: () => SAMPLES.find((s) => s.preview === "video"), sub: poseSub },
     { label: "Both hands, highest 3D pose share", pick: () => best((s) => s.minPosePct, 1), sub: poseSub },
     {
       label: "Highest guessed share",

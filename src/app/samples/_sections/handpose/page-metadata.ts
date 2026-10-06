@@ -17,7 +17,7 @@ import { HANDPOSE_PATH, HP_AGG } from "@/lib/samples/handpose";
  * a skeleton render and nothing else.
  */
 const OG_IMAGE = "/samples/hand-pose/og.jpg";
-const OG_ALT = "Skeleton render of both hands on a dark ground, left hand blue, right hand orange.";
+const OG_ALT = "A camera frame with the 21 joints of both hands drawn over it, left hand blue, right hand orange.";
 
 export function handPoseMetadata(): Metadata {
   const title = "Hand Pose Data Samples: 21 Joints per Hand in 3D";

@@ -128,7 +128,7 @@ const SORTS = [
  * samples with a skeleton video are the ones a first visit should open.
  */
 const HANDPOSE_SORTS = [
-  { key: "preview", label: "Skeleton preview first" },
+  { key: "preview", label: "Video preview first" },
   { key: "number", label: "Sample number" },
   { key: "pose", label: "3D pose share, lower hand, high to low" },
   { key: "longest", label: "Longest source" },
@@ -241,7 +241,7 @@ const SPEC_FACETS: Record<string, SpecFacet[]> = {
     {
       key: "Preview",
       title: "Preview",
-      order: ["skeleton preview", "preview on request"],
+      order: ["video preview", "preview on request"],
       caps: false,
       cross: true,
     },
@@ -1488,7 +1488,7 @@ export function SampleCatalog({
                 {/* Hand pose has no live data to count; what a reader asks of
                     it is how many samples they can watch. */}
                 {isHandPose ? (
-                  <>{totals.skeleton} with a skeleton preview</>
+                  <>{totals.skeleton} with a video preview</>
                 ) : (
                   <>{totals.live} with live data</>
                 )}

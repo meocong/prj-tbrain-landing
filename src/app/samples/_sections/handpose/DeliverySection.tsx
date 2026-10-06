@@ -76,8 +76,8 @@ function rows(): Row[] {
       tier: "open",
     },
     {
-      what: "Skeleton video",
-      contents: `Wearer-view render of both hands, 540 x 540, ${HP_FPS} fps, dark ground, no camera footage.`,
+      what: "Preview video",
+      contents: `The camera video with the 2D hand pose drawn over it, 540 x 540, ${HP_FPS} fps. Faces and bystanders blurred.`,
       format: ".mp4",
       tier: "open",
       note: videoSamples.length ? `samples ${joinAnd(videoSamples)}` : undefined,

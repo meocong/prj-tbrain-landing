@@ -165,9 +165,9 @@ function sections(hp: HandPoseSample, sample: Sample, longest: { left: number | 
 
   const preview =
     kind === "video"
-      ? `Skeleton render, 540 x 540, ${HP_FPS} fps. No camera footage.`
+      ? `Camera video with the hand pose drawn over it, 540 x 540, ${HP_FPS} fps. Faces and bystanders blurred.`
       : kind === "poster"
-        ? "Skeleton still only, 720 x 720. No camera footage. Skeleton video on request."
+        ? "Skeleton still only, 720 x 720. Video on request."
         : "Metrics and lane only. Preview on request.";
 
   // From the same list the page's field table prints, so the two cannot name

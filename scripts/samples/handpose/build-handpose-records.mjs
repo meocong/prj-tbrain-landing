@@ -73,7 +73,7 @@ function record(s) {
     job: null,
     telemetry: false,
     durationSec: s.seconds,
-    resolution: video ? "540 x 540 skeleton render" : "No public video",
+    resolution: video ? "540 x 540 camera video, hand pose overlay" : "No public video",
     fps: metrics.fps,
     streams: [
       "21 joints per hand, in metres",
@@ -85,7 +85,7 @@ function record(s) {
     spec: [
       ["Skill group", s.skillGroup],
       ["Both hands with 3D pose", BAND[s.bothHandsBand]],
-      ["Preview", video ? "Skeleton preview" : "Preview on request"],
+      ["Preview", video ? "Video preview" : "Preview on request"],
     ],
     breadcrumb: ["Samples", "Hand pose", s.title],
     // Printed as the card caption: the one line a buyer scans across a row.

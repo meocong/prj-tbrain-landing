@@ -12,7 +12,8 @@ import { FEATURED } from "./page-data";
 import { OpenRecordLink, TrackedLink } from "./page-links";
 
 /**
- * The page's hero: one skeleton render on a loop, the headline printed on it.
+ * The page's hero: six seconds of sample 13's camera video, the hand pose drawn
+ * over it and faces blurred, on a loop, the headline printed on it.
  *
  * Not `HeroReel`, for three reasons that all come from this being one short
  * clip rather than a rotation of long ones. The reel's `<video>` has no `loop`,
@@ -21,7 +22,7 @@ import { OpenRecordLink, TrackedLink } from "./page-links";
  * video with no check for reduced motion, so a reader who asked for stillness
  * would get motion back by switching tabs.
  *
- * The footage is a skeleton render on a dark ground in BOTH themes, so the band
+ * The backdrop is footage in BOTH themes, darkened by the scrims, so the band
  * is dark in both and the header goes white over it (`categoryHeroIsDark`).
  * Copy colours are fixed for the same reason: the backdrop is not the page.
  *
@@ -117,7 +118,7 @@ export function HandPoseHero() {
             playsInline
             preload="metadata"
             className="h-full w-full object-cover"
-            style={{ objectPosition: "85% 50%" }}
+            style={{ objectPosition: "68% 50%" }}
           />
         </div>
 
@@ -227,7 +228,7 @@ export function HandPoseHero() {
             <ul aria-label="What to expect" className="mt-6 flex flex-wrap gap-2">
               {[
                 "Preview without login",
-                "Previews are skeleton renders: no camera footage",
+                "Preview video with faces blurred",
                 `${HP_AGG.samples} samples, ${HP_AGG.minutes.toFixed(1)} min`,
               ].map((t) => (
                 <li
@@ -243,8 +244,8 @@ export function HandPoseHero() {
           </div>
         </div>
 
-        {/* What is on screen. A skeleton render says so in one line; without it
-            a reader has no way to know the backdrop is not footage. On a phone
+        {/* What is on screen, in one line: which sample, and that the lines
+            are the delivered pose drawn over the camera. On a phone
             it sits on the row of the back link, at the foot of the picture,
             rather than at the foot of the hero, where it would be a caption for
             nothing; its width stops short of the link, so at 320px it truncates
@@ -253,7 +254,7 @@ export function HandPoseHero() {
           className="pointer-events-none absolute right-4 top-[263px] max-w-[calc(100vw-9.5rem)] truncate text-right font-mono text-[10px] tracking-[0.08em] md:bottom-4 md:top-auto md:max-w-[min(60vw,28rem)] lg:right-10 xl:right-16"
           style={{ color: OVER_MEDIA.textDim }}
         >
-          {FEATURED.title} · skeleton render
+          {FEATURED.title} · camera video, hand pose overlay
         </p>
       </div>
     </section>

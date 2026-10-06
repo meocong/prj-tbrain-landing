@@ -186,18 +186,17 @@ const HAND_POSE_ENTRY: Category[] =
           shelf: null,
           badge: "New",
           wide: true,
-          /* The face and the header reel are skeleton renders of sample 13,
-             one of the two samples whose operator consented to a public
-             preview. Never a camera frame: the public layer of this category
-             has no footage. */
+          /* The face and the header reel are sample 13's camera video with the
+             hand pose drawn over it and faces blurred: one of the two samples
+             whose operator consented to a public preview. */
           face: "hand-pose-13",
-          // The hero render: composed 16:9 with both hands in the right half.
+          // The hero loop: 16:9, both hands right of centre.
           faceMedia: {
             poster: "/samples/hand-pose/hero-13.jpg",
             clip: "/samples/hand-pose/hero-13.mp4",
-            position: "85% 48%",
+            position: "68% 50%",
           },
-          reel: [{ slug: "hand-pose-13", title: "Fabric arranging · skeleton render" }],
+          reel: [{ slug: "hand-pose-13", title: "Fabric arranging · camera video" }],
         },
       ]
     : [];

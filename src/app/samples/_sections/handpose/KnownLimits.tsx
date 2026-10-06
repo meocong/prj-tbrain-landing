@@ -31,8 +31,8 @@ function items(): { key: string; text: string }[] {
       text: "Accuracy is reported as coverage and misses, not as joint error against marker mocap. No marker ground truth was captured.",
     },
     {
-      key: "No camera footage in public previews.",
-      text: "Public previews are skeleton renders with no camera footage.",
+      key: "Two samples have public video.",
+      text: "Their preview is the camera video with the hand pose drawn over it; faces and other people in view are blurred. The other samples show a skeleton still or the state lane only.",
     },
     {
       key: "Frames with no 3D pose are drawn empty.",

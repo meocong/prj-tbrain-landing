@@ -88,7 +88,7 @@ function items(): Item[] {
     },
     {
       q: `Why do only ${numberWord(videoSampleNumbers().length)} samples have a video?`,
-      a: `Public skeleton video is available for samples ${videos}. Every sample has its metrics and lane open.`,
+      a: `Samples ${videos} have public video with the hand pose drawn over it, because their operators agreed to a public preview. Every sample has its metrics and lane open, and video for the others is on request.`,
     },
   ];
 }

@@ -844,7 +844,7 @@
     "job": null,
     "telemetry": false,
     "durationSec": 74.6,
-    "resolution": "540 x 540 skeleton render",
+    "resolution": "540 x 540 camera video, hand pose overlay",
     "fps": 30,
     "streams": [
       "21 joints per hand, in metres",
@@ -868,7 +868,7 @@
       ],
       [
         "Preview",
-        "Skeleton preview"
+        "Video preview"
       ]
     ],
     "breadcrumb": [
@@ -919,7 +919,7 @@
     "job": null,
     "telemetry": false,
     "durationSec": 75.2,
-    "resolution": "540 x 540 skeleton render",
+    "resolution": "540 x 540 camera video, hand pose overlay",
     "fps": 30,
     "streams": [
       "21 joints per hand, in metres",
@@ -943,7 +943,7 @@
       ],
       [
         "Preview",
-        "Skeleton preview"
+        "Video preview"
       ]
     ],
     "breadcrumb": [

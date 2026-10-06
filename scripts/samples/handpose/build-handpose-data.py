@@ -66,7 +66,7 @@ CSV_COLUMNS = [
     "right_measured", "right_guessed", "right_bridged", "right_no_3d_pose",
     "measured_of_delivered_pct", "guessed_of_delivered_pct",
     "left_missed_reported_pct", "right_missed_reported_pct",
-    "left_longest_gap_frames", "right_longest_gap_frames", "public_skeleton_video",
+    "left_longest_gap_frames", "right_longest_gap_frames", "public_video_preview",
 ]
 GAP_KEY = {"gate": "longestGapFrames", "lane": "longestNoPoseFrames"}
 

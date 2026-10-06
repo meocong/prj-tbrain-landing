@@ -72,16 +72,16 @@ export function ViewerMedia({
             playsInline
             controls
             preload="metadata"
-            aria-label={`${title}, skeleton render of both hands`}
+            aria-label={`${title}, camera video with the hand pose drawn over it`}
             onError={() => setFailed(true)}
           />
         </div>
         <figcaption className="bp-mono mt-2 text-[10px]" style={{ color: C.textDim }}>
-          Skeleton render, wearer view
+          Camera video, hand pose overlay · faces blurred
         </figcaption>
         {failed && (
           <p role="alert" className="mt-1 text-[11px]" style={{ color: C.danger }}>
-            The skeleton render could not be loaded. The state lane below still works.
+            The video could not be loaded. The state lane below still works.
           </p>
         )}
       </figure>
