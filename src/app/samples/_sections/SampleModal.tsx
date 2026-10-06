@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
+import dynamic from "next/dynamic";
 import { AnimatePresence, motion } from "framer-motion";
 import { useReducedMotion } from "@/lib/motion-pref";
 import { Box, X } from "lucide-react";
@@ -13,6 +14,26 @@ import { LiveTelemetry } from "./LiveTelemetry";
 import { AccessActions } from "./AccessActions";
 import { clipSrc, posterSrc, rigLayout } from "./rig-views";
 import { RigExplorer, hasRecording } from "./RigExplorer";
+import { ViewerSkeleton } from "./handpose/viewer-skeleton";
+
+/**
+ * The body of a hand-pose record: a client-only chunk, loaded when the first one
+ * opens, and only referenced where the category is published.
+ *
+ * The condition is the inlined env literal itself rather than the `HAND_POSE_ON`
+ * constant `flags.ts` exports from the same value. `"" === "1"` folds where it
+ * stands, which leaves the dynamic import below as dead code a production build
+ * can drop along with the chunk behind it; a constant imported from another
+ * module is folded only when the bundler happens to inline that module. Keep it
+ * in step with `HAND_POSE_ON`, as `SampleCatalog` does.
+ */
+const HandPoseViewer =
+  process.env.HAND_POSE_ON === "1"
+    ? dynamic(() => import("./handpose/HandPoseViewer").then((m) => m.HandPoseViewer), {
+        ssr: false,
+        loading: () => <ViewerSkeleton />,
+      })
+    : null;
 
 /**
  * The full record, opened over the catalogue instead of pushed into the grid.
@@ -39,6 +60,13 @@ import { RigExplorer, hasRecording } from "./RigExplorer";
  */
 
 const PANEL_MAX = "min(88dvh, 880px)";
+
+/**
+ * A hand-pose record has a lane, a legend and a readout to fit beside the clip,
+ * so its panel is wider and taller than the generic one. 94dvh is about as tall
+ * as a panel can be with the overlay's 24px of padding above and below it.
+ */
+const HP_PANEL_MAX = "min(94dvh, 940px)";
 
 function mmss(total: number) {
   const m = Math.floor(total / 60);
@@ -67,11 +95,14 @@ export function SampleModal({
   sample,
   onClose,
   lensMode = "pair",
+  initialFrame = null,
 }: {
   sample: Sample | null;
   onClose: () => void;
   /** Same as the card's: every lens only on the multi-lens option's page. */
   lensMode?: "pair" | "all";
+  /** Hand pose: the frame to open on, from `?f=` or `openRecord(slug, frame)`. */
+  initialFrame?: number | null;
 }) {
   const [mounted, setMounted] = useState(false);
   const [video, setVideo] = useState<HTMLVideoElement | null>(null);
@@ -128,13 +159,21 @@ export function SampleModal({
   const panel = useRef<HTMLDivElement>(null);
   const reduce = useReducedMotion();
 
+  /* Hand pose swaps the whole body for its own viewer. `HandPoseViewer` is null
+     wherever the category is not published, and then the generic body below is
+     all there is. */
+  const isHandPose = sample?.modality === "handpose" && HandPoseViewer !== null;
+
   useEffect(() => setMounted(true), []);
 
   /** Tab must not walk out of an `aria-modal` dialog into the page behind it. */
   const trap = useCallback((e: React.KeyboardEvent) => {
     if (e.key !== "Tab" || !panel.current) return;
+    // Form controls are in the list for the records that carry them: a field
+    // left out of it can be the first or last stop and let Tab walk past the
+    // end of the dialog.
     const focusable = panel.current.querySelectorAll<HTMLElement>(
-      'a[href], button:not([disabled]), video[controls], [tabindex]:not([tabindex="-1"])',
+      'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), video[controls], [tabindex]:not([tabindex="-1"])',
     );
     if (!focusable.length) return;
     const first = focusable[0];
@@ -148,10 +187,26 @@ export function SampleModal({
     }
   }, []);
 
+  /* `onClose` is a new arrow on every render of the catalogue, so the effect
+     below cannot depend on it. It focuses the panel when it runs and hands focus
+     back to the opener when it cleans up: re-run on every catalogue render it
+     would pull focus off whatever the reader is using in the record — a lane, a
+     video — and would take the panel itself for the opener. */
+  const onCloseRef = useRef(onClose);
   useEffect(() => {
-    if (!sample) return;
+    onCloseRef.current = onClose;
+  });
+
+  const slug = sample?.slug;
+  useEffect(() => {
+    if (!slug) return;
+    // What had focus when the record opened: a card, a "Start here" chip, a row
+    // of the table. Focus goes back there on close, as `RigExplorer` does for
+    // the 3D layer, so a keyboard reader lands where they left off instead of at
+    // the top of the page.
+    const opener = document.activeElement instanceof HTMLElement ? document.activeElement : null;
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") onClose();
+      if (e.key === "Escape") onCloseRef.current();
     };
     // Freezing the page keeps the invoking card where the reader left it. Pad by
     // the scrollbar width the lock removes, or the whole layout jumps sideways.
@@ -166,8 +221,23 @@ export function SampleModal({
       body.style.overflow = prev.overflow;
       body.style.paddingRight = prev.pad;
       window.removeEventListener("keydown", onKey);
+      // The opener may have gone: a filter that ran while the record was open
+      // can unmount the card.
+      // Marked while it happens, so a card that plays its loop on keyboard
+      // focus can tell this scripted return from a reader tabbing onto it.
+      if (opener && opener !== body && opener.isConnected) {
+        body.dataset.restoringFocus = "1";
+        opener.focus();
+        delete body.dataset.restoringFocus;
+      }
     };
-  }, [sample, onClose]);
+  }, [slug]);
+
+  /* A drag that starts inside the record and ends on the backdrop — a playhead
+     dragged past the panel's edge, a text selection — makes the browser fire
+     `click` on their common ancestor, which is the backdrop. Closing takes the
+     press to have started on it too. */
+  const pressedBackdrop = useRef(false);
 
   if (!mounted) return null;
 
@@ -189,7 +259,14 @@ export function SampleModal({
           exit={{ opacity: 0, backdropFilter: "blur(0px)" }}
           transition={{ duration: 0.22, ease: "easeOut" }}
           style={{ background: "rgba(7,9,15,0.58)" }}
-          onClick={onClose}
+          onPointerDown={(e) => {
+            pressedBackdrop.current = e.target === e.currentTarget;
+          }}
+          onClick={(e) => {
+            const pressed = pressedBackdrop.current;
+            pressedBackdrop.current = false;
+            if (pressed && e.target === e.currentTarget) onClose();
+          }}
           role="presentation"
         >
           <motion.div
@@ -199,9 +276,11 @@ export function SampleModal({
             aria-modal="true"
             aria-label={sample.title}
             onKeyDown={trap}
-            className="samples-scope relative flex w-full max-w-[1240px] flex-col overflow-hidden rounded-xl outline-none"
+            className={`samples-scope relative flex w-full flex-col overflow-hidden rounded-xl outline-none ${
+              isHandPose ? "max-w-[1320px]" : "max-w-[1240px]"
+            }`}
             style={{
-              maxHeight: PANEL_MAX,
+              maxHeight: isHandPose ? HP_PANEL_MAX : PANEL_MAX,
               background: C.base,
               border: `1px solid ${C.hairline}`,
               boxShadow: "0 32px 80px -20px rgba(7,9,15,0.55)",
@@ -243,39 +322,52 @@ export function SampleModal({
                 >
                   {sample.title}
                 </h2>
-                <p className="mt-1.5 text-[12px]" style={{ color: C.textMid }}>
-                  {sample.breadcrumb.map((b, i) => (
-                    <span key={`${b}-${i}`}>
-                      {i > 0 && <span style={{ color: C.textDim }}> › </span>}
-                      <span style={{ color: i === 0 ? C.value : C.textMid }}>{b}</span>
-                    </span>
-                  ))}
-                </p>
-                {/* Without `sample.locale`. It appended the city — `Hanoi`,
-                    and on four records the commune `Xa Van Giang` — to a line
-                    that already names the trade and the kind of premises. That
-                    combination is the locator Tam asked us to cut, and it read
-                    as scene-setting rather than as an address, which is why it
-                    survived the first pass over the spec table. */}
-                <p className="mt-1 text-[12px]" style={{ color: C.textDim }}>
-                  {sceneLine(sample.environment, sample.breadcrumb)}
-                </p>
-                <ul className="mt-2.5 flex flex-wrap gap-1.5">
-                  {sample.pills
-                    .filter((p) => !(PILL_KINDS_DROPPED as string[]).includes(p.k))
-                    .map((pill) => {
-                      const st = PILL[pill.k];
-                      return (
-                        <li
-                          key={pill.t}
-                          className="rounded-full px-2.5 py-1 text-[11px]"
-                          style={{ background: st.bg, color: st.fg, border: `1px solid ${st.bd}` }}
-                        >
-                          {pill.t}
-                        </li>
-                      );
-                    })}
-                </ul>
+                {/* A plain block for every record but hand pose, whose
+                    breadcrumb and pills share one row: the panel is shorter
+                    than the generic one on a laptop, and the lane has to fit. */}
+                {/* On a phone the trail and pills would take a quarter of the screen above
+                    a lane the reader opened the record for; the card they came
+                    from showed both. */}
+                <div className={isHandPose ? "mt-1.5 hidden flex-wrap items-center gap-x-5 gap-y-2 sm:flex" : undefined}>
+                  <p className={isHandPose ? "text-[12px]" : "mt-1.5 text-[12px]"} style={{ color: C.textMid }}>
+                    {sample.breadcrumb.map((b, i) => (
+                      <span key={`${b}-${i}`}>
+                        {i > 0 && <span style={{ color: C.textDim }}> › </span>}
+                        <span style={{ color: i === 0 ? C.value : C.textMid }}>{b}</span>
+                      </span>
+                    ))}
+                  </p>
+                  {/* Without `sample.locale`. It appended the city — `Hanoi`,
+                      and on four records the commune `Xa Van Giang` — to a line
+                      that already names the trade and the kind of premises. That
+                      combination is the locator Tam asked us to cut, and it read
+                      as scene-setting rather than as an address, which is why it
+                      survived the first pass over the spec table. */}
+                  {/* Hand pose publishes no scene at all: its records carry an
+                      empty `environment`, and an empty line would still take
+                      its margin. */}
+                  {!isHandPose && (
+                    <p className="mt-1 text-[12px]" style={{ color: C.textDim }}>
+                      {sceneLine(sample.environment, sample.breadcrumb)}
+                    </p>
+                  )}
+                  <ul className={`${isHandPose ? "" : "mt-2.5 "}flex flex-wrap gap-1.5`}>
+                    {sample.pills
+                      .filter((p) => !(PILL_KINDS_DROPPED as string[]).includes(p.k))
+                      .map((pill) => {
+                        const st = PILL[pill.k];
+                        return (
+                          <li
+                            key={pill.t}
+                            className="rounded-full px-2.5 py-1 text-[11px]"
+                            style={{ background: st.bg, color: st.fg, border: `1px solid ${st.bd}` }}
+                          >
+                            {pill.t}
+                          </li>
+                        );
+                      })}
+                  </ul>
+                </div>
               </div>
 
               <button
@@ -290,201 +382,269 @@ export function SampleModal({
             </motion.header>
 
             {/* ── Body: the only band that scrolls. `min-h-0` is what allows it. ── */}
-            <div className="flex min-h-0 flex-1 flex-col overflow-y-auto overscroll-contain lg:grid lg:grid-cols-12 lg:overflow-hidden">
-              {/* This pane does not scroll. Everything in it — the clip, its
-                  caption, and either the live readout or the delivery list — is
-                  sized to fit the band. It used to scroll, which meant rows slid
-                  under the sticky caption and were clipped in half. The video
-                  takes a viewport-relative height rather than a 4:3 box so the
-                  budget still holds on a short laptop. */}
-              <motion.div
-                className="flex min-h-0 flex-col overflow-hidden lg:col-span-5 lg:h-full"
-                style={{ borderRight: `1px solid ${C.hairlineSoft}` }}
-                variants={band}
-                initial="hidden"
-                animate="show"
-                transition={{ duration: 0.45, ease: EASE, delay: reduce ? 0 : 0.12 }}
-              >
-                {/* The clip's box absorbs whatever the caption and the readout
-                    below do not use, rather than claiming a fixed height and
-                    pushing them out of a pane that cannot scroll. At a fixed
-                    `min(32vh,300px)` the readout was clipped by 86px on a 700px
-                    viewport — silently, because the pane hides its overflow.
-                    `object-contain` means shrinking only letterboxes. */}
-                <div className="lg:min-h-0 lg:flex-1">
-                  {/* The slack around the clip paints as page, not as black.
-                      The pane's height is whatever the caption and readout leave
-                      over, so its box is almost never 4:3 — taller on a tall
-                      window, wider on a short one — and `object-contain` has to
-                      pad one axis or the other. Painted black that padding read
-                      as a black frame belonging to the video, on sources that
-                      are exactly 4:3 (576x432) and need no frame at all. Painted
-                      as page it reads as the clip sitting on the panel.
-
-                      Some robotics cuts do carry baked-in bars — a wide stereo
-                      strip letterboxed into the 4:3 canvas at encode time. Those
-                      stay: `object-cover` would crop real footage to hide them,
-                      and the fix belongs in preview generation. */}
-                  <div
-                    className={`grid w-full gap-px ${rig.cols} ${
-                      rig.kind === "single" ? "aspect-[4/3]" : rig.band
-                    } lg:aspect-auto lg:h-full`}
-                    style={{ background: C.base }}
-                  >
-                    {rig.cells.map(({ view, label, place }, i) => (
-                      <figure
-                        key={view || "base"}
-                        className={`relative m-0 min-h-0 overflow-hidden ${place}`}
-                      >
-                        <video
-                          ref={
-                            i === 0
-                              ? setVideo
-                              : (el) => {
-                                  followers.current[i] = el;
-                                }
-                          }
-                          className="h-full w-full object-contain"
-                          style={{ background: C.base }}
-                          src={clipSrc(sample.slug, view)}
-                          poster={posterSrc(sample.slug, view)}
-                          muted
-                          loop
-                          playsInline
-                          /* See `followers` above: one transport for the rig. */
-                          controls={i === 0}
-                          preload="metadata"
-                          aria-label={label ? `${sample.title} — ${label}` : sample.title}
-                        />
-                        {/* Every multi-view layout, not just the six-camera
-                            one. Three body-worn frames of the same bench, or a
-                            workbench beside a colourised distance field, need
-                            saying apart exactly as much as six lenses do — and
-                            the modal is the surface a reader opens BECAUSE
-                            they want the closer look. */}
-                        {(rig.kind === "six" || rig.kind === "body" || rig.kind === "depth") && (
-                          <figcaption
-                            className="bp-mono pointer-events-none absolute left-1.5 top-1.5 max-w-[calc(100%-12px)] truncate px-1.5 py-0.5 text-[9px]"
-                            style={{ background: OVER_MEDIA.scrim, color: OVER_MEDIA.text }}
-                          >
-                            {label}
-                          </figcaption>
-                        )}
-                      </figure>
-                    ))}
-                  </div>
-                </div>
-                <div
-                  className="flex flex-none items-center gap-3 px-5 py-2"
-                  style={{ borderBottom: `1px solid ${C.hairlineSoft}` }}
+            {isHandPose && HandPoseViewer ? (
+              /* Keyed by slug: opening another hand-pose record while one is up
+                 must start its lane, video and table afresh. */
+              <HandPoseViewer key={sample.slug} sample={sample} initialFrame={initialFrame} />
+            ) : (
+              <div className="flex min-h-0 flex-1 flex-col overflow-y-auto overscroll-contain lg:grid lg:grid-cols-12 lg:overflow-hidden">
+                {/* This pane does not scroll. Everything in it — the clip, its
+                    caption, and either the live readout or the delivery list — is
+                    sized to fit the band. It used to scroll, which meant rows slid
+                    under the sticky caption and were clipped in half. The video
+                    takes a viewport-relative height rather than a 4:3 box so the
+                    budget still holds on a short laptop. */}
+                <motion.div
+                  className="flex min-h-0 flex-col overflow-hidden lg:col-span-5 lg:h-full"
+                  style={{ borderRight: `1px solid ${C.hairlineSoft}` }}
+                  variants={band}
+                  initial="hidden"
+                  animate="show"
+                  transition={{ duration: 0.45, ease: EASE, delay: reduce ? 0 : 0.12 }}
                 >
-                  <p className="bp-mono min-w-0 flex-1 text-[10px]" style={{ color: C.textDim }}>
-                    {sample.preview}
-                  </p>
-                  {/* The same window in 3D, where a recording was built for it. */}
-                  {hasRecording(sample.slug) && (
-                    <button
-                      type="button"
-                      onClick={() => {
-                        video?.pause();
-                        setExploring(true);
-                      }}
-                      className="bp-mono inline-flex flex-none items-center gap-1.5 rounded-full px-3 py-1.5 text-[10px] transition-colors"
-                      style={{ border: `1px solid ${C.accent}`, color: C.accent }}
-                    >
-                      <Box className="h-3.5 w-3.5" />
-                      Explore in 3D
-                    </button>
-                  )}
-                </div>
-                {/* One or the other, never both: together they overran the pane
-                    and brought the scrollbar back. A record with per-frame data
-                    shows the readout, because that is what the scrubber is for.
-                    A record without one shows what ships instead of dead space —
-                    which is the question the downscaled preview raises anyway. */}
-                <div className="flex-none px-5 pb-5">
-                  {sample.telemetry ? (
-                    <LiveTelemetry slug={sample.slug} video={video} />
-                  ) : (
-                    <>
-                      <p
-                        className="bp-mono mt-4 text-[10px]"
-                        style={{ color: C.accent }}
-                      >
-                        In the delivery
-                      </p>
-                      <ul className="mt-2 grid grid-cols-2 gap-x-5">
-                        {sample.streams.map((s) => (
-                          <li
-                            key={s}
-                            className="py-[5px] font-mono text-[11px]"
-                            style={{ color: C.value, borderTop: `1px solid ${C.hairlineSoft}` }}
-                          >
-                            {s}
-                          </li>
-                        ))}
-                      </ul>
-                      <p className="mt-3 text-[11px] leading-relaxed" style={{ color: C.textDim }}>
-                        Ships as {sample.formats.join(", ")} · {sample.size}
-                      </p>
-                    </>
-                  )}
-                </div>
-              </motion.div>
+                  {/* The clip's box absorbs whatever the caption and the readout
+                      below do not use, rather than claiming a fixed height and
+                      pushing them out of a pane that cannot scroll. At a fixed
+                      `min(32vh,300px)` the readout was clipped by 86px on a 700px
+                      viewport — silently, because the pane hides its overflow.
+                      `object-contain` means shrinking only letterboxes. */}
+                  <div className="lg:min-h-0 lg:flex-1">
+                    {/* The slack around the clip paints as page, not as black.
+                        The pane's height is whatever the caption and readout leave
+                        over, so its box is almost never 4:3 — taller on a tall
+                        window, wider on a short one — and `object-contain` has to
+                        pad one axis or the other. Painted black that padding read
+                        as a black frame belonging to the video, on sources that
+                        are exactly 4:3 (576x432) and need no frame at all. Painted
+                        as page it reads as the clip sitting on the panel.
 
-              <motion.div
-                className="min-h-0 lg:col-span-7 lg:h-full lg:overflow-y-auto lg:overscroll-contain"
-                variants={band}
-                initial="hidden"
-                animate="show"
-                transition={{ staggerChildren: 0.04, delayChildren: reduce ? 0 : 0.16 }}
-              >
-                {/* The four figures a buyer checks before reading anything else.
-                    Sticky, so scrolling into the checksums does not cost you the
-                    answer to "how long, shot how, how big". */}
-                <dl
-                  className="sticky top-0 z-10 grid grid-cols-2 sm:grid-cols-4"
-                  style={{ background: C.base, borderBottom: `1px solid ${C.hairline}` }}
-                >
-                  {[
-                    // Not the delivered size: the pill row and the action bar
-                    // already carry it, and three prints of "486 MB" is noise.
-                    { k: "Source length", v: mmss(sample.durationSec) },
-                    { k: "Viewpoint", v: sample.viewpoint === "first-person" ? "1st person" : "3rd person" },
-                    // "1920 x 1080 per camera" wraps a strip cell to two lines
-                    // and skews the row. The qualifier is already spelled out in
-                    // the Streams section; the strip only needs the figure.
-                    { k: "Capture", v: /(\d+\s*x\s*\d+)/.exec(sample.resolution)?.[1] ?? sample.resolution },
-                    { k: "Frame rate", v: `${sample.fps} fps` },
-                  ].map((s, i) => (
+                        Some robotics cuts do carry baked-in bars — a wide stereo
+                        strip letterboxed into the 4:3 canvas at encode time. Those
+                        stay: `object-cover` would crop real footage to hide them,
+                        and the fix belongs in preview generation. */}
                     <div
-                      key={s.k}
-                      className="px-5 py-3 lg:px-7"
-                      style={{ borderLeft: i > 0 ? `1px solid ${C.hairlineSoft}` : undefined }}
+                      className={`grid w-full gap-px ${rig.cols} ${
+                        rig.kind === "single" ? "aspect-[4/3]" : rig.band
+                      } lg:aspect-auto lg:h-full`}
+                      style={{ background: C.base }}
                     >
-                      <dt className="text-[10px]" style={{ color: C.textDim }}>
-                        {s.k}
-                      </dt>
-                      <dd
-                        className="mt-0.5 font-mono text-[15px] tracking-tight"
-                        style={{ color: C.value }}
-                      >
-                        {s.v}
-                      </dd>
+                      {rig.cells.map(({ view, label, place }, i) => (
+                        <figure
+                          key={view || "base"}
+                          className={`relative m-0 min-h-0 overflow-hidden ${place}`}
+                        >
+                          <video
+                            ref={
+                              i === 0
+                                ? setVideo
+                                : (el) => {
+                                    followers.current[i] = el;
+                                  }
+                            }
+                            className="h-full w-full object-contain"
+                            style={{ background: C.base }}
+                            src={clipSrc(sample.slug, view)}
+                            poster={posterSrc(sample.slug, view)}
+                            muted
+                            loop
+                            playsInline
+                            /* See `followers` above: one transport for the rig. */
+                            controls={i === 0}
+                            preload="metadata"
+                            aria-label={label ? `${sample.title} — ${label}` : sample.title}
+                          />
+                          {/* Every multi-view layout, not just the six-camera
+                              one. Three body-worn frames of the same bench, or a
+                              workbench beside a colourised distance field, need
+                              saying apart exactly as much as six lenses do — and
+                              the modal is the surface a reader opens BECAUSE
+                              they want the closer look. */}
+                          {(rig.kind === "six" || rig.kind === "body" || rig.kind === "depth") && (
+                            <figcaption
+                              className="bp-mono pointer-events-none absolute left-1.5 top-1.5 max-w-[calc(100%-12px)] truncate px-1.5 py-0.5 text-[9px]"
+                              style={{ background: OVER_MEDIA.scrim, color: OVER_MEDIA.text }}
+                            >
+                              {label}
+                            </figcaption>
+                          )}
+                        </figure>
+                      ))}
                     </div>
-                  ))}
-                </dl>
+                  </div>
+                  <div
+                    className="flex flex-none items-center gap-3 px-5 py-2"
+                    style={{ borderBottom: `1px solid ${C.hairlineSoft}` }}
+                  >
+                    <p className="bp-mono min-w-0 flex-1 text-[10px]" style={{ color: C.textDim }}>
+                      {sample.preview}
+                    </p>
+                    {/* The same window in 3D, where a recording was built for it. */}
+                    {hasRecording(sample.slug) && (
+                      <button
+                        type="button"
+                        onClick={() => {
+                          video?.pause();
+                          setExploring(true);
+                        }}
+                        className="bp-mono inline-flex flex-none items-center gap-1.5 rounded-full px-3 py-1.5 text-[10px] transition-colors"
+                        style={{ border: `1px solid ${C.accent}`, color: C.accent }}
+                      >
+                        <Box className="h-3.5 w-3.5" />
+                        Explore in 3D
+                      </button>
+                    )}
+                  </div>
+                  {/* One or the other, never both: together they overran the pane
+                      and brought the scrollbar back. A record with per-frame data
+                      shows the readout, because that is what the scrubber is for.
+                      A record without one shows what ships instead of dead space —
+                      which is the question the downscaled preview raises anyway. */}
+                  <div className="flex-none px-5 pb-5">
+                    {sample.telemetry ? (
+                      <LiveTelemetry slug={sample.slug} video={video} />
+                    ) : (
+                      <>
+                        <p
+                          className="bp-mono mt-4 text-[10px]"
+                          style={{ color: C.accent }}
+                        >
+                          In the delivery
+                        </p>
+                        <ul className="mt-2 grid grid-cols-2 gap-x-5">
+                          {sample.streams.map((s) => (
+                            <li
+                              key={s}
+                              className="py-[5px] font-mono text-[11px]"
+                              style={{ color: C.value, borderTop: `1px solid ${C.hairlineSoft}` }}
+                            >
+                              {s}
+                            </li>
+                          ))}
+                        </ul>
+                        <p className="mt-3 text-[11px] leading-relaxed" style={{ color: C.textDim }}>
+                          Ships as {sample.formats.join(", ")} · {sample.size}
+                        </p>
+                      </>
+                    )}
+                  </div>
+                </motion.div>
 
-                {/* One column, not two.
-                    `columns-2` balances by height, so it cut the section list at
-                    an arbitrary row and halved the value track to ~340px — every
-                    checksum, uuid and path then wrapped. At full pane width the
-                    label takes a fixed 170px and a 64-character SHA-256 lands on
-                    one line. */}
-                <div className="px-5 pb-6 lg:px-7">
-                  {sections.map((section) => (
+                <motion.div
+                  className="min-h-0 lg:col-span-7 lg:h-full lg:overflow-y-auto lg:overscroll-contain"
+                  variants={band}
+                  initial="hidden"
+                  animate="show"
+                  transition={{ staggerChildren: 0.04, delayChildren: reduce ? 0 : 0.16 }}
+                >
+                  {/* The four figures a buyer checks before reading anything else.
+                      Sticky, so scrolling into the checksums does not cost you the
+                      answer to "how long, shot how, how big". */}
+                  <dl
+                    className="sticky top-0 z-10 grid grid-cols-2 sm:grid-cols-4"
+                    style={{ background: C.base, borderBottom: `1px solid ${C.hairline}` }}
+                  >
+                    {[
+                      // Not the delivered size: the pill row and the action bar
+                      // already carry it, and three prints of "486 MB" is noise.
+                      { k: "Source length", v: mmss(sample.durationSec) },
+                      { k: "Viewpoint", v: sample.viewpoint === "first-person" ? "1st person" : "3rd person" },
+                      // "1920 x 1080 per camera" wraps a strip cell to two lines
+                      // and skews the row. The qualifier is already spelled out in
+                      // the Streams section; the strip only needs the figure.
+                      { k: "Capture", v: /(\d+\s*x\s*\d+)/.exec(sample.resolution)?.[1] ?? sample.resolution },
+                      { k: "Frame rate", v: `${sample.fps} fps` },
+                    ].map((s, i) => (
+                      <div
+                        key={s.k}
+                        className="px-5 py-3 lg:px-7"
+                        style={{ borderLeft: i > 0 ? `1px solid ${C.hairlineSoft}` : undefined }}
+                      >
+                        <dt className="text-[10px]" style={{ color: C.textDim }}>
+                          {s.k}
+                        </dt>
+                        <dd
+                          className="mt-0.5 font-mono text-[15px] tracking-tight"
+                          style={{ color: C.value }}
+                        >
+                          {s.v}
+                        </dd>
+                      </div>
+                    ))}
+                  </dl>
+
+                  {/* One column, not two.
+                      `columns-2` balances by height, so it cut the section list at
+                      an arbitrary row and halved the value track to ~340px — every
+                      checksum, uuid and path then wrapped. At full pane width the
+                      label takes a fixed 170px and a 64-character SHA-256 lands on
+                      one line. */}
+                  <div className="px-5 pb-6 lg:px-7">
+                    {sections.map((section) => (
+                      <motion.section
+                        key={section.title}
+                        className="mt-6"
+                        variants={band}
+                        transition={{ duration: 0.4, ease: EASE }}
+                      >
+                        <div className="flex items-center gap-2.5">
+                          <span
+                            aria-hidden
+                            className="h-[11px] w-[2px] rounded-full"
+                            style={{ background: C.accent }}
+                          />
+                          <h3
+                            className="bp-mono text-[10px]"
+                            style={{ color: C.value }}
+                          >
+                            {section.title}
+                          </h3>
+                          <span
+                            aria-hidden
+                            className="h-px flex-1"
+                            style={{ background: C.hairline }}
+                          />
+                        </div>
+                        {/* No rule between rows. A record carries 31 of them, and
+                            a hairline under each turned the group headings into
+                            noise: 31 evenly spaced lines read as one texture, so
+                            nothing was findable without reading every label. The
+                            groups already have a rule at their heading, which is
+                            the one separator this list needs. Alignment does the
+                            rest — a fixed label column and a mono value column
+                            give the eye two straight edges to run down. */}
+                        <dl className="mt-2">
+                          {section.rows.map(([k, v]) => (
+                            <div
+                              key={k}
+                              className="grid grid-cols-[minmax(0,10.5rem)_1fr] items-baseline gap-x-5 py-[5px]"
+                            >
+                              <dt
+                                className="text-[11px] leading-relaxed"
+                                style={{ color: C.textDim }}
+                              >
+                                {k}
+                              </dt>
+                              <dd
+                                className={`min-w-0 font-mono text-[11px] leading-relaxed ${
+                                  /\s/.test(v) ? "break-words" : "break-all"
+                                }`}
+                                style={{ color: C.value }}
+                              >
+                                {v}
+                              </dd>
+                            </div>
+                          ))}
+                        </dl>
+                      </motion.section>
+                    ))}
+
+                    {/* Licence last, because it is the question a buyer resolves
+                        after deciding they want the data. Both catalogues we read
+                        print it on every card; ours is provisional and says so
+                        through QUALIFIER rather than a badge - "indicative terms,
+                        the agreement governs" is a normal thing for a vendor to
+                        publish, a PROVISIONAL stamp is not. */}
                     <motion.section
-                      key={section.title}
                       className="mt-6"
                       variants={band}
                       transition={{ duration: 0.4, ease: EASE }}
@@ -499,98 +659,36 @@ export function SampleModal({
                           className="bp-mono text-[10px]"
                           style={{ color: C.value }}
                         >
-                          {section.title}
+                          Licence
                         </h3>
-                        <span
-                          aria-hidden
-                          className="h-px flex-1"
-                          style={{ background: C.hairline }}
-                        />
+                        <span aria-hidden className="h-px flex-1" style={{ background: C.hairline }} />
                       </div>
-                      {/* No rule between rows. A record carries 31 of them, and
-                          a hairline under each turned the group headings into
-                          noise: 31 evenly spaced lines read as one texture, so
-                          nothing was findable without reading every label. The
-                          groups already have a rule at their heading, which is
-                          the one separator this list needs. Alignment does the
-                          rest — a fixed label column and a mono value column
-                          give the eye two straight edges to run down. */}
                       <dl className="mt-2">
-                        {section.rows.map(([k, v]) => (
+                        {LICENSE.map((t) => (
                           <div
-                            key={k}
+                            key={t.label}
                             className="grid grid-cols-[minmax(0,10.5rem)_1fr] items-baseline gap-x-5 py-[5px]"
                           >
-                            <dt
-                              className="text-[11px] leading-relaxed"
-                              style={{ color: C.textDim }}
-                            >
-                              {k}
+                            <dt className="text-[11px] leading-relaxed" style={{ color: C.textDim }}>
+                              {t.label}
                             </dt>
                             <dd
-                              className={`min-w-0 font-mono text-[11px] leading-relaxed ${
-                                /\s/.test(v) ? "break-words" : "break-all"
-                              }`}
+                              className="min-w-0 break-words font-mono text-[11px] leading-relaxed"
                               style={{ color: C.value }}
                             >
-                              {v}
+                              {t.value}
                             </dd>
                           </div>
                         ))}
                       </dl>
+                      <p className="mt-3 text-[11px]" style={{ color: C.textDim }}>
+                        {QUALIFIER}
+                      </p>
                     </motion.section>
-                  ))}
-
-                  {/* Licence last, because it is the question a buyer resolves
-                      after deciding they want the data. Both catalogues we read
-                      print it on every card; ours is provisional and says so
-                      through QUALIFIER rather than a badge - "indicative terms,
-                      the agreement governs" is a normal thing for a vendor to
-                      publish, a PROVISIONAL stamp is not. */}
-                  <motion.section
-                    className="mt-6"
-                    variants={band}
-                    transition={{ duration: 0.4, ease: EASE }}
-                  >
-                    <div className="flex items-center gap-2.5">
-                      <span
-                        aria-hidden
-                        className="h-[11px] w-[2px] rounded-full"
-                        style={{ background: C.accent }}
-                      />
-                      <h3
-                        className="bp-mono text-[10px]"
-                        style={{ color: C.value }}
-                      >
-                        Licence
-                      </h3>
-                      <span aria-hidden className="h-px flex-1" style={{ background: C.hairline }} />
-                    </div>
-                    <dl className="mt-2">
-                      {LICENSE.map((t) => (
-                        <div
-                          key={t.label}
-                          className="grid grid-cols-[minmax(0,10.5rem)_1fr] items-baseline gap-x-5 py-[5px]"
-                        >
-                          <dt className="text-[11px] leading-relaxed" style={{ color: C.textDim }}>
-                            {t.label}
-                          </dt>
-                          <dd
-                            className="min-w-0 break-words font-mono text-[11px] leading-relaxed"
-                            style={{ color: C.value }}
-                          >
-                            {t.value}
-                          </dd>
-                        </div>
-                      ))}
-                    </dl>
-                    <p className="mt-3 text-[11px]" style={{ color: C.textDim }}>
-                      {QUALIFIER}
-                    </p>
-                  </motion.section>
-                </div>
-              </motion.div>
-            </div>
+                  </div>
+                </motion.div>
+              </div>
+            )}
 
             {/* ── Action bar: pinned, because this is what the page is for. ── */}
             <motion.footer

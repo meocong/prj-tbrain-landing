@@ -1141,6 +1141,18 @@ html.dark body {
   --sm-pill-ok-bg: color-mix(in srgb, var(--bp-green) 10%, transparent);
   --sm-pill-ok-fg: var(--bp-green);
   --sm-pill-ok-bd: color-mix(in srgb, var(--bp-green) 28%, transparent);
+
+  /* Hand pose: hue says WHICH hand, drawing style says how the frame was
+     obtained. Okabe-Ito sky blue and orange on the dark ground; on paper both
+     step darker, because #56B4E9 and #E69F00 are 2:1 there and these carry
+     11px figures. Measured on --sm-base / --sm-band:
+       light  #0068A6 5.49 / 4.96   #9C5000 5.44 / 4.92
+       dark   #56B4E9 8.30          #E69F00 8.50
+     Left against right stays apart under Machado deuteranopia and protanopia
+     at full severity: deltaE 95 / 83 light, 111 / 101 dark. The skeleton
+     renders are media and keep the dark pair in both themes. */
+  --hp-left: #0068A6;
+  --hp-right: #9C5000;
 }
 
 .dark .samples-scope {
@@ -1183,6 +1195,60 @@ html.dark body {
      ink it shares the card with takes it to 6.35 without introducing a fifth
      literal, and without touching the light half, which already passes. */
   --sm-pill-skill-fg: color-mix(in srgb, var(--bp-purple) 70%, var(--bp-ink));
+
+  --hp-left: #56B4E9;
+  --hp-right: #E69F00;
+}
+
+/* ── Hand-pose state lanes ──
+   One row per hand. `--hp-c` is the hand's hue, set on the row. Measured is a
+   solid fill, guessed a hatch, bridged a stipple, and no 3D pose leaves the
+   bare track — so the state survives greyscale and colour-vision deficiency.
+   The hatch is drawn over a 22% tint of the same hue so a short guessed run
+   still reads as part of that hand's row rather than as a gap. */
+.samples-scope .hp-lane-row {
+  position: relative;
+  display: block;
+  overflow: hidden;
+}
+
+.samples-scope .hp-lane-track {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 0;
+  border-top: 1px dashed color-mix(in srgb, var(--sm-text-dim) 55%, transparent);
+}
+
+.samples-scope .hp-run {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+}
+
+.samples-scope .hp-run[data-state="1"] {
+  background: var(--hp-c);
+}
+
+.samples-scope .hp-run[data-state="2"] {
+  background:
+    repeating-linear-gradient(135deg, var(--hp-c) 0 1.6px, transparent 1.6px 4px),
+    color-mix(in srgb, var(--hp-c) 22%, transparent);
+}
+
+.samples-scope .hp-run[data-state="3"] {
+  background:
+    radial-gradient(circle, var(--hp-c) 0 0.9px, transparent 1.3px) 0 0 / 3px 3px,
+    color-mix(in srgb, var(--hp-c) 12%, transparent);
+}
+
+/* Windows High Contrast drops backgrounds; keep the runs as outlines there.
+   The text alternative (counts, readout, run table) carries the detail. */
+@media (forced-colors: active) {
+  .samples-scope .hp-run {
+    border: 1px solid CanvasText;
+  }
 }
 
 /* Native video chrome is drawn by the UA, so it needs the theme announced

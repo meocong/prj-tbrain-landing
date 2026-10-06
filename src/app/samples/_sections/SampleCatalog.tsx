@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useId, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import { Check, ChevronDown, Copy, Search, SlidersHorizontal, X } from "lucide-react";
 import samples from "@/lib/samples/samples.json";
@@ -13,6 +13,7 @@ import { track } from "@/lib/samples/track";
 import { requestUrl } from "@/lib/samples/request-link";
 import { CAPABILITY, IN_FLIGHT, INTEROP } from "@/lib/samples/capability";
 import { type LineKey } from "@/lib/samples/datasets";
+import { OPEN_RECORD_EVENT, frameFromUrl, type OpenRecordDetail } from "@/lib/samples/open-record";
 import { AccessStrip } from "./AccessActions";
 import { LiveTelemetry } from "./LiveTelemetry";
 import { C, OVER_MEDIA, PILL, type Sample } from "./tokens";
@@ -36,6 +37,29 @@ const ALL = samples as unknown as Sample[];
 /* The staged views and the rig elevation moved to `rig-views.ts` when the
    record modal needed the same two things. One table, two surfaces. */
 
+/* Hand pose is published on staging and not yet on production (HAND_POSE_ON,
+   decided in `next.config.ts`). Its card and its metrics are loaded under that
+   condition, and the condition is written out against `process.env` HERE
+   rather than imported from `flags.ts`: a bundler can only drop the dead
+   `require` when the condition sits in the same file as the call, and this
+   component ships on every category page, so a static import would put the
+   hand-pose metrics in production's JavaScript. `downloads.ts` does the same
+   for the manifest. Keep the literal in step with `HAND_POSE_ON`. */
+type HandPoseLib = typeof import("@/lib/samples/handpose");
+const HP: HandPoseLib | null =
+  process.env.HAND_POSE_ON === "1"
+    ? // eslint-disable-next-line @typescript-eslint/no-require-imports
+      require("@/lib/samples/handpose")
+    : null;
+const HandPoseCard: typeof import("./handpose/HandPoseCard").HandPoseCard | null =
+  process.env.HAND_POSE_ON === "1"
+    ? // eslint-disable-next-line @typescript-eslint/no-require-imports
+      require("./handpose/HandPoseCard").HandPoseCard
+    : null;
+
+/** The metrics behind a hand-pose record: what its sorts and its tile counts read. */
+const handPoseOf = (s: Sample) => HP?.handPoseSample(s.slug) ?? null;
+
 
 /**
  * Cards revealed per step.
@@ -45,6 +69,9 @@ const ALL = samples as unknown as Sample[];
  * already narrowed to one kind of work before they get here and twelve is a
  * full screen with a "Show more" one press away. Each card mounts a `<video>`,
  * so this number is the page's media budget more than it is a row count.
+ *
+ * It is the default. A catalogue that wants another asks with `pageSize`: hand
+ * pose holds sixteen records, mounts two videos, and shows them on one page.
  */
 const PAGE = 12;
 
@@ -91,7 +118,30 @@ const SORTS = [
   { key: "title", label: "Title" },
 ] as const;
 
-type SortKey = (typeof SORTS)[number]["key"];
+/**
+ * Hand pose has no live data to put first, and one thing a buyer ranks by that
+ * no other category has: how much of the clip carries a 3D pose. That one runs
+ * HIGH TO LOW and says so in its label. The question is "which clips can I
+ * evaluate on", so the best come first; it is the lower hand's share, because a
+ * clip with one good hand and one that is mostly absent is not a good clip for
+ * work with both. The preview sort leads because it is the default: the two
+ * samples with a skeleton video are the ones a first visit should open.
+ */
+const HANDPOSE_SORTS = [
+  { key: "preview", label: "Skeleton preview first" },
+  { key: "number", label: "Sample number" },
+  { key: "pose", label: "3D pose share, lower hand, high to low" },
+  { key: "longest", label: "Longest source" },
+  { key: "shortest", label: "Shortest source" },
+  { key: "title", label: "Title" },
+] as const;
+
+type SortKey = (typeof SORTS)[number]["key"] | (typeof HANDPOSE_SORTS)[number]["key"];
+
+/** Every other category keeps exactly the four sorts and the default it always had. */
+const sortsFor = (scope: string): readonly { key: SortKey; label: string }[] =>
+  scope === "handpose" ? HANDPOSE_SORTS : SORTS;
+const defaultSort = (scope: string): SortKey => (scope === "handpose" ? "preview" : "longest");
 
 interface Filters {
   /** The category. Fixed by the route; never a facet on this page. */
@@ -143,7 +193,28 @@ interface Filters {
  * Egocentric's axes are typed fields on `Sample` and stay above; this is for
  * the ones that only exist inside `spec`, which differ per category by nature.
  */
-const SPEC_FACETS: Record<string, { key: string; title: string; order?: string[] }[]> = {
+interface SpecFacet {
+  key: string;
+  title: string;
+  order?: string[];
+  /**
+   * Capitalise the chip label. On by default, because the source stores `hard`
+   * and `combat`; off where the data already says what it means ("95% or more"
+   * would print as "95% Or More").
+   */
+  caps?: boolean;
+  /**
+   * Count each chip against the OTHER spec facets as well. Off by default,
+   * which is how egocentric and gaming have always counted: every spec facet is
+   * lifted at once, so with two on, a chip's number ignores the other's pick
+   * and can promise records the combination does not have. Hand pose has two,
+   * and a count that leads to an empty grid is the one thing this rail is
+   * written never to do.
+   */
+  cross?: boolean;
+}
+
+const SPEC_FACETS: Record<string, SpecFacet[]> = {
   egocentric: [
     // A scale, so the chips follow it. Sorted alphabetically they would read
     // easy, hard, medium — a difficulty scale that goes down and then up.
@@ -154,6 +225,26 @@ const SPEC_FACETS: Record<string, { key: string; title: string; order?: string[]
     { key: "Title", title: "Game" },
     { key: "Session type", title: "Session" },
     { key: "Stress category", title: "Stress" },
+  ],
+  /* Hand pose's two axes. Both are rows the records carry in `spec` (the
+     builder writes them from the same metrics the cards draw), and both are
+     scales or two-way splits, so the order is fixed rather than alphabetical:
+     the lower-cased values are what `order` is matched against. */
+  handpose: [
+    {
+      key: "Both hands with 3D pose",
+      title: "Both hands with 3D pose",
+      order: ["95% or more", "80 to 95%", "below 80%"],
+      caps: false,
+      cross: true,
+    },
+    {
+      key: "Preview",
+      title: "Preview",
+      order: ["skeleton preview", "preview on request"],
+      caps: false,
+      cross: true,
+    },
   ],
 };
 
@@ -233,8 +324,13 @@ function mmss(total: number) {
   return `${m}:${String(s).padStart(2, "0")}`;
 }
 
-/** Within a facet the selected values are OR-ed; across facets they are AND-ed. */
-function matches(s: Sample, f: Filters, skip?: keyof Filters) {
+/**
+ * Within a facet the selected values are OR-ed; across facets they are AND-ed.
+ *
+ * `liftSpec` lifts ONE spec facet and keeps the rest, where `skip: "spec"`
+ * lifts them all — see `SpecFacet.cross`.
+ */
+function matches(s: Sample, f: Filters, skip?: keyof Filters, liftSpec?: string) {
   const on = (k: keyof Filters) => k !== skip;
   // Scope sits outside `skip`: it is the route, not a facet, so a facet count
   // is always computed WITHIN the category the reader opened.
@@ -260,7 +356,7 @@ function matches(s: Sample, f: Filters, skip?: keyof Filters) {
   if (on("job") && f.job !== "all" && s.job !== f.job) return false;
   if (on("spec")) {
     for (const [key, picked] of Object.entries(f.spec)) {
-      if (!picked.length) continue;
+      if (!picked.length || key === liftSpec) continue;
       const v = specCell(s, key);
       if (!v || !picked.includes(v)) return false;
     }
@@ -741,18 +837,29 @@ function CapabilityPanel({
 function RailGroup({
   title,
   first,
+  grouped,
   children,
 }: {
   title: string;
   first?: boolean;
+  /**
+   * Name the chips as a group: `role="group"` labelled by the title. A set of
+   * toggle buttons with no group announces each chip alone ("95% or more,
+   * toggle button") and never says what it is a choice of. Hand pose only; the
+   * other categories' rails are left as they were.
+   */
+  grouped?: boolean;
   children: React.ReactNode;
 }) {
+  const titleId = useId();
   return (
     <div
       className={first ? "pb-5 pt-6" : "py-5"}
       style={first ? undefined : { borderTop: `1px solid ${C.hairline}` }}
+      role={grouped ? "group" : undefined}
+      aria-labelledby={grouped ? titleId : undefined}
     >
-      <p className="bp-mono mb-2 text-[10px]" style={{ color: C.textDim }}>
+      <p id={grouped ? titleId : undefined} className="bp-mono mb-2 text-[10px]" style={{ color: C.textDim }}>
         {title}
       </p>
       <div className="-mx-2.5 space-y-0.5">{children}</div>
@@ -771,6 +878,8 @@ export function SampleCatalog({
   modality,
   skillGroup,
   tier,
+  records = ALL,
+  pageSize = PAGE,
 }: {
   modality: string;
   /**
@@ -785,8 +894,41 @@ export function SampleCatalog({
   /** The camera configuration the reader arrived through. Seeded like
       `skillGroup` and just as deselectable. */
   tier?: string;
+  /**
+   * The records this catalogue lists, and the only ones a deep link, an
+   * `OPEN_RECORD_EVENT` or a facet count can reach. Defaults to `samples.json`,
+   * which holds every category but hand pose: those sixteen live in
+   * `handpose-records.json` so no site-wide count moves, and the hand-pose page
+   * passes them in. A record outside this list cannot open here, so a hand-pose
+   * slug in the URL of another category's page opens nothing.
+   */
+  records?: Sample[];
+  /** Cards per page. The category pages keep twelve; hand pose shows all sixteen. */
+  pageSize?: number;
 }) {
+  const all = records;
   const [active, setActive] = useState<Sample | null>(null);
+  /* `&f=`: the frame the record opens at. It is state rather than a read of the
+     URL inside the modal because this component deletes `f` from the address
+     whenever the open record changes (below), and the modal opens after that. */
+  const [initialFrame, setInitialFrame] = useState<number | null>(null);
+
+  /* The card opens a record with no frame: an `&f=` or an event's frame belongs
+     to the open that carried it, and must not seek the next record. */
+  const open = useCallback((s: Sample) => {
+    setInitialFrame(null);
+    setActive(s);
+  }, []);
+
+  /* Memoised, so the modal is handed the same function on every render of this
+     catalogue. It re-focused its own root whenever this changed, which pulled
+     focus off a lane or a video inside the record at every keystroke in the
+     search box behind it and every facet count. */
+  const close = useCallback(() => {
+    setActive(null);
+    setInitialFrame(null);
+  }, []);
+
   // Every lens only where the reader came to buy the multi-lens option.
   const lensMode: "pair" | "all" = tier === "stereo6" ? "all" : "pair";
   /* A record is addressable: `/samples?record=<slug>`.
@@ -806,14 +948,37 @@ export function SampleCatalog({
   useEffect(() => {
     const slug = new URLSearchParams(window.location.search).get("record");
     if (!slug) return;
-    const found = ALL.find((s) => s.slug === slug);
-    if (found) setActive(found);
+    const found = all.find((s) => s.slug === slug);
+    if (!found) return;
+    // Read before the effect below drops `f` from the address.
+    setInitialFrame(frameFromUrl());
+    setActive(found);
   }, []);
+
+  /* A link elsewhere on the page — a hero button, a "Start here" chip, a row of
+     the comparison table — opens a record through `openRecord()`. Changing only
+     the query string would not do it: a soft navigation to the same page does
+     not remount this component, so the `?record=` read above never runs. */
+  useEffect(() => {
+    const onOpen = (e: Event) => {
+      const { slug, frame } = (e as CustomEvent<OpenRecordDetail>).detail ?? {};
+      const found = slug ? all.find((s) => s.slug === slug) : undefined;
+      if (!found) return;
+      setInitialFrame(typeof frame === "number" && Number.isFinite(frame) && frame >= 0 ? Math.floor(frame) : null);
+      setActive(found);
+    };
+    window.addEventListener(OPEN_RECORD_EVENT, onOpen);
+    return () => window.removeEventListener(OPEN_RECORD_EVENT, onOpen);
+  }, [all]);
 
   useEffect(() => {
     const url = new URL(window.location.href);
     if (active) url.searchParams.set("record", active.slug);
     else url.searchParams.delete("record");
+    // `f` belongs to one open record and has already been read into
+    // `initialFrame`; one left over from the last record must not seek the
+    // next. A link to a frame comes from the viewer's "Copy link to this frame".
+    url.searchParams.delete("f");
     const next = `${url.pathname}${url.search}${url.hash}`;
     if (next !== `${window.location.pathname}${window.location.search}${window.location.hash}`) {
       window.history.replaceState(null, "", next);
@@ -851,11 +1016,21 @@ export function SampleCatalog({
 
   /** Records in the reader's line, before any facet narrows them. */
   const inLine = useMemo(
-    () => ALL.filter((s) => s.modality === f.scope).length,
-    [f.scope],
+    () => all.filter((s) => s.modality === f.scope).length,
+    [all, f.scope],
   );
 
-  const [sort, setSort] = useState<SortKey>("longest");
+  /** Hand pose: the same catalogue, with its own sorts, strings and card. */
+  const isHandPose = f.scope === "handpose";
+
+  const [sort, setSort] = useState<SortKey>(() => defaultSort(modality));
+  /* The sorts a category offers differ (hand pose has its own), and a client
+     navigation between categories keeps this state. A sort the new category
+     does not offer falls back to that category's default rather than leaving
+     the picker showing nothing selected. For every other category the two
+     lists are the same one, so this is `sort` unchanged. */
+  const sorts = sortsFor(f.scope);
+  const activeSort = sorts.some((s) => s.key === sort) ? sort : defaultSort(f.scope);
   // Six facet groups is a long scroll before the grid on a phone, so the rail
   // collapses below lg and is always open from lg up.
   const [railOpen, setRailOpen] = useState(false);
@@ -874,27 +1049,41 @@ export function SampleCatalog({
   /** Count a value as if that facet were not applied, so numbers stay reachable. */
   const countFor = useCallback(
     (key: keyof Filters, pick: (s: Sample) => string | null, v: string) =>
-      ALL.filter((s) => matches(s, f, key)).filter((s) => pick(s) === v).length,
-    [f],
+      all.filter((s) => matches(s, f, key)).filter((s) => pick(s) === v).length,
+    [all, f],
+  );
+
+  /** A spec chip's count with only ITS OWN facet lifted — see `SpecFacet.cross`. */
+  const countSpecCross = useCallback(
+    (facetKey: string, v: string) =>
+      all.filter((s) => matches(s, f, undefined, facetKey)).filter((s) => specCell(s, facetKey) === v).length,
+    [all, f],
   );
 
   /** The tier chip's count. A record can sit in two tiers, so `countFor`'s
       single-valued pick would drop it from its second one. */
   const countTier = useCallback(
-    (key: string) => ALL.filter((s) => matches(s, f, "tier") && inTier(s, key)).length,
-    [f],
+    (key: string) => all.filter((s) => matches(s, f, "tier") && inTier(s, key)).length,
+    [all, f],
   );
 
   const shown = useMemo(() => {
-    const out = ALL.filter((s) => matches(s, f));
+    const out = all.filter((s) => matches(s, f));
+    // Hand-pose comparators. A record with no metrics sorts last on each, and
+    // ties fall back to the sample number so the order is always the same one.
+    const no = (s: Sample) => handPoseOf(s)?.n ?? 99;
+    const noVideo = (s: Sample) => Number(handPoseOf(s)?.preview !== "video");
     const by: Record<SortKey, (a: Sample, b: Sample) => number> = {
       longest: (a, b) => b.durationSec - a.durationSec,
       shortest: (a, b) => a.durationSec - b.durationSec,
       live: (a, b) => Number(b.telemetry) - Number(a.telemetry) || a.title.localeCompare(b.title),
       title: (a, b) => a.title.localeCompare(b.title),
+      preview: (a, b) => noVideo(a) - noVideo(b) || no(a) - no(b),
+      number: (a, b) => no(a) - no(b),
+      pose: (a, b) => (handPoseOf(b)?.minPosePct ?? -1) - (handPoseOf(a)?.minPosePct ?? -1) || no(a) - no(b),
     };
-    return [...out].sort(by[sort]);
-  }, [f, sort]);
+    return [...out].sort(by[activeSort]);
+  }, [all, f, activeSort]);
 
   /* Every facet's options come from the records IN THIS CATEGORY, never from
      the global taxonomy.
@@ -904,7 +1093,7 @@ export function SampleCatalog({
      under Viewpoint, on a category defined by being first-person. A greyed row
      reading zero is a control that cannot do anything, and six of them ahead of
      the ones that can is what made this rail long. */
-  const scoped = useMemo(() => ALL.filter((s) => s.modality === f.scope), [f.scope]);
+  const scoped = useMemo(() => all.filter((s) => s.modality === f.scope), [all, f.scope]);
   const valuesOf = useCallback(
     (pick: (s: Sample) => string | null) =>
       Array.from(new Set(scoped.map(pick).filter(Boolean) as string[])).sort(),
@@ -981,10 +1170,10 @@ export function SampleCatalog({
      picking Cook made it read "Any job (17)": the number it exists to escape. */
   const jobOptions = useMemo(
     () => [
-      { value: "all", label: "Any job", count: ALL.filter((s) => matches(s, f, "job")).length },
+      { value: "all", label: "Any job", count: all.filter((s) => matches(s, f, "job")).length },
       ...jobs.map((j) => ({ value: j, label: j, count: countFor("job", (s) => s.job, j) })),
     ],
-    [jobs, f, countFor],
+    [all, jobs, f, countFor],
   );
 
   const dirty =
@@ -995,9 +1184,26 @@ export function SampleCatalog({
     Object.values(f.spec).some((v) => v.length > 0) ||
     f.q.trim() !== "";
 
+  /** The sample numbers whose sample pack is released under a passcode, for the access strip's copy. */
+  const packSamples = useMemo(
+    () =>
+      isHandPose
+        ? all.flatMap((s) => {
+            const hp = handPoseOf(s);
+            return hp?.pack ? [hp.n] : [];
+          })
+        : [],
+    [all, isHandPose],
+  );
+
   const totals = useMemo(() => {
     const minutes = shown.reduce((a, s) => a + s.durationSec, 0) / 60;
-    return { minutes: minutes.toFixed(1), live: shown.filter((s) => s.telemetry).length };
+    return {
+      minutes: minutes.toFixed(1),
+      live: shown.filter((s) => s.telemetry).length,
+      // What the toolbar counts in place of live data on hand pose.
+      skeleton: shown.filter((s) => handPoseOf(s)?.preview === "video").length,
+    };
   }, [shown]);
 
   /* Paged by number, not extended by a button.
@@ -1018,11 +1224,11 @@ export function SampleCatalog({
   const gridTop = useRef<HTMLDivElement | null>(null);
   useEffect(() => setPageIndex(0), [f, sort]);
 
-  const pageCount = Math.max(1, Math.ceil(shown.length / PAGE));
+  const pageCount = Math.max(1, Math.ceil(shown.length / pageSize));
   // A facet can shrink the result set under the current page while the reader is
   // on it; clamping here keeps the grid from rendering an empty page.
   const current = Math.min(pageIndex, pageCount - 1);
-  const page = shown.slice(current * PAGE, current * PAGE + PAGE);
+  const page = shown.slice(current * pageSize, current * pageSize + pageSize);
 
   const goToPage = useCallback((n: number) => {
     setPageIndex(n);
@@ -1049,7 +1255,16 @@ export function SampleCatalog({
     f.tier.length === 1 && tiers.some((t) => t.key === f.tier[0]) ? f.tier[0] : null;
 
   return (
-    <>    <section id="deck" className="bp-grid bp-frame relative" style={{ color: C.text }}>
+    <>
+    {/* On hand pose this section is a named region of its own, under the page's
+        `#samples` wrapper and after the intro that carries the heading. The
+        other categories' sections have no name and keep none. */}
+    <section
+      id="deck"
+      className="bp-grid bp-frame relative"
+      style={{ color: C.text }}
+      aria-label={isHandPose ? "Sample catalogue" : undefined}
+    >
       {/* No heading, and no dataset strip. The heading went because the
           category page above already states the name, what the category is and
           the figures. The strip went because it was the third control for one
@@ -1064,7 +1279,7 @@ export function SampleCatalog({
             a page that will not settle. */}
         <Reveal variant="rise">
         <div className="grid gap-10 lg:grid-cols-12 lg:gap-12">
-          <aside className="lg:col-span-3">
+          <aside className="lg:col-span-3" aria-label={isHandPose ? "Filter samples" : undefined}>
             <button
               type="button"
               onClick={() => setRailOpen((v) => !v)}
@@ -1091,7 +1306,7 @@ export function SampleCatalog({
                 <input
                   value={f.q}
                   onChange={(e) => setF((p) => ({ ...p, q: e.target.value }))}
-                  placeholder="Search tasks, workplaces, trades"
+                  placeholder={isHandPose ? "Search tasks and skills" : "Search tasks, workplaces, trades"}
                   aria-label="Search samples"
                   className="w-full rounded-lg py-2 pl-9 pr-3 text-[13px] outline-none"
                   style={{ background: C.band, border: `1px solid ${C.hairline}`, color: C.text }}
@@ -1108,7 +1323,7 @@ export function SampleCatalog({
                   land, that chip stops being quotable by having a number, and
                   nothing here has to change. */}
               {tiers.length > 1 && (
-                <RailGroup title="Configuration" first>
+                <RailGroup title="Configuration" first grouped={isHandPose}>
                   {tiers.map((t) => (
                     <Chip
                       key={t.key}
@@ -1137,7 +1352,7 @@ export function SampleCatalog({
                   the record and still printed in the detail view. */}
 
               {viewpoints.length > 1 && (
-                <RailGroup title="Viewpoint" first={tiers.length <= 1}>
+                <RailGroup title="Viewpoint" first={tiers.length <= 1} grouped={isHandPose}>
                   {viewpoints.map((v) => (
                     <Chip
                       key={v.key}
@@ -1151,7 +1366,7 @@ export function SampleCatalog({
               )}
 
               {skillGroups.length > 1 && (
-                <RailGroup title="Skill group">
+                <RailGroup title="Skill group" grouped={isHandPose}>
                   {skillGroups.map((g) => (
                     <Chip
                       key={g}
@@ -1165,7 +1380,7 @@ export function SampleCatalog({
               )}
 
               {industries.length > 1 && (
-                <RailGroup title="Industry">
+                <RailGroup title="Industry" grouped={isHandPose}>
                   {industries.map((i) => (
                     <Chip
                       key={i}
@@ -1179,7 +1394,7 @@ export function SampleCatalog({
               )}
 
               {sites.length > 1 && (
-                <RailGroup title="Site type">
+                <RailGroup title="Site type" grouped={isHandPose}>
                   {sites.map((v) => (
                     <Chip
                       key={v}
@@ -1203,14 +1418,18 @@ export function SampleCatalog({
                   Stress; egocentric has none here because its axes are typed
                   fields and appear above. */}
               {specFacets.map((facet) => (
-                <RailGroup key={facet.key} title={facet.title}>
+                <RailGroup key={facet.key} title={facet.title} grouped={isHandPose}>
                   {facet.values.map((v) => (
                     <Chip
                       key={v}
                       label={v}
-                      caps
+                      caps={facet.caps !== false}
                       active={(f.spec[facet.key] ?? []).includes(v)}
-                      count={countFor("spec", (s) => specCell(s, facet.key), v)}
+                      count={
+                        facet.cross
+                          ? countSpecCross(facet.key, v)
+                          : countFor("spec", (s) => specCell(s, facet.key), v)
+                      }
                       onClick={() =>
                         setF((p) => {
                           const cur = p.spec[facet.key] ?? [];
@@ -1226,7 +1445,7 @@ export function SampleCatalog({
               ))}
 
               {jobs.length > 1 && (
-                <RailGroup title="Job">
+                <RailGroup title="Job" grouped={isHandPose}>
                   {/* `px-2.5` cancels RailGroup's `-mx-2.5` the same way a chip's
                       own padding does. */}
                   <div className="px-2.5">
@@ -1252,14 +1471,27 @@ export function SampleCatalog({
                 gaps, which read as a broken divider. The card rules are the
                 divider, and they stay consistent with every row below. */}
             <div className="flex flex-wrap items-center justify-between gap-4 pb-5">
-              <p className="font-mono text-[11px]" style={{ color: C.textDim }}>
+              {/* On hand pose this is a status line: it is the only thing on the
+                  page that says what a facet press did to the grid, and a
+                  reader using a screen reader would otherwise hear nothing. */}
+              <p
+                className="font-mono text-[11px]"
+                style={{ color: C.textDim }}
+                role={isHandPose ? "status" : undefined}
+              >
                 {/* Denominator is the category, not the whole file. It read
                     "118 of 126" on a page that only contains 118. */}
                 {shown.length} of {inLine} samples
-                <span className="mx-2">/</span>
+                <span className="mx-2" aria-hidden={isHandPose || undefined}>/</span>
                 {totals.minutes} minutes of source
-                <span className="mx-2">/</span>
-                {totals.live} with live data
+                <span className="mx-2" aria-hidden={isHandPose || undefined}>/</span>
+                {/* Hand pose has no live data to count; what a reader asks of
+                    it is how many samples they can watch. */}
+                {isHandPose ? (
+                  <>{totals.skeleton} with a skeleton preview</>
+                ) : (
+                  <>{totals.live} with live data</>
+                )}
               </p>
               <div className="flex items-center gap-4">
                 {dirty && (
@@ -1280,8 +1512,8 @@ export function SampleCatalog({
                       page keeps having to undo. No `data-active`: a sort order
                       is always set, so "on" says nothing here. */}
                   <SortPicker
-                    value={sort}
-                    options={SORTS}
+                    value={activeSort}
+                    options={sorts}
                     onChange={setSort}
                     ariaLabel="Sort samples"
                   />
@@ -1312,10 +1544,15 @@ export function SampleCatalog({
                   <p className="text-sm" style={{ color: C.textMid }}>
                     Nothing matches that combination.
                   </p>
-                  <p className="mx-auto mt-2 max-w-md text-[13px]" style={{ color: C.textDim }}>
-                    Game sessions carry no skill group, industry or job, so those three narrow to the
-                    egocentric line.
-                  </p>
+                  {/* The sentence about game sessions is true of the gaming line
+                      and printed under every other category's empty grid; hand
+                      pose says only what happened. */}
+                  {!isHandPose && (
+                    <p className="mx-auto mt-2 max-w-md text-[13px]" style={{ color: C.textDim }}>
+                      Game sessions carry no skill group, industry or job, so those three narrow to the
+                      egocentric line.
+                    </p>
+                  )}
                   <button
                     type="button"
                     onClick={clear}
@@ -1333,9 +1570,13 @@ export function SampleCatalog({
                   className="grid gap-x-8 gap-y-2 sm:grid-cols-2 2xl:grid-cols-3"
                   style={{ scrollMarginTop: "88px" }}
                 >
-                  {page.map((s) => (
-                    <Card key={s.slug} sample={s} onOpen={() => setActive(s)} lensMode={lensMode} />
-                  ))}
+                  {page.map((s) =>
+                    s.modality === "handpose" && HandPoseCard ? (
+                      <HandPoseCard key={s.slug} sample={s} onOpen={() => open(s)} />
+                    ) : (
+                      <Card key={s.slug} sample={s} onOpen={() => open(s)} lensMode={lensMode} />
+                    ),
+                  )}
                 </div>
 
                 {pageCount > 1 && (
@@ -1374,7 +1615,7 @@ export function SampleCatalog({
                       />
                     </div>
                     <p className="font-mono text-[11px]" style={{ color: C.textDim }}>
-                      {current * PAGE + 1}–{current * PAGE + page.length} of {shown.length}
+                      {current * pageSize + 1}–{current * pageSize + page.length} of {shown.length}
                     </p>
                   </nav>
                 )}
@@ -1385,13 +1626,20 @@ export function SampleCatalog({
                 which asked a reader to think about passcodes before they had
                 seen a single frame - and free playback with no form is the one
                 thing this page has that the competitors do not. */}
-            <AccessStrip />
+            <AccessStrip variant={isHandPose ? "handpose" : undefined} packSamples={packSamples} />
           </div>
         </div>
         </Reveal>
       </div>
     </section>
-      <SampleModal sample={active} onClose={() => setActive(null)} lensMode={lensMode} />
+      <SampleModal
+        sample={active}
+        onClose={close}
+        lensMode={lensMode}
+        // Only a hand-pose record has a lane to seek along; an `&f=` on any
+        // other category's address is not a frame of anything.
+        initialFrame={active?.modality === "handpose" ? initialFrame : null}
+      />
     </>
   );
 }

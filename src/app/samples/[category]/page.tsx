@@ -69,6 +69,15 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const c = categoryBySlug((await params).category);
   if (!c) return {};
+  // Hand pose has its own <head>: the generic one below would double the
+  // title's brand suffix, describe the page with the card blurb and leave the
+  // canonical on the site root. The flag test is repeated here, spelled out, so
+  // a build where it is a compile-time false drops the import — see the page
+  // branch further down.
+  if (process.env.HAND_POSE_ON === "1" && c.slug === "hand-pose") {
+    const { handPoseMetadata } = await import("../_sections/handpose/page-metadata");
+    return handPoseMetadata();
+  }
   const title = `${c.name} data samples · Tbrain`;
   return {
     title,
@@ -84,6 +93,20 @@ export default async function CategoryPage({
 }) {
   const c = categoryBySlug((await params).category);
   if (!c || c.externalHref || !c.modality) notFound();
+
+  /* Hand pose is a different kind of page, not this one with the name swapped:
+     what it publishes is a metrics table and a state lane per sample, not a
+     shelf of footage, so it has its own sections and none of the tail below.
+
+     `categoryBySlug` already returns null for it unless the build is flagged
+     (HAND_POSE_ON, next.config.ts), so on production this is never reached.
+     The test is spelled out and the page imported dynamically so that, on that
+     build, the flag is a compile-time false and the whole page and its data
+     leave the bundle instead of riding along unused. */
+  if (process.env.HAND_POSE_ON === "1" && c.slug === "hand-pose") {
+    const { HandPoseCategoryPage } = await import("../_sections/handpose/HandPoseCategoryPage");
+    return <HandPoseCategoryPage c={c} />;
+  }
 
   const s = statsForCategory(c);
 
