@@ -6,6 +6,8 @@ Pick visuals in this order:
 
 ## 1. Figures from the original sources (preferred when the licence allows)
 
+Run `source_license` on **every** arXiv paper you cite. If any is reusable, the post should show at least one of its figures (the method diagram or the key result), unless none of them helps the reader.
+
 The paper, dataset card or project page usually has the best picture of the thing you're writing about: the capture rig, the data distribution, the result plot. Show it, crop it to the part you discuss, and say what to notice.
 
 1. **Check the licence first.** For arXiv papers call `mcp_tbrain_cms_source_license` with the id. It returns `reusable`, a `credit_hint` and, when reusable, the paper's `figures` (url + caption).
@@ -36,7 +38,9 @@ The paper, dataset card or project page usually has the best picture of the thin
 Rules:
 - The chart `title` states the claim the chart proves ("Most egocentric datasets are under 1,000 hours"), not a label ("Dataset sizes").
 - Every number in a chart comes from a cited source or an approved knowledge item; put it in `source`. Never chart estimates you made up. A `flow` or `quadrant` that encodes our judgement is fine: say so in the caption ("our reading of …").
-- One chart per idea. Two charts that say the same thing: cut one.
+- Always fill `source` (it prints as the footer "Source: …"); `subtitle` says what is measured and in which units, nothing else.
+- One measure per chart. Never put a 4-task average and a single-task number side by side as if comparable; make two charts or drop one.
+- One chart per idea. Two charts that say the same thing: cut one. Vary the forms: three bar charts in one post reads like a slide deck; a `flow` of the method or a `timeline` usually says more.
 - Caption says what to notice, not what the chart is ("EgoDex alone is a fifth of Ego4D's hours but all of it is hands").
 
 ## 3. The Tbrain image library (at most one, and only when it shows our own work)
