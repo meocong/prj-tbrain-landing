@@ -13,13 +13,19 @@ const source = z.object({
   accessed_at: z.string().max(40).optional(),
 });
 
+// Best-effort: social cards can't show SVG, and our charts are SVG.
+const rasterUrl = z
+  .string()
+  .max(2000)
+  .refine((u) => !/\.svg(\?|#|$)/i.test(u), "cover/og image must be PNG/JPEG/WebP, not an SVG chart; use a source figure or library image");
+
 export const draftInput = z.object({
   title: z.string().trim().min(10).max(160),
   slug: z.string().trim().max(80).optional(),
   excerpt: z.string().trim().max(400).optional(),
   content_html: z.string().min(200).max(200_000),
-  cover_image_url: z.string().max(2000).optional().nullable(),
-  og_image_url: z.string().max(2000).optional().nullable(),
+  cover_image_url: rasterUrl.optional().nullable(),
+  og_image_url: rasterUrl.optional().nullable(),
   category: z.string().trim().max(60).optional().nullable(),
   tags: z.array(z.string().trim().min(1).max(40)).max(12).optional(),
   author_name: z.string().trim().max(120).optional().nullable(),

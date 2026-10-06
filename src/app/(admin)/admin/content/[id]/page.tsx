@@ -327,7 +327,7 @@ function AgentTrail({ meta, reviewedAt }: { meta: CmsAgentMeta | null; reviewedA
       <p style={{ color: "var(--text-muted)" }}>
         {reviewedAt ? `Reviewed ${new Date(reviewedAt).toLocaleString()}` : "Not reviewed yet — check facts and sources before publishing."}
       </p>
-      {m.post_type && <p><span className="font-medium">Post type:</span> {m.post_type.replace("_", " ")}</p>}
+      {m.post_type && <p><span className="font-medium">Post type:</span> {m.post_type.replaceAll("_", " ")}</p>}
       {m.takeaway && <p><span className="font-medium">Takeaway:</span> {m.takeaway}</p>}
       {m.angle && <p><span className="font-medium">Angle:</span> {m.angle}</p>}
       {m.target_keyword && <p><span className="font-medium">Keyword:</span> {m.target_keyword}</p>}
@@ -357,6 +357,30 @@ function AgentTrail({ meta, reviewedAt }: { meta: CmsAgentMeta | null; reviewedA
           </ul>
           <Link href="/admin/content/agent/knowledge" className="underline underline-offset-2">Open knowledge</Link>
         </div>
+      )}
+      {m.images && m.images.length > 0 && (
+        <details>
+          <summary className="cursor-pointer font-medium">Images ({m.images.length})</summary>
+          <ul className="mt-1 space-y-1.5 pl-1">
+            {m.images.map((img, i) => (
+              <li key={i} className="break-all">
+                <span className="font-medium">{img.kind === "source_figure" ? "Source figure" : img.kind === "chart" ? "Our chart" : "Library"}</span>
+                {img.why ? ` — ${img.why}` : ""}
+                {img.kind === "source_figure" && (
+                  <span className="block" style={{ color: img.license ? undefined : "#b45309" }}>
+                    {img.credit || "no credit recorded"} · {img.license || "licence not recorded: check before publishing"}
+                    {img.source_url && isHttp(img.source_url) && (
+                      <>
+                        {" · "}
+                        <a href={img.source_url} target="_blank" rel="noopener noreferrer" className="underline underline-offset-2">source</a>
+                      </>
+                    )}
+                  </span>
+                )}
+              </li>
+            ))}
+          </ul>
+        </details>
       )}
       {m.factcheck_flags && m.factcheck_flags.length > 0 && (
         <ul className="space-y-1 rounded-lg px-2 py-1.5" style={{ background: "rgba(234,179,8,0.1)" }}>

@@ -118,7 +118,14 @@ export interface CmsAgentMeta {
   reader?: string;
   takeaway?: string;
   knowledge_ids?: string[];
-  images?: { url: string; why?: string }[];
+  images?: {
+    url: string;
+    why?: string;
+    kind?: "source_figure" | "chart" | "library";
+    credit?: string;
+    license?: string;
+    source_url?: string;
+  }[];
   scorecard?: { total?: number; items?: Record<string, number> };
   reader_pass?: string;
   factcheck_flags?: string[];

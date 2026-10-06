@@ -50,7 +50,7 @@ const createInput = z
         audience: z.string().max(500).optional(),
         notes: z.string().max(8000).optional(),
         experience: z.string().max(4000).optional(),
-        post_type: z.enum(["news_hook", "field_story", "trend_pov", "buyer_guide", "proof"]).optional(),
+        post_type: z.enum(["news_hook", "field_story", "trend_pov", "buyer_guide", "proof", "deep_dive", "synthesis"]).optional(),
         skip_outline: z.boolean().optional(),
       })
       .default({}),

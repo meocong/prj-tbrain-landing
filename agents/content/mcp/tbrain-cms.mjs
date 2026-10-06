@@ -10,7 +10,7 @@
 // MCP stdio transport. Env: TBRAIN_API_BASE, CONTENT_AGENT_TOKEN,
 // TBRAIN_UPLOAD_ROOT (directory images may be uploaded from).
 
-import { readFile, stat } from "node:fs/promises";
+import { mkdir, readFile, stat, writeFile } from "node:fs/promises";
 import { basename, resolve, sep } from "node:path";
 import { createInterface } from "node:readline";
 
@@ -28,7 +28,7 @@ const draftProps = {
     description:
       "Article body as HTML. Allowed: h2-h4, p, ul/ol/li, strong/em, a[href], img[src,alt], blockquote, code/pre, table. No h1 (the title is the h1), no inline styles or scripts.",
   },
-  cover_image_url: { type: "string", description: "URL returned by upload_image, or an existing /images/... path." },
+  cover_image_url: { type: "string", description: "PNG/JPEG URL returned by upload_image (licensed source figure) or a library image_url. Never an SVG chart." },
   category: { type: "string", description: "One category, e.g. 'Physical AI', 'Data Quality', 'RLHF & Evaluation'." },
   tags: { type: "array", items: { type: "string" }, description: "Up to 12 short tags." },
   author_name: { type: "string", description: "Byline. Leave empty unless a human author is confirmed." },
@@ -37,7 +37,7 @@ const draftProps = {
   agent_meta: {
     type: "object",
     description:
-      "Research trail for the reviewer: {topic, angle, target_keyword, sources:[{url,title,publisher,accessed_at}], rubric:{accuracy,framing,insight,structure,voice,visuals,seo,cta} (0-5), factcheck_flags:[string], notes, model}.",
+      "Research trail for the reviewer: {post_type, topic, reader, takeaway, target_keyword, knowledge_ids, images:[{url, why, kind: source_figure|chart|library, credit, license, source_url}], sources:[{url,title,publisher,accessed_at}], scorecard:{total, items}, reader_pass, factcheck_flags:[string], notes, model}.",
   },
 };
 
@@ -77,6 +77,37 @@ const TOOLS = [
       type: "object",
       properties: { path: { type: "string", description: "Absolute file path." }, filename: { type: "string" } },
       required: ["path"],
+    },
+  },
+  {
+    name: "source_license",
+    description:
+      "Check whether figures from a paper may be reused. Give an arXiv id or URL. Returns {license, license_url, reusable, credit_hint, html_url, pdf_url}. reusable is true only for CC BY, CC BY-SA and CC0; arXiv's default licence and any NC/ND licence are NOT reusable: redraw the data with render_chart instead and credit the source as 'Data: …'.",
+    inputSchema: { type: "object", properties: { arxiv: { type: "string" } }, required: ["arxiv"] },
+  },
+  {
+    name: "fetch_source_image",
+    description: `Download a figure/image from an https URL (<=8MB, PNG/JPEG/WebP/GIF) into ${UPLOAD_ROOT}/figures/ for cropping and upload_image. Only for sources whose licence allows reuse (source_license, a CC/Apache/MIT notice on the page, or a press kit). Returns {path, bytes, type}.`,
+    inputSchema: {
+      type: "object",
+      properties: { url: { type: "string" }, filename: { type: "string", description: "Short name, e.g. 'egodex-fig2'." } },
+      required: ["url"],
+    },
+  },
+  {
+    name: "render_chart",
+    description:
+      "Draw an original chart or diagram in the Tbrain style and get a permanent SVG URL for <img src>. spec.type: " +
+      "bar {data:[{label,value,highlight?}] 2-12, unit?, sort?} · " +
+      "line {x_labels:[..] 2-24, series:[{name, values:[number|null]}] 1-4, unit?, y_min?} · " +
+      "timeline {events:[{date,label,highlight?}] 2-8} · " +
+      "flow {steps:[{label, note?, highlight?}] 2-6} · " +
+      "quadrant {x_axis:{low,high}, y_axis:{low,high}, quadrant_labels?:[tl,tr,bl,br], items:[{label,x:0-1,y:0-1,highlight?}] 1-10}. " +
+      "Every spec: title (the claim the chart proves, <=90 chars), subtitle? (what is measured, units), source? ('EgoDex, Hoque et al. 2025'). Highlight the one item the paragraph is about; the rest go grey.",
+    inputSchema: {
+      type: "object",
+      properties: { spec: { type: "object" }, filename: { type: "string" } },
+      required: ["spec"],
     },
   },
   {
@@ -138,7 +169,7 @@ const TOOLS = [
             audience: { type: "string" },
             notes: { type: "string" },
             experience: { type: "string" },
-            post_type: { type: "string", enum: ["news_hook", "field_story", "trend_pov", "buyer_guide", "proof"] },
+            post_type: { type: "string", enum: ["news_hook", "field_story", "trend_pov", "buyer_guide", "proof", "deep_dive", "synthesis"] },
             skip_outline: { type: "boolean" },
           },
         },
@@ -246,6 +277,144 @@ async function api(method, path, body) {
 
 const enc = encodeURIComponent;
 
+const LICENSES = [
+  [/creativecommons\.org\/publicdomain\/zero/i, "CC0 1.0", true],
+  [/creativecommons\.org\/licenses\/by-nc-nd\/([\d.]+)/i, "CC BY-NC-ND", false],
+  [/creativecommons\.org\/licenses\/by-nc-sa\/([\d.]+)/i, "CC BY-NC-SA", false],
+  [/creativecommons\.org\/licenses\/by-nc\/([\d.]+)/i, "CC BY-NC", false],
+  [/creativecommons\.org\/licenses\/by-nd\/([\d.]+)/i, "CC BY-ND", false],
+  [/creativecommons\.org\/licenses\/by-sa\/([\d.]+)/i, "CC BY-SA", true],
+  [/creativecommons\.org\/licenses\/by\/([\d.]+)/i, "CC BY", true],
+  [/arxiv\.org\/licenses\/nonexclusive-distrib/i, "arXiv non-exclusive (default)", false],
+];
+
+async function sourceLicense(ref) {
+  const m = ref.match(/(\d{4}\.\d{4,5})(v\d+)?/) || ref.match(/([a-z-]+(?:\.[A-Z]{2})?\/\d{7})/);
+  if (!m) throw new Error("give an arXiv id like 2505.11709 or an arxiv.org URL");
+  const id = m[1];
+  const res = await fetch(`https://arxiv.org/abs/${id}`, { signal: AbortSignal.timeout(20_000) });
+  if (!res.ok) throw new Error(`arxiv.org/abs/${id} -> ${res.status}`);
+  const html = (await readCapped(res, 5 * 1024 * 1024)).toString("utf8");
+  const licBlock = (html.match(/<div class="abs-license">[\s\S]{0,600}?<\/div>/i) || [html])[0];
+  let license = "unknown";
+  let reusable = false;
+  let license_url = null;
+  for (const [re, name, ok] of LICENSES) {
+    const hit = licBlock.match(re);
+    if (hit) {
+      license = hit[1] ? `${name} ${hit[1]}` : name;
+      reusable = ok;
+      license_url = (licBlock.match(/href="([^"]+)"/i) || [])[1] || null;
+      break;
+    }
+  }
+  const title = (html.match(/<meta name="citation_title" content="([^"]+)"/i) || [])[1] || null;
+  const authors = [...html.matchAll(/<meta name="citation_author" content="([^"]+)"/gi)].map((a) => a[1]);
+  const date = (html.match(/<meta name="citation_date" content="([^"]+)"/i) || [])[1] || "";
+  const first = authors[0] ? authors[0].split(",")[0].trim() : "Authors";
+  const year = (date.match(/\d{4}/) || [""])[0];
+  const figures = reusable ? await arxivFigures(id).catch(() => []) : [];
+  return {
+    id,
+    title,
+    license,
+    license_url,
+    reusable,
+    credit_hint: `${first}${authors.length > 1 ? " et al." : ""}, ${year} (arXiv:${id}), ${license}`,
+    html_url: `https://arxiv.org/html/${id}`,
+    pdf_url: `https://arxiv.org/pdf/${id}`,
+    figures,
+    note: reusable
+      ? "Reuse allowed with credit. Pick from figures (or html_url), fetch_source_image it, crop to the panel you discuss, caption it with what to notice + the credit."
+      : "Do not reproduce figures. Redraw the numbers you need with render_chart and credit 'Data: <credit>', or describe and link the figure.",
+  };
+}
+
+// Figures from the arXiv HTML rendering: [{url, caption}] (raster only).
+async function arxivFigures(id) {
+  const res = await fetch(`https://arxiv.org/html/${id}`, { redirect: "follow", signal: AbortSignal.timeout(20_000) });
+  if (!res.ok || !res.url.startsWith("https://arxiv.org/")) return [];
+  const base = res.url.endsWith("/") ? res.url : res.url.replace(/[^/]*$/, "");
+  const html = (await readCapped(res, 15 * 1024 * 1024)).toString("utf8");
+  const out = [];
+  for (const fig of html.matchAll(/<figure[^>]*>([\s\S]*?)<\/figure>/gi)) {
+    const src = (fig[1].match(/<img[^>]+src="([^"]+\.(?:png|jpe?g|gif|webp))"/i) || [])[1];
+    if (!src) continue;
+    const cap = (fig[1].match(/<figcaption[^>]*>([\s\S]*?)<\/figcaption>/i) || [])[1] || "";
+    const caption = cap.replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim().slice(0, 240);
+    const url = new URL(src, base.startsWith("https://arxiv.org/html/") ? "https://arxiv.org/html/" : base).toString();
+    if (!out.some((f) => f.url === url)) out.push({ url, caption });
+    if (out.length >= 15) break;
+  }
+  return out;
+}
+
+function sniffImage(buf) {
+  if (buf.length < 12) return null;
+  if (buf[0] === 0x89 && buf[1] === 0x50 && buf[2] === 0x4e && buf[3] === 0x47) return "png";
+  if (buf[0] === 0xff && buf[1] === 0xd8 && buf[2] === 0xff) return "jpg";
+  if (buf[0] === 0x47 && buf[1] === 0x49 && buf[2] === 0x46 && buf[3] === 0x38) return "gif";
+  if (buf.subarray(0, 4).toString() === "RIFF" && buf.subarray(8, 12).toString() === "WEBP") return "webp";
+  return null;
+}
+
+const MAX_IMAGE = 8 * 1024 * 1024;
+
+// Read a response body with a hard byte cap (Content-Length can lie or be absent).
+async function readCapped(res, max) {
+  const chunks = [];
+  let total = 0;
+  for await (const chunk of res.body) {
+    total += chunk.length;
+    if (total > max) {
+      await res.body.cancel().catch(() => {});
+      throw new Error(`larger than ${Math.round(max / 1024 / 1024)}MB`);
+    }
+    chunks.push(chunk);
+  }
+  return Buffer.concat(chunks);
+}
+
+// Follow up to 5 redirects by hand, re-checking that every hop stays on https.
+async function fetchHttps(url, init = {}) {
+  let current = new URL(url);
+  for (let hop = 0; hop < 6; hop++) {
+    if (current.protocol !== "https:") throw new Error("https only");
+    const res = await fetch(current, { ...init, redirect: "manual" });
+    if (res.status >= 300 && res.status < 400 && res.headers.get("location")) {
+      current = new URL(res.headers.get("location"), current);
+      continue;
+    }
+    return res;
+  }
+  throw new Error("too many redirects");
+}
+
+async function fetchSourceImage(url, filename) {
+  let u;
+  try {
+    u = new URL(url);
+  } catch {
+    throw new Error("not a URL");
+  }
+  const res = await fetchHttps(u, {
+    headers: { "User-Agent": "TbrainContentAgent/1.0 (+https://www.tbrain.ai)" },
+    signal: AbortSignal.timeout(30_000),
+  });
+  if (!res.ok) throw new Error(`${res.status} fetching ${u.host}`);
+  if (Number(res.headers.get("content-length") || 0) > MAX_IMAGE) throw new Error("larger than 8MB");
+  const buf = await readCapped(res, MAX_IMAGE);
+  const type = sniffImage(buf);
+  if (!type) throw new Error("not a PNG/JPEG/WebP/GIF (SVG and PDF figures: screenshot or redraw with render_chart)");
+  const dir = resolve(UPLOAD_ROOT, "figures");
+  await mkdir(dir, { recursive: true });
+  const base = String(filename || basename(u.pathname) || "figure").replace(/\.[a-z0-9]+$/i, "").replace(/[^a-zA-Z0-9_-]/g, "_").slice(0, 60);
+  const path = resolve(dir, `${base}.${type}`);
+  await writeFile(path, buf);
+  return { path, bytes: buf.length, type, source_url: u.toString() };
+}
+
+
 async function callTool(name, args = {}) {
   switch (name) {
     case "list_posts": {
@@ -274,6 +443,12 @@ async function callTool(name, args = {}) {
         data_base64: data.toString("base64"),
       });
     }
+    case "source_license":
+      return sourceLicense(String(args.arxiv || ""));
+    case "fetch_source_image":
+      return fetchSourceImage(String(args.url || ""), args.filename);
+    case "render_chart":
+      return api("POST", "/api/agent/charts", { spec: args.spec, filename: args.filename });
     case "submit_for_review":
       return api("POST", `/api/agent/posts/${enc(args.id)}/submit`, {});
     case "save_social_messages": {
@@ -337,7 +512,7 @@ async function handle(msg) {
         result = {
           protocolVersion: params?.protocolVersion || PROTOCOL,
           capabilities: { tools: { listChanged: false } },
-          serverInfo: { name: "tbrain-cms", version: "1.2.0" },
+          serverInfo: { name: "tbrain-cms", version: "1.3.0" },
           instructions:
             "Blog CMS for tbrain.ai. Drafts only: you cannot publish. After create_draft + submit_for_review, send the review_url to the human reviewer.",
         };

@@ -206,7 +206,7 @@ Robotics-line datasets grouped by skill (`datasets.ts`): Tools/machines/repair �
 
 <!-- Source: find src/app -maxdepth 3 -type d -->
 
-Use only these as CTA / internal-link targets (don't invent a path):
+Use only these as CTA / internal-link targets (don't invent a path). At most 2 per post besides the CTA: the post is about the field, not our pages.
 - `/data/physical-ai` — Physical AI foundry page (has `#pipeline` anchor; also `/data/physical-ai/quality` and `/data/physical-ai/auto-label` subpages).
 - `/data/terminal-bench` — Terminal Bench landing (`/enter`, `/request-access`, `/request-sent`, `/s` subpaths are passcode/access flows, not for public linking).
 - (Not `/samples` or anything under it: samples are shared privately with buyers. Never link them from a post.)

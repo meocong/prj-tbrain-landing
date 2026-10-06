@@ -19,6 +19,10 @@ Use `web_search` and `web_extract`, and the browser only when a page needs JS. P
 - The Robot Report, IEEE Spectrum Robotics, TechCrunch robotics, The Batch (deeplearning.ai), Import AI
 - Funding / market moves only when they say something about data demand
 
+## Researchers' blogs and newsletters (angles, debates, what's worth a deep dive)
+- Chris Paxton (It Can Think), Interconnects (Nathan Lambert), Eric Jang, Lilian Weng, Sebastian Raschka (Ahead of AI), Chip Huyen, The Gradient, Benjie Holson, Ted Xiao and other robotics researchers on X/Substack
+- Use them to find what practitioners argue about and which papers they think matter. Cite them when you use their argument; never copy their images.
+
 ## Practitioner pulse
 - Reddit r/robotics, r/MachineLearning, r/reinforcementlearning; Hacker News front page threads on robotics/LLM data
 - Use these to find questions people ask. Do not cite Reddit as evidence for a factual claim.

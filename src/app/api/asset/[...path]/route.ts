@@ -36,13 +36,17 @@ export async function GET(
 
   try {
     const buf = await downloadBuffer(objectPath);
-    return new NextResponse(new Uint8Array(buf), {
-      status: 200,
-      headers: {
-        "Content-Type": contentTypeFor(objectPath),
-        "Cache-Control": "public, max-age=31536000, immutable",
-      },
-    });
+    const type = contentTypeFor(objectPath);
+    const headers: Record<string, string> = {
+      "Content-Type": type,
+      "Cache-Control": "public, max-age=31536000, immutable",
+      "X-Content-Type-Options": "nosniff",
+    };
+    // SVG opened directly is a document: never let it run script or load anything.
+    if (type === "image/svg+xml") {
+      headers["Content-Security-Policy"] = "default-src 'none'; style-src 'unsafe-inline'; sandbox";
+    }
+    return new NextResponse(new Uint8Array(buf), { status: 200, headers });
   } catch (err) {
     const code = (err as { code?: number }).code;
     if (code === 404) {

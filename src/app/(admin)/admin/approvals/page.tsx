@@ -211,7 +211,7 @@ export default function ApprovalsPage() {
                     {meta.scorecard?.total != null ? (
                       <p className="mt-1 text-xs" style={{ color: "var(--text-secondary)" }}>
                         Critic: {String(meta.scorecard.total)}/26
-                        {meta.post_type ? ` · ${String(meta.post_type).replace("_", " ")}` : ""}
+                        {meta.post_type ? ` · ${String(meta.post_type).replaceAll("_", " ")}` : ""}
                         {Array.isArray(meta.knowledge_ids) && meta.knowledge_ids.length ? ` · ${meta.knowledge_ids.length} knowledge items` : ""}
                       </p>
                     ) : rubric.length > 0 && (

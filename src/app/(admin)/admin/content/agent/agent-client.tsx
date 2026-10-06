@@ -24,12 +24,14 @@ import { useAdminAuth, useHasPermission } from "@/lib/admin/auth-context";
 
 type IdeaStatus = "new" | "queued" | "drafted" | "dismissed";
 type JobStatus = "queued" | "running" | "awaiting_approval" | "done" | "failed" | "cancelled";
-type PostType = "news_hook" | "field_story" | "trend_pov" | "buyer_guide" | "proof";
+type PostType = "news_hook" | "field_story" | "trend_pov" | "buyer_guide" | "proof" | "deep_dive" | "synthesis";
 
 const POST_TYPES: { value: PostType; label: string; hint: string }[] = [
   { value: "field_story", label: "Field story", hint: "A real problem we hit and how we solved it" },
   { value: "news_hook", label: "News + our take", hint: "Something new came out; what it means and how we do it" },
-  { value: "trend_pov", label: "Trend / point of view", hint: "Where the field is going and our position" },
+  { value: "deep_dive", label: "Deep dive", hint: "Take one paper, dataset or release apart: method, figures, what it means" },
+  { value: "synthesis", label: "Synthesis", hint: "Several sources on one question, compared side by side" },
+  { value: "trend_pov", label: "Trend / where it's going", hint: "Where the field is heading, with evidence and a clear position" },
   { value: "buyer_guide", label: "Buyer guide", hint: "Explain a topic and help a buyer decide (checklist, FAQ)" },
   { value: "proof", label: "Proof / results", hint: "Numbers we are allowed to publish, and what they show" },
 ];
@@ -44,7 +46,7 @@ interface Outline {
   sections?: { h2: string; point: string }[];
   closing?: string;
   cta?: string;
-  images?: { url: string; why: string }[];
+  images?: { url: string; why: string; kind?: string; credit?: string; license?: string }[];
   notes?: string;
 }
 
@@ -823,12 +825,16 @@ function OutlineView({
       {outline.images && outline.images.length > 0 && (
         <div className="flex flex-wrap gap-2">
           {outline.images.map((im, i) => (
-            <figure key={i} className="w-28">
+            <figure key={i} className="w-36">
               {/^\/(images|samples\/posters|api\/asset\/cms)\//.test(im.url) && (
                 // eslint-disable-next-line @next/next/no-img-element
-                <img src={im.url} alt="" className="h-16 w-28 rounded object-cover" />
+                <img src={im.url} alt="" className="h-20 w-36 rounded object-contain bg-white" />
               )}
-              <figcaption className="mt-0.5 text-[10px] leading-tight">{im.why}</figcaption>
+              <figcaption className="mt-0.5 text-[10px] leading-tight">
+                {im.kind === "chart" ? "Chart: " : im.kind === "source_figure" ? "Figure: " : ""}
+                {im.why}
+                {im.credit && <span className="block" style={{ color: "var(--text-muted)" }}>{im.credit}{im.license ? `, ${im.license}` : ""}</span>}
+              </figcaption>
             </figure>
           ))}
         </div>

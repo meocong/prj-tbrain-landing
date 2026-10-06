@@ -2,7 +2,7 @@
 
 > The example openings below show the **pattern** only. Their facts are illustrative: never reuse them in a post.
 
-Every post is exactly one of these types. Pick it in the brief, from the question the reader is asking, and follow its skeleton. A post that tries to be two types reads like neither.
+Every post is exactly one of these seven types. Pick it in the brief, from the question the reader is asking, and follow its skeleton. A post that tries to be two types reads like neither.
 
 Common to all types:
 - **One reader, one problem, one takeaway.** Write each down in one sentence before outlining. If you can't, the topic isn't ready.
@@ -10,6 +10,9 @@ Common to all types:
 - **Information gain.** Each post carries something the reader can't get from the sources you cite: a first-hand story or fact from the approved knowledge base, the requester's `experience` note, or an original analysis (a worked example, a decision rule, a comparison nobody has laid out). No information gain, no post: say so in the outline instead of padding.
 - **One peak in the middle.** Somewhere around the 50-70% mark the reader should hit the most surprising point in the post (a counterintuitive result, a failure, a number that changes the decision). Plan it in the outline.
 - **Ending.** A short "what to do with this" (a decision rule, the thing to check on Monday), then a single CTA matched to the topic. Never a recap of the headings, never "challenges remain" / "the future is bright".
+- **Built from the sources, not from our landing pages.** The substance of a post is what the original references actually contain: their method, their numbers, their figures, their limitations, what they disagree on. Read the paper body (arXiv HTML), the dataset card, the release notes, and 1-3 thoughtful blog posts about it found by web search. Then remix: compare, connect, take a side. Our own site is never a source for the argument.
+- **Tbrain's place.** Tbrain appears where our experience genuinely adds something (one section or a few paragraphs at most in `deep_dive`, `synthesis` and `trend_pov`; more in `field_story` and `proof`) and in the CTA. No product paragraph, no "at Tbrain we…" in every section, at most 2 internal links besides the CTA. A reader who never buys from us should still finish the post glad they read it.
+- **Visuals from the sources and our own charts**: see `images.md`. At least one original chart or diagram; source figures when licensed; library photos at most one.
 
 ---
 
@@ -48,24 +51,57 @@ CTA: "See how our QC pipeline works" → /data/physical-ai/quality, or /contact.
 
 Reference examples: PostHog engineering posts (hook → context → journey → resolution); Surge, "We Trained a Model on Office Work. It Also Got Better at Coding."
 
-## 3. `trend_pov`: where the field is going, and our position
+## 3. `deep_dive`: one source, taken apart
 
-Use when several signals point the same way (papers, releases, buyer questions) and we have a clear, defensible opinion. Take a side.
+Use when one paper, dataset, model release or technical report matters enough to understand properly, and the write-ups so far only repeat the abstract. The reader gets the thing explained better than the original, plus what it means for their data.
+
+Skeleton:
+1. **The one-sentence verdict** and why the reader should care, with the primary link and date.
+2. **How it works**: the method or pipeline in plain words, with the source's own figure (if licensed) or our redrawn `flow` diagram. Explain the figure in the text.
+3. **The numbers that matter**: 2-3 results, charted with `render_chart` when there's a comparison. Say what they're compared against.
+4. **What the paper doesn't say**: limitations, what's missing from the data, what would break in production. Our field experience belongs here, if it's real.
+5. **What it means for your data decision** (and the CTA).
+
+Opening pattern: the finding that surprised you, then why it matters. "EgoDex has 829 hours of video and not a single robot in it. It's also the most useful manipulation dataset Apple has released."
+
+Reference style: Lilian Weng and Sebastian Raschka on single papers; Hugging Face LeRobot release posts.
+
+## 4. `synthesis`: several sources, one question
+
+Use when 3-6 papers, datasets or releases answer the same question differently ("how much human video replaces teleop?", "what's in the big open robot datasets?"). The reader gets the map: who found what, where they agree, where they don't, and our read.
+
+Skeleton:
+1. **The question** and the short answer, in the first paragraph.
+2. **The landscape**: a comparison (one `bar` chart, a `quadrant`, or the post's one table) of the sources on the dimensions that matter.
+3. **2-3 H2s, each a pattern across sources** ("Every dataset that transfers well shares one thing: …"), not one H2 per paper.
+4. **Where they disagree, and why** (different embodiments, metrics, scale).
+5. **Our read and what to do**, then the CTA.
+
+Opening pattern: the question as the reader would ask it, then the answer. "Can you train a robot on people? Five datasets released since 2024 say yes, with a catch none of them puts in the abstract."
+
+Never write one section per paper. Group by idea.
+
+Reference style: Lilian Weng's surveys, Chip Huyen's long posts, Nathan Lambert's state-of-the-field posts.
+
+## 5. `trend_pov`: where the field is going, and our position
+
+Use when several signals point the same way (papers, releases, funding, buyer questions) and we have a clear, defensible opinion about the next 1-3 years. Take a side and make it checkable: a prediction someone could prove wrong by a date.
 
 Skeleton:
 1. **The claim** in paragraph one, stated plainly. "Teleoperation isn't going away; undefended teleoperation is."
-2. **3-4 H2s, each a claim with its evidence**: primary sources plus what we see in the field.
-3. **The strongest counterargument**, stated fairly, and why we still hold the position (or where it's right).
-4. **What this means for your next data decision.**
-5. CTA.
+2. **3-4 H2s, each a claim with its evidence**: the signals (papers, releases, numbers, a `timeline` or `line` chart of how we got here), plus what we see in the field.
+3. **The prediction**: what you expect to see by when, and what would change your mind.
+4. **The strongest counterargument**, stated fairly, and why we still hold the position (or where it's right).
+5. **What this means for your next data decision.**
+6. CTA.
 
 Opening pattern: the claim, then the tension. Avoid generic trend openers ("Robotics is entering a phase of rapid change…").
 
 CTA: a related deeper post or /contact.
 
-Reference examples: Skild, "The Hidden Pillar of Robotics"; Scale, "In an agentic world where automation gets cheap, which work is worth routing to a human?"
+Reference examples: Eric Jang's and Nathan Lambert's essays; Skild, "The Hidden Pillar of Robotics"; Scale, "In an agentic world where automation gets cheap, which work is worth routing to a human?"
 
-## 4. `buyer_guide`: explain a topic so a buyer can decide
+## 6. `buyer_guide`: explain a topic so a buyer can decide
 
 Use for evergreen questions buyers search for and ask us on calls: "what is teleoperation data", "how to evaluate a hand-pose dataset", "LeRobot vs RLDS". This is the search-traffic type. It must still have a point of view.
 
@@ -83,7 +119,7 @@ CTA: "Send us your spec and we'll mark what's missing" → /contact.
 
 Reference examples: Encord, "What Is Teleoperation Data Collection, and Why Do Robots Need It?"; Kognic's guides (Key Takeaways box, comparison table, "Choose X if…").
 
-## 5. `proof`: numbers we're allowed to publish, and what they show
+## 7. `proof`: numbers we're allowed to publish, and what they show
 
 Use only when an approved knowledge item (`kind: fact` or `doc`) gives publishable results (a pilot outcome, an error analysis, a QC study). Never invent or extrapolate numbers. Never use sample-level numbers (editorial rule 13).
 
@@ -116,4 +152,4 @@ Don't open with: the history of the field, a generic trend sentence, a definitio
 
 ## Topic mix (scout and planning)
 
-Over a month, aim for roughly 30% `field_story` / `proof`, 25% `buyer_guide`, 25% `trend_pov`, 20% `news_hook`. Never let `news_hook` become the default. If the knowledge base has an unused approved story, propose a `field_story` for it.
+Over a month, aim for roughly: 35% source-driven (`deep_dive`, `synthesis`), 20% `trend_pov`, 20% `field_story` / `proof`, 15% `buyer_guide`, 10% `news_hook`. If the knowledge base has an unused approved story, propose a `field_story` for it. Never run two posts in a row of the same type, and never let a week's posts all be about our own capture work.

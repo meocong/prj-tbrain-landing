@@ -1,7 +1,7 @@
 ---
 name: tbrain-write-post
 description: Write a Tbrain blog post people want to read — pick the post type, build a brief with real information gain from the approved knowledge base, propose an outline for human approval, then write, run reader/critic/fact-check passes, save as a draft, submit for review and prepare LinkedIn/Facebook/X copy. Use for draft jobs and when someone asks for a post.
-version: 2.0.0
+version: 2.1.0
 metadata:
   hermes:
     tags: [content, writing, tbrain]
@@ -13,7 +13,9 @@ metadata:
 You are writing for a person: a robotics or ML lead, or the person who buys their data. They have ten minutes and no obligation to finish. Every choice below serves that reader, not a search engine.
 
 Read these before you start, every time:
-- `references/post-types.md`: the five post types, their skeletons, openings and endings. **The most important file.**
+- `references/post-types.md`: the seven post types, their skeletons, openings and endings. **The most important file.**
+- `references/exemplars.md`: how the best technical writers build posts from sources, use figures, open and end
+- `references/images.md`: visuals: source figures (licence check), our own charts, the library (one at most)
 - `references/rubric.md`: the critic scorecard your draft must pass
 - `references/brand-voice.md`: how Tbrain sounds, banned phrases and AI tells
 - `references/editorial-rules.md`: what we may and may not claim (rule 13: samples and internal detail stay private)
@@ -25,15 +27,20 @@ Also check memory for reviewer preferences ("Tâm prefers: …") and apply them.
 
 ## 1. Research and the brief
 
-Research first: open 4-6 sources, at least 2 primary (paper, official post, dataset card). Then gather Tbrain material:
+Research first, and go deep. The post is built from what the original references actually contain, not from our landing pages.
+- Open 4-8 sources, at least 3 primary (paper, official post, dataset card, release notes). For papers read the body (`https://arxiv.org/html/<id>`), not just the abstract: method, dataset composition, the result tables, the limitations section.
+- Web-search for 1-3 thoughtful takes on the same topic (researchers' blogs, lab posts, substacks). Use them for angles, disagreements and counterarguments; cite them; never copy their images.
+- Write down as you go: the 5-10 numbers that matter (with their source), the figures worth showing (`source_license` tells you which you may reuse), and what the sources disagree on or leave out.
+
+Then gather Tbrain material, only for the part where it fits:
 - `mcp_tbrain_cms_search_knowledge` for approved stories and facts on the topic (try the data line and 2-3 keywords; read promising items in full with `get_knowledge`);
-- the requester's `brief.experience` (what they've seen or done first-hand), if any;
-- `mcp_tbrain_cms_list_images` for the approved image library.
+- the requester's `brief.experience` (what they've seen or done first-hand), if any.
 
 Write the brief (it goes into the outline):
-- **Post type** from `post-types.md`. Use `brief.post_type` if the requester set one. Otherwise pick from the reader's question, and prefer `field_story` when an approved story or the requester's experience fits.
+- **Post type** from `post-types.md`. Use `brief.post_type` if the requester set one. Otherwise pick from the reader's question: one source worth understanding → `deep_dive`; several sources on one question → `synthesis`; a direction with a prediction → `trend_pov`; an approved story or the requester's experience → `field_story`. Check `list_posts` and avoid the type and data line of the last two posts.
 - **Reader, problem, takeaway**: one sentence each.
-- **Information gain**: what this post has that the sources don't. Name the knowledge ids or the experience note it comes from, or the original analysis you'll add. If there's none, say so plainly in the outline notes and propose what we'd need (e.g. "a story from the team about X"). Don't pad.
+- **Information gain**: what this post has that the sources don't: the comparison across sources, the chart nobody drew, the limitation nobody mentions, a knowledge id or the experience note. If there's none, say so plainly in the outline notes. Don't pad.
+- **Visuals plan**: 3-5 visuals per `images.md`: which source figures (licence checked), which charts (with the numbers and their source), at most one library photo.
 - **The peak**: the most surprising point, and where it lands.
 - **CTA**: one, matched to the topic.
 
@@ -44,7 +51,7 @@ Unless `brief.skip_outline` is true or `brief.outline_approved` is true, stop af
    `{post_type, title, reader, problem, takeaway, opening, sections:[{h2, point}], closing, cta, images:[{url, why}], knowledge_ids, sources, notes}`.
    - `opening` is the actual first two paragraphs as they will read: the reader judges the post by them.
    - `h2`s are claims (see post-types.md). 4-6 sections.
-   - `images`: 3-4 picks from `list_images` with one line each on why that image belongs next to that section.
+   - `images`: the visuals plan: `[{url (or "chart: <spec title>" if not rendered yet), why, kind, credit, license}]`, one line each on why it belongs next to that section.
 2. Your final response is the outline report (plain text, Vietnamese, title and headings in English):
 ```
 📝 Dàn ý chờ duyệt: <Title>  (<post type>, yêu cầu bởi <requested_by>)
@@ -68,14 +75,16 @@ When the job comes back:
 
 ## 3. Draft
 
-Follow the skeleton of the post type. 1,200-1,600 words, HTML per `html-format.md`.
+Follow the skeleton of the post type. 1,200-1,600 words (`deep_dive` and `synthesis` up to 2,200), HTML per `html-format.md`.
 - **Opening**: the approved opening, polished. Answer-first or a scene; thesis in paragraph 1-2.
 - **Key takeaways box** right after the opening: `<blockquote><ul><li>…</li></ul></blockquote>` with 3 one-line takeaways (the site styles it as a box).
 - **H2s are claims.** Each section: the claim, the evidence (source link or approved Tbrain story/fact), and what it means for the reader.
 - **Write prose.** Lists only for real lists or steps. At most one table, and only for a decision.
 - **Tbrain material**: retell approved stories and facts accurately, at the level of detail the item gives, and never beyond it. Record their ids in `agent_meta.knowledge_ids`. Nothing about Tbrain that isn't in the knowledge base, `tbrain-knowledge.md` or the requester's note.
-- **Images**: 3-4 inline images from `list_images` only, each placed next to the paragraph its description matches, each followed by an `<em>` caption that says what to notice (see html-format.md). The cover is a different library image. If the library has nothing that fits a section, use fewer images and flag it for the reviewer. Never use an image whose description doesn't match.
-- **Links**: inline descriptive anchors to primary sources. 2-4 internal links: /data/physical-ai, /data/physical-ai/quality, /casestudy/<slug>, /blog/<related-slug> (from `list_posts`), /contact. Never /samples.
+- **Depth**: name the method, the dataset size, the embodiment, the metric, the baseline. "The policy improves" is not a finding; "success on unseen kitchens went from 31% to 58% when they added 20% human video" is.
+- **Visuals**: 3-5 per `images.md`: at least one `render_chart` chart or diagram built from cited numbers; licensed source figures fetched, cropped and credited; at most one library photo, and only next to a paragraph about our own work. Each followed by an `<em>` caption that says what to notice (and the credit for source figures). If you can't find a good visual for a section, leave it without one rather than decorating.
+- **Tbrain's place**: per `post-types.md`. Our experience goes where it adds; the rest of the post is about the field. No product paragraph.
+- **Links**: inline descriptive anchors to primary sources and the takes you used. At most 2 internal links besides the CTA (a related /blog post from `list_posts`, or /data/physical-ai/quality when QC is the topic). Never /samples.
 - **CTA**: one soft in-text CTA right after the section that describes the reader's pain, if natural, and a specific one at the end. The site appends a standard contact block under every post, so don't write a generic "contact us" paragraph.
 - **Ending**: one memorable line plus a concrete next step. No recap.
 
@@ -83,16 +92,16 @@ Follow the skeleton of the post type. 1,200-1,600 words, HTML per `html-format.m
 
 Use three separate `delegate_task` subagents. Each reviews **cold**: give it only the draft and the files named below.
 1. **Reader pass**: "You are a head of robotics data at a VLA startup. Read this as you would a vendor blog. Mark every sentence that made you want to keep reading, name the longest dull stretch, say where you would have stopped, and say what you'd remember tomorrow." Rewrite the dull stretch and anything before the stop point.
-2. **Critic**: `rubric.md`, `brand-voice.md`, `editorial-rules.md`, `post-types.md`, plus the image library descriptions of the images used. Ship at ≥20/26 with no 0 on items 1, 4, 6 or 10. Otherwise fix and **re-run a fresh critic**. Two rounds at most, then keep the best version and flag the rest. The score you save and report is the latest critic's total, never your own estimate.
-3. **Fact-check**: open every linked URL; check each factual sentence against its source; check every Tbrain claim against the knowledge items cited; check rule 13. Unresolved issues go into `factcheck_flags` ("Para 3: 'half of frames' — IronMind says 51% effective; reworded, please confirm").
+2. **Critic**: `rubric.md`, `brand-voice.md`, `editorial-rules.md`, `post-types.md`, `images.md`, plus the visuals list (kind, credit, licence, library description) of the images used. Ship at ≥20/26 with no 0 on items 1, 4, 6 or 10. Otherwise fix and **re-run a fresh critic**. Two rounds at most, then keep the best version and flag the rest. The score you save and report is the latest critic's total, never your own estimate.
+3. **Fact-check**: open every linked URL; check each factual sentence and every number in each chart spec against its source; check each source figure's licence and credit; check every Tbrain claim against the knowledge items cited; check rule 13. Unresolved issues go into `factcheck_flags` ("Para 3: 'half of frames' — IronMind says 51% effective; reworded, please confirm").
 
 ## 5. Metadata
 - `seo_title` ≤ 60 chars, `seo_description` 120-155 chars promising a concrete takeaway, `excerpt` 1-2 sentences, short keyword `slug`.
 - `category`: one of Physical AI, Robotics Data, Data Quality, RLHF & Evaluation, Benchmarks, Engineering. `tags`: 3-6, lowercase.
-- `cover_image_url`: from `list_images`. `author_name`: leave empty (the site shows "Tbrain Team").
+- `cover_image_url`: a PNG/JPEG, never a chart SVG (see `images.md`): the best licensed source figure, else one fitting library image. `author_name`: leave empty (the site shows "Tbrain Team").
 
 ## 6. Save and submit
-1. `mcp_tbrain_cms_create_draft` (or `update_draft` for an existing draft) with all fields and `agent_meta`: `{post_type, topic, reader, takeaway, target_keyword, knowledge_ids:[…], images:[{url, why}], sources:[{url,title,publisher,accessed_at}], scorecard:{total, items:{1..13}}, reader_pass:"<one line>", factcheck_flags:[…], model}`.
+1. `mcp_tbrain_cms_create_draft` (or `update_draft` for an existing draft) with all fields and `agent_meta`: `{post_type, topic, reader, takeaway, target_keyword, knowledge_ids:[…], images:[{url, why, kind, credit, license, source_url}], sources:[{url,title,publisher,accessed_at}], scorecard:{total, items:{1..13}}, reader_pass:"<one line>", factcheck_flags:[…], model}`.
 2. `mcp_tbrain_cms_submit_for_review` returns `review_url` and `preview_url`.
 3. `mcp_tbrain_cms_save_social_messages`:
    - **linkedin**: 150-250 words, first-person plural. Open with the post's sharpest line, then 3 short insights and a question. 0-3 hashtags, no link (it's appended).
@@ -104,7 +113,7 @@ No Markdown, bold or backslash escapes. One URL per line.
 ```
 ✍️ Bài mới chờ duyệt: <Title>  (<post type>, yêu cầu bởi <requested_by>)
 • Ý chính: <1 câu>
-• <n> từ · <k> nguồn · <m> ảnh · Critic: <total>/26
+• <n> từ · <k> nguồn · <f> hình từ nguồn gốc · <c> biểu đồ · <l> ảnh thư viện · Critic: <total>/26
 • Chất riêng: <knowledge/experience used>
 • ⚠️ Cần kiểm tra: <flags or "không có">
 👀 Xem trước: <preview_url>

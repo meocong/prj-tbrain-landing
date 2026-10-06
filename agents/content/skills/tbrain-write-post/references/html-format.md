@@ -10,7 +10,7 @@ The site sanitizes the body and strips anything outside this list. Write clean, 
 - Quotes: `<blockquote><p>…</p></blockquote>` for pull quotes or short sourced quotes.
 - Tables: `<table><thead><tr><th>…</th></tr></thead><tbody><tr><td>…</td></tr></tbody></table>` for comparisons or decision tables.
 - Code: `<pre><code class="language-python">…</code></pre>`, or inline `<code>`.
-- Images: `<img src="/images/…" alt="specific description">` followed by a caption paragraph `<p><em>What the reader should notice.</em></p>`, using only `image_url`s from `list_images` (the approved library). (No `<figure>`: the admin editor drops figcaptions.)
+- Images: `<img src="…" alt="specific description">` followed by a caption paragraph `<p><em>What the reader should notice. Figure: Khazatsky et al., 2024 (DROID), CC BY 4.0.</em></p>`. Sources: URLs returned by `upload_image` (licensed source figures), `render_chart` (our charts) or `list_images` (library). Third-party figures always carry the credit; charts built from someone's numbers end with "Data: …" when the chart's own source line isn't enough. (No `<figure>`: the admin editor drops figcaptions.)
 - Not allowed (removed): scripts, iframes, embeds, inline `style`, classes (except `language-*` on code), forms.
 
 ## Structure
