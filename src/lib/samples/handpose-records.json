@@ -1,0 +1,1118 @@
+[
+  {
+    "slug": "hand-pose-01",
+    "domain": "robotics",
+    "modality": "handpose",
+    "tier": "pair",
+    "provenance": "custom",
+    "title": "Cutting and washing",
+    "label": "Cleaning & Sanitation",
+    "environment": "",
+    "locale": "",
+    "rig": "Six-camera head rig, stereo pair used for hand pose",
+    "viewpoint": "first-person",
+    "skillGroup": "Cleaning & Sanitation",
+    "industry": null,
+    "job": null,
+    "telemetry": false,
+    "durationSec": 79.2,
+    "resolution": "No public video",
+    "fps": 30,
+    "streams": [
+      "21 joints per hand, in metres",
+      "One state per frame and hand",
+      "Per-sample metrics"
+    ],
+    "formats": [
+      "json",
+      "csv"
+    ],
+    "size": "On request",
+    "spec": [
+      [
+        "Skill group",
+        "Cleaning & Sanitation"
+      ],
+      [
+        "Both hands with 3D pose",
+        "95% or more"
+      ],
+      [
+        "Preview",
+        "Preview on request"
+      ]
+    ],
+    "breadcrumb": [
+      "Samples",
+      "Hand pose",
+      "Cutting and washing"
+    ],
+    "preview": "L 99.9% · R 98.4% with 3D pose",
+    "pills": [
+      {
+        "t": "Cleaning & Sanitation",
+        "k": "skill"
+      },
+      {
+        "t": "21 joints",
+        "k": "file"
+      },
+      {
+        "t": "Measured 96.9% of delivered",
+        "k": "quality"
+      },
+      {
+        "t": "1:19",
+        "k": "file"
+      }
+    ],
+    "downloads": []
+  },
+  {
+    "slug": "hand-pose-02",
+    "domain": "robotics",
+    "modality": "handpose",
+    "tier": "pair",
+    "provenance": "custom",
+    "title": "Engine cleaning",
+    "label": "Cleaning & Sanitation",
+    "environment": "",
+    "locale": "",
+    "rig": "Six-camera head rig, stereo pair used for hand pose",
+    "viewpoint": "first-person",
+    "skillGroup": "Cleaning & Sanitation",
+    "industry": null,
+    "job": null,
+    "telemetry": false,
+    "durationSec": 71.7,
+    "resolution": "No public video",
+    "fps": 30,
+    "streams": [
+      "21 joints per hand, in metres",
+      "One state per frame and hand",
+      "Per-sample metrics"
+    ],
+    "formats": [
+      "json",
+      "csv"
+    ],
+    "size": "On request",
+    "spec": [
+      [
+        "Skill group",
+        "Cleaning & Sanitation"
+      ],
+      [
+        "Both hands with 3D pose",
+        "80 to 95%"
+      ],
+      [
+        "Preview",
+        "Preview on request"
+      ]
+    ],
+    "breadcrumb": [
+      "Samples",
+      "Hand pose",
+      "Engine cleaning"
+    ],
+    "preview": "L 98.3% · R 86.6% with 3D pose",
+    "pills": [
+      {
+        "t": "Cleaning & Sanitation",
+        "k": "skill"
+      },
+      {
+        "t": "21 joints",
+        "k": "file"
+      },
+      {
+        "t": "Measured 96.7% of delivered",
+        "k": "quality"
+      },
+      {
+        "t": "1:12",
+        "k": "file"
+      }
+    ],
+    "downloads": []
+  },
+  {
+    "slug": "hand-pose-03",
+    "domain": "robotics",
+    "modality": "handpose",
+    "tier": "pair",
+    "provenance": "custom",
+    "title": "Cart clearing",
+    "label": "Cleaning & Sanitation",
+    "environment": "",
+    "locale": "",
+    "rig": "Six-camera head rig, stereo pair used for hand pose",
+    "viewpoint": "first-person",
+    "skillGroup": "Cleaning & Sanitation",
+    "industry": null,
+    "job": null,
+    "telemetry": false,
+    "durationSec": 120,
+    "resolution": "No public video",
+    "fps": 30,
+    "streams": [
+      "21 joints per hand, in metres",
+      "One state per frame and hand",
+      "Per-sample metrics"
+    ],
+    "formats": [
+      "json",
+      "csv"
+    ],
+    "size": "On request",
+    "spec": [
+      [
+        "Skill group",
+        "Cleaning & Sanitation"
+      ],
+      [
+        "Both hands with 3D pose",
+        "Below 80%"
+      ],
+      [
+        "Preview",
+        "Preview on request"
+      ]
+    ],
+    "breadcrumb": [
+      "Samples",
+      "Hand pose",
+      "Cart clearing"
+    ],
+    "preview": "L 71.3% · R 64.0% with 3D pose",
+    "pills": [
+      {
+        "t": "Cleaning & Sanitation",
+        "k": "skill"
+      },
+      {
+        "t": "21 joints",
+        "k": "file"
+      },
+      {
+        "t": "Measured 86.4% of delivered",
+        "k": "quality"
+      },
+      {
+        "t": "2:00",
+        "k": "file"
+      }
+    ],
+    "downloads": []
+  },
+  {
+    "slug": "hand-pose-04",
+    "domain": "robotics",
+    "modality": "handpose",
+    "tier": "pair",
+    "provenance": "custom",
+    "title": "Hair washing",
+    "label": "Healthcare & Caregiving",
+    "environment": "",
+    "locale": "",
+    "rig": "Six-camera head rig, stereo pair used for hand pose",
+    "viewpoint": "first-person",
+    "skillGroup": "Healthcare & Caregiving",
+    "industry": null,
+    "job": null,
+    "telemetry": false,
+    "durationSec": 203.7,
+    "resolution": "No public video",
+    "fps": 30,
+    "streams": [
+      "21 joints per hand, in metres",
+      "One state per frame and hand",
+      "Per-sample metrics"
+    ],
+    "formats": [
+      "json",
+      "csv"
+    ],
+    "size": "On request",
+    "spec": [
+      [
+        "Skill group",
+        "Healthcare & Caregiving"
+      ],
+      [
+        "Both hands with 3D pose",
+        "80 to 95%"
+      ],
+      [
+        "Preview",
+        "Preview on request"
+      ]
+    ],
+    "breadcrumb": [
+      "Samples",
+      "Hand pose",
+      "Hair washing"
+    ],
+    "preview": "L 96.7% · R 91.9% with 3D pose",
+    "pills": [
+      {
+        "t": "Healthcare & Caregiving",
+        "k": "skill"
+      },
+      {
+        "t": "21 joints",
+        "k": "file"
+      },
+      {
+        "t": "Measured 93.3% of delivered",
+        "k": "quality"
+      },
+      {
+        "t": "3:24",
+        "k": "file"
+      }
+    ],
+    "downloads": []
+  },
+  {
+    "slug": "hand-pose-05",
+    "domain": "robotics",
+    "modality": "handpose",
+    "tier": "pair",
+    "provenance": "custom",
+    "title": "Trash disposing",
+    "label": "Cleaning & Sanitation",
+    "environment": "",
+    "locale": "",
+    "rig": "Six-camera head rig, stereo pair used for hand pose",
+    "viewpoint": "first-person",
+    "skillGroup": "Cleaning & Sanitation",
+    "industry": null,
+    "job": null,
+    "telemetry": false,
+    "durationSec": 64.7,
+    "resolution": "No public video",
+    "fps": 30,
+    "streams": [
+      "21 joints per hand, in metres",
+      "One state per frame and hand",
+      "Per-sample metrics"
+    ],
+    "formats": [
+      "json",
+      "csv"
+    ],
+    "size": "On request",
+    "spec": [
+      [
+        "Skill group",
+        "Cleaning & Sanitation"
+      ],
+      [
+        "Both hands with 3D pose",
+        "Below 80%"
+      ],
+      [
+        "Preview",
+        "Preview on request"
+      ]
+    ],
+    "breadcrumb": [
+      "Samples",
+      "Hand pose",
+      "Trash disposing"
+    ],
+    "preview": "L 64.5% · R 77.0% with 3D pose",
+    "pills": [
+      {
+        "t": "Cleaning & Sanitation",
+        "k": "skill"
+      },
+      {
+        "t": "21 joints",
+        "k": "file"
+      },
+      {
+        "t": "Measured 89.2% of delivered",
+        "k": "quality"
+      },
+      {
+        "t": "1:05",
+        "k": "file"
+      }
+    ],
+    "downloads": []
+  },
+  {
+    "slug": "hand-pose-06",
+    "domain": "robotics",
+    "modality": "handpose",
+    "tier": "pair",
+    "provenance": "custom",
+    "title": "Notebook writing",
+    "label": "Tool Use & Technical Manipulation",
+    "environment": "",
+    "locale": "",
+    "rig": "Six-camera head rig, stereo pair used for hand pose",
+    "viewpoint": "first-person",
+    "skillGroup": "Tool Use & Technical Manipulation",
+    "industry": null,
+    "job": null,
+    "telemetry": false,
+    "durationSec": 75.5,
+    "resolution": "No public video",
+    "fps": 30,
+    "streams": [
+      "21 joints per hand, in metres",
+      "One state per frame and hand",
+      "Per-sample metrics"
+    ],
+    "formats": [
+      "json",
+      "csv"
+    ],
+    "size": "On request",
+    "spec": [
+      [
+        "Skill group",
+        "Tool Use & Technical Manipulation"
+      ],
+      [
+        "Both hands with 3D pose",
+        "Below 80%"
+      ],
+      [
+        "Preview",
+        "Preview on request"
+      ]
+    ],
+    "breadcrumb": [
+      "Samples",
+      "Hand pose",
+      "Notebook writing"
+    ],
+    "preview": "L 78.2% · R 82.3% with 3D pose",
+    "pills": [
+      {
+        "t": "Tool Use & Technical Manipulation",
+        "k": "skill"
+      },
+      {
+        "t": "21 joints",
+        "k": "file"
+      },
+      {
+        "t": "Measured 94.9% of delivered",
+        "k": "quality"
+      },
+      {
+        "t": "1:16",
+        "k": "file"
+      }
+    ],
+    "downloads": []
+  },
+  {
+    "slug": "hand-pose-07",
+    "domain": "robotics",
+    "modality": "handpose",
+    "tier": "pair",
+    "provenance": "custom",
+    "title": "Wire untangling",
+    "label": "Tool Use & Technical Manipulation",
+    "environment": "",
+    "locale": "",
+    "rig": "Six-camera head rig, stereo pair used for hand pose",
+    "viewpoint": "first-person",
+    "skillGroup": "Tool Use & Technical Manipulation",
+    "industry": null,
+    "job": null,
+    "telemetry": false,
+    "durationSec": 95.6,
+    "resolution": "No public video",
+    "fps": 30,
+    "streams": [
+      "21 joints per hand, in metres",
+      "One state per frame and hand",
+      "Per-sample metrics"
+    ],
+    "formats": [
+      "json",
+      "csv"
+    ],
+    "size": "On request",
+    "spec": [
+      [
+        "Skill group",
+        "Tool Use & Technical Manipulation"
+      ],
+      [
+        "Both hands with 3D pose",
+        "80 to 95%"
+      ],
+      [
+        "Preview",
+        "Preview on request"
+      ]
+    ],
+    "breadcrumb": [
+      "Samples",
+      "Hand pose",
+      "Wire untangling"
+    ],
+    "preview": "L 83.1% · R 82.4% with 3D pose",
+    "pills": [
+      {
+        "t": "Tool Use & Technical Manipulation",
+        "k": "skill"
+      },
+      {
+        "t": "21 joints",
+        "k": "file"
+      },
+      {
+        "t": "Measured 89.2% of delivered",
+        "k": "quality"
+      },
+      {
+        "t": "1:36",
+        "k": "file"
+      }
+    ],
+    "downloads": []
+  },
+  {
+    "slug": "hand-pose-08",
+    "domain": "robotics",
+    "modality": "handpose",
+    "tier": "pair",
+    "provenance": "custom",
+    "title": "Material organizing",
+    "label": "Pick and Place / Object Handling",
+    "environment": "",
+    "locale": "",
+    "rig": "Six-camera head rig, stereo pair used for hand pose",
+    "viewpoint": "first-person",
+    "skillGroup": "Pick and Place / Object Handling",
+    "industry": null,
+    "job": null,
+    "telemetry": false,
+    "durationSec": 74.1,
+    "resolution": "No public video",
+    "fps": 30,
+    "streams": [
+      "21 joints per hand, in metres",
+      "One state per frame and hand",
+      "Per-sample metrics"
+    ],
+    "formats": [
+      "json",
+      "csv"
+    ],
+    "size": "On request",
+    "spec": [
+      [
+        "Skill group",
+        "Pick and Place / Object Handling"
+      ],
+      [
+        "Both hands with 3D pose",
+        "95% or more"
+      ],
+      [
+        "Preview",
+        "Preview on request"
+      ]
+    ],
+    "breadcrumb": [
+      "Samples",
+      "Hand pose",
+      "Material organizing"
+    ],
+    "preview": "L 99.8% · R 99.7% with 3D pose",
+    "pills": [
+      {
+        "t": "Pick and Place / Object Handling",
+        "k": "skill"
+      },
+      {
+        "t": "21 joints",
+        "k": "file"
+      },
+      {
+        "t": "Measured 98.6% of delivered",
+        "k": "quality"
+      },
+      {
+        "t": "1:14",
+        "k": "file"
+      }
+    ],
+    "downloads": []
+  },
+  {
+    "slug": "hand-pose-09",
+    "domain": "robotics",
+    "modality": "handpose",
+    "tier": "pair",
+    "provenance": "custom",
+    "title": "Shaft wrapping",
+    "label": "Mechanical / Automotive Work",
+    "environment": "",
+    "locale": "",
+    "rig": "Six-camera head rig, stereo pair used for hand pose",
+    "viewpoint": "first-person",
+    "skillGroup": "Mechanical / Automotive Work",
+    "industry": null,
+    "job": null,
+    "telemetry": false,
+    "durationSec": 78,
+    "resolution": "No public video",
+    "fps": 30,
+    "streams": [
+      "21 joints per hand, in metres",
+      "One state per frame and hand",
+      "Per-sample metrics"
+    ],
+    "formats": [
+      "json",
+      "csv"
+    ],
+    "size": "On request",
+    "spec": [
+      [
+        "Skill group",
+        "Mechanical / Automotive Work"
+      ],
+      [
+        "Both hands with 3D pose",
+        "95% or more"
+      ],
+      [
+        "Preview",
+        "Preview on request"
+      ]
+    ],
+    "breadcrumb": [
+      "Samples",
+      "Hand pose",
+      "Shaft wrapping"
+    ],
+    "preview": "L 97.9% · R 95.5% with 3D pose",
+    "pills": [
+      {
+        "t": "Mechanical / Automotive Work",
+        "k": "skill"
+      },
+      {
+        "t": "21 joints",
+        "k": "file"
+      },
+      {
+        "t": "Measured 91.5% of delivered",
+        "k": "quality"
+      },
+      {
+        "t": "1:18",
+        "k": "file"
+      }
+    ],
+    "downloads": []
+  },
+  {
+    "slug": "hand-pose-10",
+    "domain": "robotics",
+    "modality": "handpose",
+    "tier": "pair",
+    "provenance": "custom",
+    "title": "Light setup",
+    "label": "Pick and Place / Object Handling",
+    "environment": "",
+    "locale": "",
+    "rig": "Six-camera head rig, stereo pair used for hand pose",
+    "viewpoint": "first-person",
+    "skillGroup": "Pick and Place / Object Handling",
+    "industry": null,
+    "job": null,
+    "telemetry": false,
+    "durationSec": 94.9,
+    "resolution": "No public video",
+    "fps": 30,
+    "streams": [
+      "21 joints per hand, in metres",
+      "One state per frame and hand",
+      "Per-sample metrics"
+    ],
+    "formats": [
+      "json",
+      "csv"
+    ],
+    "size": "On request",
+    "spec": [
+      [
+        "Skill group",
+        "Pick and Place / Object Handling"
+      ],
+      [
+        "Both hands with 3D pose",
+        "Below 80%"
+      ],
+      [
+        "Preview",
+        "Preview on request"
+      ]
+    ],
+    "breadcrumb": [
+      "Samples",
+      "Hand pose",
+      "Light setup"
+    ],
+    "preview": "L 24.0% · R 30.8% with 3D pose",
+    "pills": [
+      {
+        "t": "Pick and Place / Object Handling",
+        "k": "skill"
+      },
+      {
+        "t": "21 joints",
+        "k": "file"
+      },
+      {
+        "t": "Measured 82.9% of delivered",
+        "k": "quality"
+      },
+      {
+        "t": "1:35",
+        "k": "file"
+      }
+    ],
+    "downloads": []
+  },
+  {
+    "slug": "hand-pose-11",
+    "domain": "robotics",
+    "modality": "handpose",
+    "tier": "pair",
+    "provenance": "custom",
+    "title": "Table cleaning",
+    "label": "Cleaning & Sanitation",
+    "environment": "",
+    "locale": "",
+    "rig": "Six-camera head rig, stereo pair used for hand pose",
+    "viewpoint": "first-person",
+    "skillGroup": "Cleaning & Sanitation",
+    "industry": null,
+    "job": null,
+    "telemetry": false,
+    "durationSec": 74,
+    "resolution": "No public video",
+    "fps": 30,
+    "streams": [
+      "21 joints per hand, in metres",
+      "One state per frame and hand",
+      "Per-sample metrics"
+    ],
+    "formats": [
+      "json",
+      "csv"
+    ],
+    "size": "On request",
+    "spec": [
+      [
+        "Skill group",
+        "Cleaning & Sanitation"
+      ],
+      [
+        "Both hands with 3D pose",
+        "Below 80%"
+      ],
+      [
+        "Preview",
+        "Preview on request"
+      ]
+    ],
+    "breadcrumb": [
+      "Samples",
+      "Hand pose",
+      "Table cleaning"
+    ],
+    "preview": "L 73.3% · R 73.7% with 3D pose",
+    "pills": [
+      {
+        "t": "Cleaning & Sanitation",
+        "k": "skill"
+      },
+      {
+        "t": "21 joints",
+        "k": "file"
+      },
+      {
+        "t": "Measured 75.1% of delivered",
+        "k": "quality"
+      },
+      {
+        "t": "1:14",
+        "k": "file"
+      }
+    ],
+    "downloads": []
+  },
+  {
+    "slug": "hand-pose-12",
+    "domain": "robotics",
+    "modality": "handpose",
+    "tier": "pair",
+    "provenance": "custom",
+    "title": "Bathtub cleaning",
+    "label": "Cleaning & Sanitation",
+    "environment": "",
+    "locale": "",
+    "rig": "Six-camera head rig, stereo pair used for hand pose",
+    "viewpoint": "first-person",
+    "skillGroup": "Cleaning & Sanitation",
+    "industry": null,
+    "job": null,
+    "telemetry": false,
+    "durationSec": 80.8,
+    "resolution": "No public video",
+    "fps": 30,
+    "streams": [
+      "21 joints per hand, in metres",
+      "One state per frame and hand",
+      "Per-sample metrics"
+    ],
+    "formats": [
+      "json",
+      "csv"
+    ],
+    "size": "On request",
+    "spec": [
+      [
+        "Skill group",
+        "Cleaning & Sanitation"
+      ],
+      [
+        "Both hands with 3D pose",
+        "80 to 95%"
+      ],
+      [
+        "Preview",
+        "Preview on request"
+      ]
+    ],
+    "breadcrumb": [
+      "Samples",
+      "Hand pose",
+      "Bathtub cleaning"
+    ],
+    "preview": "L 84.1% · R 88.7% with 3D pose",
+    "pills": [
+      {
+        "t": "Cleaning & Sanitation",
+        "k": "skill"
+      },
+      {
+        "t": "21 joints",
+        "k": "file"
+      },
+      {
+        "t": "Measured 79.5% of delivered",
+        "k": "quality"
+      },
+      {
+        "t": "1:21",
+        "k": "file"
+      }
+    ],
+    "downloads": []
+  },
+  {
+    "slug": "hand-pose-13",
+    "domain": "robotics",
+    "modality": "handpose",
+    "tier": "pair",
+    "provenance": "custom",
+    "title": "Fabric arranging",
+    "label": "Clothing & Laundry",
+    "environment": "",
+    "locale": "",
+    "rig": "Six-camera head rig, stereo pair used for hand pose",
+    "viewpoint": "first-person",
+    "skillGroup": "Clothing & Laundry",
+    "industry": null,
+    "job": null,
+    "telemetry": false,
+    "durationSec": 74.6,
+    "resolution": "540 x 540 skeleton render",
+    "fps": 30,
+    "streams": [
+      "21 joints per hand, in metres",
+      "One state per frame and hand",
+      "Per-sample metrics"
+    ],
+    "formats": [
+      "npz",
+      "json",
+      "csv"
+    ],
+    "size": "Sample pack by passcode",
+    "spec": [
+      [
+        "Skill group",
+        "Clothing & Laundry"
+      ],
+      [
+        "Both hands with 3D pose",
+        "80 to 95%"
+      ],
+      [
+        "Preview",
+        "Skeleton preview"
+      ]
+    ],
+    "breadcrumb": [
+      "Samples",
+      "Hand pose",
+      "Fabric arranging"
+    ],
+    "preview": "L 99.9% · R 85.9% with 3D pose",
+    "pills": [
+      {
+        "t": "Clothing & Laundry",
+        "k": "skill"
+      },
+      {
+        "t": "21 joints",
+        "k": "file"
+      },
+      {
+        "t": "Measured 95.0% of delivered",
+        "k": "quality"
+      },
+      {
+        "t": "1:15",
+        "k": "file"
+      }
+    ],
+    "downloads": [
+      {
+        "t": "Sample pack",
+        "primary": true
+      }
+    ]
+  },
+  {
+    "slug": "hand-pose-14",
+    "domain": "robotics",
+    "modality": "handpose",
+    "tier": "pair",
+    "provenance": "custom",
+    "title": "Frame moving",
+    "label": "Pick and Place / Object Handling",
+    "environment": "",
+    "locale": "",
+    "rig": "Six-camera head rig, stereo pair used for hand pose",
+    "viewpoint": "first-person",
+    "skillGroup": "Pick and Place / Object Handling",
+    "industry": null,
+    "job": null,
+    "telemetry": false,
+    "durationSec": 75.2,
+    "resolution": "540 x 540 skeleton render",
+    "fps": 30,
+    "streams": [
+      "21 joints per hand, in metres",
+      "One state per frame and hand",
+      "Per-sample metrics"
+    ],
+    "formats": [
+      "npz",
+      "json",
+      "csv"
+    ],
+    "size": "Sample pack by passcode",
+    "spec": [
+      [
+        "Skill group",
+        "Pick and Place / Object Handling"
+      ],
+      [
+        "Both hands with 3D pose",
+        "Below 80%"
+      ],
+      [
+        "Preview",
+        "Skeleton preview"
+      ]
+    ],
+    "breadcrumb": [
+      "Samples",
+      "Hand pose",
+      "Frame moving"
+    ],
+    "preview": "L 46.1% · R 54.3% with 3D pose",
+    "pills": [
+      {
+        "t": "Pick and Place / Object Handling",
+        "k": "skill"
+      },
+      {
+        "t": "21 joints",
+        "k": "file"
+      },
+      {
+        "t": "Measured 92.6% of delivered",
+        "k": "quality"
+      },
+      {
+        "t": "1:15",
+        "k": "file"
+      }
+    ],
+    "downloads": [
+      {
+        "t": "Sample pack",
+        "primary": true
+      }
+    ]
+  },
+  {
+    "slug": "hand-pose-15",
+    "domain": "robotics",
+    "modality": "handpose",
+    "tier": "pair",
+    "provenance": "custom",
+    "title": "Bathroom cleaning",
+    "label": "Cleaning & Sanitation",
+    "environment": "",
+    "locale": "",
+    "rig": "Six-camera head rig, stereo pair used for hand pose",
+    "viewpoint": "first-person",
+    "skillGroup": "Cleaning & Sanitation",
+    "industry": null,
+    "job": null,
+    "telemetry": false,
+    "durationSec": 80.1,
+    "resolution": "No public video",
+    "fps": 30,
+    "streams": [
+      "21 joints per hand, in metres",
+      "One state per frame and hand",
+      "Per-sample metrics"
+    ],
+    "formats": [
+      "json",
+      "csv"
+    ],
+    "size": "On request",
+    "spec": [
+      [
+        "Skill group",
+        "Cleaning & Sanitation"
+      ],
+      [
+        "Both hands with 3D pose",
+        "Below 80%"
+      ],
+      [
+        "Preview",
+        "Preview on request"
+      ]
+    ],
+    "breadcrumb": [
+      "Samples",
+      "Hand pose",
+      "Bathroom cleaning"
+    ],
+    "preview": "L 48.6% · R 80.9% with 3D pose",
+    "pills": [
+      {
+        "t": "Cleaning & Sanitation",
+        "k": "skill"
+      },
+      {
+        "t": "21 joints",
+        "k": "file"
+      },
+      {
+        "t": "Measured 77.1% of delivered",
+        "k": "quality"
+      },
+      {
+        "t": "1:20",
+        "k": "file"
+      }
+    ],
+    "downloads": []
+  },
+  {
+    "slug": "hand-pose-16",
+    "domain": "robotics",
+    "modality": "handpose",
+    "tier": "pair",
+    "provenance": "custom",
+    "title": "Card cutting",
+    "label": "Tool Use & Technical Manipulation",
+    "environment": "",
+    "locale": "",
+    "rig": "Six-camera head rig, stereo pair used for hand pose",
+    "viewpoint": "first-person",
+    "skillGroup": "Tool Use & Technical Manipulation",
+    "industry": null,
+    "job": null,
+    "telemetry": false,
+    "durationSec": 96.6,
+    "resolution": "No public video",
+    "fps": 30,
+    "streams": [
+      "21 joints per hand, in metres",
+      "One state per frame and hand",
+      "Per-sample metrics"
+    ],
+    "formats": [
+      "json",
+      "csv"
+    ],
+    "size": "On request",
+    "spec": [
+      [
+        "Skill group",
+        "Tool Use & Technical Manipulation"
+      ],
+      [
+        "Both hands with 3D pose",
+        "80 to 95%"
+      ],
+      [
+        "Preview",
+        "Preview on request"
+      ]
+    ],
+    "breadcrumb": [
+      "Samples",
+      "Hand pose",
+      "Card cutting"
+    ],
+    "preview": "L 94.4% · R 92.1% with 3D pose",
+    "pills": [
+      {
+        "t": "Tool Use & Technical Manipulation",
+        "k": "skill"
+      },
+      {
+        "t": "21 joints",
+        "k": "file"
+      },
+      {
+        "t": "Measured 95.7% of delivered",
+        "k": "quality"
+      },
+      {
+        "t": "1:37",
+        "k": "file"
+      }
+    ],
+    "downloads": []
+  }
+]

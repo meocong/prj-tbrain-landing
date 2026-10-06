@@ -1,0 +1,817 @@
+{
+  "source": "scripts/samples/handpose/build-handpose-data.py",
+  "fps": 30,
+  "jointsPerHand": 21,
+  "jointNames": [
+    "wrist",
+    "thumb_1",
+    "thumb_2",
+    "thumb_3",
+    "thumb_4",
+    "index_1",
+    "index_2",
+    "index_3",
+    "index_4",
+    "middle_1",
+    "middle_2",
+    "middle_3",
+    "middle_4",
+    "ring_1",
+    "ring_2",
+    "ring_3",
+    "ring_4",
+    "little_1",
+    "little_2",
+    "little_3",
+    "little_4"
+  ],
+  "states": [
+    "none",
+    "measured",
+    "guessed",
+    "bridged"
+  ],
+  "aggregates": {
+    "samples": 16,
+    "frames": 43168,
+    "seconds": 1438.9,
+    "minutes": 24.0,
+    "handSlots": 86336,
+    "measured": 62725,
+    "guessed": 6411,
+    "bridged": 259,
+    "none": 16941,
+    "delivered": 69136,
+    "measuredOfDeliveredPct": 90.7,
+    "guessedOfDeliveredPct": 9.3,
+    "measuredOfSlotsPct": 72.7,
+    "deliveredOfSlotsPct": 80.1,
+    "durationMedianSec": 78.6,
+    "durationMinSec": 64.7,
+    "durationMaxSec": 203.7,
+    "pose": {
+      "min": 24.0,
+      "median": 83.6,
+      "max": 99.9,
+      "atLeast95": 9,
+      "atLeast80": 20,
+      "below50": 4
+    },
+    "bothHands": {
+      "atLeast95": 3,
+      "from80to95": 6,
+      "below80": 7
+    },
+    "preview": {
+      "video": 2,
+      "poster": 10,
+      "lane": 4
+    }
+  },
+  "samples": [
+    {
+      "n": 1,
+      "slug": "hand-pose-01",
+      "title": "Cutting and washing",
+      "skillGroup": "Cleaning & Sanitation",
+      "frames": 2376,
+      "seconds": 79.2,
+      "left": {
+        "measured": 2351,
+        "guessed": 23,
+        "bridged": 0,
+        "none": 2,
+        "posePct": 99.9,
+        "missedPct": 0.0,
+        "longestNoPoseFrames": 1
+      },
+      "right": {
+        "measured": 2213,
+        "guessed": 124,
+        "bridged": 0,
+        "none": 39,
+        "posePct": 98.4,
+        "missedPct": 0.1,
+        "longestNoPoseFrames": 39
+      },
+      "measuredOfDeliveredPct": 96.9,
+      "guessedOfDeliveredPct": 3.1,
+      "minPosePct": 98.4,
+      "bothHandsBand": "95+",
+      "preview": "poster",
+      "pack": false,
+      "media": {
+        "poster": "/samples/posters/hand-pose-01.jpg",
+        "still": "/samples/hand-pose/stills/hand-pose-01.jpg",
+        "loop": null,
+        "video": null,
+        "videoSeconds": null
+      },
+      "loop": null,
+      "posterFrame": 2347,
+      "lane": "/samples/hand-pose/lanes/hand-pose-01.json",
+      "strip": {
+        "left": "11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111",
+        "right": "11111111111111111111111111111111111211111111111111111111111111111111111111111111111111111112111111112111111111111111111111111111111111111111111221112211111111000211111121111111111111111111111111111111"
+      }
+    },
+    {
+      "n": 2,
+      "slug": "hand-pose-02",
+      "title": "Engine cleaning",
+      "skillGroup": "Cleaning & Sanitation",
+      "frames": 2151,
+      "seconds": 71.7,
+      "left": {
+        "measured": 2049,
+        "guessed": 66,
+        "bridged": 3,
+        "none": 33,
+        "posePct": 98.3,
+        "missedPct": 0.2,
+        "longestNoPoseFrames": 19
+      },
+      "right": {
+        "measured": 1798,
+        "guessed": 65,
+        "bridged": 0,
+        "none": 288,
+        "posePct": 86.6,
+        "missedPct": 0.2,
+        "longestNoPoseFrames": 206
+      },
+      "measuredOfDeliveredPct": 96.7,
+      "guessedOfDeliveredPct": 3.3,
+      "minPosePct": 86.6,
+      "bothHandsBand": "80-95",
+      "preview": "poster",
+      "pack": false,
+      "media": {
+        "poster": "/samples/posters/hand-pose-02.jpg",
+        "still": "/samples/hand-pose/stills/hand-pose-02.jpg",
+        "loop": null,
+        "video": null,
+        "videoSeconds": null
+      },
+      "loop": null,
+      "posterFrame": 1366,
+      "lane": "/samples/hand-pose/lanes/hand-pose-02.json",
+      "strip": {
+        "left": "11111111111111111111111111221111111111111111111111111111111111111111111111111111110011111111111111111111111111111111111111111111111111111111221111111111111110111111111111111111111111111111111111111111",
+        "right": "11111111111111111111111111111111111111111111111111111111111122200000000000000000001111120011111111111111111111100002211111111111111111111111001111111111111111111111111111111111111111111111111111111111"
+      }
+    },
+    {
+      "n": 3,
+      "slug": "hand-pose-03",
+      "title": "Cart clearing",
+      "skillGroup": "Cleaning & Sanitation",
+      "frames": 3600,
+      "seconds": 120.0,
+      "left": {
+        "measured": 2166,
+        "guessed": 400,
+        "bridged": 4,
+        "none": 1030,
+        "posePct": 71.3,
+        "missedPct": 2.2,
+        "longestNoPoseFrames": 285
+      },
+      "right": {
+        "measured": 2043,
+        "guessed": 260,
+        "bridged": 11,
+        "none": 1286,
+        "posePct": 64.0,
+        "missedPct": 2.5,
+        "longestNoPoseFrames": 331
+      },
+      "measuredOfDeliveredPct": 86.4,
+      "guessedOfDeliveredPct": 13.6,
+      "minPosePct": 64.0,
+      "bothHandsBand": "<80",
+      "preview": "poster",
+      "pack": false,
+      "media": {
+        "poster": "/samples/posters/hand-pose-03.jpg",
+        "still": "/samples/hand-pose/stills/hand-pose-03.jpg",
+        "loop": null,
+        "video": null,
+        "videoSeconds": null
+      },
+      "loop": null,
+      "posterFrame": 1819,
+      "lane": "/samples/hand-pose/lanes/hand-pose-03.json",
+      "strip": {
+        "left": "11111111111111011021111001111111111111111111111111021111111000000000000000011111111111111111100011011111111112110110110011111100011100000000011000000011011111111111111222222222222222111111100001111001",
+        "right": "11111110011111111100001111022211111111111100011110011111111111111111111111111111101111111010001000001111111111112111111111122211111200000000010000000011222221111111000000000000000000100000000000000000"
+      }
+    },
+    {
+      "n": 4,
+      "slug": "hand-pose-04",
+      "title": "Hair washing",
+      "skillGroup": "Healthcare & Caregiving",
+      "frames": 6112,
+      "seconds": 203.7,
+      "left": {
+        "measured": 5510,
+        "guessed": 401,
+        "bridged": 34,
+        "none": 167,
+        "posePct": 96.7,
+        "missedPct": 0.8,
+        "longestNoPoseFrames": 50
+      },
+      "right": {
+        "measured": 5248,
+        "guessed": 368,
+        "bridged": 32,
+        "none": 464,
+        "posePct": 91.9,
+        "missedPct": 0.6,
+        "longestNoPoseFrames": 132
+      },
+      "measuredOfDeliveredPct": 93.3,
+      "guessedOfDeliveredPct": 6.7,
+      "minPosePct": 91.9,
+      "bothHandsBand": "80-95",
+      "preview": "lane",
+      "pack": false,
+      "media": {
+        "poster": null,
+        "still": null,
+        "loop": null,
+        "video": null,
+        "videoSeconds": null
+      },
+      "loop": null,
+      "posterFrame": null,
+      "lane": "/samples/hand-pose/lanes/hand-pose-04.json",
+      "strip": {
+        "left": "11111110011111112022111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111112211111111111121102111111111111111111111111111111111111110011111111111111111111111111",
+        "right": "11110100111112221122111111111111111111000000111111111111111111111111111111111110111111111111111111111111111111112211112111111111112111000011111111111111111111111111111110011111111111111111111111111111"
+      }
+    },
+    {
+      "n": 5,
+      "slug": "hand-pose-05",
+      "title": "Trash disposing",
+      "skillGroup": "Cleaning & Sanitation",
+      "frames": 1941,
+      "seconds": 64.7,
+      "left": {
+        "measured": 1088,
+        "guessed": 164,
+        "bridged": 8,
+        "none": 681,
+        "posePct": 64.5,
+        "missedPct": 2.3,
+        "longestNoPoseFrames": 109
+      },
+      "right": {
+        "measured": 1362,
+        "guessed": 133,
+        "bridged": 4,
+        "none": 442,
+        "posePct": 77.0,
+        "missedPct": 1.5,
+        "longestNoPoseFrames": 107
+      },
+      "measuredOfDeliveredPct": 89.2,
+      "guessedOfDeliveredPct": 10.8,
+      "minPosePct": 64.5,
+      "bothHandsBand": "<80",
+      "preview": "poster",
+      "pack": false,
+      "media": {
+        "poster": "/samples/posters/hand-pose-05.jpg",
+        "still": "/samples/hand-pose/stills/hand-pose-05.jpg",
+        "loop": null,
+        "video": null,
+        "videoSeconds": null
+      },
+      "loop": null,
+      "posterFrame": 953,
+      "lane": "/samples/hand-pose/lanes/hand-pose-05.json",
+      "strip": {
+        "left": "00000000000111111000000000112221110001122111100011110000111111111111111111111111111111111111111111111111111111111111111111111111111111111200000000001000001120000000000000002112000000000111111111222222",
+        "right": "00000000000111112001110000000001111011111111111111110222111111111111111111111111111111111111111111111111111111111111111111111111111111111120000100000111201111111111100211111100021000012122111111111111"
+      }
+    },
+    {
+      "n": 6,
+      "slug": "hand-pose-06",
+      "title": "Notebook writing",
+      "skillGroup": "Tool Use & Technical Manipulation",
+      "frames": 2266,
+      "seconds": 75.5,
+      "left": {
+        "measured": 1659,
+        "guessed": 113,
+        "bridged": 8,
+        "none": 486,
+        "posePct": 78.2,
+        "missedPct": 4.4,
+        "longestNoPoseFrames": 86
+      },
+      "right": {
+        "measured": 1793,
+        "guessed": 72,
+        "bridged": 8,
+        "none": 393,
+        "posePct": 82.3,
+        "missedPct": 0.3,
+        "longestNoPoseFrames": 150
+      },
+      "measuredOfDeliveredPct": 94.9,
+      "guessedOfDeliveredPct": 5.1,
+      "minPosePct": 78.2,
+      "bothHandsBand": "<80",
+      "preview": "poster",
+      "pack": false,
+      "media": {
+        "poster": "/samples/posters/hand-pose-06.jpg",
+        "still": "/samples/hand-pose/stills/hand-pose-06.jpg",
+        "loop": null,
+        "video": null,
+        "videoSeconds": null
+      },
+      "loop": null,
+      "posterFrame": 645,
+      "lane": "/samples/hand-pose/lanes/hand-pose-06.json",
+      "strip": {
+        "left": "11000011111100220000011111100001111111100000111111111111111111111111111111111111111111111111111111111111111111111111111111111111110000000020022000000001111111111111111111111111111111111130000000111111",
+        "right": "00000000000001121000000000011211111111210001111111111111111111111111111111111111111111111111111111111111111111111111111111111111111110000111111111111111111111111111111111111111111111111100200001111111"
+      }
+    },
+    {
+      "n": 7,
+      "slug": "hand-pose-07",
+      "title": "Wire untangling",
+      "skillGroup": "Tool Use & Technical Manipulation",
+      "frames": 2868,
+      "seconds": 95.6,
+      "left": {
+        "measured": 2039,
+        "guessed": 345,
+        "bridged": 2,
+        "none": 482,
+        "posePct": 83.1,
+        "missedPct": 1.0,
+        "longestNoPoseFrames": 88
+      },
+      "right": {
+        "measured": 2195,
+        "guessed": 167,
+        "bridged": 6,
+        "none": 500,
+        "posePct": 82.4,
+        "missedPct": 1.6,
+        "longestNoPoseFrames": 100
+      },
+      "measuredOfDeliveredPct": 89.2,
+      "guessedOfDeliveredPct": 10.8,
+      "minPosePct": 82.4,
+      "bothHandsBand": "80-95",
+      "preview": "poster",
+      "pack": false,
+      "media": {
+        "poster": "/samples/posters/hand-pose-07.jpg",
+        "still": "/samples/hand-pose/stills/hand-pose-07.jpg",
+        "loop": null,
+        "video": null,
+        "videoSeconds": null
+      },
+      "loop": null,
+      "posterFrame": 360,
+      "lane": "/samples/hand-pose/lanes/hand-pose-07.json",
+      "strip": {
+        "left": "00011111112111111111111111111111111111211112221111111121111111111100000211000000110000022112000001111111111111111111111111111111102202111121121111111121111111111111111111111101111111001000111111111222",
+        "right": "00001111101111111111111111111111111111111111111111111111201111111111111111101111111111111001111111111111111111111111122111111111111111001111110011110111100111011111001111000000002000111000111212110010"
+      }
+    },
+    {
+      "n": 8,
+      "slug": "hand-pose-08",
+      "title": "Material organizing",
+      "skillGroup": "Pick and Place / Object Handling",
+      "frames": 2223,
+      "seconds": 74.1,
+      "left": {
+        "measured": 2203,
+        "guessed": 16,
+        "bridged": 1,
+        "none": 3,
+        "posePct": 99.8,
+        "missedPct": 0.0,
+        "longestNoPoseFrames": 2
+      },
+      "right": {
+        "measured": 2170,
+        "guessed": 46,
+        "bridged": 0,
+        "none": 7,
+        "posePct": 99.7,
+        "missedPct": 0.0,
+        "longestNoPoseFrames": 7
+      },
+      "measuredOfDeliveredPct": 98.6,
+      "guessedOfDeliveredPct": 1.4,
+      "minPosePct": 99.7,
+      "bothHandsBand": "95+",
+      "preview": "poster",
+      "pack": false,
+      "media": {
+        "poster": "/samples/posters/hand-pose-08.jpg",
+        "still": "/samples/hand-pose/stills/hand-pose-08.jpg",
+        "loop": null,
+        "video": null,
+        "videoSeconds": null
+      },
+      "loop": null,
+      "posterFrame": 1771,
+      "lane": "/samples/hand-pose/lanes/hand-pose-08.json",
+      "strip": {
+        "left": "11111111111111111111111111111111111112111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111",
+        "right": "01111211111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111112211111111111111111111111111111"
+      }
+    },
+    {
+      "n": 9,
+      "slug": "hand-pose-09",
+      "title": "Shaft wrapping",
+      "skillGroup": "Mechanical / Automotive Work",
+      "frames": 2341,
+      "seconds": 78.0,
+      "left": {
+        "measured": 2083,
+        "guessed": 209,
+        "bridged": 0,
+        "none": 49,
+        "posePct": 97.9,
+        "missedPct": 0.2,
+        "longestNoPoseFrames": 34
+      },
+      "right": {
+        "measured": 2061,
+        "guessed": 175,
+        "bridged": 1,
+        "none": 104,
+        "posePct": 95.5,
+        "missedPct": 0.0,
+        "longestNoPoseFrames": 38
+      },
+      "measuredOfDeliveredPct": 91.5,
+      "guessedOfDeliveredPct": 8.5,
+      "minPosePct": 95.5,
+      "bothHandsBand": "95+",
+      "preview": "poster",
+      "pack": false,
+      "media": {
+        "poster": "/samples/posters/hand-pose-09.jpg",
+        "still": "/samples/hand-pose/stills/hand-pose-09.jpg",
+        "loop": null,
+        "video": null,
+        "videoSeconds": null
+      },
+      "loop": null,
+      "posterFrame": 254,
+      "lane": "/samples/hand-pose/lanes/hand-pose-09.json",
+      "strip": {
+        "left": "01111111111211111111111111111111111111111111111111111111111111112000111111111111111111111111111211211111111111111111111111111111111111111111111111111122111111111111111111111111111111111111111111111111",
+        "right": "01111111111111111111111111111111111111111111111111111111111111111000111111111111110002111111111100211111111111211111111111111111111111111111111112111111111021111112111111111111111121111111111111111111"
+      }
+    },
+    {
+      "n": 10,
+      "slug": "hand-pose-10",
+      "title": "Light setup",
+      "skillGroup": "Pick and Place / Object Handling",
+      "frames": 2848,
+      "seconds": 94.9,
+      "left": {
+        "measured": 562,
+        "guessed": 122,
+        "bridged": 1,
+        "none": 2163,
+        "posePct": 24.0,
+        "missedPct": 2.7,
+        "longestNoPoseFrames": 409
+      },
+      "right": {
+        "measured": 733,
+        "guessed": 145,
+        "bridged": 1,
+        "none": 1969,
+        "posePct": 30.8,
+        "missedPct": 4.8,
+        "longestNoPoseFrames": 939
+      },
+      "measuredOfDeliveredPct": 82.9,
+      "guessedOfDeliveredPct": 17.1,
+      "minPosePct": 24.0,
+      "bothHandsBand": "<80",
+      "preview": "poster",
+      "pack": false,
+      "media": {
+        "poster": "/samples/posters/hand-pose-10.jpg",
+        "still": "/samples/hand-pose/stills/hand-pose-10.jpg",
+        "loop": null,
+        "video": null,
+        "videoSeconds": null
+      },
+      "loop": null,
+      "posterFrame": 1172,
+      "lane": "/samples/hand-pose/lanes/hand-pose-10.json",
+      "strip": {
+        "left": "00000000000000000000000000000111112111200000000000001000000000100011111111111111111020020111010000000000002112000000000000002000000000000000000002111000000000000000000000000000100100000000000000011000",
+        "right": "00000000000000000000000000000000000000000000000000000000000000000021201111111111111111221000000000000000000000000000000000000000111100000211111111111200001111111111111111110000200000000000000000211200"
+      }
+    },
+    {
+      "n": 11,
+      "slug": "hand-pose-11",
+      "title": "Table cleaning",
+      "skillGroup": "Cleaning & Sanitation",
+      "frames": 2221,
+      "seconds": 74.0,
+      "left": {
+        "measured": 1033,
+        "guessed": 594,
+        "bridged": 8,
+        "none": 586,
+        "posePct": 73.3,
+        "missedPct": 4.9,
+        "longestNoPoseFrames": 102
+      },
+      "right": {
+        "measured": 1416,
+        "guessed": 220,
+        "bridged": 26,
+        "none": 559,
+        "posePct": 73.7,
+        "missedPct": 0.5,
+        "longestNoPoseFrames": 75
+      },
+      "measuredOfDeliveredPct": 75.1,
+      "guessedOfDeliveredPct": 24.9,
+      "minPosePct": 73.3,
+      "bothHandsBand": "<80",
+      "preview": "lane",
+      "pack": false,
+      "media": {
+        "poster": null,
+        "still": null,
+        "loop": null,
+        "video": null,
+        "videoSeconds": null
+      },
+      "loop": null,
+      "posterFrame": null,
+      "lane": "/samples/hand-pose/lanes/hand-pose-11.json",
+      "strip": {
+        "left": "00020022111111110000111111111111011112111001122222222111111111111111122212221111122111111111111112000000000222222211121211111122111200000000000000012200001111111121111222022222222000011111001000001121",
+        "right": "01021111111111111111111110000001111111111100021001111111111111111110012222221111111111112221112110000001001000001111000200000111211111120000001100000111111230111111222111111111111111111111111111111111"
+      }
+    },
+    {
+      "n": 12,
+      "slug": "hand-pose-12",
+      "title": "Bathtub cleaning",
+      "skillGroup": "Cleaning & Sanitation",
+      "frames": 2424,
+      "seconds": 80.8,
+      "left": {
+        "measured": 1776,
+        "guessed": 263,
+        "bridged": 13,
+        "none": 372,
+        "posePct": 84.1,
+        "missedPct": 3.5,
+        "longestNoPoseFrames": 87
+      },
+      "right": {
+        "measured": 1553,
+        "guessed": 598,
+        "bridged": 14,
+        "none": 259,
+        "posePct": 88.7,
+        "missedPct": 1.7,
+        "longestNoPoseFrames": 58
+      },
+      "measuredOfDeliveredPct": 79.5,
+      "guessedOfDeliveredPct": 20.5,
+      "minPosePct": 84.1,
+      "bothHandsBand": "80-95",
+      "preview": "lane",
+      "pack": false,
+      "media": {
+        "poster": null,
+        "still": null,
+        "loop": null,
+        "video": null,
+        "videoSeconds": null
+      },
+      "loop": null,
+      "posterFrame": null,
+      "lane": "/samples/hand-pose/lanes/hand-pose-12.json",
+      "strip": {
+        "left": "00111111110111111111111111111111110001111111111220221211111111211111111111111111111111111111111111111210111110000000022111111111021111111111111111211111111111111111111111111222202200021111000000020011",
+        "right": "00011211111111111111111111111111121111112111222211111122121100001111111111111111111111011111221111221202200011222120000011111221122100011111111111111111122111122111222201221111111112122111111111112111"
+      }
+    },
+    {
+      "n": 13,
+      "slug": "hand-pose-13",
+      "title": "Fabric arranging",
+      "skillGroup": "Clothing & Laundry",
+      "frames": 2239,
+      "seconds": 74.6,
+      "left": {
+        "measured": 2194,
+        "guessed": 43,
+        "bridged": 1,
+        "none": 1,
+        "posePct": 99.9,
+        "missedPct": 0.0,
+        "longestNoPoseFrames": 1
+      },
+      "right": {
+        "measured": 1756,
+        "guessed": 167,
+        "bridged": 14,
+        "none": 302,
+        "posePct": 85.9,
+        "missedPct": 1.9,
+        "longestNoPoseFrames": 105
+      },
+      "measuredOfDeliveredPct": 95.0,
+      "guessedOfDeliveredPct": 5.0,
+      "minPosePct": 85.9,
+      "bothHandsBand": "80-95",
+      "preview": "video",
+      "pack": true,
+      "media": {
+        "poster": "/samples/posters/hand-pose-13.jpg",
+        "still": "/samples/hand-pose/stills/hand-pose-13.jpg",
+        "loop": "/samples/clips/hand-pose-13.mp4",
+        "video": "/samples/hand-pose/video/hand-pose-13.mp4",
+        "videoSeconds": 74.6
+      },
+      "loop": {
+        "start": 1768,
+        "frames": 87,
+        "crossfadeFrames": 15
+      },
+      "posterFrame": 1836,
+      "lane": "/samples/hand-pose/lanes/hand-pose-13.json",
+      "strip": {
+        "left": "11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111",
+        "right": "11111111111000001111111111112110221111111111112111111111111111111211111111111111110002111111111110200111111120112000000000000011111111111111111100000111111121111111111111111111111111111111111111111111"
+      }
+    },
+    {
+      "n": 14,
+      "slug": "hand-pose-14",
+      "title": "Frame moving",
+      "skillGroup": "Pick and Place / Object Handling",
+      "frames": 2256,
+      "seconds": 75.2,
+      "left": {
+        "measured": 944,
+        "guessed": 95,
+        "bridged": 1,
+        "none": 1216,
+        "posePct": 46.1,
+        "missedPct": 2.2,
+        "longestNoPoseFrames": 758
+      },
+      "right": {
+        "measured": 1153,
+        "guessed": 73,
+        "bridged": 8,
+        "none": 1022,
+        "posePct": 54.3,
+        "missedPct": 0.8,
+        "longestNoPoseFrames": 630
+      },
+      "measuredOfDeliveredPct": 92.6,
+      "guessedOfDeliveredPct": 7.4,
+      "minPosePct": 46.1,
+      "bothHandsBand": "<80",
+      "preview": "video",
+      "pack": true,
+      "media": {
+        "poster": "/samples/posters/hand-pose-14.jpg",
+        "still": "/samples/hand-pose/stills/hand-pose-14.jpg",
+        "loop": "/samples/clips/hand-pose-14.mp4",
+        "video": "/samples/hand-pose/video/hand-pose-14.mp4",
+        "videoSeconds": 75.2
+      },
+      "loop": {
+        "start": 1612,
+        "frames": 60,
+        "crossfadeFrames": 12
+      },
+      "posterFrame": 1648,
+      "lane": "/samples/hand-pose/lanes/hand-pose-14.json",
+      "strip": {
+        "left": "00011100000000011111111111111111111111100000000001000000000000000000000000000000000000000000000000000000000000000000011120011111112000000001111111111111111111111111111111111100022100000111111111110111",
+        "right": "00111111111111111101112000000000002111111111000000000000000000000000000000000000000000000000000000001111111111111111111111000000010111111111111111111111111111111111111112111111221111111000000000000011"
+      }
+    },
+    {
+      "n": 15,
+      "slug": "hand-pose-15",
+      "title": "Bathroom cleaning",
+      "skillGroup": "Cleaning & Sanitation",
+      "frames": 2404,
+      "seconds": 80.1,
+      "left": {
+        "measured": 1033,
+        "guessed": 135,
+        "bridged": 8,
+        "none": 1228,
+        "posePct": 48.6,
+        "missedPct": 12.0,
+        "longestNoPoseFrames": 230
+      },
+      "right": {
+        "measured": 1367,
+        "guessed": 579,
+        "bridged": 18,
+        "none": 440,
+        "posePct": 80.9,
+        "missedPct": 6.5,
+        "longestNoPoseFrames": 91
+      },
+      "measuredOfDeliveredPct": 77.1,
+      "guessedOfDeliveredPct": 22.9,
+      "minPosePct": 48.6,
+      "bothHandsBand": "<80",
+      "preview": "lane",
+      "pack": false,
+      "media": {
+        "poster": null,
+        "still": null,
+        "loop": null,
+        "video": null,
+        "videoSeconds": null
+      },
+      "loop": null,
+      "posterFrame": null,
+      "lane": "/samples/hand-pose/lanes/hand-pose-15.json",
+      "strip": {
+        "left": "11110111111111111100001111111111111111111111111111111111110000011111111122020011111020000000000000000000112100000000000002211111111311000000000000000110000000000000000000000000000000000010000000112111",
+        "right": "11111111111111110211211111111111111111111111111111111111112110110000000011111221111212122221222212210000000212111111221212000000002102211111111122211211111111222122212121112111000011110000021111011110"
+      }
+    },
+    {
+      "n": 16,
+      "slug": "hand-pose-16",
+      "title": "Card cutting",
+      "skillGroup": "Tool Use & Technical Manipulation",
+      "frames": 2898,
+      "seconds": 96.6,
+      "left": {
+        "measured": 2631,
+        "guessed": 104,
+        "bridged": 19,
+        "none": 144,
+        "posePct": 94.4,
+        "missedPct": 0.8,
+        "longestNoPoseFrames": 50
+      },
+      "right": {
+        "measured": 2543,
+        "guessed": 126,
+        "bridged": 5,
+        "none": 224,
+        "posePct": 92.1,
+        "missedPct": 2.2,
+        "longestNoPoseFrames": 57
+      },
+      "measuredOfDeliveredPct": 95.7,
+      "guessedOfDeliveredPct": 4.3,
+      "minPosePct": 92.1,
+      "bothHandsBand": "80-95",
+      "preview": "poster",
+      "pack": false,
+      "media": {
+        "poster": "/samples/posters/hand-pose-16.jpg",
+        "still": "/samples/hand-pose/stills/hand-pose-16.jpg",
+        "loop": null,
+        "video": null,
+        "videoSeconds": null
+      },
+      "loop": null,
+      "posterFrame": 651,
+      "lane": "/samples/hand-pose/lanes/hand-pose-16.json",
+      "strip": {
+        "left": "11111111111111111111000111111111111111111111112111111111111111111111111111111111111111111111111111111111111111111111111111111001111111111111111111111111111111102111111111111111122111111111111121111000",
+        "right": "21110011111111111200111111111111111111111111100011111111111111111111111111111111111111111111121110000111111111111111111111111111110111111111111111111111111101111111111111111111111111111111111000022111"
+      }
+    }
+  ]
+}
