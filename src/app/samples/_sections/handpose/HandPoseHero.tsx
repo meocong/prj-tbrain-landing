@@ -7,6 +7,7 @@ import { requestUrl } from "@/lib/samples/request-link";
 import { OVER_MEDIA } from "../tokens";
 import { GRADIENT_TEXT, HeroWash } from "../HeroWash";
 import { HeroFootage } from "./HeroFootage";
+import { HeroCount, HeroFootageIn, HeroRise } from "./hero-motion";
 import { FEATURED, JOINTS_PER_HAND, pad2 } from "./page-data";
 import { HashLink, TrackedLink } from "./page-links";
 
@@ -29,11 +30,18 @@ const ON_DARK_CYAN = "#22E3C8";
 const ON_DARK_INK = "#EAF0FF";
 const ON_DARK_BASE = "#0E0C24";
 
-const FIGURES: { value: string; unit?: string; label: string }[] = [
-  { value: String(HP_AGG.samples), label: "Samples" },
-  { value: HP_AGG.minutes.toFixed(1), unit: "min", label: "Total duration" },
-  { value: String(JOINTS_PER_HAND), label: "Joints per hand" },
-  { value: fmtPct(HP_AGG.measuredOfDeliveredPct), label: "Measured, of delivered hand-frames" },
+/** `value` is what is read and indexed; `num` is what counts up on screen. */
+const FIGURES: { value: string; num: number; decimals?: 0 | 1; suffix?: string; unit?: string; label: string }[] = [
+  { value: String(HP_AGG.samples), num: HP_AGG.samples, label: "Samples" },
+  { value: HP_AGG.minutes.toFixed(1), num: HP_AGG.minutes, decimals: 1, unit: "min", label: "Total duration" },
+  { value: String(JOINTS_PER_HAND), num: JOINTS_PER_HAND, label: "Joints per hand" },
+  {
+    value: fmtPct(HP_AGG.measuredOfDeliveredPct),
+    num: HP_AGG.measuredOfDeliveredPct,
+    decimals: 1,
+    suffix: "%",
+    label: "Measured, of delivered hand-frames",
+  },
 ];
 
 /** Base as r,g,b, for the fades that melt the footage into the band. */
@@ -56,7 +64,9 @@ export function HandPoseHero() {
 
         {media && (
           <div aria-hidden className="hp-hero-footage absolute inset-y-0 right-0 -z-10 w-full lg:w-[64%]">
-            <HeroFootage src={media.clip} poster={media.poster} position={media.position} />
+            <HeroFootageIn>
+              <HeroFootage src={media.clip} poster={media.poster} position={media.position} />
+            </HeroFootageIn>
             {/* Phone and tablet: the footage sits behind the text, so it is
                 dimmed whole. From lg it is masked to transparent on its left
                 (globals.css, .hp-hero-footage), so the band's glow shows
@@ -82,6 +92,7 @@ export function HandPoseHero() {
           </Link>
 
           <div className="mt-8 max-w-[50rem] md:mt-12 lg:my-auto lg:py-10">
+            <HeroRise as="div" delay={0.05} className="block">
             <p
               className="bp-mono inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-[10.5px]"
               style={{ color: ON_DARK_CYAN, background: "rgba(34,227,200,0.08)", border: "1px solid rgba(34,227,200,0.28)" }}
@@ -89,6 +100,7 @@ export function HandPoseHero() {
               <span aria-hidden className="h-1.5 w-1.5 rounded-full" style={{ background: ON_DARK_CYAN, boxShadow: `0 0 10px ${ON_DARK_CYAN}` }} />
               Robotics · Hand pose
             </p>
+            </HeroRise>
             {/* Two lines, the second carrying the gradient. `pb-2` because the
                 gradient is a background clipped to the glyphs and the line box
                 would shave the descender off "y". */}
@@ -98,18 +110,20 @@ export function HandPoseHero() {
               style={{ fontFamily: "var(--font-heading)", letterSpacing: "-0.045em", lineHeight: 0.96, color: "#ffffff" }}
             >
               {/* Spaces between the lines, so the heading's text reads as one sentence. */}
-              <span className="block">Hands, measured</span>{" "}
-              <span className="block">in 3D.</span>{" "}
-              <span className="block pb-2 lg:whitespace-nowrap" style={GRADIENT_TEXT}>
+              <HeroRise delay={0.12} y={28}>Hands, measured</HeroRise>{" "}
+              <HeroRise delay={0.2} y={28}>in 3D.</HeroRise>{" "}
+              <HeroRise delay={0.3} y={28} className="block pb-2 lg:whitespace-nowrap" style={GRADIENT_TEXT}>
                 Every frame says how.
-              </span>
+              </HeroRise>
             </h1>
+            <HeroRise as="div" delay={0.42}>
             <p className="mt-5 max-w-[34rem] text-[15px] leading-relaxed md:text-[16px]" style={{ color: OVER_MEDIA.text }}>
               {JOINTS_PER_HAND} joints per hand, in metres, from the two-camera stereo pair of a head-worn rig. Every frame is
               labelled measured, guessed, bridged or no 3D pose.
             </p>
+            </HeroRise>
 
-            <div className="mt-7 flex flex-wrap items-center gap-3">
+            <HeroRise as="div" delay={0.52} className="mt-7 flex flex-wrap items-center gap-3">
               {/* Not `#ffffff` for the fill: globals.css repaints an inline white
                   background as a dark scrim in dark mode. The dark theme's own pair. */}
               <HashLink
@@ -129,20 +143,23 @@ export function HandPoseHero() {
               >
                 Request access
               </TrackedLink>
-            </div>
+            </HeroRise>
           </div>
 
           {media && (
+            <HeroRise as="div" delay={0.9} y={8} className="mt-8 hidden self-end lg:block">
             <p
-              className="bp-mono mt-8 hidden self-end text-right text-[10px] leading-relaxed lg:block"
+              className="bp-mono text-right text-[10px] leading-relaxed"
               style={{ color: OVER_MEDIA.textDim }}
             >
               Sample {pad2(FEATURED.n)} · {FEATURED.title}
               <br />
               Camera video, hand pose drawn over it, faces blurred
             </p>
+            </HeroRise>
           )}
 
+          <HeroRise as="div" delay={0.62} y={12}>
           <dl
             className="mt-8 grid grid-cols-2 border-t sm:grid-cols-4 lg:mt-4"
             style={{ borderColor: "rgba(255,255,255,0.14)" }}
@@ -157,7 +174,11 @@ export function HandPoseHero() {
                   {f.label}
                 </dt>
                 <dd className="order-1 font-mono text-[28px] leading-none tracking-tight md:text-[34px]" style={{ color: "#ffffff" }}>
-                  {f.value}
+                  {/* The figure itself for readers and the index; the count is a picture of it. */}
+                  <span className="sr-only">{f.value}</span>
+                  <span aria-hidden>
+                    <HeroCount value={f.num} decimals={f.decimals} suffix={f.suffix} />
+                  </span>
                   {f.unit ? (
                     <small className="ml-1 text-[0.5em] tracking-normal" style={{ color: OVER_MEDIA.text }}>
                       {f.unit}
@@ -167,6 +188,7 @@ export function HandPoseHero() {
               </div>
             ))}
           </dl>
+          </HeroRise>
         </div>
       </div>
     </section>

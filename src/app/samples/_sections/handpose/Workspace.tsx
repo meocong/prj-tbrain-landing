@@ -1,10 +1,13 @@
 "use client";
 
 import { useEffect, useId, useRef, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import { useReducedMotion } from "@/lib/motion-pref";
 import { HAND_COLOR, fmtPct, handPoseSample, mmss, type HandPoseSample } from "@/lib/samples/handpose";
 import { track } from "@/lib/samples/track";
 import { C, PILL } from "../tokens";
 import { HandPlayer } from "./HandPlayer";
+import { Reveal } from "../Reveal";
 import { PageSection } from "./page-kit";
 import { SampleSelect } from "./SampleSelect";
 import { FEATURED, SAMPLES, pad2 } from "./page-data";
@@ -66,6 +69,7 @@ export function Workspace() {
   }, []);
 
   const hp: HandPoseSample = handPoseSample(slug) ?? FEATURED;
+  const reduce = useReducedMotion();
 
   return (
     <div id="samples" ref={section} className="scroll-mt-20">
@@ -80,7 +84,17 @@ export function Workspace() {
               className="mt-2 text-balance text-[26px] font-medium md:text-4xl"
               style={{ fontFamily: "var(--font-heading)", letterSpacing: "-0.03em", lineHeight: 1.06 }}
             >
-              {hp.title}
+              <motion.span
+                key={hp.slug}
+                className="block"
+                // Same `initial` either way, so the server's HTML matches; reduced
+                // motion only makes the transition instant.
+                initial={{ opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={reduce ? { duration: 0 } : { duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+              >
+                {hp.title}
+              </motion.span>
             </h2>
             <ul className="mt-3.5 flex flex-wrap items-center gap-2" aria-label="This sample in figures">
               <li>
@@ -119,7 +133,21 @@ export function Workspace() {
 
         <div className="mt-6 md:mt-7">
           {near ? (
-            <HandPlayer key={hp.slug} hp={hp} title={hp.title} initialFrame={hp.posterFrame} />
+            // A new sample crossfades in rather than snapping: the old one fades
+            // out first (`wait`), so two players never run at once.
+            <Reveal variant="zoom">
+              <AnimatePresence mode="wait" initial={false}>
+                <motion.div
+                  key={hp.slug}
+                  initial={reduce ? false : { opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={reduce ? { opacity: 1 } : { opacity: 0, y: -6, transition: { duration: 0.18 } }}
+                  transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+                >
+                  <HandPlayer hp={hp} title={hp.title} initialFrame={hp.posterFrame} />
+                </motion.div>
+              </AnimatePresence>
+            </Reveal>
           ) : (
             <div
               aria-busy="true"

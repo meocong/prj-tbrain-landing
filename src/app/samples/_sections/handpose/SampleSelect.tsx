@@ -19,10 +19,10 @@ import { pad2 } from "./page-data";
 
 const TIER: Record<HandPoseSample["preview"], string> = { video: "Video", poster: "Still", lane: "Lane only" };
 
-function Thumb({ s, size }: { s: HandPoseSample; size: "sm" | "md" }) {
+function Thumb({ s, size, load = true }: { s: HandPoseSample; size: "sm" | "md"; load?: boolean }) {
   const box = size === "sm" ? "h-9 w-12" : "h-11 w-[58px]";
   const src = s.media.poster ?? s.media.still;
-  return src && s.preview !== "lane" ? (
+  return src && load && s.preview !== "lane" ? (
     // A decorative picture of the option; its name is the text beside it.
     // eslint-disable-next-line @next/next/no-img-element
     <img src={src} alt="" loading="lazy" decoding="async" className={`${box} flex-none rounded-md object-cover`} style={{ border: `1px solid ${C.hairline}` }} />
@@ -67,6 +67,11 @@ export function SampleSelect({
   const optId = (i: number) => `${id}-opt-${i}`;
   const root = useRef<HTMLDivElement>(null);
   const [open, setOpen] = useState(false);
+  // The list stays in the DOM to animate; its pictures load on the first open, not with the page.
+  const [opened, setOpened] = useState(false);
+  useEffect(() => {
+    if (open) setOpened(true);
+  }, [open]);
   const selected = Math.max(0, samples.findIndex((s) => s.slug === value));
   const [active, setActive] = useState(selected);
   const typed = useRef({ text: "", at: 0 });
@@ -210,16 +215,21 @@ export function SampleSelect({
         role="listbox"
         aria-labelledby={labelId}
         tabIndex={-1}
-        hidden={!open}
-        className="absolute right-0 top-full z-40 mt-2 max-h-[min(440px,60svh)] w-[min(30rem,calc(100vw-2rem))] overflow-y-auto overscroll-contain rounded-2xl p-1.5"
+        // Kept in the DOM so it can animate; `invisible` takes it out of the
+        // accessibility tree and the tab order while closed, as `hidden` did.
+        data-open={open}
+        className={[
+          "absolute right-0 top-full z-40 mt-2 max-h-[min(440px,60svh)] w-[min(30rem,calc(100vw-2rem))] origin-top-right overflow-y-auto overscroll-contain rounded-2xl p-1.5",
+          "transition-[opacity,transform,visibility] duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] motion-reduce:transition-none",
+          open ? "visible translate-y-0 scale-100 opacity-100" : "pointer-events-none invisible -translate-y-1 scale-[0.98] opacity-0",
+        ].join(" ")}
         style={{
           background: C.base,
           border: `1px solid ${C.rule}`,
           boxShadow: "0 24px 60px -12px rgba(0,0,0,0.45), 0 2px 8px rgba(0,0,0,0.2)",
         }}
       >
-        {open &&
-          samples.map((s, i) => {
+        {samples.map((s, i) => {
             const isSel = i === selected;
             const isActive = i === active;
             return (
@@ -235,7 +245,7 @@ export function SampleSelect({
                 className="flex cursor-pointer items-center gap-3 rounded-xl px-2 py-2"
                 style={{ background: isActive ? C.accentSoft : "transparent" }}
               >
-                <Thumb s={s} size="sm" />
+                <Thumb s={s} size="sm" load={opened} />
                 <span className="min-w-0 flex-1">
                   <span className="block truncate text-[13px]" style={{ color: C.text, fontWeight: isSel ? 600 : 500 }}>
                     <span className="bp-mono mr-1.5 text-[10.5px]" style={{ color: C.textDim }}>
