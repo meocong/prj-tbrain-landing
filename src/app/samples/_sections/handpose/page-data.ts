@@ -29,7 +29,7 @@ export const STEREO_CAMERAS = 2;
 export const pad2 = (n: number) => String(n).padStart(2, "0");
 
 /**
- * The sample the page leads with: the first one with a public skeleton video.
+ * The sample the page leads with: the first one with a public camera video.
  * The hero loop, the "Open a sample" buttons and the caption all point at it,
  * so they cannot name different samples.
  */
@@ -158,9 +158,6 @@ export const BRIDGED_OF_SLOTS_PCT = (HP_AGG.bridged / HP_AGG.handSlots) * 100;
 export const NONE_OF_SLOTS_PCT = (HP_AGG.none / HP_AGG.handSlots) * 100;
 
 export const JOINTS_PER_HAND = HANDPOSE.jointsPerHand;
-
-/** Samples that have a public skeleton video, as numbers: "13 and 14". */
-export const videoSampleNumbers = () => SAMPLES.filter((s) => s.preview === "video").map((s) => pad2(s.n));
 
 /**
  * The sentence the spec requires wherever accuracy could be inferred, word for

@@ -1200,6 +1200,14 @@ html.dark body {
   --hp-right: #E69F00;
 }
 
+/* A panel that is media, not page: the 3D hand view sits on a dark ground in
+   both themes, so inside it the hands keep the dark-ground pair (the same pair
+   the skeleton renders use). The scene reads these two properties from here. */
+.samples-scope .hp-media {
+  --hp-left: #56B4E9;
+  --hp-right: #E69F00;
+}
+
 /* ── Hand-pose state lanes ──
    One row per hand. `--hp-c` is the hand's hue, set on the row. Measured is a
    solid fill, guessed a hatch, bridged a stipple, and no 3D pose leaves the

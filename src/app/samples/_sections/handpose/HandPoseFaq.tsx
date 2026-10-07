@@ -7,7 +7,7 @@ import { requestUrl } from "@/lib/samples/request-link";
 import { C } from "../tokens";
 import { Reveal } from "../Reveal";
 import { PageSection, SectionHead } from "./page-kit";
-import { NO_GROUND_TRUTH, SAMPLES, joinAnd, numberWord, videoSampleNumbers } from "./page-data";
+import { NO_GROUND_TRUTH, SAMPLES } from "./page-data";
 import { OpenRecordLink, TrackedLink } from "./page-links";
 
 /**
@@ -27,7 +27,6 @@ interface Item {
 function items(): Item[] {
   const s10 = SAMPLES.find((s) => s.n === 10);
   const link = "underline decoration-1 underline-offset-4";
-  const videos = joinAnd(videoSampleNumbers());
 
   return [
     {
@@ -87,8 +86,8 @@ function items(): Item[] {
       ),
     },
     {
-      q: `Why do only ${numberWord(videoSampleNumbers().length)} samples have a video?`,
-      a: `Samples ${videos} have public video with the hand pose drawn over it, because their operators agreed to a public preview. Every sample has its metrics and lane open, and video for the others is on request.`,
+      q: "Why is part of the video blurred?",
+      a: "The preview is public, so faces and other people in view are blurred before it is published, and where writing could be read, everything away from the hands. The hands and the work surface are kept sharp. The blur is only on the preview; the full delivery has the original camera files.",
     },
   ];
 }

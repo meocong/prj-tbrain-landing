@@ -31,8 +31,8 @@ function items(): { key: string; text: string }[] {
       text: "Accuracy is reported as coverage and misses, not as joint error against marker mocap. No marker ground truth was captured.",
     },
     {
-      key: "Two samples have public video.",
-      text: "Their preview is the camera video with the hand pose drawn over it; faces and other people in view are blurred. The other samples show a skeleton still or the state lane only.",
+      key: "The preview video is blurred.",
+      text: "Each preview is one head camera at 540 x 540 with the hand pose drawn over it. Faces and other people in view are blurred, and where writing could be read, everything away from the hands is, so some frames lose detail. The full delivery keeps the original camera files.",
     },
     {
       key: "Frames with no 3D pose are drawn empty.",

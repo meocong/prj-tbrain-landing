@@ -1,11 +1,13 @@
 "use client";
 
-import { useCallback, useEffect, useState, useSyncExternalStore } from "react";
+import { useEffect, useState, useSyncExternalStore } from "react";
 import { motion } from "framer-motion";
 import { useReducedMotion } from "@/lib/motion-pref";
-import { fmtCount, handPoseSample, type HandPoseLane, type HandPoseSample } from "@/lib/samples/handpose";
+import { handPoseSample, type HandPoseSample } from "@/lib/samples/handpose";
 import { C, EASE, type Sample } from "../tokens";
 import { StateLane } from "./StateLane";
+import { useLane } from "./use-lane";
+import { Sentence } from "./viewer-sentence";
 import { ViewerLegend } from "./ViewerLegend";
 import { LaneOnlyPanel, ViewerMedia, mediaKind } from "./viewer-media";
 import { LaneSkeleton } from "./viewer-skeleton";
@@ -45,40 +47,6 @@ import { LANE_ROW, LANE_ROW_HERO, clampFrame, frameMidTime } from "./viewer-fram
  * those apart, the pane can.
  */
 
-type LaneState = { status: "loading" } | { status: "ready"; lane: HandPoseLane } | { status: "error" };
-
-const isLane = (j: unknown): j is HandPoseLane => {
-  const l = j as Partial<HandPoseLane> | null;
-  return !!l && typeof l.frames === "number" && l.frames > 0 && Array.isArray(l.left) && Array.isArray(l.right);
-};
-
-/** The lane JSON is a few KB, fetched when the record opens rather than shipped in the bundle. */
-function useLane(url: string) {
-  const [state, setState] = useState<LaneState>({ status: "loading" });
-  const [attempt, setAttempt] = useState(0);
-
-  useEffect(() => {
-    const abort = new AbortController();
-    fetch(url, { signal: abort.signal })
-      .then((r) => (r.ok ? r.json() : Promise.reject(new Error(String(r.status)))))
-      .then((json: unknown) => {
-        if (!isLane(json)) throw new Error("not a lane");
-        setState({ status: "ready", lane: json });
-      })
-      .catch(() => {
-        if (!abort.signal.aborted) setState({ status: "error" });
-      });
-    return () => abort.abort();
-  }, [url, attempt]);
-
-  const retry = useCallback(() => {
-    setState({ status: "loading" });
-    setAttempt((n) => n + 1);
-  }, []);
-
-  return [state, retry] as const;
-}
-
 /**
  * Whether the panes scroll on their own, which is when the right one needs to be
  * reachable by keyboard. Below `lg` the record is one column inside the dialog's
@@ -94,17 +62,6 @@ function useWideLayout() {
     },
     () => window.matchMedia("(min-width: 1024px)").matches,
     () => false,
-  );
-}
-
-/** The two hands' counts in a sentence: the lane's text alternative, visible to everyone. */
-function Sentence({ hp }: { hp: HandPoseSample }) {
-  const hand = (name: string, s: HandPoseSample["left"]) =>
-    `${name} hand: measured for ${fmtCount(s.measured)} frames, guessed for ${fmtCount(s.guessed)}, bridged for ${fmtCount(s.bridged)}, no 3D pose for ${fmtCount(s.none)}.`;
-  return (
-    <p className="mt-4 border-l-2 pl-2.5 text-[11px] leading-[1.55]" style={{ borderColor: C.rule, color: C.textMid }}>
-      {hand("Left", hp.left)} {hand("Right", hp.right)}
-    </p>
   );
 }
 

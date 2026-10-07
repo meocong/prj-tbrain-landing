@@ -9,8 +9,8 @@ import { JOINTS_PER_HAND, SAMPLES, joinAnd } from "./page-data";
  * #delivery: what a buyer receives, tier by tier, before they ask.
  *
  * Three tiers and the file list under each. Open: the metrics table, the lanes
- * and, for two samples, the skeleton video. Passcode: the sample pack, for the
- * samples whose operator consented. On request: everything else, by signed
+ * and the camera video with the hand pose drawn over it. Passcode: the sample
+ * pack, for the samples whose operator consented. On request: everything else, by signed
  * link, after the licence is agreed.
  *
  * Every description of the pack is read from `PACK_FILES` and `PACK_FIELDS` in
@@ -77,8 +77,15 @@ function rows(): Row[] {
     },
     {
       what: "Preview video",
-      contents: `The camera video with the 2D hand pose drawn over it, 540 x 540, ${HP_FPS} fps. Faces and bystanders blurred.`,
+      contents: `The camera video with the 2D hand pose drawn over it, 540 x 540, ${HP_FPS} fps. Faces and bystanders blurred; on some samples, everything away from the hands.`,
       format: ".mp4",
+      tier: "open",
+      note: videoSamples.length ? `samples ${joinAnd(videoSamples)}` : undefined,
+    },
+    {
+      what: "3D view joints",
+      contents: `What the 3D view on this page plays: ${JOINTS_PER_HAND} joints per hand at ${HP_FPS / 2} fps, rounded to 2 mm, axes from the wearer's view, with the state per frame. For looking, not training.`,
+      format: ".bin",
       tier: "open",
       note: videoSamples.length ? `samples ${joinAnd(videoSamples)}` : undefined,
     },
@@ -108,6 +115,17 @@ function rows(): Row[] {
     },
   ];
 }
+
+const LOADER = `import numpy as np, matplotlib.pyplot as plt
+z = np.load("joints.npz")
+i = list(z["joint_names"]).index("wrist")
+wrist = z["left_joints"][:, i]            # (N, 3) metres, NaN where state is 0
+state, t = z["left_state"], np.arange(len(wrist)) / z["fps"]
+for s, name in enumerate(["no 3D pose", "measured", "guessed", "bridged"]):
+    m = state == s
+    print(f"{name}: {m.sum()} frames")
+    plt.scatter(t[m], wrist[m, 0], s=4, label=name)   # left wrist x over time
+plt.legend(); plt.show()`;
 
 /* ── The joint table ──────────────────────────────────────────────────────── */
 
@@ -332,6 +350,32 @@ export function DeliverySection() {
               <div className="mt-3">
                 <FieldTable />
               </div>
+
+              <h3 className="mt-7 text-[15px]" style={{ color: C.text }}>
+                Load it in Python
+              </h3>
+              <p className="mt-2 text-[12px] leading-[1.55]" style={{ color: C.textMid }}>
+                Reads the pack&apos;s <span className="font-mono">joints.npz</span> and plots the left wrist over time,
+                one colour per state.
+              </p>
+              <pre
+                tabIndex={0}
+                aria-label="Python: load joints.npz and plot the left wrist by state"
+                className="mt-3 font-mono"
+                style={{
+                  margin: 0,
+                  padding: "14px 16px",
+                  fontSize: 11,
+                  lineHeight: 1.65,
+                  color: "var(--bp-code-ink)",
+                  background: "var(--bp-code-panel)",
+                  border: `1px solid ${C.hairline}`,
+                  borderRadius: 10,
+                  overflowX: "auto",
+                }}
+              >
+                {LOADER}
+              </pre>
             </PageDisclosure>
           </div>
         </div>

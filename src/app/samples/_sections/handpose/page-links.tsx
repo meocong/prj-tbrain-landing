@@ -16,6 +16,9 @@ import { track, type SampleEvent } from "@/lib/samples/track";
  * keep doing what the reader asked.
  */
 
+/** Sent before a jump, so a closed tab holding the target can open (`DocsTabs`). */
+export const REVEAL_EVENT = "hp:reveal";
+
 /** A plain primary-button click, not one the browser means to handle itself. */
 const isPlainClick = (e: MouseEvent) =>
   e.button === 0 && !e.metaKey && !e.ctrlKey && !e.shiftKey && !e.altKey && !e.defaultPrevented;
@@ -27,16 +30,16 @@ interface LinkStyle {
 }
 
 /**
- * Open a sample's record in the catalogue's dialog without leaving the page.
+ * Load a sample into the viewer without leaving the page.
  *
- * The `href` is `?record=<slug>#samples`, which `SampleCatalog` reads on mount,
- * so the link still works with scripts off, in a new tab and as a pasted URL;
- * the click handler dispatches `openRecord` instead and cancels the
- * navigation, because a same-page query change does not remount the catalogue.
+ * The `href` is `?record=<slug>#samples`, which the viewer (`Workspace`) reads
+ * on mount, so the link still works with scripts off, in a new tab and as a
+ * pasted URL; the click handler dispatches `openRecord` instead and cancels the
+ * navigation, because a same-page query change does not remount the viewer.
  *
- * `from` says which control opened it, for the funnel: the catalogue's own
- * cards report themselves as "card", and the open event carries no source, so
- * every other way in has to name itself here or it is invisible in analytics.
+ * `from` says which control opened it, for the funnel: the open event carries
+ * no source, so every way in has to name itself here or it is invisible in
+ * analytics.
  */
 export function OpenRecordLink({
   slug,
@@ -50,7 +53,6 @@ export function OpenRecordLink({
   return (
     <a
       href={recordHref(slug, frame)}
-      aria-haspopup="dialog"
       aria-label={ariaLabel}
       className={className}
       style={style}
@@ -76,6 +78,8 @@ export function OpenRecordLink({
  * is what a native fragment jump does and `scrollIntoView` alone does not.
  */
 export function jumpTo(id: string): boolean {
+  // A target inside a closed documentation tab: ask the tabs to open it first.
+  window.dispatchEvent(new CustomEvent(REVEAL_EVENT, { detail: id }));
   const el = document.getElementById(id);
   if (!el) return false;
   el.scrollIntoView({ behavior: prefersReducedMotion() ? "instant" : "smooth", block: "start" });

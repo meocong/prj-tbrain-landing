@@ -18,8 +18,8 @@ import { StripLane } from "./Lane";
  * one rail and one pager without either looking bolted on. What differs is the
  * media, because what may be shown differs per sample:
  *
- *   video   a skeleton loop that plays on hover or focus. Only where consent for
- *           a public preview is on record (samples 13 and 14).
+ *   video   a camera loop with the hand pose drawn over it, faces blurred,
+ *           that plays on hover or focus.
  *   poster  one skeleton still. No loop, no full-length render.
  *   lane    nothing rendered at all: the state lane itself, drawn on a panel in
  *           the same ground as the renders, so a tile with no media is still a
@@ -31,7 +31,7 @@ import { StripLane } from "./Lane";
  * never a broken image.
  *
  * Every non-video tier says "Preview on request" and the video tier says
- * "Skeleton preview", on the tile itself: a reader who sees a still should not
+ * "Video preview", on the tile itself: a reader who sees a still should not
  * have to open the record to learn that a loop exists for some samples and not
  * for this one.
  */

@@ -62,16 +62,17 @@ export function ViewerMedia({
               animations" switch, which stills only muted video WITHOUT them,
               so the reader's Play is never overridden. Muted because the
               render has no audio track, which also keeps it out of the
-              captions rule (WCAG 1.2.2 is about audio). */}
+              captions rule (WCAG 1.2.2 is about audio). No poster: the
+              still is a different frame from 0:00, and the readout beside it
+              reads frame 0, so the first frame itself is what shows. */}
           <video
             ref={videoRef}
             className="h-full w-full object-contain"
             src={hp.media.video ?? undefined}
-            poster={hp.media.still ?? hp.media.poster ?? undefined}
             muted
             playsInline
             controls
-            preload="metadata"
+            preload="auto"
             aria-label={`${title}, camera video with the hand pose drawn over it`}
             onError={() => setFailed(true)}
           />
