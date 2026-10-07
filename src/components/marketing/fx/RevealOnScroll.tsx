@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, type Variants } from "framer-motion";
+import { MotionConfig, motion, type Variants } from "framer-motion";
 import { useReducedMotion } from "@/lib/motion-pref";
 import { type ReactNode } from "react";
 
@@ -30,14 +30,19 @@ export function RevealOnScroll({
   amount?: number | "some" | "all";
 }) {
   const shouldReduce = useReducedMotion();
+  /* `initial` is the same whatever the preference: the server renders it, and
+     one that followed the preference failed hydration for every reader with
+     reduced motion set. Under reduced motion the block goes to `visible` at
+     once, without waiting to be scrolled to, and without a transition. */
   return (
     <motion.div
       className={className}
-      initial={shouldReduce ? "visible" : "hidden"}
-      whileInView="visible"
+      initial="hidden"
+      whileInView={shouldReduce ? undefined : "visible"}
+      animate={shouldReduce ? "visible" : undefined}
       viewport={{ once: true, amount }}
       variants={variants}
-      transition={{ duration: 0.7, delay, ease: [0.16, 1, 0.3, 1] }}
+      transition={shouldReduce ? { duration: 0 } : { duration: 0.7, delay, ease: [0.16, 1, 0.3, 1] }}
     >
       {children}
     </motion.div>
@@ -57,17 +62,21 @@ export function StaggerContainer({
 }) {
   const shouldReduce = useReducedMotion();
   return (
+    // Same `initial` either way, for hydration; see RevealOnScroll.
     <motion.div
       className={className}
-      initial={shouldReduce ? "visible" : "hidden"}
-      whileInView="visible"
+      initial="hidden"
+      whileInView={shouldReduce ? undefined : "visible"}
+      animate={shouldReduce ? "visible" : undefined}
       viewport={{ once: true, amount }}
       variants={{
         hidden: {},
-        visible: { transition: { staggerChildren: stagger } },
+        visible: { transition: { staggerChildren: shouldReduce ? 0 : stagger } },
       }}
     >
-      {children}
+      {/* The items carry their own transition (STAGGER_ITEM); under reduced
+          motion this drops their movement and leaves only the fade. */}
+      <MotionConfig reducedMotion={shouldReduce ? "always" : "never"}>{children}</MotionConfig>
     </motion.div>
   );
 }
