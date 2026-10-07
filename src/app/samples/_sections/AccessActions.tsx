@@ -39,7 +39,8 @@ export function AccessStrip({
   packSamples?: number[];
 }) {
   const unlocked = useUnlocked();
-  const handPose = variant === "handpose";
+  // Inline flag, so a production bundle drops the hand-pose branches.
+  const handPose = process.env.HAND_POSE_ON === "1" && variant === "handpose";
   const packs = packSamples.length
     ? `for ${packSamples.length === 1 ? "sample" : "samples"} ${listNumbers(packSamples)}`
     : "";
@@ -278,7 +279,8 @@ export function AccessActions({ sample, from }: { sample: Sample; from: string }
   const unlocked = useUnlocked();
   const assets = assetsFor(sample.slug);
 
-  if (sample.modality === "handpose") {
+  // Inline flag, so a production bundle drops HandPoseActions.
+  if (process.env.HAND_POSE_ON === "1" && sample.modality === "handpose") {
     return <HandPoseActions sample={sample} from={from} unlocked={unlocked} assets={assets} />;
   }
 

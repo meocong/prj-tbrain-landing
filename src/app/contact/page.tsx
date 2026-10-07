@@ -39,8 +39,8 @@ export default function ContactPage() {
     // A hand-pose request names the sample and ends on the intended use, the
     // one question sales would otherwise have to ask in the first reply. It
     // stops after the colon and a space, so the visitor's answer is the next
-    // thing typed.
-    const message = slug?.startsWith("hand-pose-")
+    // thing typed. Inline flag, so a production bundle drops the branch.
+    const message = process.env.HAND_POSE_ON === "1" && slug?.startsWith("hand-pose-")
       ? `Hand pose full delivery for ${slug}${title ? ` (${title})` : ""}. Intended use: `
       : `I would like the full set for "${label}" (${slug ?? "sample"}).\n\n`;
     setForm((f) => (f.message ? f : { ...f, message }));
