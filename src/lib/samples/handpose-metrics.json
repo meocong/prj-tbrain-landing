@@ -63,9 +63,9 @@
       "below80": 7
     },
     "preview": {
-      "video": 2,
-      "poster": 10,
-      "lane": 4
+      "video": 14,
+      "poster": 1,
+      "lane": 1
     }
   },
   "samples": [
@@ -98,16 +98,20 @@
       "guessedOfDeliveredPct": 3.1,
       "minPosePct": 98.4,
       "bothHandsBand": "95+",
-      "preview": "poster",
+      "preview": "video",
       "pack": false,
       "media": {
         "poster": "/samples/posters/hand-pose-01.jpg",
         "still": "/samples/hand-pose/stills/hand-pose-01.jpg",
-        "loop": null,
-        "video": null,
-        "videoSeconds": null
+        "loop": "/samples/clips/hand-pose-01.mp4",
+        "video": "/samples/hand-pose/video/hand-pose-01.mp4",
+        "videoSeconds": 79.2
       },
-      "loop": null,
+      "loop": {
+        "start": 1143,
+        "frames": 150,
+        "crossfadeFrames": 0
+      },
       "posterFrame": 2347,
       "lane": "/samples/hand-pose/lanes/hand-pose-01.json",
       "strip": {
@@ -144,16 +148,20 @@
       "guessedOfDeliveredPct": 3.3,
       "minPosePct": 86.6,
       "bothHandsBand": "80-95",
-      "preview": "poster",
+      "preview": "video",
       "pack": false,
       "media": {
         "poster": "/samples/posters/hand-pose-02.jpg",
         "still": "/samples/hand-pose/stills/hand-pose-02.jpg",
-        "loop": null,
-        "video": null,
-        "videoSeconds": null
+        "loop": "/samples/clips/hand-pose-02.mp4",
+        "video": "/samples/hand-pose/video/hand-pose-02.mp4",
+        "videoSeconds": 71.7
       },
-      "loop": null,
+      "loop": {
+        "start": 1030,
+        "frames": 150,
+        "crossfadeFrames": 0
+      },
       "posterFrame": 1366,
       "lane": "/samples/hand-pose/lanes/hand-pose-02.json",
       "strip": {
@@ -190,16 +198,20 @@
       "guessedOfDeliveredPct": 13.6,
       "minPosePct": 64.0,
       "bothHandsBand": "<80",
-      "preview": "poster",
+      "preview": "video",
       "pack": false,
       "media": {
         "poster": "/samples/posters/hand-pose-03.jpg",
         "still": "/samples/hand-pose/stills/hand-pose-03.jpg",
-        "loop": null,
-        "video": null,
-        "videoSeconds": null
+        "loop": "/samples/clips/hand-pose-03.mp4",
+        "video": "/samples/hand-pose/video/hand-pose-03.mp4",
+        "videoSeconds": 120.0
       },
-      "loop": null,
+      "loop": {
+        "start": 1755,
+        "frames": 150,
+        "crossfadeFrames": 0
+      },
       "posterFrame": 1819,
       "lane": "/samples/hand-pose/lanes/hand-pose-03.json",
       "strip": {
@@ -282,16 +294,20 @@
       "guessedOfDeliveredPct": 10.8,
       "minPosePct": 64.5,
       "bothHandsBand": "<80",
-      "preview": "poster",
+      "preview": "video",
       "pack": false,
       "media": {
         "poster": "/samples/posters/hand-pose-05.jpg",
         "still": "/samples/hand-pose/stills/hand-pose-05.jpg",
-        "loop": null,
-        "video": null,
-        "videoSeconds": null
+        "loop": "/samples/clips/hand-pose-05.mp4",
+        "video": "/samples/hand-pose/video/hand-pose-05.mp4",
+        "videoSeconds": 64.7
       },
-      "loop": null,
+      "loop": {
+        "start": 925,
+        "frames": 150,
+        "crossfadeFrames": 0
+      },
       "posterFrame": 953,
       "lane": "/samples/hand-pose/lanes/hand-pose-05.json",
       "strip": {
@@ -328,16 +344,20 @@
       "guessedOfDeliveredPct": 5.1,
       "minPosePct": 78.2,
       "bothHandsBand": "<80",
-      "preview": "poster",
+      "preview": "video",
       "pack": false,
       "media": {
         "poster": "/samples/posters/hand-pose-06.jpg",
         "still": "/samples/hand-pose/stills/hand-pose-06.jpg",
-        "loop": null,
-        "video": null,
-        "videoSeconds": null
+        "loop": "/samples/clips/hand-pose-06.mp4",
+        "video": "/samples/hand-pose/video/hand-pose-06.mp4",
+        "videoSeconds": 75.5
       },
-      "loop": null,
+      "loop": {
+        "start": 1088,
+        "frames": 150,
+        "crossfadeFrames": 0
+      },
       "posterFrame": 645,
       "lane": "/samples/hand-pose/lanes/hand-pose-06.json",
       "strip": {
@@ -374,16 +394,20 @@
       "guessedOfDeliveredPct": 10.8,
       "minPosePct": 82.4,
       "bothHandsBand": "80-95",
-      "preview": "poster",
+      "preview": "video",
       "pack": false,
       "media": {
         "poster": "/samples/posters/hand-pose-07.jpg",
         "still": "/samples/hand-pose/stills/hand-pose-07.jpg",
-        "loop": null,
-        "video": null,
-        "videoSeconds": null
+        "loop": "/samples/clips/hand-pose-07.mp4",
+        "video": "/samples/hand-pose/video/hand-pose-07.mp4",
+        "videoSeconds": 95.6
       },
-      "loop": null,
+      "loop": {
+        "start": 1389,
+        "frames": 150,
+        "crossfadeFrames": 0
+      },
       "posterFrame": 360,
       "lane": "/samples/hand-pose/lanes/hand-pose-07.json",
       "strip": {
@@ -420,16 +444,20 @@
       "guessedOfDeliveredPct": 1.4,
       "minPosePct": 99.7,
       "bothHandsBand": "95+",
-      "preview": "poster",
+      "preview": "video",
       "pack": false,
       "media": {
         "poster": "/samples/posters/hand-pose-08.jpg",
         "still": "/samples/hand-pose/stills/hand-pose-08.jpg",
-        "loop": null,
-        "video": null,
-        "videoSeconds": null
+        "loop": "/samples/clips/hand-pose-08.mp4",
+        "video": "/samples/hand-pose/video/hand-pose-08.mp4",
+        "videoSeconds": 74.1
       },
-      "loop": null,
+      "loop": {
+        "start": 1066,
+        "frames": 150,
+        "crossfadeFrames": 0
+      },
       "posterFrame": 1771,
       "lane": "/samples/hand-pose/lanes/hand-pose-08.json",
       "strip": {
@@ -466,16 +494,20 @@
       "guessedOfDeliveredPct": 8.5,
       "minPosePct": 95.5,
       "bothHandsBand": "95+",
-      "preview": "poster",
+      "preview": "video",
       "pack": false,
       "media": {
         "poster": "/samples/posters/hand-pose-09.jpg",
         "still": "/samples/hand-pose/stills/hand-pose-09.jpg",
-        "loop": null,
-        "video": null,
-        "videoSeconds": null
+        "loop": "/samples/clips/hand-pose-09.mp4",
+        "video": "/samples/hand-pose/video/hand-pose-09.mp4",
+        "videoSeconds": 78.0
       },
-      "loop": null,
+      "loop": {
+        "start": 1125,
+        "frames": 150,
+        "crossfadeFrames": 0
+      },
       "posterFrame": 254,
       "lane": "/samples/hand-pose/lanes/hand-pose-09.json",
       "strip": {
@@ -512,16 +544,20 @@
       "guessedOfDeliveredPct": 17.1,
       "minPosePct": 24.0,
       "bothHandsBand": "<80",
-      "preview": "poster",
+      "preview": "video",
       "pack": false,
       "media": {
         "poster": "/samples/posters/hand-pose-10.jpg",
         "still": "/samples/hand-pose/stills/hand-pose-10.jpg",
-        "loop": null,
-        "video": null,
-        "videoSeconds": null
+        "loop": "/samples/clips/hand-pose-10.mp4",
+        "video": "/samples/hand-pose/video/hand-pose-10.mp4",
+        "videoSeconds": 94.9
       },
-      "loop": null,
+      "loop": {
+        "start": 1379,
+        "frames": 150,
+        "crossfadeFrames": 0
+      },
       "posterFrame": 1172,
       "lane": "/samples/hand-pose/lanes/hand-pose-10.json",
       "strip": {
@@ -558,17 +594,21 @@
       "guessedOfDeliveredPct": 24.9,
       "minPosePct": 73.3,
       "bothHandsBand": "<80",
-      "preview": "lane",
+      "preview": "video",
       "pack": false,
       "media": {
-        "poster": null,
-        "still": null,
-        "loop": null,
-        "video": null,
-        "videoSeconds": null
+        "poster": "/samples/posters/hand-pose-11.jpg",
+        "still": "/samples/hand-pose/stills/hand-pose-11.jpg",
+        "loop": "/samples/clips/hand-pose-11.mp4",
+        "video": "/samples/hand-pose/video/hand-pose-11.mp4",
+        "videoSeconds": 74.0
       },
-      "loop": null,
-      "posterFrame": null,
+      "loop": {
+        "start": 553,
+        "frames": 150,
+        "crossfadeFrames": 0
+      },
+      "posterFrame": 628,
       "lane": "/samples/hand-pose/lanes/hand-pose-11.json",
       "strip": {
         "left": "00020022111111110000111111111111011112111001122222222111111111111111122212221111122111111111111112000000000222222211121211111122111200000000000000012200001111111121111222022222222000011111001000001121",
@@ -604,17 +644,21 @@
       "guessedOfDeliveredPct": 20.5,
       "minPosePct": 84.1,
       "bothHandsBand": "80-95",
-      "preview": "lane",
+      "preview": "video",
       "pack": false,
       "media": {
-        "poster": null,
-        "still": null,
-        "loop": null,
-        "video": null,
-        "videoSeconds": null
+        "poster": "/samples/posters/hand-pose-12.jpg",
+        "still": "/samples/hand-pose/stills/hand-pose-12.jpg",
+        "loop": "/samples/clips/hand-pose-12.mp4",
+        "video": "/samples/hand-pose/video/hand-pose-12.mp4",
+        "videoSeconds": 80.8
       },
-      "loop": null,
-      "posterFrame": null,
+      "loop": {
+        "start": 779,
+        "frames": 150,
+        "crossfadeFrames": 0
+      },
+      "posterFrame": 854,
       "lane": "/samples/hand-pose/lanes/hand-pose-12.json",
       "strip": {
         "left": "00111111110111111111111111111111110001111111111220221211111111211111111111111111111111111111111111111210111110000000022111111111021111111111111111211111111111111111111111111222202200021111000000020011",
@@ -660,9 +704,9 @@
         "videoSeconds": 74.6
       },
       "loop": {
-        "start": 1713,
-        "frames": 165,
-        "crossfadeFrames": 15
+        "start": 1728,
+        "frames": 150,
+        "crossfadeFrames": 0
       },
       "posterFrame": 1836,
       "lane": "/samples/hand-pose/lanes/hand-pose-13.json",
@@ -710,9 +754,9 @@
         "videoSeconds": 75.2
       },
       "loop": {
-        "start": 1552,
-        "frames": 165,
-        "crossfadeFrames": 15
+        "start": 1567,
+        "frames": 150,
+        "crossfadeFrames": 0
       },
       "posterFrame": 1648,
       "lane": "/samples/hand-pose/lanes/hand-pose-14.json",
@@ -750,17 +794,21 @@
       "guessedOfDeliveredPct": 22.9,
       "minPosePct": 48.6,
       "bothHandsBand": "<80",
-      "preview": "lane",
+      "preview": "video",
       "pack": false,
       "media": {
-        "poster": null,
-        "still": null,
-        "loop": null,
-        "video": null,
-        "videoSeconds": null
+        "poster": "/samples/posters/hand-pose-15.jpg",
+        "still": "/samples/hand-pose/stills/hand-pose-15.jpg",
+        "loop": "/samples/clips/hand-pose-15.mp4",
+        "video": "/samples/hand-pose/video/hand-pose-15.mp4",
+        "videoSeconds": 80.1
       },
-      "loop": null,
-      "posterFrame": null,
+      "loop": {
+        "start": 551,
+        "frames": 150,
+        "crossfadeFrames": 0
+      },
+      "posterFrame": 626,
       "lane": "/samples/hand-pose/lanes/hand-pose-15.json",
       "strip": {
         "left": "11110111111111111100001111111111111111111111111111111111110000011111111122020011111020000000000000000000112100000000000002211111111311000000000000000110000000000000000000000000000000000010000000112111",

@@ -2,100 +2,136 @@
   "samples": {
     "hand-pose-01": {
       "posterFrame": 2347,
-      "loop": null,
+      "loop": {
+        "start": 1143,
+        "frames": 150,
+        "crossfadeFrames": 0
+      },
       "framing": {
         "still": 100.0,
         "poster": 100.0,
         "sample-wide": 96.6
       },
-      "note": ""
+      "note": "camera video with the 2D hand pose drawn over it; faces and bystanders blurred"
     },
     "hand-pose-02": {
       "posterFrame": 1366,
-      "loop": null,
+      "loop": {
+        "start": 1030,
+        "frames": 150,
+        "crossfadeFrames": 0
+      },
       "framing": {
         "still": 100.0,
         "poster": 100.0,
         "sample-wide": 96.9
       },
-      "note": ""
+      "note": "camera video with the 2D hand pose drawn over it; faces and bystanders blurred"
     },
     "hand-pose-03": {
       "posterFrame": 1819,
-      "loop": null,
+      "loop": {
+        "start": 1755,
+        "frames": 150,
+        "crossfadeFrames": 0
+      },
       "framing": {
         "still": 100.0,
         "poster": 100.0,
         "sample-wide": 96.6
       },
-      "note": ""
+      "note": "camera video with the 2D hand pose drawn over it; faces and bystanders blurred"
     },
     "hand-pose-05": {
       "posterFrame": 953,
-      "loop": null,
+      "loop": {
+        "start": 925,
+        "frames": 150,
+        "crossfadeFrames": 0
+      },
       "framing": {
         "still": 100.0,
         "poster": 100.0,
         "sample-wide": 96.7
       },
-      "note": ""
+      "note": "camera video with the 2D hand pose drawn over it; faces and bystanders blurred"
     },
     "hand-pose-06": {
       "posterFrame": 645,
-      "loop": null,
+      "loop": {
+        "start": 1088,
+        "frames": 150,
+        "crossfadeFrames": 0
+      },
       "framing": {
         "still": 100.0,
         "poster": 100.0,
         "sample-wide": 96.7
       },
-      "note": ""
+      "note": "camera video with the 2D hand pose drawn over it; faces and bystanders blurred"
     },
     "hand-pose-07": {
       "posterFrame": 360,
-      "loop": null,
+      "loop": {
+        "start": 1389,
+        "frames": 150,
+        "crossfadeFrames": 0
+      },
       "framing": {
         "still": 100.0,
         "poster": 100.0,
         "sample-wide": 96.7
       },
-      "note": ""
+      "note": "camera video with the 2D hand pose drawn over it; faces and bystanders blurred"
     },
     "hand-pose-08": {
       "posterFrame": 1771,
-      "loop": null,
+      "loop": {
+        "start": 1066,
+        "frames": 150,
+        "crossfadeFrames": 0
+      },
       "framing": {
         "still": 100.0,
         "poster": 100.0,
         "sample-wide": 96.3
       },
-      "note": ""
+      "note": "camera video with the 2D hand pose drawn over it; faces and bystanders blurred"
     },
     "hand-pose-09": {
       "posterFrame": 254,
-      "loop": null,
+      "loop": {
+        "start": 1125,
+        "frames": 150,
+        "crossfadeFrames": 0
+      },
       "framing": {
         "still": 100.0,
         "poster": 100.0,
         "sample-wide": 96.7
       },
-      "note": ""
+      "note": "camera video with the 2D hand pose drawn over it; faces and bystanders blurred"
     },
     "hand-pose-10": {
       "posterFrame": 1172,
-      "loop": null,
+      "loop": {
+        "start": 1379,
+        "frames": 150,
+        "crossfadeFrames": 0
+      },
       "framing": {
         "still": 100.0,
         "poster": 100.0,
         "sample-wide": 96.6
       },
-      "note": ""
+      "note": "camera video with the 2D hand pose drawn over it; faces and bystanders blurred"
     },
     "hand-pose-13": {
       "posterFrame": 1836,
       "loop": {
-        "start": 1713,
-        "frames": 165,
-        "crossfadeFrames": 15
+        "start": 1728,
+        "frames": 150,
+        "crossfadeFrames": 0
       },
       "framing": {
         "video": 96.3,
@@ -108,9 +144,9 @@
     "hand-pose-14": {
       "posterFrame": 1648,
       "loop": {
-        "start": 1552,
-        "frames": 165,
-        "crossfadeFrames": 15
+        "start": 1567,
+        "frames": 150,
+        "crossfadeFrames": 0
       },
       "framing": {
         "video": 96.7,
@@ -129,6 +165,33 @@
         "sample-wide": 96.6
       },
       "note": ""
+    },
+    "hand-pose-11": {
+      "loop": {
+        "start": 553,
+        "frames": 150,
+        "crossfadeFrames": 0
+      },
+      "posterFrame": 628,
+      "note": "camera video with the 2D hand pose drawn over it; faces and bystanders blurred"
+    },
+    "hand-pose-12": {
+      "loop": {
+        "start": 779,
+        "frames": 150,
+        "crossfadeFrames": 0
+      },
+      "posterFrame": 854,
+      "note": "camera video with the 2D hand pose drawn over it; faces and bystanders blurred"
+    },
+    "hand-pose-15": {
+      "loop": {
+        "start": 551,
+        "frames": 150,
+        "crossfadeFrames": 0
+      },
+      "posterFrame": 626,
+      "note": "camera video with the 2D hand pose drawn over it; faces and bystanders blurred"
     }
   },
   "hero": {

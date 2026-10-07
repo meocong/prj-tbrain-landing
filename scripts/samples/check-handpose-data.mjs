@@ -51,7 +51,7 @@ const HEADLINE = {
 /** Per-hand 3D pose share across the 32 hands, as quoted in the copy. */
 const POSE = { min: 24.0, median: 83.6, max: 99.9, atLeast95: 9, atLeast80: 20, below50: 4 };
 const BOTH_HANDS = { atLeast95: 3, from80to95: 6, below80: 7 };
-const PREVIEW = { video: 2, poster: 10, lane: 4 };
+const PREVIEW = { video: 14, poster: 1, lane: 1 };
 const DURATION = { median: 78.6, min: 64.7, max: 203.7 };
 
 const JOINTS = [

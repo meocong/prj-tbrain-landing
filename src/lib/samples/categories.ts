@@ -187,8 +187,8 @@ const HAND_POSE_ENTRY: Category[] =
           badge: "New",
           wide: true,
           /* The face and the header reel are sample 13's camera video with the
-             hand pose drawn over it and faces blurred: one of the two samples
-             whose operator consented to a public preview. */
+             hand pose drawn over it and faces blurred. Sample 13's operator
+             consented to a public preview. */
           face: "hand-pose-13",
           // The hero loop: 16:9, both hands right of centre.
           faceMedia: {

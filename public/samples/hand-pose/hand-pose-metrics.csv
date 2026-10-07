@@ -1,17 +1,17 @@
 sample,title,skill_group,duration_s,frames,left_pose_pct,right_pose_pct,left_measured,left_guessed,left_bridged,left_no_3d_pose,right_measured,right_guessed,right_bridged,right_no_3d_pose,measured_of_delivered_pct,guessed_of_delivered_pct,left_missed_reported_pct,right_missed_reported_pct,left_longest_no_pose_frames,right_longest_no_pose_frames,public_video_preview
-hand-pose-01,Cutting and washing,Cleaning & Sanitation,79.2,2376,99.9,98.4,2351,23,0,2,2213,124,0,39,96.9,3.1,0.0,0.1,1,39,no
-hand-pose-02,Engine cleaning,Cleaning & Sanitation,71.7,2151,98.3,86.6,2049,66,3,33,1798,65,0,288,96.7,3.3,0.2,0.2,19,206,no
-hand-pose-03,Cart clearing,Cleaning & Sanitation,120.0,3600,71.3,64.0,2166,400,4,1030,2043,260,11,1286,86.4,13.6,2.2,2.5,285,331,no
+hand-pose-01,Cutting and washing,Cleaning & Sanitation,79.2,2376,99.9,98.4,2351,23,0,2,2213,124,0,39,96.9,3.1,0.0,0.1,1,39,yes
+hand-pose-02,Engine cleaning,Cleaning & Sanitation,71.7,2151,98.3,86.6,2049,66,3,33,1798,65,0,288,96.7,3.3,0.2,0.2,19,206,yes
+hand-pose-03,Cart clearing,Cleaning & Sanitation,120.0,3600,71.3,64.0,2166,400,4,1030,2043,260,11,1286,86.4,13.6,2.2,2.5,285,331,yes
 hand-pose-04,Hair washing,Healthcare & Caregiving,203.7,6112,96.7,91.9,5510,401,34,167,5248,368,32,464,93.3,6.7,0.8,0.6,50,132,no
-hand-pose-05,Trash disposing,Cleaning & Sanitation,64.7,1941,64.5,77.0,1088,164,8,681,1362,133,4,442,89.2,10.8,2.3,1.5,109,107,no
-hand-pose-06,Notebook writing,Tool Use & Technical Manipulation,75.5,2266,78.2,82.3,1659,113,8,486,1793,72,8,393,94.9,5.1,4.4,0.3,86,150,no
-hand-pose-07,Wire untangling,Tool Use & Technical Manipulation,95.6,2868,83.1,82.4,2039,345,2,482,2195,167,6,500,89.2,10.8,1.0,1.6,88,100,no
-hand-pose-08,Material organizing,Pick and Place / Object Handling,74.1,2223,99.8,99.7,2203,16,1,3,2170,46,0,7,98.6,1.4,0.0,0.0,2,7,no
-hand-pose-09,Shaft wrapping,Mechanical / Automotive Work,78.0,2341,97.9,95.5,2083,209,0,49,2061,175,1,104,91.5,8.5,0.2,0.0,34,38,no
-hand-pose-10,Light setup,Pick and Place / Object Handling,94.9,2848,24.0,30.8,562,122,1,2163,733,145,1,1969,82.9,17.1,2.7,4.8,409,939,no
-hand-pose-11,Table cleaning,Cleaning & Sanitation,74.0,2221,73.3,73.7,1033,594,8,586,1416,220,26,559,75.1,24.9,4.9,0.5,102,75,no
-hand-pose-12,Bathtub cleaning,Cleaning & Sanitation,80.8,2424,84.1,88.7,1776,263,13,372,1553,598,14,259,79.5,20.5,3.5,1.7,87,58,no
+hand-pose-05,Trash disposing,Cleaning & Sanitation,64.7,1941,64.5,77.0,1088,164,8,681,1362,133,4,442,89.2,10.8,2.3,1.5,109,107,yes
+hand-pose-06,Notebook writing,Tool Use & Technical Manipulation,75.5,2266,78.2,82.3,1659,113,8,486,1793,72,8,393,94.9,5.1,4.4,0.3,86,150,yes
+hand-pose-07,Wire untangling,Tool Use & Technical Manipulation,95.6,2868,83.1,82.4,2039,345,2,482,2195,167,6,500,89.2,10.8,1.0,1.6,88,100,yes
+hand-pose-08,Material organizing,Pick and Place / Object Handling,74.1,2223,99.8,99.7,2203,16,1,3,2170,46,0,7,98.6,1.4,0.0,0.0,2,7,yes
+hand-pose-09,Shaft wrapping,Mechanical / Automotive Work,78.0,2341,97.9,95.5,2083,209,0,49,2061,175,1,104,91.5,8.5,0.2,0.0,34,38,yes
+hand-pose-10,Light setup,Pick and Place / Object Handling,94.9,2848,24.0,30.8,562,122,1,2163,733,145,1,1969,82.9,17.1,2.7,4.8,409,939,yes
+hand-pose-11,Table cleaning,Cleaning & Sanitation,74.0,2221,73.3,73.7,1033,594,8,586,1416,220,26,559,75.1,24.9,4.9,0.5,102,75,yes
+hand-pose-12,Bathtub cleaning,Cleaning & Sanitation,80.8,2424,84.1,88.7,1776,263,13,372,1553,598,14,259,79.5,20.5,3.5,1.7,87,58,yes
 hand-pose-13,Fabric arranging,Clothing & Laundry,74.6,2239,99.9,85.9,2194,43,1,1,1756,167,14,302,95.0,5.0,0.0,1.9,1,105,yes
 hand-pose-14,Frame moving,Pick and Place / Object Handling,75.2,2256,46.1,54.3,944,95,1,1216,1153,73,8,1022,92.6,7.4,2.2,0.8,758,630,yes
-hand-pose-15,Bathroom cleaning,Cleaning & Sanitation,80.1,2404,48.6,80.9,1033,135,8,1228,1367,579,18,440,77.1,22.9,12.0,6.5,230,91,no
+hand-pose-15,Bathroom cleaning,Cleaning & Sanitation,80.1,2404,48.6,80.9,1033,135,8,1228,1367,579,18,440,77.1,22.9,12.0,6.5,230,91,yes
 hand-pose-16,Card cutting,Tool Use & Technical Manipulation,96.6,2898,94.4,92.1,2631,104,19,144,2543,126,5,224,95.7,4.3,0.8,2.2,50,57,no

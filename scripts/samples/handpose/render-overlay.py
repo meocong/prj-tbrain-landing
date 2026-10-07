@@ -25,7 +25,7 @@ The result still has to be looked at: render, then view the contact sheet this s
 
 Outputs (same paths the skeleton renders used, so the page needs no new wiring):
   public/samples/hand-pose/video/hand-pose-NN.mp4   full length, 540x540
-  public/samples/clips/hand-pose-NN.mp4             6 s card loop, 640x480, cross-faded seam
+  public/samples/clips/hand-pose-NN.mp4             5 s card loop, 640x480
   public/samples/posters/hand-pose-NN.jpg           800x600 card poster
   public/samples/hand-pose/stills/hand-pose-NN.jpg  720x720 viewer poster
   public/samples/hand-pose/hero-13.mp4/.jpg, hero.jpg, og.jpg   for the hero sample
@@ -40,6 +40,8 @@ from pathlib import Path
 import cv2
 import numpy as np
 
+cv2.setNumThreads(2)  # several renders run side by side
+
 import hp_common as C
 import hp_render as R
 
@@ -48,11 +50,14 @@ RGB_ROOT = C.CACHE / "rgb"
 CONTACT_DIR = C.CACHE / "overlay-review"  # private: frames to look at before publishing
 
 HOLD = 8              # frames a blur region is kept either side of a detection
+FACE_EVERY = 2        # faces on every 2nd frame (at 720p), people on every 6th: HOLD (8) still spans
+PEOPLE_EVERY = 6      # each gap, and detection drops from ~0.54 s to ~0.1 s a frame (YOLOX is 0.4 s)
+FACE_SCALE = 2 / 3    # YuNet runs on a 1280x720 copy; a face too small to find there is unreadable
 FACE_GROW = 1.9
 PERSON_TOP = 0.5      # share of a bystander's box, from the top, that is blurred
 SMOOTH_SIGMA = 18.0   # frames; the crop drifts with the hands instead of jumping
-LOOP_FRAMES = 180     # 6 s card and hero loops
-XFADE = 15
+LOOP_FRAMES = 150     # 5 s card and hero loops
+XFADE = 0     # camera footage loops on a hard cut; a dissolve double-exposes moving hands
 
 # The crop is drawn at 720 (the still) and the full-length video is written at 540: real footage
 # costs about 17 MB at 720 for 75 s, about 5 MB at 540, and the viewer shows it at up to 540.
@@ -63,7 +68,8 @@ CROP_SIDE, VIDEO_SIDE, CARD_W, CARD_H, HERO_W, HERO_H = 720, 540, 640, 480, 1280
 
 class Detectors:
     def __init__(self, w: int, h: int):
-        self.face = cv2.FaceDetectorYN.create(str(MODELS / "yunet.onnx"), "", (w, h), 0.45, 0.3, 5000)
+        self.face = cv2.FaceDetectorYN.create(
+            str(MODELS / "yunet.onnx"), "", (round(w * FACE_SCALE), round(h * FACE_SCALE)), 0.45, 0.3, 5000)
         self.net = cv2.dnn.readNet(str(MODELS / "yolox_s.onnx"))
         s = 640
         grids, strides = [], []
@@ -75,8 +81,9 @@ class Detectors:
         self.grids, self.strides = np.concatenate(grids), np.concatenate(strides)
 
     def faces(self, im) -> list[tuple[int, int, int, int]]:
-        _, f = self.face.detect(im)
-        return [] if f is None else [tuple(int(v) for v in x[:4]) for x in f]
+        small = cv2.resize(im, None, fx=FACE_SCALE, fy=FACE_SCALE, interpolation=cv2.INTER_AREA)
+        _, f = self.face.detect(small)
+        return [] if f is None else [tuple(int(v / FACE_SCALE) for v in x[:4]) for x in f]
 
     def people(self, im, conf=0.3) -> list[tuple[int, int, int, int]]:
         h, w = im.shape[:2]
@@ -120,6 +127,57 @@ def blur_regions(im, regions):
         roi = cv2.resize(small, (x1 - x0, y1 - y0), interpolation=cv2.INTER_NEAREST)
         k = max(15, ((min(x1 - x0, y1 - y0) // 3) | 1))
         im[y0:y1, x0:x1] = cv2.GaussianBlur(roi, (k, k), 0)
+
+
+# Samples where the scene itself could identify a person or a place: 06, a production notebook
+# with handwritten dates and tallies; 11, a restaurant with other people at the next table;
+# 12 and 15, a hotel bathroom whose mirrors show the wearer's uniform. Everything but a feathered
+# zone round the hands is blurred, so the hands and what they hold stay sharp and the rest does not.
+FOCUS_SAMPLES = {6, 11, 12, 15}
+# Where the private text is under the hands themselves (06: the pen is on the page), the sharp
+# zone is the hand and a few pixels round it, not the room to work in.
+TIGHT_FOCUS = {6}
+
+
+# Spans, in seconds of the sample, where a phone screen is held between the hands (03: a lock
+# screen with the time and notifications). The box round both hands, grown by half, is blurred
+# for the whole span; the hand pose is drawn over it afterwards, so the motion still shows.
+SCREEN_SPANS = {3: [(59.0, 66.0)]}
+
+
+def screen_box(pts_by_side, w, h):
+    pts = [p for p in pts_by_side if len(p)]
+    if not pts:
+        return []
+    allp = np.concatenate(pts)
+    lo, hi = allp.min(0), allp.max(0)
+    pad = 0.5 * (hi - lo) + 40
+    x0, y0 = np.maximum(lo - pad, 0).astype(int)
+    x1, y1 = np.minimum(hi + pad, [w, h]).astype(int)
+    return [(x0, y0, x1 - x0, y1 - y0)]
+
+
+def focus_hands(im, pts_by_side, s=1.0, tight=False):
+    """Keep a feathered zone round each hand sharp; blur the rest of the frame hard.
+
+    Run on each output view after it is cut and scaled, not on the source frame: the views are a
+    few hundred pixels, the source is 3K, and blending at 3K made a two-minute sample take hours.
+    `s` is output pixels per source pixel, so the zone covers the same part of the scene in every
+    view."""
+    h, w = im.shape[:2]
+    mask = np.zeros((h, w), np.float32)
+    for pts in pts_by_side:
+        if len(pts) < 3:
+            continue
+        lo, hi = pts.min(0), pts.max(0)
+        k = int(2 * ((0.03 * max(hi - lo) + 4 * s) if tight else (0.22 * max(hi - lo) + 24 * s))) | 1
+        m = np.zeros_like(mask)
+        cv2.fillConvexPoly(m, cv2.convexHull(pts.astype(np.int32)), 1.0)
+        mask = np.maximum(mask, cv2.dilate(m, cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (k, k))))
+    mask = cv2.GaussianBlur(mask, (0, 0), max(1.0, (5 if tight else 25) * s))[..., None]
+    soft = cv2.GaussianBlur(cv2.resize(im, (max(1, w // 8), max(1, h // 8)), interpolation=cv2.INTER_AREA), (0, 0), 2)
+    soft = cv2.resize(soft, (w, h), interpolation=cv2.INTER_LINEAR)
+    im[:] = (im * mask + soft * (1 - mask)).astype(np.uint8)
 
 
 # ---------------------------------------------------------------- drawing ---
@@ -240,9 +298,15 @@ def render(sample: C.Sample, plan: dict):
     state = {s: hands.state(s) for s in C.SIDES}
     uv = {s: hands.per_frame(s, "uv2d", np.float32, np.nan) for s in C.SIDES}
 
+    # The delivered window can start part-way into the recording (03 starts at 226.5 s); the
+    # camera file is the whole recording, so frame 0 of the delivery is frame `offset` of it.
+    # Read here for the sync only, never written anywhere.
+    raw = json.loads((C.CACHE / sample.episode / "handpose.json").read_text())
+    offset = int(round(float((raw.get("window") or {}).get("start_s") or 0) * C.FPS))
     cap = cv2.VideoCapture(str(src))
     W, H = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH)), int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
-    C.check(int(cap.get(cv2.CAP_PROP_FRAME_COUNT)) >= frames, f"{slug}: camera video is shorter than the delivery")
+    C.check(int(cap.get(cv2.CAP_PROP_FRAME_COUNT)) >= frames + offset, f"{slug}: camera video is shorter than the delivery")
+    cap.set(cv2.CAP_PROP_POS_FRAMES, offset)
     det = Detectors(W, H)
 
     # Pass 1: detect on every frame.
@@ -251,9 +315,10 @@ def render(sample: C.Sample, plan: dict):
         ok, im = cap.read()
         C.check(ok, f"{slug}: could not decode frame {i}")
         wearer = np.concatenate([uv[s][i] for s in C.SIDES if np.isfinite(uv[s][i]).all()] or [np.zeros((0, 2))])
-        for f in det.faces(im):
-            regions[i].append(grow(f, FACE_GROW))
-        for p in det.people(im):
+        if i % FACE_EVERY == 0:
+            for f in det.faces(im):
+                regions[i].append(grow(f, FACE_GROW))
+        for p in (det.people(im) if i % PEOPLE_EVERY == 0 else []):
             # The wearer is in every frame of a head-worn camera: their arms hold the hand
             # keypoints, and their lap and chest reach the bottom edge. Blurring those would
             # blur the work itself. Anyone else stands further off, above that edge.
@@ -276,18 +341,23 @@ def render(sample: C.Sample, plan: dict):
 
     out_video = encoder(C.media_file("video", slug), VIDEO_SIDE, VIDEO_SIDE, 31)
     card_frames, hero_frames, review = [], [], []
-    cap.set(cv2.CAP_PROP_POS_FRAMES, 0)
+    cap.set(cv2.CAP_PROP_POS_FRAMES, offset)
     for i in range(frames):
         ok, im = cap.read()
         blur_regions(im, held[i])
+        if any(a * C.FPS <= i <= b * C.FPS for a, b in SCREEN_SPANS.get(sample.n, ())):
+            blur_regions(im, screen_box([uv[s][i] for s in C.SIDES if np.isfinite(uv[s][i]).all()], W, H))
 
         def view(cw, ch, ow, oh, shift=0.0):
             x0, y0, w0, h0 = window(cx[i] - shift * cw, cy[i], cw, ch, W, H)
             img = cv2.resize(im[y0:y0 + h0, x0:x0 + w0], (ow, oh), interpolation=cv2.INTER_AREA)
             s = ow / w0
-            for sd in C.SIDES:
-                if state[sd][i] != C.NONE and np.isfinite(uv[sd][i]).all():
-                    draw_hand(img, (uv[sd][i] - [x0, y0]) * s, state[sd][i], sd, max(1.0, ow / 540))
+            hands = {sd: (uv[sd][i] - [x0, y0]) * s for sd in C.SIDES
+                     if state[sd][i] != C.NONE and np.isfinite(uv[sd][i]).all()}
+            if sample.n in FOCUS_SAMPLES:
+                focus_hands(img, list(hands.values()), s, tight=sample.n in TIGHT_FOCUS)
+            for sd, P in hands.items():
+                draw_hand(img, P, state[sd][i], sd, max(1.0, ow / 540))
             return img
 
         sq = view(side[i], side[i], CROP_SIDE, CROP_SIDE)
@@ -308,6 +378,7 @@ def render(sample: C.Sample, plan: dict):
     def write_loop(path, seq, w, h, crf):
         n = len(seq) - XFADE
         enc = encoder(path, w, h, crf)
+        # With XFADE 0 this writes the window as it is.
         for k in range(n):
             f = seq[k]
             if k < XFADE:  # the last XFADE frames dissolve into the first, so the seam does not jump
@@ -335,6 +406,21 @@ def render(sample: C.Sample, plan: dict):
     return {"loop": {"start": a0, "frames": n, "crossfadeFrames": XFADE}, "posterFrame": poster_f}
 
 
+def save_plan_entry(slug: str, got: dict) -> None:
+    """Merge one sample's result into render-plan.json under a lock: several renders run at once,
+    and each used to write back the whole plan it read at start, undoing the others."""
+    import fcntl
+    with open(C.RENDER_PLAN_JSON, "r+", encoding="utf-8") as fh:
+        fcntl.flock(fh, fcntl.LOCK_EX)
+        plan = json.load(fh)
+        entry = plan["samples"].setdefault(slug, {})
+        entry.update(got)
+        entry["note"] = "camera video with the 2D hand pose drawn over it; faces and bystanders blurred"
+        fh.seek(0)
+        fh.write(json.dumps(plan, indent=2) + "\n")
+        fh.truncate()
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--only", type=int, action="append")
@@ -343,11 +429,7 @@ def main():
     for sample in C.load_samples():
         if sample.preview != "video" or (args.only and sample.n not in args.only):
             continue
-        entry = plan["samples"][sample.slug]
-        got = render(sample, entry)
-        entry.update(got)
-        entry["note"] = "camera video with the 2D hand pose drawn over it; faces and bystanders blurred"
-    C.RENDER_PLAN_JSON.write_text(json.dumps(plan, indent=2) + "\n")
+        save_plan_entry(sample.slug, render(sample, plan["samples"].get(sample.slug, {})))
 
 
 if __name__ == "__main__":
