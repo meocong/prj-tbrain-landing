@@ -13,6 +13,7 @@ import { KnownLimits } from "./KnownLimits";
 import { MethodSection } from "./MethodSection";
 import { ProductMatrix } from "./ProductMatrix";
 import { ReadingTheNumbers } from "./ReadingTheNumbers";
+import { RecordModalHost } from "./RecordModalHost";
 import { RecordingsTable } from "./RecordingsTable";
 import { Workspace } from "./Workspace";
 
@@ -23,9 +24,10 @@ import { Workspace } from "./Workspace";
  * frame by frame, so the page leads with the viewer. In order:
  *
  *   hero         what it is, four figures
- *   viewer       one recording played: camera video and the same pose in 3D, the
- *                state lane and the live numbers on one clock
- *   recordings   all of them in a sortable table; "Visualize" loads a row above
+ *   viewer       a demo: one recording played, camera video and the same pose
+ *                in 3D, the state lane and the live numbers on one clock
+ *   recordings   all of them in a sortable table; "Visualize" opens a row in the
+ *                record dialog (`RecordModalHost`), the player beside its numbers
  *   docs         how to read it, how it is measured, what you receive, the
  *                products and limits, the FAQ, as tabs
  *   access       the licence and the three ways in
@@ -69,6 +71,7 @@ export function HandPoseCategoryPage({ c }: { c: Category }) {
         <AccessSection />
       </main>
       <Footer />
+      <RecordModalHost />
     </div>
   );
 }

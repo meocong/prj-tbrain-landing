@@ -29,11 +29,14 @@ export const STEREO_CAMERAS = 2;
 export const pad2 = (n: number) => String(n).padStart(2, "0");
 
 /**
- * The sample the page leads with: the first one with a public camera video.
- * The hero loop, the "Open a sample" buttons and the caption all point at it,
- * so they cannot name different samples.
+ * The sample the page leads with: 13, whose operator consented to a public
+ * preview and whose camera video is the hero's and the category card's
+ * (`faceMedia` in categories.ts). The hero loop, the workspace and the caption
+ * all point at it, so they cannot name different samples. Falls back to the
+ * first sample with a video, then the first sample.
  */
-export const FEATURED: HandPoseSample = SAMPLES.find((s) => s.preview === "video") ?? SAMPLES[0];
+export const FEATURED: HandPoseSample =
+  SAMPLES.find((s) => s.n === 13 && s.preview === "video") ?? SAMPLES.find((s) => s.preview === "video") ?? SAMPLES[0];
 
 const WORDS = [
   "zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten",

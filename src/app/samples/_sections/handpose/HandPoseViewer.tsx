@@ -1,50 +1,32 @@
 "use client";
 
-import { useEffect, useState, useSyncExternalStore } from "react";
+import { useSyncExternalStore } from "react";
 import { motion } from "framer-motion";
 import { useReducedMotion } from "@/lib/motion-pref";
 import { handPoseSample, type HandPoseSample } from "@/lib/samples/handpose";
 import { C, EASE, type Sample } from "../tokens";
-import { StateLane } from "./StateLane";
-import { useLane } from "./use-lane";
-import { Sentence } from "./viewer-sentence";
-import { ViewerLegend } from "./ViewerLegend";
-import { LaneOnlyPanel, ViewerMedia, mediaKind } from "./viewer-media";
-import { LaneSkeleton } from "./viewer-skeleton";
+import { HandPlayer } from "./HandPlayer";
 import { ViewerSections, ViewerStrip } from "./viewer-spec";
-import { LANE_ROW, LANE_ROW_HERO, clampFrame, frameMidTime } from "./viewer-frame";
 
 /**
  * The body of the record modal for a hand-pose sample: what a buyer opens a
  * sample to do, which is to see how a hand's pose was obtained, frame by frame.
  *
- *   left   the skeleton render (or its still, or a note that there is none), the
- *          legend, and the state lane under which every frame can be read;
+ *   left   the player (`HandPlayer`): camera video and the same pose in 3D on one
+ *          clock, the readout, the key and the state lane; for a sample with no
+ *          video, its still or the lane alone;
  *   right  the strip of four figures and the record's sections.
  *
  * `SampleModal` keeps the shell — header, footer, focus trap, Escape — and loads
  * this with `next/dynamic` only where hand pose is published, so a build without
  * the category carries none of it.
  *
- * Layout
- * ──────
- * From `lg` the two panes sit side by side and EACH scrolls on its own. The
- * generic record's media pane never scrolls, because the video and a one-line
- * readout fit; a legend, a lane, a readout and a table behind a disclosure do
- * not fit under a square video on a 720px laptop, and clipping them would hide
- * the very thing this record is for. Below `lg` it is one column, in the order a
- * reader needs it: the picture, what its drawing means, the lane, then the
- * numbers.
- *
- * Both panes are `shrink-0`: in the one-column layout the body is a scrolling flex
- * column, and a pane allowed to shrink (`min-h-0` lets it) squeezes to fit the
- * body instead of letting the body scroll, so its content spills over the next
- * pane's.
- *
- * The left pane is a CONTAINER, and its layout asks the pane's width rather than
- * the viewport's. The pane is 590px on a 1280px laptop and 340px inside a phone's
- * single column, but also 600px in a tablet's: a viewport breakpoint cannot tell
- * those apart, the pane can.
+ * From `lg` the two panes sit side by side and EACH scrolls on its own: the
+ * player is taller than the panel on a laptop, and clipping it would hide the
+ * lane this record is for. Below `lg` it is one column, the player first. Both
+ * panes are `shrink-0`: in the one-column layout the body is a scrolling flex
+ * column, and a pane allowed to shrink squeezes to fit the body instead of
+ * letting the body scroll.
  */
 
 /**
@@ -65,24 +47,6 @@ function useWideLayout() {
   );
 }
 
-function LaneError({ onRetry }: { onRetry: () => void }) {
-  return (
-    <div role="alert">
-      <p className="text-[12px]" style={{ color: C.danger }}>
-        The state lane for this sample could not be loaded.
-      </p>
-      <button
-        type="button"
-        onClick={onRetry}
-        className="bp-mono mt-2 rounded-full px-3 py-1.5 text-[10px]"
-        style={{ border: `1px solid ${C.rule}`, color: C.text }}
-      >
-        Try again
-      </button>
-    </div>
-  );
-}
-
 export function HandPoseViewer({ sample, initialFrame }: { sample: Sample; initialFrame: number | null }) {
   const hp = handPoseSample(sample.slug);
   if (!hp) {
@@ -98,27 +62,6 @@ export function HandPoseViewer({ sample, initialFrame }: { sample: Sample; initi
 function Viewer({ sample, hp, initialFrame }: { sample: Sample; hp: HandPoseSample; initialFrame: number | null }) {
   const reduce = useReducedMotion();
   const wide = useWideLayout();
-  const [video, setVideo] = useState<HTMLVideoElement | null>(null);
-  const [lane, retryLane] = useLane(hp.lane);
-  const kind = mediaKind(hp);
-
-  /* A start frame, from `?f=` or `openRecord(slug, frame)`. The video is sought
-     here rather than in the lane, because the video exists from the first render
-     and the lane only once its JSON lands — and a record whose lane fails to load
-     should still open where the link said. Not before `loadedmetadata`: Safari
-     ignores a `currentTime` set earlier. */
-  useEffect(() => {
-    if (!video || initialFrame == null) return;
-    const seek = () => {
-      video.currentTime = frameMidTime(clampFrame(initialFrame, hp.frames));
-    };
-    if (video.readyState >= 1) {
-      seek();
-      return;
-    }
-    video.addEventListener("loadedmetadata", seek, { once: true });
-    return () => video.removeEventListener("loadedmetadata", seek);
-  }, [video, initialFrame, hp.frames]);
 
   /* The longest run with no 3D pose is counted from the exclusive state array,
      in the data build: `longestNoPoseFrames`. Never the pipeline's own
@@ -130,72 +73,22 @@ function Viewer({ sample, hp, initialFrame }: { sample: Sample; hp: HandPoseSamp
     right: (hp.right.longestNoPoseFrames as number | undefined) ?? null,
   };
 
-  const laneOnly = kind === "lane";
-  const laneBlock =
-    lane.status === "ready" ? (
-      <StateLane
-        slug={hp.slug}
-        title={sample.title}
-        lane={lane.lane}
-        video={video}
-        initialFrame={initialFrame}
-        hero={laneOnly}
-      />
-    ) : lane.status === "loading" ? (
-      <LaneSkeleton rowHeight={laneOnly ? LANE_ROW_HERO : LANE_ROW} />
-    ) : (
-      <LaneError onRetry={retryLane} />
-    );
-
   return (
     <motion.div
       className={[
         "flex min-h-0 flex-1 flex-col overflow-y-auto overscroll-contain",
-        "lg:grid lg:grid-cols-[minmax(0,1.08fr)_minmax(0,1fr)] lg:overflow-hidden",
-        // The square the render gets beside the legend. A ceiling on a phone;
-        // from `lg` it is what the pane's height leaves after the lane block, so
-        // the render, the lane and its readout can share a 900px laptop without
-        // scrolling. The 94dvh and 940px are the panel's own cap, `HP_PANEL_MAX`
-        // in SampleModal, which this cannot import without pulling the whole
-        // viewer into the modal's bundle.
-        "[--hp-vs:420px] lg:[--hp-vs:clamp(240px,calc(min(94dvh,940px)_-_480px),380px)]",
+        "lg:grid lg:grid-cols-[minmax(0,1.6fr)_minmax(20rem,1fr)] lg:overflow-hidden",
       ].join(" ")}
       initial={reduce ? false : { opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.45, ease: EASE, delay: reduce ? 0 : 0.12 }}
     >
-      {/* ── Left: the picture, how to read it, and the lane ── */}
+      {/* ── Left: the player ── */}
       <div
-        className="@container min-h-0 shrink-0 border-b px-5 pb-4 pt-3.5 lg:h-full lg:overflow-y-auto lg:overscroll-contain lg:border-b-0 lg:border-r lg:px-6"
+        className="min-h-0 shrink-0 border-b px-5 pb-5 pt-4 lg:h-full lg:overflow-y-auto lg:overscroll-contain lg:border-b-0 lg:border-r lg:px-6"
         style={{ borderColor: C.hairlineSoft }}
       >
-        {laneOnly ? (
-          /* No media: the lane is the preview. One column, the lane first and the
-             legend after it where there is room; on a phone the legend stays
-             ahead of the lane, as it is for every other sample. */
-          <div className="flex flex-col gap-5">
-            <div>
-              <LaneOnlyPanel />
-              <Sentence hp={hp} />
-            </div>
-            <ViewerLegend wide className="@min-[34rem]:order-3" />
-            <div className="@min-[34rem]:order-2">{laneBlock}</div>
-          </div>
-        ) : (
-          <>
-            <div className="grid gap-5 @min-[34rem]:grid-cols-[minmax(0,var(--hp-vs))_minmax(13rem,1fr)] @min-[34rem]:gap-x-5">
-              <div className="min-w-0">
-                <ViewerMedia hp={hp} title={sample.title} kind={kind} videoRef={setVideo} />
-              </div>
-              <ViewerLegend />
-            </div>
-            {/* Under both columns rather than under the picture: full width it
-                is two lines, in the picture's column it was three, and the
-                height is what decides whether the lane fits on a laptop. */}
-            <Sentence hp={hp} />
-            <div className="mt-4">{laneBlock}</div>
-          </>
-        )}
+        <HandPlayer hp={hp} title={sample.title} initialFrame={initialFrame} />
       </div>
 
       {/* ── Right: the four figures and the record ── */}

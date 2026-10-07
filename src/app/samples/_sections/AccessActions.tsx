@@ -154,13 +154,15 @@ function HandPoseActions({
     if (asset === "preview") track("handpose_pack_download", { slug: sample.slug, from });
   };
 
-  const note = (
+  // Only where there is a preview video to speak of: the record's "Preview" spec row.
+  const hasVideo = sample.spec?.some(([k, v]) => k === "Preview" && v === "Video preview") ?? false;
+  const note = hasVideo ? (
     /* Not on a phone, where the pinned footer is height the lane needs; the
        viewer's own caption says the same thing above the media. */
     <span className="hidden text-[11px] sm:inline" style={{ color: C.textDim }}>
       Faces and bystanders in the preview video are blurred.
     </span>
-  );
+  ) : null;
   const requestClass =
     "group inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-[13px] font-semibold transition-transform active:scale-[0.98]";
 

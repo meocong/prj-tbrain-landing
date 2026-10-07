@@ -24,9 +24,9 @@ import { SAMPLES, pad2 } from "./page-data";
  * #recordings: all of them, one row each, and a button that plays the row.
  *
  * A semantic table: readable by a screen reader, sortable by keyboard, copyable
- * into a spreadsheet. "Visualize" does not navigate; it loads the row into the
- * workspace above (`openRecord`, the channel every "open a sample" link on this
- * page uses) and scrolls there. Below 1024px each row is a card, because nine
+ * into a spreadsheet. "Visualize" does not navigate; it opens the row in the
+ * record dialog (`openRecord`, the channel every "open a sample" link on this
+ * page uses, heard by `RecordModalHost`). Below 1024px each row is a card, because nine
  * columns do not survive a phone and a table that scrolls sideways is the worst
  * way to read one.
  *
@@ -220,10 +220,10 @@ export function RecordingsTable() {
   return (
     <PageSection id="recordings" tone="band" labelledBy="hp-recordings-title">
       <Reveal variant="rise">
-        <SectionHead id="hp-recordings-title" eyebrow={`All ${SAMPLES.length} recordings`} lead="Pick one," dim="play it above">
+        <SectionHead id="hp-recordings-title" eyebrow={`All ${SAMPLES.length} recordings`} lead="Pick one," dim="open it">
           <Lede>
             Bars show measured (solid) plus guessed (hatched) as a share of all frames; the rest of each bar is bridged or
-            no 3D pose. Visualize loads the row into the viewer.
+            no 3D pose. Visualize opens the recording in the viewer.
           </Lede>
         </SectionHead>
 
