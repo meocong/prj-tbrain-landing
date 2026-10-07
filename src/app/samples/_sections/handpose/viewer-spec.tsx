@@ -167,8 +167,8 @@ function sections(hp: HandPoseSample, sample: Sample, longest: { left: number | 
     kind === "video"
       ? `Camera video with the hand pose drawn over it, 540 x 540, ${HP_FPS} fps. Faces and bystanders blurred.`
       : kind === "poster"
-        ? "Skeleton still only, 720 x 720. Video on request."
-        : "Metrics and lane only. Preview on request.";
+        ? "3D pose in the viewer and a skeleton still, 720 x 720. Camera video on request."
+        : "3D pose in the viewer, metrics and lane. Camera video on request.";
 
   // From the same list the page's field table prints, so the two cannot name
   // different files. The recording's name carries the sample number.

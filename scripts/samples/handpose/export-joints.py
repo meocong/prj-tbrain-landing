@@ -1,17 +1,17 @@
 #!/usr/bin/env python3
-"""Export the public 3D joints for the in-page explorer, for video-tier samples only.
+"""Export the public 3D joints for the in-page explorer, for every sample.
 
     python3 export-joints.py
 
-Writes, per sample with curation tier "video":
+Writes, per sample:
   public/samples/hand-pose/joints/hand-pose-NN.bin    int16 mm, then uint8 states
   public/samples/hand-pose/joints/hand-pose-NN.json   the layout of the .bin
 
 The page says the hands were measured in 3D, and a camera overlay alone cannot show it. This is the
 "look, not use" file the spec planned for the explorer: 15 fps (every second frame) and positions
 rounded to 2 mm, so it shows the motion faithfully without being the delivery. The 30 fps float pack
-stays behind the passcode. Only the video tier: the explorer's clock is the camera video, so a
-sample without one has no 3D view to feed.
+stays behind the passcode. The file holds joints and states only, no camera pixels, so it is
+published for every tier: a sample with no public video plays its 3D pose on a clock of its own.
 
 Axes are the wearer's view, not the rig's: x to the right, y up, z forward, origin at the rig. The
 rotation into that frame uses the stereo pair's mean optical axis (hp_render.rig_axes); no
@@ -69,8 +69,6 @@ def export(sample: C.Sample) -> dict:
 
 def main():
     for sample in C.load_samples():
-        if sample.preview != "video":
-            continue
         m = export(sample)
         size = (OUT_DIR / f"{sample.slug}.bin").stat().st_size
         print(f"{sample.slug}: {m['count']} frames at {m['fps']} fps, {size:,} B")

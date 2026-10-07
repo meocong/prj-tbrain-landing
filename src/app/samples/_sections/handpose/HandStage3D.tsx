@@ -33,7 +33,7 @@ const PRESETS: { name: ViewPreset; label: string; hint: string }[] = [
 ];
 
 /** The panel is media: dark in both themes, and so is the pair of hand hues it paints with. */
-const PANEL = "hp-media bp-frame relative aspect-square w-full overflow-hidden";
+const PANEL = "hp-media bp-frame relative w-full overflow-hidden";
 const PANEL_STYLE = { background: "#06080E", border: `1px solid ${C.hairline}` } as const;
 
 function webglAvailable() {
@@ -57,12 +57,16 @@ export function HandStage3D({
   onRetry,
   video,
   className = "",
+  wide = false,
 }: {
   joints: JointsState;
   onRetry: () => void;
   video: HTMLVideoElement | null;
   className?: string;
+  /** 16:10 instead of square: the view stands in for the video and spans its row. */
+  wide?: boolean;
 }) {
+  const shape = wide ? "aspect-[16/10]" : "aspect-square";
   const reduce = useReducedMotion();
   const panel = useRef<HTMLDivElement>(null);
   const [gl, setGl] = useState<"checking" | "yes" | "no">("checking");
@@ -101,7 +105,7 @@ export function HandStage3D({
 
   return (
     <figure className={`m-0 ${className}`}>
-      <div ref={panel} className={PANEL} style={PANEL_STYLE} role="region" aria-label="3D view of both hands, frame 0">
+      <div ref={panel} className={`${PANEL} ${shape}`} style={PANEL_STYLE} role="region" aria-label="3D view of both hands, frame 0">
         {/* Decoration: what it shows is in the lane and the readout as text. */}
         <div aria-hidden className="absolute inset-0">
           {ready && (

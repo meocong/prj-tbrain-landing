@@ -109,24 +109,3 @@ export function ViewerMedia({
     </figure>
   );
 }
-
-/**
- * A sample with no media. Hatched, because on this site hatching means "nothing
- * here", never footage, and the line sits on a solid chip so the hatch does not
- * run through the type.
- */
-export function LaneOnlyPanel() {
-  return (
-    <div
-      className="flex items-center px-3 py-4"
-      style={{
-        border: `1px solid ${C.hairline}`,
-        backgroundImage: `repeating-linear-gradient(-45deg, ${C.hairline} 0 1px, transparent 1px 10px)`,
-      }}
-    >
-      <p className="px-2.5 py-1.5 text-[12px]" style={{ background: C.base, color: C.textMid }}>
-        Metrics and lane only. Preview on request.
-      </p>
-    </div>
-  );
-}

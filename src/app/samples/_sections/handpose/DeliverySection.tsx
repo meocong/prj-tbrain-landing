@@ -87,7 +87,7 @@ function rows(): Row[] {
       contents: `What the 3D view on this page plays: ${JOINTS_PER_HAND} joints per hand at ${HP_FPS / 2} fps, rounded to 2 mm, axes from the wearer's view, with the state per frame. For looking, not training.`,
       format: ".bin",
       tier: "open",
-      note: videoSamples.length ? `samples ${joinAnd(videoSamples)}` : undefined,
+      note: "every sample",
     },
     {
       // An earlier draft titled this "…with state and 2D". The pack carries no

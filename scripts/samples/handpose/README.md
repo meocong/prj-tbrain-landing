@@ -15,7 +15,7 @@ after `render-overlay.py` has blurred faces and bystanders (and, for the samples
 | `hp_render.py` | Skeleton renderer: virtual camera, per-sample fit, `draw()`, `best_frame()`, palette check, ffmpeg writer. |
 | `render-skeleton.py` | CLI. Renders every media file, writes `render-plan.json`, probes the media. `--check-palette`, `--only NN`, `--no-video`, `--verify`. |
 | `render-overlay.py` | CLI. The `video` tier's media from the head camera (mid_left, private cache): faces (YuNet) and bystanders (YOLOX) blurred, `FOCUS_SAMPLES` blurred away from the hands, `SCREEN_SPANS` blurred between the hands, the 2D hand pose drawn over it. Overwrites the skeleton media of those samples, merges its entry into `render-plan.json`, writes review sheets outside the repo. `--only NN`. Slow: about 20 min a sample. |
-| `export-joints.py` | The 3D view's joints for the `video` tier: 15 fps, 2 mm, int16 `.bin` plus a `.json` layout. |
+| `export-joints.py` | The 3D view's joints for every sample (no pixels): 15 fps, 2 mm, int16 `.bin` plus a `.json` layout. |
 | `build-handpose-data.py` | Metrics JSON, lanes, CSV, private slug map, and every consistency assert. `--longest-gap gate` publishes the pipeline's own gap figure instead of the lane's (see States). |
 | `pack-handpose-assets.py` | The gated packs, outside the repo, with their checks and `manifest.json`. |
 | `render-plan.json` | Poster frame and loop window per sample (output of the renderer, read by the build). |
@@ -24,7 +24,7 @@ after `render-overlay.py` has blurred faces and bystanders (and, for the samples
 
     python3 render-skeleton.py          # media + render-plan.json   (about 40 s)
     python3 render-overlay.py           # camera video for the video tier (slow; review every output)
-    python3 export-joints.py            # 3D view joints for the video tier
+    python3 export-joints.py            # 3D view joints, every sample
     python3 build-handpose-data.py      # data files, asserts, privacy scan
     python3 pack-handpose-assets.py     # packs for the samples marked "pack" in curation.json
 
@@ -44,7 +44,7 @@ the files by hand; `render-skeleton.py --verify` and the build fail while they e
 | `public/samples/hand-pose/lanes/hand-pose-NN.json` (16), `public/samples/hand-pose/hand-pose-metrics.csv` | build |
 | `public/samples/hand-pose/video/hand-pose-NN.mp4` (540x540, full length), `public/samples/clips/hand-pose-NN.mp4` (640x480 loop) | render, `video` tier |
 | `public/samples/posters/hand-pose-NN.jpg` (800x600), `public/samples/hand-pose/stills/hand-pose-NN.jpg` (720x720) | render, `video` and `poster` tiers |
-| `public/samples/hand-pose/joints/hand-pose-NN.bin` and `.json` | export-joints, `video` tier |
+| `public/samples/hand-pose/joints/hand-pose-NN.bin` and `.json` | export-joints, every tier |
 | `public/samples/hand-pose/hero.jpg`, `og.jpg`, `hero-13.mp4`, `hero-13.jpg` | render, sample 13 only |
 | `<cache>/slug-map.private.json` (slug to sample folder) | build; never in the repo |
 | `<cache>/packs/hand-pose-NN-pack.zip`, `manifest.json` | pack; never in the repo |

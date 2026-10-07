@@ -1,7 +1,8 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import { HP_FPS, STATE_DRAWING, STATE_LABEL, type HandPoseSample, type StateKey } from "@/lib/samples/handpose";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { Pause, Play } from "lucide-react";
+import { HP_FPS, STATE_DRAWING, STATE_LABEL, mmss, type HandPoseSample, type StateKey } from "@/lib/samples/handpose";
 import { C } from "../tokens";
 import { StateGlyph } from "./glyphs";
 import { HandReadout } from "./HandReadout";
@@ -10,7 +11,8 @@ import { StateLane } from "./StateLane";
 import { useJoints } from "./use-joints";
 import { useLane } from "./use-lane";
 import { useVideoClock } from "./use-video-clock";
-import { LaneOnlyPanel, ViewerMedia, mediaKind } from "./viewer-media";
+import { ViewerMedia, mediaKind } from "./viewer-media";
+import { VirtualClock } from "./virtual-clock";
 import { LANE_ROW, clampFrame, frameMidTime } from "./viewer-frame";
 import { Sentence } from "./viewer-sentence";
 import { LaneSkeleton } from "./viewer-skeleton";
@@ -24,10 +26,10 @@ import { LaneSkeleton } from "./viewer-skeleton";
  * each follow it from `requestVideoFrameCallback` (`useVideoClock`), writing to
  * refs and nodes. Nothing here sets React state per frame.
  *
- * What a sample lacks, it lacks gracefully. No camera video (`poster`): its
- * skeleton still, no 3D. No media at all (`lane`): the lane and the numbers. A
- * video whose 3D joints are not published yet: the video and the lane, and a
- * line in the 3D panel's place saying so.
+ * What a sample lacks, it lacks gracefully. No camera video in public (`poster`
+ * and `lane` tiers): the 3D view takes the video's place, on a `VirtualClock`
+ * with its own play button, so the readout and the lane still follow one clock.
+ * Joints that fail to load: the 3D panel says so and offers a retry.
  *
  * Mount it with a `key` per sample: a new sample is a new clock.
  */
@@ -55,17 +57,39 @@ function KeyList() {
   );
 }
 
-function NoVideoPanel({ message }: { message: string }) {
+/** Play and pause for a sample with no video: the clock's only transport besides the lane's keys. */
+function ClockTransport({ clock, seconds }: { clock: VirtualClock; seconds: number }) {
+  const [playing, setPlaying] = useState(false);
+  const time = useRef<HTMLSpanElement>(null);
+  useEffect(() => {
+    const on = () => setPlaying(!clock.paused);
+    clock.addEventListener("play", on);
+    clock.addEventListener("pause", on);
+    return () => {
+      clock.removeEventListener("play", on);
+      clock.removeEventListener("pause", on);
+      clock.pause();
+    };
+  }, [clock]);
+  useVideoClock(clock.asVideo(), (t) => {
+    if (time.current) time.current.textContent = mmss(t);
+  });
   return (
-    <div
-      className="bp-frame flex aspect-square w-full max-w-[400px] items-center justify-center p-6 text-center @min-[34rem]:max-w-none"
-      style={{
-        border: `1px solid ${C.hairline}`,
-        backgroundImage: `repeating-linear-gradient(-45deg, ${C.hairline} 0 1px, transparent 1px 10px)`,
-      }}
-    >
-      <p className="max-w-[26ch] px-2.5 py-1.5 text-[12px] leading-[1.55]" style={{ background: C.base, color: C.textMid }}>
-        {message}
+    <div className="mt-2.5 flex items-center gap-3">
+      <button
+        type="button"
+        onClick={() => (clock.paused ? clock.play() : clock.pause())}
+        aria-label={playing ? "Pause the 3D pose" : "Play the 3D pose"}
+        className="inline-flex h-9 w-9 flex-none items-center justify-center rounded-full"
+        style={{ background: C.accent, color: "var(--sm-on-accent)" }}
+      >
+        {playing ? <Pause aria-hidden className="h-4 w-4" /> : <Play aria-hidden className="ml-0.5 h-4 w-4" />}
+      </button>
+      <p className="bp-mono text-[11px]" style={{ color: C.textMid }}>
+        <span ref={time}>0:00</span> / {mmss(seconds)}
+      </p>
+      <p className="bp-mono ml-auto text-right text-[10px]" style={{ color: C.textDim }}>
+        3D pose only · no camera video in public
       </p>
     </div>
   );
@@ -85,9 +109,12 @@ export function HandPlayer({
   onSettle?: (frame: number) => void;
 }) {
   const kind = mediaKind(hp);
-  const [video, setVideo] = useState<HTMLVideoElement | null>(null);
+  const [videoEl, setVideo] = useState<HTMLVideoElement | null>(null);
+  // No camera video in public: the 3D pose plays on a clock of its own.
+  const clock = useMemo(() => (kind === "video" ? null : new VirtualClock(hp.frames / HP_FPS)), [kind, hp.frames]);
+  const video = clock ? clock.asVideo() : videoEl;
   const [lane, retryLane] = useLane(hp.lane);
-  const [joints, retryJoints] = useJoints(kind === "video" ? hp.slug : null);
+  const [joints, retryJoints] = useJoints(hp.slug);
   const track = joints.status === "ready" ? joints.track : null;
 
   /* A start frame goes to the video, not the lane: the video exists from the
@@ -128,7 +155,7 @@ export function HandPlayer({
 
   const laneBlock =
     lane.status === "ready" ? (
-      <StateLane slug={hp.slug} title={title} lane={lane.lane} video={video} initialFrame={initialFrame} hero={kind === "lane"} />
+      <StateLane slug={hp.slug} title={title} lane={lane.lane} video={video} initialFrame={initialFrame} />
     ) : lane.status === "loading" ? (
       <LaneSkeleton rowHeight={LANE_ROW} />
     ) : (
@@ -147,38 +174,32 @@ export function HandPlayer({
       </div>
     );
 
-  if (kind === "lane") {
-    return (
-      <div className="@container">
-        <LaneOnlyPanel />
-        <div className="mt-6">{laneBlock}</div>
-        <Sentence hp={hp} />
-      </div>
-    );
-  }
-
   return (
     <div className="@container [--hp-sq:clamp(280px,calc(100svh_-_430px),520px)]">
       <div className="grid gap-5 @min-[40rem]:grid-cols-2 @min-[64rem]:grid-cols-[var(--hp-sq)_var(--hp-sq)_minmax(15rem,1fr)] @min-[64rem]:gap-x-6">
-        <div className="min-w-0">
-          <ViewerMedia hp={hp} title={title} kind={kind} videoRef={setVideo} />
-        </div>
-        <div className="min-w-0">
-          {kind === "video" ? (
-            <HandStage3D joints={joints} onRetry={retryJoints} video={video} />
-          ) : (
-            <NoVideoPanel message="The camera video and the 3D view are not published for this sample. The lane and the numbers below are." />
-          )}
-        </div>
-        <aside aria-label="Readout and key" className="flex min-w-0 flex-col gap-5 @min-[40rem]:col-span-2 @min-[64rem]:col-span-1">
-          {kind === "video" && (
-            <div>
-              <h3 className="bp-mono mb-1.5 text-[10px]" style={{ color: C.textDim }}>
-                Readout, this frame
-              </h3>
-              <HandReadout track={track} video={video} />
+        {clock ? (
+          // No video: the 3D view in its place, with a transport under it.
+          <div className="min-w-0 @min-[40rem]:col-span-2 @min-[64rem]:col-span-2">
+            <HandStage3D joints={joints} onRetry={retryJoints} video={video} wide />
+            <ClockTransport clock={clock} seconds={hp.frames / HP_FPS} />
+          </div>
+        ) : (
+          <>
+            <div className="min-w-0">
+              <ViewerMedia hp={hp} title={title} kind="video" videoRef={setVideo} />
             </div>
-          )}
+            <div className="min-w-0">
+              <HandStage3D joints={joints} onRetry={retryJoints} video={video} />
+            </div>
+          </>
+        )}
+        <aside aria-label="Readout and key" className="flex min-w-0 flex-col gap-5 @min-[40rem]:col-span-2 @min-[64rem]:col-span-1">
+          <div>
+            <h3 className="bp-mono mb-1.5 text-[10px]" style={{ color: C.textDim }}>
+              Readout, this frame
+            </h3>
+            <HandReadout track={track} video={video} />
+          </div>
           <div>
             <h3 className="bp-mono mb-2 text-[10px]" style={{ color: C.textDim }}>
               Key

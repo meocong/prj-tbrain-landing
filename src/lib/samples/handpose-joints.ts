@@ -1,7 +1,7 @@
 import type { HandState } from "./handpose";
 
 /**
- * The public 3D joints of the samples that have a public camera video (the explorer's clock is the video).
+ * The public 3D joints of every sample: joints and states only, no camera pixels.
  *
  * One file per sample, `/samples/hand-pose/joints/hand-pose-NN.bin`, written by
  * `scripts/samples/handpose/export-joints.py` at half the video's frame rate
