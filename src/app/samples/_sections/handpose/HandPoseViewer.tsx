@@ -88,7 +88,9 @@ function Viewer({ sample, hp, initialFrame }: { sample: Sample; hp: HandPoseSamp
         className="min-h-0 shrink-0 border-b px-5 pb-5 pt-4 lg:h-full lg:overflow-y-auto lg:overscroll-contain lg:border-b-0 lg:border-r lg:px-6"
         style={{ borderColor: C.hairlineSoft }}
       >
-        <HandPlayer hp={hp} title={sample.title} initialFrame={initialFrame} />
+        {/* With no frame in the link, the poster frame: both hands measured, so
+            the video, the 3D view and the readout open on something to see. */}
+        <HandPlayer hp={hp} title={sample.title} initialFrame={initialFrame ?? hp.posterFrame} />
       </div>
 
       {/* ── Right: the four figures and the record ── */}

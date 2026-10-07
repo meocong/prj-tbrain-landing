@@ -131,7 +131,7 @@ export function Workspace() {
 
         <div className="mt-6 md:mt-7">
           {near ? (
-            <HandPlayer key={hp.slug} hp={hp} title={hp.title} initialFrame={null} />
+            <HandPlayer key={hp.slug} hp={hp} title={hp.title} initialFrame={hp.posterFrame} />
           ) : (
             <div
               aria-busy="true"
