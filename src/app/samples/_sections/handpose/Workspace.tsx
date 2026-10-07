@@ -6,6 +6,7 @@ import { track } from "@/lib/samples/track";
 import { C, PILL } from "../tokens";
 import { HandPlayer } from "./HandPlayer";
 import { PageSection } from "./page-kit";
+import { SampleSelect } from "./SampleSelect";
 import { FEATURED, SAMPLES, pad2 } from "./page-data";
 
 /**
@@ -14,7 +15,7 @@ import { FEATURED, SAMPLES, pad2 } from "./page-data";
  * One sample at a time, played: camera video and the same pose in 3D side by
  * side, the lane and the live numbers under them (`HandPlayer`). A header bar
  * names the sample and carries the figures a buyer asks about first, and a
- * select switches sample. It starts on the featured sample.
+ * picker (`SampleSelect`) switches sample. It starts on the featured sample.
  *
  * It is not where a recording is opened: "Visualize", a link to a sample and
  * `?record=` open the record dialog (`RecordModalHost`), which has the same
@@ -42,7 +43,6 @@ export function Workspace() {
   const [slug, setSlug] = useState(FEATURED.slug);
   const [near, setNear] = useState(false);
   const section = useRef<HTMLDivElement>(null);
-  const selectId = useId();
   const headingId = useId();
 
   useEffect(() => {
@@ -105,27 +105,15 @@ export function Workspace() {
             </ul>
           </div>
 
-          <div className="flex flex-col gap-1.5">
-            <label htmlFor={selectId} className="bp-mono text-[10px]" style={{ color: C.textDim }}>
-              Sample
-            </label>
-            <select
-              id={selectId}
+          <div className="w-full sm:w-auto">
+            <SampleSelect
+              samples={SAMPLES}
               value={hp.slug}
-              onChange={(e) => {
-                track("handpose_sample_open", { slug: e.target.value, from: "workspace_select" });
-                setSlug(e.target.value);
+              onChange={(slug) => {
+                track("handpose_sample_open", { slug, from: "workspace_select" });
+                setSlug(slug);
               }}
-              className="min-w-[15rem] rounded-full px-4 py-2.5 text-[13px]"
-              style={{ background: C.wash, color: C.text, border: `1px solid ${C.rule}` }}
-            >
-              {SAMPLES.map((s) => (
-                <option key={s.slug} value={s.slug}>
-                  #{pad2(s.n)} {s.title}
-                  {s.preview === "video" ? " · video" : ""}
-                </option>
-              ))}
-            </select>
+            />
           </div>
         </div>
 

@@ -1208,6 +1208,15 @@ html.dark body {
   --hp-right: #E69F00;
 }
 
+/* The hand-pose hero's footage, from lg: masked to transparent on its left so
+   the band's glow shows through, where an opaque fade met it in a hard edge. */
+@media (min-width: 1024px) {
+  .samples-scope .hp-hero-footage {
+    -webkit-mask-image: linear-gradient(90deg, transparent 0%, rgba(0, 0, 0, 0.25) 18%, rgba(0, 0, 0, 0.8) 42%, #000 62%);
+    mask-image: linear-gradient(90deg, transparent 0%, rgba(0, 0, 0, 0.25) 18%, rgba(0, 0, 0, 0.8) 42%, #000 62%);
+  }
+}
+
 /* ── Hand-pose state lanes ──
    One row per hand. `--hp-c` is the hand's hue, set on the row. Measured is a
    solid fill, guessed a hatch, bridged a stipple, and no 3D pose leaves the

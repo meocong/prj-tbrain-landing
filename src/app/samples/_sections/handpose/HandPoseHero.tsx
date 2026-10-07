@@ -1,17 +1,20 @@
 import type { CSSProperties } from "react";
 import Link from "next/link";
 import { ArrowDown, ArrowLeft } from "lucide-react";
+import { categoryBySlug } from "@/lib/samples/categories";
 import { HP_AGG, fmtPct } from "@/lib/samples/handpose";
 import { requestUrl } from "@/lib/samples/request-link";
 import { OVER_MEDIA } from "../tokens";
 import { GRADIENT_TEXT, HeroWash } from "../HeroWash";
-import { JOINTS_PER_HAND } from "./page-data";
+import { HeroFootage } from "./HeroFootage";
+import { FEATURED, JOINTS_PER_HAND, pad2 } from "./page-data";
 import { HashLink, TrackedLink } from "./page-links";
 
 /**
- * The page's hero: a headline, one line of what the set is, and four figures.
- * No footage here. The viewer is the next thing on the page, and the first
- * screen's job is to say what it is looking at and get out of the way of it.
+ * The page's hero: a headline, one line of what the set is, two actions, and the
+ * four figures in a strip along the bottom. Behind it, on the right, the featured
+ * sample's camera video with the hand pose drawn over it (the category's
+ * `faceMedia`, faces blurred), faded into the band so the headline reads on it.
  *
  * The band is dark in BOTH themes, which is what keeps the header white over it
  * (`categoryHeroIsDark`), so every colour in it is a literal: the page tokens
@@ -33,7 +36,11 @@ const FIGURES: { value: string; unit?: string; label: string }[] = [
   { value: fmtPct(HP_AGG.measuredOfDeliveredPct), label: "Measured, of delivered hand-frames" },
 ];
 
+/** Base as r,g,b, for the fades that melt the footage into the band. */
+const BASE_RGB = "6,8,14";
+
 export function HandPoseHero() {
+  const media = categoryBySlug("hand-pose")?.faceMedia ?? null;
   return (
     // `bp-grid` for its focus ring, as the flat bands below carry it. The ring is
     // the cyan the text on this band uses, set here as a literal: the token is a
@@ -45,82 +52,121 @@ export function HandPoseHero() {
       style={{ animation: "none", ["--bp-focus-ring" as string]: ON_DARK_CYAN } as CSSProperties}
     >
       <div className="relative isolate overflow-hidden" style={{ background: HERO_BASE }}>
-        <HeroWash className="-z-10" />
+        <HeroWash className="-z-20" />
 
-        <div className="mx-auto max-w-[1400px] px-4 pb-8 pt-[92px] md:pb-9 md:pt-[104px] lg:px-10 xl:px-16">
+        {media && (
+          <div aria-hidden className="hp-hero-footage absolute inset-y-0 right-0 -z-10 w-full lg:w-[64%]">
+            <HeroFootage src={media.clip} poster={media.poster} position={media.position} />
+            {/* Phone and tablet: the footage sits behind the text, so it is
+                dimmed whole. From lg it is masked to transparent on its left
+                (globals.css, .hp-hero-footage), so the band's glow shows
+                through instead of meeting an opaque edge. */}
+            <div className="absolute inset-0 lg:hidden" style={{ background: `rgba(${BASE_RGB},0.74)` }} />
+            <div
+              className="absolute inset-0"
+              style={{
+                background: `linear-gradient(180deg, rgba(${BASE_RGB},0.55) 0%, rgba(${BASE_RGB},0) 22%, rgba(${BASE_RGB},0) 62%, rgb(${BASE_RGB}) 100%)`,
+              }}
+            />
+          </div>
+        )}
+
+        <div className="mx-auto flex max-w-[1400px] flex-col px-4 pt-[92px] md:pt-[108px] lg:min-h-[min(80svh,760px)] lg:px-10 xl:px-16">
           <Link
             href="/samples"
-            className="inline-flex items-center gap-2 py-1 text-[13px] hover:underline"
+            className="inline-flex w-fit items-center gap-2 py-1 text-[13px] hover:underline"
             style={{ color: OVER_MEDIA.text, textUnderlineOffset: 4 }}
           >
             <ArrowLeft aria-hidden className="h-3.5 w-3.5" />
             All categories
           </Link>
 
-          <div className="mt-3 grid gap-x-12 gap-y-6 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)] lg:items-end">
-            <div>
-              <p className="bp-mono text-[11px]" style={{ color: ON_DARK_CYAN }}>
-                / Robotics / Hand pose
-              </p>
-              {/* Two lines, the second carrying the gradient. `pb-1` because the
-                  gradient is a background clipped to the glyphs and the line box
-                  would shave the descender off "y". */}
-              <h1
-                id="hp-hero-title"
-                className="mt-3 text-balance text-[36px] font-medium tracking-tight sm:text-5xl"
-                style={{ fontFamily: "var(--font-heading)", letterSpacing: "-0.03em", lineHeight: 0.98, color: "#ffffff" }}
+          <div className="mt-8 max-w-[50rem] md:mt-12 lg:my-auto lg:py-10">
+            <p
+              className="bp-mono inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-[10.5px]"
+              style={{ color: ON_DARK_CYAN, background: "rgba(34,227,200,0.08)", border: "1px solid rgba(34,227,200,0.28)" }}
+            >
+              <span aria-hidden className="h-1.5 w-1.5 rounded-full" style={{ background: ON_DARK_CYAN, boxShadow: `0 0 10px ${ON_DARK_CYAN}` }} />
+              Robotics · Hand pose
+            </p>
+            {/* Two lines, the second carrying the gradient. `pb-2` because the
+                gradient is a background clipped to the glyphs and the line box
+                would shave the descender off "y". */}
+            <h1
+              id="hp-hero-title"
+              className="mt-5 text-[40px] font-medium sm:text-[58px] lg:text-[64px] xl:text-[72px]"
+              style={{ fontFamily: "var(--font-heading)", letterSpacing: "-0.045em", lineHeight: 0.96, color: "#ffffff" }}
+            >
+              {/* Spaces between the lines, so the heading's text reads as one sentence. */}
+              <span className="block">Hands, measured</span>{" "}
+              <span className="block">in 3D.</span>{" "}
+              <span className="block pb-2 lg:whitespace-nowrap" style={GRADIENT_TEXT}>
+                Every frame says how.
+              </span>
+            </h1>
+            <p className="mt-5 max-w-[34rem] text-[15px] leading-relaxed md:text-[16px]" style={{ color: OVER_MEDIA.text }}>
+              {JOINTS_PER_HAND} joints per hand, in metres, from the two-camera stereo pair of a head-worn rig. Every frame is
+              labelled measured, guessed, bridged or no 3D pose.
+            </p>
+
+            <div className="mt-7 flex flex-wrap items-center gap-3">
+              {/* Not `#ffffff` for the fill: globals.css repaints an inline white
+                  background as a dark scrim in dark mode. The dark theme's own pair. */}
+              <HashLink
+                id="samples"
+                className="group inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-semibold transition-transform active:scale-[0.98]"
+                style={{ background: ON_DARK_INK, color: ON_DARK_BASE }}
               >
-                <span className="block">Hands, measured in 3D.</span>
-                <span className="block pb-1" style={GRADIENT_TEXT}>
-                  Every frame says how.
-                </span>
-              </h1>
-              <p className="mt-3.5 max-w-xl text-[15px] leading-relaxed" style={{ color: OVER_MEDIA.text }}>
-                21 joints per hand, in metres, from the two-camera stereo pair of a head-worn rig. Every frame is
-                labelled measured, guessed, bridged or no 3D pose. Play any recording below.
-              </p>
-
-              <div className="mt-5 flex flex-wrap items-center gap-3">
-                {/* Not `#ffffff` for the fill: globals.css repaints an inline white
-                    background as a dark scrim in dark mode. The dark theme's own pair. */}
-                <HashLink
-                  id="samples"
-                  className="group inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-semibold transition-transform active:scale-[0.98]"
-                  style={{ background: ON_DARK_INK, color: ON_DARK_BASE }}
-                >
-                  Open the viewer
-                  <ArrowDown aria-hidden className="h-4 w-4 transition-transform group-hover:translate-y-0.5" />
-                </HashLink>
-                <TrackedLink
-                  href={requestUrl({ from: "hand-pose-hero" })}
-                  event="handpose_request_click"
-                  params={{ from: "hand-pose-hero" }}
-                  className="inline-flex items-center rounded-full px-6 py-3 text-sm font-semibold transition-colors hover:bg-white/10"
-                  style={{ border: "1px solid rgba(255,255,255,0.34)", color: "#ffffff" }}
-                >
-                  Request access
-                </TrackedLink>
-              </div>
+                Open the viewer
+                <ArrowDown aria-hidden className="h-4 w-4 transition-transform group-hover:translate-y-0.5" />
+              </HashLink>
+              <TrackedLink
+                href={requestUrl({ from: "hand-pose-hero" })}
+                event="handpose_request_click"
+                params={{ from: "hand-pose-hero" }}
+                className="inline-flex items-center rounded-full px-6 py-3 text-sm font-semibold backdrop-blur-sm transition-colors hover:bg-white/10"
+                style={{ border: "1px solid rgba(255,255,255,0.34)", color: "#ffffff" }}
+              >
+                Request access
+              </TrackedLink>
             </div>
-
-            <dl className="grid grid-cols-2 gap-x-6 gap-y-5 sm:grid-cols-4 lg:grid-cols-2">
-              {FIGURES.map((f) => (
-                <div key={f.label} className="flex flex-col pt-3" style={{ borderTop: "1px solid rgba(255,255,255,0.18)" }}>
-                  <dt className="bp-mono order-2 mt-2 text-[10px] leading-snug" style={{ color: OVER_MEDIA.textDim }}>
-                    {f.label}
-                  </dt>
-                  <dd className="order-1 font-mono text-[30px] leading-none tracking-tight md:text-[34px]" style={{ color: "#ffffff" }}>
-                    {f.value}
-                    {f.unit ? (
-                      <small className="ml-1 text-[0.5em] tracking-normal" style={{ color: OVER_MEDIA.text }}>
-                        {f.unit}
-                      </small>
-                    ) : null}
-                  </dd>
-                </div>
-              ))}
-            </dl>
           </div>
+
+          {media && (
+            <p
+              className="bp-mono mt-8 hidden self-end text-right text-[10px] leading-relaxed lg:block"
+              style={{ color: OVER_MEDIA.textDim }}
+            >
+              Sample {pad2(FEATURED.n)} · {FEATURED.title}
+              <br />
+              Camera video, hand pose drawn over it, faces blurred
+            </p>
+          )}
+
+          <dl
+            className="mt-8 grid grid-cols-2 border-t sm:grid-cols-4 lg:mt-4"
+            style={{ borderColor: "rgba(255,255,255,0.14)" }}
+          >
+            {FIGURES.map((f, i) => (
+              <div
+                key={f.label}
+                className={`flex flex-col py-5 pr-4 sm:py-6 ${i > 0 ? "sm:border-l sm:pl-6" : ""} ${i % 2 === 1 ? "border-l pl-4 sm:pl-6" : ""}`}
+                style={{ borderColor: "rgba(255,255,255,0.14)" }}
+              >
+                <dt className="bp-mono order-2 mt-2 text-[10px] leading-snug" style={{ color: OVER_MEDIA.textDim }}>
+                  {f.label}
+                </dt>
+                <dd className="order-1 font-mono text-[28px] leading-none tracking-tight md:text-[34px]" style={{ color: "#ffffff" }}>
+                  {f.value}
+                  {f.unit ? (
+                    <small className="ml-1 text-[0.5em] tracking-normal" style={{ color: OVER_MEDIA.text }}>
+                      {f.unit}
+                    </small>
+                  ) : null}
+                </dd>
+              </div>
+            ))}
+          </dl>
         </div>
       </div>
     </section>
