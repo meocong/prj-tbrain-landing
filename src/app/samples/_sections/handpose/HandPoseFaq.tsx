@@ -61,11 +61,11 @@ function items(): Item[] {
     },
     {
       q: "Which formats do you deliver?",
-      a: "Metrics as CSV and lanes as JSON in public. The passcode pack holds joints as .npz with a README and checksums. Full delivery adds renders, the full per-frame model output, calibration and the raw camera files, .mcap and IMU.",
+      a: "Anyone can download the metrics (CSV) and the per-frame lanes (JSON). With a passcode you get the joints as .npz, with a README and checksums. The full delivery adds renders, the full per-frame model output, calibration, and the raw camera files with .mcap and IMU.",
     },
     {
       q: "Can I use this commercially?",
-      a: "On request. Commercial terms, and any third-party model licences that apply to the files, are confirmed in the licence agreement before any full delivery.",
+      a: "Yes, under a licence. We agree the commercial terms with you, including any third-party model licences that apply to the files, before the full delivery.",
     },
     {
       q: "Can you capture my tasks?",
@@ -86,8 +86,8 @@ function items(): Item[] {
       ),
     },
     {
-      q: "Why is part of the video blurred?",
-      a: "The preview is public, so faces and other people in view are blurred before it is published, and where writing could be read, everything away from the hands. The hands and the work surface are kept sharp. The blur is only on the preview; the full delivery has the original camera files.",
+      q: "Are faces blurred?",
+      a: "Yes, in the public preview: the faces of people in view are blurred before it is published. Everything else, the hands and the scene, is left as recorded. The full delivery has the original camera files.",
     },
   ];
 }

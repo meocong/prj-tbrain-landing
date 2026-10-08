@@ -3,7 +3,7 @@ import { C, PILL } from "../tokens";
 import { Reveal } from "../Reveal";
 import { PageDisclosure } from "./PageDisclosure";
 import { HAIRLINE_TOP, PageSection, SectionHead, TH_CLASS } from "./page-kit";
-import { JOINTS_PER_HAND, SAMPLES, joinAnd } from "./page-data";
+import { JOINTS_PER_HAND, SAMPLES, joinAnd, pad2 } from "./page-data";
 
 /**
  * #delivery: what a buyer receives, tier by tier, before they ask.
@@ -60,6 +60,15 @@ function rows(): Row[] {
   const packSamples = SAMPLES.filter((s) => s.pack).map((s) => s.n);
   const forPack = packSamples.length ? `samples ${joinAnd(packSamples)}` : undefined;
   const videoSamples = SAMPLES.filter((s) => s.preview === "video").map((s) => s.n);
+  // "every sample", or "every sample except 04" when only a few are missing, before a long list.
+  const missing = SAMPLES.filter((s) => s.preview !== "video").map((s) => pad2(s.n));
+  const forVideo = !videoSamples.length
+    ? undefined
+    : !missing.length
+      ? "every sample"
+      : missing.length <= 3
+        ? `every sample except ${joinAnd(missing)}`
+        : `samples ${joinAnd(videoSamples)}`;
   return [
     {
       what: `Metrics (CSV, ${HP_AGG.samples} rows)`,
@@ -77,10 +86,10 @@ function rows(): Row[] {
     },
     {
       what: "Preview video",
-      contents: `The camera video with the 2D hand pose drawn over it, 540 x 540, ${HP_FPS} fps. Faces and bystanders blurred; on some samples, everything away from the hands.`,
+      contents: `The camera video with the 2D hand pose drawn over it, 540 x 540, ${HP_FPS} fps. Faces blurred; the scene is left sharp.`,
       format: ".mp4",
       tier: "open",
-      note: videoSamples.length ? `samples ${joinAnd(videoSamples)}` : undefined,
+      note: forVideo,
     },
     {
       what: "3D view joints",
@@ -230,7 +239,7 @@ export function DeliverySection() {
   return (
     <PageSection id="delivery" tone="paper" labelledBy="hp-delivery-title">
       <Reveal variant="rise">
-        <SectionHead id="hp-delivery-title" eyebrow="What you receive" lead="Three tiers," dim="stated up front" />
+        <SectionHead id="hp-delivery-title" eyebrow="What you receive" lead="Three tiers," dim="and what is in each" />
 
         {/* From lg: the table. Below it the access column would be cut off on a
             tablet, so those widths get the list. */}

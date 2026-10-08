@@ -157,7 +157,7 @@ export function HandPoseHero() {
             >
               Sample {pad2(FEATURED.n)} · {FEATURED.title}
               <br />
-              Camera video, hand pose drawn over it, faces blurred
+              Real head-camera footage, tracked hand pose on top
             </p>
             </HeroRise>
           )}

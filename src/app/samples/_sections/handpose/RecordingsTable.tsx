@@ -47,7 +47,7 @@ interface Column {
 }
 
 const COLUMNS: Column[] = [
-  { key: null, label: "Frame", width: "w-[4.5rem]" },
+  { key: null, label: "Preview", width: "w-[4.5rem]" },
   { key: "n", label: "#", first: "asc", width: "w-9" },
   { key: "title", label: "Recording", first: "asc", width: "min-w-[8rem]" },
   { key: "skillGroup", label: "Skill group", first: "asc", width: "min-w-[8.5rem]" },
@@ -220,10 +220,10 @@ export function RecordingsTable() {
   return (
     <PageSection id="recordings" tone="band" labelledBy="hp-recordings-title">
       <Reveal variant="rise">
-        <SectionHead id="hp-recordings-title" eyebrow={`All ${SAMPLES.length} recordings`} lead="Pick one," dim="open it">
+        <SectionHead id="hp-recordings-title" eyebrow={`All ${SAMPLES.length} recordings`} lead="Every recording," dim="side by side">
           <Lede>
-            Bars show measured (solid) plus guessed (hatched) as a share of all frames; the rest of each bar is bridged or
-            no 3D pose. Visualize opens the recording in the viewer.
+            Each bar is one hand across the whole clip: solid where it was measured, hatched where it was guessed, empty
+            where it was bridged or had no 3D pose. Visualize opens a recording in the viewer.
           </Lede>
         </SectionHead>
 
@@ -369,9 +369,8 @@ export function RecordingsTable() {
         )}
 
         <p className="mt-6 max-w-[46rem] text-[12px] leading-relaxed" style={{ color: C.textDim }}>
-          3D pose = measured plus guessed frames as a share of all frames; bridged frames are counted separately.
-          Measured, of delivered = measured frames as a share of measured plus guessed. Percentages to one decimal,
-          counts exact.
+          3D pose is the share of a hand's frames with a measured or guessed pose; bridged frames are counted on their
+          own. Measured, of delivered is how many of those poses were measured rather than guessed.
         </p>
       </Reveal>
     </PageSection>

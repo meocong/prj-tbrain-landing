@@ -78,7 +78,7 @@ export function ViewerMedia({
           />
         </div>
         <figcaption className="bp-mono mt-2 text-[10px]" style={{ color: C.textDim }}>
-          Camera video, hand pose overlay · faces blurred
+          Head camera, tracked hand pose on top · faces blurred
         </figcaption>
         {failed && (
           <p role="alert" className="mt-1 text-[11px]" style={{ color: C.danger }}>

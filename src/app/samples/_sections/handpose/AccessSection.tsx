@@ -35,7 +35,7 @@ export function AccessSection() {
     { label: "Preview", value: "Free to view, no login. Faces blurred in the preview video." },
     { label: "Evaluation", value: `Passcode sample pack for samples ${packSamples}, 7-day session.` },
     { label: "Full delivery", value: "Signed links after the licence is agreed." },
-    { label: "Commercial use", value: "On request." },
+    { label: "Commercial use", value: "Yes, under a licence." },
     { label: "Captured in", value: "Vietnam" },
   ];
 
@@ -53,7 +53,7 @@ export function AccessSection() {
       <Reveal variant="rise">
         <div className="grid gap-10 lg:grid-cols-12 lg:gap-14">
           <div className="lg:col-span-5">
-            <SectionHead id="hp-access-title" eyebrow="Licence and access" lead="Three ways in," dim="stated plainly" />
+            <SectionHead id="hp-access-title" eyebrow="Licence and access" lead="Three ways in," dim="no surprises" />
             <dl className="mt-7 md:mt-8">
               {licence.map((r) => (
                 <div
@@ -71,7 +71,7 @@ export function AccessSection() {
               ))}
             </dl>
             <p className="mt-4 text-[12px]" style={{ color: C.textDim }}>
-              Indicative terms. The licence agreement governs.
+              These terms are indicative; the licence agreement has the final word.
             </p>
           </div>
 

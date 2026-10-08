@@ -328,7 +328,7 @@ function Strips() {
 function NotBox() {
   const items = [
     "Not accuracy. They say how often a 3D pose was delivered for a hand, not how close each joint is to the true position.",
-    "Not a confidence score. The 3D pose share counts measured plus guessed frames; bridged frames are counted separately.",
+    "Not a confidence score. It counts frames; it does not weigh how sure each pose is.",
     "Not a reason. A frame with no 3D pose does not say why: the hand may have been out of view, or detected in 2D without being triangulated.",
   ];
   return (

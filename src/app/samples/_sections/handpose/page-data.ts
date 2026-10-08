@@ -168,4 +168,4 @@ export const JOINTS_PER_HAND = HANDPOSE.jointsPerHand;
  * the two cannot drift.
  */
 export const NO_GROUND_TRUTH =
-  "These are vision-estimated poses with self-consistency checks. No marker-based ground truth was captured, so we report coverage and misses, not joint error. Validate on your own held-out data.";
+  "These are vision-estimated poses with self-consistency checks. No marker-based ground truth was captured, so we report coverage and misses, not joint error. We recommend checking them against your own held-out data.";

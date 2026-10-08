@@ -31,12 +31,12 @@ function items(): { key: string; text: string }[] {
       text: "Accuracy is reported as coverage and misses, not as joint error against marker mocap. No marker ground truth was captured.",
     },
     {
-      key: "The preview video is blurred.",
-      text: "Each preview is one head camera at 540 x 540 with the hand pose drawn over it. Faces and other people in view are blurred, and where writing could be read, everything away from the hands is, so some frames lose detail. The full delivery keeps the original camera files.",
+      key: "Previews are one camera, scaled down.",
+      text: "The video on this page is one of the head cameras at 540 x 540, with faces blurred. The full delivery has every camera at full resolution.",
     },
     {
-      key: "Frames with no 3D pose are drawn empty.",
-      text: "A value stored on a frame with no state is treated as absent, so a stray value never appears as a hand.",
+      key: "Frames with no 3D pose stay empty.",
+      text: "We never draw a hand where the data has none, even if a stray value is stored on that frame.",
     },
   ];
 }

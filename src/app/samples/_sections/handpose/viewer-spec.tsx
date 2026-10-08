@@ -165,7 +165,7 @@ function sections(hp: HandPoseSample, sample: Sample, longest: { left: number | 
 
   const preview =
     kind === "video"
-      ? `Camera video with the hand pose drawn over it, 540 x 540, ${HP_FPS} fps. Faces and bystanders blurred.`
+      ? `Camera video with the hand pose drawn over it, 540 x 540, ${HP_FPS} fps. Faces blurred.`
       : kind === "poster"
         ? "3D pose in the viewer and a skeleton still, 720 x 720. Camera video on request."
         : "3D pose in the viewer, metrics and lane. Camera video on request.";
@@ -180,14 +180,14 @@ function sections(hp: HandPoseSample, sample: Sample, longest: { left: number | 
       rows: [
         { label: "Sample", value: hp.slug },
         { label: "Skill group", value: hp.skillGroup },
-        { label: "Viewpoint", value: sample.viewpoint === "first-person" ? "1st person" : "3rd person" },
+        { label: "Viewpoint", value: sample.viewpoint === "first-person" ? "First person, from the head" : "Third person" },
       ],
     },
     {
       title: "Capture",
       rows: [
         { label: "Rig", value: "Six-camera head rig" },
-        { label: "Cameras used", value: "2, the stereo pair, about 9 cm apart" },
+        { label: "Cameras used", value: "Two, a stereo pair about 9 cm apart" },
         {
           label: "Source length",
           value: `${mmss(hp.seconds)} (${fmtSec(hp.seconds)}, ${fmtCount(hp.frames)} frames)`,
@@ -248,13 +248,13 @@ function sections(hp: HandPoseSample, sample: Sample, longest: { left: number | 
         },
         // What each flag means in the file. The legend beside the lane says how
         // a state is drawn; these say what it is.
-        { label: "Measured", value: "Seen and triangulated by both cameras of the mid pair." },
+        { label: "Measured", value: "Both cameras saw the hand, and its joints were triangulated." },
         {
           label: "Guessed",
           value:
-            "One camera only. Placed with the wearer's measured hand size, and kept only where a 2D hand detection confirms it.",
+            "Only one camera saw the hand. The pose is scaled to the wearer's measured hand size, and kept only where a 2D detection confirms it.",
         },
-        { label: "Bridged", value: "Short gap filled between measured frames." },
+        { label: "Bridged", value: "A short gap between two measured frames, filled in." },
         { label: "No 3D pose", value: STATE_DEFINITION.none },
       ],
     },
@@ -262,7 +262,7 @@ function sections(hp: HandPoseSample, sample: Sample, longest: { left: number | 
       title: "Licence",
       rows: [
         { label: "Preview", value: "Free to view, no login" },
-        { label: "Commercial use", value: "On request" },
+        { label: "Commercial use", value: "Yes, under a licence" },
       ],
     },
   ];

@@ -21,7 +21,7 @@ import { JOINTS_PER_HAND } from "./page-data";
 const STEPS: { title: string; body: string }[] = [
   {
     title: "Find the hand in two cameras",
-    body: "The mid_left and mid_right cameras of a six-camera head rig are calibrated against each other, about 9 cm apart. A hand detector runs on each view.",
+    body: "Two cameras in the middle of a six-camera head rig, about 9 cm apart and calibrated against each other, both look at the hands. A hand detector runs on each.",
   },
   {
     title: `Triangulate to ${JOINTS_PER_HAND} joints`,
@@ -33,11 +33,11 @@ const STEPS: { title: string; body: string }[] = [
   },
   {
     title: "Bridge short gaps, flagged",
-    body: "Short gaps between measured frames are filled and labelled bridged. Bridged frames are counted separately. Each hand's track is smoothed over time.",
+    body: "Short gaps between measured frames are filled in and labelled bridged, and counted on their own. Each hand's track is then smoothed over time.",
   },
   {
     title: "Quality gate",
-    body: "Each frame passes quality checks before it is delivered. Where another person's hands were in view, the frame is flagged in the delivery metadata instead of being silently dropped.",
+    body: "Every frame is checked before it is delivered. Where someone else's hands were in view, the frame is kept and flagged in the metadata, not quietly dropped.",
   },
 ];
 
@@ -49,7 +49,7 @@ export function MethodSection() {
           id="hp-method-title"
           eyebrow="How it is measured"
           lead="Stereo triangulation,"
-          dim="explained once"
+          dim="frame by frame"
         />
 
         <div className="mt-8 grid gap-9 md:mt-10 lg:grid-cols-12 lg:items-start lg:gap-14">

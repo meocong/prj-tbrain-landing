@@ -181,7 +181,7 @@ export function HandStage3D({
         )}
       </div>
       <figcaption className="bp-mono mt-2 text-[10px]" style={{ color: C.textDim }}>
-        3D pose, metres in the head-rig frame · drag to look around
+        The same moment in 3D · drag to look around
       </figcaption>
     </figure>
   );

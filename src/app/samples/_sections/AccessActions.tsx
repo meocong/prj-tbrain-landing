@@ -160,7 +160,7 @@ function HandPoseActions({
     /* Not on a phone, where the pinned footer is height the lane needs; the
        viewer's own caption says the same thing above the media. */
     <span className="hidden text-[11px] sm:inline" style={{ color: C.textDim }}>
-      Faces and bystanders in the preview video are blurred.
+      Faces in the preview video are blurred.
     </span>
   ) : null;
   const requestClass =

@@ -153,14 +153,14 @@ export const STATE_DRAWING: Record<StateKey, string> = {
   measured: "Solid bones, filled joints",
   guessed: "Dashed bones, hollow joints",
   bridged: "Dotted bones, small rings",
-  none: "Nothing drawn",
+  none: "Left empty",
 };
 
 export const STATE_DEFINITION: Record<StateKey, string> = {
   measured: "Both cameras saw the hand; its 21 joints were triangulated.",
   guessed:
     "One camera saw the hand. The pose is a single-camera estimate scaled to the wearer's measured hand size. Flagged in every file.",
-  bridged: "A short gap filled between measured frames. Flagged. Counted separately, not in the 3D pose share.",
+  bridged: "A short gap between two measured frames, filled in and flagged. Counted on its own, not in the 3D pose share.",
   none: "No 3D pose delivered for this frame (out of view, or detected in 2D but not triangulated).",
 };
 
