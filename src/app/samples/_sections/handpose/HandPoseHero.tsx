@@ -91,7 +91,7 @@ export function HandPoseHero() {
             All categories
           </Link>
 
-          <div className="mt-8 max-w-[50rem] md:mt-12 lg:my-auto lg:py-10">
+          <div className="mt-8 max-w-[56rem] md:mt-12 lg:my-auto lg:py-10">
             <HeroRise as="div" delay={0.05} className="block">
             <p
               className="bp-mono inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-[10.5px]"
@@ -106,13 +106,16 @@ export function HandPoseHero() {
                 would shave the descender off "y". */}
             <h1
               id="hp-hero-title"
-              className="mt-5 text-[40px] font-medium sm:text-[58px] lg:text-[64px] xl:text-[72px]"
+              className="mt-5 text-balance text-[36px] font-medium sm:text-[56px] lg:text-[62px] xl:text-[70px]"
               style={{ fontFamily: "var(--font-heading)", letterSpacing: "-0.045em", lineHeight: 0.96, color: "#ffffff" }}
             >
-              {/* Spaces between the lines, so the heading's text reads as one sentence. */}
-              <HeroRise delay={0.12} y={28}>Hands, measured</HeroRise>{" "}
-              <HeroRise delay={0.2} y={28}>in 3D.</HeroRise>{" "}
-              <HeroRise delay={0.3} y={28} className="block pb-2 lg:whitespace-nowrap" style={GRADIENT_TEXT}>
+              {/* Two lines, one sentence each, never broken inside one on a wide
+                  screen ("Hands, measured / in 3D." read as a stumble). The space
+                  between keeps the heading's text one sentence for a screen reader. */}
+              <HeroRise delay={0.12} y={28} className="block lg:whitespace-nowrap">
+                Hands, measured in 3D.
+              </HeroRise>{" "}
+              <HeroRise delay={0.22} y={28} className="block pb-2 lg:whitespace-nowrap" style={GRADIENT_TEXT}>
                 Every frame says how.
               </HeroRise>
             </h1>
