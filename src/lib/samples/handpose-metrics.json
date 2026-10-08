@@ -63,8 +63,8 @@
       "below80": 7
     },
     "preview": {
-      "video": 14,
-      "poster": 1,
+      "video": 15,
+      "poster": 0,
       "lane": 1
     }
   },
@@ -844,16 +844,20 @@
       "guessedOfDeliveredPct": 4.3,
       "minPosePct": 92.1,
       "bothHandsBand": "80-95",
-      "preview": "poster",
+      "preview": "video",
       "pack": false,
       "media": {
         "poster": "/samples/posters/hand-pose-16.jpg",
         "still": "/samples/hand-pose/stills/hand-pose-16.jpg",
-        "loop": null,
-        "video": null,
-        "videoSeconds": null
+        "loop": "/samples/clips/hand-pose-16.mp4",
+        "video": "/samples/hand-pose/video/hand-pose-16.mp4",
+        "videoSeconds": 96.6
       },
-      "loop": null,
+      "loop": {
+        "start": 1404,
+        "frames": 150,
+        "crossfadeFrames": 0
+      },
       "posterFrame": 651,
       "lane": "/samples/hand-pose/lanes/hand-pose-16.json",
       "strip": {

@@ -133,7 +133,7 @@ def blur_regions(im, regions):
 # with handwritten dates and tallies; 11, a restaurant with other people at the next table;
 # 12 and 15, a hotel bathroom whose mirrors show the wearer's uniform. Everything but a feathered
 # zone round the hands is blurred, so the hands and what they hold stay sharp and the rest does not.
-FOCUS_SAMPLES = {6, 11, 12, 15}
+FOCUS_SAMPLES = {6, 11, 12, 15, 16}
 # Where the private text is under the hands themselves (06: the pen is on the page), the sharp
 # zone is the hand and a few pixels round it, not the room to work in.
 TIGHT_FOCUS = {6}
@@ -155,6 +155,26 @@ def screen_box(pts_by_side, w, h):
     x0, y0 = np.maximum(lo - pad, 0).astype(int)
     x1, y1 = np.minimum(hi + pad, [w, h]).astype(int)
     return [(x0, y0, x1 - x0, y1 - y0)]
+
+
+# Samples whose work object carries print (16: cards printed with a business name, cut in the
+# hands). Light, unsaturated paper is found by colour, its dark print closed into it, and the
+# whole sheet blurred in every view, including where it sits between the fingers.
+PAPER_SAMPLES = {16}
+
+
+def blur_paper(im, s=1.0):
+    """Blur every light, colourless region (paper, card) and the print inside it."""
+    h, w = im.shape[:2]
+    hsv = cv2.cvtColor(im, cv2.COLOR_BGR2HSV)
+    paper = ((hsv[..., 1] < 55) & (hsv[..., 2] > 140)).astype(np.uint8)
+    k = int(18 * s) | 1
+    paper = cv2.morphologyEx(paper, cv2.MORPH_CLOSE, cv2.getStructuringElement(cv2.MORPH_RECT, (k, k)))
+    paper = cv2.dilate(paper, cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (int(10 * s) | 1,) * 2))
+    mask = cv2.GaussianBlur(paper.astype(np.float32), (0, 0), max(1.0, 3 * s))[..., None]
+    soft = cv2.GaussianBlur(cv2.resize(im, (max(1, w // 24), max(1, h // 24)), interpolation=cv2.INTER_AREA), (0, 0), 1.5)
+    soft = cv2.resize(soft, (w, h), interpolation=cv2.INTER_LINEAR)
+    im[:] = (im * (1 - mask) + soft * mask).astype(np.uint8)
 
 
 def focus_hands(im, pts_by_side, s=1.0, tight=False):
@@ -354,6 +374,8 @@ def render(sample: C.Sample, plan: dict):
             s = ow / w0
             hands = {sd: (uv[sd][i] - [x0, y0]) * s for sd in C.SIDES
                      if state[sd][i] != C.NONE and np.isfinite(uv[sd][i]).all()}
+            if sample.n in PAPER_SAMPLES:
+                blur_paper(img, s)
             if sample.n in FOCUS_SAMPLES:
                 focus_hands(img, list(hands.values()), s, tight=sample.n in TIGHT_FOCUS)
             for sd, P in hands.items():
