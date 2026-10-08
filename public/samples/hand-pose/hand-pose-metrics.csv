@@ -2,7 +2,7 @@ sample,title,skill_group,duration_s,frames,left_pose_pct,right_pose_pct,left_mea
 hand-pose-01,Cutting and washing,Cleaning & Sanitation,79.2,2376,99.9,98.4,2351,23,0,2,2213,124,0,39,96.9,3.1,0.0,0.1,1,39,yes
 hand-pose-02,Engine cleaning,Cleaning & Sanitation,71.7,2151,98.3,86.6,2049,66,3,33,1798,65,0,288,96.7,3.3,0.2,0.2,19,206,yes
 hand-pose-03,Cart clearing,Cleaning & Sanitation,120.0,3600,71.3,64.0,2166,400,4,1030,2043,260,11,1286,86.4,13.6,2.2,2.5,285,331,yes
-hand-pose-04,Hair washing,Healthcare & Caregiving,203.7,6112,96.7,91.9,5510,401,34,167,5248,368,32,464,93.3,6.7,0.8,0.6,50,132,no
+hand-pose-04,Hair washing,Healthcare & Caregiving,203.7,6112,96.7,91.9,5510,401,34,167,5248,368,32,464,93.3,6.7,0.8,0.6,50,132,yes
 hand-pose-05,Trash disposing,Cleaning & Sanitation,64.7,1941,64.5,77.0,1088,164,8,681,1362,133,4,442,89.2,10.8,2.3,1.5,109,107,yes
 hand-pose-06,Notebook writing,Tool Use & Technical Manipulation,75.5,2266,78.2,82.3,1659,113,8,486,1793,72,8,393,94.9,5.1,4.4,0.3,86,150,yes
 hand-pose-07,Wire untangling,Tool Use & Technical Manipulation,95.6,2868,83.1,82.4,2039,345,2,482,2195,167,6,500,89.2,10.8,1.0,1.6,88,100,yes

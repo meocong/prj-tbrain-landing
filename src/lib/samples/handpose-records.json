@@ -223,7 +223,7 @@
     "job": null,
     "telemetry": false,
     "durationSec": 203.7,
-    "resolution": "No public video",
+    "resolution": "540 x 540 camera video, hand pose overlay",
     "fps": 30,
     "streams": [
       "21 joints per hand, in metres",
@@ -246,7 +246,7 @@
       ],
       [
         "Preview",
-        "Preview on request"
+        "Video preview"
       ]
     ],
     "breadcrumb": [

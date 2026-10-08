@@ -245,7 +245,7 @@ def check_headline(agg: dict) -> None:
         check(agg[key] == want, f"headline {key}: computed {agg[key]!r}, published {want!r}")
     for key, want in POSE_EXPECTED.items():
         check(agg["pose"][key] == want, f"per-hand coverage {key}: computed {agg['pose'][key]!r}, expected {want!r}")
-    check(agg["preview"] == {"video": 15, "poster": 0, "lane": 1}, f"preview tiers are {agg['preview']}")
+    check(agg["preview"] == {"video": 16, "poster": 0, "lane": 0}, f"preview tiers are {agg['preview']}")
 
 
 def build_csv(docs: list[dict], gap: str) -> str:

@@ -53,8 +53,14 @@ HOLD = 8              # frames a blur region is kept either side of a detection
 FACE_EVERY = 2        # faces on every 2nd frame (at 720p), people on every 6th: HOLD (8) still spans
 PEOPLE_EVERY = 6      # each gap, and detection drops from ~0.54 s to ~0.1 s a frame (YOLOX is 0.4 s)
 FACE_SCALE = 2 / 3    # YuNet runs on a 1280x720 copy; a face too small to find there is unreadable
-FACE_GROW = 1.9
-PERSON_TOP = 0.5      # share of a bystander's box, from the top, that is blurred
+FACE_GROW = 1.5
+FACE_SURE = 0.85     # a face over the wearer's hands is blurred only at this score (a customer's face
+                     # under them is real; a hand or a bag read as a face is not)
+# Samples where another person's face lies upside down under the wearer's hands (04: a
+# customer at a hair-washing basin). Faces there are also searched for on the frame turned
+# 180 degrees, where they score high, and blurred whatever hands are over them.
+UPSIDE_DOWN_FACES = {4}
+HEAD_TOP = 0.22       # a bystander's head: this share of their box, from the top, middle 60% wide
 SMOOTH_SIGMA = 18.0   # frames; the crop drifts with the hands instead of jumping
 LOOP_FRAMES = 150     # 5 s card and hero loops
 XFADE = 0     # camera footage loops on a hard cut; a dissolve double-exposes moving hands
@@ -69,7 +75,7 @@ CROP_SIDE, VIDEO_SIDE, CARD_W, CARD_H, HERO_W, HERO_H = 720, 540, 640, 480, 1280
 class Detectors:
     def __init__(self, w: int, h: int):
         self.face = cv2.FaceDetectorYN.create(
-            str(MODELS / "yunet.onnx"), "", (round(w * FACE_SCALE), round(h * FACE_SCALE)), 0.45, 0.3, 5000)
+            str(MODELS / "yunet.onnx"), "", (round(w * FACE_SCALE), round(h * FACE_SCALE)), 0.6, 0.3, 5000)
         self.net = cv2.dnn.readNet(str(MODELS / "yolox_s.onnx"))
         s = 640
         grids, strides = [], []
@@ -80,12 +86,22 @@ class Detectors:
             strides.append(np.full((g * g, 1), st))
         self.grids, self.strides = np.concatenate(grids), np.concatenate(strides)
 
-    def faces(self, im) -> list[tuple[int, int, int, int]]:
+    def faces(self, im, upside_down=False) -> list[tuple[tuple[int, int, int, int], float]]:
+        """(box, score) per face. `upside_down` also runs on the frame turned 180 degrees, for a
+        face lying head-first towards the camera, which YuNet scores low the right way up."""
         small = cv2.resize(im, None, fx=FACE_SCALE, fy=FACE_SCALE, interpolation=cv2.INTER_AREA)
         _, f = self.face.detect(small)
-        return [] if f is None else [tuple(int(v / FACE_SCALE) for v in x[:4]) for x in f]
+        out = [] if f is None else [(tuple(int(v / FACE_SCALE) for v in x[:4]), float(x[14])) for x in f]
+        if upside_down:
+            sh, sw = small.shape[:2]
+            _, g = self.face.detect(cv2.rotate(small, cv2.ROTATE_180))
+            for x in [] if g is None else g:
+                bx, by, bw, bh = x[:4]
+                box = (sw - bx - bw, sh - by - bh, bw, bh)  # back to the frame the right way up
+                out.append((tuple(int(v / FACE_SCALE) for v in box), float(x[14])))
+        return out
 
-    def people(self, im, conf=0.3) -> list[tuple[int, int, int, int]]:
+    def people(self, im, conf=0.5) -> list[tuple[int, int, int, int]]:
         h, w = im.shape[:2]
         s = 640
         r = min(s / h, s / w)
@@ -129,20 +145,20 @@ def blur_regions(im, regions):
         im[y0:y1, x0:x1] = cv2.GaussianBlur(roi, (k, k), 0)
 
 
-# Samples where the scene itself could identify a person or a place: 06, a production notebook
-# with handwritten dates and tallies; 11, a restaurant with other people at the next table;
-# 12 and 15, a hotel bathroom whose mirrors show the wearer's uniform. Everything but a feathered
-# zone round the hands is blurred, so the hands and what they hold stay sharp and the rest does not.
-FOCUS_SAMPLES = {6, 11, 12, 15, 16}
-# Where the private text is under the hands themselves (06: the pen is on the page), the sharp
-# zone is the hand and a few pixels round it, not the room to work in.
-TIGHT_FOCUS = {6}
+# Scene blurs, all OFF. The published previews blur faces and bystanders' heads only: blurring
+# the scene as well (everything away from the hands on 06, 11, 12, 15, 16; paper on 16; a phone
+# screen on 03) made them useless as samples, and the product owner chose sharp footage
+# (2026-10-08). The tools stay for a sample that ever needs one; add its number to turn it on.
+#
+# Focus: everything but a feathered zone round the hands blurred. Tight: the zone is the hand
+# itself, for private text under the pen.
+FOCUS_SAMPLES: set[int] = set()
+TIGHT_FOCUS: set[int] = set()
 
 
-# Spans, in seconds of the sample, where a phone screen is held between the hands (03: a lock
-# screen with the time and notifications). The box round both hands, grown by half, is blurred
-# for the whole span; the hand pose is drawn over it afterwards, so the motion still shows.
-SCREEN_SPANS = {3: [(59.0, 66.0)]}
+# Spans, in seconds of the sample, where a phone screen is held between the hands: the box round
+# both hands, grown by half, is blurred; the hand pose is drawn over it afterwards.
+SCREEN_SPANS: dict[int, list[tuple[float, float]]] = {}
 
 
 def screen_box(pts_by_side, w, h):
@@ -157,10 +173,9 @@ def screen_box(pts_by_side, w, h):
     return [(x0, y0, x1 - x0, y1 - y0)]
 
 
-# Samples whose work object carries print (16: cards printed with a business name, cut in the
-# hands). Light, unsaturated paper is found by colour, its dark print closed into it, and the
-# whole sheet blurred in every view, including where it sits between the fingers.
-PAPER_SAMPLES = {16}
+# Samples whose work object carries print: light, unsaturated paper is found by colour, its dark
+# print closed into it, and the whole sheet blurred in every view.
+PAPER_SAMPLES: set[int] = set()
 
 
 def blur_paper(im, s=1.0):
@@ -336,7 +351,9 @@ def render(sample: C.Sample, plan: dict):
         C.check(ok, f"{slug}: could not decode frame {i}")
         wearer = np.concatenate([uv[s][i] for s in C.SIDES if np.isfinite(uv[s][i]).all()] or [np.zeros((0, 2))])
         if i % FACE_EVERY == 0:
-            for f in det.faces(im):
+            for f, score in det.faces(im, upside_down=sample.n in UPSIDE_DOWN_FACES):
+                if score < FACE_SURE and sample.n not in UPSIDE_DOWN_FACES and len(wearer) and contains_any(f, wearer, need=2):
+                    continue
                 regions[i].append(grow(f, FACE_GROW))
         for p in (det.people(im) if i % PEOPLE_EVERY == 0 else []):
             # The wearer is in every frame of a head-worn camera: their arms hold the hand
@@ -347,7 +364,7 @@ def render(sample: C.Sample, plan: dict):
             if p[1] + p[3] > 0.92 * H:
                 continue
             x, y, w, h = p
-            regions[i].append((x - w // 10, y - h // 20, int(w * 1.2), int(h * PERSON_TOP)))
+            regions[i].append((x + w // 5, y - h // 40, int(w * 0.6), int(h * HEAD_TOP)))
         if i % 300 == 0:
             print(f"{slug}: detected {i}/{frames}", flush=True)
     held = [sum(regions[max(0, i - HOLD): i + HOLD + 1], []) for i in range(frames)]
@@ -414,7 +431,9 @@ def render(sample: C.Sample, plan: dict):
     n = write_loop(C.media_file("loop", slug), card_frames, CARD_W, CARD_H, 27)
     if hero:
         write_loop(C.HP_DIR / "hero-13.mp4", hero_frames, HERO_W, HERO_H, 27)
-        first = cv2.addWeighted(hero_frames[0], 0.0, hero_frames[n], 1.0, 0)  # frame 0 of the loop as written
+        # Frame 0 of the loop as written: with a dissolve that is the first frame blended with the
+        # one after the loop; with none (XFADE 0) it is simply the first.
+        first = hero_frames[0] if not XFADE else cv2.addWeighted(hero_frames[0], 0.0, hero_frames[n], 1.0, 0)
         jpeg(C.HP_DIR / "hero-13.jpg", first, 84)
         jpeg(C.HP_DIR / "hero.jpg", cv2.resize(first, (1600, 900), interpolation=cv2.INTER_CUBIC), 84)
         og = cv2.resize(first, (1200, 675), interpolation=cv2.INTER_AREA)[22:652]

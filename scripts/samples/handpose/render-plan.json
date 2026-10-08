@@ -196,6 +196,15 @@
       },
       "posterFrame": 626,
       "note": "camera video with the 2D hand pose drawn over it; faces and bystanders blurred"
+    },
+    "hand-pose-04": {
+      "loop": {
+        "start": 1787,
+        "frames": 150,
+        "crossfadeFrames": 0
+      },
+      "posterFrame": 1862,
+      "note": "camera video with the 2D hand pose drawn over it; faces and bystanders blurred"
     }
   },
   "hero": {

@@ -63,9 +63,9 @@
       "below80": 7
     },
     "preview": {
-      "video": 15,
+      "video": 16,
       "poster": 0,
-      "lane": 1
+      "lane": 0
     }
   },
   "samples": [
@@ -248,17 +248,21 @@
       "guessedOfDeliveredPct": 6.7,
       "minPosePct": 91.9,
       "bothHandsBand": "80-95",
-      "preview": "lane",
+      "preview": "video",
       "pack": false,
       "media": {
-        "poster": null,
-        "still": null,
-        "loop": null,
-        "video": null,
-        "videoSeconds": null
+        "poster": "/samples/posters/hand-pose-04.jpg",
+        "still": "/samples/hand-pose/stills/hand-pose-04.jpg",
+        "loop": "/samples/clips/hand-pose-04.mp4",
+        "video": "/samples/hand-pose/video/hand-pose-04.mp4",
+        "videoSeconds": 203.7
       },
-      "loop": null,
-      "posterFrame": null,
+      "loop": {
+        "start": 1787,
+        "frames": 150,
+        "crossfadeFrames": 0
+      },
+      "posterFrame": 1862,
       "lane": "/samples/hand-pose/lanes/hand-pose-04.json",
       "strip": {
         "left": "11111110011111112022111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111112211111111111121102111111111111111111111111111111111111110011111111111111111111111111",
