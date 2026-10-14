@@ -12,6 +12,7 @@ import type { CmsPost } from "@/lib/admin/types";
 import { BLOG_PROSE_CLASS } from "@/lib/blog-prose";
 import ShareButtons from "@/components/blog/ShareButtons";
 import PostCTA from "@/components/blog/PostCTA";
+import { previewPost, previewPosts } from "@/lib/blog-preview";
 
 // ISR: cache rendered post for 5 minutes; admin edits surface within that window.
 export const revalidate = 300;
@@ -19,6 +20,7 @@ export const revalidate = 300;
 // Pre-render the most-recent published posts at build time so the first hit is
 // already cached. Older posts fall back to on-demand ISR.
 export async function generateStaticParams() {
+  const previews = previewPosts().map((p) => ({ slug: p.slug }));
   try {
     const db = supabaseAdmin();
     const { data } = await db
@@ -27,9 +29,9 @@ export async function generateStaticParams() {
       .eq("status", "published")
       .order("published_at", { ascending: false, nullsFirst: false })
       .limit(20);
-    return (data ?? []).map((p: { slug: string }) => ({ slug: p.slug }));
+    return [...previews, ...(data ?? []).map((p: { slug: string }) => ({ slug: p.slug }))];
   } catch {
-    return [];
+    return previews;
   }
 }
 
@@ -39,19 +41,21 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const db = supabaseAdmin();
-  const { data: post } = await db
-    .from("cms_posts")
-    .select("title, seo_title, seo_description, excerpt, og_image_url")
-    .eq("slug", slug)
-    .eq("status", "published")
-    .maybeSingle();
+  const preview = previewPost(slug);
+  const post = preview
+    ?? (await supabaseAdmin()
+      .from("cms_posts")
+      .select("title, seo_title, seo_description, excerpt, og_image_url")
+      .eq("slug", slug)
+      .eq("status", "published")
+      .maybeSingle()).data;
 
   if (!post) return { title: "Post Not Found" };
 
   return {
     title: post.seo_title || post.title,
     description: post.seo_description || post.excerpt || undefined,
+    ...(preview && { robots: { index: false, follow: false } }),
     alternates: { canonical: `/blog/${slug}` },
     openGraph: {
       type: "article",
@@ -75,19 +79,23 @@ export default async function BlogPostPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const db = supabaseAdmin();
+  // A post under review on staging renders from its repo copy and never touches the CMS.
+  const preview = previewPost(slug);
+  const db = preview ? null : supabaseAdmin();
 
-  const { data: post } = await db
-    .from("cms_posts")
-    .select("*")
-    .eq("slug", slug)
-    .eq("status", "published")
-    .maybeSingle<CmsPost>();
+  const post = db
+    ? (await db
+      .from("cms_posts")
+      .select("*")
+      .eq("slug", slug)
+      .eq("status", "published")
+      .maybeSingle<CmsPost>()).data
+    : preview;
 
   if (!post) notFound();
 
   // Increment view count (fire-and-forget)
-  db.from("cms_posts")
+  db?.from("cms_posts")
     .update({ view_count: (post.view_count || 0) + 1 })
     .eq("id", post.id)
     .then(() => {});
@@ -99,13 +107,15 @@ export default async function BlogPostPage({
 
   // Pull a pool of candidates and rank by category/tag overlap, falling back to recency,
   // so "related" favors relevance over just "newest".
-  const { data: candidatesRaw } = await db
-    .from("cms_posts")
-    .select("id, slug, title, excerpt, cover_image_url, category, tags, published_at, created_at")
-    .eq("status", "published")
-    .neq("id", post.id)
-    .order("published_at", { ascending: false, nullsFirst: false })
-    .limit(60);
+  const { data: candidatesRaw } = db
+    ? await db
+      .from("cms_posts")
+      .select("id, slug, title, excerpt, cover_image_url, category, tags, published_at, created_at")
+      .eq("status", "published")
+      .neq("id", post.id)
+      .order("published_at", { ascending: false, nullsFirst: false })
+      .limit(60)
+    : { data: [] };
 
   const postTags = new Set((post.tags ?? []).map((t) => t.toLowerCase()));
   const related = (candidatesRaw ?? [])

@@ -5,6 +5,7 @@ import { supabaseAdmin } from "@/lib/terminal-bench/supabase/admin";
 import Link from "next/link";
 import Image from "next/image";
 import type { CmsPost } from "@/lib/admin/types";
+import { previewPosts } from "@/lib/blog-preview";
 import { Clock, ArrowRight } from "lucide-react";
 
 export const metadata: Metadata = {
@@ -43,6 +44,18 @@ function estimateReadTime(text: string): string {
   return `${Math.max(1, Math.ceil(words / 200))} min read`;
 }
 
+function toBlogPost(p: CmsPost): BlogPost {
+  return {
+    title: p.title,
+    slug: p.slug,
+    excerpt: p.excerpt || (p.content_md?.slice(0, 200).replace(/[#*_\[\]]/g, "") + "…") || "",
+    date: p.published_at || p.created_at,
+    image: p.cover_image_url || "/images/blog-rlhf.jpg",
+    category: p.category,
+    readTime: p.content_md ? estimateReadTime(p.content_md) : "5 min read",
+  };
+}
+
 const POSTS_PER_PAGE = 6;
 
 export default async function BlogPage({
@@ -65,17 +78,12 @@ export default async function BlogPage({
       .limit(60);
 
     if (cmsPosts) {
-      posts = cmsPosts.map((p: CmsPost) => ({
-        title: p.title,
-        slug: p.slug,
-        excerpt: p.excerpt || (p.content_md?.slice(0, 200).replace(/[#*_\[\]]/g, "") + "…") || "",
-        date: p.published_at || p.created_at,
-        image: p.cover_image_url || "/images/blog-rlhf.jpg",
-        category: p.category,
-        readTime: p.content_md ? estimateReadTime(p.content_md) : "5 min read",
-      }));
+      posts = cmsPosts.map(toBlogPost);
     }
   } catch { /* DB unavailable */ }
+
+  // Posts under review lead the list on staging; empty everywhere else.
+  posts = [...previewPosts().map(toBlogPost), ...posts];
 
   const allCategories = Array.from(
     new Set(posts.map((p) => p.category).filter((c): c is string => !!c))

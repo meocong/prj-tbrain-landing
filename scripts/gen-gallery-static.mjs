@@ -11,6 +11,8 @@ const IMG_DIR = join(ROOT, "public", "images");
 const OUT = join(ROOT, "src", "lib", "admin", "gallery-static.ts");
 
 const ALLOWED = new Set([".jpg", ".jpeg", ".png", ".webp", ".svg", ".gif"]);
+// Staging-only copies of blog posts under review (src/lib/blog-preview), not library images.
+const SKIP_DIRS = new Set(["blog-preview"]);
 
 function listFiles(dir, rel = "") {
   const out = [];
@@ -21,6 +23,7 @@ function listFiles(dir, rel = "") {
     let stats;
     try { stats = statSync(full); } catch { continue; }
     if (stats.isDirectory()) {
+      if (!rel && SKIP_DIRS.has(name)) continue;
       out.push(...listFiles(full, join(rel, name)));
     } else if (stats.isFile() && ALLOWED.has(extname(name).toLowerCase())) {
       out.push({

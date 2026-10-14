@@ -15,9 +15,19 @@ const HAND_POSE_ON =
   process.env.VERCEL_ENV !== "production" &&
   (process.env.VERCEL_ENV === "preview" || process.env.SHOW_HAND_POSE === "1");
 
+/**
+ * Blog posts under review (`src/lib/blog-preview`): staging has no CMS database,
+ * so it renders them from a repo copy. Same fail-closed rule as hand pose, with
+ * SHOW_BLOG_PREVIEW=1 for local builds.
+ */
+const BLOG_PREVIEW_ON =
+  process.env.VERCEL_ENV !== "production" &&
+  (process.env.VERCEL_ENV === "preview" || process.env.SHOW_BLOG_PREVIEW === "1");
+
 const nextConfig: NextConfig = {
   env: {
     HAND_POSE_ON: HAND_POSE_ON ? "1" : "",
+    BLOG_PREVIEW_ON: BLOG_PREVIEW_ON ? "1" : "",
   },
   images: {
     remotePatterns: [
@@ -40,13 +50,19 @@ const nextConfig: NextConfig = {
     ],
   },
   async redirects() {
-    if (HAND_POSE_ON) return [];
-    // With hand pose off, its static media would still be served from
+    // With a switch off, its static media would still be served from
     // `public/` by URL guess; redirects run before the filesystem does.
     return [
-      { source: "/samples/hand-pose/:path*", destination: "/samples", permanent: false },
-      { source: "/samples/clips/hand-pose-:rest", destination: "/samples", permanent: false },
-      { source: "/samples/posters/hand-pose-:rest", destination: "/samples", permanent: false },
+      ...(HAND_POSE_ON
+        ? []
+        : [
+            { source: "/samples/hand-pose/:path*", destination: "/samples", permanent: false },
+            { source: "/samples/clips/hand-pose-:rest", destination: "/samples", permanent: false },
+            { source: "/samples/posters/hand-pose-:rest", destination: "/samples", permanent: false },
+          ]),
+      ...(BLOG_PREVIEW_ON
+        ? []
+        : [{ source: "/images/blog-preview/:path*", destination: "/blog", permanent: false }]),
     ];
   },
   async headers() {
