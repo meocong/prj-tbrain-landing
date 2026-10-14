@@ -9,6 +9,9 @@ import Link from "next/link";
 import Image from "next/image";
 import { ArrowLeft, Calendar, Tag } from "lucide-react";
 import type { CmsPost } from "@/lib/admin/types";
+import { BLOG_PROSE_CLASS } from "@/lib/blog-prose";
+import ShareButtons from "@/components/blog/ShareButtons";
+import PostCTA from "@/components/blog/PostCTA";
 
 // ISR: cache rendered post for 5 minutes; admin edits surface within that window.
 export const revalidate = 300;
@@ -94,14 +97,33 @@ export default async function BlogPostPage({
     Math.ceil((post.content_md?.split(/\s+/).length || 0) / 200)
   );
 
-  const { data: relatedRaw } = await db
+  // Pull a pool of candidates and rank by category/tag overlap, falling back to recency,
+  // so "related" favors relevance over just "newest".
+  const { data: candidatesRaw } = await db
     .from("cms_posts")
-    .select("id, slug, title, excerpt, cover_image_url, category, published_at, created_at")
+    .select("id, slug, title, excerpt, cover_image_url, category, tags, published_at, created_at")
     .eq("status", "published")
     .neq("id", post.id)
     .order("published_at", { ascending: false, nullsFirst: false })
-    .limit(4);
-  const related = (relatedRaw ?? []).slice(0, 3);
+    .limit(60);
+
+  const postTags = new Set((post.tags ?? []).map((t) => t.toLowerCase()));
+  const related = (candidatesRaw ?? [])
+    .map((c) => {
+      let score = 0;
+      if (post.category && c.category && c.category.toLowerCase() === post.category.toLowerCase()) {
+        score += 10;
+      }
+      score += (c.tags ?? []).filter((t: string) => postTags.has(t.toLowerCase())).length * 2;
+      return { ...c, score };
+    })
+    .sort((a, b) => {
+      if (b.score !== a.score) return b.score - a.score;
+      const aTime = new Date(a.published_at || a.created_at).getTime();
+      const bTime = new Date(b.published_at || b.created_at).getTime();
+      return bTime - aTime;
+    })
+    .slice(0, 3);
 
   const baseUrl = process.env.PUBLIC_BASE_URL || "https://tbrain.ai";
   const articleJsonLd = {
@@ -192,11 +214,9 @@ export default async function BlogPostPage({
               </p>
             )}
 
-            {post.author_name && (
-              <p className="mt-3 text-sm" style={{ color: "var(--text-muted)" }}>
-                By {post.author_name}
-              </p>
-            )}
+            <p className="mt-3 text-sm" style={{ color: "var(--text-muted)" }}>
+              By {post.author_name || "Tbrain Team"}
+            </p>
           </header>
 
           {/* Cover image */}
@@ -216,7 +236,7 @@ export default async function BlogPostPage({
           {/* Content — render HTML */}
           {(post.content_html || post.content_md) && (
             <div
-              className="prose prose-lg mt-12 max-w-none prose-headings:font-bold prose-headings:tracking-tight prose-h2:text-[26px] prose-h2:mt-12 prose-h2:mb-4 prose-h3:text-[20px] prose-h3:mt-8 prose-p:text-[18px] prose-p:leading-[1.8] prose-p:text-[#374151] prose-li:text-[18px] prose-li:leading-[1.8] prose-a:text-[#6C3CF4] prose-img:rounded-xl prose-img:my-8 prose-blockquote:border-l-[#6C3CF4] prose-blockquote:text-[#6b7280] prose-blockquote:italic"
+              className={BLOG_PROSE_CLASS}
               dangerouslySetInnerHTML={{ __html: post.content_html || post.content_md || "" }}
             />
           )}
@@ -236,6 +256,10 @@ export default async function BlogPostPage({
               ))}
             </div>
           )}
+
+          <ShareButtons url={`${baseUrl}/blog/${post.slug}`} title={post.title} />
+
+          <PostCTA category={post.category} />
         </article>
 
         {related.length > 0 && (
@@ -292,6 +316,11 @@ export default async function BlogPostPage({
                     <h3 className="text-base md:text-lg font-semibold text-[#0e1b2e] leading-snug line-clamp-2 group-hover:text-[#6C3CF4] transition-colors">
                       {r.title}
                     </h3>
+                    {r.excerpt && (
+                      <p className="mt-2 text-sm leading-relaxed line-clamp-2" style={{ color: "var(--text-muted)" }}>
+                        {r.excerpt}
+                      </p>
+                    )}
                   </div>
                 </Link>
               ))}
