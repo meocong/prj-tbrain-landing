@@ -178,8 +178,18 @@ html.dark .rs-island {
   .rs-btn-solid { forced-color-adjust: none; background: ButtonText; color: ButtonFace; }
 }
 
+/* Focus: one visible ring for the whole page (the site default is a
+   half-alpha violet that disappears on the dark contact island). */
+.bp-chrome :is(a, button, [tabindex]):focus-visible {
+  outline: 2px solid var(--bp-ink);
+  outline-offset: 3px;
+  box-shadow: 0 0 0 5px color-mix(in srgb, var(--bp-cyan) 35%, transparent);
+}
+.rs-thumb:focus-visible { outline: 2px solid var(--bp-ink) !important; outline-offset: 2px !important; }
+
 /* ── Reduced motion / header pause: still, fully visible ─────────── */
 @media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto !important; }
   .rs-reveal { opacity: 1 !important; transform: none !important; transition: none !important; animation: none !important; }
   .rs-track { transform: none !important; transition: none !important; }
   .rs-rise { animation: none !important; }
@@ -187,6 +197,7 @@ html.dark .rs-island {
   .rs-q:hover, .rs-q:focus-within, .rs-lift:hover, .rs-btn:hover { transform: none !important; }
   .rs-q .rs-glyph :is(path, line, polyline, rect, circle, ellipse) { animation: none !important; }
 }
+html.motion-paused { scroll-behavior: auto !important; }
 html.motion-paused .rs-reveal { opacity: 1 !important; transform: none !important; transition: none !important; animation: none !important; }
 html.motion-paused .rs-track { transform: none !important; transition: none !important; }
 html.motion-paused .rs-rise { animation: none !important; opacity: 1 !important; transform: none !important; }

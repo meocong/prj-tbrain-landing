@@ -40,7 +40,15 @@ export function CountFigure({ value, prefix = "", suffix = "", className, style 
       { threshold: 0.6 }
     );
     io.observe(el);
+    // Print / save-as-PDF must never catch a figure still parked at 0.
+    const onPrint = () => {
+      io.disconnect();
+      stop?.();
+      el.textContent = fmt(value);
+    };
+    window.addEventListener("beforeprint", onPrint);
     return () => {
+      window.removeEventListener("beforeprint", onPrint);
       io.disconnect();
       stop?.();
       el.textContent = fmt(value);

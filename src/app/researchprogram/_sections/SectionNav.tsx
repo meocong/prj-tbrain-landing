@@ -7,6 +7,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Mail } from "lucide-react";
 import { CONTACT, MAIL_SUBJECT } from "@/lib/landing/research";
+import { prefersReducedMotion } from "@/lib/motion-pref";
 import { mailto } from "./ui";
 
 export interface NavItem {
@@ -53,7 +54,7 @@ export function SectionNav({ items }: { items: NavItem[] }) {
     const ul = listRef.current;
     const a = active ? ul?.querySelector<HTMLElement>(`a[href="#${active}"]`) : null;
     if (!ul || !a || ul.scrollWidth <= ul.clientWidth) return;
-    ul.scrollTo({ left: a.offsetLeft - ul.clientWidth / 2 + a.clientWidth / 2, behavior: "smooth" });
+    ul.scrollTo({ left: a.offsetLeft - ul.clientWidth / 2 + a.clientWidth / 2, behavior: prefersReducedMotion() ? "auto" : "smooth" });
   }, [active]);
 
   return (

@@ -11,7 +11,7 @@ const GLANCE: { k: string; v: string }[] = [
   { k: "Data", v: `${OFFER.data.figures[0].display} hours · egocentric` },
   { k: "Collection", v: "Free for academic research" },
   { k: "Formats", v: OFFER.formats.names.join(" · ") },
-  { k: "Results", v: "Published openly" },
+  { k: "Results", v: "Expected to be published openly" },
 ];
 
 export function ResearchHero() {

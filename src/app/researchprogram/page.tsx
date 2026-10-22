@@ -46,7 +46,7 @@ const JSONLD = {
   description: DESCRIPTION,
   url: `${BASE_URL}/researchprogram`,
   publisher: { "@type": "Organization", name: "Tbrain", url: BASE_URL, description: ABOUT.body },
-  contactPoint: { "@type": "ContactPoint", name: CONTACT.person.name, email: CONTACT.person.email, contactType: "academic partnerships" },
+  contactPoint: { "@type": "ContactPoint", name: CONTACT.person.name, email: CONTACT.person.email, contactType: RESEARCH_HERO.program },
 };
 
 const NAV = [

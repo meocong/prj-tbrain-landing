@@ -26,7 +26,13 @@ function fmt(t: number) {
 }
 
 export function CaptureReel() {
-  const reduce = useReducedMotion();
+  /* The server cannot know the reader's motion setting, so the first client
+     render must match it (video branch); the real preference applies after
+     mount. Otherwise reduced-motion readers get a hydration mismatch. */
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+  const prefersReduced = useReducedMotion();
+  const reduce = mounted && prefersReduced;
   const [idx, setIdx] = useState(0);
   const [inView, setInView] = useState(false);
   const wrapRef = useRef<HTMLDivElement>(null);
@@ -154,13 +160,12 @@ export function CaptureReel() {
                 key={c.key}
                 type="button"
                 onClick={() => setIdx(i)}
-                aria-pressed={on}
+                aria-current={on ? "true" : undefined}
                 aria-label={`Show ${c.name}`}
-                className="group relative block overflow-hidden text-left"
+                className="rs-thumb group relative block overflow-hidden text-left"
                 style={{
                   borderRadius: 8,
-                  outline: on ? "2px solid var(--bp-cyan)" : "1px solid var(--bp-line)",
-                  outlineOffset: on ? 1 : 0,
+                  boxShadow: on ? "0 0 0 2px var(--bp-cyan)" : "0 0 0 1px var(--bp-line)",
                 }}
               >
                 {/* eslint-disable-next-line @next/next/no-img-element */}

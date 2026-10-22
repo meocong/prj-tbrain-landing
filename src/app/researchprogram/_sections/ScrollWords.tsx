@@ -55,7 +55,8 @@ export function ScrollWords({ parts, className, style }: { parts: WordsPart[]; c
 }
 
 function Word({ children, progress, range, color }: { children: React.ReactNode; progress: MotionValue<number>; range: [number, number]; color: string }) {
-  const opacity = useTransform(progress, range, [0.16, 1]);
+  // Floor of 0.42 keeps un-inked words above 3:1 against the page.
+  const opacity = useTransform(progress, range, [0.42, 1]);
   return (
     <motion.span style={{ opacity, color }}>
       {children}
