@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { ArrowRight, Mail } from "lucide-react";
 import { RESEARCH_HERO, CONTACT, OFFER, MAIL_SUBJECT } from "@/lib/landing/research";
-import { CaptureReel } from "./CaptureReel";
+import { ResearchFigure } from "./ResearchFigure";
 import { Container, Rise, mailto } from "./ui";
 
 /* The program at a glance — each value is a phrase lifted from the brief,
@@ -103,7 +103,7 @@ export function ResearchHero() {
 
           <div className="lg:col-span-5">
             <Rise i={2} y={28}>
-              <CaptureReel />
+              <ResearchFigure />
             </Rise>
           </div>
         </div>

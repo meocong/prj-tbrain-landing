@@ -185,7 +185,6 @@ html.dark .rs-island {
   outline-offset: 3px;
   box-shadow: 0 0 0 5px color-mix(in srgb, var(--bp-cyan) 35%, transparent);
 }
-.rs-thumb:focus-visible { outline: 2px solid var(--bp-ink) !important; outline-offset: 2px !important; }
 
 /* ── Reduced motion / header pause: still, fully visible ─────────── */
 @media (prefers-reduced-motion: reduce) {

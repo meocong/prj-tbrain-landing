@@ -11,7 +11,7 @@ export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
 export default async function OpengraphImage() {
-  const still = await readFile(join(process.cwd(), "public/images/env/may_san_pham-poster.jpg"));
+  const still = await readFile(join(process.cwd(), "public/images/research/iron_01-annotated.jpg"));
   const stillSrc = `data:image/jpeg;base64,${still.toString("base64")}`;
   const gridLine = "rgba(20,22,30,0.06)";
 
@@ -81,7 +81,7 @@ export default async function OpengraphImage() {
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src={stillSrc} alt="" width={420} height={440} style={{ width: "100%", height: 440, objectFit: "cover", borderRadius: 14 }} />
             <div style={{ display: "flex", marginTop: 12, padding: "0 4px 2px", fontSize: 14, letterSpacing: 2, color: "#656A72", textTransform: "uppercase" }}>
-              FIG.01 · egocentric · factory floor
+              FIG.01 · 3D hands + object mask
             </div>
           </div>
         </div>
