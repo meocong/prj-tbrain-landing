@@ -11,7 +11,6 @@ import { Questions } from "./_sections/Questions";
 import { Offer } from "./_sections/Offer";
 import { Collaboration } from "./_sections/Collaboration";
 import { Contact } from "./_sections/Contact";
-import { AboutBand } from "./_sections/AboutBand";
 import { RevealObserver, RS_JS_INIT } from "./_sections/motion";
 import { TrackClicks } from "./_sections/TrackClicks";
 
@@ -77,7 +76,6 @@ export default function ResearchProgramPage() {
         <Offer />
         <Collaboration />
         <Contact />
-        <AboutBand />
       </main>
       <Footer />
     </div>

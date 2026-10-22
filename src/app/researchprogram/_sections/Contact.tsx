@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Mail } from "lucide-react";
-import { CONTACT, MAIL_SUBJECT } from "@/lib/landing/research";
+import { ABOUT, CONTACT, MAIL_SUBJECT } from "@/lib/landing/research";
 import { CopyEmail } from "./CopyEmail";
 import { Reveal } from "./motion";
 import { Container, H2, SECTION_PAD, SectionMark, mailto } from "./ui";
@@ -133,6 +133,20 @@ export function Contact() {
             </Reveal>
           </div>
         </div>
+
+        {/* About Tbrain closes the island rather than opening a second
+            paper band above the footer (which repeated the logo). */}
+        <Reveal delay={0.05}>
+          <div id="about" className="mt-16 grid scroll-mt-32 gap-x-16 gap-y-4 lg:mt-20 lg:grid-cols-12" style={{ borderTop: "1px solid var(--bp-line)", paddingTop: 36 }}>
+            <h2 id="about-title" className="bp-mono lg:col-span-5" style={{ fontSize: 11, color: "var(--bp-ink-faint)" }}>{ABOUT.title}</h2>
+            <div className="lg:col-span-7">
+              <p style={{ fontSize: "clamp(16px, 1.3vw, 18px)", lineHeight: 1.65, color: "var(--bp-ink-dim)" }}>{ABOUT.body}</p>
+              <Link href={ABOUT.site.href} className="rs-cite bp-mono mt-4 inline-block" style={{ fontSize: 11.5 }}>
+                {ABOUT.site.display}
+              </Link>
+            </div>
+          </div>
+        </Reveal>
       </Container>
     </section>
   );
