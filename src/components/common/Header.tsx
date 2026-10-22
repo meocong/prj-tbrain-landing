@@ -90,7 +90,7 @@ function heroIsDarkFor(pathname: string): boolean {
  * `/casestudy/` keeps its trailing slash on purpose: the detail page is
  * blueprint, the listing page above it is not.
  */
-const BLUEPRINT_PREFIXES = ["/samples", "/data/physical-ai", "/casestudy/"];
+const BLUEPRINT_PREFIXES = ["/samples", "/data/physical-ai", "/casestudy/", "/researchprogram"];
 const isBlueprintRoute = (pathname: string) =>
   BLUEPRINT_PREFIXES.some(
     (p) => pathname === p || pathname.startsWith(p.endsWith("/") ? p : `${p}/`)

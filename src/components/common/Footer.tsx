@@ -89,6 +89,7 @@ const FOOTER_LINKS = [
   { label: "About", href: "/about" },
   { label: "Platform", href: "/platform" },
   { label: "Case Studies", href: "/casestudy" },
+  { label: "Research Program", href: "/researchprogram" },
   { label: "Contact", href: "/contact" },
   { label: "Privacy Policy", href: "/policy" },
   { label: "Accessibility", href: "/accessibility" },
