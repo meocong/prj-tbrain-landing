@@ -84,33 +84,6 @@
 .rp-btn-secondary { background: var(--rp-bg); color: var(--rp-ink); border: 1px solid var(--rp-line); }
 .rp-btn-secondary:hover { border-color: var(--rp-accent-fill); color: var(--rp-accent); }
 
-/* Figure */
-.rp-stage { aspect-ratio: 4 / 3; }
-@media (min-width: 768px) { .rp-stage { aspect-ratio: 16 / 7; } }
-.rp-figure-panel { border: 1px solid var(--rp-line); border-radius: 0.75rem; overflow: hidden; background: var(--rp-soft); }
-.rp-figure-strip {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  padding: 0.6rem 0.9rem;
-  border-top: 1px solid var(--rp-line);
-  background: var(--rp-bg);
-}
-.rp-play {
-  display: grid;
-  place-items: center;
-  flex-shrink: 0;
-  width: 2rem;
-  height: 2rem;
-  border-radius: 999px;
-  border: 1px solid var(--rp-line);
-  color: var(--rp-ink);
-  background: var(--rp-bg);
-  cursor: pointer;
-}
-.rp-play:hover { border-color: var(--rp-accent-fill); color: var(--rp-accent); }
-.rp-play:disabled { opacity: 0.45; cursor: default; }
-.rp-label { font-size: 0.75rem; color: var(--rp-muted); }
 .rp-caption {
   max-width: 43rem;
   margin: 0.9rem auto 0;
@@ -245,11 +218,11 @@
 html.motion-paused { scroll-behavior: auto !important; }
 
 @media (forced-colors: active) {
-  .rp-btn, .rp-figure-panel, .rp-contact { border: 1px solid CanvasText; }
+  .rp-btn, .rp-contact { border: 1px solid CanvasText; }
 }
 
 @media print {
   header, footer { display: none !important; }
-  .rp-actions, .rp-play { display: none !important; }
+  .rp-actions { display: none !important; }
   .rp { background: #fff; color: #000; }
 }

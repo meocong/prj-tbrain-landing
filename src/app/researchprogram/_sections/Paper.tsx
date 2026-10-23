@@ -3,16 +3,15 @@ import Link from "next/link";
 import { ArrowUpRight, Database, Mail } from "lucide-react";
 import { ABOUT, COLLABORATION, CONTACT, MAIL_SUBJECT, OFFER, QUESTIONS, RESEARCH_HERO, WHY_NOW } from "@/lib/landing/research";
 import { CopyEmail } from "./CopyEmail";
-import { PaperFigure } from "./PaperFigure";
 import { QuestionGlyph } from "./QuestionGlyph";
 import { mailto } from "./ui";
 
 /**
  * /researchprogram, set as an academic project page in Tbrain's own colours
  * (Tam Le, 2026-10-23: Tbrain colours, simple, a little academic — hero
- * included). Title block, a teaser figure with a numbered caption, an
- * abstract, then the brief's sections as one reading column with numbered
- * references. Every sentence is the brief's (src/lib/landing/research.ts);
+ * included). Title block, a four-panel teaser figure with a numbered caption,
+ * an abstract and Table 1, then the brief's sections as one reading column
+ * with numbered references. Every sentence is the brief's (src/lib/landing/research.ts);
  * the page adds only structure: "Figure 1", "Abstract", "References" and the
  * figure caption describing what the figure draws.
  */
@@ -98,13 +97,7 @@ export function PaperHero() {
         </div>
       </div>
 
-      <figure className="rp-col-figure">
-        <PaperFigure />
-        <figcaption className="rp-caption">
-          <b>Figure 1.</b> One recorded demonstration as data. (a) Both hands in 3D from the joint track, 21 joints per hand: solid where the pose was measured,
-          dashed where it was guessed; drag to look around. (b) The state of each hand in every frame of the clip. Joint data only, no camera pixels; scale not shown.
-        </figcaption>
-      </figure>
+      <PipelineFigure />
 
       <div className="rp-col" id="abstract">
         <h2 className="rp-h2">Abstract</h2>
@@ -121,7 +114,7 @@ export function PaperHero() {
   );
 }
 
-/* Figure 2 — one frame of a recorded demonstration and what the pipeline
+/* Figure 1 (the teaser) — one frame of a recorded demonstration and what the pipeline
    derives from it. Same moment in all four panels (frame 225 of the
    arrange_01 clip, matched pixel-for-pixel against the raw frame). Depth is
    the pipeline's monocular estimate, recoloured from its rainbow map to the
@@ -136,19 +129,19 @@ const FIG2: { src: string; sub: string; alt: string }[] = [
   { src: "/research/fig2/annotated.jpg", sub: "(d) Annotated frame", alt: "The frame with hand keypoints and the fabric mask drawn over it" },
 ];
 
-function Figure2() {
+function PipelineFigure() {
   return (
-    <figure className="rp-col-figure rp-fig2" aria-labelledby="fig2-cap">
+    <figure className="rp-col-figure rp-fig2" aria-labelledby="fig1-cap">
       <div className="rp-fig2-grid">
-        {FIG2.map((p) => (
+        {FIG2.map((p, i) => (
           <div key={p.src} className="rp-fig2-cell">
-            <Image src={p.src} alt={p.alt} width={960} height={480} sizes="(min-width: 768px) 540px, 100vw" className="rp-fig2-img" />
+            <Image src={p.src} alt={p.alt} width={960} height={480} sizes="(min-width: 768px) 540px, 100vw" priority={i < 2} className="rp-fig2-img" />
             <div className="rp-fig2-sub">{p.sub}</div>
           </div>
         ))}
       </div>
-      <figcaption id="fig2-cap" className="rp-caption">
-        <b>Figure 2.</b> One frame of a recorded demonstration, arranging fabric at a sewing station, and what we derive from it. (b) is a depth estimate from the
+      <figcaption id="fig1-cap" className="rp-caption">
+        <b>Figure 1.</b> One frame of a recorded demonstration, arranging fabric at a sewing station, and what we derive from it. (b) is a depth estimate from the
         single camera view, not a sensor reading: lighter is nearer; relative depth, no scale. (c) is the 2D hand keypoints and the fabric mask, drawn over a dimmed
         copy of the frame.
       </figcaption>
@@ -160,7 +153,6 @@ export function PaperBody() {
   const [startingPoints, ...rest] = QUESTIONS.note.split(". ");
   const { data, collection, partner, formats } = OFFER;
   return (
-    <>
     <div className="rp-col">
       <Section id="why" title={WHY_NOW.title}>
         <p className="rp-p">
@@ -188,11 +180,7 @@ export function PaperBody() {
           ))}
         </ol>
       </Section>
-    </div>
 
-    <Figure2 />
-
-    <div className="rp-col">
       <Section id="offer" title={OFFER.title}>
         <ul className="rp-list">
           <li>
@@ -275,7 +263,6 @@ export function PaperBody() {
         </ol>
       </section>
     </div>
-    </>
   );
 }
 
