@@ -45,10 +45,11 @@ function Section({ id, title, children }: { id: string; title: string; children:
    (offer, contact audience, collaboration); the table only lines them up. */
 function ProgramTable() {
   const { data, collection, formats } = OFFER;
+  const { hours, tasks, environments } = data.figures;
   const rows: [string, React.ReactNode][] = [
-    ["Egocentric human demonstrations", <span key="h" className="rp-num">{data.figures[0].display} hours</span>],
-    ["Tasks", <span key="t" className="rp-num">about 3,000</span>],
-    ["Real working environments", <><span className="rp-num">70+</span> · {data.places.join(", ")}</>],
+    ["Egocentric human demonstrations", <>{hours.qualifier} <span className="rp-num">{hours.display}</span> {hours.unit}</>],
+    ["Tasks", <>{tasks.qualifier} <span className="rp-num">{tasks.display}</span></>],
+    ["Real working environments", <><span className="rp-num">{environments.display}</span> · {data.places.join(", ")}</>],
     ["Data collection", collection.topic],
     ["Delivery formats", formats.names.join(", ")],
     ["Who we'd love to hear from", sentenceCase(CONTACT.roles.join(", ").replace(", students", " and students"))],

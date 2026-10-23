@@ -83,14 +83,14 @@ export const OFFER = {
   title: "What we offer researchers",
   data: {
     topic: "Real-world data",
-    body: "2,000+ hours of egocentric human demonstrations across about 3,000 tasks and 70+ real working environments, including factories, workshops, kitchens and repair shops.",
-    /* The three figures in `body`, pulled out so they can be set large. Same
-       numbers, same qualifiers ("2,000+", "about", "70+"). */
-    figures: [
-      { n: 2000, prefix: "", suffix: "+", display: "2,000+", unit: "hours", of: "egocentric human demonstrations" },
-      { n: 3000, prefix: "~", suffix: "", display: "~3,000", unit: "tasks", of: "about 3,000 tasks" },
-      { n: 70, prefix: "", suffix: "+", display: "70+", unit: "environments", of: "real working environments" },
-    ],
+    body: "at least 2,000+ hours of egocentric human demonstrations across about 6,000 tasks and 100+ real working environments, including factories, workshops, kitchens and repair shops.",
+    /* The three figures in `body`, pulled out for Table 1. Same numbers, same
+       qualifiers as the sentence ("at least 2,000+", "about 6,000", "100+"). */
+    figures: {
+      hours: { qualifier: "at least", display: "2,000+", unit: "hours" },
+      tasks: { qualifier: "about", display: "6,000", unit: "tasks" },
+      environments: { qualifier: "", display: "100+", unit: "environments" },
+    },
     places: ["factories", "workshops", "kitchens", "repair shops"],
   },
   collection: {
