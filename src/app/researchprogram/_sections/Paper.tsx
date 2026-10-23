@@ -9,9 +9,9 @@ import { mailto } from "./ui";
 /**
  * /researchprogram, set as an academic project page in Tbrain's own colours
  * (Tam Le, 2026-10-23: Tbrain colours, simple, a little academic — hero
- * included). Title block, a four-panel teaser figure with a numbered caption,
- * an abstract and Table 1, then the brief's sections as one reading column
- * with numbered references. Every sentence is the brief's (src/lib/landing/research.ts);
+ * included). Title block, an abstract and Table 1, then the brief's sections
+ * as one reading column, with a four-panel figure before the offer and
+ * numbered references at the end. Every sentence is the brief's (src/lib/landing/research.ts);
  * the page adds only structure: "Figure 1", "Abstract", "References" and the
  * figure caption describing what the figure draws.
  */
@@ -97,8 +97,6 @@ export function PaperHero() {
         </div>
       </div>
 
-      <PipelineFigure />
-
       <div className="rp-col" id="abstract">
         <h2 className="rp-h2">Abstract</h2>
         <p className="rp-p">
@@ -114,7 +112,7 @@ export function PaperHero() {
   );
 }
 
-/* Figure 1 (the teaser) — one frame of a recorded demonstration and what the pipeline
+/* Figure 1 — one frame of a recorded demonstration and what the pipeline
    derives from it. Same moment in all four panels (frame 225 of the
    arrange_01 clip, matched pixel-for-pixel against the raw frame). Depth is
    the pipeline's monocular estimate, recoloured from its rainbow map to the
@@ -133,9 +131,9 @@ function PipelineFigure() {
   return (
     <figure className="rp-col-figure rp-fig2" aria-labelledby="fig1-cap">
       <div className="rp-fig2-grid">
-        {FIG2.map((p, i) => (
+        {FIG2.map((p) => (
           <div key={p.src} className="rp-fig2-cell">
-            <Image src={p.src} alt={p.alt} width={960} height={480} sizes="(min-width: 768px) 540px, 100vw" priority={i < 2} className="rp-fig2-img" />
+            <Image src={p.src} alt={p.alt} width={960} height={480} sizes="(min-width: 768px) 540px, 100vw" className="rp-fig2-img" />
             <div className="rp-fig2-sub">{p.sub}</div>
           </div>
         ))}
@@ -153,6 +151,7 @@ export function PaperBody() {
   const [startingPoints, ...rest] = QUESTIONS.note.split(". ");
   const { data, collection, partner, formats } = OFFER;
   return (
+    <>
     <div className="rp-col">
       <Section id="why" title={WHY_NOW.title}>
         <p className="rp-p">
@@ -180,7 +179,11 @@ export function PaperBody() {
           ))}
         </ol>
       </Section>
+    </div>
 
+    <PipelineFigure />
+
+    <div className="rp-col">
       <Section id="offer" title={OFFER.title}>
         <ul className="rp-list">
           <li>
@@ -263,6 +266,7 @@ export function PaperBody() {
         </ol>
       </section>
     </div>
+    </>
   );
 }
 
