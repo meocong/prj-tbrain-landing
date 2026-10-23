@@ -121,10 +121,46 @@ export function PaperHero() {
   );
 }
 
+/* Figure 2 — one frame of a recorded demonstration and what the pipeline
+   derives from it. Same moment in all four panels (frame 225 of the
+   arrange_01 clip, matched pixel-for-pixel against the raw frame). Depth is
+   the pipeline's monocular estimate, recoloured from its rainbow map to the
+   brand ramp (near = light); (c) is the annotated frame minus the raw one,
+   laid over a dimmed copy. Burned-in captions were cropped off the top edge.
+   Built by hand from public/images/depth/arrange_01_rgb_depth.jpg and
+   public/videos/textile-annotated/arrange_01.webm. */
+const FIG2: { src: string; sub: string; alt: string }[] = [
+  { src: "/research/fig2/raw.jpg", sub: "(a) Raw frame", alt: "Egocentric frame: two hands smoothing a piece of black fabric on a sewing table" },
+  { src: "/research/fig2/depth.jpg", sub: "(b) Estimated depth", alt: "The same frame as a depth map, near surfaces light and far ones dark" },
+  { src: "/research/fig2/overlay.jpg", sub: "(c) Hand keypoints and object mask", alt: "Hand keypoints, the fabric mask and its bounding box drawn over a dimmed copy of the frame" },
+  { src: "/research/fig2/annotated.jpg", sub: "(d) Annotated frame", alt: "The frame with hand keypoints and the fabric mask drawn over it" },
+];
+
+function Figure2() {
+  return (
+    <figure className="rp-col-figure rp-fig2" aria-labelledby="fig2-cap">
+      <div className="rp-fig2-grid">
+        {FIG2.map((p) => (
+          <div key={p.src} className="rp-fig2-cell">
+            <Image src={p.src} alt={p.alt} width={960} height={480} sizes="(min-width: 768px) 540px, 100vw" className="rp-fig2-img" />
+            <div className="rp-fig2-sub">{p.sub}</div>
+          </div>
+        ))}
+      </div>
+      <figcaption id="fig2-cap" className="rp-caption">
+        <b>Figure 2.</b> One frame of a recorded demonstration, arranging fabric at a sewing station, and what we derive from it. (b) is a depth estimate from the
+        single camera view, not a sensor reading: lighter is nearer; relative depth, no scale. (c) is the 2D hand keypoints and the fabric mask, drawn over a dimmed
+        copy of the frame.
+      </figcaption>
+    </figure>
+  );
+}
+
 export function PaperBody() {
   const [startingPoints, ...rest] = QUESTIONS.note.split(". ");
   const { data, collection, partner, formats } = OFFER;
   return (
+    <>
     <div className="rp-col">
       <Section id="why" title={WHY_NOW.title}>
         <p className="rp-p">
@@ -152,7 +188,11 @@ export function PaperBody() {
           ))}
         </ol>
       </Section>
+    </div>
 
+    <Figure2 />
+
+    <div className="rp-col">
       <Section id="offer" title={OFFER.title}>
         <ul className="rp-list">
           <li>
@@ -235,6 +275,7 @@ export function PaperBody() {
         </ol>
       </section>
     </div>
+    </>
   );
 }
 

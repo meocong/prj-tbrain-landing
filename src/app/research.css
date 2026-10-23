@@ -112,7 +112,7 @@
 .rp-play:disabled { opacity: 0.45; cursor: default; }
 .rp-label { font-size: 0.75rem; color: var(--rp-muted); }
 .rp-caption {
-  max-width: 46rem;
+  max-width: 43rem;
   margin: 0.9rem auto 0;
   font-size: 0.9375rem;
   line-height: 1.6;
@@ -130,10 +130,11 @@
   letter-spacing: -0.02em;
   color: var(--rp-ink);
   text-align: center;
+  text-wrap: balance;
   margin-bottom: 1.25rem;
 }
 .rp-section { padding-top: clamp(3rem, 6vw, 4rem); scroll-margin-top: 5rem; }
-.rp-section:last-child { padding-bottom: clamp(4rem, 8vw, 6rem); }
+.rp-col:last-child > .rp-section:last-child { padding-bottom: clamp(4rem, 8vw, 6rem); }
 .rp-p { font-size: 1.0625rem; line-height: 1.75; color: var(--rp-ink-2); }
 .rp-p + .rp-p, .rp-list + .rp-p, .rp-p + .rp-list, .rp-contact + .rp-p, .rp-p + .rp-contact { margin-top: 1rem; }
 .rp-p b, .rp-list b { color: var(--rp-ink); font-weight: 600; }
@@ -144,6 +145,13 @@
 .rp-list li { padding-left: 0.25rem; scroll-margin-top: 6rem; }
 .rp-list li:target { background: var(--rp-accent-tint); border-radius: 0.375rem; }
 
+/* Figure 2 — four panels of one frame */
+.rp-fig2 { margin-top: clamp(3rem, 6vw, 4rem); }
+.rp-fig2-grid { display: grid; grid-template-columns: 1fr; gap: 1.75rem 0.9rem; }
+@media (min-width: 768px) { .rp-fig2-grid { grid-template-columns: 1fr 1fr; } }
+.rp-fig2-img { display: block; width: 100%; height: auto; aspect-ratio: 2 / 1; object-fit: cover; border-radius: 0.5rem; border: 1px solid var(--rp-line); background: var(--rp-soft); }
+.rp-fig2-sub { margin-top: 0.4rem; line-height: 1.35; text-align: center; font-size: 0.875rem; color: var(--rp-ink-2); }
+
 /* Table 1 — booktabs rules, no verticals */
 .rp-table-wrap { margin-top: 2.25rem; }
 .rp-table-cap { font-size: 0.9375rem; color: var(--rp-ink-2); margin-bottom: 0.6rem; }
@@ -151,8 +159,8 @@
 .rp-table { width: 100%; border-collapse: collapse; border-top: 1.5px solid var(--rp-ink); border-bottom: 1.5px solid var(--rp-ink); font-size: 1rem; }
 .rp-table th, .rp-table td { padding: 0.7rem 0.25rem; text-align: left; vertical-align: baseline; }
 .rp-table tr + tr th, .rp-table tr + tr td { border-top: 1px solid var(--rp-line); }
-.rp-table th { width: 44%; font-weight: 500; color: var(--rp-muted); padding-right: 1.25rem; }
-.rp-table td { color: var(--rp-ink); }
+.rp-table th { width: 44%; font-weight: 500; color: var(--rp-muted); padding-left: 0; padding-right: 1.25rem; }
+.rp-table td { color: var(--rp-ink); padding-right: 0; text-wrap: pretty; }
 .rp-num { font-weight: 600; font-variant-numeric: tabular-nums; color: var(--rp-ink); }
 @media (max-width: 520px) {
   .rp-table th, .rp-table td { display: block; width: auto; padding: 0.15rem 0; }
