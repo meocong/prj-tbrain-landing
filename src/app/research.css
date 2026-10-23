@@ -144,6 +144,52 @@
 .rp-list li { padding-left: 0.25rem; scroll-margin-top: 6rem; }
 .rp-list li:target { background: var(--rp-accent-tint); border-radius: 0.375rem; }
 
+/* Table 1 — booktabs rules, no verticals */
+.rp-table-wrap { margin-top: 2.25rem; }
+.rp-table-cap { font-size: 0.9375rem; color: var(--rp-ink-2); margin-bottom: 0.6rem; }
+.rp-table-cap b { color: var(--rp-ink); font-weight: 600; }
+.rp-table { width: 100%; border-collapse: collapse; border-top: 1.5px solid var(--rp-ink); border-bottom: 1.5px solid var(--rp-ink); font-size: 1rem; }
+.rp-table th, .rp-table td { padding: 0.7rem 0.25rem; text-align: left; vertical-align: baseline; }
+.rp-table tr + tr th, .rp-table tr + tr td { border-top: 1px solid var(--rp-line); }
+.rp-table th { width: 44%; font-weight: 500; color: var(--rp-muted); padding-right: 1.25rem; }
+.rp-table td { color: var(--rp-ink); }
+.rp-num { font-weight: 600; font-variant-numeric: tabular-nums; color: var(--rp-ink); }
+@media (max-width: 520px) {
+  .rp-table th, .rp-table td { display: block; width: auto; padding: 0.15rem 0; }
+  .rp-table tr { display: block; padding: 0.6rem 0; }
+  .rp-table tr + tr { border-top: 1px solid var(--rp-line); }
+  .rp-table tr + tr th, .rp-table tr + tr td { border-top: 0; }
+}
+
+/* Research questions — one boxed list, two columns, like a paper's RQ box */
+.rp-rq {
+  margin-top: 1.5rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  border: 1px solid var(--rp-line);
+  border-radius: 0.75rem;
+  background: var(--rp-soft);
+  overflow: hidden;
+}
+@media (min-width: 720px) { .rp-rq { grid-template-columns: 1fr 1fr; } }
+.rp-rq li {
+  display: flex;
+  gap: 0.9rem;
+  padding: 1.1rem 1.15rem;
+  border-top: 1px solid var(--rp-line);
+  scroll-margin-top: 6rem;
+}
+.rp-rq li:first-child { border-top: 0; }
+@media (min-width: 720px) {
+  .rp-rq li:nth-child(2) { border-top: 0; }
+  .rp-rq li:nth-child(odd) { border-right: 1px solid var(--rp-line); }
+}
+.rp-rq li:target { background: var(--rp-accent-tint); }
+.rp-rq-glyph { flex-shrink: 0; display: grid; place-items: center; width: 2.75rem; height: 2.75rem; border-radius: 0.6rem; color: var(--rp-accent); background: var(--rp-bg); border: 1px solid var(--rp-line); }
+.rp-rq-n { display: block; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.04em; color: var(--rp-accent); font-variant-numeric: tabular-nums; }
+.rp-rq-topic { display: block; margin-top: 0.1rem; font-weight: 600; font-size: 1rem; color: var(--rp-ink); }
+.rp-rq-q { display: block; margin-top: 0.3rem; font-size: 0.9625rem; line-height: 1.55; color: var(--rp-ink-2); }
+
 /* Links and citations */
 .rp-link {
   color: var(--rp-accent);

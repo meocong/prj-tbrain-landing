@@ -1,8 +1,10 @@
+import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight, Database, Mail } from "lucide-react";
 import { ABOUT, COLLABORATION, CONTACT, MAIL_SUBJECT, OFFER, QUESTIONS, RESEARCH_HERO, WHY_NOW } from "@/lib/landing/research";
 import { CopyEmail } from "./CopyEmail";
 import { PaperFigure } from "./PaperFigure";
+import { QuestionGlyph } from "./QuestionGlyph";
 import { mailto } from "./ui";
 
 /**
@@ -39,6 +41,40 @@ function Section({ id, title, children }: { id: string; title: string; children:
     </section>
   );
 }
+
+/* Table 1 — the program at a glance. Every cell is a fact from the brief
+   (offer, contact audience, collaboration); the table only lines them up. */
+function ProgramTable() {
+  const { data, collection, formats } = OFFER;
+  const rows: [string, React.ReactNode][] = [
+    ["Egocentric human demonstrations", <span key="h" className="rp-num">{data.figures[0].display} hours</span>],
+    ["Tasks", <span key="t" className="rp-num">about 3,000</span>],
+    ["Real working environments", <><span className="rp-num">70+</span> · {data.places.join(", ")}</>],
+    ["Data collection", collection.topic],
+    ["Delivery formats", formats.names.join(", ")],
+    ["Who we'd love to hear from", sentenceCase(CONTACT.roles.join(", ").replace(", students", " and students"))],
+    ["Results", "Expected to be published openly"],
+  ];
+  return (
+    <figure className="rp-table-wrap">
+      <figcaption className="rp-table-cap">
+        <b>Table 1.</b> The program at a glance.
+      </figcaption>
+      <table className="rp-table">
+        <tbody>
+          {rows.map(([k, v]) => (
+            <tr key={k}>
+              <th scope="row">{k}</th>
+              <td>{v}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </figure>
+  );
+}
+
+const sentenceCase = (x: string) => x.charAt(0).toUpperCase() + x.slice(1);
 
 export function PaperHero() {
   return (
@@ -78,6 +114,8 @@ export function PaperHero() {
         <p className="rp-p">
           {RESEARCH_HERO.weBring} {RESEARCH_HERO.youBring} {RESEARCH_HERO.shape}
         </p>
+
+        <ProgramTable />
       </div>
     </header>
   );
@@ -99,10 +137,17 @@ export function PaperBody() {
         <p className="rp-p">
           {startingPoints}. {rest.join(". ")}
         </p>
-        <ol className="rp-list rp-list-numbered">
-          {QUESTIONS.items.map((q) => (
+        <ol className="rp-rq" aria-label="Research questions">
+          {QUESTIONS.items.map((q, i) => (
             <li key={q.key} id={`rq-${q.key}`}>
-              <b>{q.topic}:</b> {q.question}
+              <span className="rp-rq-glyph" aria-hidden>
+                <QuestionGlyph k={q.key} size={36} />
+              </span>
+              <span className="min-w-0">
+                <span className="rp-rq-n">RQ{i + 1}</span>
+                <span className="rp-rq-topic">{q.topic}</span>
+                <span className="rp-rq-q">{sentenceCase(q.question)}</span>
+              </span>
             </li>
           ))}
         </ol>
@@ -134,12 +179,15 @@ export function PaperBody() {
           {CONTACT.ask} {CONTACT.next}
         </p>
         <div className="rp-contact">
-          <div className="min-w-0">
+          <div className="flex min-w-0 items-center gap-3.5">
+            <Image src={CONTACT.person.avatar} alt={CONTACT.person.name} width={56} height={56} className="h-14 w-14 shrink-0 rounded-full object-cover" />
+            <div className="min-w-0">
             <div className="rp-contact-name">{CONTACT.person.name}</div>
             <div className="rp-contact-role">{CONTACT.person.role}</div>
             <a href={mailto(CONTACT.person.email, MAIL_SUBJECT)} data-rs-track="research_email_click" data-rs-where="contact_address" className="rp-link rp-contact-email">
               {CONTACT.person.email}
             </a>
+            </div>
           </div>
           <div className="flex flex-wrap gap-2.5">
             <a href={mailto(CONTACT.person.email, MAIL_SUBJECT)} data-rs-track="research_email_click" data-rs-where="contact_button" className="rp-btn rp-btn-primary">
