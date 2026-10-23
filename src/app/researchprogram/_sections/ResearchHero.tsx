@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { ArrowRight, Mail } from "lucide-react";
 import { RESEARCH_HERO, CONTACT, OFFER, MAIL_SUBJECT } from "@/lib/landing/research";
-import { ResearchFigure } from "./ResearchFigure";
+import { HandHero } from "./HandHero";
 import { Container, Rise, mailto } from "./ui";
 
 /* The program at a glance — each value is a phrase lifted from the brief,
@@ -25,7 +25,7 @@ export function ResearchHero() {
       <div aria-hidden className="bp-aurora" />
       <Container>
         <div className="grid items-center gap-x-14 gap-y-14 lg:grid-cols-12">
-          <div className="lg:col-span-7">
+          <div className="min-w-0 lg:col-span-7">
             <div className="flex flex-wrap items-center gap-x-5 gap-y-5">
             <Rise i={0}>
               <div className="bp-fig inline-flex items-center gap-2">
@@ -101,9 +101,9 @@ export function ResearchHero() {
             </Rise>
           </div>
 
-          <div className="lg:col-span-5">
+          <div className="min-w-0 lg:col-span-5">
             <Rise i={2} y={28}>
-              <ResearchFigure />
+              <HandHero />
             </Rise>
           </div>
         </div>
