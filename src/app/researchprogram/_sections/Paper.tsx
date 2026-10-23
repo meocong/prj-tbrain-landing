@@ -87,7 +87,7 @@ export function PaperHero() {
           {RESEARCH_HERO.status}
         </p>
         <div className="rp-actions">
-          <a href={mailto(CONTACT.person.email, MAIL_SUBJECT)} data-rs-track="research_email_click" data-rs-where="hero" className="rp-btn rp-btn-primary">
+          <a href={mailto(CONTACT.email, MAIL_SUBJECT)} data-rs-track="research_email_click" data-rs-where="hero" className="rp-btn rp-btn-primary">
             <Mail className="h-4 w-4" aria-hidden />
             {CONTACT.title}
           </a>
@@ -211,22 +211,20 @@ export function PaperBody() {
           {CONTACT.ask} {CONTACT.next}
         </p>
         <div className="rp-contact">
-          <div className="flex min-w-0 items-center gap-3.5">
-            <Image src={CONTACT.person.avatar} alt={CONTACT.person.name} width={56} height={56} className="h-14 w-14 shrink-0 rounded-full object-cover" />
-            <div className="min-w-0">
-            <div className="rp-contact-name">{CONTACT.person.name}</div>
-            <div className="rp-contact-role">{CONTACT.person.role}</div>
-            <a href={mailto(CONTACT.person.email, MAIL_SUBJECT)} data-rs-track="research_email_click" data-rs-where="contact_address" className="rp-link rp-contact-email">
-              {CONTACT.person.email}
+          <div className="flex min-w-0 items-center gap-3">
+            <span className="rp-contact-icon" aria-hidden>
+              <Mail className="h-5 w-5" />
+            </span>
+            <a href={mailto(CONTACT.email, MAIL_SUBJECT)} data-rs-track="research_email_click" data-rs-where="contact_address" className="rp-link rp-contact-email">
+              {CONTACT.email}
             </a>
-            </div>
           </div>
           <div className="flex flex-wrap gap-2.5">
-            <a href={mailto(CONTACT.person.email, MAIL_SUBJECT)} data-rs-track="research_email_click" data-rs-where="contact_button" className="rp-btn rp-btn-primary">
+            <a href={mailto(CONTACT.email, MAIL_SUBJECT)} data-rs-track="research_email_click" data-rs-where="contact_button" className="rp-btn rp-btn-primary">
               <Mail className="h-4 w-4" aria-hidden />
               Send a short note
             </a>
-            <CopyEmail email={CONTACT.person.email} />
+            <CopyEmail email={CONTACT.email} />
           </div>
         </div>
         <p className="rp-p">

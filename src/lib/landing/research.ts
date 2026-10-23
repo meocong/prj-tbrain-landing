@@ -130,9 +130,10 @@ export const CONTACT = {
     "simulation",
     "robot evaluation",
   ],
-  ask: "Send a short note about your lab and what you're curious about to Tam Le, Founder & CEO, at tam@tbrain.ai.",
+  ask: "Send a short note about your lab and what you're curious about to research_program@tbrain.ai.",
   next: "We'll share sample data and set up a conversation.",
-  person: { name: "Tam Le", role: "Founder & CEO", email: "tam@tbrain.ai", avatar: "/images/avt-tamle.png" },
+  /* The address in `ask`, pulled out for the mail links and the copy button. */
+  email: "research_program@tbrain.ai",
   samples: { label: "Sample data", href: "/samples", display: "tbrain.ai/samples" },
 } as const;
 

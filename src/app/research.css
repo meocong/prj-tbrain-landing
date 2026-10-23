@@ -194,9 +194,17 @@
   border-radius: 0.75rem;
   background: var(--rp-soft);
 }
-.rp-contact-name { font-weight: 600; font-size: 1.0625rem; color: var(--rp-ink); }
-.rp-contact-role { font-size: 0.875rem; color: var(--rp-muted); }
-.rp-contact-email { display: inline-block; margin-top: 0.25rem; font-size: 0.975rem; }
+.rp-contact-icon {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 9999px;
+  background: var(--rp-accent-tint);
+  color: var(--rp-accent);
+}
+.rp-contact-email { min-width: 0; font-size: 1.0625rem; font-weight: 600; overflow-wrap: anywhere; }
 
 /* References */
 .rp-refs { display: grid; gap: 0.6rem; font-size: 0.975rem; line-height: 1.6; color: var(--rp-ink-2); }

@@ -36,7 +36,7 @@ const JSONLD = {
   description: DESCRIPTION,
   url: `${BASE_URL}/researchprogram`,
   publisher: { "@type": "Organization", name: "Tbrain", url: BASE_URL, description: ABOUT.body },
-  contactPoint: { "@type": "ContactPoint", name: CONTACT.person.name, email: CONTACT.person.email, contactType: RESEARCH_HERO.program },
+  contactPoint: { "@type": "ContactPoint", email: CONTACT.email, contactType: RESEARCH_HERO.program },
 };
 
 export default function ResearchProgramPage() {
