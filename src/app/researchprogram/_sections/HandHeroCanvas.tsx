@@ -26,7 +26,7 @@ import { LineSegments2 } from "three/examples/jsm/lines/LineSegments2.js";
 import { LineSegmentsGeometry } from "three/examples/jsm/lines/LineSegmentsGeometry.js";
 import { LineMaterial } from "three/examples/jsm/lines/LineMaterial.js";
 import type { OrbitControls as OrbitControlsImpl } from "three/examples/jsm/controls/OrbitControls.js";
-import { BONES, HANDS, HAND_COLORS, HAND_FLOATS, JOINTS, poseAt, type JointTrack } from "@/lib/landing/research-hand";
+import { BONES, HANDS, HAND_FLOATS, JOINTS, poseAt, type JointTrack } from "@/lib/landing/research-hand";
 
 export type ViewPreset = "orbit" | "wearer" | "top";
 export interface PresetRequest {
@@ -34,7 +34,20 @@ export interface PresetRequest {
   n: number;
 }
 
-const GROUND = "#06080E";
+/** Scene colours, so the figure can sit on a light academic page or a dark one. */
+export interface SceneTheme {
+  ground: string;
+  gridMajor: number;
+  gridMinor: number;
+  rig: number;
+  rigLens: number;
+  left: string;
+  right: string;
+  /** Draw the schematic head-rig marker at the origin. */
+  showRig?: boolean;
+  /** Draw the one-second wrist trail. */
+  trail?: boolean;
+}
 const TRAIL = 15; // samples at 15 fps = one second
 const TWEEN_MS = 420;
 
@@ -190,13 +203,14 @@ function goalFor(name: ViewPreset, track: JointTrack): Goal {
       // Three-quarter, from in front of the wearer and to the side, a little
       // above the hands, close enough that they fill the panel; the head rig
       // at the origin sits behind them, so the egocentric viewpoint reads.
-      return { pos: at(cx + 0.24, cy + 0.22, cz + 0.34), target: at(cx, cy + 0.01, cz), fov: 44 };
+      return { pos: at(cx + 0.2, cy + 0.19, cz + 0.3), target: at(cx, cy + 0.01, cz), fov: 44 };
   }
 }
 
 function Scene({
-  track, clock, active, preset, autoRotate, reduce, seek,
+  track, clock, active, preset, autoRotate, reduce, seek, theme,
 }: {
+  theme: SceneTheme;
   seek: number;
   track: JointTrack;
   clock: React.RefObject<{ t: number; v: number }>;
@@ -214,12 +228,12 @@ function Scene({
   const tween = useRef<{ t0: number; from: Goal; to: Goal } | null>(null);
   const follow = useMemo(() => ({ goal: new THREE.Vector3(), delta: new THREE.Vector3() }), []);
 
-  const hands = useMemo(() => [makeHand(new THREE.Color(HAND_COLORS.left)), makeHand(new THREE.Color(HAND_COLORS.right))], []);
+  const hands = useMemo(() => [makeHand(new THREE.Color(theme.left)), makeHand(new THREE.Color(theme.right))], [theme.left, theme.right]);
   useEffect(() => () => hands.forEach((h) => h.dispose()), [hands]);
 
   const furniture = useMemo(() => {
     const g = new THREE.Group();
-    const grid = new THREE.GridHelper(1.8, 18, 0x1d5a57, 0x16243a);
+    const grid = new THREE.GridHelper(1.8, 18, theme.gridMajor, theme.gridMinor);
     const gm = grid.material as THREE.LineBasicMaterial;
     gm.transparent = true;
     gm.opacity = 0.85;
@@ -228,7 +242,7 @@ function Scene({
     // Schematic head rig at the origin: a box, two forward lenses, three axes.
     // Not a model of any real device.
     const rig = new THREE.Group();
-    const box = new THREE.LineSegments(new THREE.EdgesGeometry(new THREE.BoxGeometry(0.17, 0.06, 0.05)), new THREE.LineBasicMaterial({ color: 0x8e9bc4 }));
+    const box = new THREE.LineSegments(new THREE.EdgesGeometry(new THREE.BoxGeometry(0.17, 0.06, 0.05)), new THREE.LineBasicMaterial({ color: theme.rig }));
     box.position.set(0, 0, 0.03);
     rig.add(box);
     rig.add(
@@ -239,7 +253,7 @@ function Scene({
             new THREE.Vector3(s * 0.045, 0, 0), new THREE.Vector3(s * 0.045 + s * 0.04, 0, -0.1),
           ]),
         ),
-        new THREE.LineBasicMaterial({ color: 0x5a6896 }),
+        new THREE.LineBasicMaterial({ color: theme.rigLens }),
       ),
     );
     const axis = (to: [number, number, number], color: number) =>
@@ -247,9 +261,10 @@ function Scene({
     axis([0.12, 0, 0], 0xe8837f);
     axis([0, 0.12, 0], 0x7fd6a0);
     axis([0, 0, -0.18], 0x7fa8f0);
+    rig.visible = theme.showRig !== false;
     g.add(rig);
     return g;
-  }, [track]);
+  }, [track, theme.gridMajor, theme.gridMinor, theme.rig, theme.rigLens, theme.showRig]);
   useEffect(
     () => () =>
       furniture.traverse((o) => {
@@ -306,7 +321,7 @@ function Scene({
     invalidate();
   }, [active, autoRotate, seek, invalidate]);
 
-  useFrame(() => {
+  useFrame((_, delta) => {
     const tw = tween.current;
     if (tw && controls) {
       const cam = camera as THREE.PerspectiveCamera;
@@ -353,7 +368,8 @@ function Scene({
       }
       if (n) {
         follow.goal.multiplyScalar(1 / n);
-        follow.delta.copy(follow.goal).sub(controls.target).multiplyScalar(active ? 0.05 : 1);
+        // Time-based easing (~1 s to settle) so slow devices frame the same as fast ones.
+        follow.delta.copy(follow.goal).sub(controls.target).multiplyScalar(active ? 1 - Math.exp(-Math.min(delta, 0.25) * 3) : 1);
         controls.target.add(follow.delta);
         camera.position.add(follow.delta);
         controls.update();
@@ -368,7 +384,7 @@ function Scene({
       for (let k = 0; k < TRAIL; k++) {
         const tk = t - (k + 1) / track.fps;
         let on = false;
-        if (tk >= 0) {
+        if (tk >= 0 && theme.trail !== false) {
           poseAt(track, tk, scratch, scratchStates);
           if (scratchStates[h] === 1) {
             on = true;
@@ -413,6 +429,7 @@ function Scene({
 }
 
 export default function HandHeroCanvas(props: {
+  theme: SceneTheme;
   /** Bumped by the parent on a seek, so a paused (on-demand) canvas redraws. */
   seek: number;
   track: JointTrack;
@@ -429,7 +446,7 @@ export default function HandHeroCanvas(props: {
       dpr={[1, 2]}
       camera={{ position: [0.6, 0.4, 0.6], fov: 40, near: 0.01, far: 30 }}
       gl={{ antialias: true, alpha: true, powerPreference: "default" }}
-      style={{ background: GROUND, touchAction: "pan-y" }}
+      style={{ background: props.theme.ground, touchAction: "pan-y" }}
     >
       <Scene {...props} />
     </Canvas>

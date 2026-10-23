@@ -27,10 +27,9 @@ export function CopyEmail({ email }: { email: string }) {
              on screen and selectable, so there is nothing to recover. */
         }
       }}
-      className="rs-btn rs-btn-ghost inline-flex items-center justify-center gap-2 rounded-xl px-4 py-3"
-      style={{ fontSize: 14 }}
+      className="rp-btn rp-btn-secondary"
     >
-      {copied ? <Check className="h-4 w-4" style={{ color: "var(--bp-green)" }} aria-hidden /> : <Copy className="h-4 w-4" aria-hidden />}
+      {copied ? <Check className="h-4 w-4" style={{ color: "var(--rp-open)" }} aria-hidden /> : <Copy className="h-4 w-4" aria-hidden />}
       <span aria-live="polite">{copied ? "Copied" : "Copy email"}</span>
     </button>
   );

@@ -33,8 +33,9 @@ export const BONES: [number, number][] = [
   [0, 17], [17, 18], [18, 19], [19, 20],
 ];
 
-/** Okabe–Ito pair, the colours the hand-pose library already uses. */
-export const HAND_COLORS = { left: "#56B4E9", right: "#E69F00" } as const;
+/** Tbrain's violet and the logo's blue: far enough apart in lightness to tell
+    the two hands apart, and the page's own brand colours. */
+export const HAND_COLORS = { left: "#6C3CF4", right: "#0EA5E9" } as const;
 
 export type HandState = 0 | 1 | 2 | 3;
 export const STATE_NAMES = ["none", "measured", "guessed", "bridged"] as const;
@@ -141,3 +142,101 @@ export function measuredShare(lanes: Lanes) {
 
 /** A moment where both hands are measured, for the still frame under reduced motion. */
 export const STILL_T = 529 / 15;
+
+/* ── Derived signals (computed in the browser from the joint track) ───────
+   Both are normalised to 0..1 against the clip's own 5th–95th percentile:
+   the joints' absolute scale is unconfirmed, so the figure shows shape over
+   time, never millimetres. NaN where the hand has no measured pose. */
+
+const THUMB_TIP = 4;
+const INDEX_TIP = 8;
+
+function normalise(v: Float32Array) {
+  const ok = Array.from(v).filter((x) => !Number.isNaN(x)).sort((a, b) => a - b);
+  if (!ok.length) return v;
+  const lo = ok[Math.floor(ok.length * 0.05)];
+  const hi = ok[Math.floor(ok.length * 0.95)];
+  const span = Math.max(1e-6, hi - lo);
+  const out = new Float32Array(v.length);
+  for (let i = 0; i < v.length; i++) out[i] = Number.isNaN(v[i]) ? NaN : Math.min(1, Math.max(0, (v[i] - lo) / span));
+  return out;
+}
+
+export interface Derived {
+  /** Thumb-tip to index-tip distance — the signal a two-jaw gripper's opening is retargeted from. */
+  aperture: Float32Array;
+  /** Wrist speed between neighbouring samples. */
+  speed: Float32Array;
+  /** Which hand the signals follow (0 left, 1 right): the one measured most often. */
+  hand: number;
+}
+
+export function derive(track: JointTrack): Derived {
+  let best = 0;
+  let bestN = -1;
+  for (let h = 0; h < HANDS; h++) {
+    let n = 0;
+    for (let i = 0; i < track.count; i++) if (track.state[i * HANDS + h] === 1) n++;
+    if (n > bestN) {
+      bestN = n;
+      best = h;
+    }
+  }
+  const ap = new Float32Array(track.count);
+  const sp = new Float32Array(track.count);
+  const p = track.pos;
+  for (let i = 0; i < track.count; i++) {
+    const measured = track.state[i * HANDS + best] === 1;
+    const o = handOffset(i, best);
+    if (!measured || Number.isNaN(p[o])) {
+      ap[i] = NaN;
+      sp[i] = NaN;
+      continue;
+    }
+    const a = o + THUMB_TIP * 3;
+    const b = o + INDEX_TIP * 3;
+    ap[i] = Math.hypot(p[a] - p[b], p[a + 1] - p[b + 1], p[a + 2] - p[b + 2]);
+    const j = i - 1;
+    if (j >= 0 && track.state[j * HANDS + best] === 1) {
+      const q = handOffset(j, best);
+      sp[i] = Math.hypot(p[o] - p[q], p[o + 1] - p[q + 1], p[o + 2] - p[q + 2]) * track.fps;
+    } else sp[i] = NaN;
+  }
+  // Light smoothing so 2 mm quantisation does not read as jitter.
+  const smooth = (v: Float32Array) => {
+    const out = new Float32Array(v.length);
+    for (let i = 0; i < v.length; i++) {
+      let s = 0;
+      let n = 0;
+      for (let k = -2; k <= 2; k++) {
+        const x = v[i + k];
+        if (x !== undefined && !Number.isNaN(x)) {
+          s += x;
+          n++;
+        }
+      }
+      out[i] = Number.isNaN(v[i]) || !n ? NaN : s / n;
+    }
+    return out;
+  };
+  return { aperture: normalise(smooth(ap)), speed: normalise(smooth(sp)), hand: best };
+}
+
+/** SVG path for a 0..1 series over `width`×`height`, broken at NaN gaps. */
+export function seriesPath(v: Float32Array, width: number, height: number, pad = 2) {
+  let d = "";
+  let pen = false;
+  const n = v.length;
+  for (let i = 0; i < n; i++) {
+    const y = v[i];
+    if (Number.isNaN(y)) {
+      pen = false;
+      continue;
+    }
+    const x = (i / (n - 1)) * width;
+    const yy = pad + (1 - y) * (height - pad * 2);
+    d += `${pen ? "L" : "M"}${x.toFixed(1)} ${yy.toFixed(1)}`;
+    pen = true;
+  }
+  return d;
+}

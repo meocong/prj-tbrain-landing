@@ -1,17 +1,8 @@
 import type { Metadata } from "next";
 import Header from "@/components/common/Header";
 import Footer from "@/components/common/Footer";
-import { ScrollProgress } from "@/components/marketing/fx/ScrollProgress";
 import { RESEARCH_HERO, CONTACT, ABOUT } from "@/lib/landing/research";
-import { ResearchHero } from "./_sections/ResearchHero";
-import { SectionNav } from "./_sections/SectionNav";
-import { Statement } from "./_sections/Statement";
-import { WhyNow } from "./_sections/WhyNow";
-import { Questions } from "./_sections/Questions";
-import { Offer } from "./_sections/Offer";
-import { Collaboration } from "./_sections/Collaboration";
-import { Contact } from "./_sections/Contact";
-import { RevealObserver, RS_JS_INIT } from "./_sections/motion";
+import { PaperBody, PaperHero } from "./_sections/Paper";
 import { TrackClicks } from "./_sections/TrackClicks";
 
 const TITLE = `${RESEARCH_HERO.program} — ${RESEARCH_HERO.title}`;
@@ -48,34 +39,15 @@ const JSONLD = {
   contactPoint: { "@type": "ContactPoint", name: CONTACT.person.name, email: CONTACT.person.email, contactType: RESEARCH_HERO.program },
 };
 
-const NAV = [
-  { id: "why", label: "Why now" },
-  { id: "questions", label: "Questions" },
-  { id: "offer", label: "What we offer" },
-  { id: "collaborate", label: "Collaboration" },
-  { id: "contact", label: CONTACT.title },
-];
-
 export default function ResearchProgramPage() {
   return (
-    <div className="bp-chrome" style={{ background: "var(--bp-bg)", color: "var(--bp-ink)" }}>
-      {/* Before any section paints: lets the scroll reveals hide what is
-          below the fold. Without it (no JS) everything is simply visible. */}
-      <script dangerouslySetInnerHTML={{ __html: RS_JS_INIT }} />
+    <div className="rp">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(JSONLD) }} />
-      <RevealObserver />
       <TrackClicks />
-      <ScrollProgress />
       <Header />
       <main id="main-content">
-        <ResearchHero />
-        <SectionNav items={NAV} />
-        <Statement />
-        <WhyNow />
-        <Questions />
-        <Offer />
-        <Collaboration />
-        <Contact />
+        <PaperHero />
+        <PaperBody />
       </main>
       <Footer />
     </div>

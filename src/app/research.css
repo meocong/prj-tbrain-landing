@@ -1,218 +1,201 @@
 /* ════════════════════════════════════════════════════════════════════
-   /researchprogram — University Research Program.
-   Builds on blueprint.css: every colour is a theme-aware --bp-* token, so
-   the light (paper) and dark (indigo) halves come for free. Only what the
-   blueprint kit does not already carry lives here.
+   /researchprogram — University Research Program, set as an academic
+   project page in Tbrain's brand palette (white / slate, violet #6C3CF4).
+   Light by default; the dark half follows html.dark like the rest of the
+   marketing site.
    ════════════════════════════════════════════════════════════════════ */
 
-/* Hero entrance — CSS rather than framer so the headline paints with the
-   first byte of HTML instead of waiting for hydration. */
-@keyframes rs-rise {
-  from { opacity: 0; transform: translate3d(0, var(--rs-rise-y, 18px), 0); }
-  to   { opacity: 1; transform: none; }
+.rp {
+  --rp-bg: #ffffff;
+  --rp-ink: #0f172a;
+  --rp-ink-2: #334155;
+  --rp-muted: #64748b;
+  --rp-line: #e2e8f0;
+  --rp-soft: #f8fafc;
+  --rp-accent: #5a2ce0; /* AA violet for text */
+  --rp-accent-fill: #6c3cf4; /* brand violet for fills */
+  --rp-accent-tint: rgba(108, 60, 244, 0.08);
+  --rp-open: #16a34a;
+  background: var(--rp-bg);
+  color: var(--rp-ink);
 }
-.rs-rise {
-  animation: rs-rise 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+.dark .rp {
+  --rp-bg: #020617;
+  --rp-ink: #f1f5f9;
+  --rp-ink-2: #cbd5e1;
+  --rp-muted: #94a3b8;
+  --rp-line: #1e293b;
+  --rp-soft: #0b1222;
+  --rp-accent: #a78bfa;
+  --rp-accent-fill: #7c4dff;
+  --rp-accent-tint: rgba(167, 139, 250, 0.1);
+  --rp-open: #4ade80;
 }
+.rp ::selection { background: var(--rp-accent-tint); color: var(--rp-ink); }
 
-/* Scroll reveal — progressive enhancement, see researchprogram/_sections/motion.tsx.
-   Hidden only under html.rs-js; html.rs-io means the observer is running. */
-.rs-js .rs-reveal {
-  opacity: 0;
-  transform: translate3d(0, var(--rs-y, 24px), 0);
-  transition:
-    opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1) var(--rs-d, 0s),
-    transform 0.75s cubic-bezier(0.16, 1, 0.3, 1) var(--rs-d, 0s);
-}
-.rs-js .rs-reveal.rs-in { opacity: 1; transform: none; }
-.rs-js:not(.rs-io) .rs-reveal { animation: rs-failsafe 0.01s linear 2.5s forwards; }
-@keyframes rs-failsafe { to { opacity: 1; transform: none; } }
+/* Columns: reading measure, wide title block, figure. */
+.rp-col { width: 100%; max-width: 46rem; margin: 0 auto; padding: 0 1.5rem; }
+.rp-col-wide { width: 100%; max-width: 64rem; margin: 0 auto; padding: 0 1.5rem; }
+.rp-col-figure { width: 100%; max-width: 70rem; margin: clamp(2.5rem, 5vw, 3.5rem) auto 0; padding: 0 1.5rem; }
 
-/* "Open call" status dot — a slow ring, the only thing on the page that
-   repeats forever, so it stops with the rest under reduced motion / pause. */
-@keyframes rs-ping {
-  0%   { transform: scale(1); opacity: 0.55; }
-  80%, 100% { transform: scale(2.6); opacity: 0; }
-}
-.rs-live::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  background: inherit;
-  animation: rs-ping 2.2s cubic-bezier(0, 0, 0.2, 1) infinite;
-}
-
-/* Buttons */
-.rs-btn {
+/* Title block */
+.rp-hero { padding-top: clamp(7.5rem, 11vw, 9.5rem); }
+.rp-title {
   font-family: var(--font-heading);
-  font-size: 15px;
   font-weight: 600;
-  letter-spacing: -0.005em;
+  font-size: clamp(2.25rem, 4.6vw, 3.75rem);
+  line-height: 1.06;
+  letter-spacing: -0.03em;
+  color: var(--rp-ink);
+  text-wrap: balance;
+}
+.rp-authors {
+  margin-top: 1.25rem;
+  font-size: clamp(1.0625rem, 1.5vw, 1.25rem);
+  font-weight: 500;
+  color: var(--rp-accent);
+}
+.rp-venue {
+  margin-top: 0.4rem;
+  font-size: 0.975rem;
+  color: var(--rp-muted);
+  text-wrap: balance;
+}
+.rp-open { display: inline-block; vertical-align: 0.1em; margin-right: 0.55rem; width: 0.5rem; height: 0.5rem; border-radius: 999px; background: var(--rp-open); box-shadow: 0 0 0 3px color-mix(in srgb, var(--rp-open) 22%, transparent); }
+.rp-actions { margin-top: 1.75rem; display: flex; flex-wrap: wrap; justify-content: center; gap: 0.625rem; }
+
+/* Buttons: the project-page pill, in brand colours. */
+.rp-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 2.75rem;
+  padding: 0 1.25rem;
+  border-radius: 999px;
+  font-size: 0.9375rem;
+  font-weight: 600;
   text-decoration: none;
-  transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
+  cursor: pointer;
+  transition: background-color 0.18s ease, border-color 0.18s ease, color 0.18s ease;
 }
-.rs-btn-solid {
-  background: var(--bp-cyan);
-  color: var(--bp-on-cyan);
-  box-shadow: 0 10px 26px -14px var(--bp-cyan), inset 0 1px 0 rgba(255, 255, 255, 0.18);
-}
-.rs-btn-solid:hover { transform: translateY(-1px); box-shadow: 0 16px 32px -14px var(--bp-cyan), inset 0 1px 0 rgba(255, 255, 255, 0.18); }
-.rs-btn-ghost {
-  background: var(--bp-surface);
-  color: var(--bp-ink);
-  border: 1px solid var(--bp-line-strong);
-}
-.rs-btn-ghost:hover { border-color: var(--bp-cyan); transform: translateY(-1px); }
+.rp-btn-primary { background: var(--rp-accent-fill); color: #fff; box-shadow: 0 6px 16px -8px rgba(108, 60, 244, 0.7); }
+.rp-btn-primary:hover { background: #5a2ce0; }
+.rp-btn-secondary { background: var(--rp-bg); color: var(--rp-ink); border: 1px solid var(--rp-line); }
+.rp-btn-secondary:hover { border-color: var(--rp-accent-fill); color: var(--rp-accent); }
 
-/* Title-block cells: hairlines between cells in whichever grid is active. */
-.rs-glance-cell { border-color: var(--bp-line); border-style: solid; border-width: 0; }
-.rs-glance-cell:not(:last-child) { border-bottom-width: 1px; }
-@media (min-width: 768px) {
-  .rs-glance-cell { border-width: 0 !important; }
-  .rs-glance-cell:not(:last-child) { border-right-width: 1px !important; }
+/* Figure */
+.rp-stage { aspect-ratio: 4 / 3; }
+@media (min-width: 768px) { .rp-stage { aspect-ratio: 16 / 7; } }
+.rp-figure-panel { border: 1px solid var(--rp-line); border-radius: 0.75rem; overflow: hidden; background: var(--rp-soft); }
+.rp-figure-strip {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.6rem 0.9rem;
+  border-top: 1px solid var(--rp-line);
+  background: var(--rp-bg);
 }
-
-/* Offer figures: stacked rows on phones, three ruled columns from sm up. */
-.rs-fig { padding: 16px 0; }
-.rs-fig + .rs-fig { border-top: 1px solid var(--bp-line); }
-@media (min-width: 640px) {
-  .rs-fig { padding: 22px 0 22px 18px; }
-  .rs-fig:first-child { padding-left: 0; }
-  .rs-fig + .rs-fig { border-top: 0; border-left: 1px solid var(--bp-line); }
+.rp-play {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 999px;
+  border: 1px solid var(--rp-line);
+  color: var(--rp-ink);
+  background: var(--rp-bg);
+  cursor: pointer;
 }
+.rp-play:hover { border-color: var(--rp-accent-fill); color: var(--rp-accent); }
+.rp-play:disabled { opacity: 0.45; cursor: default; }
+.rp-label { font-size: 0.75rem; color: var(--rp-muted); }
+.rp-caption {
+  max-width: 46rem;
+  margin: 0.9rem auto 0;
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  color: var(--rp-ink-2);
+}
+.rp-caption b { color: var(--rp-ink); font-weight: 600; }
 
-/* Inline citation */
-.rs-cite {
-  color: var(--bp-ink);
+/* Reading column */
+.rp-hero > .rp-col { margin-top: clamp(3rem, 6vw, 4.5rem); }
+.rp-h2 {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: clamp(1.5rem, 2.2vw, 1.75rem);
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: var(--rp-ink);
+  text-align: center;
+  margin-bottom: 1.25rem;
+}
+.rp-section { padding-top: clamp(3rem, 6vw, 4rem); scroll-margin-top: 5rem; }
+.rp-section:last-child { padding-bottom: clamp(4rem, 8vw, 6rem); }
+.rp-p { font-size: 1.0625rem; line-height: 1.75; color: var(--rp-ink-2); }
+.rp-p + .rp-p, .rp-list + .rp-p, .rp-p + .rp-list, .rp-contact + .rp-p, .rp-p + .rp-contact { margin-top: 1rem; }
+.rp-p b, .rp-list b { color: var(--rp-ink); font-weight: 600; }
+.rp-list { display: grid; gap: 0.6rem; padding-left: 1.25rem; list-style: disc; font-size: 1.0625rem; line-height: 1.7; color: var(--rp-ink-2); }
+.rp-list li::marker { color: var(--rp-accent); }
+.rp-list-numbered { list-style: decimal; }
+.rp-list-numbered li::marker { font-weight: 600; font-variant-numeric: tabular-nums; }
+.rp-list li { padding-left: 0.25rem; scroll-margin-top: 6rem; }
+.rp-list li:target { background: var(--rp-accent-tint); border-radius: 0.375rem; }
+
+/* Links and citations */
+.rp-link {
+  color: var(--rp-accent);
   text-decoration: underline;
-  text-decoration-color: color-mix(in srgb, var(--bp-cyan) 55%, transparent);
   text-decoration-thickness: 1px;
   text-underline-offset: 3px;
-  transition: text-decoration-color 0.15s ease, color 0.15s ease;
+  text-decoration-color: color-mix(in srgb, var(--rp-accent) 40%, transparent);
 }
-.rs-cite:hover { color: var(--bp-cyan); text-decoration-color: var(--bp-cyan); }
-.rs-sup {
-  font-family: var(--font-mono, monospace);
-  font-size: 0.62em;
-  font-weight: 600;
-  color: var(--bp-cyan);
-  margin-left: 2px;
-  text-decoration: none;
-}
+.rp-link:hover { text-decoration-color: currentColor; }
+.rp-cite { margin-left: 0.15em; font-size: 0.8em; font-weight: 600; color: var(--rp-accent); text-decoration: none; vertical-align: 0.1em; }
 
-/* Highlighter mark under a phrase (used once per section at most). */
-.rs-mark {
-  background-image: linear-gradient(transparent 62%, color-mix(in srgb, var(--bp-cyan) 22%, transparent) 62%);
-  background-repeat: no-repeat;
-  padding: 0 2px;
-  margin: 0 -2px;
+/* Contact */
+.rp-contact {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem 1.5rem;
+  padding: 1.1rem 1.25rem;
+  border: 1px solid var(--rp-line);
+  border-radius: 0.75rem;
+  background: var(--rp-soft);
 }
+.rp-contact-name { font-weight: 600; font-size: 1.0625rem; color: var(--rp-ink); }
+.rp-contact-role { font-size: 0.875rem; color: var(--rp-muted); }
+.rp-contact-email { display: inline-block; margin-top: 0.25rem; font-size: 0.975rem; }
 
-/* Research-question cards: line-art glyph draws on hover/focus. */
-.rs-q { transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease; }
-.rs-q:hover, .rs-q:focus-within { transform: translateY(-3px); border-color: color-mix(in srgb, var(--bp-cyan) 60%, var(--bp-line)); box-shadow: var(--bp-card-shadow-hover); }
-.rs-glyph :is(path, line, polyline, rect, circle, ellipse) {
-  stroke-dasharray: 160;
-  stroke-dashoffset: 0;
-}
-.rs-q:hover .rs-glyph :is(path, line, polyline, rect, circle, ellipse),
-.rs-q:focus-within .rs-glyph :is(path, line, polyline, rect, circle, ellipse) {
-  animation: rs-redraw 1.1s cubic-bezier(0.16, 1, 0.3, 1) both;
-}
-@keyframes rs-redraw { from { stroke-dashoffset: 160; } to { stroke-dashoffset: 0; } }
+/* References */
+.rp-refs { display: grid; gap: 0.6rem; font-size: 0.975rem; line-height: 1.6; color: var(--rp-ink-2); }
+.rp-refs li { display: grid; grid-template-columns: 2.25rem 1fr; scroll-margin-top: 6rem; }
+.rp-refs li:target { background: var(--rp-accent-tint); border-radius: 0.375rem; }
+.rp-refs-n { font-weight: 600; color: var(--rp-ink); font-variant-numeric: tabular-nums; }
 
-/* Dashed "your question" tile */
-.rs-dashed {
-  border: 1.5px dashed color-mix(in srgb, var(--bp-cyan) 45%, var(--bp-line-strong));
-  background: color-mix(in srgb, var(--bp-cyan) 4%, transparent);
-}
-
-/* Offer cards */
-.rs-lift { transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease; }
-.rs-lift:hover { transform: translateY(-3px); box-shadow: var(--bp-card-shadow-hover); }
-
-/* Collaboration spectrum track — fills light → deep when its block reveals. */
-.rs-track {
-  background: linear-gradient(90deg, var(--bp-cyan) 0%, var(--bp-purple) 100%);
-  transform-origin: left center;
-  transition: transform 1.4s cubic-bezier(0.16, 1, 0.3, 1) 0.25s;
-}
-.rs-js .rs-reveal:not(.rs-in) .rs-track { transform: scaleX(0); }
-
-/* Section nav */
-.rs-subnav-link { transition: color 0.15s ease, background-color 0.15s ease; }
-.rs-subnav-link:hover { color: var(--bp-ink); }
-.rs-subnav-scroll { scrollbar-width: none; }
-@media (max-width: 1023px) {
-  /* Edge fade: says "there is more this way" on a row that scrolls sideways. */
-  .rs-subnav-scroll {
-    -webkit-mask-image: linear-gradient(90deg, #000 calc(100% - 36px), transparent);
-    mask-image: linear-gradient(90deg, #000 calc(100% - 36px), transparent);
-  }
-}
-.rs-subnav-scroll::-webkit-scrollbar { display: none; }
-
-/* Contact island — sits on the dark half of the tokens in both themes. */
-.rs-island {
-  background:
-    radial-gradient(60% 80% at 15% 0%, color-mix(in srgb, var(--bp-cyan) 16%, transparent) 0%, transparent 60%),
-    radial-gradient(50% 70% at 100% 100%, color-mix(in srgb, var(--bp-purple) 22%, transparent) 0%, transparent 60%),
-    var(--bp-bg);
-}
-
-/* In the dark theme the page is already indigo, so the island would vanish
-   into it; lift it a step and rule it off instead. */
-html.dark .rs-island {
-  background:
-    radial-gradient(60% 80% at 15% 0%, color-mix(in srgb, var(--bp-cyan) 14%, transparent) 0%, transparent 60%),
-    radial-gradient(50% 70% at 100% 100%, color-mix(in srgb, var(--bp-purple) 20%, transparent) 0%, transparent 60%),
-    var(--bp-bg-2);
-  border-top: 1px solid var(--bp-line);
-  border-bottom: 1px solid var(--bp-line);
-}
-
-/* Windows High Contrast: keep button and card edges when backgrounds drop. */
-@media (forced-colors: active) {
-  .rs-btn, .bp-card, .rs-dashed { border: 1px solid CanvasText; }
-  .rs-btn-solid { forced-color-adjust: none; background: ButtonText; color: ButtonFace; }
-}
-
-/* Focus: one visible ring for the whole page (the site default is a
-   half-alpha violet that disappears on the dark contact island). */
-.bp-chrome :is(a, button, [tabindex]):focus-visible {
-  outline: 2px solid var(--bp-ink);
+/* Focus: one visible ring everywhere on the page. */
+.rp :is(a, button, [tabindex]):focus-visible {
+  outline: 2px solid var(--rp-accent-fill);
   outline-offset: 3px;
-  box-shadow: 0 0 0 5px color-mix(in srgb, var(--bp-cyan) 35%, transparent);
+  border-radius: 6px;
 }
+.rp .rp-btn:focus-visible { border-radius: 999px; }
 
-/* ── Reduced motion / header pause: still, fully visible ─────────── */
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto !important; }
-  .rs-reveal { opacity: 1 !important; transform: none !important; transition: none !important; animation: none !important; }
-  .rs-track { transform: none !important; transition: none !important; }
-  .rs-rise { animation: none !important; }
-  .rs-live::after { animation: none !important; display: none; }
-  .rs-q:hover, .rs-q:focus-within, .rs-lift:hover, .rs-btn:hover { transform: none !important; }
-  .rs-q .rs-glyph :is(path, line, polyline, rect, circle, ellipse) { animation: none !important; }
 }
 html.motion-paused { scroll-behavior: auto !important; }
-html.motion-paused .rs-reveal { opacity: 1 !important; transform: none !important; transition: none !important; animation: none !important; }
-html.motion-paused .rs-track { transform: none !important; transition: none !important; }
-html.motion-paused .rs-rise { animation: none !important; opacity: 1 !important; transform: none !important; }
-html.motion-paused .rs-live::after { animation: none !important; display: none; }
-html.motion-paused :is(.rs-q, .rs-lift, .rs-btn):hover { transform: none !important; }
-html.motion-paused .rs-q .rs-glyph :is(path, line, polyline, rect, circle, ellipse) { animation: none !important; stroke-dashoffset: 0 !important; }
 
-/* ── Print: the brief is the kind of page that gets printed for a lab
-   meeting. Drop chrome and motion, keep the words. */
+@media (forced-colors: active) {
+  .rp-btn, .rp-figure-panel, .rp-contact { border: 1px solid CanvasText; }
+}
+
 @media print {
-  .rs-noprint, header, footer, .rs-subnav { display: none !important; }
-  .rs-rise, .rs-reveal { animation: none !important; opacity: 1 !important; transform: none !important; }
-  .rs-track { transform: none !important; }
-  .rs-words span { opacity: 1 !important; }
-  .bp-grid { background-image: none !important; animation: none !important; }
-  .bp-aurora { display: none !important; }
-  .rs-island { background: none !important; }
-  .rs-island * { color: #111 !important; }
+  header, footer { display: none !important; }
+  .rp-actions, .rp-play { display: none !important; }
+  .rp { background: #fff; color: #000; }
 }
