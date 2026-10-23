@@ -41,6 +41,7 @@ const NAV_ITEMS: { label: string; href: string; children?: NavChild[] }[] = [
   { label: "Case Studies", href: "/casestudy" },
   { label: "Physical AI", href: "/data/physical-ai" },
   { label: "Terminal Bench", href: "/data/terminal-bench" },
+  { label: "Research Program", href: "/researchprogram" },
   { label: "Blog", href: "/blog" },
   { label: "Contact", href: "/contact" },
 ];
@@ -303,7 +304,10 @@ const Header = () => {
             />
           </Link>
 
-          <nav className="hidden items-center gap-5 lg:flex xl:gap-7">
+          {/* Nine entries need about 800px at the current type size, which a
+              1024px viewport does not have, so the inline nav starts at xl and
+              the menu button covers everything narrower. */}
+          <nav className="hidden items-center gap-7 xl:flex">
             {NAV_ITEMS.map((item) =>
               item.children ? (
                 /* Hover AND focus open it, and the wrapper carries both so the
@@ -314,7 +318,7 @@ const Header = () => {
                 <div key={item.href} className="group relative">
                   <Link
                     href={item.href}
-                    className={`inline-flex items-center gap-1 text-sm font-medium transition-colors ${
+                    className={`inline-flex items-center gap-1 whitespace-nowrap text-sm font-medium transition-colors ${
                       isActive(item.href) ? tokens.linkActive : tokens.link
                     }`}
                     style={isActive(item.href) ? { color: tokens.accent } : undefined}
@@ -350,7 +354,7 @@ const Header = () => {
                 <Link
                   key={item.href}
                   href={item.href}
-                  className={`text-sm font-medium transition-colors ${
+                  className={`whitespace-nowrap text-sm font-medium transition-colors ${
                     isActive(item.href) ? tokens.linkActive : tokens.link
                   }`}
                   style={isActive(item.href) ? { color: tokens.accent } : undefined}
@@ -367,7 +371,7 @@ const Header = () => {
             <button
               type="button"
               onClick={() => setMobileOpen(!mobileOpen)}
-              className="rounded-lg p-2 lg:hidden"
+              className="rounded-lg p-2 xl:hidden"
               aria-label="Toggle menu"
               aria-expanded={mobileOpen}
             >
@@ -377,7 +381,7 @@ const Header = () => {
         </div>
 
         {mobileOpen && (
-          <nav className={`mt-4 rounded-2xl p-4 lg:hidden ${tokens.mobileMenu}`}>
+          <nav className={`mt-4 rounded-2xl p-4 xl:hidden ${tokens.mobileMenu}`}>
             {NAV_ITEMS.map((item) => (
               <div key={item.href}>
                 <Link
