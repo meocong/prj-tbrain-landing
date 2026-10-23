@@ -220,17 +220,19 @@
 }
 .rp .rp-btn:focus-visible { border-radius: 999px; }
 
+/* research.css is imported site-wide; these stay on this page. */
 @media (prefers-reduced-motion: reduce) {
-  html { scroll-behavior: auto !important; }
+  html:has(.rp) { scroll-behavior: auto !important; }
 }
-html.motion-paused { scroll-behavior: auto !important; }
+html.motion-paused:has(.rp) { scroll-behavior: auto !important; }
 
 @media (forced-colors: active) {
   .rp-btn, .rp-contact { border: 1px solid CanvasText; }
 }
 
 @media print {
-  header, footer { display: none !important; }
+  /* Site chrome only: the hero is a <header> inside <main> and must print. */
+  .rp > header, .rp > footer { display: none !important; }
   .rp-actions { display: none !important; }
   .rp { background: #fff; color: #000; }
 }
