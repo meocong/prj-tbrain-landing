@@ -2,6 +2,7 @@
 @import "shadcn/tailwind.css";
 @import "./blueprint.css";
 @import "./research.css";
+@import "./careers.css";
 @plugin "@tailwindcss/typography";
 
 @custom-variant dark (&:is(.dark *));

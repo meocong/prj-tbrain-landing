@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { supabaseAdmin } from "@/lib/terminal-bench/supabase/admin";
 import { CATEGORIES } from "@/lib/samples/categories";
+import { POSITIONS } from "@/lib/landing/careers";
 
 export const revalidate = 3600; // Refresh hourly so new blog posts/case studies surface
 
@@ -35,6 +36,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.8,
     })),
     { url: `${baseUrl}/researchprogram`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
+    { url: `${baseUrl}/careers`, lastModified: now, changeFrequency: "weekly", priority: 0.7 },
+    ...POSITIONS.map((p) => ({
+      url: `${baseUrl}/careers/${p.slug}`,
+      lastModified: new Date(p.datePosted),
+      changeFrequency: "weekly" as const,
+      priority: 0.7,
+    })),
     { url: `${baseUrl}/policy`, lastModified: now, changeFrequency: "yearly", priority: 0.3 },
     { url: `${baseUrl}/accessibility`, lastModified: now, changeFrequency: "yearly", priority: 0.3 },
   ];
