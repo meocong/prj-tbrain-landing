@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowDown, ArrowRight, Award, Compass, Factory, GraduationCap, Mail, Target } from "lucide-react";
+import { ArrowDown, ArrowRight, Mail } from "lucide-react";
 import Header from "@/components/common/Header";
 import Footer from "@/components/common/Footer";
 import { ABOUT_TBRAIN, CAREERS, POSITIONS, type Position } from "@/lib/landing/careers";
@@ -33,12 +33,8 @@ export const metadata: Metadata = {
   },
 };
 
-/* One per "Why Tbrain" reason, in the doc's order: the source, the function,
-   the impact, the collaboration, the ownership. */
-const WHY_ICONS = [Factory, Compass, Target, GraduationCap, Award];
-
-/* From this many roles the list turns into one compact card per role, so "Why
-   Tbrain" below it stays about a scroll away however many roles open. */
+/* From this many roles the list turns into one compact card per role, so the
+   page stays an index however many roles open. */
 const COMPACT_FROM = 4;
 
 /** Up to three roles: each one in full, with its summary and both actions. */
@@ -58,9 +54,9 @@ function RoleEntry({ p }: { p: Position }) {
           data-cr-track="careers_role_open"
           data-cr-where="button"
           className="cr-btn cr-btn-primary"
-          aria-label={`Read the role: ${p.title}`}
+          aria-label={`Role description: ${p.title}`}
         >
-          Read the role
+          Role description
           <ArrowRight className="cr-arrow h-4 w-4" aria-hidden />
         </Link>
         <a
@@ -179,27 +175,6 @@ export default function CareersPage() {
             {/* Every posting opens on its own page with the whole job
                 description, so the list stays an index at any length. */}
             <OpenPositions />
-          </section>
-
-          <section aria-labelledby="why-h" className="cr-section">
-            <h2 id="why-h" className="cr-h2">
-              {CAREERS.why.title}
-            </h2>
-            <div className="cr-why">
-              {CAREERS.why.items.map((w, i) => {
-                const Icon = WHY_ICONS[i % WHY_ICONS.length];
-                return (
-                  <article key={w.lead} className="cr-why-card cr-card">
-                    <span className="cr-why-icon" aria-hidden>
-                      <Icon className="h-5 w-5" />
-                    </span>
-                    <p>
-                      <b>{w.lead}</b> {w.body}
-                    </p>
-                  </article>
-                );
-              })}
-            </div>
           </section>
         </div>
       </main>
