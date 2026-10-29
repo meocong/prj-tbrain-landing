@@ -156,14 +156,7 @@ export default function CareersPage() {
           )}
           <p className="cr-lead">{ABOUT_TBRAIN.intro}</p>
           <p className="cr-ask">
-            {ABOUT_TBRAIN.questionLead} <strong>{ABOUT_TBRAIN.question}</strong>
-          </p>
-          <p className="cr-p">{ABOUT_TBRAIN.approach}</p>
-          <p className="cr-more">
-            <Link href={CAREERS.learnMore.href} className="cr-link-arrow">
-              {CAREERS.learnMore.label}
-              <ArrowRight className="cr-arrow h-4 w-4" aria-hidden />
-            </Link>
+            <strong>{CAREERS.tagline}</strong>
           </p>
         </div>
 

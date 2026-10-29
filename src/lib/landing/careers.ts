@@ -165,5 +165,7 @@ export const CAREERS = {
   titleHighlight: "Tbrain",
   openTitle: "Open positions",
   empty: "No open positions at the moment.",
-  learnMore: RESEARCH_PROGRAM_LINK,
+  /* Thạch, 2026-10-29: in place of the research question, the "We combine
+     access…" paragraph and the Research Program link. */
+  tagline: "Come work with us and shape the future of Embodied AI",
 } as const;
