@@ -188,36 +188,6 @@
 .cr-chip-company { gap: 0.4rem; padding-left: 0.4rem; color: var(--text-primary); }
 .cr-chip-company img { border-radius: 999px; }
 
-/* Why Tbrain: the about page's icon cards, two up in the column. */
-.cr-why { display: grid; gap: 1rem; grid-template-columns: minmax(0, 1fr); }
-/* An odd count leads with its first reason across both columns, so the
-   grid closes on a full row instead of one card left alone. */
-@media (min-width: 640px) {
-  .cr-why { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .cr-why-card:first-child:nth-last-child(odd) {
-    grid-column: 1 / -1;
-    display: grid;
-    grid-template-columns: auto minmax(0, 1fr);
-    column-gap: 1.25rem;
-    align-items: start;
-  }
-  .cr-why-card:first-child:nth-last-child(odd) p { margin-top: 0.15rem; }
-}
-.cr-why-card { padding: 1.5rem; border-radius: 1rem; }
-.cr-why-icon {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 2.75rem;
-  height: 2.75rem;
-  border-radius: 0.75rem;
-  background: var(--cr-accent-tint);
-  color: var(--cr-accent);
-}
-/* The doc's sentence whole: bold lead, then its reason. */
-.cr-why-card p { margin-top: 1rem; font-size: 0.9375rem; line-height: 1.65; color: var(--text-secondary); text-wrap: pretty; }
-.cr-why-card p b { font-weight: 600; color: var(--text-primary); }
-
 /* Posting: the role's card stays put on the left; the description reads in
    one card on the right. */
 .cr-aside-card { padding: clamp(1.5rem, 2.4vw, 2rem); }

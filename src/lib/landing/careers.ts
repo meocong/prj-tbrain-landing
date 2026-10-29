@@ -155,11 +155,8 @@ export const POSITIONS: Position[] = [HEAD_OF_RD];
 
 export const positionBySlug = (slug: string) => POSITIONS.find((p) => p.slug === slug);
 
-/**
- * The careers page itself. Its "Why Tbrain" is the Head of R&D posting's,
- * the only job description so far; give the page its own list when a role
- * outside research opens and those reasons stop fitting every reader.
- */
+/** The careers page itself. "Why Tbrain" stays inside each posting, as the
+    doc has it (Tam Le, 2026-10-29: "Why tbrain để trong role"). */
 export const CAREERS = {
   title: "Careers at Tbrain",
   /* The H1 as the main pages set theirs ("Get in touch"): the last word in
@@ -168,6 +165,5 @@ export const CAREERS = {
   titleHighlight: "Tbrain",
   openTitle: "Open positions",
   empty: "No open positions at the moment.",
-  why: HEAD_OF_RD.why,
   learnMore: RESEARCH_PROGRAM_LINK,
 } as const;
