@@ -154,7 +154,6 @@ export default function CareersPage() {
               </a>
             </p>
           )}
-          <p className="cr-lead">{ABOUT_TBRAIN.intro}</p>
           <p className="cr-ask">
             <strong>{CAREERS.tagline}</strong>
           </p>
