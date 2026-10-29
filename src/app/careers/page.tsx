@@ -155,7 +155,7 @@ export default function CareersPage() {
             </p>
           )}
           <p className="cr-ask">
-            <strong>{CAREERS.tagline}</strong>
+            {CAREERS.tagline}
           </p>
           <p className="cr-more">
             <Link href={CAREERS.learnMore.href} className="cr-link-arrow">
