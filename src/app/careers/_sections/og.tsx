@@ -20,13 +20,17 @@ const INK_2 = "#334155";
 const MUTED = "#64748B";
 const LINE = "#E2E8F0";
 
-async function read(path: string) {
-  const b = await readFile(join(process.cwd(), path));
-  return b.buffer.slice(b.byteOffset, b.byteOffset + b.byteLength) as ArrayBuffer;
-}
+const toArrayBuffer = (b: Buffer) => b.buffer.slice(b.byteOffset, b.byteOffset + b.byteLength) as ArrayBuffer;
 
+/* Every path below is a literal on purpose. The build traces which files a
+   route reads from what it can see in the code; a path passed in as a
+   variable makes it give up and ship the whole project (700 MB of
+   public/videos) with the route, past Vercel's function limit. */
 export async function ogOptions() {
-  const [regular, semibold] = await Promise.all([read("src/assets/fonts/Inter-Regular.ttf"), read("src/assets/fonts/Inter-SemiBold.ttf")]);
+  const [regular, semibold] = await Promise.all([
+    readFile(join(process.cwd(), "src/assets/fonts/Inter-Regular.ttf")),
+    readFile(join(process.cwd(), "src/assets/fonts/Inter-SemiBold.ttf")),
+  ]).then((bufs) => bufs.map(toArrayBuffer));
   return {
     ...OG_SIZE,
     fonts: [
