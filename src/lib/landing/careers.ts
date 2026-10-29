@@ -168,5 +168,4 @@ export const CAREERS = {
   /* Thạch, 2026-10-29: in place of the research question and the "We
      combine access…" paragraph. */
   tagline: "Come work with us and shape the future of Embodied AI",
-  learnMore: RESEARCH_PROGRAM_LINK,
 } as const;
