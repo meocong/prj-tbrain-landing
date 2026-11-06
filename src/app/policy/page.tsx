@@ -6,7 +6,7 @@ import Header from "@/components/common/Header";
 export const metadata: Metadata = {
   title: "Privacy Policy",
   description:
-    "How Tbrain collects, uses, and protects personal information for our AI training data services. Last updated September 2026.",
+    "How Tbrain collects, uses, and protects personal information for our AI training data services. Last updated November 2026.",
   alternates: { canonical: "/policy" },
   robots: { index: true, follow: false },
 };
@@ -105,7 +105,7 @@ export default async function Page() {
           >
             Privacy Policy for Tbrain LLC
           </h1>
-          <p className="italic mt-4 mb-8" style={{ color: "var(--text-muted)" }}>Last Updated: Sep 29, 2026</p>
+          <p className="italic mt-4 mb-8" style={{ color: "var(--text-muted)" }}>Last Updated: Nov 6, 2026</p>
           <div className="mb-5">
             Tbrain LLC (&quot;Tbrain,&quot; &quot;we,&quot; &quot;our,&quot; or
             &quot;us&quot;) is committed to safeguarding your privacy. This
@@ -184,6 +184,11 @@ export default async function Page() {
             <li>Ensuring security and preventing fraud</li>
             <li>Complying with legal obligations</li>
           </ul>
+          <div className="mb-5">
+            We process contact and contract data to perform our contract or for
+            our legitimate interest in running our business; analytics runs on
+            your consent.
+          </div>
           <h2 className="mb-5 font-semibold">
             5. Sharing and Disclosure of Information
           </h2>
@@ -238,6 +243,10 @@ export default async function Page() {
           </ul>
           <div className="mb-5">
             To exercise these rights, please contact us at info@tbrain.ai
+          </div>
+          <div className="mb-5">
+            EU/EEA/UK residents may lodge a complaint with their local data
+            protection authority.
           </div>
           <h2 className="mb-5 font-semibold">8. Data Retention</h2>
           <div className="mb-5">
@@ -403,7 +412,8 @@ export default async function Page() {
             Your information may be transferred to and processed in countries
             other than your own. We ensure that such transfers comply with
             applicable data protection laws and that your information remains
-            protected.
+            protected. Transfers outside the EEA are protected by the European
+            Commission’s Standard Contractual Clauses.
           </div>
           <h2 className="mb-5 font-semibold">
             12. Changes to This Privacy Policy

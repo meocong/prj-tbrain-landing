@@ -52,7 +52,8 @@ function NewsletterForm() {
         value={email}
         onChange={(e) => setEmail(e.target.value)}
         placeholder="your@email.com"
-        className="rounded-lg px-3 py-2 text-sm outline-none transition-colors"
+        aria-label="Email address"
+        className="rounded-lg px-3 py-2 text-sm outline-none transition-colors placeholder:text-(--footer-muted)"
         style={{
           minWidth: "200px",
           background: "var(--footer-input-bg)",
